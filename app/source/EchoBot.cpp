@@ -6,15 +6,11 @@
 
 #include "EchoPayload.h"
 
-// FIXME rewrite all binds to qt connects
-
 EchoBot::EchoBot(NetworkFactories* networkFactories)
 {
-    client = new Swift::Client("jid@jabber.lit", "pass", networkFactories);
+    client = new Swift::Client("jid@...", "pass", networkFactories);
     client->setAlwaysTrustCertificates();
     client->onConnected.connect(boost::bind(&EchoBot::handleConnected, this));
-
-
     client->onMessageReceived.connect(
                 boost::bind(&EchoBot::handleMessageReceived, this, _1));
     client->onPresenceReceived.connect(

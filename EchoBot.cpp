@@ -6,22 +6,22 @@
 
 #include "EchoPayload.h"
 
-using namespace boost;
-
 // FIXME rewrite all binds to qt connects
 
 EchoBot::EchoBot(NetworkFactories* networkFactories)
 {
-    client = new Client("schorsch@jabber-germany.de", "jwillrein", networkFactories);
+    client = new Swift::Client("jid@jabber.lit", "pass", networkFactories);
     client->setAlwaysTrustCertificates();
-    client->onConnected.connect(bind(&EchoBot::handleConnected, this));
-    client->onMessageReceived.connect(
-                bind(&EchoBot::handleMessageReceived, this, _1));
-    client->onPresenceReceived.connect(
-                bind(&EchoBot::handlePresenceReceived, this, _1));
-    tracer = new ClientXMLTracer(client);
+    client->onConnected.connect(boost::bind(&EchoBot::handleConnected, this));
 
-    softwareVersionResponder = new SoftwareVersionResponder(client->getIQRouter());
+
+    client->onMessageReceived.connect(
+                boost::bind(&EchoBot::handleMessageReceived, this, _1));
+    client->onPresenceReceived.connect(
+                boost::bind(&EchoBot::handlePresenceReceived, this, _1));
+    tracer = new Swift::ClientXMLTracer(client);
+
+    softwareVersionResponder = new Swift::SoftwareVersionResponder(client->getIQRouter());
     softwareVersionResponder->setVersion("EchoBot", "1.0");
     softwareVersionResponder->start();
     //...
@@ -49,11 +49,11 @@ EchoBot::~EchoBot()
 void EchoBot::handlePresenceReceived(Presence::ref presence)
 {
     // Automatically approve subscription requests
-    if (presence->getType() == Presence::Subscribe)
+    if (presence->getType() == Swift::Presence::Subscribe)
     {
-        Presence::ref response = Presence::create();
+        Swift::Presence::ref response = Swift::Presence::create();
         response->setTo(presence->getFrom());
-        response->setType(Presence::Subscribed);
+        response->setType(Swift::Presence::Subscribed);
         client->sendPresence(response);
     }
 }
@@ -61,8 +61,8 @@ void EchoBot::handlePresenceReceived(Presence::ref presence)
 void EchoBot::handleConnected()
 {
     // Request the roster
-    GetRosterRequest::ref rosterRequest =
-            GetRosterRequest::create(client->getIQRouter());
+    Swift::GetRosterRequest::ref rosterRequest =
+            Swift::GetRosterRequest::create(client->getIQRouter());
     rosterRequest->onResponse.connect(
                 bind(&EchoBot::handleRosterReceived, this, _2));
     rosterRequest->send();

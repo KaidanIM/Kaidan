@@ -2,30 +2,29 @@
 #define ECHPBOT_H
 
 #include <Swiften/Swiften.h>
+#include <QObject>
 
 #include "EchoPayloadParserFactory.h"
 #include "EchoPayloadSerializer.h"
 
-using namespace Swift;
-using namespace boost;
-
-
-
 class EchoBot
 {
+    //Q_OBJECT
+
 public:
-    EchoBot(NetworkFactories* networkFactories);
+    EchoBot(Swift::NetworkFactories* networkFactories);
     ~EchoBot();
 
-private:
-    void handlePresenceReceived(Presence::ref presence);
+private slots:
+    void handlePresenceReceived(Swift::Presence::ref presence);
     void handleConnected();
-    void handleRosterReceived(ErrorPayload::ref error);
-    void handleMessageReceived(Message::ref message);
+    void handleRosterReceived(Swift::ErrorPayload::ref error);
+    void handleMessageReceived(Swift::Message::ref message);
 
-    Client* client;
-    ClientXMLTracer* tracer;
-    SoftwareVersionResponder* softwareVersionResponder;
+private:
+    Swift::Client* client;
+    Swift::ClientXMLTracer* tracer;
+    Swift::SoftwareVersionResponder* softwareVersionResponder;
     EchoPayloadParserFactory echoPayloadParserFactory;
     EchoPayloadSerializer echoPayloadSerializer;
 

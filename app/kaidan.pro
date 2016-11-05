@@ -20,7 +20,7 @@ SOURCES += source/main.cpp \
         source/EchoBot.cpp
 
 HEADERS += source/EchoBot.h \
-            sourc/EchoPayload.h \
+            source/EchoPayload.h \
             source/EchoPayloadParserFactory.h \
             source/EchoPayloadSerializer.h
 

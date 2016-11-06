@@ -9,13 +9,13 @@
 
 class RosterController;
 
-class EchoBot : public QObject
+class Kaidan : public QObject
 {
     Q_OBJECT
 
 public:
-    EchoBot(Swift::NetworkFactories* networkFactories, QObject *parent = 0);
-    ~EchoBot();
+    Kaidan(Swift::NetworkFactories* networkFactories, QObject *parent = 0);
+    ~Kaidan();
 
 private:
     void handlePresenceReceived(Swift::Presence::ref presence);

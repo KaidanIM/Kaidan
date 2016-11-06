@@ -1,4 +1,4 @@
-#include "EchoBot.h"
+#include "Kaidan.h"
 
 #include <iostream>
 #include <boost/bind.hpp>
@@ -7,15 +7,15 @@
 #include "EchoPayload.h"
 #include "RosterContoller.h"
 
-EchoBot::EchoBot(NetworkFactories* networkFactories, QObject *parent) : rosterController_(NULL), QObject(parent)
+Kaidan::Kaidan(NetworkFactories* networkFactories, QObject *parent) : rosterController_(NULL), QObject(parent)
 {
-    client = new Swift::Client("schorsch@jabber-germany.de", "J6$er4ey", networkFactories);
+    client = new Swift::Client("jid@...", "pass", networkFactories);
     client->setAlwaysTrustCertificates();
-    client->onConnected.connect(boost::bind(&EchoBot::handleConnected, this));
+    client->onConnected.connect(boost::bind(&Kaidan::handleConnected, this));
     client->onMessageReceived.connect(
-                boost::bind(&EchoBot::handleMessageReceived, this, _1));
+                boost::bind(&Kaidan::handleMessageReceived, this, _1));
     client->onPresenceReceived.connect(
-                boost::bind(&EchoBot::handlePresenceReceived, this, _1));
+                boost::bind(&Kaidan::handlePresenceReceived, this, _1));
     tracer = new Swift::ClientXMLTracer(client);
 
     softwareVersionResponder = new Swift::SoftwareVersionResponder(client->getIQRouter());
@@ -29,7 +29,7 @@ EchoBot::EchoBot(NetworkFactories* networkFactories, QObject *parent) : rosterCo
     //...
 }
 
-EchoBot::~EchoBot()
+Kaidan::~Kaidan()
 {
     client->removePayloadSerializer(&echoPayloadSerializer);
     client->removePayloadParserFactory(&echoPayloadParserFactory);
@@ -45,7 +45,7 @@ EchoBot::~EchoBot()
 //...
 
 
-void EchoBot::handlePresenceReceived(Presence::ref presence)
+void Kaidan::handlePresenceReceived(Presence::ref presence)
 {
     // Automatically approve subscription requests
     if (presence->getType() == Swift::Presence::Subscribe)
@@ -57,7 +57,7 @@ void EchoBot::handlePresenceReceived(Presence::ref presence)
     }
 }
 
-void EchoBot::handleConnected()
+void Kaidan::handleConnected()
 {
     client->sendPresence(Presence::create("Send me a message"));
 
@@ -69,7 +69,7 @@ void EchoBot::handleConnected()
 }
 
 //...
-void EchoBot::handleMessageReceived(Message::ref message)
+void Kaidan::handleMessageReceived(Message::ref message)
 {
     //...
     // Echo back the incoming message

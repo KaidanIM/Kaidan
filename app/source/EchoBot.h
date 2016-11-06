@@ -2,23 +2,21 @@
 #define ECHPBOT_H
 
 #include <Swiften/Swiften.h>
-#include <QObject>
 
 #include "EchoPayloadParserFactory.h"
 #include "EchoPayloadSerializer.h"
 
+class RosterController;
+
 class EchoBot
 {
-    //Q_OBJECT
-
 public:
     EchoBot(Swift::NetworkFactories* networkFactories);
     ~EchoBot();
 
-private slots:
+private:
     void handlePresenceReceived(Swift::Presence::ref presence);
     void handleConnected();
-    void handleRosterReceived(Swift::ErrorPayload::ref error);
     void handleMessageReceived(Swift::Message::ref message);
 
 private:
@@ -27,6 +25,8 @@ private:
     Swift::SoftwareVersionResponder* softwareVersionResponder;
     EchoPayloadParserFactory echoPayloadParserFactory;
     EchoPayloadSerializer echoPayloadSerializer;
+
+    RosterController* rosterController_;
 
 };
 

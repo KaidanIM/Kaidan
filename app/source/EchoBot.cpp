@@ -5,10 +5,11 @@
 #include <boost/smart_ptr/make_shared.hpp>
 
 #include "EchoPayload.h"
+#include "RosterContoller.h"
 
-EchoBot::EchoBot(NetworkFactories* networkFactories)
+EchoBot::EchoBot(NetworkFactories* networkFactories) : rosterController_(NULL)
 {
-    client = new Swift::Client("jid@...", "pass", networkFactories);
+    client = new Swift::Client("schorsch@jabber-germany.de", "J6$er4ey", networkFactories);
     client->setAlwaysTrustCertificates();
     client->onConnected.connect(boost::bind(&EchoBot::handleConnected, this));
     client->onMessageReceived.connect(
@@ -18,7 +19,7 @@ EchoBot::EchoBot(NetworkFactories* networkFactories)
     tracer = new Swift::ClientXMLTracer(client);
 
     softwareVersionResponder = new Swift::SoftwareVersionResponder(client->getIQRouter());
-    softwareVersionResponder->setVersion("EchoBot", "1.0");
+    softwareVersionResponder->setVersion("Kaidan", "0.1");
     softwareVersionResponder->start();
     //...
     client->addPayloadParserFactory(&echoPayloadParserFactory);
@@ -37,6 +38,8 @@ EchoBot::~EchoBot()
     delete softwareVersionResponder;
     delete tracer;
     delete client;
+
+    delete rosterController_;
     //...
 }
 //...
@@ -56,22 +59,13 @@ void EchoBot::handlePresenceReceived(Presence::ref presence)
 
 void EchoBot::handleConnected()
 {
-    // Request the roster
-    Swift::GetRosterRequest::ref rosterRequest =
-            Swift::GetRosterRequest::create(client->getIQRouter());
-    rosterRequest->onResponse.connect(
-                bind(&EchoBot::handleRosterReceived, this, _2));
-    rosterRequest->send();
-}
-
-void EchoBot::handleRosterReceived(ErrorPayload::ref error)
-{
-    if (error)
-    {
-        std::cerr << "Error receiving roster. Continuing anyway.";
-    }
-    // Send initial available presence
     client->sendPresence(Presence::create("Send me a message"));
+
+    if (rosterController_ == NULL)
+    {
+        // Request the roster
+        rosterController_ = new RosterController(client);
+    }
 }
 
 //...

@@ -1,6 +1,7 @@
 #ifndef ECHOBOT_H
 #define ECHPBOT_H
 
+#include <QObject>
 #include <Swiften/Swiften.h>
 
 #include "EchoPayloadParserFactory.h"
@@ -8,10 +9,12 @@
 
 class RosterController;
 
-class EchoBot
+class EchoBot : public QObject
 {
+    Q_OBJECT
+
 public:
-    EchoBot(Swift::NetworkFactories* networkFactories);
+    EchoBot(Swift::NetworkFactories* networkFactories, QObject *parent = 0);
     ~EchoBot();
 
 private:

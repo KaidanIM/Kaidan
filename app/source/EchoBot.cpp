@@ -7,7 +7,7 @@
 #include "EchoPayload.h"
 #include "RosterContoller.h"
 
-EchoBot::EchoBot(NetworkFactories* networkFactories) : rosterController_(NULL)
+EchoBot::EchoBot(NetworkFactories* networkFactories, QObject *parent) : rosterController_(NULL), QObject(parent)
 {
     client = new Swift::Client("schorsch@jabber-germany.de", "J6$er4ey", networkFactories);
     client->setAlwaysTrustCertificates();

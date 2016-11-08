@@ -2,6 +2,8 @@
 #define ECHPBOT_H
 
 #include <QObject>
+#include <QStringList>
+
 #include <Swiften/Swiften.h>
 
 #include "EchoPayloadParserFactory.h"
@@ -13,16 +15,22 @@ class Kaidan : public QObject
 {
     Q_OBJECT
 
+    Q_PROPERTY(RosterController* rosterController READ getRosterController NOTIFY rosterControllerChanged)
+
 public:
     Kaidan(Swift::NetworkFactories* networkFactories, QObject *parent = 0);
     ~Kaidan();
+
+    RosterController* getRosterController();
+
+signals:
+    void rosterControllerChanged();
 
 private:
     void handlePresenceReceived(Swift::Presence::ref presence);
     void handleConnected();
     void handleMessageReceived(Swift::Message::ref message);
 
-private:
     Swift::Client* client;
     Swift::ClientXMLTracer* tracer;
     Swift::SoftwareVersionResponder* softwareVersionResponder;
@@ -30,7 +38,6 @@ private:
     EchoPayloadSerializer echoPayloadSerializer;
 
     RosterController* rosterController_;
-
 };
 
 #endif

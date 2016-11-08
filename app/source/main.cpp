@@ -1,11 +1,20 @@
 #include <QGuiApplication>
 #include <QQmlApplicationEngine>
+#include <QQuickView>
+#include <QQmlContext>
+#include <QtQml>
+
 #include "Swiften/EventLoop/Qt/QtEventLoop.h"
 
 #include "Kaidan.h"
+#include "RosterContoller.h"
+#include "RosterItem.h"
 
 int main(int argc, char *argv[])
 {
+    qmlRegisterType<RosterController>( "harbour.kaidan", 1, 0, "RosterController");
+    qmlRegisterType<RosterItem>( "harbour.kaidan", 1, 0, "RosterItem");
+
     QGuiApplication app(argc, argv);
 
     QtEventLoop eventLoop;
@@ -13,25 +22,12 @@ int main(int argc, char *argv[])
 
     Kaidan kaidan(&networkFactories);
 
-    QQmlApplicationEngine engine;
-    engine.load(QUrl(QStringLiteral("qrc:/main.qml")));
+    QQuickView view;
+    QQmlContext *ctxt = view.rootContext();
+    ctxt->setContextProperty("kaidan", &kaidan);
 
-
-#if 0
-    CarManager manager;
-
-        view->engine()->addImportPath("/usr/share/harbour-carbudget/qml");
-        view->rootContext()->setContextProperty("manager", &manager);
-        view->setSource(SailfishApp::pathTo("qml/Application.qml"));
-        view->showFullScreen();
-#endif
-
-#if 0
-        QQuickView view;
-        view.setResizeMode(QQuickView::SizeRootObjectToView);
-        QQmlContext *ctxt = view.rootContext();
-        ctxt->setContextProperty("myModel", QVariant::fromValue(dataList));
-#endif
+    view.setSource(QUrl::fromLocalFile("main.qml"));
+    view.show();
 
     return app.exec();
 }

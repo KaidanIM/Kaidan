@@ -7,7 +7,8 @@
 #include "EchoPayload.h"
 #include "RosterContoller.h"
 
-Kaidan::Kaidan(NetworkFactories* networkFactories, QObject *parent) : rosterController_(NULL), QObject(parent)
+Kaidan::Kaidan(NetworkFactories* networkFactories, QObject *parent) :
+    rosterController_(new RosterController()), QObject(parent)
 {
     client = new Swift::Client("jid@...", "pass", networkFactories);
     client->setAlwaysTrustCertificates();
@@ -21,29 +22,25 @@ Kaidan::Kaidan(NetworkFactories* networkFactories, QObject *parent) : rosterCont
     softwareVersionResponder = new Swift::SoftwareVersionResponder(client->getIQRouter());
     softwareVersionResponder->setVersion("Kaidan", "0.1");
     softwareVersionResponder->start();
-    //...
+
     client->addPayloadParserFactory(&echoPayloadParserFactory);
     client->addPayloadSerializer(&echoPayloadSerializer);
-    //...
+
     client->connect();
-    //...
 }
 
 Kaidan::~Kaidan()
 {
     client->removePayloadSerializer(&echoPayloadSerializer);
     client->removePayloadParserFactory(&echoPayloadParserFactory);
-    //...
+
     softwareVersionResponder->stop();
     delete softwareVersionResponder;
     delete tracer;
     delete client;
 
     delete rosterController_;
-    //...
 }
-//...
-
 
 void Kaidan::handlePresenceReceived(Presence::ref presence)
 {
@@ -61,21 +58,16 @@ void Kaidan::handleConnected()
 {
     client->sendPresence(Presence::create("Send me a message"));
 
-    if (rosterController_ == NULL)
-    {
-        // Request the roster
-        rosterController_ = new RosterController(client);
-    }
+    // Request the roster
+    rosterController_->requestRosterFromClient(client);
 }
 
-//...
 void Kaidan::handleMessageReceived(Message::ref message)
 {
-    //...
     // Echo back the incoming message
     message->setTo(message->getFrom());
     message->setFrom(JID());
-    //...
+
     if (!message->getPayload<EchoPayload>())
     {
         boost::shared_ptr<EchoPayload> echoPayload = boost::make_shared<EchoPayload>();
@@ -85,3 +77,7 @@ void Kaidan::handleMessageReceived(Message::ref message)
     }
 }
 
+RosterController* Kaidan::getRosterController()
+{
+    return rosterController_;
+}

@@ -1,9 +1,16 @@
 #include "RosterContoller.h"
-#include "RosterItem.h"
 
-RosterController::RosterController(Swift::Client* client, QObject *parent) :
-    QObject(parent), client_(client), rosterList_()
+#include <QQmlContext>
+
+RosterController::RosterController(QObject *parent) : QObject(parent), client_(NULL), rosterList_()
 {
+    //rosterList_.append(new RosterItem(QString("lala@lala.de"), QString("lala"), None));
+}
+
+void RosterController::requestRosterFromClient(Swift::Client *client)
+{
+    client_ = client;
+
     client_->requestRoster();
 
     Swift::GetRosterRequest::ref rosterRequest = Swift::GetRosterRequest::create(client->getIQRouter());
@@ -28,13 +35,23 @@ void RosterController::handleRosterReceived(Swift::ErrorPayload::ref error)
 
         for(it = rosterItems.begin(); it < rosterItems.end(); it++ )
         {
+#if 0
             std::cout << "jid: " << (*it).getJID().toString() <<
                          ", Name: " << (*it).getName() <<
                          ", Subscription: " << (*it).getSubscription() << std::endl;
+#endif
 
             rosterList_.append(new RosterItem(QString::fromStdString((*it).getJID().toString()),
                                               QString::fromStdString((*it).getName()),
                                               (Subscription)(*it).getSubscription()));
+
+            emit rosterListChanged();
         }
     }
 }
+
+QQmlListProperty<RosterItem> RosterController::getRosterList()
+{
+    return QQmlListProperty<RosterItem>(this, rosterList_);
+}
+

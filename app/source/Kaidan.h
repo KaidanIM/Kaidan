@@ -1,5 +1,5 @@
-#ifndef ECHOBOT_H
-#define ECHPBOT_H
+#ifndef KAIDAN_H
+#define KAIDAN_H
 
 #include <QObject>
 #include <QStringList>

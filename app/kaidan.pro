@@ -17,14 +17,14 @@ LIBS += -L$${SWIFT3PATH}/Swiften -L$${SWIFT3PATH}/3rdParty/Boost $${SWIFTLIB}
 DEFINES += BOOST_SIGNALS_NO_DEPRECATION_WARNING
 
 SOURCES += source/main.cpp \
-        source/Kaidan.cpp \
+    source/Kaidan.cpp \
     source/RosterContoller.cpp \
     source/RosterItem.cpp
 
 HEADERS += source/Kaidan.h \
-            source/EchoPayload.h \
-            source/EchoPayloadParserFactory.h \
-            source/EchoPayloadSerializer.h \
+    source/EchoPayload.h \
+    source/EchoPayloadParserFactory.h \
+    source/EchoPayloadSerializer.h \
     source/RosterContoller.h \
     source/RosterItem.h
 

@@ -1,48 +1,48 @@
-#include "EchoBot.h"
+#include "Kaidan.h"
 
 #include <iostream>
 #include <boost/bind.hpp>
 #include <boost/smart_ptr/make_shared.hpp>
 
 #include "EchoPayload.h"
+#include "RosterContoller.h"
 
-EchoBot::EchoBot(NetworkFactories* networkFactories)
+Kaidan::Kaidan(NetworkFactories* networkFactories, QObject *parent) :
+    rosterController_(new RosterController()), QObject(parent)
 {
     client = new Swift::Client("jid@...", "pass", networkFactories);
     client->setAlwaysTrustCertificates();
-    client->onConnected.connect(boost::bind(&EchoBot::handleConnected, this));
+    client->onConnected.connect(boost::bind(&Kaidan::handleConnected, this));
     client->onMessageReceived.connect(
-                boost::bind(&EchoBot::handleMessageReceived, this, _1));
+                boost::bind(&Kaidan::handleMessageReceived, this, _1));
     client->onPresenceReceived.connect(
-                boost::bind(&EchoBot::handlePresenceReceived, this, _1));
+                boost::bind(&Kaidan::handlePresenceReceived, this, _1));
     tracer = new Swift::ClientXMLTracer(client);
 
     softwareVersionResponder = new Swift::SoftwareVersionResponder(client->getIQRouter());
-    softwareVersionResponder->setVersion("EchoBot", "1.0");
+    softwareVersionResponder->setVersion("Kaidan", "0.1");
     softwareVersionResponder->start();
-    //...
+
     client->addPayloadParserFactory(&echoPayloadParserFactory);
     client->addPayloadSerializer(&echoPayloadSerializer);
-    //...
+
     client->connect();
-    //...
 }
 
-EchoBot::~EchoBot()
+Kaidan::~Kaidan()
 {
     client->removePayloadSerializer(&echoPayloadSerializer);
     client->removePayloadParserFactory(&echoPayloadParserFactory);
-    //...
+
     softwareVersionResponder->stop();
     delete softwareVersionResponder;
     delete tracer;
     delete client;
-    //...
+
+    delete rosterController_;
 }
-//...
 
-
-void EchoBot::handlePresenceReceived(Presence::ref presence)
+void Kaidan::handlePresenceReceived(Presence::ref presence)
 {
     // Automatically approve subscription requests
     if (presence->getType() == Swift::Presence::Subscribe)
@@ -54,34 +54,20 @@ void EchoBot::handlePresenceReceived(Presence::ref presence)
     }
 }
 
-void EchoBot::handleConnected()
+void Kaidan::handleConnected()
 {
-    // Request the roster
-    Swift::GetRosterRequest::ref rosterRequest =
-            Swift::GetRosterRequest::create(client->getIQRouter());
-    rosterRequest->onResponse.connect(
-                bind(&EchoBot::handleRosterReceived, this, _2));
-    rosterRequest->send();
-}
-
-void EchoBot::handleRosterReceived(ErrorPayload::ref error)
-{
-    if (error)
-    {
-        std::cerr << "Error receiving roster. Continuing anyway.";
-    }
-    // Send initial available presence
     client->sendPresence(Presence::create("Send me a message"));
+
+    // Request the roster
+    rosterController_->requestRosterFromClient(client);
 }
 
-//...
-void EchoBot::handleMessageReceived(Message::ref message)
+void Kaidan::handleMessageReceived(Message::ref message)
 {
-    //...
     // Echo back the incoming message
     message->setTo(message->getFrom());
     message->setFrom(JID());
-    //...
+
     if (!message->getPayload<EchoPayload>())
     {
         boost::shared_ptr<EchoPayload> echoPayload = boost::make_shared<EchoPayload>();
@@ -91,3 +77,7 @@ void EchoBot::handleMessageReceived(Message::ref message)
     }
 }
 
+RosterController* Kaidan::getRosterController()
+{
+    return rosterController_;
+}

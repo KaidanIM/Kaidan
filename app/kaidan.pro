@@ -1,5 +1,5 @@
 # path to local compiled swift 3 lib
-SWIFT3PATH = ../../swift-3.0
+SWIFT3PATH = ../../../swift-3.0
 # from swift-config
 SWIFTCXX = -DSWIFTEN_STATIC -DBOOST_ALL_NO_LIB -DBOOST_SYSTEM_NO_DEPRECATED -DBOOST_SIGNALS_NO_DEPRECATION_WARNING -DSWIFT_EXPERIMENTAL_FT
 SWIFTLIB = -lSwiften -lSwiften_Boost -lrt -lz -lssl -lcrypto -lxml2 -lresolv -lpthread -ldl -lm -lc -lstdc++
@@ -17,12 +17,16 @@ LIBS += -L$${SWIFT3PATH}/Swiften -L$${SWIFT3PATH}/3rdParty/Boost $${SWIFTLIB}
 DEFINES += BOOST_SIGNALS_NO_DEPRECATION_WARNING
 
 SOURCES += source/main.cpp \
-        source/EchoBot.cpp
+    source/Kaidan.cpp \
+    source/RosterContoller.cpp \
+    source/RosterItem.cpp
 
-HEADERS += source/EchoBot.h \
-            source/EchoPayload.h \
-            source/EchoPayloadParserFactory.h \
-            source/EchoPayloadSerializer.h
+HEADERS += source/Kaidan.h \
+    source/EchoPayload.h \
+    source/EchoPayloadParserFactory.h \
+    source/EchoPayloadSerializer.h \
+    source/RosterContoller.h \
+    source/RosterItem.h
 
 RESOURCES += resources/qml.qrc
 

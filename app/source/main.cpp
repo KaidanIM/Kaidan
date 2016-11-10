@@ -1,23 +1,33 @@
 #include <QGuiApplication>
 #include <QQmlApplicationEngine>
+#include <QQuickView>
+#include <QQmlContext>
+#include <QtQml>
+
 #include "Swiften/EventLoop/Qt/QtEventLoop.h"
 
-#include "EchoBot.h"
+#include "Kaidan.h"
+#include "RosterContoller.h"
+#include "RosterItem.h"
 
 int main(int argc, char *argv[])
 {
-    QGuiApplication app(argc, argv);
+    qmlRegisterType<RosterController>( "harbour.kaidan", 1, 0, "RosterController");
+    qmlRegisterType<RosterItem>( "harbour.kaidan", 1, 0, "RosterItem");
 
-    // FIXME rewrite binds to qt specific versions
-    // FIXME test connects from QtEventLoop (Swiften) to QGuiApplication
+    QGuiApplication app(argc, argv);
 
     QtEventLoop eventLoop;
     BoostNetworkFactories networkFactories(&eventLoop);
 
-    EchoBot bot(&networkFactories);
+    Kaidan kaidan(&networkFactories);
 
-    QQmlApplicationEngine engine;
-    engine.load(QUrl(QStringLiteral("qrc:/main.qml")));
+    QQuickView view;
+    QQmlContext *ctxt = view.rootContext();
+    ctxt->setContextProperty("kaidan", &kaidan);
+
+    view.setSource(QUrl::fromLocalFile("main.qml"));
+    view.show();
 
     return app.exec();
 }

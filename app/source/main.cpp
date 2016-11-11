@@ -26,7 +26,7 @@ int main(int argc, char *argv[])
     QQmlContext *ctxt = view.rootContext();
     ctxt->setContextProperty("kaidan", &kaidan);
 
-    view.setSource(QUrl::fromLocalFile("main.qml"));
+    view.setSource(QUrl("qrc:/main.qml"));
     view.show();
 
     return app.exec();

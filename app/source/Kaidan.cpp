@@ -10,7 +10,7 @@
 Kaidan::Kaidan(NetworkFactories* networkFactories, QObject *parent) :
     rosterController_(new RosterController()), QObject(parent)
 {
-    client = new Swift::Client("jid@...", "pass", networkFactories);
+	client = new Swift::Client("jid@...", "pass", networkFactories);
     client->setAlwaysTrustCertificates();
     client->onConnected.connect(boost::bind(&Kaidan::handleConnected, this));
     client->onMessageReceived.connect(

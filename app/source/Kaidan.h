@@ -38,6 +38,11 @@ private:
     EchoPayloadSerializer echoPayloadSerializer;
 
     RosterController* rosterController_;
+	public slots:
+		//we don't want to close client without disconnection
+		void mainQuit(){
+			client->disconnect();
+		}
 };
 
 #endif

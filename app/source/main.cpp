@@ -22,12 +22,14 @@ int main(int argc, char *argv[])
 
     Kaidan kaidan(&networkFactories);
 
-    QQuickView view;
-    QQmlContext *ctxt = view.rootContext();
-    ctxt->setContextProperty("kaidan", &kaidan);
+	QQmlApplicationEngine engine;
+	engine.rootContext()->setContextProperty("kaidan", &kaidan);
 
-    view.setSource(QUrl("qrc:/main.qml"));
-    view.show();
+	engine.load(QUrl("qrc:/main.qml"));
+	QObject *topLevel = engine.rootObjects().value(0);
+	QQuickWindow *window = qobject_cast<QQuickWindow*>(topLevel);
 
+	QObject::connect(topLevel, SIGNAL(mainQuit()), &kaidan, SLOT(mainQuit()));
+	window->show();
     return app.exec();
 }

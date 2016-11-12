@@ -29,7 +29,6 @@ int main(int argc, char *argv[])
 	QObject *topLevel = engine.rootObjects().value(0);
 	QQuickWindow *window = qobject_cast<QQuickWindow*>(topLevel);
 
-	QObject::connect(topLevel, SIGNAL(mainQuit()), &kaidan, SLOT(mainQuit()));
 	window->show();
     return app.exec();
 }

@@ -41,6 +41,10 @@ Kaidan::~Kaidan()
 
     delete rosterController_;
 }
+//we don't want to close client without disconnection
+void Kaidan::mainQuit(){
+	client->disconnect();
+}
 
 void Kaidan::handlePresenceReceived(Presence::ref presence)
 {

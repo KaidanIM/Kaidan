@@ -20,6 +20,7 @@ class Kaidan : public QObject
 public:
     Kaidan(Swift::NetworkFactories* networkFactories, QObject *parent = 0);
     ~Kaidan();
+	Q_INVOKABLE void mainQuit();
 
     RosterController* getRosterController();
 
@@ -38,11 +39,6 @@ private:
     EchoPayloadSerializer echoPayloadSerializer;
 
     RosterController* rosterController_;
-	public slots:
-		//we don't want to close client without disconnection
-		void mainQuit(){
-			client->disconnect();
-		}
 };
 
 #endif

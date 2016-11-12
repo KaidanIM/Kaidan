@@ -6,7 +6,7 @@ ApplicationWindow{
 	visible: true
 	width: 360
 	height: 720
-	signal mainQuit()
+
 	Flickable{
 		anchors.fill: parent
 
@@ -20,7 +20,7 @@ ApplicationWindow{
 			}
 		}
 	}
-	onClosing: mainQuit()
+	onClosing: kaidan.mainQuit()
 }
 
 

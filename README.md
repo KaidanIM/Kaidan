@@ -1,4 +1,4 @@
-# Kaidan - Cross plattform xmpp client
+# Kaidan - Cross platform XMPP client
 
 Installation
 ------------
@@ -12,9 +12,9 @@ Create a working directory
 
 Fetch swift source
 
- * wget https://github.com/swift/swift/archive/swift-3.0.zip
- * unzip swift-3.0.zip
- * cd swift-swift-3.0/
+ * wget https://swift.im/downloads/releases/swift-3.0/swift-3.0.tar.gz
+ * tar -xzvf swift-3.0.tar.gz
+ * cd swift-3.0/
 
 Install all dependencies to build swiften
 

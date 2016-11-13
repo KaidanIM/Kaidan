@@ -17,21 +17,21 @@ class EchoPayloadParser : public Swift::GenericPayloadParser<EchoPayload>
 		EchoPayloadParser() : currentDepth(0) {}
 
 		void handleStartElement(
-                const std::string& /* element */, const std::string& /* ns */, const AttributeMap&)
-        {
+			const std::string& /* element */, const std::string& /* ns */, const AttributeMap&)
+		{
 			currentDepth++;
 		}
 
-        void handleEndElement(const std::string& /* element */, const std::string& /* ns */)
-        {
+		void handleEndElement(const std::string& /* element */, const std::string& /* ns */)
+		{
 			currentDepth--;
 			if (currentDepth == 0) {
 				getPayloadInternal()->setMessage(currentText);
 			}
 		}
 
-        void handleCharacterData(const std::string& data)
-        {
+		void handleCharacterData(const std::string& data)
+		{
 			currentText += data;
 		}
 

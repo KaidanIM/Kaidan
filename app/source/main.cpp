@@ -12,22 +12,23 @@
 
 int main(int argc, char *argv[])
 {
-    qmlRegisterType<RosterController>( "harbour.kaidan", 1, 0, "RosterController");
-    qmlRegisterType<RosterItem>( "harbour.kaidan", 1, 0, "RosterItem");
+	qmlRegisterType<RosterController>( "harbour.kaidan", 1, 0, "RosterController");
+	qmlRegisterType<RosterItem>( "harbour.kaidan", 1, 0, "RosterItem");
 
-    QGuiApplication app(argc, argv);
+	QGuiApplication app(argc, argv);
 
-    QtEventLoop eventLoop;
-    BoostNetworkFactories networkFactories(&eventLoop);
+	QtEventLoop eventLoop;
+	BoostNetworkFactories networkFactories(&eventLoop);
 
-    Kaidan kaidan(&networkFactories);
+	Kaidan kaidan(&networkFactories);
 
-    QQuickView view;
-    QQmlContext *ctxt = view.rootContext();
-    ctxt->setContextProperty("kaidan", &kaidan);
+	QQmlApplicationEngine engine;
+	engine.rootContext()->setContextProperty("kaidan", &kaidan);
 
-    view.setSource(QUrl("qrc:/main.qml"));
-    view.show();
+	engine.load(QUrl("qrc:/main.qml"));
+	QObject *topLevel = engine.rootObjects().value(0);
+	QQuickWindow *window = qobject_cast<QQuickWindow*>(topLevel);
 
-    return app.exec();
+	window->show();
+	return app.exec();
 }

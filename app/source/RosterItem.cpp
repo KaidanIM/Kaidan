@@ -5,42 +5,42 @@ RosterItem::RosterItem(QObject *parent) : QObject(parent), subscription_(None), 
 }
 
 RosterItem::RosterItem(const QString &jid, const QString &name, const Subscription &subscription, QObject* parent) :
-    QObject(parent), jid_(jid), name_(name), subscription_(subscription)
+	QObject(parent), jid_(jid), name_(name), subscription_(subscription)
 {
 }
 
 QString RosterItem::getName()
 {
-    return name_;
+	return name_;
 }
 
 void RosterItem::setName(const QString &name)
 {
-    name_ = name;
+	name_ = name;
 
-    emit nameChanged();
+	emit nameChanged();
 }
 
 QString RosterItem::getJid()
 {
-    return jid_;
+	return jid_;
 }
 
 void RosterItem::setJid(const QString &jid)
 {
-    jid_ = jid;
+	jid_ = jid;
 
-    emit jidChanged();
+	emit jidChanged();
 }
 
 Subscription RosterItem::getSubscription()
 {
-    return subscription_;
+	return subscription_;
 }
 
 void RosterItem::setSubscription(const Subscription &subscription)
 {
-    subscription_ = subscription;
+	subscription_ = subscription;
 
-    emit subscriptionChanged();
+	emit subscriptionChanged();
 }

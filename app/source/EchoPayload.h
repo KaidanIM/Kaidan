@@ -14,13 +14,13 @@ class EchoPayload : public Swift::Payload
 	public:
 		EchoPayload() {}
 
-        const std::string& getMessage() const
-        {
+		const std::string& getMessage() const
+		{
 			return message;
 		}
 
-        void setMessage(const std::string& message)
-        {
+		void setMessage(const std::string& message)
+		{
 			this->message = message;
 		}
 

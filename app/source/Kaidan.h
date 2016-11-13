@@ -13,31 +13,32 @@ class RosterController;
 
 class Kaidan : public QObject
 {
-    Q_OBJECT
+	Q_OBJECT
 
-    Q_PROPERTY(RosterController* rosterController READ getRosterController NOTIFY rosterControllerChanged)
+	Q_PROPERTY(RosterController* rosterController READ getRosterController NOTIFY rosterControllerChanged)
 
 public:
-    Kaidan(Swift::NetworkFactories* networkFactories, QObject *parent = 0);
-    ~Kaidan();
+	Kaidan(Swift::NetworkFactories* networkFactories, QObject *parent = 0);
+	~Kaidan();
+	Q_INVOKABLE void mainQuit();
 
-    RosterController* getRosterController();
+	RosterController* getRosterController();
 
 signals:
-    void rosterControllerChanged();
+	void rosterControllerChanged();
 
 private:
-    void handlePresenceReceived(Swift::Presence::ref presence);
-    void handleConnected();
-    void handleMessageReceived(Swift::Message::ref message);
+	void handlePresenceReceived(Swift::Presence::ref presence);
+	void handleConnected();
+	void handleMessageReceived(Swift::Message::ref message);
 
-    Swift::Client* client;
-    Swift::ClientXMLTracer* tracer;
-    Swift::SoftwareVersionResponder* softwareVersionResponder;
-    EchoPayloadParserFactory echoPayloadParserFactory;
-    EchoPayloadSerializer echoPayloadSerializer;
+	Swift::Client* client;
+	Swift::ClientXMLTracer* tracer;
+	Swift::SoftwareVersionResponder* softwareVersionResponder;
+	EchoPayloadParserFactory echoPayloadParserFactory;
+	EchoPayloadSerializer echoPayloadSerializer;
 
-    RosterController* rosterController_;
+	RosterController* rosterController_;
 };
 
 #endif

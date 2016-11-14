@@ -3,7 +3,7 @@
 Installation
 ------------
 
-On Debian do the following:
+On Linux do the following:
 
 Create a working directory
 
@@ -19,7 +19,11 @@ Fetch swift source
 Install all dependencies to build swiften
 
  * ./BuildTools/InstallSwiftDependencies.sh
- * ./scons Swiften
+ * ./scons Swiften -j<Number of threads>
+
+Install dependencies to build Kaidan (example for Debian)
+
+ * sudo apt-get install zlib1g-dev libssl-dev libxml2-dev libstdc++-4.9-dev libqt5quick5 libqt5quickparticles5 libqt5quickwidgets5 libqt5qml5 libqt5network5 libqt5gui5 libqt5core5a qt5-default libglib2.0-dev libpthread-stubs0-dev
 
 Get Kaidan source code
 
@@ -34,6 +38,6 @@ or use command line
 
  * cd Kaidan/app
  * qmake
- * make
+ * make -j<Number of threads>
 
 

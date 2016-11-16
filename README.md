@@ -3,32 +3,32 @@
 Installation
 ------------
 
-On Linux do the following:
+On Debian do the following:
 
 Create a working directory
 
- * mkdir src
- * cd src
+ * `mkdir src`
+ * `cd src`
 
 Fetch swift source
 
- * wget https://swift.im/downloads/releases/swift-3.0/swift-3.0.tar.gz
- * tar -xzvf swift-3.0.tar.gz
- * cd swift-3.0/
+ * `wget https://swift.im/downloads/releases/swift-3.0/swift-3.0.tar.gz`
+ * `tar -xzvf swift-3.0.tar.gz`
+ * `cd swift-3.0/`
 
 Install all dependencies to build swiften
 
- * ./BuildTools/InstallSwiftDependencies.sh
- * ./scons Swiften -j<Number of threads>
+ * `./BuildTools/InstallSwiftDependencies.sh`
+ * `./scons Swiften -j<Number of threads>`
 
 Install dependencies to build Kaidan (example for Debian)
 
- * sudo apt-get install zlib1g-dev libssl-dev libxml2-dev libstdc++-4.9-dev libqt5quick5 libqt5quickparticles5 libqt5quickwidgets5 libqt5qml5 libqt5network5 libqt5gui5 libqt5core5a qt5-default libglib2.0-dev libpthread-stubs0-dev
+ * `sudo apt-get install zlib1g-dev libssl-dev libxml2-dev libstdc++-5-dev libqt5quick5 libqt5quickparticles5 libqt5quickwidgets5 libqt5qml5 libqt5network5 libqt5gui5 libqt5core5a qt5-default libglib2.0-dev libpthread-stubs0-dev`
 
 Get Kaidan source code
 
- * cd ..
- * git clone https://github.com/KaidanIM/Kaidan
+ * `cd ..`
+ * `git clone https://github.com/KaidanIM/Kaidan`
 
 Either
 
@@ -36,8 +36,8 @@ Either
 
 or use command line
 
- * cd Kaidan/app
- * qmake
- * make -j<Number of threads>
+ * `cd Kaidan/app`
+ * `qmake`
+ * `make -j<Number of threads>`
 
 

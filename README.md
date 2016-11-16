@@ -1,9 +1,8 @@
 # Kaidan - Cross platform XMPP client
 
-Installation
-------------
+## Installation
 
-On Debian do the following:
+On Linux do the following:
 
 Create a working directory
 
@@ -40,4 +39,9 @@ or use command line
  * `qmake`
  * `make -j<Number of threads>`
 
+### Troubleshooting
 
+#### Cannot find `-lSwiften_Boost`
+
+When you get this error, you probably have installed the debian packages for libboost.
+Remove them and rebuild swift. Then it should build correctly.

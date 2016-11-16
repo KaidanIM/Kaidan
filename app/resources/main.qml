@@ -7,20 +7,13 @@ ApplicationWindow{
 	width: 360
 	height: 720
 
-	Flickable{
+	Loader{
+		id: mainLoader
 		anchors.fill: parent
-
-		ListView {
-			anchors.fill: parent
-			model: kaidan.rosterController.rosterList
-			delegate: Rectangle {
-				height: 25
-				width: parent.width
-				Text { text: model.modelData.jid}
-			}
-		}
+		source: "LoginPage.qml"
 	}
-	onClosing: kaidan.mainQuit()
+
+	onClosing: kaidan.mainDisconnect()
 }
 
 

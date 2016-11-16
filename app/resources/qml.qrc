@@ -1,5 +1,7 @@
 <RCC>
-	<qresource prefix="/">
-		<file>main.qml</file>
-	</qresource>
+    <qresource prefix="/">
+        <file>main.qml</file>
+        <file>RosterPage.qml</file>
+        <file>LoginPage.qml</file>
+    </qresource>
 </RCC>

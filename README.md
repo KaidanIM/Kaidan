@@ -35,7 +35,7 @@ Either
 
 or use command line
 
- * `cd Kaidan/app`
+ * `cd Kaidan`
  * `qmake`
  * `make -j<Number of threads>`
 

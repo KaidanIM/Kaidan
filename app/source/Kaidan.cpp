@@ -10,9 +10,29 @@
 Kaidan::Kaidan(NetworkFactories* networkFactories, QObject *parent) :
 	rosterController_(new RosterController()), QObject(parent)
 {
-	client = new Swift::Client("jid@...", "pass", networkFactories);
+	netFactories = networkFactories;
+	connected = false;
+}
+
+Kaidan::~Kaidan()
+{
+	if(connected){
+		client->removePayloadSerializer(&echoPayloadSerializer);
+		client->removePayloadParserFactory(&echoPayloadParserFactory);
+		softwareVersionResponder->stop();
+		delete tracer;
+	}
+	delete softwareVersionResponder;
+	delete client;
+
+	delete rosterController_;
+}
+
+void Kaidan::mainConnect(const QString &jid, const QString &pass){
+	client = new Swift::Client(jid.toStdString(), pass.toStdString(), netFactories);
 	client->setAlwaysTrustCertificates();
 	client->onConnected.connect(boost::bind(&Kaidan::handleConnected, this));
+	client->onDisconnected.connect(boost::bind(&Kaidan::handleDisconnected, this));
 	client->onMessageReceived.connect(
 		boost::bind(&Kaidan::handleMessageReceived, this, _1));
 	client->onPresenceReceived.connect(
@@ -29,21 +49,11 @@ Kaidan::Kaidan(NetworkFactories* networkFactories, QObject *parent) :
 	client->connect();
 }
 
-Kaidan::~Kaidan()
-{
-	client->removePayloadSerializer(&echoPayloadSerializer);
-	client->removePayloadParserFactory(&echoPayloadParserFactory);
-
-	softwareVersionResponder->stop();
-	delete softwareVersionResponder;
-	delete tracer;
-	delete client;
-
-	delete rosterController_;
-}
 //we don't want to close client without disconnection
-void Kaidan::mainQuit(){
-	client->disconnect();
+void Kaidan::mainDisconnect(){
+	if(connectionState()){
+		client->disconnect();
+	}
 }
 
 void Kaidan::handlePresenceReceived(Presence::ref presence)
@@ -60,10 +70,17 @@ void Kaidan::handlePresenceReceived(Presence::ref presence)
 
 void Kaidan::handleConnected()
 {
+	connected = true;
+	emit connectionStateConnected();
 	client->sendPresence(Presence::create("Send me a message"));
 
 	// Request the roster
 	rosterController_->requestRosterFromClient(client);
+}
+
+void Kaidan::handleDisconnected(){
+	connected = false;
+	emit connectionStateDisconnected();
 }
 
 void Kaidan::handleMessageReceived(Message::ref message)
@@ -84,4 +101,8 @@ void Kaidan::handleMessageReceived(Message::ref message)
 RosterController* Kaidan::getRosterController()
 {
 	return rosterController_;
+}
+
+bool Kaidan::connectionState() const{
+	return connected;
 }

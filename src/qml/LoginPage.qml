@@ -32,8 +32,7 @@ Item {
 		}
 	}
 	Component.onCompleted: {
-		function goToRoster()
-		{
+		function goToRoster() {
 			statusLabel.text = "Connected";
 			//we need to disconnect enableConnectButton to prevent calling it on normal disconnection
 			kaidan.connectionStateDisconnected.disconnect(enableConnectButton)

@@ -16,14 +16,15 @@ Kaidan::Kaidan(NetworkFactories* networkFactories, QObject *parent) :
 
 Kaidan::~Kaidan()
 {
-	if(connected){
+	if (connected)
+	{
 		client->removePayloadSerializer(&echoPayloadSerializer);
 		client->removePayloadParserFactory(&echoPayloadParserFactory);
 		softwareVersionResponder->stop();
 		delete tracer;
+		delete softwareVersionResponder;
+		delete client;
 	}
-	delete softwareVersionResponder;
-	delete client;
 
 	delete rosterController_;
 }
@@ -50,8 +51,10 @@ void Kaidan::mainConnect(const QString &jid, const QString &pass){
 }
 
 //we don't want to close client without disconnection
-void Kaidan::mainDisconnect(){
-	if(connectionState()){
+void Kaidan::mainDisconnect()
+{
+	if (connectionState())
+	{
 		client->disconnect();
 	}
 }
@@ -78,7 +81,8 @@ void Kaidan::handleConnected()
 	rosterController_->requestRosterFromClient(client);
 }
 
-void Kaidan::handleDisconnected(){
+void Kaidan::handleDisconnected()
+{
 	connected = false;
 	emit connectionStateDisconnected();
 }
@@ -103,6 +107,7 @@ RosterController* Kaidan::getRosterController()
 	return rosterController_;
 }
 
-bool Kaidan::connectionState() const{
+bool Kaidan::connectionState() const
+{
 	return connected;
 }

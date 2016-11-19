@@ -38,8 +38,7 @@ Item {
 			kaidan.connectionStateDisconnected.disconnect(enableConnectButton)
 			mainLoader.source = "RosterPage.qml"
 		}
-		function enableConnectButton()
-		{
+		function enableConnectButton() {
 			connectButton.enabled = true
 		}
 		kaidan.connectionStateConnected.connect(goToRoster)

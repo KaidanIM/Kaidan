@@ -27,7 +27,7 @@ Install dependencies to build Kaidan (example for Debian)
 Get Kaidan source code
 
  * `cd ..`
- * `git clone https://github.com/KaidanIM/Kaidan`
+ * `git clone https://github.com/kaidanim/kaidan`
 
 Either
 
@@ -35,7 +35,7 @@ Either
 
 or use command line
 
- * `cd Kaidan`
+ * `cd kaidan`
  * `qmake`
  * `make -j<Number of threads>`
 

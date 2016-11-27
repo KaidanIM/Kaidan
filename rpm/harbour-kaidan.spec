@@ -24,7 +24,7 @@ XMPP Client for Sailfish OS
 
 
 %build
-qmake ./app/ CONFIG+=sailfishapp DEFINES+=SFOS
+qmake CONFIG+=sailfishapp DEFINES+=SFOS
 make %{?_smp_mflags}
 
 
@@ -33,7 +33,7 @@ rm -rf $RPM_BUILD_ROOT
 # >> install pre
 # << install pre
 install -d %{buildroot}%{_bindir}
-install -p -m 0755 %(pwd)/%{name} %{buildroot}%{_bindir}/harbour-%{name}
+install -p -m 0755 %(pwd)/bin/%{name} %{buildroot}%{_bindir}/harbour-%{name}
 install -d %{buildroot}%{_datadir}/applications
 #install -d %{buildroot}%{_datadir}/lipstick/notificationcategories
 install -d %{buildroot}%{_datadir}/harbour-%{name}

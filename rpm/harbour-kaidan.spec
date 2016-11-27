@@ -1,11 +1,11 @@
-Name: kaidan		
-Version: 0.1.0	
+Name: kaidan
+Version: 0.1.0
 Release:	1%{?dist}
-Summary: Kaidan - Cross Platform XMPP Client	
+Summary: Kaidan - Cross Platform XMPP Client
 
 Group: Qt/Qt
-License: GPL	
-URL: https://github.com/KaidanIM	
+License: GPL
+URL: https://github.com/KaidanIM
 Source0: %{name}-%{version}.tar.bz2
 BuildRoot:	%(mktemp -ud %{_tmppath}/%{name}-%{version}-%{release}-XXXXXX)
 
@@ -48,9 +48,9 @@ install -p %(pwd)/sailfish/harbour-kaidan.desktop %{buildroot}%{_datadir}/applic
 # >> install post
 # << install post
 
-desktop-file-install --delete-original       \
-  --dir %{buildroot}%{_datadir}/applications             \
-   %{buildroot}%{_datadir}/applications/*.desktop
+desktop-file-install --delete-original \
+    --dir %{buildroot}%{_datadir}/applications \
+    %{buildroot}%{_datadir}/applications/*.desktop
 
 
 %clean

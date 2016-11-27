@@ -6,21 +6,22 @@
 
 class Database : public QObject
 {
-    Q_OBJECT
-public:
-    explicit Database(QObject *parent = 0);
-    bool isValid();
-    QSqlDatabase* getPointer();
+	Q_OBJECT
 
-    void dumpDataToStdOut() const;
+public:
+	explicit Database(QObject *parent = 0);
+	bool isValid();
+	QSqlDatabase* getPointer();
+
+	void dumpDataToStdOut() const;
 
 signals:
 
 public slots:
 
 private:
-    bool databaseValid_;
-    QSqlDatabase database_;
+	bool databaseValid_;
+	QSqlDatabase database_;
 };
 
 #endif // DATABASE_H

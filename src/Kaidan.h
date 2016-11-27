@@ -30,7 +30,7 @@ public:
 	Q_INVOKABLE void mainConnect(const QString &jid, const QString &pass);
 	Q_INVOKABLE void sendMessage(QString const &toJid, QString const &message);
 	Q_INVOKABLE void setCurrentChatPartner(QString const &jid);
-	
+
 	bool connectionState() const;
 
 signals:
@@ -50,12 +50,12 @@ private:
 	RosterController* getRosterController();
 	Persistence* getPersistence();
 
-    Swift::Client* client_;
-    Swift::ClientXMLTracer* tracer_;
-    Swift::SoftwareVersionResponder* softwareVersionResponder_;
-    EchoPayloadParserFactory echoPayloadParserFactory_;
-    EchoPayloadSerializer echoPayloadSerializer_;
-    Swift::NetworkFactories *netFactories_;
+	Swift::Client* client_;
+	Swift::ClientXMLTracer* tracer_;
+	Swift::SoftwareVersionResponder* softwareVersionResponder_;
+	EchoPayloadParserFactory echoPayloadParserFactory_;
+	EchoPayloadSerializer echoPayloadSerializer_;
+	Swift::NetworkFactories *netFactories_;
 
 	RosterController* rosterController_;
 	Persistence* persistence_;

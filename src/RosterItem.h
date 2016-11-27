@@ -5,7 +5,7 @@
 
 enum Subscription
 {
-    None,
+	None,
 	To,
 	From,
 	Both,

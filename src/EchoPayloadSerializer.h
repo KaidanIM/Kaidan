@@ -11,11 +11,11 @@
 
 class EchoPayloadSerializer : public Swift::GenericPayloadSerializer<EchoPayload>
 {
-	public:
-		std::string serializePayload(boost::shared_ptr<EchoPayload> payload) const
-		{
-			XMLElement element("echo", "http://swift.im/protocol/echo");
-			element.addNode(XMLTextNode::ref(new XMLTextNode(payload->getMessage())));
-			return element.serialize();
-		}
+public:
+	std::string serializePayload(boost::shared_ptr<EchoPayload> payload) const
+	{
+		XMLElement element("echo", "http://swift.im/protocol/echo");
+		element.addNode(XMLTextNode::ref(new XMLTextNode(payload->getMessage())));
+		return element.serialize();
+	}
 };

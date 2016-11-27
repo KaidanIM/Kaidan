@@ -22,20 +22,21 @@ DEFINES += BOOST_SIGNALS_NO_DEPRECATION_WARNING
 SOURCES += src/main.cpp \
 	src/Kaidan.cpp \
 	src/RosterContoller.cpp \
-        src/RosterItem.cpp \
-        src/persistence/Database.cpp \
-        src/persistence/MessageController.cpp \
-        src/persistence/Persistence.cpp
+	src/RosterItem.cpp \
+	src/persistence/Database.cpp \
+	src/persistence/MessageController.cpp \
+	src/persistence/Persistence.cpp
+
 
 HEADERS += src/Kaidan.h \
 	src/EchoPayload.h \
 	src/EchoPayloadParserFactory.h \
 	src/EchoPayloadSerializer.h \
 	src/RosterContoller.h \
-        src/RosterItem.h \
-        src/persistence/Database.h \
-        src/persistence/MessageController.h \
-        src/persistence/Persistence.h
+	src/RosterItem.h \
+	src/persistence/Database.h \
+	src/persistence/MessageController.h \
+	src/persistence/Persistence.h
 
 RESOURCES += kaidan.qrc
 

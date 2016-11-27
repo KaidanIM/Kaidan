@@ -82,7 +82,7 @@ Page {
         id: view;
         clip: true;
         model: kaidan.persistence.messageController
-        
+
         header: Item {
             height: view.spacing;
             anchors {

@@ -35,13 +35,13 @@ void RosterController::handleRosterReceived(Swift::ErrorPayload::ref error)
 		{
 #if 0
 			std::cout << "jid: " << (*it).getJID().toString() <<
-				", Name: " << (*it).getName() <<
-				", Subscription: " << (*it).getSubscription() << std::endl;
+						 ", Name: " << (*it).getName() <<
+						 ", Subscription: " << (*it).getSubscription() << std::endl;
 #endif
 
 			rosterList_.append(new RosterItem(QString::fromStdString((*it).getJID().toString()),
-				QString::fromStdString((*it).getName()),
-				(Subscription)(*it).getSubscription()));
+											  QString::fromStdString((*it).getName()),
+											  (Subscription)(*it).getSubscription()));
 
 			emit rosterListChanged();
 		}

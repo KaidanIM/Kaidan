@@ -13,7 +13,7 @@
 #include "MessageController.h"
 
 Kaidan::Kaidan(NetworkFactories* networkFactories, QObject *parent) :
-	rosterController_(new RosterController()), QObject(parent)
+    QObject(parent), rosterController_(new RosterController())
 {
 	netFactories_ = networkFactories;
 	connected = false;

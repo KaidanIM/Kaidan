@@ -4,13 +4,11 @@
 
 RosterController::RosterController(QObject *parent) : QObject(parent), client_(NULL), rosterList_()
 {
-	//rosterList_.append(new RosterItem(QString("lala@lala.de"), QString("lala"), None));
 }
 
 void RosterController::requestRosterFromClient(Swift::Client *client)
 {
 	client_ = client;
-
 	client_->requestRoster();
 
 	Swift::GetRosterRequest::ref rosterRequest = Swift::GetRosterRequest::create(client->getIQRouter());
@@ -26,12 +24,12 @@ void RosterController::handleRosterReceived(Swift::ErrorPayload::ref error)
 	}
 	else
 	{
-		std::cout << "handleRosterReceived!!!" << std::endl;
+		//std::cout << "handleRosterReceived!!!" << std::endl;
 		Swift::XMPPRoster* roster = client_->getRoster();
 		std::vector<Swift::XMPPRosterItem> rosterItems = roster->getItems();
 
 		std::vector<Swift::XMPPRosterItem>::iterator it;
-		std::cout << "size: " << rosterItems.size() << std::endl;
+		//std::cout << "size: " << rosterItems.size() << std::endl;
 
 		for(it = rosterItems.begin(); it < rosterItems.end(); it++ )
 		{

@@ -1,0 +1,8 @@
+[Desktop Entry]
+Encoding=UTF-8
+Version=1.0
+Type=Application
+X-Nemo-Application-Type=generic
+Name=harbour-kaidan
+Icon=harbour-kaidan
+Exec=harbour-kaidan

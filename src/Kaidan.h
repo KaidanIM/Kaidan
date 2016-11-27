@@ -51,11 +51,11 @@ private:
 	Persistence* getPersistence();
 
     Swift::Client* client_;
-	Swift::ClientXMLTracer* tracer;
-	Swift::SoftwareVersionResponder* softwareVersionResponder;
-	EchoPayloadParserFactory echoPayloadParserFactory;
-	EchoPayloadSerializer echoPayloadSerializer;
-	Swift::NetworkFactories *netFactories;
+    Swift::ClientXMLTracer* tracer_;
+    Swift::SoftwareVersionResponder* softwareVersionResponder_;
+    EchoPayloadParserFactory echoPayloadParserFactory_;
+    EchoPayloadSerializer echoPayloadSerializer_;
+    Swift::NetworkFactories *netFactories_;
 
 	RosterController* rosterController_;
 	Persistence* persistence_;

@@ -15,7 +15,7 @@
 Kaidan::Kaidan(NetworkFactories* networkFactories, QObject *parent) :
 	rosterController_(new RosterController()), QObject(parent)
 {
-	netFactories = networkFactories;
+	netFactories_ = networkFactories;
 	connected = false;
 }
 
@@ -23,11 +23,11 @@ Kaidan::~Kaidan()
 {
 	if (connected)
 	{
-        client_->removePayloadSerializer(&echoPayloadSerializer);
-        client_->removePayloadParserFactory(&echoPayloadParserFactory);
-		softwareVersionResponder->stop();
-		delete tracer;
-		delete softwareVersionResponder;
+        client_->removePayloadSerializer(&echoPayloadSerializer_);
+        client_->removePayloadParserFactory(&echoPayloadParserFactory_);
+		softwareVersionResponder_->stop();
+		delete tracer_;
+		delete softwareVersionResponder_;
         delete client_;
 	}
 
@@ -35,7 +35,7 @@ Kaidan::~Kaidan()
 }
 
 void Kaidan::mainConnect(const QString &jid, const QString &pass){
-    client_ = new Swift::Client(jid.toStdString(), pass.toStdString(), netFactories);
+    client_ = new Swift::Client(jid.toStdString(), pass.toStdString(), netFactories_);
     client_->setAlwaysTrustCertificates();
     client_->onConnected.connect(boost::bind(&Kaidan::handleConnected, this));
     client_->onDisconnected.connect(boost::bind(&Kaidan::handleDisconnected, this));
@@ -43,14 +43,14 @@ void Kaidan::mainConnect(const QString &jid, const QString &pass){
 		boost::bind(&Kaidan::handleMessageReceived, this, _1));
     client_->onPresenceReceived.connect(
 		boost::bind(&Kaidan::handlePresenceReceived, this, _1));
-    tracer = new Swift::ClientXMLTracer(client_);
+    tracer_ = new Swift::ClientXMLTracer(client_);
 
-    softwareVersionResponder = new Swift::SoftwareVersionResponder(client_->getIQRouter());
-	softwareVersionResponder->setVersion("Kaidan", "0.1");
-	softwareVersionResponder->start();
+    softwareVersionResponder_ = new Swift::SoftwareVersionResponder(client_->getIQRouter());
+	softwareVersionResponder_->setVersion("Kaidan", "0.1");
+	softwareVersionResponder_->start();
 
-    client_->addPayloadParserFactory(&echoPayloadParserFactory);
-    client_->addPayloadSerializer(&echoPayloadSerializer);
+    client_->addPayloadParserFactory(&echoPayloadParserFactory_);
+    client_->addPayloadSerializer(&echoPayloadSerializer_);
 
     client_->connect();
 }

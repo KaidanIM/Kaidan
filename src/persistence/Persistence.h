@@ -24,11 +24,11 @@ public slots:
     void setCurrentChatPartner(QString const &jid);
 
 private:
-    bool persistenceValid_;
     MessageController* getMessageContoller();
 
     Database *db_;
     MessageController *messageController_;
+    bool persistenceValid_;
 };
 
 #endif // PERSISTENCE_H

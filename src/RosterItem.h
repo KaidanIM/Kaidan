@@ -4,7 +4,8 @@
 #include <QObject>
 
 enum Subscription
-{ None,
+{
+	None,
 	To,
 	From,
 	Both,
@@ -21,7 +22,8 @@ class RosterItem : public QObject
 
 public:
 	explicit RosterItem(QObject *parent = 0);
-	RosterItem(const QString& jid, const QString& name, const Subscription& subscription, QObject* parent = 0);
+	RosterItem(const QString& jid, const QString& name, const Subscription& subscription,
+		QObject* parent = 0);
 
 	QString getName();
 	void setName(const QString& name);

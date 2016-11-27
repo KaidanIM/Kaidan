@@ -1,6 +1,6 @@
 #include "RosterItem.h"
 
-RosterItem::RosterItem(QObject *parent) : QObject(parent), subscription_(None), jid_(""), name_("")
+RosterItem::RosterItem(QObject *parent) : QObject(parent), jid_(""), name_(""), subscription_(None)
 {
 }
 
@@ -8,6 +8,10 @@ RosterItem::RosterItem(const QString &jid, const QString &name, const Subscripti
 	QObject(parent), jid_(jid), name_(name), subscription_(subscription)
 {
 }
+
+//
+// Name
+//
 
 QString RosterItem::getName()
 {
@@ -18,8 +22,13 @@ void RosterItem::setName(const QString &name)
 {
 	name_ = name;
 
+	// emit name changed signal
 	emit nameChanged();
 }
+
+//
+// JID
+//
 
 QString RosterItem::getJid()
 {
@@ -30,8 +39,13 @@ void RosterItem::setJid(const QString &jid)
 {
 	jid_ = jid;
 
+	// emit jid changed signal
 	emit jidChanged();
 }
+
+//
+// Subscription
+//
 
 Subscription RosterItem::getSubscription()
 {
@@ -42,5 +56,6 @@ void RosterItem::setSubscription(const Subscription &subscription)
 {
 	subscription_ = subscription;
 
+	// emit subscription changed signal
 	emit subscriptionChanged();
 }

@@ -1,34 +1,82 @@
+// Qt
 #include <QGuiApplication>
 #include <QQmlApplicationEngine>
 #include <QQuickView>
 #include <QQmlContext>
 #include <QtQml>
-
-#include "Swiften/EventLoop/Qt/QtEventLoop.h"
-
+// Swiften
+#include <Swiften/EventLoop/Qt/QtEventLoop.h>
+// Sailfish-specific
+#ifdef SFOS
+#include <sailfishapp.h>
+#endif
+// Kaidan
 #include "Kaidan.h"
 #include "RosterController.h"
 #include "RosterItem.h"
+#include "Persistence.h"
+#include "MessageController.h"
+
 
 int main(int argc, char *argv[])
 {
-	qmlRegisterType<RosterController>( "harbour.kaidan", 1, 0, "RosterController");
-	qmlRegisterType<RosterItem>( "harbour.kaidan", 1, 0, "RosterItem");
+	// register types for qml
+	// TODO: Do we really want to call it harbour.kadan?
+	qmlRegisterType<RosterController>("harbour.kaidan", 1, 0, "RosterController");
+	qmlRegisterType<RosterItem>("harbour.kaidan", 1, 0, "RosterItem");
 
-	QGuiApplication app(argc, argv);
+	qRegisterMetaType<MessageController*>("MessageController*");
+	qRegisterMetaType<Persistence*>("Persistence*");
+
+	//
+	// The Back-End
+	//
 
 	QtEventLoop eventLoop;
 	BoostNetworkFactories networkFactories(&eventLoop);
 
 	Kaidan kaidan(&networkFactories);
 
-	QQmlApplicationEngine engine;
-	engine.rootContext()->setContextProperty("kaidan", &kaidan);
 
+	//
+	// The GUI
+	//
+
+#ifdef SFOS // SailfishOS App
+
+	// create an sailfish app + view
+	QGuiApplication *app = SailfishApp::application(argc, argv);
+	QQuickView *view = SailfishApp::createView();
+
+	// connect the back-end class
+	view->rootContext()->setContextProperty("kaidan", &kaidan);
+
+	// load the main qml-file and show it in fullscreen
+	view->setSource(QUrl::fromLocalFile("/usr/share/harbour-kaidan/qml/main.qml"));
+	view->showFullScreen();
+
+	// run the app
+	return app->exec();
+
+#else // normal Qt App
+
+	// create an app
+	QGuiApplication app(argc, argv);
+	// initialize the qml engine
+	QQmlApplicationEngine engine;
+
+	// connect the back-end class
+	engine.rootContext()->setContextProperty("kaidan", &kaidan);
+	// load the main qml-file
 	engine.load(QUrl("qrc:/main.qml"));
+
+	// create the qtquick window
 	QObject *topLevel = engine.rootObjects().value(0);
 	QQuickWindow *window = qobject_cast<QQuickWindow*>(topLevel);
 
+	// show the window and run the app
 	window->show();
 	return app.exec();
+
+#endif
 }

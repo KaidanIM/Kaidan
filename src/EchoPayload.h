@@ -11,19 +11,19 @@
 //...
 class EchoPayload : public Swift::Payload
 {
-	public:
-		EchoPayload() {}
+public:
+	EchoPayload() {}
 
-		const std::string& getMessage() const
-		{
-			return message;
-		}
+	const std::string& getMessage() const
+	{
+		return message;
+	}
 
-		void setMessage(const std::string& message)
-		{
-			this->message = message;
-		}
+	void setMessage(const std::string& message)
+	{
+		this->message = message;
+	}
 
-	private:
-		std::string message;
+private:
+	std::string message;
 };

@@ -1,36 +1,55 @@
 import QtQuick 2.5
-import QtQuick.Controls 1.2
+import QtQuick.Controls 1.2 as Controls
+import QtQuick.Layouts 1.2
+import org.kde.kirigami 1.0 as Kirigami
 import harbour.kaidan 1.0
 
-Item {
-	Column {
-		Row {
-			TextField {
-				id: jidField
-				width: 150
-				placeholderText: "JID"
-			}
-			TextField {
-				id: passField
-				width: 150
-				height: 27
-				placeholderText: "Password"
-				echoMode: TextInput.Password
-			}
+Kirigami.ScrollablePage {
+	id: page
+	title: "Login"
+	Layout.fillWidth: true
+	implicitWidth: applicationWindow().width
+
+	ColumnLayout {
+		width: parent.width
+		spacing: Units.smallSpacing
+
+		Controls.Label {
+			text: "Your Jabber-ID:"
 		}
-		Button {
+		Controls.TextField {
+			id: jidField
+			placeholderText: "example@jabber.example.org"
+			Layout.alignment: Qt.AlignHCenter
+		}
+
+		Controls.Label {
+			text: "Your Password:"
+		}
+		Controls.TextField {
+			id: passField
+			placeholderText: "Password"
+			echoMode: TextInput.Password
+			Layout.alignment: Qt.AlignHCenter
+		}
+
+		Controls.Button {
 			id: connectButton
 			text: "Connect"
 			onClicked: {
 				connectButton.enabled = false;
 				kaidan.mainConnect(jidField.text, passField.text);
+				applicationWindow().pageStack.pop();
+				applicationWindow().pageStack.push(rosterPageComponent);
+
 			}
 		}
-		Label {
+		Controls.Label {
 			id: statusLabel
 			text: "Not connected"
 		}
 	}
+
 	Component.onCompleted: {
 		function goToRoster() {
 			statusLabel.text = "Connected";
@@ -38,13 +57,12 @@ Item {
 			kaidan.connectionStateDisconnected.disconnect(enableConnectButton)
 			mainLoader.source = "RosterPage.qml"
 		}
+
 		function enableConnectButton() {
 			connectButton.enabled = true
 		}
+
 		kaidan.connectionStateConnected.connect(goToRoster)
 		kaidan.connectionStateDisconnected.connect(enableConnectButton)
 	}
 }
-
-
-

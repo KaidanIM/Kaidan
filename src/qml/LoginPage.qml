@@ -53,7 +53,7 @@ Kirigami.ScrollablePage {
 			//we need to disconnect enableConnectButton to prevent calling it on normal disconnection
 			kaidan.connectionStateDisconnected.disconnect(enableConnectButton)
 			//open the roster page, loaded in main.qml
-			applicationWindow().pageStack.push(rosterPageComponent);
+			applicationWindow().pageStack.replace(rosterPageComponent);
 		}
 
 		function enableConnectButton() {

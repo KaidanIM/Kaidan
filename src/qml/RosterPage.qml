@@ -1,14 +1,17 @@
 import QtQuick 2.1
+import org.kde.kirigami 1.0 as Kirigami
 import harbour.kaidan 1.0
 
-Flickable {
+Kirigami.ScrollablePage {
+	id: rosterPage
+	title: "Contacts"
+
 	ListView {
-		anchors.fill: parent
+		id: rosterView
+
 		model: kaidan.rosterController.rosterList
-		delegate: Rectangle {
-			height: 25
-			width: parent.width
-			Text { text: model.modelData.jid}
+		delegate: Kirigami.BasicListItem {
+			label: model.modelData.jid
 		}
 	}
 }

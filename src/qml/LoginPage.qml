@@ -39,9 +39,6 @@ Kirigami.ScrollablePage {
 			onClicked: {
 				connectButton.enabled = false;
 				kaidan.mainConnect(jidField.text, passField.text);
-				applicationWindow().pageStack.pop();
-				applicationWindow().pageStack.push(rosterPageComponent);
-
 			}
 		}
 		Controls.Label {
@@ -55,7 +52,8 @@ Kirigami.ScrollablePage {
 			statusLabel.text = "Connected";
 			//we need to disconnect enableConnectButton to prevent calling it on normal disconnection
 			kaidan.connectionStateDisconnected.disconnect(enableConnectButton)
-			mainLoader.source = "RosterPage.qml"
+			//open the roster page, loaded in main.qml
+			applicationWindow().pageStack.push(rosterPageComponent);
 		}
 
 		function enableConnectButton() {

@@ -11,6 +11,7 @@ Kirigami.ApplicationWindow {
 	height: 720
 
 	pageStack.initialPage: loginPageComponent
+
 	Component {
 		id: rosterPageComponent
 		RosterPage {}

@@ -1,4 +1,4 @@
-import QtQuick 2.5
+import QtQuick 2.0
 import QtQuick.Controls 1.2 as Controls
 import QtQuick.Layouts 1.2
 import org.kde.kirigami 1.0 as Kirigami
@@ -12,14 +12,14 @@ Kirigami.ScrollablePage {
 
 	ColumnLayout {
 		width: parent.width
-		spacing: Units.smallSpacing
 
 		Controls.Label {
 			text: "Your Jabber-ID:"
 		}
 		Controls.TextField {
 			id: jidField
-			placeholderText: "example@jabber.example.org"
+			placeholderText: "user@example.org"
+			Layout.minimumWidth: parent.width * 0.5
 			Layout.alignment: Qt.AlignHCenter
 		}
 
@@ -30,33 +30,32 @@ Kirigami.ScrollablePage {
 			id: passField
 			placeholderText: "Password"
 			echoMode: TextInput.Password
+			Layout.minimumWidth: parent.width * 0.5
 			Layout.alignment: Qt.AlignHCenter
 		}
 
 		Controls.Button {
 			id: connectButton
 			text: "Connect"
+			Layout.alignment: Qt.AlignRight
 			onClicked: {
 				connectButton.enabled = false;
+				connectButton.text = "<i>Connecting...</i>"
 				kaidan.mainConnect(jidField.text, passField.text);
 			}
-		}
-		Controls.Label {
-			id: statusLabel
-			text: "Not connected"
 		}
 	}
 
 	Component.onCompleted: {
 		function goToRoster() {
-			statusLabel.text = "Connected";
 			//we need to disconnect enableConnectButton to prevent calling it on normal disconnection
 			kaidan.connectionStateDisconnected.disconnect(enableConnectButton)
 			//open the roster page, loaded in main.qml
-			applicationWindow().pageStack.replace(rosterPageComponent);
+			applicationWindow().pageStack.replace(rosterPageComponent)
 		}
 
 		function enableConnectButton() {
+			connectButton.text = "Reconnect"
 			connectButton.enabled = true
 		}
 

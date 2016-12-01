@@ -10,17 +10,18 @@ Kirigami.ScrollablePage {
 	Layout.fillWidth: true
 	implicitWidth: applicationWindow().width
 
-	ColumnLayout {
-		width: parent.width
+	GridLayout {
+		columns: 2
+		anchors.fill: parent
 
+		Layout.fillWidth: true
 		Controls.Label {
 			text: "Your Jabber-ID:"
 		}
 		Controls.TextField {
 			id: jidField
 			placeholderText: "user@example.org"
-			Layout.minimumWidth: parent.width * 0.5
-			Layout.alignment: Qt.AlignHCenter
+			Layout.fillWidth: true
 		}
 
 		Controls.Label {
@@ -30,13 +31,13 @@ Kirigami.ScrollablePage {
 			id: passField
 			placeholderText: "Password"
 			echoMode: TextInput.Password
-			Layout.minimumWidth: parent.width * 0.5
-			Layout.alignment: Qt.AlignHCenter
+			Layout.fillWidth: true
 		}
 
 		Controls.Button {
 			id: connectButton
 			text: "Connect"
+			Layout.columnSpan: 2
 			Layout.alignment: Qt.AlignRight
 			onClicked: {
 				connectButton.enabled = false;
@@ -55,7 +56,7 @@ Kirigami.ScrollablePage {
 		}
 
 		function enableConnectButton() {
-			connectButton.text = "Reconnect"
+			connectButton.text = "Retry"
 			connectButton.enabled = true
 		}
 

@@ -1,19 +1,21 @@
-import QtQuick 2.1
-import QtQuick.Controls 1.4
+import QtQuick 2.0
+import org.kde.kirigami 1.0 as Kirigami
 import harbour.kaidan 1.0
 
-ApplicationWindow {
+Kirigami.ApplicationWindow {
+	id: root
 	visible: true
-	width: 360
-	height: 720
 
-	Loader {
-		id: mainLoader
-		anchors.fill: parent
-		source: "LoginPage.qml"
+	pageStack.initialPage: loginPageComponent
+
+	Component {
+		id: rosterPageComponent
+		RosterPage {}
+	}
+	Component {
+		id: loginPageComponent
+		LoginPage {}
 	}
 
 	onClosing: kaidan.mainDisconnect()
 }
-
-

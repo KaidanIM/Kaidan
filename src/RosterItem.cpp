@@ -1,6 +1,6 @@
 #include "RosterItem.h"
 
-RosterItem::RosterItem(QObject *parent) : QObject(parent), subscription_(None), jid_(""), name_("")
+RosterItem::RosterItem(QObject *parent) : QObject(parent), jid_(""), name_(""), subscription_(None)
 {
 }
 

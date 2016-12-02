@@ -4,7 +4,8 @@
 #include <QObject>
 
 enum Subscription
-{ None,
+{
+	None,
 	To,
 	From,
 	Both,

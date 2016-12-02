@@ -14,39 +14,18 @@ Create a working directory
  * `mkdir src`
  * `cd src`
 
-Fetch swift source
-
- * `wget https://swift.im/downloads/releases/swift-3.0/swift-3.0.tar.gz`
- * `tar -xzvf swift-3.0.tar.gz`
- * `cd swift-3.0/`
-
-Install all dependencies to build swiften
-
- * `./BuildTools/InstallSwiftDependencies.sh`
- * `./scons Swiften -j<Number of threads>`
-
 Install dependencies to build Kaidan (example for Debian)
 
- * `sudo apt-get install zlib1g-dev libssl-dev libxml2-dev libstdc++-5-dev libqt5quick5 libqt5quickparticles5 libqt5quickwidgets5 libqt5qml5 libqt5network5 libqt5gui5 libqt5core5a qt5-default libglib2.0-dev libpthread-stubs0-dev`
+ *  `sudo apt-get install git-core cmake build-essential libstdc++-5-dev zlib1g-dev libglib2.0-dev libssl-dev libxml2-dev libcrypto++-dev libpthread-stubs0-dev libidn11-dev libminiupnpc-dev libnatpmp-dev libswiften-dev libboost-signals-dev libboost-system-dev libboost-thread-dev libboost-regex-dev libboost-program-options-dev libboost-filesystem-dev libboost-serialization-dev libboost-date-time-dev libqt5quick5 libqt5quickparticles5 libqt5quickwidgets5 libqt5qml5 libqt5network5 libqt5gui5 libqt5core5a qtdeclarative5-dev qt5-default qml-module-org-kde-kirigami`
 
 Get Kaidan source code
 
  * `cd ..`
  * `git clone https://github.com/kaidanim/kaidan`
 
-Either
-
- * open pro file within qtreator
-
-or use command line
+Finally compile it
 
  * `cd kaidan`
- * `qmake`
- * `make -j<Number of threads>`
+ * `cmake .`
+ * `make -j<number of threads>`
 
-### Troubleshooting
-
-#### Cannot find `-lSwiften_Boost`
-
-When you get this error, you probably have installed the debian packages for libboost.
-Remove them and rebuild swift. Then it should build correctly.

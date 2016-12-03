@@ -26,6 +26,32 @@ Kirigami.ApplicationWindow {
 	width: 960
 	height: 540
 
+	globalDrawer: Kirigami.GlobalDrawer {
+		id: globalDrawer
+		title: "Kaidan"
+		titleIcon: "kaidan"
+		bannerImageSource: kaidan.getResourcePath("images/banner.png");
+
+		// make drawer floating (overlay)
+		modal: true
+		opened: false //drawerOpen: false  // Kirigami2
+
+		actions: [
+			Kirigami.Action {
+				text: "Logout"
+				iconName: "system-shutdown"
+				onTriggered: {
+					kaidan.mainDisconnect();
+
+					// close all pages
+					pageStack.pop(undefined);
+					// open login page
+					pageStack.push(loginPage);
+				}
+			}
+		]
+	}
+
 	// load all pages
 	Component {id: chatPage; ChatPage {}}
 	Component {id: loginPage; LoginPage {}}
@@ -38,13 +64,15 @@ Kirigami.ApplicationWindow {
 
 	Component.onCompleted: {
 		function openLoginPage() {
-			// disconnect this func; the login page will do that
+			// disconnect this func; the login page will do that now
 			kaidan.connectionStateDisconnected.disconnect(openLoginPage);
+
+			// close all pages
+			pageStack.pop(undefined);
+
 			// open login page
-			pageStack.pop(); // pop all pages
 			pageStack.push(loginPage, {"isRetry": true});
 		}
-
 
 		if (kaidan.newLoginNeeded()) {
 			// open login page and get new data from user

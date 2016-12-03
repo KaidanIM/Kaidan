@@ -208,7 +208,7 @@ QString Kaidan::getResourcePath(QString name_)
 		if (directory.exists(name_))
 		{
 			// found the file, return the path
-			return directory.absoluteFilePath(name_);
+			return QString("file://") + directory.absoluteFilePath(name_);
 		}
 	}
 

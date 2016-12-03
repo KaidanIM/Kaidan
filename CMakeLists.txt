@@ -143,9 +143,9 @@ if(UNIX AND NOT APPLE)
 	)
 
 	# install kaidan media
-	# install(DIRECTORY "data/images"
-	# 	DESTINATION "${CMAKE_INSTALL_FULL_DATADIR}/${PROJECT_NAME}"
-	# )
+	install(DIRECTORY "data/images"
+		DESTINATION "${CMAKE_INSTALL_FULL_DATADIR}/${PROJECT_NAME}"
+	)
 
 	# install icon (scalable + 128x)
 	install(FILES "misc/kaidan.svg"

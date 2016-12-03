@@ -65,9 +65,10 @@ Kirigami.ScrollablePage {
 			onClicked: {
 				// disable the button
 				connectButton.enabled = false;
-				// connect to given account data
+				// indicate that we're connecting now
 				connectButton.text = "<i>" + qsTr("Connecting...") + "</i>";
 
+				// connect to given account data
 				kaidan.jid = jidField.text;
 				kaidan.password = passField.text;
 				kaidan.mainConnect();
@@ -76,9 +77,12 @@ Kirigami.ScrollablePage {
 	}
 
 	Component.onCompleted: {
-		function goToRoster() {
+		function openRosterPage() {
 			// we need to disconnect enableConnectButton to prevent calling it on normal disconnection
 			kaidan.connectionStateDisconnected.disconnect(enableConnectButton);
+
+			// reenable the controls
+			controlsVisible = true;
 			// open the roster page
 			pageStack.replace(rosterPage);
 		}
@@ -90,7 +94,10 @@ Kirigami.ScrollablePage {
 		}
 
 		// connect functions to back-end events
-		kaidan.connectionStateConnected.connect(goToRoster);
+		kaidan.connectionStateConnected.connect(openRosterPage);
 		kaidan.connectionStateDisconnected.connect(enableConnectButton);
+
+		// disable the controls (this also makes the drawer invisible)
+		controlsVisible = false;
 	}
 }

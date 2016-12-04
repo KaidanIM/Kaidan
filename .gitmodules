@@ -1,0 +1,3 @@
+[submodule "libs/kaidansf"]
+	path = libs/kaidansf
+	url = https://github.com/kaidanim/kaidansf

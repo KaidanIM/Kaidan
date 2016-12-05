@@ -1,4 +1,4 @@
-#include "RosterContoller.h"
+#include "RosterController.h"
 
 #include <QQmlContext>
 

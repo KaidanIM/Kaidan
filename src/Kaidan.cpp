@@ -5,7 +5,7 @@
 #include <boost/smart_ptr/make_shared.hpp>
 
 #include "EchoPayload.h"
-#include "RosterContoller.h"
+#include "RosterController.h"
 
 Kaidan::Kaidan(NetworkFactories* networkFactories, QObject *parent) :
 	rosterController_(new RosterController()), QObject(parent)

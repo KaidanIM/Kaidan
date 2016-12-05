@@ -7,7 +7,7 @@
 #include "Swiften/EventLoop/Qt/QtEventLoop.h"
 
 #include "Kaidan.h"
-#include "RosterContoller.h"
+#include "RosterController.h"
 #include "RosterItem.h"
 
 int main(int argc, char *argv[])

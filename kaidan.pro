@@ -20,14 +20,14 @@ DEFINES += BOOST_SIGNALS_NO_DEPRECATION_WARNING
 
 SOURCES += src/main.cpp \
 	src/Kaidan.cpp \
-	src/RosterContoller.cpp \
+	src/RosterController.cpp \
 	src/RosterItem.cpp
 
 HEADERS += src/Kaidan.h \
 	src/EchoPayload.h \
 	src/EchoPayloadParserFactory.h \
 	src/EchoPayloadSerializer.h \
-	src/RosterContoller.h \
+	src/RosterController.h \
 	src/RosterItem.h
 
 RESOURCES += kaidan.qrc

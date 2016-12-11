@@ -1,5 +1,6 @@
 ################### Kaidan ####################
 bin/kaidan
+kaidan_automoc.cpp
 
 ###################### C++ ####################
 # Prerequisites
@@ -109,8 +110,12 @@ Makefile*
 # QtCtreator CMake
 CMakeLists.txt.user*
 
+################## CMake ######################
+
+CMakeCache.txt
+CMakeFiles
+cmake_install.cmake
 
 ################# Other #######################
 
 *.swp
-

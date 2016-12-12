@@ -41,7 +41,7 @@ void Kaidan::mainConnect(const QString &jid, const QString &pass){
 	tracer = new Swift::ClientXMLTracer(client);
 
 	softwareVersionResponder = new Swift::SoftwareVersionResponder(client->getIQRouter());
-	softwareVersionResponder->setVersion("Kaidan", "0.1");
+	softwareVersionResponder->setVersion(APPLICATION_DISPLAY_NAME, VERSION_STRING);
 	softwareVersionResponder->start();
 
 	client->addPayloadParserFactory(&echoPayloadParserFactory);

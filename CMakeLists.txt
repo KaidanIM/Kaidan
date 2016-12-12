@@ -3,13 +3,17 @@ set(QT_MIN_VERSION "5.5.0")
 
 project(kaidan)
 
+# application name
+set(APPLICATION_ID "harbour.kaidan")
+set(APPLICATION_NAME "kaidan")
+set(APPLICATION_DISPLAY_NAME "Kaidan")
+
 # Version
 set(VERSION_MAJOR 0)
 set(VERSION_MINOR 0)
 set(VERSION_PATCH 1)
 set(VERSION_EXTRA "" CACHE STRING "Stuff to append to version string")
 
-# Version string
 set(VERSION_STRING "${VERSION_MAJOR}.${VERSION_MINOR}.${VERSION_PATCH}")
 if(VERSION_EXTRA)
 	set(VERSION_STRING ${VERSION_STRING}-${VERSION_EXTRA})
@@ -55,4 +59,13 @@ target_link_libraries(${PROJECT_NAME}
 	Qt5::Quick
 	${SWIFTEN_LIBRARY}
 	${Boost_LIBRARY}
+)
+
+# Pass variables to C++
+target_compile_definitions(${PROJECT_NAME} PRIVATE
+	APPLICATION_ID="${APPLICATION_ID}"
+	APPLICATION_NAME="${APPLICATION_NAME}"
+	APPLICATION_DISPLAY_NAME="${APPLICATION_DISPLAY_NAME}"
+
+	VERSION_STRING="${VERSION_STRING}"
 )

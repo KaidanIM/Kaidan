@@ -1,5 +1,24 @@
-#include "MessageController.h"
+/*
+ *  Kaidan - Cross platform XMPP client
+ *
+ *  Copyright (C) 2016 LNJ <git@lnj.li>
+ *  Copyright (C) 2016 geobra <s.g.b@gmx.de>
+ *
+ *  Kaidan is free software: you can redistribute it and/or modify
+ *  it under the terms of the GNU General Public License as published by
+ *  the Free Software Foundation, either version 3 of the License, or
+ *  (at your option) any later version.
+ *
+ *  Kaidan is distributed in the hope that it will be useful,
+ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *  GNU General Public License for more details.
+ *
+ *  You should have received a copy of the GNU General Public License
+ *  along with Kaidan. If not, see <http://www.gnu.org/licenses/>.
+ */
 
+#include "MessageController.h"
 // Qt
 #include <QSqlRecord>
 #include <QSqlError>
@@ -17,7 +36,7 @@ MessageController::MessageController(Database *db, QObject *parent) :
 {
 	setEditStrategy(QSqlTableModel::OnRowChange);
 	setTable("messages");
-	setSort(0, Qt::AscendingOrder);
+	setSort(4, Qt::AscendingOrder); // 4 -> timestamp
 	if (!select())
 	{
 		qDebug() << "error on select in MessageController::MessageController";
@@ -26,7 +45,9 @@ MessageController::MessageController(Database *db, QObject *parent) :
 
 void MessageController::setFilterOnJid(QString const &jidFiler)
 {
+	qDebug() << "setFilter before";
 	setFilter("jid = '" + jidFiler + "'");
+	qDebug() << "setFilter after";
 
 	if (!select())
 	{
@@ -34,7 +55,7 @@ void MessageController::setFilterOnJid(QString const &jidFiler)
 	}
 }
 
-QVariant MessageController::data (const QModelIndex & requestedIndex, int role) const
+QVariant MessageController::data(const QModelIndex & requestedIndex, int role) const
 {
 	if(requestedIndex.row() >= rowCount())
 	{
@@ -51,10 +72,8 @@ QVariant MessageController::data (const QModelIndex & requestedIndex, int role) 
 
 	QModelIndex modelIndex = this->index(requestedIndex.row(), role - Qt::UserRole - 1 );
 
-/*
-	if (isDirty(modelIndex))
-		qDebug() << "index is dirty!" << modelIndex;
-*/
+	//if (isDirty(modelIndex))
+	//	qDebug() << "index is dirty!" << modelIndex;
 
 	QVariant editData = QSqlQueryModel::data(modelIndex, Qt::EditRole);
 
@@ -85,14 +104,16 @@ void MessageController::setTable(const QString &table_name)
 	generateRoleNames();
 }
 
-void MessageController::addMessage(const QString &jid, const QString &message, unsigned int direction)
+void MessageController::addMessage(const QString &id, const QString &jid,
+	const QString &message, unsigned int direction)
 {
 	QSqlRecord record = this->record();
 
+	record.setValue("id", id);
 	record.setValue("jid", jid);
 	record.setValue("message", message);
 	record.setValue("direction", direction);
-	record.setValue("received", QDateTime::currentDateTime().toString("yyyy-MM-dd HH:mm:ss"));
+	record.setValue("timestamp", QDateTime::currentDateTime().toTime_t());
 
 	if (!this->insertRecord(-1, record))
 	{
@@ -108,20 +129,75 @@ void MessageController::addMessage(const QString &jid, const QString &message, u
 		}
 		else
 		{
-			qDebug() << "Success on adding message";
+			//qDebug() << "Success on adding message";
 		}
 	}
 
 	// update the model with the changes of the database
 	if (select())
 	{
-		// emit message received signal to qml
-		emit signalMessageReceived(jid);
+		if (direction == 1)
+		{
+			emit signalMessageReceived(0, jid, message);
+		}
 	}
 	else
 	{
 		qDebug() << "error on select in MessageController::addMessage";
 	}
 
-	database_->dumpDataToStdOut();
+//	database_->dumpDataToStdOut();
+}
+
+void MessageController::markMessageReceived(QString const &id)
+{
+	int row = getRowNumberForId(id);
+
+	if (row >= 0) // only on found messages
+	{
+		QSqlRecord record = this->record(row);
+		record.setValue("isreceived", true);
+
+		if (this->setRecord(row, record) == false)
+		{
+			printSqlError();
+		}
+		else
+		{
+	    		if (!this->submitAll())
+	    		{
+				printSqlError();
+	    		}
+		}
+
+		// update the model with the changes of the database
+		if (select() != true)
+		{
+			qDebug() << "error on select in MessageController::addMessage";
+		}
+	}
+}
+
+int MessageController::getRowNumberForId(QString const &id)
+{
+	int returnValue = -1;
+
+	for (int row = 0; row < rowCount(); row++)
+	{
+		QString idInModel = record(row).value("id").toString();
+
+		if (idInModel == id)
+		{
+			returnValue = row;
+		}
+	}
+
+	return returnValue;
+}
+
+void MessageController::printSqlError()
+{
+	qDebug() << this->lastError().databaseText();
+	qDebug() << this->lastError().driverText();
+	qDebug() << this->lastError().text();
 }

@@ -1,3 +1,24 @@
+/*
+ *  Kaidan - Cross platform XMPP client
+ *
+ *  Copyright (C) 2016 LNJ <git@lnj.li>
+ *  Copyright (C) 2016 Marzanna
+ *  Copyright (C) 2016 geobra <s.g.b@gmx.de>
+ *
+ *  Kaidan is free software: you can redistribute it and/or modify
+ *  it under the terms of the GNU General Public License as published by
+ *  the Free Software Foundation, either version 3 of the License, or
+ *  (at your option) any later version.
+ *
+ *  Kaidan is distributed in the hope that it will be useful,
+ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *  GNU General Public License for more details.
+ *
+ *  You should have received a copy of the GNU General Public License
+ *  along with Kaidan. If not, see <http://www.gnu.org/licenses/>.
+ */
+
 #include "Kaidan.h"
 
 #include <iostream>
@@ -5,8 +26,8 @@
 #include <boost/bind.hpp>
 #include <boost/smart_ptr/make_shared.hpp>
 // Qt
-//#include <QDateTime>
-//#include <QDebug>
+#include <QDateTime>
+#include <QDebug>
 // Kaidan
 #include "EchoPayload.h"
 #include "RosterController.h"
@@ -28,7 +49,7 @@ Kaidan::~Kaidan()
 		client_->removePayloadSerializer(&echoPayloadSerializer_);
 		client_->removePayloadParserFactory(&echoPayloadParserFactory_);
 		softwareVersionResponder_->stop();
-		delete tracer_;
+		//delete tracer_;
 		delete softwareVersionResponder_;
 		delete client_;
 	}
@@ -51,7 +72,7 @@ void Kaidan::mainConnect(const QString &jid, const QString &pass)
 	client_->onPresenceReceived.connect(boost::bind(&Kaidan::handlePresenceReceived, this, _1));
 
 	// create XML tracer
-	tracer_ = new Swift::ClientXMLTracer(client_);
+	//tracer_ = new Swift::ClientXMLTracer(client_);
 
 	// share project version
 	softwareVersionResponder_ = new Swift::SoftwareVersionResponder(client_->getIQRouter());
@@ -67,6 +88,7 @@ void Kaidan::mainConnect(const QString &jid, const QString &pass)
 
 void Kaidan::setCurrentChatPartner(QString const &jid)
 {
+	qDebug() << "setCurrentChatPartner(" << jid << ")";
 	persistence_->setCurrentChatPartner(jid);
 }
 
@@ -74,20 +96,25 @@ void Kaidan::sendMessage(QString const &toJid, QString const &message)
 {
 	// new empty message
 	Swift::Message::ref msg(new Swift::Message);
-
-	// create a JID from string
+	// create receiver jid
 	Swift::JID receiverJid(toJid.toStdString());
 
-	// set metadata
-	msg->setFrom(JID());
-	msg->setTo(receiverJid);
-	msg->setBody(message.toStdString());
+	// generate a new id
+	Swift::IDGenerator idGenerator;
+	std::string msgId = idGenerator.generateID();
 
-	// send the message to the server
+	// set metadata
+	msg->setFrom(JID(client_->getJID()));
+	msg->setTo(receiverJid);
+	msg->setID(msgId);
+	msg->setBody(message.toStdString());
+	msg->addPayload(boost::make_shared<DeliveryReceiptRequest>());
+
+	// send the message
 	client_->sendMessage(msg);
 
-	// save the message to the db
-	persistence_->addMessage(QString::fromStdString(receiverJid.toBare().toString()), message, 0);
+	// add the message to the db
+	persistence_->addMessage(QString::fromStdString(msgId), QString::fromStdString(receiverJid.toBare().toString()), message, 0);
 }
 
 void Kaidan::mainDisconnect()
@@ -135,27 +162,39 @@ void Kaidan::handleMessageReceived(Message::ref message)
 	std::string fromJid = message->getFrom().toBare().toString();
 	boost::optional<std::string> fromBody = message->getBody();
 
-/*
-	QDateTime timeFromMessage;
-	boost::optional<boost::posix_time::ptime> tsFromMessage = message->getTimestamp();
-	if (tsFromMessage)
-	{
-		boost::posix_time::ptime ts = *tsFromMessage;
-		//qDebug() << "ts: " << ts.time_of_day().
-		std::string isoString = boost::posix_time::to_iso_string(ts);
-		qDebug() << "isoString: " << isoString.c_str();
-		timeFromMessage = QDateTime::fromString(isoString.c_str(), "yyyyMMddTHHmmss");
-		qDebug() << "qstring: " << timeFromMessage.toString();
-	}
-*/
-
-	// TODO: add empty message if no body in here.
+	// TODO: add message to persistence if body or media received
 	if (fromBody)
 	{
 		std::string body = *fromBody;
-		persistence_->addMessage(QString::fromStdString(fromJid), QString::fromStdString(body), 1);
+		persistence_->addMessage(QString::fromStdString(message->getID()), QString::fromStdString(fromJid), QString::fromStdString(body), 1 );
+	}
+
+	// XEP 0184
+	if (message->getPayload<DeliveryReceiptRequest>())
+	{
+		// send message receipt
+		Message::ref receiptReply = boost::make_shared<Message>();
+		receiptReply->setFrom(message->getTo());
+		receiptReply->setTo(message->getFrom());
+
+		boost::shared_ptr<DeliveryReceipt> receipt = boost::make_shared<DeliveryReceipt>();
+		receipt->setReceivedID(message->getID());
+		receiptReply->addPayload(receipt);
+		client_->sendMessage(receiptReply);
+	}
+
+	// mark sent msg as received
+	DeliveryReceipt::ref rcpt = message->getPayload<DeliveryReceipt>();
+	if (rcpt)
+	{
+		std::string recevideId = rcpt->getReceivedID();
+		if (recevideId.length() > 0)
+		{
+	    		persistence_->markMessageAsReceivedById(QString::fromStdString(recevideId));
+		}
 	}
 }
+
 
 RosterController* Kaidan::getRosterController()
 {

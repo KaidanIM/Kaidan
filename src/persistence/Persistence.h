@@ -1,6 +1,7 @@
 /*
  *  Kaidan - Cross platform XMPP client
  *
+ *  Copyright (C) 2016 LNJ <git@lnj.li>
  *  Copyright (C) 2016 geobra <s.g.b@gmx.de>
  *
  *  Kaidan is free software: you can redistribute it and/or modify
@@ -17,40 +18,41 @@
  *  along with Kaidan. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef ROSTERCONTROLLER_H
-#define ROSTERCONTROLLER_H
+#ifndef PERSISTENCE_H
+#define PERSISTENCE_H
 
-// Qt
 #include <QObject>
-#include <QQmlListProperty>
-// Swiften
-#include <Swiften/Swiften.h>
-// Kaidan
-#include "RosterItem.h"
 
+class Database;
+class MessageController;
+class SessionController;
 
-class RosterController : public QObject
+class Persistence : public QObject
 {
 	Q_OBJECT
-	Q_PROPERTY(QQmlListProperty<RosterItem> rosterList READ getRosterList NOTIFY rosterListChanged)
+	Q_PROPERTY(MessageController* messageController READ getMessageController NOTIFY messageControllerChanged)
 
 public:
-	RosterController(QObject *parent = 0);
+	explicit Persistence(QObject *parent = 0);
+	~Persistence();
 
-	void requestRosterFromClient(Swift::Client *client);
-	QQmlListProperty<RosterItem> getRosterList();
+	bool isValid();
+	void markMessageAsReceivedById(QString const &id);
 
 signals:
-	void rosterListChanged();
+	void messageControllerChanged();
 
 public slots:
+	void addMessage(const QString &id, QString const &jid, QString const &message, unsigned int direction);
+	void setCurrentChatPartner(QString const &jid);
 
 private:
-	void handleRosterReceived(Swift::ErrorPayload::ref error);
+	MessageController* getMessageController();
 
-	Swift::Client* client_;
-	QList<RosterItem*> rosterList_;
+	Database *db_;
+	MessageController *messageController_;
 
+	bool persistenceValid_;
 };
 
-#endif // ROSTERCONTROLLER_H
+#endif // PERSISTENCE_H

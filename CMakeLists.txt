@@ -33,7 +33,7 @@ set(EXECUTABLE_OUTPUT_PATH "bin")
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_SOURCE_DIR}/cmake")
 
 # Find packages
-find_package(Qt5 ${QT_MIN_VERSION} REQUIRED NO_MODULE COMPONENTS Core Qml Quick)
+find_package(Qt5 ${QT_MIN_VERSION} REQUIRED NO_MODULE COMPONENTS Core Qml Quick Sql)
 find_package(KF5Kirigami REQUIRED)
 find_package(Swiften REQUIRED)
 find_package(Boost REQUIRED)
@@ -46,13 +46,20 @@ add_executable(${PROJECT_NAME}
 	src/Kaidan.cpp
 	src/RosterController.cpp
 	src/RosterItem.cpp
+	src/persistence/Database.cpp
+	src/persistence/MessageController.cpp
+	src/persistence/Persistence.cpp
 )
+
+# Additional include dirs
+include_directories("${CMAKE_SOURCE_DIR}/src/persistence")
 
 # Link libraries
 target_link_libraries(${PROJECT_NAME}
 	Qt5::Core
 	Qt5::Qml
 	Qt5::Quick
+	Qt5::Sql
 	${SWIFTEN_LIBRARY}
 	${Boost_LIBRARY}
 )

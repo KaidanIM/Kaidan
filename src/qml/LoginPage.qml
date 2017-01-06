@@ -1,5 +1,5 @@
 import QtQuick 2.0
-import QtQuick.Controls 1.2 as Controls
+import QtQuick.Controls 2.0 as Controls
 import QtQuick.Layouts 1.2
 import org.kde.kirigami 1.0 as Kirigami
 import harbour.kaidan 1.0

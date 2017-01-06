@@ -88,7 +88,7 @@ int main(int argc, char *argv[])
 	QQmlApplicationEngine engine;
 	engine.rootContext()->setContextProperty("kaidan", &kaidan);
 
-	engine.load(QUrl("qrc:/main.qml"));
+	engine.load(QUrl("qrc:/qml/main.qml"));
 	QObject *topLevel = engine.rootObjects().value(0);
 	QQuickWindow *window = qobject_cast<QQuickWindow*>(topLevel);
 

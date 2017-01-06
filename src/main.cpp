@@ -74,9 +74,14 @@ int main(int argc, char *argv[])
 
 	// create a qt app
 	QGuiApplication app(argc, argv);
+
+	// name, display name, description
 	QGuiApplication::setApplicationName(APPLICATION_NAME);
 	QGuiApplication::setApplicationDisplayName(APPLICATION_DISPLAY_NAME);
 	QGuiApplication::setApplicationVersion(VERSION_STRING);
+
+	// attributes
+	QGuiApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
 
 	// create parser and add a description
 	QCommandLineParser parser;

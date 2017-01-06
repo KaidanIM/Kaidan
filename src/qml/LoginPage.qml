@@ -25,17 +25,15 @@ import org.kde.kirigami 1.0 as Kirigami
 import harbour.kaidan 1.0
 
 Kirigami.ScrollablePage {
-	id: page
 	title: "Login"
-	Layout.fillWidth: true
-	implicitWidth: applicationWindow().width
 
 	GridLayout {
 		columns: 2
 		anchors.fill: parent
-
 		Layout.fillWidth: true
-		Controls.Label {
+
+		// JID field
+		Kirigami.Label {
 			text: "Your Jabber-ID:"
 		}
 		Controls.TextField {
@@ -44,7 +42,8 @@ Kirigami.ScrollablePage {
 			Layout.fillWidth: true
 		}
 
-		Controls.Label {
+		// Password field
+		Kirigami.Label {
 			text: "Your Password:"
 		}
 		Controls.TextField {
@@ -54,14 +53,18 @@ Kirigami.ScrollablePage {
 			Layout.fillWidth: true
 		}
 
+		// Connect button
 		Controls.Button {
 			id: connectButton
 			text: "Connect"
 			Layout.columnSpan: 2
 			Layout.alignment: Qt.AlignRight
 			onClicked: {
+				// disable the button
 				connectButton.enabled = false;
 				connectButton.text = "<i>Connecting...</i>"
+
+				// connect to given account data
 				kaidan.mainConnect(jidField.text, passField.text);
 			}
 		}
@@ -69,10 +72,10 @@ Kirigami.ScrollablePage {
 
 	Component.onCompleted: {
 		function goToRoster() {
-			//we need to disconnect enableConnectButton to prevent calling it on normal disconnection
+			// we need to disconnect enableConnectButton to prevent calling it on normal disconnection
 			kaidan.connectionStateDisconnected.disconnect(enableConnectButton)
-			//open the roster page, loaded in main.qml
-			applicationWindow().pageStack.replace(rosterPageComponent)
+			// open the roster page
+			pageStack.replace(rosterPage)
 		}
 
 		function enableConnectButton() {
@@ -80,6 +83,7 @@ Kirigami.ScrollablePage {
 			connectButton.enabled = true
 		}
 
+		// connect functions to back-end events
 		kaidan.connectionStateConnected.connect(goToRoster)
 		kaidan.connectionStateDisconnected.connect(enableConnectButton)
 	}

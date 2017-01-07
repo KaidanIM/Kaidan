@@ -1,5 +1,6 @@
 cmake_minimum_required(VERSION 2.8.11)
-set(QT_MIN_VERSION "5.5.0")
+set(CMAKE_CXX_STANDARD 14)
+set(QT_MIN_VERSION "5.7.0")
 
 project(kaidan)
 
@@ -34,17 +35,29 @@ set(CMAKE_AUTORCC ON)
 set(EXECUTABLE_OUTPUT_PATH "bin")
 
 
+#
+# Dependecies
+#
+
 # CMake module path
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_SOURCE_DIR}/cmake")
 
 # Find packages
-find_package(Qt5 ${QT_MIN_VERSION} REQUIRED NO_MODULE COMPONENTS Core Qml Quick)
+find_package(Qt5 ${QT_MIN_VERSION} REQUIRED NO_MODULE COMPONENTS Core Qml Quick LinguistTools)
 find_package(KF5Kirigami REQUIRED)
 find_package(Swiften REQUIRED)
 find_package(Boost REQUIRED)
 
+#
+# Translation
+#
 
-# Sources
+include("${CMAKE_SOURCE_DIR}/i18n/CMakeLists.txt")
+
+#
+# Sources / Resources
+#
+
 add_executable(${PROJECT_NAME}
 	kaidan.qrc
 	src/main.cpp
@@ -53,7 +66,10 @@ add_executable(${PROJECT_NAME}
 	src/RosterItem.cpp
 )
 
-# Link libraries
+#
+# Linker Flags
+#
+
 target_link_libraries(${PROJECT_NAME}
 	Qt5::Core
 	Qt5::Qml
@@ -62,7 +78,10 @@ target_link_libraries(${PROJECT_NAME}
 	${Boost_LIBRARY}
 )
 
-# Pass variables to C++
+#
+# Global C++ variables
+#
+
 target_compile_definitions(${PROJECT_NAME} PRIVATE
 	APPLICATION_ID="${APPLICATION_ID}"
 	APPLICATION_NAME="${APPLICATION_NAME}"
@@ -70,4 +89,6 @@ target_compile_definitions(${PROJECT_NAME} PRIVATE
 	APPLICATION_DESCRIPTION="${APPLICATION_DESCRIPTION}"
 
 	VERSION_STRING="${VERSION_STRING}"
+
+	BOOST_SIGNALS_NO_DEPRECATION_WARNING=True
 )

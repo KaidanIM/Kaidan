@@ -1,7 +1,7 @@
 /*
  *  Kaidan - Cross platform XMPP client
  *
- *  Copyright (C) 2016 LNJ <git@lnj.li>
+ *  Copyright (C) 2016-2017 LNJ <git@lnj.li>
  *  Copyright (C) 2016 Marzanna
  *
  *  Kaidan is free software: you can redistribute it and/or modify
@@ -23,15 +23,34 @@ import org.kde.kirigami 1.0 as Kirigami
 import harbour.kaidan 1.0
 
 Kirigami.ScrollablePage {
-	id: rosterPage
 	title: "Contacts"
 
 	ListView {
-		id: rosterView
-
 		model: kaidan.rosterController.rosterList
-		delegate: Kirigami.BasicListItem {
-			label: model.modelData.jid
+
+		delegate: Kirigami.SwipeListItem {
+			Kirigami.Label {
+				// use the Name or JID
+				text: name ? name : jid
+			}
+
+			onClicked: {
+				//kaidan.setCurrentChatPartner(jid)
+				pageStack.push(chatPage, {
+					"chatName": (name ? name : jid),
+					"toJid": jid
+				})
+			}
+
+			actions: [
+				Kirigami.Action {
+					iconName: "bookmark-remove"
+					onTriggered: {
+						print("deleting contact from roster: " + jid)
+						//kaidan.removeContactFromRoster()
+					}
+				}
+			]
 		}
 	}
 }

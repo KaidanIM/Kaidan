@@ -3,5 +3,6 @@
 		<file alias="qml/main.qml">src/qml/main.qml</file>
 		<file alias="qml/RosterPage.qml">src/qml/RosterPage.qml</file>
 		<file alias="qml/LoginPage.qml">src/qml/LoginPage.qml</file>
+		<file alias="qml/ChatPage.qml">src/qml/ChatPage.qml</file>
 	</qresource>
 </RCC>

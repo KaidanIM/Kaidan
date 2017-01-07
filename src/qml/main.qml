@@ -26,16 +26,14 @@ Kirigami.ApplicationWindow {
 	id: root
 	visible: true
 
-	pageStack.initialPage: loginPageComponent
+	// first page: login, the roster page will be opened after it
+	pageStack.initialPage: loginPage
 
-	Component {
-		id: rosterPageComponent
-		RosterPage {}
-	}
-	Component {
-		id: loginPageComponent
-		LoginPage {}
-	}
+	// load all pages
+	Component {id: chatPage; ChatPage {}}
+	Component {id: loginPage; LoginPage {}}
+	Component {id: rosterPage; RosterPage {}}
 
+	// diconnect from jabber server
 	onClosing: kaidan.mainDisconnect()
 }

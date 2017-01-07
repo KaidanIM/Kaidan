@@ -1,7 +1,7 @@
 /*
  *  Kaidan - Cross platform XMPP client
  *
- *  Copyright (C) 2016 LNJ <git@lnj.li>
+ *  Copyright (C) 2016-2017 LNJ <git@lnj.li>
  *  Copyright (C) 2016 Marzanna
  *  Copyright (C) 2016 geobra <s.g.b@gmx.de>
  *
@@ -74,9 +74,14 @@ int main(int argc, char *argv[])
 
 	// create a qt app
 	QGuiApplication app(argc, argv);
+
+	// name, display name, description
 	QGuiApplication::setApplicationName(APPLICATION_NAME);
 	QGuiApplication::setApplicationDisplayName(APPLICATION_DISPLAY_NAME);
 	QGuiApplication::setApplicationVersion(VERSION_STRING);
+
+	// attributes
+	QGuiApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
 
 	// create parser and add a description
 	QCommandLineParser parser;

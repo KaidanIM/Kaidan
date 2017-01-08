@@ -96,7 +96,7 @@ Kirigami.Page {
 					id: messageField
 					Layout.fillWidth: true
 					placeholderText: qsTr("Compose message")
-					wrapMode: TextArea.Wrap
+					wrapMode: Controls.TextArea.Wrap
 				}
 
 				Controls.Button {

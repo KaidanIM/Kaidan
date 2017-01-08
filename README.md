@@ -11,8 +11,8 @@ On Linux do the following:
 
 Create a working directory
 
- * `mkdir src`
- * `cd src`
+ * `mkdir build`
+ * `cd build`
 
 Install dependencies to build Kaidan (example for Debian)
 
@@ -20,11 +20,14 @@ Install dependencies to build Kaidan (example for Debian)
 
 Get Kaidan source code
 
- * `cd ..`
  * `git clone https://github.com/kaidanim/kaidan`
 
 Finally compile it
 
- * `cd kaidan`
- * `cmake .`
+ * `mkdir kaidan/build ; cd kaidan/build`
+ * `cmake ..`
  * `make -j<number of threads>`
+
+ You can now run Kaidan:
+
+ * `./bin/kaidan`

@@ -35,12 +35,12 @@
         <translation>Verbinden</translation>
     </message>
     <message>
-        <source>&lt;i&gt;Connecting...&lt;/i&gt;</source>
-        <translation>&lt;i&gt;Verbinden...&lt;/i&gt;</translation>
-    </message>
-    <message>
         <source>Retry</source>
         <translation>Erneut Versuchen</translation>
+    </message>
+    <message>
+        <source>Connecting...</source>
+        <translation>Verbinden...</translation>
     </message>
 </context>
 <context>

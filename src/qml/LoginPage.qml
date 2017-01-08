@@ -63,7 +63,7 @@ Kirigami.ScrollablePage {
 				// disable the button
 				connectButton.enabled = false;
 				// connect to given account data
-				connectButton.text = qsTr("<i>Connecting...</i>")
+				connectButton.text = "<i>" + qsTr("Connecting...") + "</i>"
 
 				kaidan.mainConnect(jidField.text, passField.text);
 			}

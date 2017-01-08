@@ -24,9 +24,11 @@
 #include <QCommandLineOption>
 #include <QDebug>
 #include <QGuiApplication>
+#include <QLocale>
 #include <QQmlApplicationEngine>
 #include <QQuickView>
 #include <QQmlContext>
+#include <QTranslator>
 #include <QtQml>
 // Swiften
 #include "Swiften/EventLoop/Qt/QtEventLoop.h"
@@ -72,6 +74,10 @@ int main(int argc, char *argv[])
 	qmlRegisterType<RosterController>(APPLICATION_ID, 1, 0, "RosterController");
 	qmlRegisterType<RosterItem>(APPLICATION_ID, 1, 0, "RosterItem");
 
+	//
+	// App
+	//
+
 	// create a qt app
 	QGuiApplication app(argc, argv);
 
@@ -82,6 +88,22 @@ int main(int argc, char *argv[])
 
 	// attributes
 	QGuiApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
+
+	// Qt-Translator
+	QTranslator qtTranslator;
+	qtTranslator.load("qt_" + QLocale::system().name(),
+		QLibraryInfo::location(QLibraryInfo::TranslationsPath));
+	app.installTranslator(&qtTranslator);
+
+	// Kaidan-Translator
+	QTranslator kaidanTranslator;
+	kaidanTranslator.load(QLocale::system().name()); // loads the systems locale or none
+	app.installTranslator(&kaidanTranslator);
+
+
+	//
+	// Command line arguments
+	//
 
 	// create parser and add a description
 	QCommandLineParser parser;
@@ -102,14 +124,25 @@ int main(int argc, char *argv[])
 			parser.showHelp();
 			return 0;
 		case CommandLineOk:
-			qDebug() << "Successfully parsed command line input.";
+			qDebug() << QCoreApplication::translate("main",
+				"Successfully parsed command line input.");
 			break;
 	}
+
+
+	//
+	// Kaidan back-end
+	//
 
 	QtEventLoop eventLoop;
 	BoostNetworkFactories networkFactories(&eventLoop);
 
 	Kaidan kaidan(&networkFactories);
+
+
+	//
+	// QML-GUI
+	//
 
 	QQmlApplicationEngine engine;
 	engine.rootContext()->setContextProperty("kaidan", &kaidan);

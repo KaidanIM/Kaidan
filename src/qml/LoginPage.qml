@@ -34,21 +34,21 @@ Kirigami.ScrollablePage {
 
 		// JID field
 		Kirigami.Label {
-			text: "Your Jabber-ID:"
+			text: qsTr("Your Jabber-ID:")
 		}
 		Controls.TextField {
 			id: jidField
-			placeholderText: "user@example.org"
+			placeholderText: qsTr("user@example.org")
 			Layout.fillWidth: true
 		}
 
 		// Password field
 		Kirigami.Label {
-			text: "Your Password:"
+			text: qsTr("Your Password:")
 		}
 		Controls.TextField {
 			id: passField
-			placeholderText: "Password"
+			placeholderText: qsTr("Password")
 			echoMode: TextInput.Password
 			Layout.fillWidth: true
 		}
@@ -56,15 +56,15 @@ Kirigami.ScrollablePage {
 		// Connect button
 		Controls.Button {
 			id: connectButton
-			text: "Connect"
+			text: qsTr("Connect")
 			Layout.columnSpan: 2
 			Layout.alignment: Qt.AlignRight
 			onClicked: {
 				// disable the button
 				connectButton.enabled = false;
-				connectButton.text = "<i>Connecting...</i>"
-
 				// connect to given account data
+				connectButton.text = qsTr("<i>Connecting...</i>")
+
 				kaidan.mainConnect(jidField.text, passField.text);
 			}
 		}
@@ -79,7 +79,7 @@ Kirigami.ScrollablePage {
 		}
 
 		function enableConnectButton() {
-			connectButton.text = "Retry"
+			connectButton.text = qsTr("Retry")
 			connectButton.enabled = true
 		}
 

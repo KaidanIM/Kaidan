@@ -23,7 +23,7 @@ import org.kde.kirigami 1.0 as Kirigami
 import harbour.kaidan 1.0
 
 Kirigami.ScrollablePage {
-	title: "Contacts"
+	title: qsTr("Contacts")
 
 	ListView {
 		model: kaidan.rosterController.rosterList

@@ -1,7 +1,7 @@
 /*
  *  Kaidan - Cross platform XMPP client
  *
- *  Copyright (C) 2016 LNJ <git@lnj.li>
+ *  Copyright (C) 2016-2017 LNJ <git@lnj.li>
  *  Copyright (C) 2016 Marzanna
  *
  *  Kaidan is free software: you can redistribute it and/or modify
@@ -24,16 +24,40 @@ import harbour.kaidan 1.0
 
 Kirigami.ApplicationWindow {
 	id: root
-	visible: true
-
-	// first page: login, the roster page will be opened after it
-	pageStack.initialPage: loginPage
 
 	// load all pages
 	Component {id: chatPage; ChatPage {}}
 	Component {id: loginPage; LoginPage {}}
 	Component {id: rosterPage; RosterPage {}}
 
-	// diconnect from jabber server
-	onClosing: kaidan.mainDisconnect()
+	// when the window was closed, disconnect from jabber server
+	onClosing: {
+		kaidan.mainDisconnect()
+	}
+
+	Component.onCompleted: {
+		function openLoginPage() {
+			// disconnect this func; the login page will do that
+			kaidan.connectionStateDisconnected.disconnect(openLoginPage);
+			// open login page
+			pageStack.pop(); // pop all pages
+			pageStack.push(loginPage, {"isRetry": true});
+		}
+
+
+		if (kaidan.newLoginNeeded()) {
+			// open login page and get new data from user
+			pageStack.push(loginPage);
+		}
+		else {
+			// open client normally
+
+			// on connection failure, open login page
+			kaidan.connectionStateDisconnected.connect(openLoginPage);
+
+			// show roster and login with restored data
+			pageStack.push(rosterPage);
+			kaidan.mainConnect();
+		}
+	}
 }

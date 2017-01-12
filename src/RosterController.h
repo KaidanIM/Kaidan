@@ -20,11 +20,13 @@
 #ifndef ROSTERCONTROLLER_H
 #define ROSTERCONTROLLER_H
 
-#include "RosterItem.h"
-
-#include <Swiften/Swiften.h>
+// Qt
 #include <QObject>
 #include <QQmlListProperty>
+// Swiften
+#include <Swiften/Swiften.h>
+// Kaidan
+#include "RosterItem.h"
 
 class RosterController : public QObject
 {

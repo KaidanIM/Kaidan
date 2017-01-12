@@ -22,15 +22,17 @@
 #ifndef KAIDAN_H
 #define KAIDAN_H
 
+// Qt
 #include <QObject>
+#include <QSettings>
+#include <QString>
 #include <QStringList>
-
+// Swiften
 #include <Swiften/Swiften.h>
-
+// Kaidan
 #include "EchoPayloadParserFactory.h"
 #include "EchoPayloadSerializer.h"
-
-class RosterController;
+#include "RosterController.h"
 
 class Kaidan : public QObject
 {
@@ -42,9 +44,17 @@ class Kaidan : public QObject
 public:
 	Kaidan(Swift::NetworkFactories* networkFactories, QObject *parent = 0);
 	~Kaidan();
+
 	Q_INVOKABLE void mainDisconnect();
-	Q_INVOKABLE void mainConnect(const QString &jid, const QString &pass);
+	Q_INVOKABLE void mainConnect();
+
 	bool connectionState() const;
+	Q_INVOKABLE bool newLoginNeeded();
+
+	Q_INVOKABLE QString getJid();
+	Q_INVOKABLE QString getPassword();
+	Q_INVOKABLE void setJid(QString);
+	Q_INVOKABLE void setPassword(QString);
 
 	RosterController* getRosterController();
 
@@ -68,6 +78,11 @@ private:
 	Swift::NetworkFactories *netFactories;
 
 	RosterController* rosterController_;
+
+	QSettings* settings;
+
+	QString jid;
+	QString password;
 };
 
 #endif

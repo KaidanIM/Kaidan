@@ -1,7 +1,7 @@
 /*
  *  Kaidan - Cross platform XMPP client
  *
- *  Copyright (C) 2016 LNJ <git@lnj.li>
+ *  Copyright (C) 2016-2017 LNJ <git@lnj.li>
  *  Copyright (C) 2016 Marzanna
  *
  *  Kaidan is free software: you can redistribute it and/or modify
@@ -25,6 +25,8 @@ import org.kde.kirigami 1.0 as Kirigami
 import harbour.kaidan 1.0
 
 Kirigami.ScrollablePage {
+	property bool isRetry
+
 	title: "Login"
 
 	GridLayout {
@@ -38,6 +40,7 @@ Kirigami.ScrollablePage {
 		}
 		Controls.TextField {
 			id: jidField
+			text: kaidan.getJid()
 			placeholderText: qsTr("user@example.org")
 			Layout.fillWidth: true
 		}
@@ -48,6 +51,7 @@ Kirigami.ScrollablePage {
 		}
 		Controls.TextField {
 			id: passField
+			text: kaidan.getPassword()
 			placeholderText: qsTr("Password")
 			echoMode: TextInput.Password
 			Layout.fillWidth: true
@@ -56,16 +60,18 @@ Kirigami.ScrollablePage {
 		// Connect button
 		Controls.Button {
 			id: connectButton
-			text: qsTr("Connect")
+			text: isRetry ? qsTr("Retry") : qsTr("Connect")
 			Layout.columnSpan: 2
 			Layout.alignment: Qt.AlignRight
 			onClicked: {
 				// disable the button
 				connectButton.enabled = false;
 				// connect to given account data
-				connectButton.text = "<i>" + qsTr("Connecting...") + "</i>"
+				connectButton.text = "<i>" + qsTr("Connecting...") + "</i>";
 
-				kaidan.mainConnect(jidField.text, passField.text);
+				kaidan.setJid(jidField.text);
+				kaidan.setPassword(passField.text);
+				kaidan.mainConnect();
 			}
 		}
 	}
@@ -73,18 +79,19 @@ Kirigami.ScrollablePage {
 	Component.onCompleted: {
 		function goToRoster() {
 			// we need to disconnect enableConnectButton to prevent calling it on normal disconnection
-			kaidan.connectionStateDisconnected.disconnect(enableConnectButton)
+			kaidan.connectionStateDisconnected.disconnect(enableConnectButton);
 			// open the roster page
-			pageStack.replace(rosterPage)
+			pageStack.replace(rosterPage);
 		}
 
 		function enableConnectButton() {
-			connectButton.text = qsTr("Retry")
-			connectButton.enabled = true
+			isRetry = true;
+			connectButton.text = qsTr("Retry");
+			connectButton.enabled = true;
 		}
 
 		// connect functions to back-end events
-		kaidan.connectionStateConnected.connect(goToRoster)
-		kaidan.connectionStateDisconnected.connect(enableConnectButton)
+		kaidan.connectionStateConnected.connect(goToRoster);
+		kaidan.connectionStateDisconnected.connect(enableConnectButton);
 	}
 }

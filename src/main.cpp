@@ -75,6 +75,15 @@ int main(int argc, char *argv[])
 	qmlRegisterType<RosterItem>(APPLICATION_ID, 1, 0, "RosterItem");
 
 	//
+	// Kaidan back-end
+	//
+
+	QtEventLoop eventLoop;
+	BoostNetworkFactories networkFactories(&eventLoop);
+
+	Kaidan kaidan(&networkFactories);
+
+	//
 	// App
 	//
 
@@ -85,6 +94,8 @@ int main(int argc, char *argv[])
 	QGuiApplication::setApplicationName(APPLICATION_NAME);
 	QGuiApplication::setApplicationDisplayName(APPLICATION_DISPLAY_NAME);
 	QGuiApplication::setApplicationVersion(VERSION_STRING);
+	QGuiApplication::setOrganizationName(ORGANIZAITON_NAME);
+	QGuiApplication::setOrganizationDomain(ORGANIZATION_DOMAIN);
 
 	// attributes
 	QGuiApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
@@ -128,17 +139,6 @@ int main(int argc, char *argv[])
 				"Successfully parsed command line input.");
 			break;
 	}
-
-
-	//
-	// Kaidan back-end
-	//
-
-	QtEventLoop eventLoop;
-	BoostNetworkFactories networkFactories(&eventLoop);
-
-	Kaidan kaidan(&networkFactories);
-
 
 	//
 	// QML-GUI

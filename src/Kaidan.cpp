@@ -22,9 +22,14 @@
 #include "Kaidan.h"
 
 #include <iostream>
+// Qt
+#include <QDebug>
+#include <QSettings>
+#include <QString>
+// Boost
 #include <boost/bind.hpp>
 #include <boost/smart_ptr/make_shared.hpp>
-
+// Kaidan
 #include "EchoPayload.h"
 #include "RosterController.h"
 
@@ -33,6 +38,25 @@ Kaidan::Kaidan(NetworkFactories* networkFactories, QObject *parent) :
 {
 	netFactories = networkFactories;
 	connected = false;
+
+	//
+	// Restore login data
+	//
+
+	// init settings (-> "kaidan/kaidan.conf")
+	settings = new QSettings(QString(APPLICATION_NAME), QString(APPLICATION_NAME));
+
+	if (settings->value("auth/jid").toString() != "")
+	{
+		// get JID from settings
+		jid = settings->value("auth/jid").toString();
+
+		if (settings->value("auth/password").toString() != "")
+		{
+			// get password from settings
+			password = settings->value("auth/password").toString();
+		}
+	}
 }
 
 Kaidan::~Kaidan()
@@ -48,19 +72,27 @@ Kaidan::~Kaidan()
 	}
 
 	delete rosterController_;
+	delete settings;
 }
 
-void Kaidan::mainConnect(const QString &jid, const QString &pass){
-	client = new Swift::Client(jid.toStdString(), pass.toStdString(), netFactories);
+void Kaidan::mainConnect()
+{
+	// Create a new XMPP client
+	client = new Swift::Client(jid.toStdString(), password.toStdString(), netFactories);
+
+	// trust all certificates
 	client->setAlwaysTrustCertificates();
+
+	// event handling
 	client->onConnected.connect(boost::bind(&Kaidan::handleConnected, this));
 	client->onDisconnected.connect(boost::bind(&Kaidan::handleDisconnected, this));
-	client->onMessageReceived.connect(
-		boost::bind(&Kaidan::handleMessageReceived, this, _1));
-	client->onPresenceReceived.connect(
-		boost::bind(&Kaidan::handlePresenceReceived, this, _1));
+	client->onMessageReceived.connect(boost::bind(&Kaidan::handleMessageReceived, this, _1));
+	client->onPresenceReceived.connect(boost::bind(&Kaidan::handlePresenceReceived, this, _1));
+
+	// Create XML tracer (console output of xmpp data)
 	tracer = new Swift::ClientXMLTracer(client);
 
+	// share kaidan version
 	softwareVersionResponder = new Swift::SoftwareVersionResponder(client->getIQRouter());
 	softwareVersionResponder->setVersion(APPLICATION_DISPLAY_NAME, VERSION_STRING);
 	softwareVersionResponder->start();
@@ -68,10 +100,11 @@ void Kaidan::mainConnect(const QString &jid, const QString &pass){
 	client->addPayloadParserFactory(&echoPayloadParserFactory);
 	client->addPayloadSerializer(&echoPayloadSerializer);
 
+	// .. and connect!
 	client->connect();
 }
 
-//we don't want to close client without disconnection
+// we don't want to close client without disconnection
 void Kaidan::mainDisconnect()
 {
 	if (connectionState())
@@ -80,20 +113,9 @@ void Kaidan::mainDisconnect()
 	}
 }
 
-void Kaidan::handlePresenceReceived(Presence::ref presence)
-{
-	// Automatically approve subscription requests
-	if (presence->getType() == Swift::Presence::Subscribe)
-	{
-		Swift::Presence::ref response = Swift::Presence::create();
-		response->setTo(presence->getFrom());
-		response->setType(Swift::Presence::Subscribed);
-		client->sendPresence(response);
-	}
-}
-
 void Kaidan::handleConnected()
 {
+	// emit connected signal
 	connected = true;
 	emit connectionStateConnected();
 	client->sendPresence(Presence::create("Send me a message"));
@@ -106,6 +128,18 @@ void Kaidan::handleDisconnected()
 {
 	connected = false;
 	emit connectionStateDisconnected();
+}
+
+void Kaidan::handlePresenceReceived(Presence::ref presence)
+{
+	// Automatically approve subscription requests
+	if (presence->getType() == Swift::Presence::Subscribe)
+	{
+		Swift::Presence::ref response = Swift::Presence::create();
+		response->setTo(presence->getFrom());
+		response->setType(Swift::Presence::Subscribed);
+		client->sendPresence(response);
+	}
 }
 
 void Kaidan::handleMessageReceived(Message::ref message)
@@ -131,4 +165,38 @@ RosterController* Kaidan::getRosterController()
 bool Kaidan::connectionState() const
 {
 	return connected;
+}
+
+bool Kaidan::newLoginNeeded()
+{
+	// if no jid or password, return true
+	return (jid == "") || (password == "");
+}
+
+QString Kaidan::getJid()
+{
+	return jid;
+}
+
+QString Kaidan::getPassword()
+{
+	return password;
+}
+
+void Kaidan::setJid(QString jid_)
+{
+	// set new jid for mainConnect
+	jid = jid_;
+
+	// save to settings
+	settings->setValue("auth/jid", jid_);
+}
+
+void Kaidan::setPassword(QString password_)
+{
+	// set new password for
+	password = password_;
+
+	// save to settings
+	settings->setValue("auth/password", password_);
 }

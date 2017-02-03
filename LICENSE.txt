@@ -1,8 +1,8 @@
 Kaidan - Cross platform XMPP client
 ===================================
 
-License of source code and translations:
-----------------------------------------
+License of Kaidan source code and translations:
+-----------------------------------------------
 Copyright (C) 2016-2017 Kaidan developers and contributors (see source file
 comments and the version control log)
 
@@ -18,3 +18,17 @@ GNU General Public License for more details.
 
 You should have received a copy of the GNU General Public License
 along with Kaidan.  If not, see <http://www.gnu.org/licenses/>.
+
+
+License of Kaidan media (images, sounds):
+-----------------------------------------
+Creative Commons Attribution-ShareAlike 4.0 International (CC BY-SA 4.0)
+http://creativecommons.org/licenses/by-sa/4.0/
+
+Copyright (C) 2016-2017 Ilya Bizyaev <bizyaev.game@yandex.ru> (CC BY-SA 4.0):
+  misc/kaidan.svg
+  misc/kaidan-128x128.png
+
+License of all media files not listed in here:
+Copyright (C) 2017 Kaidan developers (CC BY-SA 4.0)
+

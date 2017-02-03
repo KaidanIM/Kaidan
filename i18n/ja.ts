@@ -1,34 +1,34 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.1">
+<TS version="2.1" language="ja">
 <context>
     <name>ChatPage</name>
     <message>
         <source>Compose message</source>
-        <translation type="unfinished"></translation>
+        <translation>メッセージを書く</translation>
     </message>
     <message>
         <source>Send</source>
-        <translation type="unfinished"></translation>
+        <translation>送る</translation>
     </message>
 </context>
 <context>
     <name>LoginPage</name>
     <message>
         <source>Your Jabber-ID:</source>
-        <translation type="unfinished"></translation>
+        <translation>君のJabber-ID：</translation>
     </message>
     <message>
         <source>user@example.org</source>
-        <translation type="unfinished"></translation>
+        <translation>user＠example.jp</translation>
     </message>
     <message>
         <source>Your Password:</source>
-        <translation type="unfinished"></translation>
+        <translation>君の合言葉：</translation>
     </message>
     <message>
         <source>Password</source>
-        <translation type="unfinished"></translation>
+        <translation>合言葉</translation>
     </message>
     <message>
         <source>Retry</source>

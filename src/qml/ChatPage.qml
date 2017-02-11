@@ -21,11 +21,10 @@ import QtQuick 2.6
 import QtQuick.Controls 2.0 as Controls
 import QtQuick.Layouts 1.3
 import org.kde.kirigami 1.0 as Kirigami
-import harbour.kaidan 1.0
 
 Kirigami.Page {
 	property string chatName
-	property string toJid
+	property string recipientJid
 
 	title: chatName
 
@@ -47,10 +46,12 @@ Kirigami.Page {
 			verticalLayoutDirection: ListView.BottomToTop
 
 			spacing: 12
-			model: 10
+
+			// connect the database
+			model: kaidan.messageController.messageModel
 
 			delegate: Row {
-				readonly property bool sentByMe: index % 2 == 0
+				readonly property bool sentByMe: model.recipient !== "Me"
 
 				anchors.right: sentByMe ? parent.right : undefined
 				spacing: 6
@@ -71,13 +72,11 @@ Kirigami.Page {
 
 					Kirigami.Label {
 						anchors.centerIn: parent
-						text: index
+						text: model.message
 						color: sentByMe ? "black" : "white"
 					}
 				}
 			}
-
-			//Controls.ScrollBar.vertical: Controls.ScrollBar {}
 		}
 
 
@@ -102,7 +101,24 @@ Kirigami.Page {
 				Controls.Button {
 					id: sendButton
 					text: qsTr("Send")
-					enabled: messageField.length > 0
+					onClicked: {
+						// don't send empty messages
+						if (messageField.text == "") {
+							return;
+						}
+
+						// disable the button to prevent sending
+						// the same message several times
+						sendButton.enabled = false;
+
+						// send the message
+						kaidan.messageController.sendMessage(recipientJid, messageField.text);
+						// clean up the text field
+						messageField.text = "";
+
+						// reenable the button
+						sendButton.enabled = true;
+					}
 				}
 			}
 		}

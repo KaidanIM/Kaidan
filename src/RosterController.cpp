@@ -1,6 +1,7 @@
 /*
  *  Kaidan - Cross platform XMPP client
  *
+ *  Copyright (C) 2017 LNJ <git@lnj.li>
  *  Copyright (C) 2016 geobra <s.g.b@gmx.de>
  *
  *  Kaidan is free software: you can redistribute it and/or modify
@@ -20,56 +21,92 @@
 #include "RosterController.h"
 
 #include <QQmlContext>
+#include <QDebug>
+#include <QSqlError>
+#include <QSqlRecord>
+#include <QSqlQuery>
 
-RosterController::RosterController(QObject *parent) : QObject(parent), client_(NULL), rosterList_()
+#include "RosterModel.h"
+
+RosterController::RosterController(QObject *parent) : QObject(parent)
 {
-	//rosterList_.append(new RosterItem(QString("lala@lala.de"), QString("lala"), None));
+	rosterModel = new RosterModel();
 }
 
-void RosterController::requestRosterFromClient(Swift::Client *client)
+RosterController::~RosterController()
 {
-	client_ = client;
 
-	client_->requestRoster();
+}
+
+RosterModel* RosterController::getRosterModel()
+{
+	return rosterModel;
+}
+
+void RosterController::requestRosterFromClient(Swift::Client *client_)
+{
+	client = client_;
+
+	client->requestRoster();
 
 	Swift::GetRosterRequest::ref rosterRequest = Swift::GetRosterRequest::create(client->getIQRouter());
 	rosterRequest->onResponse.connect(bind(&RosterController::handleRosterReceived, this, _2));
 	rosterRequest->send();
+	std::cout << "RosterController: Sent roster request\n";
 }
 
-void RosterController::handleRosterReceived(Swift::ErrorPayload::ref error)
+void RosterController::handleRosterReceived(Swift::ErrorPayload::ref error_)
 {
-	if (error)
+	if (error_)
 	{
-		std::cerr << "Error receiving roster. Continuing anyway.";
+		std::cerr << "RosterController: Error receiving roster. Continuing anyway.\n";
 	}
 	else
 	{
-		std::cout << "handleRosterReceived!!!" << std::endl;
-		Swift::XMPPRoster* roster = client_->getRoster();
+		// we know we've received the roster, so we get it from the client
+		Swift::XMPPRoster* roster = client->getRoster();
+
+		// create a vector containing all roster items
 		std::vector<Swift::XMPPRosterItem> rosterItems = roster->getItems();
-
+		// create a fitting iterator
 		std::vector<Swift::XMPPRosterItem>::iterator it;
-		std::cout << "size: " << rosterItems.size() << std::endl;
 
-		for(it = rosterItems.begin(); it < rosterItems.end(); it++ )
+		// output the size of the vector with the roster items
+		std::cout << "RosterController: Received XMPP Roster with "
+			<< rosterItems.size() << " contacts." << std::endl;
+
+
+		// remove all rows / contacts (we've got new ones)
+		for (int i = 0; i < rosterModel->rowCount(); ++i)
 		{
-#if 0
-			std::cout << "jid: " << (*it).getJID().toString() <<
-				", Name: " << (*it).getName() <<
-				", Subscription: " << (*it).getSubscription() << std::endl;
-#endif
-
-			rosterList_.append(new RosterItem(QString::fromStdString((*it).getJID().toString()),
-				QString::fromStdString((*it).getName()),
-				(Subscription)(*it).getSubscription()));
-
-			emit rosterListChanged();
+			rosterModel->removeRow(i);
 		}
-	}
-}
 
-QQmlListProperty<RosterItem> RosterController::getRosterList()
-{
-	return QQmlListProperty<RosterItem>(this, rosterList_);
+
+		// add all contacts from the received roster
+		for(it = rosterItems.begin(); it < rosterItems.end(); it++)
+		{
+			// create a new record
+			QSqlRecord newRecord = rosterModel->record();
+
+			// set the data from the received Roster
+			newRecord.setValue("jid", QString::fromStdString((*it).getJID().toString()));
+			newRecord.setValue("name", QString::fromStdString((*it).getName()));
+
+			// inster the record into the DB (or print error)
+			if (!rosterModel->insertRecord(rosterModel->rowCount(), newRecord)) {
+				qWarning() << "Failed to save RosterContact into DB:"
+					<< rosterModel->lastError().text();
+				return;
+			}
+		}
+
+		// submit all new changes
+		rosterModel->submitAll();
+
+		// send signal for updating the GUI
+		emit rosterModelChanged();
+
+		std::cout << "RosterController: Finished updating roster contacts." << '\n';
+	}
 }

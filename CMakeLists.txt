@@ -49,7 +49,7 @@ set(EXECUTABLE_OUTPUT_PATH "bin")
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_SOURCE_DIR}/cmake")
 
 # Find packages
-find_package(Qt5 ${QT_MIN_VERSION} REQUIRED NO_MODULE COMPONENTS Core Qml Quick LinguistTools)
+find_package(Qt5 ${QT_MIN_VERSION} REQUIRED NO_MODULE COMPONENTS Core Qml Quick Sql LinguistTools)
 find_package(KF5Kirigami REQUIRED)
 find_package(Swiften REQUIRED)
 find_package(Boost REQUIRED)
@@ -71,7 +71,9 @@ add_executable(${PROJECT_NAME}
 	src/main.cpp
 	src/Kaidan.cpp
 	src/RosterController.cpp
-	src/RosterItem.cpp
+	src/RosterModel.cpp
+	src/MessageController.cpp
+	src/MessageModel.cpp
 )
 
 #
@@ -80,6 +82,7 @@ add_executable(${PROJECT_NAME}
 
 target_link_libraries(${PROJECT_NAME}
 	Qt5::Core
+	Qt5::Sql
 	Qt5::Qml
 	Qt5::Quick
 	${SWIFTEN_LIBRARY}

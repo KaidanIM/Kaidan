@@ -1,7 +1,7 @@
 /*
  *  Kaidan - Cross platform XMPP client
  *
- *  Copyright (C) 2016 LNJ <git@lnj.li>
+ *  Copyright (C) 2016-2017 LNJ <git@lnj.li>
  *  Copyright (C) 2016 Marzanna
  *  Copyright (C) 2016 geobra <s.g.b@gmx.de>
  *
@@ -33,12 +33,14 @@
 #include "EchoPayloadParserFactory.h"
 #include "EchoPayloadSerializer.h"
 #include "RosterController.h"
+#include "MessageController.h"
 
 class Kaidan : public QObject
 {
 	Q_OBJECT
 
 	Q_PROPERTY(RosterController* rosterController READ getRosterController NOTIFY rosterControllerChanged)
+	Q_PROPERTY(MessageController* messageController READ getMessageController NOTIFY messageControllerChanged)
 	Q_PROPERTY(bool connectionState READ connectionState NOTIFY connectionStateConnected NOTIFY connectionStateDisconnected)
 	Q_PROPERTY(QString jid READ getJid WRITE setJid NOTIFY jidChanged)
 	Q_PROPERTY(QString password READ getPassword WRITE setPassword NOTIFY passwordChanged)
@@ -59,19 +61,20 @@ public:
 	void setPassword(QString);
 
 	RosterController* getRosterController();
+	MessageController* getMessageController();
 
 signals:
+	void rosterControllerChanged();
+	void messageControllerChanged();
 	void connectionStateConnected();
 	void connectionStateDisconnected();
 	void jidChanged();
 	void passwordChanged();
-	void rosterControllerChanged();
 
 private:
 	void handlePresenceReceived(Swift::Presence::ref presence);
 	void handleConnected();
 	void handleDisconnected();
-	void handleMessageReceived(Swift::Message::ref message);
 	bool connected;
 
 	Swift::Client* client;
@@ -81,7 +84,8 @@ private:
 	EchoPayloadSerializer echoPayloadSerializer;
 	Swift::NetworkFactories *netFactories;
 
-	RosterController* rosterController_;
+	RosterController* rosterController;
+	MessageController* messageController;
 
 	QSettings* settings;
 

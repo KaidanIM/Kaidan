@@ -20,34 +20,33 @@
 
 import QtQuick 2.0
 import org.kde.kirigami 1.0 as Kirigami
-import harbour.kaidan 1.0
 
 Kirigami.ScrollablePage {
 	title: qsTr("Contacts")
 
 	ListView {
-		model: kaidan.rosterController.rosterList
+		model: kaidan.rosterController.rosterModel
 
 		delegate: Kirigami.SwipeListItem {
 			Kirigami.Label {
 				// use the Name or JID
-				text: name ? name : jid
+				text: model.name ? model.name : model.jid
 			}
 
 			onClicked: {
-				//kaidan.setCurrentChatPartner(jid)
+				kaidan.messageController.recipient = model.jid;
+
 				pageStack.push(chatPage, {
-					"chatName": (name ? name : jid),
-					"toJid": jid
-				})
+					"chatName": (model.name ? model.name : model.jid),
+					"recipientJid": model.jid
+				});
 			}
 
 			actions: [
 				Kirigami.Action {
 					iconName: "bookmark-remove"
 					onTriggered: {
-						print("deleting contact from roster: " + jid)
-						//kaidan.removeContactFromRoster()
+						//
 					}
 				}
 			]

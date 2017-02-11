@@ -1,7 +1,7 @@
 /*
  *  Kaidan - Cross platform XMPP client
  *
- *  Copyright (C) 2016 LNJ <git@lnj.li>
+ *  Copyright (C) 2016-2017 LNJ <git@lnj.li>
  *  Copyright (C) 2016 Marzanna
  *  Copyright (C) 2016 geobra <s.g.b@gmx.de>
  *
@@ -28,16 +28,14 @@
 #include <QString>
 // Boost
 #include <boost/bind.hpp>
-#include <boost/smart_ptr/make_shared.hpp>
 // Kaidan
-#include "EchoPayload.h"
 #include "RosterController.h"
 
-Kaidan::Kaidan(NetworkFactories* networkFactories, QObject *parent) :
-	rosterController_(new RosterController()), QObject(parent)
+Kaidan::Kaidan(NetworkFactories* networkFactories, QObject *parent) : QObject(parent)
 {
 	netFactories = networkFactories;
 	connected = false;
+	rosterController = new RosterController();
 
 	//
 	// Restore login data
@@ -63,15 +61,17 @@ Kaidan::~Kaidan()
 {
 	if (connected)
 	{
+		client->disconnect();
 		client->removePayloadSerializer(&echoPayloadSerializer);
 		client->removePayloadParserFactory(&echoPayloadParserFactory);
 		softwareVersionResponder->stop();
 		delete tracer;
 		delete softwareVersionResponder;
+		delete messageController;
 		delete client;
 	}
 
-	delete rosterController_;
+	delete rosterController;
 	delete settings;
 }
 
@@ -86,7 +86,6 @@ void Kaidan::mainConnect()
 	// event handling
 	client->onConnected.connect(boost::bind(&Kaidan::handleConnected, this));
 	client->onDisconnected.connect(boost::bind(&Kaidan::handleDisconnected, this));
-	client->onMessageReceived.connect(boost::bind(&Kaidan::handleMessageReceived, this, _1));
 	client->onPresenceReceived.connect(boost::bind(&Kaidan::handlePresenceReceived, this, _1));
 
 	// Create XML tracer (console output of xmpp data)
@@ -99,6 +98,9 @@ void Kaidan::mainConnect()
 
 	client->addPayloadParserFactory(&echoPayloadParserFactory);
 	client->addPayloadSerializer(&echoPayloadSerializer);
+
+	// create message controller
+	messageController = new MessageController(client);
 
 	// .. and connect!
 	client->connect();
@@ -121,7 +123,8 @@ void Kaidan::handleConnected()
 	client->sendPresence(Presence::create("Send me a message"));
 
 	// Request the roster
-	rosterController_->requestRosterFromClient(client);
+	rosterController->requestRosterFromClient(client);
+	emit rosterControllerChanged();
 }
 
 void Kaidan::handleDisconnected()
@@ -142,24 +145,14 @@ void Kaidan::handlePresenceReceived(Presence::ref presence)
 	}
 }
 
-void Kaidan::handleMessageReceived(Message::ref message)
-{
-	// Echo back the incoming message
-	message->setTo(message->getFrom());
-	message->setFrom(JID());
-
-	if (!message->getPayload<EchoPayload>())
-	{
-		boost::shared_ptr<EchoPayload> echoPayload = boost::make_shared<EchoPayload>();
-		echoPayload->setMessage("This is an echoed message");
-		message->addPayload(echoPayload);
-		client->sendMessage(message);
-	}
-}
-
 RosterController* Kaidan::getRosterController()
 {
-	return rosterController_;
+	return rosterController;
+}
+
+MessageController* Kaidan::getMessageController()
+{
+	return messageController;
 }
 
 bool Kaidan::connectionState() const

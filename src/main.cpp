@@ -28,14 +28,15 @@
 #include <QQmlApplicationEngine>
 #include <QQuickView>
 #include <QQmlContext>
+#include <QStandardPaths>
+#include <QSqlDatabase>
+#include <QSqlError>
 #include <QTranslator>
 #include <QtQml>
 // Swiften
 #include "Swiften/EventLoop/Qt/QtEventLoop.h"
 // Kaidan
 #include "Kaidan.h"
-#include "RosterController.h"
-#include "RosterItem.h"
 
 enum CommandLineParseResult
 {
@@ -69,20 +70,31 @@ CommandLineParseResult parseCommandLine(QCommandLineParser &parser, QString *err
 	return CommandLineOk;
 }
 
+void connectToDatabase()
+{
+	QSqlDatabase database = QSqlDatabase::database();
+	if (!database.isValid()) {
+		database = QSqlDatabase::addDatabase("QSQLITE");
+		if (!database.isValid())
+			qFatal("Cannot add database: %s", qPrintable(database.lastError().text()));
+	}
+
+	const QDir writeDir = QStandardPaths::writableLocation(QStandardPaths::AppDataLocation);
+	if (!writeDir.mkpath("."))
+		qFatal("Failed to create writable directory at %s", qPrintable(writeDir.absolutePath()));
+
+	// Ensure that we have a writable location on all devices.
+	const QString fileName = writeDir.absolutePath() + "/messages.sqlite3";
+	// When using the SQLite driver, open() will create the SQLite database if it doesn't exist.
+	database.setDatabaseName(fileName);
+	if (!database.open()) {
+		qFatal("Cannot open database: %s", qPrintable(database.lastError().text()));
+		QFile::remove(fileName);
+	}
+}
+
 int main(int argc, char *argv[])
 {
-	qmlRegisterType<RosterController>(APPLICATION_ID, 1, 0, "RosterController");
-	qmlRegisterType<RosterItem>(APPLICATION_ID, 1, 0, "RosterItem");
-
-	//
-	// Kaidan back-end
-	//
-
-	QtEventLoop eventLoop;
-	BoostNetworkFactories networkFactories(&eventLoop);
-
-	Kaidan kaidan(&networkFactories);
-
 	//
 	// App
 	//
@@ -113,6 +125,19 @@ int main(int argc, char *argv[])
 
 
 	//
+	// Kaidan back-end
+	//
+
+	// open the message/roster db
+	connectToDatabase();
+
+	QtEventLoop eventLoop;
+	BoostNetworkFactories networkFactories(&eventLoop);
+
+	Kaidan kaidan(&networkFactories);
+
+
+	//
 	// Command line arguments
 	//
 
@@ -140,6 +165,7 @@ int main(int argc, char *argv[])
 			break;
 	}
 
+
 	//
 	// QML-GUI
 	//
@@ -152,5 +178,12 @@ int main(int argc, char *argv[])
 	QQuickWindow *window = qobject_cast<QQuickWindow*>(topLevel);
 
 	window->show();
-	return app.exec();
+
+	// execute the app
+	int retvar = app.exec();
+
+	// be sure that kaidan has disconnected properly
+	kaidan.mainDisconnect();
+
+	return retvar;
 }

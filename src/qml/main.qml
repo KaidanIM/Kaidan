@@ -20,10 +20,11 @@
 
 import QtQuick 2.0
 import org.kde.kirigami 1.0 as Kirigami
-import harbour.kaidan 1.0
 
 Kirigami.ApplicationWindow {
 	id: root
+	width: 960
+	height: 540
 
 	// load all pages
 	Component {id: chatPage; ChatPage {}}
@@ -32,7 +33,7 @@ Kirigami.ApplicationWindow {
 
 	// when the window was closed, disconnect from jabber server
 	onClosing: {
-		kaidan.mainDisconnect()
+		kaidan.mainDisconnect();
 	}
 
 	Component.onCompleted: {

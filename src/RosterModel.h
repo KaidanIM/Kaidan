@@ -2,7 +2,6 @@
  *  Kaidan - Cross platform XMPP client
  *
  *  Copyright (C) 2017 LNJ <git@lnj.li>
- *  Copyright (C) 2016 geobra <s.g.b@gmx.de>
  *
  *  Kaidan is free software: you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -18,8 +17,8 @@
  *  along with Kaidan. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef ROSTERCONTROLLER_H
-#define ROSTERCONTROLLER_H
+#ifndef ROSTERMODEL_H
+#define ROSTERMODEL_H
 
 // Qt
 #include <QObject>
@@ -27,27 +26,18 @@
 #include <QQmlListProperty>
 // Swiften
 #include <Swiften/Swiften.h>
-// Kaidan
-#include "RosterModel.h"
 
-class RosterController : public QObject
+class RosterModel : public QSqlTableModel
 {
 	Q_OBJECT
-	Q_PROPERTY(RosterModel* rosterModel READ getRosterModel NOTIFY rosterModelChanged)
-
 public:
-	RosterController(QObject *parent = 0);
-	~RosterController();
-	void requestRosterFromClient(Swift::Client *client);
-	RosterModel* getRosterModel();
+	RosterModel(QObject *parent = 0);
 
-signals:
-	void rosterModelChanged();
+	QHash<int, QByteArray> roleNames() const;
+	QVariant data(const QModelIndex &index, int role) const;
 
 private:
-	void handleRosterReceived(Swift::ErrorPayload::ref error);
 	Swift::Client* client;
-	RosterModel* rosterModel;
 };
 
-#endif // ROSTERCONTROLLER_H
+#endif // ROSTERMODEL_H

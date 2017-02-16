@@ -32,7 +32,6 @@
 // Swiften
 #include <Swiften/Swiften.h>
 // Kaidan
-#include "EchoPayload.h"
 #include "MessageModel.h"
 
 MessageController::MessageController(Swift::Client* client_, QObject *parent) : QObject(parent)

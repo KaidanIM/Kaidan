@@ -34,7 +34,7 @@
 #include <QTranslator>
 #include <QtQml>
 // Swiften
-#include "Swiften/EventLoop/Qt/QtEventLoop.h"
+#include <Swiften/EventLoop/Qt/QtEventLoop.h>
 // Kaidan
 #include "Kaidan.h"
 
@@ -131,8 +131,8 @@ int main(int argc, char *argv[])
 	// open the message/roster db
 	connectToDatabase();
 
-	QtEventLoop eventLoop;
-	BoostNetworkFactories networkFactories(&eventLoop);
+	Swift::QtEventLoop eventLoop;
+	Swift::BoostNetworkFactories networkFactories(&eventLoop);
 
 	Kaidan kaidan(&networkFactories);
 

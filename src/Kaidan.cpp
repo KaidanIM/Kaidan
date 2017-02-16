@@ -28,10 +28,12 @@
 #include <QString>
 // Boost
 #include <boost/bind.hpp>
+// Swiften
+#include <Swiften/Swiften.h>
 // Kaidan
 #include "RosterController.h"
 
-Kaidan::Kaidan(NetworkFactories* networkFactories, QObject *parent) : QObject(parent)
+Kaidan::Kaidan(Swift::NetworkFactories* networkFactories, QObject *parent) : QObject(parent)
 {
 	netFactories = networkFactories;
 	connected = false;
@@ -62,8 +64,6 @@ Kaidan::~Kaidan()
 	if (connected)
 	{
 		client->disconnect();
-		client->removePayloadSerializer(&echoPayloadSerializer);
-		client->removePayloadParserFactory(&echoPayloadParserFactory);
 		softwareVersionResponder->stop();
 		delete tracer;
 		delete softwareVersionResponder;
@@ -96,9 +96,6 @@ void Kaidan::mainConnect()
 	softwareVersionResponder->setVersion(APPLICATION_DISPLAY_NAME, VERSION_STRING);
 	softwareVersionResponder->start();
 
-	client->addPayloadParserFactory(&echoPayloadParserFactory);
-	client->addPayloadSerializer(&echoPayloadSerializer);
-
 	// create message controller
 	messageController = new MessageController(client);
 
@@ -120,7 +117,7 @@ void Kaidan::handleConnected()
 	// emit connected signal
 	connected = true;
 	emit connectionStateConnected();
-	client->sendPresence(Presence::create("Send me a message"));
+	client->sendPresence(Swift::Presence::create("Send me a message"));
 
 	// Request the roster
 	rosterController->requestRosterFromClient(client);
@@ -133,7 +130,7 @@ void Kaidan::handleDisconnected()
 	emit connectionStateDisconnected();
 }
 
-void Kaidan::handlePresenceReceived(Presence::ref presence)
+void Kaidan::handlePresenceReceived(Swift::Presence::ref presence)
 {
 	// Automatically approve subscription requests
 	if (presence->getType() == Swift::Presence::Subscribe)

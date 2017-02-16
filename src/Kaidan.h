@@ -30,8 +30,6 @@
 // Swiften
 #include <Swiften/Swiften.h>
 // Kaidan
-#include "EchoPayloadParserFactory.h"
-#include "EchoPayloadSerializer.h"
 #include "RosterController.h"
 #include "MessageController.h"
 
@@ -80,8 +78,6 @@ private:
 	Swift::Client* client;
 	Swift::ClientXMLTracer* tracer;
 	Swift::SoftwareVersionResponder* softwareVersionResponder;
-	EchoPayloadParserFactory echoPayloadParserFactory;
-	EchoPayloadSerializer echoPayloadSerializer;
 	Swift::NetworkFactories *netFactories;
 
 	RosterController* rosterController;

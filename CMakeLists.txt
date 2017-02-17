@@ -4,6 +4,9 @@ set(QT_MIN_VERSION "5.7.0")
 
 project(kaidan)
 
+# CMake options
+option(I18N "Enable i18n support" FALSE)
+
 # application name
 set(APPLICATION_ID "harbour.kaidan")
 set(APPLICATION_NAME "kaidan")
@@ -55,7 +58,9 @@ find_package(Boost REQUIRED)
 # Translation
 #
 
-include("${CMAKE_SOURCE_DIR}/i18n/CMakeLists.txt")
+if(I18N)
+	include("${CMAKE_SOURCE_DIR}/i18n/CMakeLists.txt")
+endif()
 
 #
 # Sources / Resources

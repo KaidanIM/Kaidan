@@ -26,7 +26,7 @@ Get Kaidan source code
 Finally compile it
 
  * `mkdir kaidan/build ; cd kaidan/build`
- * `cmake ..`
+ * `cmake .. -DI18N=1`
  * `make -j<number of threads>`
 
 You can now run Kaidan:

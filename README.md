@@ -29,6 +29,6 @@ Finally compile it
  * `cmake ..`
  * `make -j<number of threads>`
 
- You can now run Kaidan:
+You can now run Kaidan:
 
  * `./bin/kaidan`

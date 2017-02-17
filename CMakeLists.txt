@@ -49,10 +49,11 @@ set(EXECUTABLE_OUTPUT_PATH "bin")
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_SOURCE_DIR}/cmake")
 
 # Find packages
-find_package(Qt5 ${QT_MIN_VERSION} REQUIRED NO_MODULE COMPONENTS Core Qml Quick Sql LinguistTools)
+find_package(Qt5 ${QT_MIN_VERSION} REQUIRED NO_MODULE COMPONENTS Core Qml Quick Sql)
 find_package(KF5Kirigami REQUIRED)
 find_package(Swiften REQUIRED)
 find_package(Boost REQUIRED)
+include(GNUInstallDirs)
 
 #
 # Translation
@@ -68,6 +69,7 @@ endif()
 
 add_executable(${PROJECT_NAME}
 	kaidan.qrc
+	${I18N_QRC_CPP} # set in i18n/CMakeLists.txt, if enabled
 	src/main.cpp
 	src/Kaidan.cpp
 	src/RosterController.cpp
@@ -105,3 +107,10 @@ target_compile_definitions(${PROJECT_NAME} PRIVATE
 
 	BOOST_SIGNALS_NO_DEPRECATION_WARNING=True
 )
+
+
+#
+# Install Kaidan binary
+#
+
+install(PROGRAMS ${CMAKE_CURRENT_BINARY_DIR}/${EXECUTABLE_OUTPUT_PATH}/${PROJECT_NAME} DESTINATION ${CMAKE_INSTALL_FULL_BINDIR})

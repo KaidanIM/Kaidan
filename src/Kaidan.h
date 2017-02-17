@@ -40,6 +40,8 @@ class Kaidan : public QObject
 
 	Q_PROPERTY(RosterController* rosterController READ getRosterController NOTIFY rosterControllerChanged)
 	Q_PROPERTY(bool connectionState READ connectionState NOTIFY connectionStateConnected NOTIFY connectionStateDisconnected)
+	Q_PROPERTY(QString jid READ getJid WRITE setJid NOTIFY jidChanged)
+	Q_PROPERTY(QString password READ getPassword WRITE setPassword NOTIFY passwordChanged)
 
 public:
 	Kaidan(Swift::NetworkFactories* networkFactories, QObject *parent = 0);
@@ -51,17 +53,19 @@ public:
 	bool connectionState() const;
 	Q_INVOKABLE bool newLoginNeeded();
 
-	Q_INVOKABLE QString getJid();
-	Q_INVOKABLE QString getPassword();
-	Q_INVOKABLE void setJid(QString);
-	Q_INVOKABLE void setPassword(QString);
+	QString getJid();
+	QString getPassword();
+	void setJid(QString);
+	void setPassword(QString);
 
 	RosterController* getRosterController();
 
 signals:
-	void rosterControllerChanged();
 	void connectionStateConnected();
 	void connectionStateDisconnected();
+	void jidChanged();
+	void passwordChanged();
+	void rosterControllerChanged();
 
 private:
 	void handlePresenceReceived(Swift::Presence::ref presence);

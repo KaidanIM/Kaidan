@@ -40,7 +40,7 @@ Kirigami.ScrollablePage {
 		}
 		Controls.TextField {
 			id: jidField
-			text: kaidan.getJid()
+			text: kaidan.jid
 			placeholderText: qsTr("user@example.org")
 			Layout.fillWidth: true
 		}
@@ -51,7 +51,7 @@ Kirigami.ScrollablePage {
 		}
 		Controls.TextField {
 			id: passField
-			text: kaidan.getPassword()
+			text: kaidan.password
 			placeholderText: qsTr("Password")
 			echoMode: TextInput.Password
 			Layout.fillWidth: true
@@ -69,8 +69,8 @@ Kirigami.ScrollablePage {
 				// connect to given account data
 				connectButton.text = "<i>" + qsTr("Connecting...") + "</i>";
 
-				kaidan.setJid(jidField.text);
-				kaidan.setPassword(passField.text);
+				kaidan.jid = jidField.text;
+				kaidan.password = passField.text;
 				kaidan.mainConnect();
 			}
 		}

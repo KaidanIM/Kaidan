@@ -43,8 +43,8 @@ Kaidan::Kaidan(NetworkFactories* networkFactories, QObject *parent) :
 	// Restore login data
 	//
 
-	// init settings (-> "kaidan/kaidan.conf")
-	settings = new QSettings(QString(APPLICATION_NAME), QString(APPLICATION_NAME));
+	// init settings (-> "KaidanIM/kaidan.conf")
+	settings = new QSettings(QString(ORGANIZAITON_NAME), QString(APPLICATION_NAME));
 
 	if (settings->value("auth/jid").toString() != "")
 	{

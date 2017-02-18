@@ -1,6 +1,7 @@
 cmake_minimum_required(VERSION 2.8.11)
 set(CMAKE_CXX_STANDARD 14)
 set(QT_MIN_VERSION "5.7.0")
+set(BOOST_MIN_VERSION "1.34.1")
 
 project(kaidan)
 
@@ -52,7 +53,7 @@ set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_SOURCE_DIR}/cmake")
 find_package(Qt5 ${QT_MIN_VERSION} REQUIRED NO_MODULE COMPONENTS Core Qml Quick Sql)
 find_package(KF5Kirigami REQUIRED)
 find_package(Swiften REQUIRED)
-find_package(Boost REQUIRED)
+find_package(Boost ${BOOST_MIN_VERSION} REQUIRED COMPONENTS signals)
 include(GNUInstallDirs)
 
 #
@@ -87,8 +88,8 @@ target_link_libraries(${PROJECT_NAME}
 	Qt5::Sql
 	Qt5::Qml
 	Qt5::Quick
+	Boost::signals
 	${SWIFTEN_LIBRARY}
-	${Boost_LIBRARY}
 )
 
 #

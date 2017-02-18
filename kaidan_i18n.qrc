@@ -1,0 +1,8 @@
+<RCC>
+	<qresource prefix="/i18n">
+		<file>kaidan_de.qm</file>
+		<file>kaidan_fr.qm</file>
+		<file>kaidan_ja.qm</file>
+		<file>kaidan_ru.qm</file>
+	</qresource>
+</RCC>

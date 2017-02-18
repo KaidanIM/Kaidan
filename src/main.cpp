@@ -120,7 +120,9 @@ int main(int argc, char *argv[])
 
 	// Kaidan-Translator
 	QTranslator kaidanTranslator;
-	kaidanTranslator.load(QLocale::system().name()); // loads the systems locale or none
+	// load the systems locale or none
+	kaidanTranslator.load(QString(APPLICATION_NAME) + "_" + QLocale::system().name(),
+		":/i18n"); // load the qm files via. rcc (bundled in binary)
 	app.installTranslator(&kaidanTranslator);
 
 

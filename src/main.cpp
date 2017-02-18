@@ -153,7 +153,7 @@ int main(int argc, char *argv[])
 	switch (parseCommandLine(parser, &commandLineErrorMessage))
 	{
 		case CommandLineError:
-			qDebug() << commandLineErrorMessage;
+			qWarning() << commandLineErrorMessage;
 			return 1;
 		case CommandLineVersionRequested:
 			parser.showVersion();
@@ -162,8 +162,6 @@ int main(int argc, char *argv[])
 			parser.showHelp();
 			return 0;
 		case CommandLineOk:
-			qDebug() << QCoreApplication::translate("main",
-				"Successfully parsed command line input.");
 			break;
 	}
 

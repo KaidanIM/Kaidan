@@ -52,7 +52,6 @@ void RosterController::requestRosterFromClient(Swift::Client *client_)
 	Swift::GetRosterRequest::ref rosterRequest = Swift::GetRosterRequest::create(client->getIQRouter());
 	rosterRequest->onResponse.connect(bind(&RosterController::handleRosterReceived, this, _2));
 	rosterRequest->send();
-	std::cout << "RosterController: Sent roster request\n";
 }
 
 void RosterController::handleRosterReceived(Swift::ErrorPayload::ref error_)
@@ -70,10 +69,6 @@ void RosterController::handleRosterReceived(Swift::ErrorPayload::ref error_)
 		std::vector<Swift::XMPPRosterItem> rosterItems = roster->getItems();
 		// create a fitting iterator
 		std::vector<Swift::XMPPRosterItem>::iterator it;
-
-		// output the size of the vector with the roster items
-		std::cout << "RosterController: Received XMPP Roster with "
-			<< rosterItems.size() << " contacts." << std::endl;
 
 
 		// remove all rows / contacts (we've got new ones)
@@ -106,7 +101,5 @@ void RosterController::handleRosterReceived(Swift::ErrorPayload::ref error_)
 
 		// send signal for updating the GUI
 		emit rosterModelChanged();
-
-		std::cout << "RosterController: Finished updating roster contacts." << '\n';
 	}
 }

@@ -54,7 +54,7 @@
     <name>main</name>
     <message>
         <source>Successfully parsed command line input.</source>
-        <translation>Ввод из командной строки успешно распознан.</translation>
+        <translation type="vanished">Ввод из командной строки успешно распознан.</translation>
     </message>
 </context>
 </TS>

@@ -54,7 +54,7 @@
     <name>main</name>
     <message>
         <source>Successfully parsed command line input.</source>
-        <translation>Kommandozeileneingaben erfolgreich geparst.</translation>
+        <translation type="vanished">Kommandozeileneingaben erfolgreich geparst.</translation>
     </message>
 </context>
 </TS>

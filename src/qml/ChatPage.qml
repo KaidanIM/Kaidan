@@ -2,6 +2,7 @@
  *  Kaidan - Cross platform XMPP client
  *
  *  Copyright (C) 2016-2017 LNJ <git@lnj.li>
+ *  Copyright (C) 2017 JBBgameich <jbb.mail@gmx.de>
  *
  *  Kaidan is free software: you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by

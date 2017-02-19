@@ -114,4 +114,18 @@ target_compile_definitions(${PROJECT_NAME} PRIVATE
 # Install Kaidan binary
 #
 
-install(PROGRAMS ${CMAKE_CURRENT_BINARY_DIR}/${EXECUTABLE_OUTPUT_PATH}/${PROJECT_NAME} DESTINATION ${CMAKE_INSTALL_FULL_BINDIR})
+if(UNIX AND NOT APPLE)
+	# install kaidan binary
+	install(PROGRAMS ${CMAKE_CURRENT_BINARY_DIR}/${EXECUTABLE_OUTPUT_PATH}/${PROJECT_NAME}
+		DESTINATION ${CMAKE_INSTALL_FULL_BINDIR}
+	)
+
+	# install icon (scalable + 128x)
+	install(FILES "misc/kaidan.svg"
+		DESTINATION "${CMAKE_INSTALL_FULL_DATADIR}/icons/hicolor/scalable/apps"
+	)
+	install(FILES "misc/kaidan-128x128.png"
+		DESTINATION "${CMAKE_INSTALL_FULL_DATADIR}/icons/hicolor/128x128/apps"
+		RENAME "kaidan.png"
+	)
+endif()

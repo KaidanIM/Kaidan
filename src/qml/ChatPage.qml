@@ -59,18 +59,23 @@ Kirigami.Page {
 				Rectangle {
 					id: avatar
 
-					width: height
-					height: parent.height
+					width: 40
+					height: 40
+					radius: width*0.5
 					color: "grey"
 					visible: !sentByMe
 				}
 
 				Rectangle {
-					width: 80
-					height: 40
+					radius: 2
+					border.width: 1
+					border.color: "#E1DFDF"
+					width: messageText.width + 10
+					height: messageText.height + 10
 					color: sentByMe ? "lightgrey" : "steelblue"
 
 					Kirigami.Label {
+						id: messageText
 						anchors.centerIn: parent
 						text: model.message
 						color: sentByMe ? "black" : "white"

@@ -128,4 +128,9 @@ if(UNIX AND NOT APPLE)
 		DESTINATION "${CMAKE_INSTALL_FULL_DATADIR}/icons/hicolor/128x128/apps"
 		RENAME "kaidan.png"
 	)
+
+	# install desktop file
+	install(FILES "misc/kaidan.desktop"
+		DESTINATION "${CMAKE_INSTALL_FULL_DATADIR}/applications"
+	)
 endif()

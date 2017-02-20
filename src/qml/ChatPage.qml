@@ -102,6 +102,7 @@ Kirigami.Page {
 					Layout.fillWidth: true
 					placeholderText: qsTr("Compose message")
 					wrapMode: Controls.TextArea.Wrap
+					selectByMouse: true
 				}
 
 				Controls.Button {

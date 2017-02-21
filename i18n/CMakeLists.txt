@@ -89,5 +89,3 @@ add_custom_command(
 	MAIN_DEPENDENCY ${I18N_QRC_COPY}
 	DEPENDS ${QM_FILES}
 )
-
-# The copy of the qrc file will be added to the binary via. AUTORCC in the main CMake file.

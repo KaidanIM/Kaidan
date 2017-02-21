@@ -7,6 +7,7 @@ project(kaidan)
 
 # CMake options
 option(I18N "Enable i18n support" FALSE)
+option(SAILFISH_OS "Build with Sailfish OS GUI, needs libs/kaidansf submodule" FALSE)
 
 # application name
 set(APPLICATION_ID "harbour.kaidan")
@@ -37,7 +38,6 @@ set(CMAKE_AUTOMOC ON)
 set(CMAKE_AUTOUIC ON)
 set(CMAKE_AUTORCC ON)
 
-
 # Set output path for executables
 set(EXECUTABLE_OUTPUT_PATH "bin")
 
@@ -56,28 +56,45 @@ find_package(Swiften REQUIRED)
 find_package(Boost ${BOOST_MIN_VERSION} REQUIRED COMPONENTS signals)
 include(GNUInstallDirs)
 
+
 #
-# Translation
+# Load submodules
 #
 
+# Main kaidan sources
+include("${CMAKE_SOURCE_DIR}/src/CMakeLists.txt")
+
+# I18n support
 if(I18N)
 	include("${CMAKE_SOURCE_DIR}/i18n/CMakeLists.txt")
 endif()
+
+# Sailfish OS GUI
+if(SAILFISH_OS)
+	if(EXISTS "${CMAKE_SOURCE_DIR}/libs/kaidansf/CMakeLists.txt")
+		include("${CMAKE_SOURCE_DIR}/libs/kaidansf/CMakeLists.txt")
+	else()
+		message(FATAL_ERROR "Could NOT find KaidanSF adaptions for Sailfish OS.")
+	endif()
+endif()
+
 
 #
 # Sources / Resources
 #
 
+# normal kirigami GUI, if no Sailfish OS build
+if(NOT SAILFISH_OS)
+	set(KAIDAN_QML_QRC kaidan_qml.qrc)
+endif()
+
 add_executable(${PROJECT_NAME}
-	kaidan.qrc
-	${I18N_QRC_CPP} # set in i18n/CMakeLists.txt, if enabled
-	src/main.cpp
-	src/Kaidan.cpp
-	src/RosterController.cpp
-	src/RosterModel.cpp
-	src/MessageController.cpp
-	src/MessageModel.cpp
+	${KAIDAN_SOURCES}
+	${KAIDAN_QML_QRC}
+	${I18N_QRC_CPP}     # only set if enabled
+	${KAIDANSF_SOURCES} #
 )
+
 
 #
 # Linker Flags
@@ -92,9 +109,17 @@ target_link_libraries(${PROJECT_NAME}
 	${SWIFTEN_LIBRARY}
 )
 
+
 #
 # Global C++ variables
 #
+
+if(SAILFISH_OS)
+	set(KAIDAN_COMPILE_DEFINITIONS
+		SAILFISH_OS=True
+		PLATFORM_DISPLAY_NAME="Sailfish OS"
+	)
+endif()
 
 target_compile_definitions(${PROJECT_NAME} PRIVATE
 	APPLICATION_ID="${APPLICATION_ID}"
@@ -107,11 +132,13 @@ target_compile_definitions(${PROJECT_NAME} PRIVATE
 	VERSION_STRING="${VERSION_STRING}"
 
 	BOOST_SIGNALS_NO_DEPRECATION_WARNING=True
+
+	${KAIDAN_COMPILE_DEFINITIONS}
 )
 
 
 #
-# Install Kaidan binary
+# Install Kaidan
 #
 
 if(UNIX AND NOT APPLE)

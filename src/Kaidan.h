@@ -61,6 +61,8 @@ public:
 	RosterController* getRosterController();
 	MessageController* getMessageController();
 
+	Q_INVOKABLE QString getResourcePath(QString);
+
 signals:
 	void rosterControllerChanged();
 	void messageControllerChanged();

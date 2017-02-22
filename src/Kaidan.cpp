@@ -24,8 +24,10 @@
 #include <iostream>
 // Qt
 #include <QDebug>
+#include <QDir>
 #include <QSettings>
 #include <QString>
+#include <QStandardPaths>
 // Boost
 #include <boost/bind.hpp>
 // Swiften
@@ -43,8 +45,8 @@ Kaidan::Kaidan(Swift::NetworkFactories* networkFactories, QObject *parent) : QOb
 	// Restore login data
 	//
 
-	// init settings (-> "KaidanIM/kaidan.conf")
-	settings = new QSettings(QString(ORGANIZAITON_NAME), QString(APPLICATION_NAME));
+	// init settings (-> "kaidan/kaidan.conf")
+	settings = new QSettings(QString(APPLICATION_NAME), QString(APPLICATION_NAME));
 
 	if (settings->value("auth/jid").toString() != "")
 	{
@@ -189,4 +191,28 @@ void Kaidan::setPassword(QString password_)
 
 	// save to settings
 	settings->setValue("auth/password", password_);
+}
+
+QString Kaidan::getResourcePath(QString name_)
+{
+	// get the standard app data locations for current platform
+	QStringList pathList = QStandardPaths::standardLocations(QStandardPaths::AppDataLocation);
+	pathList << QString(DEBUG_SOURCE_PATH) + QString("/data"); // append debug directory
+
+	// search for file in directories
+	for(int i = 0; i < pathList.size(); i++)
+	{
+		// open directory
+		QDir directory(pathList.at(i));
+		// look up the file
+		if (directory.exists(name_))
+		{
+			// found the file, return the path
+			return directory.absoluteFilePath(name_);
+		}
+	}
+
+	// no file found
+	qWarning() << "Could NOT find media file:" << name_;
+	return QString("");
 }

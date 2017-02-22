@@ -36,9 +36,6 @@ set(CMAKE_AUTOMOC ON)
 set(CMAKE_AUTOUIC ON)
 set(CMAKE_AUTORCC ON)
 
-# Set output path for executables
-set(EXECUTABLE_OUTPUT_PATH "bin")
-
 
 #
 # Dependecies
@@ -141,7 +138,7 @@ target_compile_definitions(${PROJECT_NAME} PRIVATE
 
 if(UNIX AND NOT APPLE)
 	# install kaidan binary
-	install(PROGRAMS ${CMAKE_CURRENT_BINARY_DIR}/${EXECUTABLE_OUTPUT_PATH}/${PROJECT_NAME}
+	install(PROGRAMS ${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}
 		DESTINATION ${CMAKE_INSTALL_FULL_BINDIR}
 	)
 

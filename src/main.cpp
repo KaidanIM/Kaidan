@@ -106,8 +106,6 @@ int main(int argc, char *argv[])
 	QGuiApplication::setApplicationName(APPLICATION_NAME);
 	QGuiApplication::setApplicationDisplayName(APPLICATION_DISPLAY_NAME);
 	QGuiApplication::setApplicationVersion(VERSION_STRING);
-	QGuiApplication::setOrganizationName(ORGANIZAITON_NAME);
-	QGuiApplication::setOrganizationDomain(ORGANIZATION_DOMAIN);
 
 	// attributes
 	QGuiApplication::setAttribute(Qt::AA_EnableHighDpiScaling);

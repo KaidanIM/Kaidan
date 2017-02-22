@@ -27,7 +27,7 @@ Kirigami.ScrollablePage {
 	ListView {
 		model: kaidan.rosterController.rosterModel
 
-		delegate: Kirigami.SwipeListItem {
+		delegate: Kirigami.BasicListItem {  //Kirigami.SwipeListItem
 			Kirigami.Label {
 				// use the Name or JID
 				text: model.name ? model.name : model.jid
@@ -42,14 +42,14 @@ Kirigami.ScrollablePage {
 				});
 			}
 
-			actions: [
-				Kirigami.Action {
-					iconName: "bookmark-remove"
-					onTriggered: {
-						//
-					}
-				}
-			]
+			// actions: [
+			// 	Kirigami.Action {
+			// 		iconName: "bookmark-remove"
+			// 		onTriggered: {
+			// 			//
+			// 		}
+			// 	}
+			// ]
 		}
 	}
 }

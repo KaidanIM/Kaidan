@@ -1,13 +1,6 @@
-# if(APPLE AND UNIX) ## OSX
-# 	install(FILES ${TRANSLATION_QM} DESTINATION MultiMC.app/Contents/Resources/translations)
-# else()
-# 	install(FILES ${TRANSLATION_QM} DESTINATION share/${PROJECT_NAME}/i18n)
-# endif()
-
-
+# Kaidan i18n
 
 find_package(Qt5LinguistTools)
-include(GNUInstallDirs)
 
 file(GLOB FILES_TO_TRANSLATE
 	${CMAKE_SOURCE_DIR}/src/*.cpp
@@ -23,15 +16,25 @@ file(GLOB TS_FILES
 #
 
 set(LUPDATE_ARGS -silent)
-add_custom_target(ts_update ALL DEPENDS)
 
+foreach(TS_FILE ${TS_FILES})
+add_custom_command(
+	OUTPUT ${TS_FILE}
+	COMMAND ${Qt5_LUPDATE_EXECUTABLE} ${LUPDATE_ARGS} ${FILES_TO_TRANSLATE} -ts ${TS_FILE}
+	COMMENT "Updating ${TS_FILE}"
+	MAIN_DEPENDENCY ${FILES_TO_TRANSLATE}
+	DEPENDS ${FILES_TO_TRANSLATE}
+	VERBATIM
+)
+endforeach()
+
+# extra target for *only* updating ts files
+add_custom_target(ts_update)
 foreach(TS_FILE ${TS_FILES})
 add_custom_command(
 	TARGET ts_update
 	COMMAND ${Qt5_LUPDATE_EXECUTABLE} ${LUPDATE_ARGS} ${FILES_TO_TRANSLATE} -ts ${TS_FILE}
 	COMMENT "Updating ${TS_FILE}"
-	MAIN_DEPENDENCY ${FILES_TO_TRANSLATE}
-	VERBATIM
 )
 endforeach()
 
@@ -41,8 +44,6 @@ endforeach()
 #
 
 set(LRELEASE_ARGS -compress -nounfinished -removeidentical -silent)
-add_custom_target(translations ALL DEPENDS ts_update)
-
 
 foreach(TS_FILE ${TS_FILES})
 get_filename_component(FILENAME ${TS_FILE} NAME_WE) # only name without extension
@@ -50,14 +51,12 @@ set(QM_FILE "${PROJECT_NAME}_${FILENAME}.qm")       # name for the generated qm 
 set(QM_FILES ${QM_FILES} "${CMAKE_CURRENT_BINARY_DIR}/${QM_FILE}")
 
 add_custom_command(
-	TARGET translations
+	OUTPUT ${QM_FILE}
 	COMMAND ${Qt5_LRELEASE_EXECUTABLE} ${LRELEASE_ARGS} ${TS_FILE} -qm ${CMAKE_CURRENT_BINARY_DIR}/${QM_FILE}
 	COMMENT "Generating binary translation file ${QM_FILE}"
-	MAIN_DEPENDENCY ${TS_FILE}
+	DEPENDS ${TS_FILE}
 	VERBATIM
 )
-
-#install(FILES ${CMAKE_CURRENT_BINARY_DIR}/${QM_FILE} DESTINATION ${CMAKE_INSTALL_FULL_DATADIR}/${PROJECT_NAME}/i18n)
 endforeach()
 
 
@@ -66,10 +65,10 @@ endforeach()
 # Add all translations to the binary via. rcc / qrc file
 #
 
-set(I18N_QRC_NAME kaidan_i18n)
-set(I18N_QRC_INPUT ${CMAKE_CURRENT_SOURCE_DIR}/${I18N_QRC_NAME}.qrc)
-set(I18N_QRC_COPY ${CMAKE_CURRENT_BINARY_DIR}/${I18N_QRC_NAME}.qrc)
-set(I18N_QRC_CPP ${CMAKE_CURRENT_BINARY_DIR}/qrc_${I18N_QRC_NAME}.cpp)
+set(I18N_QRC_NAME 0_i18n)
+set(I18N_QRC_INPUT ${CMAKE_CURRENT_LIST_DIR}/${I18N_QRC_NAME}.qrc)
+set(I18N_QRC_COPY ${CMAKE_CURRENT_BINARY_DIR}/kaidan_i18n.qrc)
+set(I18N_QRC_CPP ${CMAKE_CURRENT_BINARY_DIR}/qrc_kaidan_i18n.cpp)
 
 # Copy the QRC file to the output directory, because the files listed in the
 # qrc file are relative to that directory.
@@ -85,7 +84,11 @@ add_custom_command(
 add_custom_command(
 	OUTPUT ${I18N_QRC_CPP}
 	COMMAND ${Qt5Core_RCC_EXECUTABLE} ${RCC_OPTIONS} -name ${I18N_QRC_NAME} -o ${I18N_QRC_CPP} ${I18N_QRC_COPY}
-	COMMENT "Generating qrc source qrc_${I18N_QRC_NAME}.cpp"
+	COMMENT "Generating qrc source qrc_kaidan_i18n.cpp"
 	MAIN_DEPENDENCY ${I18N_QRC_COPY}
 	DEPENDS ${QM_FILES}
 )
+
+
+# Translatiopns target
+add_custom_target(translations ALL DEPENDS ${TS_FILES} ${QM_FILES})

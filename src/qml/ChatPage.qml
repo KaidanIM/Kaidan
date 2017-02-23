@@ -24,6 +24,8 @@ import QtQuick.Layouts 1.3
 import org.kde.kirigami 1.0 as Kirigami
 
 Kirigami.Page {
+	id: root
+
 	property string chatName
 	property string recipientJid
 
@@ -63,23 +65,35 @@ Kirigami.Page {
 					width: 40
 					height: 40
 					radius: width * 0.5
+
 					color: "grey"
 					visible: !sentByMe
 				}
 
 				Rectangle {
+					width: messageText.width + 12
+					height: messageText.height + 6
+
 					radius: 2
 					border.width: 1
 					border.color: "#E1DFDF"
-					width: messageText.width + 10
-					height: messageText.height + 2
+
 					color: sentByMe ? "lightgrey" : "steelblue"
 
 					Kirigami.Label {
 						id: messageText
+
 						anchors.centerIn: parent
+
 						text: model.message
+						wrapMode: Text.Wrap
 						color: sentByMe ? "black" : "white"
+					}
+
+					Component.onCompleted: {
+						if (messageText.paintedWidth > 190) {
+							messageText.width = 190
+						}
 					}
 				}
 			}

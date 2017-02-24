@@ -35,7 +35,7 @@ RosterController::RosterController(QObject *parent) : QObject(parent)
 
 RosterController::~RosterController()
 {
-
+	delete rosterModel;
 }
 
 RosterModel* RosterController::getRosterModel()

@@ -45,7 +45,7 @@ MessageController::MessageController(Swift::Client* client_, QObject *parent) : 
 
 MessageController::~MessageController()
 {
-
+	delete messageModel;
 }
 
 MessageModel* MessageController::getMessageModel()

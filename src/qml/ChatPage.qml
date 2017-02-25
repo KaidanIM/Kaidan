@@ -38,7 +38,7 @@ Kirigami.Page {
 	
 	Image {
 		id: bgimage
-		source: "file://" + kaidan.getResourcePath("images/chat.png")
+		source: kaidan.getResourcePath("images/chat.png")
 		anchors.fill: parent
 		fillMode: Image.Tile
 		horizontalAlignment: Image.AlignLeft

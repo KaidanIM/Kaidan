@@ -49,6 +49,11 @@ Kirigami.ApplicationWindow {
 					// open login page
 					pageStack.push(loginPage);
 				}
+			},
+			Kirigami.Action {
+				text: "About"
+				iconName: "help-about"
+				onTriggered: pageStack.push(aboutPage)
 			}
 		]
 	}
@@ -57,6 +62,7 @@ Kirigami.ApplicationWindow {
 	Component {id: chatPage; ChatPage {}}
 	Component {id: loginPage; LoginPage {}}
 	Component {id: rosterPage; RosterPage {}}
+	Component {id: aboutPage; AboutPage {}}
 
 	// when the window was closed, disconnect from jabber server
 	onClosing: {

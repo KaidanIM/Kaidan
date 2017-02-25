@@ -1,5 +1,5 @@
 ################### Kaidan ####################
-bin/kaidan
+kaidan
 kaidan_automoc.cpp
 
 ###################### C++ ####################
@@ -118,6 +118,7 @@ CMakeLists.txt.user*
 CMakeCache.txt
 CMakeFiles
 cmake_install.cmake
+install_manifest.txt
 
 ################# Other #######################
 

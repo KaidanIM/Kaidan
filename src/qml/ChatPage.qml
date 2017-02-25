@@ -31,6 +31,20 @@ Kirigami.Page {
 
 	title: chatName
 
+	leftPadding: 0
+	rightPadding: 0
+	bottomPadding: 0
+	topPadding: 0
+
+	Image {
+		id: bgimage
+		source: kaidan.getResourcePath("images/chat.png")
+		anchors.fill: parent
+		fillMode: Image.Tile
+		horizontalAlignment: Image.AlignLeft
+		verticalAlignment: Image.AlignTop
+	}
+
 	ColumnLayout {
 		anchors.fill: parent
 

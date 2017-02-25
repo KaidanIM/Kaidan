@@ -22,13 +22,17 @@ along with Kaidan.  If not, see <http://www.gnu.org/licenses/>.
 
 License of Kaidan media (images, sounds):
 -----------------------------------------
-Creative Commons Attribution-ShareAlike 4.0 International (CC BY-SA 4.0)
+Creative Commons Attribution-ShareAlike 4.0 International (CC BY-SA 4.0):
 http://creativecommons.org/licenses/by-sa/4.0/
+Creative Commons Attribution-ShareAlike 3.0 Unported (CC BY-SA 3.0):
+http://creativecommons.org/licenses/by-sa/3.0/
 
 Copyright (C) 2016-2017 Ilya Bizyaev <bizyaev.game@yandex.ru> (CC BY-SA 4.0):
   misc/kaidan.svg
   misc/kaidan-128x128.png
 
+Copyright (C) 2013 Subtle Patterns, Toptal Designers (CC BY-SA 3.0):
+  data/images/chat.png (source: https://www.toptal.com/designers/subtlepatterns/inspiration-geometry/)
+
 License of all media files not listed in here:
 Copyright (C) 2017 Kaidan developers (CC BY-SA 4.0)
-

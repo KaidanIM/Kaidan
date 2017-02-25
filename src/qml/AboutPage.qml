@@ -30,7 +30,7 @@ Kirigami.ScrollablePage {
 		width: parent.width
 
 		Image {
-			source: kaidan.getResourcePath("../icons/hicolor/scalable/apps/kaidan.svg")
+			source: kaidan.getResourcePath("images/kaidan.svg")
 			height: aboutPage.width / 2.5
 			width: aboutPage.width / 2.5
 			fillMode: Image.PreserveAspectFit

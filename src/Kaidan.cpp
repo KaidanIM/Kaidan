@@ -221,4 +221,3 @@ QString Kaidan::getVersionString()
 {
 		return QString(VERSION_STRING);
 }
-

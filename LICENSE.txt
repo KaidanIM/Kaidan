@@ -22,8 +22,10 @@ along with Kaidan.  If not, see <http://www.gnu.org/licenses/>.
 
 License of Kaidan media (images, sounds):
 -----------------------------------------
-Creative Commons Attribution-ShareAlike 4.0 International (CC BY-SA 4.0)
+Creative Commons Attribution-ShareAlike 4.0 International (CC BY-SA 4.0):
 http://creativecommons.org/licenses/by-sa/4.0/
+Creative Commons Attribution-ShareAlike 3.0 Unported (CC BY-SA 3.0):
+http://creativecommons.org/licenses/by-sa/3.0/
 
 Copyright (C) 2016-2017 Ilya Bizyaev <bizyaev.game@yandex.ru> (CC BY-SA 4.0):
   misc/kaidan.svg

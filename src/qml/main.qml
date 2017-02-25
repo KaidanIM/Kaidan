@@ -38,7 +38,7 @@ Kirigami.ApplicationWindow {
 
 		actions: [
 			Kirigami.Action {
-				text: "Logout"
+				text: qsTr("Logout")
 				iconName: "system-shutdown"
 				onTriggered: {
 					kaidan.mainDisconnect();

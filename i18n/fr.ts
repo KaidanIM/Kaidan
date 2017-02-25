@@ -50,4 +50,11 @@
         <translation type="unfinished"></translation>
     </message>
 </context>
+<context>
+    <name>main</name>
+    <message>
+        <source>Logout</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
 </TS>

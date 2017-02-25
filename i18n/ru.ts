@@ -56,5 +56,9 @@
         <source>Successfully parsed command line input.</source>
         <translation type="vanished">Ввод из командной строки успешно распознан.</translation>
     </message>
+    <message>
+        <source>Logout</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 </TS>

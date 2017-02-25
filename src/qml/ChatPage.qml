@@ -30,12 +30,12 @@ Kirigami.Page {
 	property string recipientJid
 
 	title: chatName
-	
+
 	leftPadding: 0
 	rightPadding: 0
 	bottomPadding: 0
 	topPadding: 0
-	
+
 	Image {
 		id: bgimage
 		source: kaidan.getResourcePath("images/chat.png")

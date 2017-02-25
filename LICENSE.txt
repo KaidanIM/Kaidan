@@ -28,7 +28,7 @@ http://creativecommons.org/licenses/by-sa/4.0/
 Copyright (C) 2016-2017 Ilya Bizyaev <bizyaev.game@yandex.ru> (CC BY-SA 4.0):
   misc/kaidan.svg
   misc/kaidan-128x128.png
-  
+
 Copyright (C) Toptal Designers (CC BY-SA 3.0):
   data/images/chat.png
 

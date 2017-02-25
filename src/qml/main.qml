@@ -44,6 +44,7 @@ Kirigami.ApplicationWindow {
 					kaidan.mainDisconnect();
 
 					// close all pages
+					pageStack.pop(undefined); // BUG: This is not popping all pages
 					pageStack.pop(undefined);
 					// open login page
 					pageStack.push(loginPage);

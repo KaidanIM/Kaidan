@@ -51,7 +51,7 @@ Kirigami.ApplicationWindow {
 				}
 			},
 			Kirigami.Action {
-				text: "About"
+				text: qsTr("About")
 				iconName: "help-about"
 				onTriggered: pageStack.push(aboutPage)
 			}

@@ -29,9 +29,8 @@ Copyright (C) 2016-2017 Ilya Bizyaev <bizyaev.game@yandex.ru> (CC BY-SA 4.0):
   misc/kaidan.svg
   misc/kaidan-128x128.png
 
-Copyright (C) Toptal Designers (CC BY-SA 3.0):
-  data/images/chat.png
+Copyright (C) 2013 Subtle Patterns, Toptal Designers (CC BY-SA 3.0):
+  data/images/chat.png (source: https://www.toptal.com/designers/subtlepatterns/inspiration-geometry/)
 
 License of all media files not listed in here:
 Copyright (C) 2017 Kaidan developers (CC BY-SA 4.0)
-

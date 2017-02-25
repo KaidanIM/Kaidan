@@ -58,7 +58,7 @@
     </message>
     <message>
         <source>Logout</source>
-        <translation type="unfinished"></translation>
+        <translation>Abmelden</translation>
     </message>
 </context>
 </TS>

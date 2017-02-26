@@ -31,7 +31,7 @@ Kirigami.ScrollablePage {
 
 		Image {
 			source: kaidan.getResourcePath("images/kaidan.svg")
-			width: aboutPage.width * 0.3
+			height: aboutPage.height * 0.5
 			fillMode: Image.PreserveAspectFit
 			anchors.horizontalCenter: parent.horizontalCenter
 		}

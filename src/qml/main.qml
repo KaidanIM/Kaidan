@@ -19,7 +19,7 @@
  */
 
 import QtQuick 2.0
-import org.kde.kirigami 1.0 as Kirigami
+import org.kde.kirigami 2.0 as Kirigami
 
 Kirigami.ApplicationWindow {
 	id: root
@@ -34,7 +34,7 @@ Kirigami.ApplicationWindow {
 
 		// make drawer floating (overlay)
 		modal: true
-		opened: false //drawerOpen: false  // Kirigami2
+		drawerOpen: false
 
 		actions: [
 			Kirigami.Action {

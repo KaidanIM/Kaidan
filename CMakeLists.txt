@@ -18,8 +18,8 @@ set(APPLICATION_DESCRIPTION "Cross platform XMPP client")
 
 # Version
 set(VERSION_MAJOR 0)
-set(VERSION_MINOR 0)
-set(VERSION_PATCH 1)
+set(VERSION_MINOR 1)
+set(VERSION_PATCH 0)
 set(VERSION_EXTRA "" CACHE STRING "Stuff to append to version string")
 
 set(VERSION_STRING "${VERSION_MAJOR}.${VERSION_MINOR}.${VERSION_PATCH}")

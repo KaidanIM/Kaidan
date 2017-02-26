@@ -219,5 +219,5 @@ QString Kaidan::getResourcePath(QString name_)
 
 QString Kaidan::getVersionString()
 {
-		return QString(VERSION_STRING);
+	return QString(VERSION_STRING);
 }

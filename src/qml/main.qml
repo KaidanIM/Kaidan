@@ -53,7 +53,12 @@ Kirigami.ApplicationWindow {
 			Kirigami.Action {
 				text: qsTr("About")
 				iconName: "help-about"
-				onTriggered: pageStack.push(aboutPage)
+				onTriggered: {
+					// prevent opening the about page multiple times
+					pageStack.pop(rosterPage);
+					// open login page
+					pageStack.push(aboutPage)
+				}
 			}
 		]
 	}

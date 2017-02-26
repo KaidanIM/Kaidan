@@ -19,7 +19,7 @@
 
 import QtQuick 2.1
 import QtQuick.Layouts 1.2
-import QtQuick.Controls 2.0
+import QtQuick.Controls 2.0 Controls
 import org.kde.kirigami 1.0 as Kirigami
 
 Kirigami.ScrollablePage {
@@ -31,7 +31,6 @@ Kirigami.ScrollablePage {
 
 		Image {
 			source: kaidan.getResourcePath("images/kaidan.svg")
-			height: aboutPage.width / 2.5
 			width: aboutPage.width / 2.5
 			fillMode: Image.PreserveAspectFit
 			anchors.horizontalCenter: parent.horizontalCenter
@@ -49,25 +48,25 @@ Kirigami.ScrollablePage {
 		}
 
 		Kirigami.Label {
-			text: qsTr("License: GPLv3+ / CC BY-SA 4.0")
+			text: qsTr("License:") + "GPLv3+ / CC BY-SA 4.0"
 			anchors.horizontalCenter: parent.horizontalCenter
 		}
 
 		Kirigami.Label {
-			text: qsTr("Copyright (C) 2016-2017 Kaidan developers and contributors")
+			text: "Copyright (C) 2016-2017 Kaidan developers and contributors"
 			anchors.horizontalCenter: parent.horizontalCenter
 		}
 
-		ToolButton {
+		Controls.ToolButton {
 			text: qsTr("Sourcecode on Github")
 			onClicked: Qt.openUrlExternally("https://github.com/KaidanIM/Kaidan")
 			anchors.horizontalCenter: parent.horizontalCenter
 		}
 
-		Button {
+		Controls.Button {
 			id: close
 			anchors.horizontalCenter: parent.horizontalCenter
-			text: qsTr("close")
+			text: qsTr("Close")
 			onClicked: pageStack.pop()
 		}
 	}

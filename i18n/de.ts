@@ -5,23 +5,23 @@
     <name>AboutPage</name>
     <message>
         <source>About</source>
-        <translation type="unfinished"></translation>
+        <translation>Über</translation>
     </message>
     <message>
         <source>A simple, user-friendly Jabber/XMPP client</source>
-        <translation type="unfinished"></translation>
+        <translation>Ein einfacher, benutzerfreundlicher Jabber/XMPP client</translation>
     </message>
     <message>
         <source>License:</source>
-        <translation type="unfinished"></translation>
+        <translation>Lizenz:</translation>
     </message>
     <message>
         <source>Sourcecode on Github</source>
-        <translation type="unfinished"></translation>
+        <translation>Quellcode auf GitHub</translation>
     </message>
     <message>
         <source>Close</source>
-        <translation type="unfinished"></translation>
+        <translation>Schließen</translation>
     </message>
 </context>
 <context>

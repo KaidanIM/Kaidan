@@ -216,3 +216,8 @@ QString Kaidan::getResourcePath(QString name_)
 	qWarning() << "Could NOT find media file:" << name_;
 	return QString("");
 }
+
+QString Kaidan::getVersionString()
+{
+	return QString(VERSION_STRING);
+}

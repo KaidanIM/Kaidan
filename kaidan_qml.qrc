@@ -4,5 +4,6 @@
 		<file alias="qml/RosterPage.qml">src/qml/RosterPage.qml</file>
 		<file alias="qml/LoginPage.qml">src/qml/LoginPage.qml</file>
 		<file alias="qml/ChatPage.qml">src/qml/ChatPage.qml</file>
+		<file alias="qml/AboutPage.qml">src/qml/AboutPage.qml</file>
 	</qresource>
 </RCC>

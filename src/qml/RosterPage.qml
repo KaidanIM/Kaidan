@@ -27,7 +27,7 @@ Kirigami.ScrollablePage {
 	ListView {
 		model: kaidan.rosterController.rosterModel
 
-		delegate: Kirigami.BasicListItem {  //Kirigami.SwipeListItem
+		delegate: Kirigami.AbstractListItem {  //Kirigami.SwipeListItem
 			Kirigami.Label {
 				// use the Name or JID
 				text: model.name ? model.name : model.jid

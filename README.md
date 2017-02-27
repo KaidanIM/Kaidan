@@ -1,4 +1,4 @@
-# Kaidan - Cross platform XMPP client
+# Kaidan - A user-friendly XMPP client for every device!
 
 [![Release](https://img.shields.io/github/release/kaidanim/kaidan.svg)](https://github.com/kaidanim/kaidan/releases)
 [![Downloads](https://img.shields.io/github/downloads/kaidanim/kaidan/total.svg)](https://github.com/kaidanim/kaidan/releases)

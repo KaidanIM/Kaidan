@@ -27,8 +27,11 @@ Kirigami.ScrollablePage {
 	ListView {
 		model: kaidan.rosterController.rosterModel
 
-		delegate: Kirigami.AbstractListItem {  //Kirigami.SwipeListItem
+		delegate: Kirigami.SwipeListItem {
+			height: contactText.height + 16
+
 			Kirigami.Label {
+				id: contactText
 				// use the Name or JID
 				text: model.name ? model.name : model.jid
 			}
@@ -42,14 +45,14 @@ Kirigami.ScrollablePage {
 				});
 			}
 
-			// actions: [
-			// 	Kirigami.Action {
-			// 		iconName: "bookmark-remove"
-			// 		onTriggered: {
-			// 			//
-			// 		}
-			// 	}
-			// ]
+			actions: [
+			 	Kirigami.Action {
+			 		iconName: "bookmark-remove"
+			 		onTriggered: {
+                        
+					}
+				}
+			]
 		}
 	}
 }

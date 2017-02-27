@@ -50,6 +50,10 @@ You can now run Kaidan:
 
  * `./kaidan`
 
+If you like it, install it by:
+
+ * `sudo make install`
+
 ----
 
 ![GPLv3](https://www.gnu.org/graphics/gplv3-127x51.png)

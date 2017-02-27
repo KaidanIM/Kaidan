@@ -49,7 +49,6 @@ Kirigami.ScrollablePage {
 			 	Kirigami.Action {
 			 		iconName: "bookmark-remove"
 			 		onTriggered: {
-                        
 					}
 				}
 			]

@@ -20,13 +20,11 @@ set(APPLICATION_DESCRIPTION "Cross platform XMPP client")
 set(VERSION_MAJOR 0)
 set(VERSION_MINOR 2)
 set(VERSION_PATCH 0)
-set(VERSION_EXTRA "dev" CACHE STRING "Stuff to append to version string")
-
+set(VERSION_EXTRA "dev")
 set(VERSION_STRING "${VERSION_MAJOR}.${VERSION_MINOR}.${VERSION_PATCH}")
 if(VERSION_EXTRA)
 	set(VERSION_STRING ${VERSION_STRING}-${VERSION_EXTRA})
 endif()
-
 
 # Find includes in corresponding build directories
 set(CMAKE_INCLUDE_CURRENT_DIR ON)

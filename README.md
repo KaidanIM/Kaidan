@@ -49,3 +49,8 @@ Finally compile it
 You can now run Kaidan:
 
  * `./kaidan`
+
+----
+
+![GPLv3](https://www.gnu.org/graphics/gplv3-127x51.png)
+![CC BY-SA 4.0](https://i.creativecommons.org/l/by-sa/4.0/88x31.png)

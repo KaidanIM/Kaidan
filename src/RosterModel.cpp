@@ -78,3 +78,40 @@ QVariant RosterModel::data(const QModelIndex &index, int role) const
 	}
 	return value;
 }
+
+void RosterModel::clearData()
+{
+	// remove all rows / contacts from the model
+	for (int i = 0; i < rowCount(); ++i)
+	{
+		removeRow(i);
+	}
+}
+
+void RosterModel::insertContact(QString jid_, QString name_)
+{
+	// create a new record
+	QSqlRecord newRecord = record();
+
+	// set the given data
+	newRecord.setValue("jid", jid_);
+	newRecord.setValue("name", name_);
+
+	// inster the record into the DB (or print error)
+	if (!insertRecord(rowCount(), newRecord)) {
+		qWarning() << "Failed to save Contact into DB:"
+			<< lastError().text();
+	}
+}
+
+void RosterModel::removeContactByJid(QString jid_)
+{
+	QSqlQuery newQuery;
+	newQuery.exec(QString("DELETE FROM 'Roster' WHERE jid = '%1'").arg(jid_));
+}
+
+void RosterModel::updateContactName(QString jid_, QString name_)
+{
+	QSqlQuery newQuery;
+	newQuery.exec(QString("UPDATE 'Roster' SET name = '%1' WHERE jid = '%2'").arg(name_, jid_));
+}

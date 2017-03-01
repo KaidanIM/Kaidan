@@ -36,6 +36,11 @@ public:
 	QHash<int, QByteArray> roleNames() const;
 	QVariant data(const QModelIndex &index, int role) const;
 
+	void clearData();
+	void insertContact(QString, QString);
+	void removeContactByJid(QString);
+	void updateContactName(QString, QString);
+
 private:
 	Swift::Client* client;
 };

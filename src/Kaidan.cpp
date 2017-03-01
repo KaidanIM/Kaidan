@@ -42,23 +42,28 @@ Kaidan::Kaidan(Swift::NetworkFactories* networkFactories, QObject *parent) : QOb
 	rosterController = new RosterController();
 
 	//
-	// Restore login data
+	// Load settings data
 	//
 
 	// init settings (-> "kaidan/kaidan.conf")
 	settings = new QSettings(QString(APPLICATION_NAME), QString(APPLICATION_NAME));
 
-	if (settings->value("auth/jid").toString() != "")
-	{
-		// get JID from settings
-		jid = settings->value("auth/jid").toString();
+	// get JID from settings
+	jid = settings->value("auth/jid").toString();
+	// get JID resource from settings
+	jidResource = settings->value("auth/resource").toString();
+	// get password from settings
+	password = settings->value("auth/password").toString();
 
-		if (settings->value("auth/password").toString() != "")
-		{
-			// get password from settings
-			password = settings->value("auth/password").toString();
-		}
+	// use Kaidan as resource, if no set
+	if (jidResource == "")
+	{
+		jidResource = QString(APPLICATION_NAME);
+		settings->setValue("auth/resource", jidResource);
 	}
+
+	// create/update the full jid
+	updateFullJid();
 }
 
 Kaidan::~Kaidan()
@@ -80,7 +85,7 @@ Kaidan::~Kaidan()
 void Kaidan::mainConnect()
 {
 	// Create a new XMPP client
-	client = new Swift::Client(jid.toStdString(), password.toStdString(), netFactories);
+	client = new Swift::Client(fullJid.toStdString(), password.toStdString(), netFactories);
 
 	// trust all certificates
 	client->setAlwaysTrustCertificates();
@@ -108,7 +113,7 @@ void Kaidan::mainConnect()
 // we don't want to close client without disconnection
 void Kaidan::mainDisconnect()
 {
-	if (connectionState())
+	if (getConnectionState())
 	{
 		client->disconnect();
 	}
@@ -144,53 +149,29 @@ void Kaidan::handlePresenceReceived(Swift::Presence::ref presence)
 	}
 }
 
-RosterController* Kaidan::getRosterController()
+void Kaidan::updateFullJid()
 {
-	return rosterController;
-}
-
-MessageController* Kaidan::getMessageController()
-{
-	return messageController;
-}
-
-bool Kaidan::connectionState() const
-{
-	return connected;
-}
-
-bool Kaidan::newLoginNeeded()
-{
-	// if no jid or password, return true
-	return (jid == "") || (password == "");
-}
-
-QString Kaidan::getJid()
-{
-	return jid;
-}
-
-QString Kaidan::getPassword()
-{
-	return password;
+	fullJid = jid + QString("/") + jidResource;
 }
 
 void Kaidan::setJid(QString jid_)
 {
-	// set new jid for mainConnect
-	jid = jid_;
+	jid = jid_; // set new jid for mainConnect
+	settings->setValue("auth/jid", jid_); // save to settings
+	updateFullJid();
+}
 
-	// save to settings
-	settings->setValue("auth/jid", jid_);
+void Kaidan::setJidResource(QString jidResource_)
+{
+	jidResource = jidResource_;
+	settings->setValue("auth/resource", jidResource); // save jid resource
+	updateFullJid(); // update the full jid (the resource part has changed)
 }
 
 void Kaidan::setPassword(QString password_)
 {
-	// set new password for
-	password = password_;
-
-	// save to settings
-	settings->setValue("auth/password", password_);
+	password = password_; // set new password for
+	settings->setValue("auth/password", password_); // save to settings
 }
 
 QString Kaidan::getResourcePath(QString name_)
@@ -217,7 +198,14 @@ QString Kaidan::getResourcePath(QString name_)
 	return QString("");
 }
 
-QString Kaidan::getVersionString()
-{
-	return QString(VERSION_STRING);
-}
+// if no jid or password, return true
+bool Kaidan::newLoginNeeded() {return (jid == "") || (password == "");}
+
+RosterController* Kaidan::getRosterController() {return rosterController;}
+MessageController* Kaidan::getMessageController() {return messageController;}
+bool Kaidan::getConnectionState() const {return connected;}
+QString Kaidan::getVersionString() {return QString(VERSION_STRING);}
+
+QString Kaidan::getJid() {return jid;}
+QString Kaidan::getJidResource() {return jidResource;}
+QString Kaidan::getPassword() {return password;}

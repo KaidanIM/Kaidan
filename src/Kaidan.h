@@ -39,8 +39,9 @@ class Kaidan : public QObject
 
 	Q_PROPERTY(RosterController* rosterController READ getRosterController NOTIFY rosterControllerChanged)
 	Q_PROPERTY(MessageController* messageController READ getMessageController NOTIFY messageControllerChanged)
-	Q_PROPERTY(bool connectionState READ connectionState NOTIFY connectionStateConnected NOTIFY connectionStateDisconnected)
+	Q_PROPERTY(bool connectionState READ getConnectionState NOTIFY connectionStateConnected NOTIFY connectionStateDisconnected)
 	Q_PROPERTY(QString jid READ getJid WRITE setJid NOTIFY jidChanged)
+	Q_PROPERTY(QString jidResource READ getJidResource WRITE setJidResource NOTIFY jidResourceChanged)
 	Q_PROPERTY(QString password READ getPassword WRITE setPassword NOTIFY passwordChanged)
 
 public:
@@ -50,19 +51,20 @@ public:
 	Q_INVOKABLE void mainDisconnect();
 	Q_INVOKABLE void mainConnect();
 
-	bool connectionState() const;
+	bool getConnectionState() const;
 	Q_INVOKABLE bool newLoginNeeded();
 
 	QString getJid();
+	QString getJidResource();
 	QString getPassword();
 	void setJid(QString);
+	void setJidResource(QString);
 	void setPassword(QString);
 
 	RosterController* getRosterController();
 	MessageController* getMessageController();
 
 	Q_INVOKABLE QString getResourcePath(QString);
-    
 	Q_INVOKABLE QString getVersionString();
 
 signals:
@@ -71,12 +73,15 @@ signals:
 	void connectionStateConnected();
 	void connectionStateDisconnected();
 	void jidChanged();
+	void jidResourceChanged();
 	void passwordChanged();
 
 private:
 	void handlePresenceReceived(Swift::Presence::ref presence);
 	void handleConnected();
 	void handleDisconnected();
+	void updateFullJid();
+
 	bool connected;
 
 	Swift::Client* client;
@@ -90,6 +95,8 @@ private:
 	QSettings* settings;
 
 	QString jid;
+	QString jidResource;
+	QString fullJid;
 	QString password;
 };
 

@@ -106,6 +106,9 @@ void Kaidan::mainConnect()
 	// create message controller
 	messageController = new MessageController(client);
 
+	// set client in roster controller
+	rosterController->setClient(client);
+
 	// .. and connect!
 	client->connect();
 }
@@ -127,7 +130,7 @@ void Kaidan::handleConnected()
 	client->sendPresence(Swift::Presence::create("Send me a message"));
 
 	// Request the roster
-	rosterController->requestRosterFromClient(client);
+	rosterController->requestRosterFromClient();
 	emit rosterControllerChanged();
 }
 

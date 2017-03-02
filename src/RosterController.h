@@ -38,7 +38,9 @@ class RosterController : public QObject
 public:
 	RosterController(QObject *parent = 0);
 	~RosterController();
-	void requestRosterFromClient(Swift::Client *client);
+
+	void setClient(Swift::Client *client_);
+	void requestRosterFromClient();
 	RosterModel* getRosterModel();
 
 signals:
@@ -46,7 +48,13 @@ signals:
 
 private:
 	void handleRosterReceived(Swift::ErrorPayload::ref error);
+	void handleInitialRosterPopulated();
+	void handleJidAdded(const Swift::JID &jid_);
+	void handleJidRemoved(const Swift::JID &jid_);
+	void handleJidUpdated(const Swift::JID &jid_, const std::string &name_, const std::vector<std::string>&);
+	void handleRosterCleared();
 	Swift::Client* client;
+	Swift::XMPPRoster* xmppRoster;
 	RosterModel* rosterModel;
 };
 

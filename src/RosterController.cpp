@@ -20,6 +20,8 @@
 
 #include "RosterController.h"
 
+#include <string.h>
+
 #include <QQmlContext>
 #include <QDebug>
 #include <QSqlError>
@@ -38,15 +40,20 @@ RosterController::~RosterController()
 	delete rosterModel;
 }
 
+void RosterController::setClient(Swift::Client *client_)
+{
+	client = client_;
+	xmppRoster = client->getRoster();
+	xmppRoster->onInitialRosterPopulated.connect(boost::bind(&RosterController::handleInitialRosterPopulated, this));
+}
+
 RosterModel* RosterController::getRosterModel()
 {
 	return rosterModel;
 }
 
-void RosterController::requestRosterFromClient(Swift::Client *client_)
+void RosterController::requestRosterFromClient()
 {
-	client = client_;
-
 	client->requestRoster();
 
 	Swift::GetRosterRequest::ref rosterRequest = Swift::GetRosterRequest::create(client->getIQRouter());
@@ -62,44 +69,76 @@ void RosterController::handleRosterReceived(Swift::ErrorPayload::ref error_)
 	}
 	else
 	{
-		// we know we've received the roster, so we get it from the client
-		Swift::XMPPRoster* roster = client->getRoster();
+		// remove all rows / contacts from the model (we've got new ones)
+		rosterModel->clearData();
 
 		// create a vector containing all roster items
-		std::vector<Swift::XMPPRosterItem> rosterItems = roster->getItems();
+		std::vector<Swift::XMPPRosterItem> rosterItems = xmppRoster->getItems();
 		// create a fitting iterator
 		std::vector<Swift::XMPPRosterItem>::iterator it;
-
-
-		// remove all rows / contacts (we've got new ones)
-		for (int i = 0; i < rosterModel->rowCount(); ++i)
-		{
-			rosterModel->removeRow(i);
-		}
-
 
 		// add all contacts from the received roster
 		for(it = rosterItems.begin(); it < rosterItems.end(); it++)
 		{
-			// create a new record
-			QSqlRecord newRecord = rosterModel->record();
-
-			// set the data from the received Roster
-			newRecord.setValue("jid", QString::fromStdString((*it).getJID().toString()));
-			newRecord.setValue("name", QString::fromStdString((*it).getName()));
-
-			// inster the record into the DB (or print error)
-			if (!rosterModel->insertRecord(rosterModel->rowCount(), newRecord)) {
-				qWarning() << "Failed to save RosterContact into DB:"
-					<< rosterModel->lastError().text();
-				return;
-			}
+			rosterModel->insertContact(
+				QString::fromStdString((*it).getJID().toBare().toString()),
+				QString::fromStdString((*it).getName())
+			);
 		}
 
 		// submit all new changes
 		rosterModel->submitAll();
-
 		// send signal for updating the GUI
 		emit rosterModelChanged();
 	}
+}
+
+void RosterController::handleInitialRosterPopulated()
+{
+	// all contacts from the roster were added to the db (handleRosterReceived was already called)
+	// for all later changes we connect these bindings:
+	xmppRoster->onJIDAdded.connect(boost::bind(&RosterController::handleJidAdded, this, _1));
+	xmppRoster->onJIDRemoved.connect(boost::bind(&RosterController::handleJidRemoved, this, _1));
+	xmppRoster->onJIDUpdated.connect(boost::bind(&RosterController::handleJidUpdated, this, _1, _2, _3));
+	xmppRoster->onRosterCleared.connect(boost::bind(&RosterController::handleRosterCleared, this));
+}
+
+void RosterController::handleJidAdded(const Swift::JID &jid_)
+{
+	rosterModel->insertContact(
+		QString::fromStdString(jid_.toBare().toString()),
+		QString::fromStdString(xmppRoster->getNameForJID(jid_))
+	);
+
+	rosterModel->submitAll();
+
+	emit rosterModelChanged();
+}
+
+void RosterController::handleJidRemoved(const Swift::JID &jid_)
+{
+	rosterModel->removeContactByJid(
+		QString::fromStdString(jid_.toBare().toString())
+	);
+
+	emit rosterModelChanged();
+}
+
+void RosterController::handleJidUpdated(const Swift::JID &jid_, const std::string &name_,
+	const std::vector<std::string>&)
+{
+	rosterModel->updateContactName(
+		QString::fromStdString(jid_.toBare().toString()),
+		QString::fromStdString(name_)
+	);
+
+	emit rosterModelChanged();
+}
+
+void RosterController::handleRosterCleared()
+{
+	// remove all contacts
+	rosterModel->clearData();
+
+	emit rosterModelChanged();
 }

@@ -28,10 +28,9 @@ Kirigami.ScrollablePage {
 		model: kaidan.rosterController.rosterModel
 
 		delegate: Kirigami.SwipeListItem {
-			height: contactText.height + 16
+			height: 50
 
 			Kirigami.Label {
-				id: contactText
 				// use the Name or JID
 				text: model.name ? model.name : model.jid
 			}

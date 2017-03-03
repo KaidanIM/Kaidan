@@ -33,6 +33,7 @@
 #include "RosterController.h"
 #include "MessageController.h"
 #include "PresenceController.h"
+#include "VCardController.h"
 
 class Kaidan : public QObject
 {
@@ -40,6 +41,7 @@ class Kaidan : public QObject
 
 	Q_PROPERTY(RosterController* rosterController READ getRosterController NOTIFY rosterControllerChanged)
 	Q_PROPERTY(MessageController* messageController READ getMessageController NOTIFY messageControllerChanged)
+	Q_PROPERTY(VCardController* vCardController READ getVCardController NOTIFY vCardControllerChanged)
 	Q_PROPERTY(bool connectionState READ getConnectionState NOTIFY connectionStateConnected NOTIFY connectionStateDisconnected)
 	Q_PROPERTY(QString jid READ getJid WRITE setJid NOTIFY jidChanged)
 	Q_PROPERTY(QString jidResource READ getJidResource WRITE setJidResource NOTIFY jidResourceChanged)
@@ -64,6 +66,7 @@ public:
 
 	RosterController* getRosterController();
 	MessageController* getMessageController();
+	VCardController* getVCardController();
 
 	Q_INVOKABLE QString getResourcePath(QString);
 	Q_INVOKABLE QString getVersionString();
@@ -71,6 +74,7 @@ public:
 signals:
 	void rosterControllerChanged();
 	void messageControllerChanged();
+	void vCardControllerChanged();
 	void connectionStateConnected();
 	void connectionStateDisconnected();
 	void jidChanged();
@@ -92,6 +96,7 @@ private:
 	RosterController* rosterController;
 	MessageController* messageController;
 	PresenceController* presenceController;
+	VCardController* vCardController;
 
 	QSettings* settings;
 

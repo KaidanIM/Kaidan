@@ -35,6 +35,8 @@
 // Kaidan
 #include "RosterController.h"
 #include "PresenceController.h"
+#include "MessageController.h"
+#include "VCardController.h"
 
 Kaidan::Kaidan(Swift::NetworkFactories* networkFactories, QObject *parent) : QObject(parent)
 {
@@ -43,6 +45,7 @@ Kaidan::Kaidan(Swift::NetworkFactories* networkFactories, QObject *parent) : QOb
 	messageController = new MessageController();
 	rosterController = new RosterController();
 	presenceController = new PresenceController();
+	vCardController = new VCardController();
 
 	//
 	// Load settings data
@@ -83,6 +86,7 @@ Kaidan::~Kaidan()
 
 	delete rosterController;
 	delete presenceController;
+	delete vCardController;
 	delete settings;
 }
 
@@ -110,6 +114,7 @@ void Kaidan::mainConnect()
 	messageController->setClient(client);
 	rosterController->setClient(client);
 	presenceController->setClient(client);
+	vCardController->setClient(client);
 
 	// .. and connect!
 	client->connect();
@@ -192,6 +197,7 @@ bool Kaidan::newLoginNeeded() {return (jid == "") || (password == "");}
 
 RosterController* Kaidan::getRosterController() {return rosterController;}
 MessageController* Kaidan::getMessageController() {return messageController;}
+VCardController* Kaidan::getVCardController() {return vCardController;}
 bool Kaidan::getConnectionState() const {return connected;}
 QString Kaidan::getVersionString() {return QString(VERSION_STRING);}
 

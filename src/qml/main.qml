@@ -20,6 +20,7 @@
 
 import QtQuick 2.0
 import org.kde.kirigami 2.0 as Kirigami
+import io.github.kaidanim 1.0
 
 Kirigami.ApplicationWindow {
 	id: root
@@ -66,16 +67,16 @@ Kirigami.ApplicationWindow {
 		]
 	}
 
+	// when the window was closed, disconnect from jabber server
+	onClosing: {
+		kaidan.mainDisconnect();
+	}
+
 	// load all pages
 	Component {id: chatPage; ChatPage {}}
 	Component {id: loginPage; LoginPage {}}
 	Component {id: rosterPage; RosterPage {}}
 	Component {id: aboutPage; AboutPage {}}
-
-	// when the window was closed, disconnect from jabber server
-	onClosing: {
-		kaidan.mainDisconnect();
-	}
 
 	Component.onCompleted: {
 		function openLoginPage() {

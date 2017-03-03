@@ -20,7 +20,7 @@ GUI using Silica for better look & feel on Sailfish OS soon (See [KaidanSF](http
 But if you want to get a client for Sailfish OS _now_, maybe take a look at
 [Shmoose](https://github.com/geobra/harbour-shmoose), a fork by an earlier developer of Kaidan.
 
-Kaidan is NOT finished at all and we still have much to do!
+Kaidan is *not* finished yet, so don't expect it working as well as a finished client will do.
 
 
 ## Installation

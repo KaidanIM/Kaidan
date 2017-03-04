@@ -26,6 +26,8 @@ Kirigami.ApplicationWindow {
 	width: 960
 	height: 540
 
+	header: Kirigami.ToolBarApplicationHeader {}
+
 	globalDrawer: Kirigami.GlobalDrawer {
 		id: globalDrawer
 		title: "Kaidan"

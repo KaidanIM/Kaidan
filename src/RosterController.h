@@ -42,6 +42,8 @@ public:
 	void setClient(Swift::Client *client_);
 	void requestRosterFromClient();
 	RosterModel* getRosterModel();
+	Q_INVOKABLE void addContact(const QString jid_, const QString name_);
+	Q_INVOKABLE void removeContact(const QString);
 
 signals:
 	void rosterModelChanged();
@@ -54,6 +56,7 @@ private:
 	void handleJidUpdated(const Swift::JID &jid_, const std::string &name_, const std::vector<std::string>&);
 	void handleRosterCleared();
 	Swift::Client* client;
+	Swift::IQRouter *iqRouter;
 	Swift::XMPPRoster* xmppRoster;
 	RosterModel* rosterModel;
 };

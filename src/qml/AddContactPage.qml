@@ -26,7 +26,6 @@ Kirigami.Page {
 	title: "Add Contact"
 
 	Column {
-		id: popupColumn
 		width: parent.width
 
 		Kirigami.Heading {

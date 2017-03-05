@@ -23,6 +23,7 @@ import org.kde.kirigami 2.0 as Kirigami
 import io.github.kaidanim 1.0
 
 Kirigami.ScrollablePage {
+	id: rosterPage
 	title: qsTr("Contacts")
 
 	ListView {
@@ -48,9 +49,10 @@ Kirigami.ScrollablePage {
 			}
 
 			actions: [
-			 	Kirigami.Action {
-			 		iconName: "bookmark-remove"
-			 		onTriggered: {
+				Kirigami.Action {
+					iconName: "bookmark-remove"
+					onTriggered: {
+						kaidan.rosterController.removeContact(model.jid)
 					}
 				}
 			]

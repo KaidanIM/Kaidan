@@ -34,11 +34,8 @@
 // Kaidan
 #include "MessageModel.h"
 
-MessageController::MessageController(Swift::Client* client_, QObject *parent) : QObject(parent)
+MessageController::MessageController(QObject *parent) : QObject(parent)
 {
-	client = client_;
-	client->onMessageReceived.connect(boost::bind(&MessageController::handleMessageReceived, this, _1));
-
 	messageModel = new MessageModel();
 	emit messageModelChanged();
 }
@@ -46,6 +43,12 @@ MessageController::MessageController(Swift::Client* client_, QObject *parent) : 
 MessageController::~MessageController()
 {
 	delete messageModel;
+}
+
+void MessageController::setClient(Swift::Client* client_)
+{
+	client = client_;
+	client->onMessageReceived.connect(boost::bind(&MessageController::handleMessageReceived, this, _1));
 }
 
 MessageModel* MessageController::getMessageModel()

@@ -40,6 +40,7 @@ Kaidan::Kaidan(Swift::NetworkFactories* networkFactories, QObject *parent) : QOb
 {
 	netFactories = networkFactories;
 	connected = false;
+	messageController = new MessageController();
 	rosterController = new RosterController();
 	presenceController = new PresenceController();
 
@@ -105,10 +106,8 @@ void Kaidan::mainConnect()
 	softwareVersionResponder->setVersion(APPLICATION_DISPLAY_NAME, VERSION_STRING);
 	softwareVersionResponder->start();
 
-	// create message controller
-	messageController = new MessageController(client);
-
-	// set client in roster, presence controller
+	// set client in message, roster and presence controller
+	messageController->setClient(client);
 	rosterController->setClient(client);
 	presenceController->setClient(client);
 

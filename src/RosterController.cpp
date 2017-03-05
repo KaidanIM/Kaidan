@@ -48,6 +48,7 @@ RosterController::~RosterController()
 void RosterController::setClient(Swift::Client *client_)
 {
 	client = client_;
+	client->onConnected.connect(boost::bind(&RosterController::requestRosterFromClient, this));
 	iqRouter = client->getIQRouter();
 	xmppRoster = client->getRoster();
 	xmppRoster->onInitialRosterPopulated.connect(boost::bind(&RosterController::handleInitialRosterPopulated, this));

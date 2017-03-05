@@ -128,10 +128,6 @@ void Kaidan::handleConnected()
 	connected = true;
 	emit connectionStateConnected();
 	client->sendPresence(Swift::Presence::create("Send me a message"));
-
-	// Request the roster
-	rosterController->requestRosterFromClient();
-	emit rosterControllerChanged();
 }
 
 void Kaidan::handleDisconnected()

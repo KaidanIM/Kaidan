@@ -8,4 +8,5 @@ set(KAIDAN_SOURCES
 	${CURDIR}/RosterModel.cpp
 	${CURDIR}/MessageController.cpp
 	${CURDIR}/MessageModel.cpp
+	${CURDIR}/PresenceController.cpp
 )

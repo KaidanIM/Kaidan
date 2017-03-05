@@ -34,12 +34,14 @@
 #include <Swiften/Swiften.h>
 // Kaidan
 #include "RosterController.h"
+#include "PresenceController.h"
 
 Kaidan::Kaidan(Swift::NetworkFactories* networkFactories, QObject *parent) : QObject(parent)
 {
 	netFactories = networkFactories;
 	connected = false;
 	rosterController = new RosterController();
+	presenceController = new PresenceController();
 
 	//
 	// Load settings data
@@ -79,6 +81,7 @@ Kaidan::~Kaidan()
 	}
 
 	delete rosterController;
+	delete presenceController;
 	delete settings;
 }
 
@@ -93,7 +96,6 @@ void Kaidan::mainConnect()
 	// event handling
 	client->onConnected.connect(boost::bind(&Kaidan::handleConnected, this));
 	client->onDisconnected.connect(boost::bind(&Kaidan::handleDisconnected, this));
-	client->onPresenceReceived.connect(boost::bind(&Kaidan::handlePresenceReceived, this, _1));
 
 	// Create XML tracer (console output of xmpp data)
 	tracer = new Swift::ClientXMLTracer(client);
@@ -106,8 +108,9 @@ void Kaidan::mainConnect()
 	// create message controller
 	messageController = new MessageController(client);
 
-	// set client in roster controller
+	// set client in roster, presence controller
 	rosterController->setClient(client);
+	presenceController->setClient(client);
 
 	// .. and connect!
 	client->connect();
@@ -134,18 +137,6 @@ void Kaidan::handleDisconnected()
 {
 	connected = false;
 	emit connectionStateDisconnected();
-}
-
-void Kaidan::handlePresenceReceived(Swift::Presence::ref presence)
-{
-	// Automatically approve subscription requests
-	if (presence->getType() == Swift::Presence::Subscribe)
-	{
-		Swift::Presence::ref response = Swift::Presence::create();
-		response->setTo(presence->getFrom());
-		response->setType(Swift::Presence::Subscribed);
-		client->sendPresence(response);
-	}
 }
 
 void Kaidan::updateFullJid()

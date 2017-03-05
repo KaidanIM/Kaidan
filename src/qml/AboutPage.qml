@@ -36,9 +36,8 @@ Kirigami.ScrollablePage {
 			anchors.horizontalCenter: parent.horizontalCenter
 		}
 
-		Kirigami.Label {
-			font.bold: true
-			text: "<h2>Kaidan " + kaidan.getVersionString() + "</h2>"
+		Kirigami.Heading {
+			text: "Kaidan " + kaidan.getVersionString()
 			anchors.horizontalCenter: parent.horizontalCenter
 		}
 

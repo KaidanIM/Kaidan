@@ -1,5 +1,5 @@
 /*
- *  Kaidan - Cross platform XMPP client
+ *  Kaidan - A user-friendly XMPP client for every device!
  *
  *  Copyright (C) 2016-2017 LNJ <git@lnj.li>
  *  Copyright (C) 2016 Marzanna
@@ -32,6 +32,7 @@
 // Kaidan
 #include "RosterController.h"
 #include "MessageController.h"
+#include "PresenceController.h"
 
 class Kaidan : public QObject
 {
@@ -77,7 +78,6 @@ signals:
 	void passwordChanged();
 
 private:
-	void handlePresenceReceived(Swift::Presence::ref presence);
 	void handleConnected();
 	void handleDisconnected();
 	void updateFullJid();
@@ -91,6 +91,7 @@ private:
 
 	RosterController* rosterController;
 	MessageController* messageController;
+	PresenceController* presenceController;
 
 	QSettings* settings;
 

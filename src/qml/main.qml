@@ -1,5 +1,5 @@
 /*
- *  Kaidan - Cross platform XMPP client
+ *  Kaidan - A user-friendly XMPP client for every device!
  *
  *  Copyright (C) 2016-2017 LNJ <git@lnj.li>
  *  Copyright (C) 2016 Marzanna

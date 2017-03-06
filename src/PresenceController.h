@@ -17,30 +17,27 @@
  *  along with Kaidan. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef MESSAGEMODEL_H
-#define MESSAGEMODEL_H
+#ifndef PRESENCECONTROLLER_H
+#define PRESENCECONTROLLER_H
 
-#include <QSqlTableModel>
+#include <QObject>
+#include <Swiften/Swiften.h>
 
-class MessageModel : public QSqlTableModel
+class PresenceController : public QObject
 {
 	Q_OBJECT
 
 public:
-	MessageModel(QObject *parent = 0);
+	PresenceController(QObject *parent = 0);
+	~PresenceController();
 
-	QVariant data(const QModelIndex &index, int role) const Q_DECL_OVERRIDE;
-	QHash<int, QByteArray> roleNames() const Q_DECL_OVERRIDE;
-
-	void applyRecipientFilter(QString recipient_);
-	void addMessage(const QString* author, const QString* author_resource,
-		const QString* recipient, const QString* recipient_resource,
-		const QString* timestamp, const QString* message);
+	void setClient(Swift::Client* client_);
 
 signals:
-	void recipientChanged();
 
 private:
+	void handlePresenceReceived(Swift::Presence::ref presence);
+	Swift::Client* client;
 };
 
-#endif // MESSAGEMODEL_H
+#endif // PRESENCECONTROLLER_H

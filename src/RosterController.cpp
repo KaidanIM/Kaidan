@@ -1,5 +1,5 @@
 /*
- *  Kaidan - Cross platform XMPP client
+ *  Kaidan - A user-friendly XMPP client for every device!
  *
  *  Copyright (C) 2017 LNJ <git@lnj.li>
  *  Copyright (C) 2016 geobra <s.g.b@gmx.de>
@@ -18,17 +18,22 @@
  *  along with Kaidan. If not, see <http://www.gnu.org/licenses/>.
  */
 
+// RosterController
 #include "RosterController.h"
-
+// C++
 #include <string.h>
-
+// Qt 5
 #include <QQmlContext>
 #include <QDebug>
 #include <QSqlError>
 #include <QSqlRecord>
 #include <QSqlQuery>
-
+// Kaidan
 #include "RosterModel.h"
+// Swiften
+#include <Swiften/Swiften.h>
+// Boost
+#include <boost/bind.hpp>
 
 RosterController::RosterController(QObject *parent) : QObject(parent)
 {
@@ -43,6 +48,8 @@ RosterController::~RosterController()
 void RosterController::setClient(Swift::Client *client_)
 {
 	client = client_;
+	client->onConnected.connect(boost::bind(&RosterController::requestRosterFromClient, this));
+	iqRouter = client->getIQRouter();
 	xmppRoster = client->getRoster();
 	xmppRoster->onInitialRosterPopulated.connect(boost::bind(&RosterController::handleInitialRosterPopulated, this));
 }
@@ -74,7 +81,7 @@ void RosterController::handleRosterReceived(Swift::ErrorPayload::ref error_)
 
 		// create a vector containing all roster items
 		std::vector<Swift::XMPPRosterItem> rosterItems = xmppRoster->getItems();
-		// create a fitting iterator
+		// create an iterator for it
 		std::vector<Swift::XMPPRosterItem>::iterator it;
 
 		// add all contacts from the received roster
@@ -141,4 +148,49 @@ void RosterController::handleRosterCleared()
 	rosterModel->clearData();
 
 	emit rosterModelChanged();
+}
+
+void RosterController::addContact(const QString jid_, const QString name_)
+{
+	// the contact will be added to the model via. handleJidAdded
+
+	// generate a new ID for the subscription request
+	Swift::IDGenerator idGenerator;
+	std::string iqId = idGenerator.generateID();
+
+	// create a new roster item payload
+	Swift::RosterItemPayload addItemPayload;
+	addItemPayload.setJID(jid_.toStdString());
+	addItemPayload.setName(name_.toStdString());
+	addItemPayload.setSubscription(Swift::RosterItemPayload::None);
+
+	// add the new roster item payload to a new roster payload
+	boost::shared_ptr<Swift::RosterPayload> rosterPayload(new Swift::RosterPayload);
+	rosterPayload->addItem(addItemPayload);
+
+	// sent the request
+	iqRouter->sendIQ(
+		Swift::IQ::createRequest(Swift::IQ::Set, Swift::JID(), iqId, rosterPayload)
+	);
+}
+
+void RosterController::removeContact(const QString jid_)
+{
+	// the contact will be removed from the model via. handleJidRemoved
+
+	// generate new id for the request
+	Swift::IDGenerator idGenerator;
+	std::string iqId = idGenerator.generateID();
+
+	// create new roster payload, add roster item removal
+	boost::shared_ptr<Swift::RosterPayload> rosterPayload(new Swift::RosterPayload);
+	rosterPayload->addItem(Swift::RosterItemPayload(
+		Swift::JID(jid_.toStdString()), "",
+		Swift::RosterItemPayload::Remove
+	));
+
+	// send the remove request
+	iqRouter->sendIQ(
+		Swift::IQ::createRequest(Swift::IQ::Set, Swift::JID(), iqId, rosterPayload)
+	);
 }

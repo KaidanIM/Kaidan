@@ -17,32 +17,35 @@
  *  along with Kaidan. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef ROSTERMODEL_H
-#define ROSTERMODEL_H
-
-// Qt
+#include "PresenceController.h"
 #include <QObject>
-#include <QSqlTableModel>
-#include <QQmlListProperty>
-// Swiften
 #include <Swiften/Swiften.h>
+#include <boost/bind.hpp>
 
-class RosterModel : public QSqlTableModel
+PresenceController::PresenceController(QObject* parent) : QObject(parent)
 {
-	Q_OBJECT
-public:
-	RosterModel(QObject *parent = 0);
 
-	QHash<int, QByteArray> roleNames() const;
-	QVariant data(const QModelIndex &index, int role) const;
+}
 
-	void clearData();
-	void insertContact(QString, QString);
-	void removeContactByJid(QString);
-	void updateContactName(QString, QString);
+PresenceController::~PresenceController()
+{
 
-private:
-	Swift::Client* client;
-};
+}
 
-#endif // ROSTERMODEL_H
+void PresenceController::setClient(Swift::Client* client_)
+{
+	client = client_;
+	client->onPresenceReceived.connect(boost::bind(&PresenceController::handlePresenceReceived, this, _1));
+}
+
+void PresenceController::handlePresenceReceived(Swift::Presence::ref presence)
+{
+	// Automatically approve subscription requests
+	if (presence->getType() == Swift::Presence::Subscribe)
+	{
+		Swift::Presence::ref response = Swift::Presence::create();
+		response->setTo(presence->getFrom());
+		response->setType(Swift::Presence::Subscribed);
+		client->sendPresence(response);
+	}
+}

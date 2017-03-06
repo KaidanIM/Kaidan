@@ -1,5 +1,5 @@
 /*
- *  Kaidan - Cross platform XMPP client
+ *  Kaidan - A user-friendly XMPP client for every device!
  *
  *  Copyright (C) 2016-2017 LNJ <git@lnj.li>
  *  Copyright (C) 2016 Marzanna
@@ -34,12 +34,15 @@
 #include <Swiften/Swiften.h>
 // Kaidan
 #include "RosterController.h"
+#include "PresenceController.h"
 
 Kaidan::Kaidan(Swift::NetworkFactories* networkFactories, QObject *parent) : QObject(parent)
 {
 	netFactories = networkFactories;
 	connected = false;
+	messageController = new MessageController();
 	rosterController = new RosterController();
+	presenceController = new PresenceController();
 
 	//
 	// Load settings data
@@ -79,6 +82,7 @@ Kaidan::~Kaidan()
 	}
 
 	delete rosterController;
+	delete presenceController;
 	delete settings;
 }
 
@@ -93,7 +97,6 @@ void Kaidan::mainConnect()
 	// event handling
 	client->onConnected.connect(boost::bind(&Kaidan::handleConnected, this));
 	client->onDisconnected.connect(boost::bind(&Kaidan::handleDisconnected, this));
-	client->onPresenceReceived.connect(boost::bind(&Kaidan::handlePresenceReceived, this, _1));
 
 	// Create XML tracer (console output of xmpp data)
 	tracer = new Swift::ClientXMLTracer(client);
@@ -103,11 +106,10 @@ void Kaidan::mainConnect()
 	softwareVersionResponder->setVersion(APPLICATION_DISPLAY_NAME, VERSION_STRING);
 	softwareVersionResponder->start();
 
-	// create message controller
-	messageController = new MessageController(client);
-
-	// set client in roster controller
+	// set client in message, roster and presence controller
+	messageController->setClient(client);
 	rosterController->setClient(client);
+	presenceController->setClient(client);
 
 	// .. and connect!
 	client->connect();
@@ -128,28 +130,12 @@ void Kaidan::handleConnected()
 	connected = true;
 	emit connectionStateConnected();
 	client->sendPresence(Swift::Presence::create("Send me a message"));
-
-	// Request the roster
-	rosterController->requestRosterFromClient();
-	emit rosterControllerChanged();
 }
 
 void Kaidan::handleDisconnected()
 {
 	connected = false;
 	emit connectionStateDisconnected();
-}
-
-void Kaidan::handlePresenceReceived(Swift::Presence::ref presence)
-{
-	// Automatically approve subscription requests
-	if (presence->getType() == Swift::Presence::Subscribe)
-	{
-		Swift::Presence::ref response = Swift::Presence::create();
-		response->setTo(presence->getFrom());
-		response->setType(Swift::Presence::Subscribed);
-		client->sendPresence(response);
-	}
 }
 
 void Kaidan::updateFullJid()

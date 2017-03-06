@@ -1,5 +1,5 @@
 /*
- *  Kaidan - Cross platform XMPP client
+ *  Kaidan - A user-friendly XMPP client for every device!
  *
  *  Copyright (C) 2017 LNJ <git@lnj.li>
  *
@@ -35,9 +35,10 @@ class MessageController : public QObject
 	Q_PROPERTY(QString recipient READ getRecipient WRITE setRecipient NOTIFY recipientChanged)
 
 public:
-	MessageController(Swift::Client* client_, QObject *parent = 0);
+	MessageController(QObject *parent = 0);
 	~MessageController();
 
+	void setClient(Swift::Client* client_);
 	MessageModel* getMessageModel();
 
 	void setRecipient(QString recipient_);

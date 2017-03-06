@@ -48,12 +48,7 @@ Kirigami.ApplicationWindow {
 				iconName: "system-shutdown"
 				onTriggered: {
 					kaidan.mainDisconnect();
-
-					// close all pages
-					pageStack.pop(undefined); // BUG: This is not popping all pages
-					pageStack.pop(undefined);
-					// open login page
-					pageStack.push(loginPage);
+					// the login page will be pushed automatically
 				}
 			},
 			Kirigami.Action {
@@ -61,7 +56,9 @@ Kirigami.ApplicationWindow {
 				iconName: "help-about"
 				onTriggered: {
 					// prevent opening the about page multiple times
-					pageStack.pop(rosterPage);
+					while (pageStack.depth > 1) {
+						pageStack.pop();
+					}
 					// open login page
 					pageStack.push(aboutPage);
 				}
@@ -86,10 +83,13 @@ Kirigami.ApplicationWindow {
 			kaidan.connectionStateDisconnected.disconnect(openLoginPage);
 
 			// close all pages
-			pageStack.pop(undefined);
+			while (pageStack.depth > 0) {
+				pageStack.pop();
+			}
 
-			// open login page
+			// open login page   // FIXME: WHY is the login page popped, if only pushed once ?!
 			pageStack.push(loginPage, {"isRetry": true});
+			pageStack.replace(loginPage, {"isRetry": true});
 		}
 
 		if (kaidan.newLoginNeeded()) {

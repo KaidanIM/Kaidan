@@ -26,17 +26,23 @@ Kirigami.ApplicationWindow {
 	width: 960
 	height: 540
 
-	header: Kirigami.ToolBarApplicationHeader {}
+	header: Kirigami.ToolBarApplicationHeader {
+		maximumHeight: Kirigami.Units.gridUnit * 2.25
+		minimumHeight: Kirigami.Units.gridUnit * 2.25
+		preferredHeight: Kirigami.Units.gridUnit * 2.25
+	}
 
 	globalDrawer: Kirigami.GlobalDrawer {
 		id: globalDrawer
 		title: "Kaidan"
 		titleIcon: "kaidan"
 		bannerImageSource: kaidan.getResourcePath("images/banner.png");
-
 		// make drawer floating (overlay)
 		modal: true
+		// start with closed drawer
 		drawerOpen: false
+		// show open button on the left side
+		handleVisible: true
 
 		actions: [
 			Kirigami.Action {

@@ -81,8 +81,8 @@ Kirigami.Page {
 			// we need to disconnect enableConnectButton to prevent calling it on normal disconnection
 			kaidan.connectionStateDisconnected.disconnect(enableConnectButton);
 
-			// reenable the controls
-			controlsVisible = true;
+			// reenable the drawer
+			globalDrawer.enabled = true;
 			// open the roster page
 			pageStack.replace(rosterPage);
 		}
@@ -97,7 +97,7 @@ Kirigami.Page {
 		kaidan.connectionStateConnected.connect(openRosterPage);
 		kaidan.connectionStateDisconnected.connect(enableConnectButton);
 
-		// disable the controls (this also makes the drawer invisible)
-		controlsVisible = false;
+		// disable the drawer
+		globalDrawer.enabled = false;
 	}
 }

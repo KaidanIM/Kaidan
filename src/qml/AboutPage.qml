@@ -20,9 +20,9 @@
 import QtQuick 2.1
 import QtQuick.Layouts 1.2
 import QtQuick.Controls 2.0 as Controls
-import org.kde.kirigami 1.0 as Kirigami
+import org.kde.kirigami 2.0 as Kirigami
 
-Kirigami.ScrollablePage {
+Kirigami.Page {
 	id: aboutPage
 	title: qsTr("About")
 
@@ -36,9 +36,8 @@ Kirigami.ScrollablePage {
 			anchors.horizontalCenter: parent.horizontalCenter
 		}
 
-		Kirigami.Label {
-			font.bold: true
-			text: "<h2>Kaidan " + kaidan.getVersionString() + "</h2>"
+		Kirigami.Heading {
+			text: "Kaidan " + kaidan.getVersionString()
 			anchors.horizontalCenter: parent.horizontalCenter
 		}
 

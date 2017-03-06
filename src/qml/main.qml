@@ -19,22 +19,28 @@
  */
 
 import QtQuick 2.0
-import org.kde.kirigami 1.0 as Kirigami
+import org.kde.kirigami 2.0 as Kirigami
 
 Kirigami.ApplicationWindow {
 	id: root
 	width: 960
 	height: 540
 
+	header: Kirigami.ToolBarApplicationHeader {
+		preferredHeight: Kirigami.Units.gridUnit * 2.25
+	}
+
 	globalDrawer: Kirigami.GlobalDrawer {
 		id: globalDrawer
 		title: "Kaidan"
 		titleIcon: "kaidan"
 		bannerImageSource: kaidan.getResourcePath("images/banner.png");
-
 		// make drawer floating (overlay)
 		modal: true
-		opened: false //drawerOpen: false  // Kirigami2
+		// start with closed drawer
+		drawerOpen: false
+		// show open button on the left side
+		handleVisible: true
 
 		actions: [
 			Kirigami.Action {
@@ -42,12 +48,7 @@ Kirigami.ApplicationWindow {
 				iconName: "system-shutdown"
 				onTriggered: {
 					kaidan.mainDisconnect();
-
-					// close all pages
-					pageStack.pop(undefined); // BUG: This is not popping all pages
-					pageStack.pop(undefined);
-					// open login page
-					pageStack.push(loginPage);
+					// the login page will be pushed automatically
 				}
 			},
 			Kirigami.Action {
@@ -55,7 +56,9 @@ Kirigami.ApplicationWindow {
 				iconName: "help-about"
 				onTriggered: {
 					// prevent opening the about page multiple times
-					pageStack.pop(rosterPage);
+					while (pageStack.depth > 1) {
+						pageStack.pop();
+					}
 					// open login page
 					pageStack.push(aboutPage);
 				}
@@ -80,10 +83,13 @@ Kirigami.ApplicationWindow {
 			kaidan.connectionStateDisconnected.disconnect(openLoginPage);
 
 			// close all pages
-			pageStack.pop(undefined);
+			while (pageStack.depth > 0) {
+				pageStack.pop();
+			}
 
-			// open login page
+			// open login page   // FIXME: WHY is the login page popped, if only pushed once ?!
 			pageStack.push(loginPage, {"isRetry": true});
+			pageStack.replace(loginPage, {"isRetry": true});
 		}
 
 		if (kaidan.newLoginNeeded()) {

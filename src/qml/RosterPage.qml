@@ -19,7 +19,7 @@
  */
 
 import QtQuick 2.0
-import org.kde.kirigami 1.0 as Kirigami
+import org.kde.kirigami 2.0 as Kirigami
 
 Kirigami.ScrollablePage {
 	title: qsTr("Contacts")
@@ -27,7 +27,9 @@ Kirigami.ScrollablePage {
 	ListView {
 		model: kaidan.rosterController.rosterModel
 
-		delegate: Kirigami.BasicListItem {  //Kirigami.SwipeListItem
+		delegate: Kirigami.SwipeListItem {
+			height: Kirigami.Units.gridUnit * 2.5
+
 			Kirigami.Label {
 				// use the Name or JID
 				text: model.name ? model.name : model.jid
@@ -42,14 +44,13 @@ Kirigami.ScrollablePage {
 				});
 			}
 
-			// actions: [
-			// 	Kirigami.Action {
-			// 		iconName: "bookmark-remove"
-			// 		onTriggered: {
-			// 			//
-			// 		}
-			// 	}
-			// ]
+			actions: [
+			 	Kirigami.Action {
+			 		iconName: "bookmark-remove"
+			 		onTriggered: {
+					}
+				}
+			]
 		}
 	}
 }

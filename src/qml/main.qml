@@ -27,8 +27,6 @@ Kirigami.ApplicationWindow {
 	height: 540
 
 	header: Kirigami.ToolBarApplicationHeader {
-		maximumHeight: Kirigami.Units.gridUnit * 2.25
-		minimumHeight: Kirigami.Units.gridUnit * 2.25
 		preferredHeight: Kirigami.Units.gridUnit * 2.25
 	}
 

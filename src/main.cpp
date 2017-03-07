@@ -37,6 +37,7 @@
 #include <Swiften/EventLoop/Qt/QtEventLoop.h>
 // Kaidan
 #include "Kaidan.h"
+#include "VCard.h"
 
 enum CommandLineParseResult
 {
@@ -109,6 +110,9 @@ int main(int argc, char *argv[])
 
 	// attributes
 	QGuiApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
+
+	// Kaidan QML types
+	qmlRegisterType<VCard>(APPLICATION_ID, 1, 0, "VCard");
 
 	// Qt-Translator
 	QTranslator qtTranslator;

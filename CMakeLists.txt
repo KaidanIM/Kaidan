@@ -10,7 +10,7 @@ option(I18N "Enable i18n support" FALSE)
 option(SAILFISH_OS "Build with Sailfish OS GUI, needs libs/kaidansf submodule" FALSE)
 
 # application name
-set(APPLICATION_ID "harbour.kaidan")
+set(APPLICATION_ID "io.github.kaidanim")
 set(APPLICATION_NAME "kaidan")
 set(APPLICATION_DISPLAY_NAME "Kaidan")
 set(APPLICATION_DESCRIPTION "Cross platform XMPP client")

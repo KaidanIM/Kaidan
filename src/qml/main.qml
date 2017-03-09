@@ -56,8 +56,8 @@ Kirigami.ApplicationWindow {
 			}
 
 			// open login page   // FIXME: WHY is the login page popped, if only pushed once ?!
-			pageStack.push(loginPage, {"isRetry": true});
-			pageStack.replace(loginPage, {"isRetry": true});
+			pageStack.push(loginPage);
+			pageStack.replace(loginPage);
 		}
 
 		if (kaidan.newLoginNeeded()) {

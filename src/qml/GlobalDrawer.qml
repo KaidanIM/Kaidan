@@ -37,7 +37,6 @@ Kirigami.GlobalDrawer {
 			text: qsTr("Add Contact")
 			iconName: "contact-new"
 			onTriggered: {
-				console.log("Hello opening contact sheet 1");
 				addContactDialogRequested();
 			}
 		},

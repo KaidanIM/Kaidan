@@ -29,30 +29,14 @@ Kirigami.ApplicationWindow {
 	width: 960
 	height: 540
 
+	// signals
+	signal addContactDialogRequested()
+
 	header: Kirigami.ToolBarApplicationHeader {
 		preferredHeight: Kirigami.Units.gridUnit * 2.25
 	}
 
-<<<<<<< HEAD
 	globalDrawer: GlobalDrawer {}
-=======
-		actions: [
-			Kirigami.Action {
-				text: qsTr("Add Contact")
-				iconName: "contact-new"
-				onTriggered: {
-					// prevent opening the page multiple times
-					pageStack.pop(rosterPage);
-					// open page
-					pageStack.push(addContactPage);
-				}
-			},
-			Kirigami.Action {
-				text: qsTr("Logout")
-				iconName: "system-shutdown"
-				onTriggered: {
-					kaidan.mainDisconnect();
->>>>>>> Add support for adding new contacts from the gui
 
 	// when the window was closed, disconnect from jabber server
 	onClosing: {
@@ -64,7 +48,6 @@ Kirigami.ApplicationWindow {
 	Component {id: loginPage; LoginPage {}}
 	Component {id: rosterPage; RosterPage {}}
 	Component {id: aboutPage; AboutPage {}}
-	Component {id: addContactPage; AddContactPage {}}
 
 	Component.onCompleted: {
 		function openLoginPage() {

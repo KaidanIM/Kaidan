@@ -23,8 +23,11 @@ import org.kde.kirigami 2.0 as Kirigami
 import io.github.kaidanim 1.0
 
 Kirigami.ScrollablePage {
-	id: rosterPage
 	title: qsTr("Contacts")
+
+	RosterAddContactSheet {
+		id: addContactSheet
+	}
 
 	ListView {
 		verticalLayoutDirection: ListView.TopToBottom
@@ -52,10 +55,21 @@ Kirigami.ScrollablePage {
 				Kirigami.Action {
 					iconName: "bookmark-remove"
 					onTriggered: {
-						kaidan.rosterController.removeContact(model.jid)
+						kaidan.rosterController.removeContact(model.jid);
 					}
 				}
 			]
 		}
+	}
+
+	Component.onCompleted: {
+		function openAddContactSheet() { addContactSheet.open(); }
+		function disconnectOpenAddContactSheet() {
+			addContactDialogRequested.disconnect(openAddContactSheet);
+		}
+		// open sheet when requested from drawer over signal
+		addContactDialogRequested.connect(openAddContactSheet);
+		// disconnect the open function, when the roster page is closed
+		connectionStateDisconnected.connect(disconnectOpenAddContactSheet);
 	}
 }

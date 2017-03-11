@@ -2,6 +2,7 @@
  *  Kaidan - Cross platform XMPP client
  *
  *  Copyright (C) 2017 JBB <jbb.mail@gmx.de>
+ *  Copyright (C) 2017 LNJ <git@lnj.li>
  *
  *  Kaidan is free software: you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -22,31 +23,25 @@ import QtQuick.Controls 2.0 as Controls
 import QtQuick.Layouts 1.2
 import org.kde.kirigami 1.0 as Kirigami
 
-Kirigami.Page {
-	title: "Add Contact"
-
+Kirigami.OverlaySheet {
 	Column {
-		width: parent.width
-
 		Kirigami.Heading {
 			text: qsTr("Add Contact")
 		}
 
 		Kirigami.Label {
-			text: qsTr("Name")
+			text: qsTr("Nickname:")
 		}
-
 		Controls.TextField {
-			id: nameField
+			id: nickField
 			selectByMouse: true
 		}
 
 		Kirigami.Label {
-			text: qsTr("Jabber ID")
+			text: qsTr("Jabber ID:")
 		}
-
 		Controls.TextField {
-			id: contactJidField
+			id: jidField
 			placeholderText: qsTr("user@example.org")
 			selectByMouse: true
 		}
@@ -54,18 +49,17 @@ Kirigami.Page {
 		Row {
 			Controls.Button {
 				text: qsTr("Cancel")
-				onClicked: pageStack.pop()
+				onClicked: close()
 			}
 
 			Controls.Button {
 				text: qsTr("Add")
 				enabled: contactJidField.length > 0
 				onClicked: {
-					kaidan.rosterController.addContact(contactJidField.text, nameField.text);
-					pageStack.pop();
+					kaidan.rosterController.addContact(jidField.text, nickField.text);
+					close();
 				}
 			}
 		}
 	}
 }
-

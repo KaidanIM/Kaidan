@@ -37,8 +37,17 @@ Kirigami.GlobalDrawer {
 			text: qsTr("Logout")
 			iconName: "system-shutdown"
 			onTriggered: {
-				kaidan.mainDisconnect();
-				// the login page will be pushed automatically
+				if (kaidan.connected) {
+					// disconnect normally, this will emit the
+					// disconncted signal and open the login page
+					kaidan.mainDisconnect();
+				}
+				else {
+					// emit the disconnect signal, to force
+					// the pages being popped and the login
+					// page pushed
+					kaidan.connectionStateDisconnected();
+				}
 			}
 		},
 		Kirigami.Action {

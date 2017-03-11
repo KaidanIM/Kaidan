@@ -140,3 +140,13 @@ const QString VCard::getPreferredEMailAddress()
 {
 	return QString::fromStdString(vCard->getPreferredEMailAddress().address);
 }
+
+const QString VCard::getPhoto()
+{
+	return QString::fromStdString(Swift::byteArrayToString(vCard->getPhoto()));
+}
+
+const QString VCard::getPhotoType()
+{
+	return QString::fromStdString(vCard->getPhotoType());
+}

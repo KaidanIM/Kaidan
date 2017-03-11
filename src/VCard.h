@@ -40,6 +40,8 @@ class VCard : public QObject
 	Q_PROPERTY(const QString suffix READ getSuffix WRITE setSuffix NOTIFY VCardChanged)
 	Q_PROPERTY(const QString nickname READ getNickname WRITE setNickname NOTIFY VCardChanged)
 	Q_PROPERTY(const QString preferredEMailAddress READ getPreferredEMailAddress NOTIFY VCardChanged)
+	Q_PROPERTY(const QString photo READ getPhoto NOTIFY VCardChanged)
+	Q_PROPERTY(const QString photoType READ getPhotoType NOTIFY VCardChanged)
 
 public:
 	VCard(QObject *parent = 0);
@@ -64,21 +66,14 @@ public:
 	void setNickname(const QString);
 	const QString getNickname();
 	const QString getPreferredEMailAddress();
+	const QString getPhoto();
+	const QString getPhotoType();
 
 signals:
 	void VCardChanged();
 
 private:
 	Swift::VCard::ref vCard;
-	QString version;
-	QString fullName;
-	QString familyName;
-	QString givenName;
-	QString middleName;
-	QString prefix;
-	QString suffix;
-	QString nickname;
-	QString preferredEMailAddress;
 };
 
 #endif // VCARD_H

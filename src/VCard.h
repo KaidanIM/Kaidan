@@ -45,6 +45,7 @@ public:
 	VCard(QObject *parent = 0);
 	~VCard();
 	void fromSwiftVCard(Swift::VCard::ref vCard_);
+	Swift::VCard::ref getSwiftVCard();
 
 	void setVersion(const QString);
 	const QString getVersion();

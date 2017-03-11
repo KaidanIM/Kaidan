@@ -85,7 +85,10 @@ VCard* VCardController::getOwnVCard()
 
 void VCardController::setOwnVCard(VCard* vCard_)
 {
-	ownVCard = vCard_;
+	// publish new vCard
+	Swift::SetVCardRequest::ref vCardChangeRequest = manager->createSetVCardRequest(
+		vCard_->getSwiftVCard());
+	vCardChangeRequest->send();
 }
 
 void VCardController::requestOwnVCard()
@@ -118,6 +121,7 @@ void VCardController::handleVCardChanged(const Swift::JID &jid_, Swift::VCard::r
 
 void VCardController::handleOwnVCardChanged(Swift::VCard::ref vCard_)
 {
+	std::cout << "VCardController::handleOwnVCardChanged: Received own VCard" << '\n';
 	ownVCard->fromSwiftVCard(vCard_);
 	emit ownVCardChanged();
 }

@@ -51,6 +51,11 @@ void VCard::fromSwiftVCard(Swift::VCard::ref vCard_)
 	}
 }
 
+Swift::VCard::ref VCard::getSwiftVCard()
+{
+	return vCard;
+}
+
 void VCard::setVersion(const QString version_)
 {
 	vCard->setVersion(version_.toStdString());

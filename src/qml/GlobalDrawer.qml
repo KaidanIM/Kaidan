@@ -38,7 +38,7 @@ Kirigami.GlobalDrawer {
 			iconName: "contact-new"
 			onTriggered: {
 				console.log("Hello opening contact sheet 1");
-				applicationWindow().addContactDialogRequested();
+				addContactDialogRequested();
 			}
 		},
 		Kirigami.Action {

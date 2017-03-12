@@ -110,6 +110,13 @@ Kirigami.Page {
 						}
 					}
 				}
+
+				Component.onCompleted: {
+					// mark unread messages as read
+					if (!model.isRead) {
+						kaidan.messageController.setMessageAsRead(model.id);
+					}
+				}
 			}
 		}
 

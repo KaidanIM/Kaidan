@@ -78,6 +78,10 @@ QString MessageController::getRecipient()
 	return recipient;
 }
 
+void MessageController::setMessageAsRead(const QString msgId)
+{
+	messageModel->setMessageAsRead(msgId);
+}
 
 void MessageController::handleMessageReceived(Swift::Message::ref message_)
 {
@@ -103,6 +107,7 @@ void MessageController::handleMessageReceived(Swift::Message::ref message_)
 	const QString recipient_resource = QString::fromStdString(client->getJID().getResource());
 	QString timestamp = QDateTime::currentDateTime().toString(Qt::ISODate); // fallback timestamp
 	const QString message = QString(message_->getBody()->c_str());
+	const QString msgId = QString::fromStdString(message_->getID());
 
 	// get the timestamp from the message, if exists
 	boost::optional<boost::posix_time::ptime> timestampOpt = message_->getTimestamp();
@@ -115,13 +120,17 @@ void MessageController::handleMessageReceived(Swift::Message::ref message_)
 
 
 	messageModel->addMessage(&author, &author_resource, ownJid,
-		&recipient_resource, &timestamp, &message);
+		&recipient_resource, &timestamp, &message, &msgId);
 
 	emit messageModelChanged();
 }
 
 void MessageController::sendMessage(const QString recipient_, const QString message_)
 {
+	// generate a new message id
+	Swift::IDGenerator idGenerator;
+	std::string msgId = idGenerator.generateID();
+
 	//
 	// add the message to the db
 	//
@@ -129,9 +138,10 @@ void MessageController::sendMessage(const QString recipient_, const QString mess
 	const QString timestamp = QDateTime::currentDateTime().toString(Qt::ISODate);
 	const QString author_resource = QString(client->getJID().getResource().c_str());
 	const QString recipient_resource = QString("");
+	const QString qmsgId = QString::fromStdString(msgId);
 
 	messageModel->addMessage(ownJid, &author_resource, &recipient_,
-		&recipient_resource, &timestamp, &message_);
+		&recipient_resource, &timestamp, &message_, &qmsgId);
 
 	emit messageModelChanged();
 
@@ -144,6 +154,7 @@ void MessageController::sendMessage(const QString recipient_, const QString mess
 	newMessage->setTo(Swift::JID(recipient_.toStdString()));
 	newMessage->setFrom(client->getJID());
 	newMessage->setBody(message_.toStdString());
+	newMessage->setID(msgId);
 
 	// send the message
 	client->sendMessage(newMessage);

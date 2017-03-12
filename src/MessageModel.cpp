@@ -46,6 +46,10 @@ static void createTable()
 		"'recipient_resource' TEXT,"
 		"'timestamp' TEXT NOT NULL,"
 		"'message' TEXT NOT NULL,"
+		"'id' TEXT NOT NULL,"
+		"'isRead' BOOL,"
+		"'isSent' BOOL,"
+		"'meta' TEXT," // placeholder field for later additons
 		"FOREIGN KEY('author') REFERENCES Contacts ('jid'),"
 		"FOREIGN KEY('recipient') REFERENCES Contacts ('jid')"
 		")"))
@@ -96,12 +100,30 @@ QHash<int, QByteArray> MessageModel::roleNames() const
 	names[Qt::UserRole + 3] = "recipient_resource";
 	names[Qt::UserRole + 4] = "timestamp";
 	names[Qt::UserRole + 5] = "message";
+	names[Qt::UserRole + 6] = "id";
+	names[Qt::UserRole + 7] = "isRead";
+	names[Qt::UserRole + 8] = "isSent";
+	names[Qt::UserRole + 9] = "meta";
 	return names;
+}
+
+void MessageModel::setMessageAsRead(const QString msgId)
+{
+	QSqlQuery newQuery;
+	newQuery.exec(QString("UPDATE 'Messages' SET 'isRead' = 1 WHERE id = '%1'").arg(msgId));
+	submitAll();
+}
+
+void MessageModel::setMessageAsSent(const QString msgId)
+{
+	QSqlQuery newQuery;
+	newQuery.exec(QString("UPDATE 'Messages' SET 'isSent' = 1 WHERE id = '%1'").arg(msgId));
+	submitAll();
 }
 
 void MessageModel::addMessage(const QString* author, const QString* author_resource,
 	const QString* recipient, const QString* recipient_resource,
-	const QString* timestamp, const QString* message)
+	const QString* timestamp, const QString* message, const QString* msgId)
 {
 	QSqlRecord newRecord = record();
 	newRecord.setValue("author", *author);
@@ -110,6 +132,9 @@ void MessageModel::addMessage(const QString* author, const QString* author_resou
 	newRecord.setValue("recipient_resource", *recipient_resource);
 	newRecord.setValue("timestamp", *timestamp);
 	newRecord.setValue("message", *message);
+	newRecord.setValue("id", msgId);
+	newRecord.setValue("isRead", false);
+	newRecord.setValue("isSent", false);
 
 	if (!insertRecord(rowCount(), newRecord)) {
 		qWarning() << "Failed to add message to DB:" << lastError().text();

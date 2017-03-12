@@ -45,6 +45,7 @@ public:
 	QString getRecipient();
 
 	Q_INVOKABLE void sendMessage(const QString recipient_, const QString message_);
+	Q_INVOKABLE void setMessageAsRead(const QString msgId);
 
 signals:
 	void messageModelChanged();

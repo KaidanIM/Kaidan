@@ -138,7 +138,7 @@ void MessageController::handleMessageReceived(Swift::Message::ref message_)
 	}
 
 	// XEP-0184: Message Delivery Receipts
-	// get a reply of a deliveert receipt request
+	// get a reply of a delivered receipt request
 	Swift::DeliveryReceipt::ref receipt = message_->getPayload<Swift::DeliveryReceipt>();
 	if (receipt)
 	{

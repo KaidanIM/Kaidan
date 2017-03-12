@@ -34,6 +34,7 @@
 #include "MessageController.h"
 #include "PresenceController.h"
 #include "VCardController.h"
+#include "ServiceDiscoveryManager.h"
 
 class Kaidan : public QObject
 {
@@ -97,6 +98,7 @@ private:
 	MessageController* messageController;
 	PresenceController* presenceController;
 	VCardController* vCardController;
+	ServiceDiscoveryManager* serviceDiscoveryManager;
 
 	QSettings* settings;
 

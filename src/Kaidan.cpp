@@ -37,6 +37,7 @@
 #include "PresenceController.h"
 #include "MessageController.h"
 #include "VCardController.h"
+#include "ServiceDiscoveryManager.h"
 
 Kaidan::Kaidan(Swift::NetworkFactories* networkFactories, QObject *parent) : QObject(parent)
 {
@@ -72,6 +73,7 @@ Kaidan::Kaidan(Swift::NetworkFactories* networkFactories, QObject *parent) : QOb
 	rosterController = new RosterController();
 	presenceController = new PresenceController();
 	vCardController = new VCardController();
+	serviceDiscoveryManager = new ServiceDiscoveryManager();
 }
 
 Kaidan::~Kaidan()
@@ -90,6 +92,7 @@ Kaidan::~Kaidan()
 	delete presenceController;
 	delete vCardController;
 	delete settings;
+	delete serviceDiscoveryManager;
 }
 
 void Kaidan::mainConnect()
@@ -117,6 +120,7 @@ void Kaidan::mainConnect()
 	rosterController->setClient(client);
 	presenceController->setClient(client);
 	vCardController->setClient(client);
+	serviceDiscoveryManager->setClient(client);
 
 	// .. and connect!
 	client->connect();

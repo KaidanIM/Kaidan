@@ -9,6 +9,7 @@ set(KAIDAN_SOURCES
 	${CURDIR}/MessageController.cpp
 	${CURDIR}/MessageModel.cpp
 	${CURDIR}/PresenceController.cpp
+	${CURDIR}/ServiceDiscoveryManager.cpp
 	${CURDIR}/VCard.cpp
 	${CURDIR}/VCardController.cpp
 )

@@ -46,7 +46,7 @@ set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_SOURCE_DIR}/cmake")
 find_package(Qt5 ${QT_MIN_VERSION} REQUIRED NO_MODULE COMPONENTS Core Qml Quick Sql)
 find_package(KF5Kirigami2 REQUIRED)
 find_package(Swiften REQUIRED)
-find_package(Boost ${BOOST_MIN_VERSION} REQUIRED COMPONENTS signals)
+find_package(Boost ${BOOST_MIN_VERSION} REQUIRED COMPONENTS signals date_time)
 include(GNUInstallDirs)
 
 
@@ -99,6 +99,7 @@ target_link_libraries(${PROJECT_NAME}
 	Qt5::Qml
 	Qt5::Quick
 	Boost::signals
+	Boost::date_time
 	${SWIFTEN_LIBRARY}
 )
 

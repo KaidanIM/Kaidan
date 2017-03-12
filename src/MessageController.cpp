@@ -28,6 +28,8 @@
 #include <QSqlQuery>
 // Boost
 #include <boost/bind.hpp>
+#include <boost/date_time/posix_time/posix_time.hpp>
+#include <boost/optional.hpp>
 #include <boost/smart_ptr/make_shared.hpp>
 // Swiften
 #include <Swiften/Swiften.h>
@@ -99,8 +101,18 @@ void MessageController::handleMessageReceived(Swift::Message::ref message_)
 	const QString author = QString(message_->getFrom().toBare().toString().c_str());
 	const QString author_resource = QString(message_->getFrom().getResource().c_str());
 	const QString recipient_resource = QString::fromStdString(client->getJID().getResource());
-	const QString timestamp = QDateTime::currentDateTime().toString(Qt::ISODate); // TODO: use timestamp from message
+	QString timestamp = QDateTime::currentDateTime().toString(Qt::ISODate); // fallback timestamp
 	const QString message = QString(message_->getBody()->c_str());
+
+	// get the timestamp from the message, if exists
+	boost::optional<boost::posix_time::ptime> timestampOpt = message_->getTimestamp();
+	if (timestampOpt)
+	{
+		timestamp = QString::fromStdString(
+			boost::posix_time::to_iso_extended_string(*timestampOpt)
+		);
+	}
+
 
 	messageModel->addMessage(&author, &author_resource, ownJid,
 		&recipient_resource, &timestamp, &message);

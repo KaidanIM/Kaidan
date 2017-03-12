@@ -34,8 +34,9 @@
 // Kaidan
 #include "MessageModel.h"
 
-MessageController::MessageController(QObject *parent) : QObject(parent)
+MessageController::MessageController(QString* ownJid_, QObject *parent) : QObject(parent)
 {
+	ownJid = ownJid_;
 	messageModel = new MessageModel();
 	emit messageModelChanged();
 }
@@ -64,7 +65,9 @@ void MessageController::setRecipient(QString recipient_)
 	recipient = recipient_;
 	emit recipientChanged();
 
-	messageModel->applyRecipientFilter(recipient);
+	// we have to use ownJid here, because this should also be usable when
+	// we're offline or we haven't connected already.
+	messageModel->applyRecipientFilter(recipient, *ownJid);
 	emit messageModelChanged();
 }
 
@@ -95,12 +98,11 @@ void MessageController::handleMessageReceived(Swift::Message::ref message_)
 	// author is only the 'bare' JID: e.g. 'albert@einstein.ch'
 	const QString author = QString(message_->getFrom().toBare().toString().c_str());
 	const QString author_resource = QString(message_->getFrom().getResource().c_str());
-	const QString recipient = QString("Me");
-	const QString recipient_resource = QString("");
-	const QString timestamp = QDateTime::currentDateTime().toString(Qt::ISODate);
+	const QString recipient_resource = QString::fromStdString(client->getJID().getResource());
+	const QString timestamp = QDateTime::currentDateTime().toString(Qt::ISODate); // TODO: use timestamp from message
 	const QString message = QString(message_->getBody()->c_str());
 
-	messageModel->addMessage(&author, &author_resource, &recipient,
+	messageModel->addMessage(&author, &author_resource, ownJid,
 		&recipient_resource, &timestamp, &message);
 
 	emit messageModelChanged();
@@ -113,11 +115,10 @@ void MessageController::sendMessage(const QString recipient_, const QString mess
 	//
 
 	const QString timestamp = QDateTime::currentDateTime().toString(Qt::ISODate);
-	const QString author = QString("Me");
 	const QString author_resource = QString(client->getJID().getResource().c_str());
 	const QString recipient_resource = QString("");
 
-	messageModel->addMessage(&author, &author_resource, &recipient_,
+	messageModel->addMessage(ownJid, &author_resource, &recipient_,
 		&recipient_resource, &timestamp, &message_);
 
 	emit messageModelChanged();

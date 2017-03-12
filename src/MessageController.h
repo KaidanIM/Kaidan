@@ -35,7 +35,7 @@ class MessageController : public QObject
 	Q_PROPERTY(QString recipient READ getRecipient WRITE setRecipient NOTIFY recipientChanged)
 
 public:
-	MessageController(QObject *parent = 0);
+	MessageController(QString* ownJid_, QObject *parent = 0);
 	~MessageController();
 
 	void setClient(Swift::Client* client_);
@@ -56,6 +56,7 @@ private:
 	Swift::Client* client;
 	MessageModel* messageModel;
 	QString recipient;
+	QString* ownJid;
 };
 
 #endif // MESSAGECONTROLLER_H

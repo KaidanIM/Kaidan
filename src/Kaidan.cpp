@@ -42,10 +42,6 @@ Kaidan::Kaidan(Swift::NetworkFactories* networkFactories, QObject *parent) : QOb
 {
 	netFactories = networkFactories;
 	connected = false;
-	messageController = new MessageController();
-	rosterController = new RosterController();
-	presenceController = new PresenceController();
-	vCardController = new VCardController();
 
 	//
 	// Load settings data
@@ -70,6 +66,12 @@ Kaidan::Kaidan(Swift::NetworkFactories* networkFactories, QObject *parent) : QOb
 
 	// create/update the full jid
 	updateFullJid();
+
+	// load controlers
+	messageController = new MessageController(&jid);
+	rosterController = new RosterController();
+	presenceController = new PresenceController();
+	vCardController = new VCardController();
 }
 
 Kaidan::~Kaidan()

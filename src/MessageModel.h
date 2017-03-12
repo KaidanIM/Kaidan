@@ -36,9 +36,10 @@ public:
 	void addMessage(const QString* author, const QString* author_resource,
 		const QString* recipient, const QString* recipient_resource,
 		const QString* timestamp, const QString* message,
-		const QString* msgId);
-	void setMessageAsRead(const QString msgId);
+		const QString* msgId, bool sentByMe);
 	void setMessageAsSent(const QString msgId);
+	void setMessageAsDelivered(const QString msgId);
+	void setMessageAsRead(const QString msgId);
 
 signals:
 	void recipientChanged();

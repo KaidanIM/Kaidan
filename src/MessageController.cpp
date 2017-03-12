@@ -85,44 +85,69 @@ void MessageController::setMessageAsRead(const QString msgId)
 
 void MessageController::handleMessageReceived(Swift::Message::ref message_)
 {
-	// check if the message has a body -> is valid
-	if (!message_->getBody())
+	boost::optional<std::string> bodyOpt = message_->getBody();
+
+	if (bodyOpt)
 	{
-		std::cout << "MessageController: Received message without body." << '\n';
-		return;
-	}
-	else
-	{
-		std::cout << "MessageController: Message received." << '\n';
-	}
+		//
+		// add the message to the db
+		//
 
+		// author is only the 'bare' JID: e.g. 'albert@einstein.ch'
+		const QString author = QString(message_->getFrom().toBare().toString().c_str());
+		const QString author_resource = QString(message_->getFrom().getResource().c_str());
+		const QString recipient_resource = QString::fromStdString(client->getJID().getResource());
+		QString timestamp = QDateTime::currentDateTime().toString(Qt::ISODate); // fallback timestamp
+		const QString message = QString(*bodyOpt->c_str());
+		const QString msgId = QString::fromStdString(message_->getID());
 
-	//
-	// add the message to the db
-	//
+		// get the timestamp from the message, if exists
+		boost::optional<boost::posix_time::ptime> timestampOpt = message_->getTimestamp();
+		if (timestampOpt)
+		{
+			timestamp = QString::fromStdString(
+				boost::posix_time::to_iso_extended_string(*timestampOpt)
+			);
+		}
 
-	// author is only the 'bare' JID: e.g. 'albert@einstein.ch'
-	const QString author = QString(message_->getFrom().toBare().toString().c_str());
-	const QString author_resource = QString(message_->getFrom().getResource().c_str());
-	const QString recipient_resource = QString::fromStdString(client->getJID().getResource());
-	QString timestamp = QDateTime::currentDateTime().toString(Qt::ISODate); // fallback timestamp
-	const QString message = QString(message_->getBody()->c_str());
-	const QString msgId = QString::fromStdString(message_->getID());
+		messageModel->addMessage(&author, &author_resource, ownJid,
+			&recipient_resource, &timestamp, &message, &msgId, false);
 
-	// get the timestamp from the message, if exists
-	boost::optional<boost::posix_time::ptime> timestampOpt = message_->getTimestamp();
-	if (timestampOpt)
-	{
-		timestamp = QString::fromStdString(
-			boost::posix_time::to_iso_extended_string(*timestampOpt)
-		);
+		emit messageModelChanged();
 	}
 
+	// XEP-0184: Message Delivery Receipts
+	// send a reply that the message has arrived
+	if (message_->getPayload<Swift::DeliveryReceiptRequest>())
+	{
+		// create a new reply payload
+		boost::shared_ptr<Swift::DeliveryReceipt> receiptPayload =
+			boost::make_shared<Swift::DeliveryReceipt>();
+		receiptPayload->setReceivedID(message_->getID());
 
-	messageModel->addMessage(&author, &author_resource, ownJid,
-		&recipient_resource, &timestamp, &message, &msgId);
+		// create a new message
+		Swift::Message::ref receiptReply = boost::make_shared<Swift::Message>();
+		receiptReply->setFrom(message_->getTo());
+		receiptReply->setTo(message_->getFrom());
 
-	emit messageModelChanged();
+		// add the reply payload to the message
+		receiptReply->addPayload(receiptPayload);
+
+		// send the message
+		client->sendMessage(receiptReply);
+	}
+
+	// XEP-0184: Message Delivery Receipts
+	// get a reply of a deliveert receipt request
+	Swift::DeliveryReceipt::ref receipt = message_->getPayload<Swift::DeliveryReceipt>();
+	if (receipt)
+	{
+		std::string receivedId = receipt->getReceivedID();
+		if (receivedId.length() > 0)
+		{
+			messageModel->setMessageAsDelivered(QString::fromStdString(receivedId));
+		}
+	}
 }
 
 void MessageController::sendMessage(const QString recipient_, const QString message_)
@@ -141,7 +166,7 @@ void MessageController::sendMessage(const QString recipient_, const QString mess
 	const QString qmsgId = QString::fromStdString(msgId);
 
 	messageModel->addMessage(ownJid, &author_resource, &recipient_,
-		&recipient_resource, &timestamp, &message_, &qmsgId);
+		&recipient_resource, &timestamp, &message_, &qmsgId, true);
 
 	emit messageModelChanged();
 
@@ -155,6 +180,10 @@ void MessageController::sendMessage(const QString recipient_, const QString mess
 	newMessage->setFrom(client->getJID());
 	newMessage->setBody(message_.toStdString());
 	newMessage->setID(msgId);
+
+	// XEP-0184: Message Delivery Receipts
+	// add a delivery receipt request
+	newMessage->addPayload(boost::make_shared<Swift::DeliveryReceiptRequest>());
 
 	// send the message
 	client->sendMessage(newMessage);

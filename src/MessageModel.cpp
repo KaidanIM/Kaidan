@@ -47,8 +47,9 @@ static void createTable()
 		"'timestamp' TEXT NOT NULL,"
 		"'message' TEXT NOT NULL,"
 		"'id' TEXT NOT NULL,"
-		"'isRead' BOOL,"
 		"'isSent' BOOL,"
+		"'isDelivered' BOOL,"
+		"'isRead' BOOL,"
 		"'meta' TEXT," // placeholder field for later additons
 		"FOREIGN KEY('author') REFERENCES Contacts ('jid'),"
 		"FOREIGN KEY('recipient') REFERENCES Contacts ('jid')"
@@ -101,17 +102,11 @@ QHash<int, QByteArray> MessageModel::roleNames() const
 	names[Qt::UserRole + 4] = "timestamp";
 	names[Qt::UserRole + 5] = "message";
 	names[Qt::UserRole + 6] = "id";
-	names[Qt::UserRole + 7] = "isRead";
-	names[Qt::UserRole + 8] = "isSent";
-	names[Qt::UserRole + 9] = "meta";
+	names[Qt::UserRole + 7] = "isSent"; // sent to server
+	names[Qt::UserRole + 8] = "isDelivered"; // message has arrived on a client
+	names[Qt::UserRole + 9] = "isRead"; // message has been read from the recipient
+	names[Qt::UserRole + 10] = "meta";
 	return names;
-}
-
-void MessageModel::setMessageAsRead(const QString msgId)
-{
-	QSqlQuery newQuery;
-	newQuery.exec(QString("UPDATE 'Messages' SET 'isRead' = 1 WHERE id = '%1'").arg(msgId));
-	submitAll();
 }
 
 void MessageModel::setMessageAsSent(const QString msgId)
@@ -121,9 +116,24 @@ void MessageModel::setMessageAsSent(const QString msgId)
 	submitAll();
 }
 
+void MessageModel::setMessageAsDelivered(const QString msgId)
+{
+	QSqlQuery newQuery;
+	newQuery.exec(QString("UPDATE 'Messages' SET 'isDelivered' = 1 WHERE id = '%1'").arg(msgId));
+	submitAll();
+}
+
+void MessageModel::setMessageAsRead(const QString msgId)
+{
+	QSqlQuery newQuery;
+	newQuery.exec(QString("UPDATE 'Messages' SET 'isRead' = 1 WHERE id = '%1'").arg(msgId));
+	submitAll();
+}
+
 void MessageModel::addMessage(const QString* author, const QString* author_resource,
 	const QString* recipient, const QString* recipient_resource,
-	const QString* timestamp, const QString* message, const QString* msgId)
+	const QString* timestamp, const QString* message, const QString* msgId,
+	bool sentByMe)
 {
 	QSqlRecord newRecord = record();
 	newRecord.setValue("author", *author);
@@ -132,9 +142,10 @@ void MessageModel::addMessage(const QString* author, const QString* author_resou
 	newRecord.setValue("recipient_resource", *recipient_resource);
 	newRecord.setValue("timestamp", *timestamp);
 	newRecord.setValue("message", *message);
-	newRecord.setValue("id", msgId);
+	newRecord.setValue("id", *msgId);
+	newRecord.setValue("isSent", sentByMe ? false : true);
+	newRecord.setValue("isDelivered", sentByMe ? false : true);
 	newRecord.setValue("isRead", false);
-	newRecord.setValue("isSent", false);
 
 	if (!insertRecord(rowCount(), newRecord)) {
 		qWarning() << "Failed to add message to DB:" << lastError().text();

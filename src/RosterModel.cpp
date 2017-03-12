@@ -102,16 +102,20 @@ void RosterModel::insertContact(QString jid_, QString name_)
 		qWarning() << "Failed to save Contact into DB:"
 			<< lastError().text();
 	}
+
+	submitAll();
 }
 
 void RosterModel::removeContactByJid(QString jid_)
 {
 	QSqlQuery newQuery;
 	newQuery.exec(QString("DELETE FROM 'Roster' WHERE jid = '%1'").arg(jid_));
+	submitAll();
 }
 
 void RosterModel::updateContactName(QString jid_, QString name_)
 {
 	QSqlQuery newQuery;
 	newQuery.exec(QString("UPDATE 'Roster' SET name = '%1' WHERE jid = '%2'").arg(name_, jid_));
+	submitAll();
 }

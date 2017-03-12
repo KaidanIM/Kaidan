@@ -113,6 +113,10 @@ if(SAILFISH_OS)
 		SAILFISH_OS=True
 		PLATFORM_DISPLAY_NAME="Sailfish OS"
 	)
+else()
+	set(KAIDAN_COMPILE_DEFINITIONS
+		NOTIFICATIONS_LIBNOTIFY=True
+	)
 endif()
 
 target_compile_definitions(${PROJECT_NAME} PRIVATE

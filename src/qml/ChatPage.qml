@@ -68,7 +68,7 @@ Kirigami.Page {
 			model: kaidan.messageController.messageModel
 
 			delegate: Row {
-				readonly property bool sentByMe: model.recipient !== "Me"
+				readonly property bool sentByMe: !(model.recipient == "Me" || model.recipient == kaidan.jid)
 
 				anchors.right: sentByMe ? parent.right : undefined
 				spacing: 6

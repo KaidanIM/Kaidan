@@ -35,6 +35,7 @@
 #include <Swiften/Swiften.h>
 // Kaidan
 #include "MessageModel.h"
+#include "Notifications.h"
 
 MessageController::MessageController(QString* ownJid_, QObject *parent) : QObject(parent)
 {
@@ -114,6 +115,12 @@ void MessageController::handleMessageReceived(Swift::Message::ref message_)
 			&recipient_resource, &timestamp, &message, &msgId, false);
 
 		emit messageModelChanged();
+
+		// send a new notification | TODO: Resolve nickname from JID
+		Notifications::sendMessageNotification(
+			message_->getFrom().toBare().toString(),
+			*bodyOpt
+		);
 	}
 
 	// XEP-0184: Message Delivery Receipts

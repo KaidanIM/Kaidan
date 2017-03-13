@@ -17,8 +17,13 @@
  *  along with Kaidan. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include <string>
+// Kaidan
+#include "Notifications.h"
 
-namespace Notifications {
-	void sendMessageNotification(std::string fromName, std::string message);
+void Notifications::sendMessageNotification(std::string fromName, std::string message)
+{
+#ifdef NOTIFICATIONS_LIBNOTIFY
+	std::string command = "notify-send \"" + fromName + ": " + message + "\" -a kaidan -i kaidan -t 4000";
+	system(command.c_str());
+#endif
 }

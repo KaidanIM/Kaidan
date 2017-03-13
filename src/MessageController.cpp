@@ -116,7 +116,7 @@ void MessageController::handleMessageReceived(Swift::Message::ref message_)
 
 		emit messageModelChanged();
 
-		// send a new notification
+		// send a new notification | TODO: Resolve nickname from JID
 		Notifications::sendMessageNotification(
 			message_->getFrom().toBare().toString(),
 			*bodyOpt

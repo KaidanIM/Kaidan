@@ -40,6 +40,9 @@ public:
 	void insertContact(QString, QString);
 	void removeContactByJid(QString);
 	void updateContactName(QString, QString);
+	QStringList getJidList();
+	void removeListOfJids(QStringList*);
+	void setLastExchangedOfJid(const QString, const QString);
 
 private:
 	Swift::Client* client;

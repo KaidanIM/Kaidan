@@ -26,6 +26,8 @@ Kirigami.ScrollablePage {
 	title: qsTr("Contacts")
 
 	ListView {
+		verticalLayoutDirection: ListView.TopToBottom
+
 		model: kaidan.rosterController.rosterModel
 
 		delegate: Kirigami.SwipeListItem {

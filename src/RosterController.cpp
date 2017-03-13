@@ -24,6 +24,7 @@
 #include <string.h>
 // Qt 5
 #include <QQmlContext>
+#include <QDateTime>
 #include <QDebug>
 #include <QSqlError>
 #include <QSqlRecord>
@@ -76,25 +77,59 @@ void RosterController::handleRosterReceived(Swift::ErrorPayload::ref error_)
 	}
 	else
 	{
-		// remove all rows / contacts from the model (we've got new ones)
-		rosterModel->clearData();
-
 		// create a vector containing all roster items
 		std::vector<Swift::XMPPRosterItem> rosterItems = xmppRoster->getItems();
 		// create an iterator for it
 		std::vector<Swift::XMPPRosterItem>::iterator it;
 
-		// add all contacts from the received roster
-		for(it = rosterItems.begin(); it < rosterItems.end(); it++)
+
+		//
+		// Find out which/if JIDs have been removed
+		//
+
+		// list of JIDs from server
+		QStringList newJids;
+		for (it = rosterItems.begin(); it < rosterItems.end(); it++)
+			newJids << QString::fromStdString((*it).getJID().toBare().toString());
+
+		// list of the JIDs from the DB
+		QStringList currentJids = rosterModel->getJidList();
+		// a new list with all JIDs to delete
+		QStringList jidsToDelete;
+
+		// add all JIDs to the delete list that are in the original list
+		// but not in the new from the server
+		for (int i = 0; i < currentJids.length(); i++)
 		{
-			rosterModel->insertContact(
-				QString::fromStdString((*it).getJID().toBare().toString()),
-				QString::fromStdString((*it).getName())
-			);
+			QString jidAtI = currentJids.at(i);
+			if (!newJids.contains(jidAtI))
+			{
+				jidsToDelete << jidAtI;
+			}
 		}
 
-		// submit all new changes
-		rosterModel->submitAll();
+		// remove the JIDs from the DB
+		rosterModel->removeListOfJids(&jidsToDelete);
+
+		//
+		// Update the roster
+		//
+
+		for (it = rosterItems.begin(); it < rosterItems.end(); it++)
+		{
+			QString jid = QString::fromStdString((*it).getJID().toBare().toString());
+			QString name = QString::fromStdString((*it).getName());
+
+			if (currentJids.contains(jid))
+			{
+				rosterModel->updateContactName(jid, name);
+			}
+			else
+			{
+				rosterModel->insertContact(jid, name);
+			}
+		}
+
 		// send signal for updating the GUI
 		emit rosterModelChanged();
 	}
@@ -193,4 +228,12 @@ void RosterController::removeContact(const QString jid_)
 	iqRouter->sendIQ(
 		Swift::IQ::createRequest(Swift::IQ::Set, Swift::JID(), iqId, rosterPayload)
 	);
+}
+
+void RosterController::updateLastExchangedOfJid(const QString jid_)
+{
+	rosterModel->setLastExchangedOfJid(jid_, QDateTime::currentDateTime().toString(Qt::ISODate));
+
+	// send signal for updating the GUI
+	emit rosterModelChanged();
 }

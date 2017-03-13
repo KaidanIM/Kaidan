@@ -55,6 +55,11 @@ void MessageController::setClient(Swift::Client* client_)
 	client->onMessageReceived.connect(boost::bind(&MessageController::handleMessageReceived, this, _1));
 }
 
+void MessageController::setRosterController(RosterController* rosterController_)
+{
+	rosterController = rosterController_;
+}
+
 MessageModel* MessageController::getMessageModel()
 {
 	return messageModel;
@@ -155,6 +160,13 @@ void MessageController::handleMessageReceived(Swift::Message::ref message_)
 			messageModel->setMessageAsDelivered(QString::fromStdString(receivedId));
 		}
 	}
+
+	//
+	// Update lastExchanged in roster controller
+	//
+
+	rosterController->updateLastExchangedOfJid(QString::fromStdString(
+		message_->getFrom().toBare().toString()));
 }
 
 void MessageController::sendMessage(const QString recipient_, const QString message_)
@@ -195,5 +207,9 @@ void MessageController::sendMessage(const QString recipient_, const QString mess
 	// send the message
 	client->sendMessage(newMessage);
 
-	std::cout << "MessageController: Sent new message from " << newMessage->getFrom() << " to " << newMessage->getTo() << '\n';
+	//
+	// Update lastExchanged in roster controller
+	//
+
+	rosterController->updateLastExchangedOfJid(recipient);
 }

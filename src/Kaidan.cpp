@@ -74,6 +74,8 @@ Kaidan::Kaidan(Swift::NetworkFactories* networkFactories, QObject *parent) : QOb
 	presenceController = new PresenceController();
 	vCardController = new VCardController();
 	serviceDiscoveryManager = new ServiceDiscoveryManager();
+
+	messageController->setRosterController(rosterController);
 }
 
 Kaidan::~Kaidan()

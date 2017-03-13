@@ -135,6 +135,10 @@ void MessageModel::addMessage(const QString* author, const QString* author_resou
 	const QString* timestamp, const QString* message, const QString* msgId,
 	bool sentByMe)
 {
+	//
+	// add the new message
+	//
+
 	QSqlRecord newRecord = record();
 	newRecord.setValue("author", *author);
 	newRecord.setValue("author_resource", *author_resource);

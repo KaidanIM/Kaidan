@@ -19,6 +19,7 @@
 
 #include "RosterModel.h"
 
+#include <QDateTime>
 #include <QDebug>
 #include <QSqlError>
 #include <QSqlQuery>
@@ -35,11 +36,18 @@ static void createTable()
 	}
 
 	QSqlQuery query;
-	if (!query.exec(
-		"CREATE TABLE IF NOT EXISTS 'Roster' ("
-		"   'jid' TEXT NOT NULL,"
-		"   'name' TEXT NOT NULL"
-		")")) {
+	if (!query.exec("CREATE TABLE IF NOT EXISTS 'Roster' ("
+		"'jid' TEXT NOT NULL,"
+		"'name' TEXT NOT NULL,"
+		"'lastExchanged' TEXT NOT NULL,"
+		"'unreadMessages' INTEGER," // < UNUSED v
+		"'lastMessage' TEXT,"
+		"'lastOnline' TEXT,"
+		"'activity' TEXT,"
+		"'status' TEXT,"
+		"'mood' TEXT"               // < UNUSED ^
+		")"))
+	{
 		qFatal("Failed to query database: %s", qPrintable(query.lastError().text()));
 	}
 }
@@ -49,6 +57,9 @@ RosterModel::RosterModel(QObject *parent) : QSqlTableModel(parent)
 	createTable();
 	setTable(rosterTableName);
 	setEditStrategy(QSqlTableModel::OnManualSubmit);
+
+	// sort from last time exchanged
+	setSort(2, Qt::DescendingOrder);
 
 	select();
 }
@@ -96,6 +107,8 @@ void RosterModel::insertContact(QString jid_, QString name_)
 	// set the given data
 	newRecord.setValue("jid", jid_);
 	newRecord.setValue("name", name_);
+	newRecord.setValue("lastExchanged", QDateTime::currentDateTime().toString(Qt::ISODate));
+	newRecord.setValue("unreadMessages", 0);
 
 	// inster the record into the DB (or print error)
 	if (!insertRecord(rowCount(), newRecord)) {
@@ -117,5 +130,37 @@ void RosterModel::updateContactName(QString jid_, QString name_)
 {
 	QSqlQuery newQuery;
 	newQuery.exec(QString("UPDATE 'Roster' SET name = '%1' WHERE jid = '%2'").arg(name_, jid_));
+	submitAll();
+}
+
+QStringList RosterModel::getJidList()
+{
+	QStringList retVar;
+
+	QSqlQuery query;
+	query.exec("SELECT * FROM 'Roster'");
+
+	int jidCol = query.record().indexOf("jid");
+
+	// add all jids to the list
+	while (query.next())
+		retVar << query.value(jidCol).toString();
+	return retVar;
+}
+
+void RosterModel::removeListOfJids(QStringList* jidList)
+{
+	QSqlQuery query;
+	for (int i = 0; i < jidList->length(); i++)
+	{
+		query.exec(QString("DELETE FROM 'Roster' WHERE jid = '%1'").arg(jidList->at(i)));
+	}
+	submitAll();
+}
+
+void RosterModel::setLastExchangedOfJid(const QString jid_, const QString date_)
+{
+	QSqlQuery newQuery;
+	newQuery.exec(QString("UPDATE 'Roster' SET lastExchanged = '%1' WHERE jid = '%2'").arg(date_, jid_));
 	submitAll();
 }

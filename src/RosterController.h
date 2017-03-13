@@ -42,6 +42,7 @@ public:
 	void setClient(Swift::Client *client_);
 	void requestRosterFromClient();
 	RosterModel* getRosterModel();
+	void updateLastExchangedOfJid(const QString jid_);
 	Q_INVOKABLE void addContact(const QString jid_, const QString name_);
 	Q_INVOKABLE void removeContact(const QString);
 

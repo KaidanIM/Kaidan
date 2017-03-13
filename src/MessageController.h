@@ -27,6 +27,7 @@
 #include <Swiften/Swiften.h>
 // Kaidan
 #include "MessageModel.h"
+#include "RosterController.h"
 
 class MessageController : public QObject
 {
@@ -39,6 +40,7 @@ public:
 	~MessageController();
 
 	void setClient(Swift::Client* client_);
+	void setRosterController(RosterController* rosterController_);
 	MessageModel* getMessageModel();
 
 	void setRecipient(QString recipient_);
@@ -56,6 +58,7 @@ private:
 
 	Swift::Client* client;
 	MessageModel* messageModel;
+	RosterController* rosterController;
 	QString recipient;
 	QString* ownJid;
 };

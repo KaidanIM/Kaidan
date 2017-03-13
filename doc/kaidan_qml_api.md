@@ -16,7 +16,7 @@ This will be needed to use all registered QML types of Kaidan.
 
 ## Kaidan
 
-These are the global functions of the main Kaidan class.
+These are the global functions and variables of the main Kaidan class.
 
 ### `kaidan.connectionState = bool`
 Is true, when connected to a server.

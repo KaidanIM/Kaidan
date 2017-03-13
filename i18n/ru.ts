@@ -113,7 +113,7 @@
     </message>
     <message>
         <source>Cancel</source>
-        <translation type="unfinished"></translation>
+        <translation>Отменить</translation>
     </message>
     <message>
         <source>Add</source>
@@ -134,7 +134,7 @@
 <context>
     <name>RosterRemoveContactSheet</name>
     <message>
-        <source>Do you really want to delete the contact &quot;%1&quot; from your roster?</source>
+        <source>Do you really want to delete the contact "%1" from your roster?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>

@@ -74,11 +74,9 @@ MessageModel::MessageModel(QObject *parent) :
 
 void MessageModel::applyRecipientFilter(QString recipient_, QString author_)
 {
-	// DEPRECATED: author/recipient = 'Me'
 	const QString filterString = QString::fromLatin1("(recipient = '%1' AND "
-		"author = 'Me') OR (recipient = 'Me' AND author='%1') OR "
-		"(recipient = '%1' AND author = '%2') OR (recipient = '%2' AND "
-		"author = '%1')").arg(recipient_, author_);
+		"author = '%2') OR (recipient = '%2' AND author = '%1')").arg(
+			recipient_, author_);
 	setFilter(filterString);
 	select();
 }

@@ -27,6 +27,10 @@ Kaidan is *not* finished yet, so don't expect it working as well as a finished c
 
 On Linux do the following:
 
+Get Kaidan source code
+
+ * `git clone https://github.com/kaidanim/kaidan`
+
 Create a working directory
 
  * `mkdir build`
@@ -42,10 +46,6 @@ Debian currently has no Kirigami2 packages, so we have to install them from exte
  * `sudo apt-key adv --keyserver hkp://pgp.mit.edu --recv-key "210EB0BCA70439F0"`
  * `sudo apt-get update`
  * `sudo apt-get install kirigami2-dev`
-
-Get Kaidan source code
-
- * `git clone https://github.com/kaidanim/kaidan`
 
 Finally compile it
 

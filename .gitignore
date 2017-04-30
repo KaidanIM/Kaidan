@@ -120,6 +120,11 @@ CMakeFiles
 cmake_install.cmake
 install_manifest.txt
 
+################ KDevelop #####################
+
+.kdev4/
+*.kdev4
+
 ################# Other #######################
 
 *.swp

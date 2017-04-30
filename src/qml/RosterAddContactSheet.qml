@@ -21,10 +21,13 @@
 import QtQuick 2.0
 import QtQuick.Controls 2.0 as Controls
 import QtQuick.Layouts 1.2
-import org.kde.kirigami 1.0 as Kirigami
+import org.kde.kirigami 2.0 as Kirigami
 
 Kirigami.OverlaySheet {
-	Column {
+	ColumnLayout {
+		Layout.maximumWidth: parent.width
+		Layout.fillWidth: true
+
 		Kirigami.Heading {
 			text: qsTr("Add Contact")
 		}
@@ -35,30 +38,37 @@ Kirigami.OverlaySheet {
 		Controls.TextField {
 			id: nickField
 			selectByMouse: true
+			Layout.fillWidth: true
 		}
 
 		Kirigami.Label {
-			text: qsTr("Jabber ID:")
+			text: qsTr("Jabber-ID:")
 		}
 		Controls.TextField {
 			id: jidField
 			placeholderText: qsTr("user@example.org")
 			selectByMouse: true
+			Layout.fillWidth: true
 		}
 
-		Row {
+		RowLayout {
+			Layout.topMargin: 10
+			Layout.fillWidth: true
+
 			Controls.Button {
 				text: qsTr("Cancel")
 				onClicked: close()
+				Layout.fillWidth: true
 			}
 
 			Controls.Button {
 				text: qsTr("Add")
-				enabled: contactJidField.length > 0
+				enabled: jidField.length > 0
 				onClicked: {
 					kaidan.rosterController.addContact(jidField.text, nickField.text);
 					close();
 				}
+				Layout.fillWidth: true
 			}
 		}
 	}

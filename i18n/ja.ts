@@ -36,6 +36,21 @@
     </message>
 </context>
 <context>
+    <name>GlobalDrawer</name>
+    <message>
+        <source>Add Contact</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Logout</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>About</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>LoginPage</name>
     <message>
         <source>Your Jabber-ID:</source>
@@ -51,7 +66,7 @@
     </message>
     <message>
         <source>Password</source>
-        <translation>合言葉</translation>
+        <translation type="vanished">合言葉</translation>
     </message>
     <message>
         <source>Retry</source>
@@ -65,22 +80,54 @@
         <source>Connecting...</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Login</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Log in to your Jabber Account</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Your diaspora*-ID:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>user@diaspora.pod</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>RosterAddContactSheet</name>
+    <message>
+        <source>Add Contact</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Nickname:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Jabber-ID:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>user@example.org</source>
+        <translation type="unfinished">user＠example.jp</translation>
+    </message>
+    <message>
+        <source>Cancel</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Add</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>RosterPage</name>
     <message>
         <source>Contacts</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>main</name>
-    <message>
-        <source>Logout</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>About</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

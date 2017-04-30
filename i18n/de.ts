@@ -36,6 +36,21 @@
     </message>
 </context>
 <context>
+    <name>GlobalDrawer</name>
+    <message>
+        <source>Add Contact</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Logout</source>
+        <translation type="unfinished">Abmelden</translation>
+    </message>
+    <message>
+        <source>About</source>
+        <translation type="unfinished">Über</translation>
+    </message>
+</context>
+<context>
     <name>LoginPage</name>
     <message>
         <source>Your Jabber-ID:</source>
@@ -51,7 +66,7 @@
     </message>
     <message>
         <source>Password</source>
-        <translation>Passwort</translation>
+        <translation type="vanished">Passwort</translation>
     </message>
     <message>
         <source>Connect</source>
@@ -64,6 +79,49 @@
     <message>
         <source>Connecting...</source>
         <translation>Verbinden...</translation>
+    </message>
+    <message>
+        <source>Login</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Log in to your Jabber Account</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Your diaspora*-ID:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>user@diaspora.pod</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>RosterAddContactSheet</name>
+    <message>
+        <source>Add Contact</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Nickname:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Jabber-ID:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>user@example.org</source>
+        <translation type="unfinished">user@beispiel.org</translation>
+    </message>
+    <message>
+        <source>Cancel</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Add</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -81,11 +139,11 @@
     </message>
     <message>
         <source>Logout</source>
-        <translation>Abmelden</translation>
+        <translation type="vanished">Abmelden</translation>
     </message>
     <message>
         <source>About</source>
-        <translation>Über</translation>
+        <translation type="vanished">Über</translation>
     </message>
 </context>
 </TS>

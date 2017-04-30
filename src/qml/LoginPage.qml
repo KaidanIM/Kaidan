@@ -3,6 +3,7 @@
  *
  *  Copyright (C) 2016-2017 LNJ <git@lnj.li>
  *  Copyright (C) 2016 Marzanna
+ *  Copyright (C) 2017 JBBgameich <jbb.mail@gmx.de>
  *
  *  Kaidan is free software: you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -20,58 +21,130 @@
 
 import QtQuick 2.0
 import QtQuick.Controls 2.0 as Controls
+import QtQuick.Controls.Material 2.0
 import QtQuick.Layouts 1.2
 import org.kde.kirigami 2.0 as Kirigami
 
 Kirigami.Page {
 	property bool isRetry
 
-	title: "Login"
+	title: qsTr("Login")
 
-	GridLayout {
-		columns: 2
-		width: parent.width
-		Layout.fillWidth: true
+	ColumnLayout {
+		anchors.fill: parent
 
-		// JID field
-		Kirigami.Label {
-			text: qsTr("Your Jabber-ID:")
+		Kirigami.Heading {
+			text: qsTr("Log in to your Jabber Account")
+			anchors.horizontalCenter: parent.horizontalCenter
 		}
-		Controls.TextField {
-			id: jidField
-			text: kaidan.jid
-			placeholderText: qsTr("user@example.org")
+
+		GridLayout {
+			columns: 2
+			width: parent.width
 			Layout.fillWidth: true
-		}
 
-		// Password field
-		Kirigami.Label {
-			text: qsTr("Your Password:")
-		}
-		Controls.TextField {
-			id: passField
-			text: kaidan.password
-			placeholderText: qsTr("Password")
-			echoMode: TextInput.Password
-			Layout.fillWidth: true
-		}
+			// JID field
+			Kirigami.Label {
+				id: jidLabel
+				text: qsTr("Your Jabber-ID:")
 
-		// Connect button
-		Controls.Button {
-			id: connectButton
-			text: isRetry ? qsTr("Retry") : qsTr("Connect")
-			Layout.columnSpan: 2
-			Layout.alignment: Qt.AlignRight
-			onClicked: {
-				// disable the button
-				connectButton.enabled = false;
-				// indicate that we're connecting now
-				connectButton.text = "<i>" + qsTr("Connecting...") + "</i>";
+				states: [
+					State {
+						name: "diaspora"
+						PropertyChanges {
+							target: jidLabel
+							text: qsTr("Your diaspora*-ID:")
+						}
+					}
+				]
+			}
+			Controls.TextField {
+				id: jidField
+				text: kaidan.jid
+				placeholderText: qsTr("user@example.org")
+				Layout.fillWidth: true
+				selectByMouse: true
 
-				// connect to given account data
-				kaidan.jid = jidField.text;
-				kaidan.password = passField.text;
-				kaidan.mainConnect();
+				states: [
+					State {
+						name: "diaspora"
+						PropertyChanges {
+							target: jidField
+							placeholderText: qsTr("user@diaspora.pod")
+						}
+					}
+				]
+			}
+
+			// Password field
+			Kirigami.Label {
+				text: qsTr("Your Password:")
+			}
+			Controls.TextField {
+				id: passField
+				text: kaidan.password
+				echoMode: TextInput.Password
+				selectByMouse: true
+				Layout.fillWidth: true
+			}
+
+			// Connect button
+			Controls.Button {
+				id: connectButton
+				text: isRetry ? qsTr("Retry") : qsTr("Connect")
+				Layout.columnSpan: 2
+				Layout.alignment: Qt.AlignRight
+				onClicked: {
+					// disable the button
+					connectButton.enabled = false;
+					// indicate that we're connecting now
+					connectButton.text = "<i>" + qsTr("Connecting...") + "</i>";
+
+					// connect to given account data
+					kaidan.jid = jidField.text;
+					kaidan.password = passField.text;
+					kaidan.mainConnect();
+				}
+			}
+		}
+		
+
+		Controls.ToolBar {
+			id: serviceBar
+			height: Kirigami.Units.gridUnit * 3
+			anchors.horizontalCenter: parent.horizontalCenter
+			Material.foreground: "transparent"
+			Material.background: "transparent"
+			Material.accent: "transparent"
+
+			Row {
+				spacing: 20
+
+				Controls.ToolButton {
+					Image {
+						source: kaidan.getResourcePath("images/diaspora.svg")
+						fillMode: Image.PreserveAspectFit
+						height: serviceBar.height
+					}
+
+					onClicked: {
+						jidField.state = "diaspora";
+						jidLabel.state = "diaspora";
+					}
+				}
+
+				Controls.ToolButton {
+					Image { 
+						source: kaidan.getResourcePath("images/xmpp.svg")
+						fillMode: Image.PreserveAspectFit
+						height: serviceBar.height
+					}
+
+					onClicked: {
+						jidField.state = "";
+						jidLabel.state = "";
+					}
+				}
 			}
 		}
 	}

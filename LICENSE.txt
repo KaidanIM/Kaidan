@@ -44,6 +44,12 @@ Copyright (C) 2016 MBB <mbb-mail@gmx.de> (CC BY-SA 4.0):
 
 Copyright (C) 2013 Subtle Patterns, Toptal Designers (CC BY-SA 3.0):
   data/images/chat.png (source: https://www.toptal.com/designers/subtlepatterns/inspiration-geometry/)
+  
+Copyright (C) Raja Sandhu, XMPP Standards Foundation (MIT):
+  data/images/xmpp.svg
+
+Copyright (C) Dandelion Developers (https://github.com/Diaspora-for-Android/dandelion) (GPLv3+):
+  data/images/diaspora.svg
 
 License of all media files not listed in here:
 Copyright (C) 2017 Kaidan developers (CC BY-SA 4.0)

@@ -28,14 +28,13 @@ import org.kde.kirigami 2.0 as Kirigami
 Kirigami.Page {
 	property bool isRetry
 
-	title: "Login"
+	title: qsTr("Login")
 
-	Column {
-		width: parent.width
-		spacing: 50
+	ColumnLayout {
+		anchors.fill: parent
 
 		Kirigami.Heading {
-			text: qsTr("Log in to Kaidan")
+			text: qsTr("Log in to your Jabber Account")
 			anchors.horizontalCenter: parent.horizontalCenter
 		}
 
@@ -48,6 +47,16 @@ Kirigami.Page {
 			Kirigami.Label {
 				id: jidLabel
 				text: qsTr("Your Jabber-ID:")
+
+				states: [
+					State {
+						name: "diaspora"
+						PropertyChanges {
+							target: jidLabel
+							text: qsTr("Your diaspora*-ID:")
+						}
+					}
+				]
 			}
 			Controls.TextField {
 				id: jidField
@@ -55,6 +64,16 @@ Kirigami.Page {
 				placeholderText: qsTr("user@example.org")
 				Layout.fillWidth: true
 				selectByMouse: true
+
+				states: [
+					State {
+						name: "diaspora"
+						PropertyChanges {
+							target: jidField
+							placeholderText: qsTr("user@diaspora.pod")
+						}
+					}
+				]
 			}
 
 			// Password field
@@ -64,10 +83,9 @@ Kirigami.Page {
 			Controls.TextField {
 				id: passField
 				text: kaidan.password
-				placeholderText: qsTr("Password")
 				echoMode: TextInput.Password
-				Layout.fillWidth: true
 				selectByMouse: true
+				Layout.fillWidth: true
 			}
 
 			// Connect button
@@ -103,30 +121,28 @@ Kirigami.Page {
 				spacing: 20
 
 				Controls.ToolButton {
-					height: serviceBar.height
-					onClicked: {
-						jidField.placeholderText = qsTr("user@diaspora-pod.org");
-						jidLabel.text = qsTr("Your Diaspora* ID");
-					}
-
-					Image { 
-						source: kaidan.getResourcePath("images/diaspora.svg") 
+					Image {
+						source: kaidan.getResourcePath("images/diaspora.svg")
 						fillMode: Image.PreserveAspectFit
 						height: serviceBar.height
+					}
+
+					onClicked: {
+						jidField.state = "diaspora";
+						jidLabel.state = "diaspora";
 					}
 				}
 
 				Controls.ToolButton {
-					height: serviceBar.height
-					onClicked: {
-						jidField.placeholderText = qsTr("user@example.org");
-						jidLabel.text = qsTr("Your Jabber ID");
-					}
-
 					Image { 
 						source: kaidan.getResourcePath("images/xmpp.svg")
 						fillMode: Image.PreserveAspectFit
 						height: serviceBar.height
+					}
+
+					onClicked: {
+						jidField.state = "";
+						jidLabel.state = "";
 					}
 				}
 			}

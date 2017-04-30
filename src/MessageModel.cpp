@@ -147,7 +147,7 @@ void MessageModel::addMessage(const QString* author, const QString* author_resou
 	newRecord.setValue("id", *msgId);
 	newRecord.setValue("isSent", sentByMe ? false : true);
 	newRecord.setValue("isDelivered", sentByMe ? false : true);
-	newRecord.setValue("isRead", false);
+	newRecord.setValue("isRead", sentByMe ? true : false);
 
 	if (!insertRecord(rowCount(), newRecord)) {
 		qWarning() << "Failed to add message to DB:" << lastError().text();

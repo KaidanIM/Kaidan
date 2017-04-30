@@ -6,5 +6,6 @@
 		<file alias="qml/ChatPage.qml">src/qml/ChatPage.qml</file>
 		<file alias="qml/AboutPage.qml">src/qml/AboutPage.qml</file>
 		<file alias="qml/GlobalDrawer.qml">src/qml/GlobalDrawer.qml</file>
+		<file alias="qml/RosterAddContactSheet.qml">src/qml/RosterAddContactSheet.qml</file>
 	</qresource>
 </RCC>

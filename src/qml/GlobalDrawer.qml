@@ -34,6 +34,13 @@ Kirigami.GlobalDrawer {
 
 	actions: [
 		Kirigami.Action {
+			text: qsTr("Add Contact")
+			iconName: "contact-new"
+			onTriggered: {
+				addContactDialogRequested();
+			}
+		},
+		Kirigami.Action {
 			text: qsTr("Logout")
 			iconName: "system-shutdown"
 			onTriggered: {

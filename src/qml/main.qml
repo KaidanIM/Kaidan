@@ -19,7 +19,7 @@
  *  along with Kaidan. If not, see <http://www.gnu.org/licenses/>.
  */
 
-import QtQuick 2.0
+import QtQuick 2.6
 import org.kde.kirigami 2.0 as Kirigami
 import io.github.kaidanim 1.0
 
@@ -27,6 +27,9 @@ Kirigami.ApplicationWindow {
 	id: root
 	width: 960
 	height: 540
+
+	// signals
+	signal addContactDialogRequested()
 
 	header: Kirigami.ToolBarApplicationHeader {
 		preferredHeight: Kirigami.Units.gridUnit * 2.25

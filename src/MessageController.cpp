@@ -104,7 +104,7 @@ void MessageController::handleMessageReceived(Swift::Message::ref message_)
 		const QString author_resource = QString(message_->getFrom().getResource().c_str());
 		const QString recipient_resource = QString::fromStdString(client->getJID().getResource());
 		QString timestamp = QDateTime::currentDateTime().toString(Qt::ISODate); // fallback timestamp
-		const QString message = QString(*bodyOpt->c_str());
+		const QString message = QString::fromStdString(*bodyOpt);
 		const QString msgId = QString::fromStdString(message_->getID());
 
 		// get the timestamp from the message, if exists

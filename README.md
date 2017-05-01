@@ -33,7 +33,7 @@ Install dependencies to build Kaidan (for Debian Stretch and Sid)
 
 Debian currently has no Kirigami2 packages, so we have to install them from external sources.
 
- * `sudo apt-add-repository "deb https://kaidanim.github.io/packages sid main"`
+ * `sudo apt-add-repository "deb https://raw.githubusercontent.com/kaidanim/packages/master sid main"`
  * `sudo apt-key adv --keyserver hkp://pgp.mit.edu --recv-key "210EB0BCA70439F0"`
  * `sudo apt-get update`
  * `sudo apt-get install kirigami2-dev`

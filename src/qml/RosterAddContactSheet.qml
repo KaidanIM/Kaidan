@@ -25,11 +25,9 @@ import org.kde.kirigami 2.0 as Kirigami
 
 Kirigami.OverlaySheet {
 	ColumnLayout {
-		Layout.maximumWidth: parent.width
-		Layout.fillWidth: true
-
 		Kirigami.Heading {
-			text: qsTr("Add Contact")
+			text: qsTr("Add new contact") + "          "
+			Layout.fillWidth: true
 		}
 
 		Kirigami.Label {
@@ -53,7 +51,6 @@ Kirigami.OverlaySheet {
 
 		RowLayout {
 			Layout.topMargin: 10
-			Layout.fillWidth: true
 
 			Controls.Button {
 				text: qsTr("Cancel")

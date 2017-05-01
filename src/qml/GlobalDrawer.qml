@@ -34,7 +34,7 @@ Kirigami.GlobalDrawer {
 
 	actions: [
 		Kirigami.Action {
-			text: qsTr("Add Contact")
+			text: qsTr("Add new contact")
 			iconName: "contact-new"
 			onTriggered: {
 				addContactDialogRequested();

@@ -28,6 +28,10 @@ Kirigami.ScrollablePage {
 	RosterAddContactSheet {
 		id: addContactSheet
 	}
+	RosterRemoveContactSheet {
+		id: removeContactSheet
+		jid: ""
+	}
 
 	ListView {
 		verticalLayoutDirection: ListView.TopToBottom
@@ -55,7 +59,8 @@ Kirigami.ScrollablePage {
 				Kirigami.Action {
 					iconName: "bookmark-remove"
 					onTriggered: {
-						kaidan.rosterController.removeContact(model.jid);
+						removeContactSheet.jid = model.jid;
+						removeContactSheet.open();
 					}
 				}
 			]

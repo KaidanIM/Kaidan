@@ -112,9 +112,10 @@ void Kaidan::mainConnect()
 	// Create XML tracer (console output of xmpp data)
 	tracer = new Swift::ClientXMLTracer(client);
 
-	// share kaidan version
+	// share kaidan version and sytem info
+	QString systemInfo = QSysInfo::prettyProductName();
 	softwareVersionResponder = new Swift::SoftwareVersionResponder(client->getIQRouter());
-	softwareVersionResponder->setVersion(APPLICATION_DISPLAY_NAME, VERSION_STRING);
+	softwareVersionResponder->setVersion(APPLICATION_DISPLAY_NAME, VERSION_STRING, systemInfo.toStdString());
 	softwareVersionResponder->start();
 
 	// set client in message, roster and presence controller

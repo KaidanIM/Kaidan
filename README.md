@@ -29,13 +29,13 @@ Kaidan is *not* finished yet, so don't expect it working as well as a finished c
 
 Note: We can not guarantee that the packages available from the repository is always up to date.
 
-Add our apt repository too your system
+Add our apt repository to your system
 
  * `sudo apt-add-repository "deb https://raw.githubusercontent.com/kaidanim/packages/master sid main"`
  * `sudo apt-key adv --keyserver hkp://pgp.mit.edu --recv-key "210EB0BCA70439F0"`
  * `sudo apt-get update`
 
-Then finally install Kaidan
+Then install Kaidan
 
  * `sudo apt-get install kaidan`
 

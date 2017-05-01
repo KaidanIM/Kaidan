@@ -26,7 +26,7 @@ Kirigami.OverlaySheet {
 	property string jid;
 
 	onSheetOpenChanged: {
-		infoLabel.text = qsTr("Do you really want to delete the contact with the JID \"%1\" from your roster? This can't be undone!").arg(jid);
+		infoLabel.text = qsTr("Do you really want to delete the contact \"%1\" from your roster?").arg(jid);
 	}
 
 	ColumnLayout {

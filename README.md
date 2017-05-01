@@ -39,7 +39,7 @@ Then finally install Kaidan
 
  * `sudo apt-get install kaidan`
 
-### Compile yourself
+### Compile it yourself
 
 On Linux do the following:
 

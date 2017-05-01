@@ -27,7 +27,7 @@ Kaidan is *not* finished yet, so don't expect it working as well as a finished c
 
 ### Debian sid based systems
 
-Note: We can not guarantee that the packages available from the repository is always up to date.
+Note: We can not guarantee that the packages available from the repository are always up to date.
 
 Add our apt repository to your system
 

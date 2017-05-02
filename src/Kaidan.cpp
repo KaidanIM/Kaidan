@@ -125,8 +125,12 @@ void Kaidan::mainConnect()
 	vCardController->setClient(client);
 	serviceDiscoveryManager->setClient(client);
 
+	Swift::ClientOptions options;
+	options.allowPLAINWithoutTLS = true;
+	options.useStreamCompression = false;
+    
 	// .. and connect!
-	client->connect();
+	client->connect(options);
 }
 
 // we don't want to close client without disconnection

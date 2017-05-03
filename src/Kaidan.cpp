@@ -126,7 +126,6 @@ void Kaidan::mainConnect()
 	serviceDiscoveryManager->setClient(client);
 
 	Swift::ClientOptions options;
-	options.allowPLAINWithoutTLS = true;
 	options.useStreamCompression = false;
     
 	// .. and connect!

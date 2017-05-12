@@ -92,7 +92,8 @@ private:
 	Swift::Client* client;
 	Swift::ClientXMLTracer* tracer;
 	Swift::SoftwareVersionResponder* softwareVersionResponder;
-	Swift::NetworkFactories *netFactories;
+	Swift::NetworkFactories* netFactories;
+	Swift::MemoryStorages* storages;
 
 	RosterController* rosterController;
 	MessageController* messageController;

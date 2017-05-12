@@ -32,6 +32,7 @@
 #include <boost/bind.hpp>
 // Swiften
 #include <Swiften/Swiften.h>
+#include <Swiften/Crypto/PlatformCryptoProvider.h>
 // Kaidan
 #include "RosterController.h"
 #include "PresenceController.h"
@@ -76,6 +77,8 @@ Kaidan::Kaidan(Swift::NetworkFactories* networkFactories, QObject *parent) : QOb
 	serviceDiscoveryManager = new ServiceDiscoveryManager();
 
 	messageController->setRosterController(rosterController);
+
+	storages = new Swift::MemoryStorages(Swift::PlatformCryptoProvider::create());
 }
 
 Kaidan::~Kaidan()
@@ -100,7 +103,7 @@ Kaidan::~Kaidan()
 void Kaidan::mainConnect()
 {
 	// Create a new XMPP client
-	client = new Swift::Client(fullJid.toStdString(), password.toStdString(), netFactories);
+	client = new Swift::Client(fullJid.toStdString(), password.toStdString(), netFactories, storages);
 
 	// trust all certificates
 	client->setAlwaysTrustCertificates();

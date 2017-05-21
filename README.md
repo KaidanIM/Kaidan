@@ -31,7 +31,7 @@ Note: We can not guarantee that the packages available from the repository are a
 
 Add our apt repository to your system
 
- * `sudo apt-get install apt-transport-https software-properties-common`
+ * `sudo apt-get install apt-transport-https software-properties-common dirmngr`
  * `sudo apt-add-repository "deb https://raw.githubusercontent.com/kaidanim/packages/master sid main"`
  * `sudo apt-key adv --keyserver hkp://pgp.mit.edu --recv-key "210EB0BCA70439F0"`
  * `sudo apt-get update`

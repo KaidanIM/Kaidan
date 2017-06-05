@@ -98,7 +98,6 @@ target_link_libraries(${PROJECT_NAME}
 	Qt5::Sql
 	Qt5::Qml
 	Qt5::Quick
-	Qt5::QuickControls2
 	Boost::signals
 	Boost::date_time
 	${SWIFTEN_LIBRARY}

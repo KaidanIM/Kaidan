@@ -20,6 +20,7 @@
  */
 
 import QtQuick 2.6
+import QtQuick.Controls.Material 2.0
 import org.kde.kirigami 2.0 as Kirigami
 import io.github.kaidanim 1.0
 
@@ -27,6 +28,8 @@ Kirigami.ApplicationWindow {
 	id: root
 	width: 960
 	height: 540
+
+	Material.accent: Material.Green
 
 	// signals
 	signal addContactDialogRequested()

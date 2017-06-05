@@ -27,6 +27,7 @@
 #include <QLocale>
 #include <QQmlApplicationEngine>
 #include <QQuickView>
+#include <QQuickStyle>
 #include <QQmlContext>
 #include <QStandardPaths>
 #include <QSqlDatabase>
@@ -172,6 +173,10 @@ int main(int argc, char *argv[])
 	//
 	// QML-GUI
 	//
+#ifndef SAILFISH_OS
+	// QtQuickControls2 Style
+	QQuickStyle::setStyle("Material");
+#endif
 
 	QQmlApplicationEngine engine;
 	engine.rootContext()->setContextProperty("kaidan", &kaidan);

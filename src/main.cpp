@@ -27,7 +27,6 @@
 #include <QLocale>
 #include <QQmlApplicationEngine>
 #include <QQuickView>
-#include <QQuickStyle>
 #include <QQmlContext>
 #include <QStandardPaths>
 #include <QSqlDatabase>
@@ -175,7 +174,7 @@ int main(int argc, char *argv[])
 	//
 #ifndef SAILFISH_OS
 	// QtQuickControls2 Style
-	QQuickStyle::setStyle("Material");
+	qputenv("QT_QUICK_CONTROLS_STYLE", "Material");
 #endif
 
 	QQmlApplicationEngine engine;

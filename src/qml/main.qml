@@ -29,8 +29,6 @@ Kirigami.ApplicationWindow {
 	width: 960
 	height: 540
 
-	Material.accent: Material.Green
-
 	// signals
 	signal addContactDialogRequested()
 

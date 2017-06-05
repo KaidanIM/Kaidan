@@ -46,13 +46,20 @@ Kirigami.ScrollablePage {
 				text: model.name ? model.name : model.jid
 			}
 
-			onClicked: {
-				kaidan.messageController.recipient = model.jid;
+			// TODO: Add unread message counter: model.unreadMessages
 
+			onClicked: {
+				// first push the chat page
 				pageStack.push(chatPage, {
 					"chatName": (model.name ? model.name : model.jid),
 					"recipientJid": model.jid
 				});
+
+				// then set the message filter for this jid
+				// this will update the unread message count,
+				// which will update the roster and will reset the
+				// model variable
+				kaidan.messageController.recipient = model.jid;
 			}
 
 			actions: [

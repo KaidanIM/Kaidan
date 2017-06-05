@@ -20,7 +20,8 @@
 
 // RosterController
 #include "RosterController.h"
-// C++
+// Std
+#include <iostream>
 #include <string.h>
 // Qt 5
 #include <QQmlContext>
@@ -32,7 +33,13 @@
 // Kaidan
 #include "RosterModel.h"
 // Swiften
-#include <Swiften/Swiften.h>
+#include <Swiften/Base/IDGenerator.h>
+#include <Swiften/Client/Client.h>
+#include <Swiften/Elements/ErrorPayload.h>
+#include <Swiften/JID/JID.h>
+#include <Swiften/Roster/GetRosterRequest.h>
+#include <Swiften/Roster/XMPPRoster.h>
+#include <Swiften/Queries/IQRouter.h>
 // Boost
 #include <boost/bind.hpp>
 
@@ -235,5 +242,21 @@ void RosterController::updateLastExchangedOfJid(const QString jid_)
 	rosterModel->setLastExchangedOfJid(jid_, QDateTime::currentDateTime().toString(Qt::ISODate));
 
 	// send signal for updating the GUI
+	emit rosterModelChanged();
+}
+
+void RosterController::newUnreadMessageForJid(const QString jid_)
+{
+	// get the current unread message count
+	int msgCount = rosterModel->getUnreadMessageCountOfJid(&jid_);
+	// increase it by one
+	msgCount++;
+	// set the new increased count
+	rosterModel->setUnreadMessageCountOfJid(&jid_, msgCount);
+}
+
+void RosterController::resetUnreadMessagesForJid(const QString jid_)
+{
+	rosterModel->setUnreadMessageCountOfJid(&jid_, 0);
 	emit rosterModelChanged();
 }

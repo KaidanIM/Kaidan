@@ -39,7 +39,7 @@
     <name>GlobalDrawer</name>
     <message>
         <source>Add Contact</source>
-        <translation>Kontakt Hinzufügen</translation>
+        <translation type="vanished">Kontakt Hinzufügen</translation>
     </message>
     <message>
         <source>Logout</source>
@@ -48,6 +48,10 @@
     <message>
         <source>About</source>
         <translation>Über</translation>
+    </message>
+    <message>
+        <source>Add new contact</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -101,7 +105,7 @@
     <name>RosterAddContactSheet</name>
     <message>
         <source>Add Contact</source>
-        <translation>Kontakt Hinzufügen</translation>
+        <translation type="vanished">Kontakt Hinzufügen</translation>
     </message>
     <message>
         <source>Nickname:</source>
@@ -123,12 +127,35 @@
         <source>Add</source>
         <translation>Hinzufügen</translation>
     </message>
+    <message>
+        <source>Add new contact</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>RosterPage</name>
     <message>
         <source>Contacts</source>
         <translation>Kontakte</translation>
+    </message>
+</context>
+<context>
+    <name>RosterRemoveContactSheet</name>
+    <message>
+        <source>Do you really want to delete the contact &quot;%1&quot; from your roster?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Delete contact</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cancel</source>
+        <translation type="unfinished">Abbrechen</translation>
+    </message>
+    <message>
+        <source>Delete</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

@@ -19,12 +19,14 @@
 
 // VCard
 #include "VCard.h"
+// Std
+#include <iostream>
 // Qt 5
 #include <QString>
 // Boost
 #include <boost/shared_ptr.hpp>
 // Swiften
-#include <Swiften/Swiften.h>
+#include <Swiften/Elements/VCard.h>
 
 VCard::VCard(QObject *parent) : QObject(parent)
 {

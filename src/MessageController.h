@@ -24,7 +24,8 @@
 #include <QObject>
 #include <QSqlTableModel>
 // Swiften
-#include <Swiften/Swiften.h>
+#include <Swiften/Client/Client.h>
+#include <Swiften/Elements/Message.h>
 // Kaidan
 #include "MessageModel.h"
 #include "RosterController.h"
@@ -47,7 +48,6 @@ public:
 	QString getRecipient();
 
 	Q_INVOKABLE void sendMessage(const QString recipient_, const QString message_);
-	Q_INVOKABLE void setMessageAsRead(const QString msgId);
 
 signals:
 	void messageModelChanged();

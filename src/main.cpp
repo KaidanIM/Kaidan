@@ -35,6 +35,7 @@
 #include <QtQml>
 // Swiften
 #include <Swiften/EventLoop/Qt/QtEventLoop.h>
+#include <Swiften/Network/BoostNetworkFactories.h>
 // Kaidan
 #include "Kaidan.h"
 #include "VCard.h"

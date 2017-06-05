@@ -23,7 +23,9 @@
 // Qt
 #include <QObject>
 // Swiften
-#include <Swiften/Swiften.h>
+#include <Swiften/Client/Client.h>
+#include <Swiften/Elements/VCard.h>
+#include <Swiften/JID/JID.h>
 // Kaidan
 #include "VCard.h"
 

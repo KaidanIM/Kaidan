@@ -24,8 +24,6 @@
 #include <QObject>
 #include <QSqlTableModel>
 #include <QQmlListProperty>
-// Swiften
-#include <Swiften/Swiften.h>
 
 class RosterModel : public QSqlTableModel
 {
@@ -43,9 +41,8 @@ public:
 	QStringList getJidList();
 	void removeListOfJids(QStringList*);
 	void setLastExchangedOfJid(const QString, const QString);
-
-private:
-	Swift::Client* client;
+	int getUnreadMessageCountOfJid(const QString* jid_);
+	void setUnreadMessageCountOfJid(const QString* jid_, const int unreadMessageCount);
 };
 
 #endif // ROSTERMODEL_H

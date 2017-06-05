@@ -21,7 +21,8 @@
 #define PRESENCECONTROLLER_H
 
 #include <QObject>
-#include <Swiften/Swiften.h>
+#include <Swiften/Client/Client.h>
+#include <Swiften/Elements/Presence.h>
 
 class PresenceController : public QObject
 {

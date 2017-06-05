@@ -51,7 +51,7 @@
     </message>
     <message>
         <source>Add new contact</source>
-        <translation type="unfinished"></translation>
+        <translation>Neuen Kontakt hinzufügen</translation>
     </message>
 </context>
 <context>
@@ -129,7 +129,7 @@
     </message>
     <message>
         <source>Add new contact</source>
-        <translation type="unfinished"></translation>
+        <translation>Neuen Kontakt hinzufügen</translation>
     </message>
 </context>
 <context>
@@ -142,20 +142,20 @@
 <context>
     <name>RosterRemoveContactSheet</name>
     <message>
-        <source>Do you really want to delete the contact &quot;%1&quot; from your roster?</source>
-        <translation type="unfinished"></translation>
+        <source>Do you really want to delete the contact "%1" from your roster?</source>
+        <translation>Möchten Sie wirklich "%1" aus Ihrer Kontaktliste entfernen?</translation>
     </message>
     <message>
         <source>Delete contact</source>
-        <translation type="unfinished"></translation>
+        <translation>Kontakt entfernen</translation>
     </message>
     <message>
         <source>Cancel</source>
-        <translation type="unfinished">Abbrechen</translation>
+        <translation>Abbrechen</translation>
     </message>
     <message>
         <source>Delete</source>
-        <translation type="unfinished"></translation>
+        <translation>Entfernen</translation>
     </message>
 </context>
 <context>

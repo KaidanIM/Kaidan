@@ -142,8 +142,8 @@
 <context>
     <name>RosterRemoveContactSheet</name>
     <message>
-        <source>Do you really want to delete the contact "%1" from your roster?</source>
-        <translation>Möchten Sie wirklich "%1" aus Ihrer Kontaktliste entfernen?</translation>
+        <source>Do you really want to delete the contact &quot;%1&quot; from your roster?</source>
+        <translation>Möchten Sie wirklich &quot;%1&quot; aus Ihrer Kontaktliste entfernen?</translation>
     </message>
     <message>
         <source>Delete contact</source>

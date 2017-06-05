@@ -43,7 +43,7 @@ set(CMAKE_AUTORCC ON)
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_SOURCE_DIR}/cmake")
 
 # Find packages
-find_package(Qt5 ${QT_MIN_VERSION} REQUIRED NO_MODULE COMPONENTS Core Qml Quick Sql)
+find_package(Qt5 ${QT_MIN_VERSION} REQUIRED NO_MODULE COMPONENTS Core Qml Quick Sql QuickControls2)
 find_package(KF5Kirigami2 REQUIRED)
 find_package(Swiften REQUIRED)
 find_package(Boost ${BOOST_MIN_VERSION} REQUIRED COMPONENTS signals date_time)
@@ -98,6 +98,7 @@ target_link_libraries(${PROJECT_NAME}
 	Qt5::Sql
 	Qt5::Qml
 	Qt5::Quick
+	Qt5::QuickControls2
 	Boost::signals
 	Boost::date_time
 	${SWIFTEN_LIBRARY}

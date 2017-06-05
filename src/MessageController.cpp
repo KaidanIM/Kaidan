@@ -32,7 +32,11 @@
 #include <boost/optional.hpp>
 #include <boost/smart_ptr/make_shared.hpp>
 // Swiften
-#include <Swiften/Swiften.h>
+#include <Swiften/Client/Client.h>
+#include <Swiften/Elements/Message.h>
+#include <Swiften/Elements/DeliveryReceipt.h>
+#include <Swiften/Elements/DeliveryReceiptRequest.h>
+#include <Swiften/Base/IDGenerator.h>
 // Kaidan
 #include "MessageModel.h"
 #include "Notifications.h"
@@ -67,6 +71,7 @@ MessageModel* MessageController::getMessageModel()
 
 void MessageController::setRecipient(QString recipient_)
 {
+	// update the recipient
 	if (recipient == recipient_)
 		return;
 
@@ -77,16 +82,14 @@ void MessageController::setRecipient(QString recipient_)
 	// we're offline or we haven't connected already.
 	messageModel->applyRecipientFilter(recipient, *ownJid);
 	emit messageModelChanged();
+
+	// reset the unread message counter for this contact
+	rosterController->resetUnreadMessagesForJid(recipient_);
 }
 
 QString MessageController::getRecipient()
 {
 	return recipient;
-}
-
-void MessageController::setMessageAsRead(const QString msgId)
-{
-	messageModel->setMessageAsRead(msgId);
 }
 
 void MessageController::handleMessageReceived(Swift::Message::ref message_)
@@ -100,7 +103,7 @@ void MessageController::handleMessageReceived(Swift::Message::ref message_)
 		//
 
 		// author is only the 'bare' JID: e.g. 'albert@einstein.ch'
-		const QString author = QString(message_->getFrom().toBare().toString().c_str());
+		const QString author = QString::fromStdString(message_->getFrom().toBare().toString());
 		const QString author_resource = QString(message_->getFrom().getResource().c_str());
 		const QString recipient_resource = QString::fromStdString(client->getJID().getResource());
 		QString timestamp = QDateTime::currentDateTime().toString(Qt::ISODate); // fallback timestamp
@@ -162,11 +165,20 @@ void MessageController::handleMessageReceived(Swift::Message::ref message_)
 	}
 
 	//
-	// Update lastExchanged in roster controller
+	// Update last exchanged, unread message count in roster controller
 	//
 
-	rosterController->updateLastExchangedOfJid(QString::fromStdString(
-		message_->getFrom().toBare().toString()));
+	if (bodyOpt)
+	{
+		const QString msgAuthor = QString::fromStdString(message_->getFrom().toBare().toString());
+
+		rosterController->updateLastExchangedOfJid(msgAuthor);
+		
+		if (msgAuthor != this->recipient)
+		{
+			rosterController->newUnreadMessageForJid(msgAuthor);
+		}
+	}
 }
 
 void MessageController::sendMessage(const QString recipient_, const QString message_)

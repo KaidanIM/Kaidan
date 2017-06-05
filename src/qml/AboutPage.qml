@@ -63,9 +63,13 @@ Kirigami.Page {
 		}
 
 		Controls.Button {
-			anchors.horizontalCenter: parent.horizontalCenter
+			id: closeButton
 			text: qsTr("Close")
-			onClicked: pageStack.pop()
+			anchors.horizontalCenter: parent.horizontalCenter
+			onClicked: {
+				closeButton.enabled = false;
+				pageStack.pop();
+			}
 		}
 	}
 }

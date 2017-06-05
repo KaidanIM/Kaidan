@@ -31,12 +31,15 @@
 // Boost
 #include <boost/bind.hpp>
 // Swiften
-#include <Swiften/Swiften.h>
+#include <Swiften/Client/Client.h>
+#include <Swiften/Client/MemoryStorages.h>
 #include <Swiften/Crypto/PlatformCryptoProvider.h>
+#include <Swiften/Queries/Responders/SoftwareVersionResponder.h>
 // Kaidan
 #include "RosterController.h"
 #include "PresenceController.h"
 #include "MessageController.h"
+#include "MessageModel.h"
 #include "VCardController.h"
 #include "ServiceDiscoveryManager.h"
 
@@ -69,7 +72,7 @@ Kaidan::Kaidan(Swift::NetworkFactories* networkFactories, QObject *parent) : QOb
 	// create/update the full jid
 	updateFullJid();
 
-	// load controlers
+	// load controllers
 	messageController = new MessageController(&jid);
 	rosterController = new RosterController();
 	presenceController = new PresenceController();
@@ -130,7 +133,7 @@ void Kaidan::mainConnect()
 
 	Swift::ClientOptions options;
 	options.useStreamCompression = false;
-    
+
 	// .. and connect!
 	client->connect(options);
 }

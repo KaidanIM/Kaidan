@@ -26,7 +26,9 @@
 // Boost
 #include <boost/bind.hpp>
 // Swiften
-#include <Swiften/Swiften.h>
+#include <Swiften/Client/Client.h>
+#include <Swiften/Disco/ClientDiscoManager.h>
+#include <Swiften/Disco/GetDiscoInfoRequest.h>
 
 ServiceDiscoveryManager::ServiceDiscoveryManager()
 {

@@ -26,7 +26,7 @@
 // Boost
 #include <boost/shared_ptr.hpp>
 // Swiften
-#include <Swiften/Swiften.h>
+#include <Swiften/Elements/VCard.h>
 
 class VCard : public QObject
 {

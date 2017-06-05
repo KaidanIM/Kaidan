@@ -26,7 +26,8 @@
 #include <QSqlTableModel>
 #include <QQmlListProperty>
 // Swiften
-#include <Swiften/Swiften.h>
+#include <Swiften/Client/Client.h>
+#include <Swiften/Elements/ErrorPayload.h>
 // Kaidan
 #include "RosterModel.h"
 
@@ -43,6 +44,8 @@ public:
 	void requestRosterFromClient();
 	RosterModel* getRosterModel();
 	void updateLastExchangedOfJid(const QString jid_);
+	void newUnreadMessageForJid(const QString jid_);
+	void resetUnreadMessagesForJid(const QString jid_);
 	Q_INVOKABLE void addContact(const QString jid_, const QString name_);
 	Q_INVOKABLE void removeContact(const QString);
 
@@ -57,7 +60,7 @@ private:
 	void handleJidUpdated(const Swift::JID &jid_, const std::string &name_, const std::vector<std::string>&);
 	void handleRosterCleared();
 	Swift::Client* client;
-	Swift::IQRouter *iqRouter;
+	Swift::IQRouter* iqRouter;
 	Swift::XMPPRoster* xmppRoster;
 	RosterModel* rosterModel;
 };

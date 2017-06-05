@@ -39,7 +39,6 @@ public:
 		const QString* msgId, bool sentByMe);
 	void setMessageAsSent(const QString msgId);
 	void setMessageAsDelivered(const QString msgId);
-	void setMessageAsRead(const QString msgId);
 
 signals:
 	void recipientChanged();

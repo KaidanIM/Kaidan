@@ -24,7 +24,8 @@
 // Qt 5
 #include <QDebug>
 // Swiften
-#include <Swiften/Swiften.h>
+#include <Swiften/Client/Client.h>
+#include <Swiften/VCards/VCardManager.h>
 // Boost
 #include <boost/bind.hpp>
 // Kaidan

@@ -40,12 +40,12 @@ static void createTable()
 		"'jid' TEXT NOT NULL,"
 		"'name' TEXT NOT NULL,"
 		"'lastExchanged' TEXT NOT NULL,"
-		"'unreadMessages' INTEGER," // < UNUSED v
-		"'lastMessage' TEXT,"
+		"'unreadMessages' INTEGER,"
+		"'lastMessage' TEXT,"    // < UNUSED v
 		"'lastOnline' TEXT,"
 		"'activity' TEXT,"
 		"'status' TEXT,"
-		"'mood' TEXT"               // < UNUSED ^
+		"'mood' TEXT"            // < UNUSED ^
 		")"))
 	{
 		qFatal("Failed to query database: %s", qPrintable(query.lastError().text()));
@@ -138,7 +138,7 @@ QStringList RosterModel::getJidList()
 	QStringList retVar;
 
 	QSqlQuery query;
-	query.exec("SELECT * FROM 'Roster'");
+	query.exec("SELECT jid FROM Roster");
 
 	int jidCol = query.record().indexOf("jid");
 
@@ -163,4 +163,36 @@ void RosterModel::setLastExchangedOfJid(const QString jid_, const QString date_)
 	QSqlQuery newQuery;
 	newQuery.exec(QString("UPDATE 'Roster' SET lastExchanged = '%1' WHERE jid = '%2'").arg(date_, jid_));
 	submitAll();
+}
+
+int RosterModel::getUnreadMessageCountOfJid(const QString* jid_)
+{
+	QSqlQuery query;
+
+	query.prepare(QString("SELECT unreadMessages FROM Roster WHERE jid = '%1'").arg(*jid_));
+	if (!query.exec())
+	{
+		qDebug("Failed to query database: %s", qPrintable(query.lastError().text()));
+		return 0;
+	}
+
+	query.next();
+	return query.value("unreadMessages").toInt();
+}
+
+void RosterModel::setUnreadMessageCountOfJid(const QString* jid_, const int count_)
+{
+	QSqlQuery query;
+	query.prepare(QString("UPDATE Roster SET unreadMessages = %1 WHERE jid = '%2'")
+		.arg(QString::number(count_), *jid_));
+
+	if (!query.exec()) {
+		qDebug("Failed to query database: %s", qPrintable(query.lastError().text()));
+		qDebug() << query.lastQuery();
+	}
+	if (!select()) {
+		qDebug() << "Error on select in RosterModel::setUnreadMessageCountOfJid";
+	}
+
+	submit();
 }

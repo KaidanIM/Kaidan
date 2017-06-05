@@ -25,7 +25,9 @@
 #define SERVICEDISCOVERYMANAGER_H
 
 // Swiften
-#include <Swiften/Swiften.h>
+#include <Swiften/Client/Client.h>
+#include <Swiften/Elements/DiscoInfo.h>
+#include <Swiften/Elements/ErrorPayload.h>
 
 class ServiceDiscoveryManager
 {

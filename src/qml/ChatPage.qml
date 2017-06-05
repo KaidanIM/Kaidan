@@ -55,7 +55,7 @@ Kirigami.Page {
 		ListView {
 			Layout.fillWidth: true
 			Layout.fillHeight: true
-			Layout.margins: pane.leftPadding + messageField.leftPadding
+			Layout.margins: Kirigami.Units.gridUnit * 0.75
 
 			displayMarginBeginning: 40
 			displayMarginEnd: 40
@@ -119,8 +119,14 @@ Kirigami.Page {
 		//
 
 		Controls.Pane {
-			id: pane
+			id: sendingArea
 			Layout.fillWidth: true
+			topPadding: Kirigami.Units.gridUnit * 0.1
+			bottomPadding: Kirigami.Units.gridUnit * 0.1
+			wheelEnabled: true
+			background: Rectangle {
+				color: "white"
+			}
 
 			RowLayout {
 				width: parent.width

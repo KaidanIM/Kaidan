@@ -37,16 +37,16 @@ static void createTable()
 
 	QSqlQuery query;
 	if (!query.exec("CREATE TABLE IF NOT EXISTS 'Roster' ("
-		"'jid' TEXT NOT NULL,"
-		"'name' TEXT NOT NULL,"
-		"'lastExchanged' TEXT NOT NULL,"
-		"'unreadMessages' INTEGER,"
-		"'lastMessage' TEXT,"    // < UNUSED v
-		"'lastOnline' TEXT,"
-		"'activity' TEXT,"
-		"'status' TEXT,"
-		"'mood' TEXT"            // < UNUSED ^
-		")"))
+	                "'jid' TEXT NOT NULL,"
+	                "'name' TEXT NOT NULL,"
+	                "'lastExchanged' TEXT NOT NULL,"
+	                "'unreadMessages' INTEGER,"
+	                "'lastMessage' TEXT,"    // < UNUSED v
+	                "'lastOnline' TEXT,"
+	                "'activity' TEXT,"
+	                "'status' TEXT,"
+	                "'mood' TEXT"            // < UNUSED ^
+	                ")"))
 	{
 		qFatal("Failed to query database: %s", qPrintable(query.lastError().text()));
 	}
@@ -93,8 +93,7 @@ QVariant RosterModel::data(const QModelIndex &index, int role) const
 void RosterModel::clearData()
 {
 	// remove all rows / contacts from the model
-	for (int i = 0; i < rowCount(); ++i)
-	{
+	for (int i = 0; i < rowCount(); ++i) {
 		removeRow(i);
 	}
 }
@@ -113,7 +112,7 @@ void RosterModel::insertContact(QString jid_, QString name_)
 	// inster the record into the DB (or print error)
 	if (!insertRecord(rowCount(), newRecord)) {
 		qWarning() << "Failed to save Contact into DB:"
-			<< lastError().text();
+		           << lastError().text();
 	}
 
 	submitAll();
@@ -151,8 +150,7 @@ QStringList RosterModel::getJidList()
 void RosterModel::removeListOfJids(QStringList* jidList)
 {
 	QSqlQuery query;
-	for (int i = 0; i < jidList->length(); i++)
-	{
+	for (int i = 0; i < jidList->length(); i++) {
 		query.exec(QString("DELETE FROM 'Roster' WHERE jid = '%1'").arg(jidList->at(i)));
 	}
 	submitAll();
@@ -170,8 +168,7 @@ int RosterModel::getUnreadMessageCountOfJid(const QString* jid_)
 	QSqlQuery query;
 
 	query.prepare(QString("SELECT unreadMessages FROM Roster WHERE jid = '%1'").arg(*jid_));
-	if (!query.exec())
-	{
+	if (!query.exec()) {
 		qDebug("Failed to query database: %s", qPrintable(query.lastError().text()));
 		return 0;
 	}
@@ -184,7 +181,7 @@ void RosterModel::setUnreadMessageCountOfJid(const QString* jid_, const int coun
 {
 	QSqlQuery query;
 	query.prepare(QString("UPDATE Roster SET unreadMessages = %1 WHERE jid = '%2'")
-		.arg(QString::number(count_), *jid_));
+	              .arg(QString::number(count_), *jid_));
 
 	if (!query.exec()) {
 		qDebug("Failed to query database: %s", qPrintable(query.lastError().text()));

@@ -62,18 +62,18 @@ void ServiceDiscoveryManager::handleConnected()
 	//
 
 	Swift::GetDiscoInfoRequest::ref discoInfoRequest = Swift::GetDiscoInfoRequest::create(
-		Swift::JID(client->getJID().getDomain()),
-		client->getIQRouter()
-	);
+	                        Swift::JID(client->getJID().getDomain()),
+	                        client->getIQRouter()
+	                );
 
 	discoInfoRequest->onResponse.connect(boost::bind(
-		&ServiceDiscoveryManager::handleServerDiscoInfoReceived, this, _1, _2
-	));
+	                &ServiceDiscoveryManager::handleServerDiscoInfoReceived, this, _1, _2
+	                                     ));
 	discoInfoRequest->send();
 }
 
 void ServiceDiscoveryManager::handleServerDiscoInfoReceived(
-	boost::shared_ptr<Swift::DiscoInfo> info, Swift::ErrorPayload::ref error)
+        boost::shared_ptr<Swift::DiscoInfo> info, Swift::ErrorPayload::ref error)
 {
 	// TODO: check if the server supports our XEPs
 }

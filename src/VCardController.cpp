@@ -60,11 +60,10 @@ void VCardController::setCurrentJid(QString jid_)
 	currentJid = jid_;
 
 	// get the new VCard, if client is connected
-	if (client->isAvailable())
-	{
+	if (client->isAvailable()) {
 		currentVCard->fromSwiftVCard(manager->getVCardAndRequestWhenNeeded(
-			Swift::JID(currentJid.toStdString())
-		));
+		                                     Swift::JID(currentJid.toStdString())
+		                             ));
 		emit currentVCardChanged();
 	}
 }
@@ -88,7 +87,7 @@ void VCardController::setOwnVCard(VCard* vCard_)
 {
 	// publish new vCard
 	Swift::SetVCardRequest::ref vCardChangeRequest = manager->createSetVCardRequest(
-		vCard_->getSwiftVCard());
+	                        vCard_->getSwiftVCard());
 	vCardChangeRequest->send();
 }
 
@@ -100,11 +99,10 @@ void VCardController::requestOwnVCard()
 void VCardController::requestCurrentVCard()
 {
 	// if a new jid was already set, but the client wasn't connected
-	if (currentJid != "")
-	{
+	if (currentJid != "") {
 		currentVCard->fromSwiftVCard(manager->getVCardAndRequestWhenNeeded(
-			Swift::JID(currentJid.toStdString())
-		));
+		                                     Swift::JID(currentJid.toStdString())
+		                             ));
 		emit currentVCardChanged();
 	}
 }
@@ -112,8 +110,7 @@ void VCardController::requestCurrentVCard()
 void VCardController::handleVCardChanged(const Swift::JID &jid_, Swift::VCard::ref vCard_)
 {
 	std::cout << "VCardController::handleVCardChanged: Received new VCard from: " << jid_.toString() << '\n';
-	if (jid_.toString() == currentJid.toStdString())
-	{
+	if (jid_.toString() == currentJid.toStdString()) {
 		// update the current VCard
 		currentVCard->fromSwiftVCard(vCard_);
 		emit currentVCardChanged();

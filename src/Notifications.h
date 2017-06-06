@@ -19,6 +19,7 @@
 
 #include <string>
 
-namespace Notifications {
-	void sendMessageNotification(std::string fromName, std::string message);
+namespace Notifications
+{
+void sendMessageNotification(std::string fromName, std::string message);
 }

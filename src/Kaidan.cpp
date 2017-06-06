@@ -63,8 +63,7 @@ Kaidan::Kaidan(Swift::NetworkFactories* networkFactories, QObject *parent) : QOb
 	password = settings->value("auth/password").toString();
 
 	// use Kaidan as resource, if no set
-	if (jidResource == "")
-	{
+	if (jidResource == "") {
 		jidResource = QString(APPLICATION_NAME);
 		settings->setValue("auth/resource", jidResource);
 	}
@@ -86,8 +85,7 @@ Kaidan::Kaidan(Swift::NetworkFactories* networkFactories, QObject *parent) : QOb
 
 Kaidan::~Kaidan()
 {
-	if (connected)
-	{
+	if (connected) {
 		client->disconnect();
 		softwareVersionResponder->stop();
 		delete tracer;
@@ -141,8 +139,7 @@ void Kaidan::mainConnect()
 // we don't want to close client without disconnection
 void Kaidan::mainDisconnect()
 {
-	if (getConnectionState())
-	{
+	if (getConnectionState()) {
 		client->disconnect();
 	}
 }
@@ -193,13 +190,11 @@ QString Kaidan::getResourcePath(QString name_)
 	pathList << QString(DEBUG_SOURCE_PATH) + QString("/data"); // append debug directory
 
 	// search for file in directories
-	for(int i = 0; i < pathList.size(); i++)
-	{
+	for (int i = 0; i < pathList.size(); i++) {
 		// open directory
 		QDir directory(pathList.at(i));
 		// look up the file
-		if (directory.exists(name_))
-		{
+		if (directory.exists(name_)) {
 			// found the file, return the path
 			return QString("file://") + directory.absoluteFilePath(name_);
 		}
@@ -211,14 +206,41 @@ QString Kaidan::getResourcePath(QString name_)
 }
 
 // if no jid or password, return true
-bool Kaidan::newLoginNeeded() {return (jid == "") || (password == "");}
+bool Kaidan::newLoginNeeded()
+{
+	return (jid == "") || (password == "");
+}
 
-RosterController* Kaidan::getRosterController() {return rosterController;}
-MessageController* Kaidan::getMessageController() {return messageController;}
-VCardController* Kaidan::getVCardController() {return vCardController;}
-bool Kaidan::getConnectionState() const {return connected;}
-QString Kaidan::getVersionString() {return QString(VERSION_STRING);}
+RosterController* Kaidan::getRosterController()
+{
+	return rosterController;
+}
+MessageController* Kaidan::getMessageController()
+{
+	return messageController;
+}
+VCardController* Kaidan::getVCardController()
+{
+	return vCardController;
+}
+bool Kaidan::getConnectionState() const
+{
+	return connected;
+}
+QString Kaidan::getVersionString()
+{
+	return QString(VERSION_STRING);
+}
 
-QString Kaidan::getJid() {return jid;}
-QString Kaidan::getJidResource() {return jidResource;}
-QString Kaidan::getPassword() {return password;}
+QString Kaidan::getJid()
+{
+	return jid;
+}
+QString Kaidan::getJidResource()
+{
+	return jidResource;
+}
+QString Kaidan::getPassword()
+{
+	return password;
+}

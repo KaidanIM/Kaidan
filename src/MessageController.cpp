@@ -96,8 +96,7 @@ void MessageController::handleMessageReceived(Swift::Message::ref message_)
 {
 	boost::optional<std::string> bodyOpt = message_->getBody();
 
-	if (bodyOpt)
-	{
+	if (bodyOpt) {
 		//
 		// add the message to the db
 		//
@@ -112,32 +111,30 @@ void MessageController::handleMessageReceived(Swift::Message::ref message_)
 
 		// get the timestamp from the message, if exists
 		boost::optional<boost::posix_time::ptime> timestampOpt = message_->getTimestamp();
-		if (timestampOpt)
-		{
+		if (timestampOpt) {
 			timestamp = QString::fromStdString(
-				boost::posix_time::to_iso_extended_string(*timestampOpt)
-			);
+			                    boost::posix_time::to_iso_extended_string(*timestampOpt)
+			            );
 		}
 
 		messageModel->addMessage(&author, &author_resource, ownJid,
-			&recipient_resource, &timestamp, &message, &msgId, false);
+		                         &recipient_resource, &timestamp, &message, &msgId, false);
 
 		emit messageModelChanged();
 
 		// send a new notification | TODO: Resolve nickname from JID
 		Notifications::sendMessageNotification(
-			message_->getFrom().toBare().toString(),
-			*bodyOpt
+		        message_->getFrom().toBare().toString(),
+		        *bodyOpt
 		);
 	}
 
 	// XEP-0184: Message Delivery Receipts
 	// send a reply that the message has arrived
-	if (message_->getPayload<Swift::DeliveryReceiptRequest>())
-	{
+	if (message_->getPayload<Swift::DeliveryReceiptRequest>()) {
 		// create a new reply payload
 		boost::shared_ptr<Swift::DeliveryReceipt> receiptPayload =
-			boost::make_shared<Swift::DeliveryReceipt>();
+		        boost::make_shared<Swift::DeliveryReceipt>();
 		receiptPayload->setReceivedID(message_->getID());
 
 		// create a new message
@@ -155,11 +152,9 @@ void MessageController::handleMessageReceived(Swift::Message::ref message_)
 	// XEP-0184: Message Delivery Receipts
 	// get a reply of a delivered receipt request
 	Swift::DeliveryReceipt::ref receipt = message_->getPayload<Swift::DeliveryReceipt>();
-	if (receipt)
-	{
+	if (receipt) {
 		std::string receivedId = receipt->getReceivedID();
-		if (receivedId.length() > 0)
-		{
+		if (receivedId.length() > 0) {
 			messageModel->setMessageAsDelivered(QString::fromStdString(receivedId));
 		}
 	}
@@ -168,14 +163,12 @@ void MessageController::handleMessageReceived(Swift::Message::ref message_)
 	// Update last exchanged, unread message count in roster controller
 	//
 
-	if (bodyOpt)
-	{
+	if (bodyOpt) {
 		const QString msgAuthor = QString::fromStdString(message_->getFrom().toBare().toString());
 
 		rosterController->updateLastExchangedOfJid(msgAuthor);
-		
-		if (msgAuthor != this->recipient)
-		{
+
+		if (msgAuthor != this->recipient) {
 			rosterController->newUnreadMessageForJid(msgAuthor);
 		}
 	}
@@ -197,7 +190,7 @@ void MessageController::sendMessage(const QString recipient_, const QString mess
 	const QString qmsgId = QString::fromStdString(msgId);
 
 	messageModel->addMessage(ownJid, &author_resource, &recipient_,
-		&recipient_resource, &timestamp, &message_, &qmsgId, true);
+	                         &recipient_resource, &timestamp, &message_, &qmsgId, true);
 
 	emit messageModelChanged();
 

@@ -1,6 +1,6 @@
 # Changelog
 
-### Version 0.2.0 (released on xx.06.2017)
+### Version 0.2.0 (released on 06.06.2017)
 User interface:
  * GUI: Port to Kirigami 2 (#81) (@JBBgameich)
  * User Material/Green Theme per default (@LNJ2)

@@ -63,7 +63,7 @@ Finally compile it
 
  * `mkdir kaidan/build ; cd kaidan/build`
  * `cmake .. -DI18N=1`
- * `make -j<number of threads>`
+ * `make -j$(nproc)`
 
 Now you can run Kaidan:
 

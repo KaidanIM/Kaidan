@@ -19,6 +19,7 @@
  */
 
 import QtQuick 2.0
+import QtQuick.Layouts 1.3
 import org.kde.kirigami 2.0 as Kirigami
 import io.github.kaidanim 1.0
 
@@ -41,12 +42,34 @@ Kirigami.ScrollablePage {
 		delegate: Kirigami.SwipeListItem {
 			height: Kirigami.Units.gridUnit * 2.5
 
-			Kirigami.Label {
-				// use the Name or JID
-				text: model.name ? model.name : model.jid
-			}
+			RowLayout {
+				Kirigami.Label {
+					Layout.fillWidth: true
+					// use the Name or JID
+					text: model.name ? model.name : model.jid
+				}
 
-			// TODO: Add unread message counter: model.unreadMessages
+				Rectangle {
+					id: counterCircle
+					visible: model.unreadMessages > 0
+					Layout.preferredHeight: Kirigami.Units.gridUnit * 1.25
+					Layout.preferredWidth: Kirigami.Units.gridUnit * 1.25
+					radius: counterCircle.height * 0.5
+					color: "#4CAF50"
+
+					Text {
+						id: msgCounter
+						text: model.unreadMessages
+						color: "white"
+						anchors.centerIn: parent
+					}
+				}
+
+				// placeholder
+				Item {
+					width: Kirigami.Units.gridUnit * 2
+				}
+			}
 
 			onClicked: {
 				// first push the chat page

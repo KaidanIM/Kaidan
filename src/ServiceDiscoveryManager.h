@@ -37,7 +37,7 @@ public:
 	void setClient(Swift::Client*);
 	void handleConnected();
 	void handleServerDiscoInfoReceived(boost::shared_ptr<Swift::DiscoInfo> discoInfo,
-		Swift::ErrorPayload::ref error);
+	                                   Swift::ErrorPayload::ref error);
 
 private:
 	Swift::Client* client;

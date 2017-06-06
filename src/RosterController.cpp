@@ -78,12 +78,9 @@ void RosterController::requestRosterFromClient()
 
 void RosterController::handleRosterReceived(Swift::ErrorPayload::ref error_)
 {
-	if (error_)
-	{
+	if (error_) {
 		std::cerr << "RosterController: Error receiving roster. Continuing anyway.\n";
-	}
-	else
-	{
+	} else {
 		// create a vector containing all roster items
 		std::vector<Swift::XMPPRosterItem> rosterItems = xmppRoster->getItems();
 		// create an iterator for it
@@ -106,11 +103,9 @@ void RosterController::handleRosterReceived(Swift::ErrorPayload::ref error_)
 
 		// add all JIDs to the delete list that are in the original list
 		// but not in the new from the server
-		for (int i = 0; i < currentJids.length(); i++)
-		{
+		for (int i = 0; i < currentJids.length(); i++) {
 			QString jidAtI = currentJids.at(i);
-			if (!newJids.contains(jidAtI))
-			{
+			if (!newJids.contains(jidAtI)) {
 				jidsToDelete << jidAtI;
 			}
 		}
@@ -122,17 +117,13 @@ void RosterController::handleRosterReceived(Swift::ErrorPayload::ref error_)
 		// Update the roster
 		//
 
-		for (it = rosterItems.begin(); it < rosterItems.end(); it++)
-		{
+		for (it = rosterItems.begin(); it < rosterItems.end(); it++) {
 			QString jid = QString::fromStdString((*it).getJID().toBare().toString());
 			QString name = QString::fromStdString((*it).getName());
 
-			if (currentJids.contains(jid))
-			{
+			if (currentJids.contains(jid)) {
 				rosterModel->updateContactName(jid, name);
-			}
-			else
-			{
+			} else {
 				rosterModel->insertContact(jid, name);
 			}
 		}
@@ -155,8 +146,8 @@ void RosterController::handleInitialRosterPopulated()
 void RosterController::handleJidAdded(const Swift::JID &jid_)
 {
 	rosterModel->insertContact(
-		QString::fromStdString(jid_.toBare().toString()),
-		QString::fromStdString(xmppRoster->getNameForJID(jid_))
+	        QString::fromStdString(jid_.toBare().toString()),
+	        QString::fromStdString(xmppRoster->getNameForJID(jid_))
 	);
 
 	rosterModel->submitAll();
@@ -167,18 +158,18 @@ void RosterController::handleJidAdded(const Swift::JID &jid_)
 void RosterController::handleJidRemoved(const Swift::JID &jid_)
 {
 	rosterModel->removeContactByJid(
-		QString::fromStdString(jid_.toBare().toString())
+	        QString::fromStdString(jid_.toBare().toString())
 	);
 
 	emit rosterModelChanged();
 }
 
 void RosterController::handleJidUpdated(const Swift::JID &jid_, const std::string &name_,
-	const std::vector<std::string>&)
+                                        const std::vector<std::string>&)
 {
 	rosterModel->updateContactName(
-		QString::fromStdString(jid_.toBare().toString()),
-		QString::fromStdString(name_)
+	        QString::fromStdString(jid_.toBare().toString()),
+	        QString::fromStdString(name_)
 	);
 
 	emit rosterModelChanged();
@@ -212,7 +203,7 @@ void RosterController::addContact(const QString jid_, const QString name_)
 
 	// sent the request
 	iqRouter->sendIQ(
-		Swift::IQ::createRequest(Swift::IQ::Set, Swift::JID(), iqId, rosterPayload)
+	        Swift::IQ::createRequest(Swift::IQ::Set, Swift::JID(), iqId, rosterPayload)
 	);
 }
 
@@ -227,13 +218,13 @@ void RosterController::removeContact(const QString jid_)
 	// create new roster payload, add roster item removal
 	boost::shared_ptr<Swift::RosterPayload> rosterPayload(new Swift::RosterPayload);
 	rosterPayload->addItem(Swift::RosterItemPayload(
-		Swift::JID(jid_.toStdString()), "",
-		Swift::RosterItemPayload::Remove
-	));
+	                               Swift::JID(jid_.toStdString()), "",
+	                               Swift::RosterItemPayload::Remove
+	                       ));
 
 	// send the remove request
 	iqRouter->sendIQ(
-		Swift::IQ::createRequest(Swift::IQ::Set, Swift::JID(), iqId, rosterPayload)
+	        Swift::IQ::createRequest(Swift::IQ::Set, Swift::JID(), iqId, rosterPayload)
 	);
 }
 

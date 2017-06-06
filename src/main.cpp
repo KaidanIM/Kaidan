@@ -40,8 +40,7 @@
 #include "Kaidan.h"
 #include "VCard.h"
 
-enum CommandLineParseResult
-{
+enum CommandLineParseResult {
 	CommandLineOk,
 	CommandLineError,
 	CommandLineVersionRequested,
@@ -55,8 +54,7 @@ CommandLineParseResult parseCommandLine(QCommandLineParser &parser, QString *err
 	QCommandLineOption versionOption = parser.addVersionOption();
 
 	// parse arguments
-	if (!parser.parse(QGuiApplication::arguments()))
-	{
+	if (!parser.parse(QGuiApplication::arguments())) {
 		*errorMessage = parser.errorText();
 		return CommandLineError;
 	}
@@ -118,14 +116,14 @@ int main(int argc, char *argv[])
 	// Qt-Translator
 	QTranslator qtTranslator;
 	qtTranslator.load("qt_" + QLocale::system().name(),
-		QLibraryInfo::location(QLibraryInfo::TranslationsPath));
+	                  QLibraryInfo::location(QLibraryInfo::TranslationsPath));
 	app.installTranslator(&qtTranslator);
 
 	// Kaidan-Translator
 	QTranslator kaidanTranslator;
 	// load the systems locale or none
 	kaidanTranslator.load(QString(APPLICATION_NAME) + "_" + QLocale::system().name(),
-		":/i18n"); // load the qm files via. rcc (bundled in binary)
+	                      ":/i18n"); // load the qm files via. rcc (bundled in binary)
 	app.installTranslator(&kaidanTranslator);
 
 
@@ -149,23 +147,22 @@ int main(int argc, char *argv[])
 	// create parser and add a description
 	QCommandLineParser parser;
 	parser.setApplicationDescription(QString(APPLICATION_DISPLAY_NAME) +
-		" - " + QString(APPLICATION_DESCRIPTION));
+	                                 " - " + QString(APPLICATION_DESCRIPTION));
 
 	// parse the arguments
 	QString commandLineErrorMessage;
-	switch (parseCommandLine(parser, &commandLineErrorMessage))
-	{
-		case CommandLineError:
-			qWarning() << commandLineErrorMessage;
-			return 1;
-		case CommandLineVersionRequested:
-			parser.showVersion();
-			return 0;
-		case CommandLineHelpRequested:
-			parser.showHelp();
-			return 0;
-		case CommandLineOk:
-			break;
+	switch (parseCommandLine(parser, &commandLineErrorMessage)) {
+	case CommandLineError:
+		qWarning() << commandLineErrorMessage;
+		return 1;
+	case CommandLineVersionRequested:
+		parser.showVersion();
+		return 0;
+	case CommandLineHelpRequested:
+		parser.showHelp();
+		return 0;
+	case CommandLineOk:
+		break;
 	}
 
 

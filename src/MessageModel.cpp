@@ -39,19 +39,19 @@ static void createTable()
 
 	QSqlQuery query;
 	if (!query.exec(
-		"CREATE TABLE IF NOT EXISTS 'Messages' ("
-		"'author' TEXT NOT NULL,"
-		"'author_resource' TEXT,"
-		"'recipient' TEXT NOT NULL,"
-		"'recipient_resource' TEXT,"
-		"'timestamp' TEXT NOT NULL,"
-		"'message' TEXT NOT NULL,"
-		"'id' TEXT NOT NULL,"
-		"'isSent' BOOL,"      // is sent to server
-		"'isDelivered' BOOL," // message has arrived at other client
-		"FOREIGN KEY('author') REFERENCES Roster ('jid'),"
-		"FOREIGN KEY('recipient') REFERENCES Roster ('jid')"
-		")"))
+	            "CREATE TABLE IF NOT EXISTS 'Messages' ("
+	            "'author' TEXT NOT NULL,"
+	            "'author_resource' TEXT,"
+	            "'recipient' TEXT NOT NULL,"
+	            "'recipient_resource' TEXT,"
+	            "'timestamp' TEXT NOT NULL,"
+	            "'message' TEXT NOT NULL,"
+	            "'id' TEXT NOT NULL,"
+	            "'isSent' BOOL,"      // is sent to server
+	            "'isDelivered' BOOL," // message has arrived at other client
+	            "FOREIGN KEY('author') REFERENCES Roster ('jid'),"
+	            "FOREIGN KEY('recipient') REFERENCES Roster ('jid')"
+	            ")"))
 	{
 		qFatal("Failed to query database: %s", qPrintable(query.lastError().text()));
 	}
@@ -72,8 +72,8 @@ MessageModel::MessageModel(QObject *parent) : QSqlTableModel(parent)
 void MessageModel::applyRecipientFilter(QString recipient_, QString author_)
 {
 	const QString filterString = QString::fromLatin1("(recipient = '%1' AND "
-		"author = '%2') OR (recipient = '%2' AND author = '%1')").arg(
-			recipient_, author_);
+	                             "author = '%2') OR (recipient = '%2' AND author = '%1')").arg(
+	                                     recipient_, author_);
 	setFilter(filterString);
 	select();
 }
@@ -112,9 +112,9 @@ void MessageModel::setMessageAsDelivered(const QString msgId)
 }
 
 void MessageModel::addMessage(const QString* author, const QString* author_resource,
-	const QString* recipient, const QString* recipient_resource,
-	const QString* timestamp, const QString* message, const QString* msgId,
-	bool sentByMe)
+                              const QString* recipient, const QString* recipient_resource,
+                              const QString* timestamp, const QString* message, const QString* msgId,
+                              bool sentByMe)
 {
 	//
 	// add the new message

@@ -42,8 +42,7 @@ void PresenceController::setClient(Swift::Client* client_)
 void PresenceController::handlePresenceReceived(Swift::Presence::ref presence)
 {
 	// Automatically approve subscription requests
-	if (presence->getType() == Swift::Presence::Subscribe)
-	{
+	if (presence->getType() == Swift::Presence::Subscribe) {
 		Swift::Presence::ref response = Swift::Presence::create();
 		response->setTo(presence->getFrom());
 		response->setType(Swift::Presence::Subscribed);

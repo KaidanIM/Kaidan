@@ -37,6 +37,9 @@ Connects to the XMPP server of the set account and initialises all subcontroller
 ### `kaidan.mainDisconnect()`
 Disconnect from XMPP server.
 
+### `kaidan.newLoginNeeded()`
+Will return true, if there is no account data to use for connecting.
+
 ### `kaidan.getResourcePath(resourceName)`
 Get an absolute path of a data file; returns a file:// path
 * `resourceName = string`: the relative path in the data folder of Kaidan; for example:

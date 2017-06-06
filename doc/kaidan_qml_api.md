@@ -74,6 +74,35 @@ This will send the `message` to the `recipient`.
 * `message = string`: The message to be sent.
 
 
+## MessageModel
+
+This is a QSqlTableModel. The table contains the following rows:
+
+### `author = string`
+The JID of author of the message.
+
+### `author_resource = string`
+The JID resource of the author of the message.
+
+### `recipient = string`
+The JID of the recipient of the message.
+
+### `recipient_resource = string`
+The JID resource of the recipient of the message.
+
+### `timestamp = string`
+The timestamp when the message was sent.
+
+### `message = string`
+The message body.
+
+### `id = string`
+The message id.
+
+### `isDelivered = bool`
+Is true, if the a delivery confirmation has arrived from the recipient's client.
+
+
 ## RosterController
 
 The roster controller is for getting, editing and adding contacts.
@@ -91,6 +120,24 @@ empty ("").
 ### `kaidan.rosterController.removeContact(jid)`
 This will send a request to remove the contact that has the given `jid`.
 * `jid = string`: The bare JID of the contact to remove.
+
+
+## RosterModel
+
+This is a QSqlTableModel. The table contains the following rows:
+
+### `jid = string`
+The JID of the contact.
+
+### `name = string`
+The nick name for this contact.
+
+### `lastExchanged = string`
+The date on which the last time a message was exchanged. (You can use this for
+sorting)
+
+### `unreadMessages = int`
+The number of unread messages from this contact.
 
 
 ## VCard

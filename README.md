@@ -6,6 +6,7 @@
 [![Translation](https://hosted.weblate.org/widgets/kaidan/-/svg-badge.svg)](https://hosted.weblate.org/projects/kaidan/translations/)
 [![License](https://img.shields.io/badge/License-GPLv3%2B%20%2F%20CC%20BY--SA%204.0-blue.svg)](https://raw.githubusercontent.com/kaidanim/kaidan/master/LICENSE.txt)
 
+![](http://i.imgur.com/y3YB4aH.png)
 
 ## About
 
@@ -22,6 +23,9 @@ But if you want to get a client for Sailfish OS _now_, maybe take a look at
 
 Kaidan is *not* finished yet, so don't expect it working as well as a finished client will do.
 
+## Screenshots
+
+![](http://i.imgur.com/Yfuf6AT.png)
 
 ## Installation
 

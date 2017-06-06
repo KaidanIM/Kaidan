@@ -42,13 +42,10 @@ VCard::~VCard()
 void VCard::fromSwiftVCard(Swift::VCard::ref vCard_)
 {
 	// only use the new VCard, if it's valid
-	if (vCard_)
-	{
+	if (vCard_) {
 		vCard = vCard_;
 		emit VCardChanged();
-	}
-	else
-	{
+	} else {
 		std::cout << "VCard::fromSwiftVCard - Not Valid / Empty" << '\n';
 	}
 }

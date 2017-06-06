@@ -6,7 +6,7 @@
 [![Translation](https://hosted.weblate.org/widgets/kaidan/-/svg-badge.svg)](https://hosted.weblate.org/projects/kaidan/translations/)
 [![License](https://img.shields.io/badge/License-GPLv3%2B%20%2F%20CC%20BY--SA%204.0-blue.svg)](https://raw.githubusercontent.com/kaidanim/kaidan/master/LICENSE.txt)
 
-![](http://i.imgur.com/y3YB4aH.png)
+![](http://i.imgur.com/k1Aup3h.png)
 
 ## About
 

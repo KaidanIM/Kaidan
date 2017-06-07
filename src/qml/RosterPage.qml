@@ -82,7 +82,7 @@ Kirigami.ScrollablePage {
 				// this will update the unread message count,
 				// which will update the roster and will reset the
 				// model variable
-				kaidan.messageController.recipient = model.jid;
+				kaidan.chatPartner = model.jid;
 			}
 
 			actions: [

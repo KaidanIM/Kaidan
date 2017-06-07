@@ -22,7 +22,6 @@
 
 // Qt
 #include <QObject>
-#include <QSqlTableModel>
 // Swiften
 #include <Swiften/Client/Client.h>
 #include <Swiften/Elements/Message.h>
@@ -33,21 +32,17 @@
 class MessageController : public QObject
 {
 	Q_OBJECT
-	Q_PROPERTY(MessageModel* messageModel READ getMessageModel NOTIFY messageModelChanged)
-	Q_PROPERTY(QString recipient READ getRecipient WRITE setRecipient NOTIFY recipientChanged)
+	Q_PROPERTY(MessageModel *messageModel READ getMessageModel NOTIFY messageModelChanged)
 
 public:
-	MessageController(QString* ownJid_, QObject *parent = 0);
+	MessageController(QString *ownJid_, QObject *parent = 0);
 	~MessageController();
 
-	void setClient(Swift::Client* client_);
-	void setRosterController(RosterController* rosterController_);
+	void setClient(Swift::Client *client_);
 	MessageModel* getMessageModel();
 
-	void setRecipient(QString recipient_);
-	QString getRecipient();
-
-	Q_INVOKABLE void sendMessage(const QString recipient_, const QString message_);
+	void setChatPartner(QString *recipient);
+	void sendMessage(QString *recipient_, QString *message_);
 
 signals:
 	void messageModelChanged();
@@ -56,11 +51,9 @@ signals:
 private:
 	void handleMessageReceived(Swift::Message::ref message);
 
-	Swift::Client* client;
-	MessageModel* messageModel;
-	RosterController* rosterController;
-	QString recipient;
-	QString* ownJid;
+	Swift::Client *client;
+	MessageModel *messageModel;
+	QString *ownJid;
 };
 
 #endif // MESSAGECONTROLLER_H

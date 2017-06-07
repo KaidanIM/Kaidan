@@ -69,11 +69,11 @@ MessageModel::MessageModel(QObject *parent) : QSqlTableModel(parent)
 	setEditStrategy(QSqlTableModel::OnManualSubmit);
 }
 
-void MessageModel::applyRecipientFilter(QString recipient_, QString author_)
+void MessageModel::applyRecipientFilter(QString *recipient_, QString *author_)
 {
 	const QString filterString = QString::fromLatin1("(recipient = '%1' AND "
 	                             "author = '%2') OR (recipient = '%2' AND author = '%1')").arg(
-	                                     recipient_, author_);
+	                                     *recipient_, *author_);
 	setFilter(filterString);
 	select();
 }

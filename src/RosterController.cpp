@@ -24,12 +24,8 @@
 #include <iostream>
 #include <string.h>
 // Qt 5
-#include <QQmlContext>
 #include <QDateTime>
 #include <QDebug>
-#include <QSqlError>
-#include <QSqlRecord>
-#include <QSqlQuery>
 // Kaidan
 #include "RosterModel.h"
 // Swiften
@@ -42,10 +38,12 @@
 #include <Swiften/Queries/IQRouter.h>
 // Boost
 #include <boost/bind.hpp>
+#include <boost/optional.hpp>
 
 RosterController::RosterController(QObject *parent) : QObject(parent)
 {
 	rosterModel = new RosterModel();
+	chatPartner = QString("");
 }
 
 RosterController::~RosterController()
@@ -56,15 +54,28 @@ RosterController::~RosterController()
 void RosterController::setClient(Swift::Client *client_)
 {
 	client = client_;
-	client->onConnected.connect(boost::bind(&RosterController::requestRosterFromClient, this));
 	iqRouter = client->getIQRouter();
+	client->onConnected.connect(
+		boost::bind(&RosterController::requestRosterFromClient, this));
+	client->onMessageReceived.connect(
+		boost::bind(&RosterController::handleMessageReceived, this, _1));
+
 	xmppRoster = client->getRoster();
-	xmppRoster->onInitialRosterPopulated.connect(boost::bind(&RosterController::handleInitialRosterPopulated, this));
+	xmppRoster->onInitialRosterPopulated.connect(
+		boost::bind(&RosterController::handleInitialRosterPopulated, this));
 }
 
 RosterModel* RosterController::getRosterModel()
 {
 	return rosterModel;
+}
+
+void RosterController::setChatPartner(QString *chatPartner)
+{
+	this->chatPartner = *chatPartner;
+
+	// reset the unread message counter for this contact
+	resetUnreadMessagesForJid(chatPartner);
 }
 
 void RosterController::requestRosterFromClient()
@@ -127,9 +138,6 @@ void RosterController::handleRosterReceived(Swift::ErrorPayload::ref error_)
 				rosterModel->insertContact(jid, name);
 			}
 		}
-
-		// send signal for updating the GUI
-		emit rosterModelChanged();
 	}
 }
 
@@ -151,8 +159,6 @@ void RosterController::handleJidAdded(const Swift::JID &jid_)
 	);
 
 	rosterModel->submitAll();
-
-	emit rosterModelChanged();
 }
 
 void RosterController::handleJidRemoved(const Swift::JID &jid_)
@@ -160,8 +166,6 @@ void RosterController::handleJidRemoved(const Swift::JID &jid_)
 	rosterModel->removeContactByJid(
 	        QString::fromStdString(jid_.toBare().toString())
 	);
-
-	emit rosterModelChanged();
 }
 
 void RosterController::handleJidUpdated(const Swift::JID &jid_, const std::string &name_,
@@ -171,16 +175,12 @@ void RosterController::handleJidUpdated(const Swift::JID &jid_, const std::strin
 	        QString::fromStdString(jid_.toBare().toString()),
 	        QString::fromStdString(name_)
 	);
-
-	emit rosterModelChanged();
 }
 
 void RosterController::handleRosterCleared()
 {
 	// remove all contacts
 	rosterModel->clearData();
-
-	emit rosterModelChanged();
 }
 
 void RosterController::addContact(const QString jid_, const QString name_)
@@ -228,12 +228,30 @@ void RosterController::removeContact(const QString jid_)
 	);
 }
 
-void RosterController::updateLastExchangedOfJid(const QString jid_)
+void RosterController::handleMessageReceived(Swift::Message::ref message)
 {
-	rosterModel->setLastExchangedOfJid(jid_, QDateTime::currentDateTime().toString(Qt::ISODate));
+	//
+	// Update last exchanged and unread message count
+	//
 
-	// send signal for updating the GUI
-	emit rosterModelChanged();
+	boost::optional<std::string> optionalMessageBody = message->getBody();
+
+	if (optionalMessageBody) {
+		QString msgAuthor = QString::fromStdString(message->getFrom()
+			.toBare().toString());
+
+		updateLastExchangedOfJid(&msgAuthor);
+
+		if (msgAuthor != chatPartner) {
+			newUnreadMessageForJid(msgAuthor);
+		}
+	}
+}
+
+void RosterController::updateLastExchangedOfJid(QString *jid_)
+{
+	QString dateTime = QDateTime::currentDateTime().toString(Qt::ISODate);
+	rosterModel->setLastExchangedOfJid(jid_, &dateTime);
 }
 
 void RosterController::newUnreadMessageForJid(const QString jid_)
@@ -246,8 +264,7 @@ void RosterController::newUnreadMessageForJid(const QString jid_)
 	rosterModel->setUnreadMessageCountOfJid(&jid_, msgCount);
 }
 
-void RosterController::resetUnreadMessagesForJid(const QString jid_)
+void RosterController::resetUnreadMessagesForJid(QString *jid)
 {
-	rosterModel->setUnreadMessageCountOfJid(&jid_, 0);
-	emit rosterModelChanged();
+	rosterModel->setUnreadMessageCountOfJid(jid, 0);
 }

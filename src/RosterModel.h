@@ -40,7 +40,7 @@ public:
 	void updateContactName(QString, QString);
 	QStringList getJidList();
 	void removeListOfJids(QStringList*);
-	void setLastExchangedOfJid(const QString, const QString);
+	void setLastExchangedOfJid(QString*, QString*);
 	int getUnreadMessageCountOfJid(const QString* jid_);
 	void setUnreadMessageCountOfJid(const QString* jid_, const int unreadMessageCount);
 };

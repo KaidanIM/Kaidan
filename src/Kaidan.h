@@ -48,6 +48,7 @@ class Kaidan : public QObject
 	Q_PROPERTY(QString jid READ getJid WRITE setJid NOTIFY jidChanged)
 	Q_PROPERTY(QString jidResource READ getJidResource WRITE setJidResource NOTIFY jidResourceChanged)
 	Q_PROPERTY(QString password READ getPassword WRITE setPassword NOTIFY passwordChanged)
+	Q_PROPERTY(QString chatPartner READ getChatPartner WRITE setChatPartner NOTIFY chatPartnerChanged)
 
 public:
 	Kaidan(Swift::NetworkFactories* networkFactories, QObject *parent = 0);
@@ -55,21 +56,23 @@ public:
 
 	Q_INVOKABLE void mainDisconnect();
 	Q_INVOKABLE void mainConnect();
-
-	bool getConnectionState() const;
 	Q_INVOKABLE bool newLoginNeeded();
 
+	bool getConnectionState() const;
 	QString getJid();
-	QString getJidResource();
-	QString getPassword();
 	void setJid(QString);
+	QString getJidResource();
 	void setJidResource(QString);
+	QString getPassword();
 	void setPassword(QString);
+	QString getChatPartner();
+	void setChatPartner(QString);
 
 	RosterController* getRosterController();
 	MessageController* getMessageController();
 	VCardController* getVCardController();
 
+	Q_INVOKABLE void sendMessage(QString jid, QString message);
 	Q_INVOKABLE QString getResourcePath(QString);
 	Q_INVOKABLE QString getVersionString();
 
@@ -82,6 +85,7 @@ signals:
 	void jidChanged();
 	void jidResourceChanged();
 	void passwordChanged();
+	void chatPartnerChanged();
 
 private:
 	void handleConnected();
@@ -108,6 +112,7 @@ private:
 	QString jidResource;
 	QString fullJid;
 	QString password;
+	QString chatPartner;
 };
 
 #endif

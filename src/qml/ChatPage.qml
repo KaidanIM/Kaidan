@@ -153,7 +153,7 @@ Kirigami.Page {
 						sendButton.enabled = false;
 
 						// send the message
-						kaidan.messageController.sendMessage(recipientJid, messageField.text);
+						kaidan.sendMessage(recipientJid, messageField.text);
 						// clean up the text field
 						messageField.text = "";
 

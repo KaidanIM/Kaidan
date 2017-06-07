@@ -156,10 +156,10 @@ void RosterModel::removeListOfJids(QStringList* jidList)
 	submitAll();
 }
 
-void RosterModel::setLastExchangedOfJid(const QString jid_, const QString date_)
+void RosterModel::setLastExchangedOfJid(QString *jid_, QString *date_)
 {
 	QSqlQuery newQuery;
-	newQuery.exec(QString("UPDATE 'Roster' SET lastExchanged = '%1' WHERE jid = '%2'").arg(date_, jid_));
+	newQuery.exec(QString("UPDATE 'Roster' SET lastExchanged = '%1' WHERE jid = '%2'").arg(*date_, *jid_));
 	submitAll();
 }
 

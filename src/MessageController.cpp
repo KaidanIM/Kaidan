@@ -23,9 +23,6 @@
 #include <QDateTime>
 #include <QDebug>
 #include <QString>
-#include <QSqlError>
-#include <QSqlRecord>
-#include <QSqlQuery>
 // Boost
 #include <boost/bind.hpp>
 #include <boost/date_time/posix_time/posix_time.hpp>
@@ -59,37 +56,16 @@ void MessageController::setClient(Swift::Client* client_)
 	client->onMessageReceived.connect(boost::bind(&MessageController::handleMessageReceived, this, _1));
 }
 
-void MessageController::setRosterController(RosterController* rosterController_)
-{
-	rosterController = rosterController_;
-}
-
 MessageModel* MessageController::getMessageModel()
 {
 	return messageModel;
 }
 
-void MessageController::setRecipient(QString recipient_)
+void MessageController::setChatPartner(QString *recipient)
 {
-	// update the recipient
-	if (recipient == recipient_)
-		return;
-
-	recipient = recipient_;
-	emit recipientChanged();
-
 	// we have to use ownJid here, because this should also be usable when
 	// we're offline or we haven't connected already.
-	messageModel->applyRecipientFilter(recipient, *ownJid);
-	emit messageModelChanged();
-
-	// reset the unread message counter for this contact
-	rosterController->resetUnreadMessagesForJid(recipient_);
-}
-
-QString MessageController::getRecipient()
-{
-	return recipient;
+	messageModel->applyRecipientFilter(recipient, ownJid);
 }
 
 void MessageController::handleMessageReceived(Swift::Message::ref message_)
@@ -119,8 +95,6 @@ void MessageController::handleMessageReceived(Swift::Message::ref message_)
 
 		messageModel->addMessage(&author, &author_resource, ownJid,
 		                         &recipient_resource, &timestamp, &message, &msgId, false);
-
-		emit messageModelChanged();
 
 		// send a new notification | TODO: Resolve nickname from JID
 		Notifications::sendMessageNotification(
@@ -158,23 +132,9 @@ void MessageController::handleMessageReceived(Swift::Message::ref message_)
 			messageModel->setMessageAsDelivered(QString::fromStdString(receivedId));
 		}
 	}
-
-	//
-	// Update last exchanged, unread message count in roster controller
-	//
-
-	if (bodyOpt) {
-		const QString msgAuthor = QString::fromStdString(message_->getFrom().toBare().toString());
-
-		rosterController->updateLastExchangedOfJid(msgAuthor);
-
-		if (msgAuthor != this->recipient) {
-			rosterController->newUnreadMessageForJid(msgAuthor);
-		}
-	}
 }
 
-void MessageController::sendMessage(const QString recipient_, const QString message_)
+void MessageController::sendMessage(QString *recipient_, QString *message_)
 {
 	// generate a new message id
 	Swift::IDGenerator idGenerator;
@@ -185,24 +145,21 @@ void MessageController::sendMessage(const QString recipient_, const QString mess
 	//
 
 	const QString timestamp = QDateTime::currentDateTime().toString(Qt::ISODate);
-	const QString author_resource = QString(client->getJID().getResource().c_str());
+	const QString author_resource = QString::fromStdString(client->getJID().getResource());
 	const QString recipient_resource = QString("");
 	const QString qmsgId = QString::fromStdString(msgId);
 
-	messageModel->addMessage(ownJid, &author_resource, &recipient_,
-	                         &recipient_resource, &timestamp, &message_, &qmsgId, true);
-
-	emit messageModelChanged();
-
+	messageModel->addMessage(ownJid, &author_resource, recipient_,
+	                         &recipient_resource, &timestamp, message_, &qmsgId, true);
 
 	//
 	// send the message
 	//
 
 	boost::shared_ptr<Swift::Message> newMessage(new Swift::Message());
-	newMessage->setTo(Swift::JID(recipient_.toStdString()));
+	newMessage->setTo(Swift::JID(recipient_->toStdString()));
 	newMessage->setFrom(client->getJID());
-	newMessage->setBody(message_.toStdString());
+	newMessage->setBody(message_->toStdString());
 	newMessage->setID(msgId);
 
 	// XEP-0184: Message Delivery Receipts
@@ -211,10 +168,4 @@ void MessageController::sendMessage(const QString recipient_, const QString mess
 
 	// send the message
 	client->sendMessage(newMessage);
-
-	//
-	// Update lastExchanged in roster controller
-	//
-
-	rosterController->updateLastExchangedOfJid(recipient);
 }

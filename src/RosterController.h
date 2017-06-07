@@ -24,10 +24,10 @@
 // Qt
 #include <QObject>
 #include <QSqlTableModel>
-#include <QQmlListProperty>
 // Swiften
 #include <Swiften/Client/Client.h>
 #include <Swiften/Elements/ErrorPayload.h>
+#include <Swiften/Elements/Message.h>
 // Kaidan
 #include "RosterModel.h"
 
@@ -43,9 +43,10 @@ public:
 	void setClient(Swift::Client *client_);
 	void requestRosterFromClient();
 	RosterModel* getRosterModel();
-	void updateLastExchangedOfJid(const QString jid_);
+	void setChatPartner(QString *chatPartner);
+	void updateLastExchangedOfJid(QString *jid_);
 	void newUnreadMessageForJid(const QString jid_);
-	void resetUnreadMessagesForJid(const QString jid_);
+	void resetUnreadMessagesForJid(QString *jid_);
 	Q_INVOKABLE void addContact(const QString jid_, const QString name_);
 	Q_INVOKABLE void removeContact(const QString);
 
@@ -53,16 +54,18 @@ signals:
 	void rosterModelChanged();
 
 private:
+	void handleMessageReceived(Swift::Message::ref message);
 	void handleRosterReceived(Swift::ErrorPayload::ref error);
 	void handleInitialRosterPopulated();
 	void handleJidAdded(const Swift::JID &jid_);
 	void handleJidRemoved(const Swift::JID &jid_);
 	void handleJidUpdated(const Swift::JID &jid_, const std::string &name_, const std::vector<std::string>&);
 	void handleRosterCleared();
-	Swift::Client* client;
-	Swift::IQRouter* iqRouter;
-	Swift::XMPPRoster* xmppRoster;
-	RosterModel* rosterModel;
+	Swift::Client *client;
+	Swift::IQRouter *iqRouter;
+	Swift::XMPPRoster *xmppRoster;
+	RosterModel *rosterModel;
+	QString chatPartner;
 };
 
 #endif // ROSTERCONTROLLER_H

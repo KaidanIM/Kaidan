@@ -1,5 +1,9 @@
 # Changelog
 
+### Version 0.2.1 (released on 08.06.2017)
+Fixes:
+ * Roster page: Fixed style: Now has contour lines and a cool material effect (@LNJ2)
+
 ### Version 0.2.0 (released on 06.06.2017)
 User interface:
  * GUI: Port to Kirigami 2 (#81) (@JBBgameich)
@@ -17,5 +21,5 @@ New features:
  * Add XEP-0184: Message Delivery Receipts (@LNJ2)
  * Disable stream compression by default (for HipChat/other server compatibility) (@LNJ2)
 
-Fixes
+Fixes:
  * AboutPage: Fix possible closing of multiple pages (@LNJ2)

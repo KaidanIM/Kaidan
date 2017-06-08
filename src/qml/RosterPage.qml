@@ -40,6 +40,7 @@ Kirigami.ScrollablePage {
 		model: kaidan.rosterController.rosterModel
 
 		delegate: Kirigami.SwipeListItem {
+			id: listItem
 			height: Kirigami.Units.gridUnit * 2.5
 
 			RowLayout {

@@ -43,6 +43,7 @@ public:
 	void setLastExchangedOfJid(QString*, QString*);
 	int getUnreadMessageCountOfJid(const QString* jid_);
 	void setUnreadMessageCountOfJid(const QString* jid_, const int unreadMessageCount);
+	void setLastMessageForJid(QString*, QString*);
 };
 
 #endif // ROSTERMODEL_H

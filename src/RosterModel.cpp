@@ -193,3 +193,20 @@ void RosterModel::setUnreadMessageCountOfJid(const QString* jid_, const int coun
 
 	submit();
 }
+
+void RosterModel::setLastMessageForJid(QString *jid, QString *message)
+{
+	QSqlQuery query;
+	query.prepare(QString("UPDATE Roster SET lastMessage = %1 WHERE jid = '%2'")
+	              .arg(*message, *jid));
+
+	if (!query.exec()) {
+		qDebug("Failed to query database: %s", qPrintable(query.lastError().text()));
+		qDebug() << query.lastQuery();
+	}
+	if (!select()) {
+		qDebug() << "Error on select in RosterModel::setUnreadMessageCountOfJid";
+	}
+
+	submit();
+}

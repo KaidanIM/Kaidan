@@ -239,6 +239,10 @@ void RosterController::handleMessageReceived(Swift::Message::ref message)
 	if (optionalMessageBody) {
 		QString msgAuthor = QString::fromStdString(message->getFrom()
 			.toBare().toString());
+		QString message = QString::fromStdString(optionalMessageBody.get());
+
+		// update the last message for this contact
+		rosterModel->setLastMessageForJid(&msgAuthor, &message);
 
 		updateLastExchangedOfJid(&msgAuthor);
 
@@ -246,6 +250,14 @@ void RosterController::handleMessageReceived(Swift::Message::ref message)
 			newUnreadMessageForJid(msgAuthor);
 		}
 	}
+}
+
+void RosterController::handleNewMessageSent(QString *jid, QString *message)
+{
+	// update the last message for this contact
+	rosterModel->setLastMessageForJid(jid, message);
+	// update the last exchanged date
+	updateLastExchangedOfJid(jid);
 }
 
 void RosterController::updateLastExchangedOfJid(QString *jid_)

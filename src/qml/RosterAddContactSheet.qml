@@ -24,6 +24,11 @@ import QtQuick.Layouts 1.2
 import org.kde.kirigami 2.0 as Kirigami
 
 Kirigami.OverlaySheet {
+	function clearInput() {
+		jidField.text = "";
+		nickField.text = "";
+	}
+	
 	ColumnLayout {
 		Kirigami.Heading {
 			text: qsTr("Add new contact") + "          "
@@ -54,7 +59,10 @@ Kirigami.OverlaySheet {
 
 			Controls.Button {
 				text: qsTr("Cancel")
-				onClicked: close()
+				onClicked: {
+					clearInput();
+					close();
+				}
 				Layout.fillWidth: true
 			}
 
@@ -63,6 +71,7 @@ Kirigami.OverlaySheet {
 				enabled: jidField.length > 0
 				onClicked: {
 					kaidan.rosterController.addContact(jidField.text, nickField.text);
+					clearInput();
 					close();
 				}
 				Layout.fillWidth: true

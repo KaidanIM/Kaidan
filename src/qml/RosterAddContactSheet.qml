@@ -61,7 +61,7 @@ Kirigami.OverlaySheet {
 				text: qsTr("Cancel")
 				onClicked: {
 					clearInput();
-					close()
+					close();
 				}
 				Layout.fillWidth: true
 			}
@@ -72,7 +72,7 @@ Kirigami.OverlaySheet {
 				onClicked: {
 					kaidan.rosterController.addContact(jidField.text, nickField.text);
 					clearInput();
-					close()
+					close();
 				}
 				Layout.fillWidth: true
 			}

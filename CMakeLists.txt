@@ -34,7 +34,7 @@ set(CMAKE_AUTOMOC ON)
 set(CMAKE_AUTOUIC ON)
 set(CMAKE_AUTORCC ON)
 
-# CMake modules inclue
+# CMake modules include
 include(FeatureSummary)
 include(GNUInstallDirs)
 

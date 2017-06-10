@@ -44,6 +44,7 @@ public:
 	void requestRosterFromClient();
 	RosterModel* getRosterModel();
 	void setChatPartner(QString *chatPartner);
+	void handleNewMessageSent(QString*, QString*);
 	void updateLastExchangedOfJid(QString *jid_);
 	void newUnreadMessageForJid(const QString jid_);
 	void resetUnreadMessagesForJid(QString *jid_);

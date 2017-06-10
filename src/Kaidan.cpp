@@ -226,7 +226,6 @@ void Kaidan::sendMessage(QString jid, QString message)
 {
 	messageController->sendMessage(&jid, &message);
 	rosterController->handleNewMessageSent(&jid, &message);
-// 	rosterController->updateLastExchangedOfJid(&jid);
 }
 
 QString Kaidan::getResourcePath(QString name_)

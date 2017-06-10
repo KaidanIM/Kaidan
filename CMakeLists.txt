@@ -34,6 +34,9 @@ set(CMAKE_AUTOMOC ON)
 set(CMAKE_AUTOUIC ON)
 set(CMAKE_AUTORCC ON)
 
+# CMake modules inclue
+include(FeatureSummary)
+include(GNUInstallDirs)
 
 #
 # Dependecies
@@ -47,7 +50,6 @@ find_package(Qt5 ${QT_MIN_VERSION} REQUIRED NO_MODULE COMPONENTS Core Qml Quick 
 find_package(KF5Kirigami2 REQUIRED)
 find_package(Swiften REQUIRED)
 find_package(Boost ${BOOST_MIN_VERSION} REQUIRED COMPONENTS signals date_time)
-include(GNUInstallDirs)
 
 
 #
@@ -164,3 +166,6 @@ if(UNIX AND NOT APPLE)
 		DESTINATION "${CMAKE_INSTALL_FULL_DATADIR}/applications"
 	)
 endif()
+
+
+feature_summary(WHAT ALL FATAL_ON_MISSING_REQUIRED_PACKAGES)

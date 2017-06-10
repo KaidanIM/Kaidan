@@ -225,7 +225,7 @@ void Kaidan::setChatPartner(QString chatPartner)
 void Kaidan::sendMessage(QString jid, QString message)
 {
 	messageController->sendMessage(&jid, &message);
-	rosterController->updateLastExchangedOfJid(&jid);
+	rosterController->handleNewMessageSent(&jid, &message);
 }
 
 QString Kaidan::getResourcePath(QString name_)

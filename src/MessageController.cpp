@@ -38,10 +38,9 @@
 #include "MessageModel.h"
 #include "Notifications.h"
 
-MessageController::MessageController(QString* ownJid_, QObject *parent) : QObject(parent)
+MessageController::MessageController(QSqlDatabase *database, QObject *parent) : QObject(parent)
 {
-	ownJid = ownJid_;
-	messageModel = new MessageModel();
+	messageModel = new MessageModel(database);
 	emit messageModelChanged();
 }
 
@@ -61,7 +60,7 @@ MessageModel* MessageController::getMessageModel()
 	return messageModel;
 }
 
-void MessageController::setChatPartner(QString *recipient)
+void MessageController::setChatPartner(QString *recipient, QString* ownJid)
 {
 	// we have to use ownJid here, because this should also be usable when
 	// we're offline or we haven't connected already.

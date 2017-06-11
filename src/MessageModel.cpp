@@ -30,38 +30,10 @@
 
 static const char *conversationsTableName = "Messages";
 
-static void createTable()
+MessageModel::MessageModel(QSqlDatabase *database, QObject *parent) : QSqlTableModel(parent, *database)
 {
-	if (QSqlDatabase::database().tables().contains(conversationsTableName)) {
-		// The table already exists; we don't need to do anything.
-		return;
-	}
-
-	QSqlQuery query;
-	if (!query.exec(
-	            "CREATE TABLE IF NOT EXISTS 'Messages' ("
-	            "'author' TEXT NOT NULL,"
-	            "'author_resource' TEXT,"
-	            "'recipient' TEXT NOT NULL,"
-	            "'recipient_resource' TEXT,"
-	            "'timestamp' TEXT NOT NULL,"
-	            "'message' TEXT NOT NULL,"
-	            "'id' TEXT NOT NULL,"
-	            "'isSent' BOOL,"      // is sent to server
-	            "'isDelivered' BOOL," // message has arrived at other client
-	            "FOREIGN KEY('author') REFERENCES Roster ('jid'),"
-	            "FOREIGN KEY('recipient') REFERENCES Roster ('jid')"
-	            ")"))
-	{
-		qFatal("Failed to query database: %s", qPrintable(query.lastError().text()));
-	}
-}
-
-MessageModel::MessageModel(QObject *parent) : QSqlTableModel(parent)
-{
-	createTable();
+	this->database = database;
 	setTable(conversationsTableName);
-
 	// sort in descending order of the timestamp column
 	setSort(4, Qt::DescendingOrder);
 
@@ -99,14 +71,14 @@ QHash<int, QByteArray> MessageModel::roleNames() const
 
 void MessageModel::setMessageAsSent(const QString msgId)
 {
-	QSqlQuery newQuery;
+	QSqlQuery newQuery(*database);
 	newQuery.exec(QString("UPDATE 'Messages' SET 'isSent' = 1 WHERE id = '%1'").arg(msgId));
 	submitAll();
 }
 
 void MessageModel::setMessageAsDelivered(const QString msgId)
 {
-	QSqlQuery newQuery;
+	QSqlQuery newQuery(*database);
 	newQuery.exec(QString("UPDATE 'Messages' SET 'isDelivered' = 1 WHERE id = '%1'").arg(msgId));
 	submitAll();
 }

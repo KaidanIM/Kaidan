@@ -40,9 +40,10 @@
 #include <boost/bind.hpp>
 #include <boost/optional.hpp>
 
-RosterController::RosterController(QObject *parent) : QObject(parent)
+RosterController::RosterController(QSqlDatabase* database, QObject *parent) :
+QObject(parent)
 {
-	rosterModel = new RosterModel();
+	rosterModel = new RosterModel(database);
 	chatPartner = QString("");
 }
 

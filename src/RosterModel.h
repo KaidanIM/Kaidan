@@ -22,6 +22,7 @@
 
 // Qt
 #include <QObject>
+#include <QSqlDatabase>
 #include <QSqlTableModel>
 #include <QQmlListProperty>
 
@@ -29,7 +30,7 @@ class RosterModel : public QSqlTableModel
 {
 	Q_OBJECT
 public:
-	RosterModel(QObject *parent = 0);
+	RosterModel(QSqlDatabase *database, QObject *parent = 0);
 
 	QHash<int, QByteArray> roleNames() const;
 	QVariant data(const QModelIndex &index, int role) const;
@@ -44,6 +45,9 @@ public:
 	int getUnreadMessageCountOfJid(const QString* jid_);
 	void setUnreadMessageCountOfJid(const QString* jid_, const int unreadMessageCount);
 	void setLastMessageForJid(QString*, QString*);
+
+private:
+	QSqlDatabase *database;
 };
 
 #endif // ROSTERMODEL_H

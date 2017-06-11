@@ -4,6 +4,7 @@ set(CURDIR ${CMAKE_CURRENT_LIST_DIR})
 set(KAIDAN_SOURCES
 	${CURDIR}/main.cpp
 	${CURDIR}/Kaidan.cpp
+	${CURDIR}/Database.cpp
 	${CURDIR}/RosterController.cpp
 	${CURDIR}/RosterModel.cpp
 	${CURDIR}/MessageController.cpp

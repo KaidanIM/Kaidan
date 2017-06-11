@@ -24,37 +24,16 @@
 #include <QSqlError>
 #include <QSqlQuery>
 #include <QSqlRecord>
+#include <QSqlDatabase>
 #include <QSqlTableModel>
 
 static const char *rosterTableName = "Roster";
 
-static void createTable()
+RosterModel::RosterModel(QSqlDatabase* database, QObject *parent) :
+	QSqlTableModel(parent, *database)
 {
-	if (QSqlDatabase::database().tables().contains(QStringLiteral("Roster"))) {
-		// The table already exists; we don't need to do anything.
-		return;
-	}
+	this->database = database;
 
-	QSqlQuery query;
-	if (!query.exec("CREATE TABLE IF NOT EXISTS 'Roster' ("
-	                "'jid' TEXT NOT NULL,"
-	                "'name' TEXT NOT NULL,"
-	                "'lastExchanged' TEXT NOT NULL,"
-	                "'unreadMessages' INTEGER,"
-	                "'lastMessage' TEXT,"    // < UNUSED v
-	                "'lastOnline' TEXT,"
-	                "'activity' TEXT,"
-	                "'status' TEXT,"
-	                "'mood' TEXT"            // < UNUSED ^
-	                ")"))
-	{
-		qFatal("Failed to query database: %s", qPrintable(query.lastError().text()));
-	}
-}
-
-RosterModel::RosterModel(QObject *parent) : QSqlTableModel(parent)
-{
-	createTable();
 	setTable(rosterTableName);
 	setEditStrategy(QSqlTableModel::OnManualSubmit);
 
@@ -120,15 +99,19 @@ void RosterModel::insertContact(QString jid_, QString name_)
 
 void RosterModel::removeContactByJid(QString jid_)
 {
-	QSqlQuery newQuery;
-	newQuery.exec(QString("DELETE FROM 'Roster' WHERE jid = '%1'").arg(jid_));
+	QSqlQuery query(*database);
+	if (!query.exec(QString("DELETE FROM 'Roster' WHERE jid = '%1'").arg(jid_))) {
+		qDebug("Failed to query database: %s", qPrintable(query.lastError().text()));
+	}
 	submitAll();
 }
 
 void RosterModel::updateContactName(QString jid_, QString name_)
 {
-	QSqlQuery newQuery;
-	newQuery.exec(QString("UPDATE 'Roster' SET name = '%1' WHERE jid = '%2'").arg(name_, jid_));
+	QSqlQuery query(*database);
+	if (!query.exec(QString("UPDATE 'Roster' SET name = '%1' WHERE jid = '%2'").arg(name_, jid_))) {
+		qDebug("Failed to query database: %s", qPrintable(query.lastError().text()));
+	}
 	submitAll();
 }
 
@@ -136,8 +119,10 @@ QStringList RosterModel::getJidList()
 {
 	QStringList retVar;
 
-	QSqlQuery query;
-	query.exec("SELECT jid FROM Roster");
+	QSqlQuery query(*database);
+	if (!query.exec("SELECT jid FROM Roster")) {
+		qDebug("Failed to query database: %s", qPrintable(query.lastError().text()));
+	}
 
 	int jidCol = query.record().indexOf("jid");
 
@@ -149,23 +134,26 @@ QStringList RosterModel::getJidList()
 
 void RosterModel::removeListOfJids(QStringList* jidList)
 {
-	QSqlQuery query;
+	QSqlQuery query(*database);
 	for (int i = 0; i < jidList->length(); i++) {
-		query.exec(QString("DELETE FROM 'Roster' WHERE jid = '%1'").arg(jidList->at(i)));
+		if (!query.exec(QString("DELETE FROM 'Roster' WHERE jid = '%1'")
+				.arg(jidList->at(i)))) {
+			qDebug("Failed to query database: %s", qPrintable(query.lastError().text()));
+		}
 	}
 	submitAll();
 }
 
 void RosterModel::setLastExchangedOfJid(QString *jid_, QString *date_)
 {
-	QSqlQuery newQuery;
+	QSqlQuery newQuery(*database);
 	newQuery.exec(QString("UPDATE 'Roster' SET lastExchanged = '%1' WHERE jid = '%2'").arg(*date_, *jid_));
 	submitAll();
 }
 
 int RosterModel::getUnreadMessageCountOfJid(const QString* jid_)
 {
-	QSqlQuery query;
+	QSqlQuery query(*database);
 
 	query.prepare(QString("SELECT unreadMessages FROM Roster WHERE jid = '%1'").arg(*jid_));
 	if (!query.exec()) {
@@ -179,7 +167,7 @@ int RosterModel::getUnreadMessageCountOfJid(const QString* jid_)
 
 void RosterModel::setUnreadMessageCountOfJid(const QString* jid_, const int count_)
 {
-	QSqlQuery query;
+	QSqlQuery query(*database);
 	query.prepare(QString("UPDATE Roster SET unreadMessages = %1 WHERE jid = '%2'")
 	              .arg(QString::number(count_), *jid_));
 
@@ -196,7 +184,7 @@ void RosterModel::setUnreadMessageCountOfJid(const QString* jid_, const int coun
 
 void RosterModel::setLastMessageForJid(QString *jid, QString *message)
 {
-	QSqlQuery query;
+	QSqlQuery query(*database);
 	query.prepare(QString("UPDATE Roster SET lastMessage = %1 WHERE jid = '%2'")
 	              .arg(*message, *jid));
 

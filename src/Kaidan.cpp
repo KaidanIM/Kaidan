@@ -43,10 +43,21 @@
 #include "VCardController.h"
 #include "ServiceDiscoveryManager.h"
 
-Kaidan::Kaidan(Swift::NetworkFactories* networkFactories, QObject *parent) : QObject(parent)
+Kaidan::Kaidan(Swift::NetworkFactories *networkFactories, QObject *parent) :
+	QObject(parent)
 {
-	netFactories = networkFactories;
 	connected = false;
+	netFactories = networkFactories;
+	database = new Database();
+	database->openDatabase();
+	if (database->needToConvert()) database->convertDatabase();
+	storages = new Swift::MemoryStorages(Swift::PlatformCryptoProvider::create());
+	messageController = new MessageController(database->getDatabase());
+	rosterController = new RosterController(database->getDatabase());
+	presenceController = new PresenceController();
+	vCardController = new VCardController();
+	serviceDiscoveryManager = new ServiceDiscoveryManager();
+
 
 	//
 	// Load settings data
@@ -70,15 +81,6 @@ Kaidan::Kaidan(Swift::NetworkFactories* networkFactories, QObject *parent) : QOb
 
 	// create/update the full jid
 	updateFullJid();
-
-	// load controllers
-	messageController = new MessageController(&jid);
-	rosterController = new RosterController();
-	presenceController = new PresenceController();
-	vCardController = new VCardController();
-	serviceDiscoveryManager = new ServiceDiscoveryManager();
-
-	storages = new Swift::MemoryStorages(Swift::PlatformCryptoProvider::create());
 }
 
 Kaidan::~Kaidan()
@@ -216,7 +218,7 @@ void Kaidan::setChatPartner(QString chatPartner)
 	this->chatPartner = chatPartner;
 
 	// upsate message controller
-	messageController->setChatPartner(&chatPartner);
+	messageController->setChatPartner(&chatPartner, &jid);
 	rosterController->setChatPartner(&chatPartner);
 
 	emit chatPartnerChanged();

@@ -22,6 +22,7 @@
 
 // Qt
 #include <QObject>
+#include <QSqlDatabase>
 // Swiften
 #include <Swiften/Client/Client.h>
 #include <Swiften/Elements/Message.h>
@@ -35,13 +36,13 @@ class MessageController : public QObject
 	Q_PROPERTY(MessageModel *messageModel READ getMessageModel NOTIFY messageModelChanged)
 
 public:
-	MessageController(QString *ownJid_, QObject *parent = 0);
+	MessageController(QSqlDatabase *database, QObject *parent = 0);
 	~MessageController();
 
 	void setClient(Swift::Client *client_);
 	MessageModel* getMessageModel();
 
-	void setChatPartner(QString *recipient);
+	void setChatPartner(QString *recipient, QString* ownJid);
 	void sendMessage(QString *recipient_, QString *message_);
 
 signals:

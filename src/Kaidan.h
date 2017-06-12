@@ -31,6 +31,7 @@
 #include <Swiften/Client/Client.h>
 #include <Swiften/Client/ClientXMLTracer.h>
 // Kaidan
+#include "Database.h"
 #include "RosterController.h"
 #include "MessageController.h"
 #include "PresenceController.h"
@@ -51,7 +52,7 @@ class Kaidan : public QObject
 	Q_PROPERTY(QString chatPartner READ getChatPartner WRITE setChatPartner NOTIFY chatPartnerChanged)
 
 public:
-	Kaidan(Swift::NetworkFactories* networkFactories, QObject *parent = 0);
+	Kaidan(Swift::NetworkFactories *networkFactories, QObject *parent = 0);
 	~Kaidan();
 
 	Q_INVOKABLE void mainDisconnect();
@@ -100,6 +101,7 @@ private:
 	Swift::NetworkFactories* netFactories;
 	Swift::MemoryStorages* storages;
 
+	Database* database;
 	RosterController* rosterController;
 	MessageController* messageController;
 	PresenceController* presenceController;

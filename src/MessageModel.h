@@ -27,7 +27,7 @@ class MessageModel : public QSqlTableModel
 	Q_OBJECT
 
 public:
-	MessageModel(QObject *parent = 0);
+	MessageModel(QSqlDatabase *database, QObject *parent = 0);
 
 	QVariant data(const QModelIndex &index, int role) const Q_DECL_OVERRIDE;
 	QHash<int, QByteArray> roleNames() const Q_DECL_OVERRIDE;
@@ -44,6 +44,7 @@ signals:
 	void recipientChanged();
 
 private:
+	QSqlDatabase* database;
 };
 
 #endif // MESSAGEMODEL_H

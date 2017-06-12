@@ -37,7 +37,7 @@ class RosterController : public QObject
 	Q_PROPERTY(RosterModel* rosterModel READ getRosterModel NOTIFY rosterModelChanged)
 
 public:
-	RosterController(QObject *parent = 0);
+	RosterController(QSqlDatabase* database, QObject *parent = 0);
 	~RosterController();
 
 	void setClient(Swift::Client *client_);

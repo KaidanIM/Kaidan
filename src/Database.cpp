@@ -30,7 +30,7 @@
 #include <QSqlQuery>
 #include <QSqlRecord>
 
-static const unsigned int DATABASE_LATEST_VERSION = 2;
+static const unsigned int DATABASE_LATEST_VERSION = 3;
 static const char *DATABASE_TABLE_INFO = "dbinfo";
 static const char *DATABASE_TABLE_MESSAGES = "Messages";
 static const char *DATABASE_TABLE_ROSTER = "Roster";
@@ -117,7 +117,9 @@ void Database::convertDatabase()
 		createNewDatabase();
 		break;
 	case 1:
-		convertDatabaseToV2();
+		convertDatabaseToV2(); version = 2;
+	case 2:
+		convertDatabaseToV3(); version = 3;
 		// only break on last convertion step, to not enter default (!)
 		break;
 	default:
@@ -157,7 +159,8 @@ void Database::createNewDatabase()
 	                "'lastOnline' TEXT,"     // < UNUSED v
 	                "'activity' TEXT,"
 	                "'status' TEXT,"
-	                "'mood' TEXT"            // < UNUSED ^
+	                "'mood' TEXT,"
+					"'avatarHash' TEXT"      // < UNUSED ^
 	                ")"))
 	{
 		qFatal("Failed to query database: %s", qPrintable(query.lastError().text()));
@@ -206,4 +209,13 @@ void Database::convertDatabaseToV2()
 {
 	// create a new dbinfo table
 	createDbInfoTable();
+}
+
+void Database::convertDatabaseToV3()
+{
+	QSqlQuery query(database);
+	query.prepare("ALTER TABLE Roster ADD avatarHash TEXT");
+	if (!query.exec()) {
+		qFatal("Failed to query database: %s", qPrintable(query.lastError().text()));
+	}
 }

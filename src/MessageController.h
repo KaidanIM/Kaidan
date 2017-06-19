@@ -43,7 +43,7 @@ public:
 	MessageModel* getMessageModel();
 
 	void setChatPartner(QString *recipient, QString* ownJid);
-	void sendMessage(QString *recipient_, QString *message_);
+	void sendMessage(QString *fromJid, QString *recipient_, QString *message_);
 
 signals:
 	void messageModelChanged();
@@ -54,7 +54,6 @@ private:
 
 	Swift::Client *client;
 	MessageModel *messageModel;
-	QString *ownJid;
 };
 
 #endif // MESSAGECONTROLLER_H

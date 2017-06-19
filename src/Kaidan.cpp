@@ -226,7 +226,7 @@ void Kaidan::setChatPartner(QString chatPartner)
 
 void Kaidan::sendMessage(QString jid, QString message)
 {
-	messageController->sendMessage(&jid, &message);
+	messageController->sendMessage(&(this->jid), &jid, &message);
 	rosterController->handleNewMessageSent(&jid, &message);
 }
 

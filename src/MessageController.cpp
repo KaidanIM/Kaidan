@@ -78,7 +78,8 @@ void MessageController::handleMessageReceived(Swift::Message::ref message_)
 
 		// author is only the 'bare' JID: e.g. 'albert@einstein.ch'
 		const QString author = QString::fromStdString(message_->getFrom().toBare().toString());
-		const QString author_resource = QString(message_->getFrom().getResource().c_str());
+		const QString author_resource = QString::fromStdString(message_->getFrom().getResource());
+		const QString recipient = QString::fromStdString(message_->getTo().toBare().toString());
 		const QString recipient_resource = QString::fromStdString(client->getJID().getResource());
 		QString timestamp = QDateTime::currentDateTime().toString(Qt::ISODate); // fallback timestamp
 		const QString message = QString::fromStdString(*bodyOpt);
@@ -92,8 +93,8 @@ void MessageController::handleMessageReceived(Swift::Message::ref message_)
 			            );
 		}
 
-		messageModel->addMessage(&author, &author_resource, ownJid,
-		                         &recipient_resource, &timestamp, &message, &msgId, false);
+		messageModel->addMessage(&author, &author_resource, &recipient,
+			&recipient_resource, &timestamp, &message, &msgId, false);
 
 		// send a new notification | TODO: Resolve nickname from JID
 		Notifications::sendMessageNotification(
@@ -133,7 +134,7 @@ void MessageController::handleMessageReceived(Swift::Message::ref message_)
 	}
 }
 
-void MessageController::sendMessage(QString *recipient_, QString *message_)
+void MessageController::sendMessage(QString *fromJid, QString *recipient_, QString *message_)
 {
 	// generate a new message id
 	Swift::IDGenerator idGenerator;
@@ -148,7 +149,7 @@ void MessageController::sendMessage(QString *recipient_, QString *message_)
 	const QString recipient_resource = QString("");
 	const QString qmsgId = QString::fromStdString(msgId);
 
-	messageModel->addMessage(ownJid, &author_resource, recipient_,
+	messageModel->addMessage(fromJid, &author_resource, recipient_,
 	                         &recipient_resource, &timestamp, message_, &qmsgId, true);
 
 	//

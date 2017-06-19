@@ -83,9 +83,9 @@ void MessageModel::setMessageAsDelivered(const QString msgId)
 	submitAll();
 }
 
-void MessageModel::addMessage(const QString* author, const QString* author_resource,
-                              const QString* recipient, const QString* recipient_resource,
-                              const QString* timestamp, const QString* message, const QString* msgId,
+void MessageModel::addMessage(const QString *author, const QString *author_resource,
+                              const QString *recipient, const QString *recipient_resource,
+                              const QString *timestamp, const QString *message, const QString *msgId,
                               bool sentByMe)
 {
 	//
@@ -102,8 +102,6 @@ void MessageModel::addMessage(const QString* author, const QString* author_resou
 	record.setValue("id", *msgId);
 	record.setValue("isSent", sentByMe ? false : true);
 	record.setValue("isDelivered", sentByMe ? false : true);
-	record.setValue("isRead", sentByMe ? false : true);
-	record.setValue("isReadByMe", sentByMe ? true : false);
 
 	if (!insertRecord(rowCount(), record)) {
 		qWarning() << "Failed to add message to DB:" << lastError().text();

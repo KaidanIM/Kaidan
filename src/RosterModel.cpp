@@ -185,7 +185,7 @@ void RosterModel::setUnreadMessageCountOfJid(const QString* jid_, const int coun
 void RosterModel::setLastMessageForJid(QString *jid, QString *message)
 {
 	QSqlQuery query(*database);
-	query.prepare(QString("UPDATE Roster SET lastMessage = %1 WHERE jid = '%2'")
+	query.prepare(QString("UPDATE Roster SET lastMessage = '%1' WHERE jid = '%2'")
 	              .arg(*message, *jid));
 
 	if (!query.exec()) {

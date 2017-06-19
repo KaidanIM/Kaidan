@@ -21,7 +21,6 @@
 
 import QtQuick 2.0
 import QtQuick.Controls 2.0 as Controls
-import QtQuick.Controls.Material 2.0
 import QtQuick.Layouts 1.2
 import org.kde.kirigami 2.0 as Kirigami
 
@@ -109,13 +108,10 @@ Kirigami.Page {
 		}
 		
 
-		Controls.ToolBar {
+		RowLayout {
 			id: serviceBar
 			height: Kirigami.Units.gridUnit * 3
 			anchors.horizontalCenter: parent.horizontalCenter
-			Material.foreground: "transparent"
-			Material.background: "transparent"
-			Material.accent: "transparent"
 
 			Row {
 				spacing: 20

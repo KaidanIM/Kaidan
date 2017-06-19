@@ -1,5 +1,17 @@
 # Changelog
 
+### Version 0.2.2 (released on 19.06.2017)
+Fixes:
+ * RosterPage: Clear TextFields after closing AddContactSheet (#106) (@JBBgameich)
+
+Unused back-end features:
+ * RosterController: Save lastMessage for each contact (#108) (@LNJ2)
+ * Add database versioning and conversion (#110) (@LNJ2)
+ * Database: Add new roster row `avatarHash` (#112) (@LNJ2)
+
+Misc:
+ * CMake: Add feature summary (#109) (@LNJ2)
+
 ### Version 0.2.1 (released on 08.06.2017)
 Fixes:
  * Roster page: Fixed style: Now has contour lines and a cool material effect (@LNJ2)

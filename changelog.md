@@ -1,5 +1,10 @@
 # Changelog
 
+### Version 0.2.3 (released on 19.06.2017)
+Fixes:
+ * LoginPage: Remove material shadow (#113) (@JBBgameich)
+ * Kaidan was crashing since v0.2.2 when inserting a new message to the DB (@LNJ2)
+
 ### Version 0.2.2 (released on 19.06.2017)
 Fixes:
  * RosterPage: Clear TextFields after closing AddContactSheet (#106) (@JBBgameich)

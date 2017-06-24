@@ -106,6 +106,6 @@ Kirigami.ScrollablePage {
 		// open sheet when requested from drawer over signal
 		addContactDialogRequested.connect(openAddContactSheet);
 		// disconnect the open function, when the roster page is closed
-		connectionStateDisconnected.connect(disconnectOpenAddContactSheet);
+		kaidan.connectionStateDisconnected.connect(disconnectOpenAddContactSheet);
 	}
 }

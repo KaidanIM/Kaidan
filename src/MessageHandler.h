@@ -17,43 +17,32 @@
  *  along with Kaidan. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef MESSAGECONTROLLER_H
-#define MESSAGECONTROLLER_H
+#ifndef MESSAGEHANDLER_H
+#define MESSAGEHANDLER_H
 
 // Qt
 #include <QObject>
 #include <QSqlDatabase>
-// Swiften
-#include <Swiften/Client/Client.h>
-#include <Swiften/Elements/Message.h>
+// gloox
+#include <gloox/client.h>
+#include <gloox/message.h>
+#include <gloox/messagehandler.h>
+#include <gloox/messagesession.h>
 // Kaidan
 #include "MessageModel.h"
-#include "RosterController.h"
 
-class MessageController : public QObject
+class MessageHandler : public gloox::MessageHandler
 {
-	Q_OBJECT
-	Q_PROPERTY(MessageModel *messageModel READ getMessageModel NOTIFY messageModelChanged)
-
 public:
-	MessageController(QSqlDatabase *database, QObject *parent = 0);
-	~MessageController();
+	MessageHandler(gloox::Client *client, MessageModel *model);
+	~MessageHandler();
 
-	void setClient(Swift::Client *client_);
-	MessageModel* getMessageModel();
-
-	void setChatPartner(QString *recipient, QString* ownJid);
-	void sendMessage(QString *fromJid, QString *recipient_, QString *message_);
-
-signals:
-	void messageModelChanged();
-	void recipientChanged();
+	void sendMessage(QString *fromJid, QString *toJid, QString *body);
+	virtual void handleMessage(const gloox::Message &message, gloox::MessageSession *session = 0);
 
 private:
-	void handleMessageReceived(Swift::Message::ref message);
-
-	Swift::Client *client;
+	gloox::Client *client;
 	MessageModel *messageModel;
 };
 
-#endif // MESSAGECONTROLLER_H
+#endif // MESSAGEHANDLER_H

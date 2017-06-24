@@ -30,10 +30,12 @@
 // Swiften
 #include <Swiften/Client/Client.h>
 #include <Swiften/Client/ClientXMLTracer.h>
+// gloox
+#include <gloox/client.h>
 // Kaidan
 #include "Database.h"
 #include "RosterController.h"
-#include "MessageController.h"
+#include "MessageSessionHandler.h"
 #include "PresenceController.h"
 #include "VCardController.h"
 #include "ServiceDiscoveryManager.h"
@@ -43,7 +45,7 @@ class Kaidan : public QObject
 	Q_OBJECT
 
 	Q_PROPERTY(RosterController* rosterController READ getRosterController NOTIFY rosterControllerChanged)
-	Q_PROPERTY(MessageController* messageController READ getMessageController NOTIFY messageControllerChanged)
+	Q_PROPERTY(MessageModel* messageModel READ getMessageModel NOTIFY messageModelChanged)
 	Q_PROPERTY(VCardController* vCardController READ getVCardController NOTIFY vCardControllerChanged)
 	Q_PROPERTY(bool connectionState READ getConnectionState NOTIFY connectionStateConnected NOTIFY connectionStateDisconnected)
 	Q_PROPERTY(QString jid READ getJid WRITE setJid NOTIFY jidChanged)
@@ -70,7 +72,7 @@ public:
 	void setChatPartner(QString);
 
 	RosterController* getRosterController();
-	MessageController* getMessageController();
+	MessageModel* getMessageModel();
 	VCardController* getVCardController();
 
 	Q_INVOKABLE void sendMessage(QString jid, QString message);
@@ -79,7 +81,7 @@ public:
 
 signals:
 	void rosterControllerChanged();
-	void messageControllerChanged();
+	void messageModelChanged();
 	void vCardControllerChanged();
 	void connectionStateConnected();
 	void connectionStateDisconnected();
@@ -91,28 +93,28 @@ signals:
 private:
 	void handleConnected();
 	void handleDisconnected();
-	void updateFullJid();
 
 	bool connected;
 
-	Swift::Client* client;
-	Swift::ClientXMLTracer* tracer;
-	Swift::SoftwareVersionResponder* softwareVersionResponder;
-	Swift::NetworkFactories* netFactories;
-	Swift::MemoryStorages* storages;
+	gloox::Client *client_;
+	Swift::Client *client;
+	Swift::ClientXMLTracer *tracer;
+	Swift::SoftwareVersionResponder *softwareVersionResponder;
+	Swift::NetworkFactories *netFactories;
+	Swift::MemoryStorages *storages;
 
-	Database* database;
-	RosterController* rosterController;
-	MessageController* messageController;
-	PresenceController* presenceController;
-	VCardController* vCardController;
-	ServiceDiscoveryManager* serviceDiscoveryManager;
+	Database *database;
+	RosterController *rosterController;
+	MessageModel *messageModel;
+	MessageSessionHandler *messageSessionHandler;
+	PresenceController *presenceController;
+	VCardController *vCardController;
+	ServiceDiscoveryManager *serviceDiscoveryManager;
 
-	QSettings* settings;
+	QSettings *settings;
 
 	QString jid;
 	QString jidResource;
-	QString fullJid;
 	QString password;
 	QString chatPartner;
 };

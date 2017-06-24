@@ -38,7 +38,7 @@
 // Kaidan
 #include "RosterController.h"
 #include "PresenceController.h"
-#include "MessageController.h"
+#include "MessageSessionHandler.h"
 #include "MessageModel.h"
 #include "VCardController.h"
 #include "ServiceDiscoveryManager.h"
@@ -48,16 +48,19 @@ Kaidan::Kaidan(Swift::NetworkFactories *networkFactories, QObject *parent) :
 {
 	connected = false;
 	netFactories = networkFactories;
+
+	// setup database
 	database = new Database();
 	database->openDatabase();
 	if (database->needToConvert()) database->convertDatabase();
+
+	// setup components
 	storages = new Swift::MemoryStorages(Swift::PlatformCryptoProvider::create());
-	messageController = new MessageController(database->getDatabase());
+	messageModel = new MessageModel(database->getDatabase());
 	rosterController = new RosterController(database->getDatabase());
 	presenceController = new PresenceController();
 	vCardController = new VCardController();
 	serviceDiscoveryManager = new ServiceDiscoveryManager();
-
 
 	//
 	// Load settings data
@@ -78,9 +81,6 @@ Kaidan::Kaidan(Swift::NetworkFactories *networkFactories, QObject *parent) :
 		jidResource = QString(APPLICATION_NAME);
 		settings->setValue("auth/resource", jidResource);
 	}
-
-	// create/update the full jid
-	updateFullJid();
 }
 
 Kaidan::~Kaidan()
@@ -90,10 +90,10 @@ Kaidan::~Kaidan()
 		softwareVersionResponder->stop();
 		delete tracer;
 		delete softwareVersionResponder;
-		delete messageController;
 		delete client;
 	}
 
+	delete messageSessionHandler;
 	delete rosterController;
 	delete presenceController;
 	delete vCardController;
@@ -104,7 +104,17 @@ Kaidan::~Kaidan()
 void Kaidan::mainConnect()
 {
 	// Create a new XMPP client
-	client = new Swift::Client(fullJid.toStdString(), password.toStdString(), netFactories, storages);
+	client_ = new gloox::Client(gloox::JID(jid.toStdString()), password.toStdString());
+	// require encryption
+	client_->setTls(gloox::TLSPolicy::TLSRequired);
+	// set the JID resource
+	client_->setResource(jidResource.toStdString());
+
+	messageSessionHandler = new MessageSessionHandler(client_, messageModel);
+	client_->registerMessageSessionHandler((gloox::MessageSessionHandler*) messageSessionHandler);
+
+
+	client = new Swift::Client(jid.toStdString(), password.toStdString(), netFactories, storages);
 
 	// trust all certificates
 	client->setAlwaysTrustCertificates();
@@ -123,7 +133,6 @@ void Kaidan::mainConnect()
 	softwareVersionResponder->start();
 
 	// set client in message, roster and presence controller
-	messageController->setClient(client);
 	rosterController->setClient(client);
 	presenceController->setClient(client);
 	vCardController->setClient(client);
@@ -134,6 +143,8 @@ void Kaidan::mainConnect()
 
 	// .. and connect!
 	client->connect(options);
+	
+	client_->connect();
 }
 
 // we don't want to close client without disconnection
@@ -163,11 +174,6 @@ bool Kaidan::newLoginNeeded()
 	return (jid == "") || (password == "");
 }
 
-void Kaidan::updateFullJid()
-{
-	fullJid = jid + QString("/") + jidResource;
-}
-
 QString Kaidan::getJid()
 {
 	return jid;
@@ -177,7 +183,6 @@ void Kaidan::setJid(QString jid_)
 {
 	jid = jid_; // set new jid for mainConnect
 	settings->setValue("auth/jid", jid_); // save to settings
-	updateFullJid();
 }
 
 QString Kaidan::getJidResource()
@@ -189,7 +194,6 @@ void Kaidan::setJidResource(QString jidResource_)
 {
 	jidResource = jidResource_;
 	settings->setValue("auth/resource", jidResource); // save jid resource
-	updateFullJid(); // update the full jid (the resource part has changed)
 }
 
 QString Kaidan::getPassword()
@@ -217,8 +221,8 @@ void Kaidan::setChatPartner(QString chatPartner)
 	// set the new chat partner
 	this->chatPartner = chatPartner;
 
-	// upsate message controller
-	messageController->setChatPartner(&chatPartner, &jid);
+	// update message controller
+	messageModel->applyRecipientFilter(&chatPartner, &jid);
 	rosterController->setChatPartner(&chatPartner);
 
 	emit chatPartnerChanged();
@@ -226,7 +230,7 @@ void Kaidan::setChatPartner(QString chatPartner)
 
 void Kaidan::sendMessage(QString jid, QString message)
 {
-	messageController->sendMessage(&(this->jid), &jid, &message);
+	messageSessionHandler->getMessageHandler()->sendMessage(&(this->jid), &jid, &message);
 	rosterController->handleNewMessageSent(&jid, &message);
 }
 
@@ -256,18 +260,22 @@ RosterController* Kaidan::getRosterController()
 {
 	return rosterController;
 }
-MessageController* Kaidan::getMessageController()
+
+MessageModel* Kaidan::getMessageModel()
 {
-	return messageController;
+	return messageModel;
 }
+
 VCardController* Kaidan::getVCardController()
 {
 	return vCardController;
 }
+
 bool Kaidan::getConnectionState() const
 {
 	return connected;
 }
+
 QString Kaidan::getVersionString()
 {
 	return QString(VERSION_STRING);

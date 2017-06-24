@@ -7,7 +7,8 @@ set(KAIDAN_SOURCES
 	${CURDIR}/Database.cpp
 	${CURDIR}/RosterController.cpp
 	${CURDIR}/RosterModel.cpp
-	${CURDIR}/MessageController.cpp
+	${CURDIR}/MessageHandler.cpp
+	${CURDIR}/MessageSessionHandler.cpp
 	${CURDIR}/MessageModel.cpp
 	${CURDIR}/Notifications.cpp
 	${CURDIR}/PresenceController.cpp

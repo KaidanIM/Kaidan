@@ -65,7 +65,7 @@ Kirigami.Page {
 			spacing: 12
 
 			// connect the database
-			model: kaidan.messageController.messageModel
+			model: kaidan.messageModel
 
 			delegate: Row {
 				readonly property bool sentByMe: model.recipient !== kaidan.jid

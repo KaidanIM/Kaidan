@@ -31,13 +31,11 @@ Kaidan is *not* finished yet, so don't expect it working as well as a finished c
 
 ### Debian Stretch based systems
 
-Note: We can not guarantee that the packages available from the repository are always up to date.
-
 Add our apt repository to your system
 
 ```
 sudo apt-get install apt-transport-https software-properties-common dirmngr gnupg
-sudo apt-add-repository "deb https://raw.githubusercontent.com/kaidanim/packages/master sid main"
+sudo apt-add-repository "deb https://raw.githubusercontent.com/kaidanim/packages/master stretch main"
 sudo apt-key adv --keyserver hkp://pgp.mit.edu --recv-key "210EB0BCA70439F0"
 sudo apt-get update
 ```
@@ -64,7 +62,7 @@ Build only dependencies:
 ```bash
 sudo apt-get install apt-transport-https git-core cmake build-essential zlib1g-dev \
   libglib2.0-dev libssl-dev libxml2-dev libcrypto++-dev libpthread-stubs0-dev libidn11-dev \
-  libminiupnpc-dev libnatpmp-dev libswiften-dev libboost-system-dev libnotify-bin \
+  libminiupnpc-dev libnatpmp-dev libboost-system-dev libnotify-bin \
   libboost-program-options-dev libboost-serialization-dev libqt5quick5 libqt5quickcontrols2-5 \
   libqt5quickwidgets5 libqt5qml5 libqt5gui5 libqt5core5a qtdeclarative5-dev qttools5-dev \
   qt5-default qtquickcontrols2-5-dev qml-module-qtquick-controls2
@@ -75,7 +73,7 @@ Debian currently has no Kirigami2 packages, so we have to install them from exte
  sudo apt-add-repository "deb https://raw.githubusercontent.com/kaidanim/packages/master sid main"
  sudo apt-key adv --keyserver hkp://pgp.mit.edu --recv-key "210EB0BCA70439F0"
  sudo apt-get update
- sudo apt-get install kirigami2-dev
+ sudo apt-get install kirigami2-dev libswiften-dev
  ```
 
 #### Get the source code:

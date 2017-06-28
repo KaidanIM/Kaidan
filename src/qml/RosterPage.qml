@@ -37,7 +37,7 @@ Kirigami.ScrollablePage {
 	ListView {
 		verticalLayoutDirection: ListView.TopToBottom
 
-		model: kaidan.rosterController.rosterModel
+		model: kaidan.rosterModel
 
 		delegate: Kirigami.SwipeListItem {
 			id: listItem

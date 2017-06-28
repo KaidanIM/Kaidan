@@ -5,8 +5,9 @@ set(KAIDAN_SOURCES
 	${CURDIR}/main.cpp
 	${CURDIR}/Kaidan.cpp
 	${CURDIR}/Database.cpp
-	${CURDIR}/RosterController.cpp
 	${CURDIR}/RosterModel.cpp
+	${CURDIR}/RosterManager.cpp
+	${CURDIR}/RosterUpdater.cpp
 	${CURDIR}/MessageHandler.cpp
 	${CURDIR}/MessageSessionHandler.cpp
 	${CURDIR}/MessageModel.cpp

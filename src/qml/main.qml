@@ -67,8 +67,7 @@ Kirigami.ApplicationWindow {
 		if (kaidan.newLoginNeeded()) {
 			// open login page and get new data from user
 			pageStack.push(loginPage);
-		}
-		else {
+		} else {
 			// open client normally
 
 			// on connection failure, open login page

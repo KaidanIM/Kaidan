@@ -33,10 +33,11 @@ public:
 	QHash<int, QByteArray> roleNames() const Q_DECL_OVERRIDE;
 
 	void applyRecipientFilter(QString *recipient_, QString *author_);
-	void addMessage(const QString *author, const QString *author_resource,
-	                const QString *recipient, const QString *recipient_resource,
-	                const QString *timestamp, const QString *message,
-	                const QString *msgId, bool sentByMe);
+	void addMessage(const QString *author, const QString *recipient,
+					const QString *timestamp, const QString *message,
+					const QString *msgId, bool sentByMe,
+					const QString *author_resource = new QString(),
+					const QString *recipient_resource = new QString());
 	void setMessageAsSent(const QString msgId);
 	void setMessageAsDelivered(const QString msgId);
 

@@ -60,8 +60,8 @@ void MessageHandler::handleMessage(const gloox::Message &message, gloox::Message
 		
 		const QString msgId = QString::fromStdString(message.id());
 
-		messageModel->addMessage(&author, &author_resource, &recipient,
-			&recipient_resource, &timestamp, &body, &msgId, false);
+		messageModel->addMessage(&author, &recipient, &timestamp, &body, &msgId,
+								 false, &author_resource, &recipient_resource);
 
 		// send a new notification | TODO: Resolve nickname from JID
 		Notifications::sendMessageNotification(message.from().full(), body.toStdString());
@@ -104,8 +104,7 @@ void MessageHandler::sendMessage(QString *fromJid, QString *toJid, QString *body
 	const QString timestamp = QDateTime::currentDateTime().toString(Qt::ISODate);
 	const QString id = QString::fromStdString(message.id());
 
-	messageModel->addMessage(fromJid, nullptr, toJid, nullptr, &timestamp, body,
-							 &id, true);
+	messageModel->addMessage(fromJid, toJid, &timestamp, body, &id, true);
 
 	// XEP-0184: Message Delivery Receipts
 	// request a delivery receipt from the other client

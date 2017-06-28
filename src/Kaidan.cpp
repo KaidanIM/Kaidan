@@ -28,15 +28,10 @@
 #include <QSettings>
 #include <QString>
 #include <QStandardPaths>
-// Boost
-#include <boost/bind.hpp>
-// Swiften
-#include <Swiften/Client/Client.h>
-#include <Swiften/Client/MemoryStorages.h>
-#include <Swiften/Crypto/PlatformCryptoProvider.h>
-#include <Swiften/Queries/Responders/SoftwareVersionResponder.h>
+#include <QTimer>
 // gloox
 #include <gloox/rostermanager.h>
+#include <gloox/receipt.h>
 // Kaidan
 #include "RosterModel.h"
 #include "PresenceController.h"
@@ -45,11 +40,9 @@
 #include "VCardController.h"
 #include "ServiceDiscoveryManager.h"
 
-Kaidan::Kaidan(Swift::NetworkFactories *networkFactories, QObject *parent) :
-	QObject(parent)
+Kaidan::Kaidan(QObject *parent) : QObject(parent)
 {
 	connected = false;
-	netFactories = networkFactories;
 
 	// setup database
 	database = new Database();
@@ -57,11 +50,8 @@ Kaidan::Kaidan(Swift::NetworkFactories *networkFactories, QObject *parent) :
 	if (database->needToConvert()) database->convertDatabase();
 
 	// setup components
-	storages = new Swift::MemoryStorages(Swift::PlatformCryptoProvider::create());
 	messageModel = new MessageModel(database->getDatabase());
-	presenceController = new PresenceController();
-	vCardController = new VCardController();
-	serviceDiscoveryManager = new ServiceDiscoveryManager();
+	rosterModel = new RosterModel(database->getDatabase());
 
 	//
 	// Load settings data
@@ -88,89 +78,78 @@ Kaidan::~Kaidan()
 {
 	if (connected) {
 		client->disconnect();
-		softwareVersionResponder->stop();
-		delete tracer;
-		delete softwareVersionResponder;
 		delete client;
 	}
 
 	delete messageSessionHandler;
 	delete rosterManager;
-	delete presenceController;
-	delete vCardController;
 	delete settings;
-	delete serviceDiscoveryManager;
 }
 
 void Kaidan::mainConnect()
 {
 	// Create a new XMPP client
-	client_ = new gloox::Client(gloox::JID(jid.toStdString()), password.toStdString());
+	client = new gloox::Client(gloox::JID(jid.toStdString()), password.toStdString());
 	// require encryption
-	client_->setTls(gloox::TLSPolicy::TLSRequired);
+	client->setTls(gloox::TLSPolicy::TLSRequired);
 	// set the JID resource
-	client_->setResource(jidResource.toStdString());
+	client->setResource(jidResource.toStdString());
+
+	// Connection listener
+	client->registerConnectionListener(this);
 
 	// Message receiving/sending
-	messageSessionHandler = new MessageSessionHandler(client_, messageModel);
-	client_->registerMessageSessionHandler((gloox::MessageSessionHandler*) messageSessionHandler);
+	messageSessionHandler = new MessageSessionHandler(client, messageModel);
+	client->registerMessageSessionHandler((gloox::MessageSessionHandler*) messageSessionHandler);
 
 	// Roster
-	rosterManager = new RosterManager(rosterModel, client_);
+	rosterManager = new RosterManager(rosterModel, client);
 
-	//client_->connect();
+	// Register Stanza Extensions
+	client->registerStanzaExtension(new gloox::Receipt(gloox::Receipt::Request));
+	client->registerStanzaExtension(new gloox::Receipt(gloox::Receipt::Received));
 
+	client->connect(false);
 
-	client = new Swift::Client(jid.toStdString(), password.toStdString(), netFactories, storages);
-
-	// trust all certificates
-	client->setAlwaysTrustCertificates();
-
-	// event handling
-	client->onConnected.connect(boost::bind(&Kaidan::handleConnected, this));
-	client->onDisconnected.connect(boost::bind(&Kaidan::handleDisconnected, this));
-
-	// Create XML tracer (console output of xmpp data)
-	tracer = new Swift::ClientXMLTracer(client);
-
-	// share kaidan version and sytem info
-	QString systemInfo = QSysInfo::prettyProductName();
-	softwareVersionResponder = new Swift::SoftwareVersionResponder(client->getIQRouter());
-	softwareVersionResponder->setVersion(APPLICATION_DISPLAY_NAME, VERSION_STRING, systemInfo.toStdString());
-	softwareVersionResponder->start();
-
-	// set client in message, roster and presence controller
-	presenceController->setClient(client);
-	vCardController->setClient(client);
-	serviceDiscoveryManager->setClient(client);
-
-	Swift::ClientOptions options;
-	options.useStreamCompression = false;
-
-	// .. and connect!
-	client->connect(options);
+	// every 100 ms: fetch new packages from the socket
+	QTimer *timer = new QTimer(this);
+	connect(timer, SIGNAL(timeout()), this, SLOT(updateClient()));
+	timer->start(100);
 }
 
-// we don't want to close client without disconnection
 void Kaidan::mainDisconnect()
 {
-	if (getConnectionState()) {
+	if (connected) {
 		client->disconnect();
 	}
 }
 
-void Kaidan::handleConnected()
+void Kaidan::onConnect()
 {
+	qDebug() << "[Connection] Connected successfully to server";
 	// emit connected signal
 	connected = true;
 	emit connectionStateConnected();
-	client->sendPresence(Swift::Presence::create("Send me a message"));
 }
 
-void Kaidan::handleDisconnected()
+void Kaidan::onDisconnect(gloox::ConnectionError error)
 {
+	qDebug() << "[Connection] Connection failed or disconnected" << error;
 	connected = false;
 	emit connectionStateDisconnected();
+}
+
+bool Kaidan::onTLSConnect(const gloox::CertInfo &info)
+{
+	// accept certificate
+	qDebug() << "[Connection] Automatically accepting TLS certificate";
+	return true;
+}
+
+void Kaidan::updateClient()
+{
+	// parse new incoming network packages; wait 0 ms for new ones
+	client->recv(0);
 }
 
 bool Kaidan::newLoginNeeded()

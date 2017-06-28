@@ -27,11 +27,9 @@
 #include <QSettings>
 #include <QString>
 #include <QStringList>
-// Swiften
-#include <Swiften/Client/Client.h>
-#include <Swiften/Client/ClientXMLTracer.h>
 // gloox
 #include <gloox/client.h>
+#include <gloox/connectionlistener.h>
 // Kaidan
 #include "Database.h"
 #include "RosterManager.h"
@@ -40,7 +38,7 @@
 #include "VCardController.h"
 #include "ServiceDiscoveryManager.h"
 
-class Kaidan : public QObject
+class Kaidan : public QObject, public gloox::ConnectionListener
 {
 	Q_OBJECT
 
@@ -54,12 +52,17 @@ class Kaidan : public QObject
 	Q_PROPERTY(QString chatPartner READ getChatPartner WRITE setChatPartner NOTIFY chatPartnerChanged)
 
 public:
-	Kaidan(Swift::NetworkFactories *networkFactories, QObject *parent = 0);
+	Kaidan(QObject *parent = 0);
 	~Kaidan();
 
-	Q_INVOKABLE void mainDisconnect();
 	Q_INVOKABLE void mainConnect();
+	Q_INVOKABLE void mainDisconnect();
 	Q_INVOKABLE bool newLoginNeeded();
+	Q_INVOKABLE void sendMessage(QString jid, QString message);
+	Q_INVOKABLE void addContact(QString jid, QString nick);
+	Q_INVOKABLE void removeContact(QString jid);
+	Q_INVOKABLE QString getResourcePath(QString);
+	Q_INVOKABLE QString getVersionString();
 
 	bool getConnectionState() const;
 	QString getJid();
@@ -70,16 +73,13 @@ public:
 	void setPassword(QString);
 	QString getChatPartner();
 	void setChatPartner(QString);
-
 	RosterModel* getRosterModel();
 	MessageModel* getMessageModel();
 	VCardController* getVCardController();
 
-	Q_INVOKABLE void sendMessage(QString jid, QString message);
-	Q_INVOKABLE void addContact(QString jid, QString nick);
-	Q_INVOKABLE void removeContact(QString jid);
-	Q_INVOKABLE QString getResourcePath(QString);
-	Q_INVOKABLE QString getVersionString();
+	virtual void onConnect();
+	virtual void onDisconnect(gloox::ConnectionError error);
+	virtual bool onTLSConnect(const gloox::CertInfo &info);
 
 signals:
 	void rosterModelChanged();
@@ -92,18 +92,11 @@ signals:
 	void passwordChanged();
 	void chatPartnerChanged();
 
+private slots:
+	void updateClient();
+
 private:
-	void handleConnected();
-	void handleDisconnected();
-
-	bool connected;
-
-	gloox::Client *client_;
-	Swift::Client *client;
-	Swift::ClientXMLTracer *tracer;
-	Swift::SoftwareVersionResponder *softwareVersionResponder;
-	Swift::NetworkFactories *netFactories;
-	Swift::MemoryStorages *storages;
+	gloox::Client *client;
 
 	Database *database;
 	RosterModel *rosterModel;
@@ -113,9 +106,9 @@ private:
 	PresenceController *presenceController;
 	VCardController *vCardController;
 	ServiceDiscoveryManager *serviceDiscoveryManager;
-
 	QSettings *settings;
 
+	bool connected;
 	QString jid;
 	QString jidResource;
 	QString password;

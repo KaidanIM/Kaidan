@@ -99,7 +99,9 @@ Kirigami.ScrollablePage {
 	}
 
 	Component.onCompleted: {
-		function openAddContactSheet() { addContactSheet.open(); }
+		function openAddContactSheet() {
+			addContactSheet.open();
+		}
 		function disconnectOpenAddContactSheet() {
 			addContactDialogRequested.disconnect(openAddContactSheet);
 		}

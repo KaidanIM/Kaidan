@@ -83,10 +83,10 @@ void MessageModel::setMessageAsDelivered(const QString msgId)
 	submitAll();
 }
 
-void MessageModel::addMessage(const QString *author, const QString *author_resource,
-                              const QString *recipient, const QString *recipient_resource,
-                              const QString *timestamp, const QString *message, const QString *msgId,
-                              bool sentByMe)
+void MessageModel::addMessage(const QString *author, const QString *recipient,
+							  const QString *timestamp, const QString *message,
+							  const QString *msgId, bool sentByMe,
+							  const QString *author_resource, const QString *recipient_resource)
 {
 	//
 	// add the new message

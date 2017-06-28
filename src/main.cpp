@@ -33,9 +33,6 @@
 #include <QSqlError>
 #include <QTranslator>
 #include <QtQml>
-// Swiften
-#include <Swiften/EventLoop/Qt/QtEventLoop.h>
-#include <Swiften/Network/BoostNetworkFactories.h>
 // Kaidan
 #include "Kaidan.h"
 #include "VCard.h"
@@ -108,11 +105,7 @@ int main(int argc, char *argv[])
 	// Kaidan back-end
 	//
 
-	Swift::QtEventLoop eventLoop;
-	Swift::BoostNetworkFactories networkFactories(&eventLoop);
-
-	Kaidan kaidan(&networkFactories);
-
+	Kaidan kaidan;
 
 	//
 	// Command line arguments

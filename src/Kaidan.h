@@ -34,7 +34,7 @@
 #include <gloox/client.h>
 // Kaidan
 #include "Database.h"
-#include "RosterController.h"
+#include "RosterManager.h"
 #include "MessageSessionHandler.h"
 #include "PresenceController.h"
 #include "VCardController.h"
@@ -44,7 +44,7 @@ class Kaidan : public QObject
 {
 	Q_OBJECT
 
-	Q_PROPERTY(RosterController* rosterController READ getRosterController NOTIFY rosterControllerChanged)
+	Q_PROPERTY(RosterModel* rosterModel READ getRosterModel NOTIFY rosterModelChanged)
 	Q_PROPERTY(MessageModel* messageModel READ getMessageModel NOTIFY messageModelChanged)
 	Q_PROPERTY(VCardController* vCardController READ getVCardController NOTIFY vCardControllerChanged)
 	Q_PROPERTY(bool connectionState READ getConnectionState NOTIFY connectionStateConnected NOTIFY connectionStateDisconnected)
@@ -71,16 +71,18 @@ public:
 	QString getChatPartner();
 	void setChatPartner(QString);
 
-	RosterController* getRosterController();
+	RosterModel* getRosterModel();
 	MessageModel* getMessageModel();
 	VCardController* getVCardController();
 
 	Q_INVOKABLE void sendMessage(QString jid, QString message);
+	Q_INVOKABLE void addContact(QString jid, QString nick);
+	Q_INVOKABLE void removeContact(QString jid);
 	Q_INVOKABLE QString getResourcePath(QString);
 	Q_INVOKABLE QString getVersionString();
 
 signals:
-	void rosterControllerChanged();
+	void rosterModelChanged();
 	void messageModelChanged();
 	void vCardControllerChanged();
 	void connectionStateConnected();
@@ -104,7 +106,8 @@ private:
 	Swift::MemoryStorages *storages;
 
 	Database *database;
-	RosterController *rosterController;
+	RosterModel *rosterModel;
+	RosterManager *rosterManager;
 	MessageModel *messageModel;
 	MessageSessionHandler *messageSessionHandler;
 	PresenceController *presenceController;

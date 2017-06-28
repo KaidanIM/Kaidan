@@ -35,8 +35,10 @@
 #include <Swiften/Client/MemoryStorages.h>
 #include <Swiften/Crypto/PlatformCryptoProvider.h>
 #include <Swiften/Queries/Responders/SoftwareVersionResponder.h>
+// gloox
+#include <gloox/rostermanager.h>
 // Kaidan
-#include "RosterController.h"
+#include "RosterModel.h"
 #include "PresenceController.h"
 #include "MessageSessionHandler.h"
 #include "MessageModel.h"
@@ -57,7 +59,6 @@ Kaidan::Kaidan(Swift::NetworkFactories *networkFactories, QObject *parent) :
 	// setup components
 	storages = new Swift::MemoryStorages(Swift::PlatformCryptoProvider::create());
 	messageModel = new MessageModel(database->getDatabase());
-	rosterController = new RosterController(database->getDatabase());
 	presenceController = new PresenceController();
 	vCardController = new VCardController();
 	serviceDiscoveryManager = new ServiceDiscoveryManager();
@@ -94,7 +95,7 @@ Kaidan::~Kaidan()
 	}
 
 	delete messageSessionHandler;
-	delete rosterController;
+	delete rosterManager;
 	delete presenceController;
 	delete vCardController;
 	delete settings;
@@ -110,8 +111,14 @@ void Kaidan::mainConnect()
 	// set the JID resource
 	client_->setResource(jidResource.toStdString());
 
+	// Message receiving/sending
 	messageSessionHandler = new MessageSessionHandler(client_, messageModel);
 	client_->registerMessageSessionHandler((gloox::MessageSessionHandler*) messageSessionHandler);
+
+	// Roster
+	rosterManager = new RosterManager(rosterModel, client_);
+
+	//client_->connect();
 
 
 	client = new Swift::Client(jid.toStdString(), password.toStdString(), netFactories, storages);
@@ -133,7 +140,6 @@ void Kaidan::mainConnect()
 	softwareVersionResponder->start();
 
 	// set client in message, roster and presence controller
-	rosterController->setClient(client);
 	presenceController->setClient(client);
 	vCardController->setClient(client);
 	serviceDiscoveryManager->setClient(client);
@@ -143,8 +149,6 @@ void Kaidan::mainConnect()
 
 	// .. and connect!
 	client->connect(options);
-	
-	client_->connect();
 }
 
 // we don't want to close client without disconnection
@@ -221,17 +225,34 @@ void Kaidan::setChatPartner(QString chatPartner)
 	// set the new chat partner
 	this->chatPartner = chatPartner;
 
-	// update message controller
+	// filter message for this chat partner
 	messageModel->applyRecipientFilter(&chatPartner, &jid);
-	rosterController->setChatPartner(&chatPartner);
+
+	rosterManager->setChatPartner(&chatPartner);
 
 	emit chatPartnerChanged();
 }
 
 void Kaidan::sendMessage(QString jid, QString message)
 {
-	messageSessionHandler->getMessageHandler()->sendMessage(&(this->jid), &jid, &message);
-	rosterController->handleNewMessageSent(&jid, &message);
+	if (connected) {
+		messageSessionHandler->getMessageHandler()->sendMessage(&(this->jid), &jid, &message);
+		rosterManager->handleMessageSent(&jid, &message);
+	}
+}
+
+void Kaidan::addContact(QString jid, QString nick)
+{
+	if (connected) {
+		rosterManager->addContact(jid, nick);
+	}
+}
+
+void Kaidan::removeContact(QString jid)
+{
+	if (connected) {
+		rosterManager->removeContact(jid);
+	}
 }
 
 QString Kaidan::getResourcePath(QString name_)
@@ -256,9 +277,9 @@ QString Kaidan::getResourcePath(QString name_)
 	return QString("");
 }
 
-RosterController* Kaidan::getRosterController()
+RosterModel* Kaidan::getRosterModel()
 {
-	return rosterController;
+	return rosterModel;
 }
 
 MessageModel* Kaidan::getMessageModel()

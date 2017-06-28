@@ -158,10 +158,5 @@ int main(int argc, char *argv[])
 	window->show();
 
 	// execute the app
-	int retvar = app.exec();
-
-	// be sure that kaidan has disconnected properly
-	kaidan.mainDisconnect();
-
-	return retvar;
+	return app.exec();
 }

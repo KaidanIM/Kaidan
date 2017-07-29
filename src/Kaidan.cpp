@@ -113,6 +113,7 @@ void Kaidan::mainConnect()
 	// Register Stanza Extensions
 	client->registerStanzaExtension(new gloox::Receipt(gloox::Receipt::Request));
 	client->registerStanzaExtension(new gloox::Receipt(gloox::Receipt::Received));
+	client->registerStanzaExtension(new gloox::DelayedDelivery(gloox::JID(), std::string("")));
 
 	// Logging
 	client->logInstance().registerLogHandler(gloox::LogLevelDebug,

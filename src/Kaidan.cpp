@@ -48,6 +48,7 @@ Kaidan::Kaidan(QObject *parent) : QObject(parent)
 	// setup components
 	messageModel = new MessageModel(database->getDatabase());
 	rosterModel = new RosterModel(database->getDatabase());
+	xmlLogHandler = new XmlLogHandler();
 
 	//
 	// Load settings data
@@ -112,6 +113,10 @@ void Kaidan::mainConnect()
 	// Register Stanza Extensions
 	client->registerStanzaExtension(new gloox::Receipt(gloox::Receipt::Request));
 	client->registerStanzaExtension(new gloox::Receipt(gloox::Receipt::Received));
+
+	// Logging
+	client->logInstance().registerLogHandler(gloox::LogLevelDebug,
+		gloox::LogAreaXmlIncoming | gloox::LogAreaXmlOutgoing, xmlLogHandler);
 
 	client->connect(false);
 

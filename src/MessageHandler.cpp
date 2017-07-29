@@ -31,6 +31,30 @@
 #include "MessageModel.h"
 #include "Notifications.h"
 
+QDateTime glooxStampToQDateTime(std::string stamp_)
+{
+	QString stamp = QString::fromStdString(stamp_);
+	QDateTime dateTime;
+
+	if (stamp.contains('Z')) {
+		dateTime = QDateTime::fromString(stamp, "yyyy-MM-ddThh:mm:ss.zzzZ");
+	} else if (stamp.contains('-') && stamp.contains(':') && stamp.contains('.')) {
+		dateTime = QDateTime::fromString(stamp, "yyyy-MM-ddThh:mm:ss.zzz");
+	} else if (stamp.contains('-') && stamp.contains(':')) {
+		dateTime = QDateTime::fromString(stamp, "yyyy-MM-ddThh:mm:ss");
+	} else if (stamp.contains(':') && stamp.contains('T')) {
+		dateTime = QDateTime::fromString(stamp, "yyyyMMddThh:mm:ss");
+	} else {
+		dateTime = QDateTime::fromString(stamp, "hh:mm");
+	}
+
+	if (!dateTime.isValid())
+		return QDateTime();
+
+	dateTime.setTimeSpec(Qt::UTC);
+	return dateTime;
+}
+
 MessageHandler::MessageHandler(gloox::Client *client, MessageModel *model)
 {
 	messageModel = model;
@@ -55,9 +79,17 @@ void MessageHandler::handleMessage(const gloox::Message &message, gloox::Message
 		const QString author_resource = QString::fromStdString(message.from().resource());
 		const QString recipient = QString::fromStdString(message.to().bare());
 		const QString recipient_resource = QString::fromStdString(message.to().resource());
-		// TODO: XEP-0203: Delayed Delivery's timestamps
-		QString timestamp = QDateTime::currentDateTime().toString(Qt::ISODate);
-		
+		QString timestamp;
+
+		// If it is a delayed delivery (containing a timestamp), use its timestamp
+		const gloox::DelayedDelivery *delayedDelivery = message.when();
+		if (delayedDelivery) {
+			timestamp = glooxStampToQDateTime(delayedDelivery->stamp()).toString(Qt::ISODate);
+		}
+		if (timestamp.isEmpty()) {
+			timestamp = QDateTime::currentDateTime().toString(Qt::ISODate);
+		}
+
 		const QString msgId = QString::fromStdString(message.id());
 
 		messageModel->addMessage(&author, &recipient, &timestamp, &body, &msgId,

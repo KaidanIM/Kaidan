@@ -12,12 +12,12 @@
 
 Kaidan is a simple, user-friendly Jabber/XMPP client providing a modern user-interface
 using [Kirigami](https://techbase.kde.org/Kirigami) and [QtQuick](http://wiki.qt.io/Qt_Quick).
-The back-end of Kaidan is completely written in C++ using the [Swiften](http://swift.im/swiften.html)
-Library of the [Swift Instant Messenger](http://swift.im/swift.html) and [Qt 5](https://www.qt.io/).
+The back-end of Kaidan is completely written in C++ using the [gloox](https://camaya.net/gloox/)
+XMPP client library and [Qt 5](https://www.qt.io/).
 
 Currently Kaidan only has been tested on GNU/Linux Desktops, but because of the use of Qt we shouldn't have
 any problems porting it to all other common platforms, even Android. Nevertheless we will work on another
-GUI using Silica for better look & feel on Sailfish OS soon (See [KaidanSF](https://github.com/KaidanIM/KaidanSF)).
+GUI using Silica for better look & feel on Sailfish OS soon™ (See [KaidanSF](https://github.com/KaidanIM/KaidanSF)).
 But if you want to get a client for Sailfish OS _now_, maybe take a look at
 [Shmoose](https://github.com/geobra/harbour-shmoose), a fork by an earlier developer of Kaidan.
 
@@ -48,8 +48,7 @@ Then install Kaidan
 
 #### Install all dependencies:
  * Qt (Core Qml Quick Sql QuickControls2) (>= 5.7.0)
- * Swiften (>= 3.0.0)
- * Boost (>= 1.34.1)
+ * gloox (>= 1.0.0)
  * Kirigami 2 (>= 2.0.0)
 
 Build only dependencies:
@@ -61,11 +60,9 @@ Build only dependencies:
 ##### On Debian Stretch or Sid do the following:
 ```bash
 sudo apt-get install apt-transport-https git-core cmake build-essential zlib1g-dev \
-  libglib2.0-dev libssl-dev libxml2-dev libcrypto++-dev libpthread-stubs0-dev libidn11-dev \
-  libminiupnpc-dev libnatpmp-dev libboost-system-dev libnotify-bin \
-  libboost-program-options-dev libboost-serialization-dev libqt5quick5 libqt5quickcontrols2-5 \
-  libqt5quickwidgets5 libqt5qml5 libqt5gui5 libqt5core5a qtdeclarative5-dev qttools5-dev \
-  qt5-default qtquickcontrols2-5-dev qml-module-qtquick-controls2
+  libgloox-dev libnotify-bin libqt5quick5 libqt5quickcontrols2-5 libqt5quickwidgets5 \
+  libqt5qml5 libqt5gui5 libqt5core5a qtdeclarative5-dev qttools5-dev qt5-default \
+  qtquickcontrols2-5-dev
 ```
 
 Debian currently has no Kirigami2 packages, so we have to install them from external sources:
@@ -73,7 +70,7 @@ Debian currently has no Kirigami2 packages, so we have to install them from exte
  sudo apt-add-repository "deb https://raw.githubusercontent.com/kaidanim/packages/master sid main"
  sudo apt-key adv --keyserver hkp://pgp.mit.edu --recv-key "210EB0BCA70439F0"
  sudo apt-get update
- sudo apt-get install kirigami2-dev libswiften-dev
+ sudo apt-get install kirigami2-dev
  ```
 
 #### Get the source code:

@@ -34,7 +34,7 @@
 #include "Database.h"
 #include "RosterManager.h"
 #include "MessageSessionHandler.h"
-#include "PresenceController.h"
+#include "PresenceHandler.h"
 #include "VCardController.h"
 #include "ServiceDiscoveryManager.h"
 
@@ -103,7 +103,7 @@ private:
 	RosterManager *rosterManager;
 	MessageModel *messageModel;
 	MessageSessionHandler *messageSessionHandler;
-	PresenceController *presenceController;
+	PresenceHandler *presenceHandler;
 	VCardController *vCardController;
 	ServiceDiscoveryManager *serviceDiscoveryManager;
 	QSettings *settings;

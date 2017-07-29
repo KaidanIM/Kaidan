@@ -34,11 +34,7 @@
 #include <gloox/receipt.h>
 // Kaidan
 #include "RosterModel.h"
-#include "PresenceController.h"
-#include "MessageSessionHandler.h"
 #include "MessageModel.h"
-#include "VCardController.h"
-#include "ServiceDiscoveryManager.h"
 
 Kaidan::Kaidan(QObject *parent) : QObject(parent)
 {
@@ -104,6 +100,10 @@ void Kaidan::mainConnect()
 
 	// Roster
 	rosterManager = new RosterManager(rosterModel, client);
+
+	// Presence Handler
+	presenceHandler = new PresenceHandler(client);
+	client->registerPresenceHandler(presenceHandler);
 
 	// Register Stanza Extensions
 	client->registerStanzaExtension(new gloox::Receipt(gloox::Receipt::Request));

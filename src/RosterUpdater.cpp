@@ -114,14 +114,6 @@ void RosterUpdater::handleItemUpdated(const gloox::JID &jid_)
 	);
 }
 
-void RosterUpdater::handleItemSubscribed(const gloox::JID& jid)
-{
-}
-
-void RosterUpdater::handleItemUnsubscribed(const gloox::JID& jid)
-{
-}
-
 void RosterUpdater::handleRosterPresence(const gloox::RosterItem& item,
 	const std::string& resource, gloox::Presence::PresenceType presence,
 	const std::string& msg)
@@ -134,14 +126,30 @@ void RosterUpdater::handleSelfPresence(const gloox::RosterItem& item,
 {
 }
 
+void RosterUpdater::handleItemSubscribed(const gloox::JID& jid)
+{
+}
+
+void RosterUpdater::handleItemUnsubscribed(const gloox::JID& jid)
+{
+}
+
 bool RosterUpdater::handleSubscriptionRequest(const gloox::JID& jid,
 	const std::string& msg)
 {
+	qDebug() << "[RosterUpdater] Automatically accepting arrived subscription request from"
+			 << QString::fromStdString(jid.full());
+	// automatically accept the subscription request
+	return true;
 }
 
 bool RosterUpdater::handleUnsubscriptionRequest(const gloox::JID& jid,
 	const std::string& msg)
 {
+	qDebug() << "[RosterUpdater]" << QString::fromStdString(jid.full())
+			 << "has unsubscribed from your presence; also unsubscribing from its presence";
+	// automatically also unsubscribing from the contact
+	return true;
 }
 
 void RosterUpdater::handleNonrosterPresence(const gloox::Presence& presence)

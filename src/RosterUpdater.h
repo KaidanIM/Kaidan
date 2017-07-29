@@ -54,10 +54,10 @@ public:
 	virtual bool handleUnsubscriptionRequest(const gloox::JID& jid, const std::string& msg);
 	virtual void handleNonrosterPresence(const gloox::Presence& presence);
 	virtual void handleRosterError(const gloox::IQ& iq);
-	
+
 	// gloox::MessageHandler
 	virtual void handleMessage(const gloox::Message &msg, gloox::MessageSession *session = 0);
-	
+
 	void handleMessageSent(QString *jid, QString *message);
 	void updateLastExchangedOfJid(QString *jid);
 	void newUnreadMessageForJid(QString *jid);

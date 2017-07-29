@@ -17,28 +17,18 @@
  *  along with Kaidan. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef PRESENCECONTROLLER_H
-#define PRESENCECONTROLLER_H
+#include "PresenceHandler.h"
 
-#include <QObject>
-#include <Swiften/Client/Client.h>
-#include <Swiften/Elements/Presence.h>
-
-class PresenceController : public QObject
+PresenceHandler::PresenceHandler(gloox::Client *client)
 {
-	Q_OBJECT
+	this->client = client;
+}
 
-public:
-	PresenceController(QObject *parent = 0);
-	~PresenceController();
+PresenceHandler::~PresenceHandler()
+{
+}
 
-	void setClient(Swift::Client* client_);
-
-signals:
-
-private:
-	void handlePresenceReceived(Swift::Presence::ref presence);
-	Swift::Client* client;
-};
-
-#endif // PRESENCECONTROLLER_H
+void PresenceHandler::handlePresence(const gloox::Presence &presence)
+{
+	// Subscription requests are now managed in the RosterUpdater
+}

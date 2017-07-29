@@ -12,7 +12,7 @@ set(KAIDAN_SOURCES
 	${CURDIR}/MessageSessionHandler.cpp
 	${CURDIR}/MessageModel.cpp
 	${CURDIR}/Notifications.cpp
-	${CURDIR}/PresenceController.cpp
+	${CURDIR}/PresenceHandler.cpp
 	${CURDIR}/ServiceDiscoveryManager.cpp
 	${CURDIR}/VCard.cpp
 	${CURDIR}/VCardController.cpp

@@ -50,11 +50,6 @@ find_package(Qt5 ${QT_MIN_VERSION} REQUIRED NO_MODULE COMPONENTS Core Qml Quick 
 find_package(KF5Kirigami2 REQUIRED)
 find_package(Gloox REQUIRED)
 
-# FIXME: Remove
-find_package(Swiften REQUIRED)
-find_package(Boost ${BOOST_MIN_VERSION} REQUIRED COMPONENTS signals date_time)
-
-
 #
 # Load submodules
 #
@@ -104,9 +99,6 @@ target_link_libraries(${PROJECT_NAME}
 	Qt5::Qml
 	Qt5::Quick
 	${GLOOX_LIBRARIES}
-	Boost::signals
-	Boost::date_time
-	${SWIFTEN_LIBRARY}
 )
 
 
@@ -134,8 +126,6 @@ target_compile_definitions(${PROJECT_NAME} PRIVATE
 	VERSION_STRING="${VERSION_STRING}"
 
 	DEBUG_SOURCE_PATH="${CMAKE_SOURCE_DIR}"
-
-	BOOST_SIGNALS_NO_DEPRECATION_WARNING=True
 
 	${KAIDAN_COMPILE_DEFINITIONS}
 )

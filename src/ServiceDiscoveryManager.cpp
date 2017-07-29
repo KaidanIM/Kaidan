@@ -21,59 +21,60 @@
 // XEP-0030: Service Discovery | https://xmpp.org/extensions/xep-0030.html
 //
 
-// Kaidan
 #include "ServiceDiscoveryManager.h"
-// Boost
-#include <boost/bind.hpp>
-// Swiften
-#include <Swiften/Client/Client.h>
-#include <Swiften/Disco/ClientDiscoManager.h>
-#include <Swiften/Disco/GetDiscoInfoRequest.h>
+#include <QString>
+#include <QDebug>
+#include <qsysinfo.h>
 
-ServiceDiscoveryManager::ServiceDiscoveryManager()
+ServiceDiscoveryManager::ServiceDiscoveryManager(gloox::Disco *disco)
 {
+	this->disco = disco;
 
+	// register as disco handler
+	disco->registerDiscoHandler(this);
+
+	setFeaturesAndIdentity();
 }
 
-void ServiceDiscoveryManager::setClient(Swift::Client* client_)
+ServiceDiscoveryManager::~ServiceDiscoveryManager()
 {
-	client = client_;
-	client->onConnected.connect(boost::bind(&ServiceDiscoveryManager::handleConnected, this));
 }
 
-void ServiceDiscoveryManager::handleConnected()
+void ServiceDiscoveryManager::setFeaturesAndIdentity()
 {
 	//
-	// send own capabilities
+	// Announce our identity
 	//
 
-	Swift::DiscoInfo discoInfo;
-	// add identity, TODO: Use phone for android/sfos builds
-	discoInfo.addIdentity(Swift::DiscoInfo::Identity(APPLICATION_NAME, "client", "pc"));
+	// TODO: Annouce the client as phone on Android/SFOS/PM/...
+	disco->setIdentity("client", "pc", APPLICATION_DISPLAY_NAME);
+
+	// Set the software version
+	std::string sysInfo = QSysInfo::prettyProductName().toStdString();
+	disco->setVersion(APPLICATION_DISPLAY_NAME, VERSION_STRING, sysInfo);
+
+	//
+	// Announce features
+	//
 
 	// XEP-0184: Message Delivery Receipts | http://xmpp.org/extensions/xep-0184.html
-	discoInfo.addFeature(Swift::DiscoInfo::MessageDeliveryReceiptsFeature);
-
-	client->getDiscoManager()->setDiscoInfo(discoInfo);
-
-
-	//
-	// request the service discovery info from server
-	//
-
-	Swift::GetDiscoInfoRequest::ref discoInfoRequest = Swift::GetDiscoInfoRequest::create(
-	                        Swift::JID(client->getJID().getDomain()),
-	                        client->getIQRouter()
-	                );
-
-	discoInfoRequest->onResponse.connect(boost::bind(
-	                &ServiceDiscoveryManager::handleServerDiscoInfoReceived, this, _1, _2
-	                                     ));
-	discoInfoRequest->send();
+	disco->addFeature(gloox::XMLNS_RECEIPTS);
 }
 
-void ServiceDiscoveryManager::handleServerDiscoInfoReceived(
-        boost::shared_ptr<Swift::DiscoInfo> info, Swift::ErrorPayload::ref error)
+void ServiceDiscoveryManager::handleDiscoInfo(const gloox::JID& from, const gloox::Disco::Info& info, int context)
 {
-	// TODO: check if the server supports our XEPs
+}
+
+void ServiceDiscoveryManager::handleDiscoItems(const gloox::JID& from, const gloox::Disco::Items& items, int context)
+{
+}
+
+bool ServiceDiscoveryManager::handleDiscoSet(const gloox::IQ& iq)
+{
+}
+
+void ServiceDiscoveryManager::handleDiscoError(const gloox::JID &from, const gloox::Error *error, int context)
+{
+	qWarning() << "[ServiceDiscoveryManager] Error occured with"
+			   << QString::fromStdString(from.full()) << "in context" << context;
 }

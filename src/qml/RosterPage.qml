@@ -21,7 +21,6 @@
 import QtQuick 2.0
 import QtQuick.Layouts 1.3
 import org.kde.kirigami 2.0 as Kirigami
-import io.github.kaidanim 1.0
 
 Kirigami.ScrollablePage {
 	title: qsTr("Contacts")

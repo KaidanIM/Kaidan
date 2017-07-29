@@ -35,7 +35,6 @@
 #include "RosterManager.h"
 #include "MessageSessionHandler.h"
 #include "PresenceHandler.h"
-#include "VCardController.h"
 #include "ServiceDiscoveryManager.h"
 
 class Kaidan : public QObject, public gloox::ConnectionListener
@@ -44,7 +43,6 @@ class Kaidan : public QObject, public gloox::ConnectionListener
 
 	Q_PROPERTY(RosterModel* rosterModel READ getRosterModel NOTIFY rosterModelChanged)
 	Q_PROPERTY(MessageModel* messageModel READ getMessageModel NOTIFY messageModelChanged)
-	Q_PROPERTY(VCardController* vCardController READ getVCardController NOTIFY vCardControllerChanged)
 	Q_PROPERTY(bool connectionState READ getConnectionState NOTIFY connectionStateConnected NOTIFY connectionStateDisconnected)
 	Q_PROPERTY(QString jid READ getJid WRITE setJid NOTIFY jidChanged)
 	Q_PROPERTY(QString jidResource READ getJidResource WRITE setJidResource NOTIFY jidResourceChanged)
@@ -75,7 +73,6 @@ public:
 	void setChatPartner(QString);
 	RosterModel* getRosterModel();
 	MessageModel* getMessageModel();
-	VCardController* getVCardController();
 
 	virtual void onConnect();
 	virtual void onDisconnect(gloox::ConnectionError error);
@@ -104,7 +101,6 @@ private:
 	MessageModel *messageModel;
 	MessageSessionHandler *messageSessionHandler;
 	PresenceHandler *presenceHandler;
-	VCardController *vCardController;
 	ServiceDiscoveryManager *serviceDiscoveryManager;
 	QSettings *settings;
 

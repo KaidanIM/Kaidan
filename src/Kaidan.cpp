@@ -270,11 +270,6 @@ MessageModel* Kaidan::getMessageModel()
 	return messageModel;
 }
 
-VCardController* Kaidan::getVCardController()
-{
-	return vCardController;
-}
-
 bool Kaidan::getConnectionState() const
 {
 	return connected;

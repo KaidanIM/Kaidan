@@ -36,6 +36,7 @@
 #include "MessageSessionHandler.h"
 #include "PresenceHandler.h"
 #include "ServiceDiscoveryManager.h"
+#include "XmlLogHandler.h"
 
 class Kaidan : public QObject, public gloox::ConnectionListener
 {
@@ -102,6 +103,7 @@ private:
 	MessageSessionHandler *messageSessionHandler;
 	PresenceHandler *presenceHandler;
 	ServiceDiscoveryManager *serviceDiscoveryManager;
+	XmlLogHandler *xmlLogHandler;
 	QSettings *settings;
 
 	bool connected;

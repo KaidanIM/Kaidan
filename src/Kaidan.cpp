@@ -77,6 +77,7 @@ Kaidan::~Kaidan()
 		delete client;
 	}
 
+	delete serviceDiscoveryManager;
 	delete messageSessionHandler;
 	delete rosterManager;
 	delete settings;
@@ -104,6 +105,9 @@ void Kaidan::mainConnect()
 	// Presence Handler
 	presenceHandler = new PresenceHandler(client);
 	client->registerPresenceHandler(presenceHandler);
+
+	// Service Discovery
+	serviceDiscoveryManager = new ServiceDiscoveryManager(client->disco());
 
 	// Register Stanza Extensions
 	client->registerStanzaExtension(new gloox::Receipt(gloox::Receipt::Request));

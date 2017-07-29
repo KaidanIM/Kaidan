@@ -24,23 +24,26 @@
 #ifndef SERVICEDISCOVERYMANAGER_H
 #define SERVICEDISCOVERYMANAGER_H
 
-// Swiften
-#include <Swiften/Client/Client.h>
-#include <Swiften/Elements/DiscoInfo.h>
-#include <Swiften/Elements/ErrorPayload.h>
+// gloox
+#include <gloox/client.h>
+#include <gloox/disco.h>
+#include <gloox/discohandler.h>
 
-class ServiceDiscoveryManager
+class ServiceDiscoveryManager : gloox::DiscoHandler
 {
 public:
-	ServiceDiscoveryManager();
+	ServiceDiscoveryManager(gloox::Disco *disco);
+	~ServiceDiscoveryManager();
 
-	void setClient(Swift::Client*);
-	void handleConnected();
-	void handleServerDiscoInfoReceived(boost::shared_ptr<Swift::DiscoInfo> discoInfo,
-	                                   Swift::ErrorPayload::ref error);
+	void setFeaturesAndIdentity();
+
+	void handleDiscoInfo(const gloox::JID &from, const gloox::Disco::Info &info, int context);
+	void handleDiscoItems(const gloox::JID &from, const gloox::Disco::Items &items, int context);
+	void handleDiscoError(const gloox::JID &from, const gloox::Error *error, int context);
+	bool handleDiscoSet(const gloox::IQ &iq);
 
 private:
-	Swift::Client* client;
+	gloox::Disco *disco;
 };
 
 #endif // SERVICEDISCOVERYMANAGER_H

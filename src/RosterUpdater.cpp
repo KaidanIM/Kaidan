@@ -38,12 +38,6 @@ RosterUpdater::~RosterUpdater()
 {
 }
 
-void RosterUpdater::setChatPartner(QString* jid)
-{
-	chatPartner = jid;
-	resetUnreadMessagesForJid(chatPartner);
-}
-
 void RosterUpdater::handleRoster(const gloox::Roster &roster)
 {
 	//
@@ -160,56 +154,4 @@ void RosterUpdater::handleRosterError(const gloox::IQ& iq)
 {
 	qWarning() << "[RosterUpdater] Error occured in IQ"
 			   << QString::fromStdString(iq.id());
-}
-
-// handle message received
-void RosterUpdater::handleMessage(const gloox::Message &msg, gloox::MessageSession *session)
-{
-	// Update last exchanged and unread message count
-
-	std::string body = msg.body();
-
-	if (body.length() > 0) {
-		QString msgAuthor = QString::fromStdString(msg.from().bare());
-		QString message = QString::fromStdString(body);
-
-		// update the last message for this contact
-		rosterModel->setLastMessageForJid(&msgAuthor, &message);
-
-		updateLastExchangedOfJid(&msgAuthor);
-
-		if (msgAuthor != chatPartner) {
-			newUnreadMessageForJid(&msgAuthor);
-		}
-	}
-}
-
-// handle message sent
-void RosterUpdater::handleMessageSent(QString *jid, QString *message)
-{
-	// update the last message for this contact
-	rosterModel->setLastMessageForJid(jid, message);
-	// update the last exchanged date
-	updateLastExchangedOfJid(jid);
-}
-
-void RosterUpdater::updateLastExchangedOfJid(QString *jid)
-{
-	QString dateTime = QDateTime::currentDateTime().toString(Qt::ISODate);
-	rosterModel->setLastExchangedOfJid(jid, &dateTime);
-}
-
-void RosterUpdater::newUnreadMessageForJid(QString *jid)
-{
-	// get the current unread message count
-	int msgCount = rosterModel->getUnreadMessageCountOfJid(jid);
-	// increase it by one
-	msgCount++;
-	// set the new increased count
-	rosterModel->setUnreadMessageCountOfJid(jid, msgCount);
-}
-
-void RosterUpdater::resetUnreadMessagesForJid(QString *jid)
-{
-	rosterModel->setUnreadMessageCountOfJid(jid, 0);
 }

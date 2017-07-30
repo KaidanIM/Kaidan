@@ -25,19 +25,16 @@
 #include <QObject>
 #include <QSqlTableModel>
 // gloox
-#include <gloox/message.h>
-#include <gloox/messagehandler.h>
 #include <gloox/rosterlistener.h>
 #include <gloox/rostermanager.h>
 // Kaidan
 #include "RosterModel.h"
 
-class RosterUpdater : public gloox::RosterListener, gloox::MessageHandler
+class RosterUpdater : public gloox::RosterListener
 {
 public:
 	RosterUpdater(RosterModel* rosterModel, gloox::RosterManager *rosterManager);
 	~RosterUpdater();
-	void setChatPartner(QString *jid);
 
 	// gloox::RosterListener
 	virtual void handleItemAdded(const gloox::JID& jid);
@@ -55,17 +52,8 @@ public:
 	virtual void handleNonrosterPresence(const gloox::Presence& presence);
 	virtual void handleRosterError(const gloox::IQ& iq);
 
-	// gloox::MessageHandler
-	virtual void handleMessage(const gloox::Message &msg, gloox::MessageSession *session = 0);
-
-	void handleMessageSent(QString *jid, QString *message);
-	void updateLastExchangedOfJid(QString *jid);
-	void newUnreadMessageForJid(QString *jid);
-	void resetUnreadMessagesForJid(QString *jid);
-
 private:
 	RosterModel *rosterModel;
-	QString *chatPartner;
 	gloox::RosterManager *rosterManager;
 };
 

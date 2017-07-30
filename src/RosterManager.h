@@ -36,9 +36,6 @@ public:
 	void addContact(const QString jid_, const QString name_);
 	void removeContact(const QString);
 
-	void setChatPartner(QString *jid);
-	void handleMessageSent(QString *jid, QString *message);
-
 private:
 	RosterModel *rosterModel;
 	RosterUpdater *rosterUpdater;

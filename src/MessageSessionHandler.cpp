@@ -20,11 +20,12 @@
 #include "MessageSessionHandler.h"
 #include "MessageHandler.h"
 
-MessageSessionHandler::MessageSessionHandler(gloox::Client *client, MessageModel *messageModel)
+MessageSessionHandler::MessageSessionHandler(gloox::Client *client,
+	MessageModel *messageModel, RosterModel *rosterModel)
 {
 	this->client = client;
 	this->messageModel = messageModel;
-	messageHandler = new MessageHandler(client, messageModel);
+	messageHandler = new MessageHandler(client, messageModel, rosterModel);
 }
 
 MessageSessionHandler::~MessageSessionHandler()
@@ -34,7 +35,7 @@ MessageSessionHandler::~MessageSessionHandler()
 
 void MessageSessionHandler::handleMessageSession(gloox::MessageSession *session)
 {
-	session->registerMessageHandler((gloox::MessageHandler*) messageHandler);
+	session->registerMessageHandler(messageHandler);
 }
 
 MessageHandler* MessageSessionHandler::getMessageHandler()

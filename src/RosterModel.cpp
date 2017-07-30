@@ -144,7 +144,7 @@ void RosterModel::removeListOfJids(QStringList* jidList)
 	submitAll();
 }
 
-void RosterModel::setLastExchangedOfJid(QString *jid_, QString *date_)
+void RosterModel::setLastExchangedOfJid(const QString *jid_, QString *date_)
 {
 	QSqlQuery newQuery(*database);
 	newQuery.exec(QString("UPDATE 'Roster' SET lastExchanged = '%1' WHERE jid = '%2'").arg(*date_, *jid_));
@@ -182,7 +182,7 @@ void RosterModel::setUnreadMessageCountOfJid(const QString* jid_, const int coun
 	submit();
 }
 
-void RosterModel::setLastMessageForJid(QString *jid, QString *message)
+void RosterModel::setLastMessageForJid(const QString *jid, QString *message)
 {
 	QSqlQuery query(*database);
 	query.prepare(QString("UPDATE Roster SET lastMessage = '%1' WHERE jid = '%2'")

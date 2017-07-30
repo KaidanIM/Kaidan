@@ -30,19 +30,28 @@
 #include <gloox/messagesession.h>
 // Kaidan
 #include "MessageModel.h"
+#include "RosterModel.h"
 
 class MessageHandler : public gloox::MessageHandler
 {
 public:
-	MessageHandler(gloox::Client *client, MessageModel *model);
+	MessageHandler(gloox::Client *client, MessageModel *messageModel, RosterModel *rosterModel);
 	~MessageHandler();
+
+	void setCurrentChatPartner(QString *chatPartner);
 
 	void sendMessage(QString *fromJid, QString *toJid, QString *body);
 	virtual void handleMessage(const gloox::Message &message, gloox::MessageSession *session = 0);
 
+	void updateLastExchangedOfJid(const QString *jid);
+	void newUnreadMessageForJid(const QString *jid);
+	void resetUnreadMessagesForJid(const QString *jid);
+
 private:
 	gloox::Client *client;
 	MessageModel *messageModel;
+	RosterModel *rosterModel;
+	QString *chatPartner;
 };
 
 #endif // MESSAGEHANDLER_H

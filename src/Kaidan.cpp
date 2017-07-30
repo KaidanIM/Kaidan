@@ -97,8 +97,8 @@ void Kaidan::mainConnect()
 	client->registerConnectionListener(this);
 
 	// Message receiving/sending
-	messageSessionHandler = new MessageSessionHandler(client, messageModel);
-	client->registerMessageSessionHandler((gloox::MessageSessionHandler*) messageSessionHandler);
+	messageSessionHandler = new MessageSessionHandler(client, messageModel, rosterModel);
+	client->registerMessageSessionHandler(messageSessionHandler);
 
 	// Roster
 	rosterManager = new RosterManager(rosterModel, client);
@@ -216,8 +216,7 @@ void Kaidan::setChatPartner(QString chatPartner)
 
 	// filter message for this chat partner
 	messageModel->applyRecipientFilter(&chatPartner, &jid);
-
-	rosterManager->setChatPartner(&chatPartner);
+	messageSessionHandler->getMessageHandler()->setCurrentChatPartner(&chatPartner);
 
 	emit chatPartnerChanged();
 }
@@ -226,7 +225,6 @@ void Kaidan::sendMessage(QString jid, QString message)
 {
 	if (connected) {
 		messageSessionHandler->getMessageHandler()->sendMessage(&(this->jid), &jid, &message);
-		rosterManager->handleMessageSent(&jid, &message);
 	}
 }
 

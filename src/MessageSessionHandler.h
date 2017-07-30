@@ -28,10 +28,10 @@
 #include "MessageHandler.h"
 #include "MessageModel.h"
 
-class MessageSessionHandler : gloox::MessageSessionHandler
+class MessageSessionHandler : public gloox::MessageSessionHandler
 {
 public:
-	MessageSessionHandler(gloox::Client*, MessageModel*);
+	MessageSessionHandler(gloox::Client *client, MessageModel *messageModel, RosterModel *rosterModel);
 	~MessageSessionHandler();
 
 	virtual void handleMessageSession(gloox::MessageSession*);

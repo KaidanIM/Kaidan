@@ -50,13 +50,3 @@ void RosterManager::removeContact(const QString jid)
 	// remove contact from roster
 	rosterManager->remove(jid.toStdString());
 }
-
-void RosterManager::setChatPartner(QString* jid)
-{
-	rosterUpdater->setChatPartner(jid);
-}
-
-void RosterManager::handleMessageSent(QString* jid, QString* message)
-{
-	rosterUpdater->handleMessageSent(jid, message);
-}

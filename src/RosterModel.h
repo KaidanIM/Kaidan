@@ -41,10 +41,10 @@ public:
 	void updateContactName(QString, QString);
 	QStringList getJidList();
 	void removeListOfJids(QStringList*);
-	void setLastExchangedOfJid(QString*, QString*);
+	void setLastExchangedOfJid(const QString *jid, QString *date);
 	int getUnreadMessageCountOfJid(const QString* jid_);
 	void setUnreadMessageCountOfJid(const QString* jid_, const int unreadMessageCount);
-	void setLastMessageForJid(QString*, QString*);
+	void setLastMessageForJid(const QString *jid, QString *message);
 
 private:
 	QSqlDatabase *database;

@@ -19,7 +19,6 @@
 
 #include "MessageHandler.h"
 // Std
-#include <exception>
 #include <iostream>
 // Qt
 #include <QDateTime>
@@ -55,9 +54,11 @@ QDateTime glooxStampToQDateTime(std::string stamp_)
 	return dateTime;
 }
 
-MessageHandler::MessageHandler(gloox::Client *client, MessageModel *model)
+MessageHandler::MessageHandler(gloox::Client *client, MessageModel *messageModel,
+	RosterModel *rosterModel)
 {
-	messageModel = model;
+	this->messageModel = messageModel;
+	this->rosterModel = rosterModel;
 	this->client = client;
 }
 
@@ -65,10 +66,17 @@ MessageHandler::~MessageHandler()
 {
 }
 
+void MessageHandler::setCurrentChatPartner(QString* chatPartner)
+{
+	this->chatPartner = chatPartner;
+
+	resetUnreadMessagesForJid(chatPartner);
+}
+
 void MessageHandler::handleMessage(const gloox::Message &message, gloox::MessageSession *session)
 {
 	QString body = QString::fromStdString(message.body());
-	
+
 	if (body.size() > 0) {
 		//
 		// add the message to the db
@@ -92,11 +100,23 @@ void MessageHandler::handleMessage(const gloox::Message &message, gloox::Message
 
 		const QString msgId = QString::fromStdString(message.id());
 
+		// add the message to the database
 		messageModel->addMessage(&author, &recipient, &timestamp, &body, &msgId,
 								 false, &author_resource, &recipient_resource);
 
 		// send a new notification | TODO: Resolve nickname from JID
 		Notifications::sendMessageNotification(message.from().full(), body.toStdString());
+
+		// update the last message for this contact
+		rosterModel->setLastMessageForJid(&author, &body);
+
+		// update the last exchanged for this contact
+		updateLastExchangedOfJid(&author);
+
+		// if chat is not opened, add a new unread message
+		if (author != *chatPartner) {
+			newUnreadMessageForJid(&author);
+		}
 	}
 
 	// XEP-0184: Message Delivery Receipts
@@ -145,4 +165,30 @@ void MessageHandler::sendMessage(QString *fromJid, QString *toJid, QString *body
 
 	// send the message
 	client->send(message);
+
+	// update the last message for this contact
+	rosterModel->setLastMessageForJid(toJid, body);
+	// update the last exchanged date
+	updateLastExchangedOfJid(toJid);
+}
+
+void MessageHandler::updateLastExchangedOfJid(const QString *jid)
+{
+	QString dateTime = QDateTime::currentDateTime().toString(Qt::ISODate);
+	rosterModel->setLastExchangedOfJid(jid, &dateTime);
+}
+
+void MessageHandler::newUnreadMessageForJid(const QString *jid)
+{
+	// get the current unread message count
+	int msgCount = rosterModel->getUnreadMessageCountOfJid(jid);
+	// increase it by one
+	msgCount++;
+	// set the new increased count
+	rosterModel->setUnreadMessageCountOfJid(jid, msgCount);
+}
+
+void MessageHandler::resetUnreadMessagesForJid(const QString *jid)
+{
+	rosterModel->setUnreadMessageCountOfJid(jid, 0);
 }

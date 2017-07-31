@@ -49,10 +49,7 @@ Kirigami.ApplicationWindow {
 	Component {id: aboutPage; AboutPage {}}
 
 	Component.onCompleted: {
-		function openLoginPage() {
-			// disconnect this func; the login page will do that now
-			kaidan.connectionStateDisconnected.disconnect(openLoginPage);
-
+		function handleDisconnect() {
 			// close all pages
 			while (pageStack.depth > 0) {
 				pageStack.pop();
@@ -70,7 +67,7 @@ Kirigami.ApplicationWindow {
 			// open client normally
 
 			// on connection failure, open login page
-			kaidan.connectionStateDisconnected.connect(openLoginPage);
+			kaidan.connectionStateDisconnected.connect(handleDisconnect);
 
 			// show roster and login with restored data
 			pageStack.push(rosterPage);

@@ -28,11 +28,12 @@
 #include <gloox/client.h>
 #include <gloox/disco.h>
 #include <gloox/discohandler.h>
+#include <gloox/connectionlistener.h>
 
-class ServiceDiscoveryManager : gloox::DiscoHandler
+class ServiceDiscoveryManager : public gloox::DiscoHandler, public gloox::ConnectionListener
 {
 public:
-	ServiceDiscoveryManager(gloox::Disco *disco);
+	ServiceDiscoveryManager(gloox::Client *client, gloox::Disco *disco);
 	~ServiceDiscoveryManager();
 
 	void setFeaturesAndIdentity();
@@ -42,7 +43,12 @@ public:
 	void handleDiscoError(const gloox::JID &from, const gloox::Error *error, int context);
 	bool handleDiscoSet(const gloox::IQ &iq);
 
+	virtual void onConnect();
+	virtual void onDisconnect(gloox::ConnectionError error);
+	virtual bool onTLSConnect(const gloox::CertInfo &info);
+
 private:
+	gloox::Client *client;
 	gloox::Disco *disco;
 };
 

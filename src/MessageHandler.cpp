@@ -26,6 +26,7 @@
 #include <QString>
 // gloox
 #include <gloox/receipt.h>
+#include <gloox/carbons.h>
 // Kaidan
 #include "MessageModel.h"
 #include "Notifications.h"
@@ -60,6 +61,7 @@ MessageHandler::MessageHandler(gloox::Client *client, MessageModel *messageModel
 	this->messageModel = messageModel;
 	this->rosterModel = rosterModel;
 	this->client = client;
+	this->chatPartner = new QString("");
 }
 
 MessageHandler::~MessageHandler()
@@ -73,75 +75,103 @@ void MessageHandler::setCurrentChatPartner(QString* chatPartner)
 	resetUnreadMessagesForJid(chatPartner);
 }
 
-void MessageHandler::handleMessage(const gloox::Message &message, gloox::MessageSession *session)
+void MessageHandler::handleMessage(const gloox::Message &stanza, gloox::MessageSession *session)
 {
-	QString body = QString::fromStdString(message.body());
+	// this should contain the real message (e.g. containing the body)
+	gloox::Message *message = const_cast<gloox::Message*>(&stanza);
+	// if the real message is in a message carbon extract it from there
+	if (stanza.hasEmbeddedStanza()) {
+		// get the possible carbon extension
+		const gloox::Carbons *carbon = stanza.findExtension<const gloox::Carbons>(gloox::ExtCarbons);
+
+		// if the extension exists and contains a message, use it as the real message
+		if(carbon && carbon->embeddedStanza())
+			message = static_cast<gloox::Message*>(carbon->embeddedStanza());
+	}
+
+	QString body = QString::fromStdString(message->body());
 
 	if (body.size() > 0) {
 		//
-		// add the message to the db
+		// Extract information of the message
 		//
 
 		// author is only the 'bare' JID: e.g. 'albert@einstein.ch'
-		const QString author = QString::fromStdString(message.from().bare());
-		const QString author_resource = QString::fromStdString(message.from().resource());
-		const QString recipient = QString::fromStdString(message.to().bare());
-		const QString recipient_resource = QString::fromStdString(message.to().resource());
+		const QString fromJid = QString::fromStdString(message->from().bare());
+		const QString fromJidResource = QString::fromStdString(message->from().resource());
+		const QString toJid = QString::fromStdString(message->to().bare());
+		const QString toJidResource = QString::fromStdString(message->to().resource());
+		const QString msgId = QString::fromStdString(message->id());
+		const bool isSentByMe = fromJid == QString::fromStdString(client->jid().bare());
 		QString timestamp;
 
+		//
 		// If it is a delayed delivery (containing a timestamp), use its timestamp
-		const gloox::DelayedDelivery *delayedDelivery = message.when();
-		if (delayedDelivery) {
-			timestamp = glooxStampToQDateTime(delayedDelivery->stamp()).toString(Qt::ISODate);
-		}
-		if (timestamp.isEmpty()) {
-			timestamp = QDateTime::currentDateTime().toString(Qt::ISODate);
-		}
+		//
 
-		const QString msgId = QString::fromStdString(message.id());
+		const gloox::DelayedDelivery *delayedDelivery = message->when();
+		if (delayedDelivery)
+			timestamp = glooxStampToQDateTime(delayedDelivery->stamp()).toString(Qt::ISODate);
+
+		// fallback: use current time from local clock
+		if (timestamp.isEmpty())
+			timestamp = QDateTime::currentDateTime().toString(Qt::ISODate);
 
 		// add the message to the database
-		messageModel->addMessage(&author, &recipient, &timestamp, &body, &msgId,
-								 false, &author_resource, &recipient_resource);
+		messageModel->addMessage(&fromJid, &toJid, &timestamp, &body, &msgId,
+								 isSentByMe, &fromJidResource, &toJidResource);
 
-		// send a new notification | TODO: Resolve nickname from JID
-		Notifications::sendMessageNotification(message.from().full(), body.toStdString());
+		//
+		// Send a new notification | TODO: Resolve nickname from JID
+		//
+
+		if (!isSentByMe)
+			Notifications::sendMessageNotification(message->from().full(), body.toStdString());
+
+		//
+		// Update contact sort (lastExchanged), last message and unread message count
+		//
+
+		// the contact can differ if the message is really from a contact or just
+		// a forward of another of the user's clients
+		const QString *contactJid = isSentByMe ? &toJid : & fromJid;
 
 		// update the last message for this contact
-		rosterModel->setLastMessageForJid(&author, &body);
+		rosterModel->setLastMessageForJid(contactJid, &body);
 
 		// update the last exchanged for this contact
-		updateLastExchangedOfJid(&author);
+		updateLastExchangedOfJid(contactJid);
 
-		// if chat is not opened, add a new unread message
-		if (author != *chatPartner) {
-			newUnreadMessageForJid(&author);
-		}
+		// Increase unread message counter
+		// don't add new unread message if chat is opened or we wrote the message
+		if (*contactJid != *chatPartner && !isSentByMe)
+			newUnreadMessageForJid(contactJid);
 	}
 
-	// XEP-0184: Message Delivery Receipts
-	// try to get a possible delivery receipt
-	gloox::Receipt *receipt = (gloox::Receipt*) message.findExtension<gloox::Receipt>(
-		gloox::ExtReceipt);
+	if (message->hasEmbeddedStanza()) {
+		// XEP-0184: Message Delivery Receipts
+		// try to get a possible delivery receipt
+		gloox::Receipt *receipt = (gloox::Receipt*) message->findExtension<gloox::Receipt>(gloox::ExtReceipt);
 
-	if (receipt) {
-		// get the type of the receipt
-		gloox::Receipt::ReceiptType receiptType = receipt->rcpt();
-		if (receiptType == gloox::Receipt::Request) {
-			// send the asked confirmation, that the message has been arrived
-			// new message to the author of the request
-			gloox::Message receiptMessage(gloox::Message::Chat, message.from());
+		if (receipt) {
+			// get the type of the receipt
+			gloox::Receipt::ReceiptType receiptType = receipt->rcpt();
+			if (receiptType == gloox::Receipt::Request) {
+				// send the asked confirmation, that the message has been arrived
+				// new message to the author of the request
+				gloox::Message receiptMessage(gloox::Message::Chat, message->from());
 
-			// add the receipt extension containing the request's message id
-			gloox::Receipt *receiptPayload = new gloox::Receipt(gloox::Receipt::Received,
-																message.id());
-			receiptMessage.addExtension(receiptPayload);
+				// add the receipt extension containing the request's message id
+				gloox::Receipt *receiptPayload = new gloox::Receipt(gloox::Receipt::Received,
+																	message->id());
+				receiptMessage.addExtension(receiptPayload);
 
-			// send the receipt message
-			client->send(receiptMessage);
-		} else if (receiptType == gloox::Receipt::Received) {
-			// Delivery Receipt Received -> mark message as read in db
-			messageModel->setMessageAsDelivered(QString::fromStdString(receipt->id()));
+				// send the receipt message
+				client->send(receiptMessage);
+			} else if (receiptType == gloox::Receipt::Received) {
+				// Delivery Receipt Received -> mark message as read in db
+				messageModel->setMessageAsDelivered(QString::fromStdString(receipt->id()));
+			}
 		}
 	}
 }

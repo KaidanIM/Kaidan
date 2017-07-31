@@ -25,18 +25,36 @@
 #include <QString>
 #include <QDebug>
 #include <qsysinfo.h>
+#include <gloox/carbons.h>
 
-ServiceDiscoveryManager::ServiceDiscoveryManager(gloox::Disco *disco)
+ServiceDiscoveryManager::ServiceDiscoveryManager(gloox::Client *client, gloox::Disco *disco)
 {
 	this->disco = disco;
+	this->client = client;
 
 	// register as disco handler
 	disco->registerDiscoHandler(this);
+	// register as connection listener
+	client->registerConnectionListener(this);
 
 	setFeaturesAndIdentity();
 }
 
 ServiceDiscoveryManager::~ServiceDiscoveryManager()
+{
+}
+
+void ServiceDiscoveryManager::onConnect()
+{
+	// request the disco info from the server
+	disco->getDiscoInfo(gloox::JID(client->server()), std::string(), this, 0);
+}
+
+void ServiceDiscoveryManager::onDisconnect(gloox::ConnectionError error)
+{
+}
+
+bool ServiceDiscoveryManager::onTLSConnect(const gloox::CertInfo &info)
 {
 }
 
@@ -63,6 +81,14 @@ void ServiceDiscoveryManager::setFeaturesAndIdentity()
 
 void ServiceDiscoveryManager::handleDiscoInfo(const gloox::JID& from, const gloox::Disco::Info& info, int context)
 {
+	if (from.bare() == client->server()) {
+		// XEP-0280: Message Carbons
+		if (info.hasFeature(gloox::XMLNS_MESSAGE_CARBONS)) {
+			gloox::IQ iq(gloox::IQ::Set, gloox::JID(), client->getID());
+			iq.addExtension(new gloox::Carbons(gloox::Carbons::Enable));
+			client->send(iq);
+		}
+	}
 }
 
 void ServiceDiscoveryManager::handleDiscoItems(const gloox::JID& from, const gloox::Disco::Items& items, int context)

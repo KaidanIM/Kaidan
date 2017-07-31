@@ -41,16 +41,26 @@
 Kaidan::Kaidan(QObject *parent) : QObject(parent)
 {
 	connected = false;
+	isClientSetUp = false;
+
+	//
+	// Database and components
+	//
 
 	// setup database
 	database = new Database();
 	database->openDatabase();
-	if (database->needToConvert()) database->convertDatabase();
+	if (database->needToConvert())
+		database->convertDatabase();
 
 	// setup components
 	messageModel = new MessageModel(database->getDatabase());
 	rosterModel = new RosterModel(database->getDatabase());
 	xmlLogHandler = new XmlLogHandler();
+
+	// client package fetch timer
+	packageFetchTimer = new QTimer(this);
+	connect(packageFetchTimer, SIGNAL(timeout()), this, SLOT(updateClient()));
 
 	//
 	// Load settings data
@@ -67,27 +77,32 @@ Kaidan::Kaidan(QObject *parent) : QObject(parent)
 	password = settings->value("auth/password").toString();
 
 	// use Kaidan as resource, if no set
-	if (jidResource == "") {
-		jidResource = QString(APPLICATION_NAME);
-		settings->setValue("auth/resource", jidResource);
-	}
+	if (jidResource == "")
+		setJidResource(QString(APPLICATION_NAME));
 }
 
 Kaidan::~Kaidan()
 {
-	if (connected) {
-		client->disconnect();
-		delete client;
-	}
+	// main disconnect will only try to disconnect, if connected
+	mainDisconnect();
+	// this will delete the client and its components
+	if (isClientSetUp)
+		clientCleanUp();
 
-	delete serviceDiscoveryManager;
-	delete messageSessionHandler;
-	delete rosterManager;
+	delete rosterModel;
+	delete messageModel;
+	delete database;
+	delete xmlLogHandler;
+	delete packageFetchTimer;
 	delete settings;
 }
 
 void Kaidan::mainConnect()
 {
+	// first delete everything from the last connection
+	if (isClientSetUp)
+		clientCleanUp();
+
 	// Create a new XMPP client
 	client = new gloox::Client(gloox::JID(jid.toStdString()), password.toStdString());
 	// require encryption
@@ -126,16 +141,24 @@ void Kaidan::mainConnect()
 	client->connect(false);
 
 	// every 100 ms: fetch new packages from the socket
-	QTimer *timer = new QTimer(this);
-	connect(timer, SIGNAL(timeout()), this, SLOT(updateClient()));
-	timer->start(100);
+	packageFetchTimer->start(100);
 }
 
 void Kaidan::mainDisconnect()
 {
 	if (connected) {
 		client->disconnect();
+		packageFetchTimer->stop();
 	}
+}
+
+void Kaidan::clientCleanUp()
+{
+	delete serviceDiscoveryManager;
+	delete presenceHandler;
+	delete rosterManager;
+	delete messageSessionHandler;
+	delete client;
 }
 
 void Kaidan::onConnect()
@@ -227,23 +250,23 @@ void Kaidan::setChatPartner(QString chatPartner)
 
 void Kaidan::sendMessage(QString jid, QString message)
 {
-	if (connected) {
+	// TODO: Add offline message cache
+	if (connected)
 		messageSessionHandler->getMessageHandler()->sendMessage(&(this->jid), &jid, &message);
-	}
 }
 
 void Kaidan::addContact(QString jid, QString nick)
 {
-	if (connected) {
+	// TODO: Add an error notification/message if not connected
+	if (connected)
 		rosterManager->addContact(jid, nick);
-	}
 }
 
 void Kaidan::removeContact(QString jid)
 {
-	if (connected) {
+	// TODO: Add an error notification/message if not connected
+	if (connected)
 		rosterManager->removeContact(jid);
-	}
 }
 
 QString Kaidan::getResourcePath(QString name_)

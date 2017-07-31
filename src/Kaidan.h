@@ -26,7 +26,7 @@
 #include <QObject>
 #include <QSettings>
 #include <QString>
-#include <QStringList>
+#include <QTimer>
 // gloox
 #include <gloox/client.h>
 #include <gloox/connectionlistener.h>
@@ -94,8 +94,9 @@ private slots:
 	void updateClient();
 
 private:
-	gloox::Client *client;
+	void clientCleanUp();
 
+	gloox::Client *client;
 	Database *database;
 	RosterModel *rosterModel;
 	RosterManager *rosterManager;
@@ -107,10 +108,12 @@ private:
 	QSettings *settings;
 
 	bool connected;
+	bool isClientSetUp;
 	QString jid;
 	QString jidResource;
 	QString password;
 	QString chatPartner;
+	QTimer *packageFetchTimer;
 };
 
 #endif

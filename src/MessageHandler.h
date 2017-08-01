@@ -51,7 +51,7 @@ private:
 	gloox::Client *client;
 	MessageModel *messageModel;
 	RosterModel *rosterModel;
-	QString *chatPartner;
+	QString chatPartner;
 };
 
 #endif // MESSAGEHANDLER_H

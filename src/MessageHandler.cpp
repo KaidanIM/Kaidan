@@ -61,16 +61,16 @@ MessageHandler::MessageHandler(gloox::Client *client, MessageModel *messageModel
 	this->messageModel = messageModel;
 	this->rosterModel = rosterModel;
 	this->client = client;
-	this->chatPartner = new QString("");
+	this->chatPartner = QString("");
 }
 
 MessageHandler::~MessageHandler()
 {
 }
 
-void MessageHandler::setCurrentChatPartner(QString* chatPartner)
+void MessageHandler::setCurrentChatPartner(QString *chatPartner)
 {
-	this->chatPartner = chatPartner;
+	this->chatPartner = *chatPartner;
 
 	resetUnreadMessagesForJid(chatPartner);
 }
@@ -134,18 +134,18 @@ void MessageHandler::handleMessage(const gloox::Message &stanza, gloox::MessageS
 
 		// the contact can differ if the message is really from a contact or just
 		// a forward of another of the user's clients
-		const QString *contactJid = isSentByMe ? &toJid : & fromJid;
+		const QString contactJid = isSentByMe ? toJid : fromJid;
 
 		// update the last message for this contact
-		rosterModel->setLastMessageForJid(contactJid, &body);
+		rosterModel->setLastMessageForJid(&contactJid, &body);
 
 		// update the last exchanged for this contact
-		updateLastExchangedOfJid(contactJid);
+		updateLastExchangedOfJid(&contactJid);
 
 		// Increase unread message counter
 		// don't add new unread message if chat is opened or we wrote the message
-		if (*contactJid != *chatPartner && !isSentByMe)
-			newUnreadMessageForJid(contactJid);
+		if (chatPartner != contactJid && !isSentByMe)
+			newUnreadMessageForJid(&contactJid);
 	}
 
 	if (message->hasEmbeddedStanza()) {

@@ -49,9 +49,9 @@ sudo apt install kaidan
 ### Compile it yourself
 
 #### Install all dependencies:
- * Qt (Core Qml Quick Sql QuickControls2) (>= 5.7.0)
- * gloox (>= 1.0.0)
- * Kirigami 2 (>= 2.0.0)
+ * [Qt](http://doc.qt.io/qt-5/build-sources.html) (Core Qml Quick Sql QuickControls2) (>= 5.7.0)
+ * [gloox](https://camaya.net/gloox/download/) (>= 1.0.10)
+ * [Kirigami 2](https://phabricator.kde.org/source/kirigami/) (>= 2.0.0)
 
 Build only dependencies:
  * A C++ compiler
@@ -60,6 +60,7 @@ Build only dependencies:
  * Git (if you don't want to use tarballs/zips from github)
 
 ##### On Debian Stretch or Sid do the following:
+
 ```bash
 sudo apt install apt-transport-https git-core cmake build-essential zlib1g-dev \
   libgloox-dev libnotify-bin libqt5quick5 libqt5quickcontrols2-5 libqt5quickwidgets5 \

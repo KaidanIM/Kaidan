@@ -31,7 +31,7 @@ Kaidan is *not* finished yet, so don't expect it working as well as a finished c
 
 ### Debian Stretch based systems
 
-Add our apt repository to your system
+Add our APT repository to your system
 
 ```
 sudo apt-get install apt-transport-https software-properties-common dirmngr gnupg
@@ -40,9 +40,11 @@ sudo apt-key adv --keyserver hkp://pgp.mit.edu --recv-key "210EB0BCA70439F0"
 sudo apt-get update
 ```
 
-Then install Kaidan
+Then you can install Kaidan
 
- `sudo apt-get install kaidan`
+```bash
+sudo apt-get install kaidan
+```
 
 ### Compile it yourself
 
@@ -65,17 +67,21 @@ sudo apt-get install apt-transport-https git-core cmake build-essential zlib1g-d
   qtquickcontrols2-5-dev
 ```
 
-Debian currently has no Kirigami2 packages, so we have to install them from external sources:
- ```bash
- sudo apt-add-repository "deb https://raw.githubusercontent.com/kaidanim/packages/master sid main"
- sudo apt-key adv --keyserver hkp://pgp.mit.edu --recv-key "210EB0BCA70439F0"
- sudo apt-get update
- sudo apt-get install kirigami2-dev
+Debian currently has no Kirigami2 packages, so we have to install them from our external sources:
+
+```bash
+sudo apt-get install apt-transport-https software-properties-common dirmngr gnupg
+sudo apt-add-repository "deb https://raw.githubusercontent.com/kaidanim/packages/master sid main"
+sudo apt-key adv --keyserver hkp://pgp.mit.edu --recv-key "210EB0BCA70439F0"
+sudo apt-get update
+sudo apt-get install kirigami2-dev
  ```
 
 #### Get the source code:
 
-`git clone https://github.com/kaidanim/kaidan`
+```bash
+git clone https://github.com/kaidanim/kaidan
+```
 
 #### Finally compile it:
 
@@ -87,11 +93,15 @@ make -j$(nproc)
 
 #### Now you can run Kaidan:
 
-`./kaidan`
+```bash
+./kaidan
+```
 
 #### If you like it, install it by:
 
- * `sudo make install`
+ ```bash
+ sudo make install
+ ```
 
 ----
 

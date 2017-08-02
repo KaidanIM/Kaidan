@@ -34,16 +34,16 @@ Kaidan is *not* finished yet, so don't expect it working as well as a finished c
 Add our APT repository to your system
 
 ```
-sudo apt-get install apt-transport-https software-properties-common dirmngr gnupg
+sudo apt install apt-transport-https software-properties-common dirmngr gnupg
 sudo apt-add-repository "deb https://raw.githubusercontent.com/kaidanim/packages/master stretch main"
 sudo apt-key adv --keyserver hkp://pgp.mit.edu --recv-key "210EB0BCA70439F0"
-sudo apt-get update
+sudo apt update
 ```
 
 Then you can install Kaidan
 
 ```bash
-sudo apt-get install kaidan
+sudo apt install kaidan
 ```
 
 ### Compile it yourself
@@ -61,7 +61,7 @@ Build only dependencies:
 
 ##### On Debian Stretch or Sid do the following:
 ```bash
-sudo apt-get install apt-transport-https git-core cmake build-essential zlib1g-dev \
+sudo apt install apt-transport-https git-core cmake build-essential zlib1g-dev \
   libgloox-dev libnotify-bin libqt5quick5 libqt5quickcontrols2-5 libqt5quickwidgets5 \
   libqt5qml5 libqt5gui5 libqt5core5a qtdeclarative5-dev qttools5-dev qt5-default \
   qtquickcontrols2-5-dev
@@ -70,11 +70,11 @@ sudo apt-get install apt-transport-https git-core cmake build-essential zlib1g-d
 Debian currently has no Kirigami2 packages, so we have to install them from our external sources:
 
 ```bash
-sudo apt-get install apt-transport-https software-properties-common dirmngr gnupg
+sudo apt install apt-transport-https software-properties-common dirmngr gnupg
 sudo apt-add-repository "deb https://raw.githubusercontent.com/kaidanim/packages/master sid main"
 sudo apt-key adv --keyserver hkp://pgp.mit.edu --recv-key "210EB0BCA70439F0"
-sudo apt-get update
-sudo apt-get install kirigami2-dev
+sudo apt update
+sudo apt install kirigami2-dev
  ```
 
 #### Get the source code:

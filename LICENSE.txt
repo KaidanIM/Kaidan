@@ -39,6 +39,9 @@ Copyright (C) 2016-2017 Ilya Bizyaev <bizyaev.game@yandex.ru> (CC BY-SA 4.0):
   misc/kaidan.svg
   misc/kaidan-128x128.png
 
+Copyright (C) 2017 LNJ <git@lnj.li> (CC BY-SA 4.0):
+  data/images/fallback-avatar.svg
+
 Copyright (C) 2016 MBB <mbb-mail@gmx.de> (CC BY-SA 4.0):
   data/images/banner.png
 

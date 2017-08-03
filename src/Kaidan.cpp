@@ -310,3 +310,8 @@ QString Kaidan::getVersionString()
 {
 	return QString(VERSION_STRING);
 }
+
+QString Kaidan::removeNewLinesFromString(QString input)
+{
+	return input.simplified();
+}

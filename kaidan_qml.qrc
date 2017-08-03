@@ -8,6 +8,8 @@
 		<file alias="qml/ChatPage.qml">src/qml/ChatPage.qml</file>
 		<file alias="qml/AboutPage.qml">src/qml/AboutPage.qml</file>
 		<file alias="qml/GlobalDrawer.qml">src/qml/GlobalDrawer.qml</file>
+		<file alias="qml/elements/RosterListItem.qml">src/qml/elements/RosterListItem.qml</file>
+		<file alias="qml/elements/MessageCounter.qml">src/qml/elements/MessageCounter.qml</file>
 
 		<file alias="qtquickcontrols2.conf">misc/qtquickcontrols2.conf</file>
 	</qresource>

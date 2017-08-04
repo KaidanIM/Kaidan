@@ -20,7 +20,9 @@
 
 import QtQuick 2.0
 import QtQuick.Layouts 1.3
+import QtQuick.Controls 2.0 as Controls
 import org.kde.kirigami 2.0 as Kirigami
+import "elements"
 
 Kirigami.ScrollablePage {
 	title: qsTr("Contacts")
@@ -35,41 +37,11 @@ Kirigami.ScrollablePage {
 
 	ListView {
 		verticalLayoutDirection: ListView.TopToBottom
-
 		model: kaidan.rosterModel
-
-		delegate: Kirigami.SwipeListItem {
-			id: listItem
-			height: Kirigami.Units.gridUnit * 2.5
-
-			RowLayout {
-				Kirigami.Label {
-					Layout.fillWidth: true
-					// use the Name or JID
-					text: model.name ? model.name : model.jid
-				}
-
-				Rectangle {
-					id: counterCircle
-					visible: model.unreadMessages > 0
-					Layout.preferredHeight: Kirigami.Units.gridUnit * 1.25
-					Layout.preferredWidth: Kirigami.Units.gridUnit * 1.25
-					radius: counterCircle.height * 0.5
-					color: "#4CAF50"
-
-					Text {
-						id: msgCounter
-						text: model.unreadMessages
-						color: "white"
-						anchors.centerIn: parent
-					}
-				}
-
-				// placeholder
-				Item {
-					width: Kirigami.Units.gridUnit * 2
-				}
-			}
+		delegate: RosterListItem {
+			name: model.name ? model.name : model.jid
+			lastMessage: model.lastMessage
+			unreadMessages: model.unreadMessages
 
 			onClicked: {
 				// first push the chat page
@@ -104,6 +76,7 @@ Kirigami.ScrollablePage {
 		function disconnectOpenAddContactSheet() {
 			addContactDialogRequested.disconnect(openAddContactSheet);
 		}
+
 		// open sheet when requested from drawer over signal
 		addContactDialogRequested.connect(openAddContactSheet);
 		// disconnect the open function, when the roster page is closed

@@ -36,6 +36,8 @@
 #include "MessageSessionHandler.h"
 #include "PresenceHandler.h"
 #include "ServiceDiscoveryManager.h"
+#include "VCardManager.h"
+#include "AvatarFileStorage.h"
 #include "XmlLogHandler.h"
 
 class Kaidan : public QObject, public gloox::ConnectionListener
@@ -61,6 +63,7 @@ public:
 	Q_INVOKABLE void addContact(QString jid, QString nick);
 	Q_INVOKABLE void removeContact(QString jid);
 	Q_INVOKABLE QString getResourcePath(QString);
+	Q_INVOKABLE QString getAvatarPath(QString hash);
 	Q_INVOKABLE QString getVersionString();
 	Q_INVOKABLE QString removeNewLinesFromString(QString input);
 
@@ -105,6 +108,8 @@ private:
 	MessageSessionHandler *messageSessionHandler;
 	PresenceHandler *presenceHandler;
 	ServiceDiscoveryManager *serviceDiscoveryManager;
+	VCardManager *vCardManager;
+	AvatarFileStorage *avatarStorage;
 	XmlLogHandler *xmlLogHandler;
 	QSettings *settings;
 

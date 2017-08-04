@@ -29,11 +29,12 @@
 #include <gloox/rostermanager.h>
 // Kaidan
 #include "RosterModel.h"
+#include "VCardManager.h"
 
 class RosterUpdater : public gloox::RosterListener
 {
 public:
-	RosterUpdater(RosterModel* rosterModel, gloox::RosterManager *rosterManager);
+	RosterUpdater(RosterModel* rosterModel, gloox::RosterManager *rosterManager, VCardManager *vCardManager);
 	~RosterUpdater();
 
 	// gloox::RosterListener
@@ -55,6 +56,7 @@ public:
 private:
 	RosterModel *rosterModel;
 	gloox::RosterManager *rosterManager;
+	VCardManager *vCardManager;
 };
 
 #endif // ROSTERUPDATER_H

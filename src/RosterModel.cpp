@@ -198,3 +198,20 @@ void RosterModel::setLastMessageForJid(const QString *jid, QString *message)
 
 	submit();
 }
+
+void RosterModel::setAvatarHash(const QString* jid, const QString* hash)
+{
+	QSqlQuery query(*database);
+	query.prepare(QString("UPDATE Roster SET avatarHash = '%1' WHERE jid = '%2'")
+	              .arg(*hash, *jid));
+
+	if (!query.exec()) {
+		qDebug("Failed to query database: %s", qPrintable(query.lastError().text()));
+		qDebug() << query.lastQuery();
+	}
+	if (!select()) {
+		qDebug() << "Error on select in RosterModel::setAvatarHash";
+	}
+
+	submit();
+}

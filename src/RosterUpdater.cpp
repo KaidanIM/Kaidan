@@ -28,10 +28,11 @@
 #include <QDateTime>
 #include <QDebug>
 
-RosterUpdater::RosterUpdater(RosterModel *rosterModel, gloox::RosterManager *rosterManager)
+RosterUpdater::RosterUpdater(RosterModel *rosterModel, gloox::RosterManager *rosterManager, VCardManager *vCardManager)
 {
 	this->rosterModel = rosterModel;
 	this->rosterManager = rosterManager;
+	this->vCardManager = vCardManager;
 }
 
 RosterUpdater::~RosterUpdater()
@@ -80,6 +81,8 @@ void RosterUpdater::handleRoster(const gloox::Roster &roster)
 		} else {
 			rosterModel->insertContact(jid, name);
 		}
+
+		vCardManager->fetchVCard(jid);
 	}
 }
 

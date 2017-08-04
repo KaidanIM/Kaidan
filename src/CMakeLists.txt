@@ -15,5 +15,6 @@ set(KAIDAN_SOURCES
 	${CURDIR}/Notifications.cpp
 	${CURDIR}/PresenceHandler.cpp
 	${CURDIR}/ServiceDiscoveryManager.cpp
+	${CURDIR}/VCardManager.cpp
 	${CURDIR}/XmlLogHandler.cpp
 )

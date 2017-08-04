@@ -34,6 +34,7 @@
 #include <gloox/receipt.h>
 #include <gloox/forward.h>
 #include <gloox/carbons.h>
+#include <gloox/vcardmanager.h>
 // Kaidan
 #include "RosterModel.h"
 #include "MessageModel.h"
@@ -57,6 +58,7 @@ Kaidan::Kaidan(QObject *parent) : QObject(parent)
 	messageModel = new MessageModel(database->getDatabase());
 	rosterModel = new RosterModel(database->getDatabase());
 	xmlLogHandler = new XmlLogHandler();
+	avatarStorage = new AvatarFileStorage();
 
 	// client package fetch timer
 	packageFetchTimer = new QTimer(this);
@@ -92,6 +94,7 @@ Kaidan::~Kaidan()
 	delete rosterModel;
 	delete messageModel;
 	delete database;
+	delete avatarStorage;
 	delete xmlLogHandler;
 	delete packageFetchTimer;
 	delete settings;
@@ -117,8 +120,11 @@ void Kaidan::mainConnect()
 	messageSessionHandler = new MessageSessionHandler(client, messageModel, rosterModel);
 	client->registerMessageSessionHandler(messageSessionHandler);
 
+	// VCardManager
+	vCardManager = new VCardManager(client, avatarStorage, rosterModel);
+
 	// Roster
-	rosterManager = new RosterManager(rosterModel, client);
+	rosterManager = new RosterManager(client, rosterModel, vCardManager);
 
 	// Presence Handler
 	presenceHandler = new PresenceHandler(client);
@@ -158,6 +164,7 @@ void Kaidan::clientCleanUp()
 	delete presenceHandler;
 	delete rosterManager;
 	delete messageSessionHandler;
+	delete vCardManager;
 	delete client;
 }
 
@@ -289,6 +296,11 @@ QString Kaidan::getResourcePath(QString name_)
 	// no file found
 	qWarning() << "Could NOT find media file:" << name_;
 	return QString("");
+}
+
+QString Kaidan::getAvatarPath(QString hash)
+{
+	return QString("file://") + avatarStorage->getAvatarPath(hash);
 }
 
 RosterModel* Kaidan::getRosterModel()

@@ -17,30 +17,33 @@
  *  along with Kaidan. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef ROSTERMANAGER_H
-#define ROSTERMANAGER_H
+#ifndef VCARDMANAGER_H
+#define VCARDMANAGER_H
 
 // gloox
+#include <gloox/vcardhandler.h>
+#include <gloox/vcardmanager.h>
 #include <gloox/client.h>
-#include <gloox/rostermanager.h>
 // Kaidan
+#include "AvatarFileStorage.h"
 #include "RosterModel.h"
-#include "RosterUpdater.h"
-#include "VCardManager.h"
 
-class RosterManager
+class VCardManager : public gloox::VCardHandler
 {
 public:
-	RosterManager(gloox::Client *client, RosterModel *rosterModel, VCardManager *vCardManager);
-	~RosterManager();
-
-	void addContact(const QString jid_, const QString name_);
-	void removeContact(const QString);
+	VCardManager(gloox::Client *client, AvatarFileStorage *avatarStorage, RosterModel *rosterModel);
+	~VCardManager();
+	
+	void fetchVCard(QString jid);
+	virtual void handleVCard(const gloox::JID &jid, const gloox::VCard *vcard);
+	virtual void handleVCardResult(VCardContext context, const gloox::JID &jid,
+				       gloox::StanzaError stanzaError = gloox::StanzaErrorUndefined);
 
 private:
+	gloox::Client *client;
+	gloox::VCardManager *vCardManager;
+	AvatarFileStorage *avatarStorage;
 	RosterModel *rosterModel;
-	RosterUpdater *rosterUpdater;
-	gloox::RosterManager *rosterManager;
 };
 
-#endif // ROSTERMANAGER_H
+#endif // VCARDMANAGER_H

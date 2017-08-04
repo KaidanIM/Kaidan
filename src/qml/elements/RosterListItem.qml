@@ -26,6 +26,7 @@ Kirigami.SwipeListItem {
 	property string name;
 	property string lastMessage;
 	property int unreadMessages;
+	property string avatarImagePath;
 
 	id: listItem
 	topPadding: Kirigami.Units.smallSpacing * 1.5
@@ -36,7 +37,7 @@ Kirigami.SwipeListItem {
 
 		// left side: Avatar
 		Image {
-			source: kaidan.getResourcePath("images/fallback-avatar.svg")
+			source: avatarImagePath
 			fillMode: Image.PreserveAspectFit
 			Layout.preferredHeight: parent.height
 			Layout.preferredWidth: parent.height

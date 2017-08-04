@@ -19,13 +19,13 @@
 
 #include "RosterManager.h"
 
-RosterManager::RosterManager(RosterModel* rosterModel, gloox::Client *client)
+RosterManager::RosterManager(gloox::Client *client, RosterModel* rosterModel, VCardManager *vCardManager)
 {
 	this->rosterModel = rosterModel;
 	rosterManager = client->rosterManager();
 
 	// register the roster updater as roster listener
-	rosterUpdater = new RosterUpdater(rosterModel, rosterManager);
+	rosterUpdater = new RosterUpdater(rosterModel, rosterManager, vCardManager);
 	rosterManager->registerRosterListener(rosterUpdater);
 }
 

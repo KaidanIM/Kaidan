@@ -151,16 +151,16 @@ void Database::createNewDatabase()
 	//
 
 	if (!query.exec("CREATE TABLE IF NOT EXISTS 'Roster' ("
-	                "'jid' TEXT NOT NULL,"
-	                "'name' TEXT NOT NULL,"
-	                "'lastExchanged' TEXT NOT NULL,"
-	                "'unreadMessages' INTEGER,"
-	                "'lastMessage' TEXT,"
-	                "'lastOnline' TEXT,"     // < UNUSED v
-	                "'activity' TEXT,"
-	                "'status' TEXT,"
-	                "'mood' TEXT,"
-					"'avatarHash' TEXT"      // < UNUSED ^
+			"'jid' TEXT NOT NULL,"
+			"'name' TEXT NOT NULL,"
+			"'lastExchanged' TEXT NOT NULL,"
+			"'unreadMessages' INTEGER,"
+			"'lastMessage' TEXT,"
+			"'lastOnline' TEXT,"     // < UNUSED v
+			"'activity' TEXT,"
+			"'status' TEXT,"
+			"'mood' TEXT,"           // < UNUSED ^
+			"'avatarHash' TEXT"
 	                ")"))
 	{
 		qFatal("Failed to query database: %s", qPrintable(query.lastError().text()));

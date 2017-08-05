@@ -35,6 +35,7 @@
 #include <gloox/forward.h>
 #include <gloox/carbons.h>
 #include <gloox/vcardmanager.h>
+#include <gloox/vcardupdate.h>
 // Kaidan
 #include "RosterModel.h"
 #include "MessageModel.h"
@@ -128,17 +129,16 @@ void Kaidan::mainConnect()
 
 	// Presence Handler
 	presenceHandler = new PresenceHandler(client);
-	client->registerPresenceHandler(presenceHandler);
 
 	// Service Discovery
 	serviceDiscoveryManager = new ServiceDiscoveryManager(client, client->disco());
 
 	// Register Stanza Extensions
 	client->registerStanzaExtension(new gloox::Receipt(gloox::Receipt::Request));
-	client->registerStanzaExtension(new gloox::Receipt(gloox::Receipt::Received));
 	client->registerStanzaExtension(new gloox::DelayedDelivery(gloox::JID(), std::string("")));
 	client->registerStanzaExtension(new gloox::Forward());
 	client->registerStanzaExtension(new gloox::Carbons());
+	client->registerStanzaExtension(new gloox::VCardUpdate());
 
 	// Logging
 	client->logInstance().registerLogHandler(gloox::LogLevelDebug,

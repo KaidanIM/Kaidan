@@ -26,6 +26,11 @@
 
 AvatarFileStorage::AvatarFileStorage()
 {
+	// create avatar directory, if it doesn't exists
+	QDir cacheDir(QStandardPaths::writableLocation(QStandardPaths::CacheLocation));
+	if (!cacheDir.exists("avatars"))
+		cacheDir.mkpath("avatars");
+
 	// search for the avatar list file (hash <-> jid)
 	QString avatarFilePath = getAvatarPath("avatar_list.sha3-256");
 

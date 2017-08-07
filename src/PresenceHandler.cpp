@@ -22,6 +22,7 @@
 PresenceHandler::PresenceHandler(gloox::Client *client)
 {
 	this->client = client;
+	client->registerPresenceHandler(this);
 }
 
 PresenceHandler::~PresenceHandler()

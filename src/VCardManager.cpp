@@ -18,6 +18,7 @@
  */
 
 #include "VCardManager.h"
+#include <gloox/vcardupdate.h>
 
 VCardManager::VCardManager(gloox::Client *client, AvatarFileStorage *avatarStorage,
 			   RosterModel *rosterModel)
@@ -26,6 +27,7 @@ VCardManager::VCardManager(gloox::Client *client, AvatarFileStorage *avatarStora
 	this->vCardManager = new gloox::VCardManager(client);
 	this->avatarStorage = avatarStorage;
 	this->rosterModel = rosterModel;
+	client->registerPresenceHandler(this);
 }
 
 VCardManager::~VCardManager()
@@ -55,4 +57,12 @@ void VCardManager::handleVCard(const gloox::JID& jid, const gloox::VCard* vcard)
 
 void VCardManager::handleVCardResult(VCardContext context, const gloox::JID &jid, gloox::StanzaError stanzaError)
 {
+}
+
+void VCardManager::handlePresence(const gloox::Presence& presence)
+{
+	const gloox::VCardUpdate *vcupdate = presence.findExtension<gloox::VCardUpdate>
+		(gloox::ExtVCardUpdate);
+	if (vcupdate && vcupdate->hash().size() > 0)
+		fetchVCard(QString::fromStdString(presence.from().bare()));
 }

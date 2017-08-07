@@ -21,14 +21,15 @@
 #define VCARDMANAGER_H
 
 // gloox
+#include <gloox/client.h>
 #include <gloox/vcardhandler.h>
 #include <gloox/vcardmanager.h>
-#include <gloox/client.h>
+#include <gloox/presencehandler.h>
 // Kaidan
 #include "AvatarFileStorage.h"
 #include "RosterModel.h"
 
-class VCardManager : public gloox::VCardHandler
+class VCardManager : public gloox::VCardHandler, public gloox::PresenceHandler
 {
 public:
 	VCardManager(gloox::Client *client, AvatarFileStorage *avatarStorage, RosterModel *rosterModel);
@@ -38,6 +39,7 @@ public:
 	virtual void handleVCard(const gloox::JID &jid, const gloox::VCard *vcard);
 	virtual void handleVCardResult(VCardContext context, const gloox::JID &jid,
 				       gloox::StanzaError stanzaError = gloox::StanzaErrorUndefined);
+	virtual void handlePresence(const gloox::Presence &presence);
 
 private:
 	gloox::Client *client;

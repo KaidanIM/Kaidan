@@ -28,6 +28,7 @@ VCardManager::VCardManager(gloox::Client *client, AvatarFileStorage *avatarStora
 	this->avatarStorage = avatarStorage;
 	this->rosterModel = rosterModel;
 	client->registerPresenceHandler(this);
+	client->registerConnectionListener(this);
 }
 
 VCardManager::~VCardManager()
@@ -65,4 +66,18 @@ void VCardManager::handlePresence(const gloox::Presence& presence)
 		(gloox::ExtVCardUpdate);
 	if (vcupdate && vcupdate->hash().size() > 0)
 		fetchVCard(QString::fromStdString(presence.from().bare()));
+}
+
+void VCardManager::onConnect()
+{
+	vCardManager->fetchVCard(client->jid().bare(), this);
+}
+
+void VCardManager::onDisconnect(gloox::ConnectionError error)
+{
+}
+
+bool VCardManager::onTLSConnect(const gloox::CertInfo& info)
+{
+	return true;
 }

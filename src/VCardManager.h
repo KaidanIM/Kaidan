@@ -25,11 +25,13 @@
 #include <gloox/vcardhandler.h>
 #include <gloox/vcardmanager.h>
 #include <gloox/presencehandler.h>
+#include <gloox/connectionlistener.h>
 // Kaidan
 #include "AvatarFileStorage.h"
 #include "RosterModel.h"
 
-class VCardManager : public gloox::VCardHandler, public gloox::PresenceHandler
+class VCardManager : public gloox::VCardHandler, public gloox::PresenceHandler,
+	public gloox::ConnectionListener
 {
 public:
 	VCardManager(gloox::Client *client, AvatarFileStorage *avatarStorage, RosterModel *rosterModel);
@@ -40,6 +42,9 @@ public:
 	virtual void handleVCardResult(VCardContext context, const gloox::JID &jid,
 				       gloox::StanzaError stanzaError = gloox::StanzaErrorUndefined);
 	virtual void handlePresence(const gloox::Presence &presence);
+	virtual void onConnect();
+	virtual void onDisconnect(gloox::ConnectionError error);
+	virtual bool onTLSConnect(const gloox::CertInfo &info);
 
 private:
 	gloox::Client *client;

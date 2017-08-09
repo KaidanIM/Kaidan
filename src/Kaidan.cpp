@@ -60,6 +60,9 @@ Kaidan::Kaidan(QObject *parent) : QObject(parent)
 	rosterModel = new RosterModel(database->getDatabase());
 	xmlLogHandler = new XmlLogHandler();
 	avatarStorage = new AvatarFileStorage();
+	// Connect the avatar changed signal of the avatarStorage with the NOTIFY signal
+	// of the Q_PROPERTY for the avatar storage (so all avatars are updated in QML)
+	connect(avatarStorage, &AvatarFileStorage::avatarIdsChanged, this, &Kaidan::avatarStorageChanged);
 
 	// client package fetch timer
 	packageFetchTimer = new QTimer(this);
@@ -311,6 +314,11 @@ RosterModel* Kaidan::getRosterModel()
 MessageModel* Kaidan::getMessageModel()
 {
 	return messageModel;
+}
+
+AvatarFileStorage* Kaidan::getAvatarStorage()
+{
+	return avatarStorage;
 }
 
 bool Kaidan::getConnectionState() const

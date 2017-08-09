@@ -46,6 +46,7 @@ class Kaidan : public QObject, public gloox::ConnectionListener
 
 	Q_PROPERTY(RosterModel* rosterModel READ getRosterModel NOTIFY rosterModelChanged)
 	Q_PROPERTY(MessageModel* messageModel READ getMessageModel NOTIFY messageModelChanged)
+	Q_PROPERTY(AvatarFileStorage* avatarStorage READ getAvatarStorage NOTIFY avatarStorageChanged)
 	Q_PROPERTY(bool connectionState READ getConnectionState NOTIFY connectionStateConnected NOTIFY connectionStateDisconnected)
 	Q_PROPERTY(QString jid READ getJid WRITE setJid NOTIFY jidChanged)
 	Q_PROPERTY(QString jidResource READ getJidResource WRITE setJidResource NOTIFY jidResourceChanged)
@@ -78,6 +79,7 @@ public:
 	void setChatPartner(QString);
 	RosterModel* getRosterModel();
 	MessageModel* getMessageModel();
+	AvatarFileStorage* getAvatarStorage();
 
 	virtual void onConnect();
 	virtual void onDisconnect(gloox::ConnectionError error);
@@ -86,6 +88,7 @@ public:
 signals:
 	void rosterModelChanged();
 	void messageModelChanged();
+	void avatarStorageChanged();
 	void vCardControllerChanged();
 	void connectionStateConnected();
 	void connectionStateDisconnected();

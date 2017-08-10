@@ -128,3 +128,4 @@ install_manifest.txt
 ################# Other #######################
 
 *.swp
+.vscode/

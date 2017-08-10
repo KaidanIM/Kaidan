@@ -22,6 +22,7 @@ import QtQuick 2.6
 import QtQuick.Controls 2.0 as Controls
 import QtQuick.Layouts 1.3
 import org.kde.kirigami 2.0 as Kirigami
+import "elements"
 
 Kirigami.Page {
 	id: root
@@ -67,49 +68,9 @@ Kirigami.Page {
 			// connect the database
 			model: kaidan.messageModel
 
-			delegate: Row {
-				readonly property bool sentByMe: model.recipient !== kaidan.jid
-
-				anchors.right: sentByMe ? parent.right : undefined
-				spacing: 6
-
-				Rectangle {
-					id: avatar
-
-					width: 40
-					height: 40
-					radius: width * 0.5
-
-					color: "grey"
-					visible: !sentByMe
-				}
-
-				Rectangle {
-					width: messageText.width + 12
-					height: messageText.height + 6
-
-					radius: 2
-					border.width: 1
-					border.color: "#E1DFDF"
-
-					color: sentByMe ? "lightgrey" : "steelblue"
-
-					Kirigami.Label {
-						id: messageText
-
-						anchors.centerIn: parent
-
-						text: model.message
-						wrapMode: Text.Wrap
-						color: sentByMe ? "black" : "white"
-					}
-
-					Component.onCompleted: {
-						if (messageText.paintedWidth > 190) {
-							messageText.width = 190
-						}
-					}
-				}
+			delegate: ChatMessage {
+				sentByMe: model.recipient !== kaidan.jid
+				messageBody: model.message
 			}
 		}
 

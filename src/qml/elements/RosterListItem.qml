@@ -17,7 +17,7 @@
  *  along with Kaidan. If not, see <http://www.gnu.org/licenses/>.
  */
 
-import QtQuick 2.0
+import QtQuick 2.3
 import QtQuick.Layouts 1.3
 import QtQuick.Controls 2.0 as Controls
 import org.kde.kirigami 2.0 as Kirigami
@@ -41,6 +41,7 @@ Kirigami.SwipeListItem {
 			fillMode: Image.PreserveAspectFit
 			Layout.preferredHeight: parent.height
 			Layout.preferredWidth: parent.height
+			mipmap: true
 		}
 		// right side
 		ColumnLayout {

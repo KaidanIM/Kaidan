@@ -71,6 +71,8 @@ Kirigami.Page {
 			delegate: ChatMessage {
 				sentByMe: model.recipient !== kaidan.jid
 				messageBody: model.message
+				dateTime: new Date(timestamp)
+				isRead: model.isDelivered
 			}
 		}
 

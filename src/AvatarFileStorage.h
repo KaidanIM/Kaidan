@@ -20,13 +20,16 @@
 #ifndef AVATARFILESTORAGE_H
 #define AVATARFILESTORAGE_H
 
+#include <QObject>
 #include <QString>
 #include <QMap>
 
-class AvatarFileStorage
+class AvatarFileStorage : public QObject
 {
+	Q_OBJECT
+
 public:
-	AvatarFileStorage();
+	AvatarFileStorage(QObject *parent = 0);
 	~AvatarFileStorage();
 
 	struct AddAvatarResult {
@@ -38,11 +41,16 @@ public:
 		bool newWritten = false;
 	};
 
-	bool hasAvatarHash(const QString &hash) const;
 	AddAvatarResult addAvatar(const QString &jid, const QByteArray &avatar);
+	QString getAvatarPathOfJid(const QString &jid) const;
+	bool hasAvatarHash(const QString &hash) const;
 	QString getAvatarPath(const QString &hash) const;
-	QString getAvatarPathForJid(const QString &jid) const;
-	QString getHashForJid(const QString &jid) const;
+
+	Q_INVOKABLE QString getHashOfJid(const QString &jid) const;
+	Q_INVOKABLE QString getAvatarUrl(const QString &jid) const;
+
+signals:
+	void avatarIdsChanged();
 
 private:
 	void saveAvatarsFile();

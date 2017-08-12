@@ -24,7 +24,7 @@
 #include <QCryptographicHash>
 #include <QDebug>
 
-AvatarFileStorage::AvatarFileStorage()
+AvatarFileStorage::AvatarFileStorage(QObject *parent) : QObject(parent)
 {
 	// create avatar directory, if it doesn't exists
 	QDir cacheDir(QStandardPaths::writableLocation(QStandardPaths::CacheLocation));
@@ -81,11 +81,18 @@ AvatarFileStorage::AddAvatarResult AvatarFileStorage::addAvatar(const QString &j
 	if (jidAvatarMap[jid] != result.hash) {
 		jidAvatarMap[jid] = result.hash;
 		result.hasChanged = true;
+		emit avatarIdsChanged();
 	}
 
 	// abort if the avatar with this hash is already saved
-	if (hasAvatarHash(result.hash))
+	// only update GUI, if avatar really has changed
+	bool hasAvatar = hasAvatarHash(result.hash);
+	if (hasAvatar && result.hasChanged) {
+		emit avatarIdsChanged();
 		return result;
+	} else if (hasAvatar) {
+		return result;
+	}
 
 	// write the avatar to disk:
 	// get the writable cache location for writing
@@ -102,6 +109,7 @@ AvatarFileStorage::AddAvatarResult AvatarFileStorage::addAvatar(const QString &j
 	// mark that the avatar is new
 	result.newWritten = true;
 
+	emit avatarIdsChanged();
 	return result;
 }
 
@@ -111,14 +119,19 @@ QString AvatarFileStorage::getAvatarPath(const QString &hash) const
 		QDir::separator() + hash, QStandardPaths::LocateFile);
 }
 
-QString AvatarFileStorage::getHashForJid(const QString& jid) const
+QString AvatarFileStorage::getHashOfJid(const QString& jid) const
 {
 	return jidAvatarMap[jid];
 }
 
-QString AvatarFileStorage::getAvatarPathForJid(const QString& jid) const
+QString AvatarFileStorage::getAvatarPathOfJid(const QString& jid) const
 {
-	return getAvatarPath(getHashForJid(jid));
+	return getAvatarPath(getHashOfJid(jid));
+}
+
+QString AvatarFileStorage::getAvatarUrl(const QString &jid) const
+{
+	return QString("file://") + getAvatarPathOfJid(jid);
 }
 
 bool AvatarFileStorage::hasAvatarHash(const QString& hash) const

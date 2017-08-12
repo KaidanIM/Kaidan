@@ -42,7 +42,9 @@ Kirigami.ScrollablePage {
 			name: model.name ? model.name : model.jid
 			lastMessage: model.lastMessage
 			unreadMessages: model.unreadMessages
-			avatarImagePath: model.avatarHash ? kaidan.getAvatarPath(model.avatarHash) : kaidan.getResourcePath("images/fallback-avatar.svg")
+			avatarImagePath: kaidan.avatarStorage.getHashOfJid(model.jid) != "" ?
+					 kaidan.avatarStorage.getAvatarUrl(model.jid) :
+					 kaidan.getResourcePath("images/fallback-avatar.svg")
 
 			onClicked: {
 				// first push the chat page

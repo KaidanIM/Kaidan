@@ -1,5 +1,15 @@
 # Changelog
 
+### Version 0.3.0 (UNRELEASED)
+ * Added XEP-0280: Message Carbons (#117) (@LNJ2)
+ * Added XEP-0054/XEP-0153: VCard-based avatars (#73, #105, #119) (@LNJ2)
+ * Added file storage for simply caching all avatars (@LNJ2)
+ * New roster design - showing round avatars and last message (#118) (@LNJ2)
+ * New chat page design - showing time, delivery status and round avatars (#123) (@LNJ2)
+ * Switched to XMPP client library "gloox" (#114) (@LNJ2)
+ * Rewritten most of the back-end for gloox and partialy also restructured it (#114) (@LNJ2)
+ * (Re)written new LogHandler for gloox (Swiften had this already included) (#114) (@LNJ2)
+
 ### Version 0.2.3 (released on 19.06.2017)
 Fixes:
  * LoginPage: Remove material shadow (#113) (@JBBgameich)

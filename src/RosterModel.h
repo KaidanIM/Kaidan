@@ -45,7 +45,6 @@ public:
 	int getUnreadMessageCountOfJid(const QString* jid_);
 	void setUnreadMessageCountOfJid(const QString* jid_, const int unreadMessageCount);
 	void setLastMessageForJid(const QString *jid, QString *message);
-	void setAvatarHash(const QString *jid, const QString *hash);
 
 private:
 	QSqlDatabase *database;

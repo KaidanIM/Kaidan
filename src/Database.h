@@ -42,6 +42,7 @@ private:
 	void createNewDatabase();
 	void convertDatabaseToV2();
 	void convertDatabaseToV3();
+	void convertDatabaseToV4();
 
 	QSqlDatabase database;
 	int version;

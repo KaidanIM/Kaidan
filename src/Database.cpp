@@ -30,7 +30,7 @@
 #include <QSqlQuery>
 #include <QSqlRecord>
 
-static const unsigned int DATABASE_LATEST_VERSION = 3;
+static const unsigned int DATABASE_LATEST_VERSION = 4;
 static const char *DATABASE_TABLE_INFO = "dbinfo";
 static const char *DATABASE_TABLE_MESSAGES = "Messages";
 static const char *DATABASE_TABLE_ROSTER = "Roster";
@@ -120,6 +120,8 @@ void Database::convertDatabase()
 		convertDatabaseToV2(); version = 2;
 	case 2:
 		convertDatabaseToV3(); version = 3;
+	case 3:
+		convertDatabaseToV4(); version = 4;
 		// only break on last convertion step, to not enter default (!)
 		break;
 	default:
@@ -160,7 +162,6 @@ void Database::createNewDatabase()
 			"'activity' TEXT,"
 			"'status' TEXT,"
 			"'mood' TEXT,"           // < UNUSED ^
-			"'avatarHash' TEXT"
 	                ")"))
 	{
 		qFatal("Failed to query database: %s", qPrintable(query.lastError().text()));
@@ -215,7 +216,49 @@ void Database::convertDatabaseToV3()
 {
 	QSqlQuery query(database);
 	query.prepare("ALTER TABLE Roster ADD avatarHash TEXT");
+	if (!query.exec())
+		qFatal("Failed to query database: %s", qPrintable(query.lastError().text()));
+}
+
+void Database::convertDatabaseToV4()
+{
+	QSqlQuery query(database);
+	// SQLite doesn't support the ALTER TABLE drop columns feature, so we have to use a workaround.
+	// we copy all rows into a back-up table (but without `avatarHash`), and then delete the old table
+	// and copy everything to the normal table again
+	query.prepare("CREATE TEMPORARY TABLE roster_backup(jid,name,lastExchanged,"
+		"unreadMessages,lastMessage,lastOnline,activity,status,mood);");
 	if (!query.exec()) {
+		qDebug() << query.executedQuery();
+		qFatal("Failed to query database: %s", qPrintable(query.lastError().text()));
+	}
+	query.prepare("INSERT INTO roster_backup SELECT jid,name,lastExchanged,unreadMessages,"
+		"lastMessage,lastOnline,activity,status,mood FROM Roster;");
+	if (!query.exec()) {
+		qDebug() << query.executedQuery();
+		qFatal("Failed to query database: %s", qPrintable(query.lastError().text()));
+	}
+	query.prepare("DROP TABLE Roster;");
+	if (!query.exec()) {
+		qDebug() << query.executedQuery();
+		qFatal("Failed to query database: %s", qPrintable(query.lastError().text()));
+	}
+	query.prepare("CREATE TABLE Roster('jid' TEXT NOT NULL,'name' TEXT NOT NULL,"
+		"'lastExchanged' TEXT NOT NULL,'unreadMessages' INTEGER,'lastMessage' TEXT,"
+		"'lastOnline' TEXT,'activity' TEXT,'status' TEXT,'mood' TEXT);");
+	if (!query.exec()) {
+		qDebug() << query.executedQuery();
+		qFatal("Failed to query database: %s", qPrintable(query.lastError().text()));
+	}
+	query.prepare("INSERT INTO Roster SELECT jid,name,lastExchanged,unreadMessages,"
+		"lastMessage,lastOnline,activity,status,mood FROM Roster_backup;");
+	if (!query.exec()) {
+		qDebug() << query.executedQuery();
+		qFatal("Failed to query database: %s", qPrintable(query.lastError().text()));
+	}
+	query.prepare("DROP TABLE Roster_backup;");
+	if (!query.exec()) {
+		qDebug() << query.executedQuery();
 		qFatal("Failed to query database: %s", qPrintable(query.lastError().text()));
 	}
 }

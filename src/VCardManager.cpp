@@ -48,12 +48,7 @@ void VCardManager::handleVCard(const gloox::JID& jid, const gloox::VCard* vcard)
 		return;
 
 	QByteArray avatarBytes(avatarString.c_str(), avatarString.length());
-	QString jid_ = QString::fromStdString(jid.bare());
-	AvatarFileStorage::AddAvatarResult result = avatarStorage->addAvatar(jid_, avatarBytes);
-
-	// if the avatar for this jid has been changed, also change it in the DB
-	if (result.hasChanged)
-		rosterModel->setAvatarHash(&jid_, &result.hash);
+	avatarStorage->addAvatar(QString::fromStdString(jid.bare()), avatarBytes);
 }
 
 void VCardManager::handleVCardResult(VCardContext context, const gloox::JID &jid, gloox::StanzaError stanzaError)

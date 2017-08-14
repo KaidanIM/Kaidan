@@ -27,19 +27,18 @@ Row {
 	property string messageBody: ""
 	property date dateTime: new Date()
 	property bool isRead: false
+	property string recipientAvatarUrl: ""
 
 	anchors.right: sentByMe ? parent.right : undefined
 	spacing: Kirigami.Units.gridUnit * 0.5
 	layoutDirection: sentByMe ? Qt.RightToLeft : Qt.LeftToRight
 
-	Rectangle {
+	RoundImage {
 		id: avatar
-
-		width: Kirigami.Units.gridUnit * 2
-		height: Kirigami.Units.gridUnit * 2
-		radius: width * 0.5
 		visible: !sentByMe
-		color: "grey"
+		width: Kirigami.Units.gridUnit * 2.2
+		height: Kirigami.Units.gridUnit * 2.2
+		source: recipientAvatarUrl
 	}
 
 	Item {

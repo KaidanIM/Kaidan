@@ -36,8 +36,9 @@ Kirigami.SwipeListItem {
 		spacing: Kirigami.Units.gridUnit * 0.5
 
 		// left side: Avatar
-		Image {
+		RoundImage {
 			source: avatarImagePath
+			width: height
 			fillMode: Image.PreserveAspectFit
 			Layout.preferredHeight: parent.height
 			Layout.preferredWidth: parent.height

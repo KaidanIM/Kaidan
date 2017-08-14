@@ -64,7 +64,6 @@ public:
 	Q_INVOKABLE void addContact(QString jid, QString nick);
 	Q_INVOKABLE void removeContact(QString jid);
 	Q_INVOKABLE QString getResourcePath(QString);
-	Q_INVOKABLE QString getAvatarPath(QString hash);
 	Q_INVOKABLE QString getVersionString();
 	Q_INVOKABLE QString removeNewLinesFromString(QString input);
 

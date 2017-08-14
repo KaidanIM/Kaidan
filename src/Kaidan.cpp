@@ -301,11 +301,6 @@ QString Kaidan::getResourcePath(QString name_)
 	return QString("");
 }
 
-QString Kaidan::getAvatarPath(QString hash)
-{
-	return QString("file://") + avatarStorage->getAvatarPath(hash);
-}
-
 RosterModel* Kaidan::getRosterModel()
 {
 	return rosterModel;

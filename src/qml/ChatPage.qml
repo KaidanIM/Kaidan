@@ -73,6 +73,9 @@ Kirigami.Page {
 				messageBody: model.message
 				dateTime: new Date(timestamp)
 				isRead: model.isDelivered
+				recipientAvatarUrl: kaidan.avatarStorage.getHashOfJid(recipient) != "" ?
+						    kaidan.avatarStorage.getAvatarUrl(recipient) :
+						    kaidan.getResourcePath("images/fallback-avatar.svg")
 			}
 		}
 

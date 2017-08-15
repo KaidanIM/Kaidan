@@ -1,6 +1,6 @@
 # Changelog
 
-### Version 0.3.0 (UNRELEASED)
+### Version 0.3.0 (released on 15.08.2017)
  * Added XEP-0280: Message Carbons (#117) (@LNJ2)
  * Added XEP-0054/XEP-0153: VCard-based avatars (#73, #105, #119) (@LNJ2)
  * Added file storage for simply caching all avatars (@LNJ2)

@@ -24,6 +24,9 @@ This will send a new request to add a new contact to the roster.
 * `name = string`: The preferred nickname of the contact in the roster, can be
 empty ("").
 
+### `kaidan.avatarStorage = AvatarFileStorage`
+An AvatarStorage object to load automatically updating avatars.
+
 ### `kaidan.connectionState = bool`
 Is true, when connected to a server.
 
@@ -57,6 +60,10 @@ Will return true, if there is no account data to use for connecting.
 This will send a request to remove the contact that has the given `jid`.
 * `jid = string`: The bare JID of the contact to remove.
 
+### `kaidan.removeNewLinesFromString(input)`
+This will use the QString::simplify function to remove all unneeded spaces, new lines, etc.
+Will return the simplified string.
+
 ### `kaidan.rosterModel = RosterModel`
 The model for displaying the roster contacts from the SQLite database. It can be
 used in ListViews.
@@ -81,6 +88,17 @@ Signal, emitted when Kaidan has connected to a XMPP server.
 
 ### `kaidan.connectionStateDisconnected()`
 Signal, emitted when Kaidan was disconnected or a try to connect wasn't successful.
+
+
+## AvatarFileStorage
+This is a simple storage to cache avatars. They will be updated automatically, whenever
+an avatar has been changed.
+
+### `getHashOfJid(jid)`
+Will return a SHA3-256 hex hash string or an empty string if no avatar set for this JID.
+
+### `getAvatarUrl(jid)`
+Will return a file:// url to the local file of the JID's avatar.
 
 
 ## MessageModel

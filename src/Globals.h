@@ -28,26 +28,21 @@
  *  along with Kaidan.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef XMLLOGHANDLER_H
-#define XMLLOGHANDLER_H
+#ifndef GLOBALS_H
+#define GLOBALS_H
 
-#include <gloox/loghandler.h>
+/**
+ * Application information
+ */
+#define APPLICATION_ID "io.github.kaidanim"
+#define APPLICATION_NAME "kaidan"
+#define APPLICATION_DISPLAY_NAME "Kaidan"
+#define APPLICATION_DESCRIPTION "A simple, user-friendly Jabber/XMPP client"
+#define VERSION_STRING "0.4.0-dev"
 
-class QString;
-namespace gloox {
-	class Client;
-}
+/**
+ * Map of JIDs to contact names
+ */
+typedef QMap<QString, QString> ContactMap;
 
-class XmlLogHandler : public gloox::LogHandler
-{
-public:
-	XmlLogHandler(gloox::Client *client);
-	~XmlLogHandler();
-	virtual void handleLog(gloox::LogLevel level, gloox::LogArea area, const std::string &message);
-	static QString makeXmlPretty(QString inputXml);
-
-private:
-	gloox::Client *client;
-};
-
-#endif // XMLLOGHANDLER_H
+#endif // GLOBALS_H

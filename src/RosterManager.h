@@ -31,6 +31,8 @@
 #ifndef ROSTERMANAGER_H
 #define ROSTERMANAGER_H
 
+// Qt
+#include <QObject>
 // gloox
 #include <gloox/client.h>
 #include <gloox/rostermanager.h>
@@ -39,14 +41,18 @@
 #include "RosterUpdater.h"
 #include "VCardManager.h"
 
-class RosterManager
+class RosterManager : public QObject
 {
+	Q_OBJECT
+
 public:
-	RosterManager(gloox::Client *client, RosterModel *rosterModel, VCardManager *vCardManager);
+	RosterManager(gloox::Client *client, RosterModel *rosterModel,
+	              VCardManager *vCardManager, QObject *parent = nullptr);
 	~RosterManager();
 
-	void addContact(const QString jid_, const QString name_);
-	void removeContact(const QString);
+public slots:
+	void addContact(const QString jid, const QString name);
+	void removeContact(const QString jid);
 
 private:
 	RosterModel *rosterModel;

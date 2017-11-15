@@ -30,7 +30,8 @@
 
 #include "RosterManager.h"
 
-RosterManager::RosterManager(gloox::Client *client, RosterModel* rosterModel, VCardManager *vCardManager)
+RosterManager::RosterManager(gloox::Client *client, RosterModel* rosterModel,
+                             VCardManager *vCardManager, QObject *parent) : QObject(parent)
 {
 	this->rosterModel = rosterModel;
 	rosterManager = client->rosterManager();
@@ -56,8 +57,10 @@ void RosterManager::addContact(const QString jid, const QString nick)
 void RosterManager::removeContact(const QString jid)
 {
 	// cancel possible subscriptions
-	rosterManager->cancel(jid.toStdString()); // don't send our presence anymore
-	rosterManager->unsubscribe(jid.toStdString()); // don't receive the JID's presence anymore
+	// don't send our presence anymore
+	rosterManager->cancel(jid.toStdString());
+	// don't receive the JID's presence anymore
+	rosterManager->unsubscribe(jid.toStdString());
 	// remove contact from roster
 	rosterManager->remove(jid.toStdString());
 }

@@ -35,7 +35,6 @@ import org.kde.kirigami 2.0 as Kirigami
 
 Kirigami.OverlaySheet {
 	id: aboutSheet
-	Layout.alignment: Qt.AlignH | Qt.AlignTop
 
 	ColumnLayout {
 		id: content

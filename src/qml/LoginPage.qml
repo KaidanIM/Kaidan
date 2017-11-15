@@ -32,10 +32,9 @@ import QtQuick 2.7
 import QtQuick.Controls 2.0 as Controls
 import QtQuick.Layouts 1.2
 import org.kde.kirigami 2.0 as Kirigami
+import io.github.kaidanim 1.0
 
 Kirigami.Page {
-	property bool isRetry
-
 	title: qsTr("Log in")
 
 	ColumnLayout {
@@ -104,27 +103,35 @@ Kirigami.Page {
 				Layout.columnSpan: 2
 				Layout.alignment: Qt.AlignRight
 				Layout.minimumWidth: connectLabel.width
-				onClicked: {
-					// disable the button
-					connectButton.enabled = false;
-					// indicate that we're connecting now
-					connectLabel.text = "<i>" + qsTr("Connecting…") + "</i>";
+				states: [
+					State {
+						name: "connecting"
+						PropertyChanges {
+							target: connectButton
+							enabled: false
+						}
+						PropertyChanges {
+							target: connectLabel
+							text: "<i>" + qsTr("Connecting…") + "</i>"
+						}
+					}
+				]
 
+				onClicked: {
 					// connect to given account data
-					kaidan.jid = jidField.text;
-					kaidan.password = passField.text;
-					kaidan.mainConnect();
+					kaidan.jid = jidField.text
+					kaidan.password = passField.text
+					kaidan.mainConnect()
 				}
 
 				Controls.Label {
 					id: connectLabel
 					anchors.centerIn: connectButton
-					text: isRetry ? qsTr("Retry") : qsTr("Connect")
+					text: qsTr("Connect")
 					textFormat: Text.RichText
 				}
 			}
 		}
-		
 
 		RowLayout {
 			id: serviceBar
@@ -165,28 +172,19 @@ Kirigami.Page {
 		}
 	}
 
+	function handleConnectionState(state) {
+		if (state === Enums.StateConnecting) {
+			connectButton.state = "connecting"
+		} else {
+			connectButton.state = ""
+		}
+	}
+
 	Component.onCompleted: {
-		function openRosterPage() {
-			// we need to disconnect enableConnectButton to prevent calling it on normal disconnection
-			kaidan.connectionStateDisconnected.disconnect(enableConnectButton);
+		kaidan.connectionStateChanged.connect(handleConnectionState)
+	}
 
-			// reenable the drawer
-			globalDrawer.enabled = true;
-			// open the roster page
-			pageStack.replace(rosterPage);
-		}
-
-		function enableConnectButton() {
-			isRetry = true;
-			connectButton.text = qsTr("Retry");
-			connectButton.enabled = true;
-		}
-
-		// connect functions to back-end events
-		kaidan.connectionStateConnected.connect(openRosterPage);
-		kaidan.connectionStateDisconnected.connect(enableConnectButton);
-
-		// disable the drawer
-		globalDrawer.enabled = false;
+	Component.onDestruction: {
+		kaidan.connectionStateChanged.disconnect(handleConnectionState)
 	}
 }

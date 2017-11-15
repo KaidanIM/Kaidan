@@ -30,31 +30,21 @@
 
 #include "Kaidan.h"
 
-#include <iostream>
 // Qt
 #include <QDebug>
 #include <QDir>
 #include <QSettings>
 #include <QString>
 #include <QStandardPaths>
-#include <QTimer>
 #include <QCoreApplication>
-// gloox
-#include <gloox/rostermanager.h>
-#include <gloox/receipt.h>
-#include <gloox/forward.h>
-#include <gloox/carbons.h>
-#include <gloox/vcardmanager.h>
-#include <gloox/vcardupdate.h>
 // Kaidan
+#include "AvatarFileStorage.h"
 #include "RosterModel.h"
 #include "MessageModel.h"
+#include "Database.h"
 
 Kaidan::Kaidan(QObject *parent) : QObject(parent)
 {
-	connected = false;
-	isClientSetUp = false;
-
 	//
 	// Database and components
 	//
@@ -66,17 +56,13 @@ Kaidan::Kaidan(QObject *parent) : QObject(parent)
 		database->convertDatabase();
 
 	// setup components
-	messageModel = new MessageModel(database->getDatabase());
-	rosterModel = new RosterModel(database->getDatabase());
-	xmlLogHandler = new XmlLogHandler();
-	avatarStorage = new AvatarFileStorage();
+	messageModel = new MessageModel(database->getDatabase(), this);
+	rosterModel = new RosterModel(database->getDatabase(), this);
+	avatarStorage = new AvatarFileStorage(this);
 	// Connect the avatar changed signal of the avatarStorage with the NOTIFY signal
 	// of the Q_PROPERTY for the avatar storage (so all avatars are updated in QML)
-	connect(avatarStorage, &AvatarFileStorage::avatarIdsChanged, this, &Kaidan::avatarStorageChanged);
-
-	// client package fetch timer
-	packageFetchTimer = new QTimer(this);
-	connect(packageFetchTimer, SIGNAL(timeout()), this, SLOT(updateClient()));
+	connect(avatarStorage, &AvatarFileStorage::avatarIdsChanged,
+	        this, &Kaidan::avatarStorageChanged);
 
 	//
 	// Load settings data
@@ -85,171 +71,93 @@ Kaidan::Kaidan(QObject *parent) : QObject(parent)
 	// init settings (-> "kaidan/kaidan.conf")
 	settings = new QSettings(QString(APPLICATION_NAME), QString(APPLICATION_NAME));
 
-	// get JID from settings
-	jid = settings->value("auth/jid").toString();
-	// get JID resource from settings
-	jidResource = settings->value("auth/resource").toString();
-	// get password from settings
-	password = settings->value("auth/password").toString();
-
+	creds.jid = settings->value("auth/jid").toString();
+	creds.jidResource = settings->value("auth/resource").toString();
+	creds.password = settings->value("auth/password").toString();
 	// use Kaidan as resource, if no set
-	if (jidResource == "")
+	if (creds.jidResource == "")
 		setJidResource(QString(APPLICATION_NAME));
+
+	creds.isFirstTry = false;
+
+	// create new client and start thread's main loop (won't connect until requested)
+	client = new ClientThread(rosterModel, messageModel, avatarStorage, creds, settings);
+	client->start();
+	
+	connect(client, &ClientThread::connectionStateChanged, [=](ConnectionState state) {
+		emit this->connectionStateChanged((quint8) state);
+	});
+	connect(client, &ClientThread::disconnReasonChanged, [=](DisconnReason reason) {
+		emit this->disconnReasonChanged((quint8) reason);
+	});
+	connect(client, &ClientThread::newCredentialsNeeded, this, &Kaidan::newCredentialsNeeded);
+	connect(client, &ClientThread::logInWorked, this, &Kaidan::logInWorked);
 }
 
 Kaidan::~Kaidan()
 {
-	// main disconnect will only try to disconnect, if connected
-	mainDisconnect();
-	// this will delete the client and its components
-	if (isClientSetUp)
-		clientCleanUp();
-
+	delete client;
 	delete rosterModel;
 	delete messageModel;
 	delete database;
 	delete avatarStorage;
-	delete xmlLogHandler;
-	delete packageFetchTimer;
 	delete settings;
 }
 
-void Kaidan::mainConnect()
+void Kaidan::start()
 {
-	// first delete everything from the last connection
-	if (isClientSetUp)
-		clientCleanUp();
-
-	// Create a new XMPP client
-	client = new gloox::Client(gloox::JID(jid.toStdString()), password.toStdString());
-	// require encryption
-	client->setTls(gloox::TLSPolicy::TLSRequired);
-	// set the JID resource
-	client->setResource(jidResource.toStdString());
-
-	// Connection listener
-	client->registerConnectionListener(this);
-
-	// Message receiving/sending
-	messageSessionHandler = new MessageSessionHandler(client, messageModel, rosterModel);
-	client->registerMessageSessionHandler(messageSessionHandler);
-
-	// VCardManager
-	vCardManager = new VCardManager(client, avatarStorage, rosterModel);
-
-	// Roster
-	rosterManager = new RosterManager(client, rosterModel, vCardManager);
-
-	// Presence Handler
-	presenceHandler = new PresenceHandler(client);
-
-	// Service Discovery
-	serviceDiscoveryManager = new ServiceDiscoveryManager(client, client->disco());
-
-	// Register Stanza Extensions
-	client->registerStanzaExtension(new gloox::Receipt(gloox::Receipt::Request));
-	client->registerStanzaExtension(new gloox::DelayedDelivery(gloox::JID(), std::string("")));
-	client->registerStanzaExtension(new gloox::Forward());
-	client->registerStanzaExtension(new gloox::Carbons());
-	client->registerStanzaExtension(new gloox::VCardUpdate());
-
-	// Logging
-	client->logInstance().registerLogHandler(gloox::LogLevelDebug,
-		gloox::LogAreaXmlIncoming | gloox::LogAreaXmlOutgoing, xmlLogHandler);
-
-	client->connect(false);
-
-	// every 100 ms: fetch new packages from the socket
-	packageFetchTimer->start(100);
+	if (creds.jid.isEmpty() || creds.password.isEmpty())
+		emit newCredentialsNeeded();
+	else
+		mainConnect();
 }
 
-void Kaidan::mainDisconnect()
+bool Kaidan::mainConnect()
 {
-	if (connected) {
-		client->disconnect();
-		packageFetchTimer->stop();
+	if (client->isConnected()) {
+		qWarning() << "[main] Tried to connect, even if still connected!"
+		           << "Requesting disconnect.";
+		emit client->disconnectRequested();
+		return false;
 	}
-}
 
-void Kaidan::clientCleanUp()
-{
-	delete serviceDiscoveryManager;
-	delete presenceHandler;
-	delete rosterManager;
-	delete messageSessionHandler;
-	delete vCardManager;
-	delete client;
-}
-
-void Kaidan::onConnect()
-{
-	qDebug() << "[Connection] Connected successfully to server";
-	// emit connected signal
-	connected = true;
-	emit connectionStateConnected();
-}
-
-void Kaidan::onDisconnect(gloox::ConnectionError error)
-{
-	qDebug() << "[Connection] Connection failed or disconnected" << error;
-	connected = false;
-	emit connectionStateDisconnected();
-}
-
-bool Kaidan::onTLSConnect(const gloox::CertInfo &info)
-{
-	// accept certificate
-	qDebug() << "[Connection] Automatically accepting TLS certificate";
+	// TODO: check if jid is valid first
+	client->setCredentials(creds);
+	emit client->connectRequested();
 	return true;
 }
 
-void Kaidan::updateClient()
+void Kaidan::mainDisconnect(bool openLogInPage)
 {
-	// parse new incoming network packages; wait 0 ms for new ones
-	client->recv(0);
+	// disconnect the client if connected or connecting
+	if (client->isConnected())
+		emit client->disconnectRequested();
+
+	// trigger the gui to open the log in page in case the was wanted:
+	if (openLogInPage)
+		emit newCredentialsNeeded();
 }
 
-bool Kaidan::newLoginNeeded()
+void Kaidan::setJid(QString jid)
 {
-	return (jid == "") || (password == "");
+	creds.jid = jid;
+	// credentials were modified -> first try
+	creds.isFirstTry = true;
 }
 
-QString Kaidan::getJid()
+void Kaidan::setJidResource(QString jidResource)
 {
-	return jid;
+	// JID resource won't influence the authentication, so we don't need
+	// to set the first try flag and can save it.
+	creds.jidResource = jidResource;
+	settings->setValue("auth/resource", jidResource);
 }
 
-void Kaidan::setJid(QString jid_)
+void Kaidan::setPassword(QString password)
 {
-	jid = jid_; // set new jid for mainConnect
-	settings->setValue("auth/jid", jid_); // save to settings
-}
-
-QString Kaidan::getJidResource()
-{
-	return jidResource;
-}
-
-void Kaidan::setJidResource(QString jidResource_)
-{
-	jidResource = jidResource_;
-	settings->setValue("auth/resource", jidResource); // save jid resource
-}
-
-QString Kaidan::getPassword()
-{
-	return password;
-}
-
-void Kaidan::setPassword(QString password_)
-{
-	password = password_; // set new password for
-	settings->setValue("auth/password", password_); // save to settings
-}
-
-QString Kaidan::getChatPartner()
-{
-	return chatPartner;
+	creds.password = password;
+	// credentials were modified -> first try
+	creds.isFirstTry = true;
 }
 
 void Kaidan::setChatPartner(QString chatPartner)
@@ -262,34 +170,51 @@ void Kaidan::setChatPartner(QString chatPartner)
 	this->chatPartner = chatPartner;
 
 	// filter message for this chat partner
-	messageModel->applyRecipientFilter(&chatPartner, &jid);
-	messageSessionHandler->getMessageHandler()->setCurrentChatPartner(&chatPartner);
+	messageModel->applyRecipientFilter(&chatPartner, &(creds.jid));
+	client->setCurrentChatPartner(&chatPartner);
 
 	emit chatPartnerChanged();
+}
+
+quint8 Kaidan::getConnectionState() const
+{
+	return (quint8) client->getConnectionState();
+}
+
+quint8 Kaidan::getDisconnReason() const
+{
+	// gloox::ConnectionError -> (Kaidan) Enums::DisconnReason
+	return (quint8) client->getConnectionError();
 }
 
 void Kaidan::sendMessage(QString jid, QString message)
 {
 	// TODO: Add offline message cache
-	if (connected)
-		messageSessionHandler->getMessageHandler()->sendMessage(&(this->jid), &jid, &message);
+	if (client->isConnected())
+		emit client->sendMessageRequested(jid, message);
+	else
+		qWarning() << "[main] Couldn't send message, because not being connected.";
 }
 
 void Kaidan::addContact(QString jid, QString nick)
 {
 	// TODO: Add an error notification/message if not connected
-	if (connected)
-		rosterManager->addContact(jid, nick);
+	if (client->isConnected())
+		emit client->addContactRequested(jid, nick);
+	else
+		qWarning() << "[main] Couldn't add contact, because not being connected.";
 }
 
 void Kaidan::removeContact(QString jid)
 {
 	// TODO: Add an error notification/message if not connected
-	if (connected)
-		rosterManager->removeContact(jid);
+	if (client->isConnected())
+		emit client->removeContactRequested(jid);
+	else
+		qWarning() << "[main] Couldn't remove contact, because not being connected.";
 }
 
-QString Kaidan::getResourcePath(QString name_)
+QString Kaidan::getResourcePath(QString name) const
 {
 	// list of file paths where to search for the resource file
 	QStringList pathList;
@@ -300,7 +225,7 @@ QString Kaidan::getResourcePath(QString name_)
 #ifndef NDEBUG
 #ifdef DEBUG_SOURCE_PATH
 	// add source directory (only for debug builds)
-	pathList << QString(DEBUG_SOURCE_PATH) + QString("/data"); // append debug directory
+	pathList << QString(DEBUG_SOURCE_PATH) + QString("/data");
 #endif
 #endif
 
@@ -309,47 +234,17 @@ QString Kaidan::getResourcePath(QString name_)
 		// open directory
 		QDir directory(pathList.at(i));
 		// look up the file
-		if (directory.exists(name_)) {
+		if (directory.exists(name)) {
 			// found the file, return the path
-			return QString("file://") + directory.absoluteFilePath(name_);
+			return QString("file://") + directory.absoluteFilePath(name);
 		}
 	}
 	
 	// on Android, we want to fetch images from the application resources
-	if (QFile::exists(":/" + name_))
-		return QString("qrc:/" + name_);
+	if (QFile::exists(":/" + name))
+		return QString("qrc:/" + name);
 
 	// no file found
-	qWarning() << "Could NOT find media file:" << name_;
+	qWarning() << "[main] Could NOT find media file:" << name;
 	return QString("");
-}
-
-RosterModel* Kaidan::getRosterModel()
-{
-	return rosterModel;
-}
-
-MessageModel* Kaidan::getMessageModel()
-{
-	return messageModel;
-}
-
-AvatarFileStorage* Kaidan::getAvatarStorage()
-{
-	return avatarStorage;
-}
-
-bool Kaidan::getConnectionState() const
-{
-	return connected;
-}
-
-QString Kaidan::getVersionString()
-{
-	return QString(VERSION_STRING);
-}
-
-QString Kaidan::removeNewLinesFromString(QString input)
-{
-	return input.simplified();
 }

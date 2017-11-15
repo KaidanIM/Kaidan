@@ -36,15 +36,12 @@
 #include <QSqlQuery>
 #include <QSqlRecord>
 #include <QSqlDatabase>
-#include <QSqlTableModel>
 
 static const char *rosterTableName = "Roster";
 
-RosterModel::RosterModel(QSqlDatabase* database, QObject *parent) :
+RosterModel::RosterModel(QSqlDatabase *database, QObject *parent):
 	QSqlTableModel(parent, *database)
 {
-	this->database = database;
-
 	setTable(rosterTableName);
 	setEditStrategy(QSqlTableModel::OnManualSubmit);
 
@@ -52,6 +49,16 @@ RosterModel::RosterModel(QSqlDatabase* database, QObject *parent) :
 	setSort(2, Qt::DescendingOrder);
 
 	select();
+
+	connect(this, &RosterModel::clearDataRequested, this, &RosterModel::clearData);
+	connect(this, &RosterModel::insertContactRequested, this, &RosterModel::insertContact);
+	connect(this, &RosterModel::removeContactRequested, this, &RosterModel::removeContact);
+	connect(this, &RosterModel::editContactNameRequested, this, &RosterModel::editContactName);
+	connect(this, &RosterModel::setLastExchangedRequested, this, &RosterModel::setLastExchanged);
+	connect(this, &RosterModel::setUnreadMessageCountRequested, this, &RosterModel::setUnreadMessageCount);
+	connect(this, &RosterModel::setLastMessageRequested, this, &RosterModel::setLastMessage);
+	connect(this, &RosterModel::newUnreadMessageRequested, this, &RosterModel::newUnreadMessage);
+	connect(this, &RosterModel::replaceContactsRequested, this, &RosterModel::replaceContacts);
 }
 
 QHash<int, QByteArray> RosterModel::roleNames() const
@@ -88,14 +95,14 @@ void RosterModel::clearData()
 	}
 }
 
-void RosterModel::insertContact(QString jid_, QString name_)
+void RosterModel::insertContact(QString jid, QString name)
 {
 	// create a new record
 	QSqlRecord newRecord = record();
 
 	// set the given data
-	newRecord.setValue("jid", jid_);
-	newRecord.setValue("name", name_);
+	newRecord.setValue("jid", jid);
+	newRecord.setValue("name", name);
 	newRecord.setValue("lastExchanged", QDateTime::currentDateTime().toString(Qt::ISODate));
 	newRecord.setValue("unreadMessages", 0);
 
@@ -108,29 +115,29 @@ void RosterModel::insertContact(QString jid_, QString name_)
 	submitAll();
 }
 
-void RosterModel::removeContactByJid(QString jid_)
+void RosterModel::removeContact(QString jid)
 {
-	QSqlQuery query(*database);
-	if (!query.exec(QString("DELETE FROM 'Roster' WHERE jid = '%1'").arg(jid_))) {
+	QSqlQuery query(database());
+	if (!query.exec(QString("DELETE FROM 'Roster' WHERE jid = '%1'").arg(jid))) {
 		qDebug("Failed to query database: %s", qPrintable(query.lastError().text()));
 	}
-	submitAll();
+	submit();
 }
 
-void RosterModel::updateContactName(QString jid_, QString name_)
+void RosterModel::editContactName(QString jid, QString name)
 {
-	QSqlQuery query(*database);
-	if (!query.exec(QString("UPDATE 'Roster' SET name = '%1' WHERE jid = '%2'").arg(name_, jid_))) {
+	QSqlQuery query(database());
+	if (!query.exec(QString("UPDATE 'Roster' SET name = '%1' WHERE jid = '%2'").arg(name, jid))) {
 		qDebug("Failed to query database: %s", qPrintable(query.lastError().text()));
 	}
-	submitAll();
+	submit();
 }
 
 QStringList RosterModel::getJidList()
 {
 	QStringList retVar;
 
-	QSqlQuery query(*database);
+	QSqlQuery query(database());
 	if (!query.exec("SELECT jid FROM Roster")) {
 		qDebug("Failed to query database: %s", qPrintable(query.lastError().text()));
 	}
@@ -143,30 +150,30 @@ QStringList RosterModel::getJidList()
 	return retVar;
 }
 
-void RosterModel::removeListOfJids(QStringList* jidList)
+void RosterModel::removeContactList(QStringList &jidList)
 {
-	QSqlQuery query(*database);
-	for (int i = 0; i < jidList->length(); i++) {
+	QSqlQuery query(database());
+	for (int i = 0; i < jidList.length(); i++) {
 		if (!query.exec(QString("DELETE FROM 'Roster' WHERE jid = '%1'")
-				.arg(jidList->at(i)))) {
+		    .arg(jidList.at(i)))) {
 			qDebug("Failed to query database: %s", qPrintable(query.lastError().text()));
 		}
 	}
 	submitAll();
 }
 
-void RosterModel::setLastExchangedOfJid(const QString *jid_, QString *date_)
+void RosterModel::setLastExchanged(const QString jid, QString date)
 {
-	QSqlQuery newQuery(*database);
-	newQuery.exec(QString("UPDATE 'Roster' SET lastExchanged = '%1' WHERE jid = '%2'").arg(*date_, *jid_));
-	submitAll();
+	QSqlQuery newQuery(database());
+	newQuery.exec(QString("UPDATE 'Roster' SET lastExchanged = '%1' WHERE jid = '%2'").arg(date, jid));
+	submit();
 }
 
-int RosterModel::getUnreadMessageCountOfJid(const QString* jid_)
+int RosterModel::getUnreadMessageCount(const QString &jid)
 {
-	QSqlQuery query(*database);
+	QSqlQuery query(database());
 
-	query.prepare(QString("SELECT unreadMessages FROM Roster WHERE jid = '%1'").arg(*jid_));
+	query.prepare(QString("SELECT unreadMessages FROM Roster WHERE jid = '%1'").arg(jid));
 	if (!query.exec()) {
 		qDebug("Failed to query database: %s", qPrintable(query.lastError().text()));
 		return 0;
@@ -176,36 +183,78 @@ int RosterModel::getUnreadMessageCountOfJid(const QString* jid_)
 	return query.value("unreadMessages").toInt();
 }
 
-void RosterModel::setUnreadMessageCountOfJid(const QString* jid_, const int count_)
+void RosterModel::setUnreadMessageCount(const QString jid, const int count)
 {
-	QSqlQuery query(*database);
+	QSqlQuery query(database());
 	query.prepare(QString("UPDATE Roster SET unreadMessages = %1 WHERE jid = '%2'")
-	              .arg(QString::number(count_), *jid_));
+	              .arg(QString::number(count), jid));
 
 	if (!query.exec()) {
 		qDebug("Failed to query database: %s", qPrintable(query.lastError().text()));
 		qDebug() << query.lastQuery();
 	}
 	if (!select()) {
-		qDebug() << "Error on select in RosterModel::setUnreadMessageCountOfJid";
+		qDebug() << "Error on select in RosterModel::setUnreadMessageCount";
 	}
-
 	submit();
 }
 
-void RosterModel::setLastMessageForJid(const QString *jid, QString *message)
+void RosterModel::newUnreadMessage(const QString jid)
 {
-	QSqlQuery query(*database);
+	int msgCount = getUnreadMessageCount(jid);
+	msgCount++;
+	setUnreadMessageCount(jid, msgCount);
+}
+
+void RosterModel::setLastMessage(const QString jid, QString message)
+{
+	QSqlQuery query(database());
 	query.prepare(QString("UPDATE Roster SET lastMessage = '%1' WHERE jid = '%2'")
-	              .arg(*message, *jid));
+	              .arg(message, jid));
 
 	if (!query.exec()) {
 		qDebug("Failed to query database: %s", qPrintable(query.lastError().text()));
 		qDebug() << query.lastQuery();
 	}
 	if (!select()) {
-		qDebug() << "Error on select in RosterModel::setUnreadMessageCountOfJid";
+		qDebug() << "Error on select in RosterModel::setLastMessage";
+	}
+	submit();
+}
+
+void RosterModel::replaceContacts(const QMap<QString, QString> contactList)
+{
+	// This will first remove a list of JIDs from the DB that were deleted on
+	// the server, then it'll update all the nick names. This is made so
+	// complicated, because otherwise information about lastExchanged, lastMessage,
+	// etc. will be lost.
+
+	// list of the JIDs from the DB
+	QStringList currentJids = getJidList();
+	// a new list with all JIDs to delete
+	QStringList jidsToDelete;
+
+	// add all JIDs to the delete list that are in the original list
+	// but not in the new from the server
+	for (int i = 0; i < currentJids.length(); i++) {
+		QString jidAtI = currentJids.at(i);
+		if (!contactList.contains(jidAtI)) {
+			jidsToDelete << jidAtI;
+		}
 	}
 
-	submit();
+	// remove JIDs
+	removeContactList(jidsToDelete);
+
+	// Update all contact nicknames / add new contacts
+	for (auto key : contactList.keys()) {
+		QString jid = key;
+		QString name = contactList[key];
+
+		if (currentJids.contains(jid)) {
+			editContactName(jid, name);
+		} else {
+			insertContact(jid, name);
+		}
+	}
 }

@@ -38,11 +38,11 @@
 #include <QDateTime>
 #include <QDebug>
 
-RosterUpdater::RosterUpdater(RosterModel *rosterModel, gloox::RosterManager *rosterManager, VCardManager *vCardManager)
+RosterUpdater::RosterUpdater(RosterModel *rosterModel, gloox::RosterManager *rosterManager,
+                             VCardManager *vCardManager, QObject *parent):
+                             QObject(parent), rosterModel(rosterModel),
+                             rosterManager(rosterManager), vCardManager(vCardManager)
 {
-	this->rosterModel = rosterModel;
-	this->rosterManager = rosterManager;
-	this->vCardManager = vCardManager;
 }
 
 RosterUpdater::~RosterUpdater()
@@ -51,74 +51,37 @@ RosterUpdater::~RosterUpdater()
 
 void RosterUpdater::handleRoster(const gloox::Roster &roster)
 {
-	//
-	// Find out which/if JIDs have been removed
-	//
-
-	// list of JIDs from server
-	QStringList newJids;
-	for (auto const& item : roster) {
-		newJids << QString::fromStdString(item.second->jidJID().bare());
-	}
-
-	// list of the JIDs from the DB
-	QStringList currentJids = rosterModel->getJidList();
-	// a new list with all JIDs to delete
-	QStringList jidsToDelete;
-
-	// add all JIDs to the delete list that are in the original list
-	// but not in the new from the server
-	for (int i = 0; i < currentJids.length(); i++) {
-		QString jidAtI = currentJids.at(i);
-		if (!newJids.contains(jidAtI)) {
-			jidsToDelete << jidAtI;
-		}
-	}
-
-	// remove the JIDs from the DB
-	rosterModel->removeListOfJids(&jidsToDelete);
-
-	//
-	// Update the roster
-	//
-
+	// create a new list of contacts
+	ContactMap contactList;
 	for (auto const& item : roster) {
 		QString jid = QString::fromStdString(item.second->jidJID().bare());
 		QString name = QString::fromStdString(item.second->name());
 
-		if (currentJids.contains(jid)) {
-			rosterModel->updateContactName(jid, name);
-		} else {
-			rosterModel->insertContact(jid, name);
-		}
-
+		contactList[jid] = name;
 		vCardManager->fetchVCard(jid);
 	}
+
+	// replace current contacts with new ones from server
+	emit rosterModel->replaceContactsRequested(contactList);
 }
 
-void RosterUpdater::handleItemAdded(const gloox::JID &jid_)
+void RosterUpdater::handleItemAdded(const gloox::JID &jid)
 {
-	gloox::RosterItem *item = rosterManager->getRosterItem(jid_);
-	rosterModel->insertContact(
-	        QString::fromStdString(jid_.bare()),
-	        QString::fromStdString(item->name())
-	);
+	gloox::RosterItem *item = rosterManager->getRosterItem(jid);
+	emit rosterModel->insertContactRequested(QString::fromStdString(jid.bare()),
+	                                         QString::fromStdString(item->name()));
 }
 
-void RosterUpdater::handleItemRemoved(const gloox::JID &jid_)
+void RosterUpdater::handleItemRemoved(const gloox::JID &jid)
 {
-	rosterModel->removeContactByJid(
-	        QString::fromStdString(jid_.bare())
-	);
+	emit rosterModel->removeContactRequested(QString::fromStdString(jid.bare()));
 }
 
-void RosterUpdater::handleItemUpdated(const gloox::JID &jid_)
+void RosterUpdater::handleItemUpdated(const gloox::JID &jid)
 {
-	gloox::RosterItem *item = rosterManager->getRosterItem(jid_);
-	rosterModel->updateContactName(
-	        QString::fromStdString(jid_.bare()),
-	        QString::fromStdString(item->name())
-	);
+	gloox::RosterItem *item = rosterManager->getRosterItem(jid);
+	emit rosterModel->editContactNameRequested(QString::fromStdString(jid.bare()),
+	                                           QString::fromStdString(item->name()));
 }
 
 void RosterUpdater::handleRosterPresence(const gloox::RosterItem& item,
@@ -128,8 +91,9 @@ void RosterUpdater::handleRosterPresence(const gloox::RosterItem& item,
 }
 
 void RosterUpdater::handleSelfPresence(const gloox::RosterItem& item,
-	const std::string& resource, gloox::Presence::PresenceType presence,
-	const std::string& msg)
+                                       const std::string& resource,
+                                       gloox::Presence::PresenceType presence,
+                                       const std::string& msg)
 {
 }
 
@@ -141,11 +105,10 @@ void RosterUpdater::handleItemUnsubscribed(const gloox::JID& jid)
 {
 }
 
-bool RosterUpdater::handleSubscriptionRequest(const gloox::JID& jid,
-	const std::string& msg)
+bool RosterUpdater::handleSubscriptionRequest(const gloox::JID& jid, const std::string& msg)
 {
 	qDebug() << "[RosterUpdater] Automatically accepting arrived subscription request from"
-			 << QString::fromStdString(jid.full());
+	         << QString::fromStdString(jid.full());
 	// automatically accept the subscription request
 	return true;
 }
@@ -154,7 +117,7 @@ bool RosterUpdater::handleUnsubscriptionRequest(const gloox::JID& jid,
 	const std::string& msg)
 {
 	qDebug() << "[RosterUpdater]" << QString::fromStdString(jid.full())
-			 << "has unsubscribed from your presence; also unsubscribing from its presence";
+	         << "has unsubscribed from your presence; also unsubscribing from its presence";
 	// automatically also unsubscribing from the contact
 	return true;
 }
@@ -166,5 +129,5 @@ void RosterUpdater::handleNonrosterPresence(const gloox::Presence& presence)
 void RosterUpdater::handleRosterError(const gloox::IQ& iq)
 {
 	qWarning() << "[RosterUpdater] Error occured in IQ"
-			   << QString::fromStdString(iq.id());
+	           << QString::fromStdString(iq.id());
 }

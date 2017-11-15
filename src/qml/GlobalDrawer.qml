@@ -29,6 +29,7 @@
  */
 
 import org.kde.kirigami 2.0 as Kirigami
+import io.github.kaidanim 1.0
 
 Kirigami.GlobalDrawer {
 	id: globalDrawer
@@ -51,16 +52,8 @@ Kirigami.GlobalDrawer {
 			text: qsTr("Log out")
 			iconName: "system-shutdown"
 			onTriggered: {
-				if (kaidan.connected) {
-					// disconnect normally, this will emit the
-					// disconncted signal and open the login page
-					kaidan.mainDisconnect();
-				} else {
-					// emit the disconnect signal, to force
-					// the pages being popped and the login
-					// page pushed
-					kaidan.connectionStateDisconnected();
-				}
+				// disconnect (open log in page)
+				kaidan.mainDisconnect(true);
 			}
 		},
 		Kirigami.Action {

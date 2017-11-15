@@ -32,33 +32,48 @@
 #define ROSTERMODEL_H
 
 // Qt
-#include <QObject>
-#include <QSqlDatabase>
 #include <QSqlTableModel>
-#include <QQmlListProperty>
+#include "Globals.h"
+
+class QSqlDatabase;
+class Database;
 
 class RosterModel : public QSqlTableModel
 {
 	Q_OBJECT
+
 public:
 	RosterModel(QSqlDatabase *database, QObject *parent = 0);
 
 	QHash<int, QByteArray> roleNames() const;
 	QVariant data(const QModelIndex &index, int role) const;
 
+signals:
+	void clearDataRequested();
+	void insertContactRequested(QString jid, QString nickname);
+	void removeContactRequested(QString jid);
+	void editContactNameRequested(QString jid, QString nickname);
+	void setLastExchangedRequested(const QString jid, QString date);
+	void setUnreadMessageCountRequested(const QString jid, const int unreadMessageCount);
+	void setLastMessageRequested(const QString jid, QString message);
+	void newUnreadMessageRequested(const QString jid);
+	void replaceContactsRequested(const ContactMap contactMap);
+
+private slots:
 	void clearData();
-	void insertContact(QString, QString);
-	void removeContactByJid(QString);
-	void updateContactName(QString, QString);
-	QStringList getJidList();
-	void removeListOfJids(QStringList*);
-	void setLastExchangedOfJid(const QString *jid, QString *date);
-	int getUnreadMessageCountOfJid(const QString* jid_);
-	void setUnreadMessageCountOfJid(const QString* jid_, const int unreadMessageCount);
-	void setLastMessageForJid(const QString *jid, QString *message);
+	void insertContact(QString jid, QString nickname);
+	void removeContact(QString jid);
+	void editContactName(QString jid, QString nickname);
+	void setLastExchanged(const QString jid, QString date);
+	void setUnreadMessageCount(const QString jid, const int unreadMessageCount);
+	void newUnreadMessage(const QString jid);
+	void setLastMessage(const QString jid, QString message);
+	void replaceContacts(const ContactMap contactMap);
 
 private:
-	QSqlDatabase *database;
+	QStringList getJidList();
+	void removeContactList(QStringList &jidList);
+	int getUnreadMessageCount(const QString &jid);
 };
 
 #endif // ROSTERMODEL_H

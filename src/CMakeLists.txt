@@ -4,6 +4,8 @@ set(CURDIR ${CMAKE_CURRENT_LIST_DIR})
 set(KAIDAN_SOURCES
 	${CURDIR}/main.cpp
 	${CURDIR}/Kaidan.cpp
+	${CURDIR}/ClientThread.cpp
+	${CURDIR}/ClientWorker.cpp
 	${CURDIR}/AvatarFileStorage.cpp
 	${CURDIR}/Database.cpp
 	${CURDIR}/RosterModel.cpp
@@ -18,4 +20,7 @@ set(KAIDAN_SOURCES
 	${CURDIR}/VCardManager.cpp
 	${CURDIR}/XmlLogHandler.cpp
 	${CURDIR}/StatusBar.cpp
+
+	# needed to trigger moc generation
+	${CURDIR}/Enums.h
 )

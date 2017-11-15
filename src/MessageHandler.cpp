@@ -67,12 +67,11 @@ QDateTime glooxStampToQDateTime(std::string stamp_)
 }
 
 MessageHandler::MessageHandler(gloox::Client *client, MessageModel *messageModel,
-	RosterModel *rosterModel)
+                               RosterModel *rosterModel, QObject *parent):
+                               QObject(parent), client(client),
+                               messageModel(messageModel), rosterModel(rosterModel),
+                               chatPartner("")
 {
-	this->messageModel = messageModel;
-	this->rosterModel = rosterModel;
-	this->client = client;
-	this->chatPartner = QString("");
 }
 
 MessageHandler::~MessageHandler()
@@ -83,7 +82,7 @@ void MessageHandler::setCurrentChatPartner(QString *chatPartner)
 {
 	this->chatPartner = *chatPartner;
 
-	resetUnreadMessagesForJid(chatPartner);
+	resetUnreadMessagesForJid(this->chatPartner);
 }
 
 void MessageHandler::handleMessage(const gloox::Message &stanza, gloox::MessageSession *session)
@@ -122,15 +121,17 @@ void MessageHandler::handleMessage(const gloox::Message &stanza, gloox::MessageS
 
 		const gloox::DelayedDelivery *delayedDelivery = message->when();
 		if (delayedDelivery)
-			timestamp = glooxStampToQDateTime(delayedDelivery->stamp()).toString(Qt::ISODate);
+			timestamp = glooxStampToQDateTime(delayedDelivery->stamp())
+			            .toString(Qt::ISODate);
 
 		// fallback: use current time from local clock
 		if (timestamp.isEmpty())
 			timestamp = QDateTime::currentDateTime().toString(Qt::ISODate);
 
 		// add the message to the database
-		messageModel->addMessage(&fromJid, &toJid, &timestamp, &body, &msgId,
-					isSentByMe, &fromJidResource, &toJidResource);
+		emit messageModel->addMessageRequested(fromJid, toJid, timestamp,
+		                                       body, msgId, isSentByMe,
+		                                       fromJidResource, toJidResource);
 
 		//
 		// Send a new notification | TODO: Resolve nickname from JID
@@ -148,15 +149,15 @@ void MessageHandler::handleMessage(const gloox::Message &stanza, gloox::MessageS
 		const QString contactJid = isSentByMe ? toJid : fromJid;
 
 		// update the last message for this contact
-		rosterModel->setLastMessageForJid(&contactJid, &body);
+		emit rosterModel->setLastMessageRequested(contactJid, body);
 
 		// update the last exchanged for this contact
-		updateLastExchangedOfJid(&contactJid);
+		updateLastExchangedOfJid(contactJid);
 
 		// Increase unread message counter
 		// don't add new unread message if chat is opened or we wrote the message
 		if (chatPartner != contactJid && !isSentByMe)
-			newUnreadMessageForJid(&contactJid);
+			newUnreadMessageForJid(contactJid);
 	}
 
 	// XEP-0184: Message Delivery Receipts
@@ -179,22 +180,24 @@ void MessageHandler::handleMessage(const gloox::Message &stanza, gloox::MessageS
 			client->send(receiptMessage);
 		} else if (receiptType == gloox::Receipt::Received) {
 			// Delivery Receipt Received -> mark message as read in db
-			messageModel->setMessageAsDelivered(QString::fromStdString(receipt->id()));
+			emit messageModel->setMessageAsDeliveredRequested(
+				QString::fromStdString(receipt->id()));
 		}
 	}
 }
 
-void MessageHandler::sendMessage(QString *fromJid, QString *toJid, QString *body)
+void MessageHandler::sendMessage(QString toJid, QString body)
 {
 	// create a new message
-	gloox::Message message(gloox::Message::Chat, gloox::JID(toJid->toStdString()),
-						   body->toStdString());
+	gloox::Message message(gloox::Message::Chat, gloox::JID(toJid.toStdString()),
+	                       body.toStdString());
 
 	// add the message to the database
 	const QString timestamp = QDateTime::currentDateTime().toString(Qt::ISODate);
 	const QString id = QString::fromStdString(message.id());
+	const QString fromJid = QString::fromStdString(client->jid().bare());
 
-	messageModel->addMessage(fromJid, toJid, &timestamp, body, &id, true);
+	emit messageModel->addMessageRequested(fromJid, toJid, timestamp, body, id, true); 
 
 	// XEP-0184: Message Delivery Receipts
 	// request a delivery receipt from the other client
@@ -205,28 +208,25 @@ void MessageHandler::sendMessage(QString *fromJid, QString *toJid, QString *body
 	client->send(message);
 
 	// update the last message for this contact
-	rosterModel->setLastMessageForJid(toJid, body);
+	emit rosterModel->setLastMessageRequested(toJid, body);
 	// update the last exchanged date
 	updateLastExchangedOfJid(toJid);
 }
 
-void MessageHandler::updateLastExchangedOfJid(const QString *jid)
+void MessageHandler::updateLastExchangedOfJid(const QString &jid)
 {
 	QString dateTime = QDateTime::currentDateTime().toString(Qt::ISODate);
-	rosterModel->setLastExchangedOfJid(jid, &dateTime);
+	emit rosterModel->setLastExchangedRequested(jid, dateTime);
 }
 
-void MessageHandler::newUnreadMessageForJid(const QString *jid)
+void MessageHandler::newUnreadMessageForJid(const QString &jid)
 {
-	// get the current unread message count
-	int msgCount = rosterModel->getUnreadMessageCountOfJid(jid);
-	// increase it by one
-	msgCount++;
-	// set the new increased count
-	rosterModel->setUnreadMessageCountOfJid(jid, msgCount);
+	// add a new unread message to the contact
+	emit rosterModel->newUnreadMessageRequested(jid);
 }
 
-void MessageHandler::resetUnreadMessagesForJid(const QString *jid)
+void MessageHandler::resetUnreadMessagesForJid(const QString &jid)
 {
-	rosterModel->setUnreadMessageCountOfJid(jid, 0);
+	// reset the unread message count to 0
+	emit rosterModel->setUnreadMessageCountRequested(jid, 0);
 }

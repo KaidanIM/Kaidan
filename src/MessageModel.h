@@ -42,21 +42,28 @@ public:
 
 	QVariant data(const QModelIndex &index, int role) const Q_DECL_OVERRIDE;
 	QHash<int, QByteArray> roleNames() const Q_DECL_OVERRIDE;
-
 	void applyRecipientFilter(QString *recipient_, QString *author_);
-	void addMessage(const QString *author, const QString *recipient,
-					const QString *timestamp, const QString *message,
-					const QString *msgId, bool sentByMe,
-					const QString *author_resource = new QString(),
-					const QString *recipient_resource = new QString());
-	void setMessageAsSent(const QString msgId);
-	void setMessageAsDelivered(const QString msgId);
 
 signals:
 	void recipientChanged();
+	void addMessageRequested(const QString author, const QString recipient,
+	                         const QString timestamp, const QString message,
+	                         const QString msgId, bool sentByMe,
+	                         const QString author_resource = QString(),
+	                         const QString recipient_resource = QString());
+	void setMessageAsSentRequested(const QString msgId);
+	void setMessageAsDeliveredRequested(const QString msgId);
+
+private slots:
+	void addMessage(const QString author, const QString recipient,
+	                const QString timestamp, const QString message, const QString msgId, 
+	                bool sentByMe, const QString author_resource = QString(),
+	                const QString recipient_resource = QString());
+	void setMessageAsSent(const QString msgId);
+	void setMessageAsDelivered(const QString msgId);
 
 private:
-	QSqlDatabase* database;
+	QSqlDatabase *database;
 };
 
 #endif // MESSAGEMODEL_H

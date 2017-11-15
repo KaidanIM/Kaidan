@@ -28,44 +28,83 @@
  *  along with Kaidan.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef MESSAGEHANDLER_H
-#define MESSAGEHANDLER_H
+#ifndef CLIENTWORKER_H
+#define CLIENTWORKER_H
 
 // Qt
 #include <QObject>
-#include <QSqlDatabase>
 // gloox
-#include <gloox/client.h>
-#include <gloox/message.h>
-#include <gloox/messagehandler.h>
-#include <gloox/messagesession.h>
-// Kaidan
-#include "MessageModel.h"
-#include "RosterModel.h"
+#include <gloox/connectionlistener.h>
 
-class MessageHandler : public QObject, public gloox::MessageHandler
+namespace gloox {
+	class Client;
+}
+
+class ClientThread;
+
+/**
+ * The ClientWorker is used as a QObject-based worker on the ClientThread.
+ * 
+ * @see ClientThread
+ */
+class ClientWorker : public QObject, public gloox::ConnectionListener
 {
 	Q_OBJECT
 
 public:
-	MessageHandler(gloox::Client *client, MessageModel *messageModel,
-		       RosterModel *rosterModel, QObject *parent = nullptr);
-	~MessageHandler();
-
-	void setCurrentChatPartner(QString *chatPartner);
-	virtual void handleMessage(const gloox::Message &message, gloox::MessageSession *session = 0);
-	void updateLastExchangedOfJid(const QString &jid);
-	void newUnreadMessageForJid(const QString &jid);
-	void resetUnreadMessagesForJid(const QString &jid);
+	/**
+	 * @param client XMPP Client which will be worked on.
+	 * @param controller The ClientThread instance for emitting signals.
+	 * @param parent Optional QObject-based parent.
+	 */
+	ClientWorker(gloox::Client *client, ClientThread *contoller,
+	             QObject *parent = nullptr);
 
 public slots:
-	void sendMessage(QString toJid, QString body);
+	/**
+	 * Main function that will be executed via a QTimer.
+	 * 
+	 * If the client is not disconnected and not untouched, this will fetch
+	 * new packages from the client and process them.
+	 */
+	void updateClient();
+
+	/**
+	 * Connects the client with the server.
+	 */
+	void xmppConnect();
+
+	/**
+	 * Disconnects the client from server.
+	 */
+	void xmppDisconnect();
+
+	/**
+	 * Destruct timer used for client loop (needs to be killed on the client
+	 * thread)
+	 */
+	void stopWorkTimer();
 
 private:
+	/**
+	 * Notifys via signal that the client has connected.
+	 */
+	virtual void onConnect();
+
+	/**
+	 * Saves error reason and emits a disconnect signal.
+	 */
+	virtual void onDisconnect(gloox::ConnectionError error);
+
+	/**
+	 * Always accepts the TLS certificate
+	 * 
+	 * @todo Automatically check if certificate is valid and ask user.
+	 */
+	virtual bool onTLSConnect(const gloox::CertInfo &info);
+
 	gloox::Client *client;
-	MessageModel *messageModel;
-	RosterModel *rosterModel;
-	QString chatPartner;
+	ClientThread *controller;
 };
 
-#endif // MESSAGEHANDLER_H
+#endif // CLIENTWORKER_H

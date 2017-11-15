@@ -33,10 +33,16 @@
 //
 
 #include "ServiceDiscoveryManager.h"
+// Qt
 #include <QString>
 #include <QDebug>
-#include <qsysinfo.h>
+#include <QSysInfo>
+// gloox
+#include <gloox/client.h>
+#include <gloox/disco.h>
 #include <gloox/carbons.h>
+// Kaidan
+#include "Globals.h"
 
 ServiceDiscoveryManager::ServiceDiscoveryManager(gloox::Client *client, gloox::Disco *disco)
 {

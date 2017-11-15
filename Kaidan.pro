@@ -8,6 +8,8 @@ CONFIG += c++11
 SOURCES += \
     src/main.cpp \
     src/Kaidan.cpp \
+    src/ClientThread.cpp \
+    src/ClientWorker.cpp \
     src/AvatarFileStorage.cpp \
     src/Database.cpp \
     src/RosterModel.cpp \
@@ -37,8 +39,11 @@ HEADERS += \
     src/PresenceHandler.h \
     src/MessageHandler.h \
     src/Kaidan.h \
+    src/ClientThread.h \
+    src/ClientWorker.h \
     src/VCardManager.h \
-    src/branding.h \
+    src/Globals.h \
+    src/Enums.h \
     src/StatusBar.h
 
 android: INCLUDEPATH += $$PWD/3rdparty/gloox/include

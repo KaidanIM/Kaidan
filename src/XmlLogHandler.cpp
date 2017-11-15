@@ -29,9 +29,22 @@
  */
 
 #include "XmlLogHandler.h"
+#include <gloox/loghandler.h>
+#include <gloox/client.h>
 #include <QDebug>
 #include <QXmlStreamReader>
 #include <QXmlStreamWriter>
+
+XmlLogHandler::XmlLogHandler(gloox::Client *client) : client(client)
+{
+	client->logInstance().registerLogHandler(gloox::LogLevelDebug, gloox::LogAreaXmlIncoming |
+	                                         gloox::LogAreaXmlOutgoing, this);
+}
+
+XmlLogHandler::~XmlLogHandler()
+{
+	client->logInstance().removeLogHandler(this);
+}
 
 void XmlLogHandler::handleLog(gloox::LogLevel level, gloox::LogArea area, const std::string &message)
 {

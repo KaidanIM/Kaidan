@@ -36,12 +36,13 @@
 #define SERVICEDISCOVERYMANAGER_H
 
 // gloox
-#include <gloox/client.h>
-#include <gloox/disco.h>
 #include <gloox/discohandler.h>
 #include <gloox/connectionlistener.h>
-// Kaidan
-#include "branding.h"
+
+namespace gloox {
+	class Client;
+	class Disco;
+}
 
 class ServiceDiscoveryManager : public gloox::DiscoHandler, public gloox::ConnectionListener
 {

@@ -41,10 +41,13 @@
 #include "RosterModel.h"
 #include "VCardManager.h"
 
-class RosterUpdater : public gloox::RosterListener
+class RosterUpdater : public QObject, public gloox::RosterListener
 {
+	Q_OBJECT
+
 public:
-	RosterUpdater(RosterModel* rosterModel, gloox::RosterManager *rosterManager, VCardManager *vCardManager);
+	RosterUpdater(RosterModel* rosterModel, gloox::RosterManager *rosterManager,
+	              VCardManager *vCardManager, QObject *parent = nullptr);
 	~RosterUpdater();
 
 	// gloox::RosterListener

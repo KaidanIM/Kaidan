@@ -32,10 +32,10 @@
 #include "MessageHandler.h"
 
 MessageSessionHandler::MessageSessionHandler(gloox::Client *client,
-	MessageModel *messageModel, RosterModel *rosterModel)
+	MessageModel *messageModel, RosterModel *rosterModel) : client(client),
+	messageModel(messageModel)
 {
-	this->client = client;
-	this->messageModel = messageModel;
+	client->registerMessageSessionHandler(this);
 	messageHandler = new MessageHandler(client, messageModel, rosterModel);
 }
 

@@ -41,15 +41,19 @@
 
 static const char *conversationsTableName = "Messages";
 
-MessageModel::MessageModel(QSqlDatabase *database, QObject *parent) : QSqlTableModel(parent, *database)
+MessageModel::MessageModel(QSqlDatabase *database, QObject *parent):
+	QSqlTableModel(parent, *database), database(database)
 {
-	this->database = database;
 	setTable(conversationsTableName);
 	// sort in descending order of the timestamp column
 	setSort(4, Qt::DescendingOrder);
 
 	// Ensures that the model is sorted correctly after submitting a new row.
 	setEditStrategy(QSqlTableModel::OnManualSubmit);
+
+	connect(this, &MessageModel::addMessageRequested, this, &MessageModel::addMessage);
+	connect(this, &MessageModel::setMessageAsSentRequested, this, &MessageModel::setMessageAsSent);
+	connect(this, &MessageModel::setMessageAsDeliveredRequested, this, &MessageModel::setMessageAsDelivered);
 }
 
 void MessageModel::applyRecipientFilter(QString *recipient_, QString *author_)
@@ -94,23 +98,23 @@ void MessageModel::setMessageAsDelivered(const QString msgId)
 	submitAll();
 }
 
-void MessageModel::addMessage(const QString *author, const QString *recipient,
-							  const QString *timestamp, const QString *message,
-							  const QString *msgId, bool sentByMe,
-							  const QString *author_resource, const QString *recipient_resource)
+void MessageModel::addMessage(const QString author, const QString recipient,
+                              const QString timestamp, const QString message,
+                              const QString msgId, bool sentByMe,
+                              const QString author_resource, const QString recipient_resource)
 {
 	//
 	// add the new message
 	//
 
 	QSqlRecord record = this->record();
-	record.setValue("author", *author);
-	record.setValue("author_resource", *author_resource);
-	record.setValue("recipient", *recipient);
-	record.setValue("recipient_resource", *recipient_resource);
-	record.setValue("timestamp", *timestamp);
-	record.setValue("message", *message);
-	record.setValue("id", *msgId);
+	record.setValue("author", author);
+	record.setValue("author_resource", author_resource);
+	record.setValue("recipient", recipient);
+	record.setValue("recipient_resource", recipient_resource);
+	record.setValue("timestamp", timestamp);
+	record.setValue("message", message);
+	record.setValue("id", msgId);
 	record.setValue("isSent", sentByMe ? false : true);
 	record.setValue("isDelivered", sentByMe ? false : true);
 

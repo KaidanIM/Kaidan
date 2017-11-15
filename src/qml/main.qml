@@ -32,6 +32,7 @@ import QtQuick 2.6
 import QtQuick.Controls.Material 2.0
 import org.kde.kirigami 2.0 as Kirigami
 import StatusBar 0.1
+import io.github.kaidanim 1.0
 
 Kirigami.ApplicationWindow {
 	id: root
@@ -63,30 +64,34 @@ Kirigami.ApplicationWindow {
 	Component {id: loginPage; LoginPage {}}
 	Component {id: rosterPage; RosterPage {}}
 
+	function openLogInPage() {
+		// close all pages (we don't know on which page we're on,
+		// thus we don't use replace)
+		while (pageStack.depth > 0)
+			pageStack.pop();
+
+		// toggle global drawer
+		globalDrawer.enabled = false
+		globalDrawer.visible = false
+		// push new page
+		pageStack.push(loginPage)
+	}
+
+	function closeLogInPage() {
+		// toggle global drawer
+		globalDrawer.enabled = true
+
+		// replace page with roster page
+		pageStack.replace(rosterPage)
+	}
+
 	Component.onCompleted: {
-		function handleDisconnect() {
-			// close all pages
-			while (pageStack.depth > 0) {
-				pageStack.pop();
-			}
+		kaidan.newCredentialsNeeded.connect(openLogInPage);
+		kaidan.logInWorked.connect(closeLogInPage);
 
-			// open login page   // FIXME: WHY is the login page popped, if only pushed once ?!
-			pageStack.push(loginPage);
-			pageStack.replace(loginPage);
-		}
-
-		if (kaidan.newLoginNeeded()) {
-			// open login page and get new data from user
-			pageStack.push(loginPage);
-		} else {
-			// open client normally
-
-			// on connection failure, open login page
-			kaidan.connectionStateDisconnected.connect(handleDisconnect);
-
-			// show roster and login with restored data
-			pageStack.push(rosterPage);
-			kaidan.mainConnect();
-		}
+		// push roster page (trying normal start up)
+		pageStack.push(rosterPage)
+		// Annouce that we're ready and the back-end can start with connecting
+		kaidan.start()
 	}
 }

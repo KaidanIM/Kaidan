@@ -33,105 +33,288 @@
 
 // Qt
 #include <QObject>
-#include <QSettings>
 #include <QString>
-#include <QTimer>
 // gloox
-#include <gloox/client.h>
 #include <gloox/connectionlistener.h>
 // Kaidan
-#include "branding.h"
-#include "Database.h"
-#include "RosterManager.h"
-#include "MessageSessionHandler.h"
-#include "PresenceHandler.h"
-#include "ServiceDiscoveryManager.h"
-#include "VCardManager.h"
-#include "AvatarFileStorage.h"
-#include "XmlLogHandler.h"
+#include "ClientThread.h"
+#include "Globals.h"
+#include "Enums.h"
 
-class Kaidan : public QObject, public gloox::ConnectionListener
+class AvatarFileStorage;
+class RosterManager;
+class RosterModel;
+class MessageModel;
+class QSettings;
+class Database;
+
+using namespace Enums;
+
+/**
+ * @class Kaidan Kaidan's Back-End Class
+ * 
+ * @brief This class will initiate the complete back-end, including the @see Database
+ * connection, viewing models (@see MessageModel, @see RosterModel), etc.
+ * 
+ * This class will run in the main thread, only the XMPP connection runs in another
+ * thread (@see ClientThread).
+ */
+class Kaidan : public QObject
 {
 	Q_OBJECT
 
 	Q_PROPERTY(RosterModel* rosterModel READ getRosterModel NOTIFY rosterModelChanged)
 	Q_PROPERTY(MessageModel* messageModel READ getMessageModel NOTIFY messageModelChanged)
 	Q_PROPERTY(AvatarFileStorage* avatarStorage READ getAvatarStorage NOTIFY avatarStorageChanged)
-	Q_PROPERTY(bool connectionState READ getConnectionState NOTIFY connectionStateConnected NOTIFY connectionStateDisconnected)
+	Q_PROPERTY(quint8 connectionState READ getConnectionState NOTIFY connectionStateChanged)
+	Q_PROPERTY(quint8 disconnReason READ getDisconnReason NOTIFY disconnReasonChanged)
 	Q_PROPERTY(QString jid READ getJid WRITE setJid NOTIFY jidChanged)
 	Q_PROPERTY(QString jidResource READ getJidResource WRITE setJidResource NOTIFY jidResourceChanged)
 	Q_PROPERTY(QString password READ getPassword WRITE setPassword NOTIFY passwordChanged)
 	Q_PROPERTY(QString chatPartner READ getChatPartner WRITE setChatPartner NOTIFY chatPartnerChanged)
 
 public:
+	/**
+	 * Constructor
+	 */
 	Kaidan(QObject *parent = 0);
+
+	/**
+	 * Destructor
+	 */
 	~Kaidan();
 
-	Q_INVOKABLE void mainConnect();
-	Q_INVOKABLE void mainDisconnect();
-	Q_INVOKABLE bool newLoginNeeded();
+	/**
+	 * Start connection (called from QML when ready)
+	 */
+	Q_INVOKABLE void start();
+
+	/**
+	 * Connect to the XMPP server
+	 *
+	 * If you haven't set a username and password, they are used from the
+	 * last successful login (the settings file).
+	 */
+	Q_INVOKABLE bool mainConnect();
+
+	/**
+	 * Disconnect from XMPP server
+	 *
+	 * This will disconnect the client from the server. When disconnected,
+	 * the connectionStateChanged signal will be emitted.
+	 * 
+	 * @param openLogInPage If true, the newCredentialsNeeded signal will be
+	 * emitted.
+	 */
+	Q_INVOKABLE void mainDisconnect(bool openLogInPage = false);
+
+	/**
+	 * Send a text message to any JID
+	 *
+	 * Currently only contacts are displayed on the RosterPage (there is no
+	 * way to view a list of all chats -> for contacts and non-contacts), so
+	 * you should only send messages to JIDs from your roster, otherwise you
+	 * won't be able to see the message history.
+	 */
 	Q_INVOKABLE void sendMessage(QString jid, QString message);
+
+	/**
+	 * Add a contact to your roster
+	 *
+	 * @param nick A simple nick name for the new contact, which should be
+	 *             used to display in the roster.
+	 */
 	Q_INVOKABLE void addContact(QString jid, QString nick);
+
+	/**
+	 * Remove a contact from your roster
+	 *
+	 * Only the JID is needed.
+	 */
 	Q_INVOKABLE void removeContact(QString jid);
-	Q_INVOKABLE QString getResourcePath(QString);
-	Q_INVOKABLE QString getVersionString();
-	Q_INVOKABLE QString removeNewLinesFromString(QString input);
 
-	bool getConnectionState() const;
-	QString getJid();
-	void setJid(QString);
-	QString getJidResource();
-	void setJidResource(QString);
-	QString getPassword();
-	void setPassword(QString);
-	QString getChatPartner();
-	void setChatPartner(QString);
-	RosterModel* getRosterModel();
-	MessageModel* getMessageModel();
-	AvatarFileStorage* getAvatarStorage();
+	/**
+	 * Returns a URL to a given resource file name
+	 *
+	 * This will check various paths which could contain the searched file.
+	 * If the file was found, it'll return a `file://` or a `qrc:/` url to
+	 * the file.
+	 */
+	Q_INVOKABLE QString getResourcePath(QString resourceName) const;
 
-	virtual void onConnect();
-	virtual void onDisconnect(gloox::ConnectionError error);
-	virtual bool onTLSConnect(const gloox::CertInfo &info);
+	/**
+	 * Returns the current ConnectionState
+	 */
+	Q_INVOKABLE quint8 getConnectionState() const;
+
+	/**
+	 * Returns the last disconnection reason
+	 */
+	Q_INVOKABLE quint8 getDisconnReason() const;
+
+	/**
+	 * Returns a string of this build's Kaidan version
+	 */
+	Q_INVOKABLE QString getVersionString() const
+	{
+		return QString(VERSION_STRING);
+	}
+
+	/**
+	 * Returns a string without new lines, unneeded spaces, etc.
+	 *
+	 * See QString::simplified for more information.
+	 */
+	Q_INVOKABLE QString removeNewLinesFromString(QString input) const
+	{
+		return input.simplified();
+	}
+
+	/**
+	 * Set own JID used for connection
+	 *
+	 * To really change the JID of the current connection, you'll need to
+	 * reconnect.
+	 */
+	void setJid(QString jid);
+
+	/**
+	 * Get the current JID
+	 */
+	QString getJid() const
+	{
+		return creds.jid;
+	}
+
+	/**
+	 * Set a optional custom JID resource (device name)
+	 */
+	void setJidResource(QString jidResource);
+
+	/**
+	 * Get the JID resoruce
+	 */
+	QString getJidResource() const
+	{
+		return creds.jidResource;
+	}
+
+	/**
+	 * Set the password for next connection
+	 */
+	void setPassword(QString password);
+
+	/**
+	 * Get the currently used password
+	 */
+	QString getPassword() const
+	{
+		return creds.password;
+	}
+
+	/**
+	 * Set the currently opened chat
+	 *
+	 * This will set a filter on the database to only view the wanted messages.
+	 */
+	void setChatPartner(QString jid);
+
+	/**
+	 * Get the currrently opened chat
+	 */
+	QString getChatPartner() const
+	{
+		return chatPartner;
+	}
+
+	/**
+	 * Get the roster model
+	 */
+	RosterModel* getRosterModel() const
+	{
+		return rosterModel;
+	}
+
+	/**
+	 * Get the message model
+	 */
+	MessageModel* getMessageModel() const
+	{
+		return messageModel;
+	}
+
+	/**
+	 * Get the avatar storage
+	 */
+	AvatarFileStorage* getAvatarStorage() const
+	{
+		return avatarStorage;
+	}
 
 signals:
 	void rosterModelChanged();
 	void messageModelChanged();
 	void avatarStorageChanged();
-	void vCardControllerChanged();
-	void connectionStateConnected();
-	void connectionStateDisconnected();
+
+	/**
+	 * Emitted, when the client's connection state has changed (e.g. when
+	 * successfully connected or when disconnected)
+	 */
+	void connectionStateChanged(quint8 state);
+
+	/**
+	 * Emitted, when the client failed to connect and gives the reason in
+	 * a DisconnectionReason enumatrion.
+	 */
+	void disconnReasonChanged(quint8 reason);
+
+	/**
+	 * Emitted when the JID was changed
+	 */
 	void jidChanged();
+
+	/**
+	 * Emitted when the JID resouce (device name) has changed
+	 */
 	void jidResourceChanged();
+
+	/**
+	 * Emitted when the used password for logging in has changed
+	 */
 	void passwordChanged();
+
+	/**
+	 * Emitted when the currently opnened chat has changed
+	 */
 	void chatPartnerChanged();
 
-private slots:
-	void updateClient();
+	/**
+	 * Emitted when there are no (correct) credentials and new are needed
+	 *
+	 * The client will be in disconnected state, when this is emitted.
+	 */
+	void newCredentialsNeeded();
+
+	/**
+	 * Emitted when log in worked with new credentials
+	 *
+	 * The client will be in connected state, when this is emitted.
+	 */
+	void logInWorked();
 
 private:
-	void clientCleanUp();
+	void connectDatabases();
 
-	gloox::Client *client;
+	ClientThread *client;
 	Database *database;
 	RosterModel *rosterModel;
 	RosterManager *rosterManager;
 	MessageModel *messageModel;
-	MessageSessionHandler *messageSessionHandler;
-	PresenceHandler *presenceHandler;
-	ServiceDiscoveryManager *serviceDiscoveryManager;
-	VCardManager *vCardManager;
 	AvatarFileStorage *avatarStorage;
-	XmlLogHandler *xmlLogHandler;
 	QSettings *settings;
 
-	bool connected;
-	bool isClientSetUp;
-	QString jid;
-	QString jidResource;
-	QString password;
+	ClientThread::Credentials creds;
 	QString chatPartner;
-	QTimer *packageFetchTimer;
 };
 
 #endif

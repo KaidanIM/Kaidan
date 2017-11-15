@@ -49,10 +49,9 @@ public:
 	MessageHandler* getMessageHandler();
 
 private:
+	gloox::Client *client;
 	MessageHandler *messageHandler;
 	MessageModel *messageModel;
-
-	gloox::Client *client;
 };
 
 #endif // MESSAGESESSIONHANDLER_H

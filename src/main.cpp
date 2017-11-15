@@ -34,16 +34,18 @@
 #include <QDebug>
 #include <QGuiApplication>
 #include <QLocale>
+#include <qqml.h>
 #include <QQmlApplicationEngine>
-#include <QQuickView>
 #include <QQmlContext>
-#include <QStandardPaths>
-#include <QSqlDatabase>
-#include <QSqlError>
 #include <QTranslator>
-#include <QtQml>
+#include <QLibraryInfo>
 // Kaidan
 #include "Kaidan.h"
+#include "RosterModel.h"
+#include "MessageModel.h"
+#include "AvatarFileStorage.h"
+#include "Globals.h"
+#include "Enums.h"
 #include "StatusBar.h"
 
 #ifdef QMAKE_BUILD
@@ -79,7 +81,6 @@ CommandLineParseResult parseCommandLine(QCommandLineParser &parser, QString *err
 
 	if (parser.isSet(helpOption))
 		return CommandLineHelpRequested;
-
 	// if nothing special happened, return OK
 	return CommandLineOk;
 }
@@ -101,6 +102,14 @@ int main(int argc, char *argv[])
 	// attributes
 	QGuiApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
 
+	// register qMetaTypes
+	qRegisterMetaType<RosterModel*>("RosterModel*");
+	qRegisterMetaType<MessageModel*>("MessageModel*");
+	qRegisterMetaType<AvatarFileStorage*>("AvatarFileStorage*");
+	qRegisterMetaType<ContactMap>("ContactMap");
+	qmlRegisterUncreatableMetaObject(Enums::staticMetaObject, APPLICATION_ID,
+	                                 1, 0, "Kaidan", "Access to enums & flags only");
+
 	// Qt-Translator
 	QTranslator qtTranslator;
 	qtTranslator.load("qt_" + QLocale::system().name(),
@@ -109,8 +118,8 @@ int main(int argc, char *argv[])
 
 	// Kaidan-Translator
 	QTranslator kaidanTranslator;
-	// load the systems locale or none
-	kaidanTranslator.load(QLocale::system().name(), ":/i18n"); // load qm files from resources
+	// load the systems locale or none from resources
+	kaidanTranslator.load(QLocale::system().name(), ":/i18n");
 	app.installTranslator(&kaidanTranslator);
 
 
@@ -150,6 +159,8 @@ int main(int argc, char *argv[])
 	// QML-GUI
 	//
 
+	QQmlApplicationEngine engine;
+
 #ifndef SAILFISH_OS
 	// QtQuickControls2 Style
 	if (qgetenv("QT_QUICK_CONTROLS_STYLE").isEmpty()) {
@@ -158,16 +169,15 @@ int main(int argc, char *argv[])
 	}
 #endif
 
-	qmlRegisterType<StatusBar>("StatusBar", 0, 1, "StatusBar");
-
-	QQmlApplicationEngine engine;
-    
+	// QML type bindings
 #ifdef QMAKE_BUILD
 	KirigamiPlugin::getInstance().registerTypes();
 #endif
-    
-	engine.rootContext()->setContextProperty("kaidan", &kaidan);
+	qmlRegisterType<StatusBar>("StatusBar", 0, 1, "StatusBar");
+	qmlRegisterUncreatableMetaObject(Enums::staticMetaObject, APPLICATION_ID,
+		1, 0, "Enums", "Can't create object; only enums defined!");
 
+	engine.rootContext()->setContextProperty("kaidan", &kaidan);
 	engine.load(QUrl("qrc:/qml/main.qml"));
 	if(engine.rootObjects().isEmpty())
 		return -1;
@@ -177,6 +187,6 @@ int main(int argc, char *argv[])
 	QtAndroid::hideSplashScreen();
 #endif
 
-	// execute the app
+	// enter qt main loop
 	return app.exec();
 }

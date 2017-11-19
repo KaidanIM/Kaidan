@@ -37,7 +37,7 @@ Add our APT repository to your system
 ```
 sudo apt install apt-transport-https software-properties-common dirmngr gnupg
 sudo apt-add-repository "deb https://raw.githubusercontent.com/kaidanim/packages/master stretch main"
-sudo apt-key adv --keyserver hkp://pgp.mit.edu --recv-key "210EB0BCA70439F0"
+sudo apt-key adv --recv-key "210EB0BCA70439F0"
 sudo apt update
 ```
 
@@ -60,23 +60,27 @@ Build only dependencies:
  * CMake
  * Git (if you don't want to use tarballs/zips from github)
 
-##### On Debian Stretch or Sid do the following:
+##### On debian *sid* do the following:
 
 ```bash
 sudo apt install apt-transport-https git-core cmake build-essential zlib1g-dev \
   libgloox-dev libnotify-bin libqt5quick5 libqt5quickcontrols2-5 libqt5quickwidgets5 \
   libqt5qml5 libqt5gui5 libqt5core5a qtdeclarative5-dev qttools5-dev qt5-default \
-  qtquickcontrols2-5-dev
+  qtquickcontrols2-5-dev kirigami2-dev
 ```
 
-Debian currently has no Kirigami2 packages, so we have to install them from our external sources:
+##### On debian *stretch* do the following:
+Debian *stretch* has *no* Kirigami 2 packages, so we have to install them from external sources:
 
 ```bash
 sudo apt install apt-transport-https software-properties-common dirmngr gnupg
 sudo apt-add-repository "deb https://raw.githubusercontent.com/kaidanim/packages/master sid main"
-sudo apt-key adv --keyserver hkp://pgp.mit.edu --recv-key "210EB0BCA70439F0"
+sudo apt-key adv --recv-key "210EB0BCA70439F0"
 sudo apt update
-sudo apt install kirigami2-dev
+sudo apt install apt-transport-https git-core cmake build-essential zlib1g-dev \
+  libgloox-dev libnotify-bin libqt5quick5 libqt5quickcontrols2-5 libqt5quickwidgets5 \
+  libqt5qml5 libqt5gui5 libqt5core5a qtdeclarative5-dev qttools5-dev qt5-default \
+  qtquickcontrols2-5-dev kirigami2-dev
  ```
 
 #### Get the source code:

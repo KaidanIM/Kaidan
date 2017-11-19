@@ -7,12 +7,6 @@ services:
 
 before_install:
 - docker pull debian:sid-slim
-- docker run -d -p 127.0.0.1:80:4567 debian:sid-slim
-- docker run debian:sid-slim /bin/bash -c "echo deb https://raw.githubusercontent.com/kaidanim/packages/master sid main >> /etc/apt/sources.list"
-- docker run debian:sid-slim /bin/bash -c "apt update"
-- docker run debian:sid-slim /bin/bash -c "apt install cmake build-essential zlib1g-dev libgloox-dev libqt5quick5 libqt5quickcontrols2-5 libqt5quickwidgets5 libqt5qml5 libqt5gui5 libqt5core5a qtdeclarative5-dev qttools5-dev qt5-default qtquickcontrols2-5-dev kirigami2-dev"
 
 script:
-- mkdir build; cd build
-- cmake .. -DI18N=1
-- make -j$(nproc)
+- docker run debian:sid-slim /bin/bash -c "apt update; apt install software-properties-common dirmngr gnupg ca-certificates -y; apt-key adv --keyserver hkp://pgp.mit.edu --recv-key "210EB0BCA70439F0"; echo deb https://raw.githubusercontent.com/kaidanim/packages/master sid main >> /etc/apt/sources.list; apt-get update; apt-get install cmake build-essential zlib1g-dev libgloox-dev libqt5quick5 libqt5quickcontrols2-5 libqt5quickwidgets5 libqt5qml5 libqt5gui5 libqt5core5a qtdeclarative5-dev qttools5-dev qt5-default qtquickcontrols2-5-dev kirigami2-dev -y; mkdir /root/kaidan/build; cd /root/kaidan/build; cmake .. -DI18N=1; make -j$(nproc)"

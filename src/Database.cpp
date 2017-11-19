@@ -85,6 +85,8 @@ void Database::loadDatabaseInfo()
 		} else {
 			version = 0;
 		}
+		// we've got all we want; do not query for a db version
+		return;
 	}
 
 	QSqlQuery query(database);
@@ -161,10 +163,10 @@ void Database::createNewDatabase()
 			"'lastOnline' TEXT,"     // < UNUSED v
 			"'activity' TEXT,"
 			"'status' TEXT,"
-			"'mood' TEXT,"           // < UNUSED ^
+			"'mood' TEXT"           // < UNUSED ^
 	                ")"))
 	{
-		qFatal("Failed to query database: %s", qPrintable(query.lastError().text()));
+		qFatal("Error creating roster table: Failed to query database: %s", qPrintable(query.lastError().text()));
 	}
 
 	//
@@ -186,7 +188,7 @@ void Database::createNewDatabase()
 	            "FOREIGN KEY('recipient') REFERENCES Roster ('jid')"
 	            ")"))
 	{
-		qFatal("Failed to query database: %s", qPrintable(query.lastError().text()));
+		qFatal("Error creating messages table: Failed to query database: %s", qPrintable(query.lastError().text()));
 	}
 }
 

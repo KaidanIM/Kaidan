@@ -1,11 +1,11 @@
 # Kaidan - A user-friendly XMPP client for every device!
 
+[![Build Status](https://travis-ci.org/KaidanIM/Kaidan.svg?branch=master)](https://travis-ci.org/KaidanIM/Kaidan)
 [![Release](https://img.shields.io/github/release/kaidanim/kaidan.svg)](https://github.com/kaidanim/kaidan/releases)
 [![Downloads](https://img.shields.io/github/downloads/kaidanim/kaidan/total.svg)](https://github.com/kaidanim/kaidan/releases)
 [![Issues](https://img.shields.io/github/issues/kaidanim/kaidan.svg)](https://github.com/kaidanim/kaidan/issues)
 [![Translation](https://hosted.weblate.org/widgets/kaidan/-/svg-badge.svg)](https://hosted.weblate.org/projects/kaidan/translations/)
 [![License](https://img.shields.io/badge/License-GPLv3%2B%20%2F%20CC%20BY--SA%204.0-blue.svg)](https://raw.githubusercontent.com/kaidanim/kaidan/master/LICENSE.txt)
-[![Build Status](https://travis-ci.org/KaidanIM/Kaidan.svg?branch=master)](https://travis-ci.org/KaidanIM/Kaidan)
 
 ![](http://i.imgur.com/k1Aup3h.png)
 

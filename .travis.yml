@@ -7,4 +7,4 @@ before_install:
   - docker pull debian:sid-slim
 
 script:
-  - docker run -v $PWD:/mnt/kaidan debian:sid-slim /bin/bash -c "cd /mnt/kaidan/utils; ./dependencies.sh; ./build.sh"
+  - docker run -v $PWD:/mnt/kaidan debian:sid-slim /bin/bash -c "cd /mnt/kaidan/utils; ./travis-dependencies.sh; ./travis-build.sh"

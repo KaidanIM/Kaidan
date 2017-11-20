@@ -69,12 +69,12 @@ Kirigami.Page {
 			model: kaidan.messageModel
 
 			delegate: ChatMessage {
-				sentByMe: model.recipient !== kaidan.jid
+				sentByMe: model.recipient != kaidan.jid
 				messageBody: model.message
 				dateTime: new Date(timestamp)
 				isRead: model.isDelivered
-				recipientAvatarUrl: kaidan.avatarStorage.getHashOfJid(recipient) != "" ?
-						    kaidan.avatarStorage.getAvatarUrl(recipient) :
+				recipientAvatarUrl: kaidan.avatarStorage.getHashOfJid(author) !== "" ?
+						    kaidan.avatarStorage.getAvatarUrl(author) :
 						    kaidan.getResourcePath("images/fallback-avatar.svg")
 			}
 		}

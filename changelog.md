@@ -1,5 +1,16 @@
 # Changelog
 
+### Version 0.3.1 (released on 20.11.2017)
+Fixes:
+ * Fixed database creation errors (#135, #132) (@LNJ2)
+ * ChatPage: Fixed recipient's instead of author's avatar displayed (#131, #137) (@LNJ2)
+
+Misc:
+ * Added Travis-CI integration (#133, #134, #136) (@JBBgameich)
+
+Internationalization:
+ * Added Malay translations (#129) (@MuhdNurHidayat)
+
 ### Version 0.3.0 (released on 15.08.2017)
  * Added XEP-0280: Message Carbons (#117) (@LNJ2)
  * Added XEP-0054/XEP-0153: VCard-based avatars (#73, #105, #119) (@LNJ2)

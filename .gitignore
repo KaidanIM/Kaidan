@@ -2,6 +2,10 @@
 kaidan
 kaidan_automoc.cpp
 
+################### AppImage #################
+AppDir/
+*.AppImage
+
 ###################### C++ ####################
 # Prerequisites
 *.d

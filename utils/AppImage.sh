@@ -11,7 +11,7 @@ if ! [ -f linuxdeployqt-continuous-x86_64.AppImage ]; then
 fi
 
 # configure buildsystem and environment for AppDir installation
-mkdir ../build
+if ! [ -d ../build ]; then mkdir ../build; fi
 cd ../build
 export QT_SELECT=qt5
 cmake .. -DCMAKE_INSTALL_PREFIX:PATH=$PWD/../AppDir/usr/

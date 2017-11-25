@@ -29,6 +29,7 @@
 #include <QString>
 #include <QStandardPaths>
 #include <QTimer>
+#include <QCoreApplication>
 // gloox
 #include <gloox/rostermanager.h>
 #include <gloox/receipt.h>
@@ -281,8 +282,13 @@ void Kaidan::removeContact(QString jid)
 
 QString Kaidan::getResourcePath(QString name_)
 {
+	// list of file paths where to search for the resource file
+	QStringList pathList;
+	// add relative path from binary (only works if installed)
+	pathList << QCoreApplication::applicationDirPath() + QString("/../share/") + QString(APPLICATION_NAME);
 	// get the standard app data locations for current platform
-	QStringList pathList = QStandardPaths::standardLocations(QStandardPaths::AppDataLocation);
+	pathList << QStandardPaths::standardLocations(QStandardPaths::AppDataLocation);
+	// add build directory
 	pathList << QString(DEBUG_SOURCE_PATH) + QString("/data"); // append debug directory
 
 	// search for file in directories

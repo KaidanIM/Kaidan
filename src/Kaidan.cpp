@@ -288,8 +288,10 @@ QString Kaidan::getResourcePath(QString name_)
 	pathList << QCoreApplication::applicationDirPath() + QString("/../share/") + QString(APPLICATION_NAME);
 	// get the standard app data locations for current platform
 	pathList << QStandardPaths::standardLocations(QStandardPaths::AppDataLocation);
-	// add build directory
+#ifndef NDEBUG
+	// add source directory (only for debug builds)
 	pathList << QString(DEBUG_SOURCE_PATH) + QString("/data"); // append debug directory
+#endif
 
 	// search for file in directories
 	for (int i = 0; i < pathList.size(); i++) {

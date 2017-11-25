@@ -1,5 +1,10 @@
 # Changelog
 
+### Version 0.3.2 (released on 25.11.2017)
+ * Added AppImage build script (#138) (@JBBgameich)
+ * Use relative paths to find resource files (#143) (@LNJ2)
+ * Source directory is only used for resource files in debug builds (#146) (@LNJ2)
+
 ### Version 0.3.1 (released on 20.11.2017)
 Fixes:
  * Fixed database creation errors (#135, #132) (@LNJ2)

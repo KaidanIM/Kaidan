@@ -14,11 +14,11 @@ fi
 if ! [ -d ../build ]; then mkdir ../build; fi
 cd ../build
 export QT_SELECT=qt5
-cmake .. -DCMAKE_INSTALL_PREFIX:PATH=$PWD/../AppDir/usr/
 
 # Build kaidan
+cmake .. -DI18N=1 -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=/usr
 make -j$(nproc)
-make install
+make DESTDIR=../AppDir -j$(nproc) install
 cd ..
 
 # Copy dependencies into AppDir

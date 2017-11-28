@@ -14,6 +14,7 @@ echo deb https://raw.githubusercontent.com/kaidanim/packages/master sid main >> 
 apt update
 apt install cmake \
             build-essential \
+            ninja-build \
             zlib1g-dev \
             libgloox-dev \
             libqt5quick5 \

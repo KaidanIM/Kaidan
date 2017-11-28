@@ -8,4 +8,5 @@ install:
 
 script:
   - cd utils
+  - source /opt/qt*/bin/qt*-env.sh
   - ./travis-build.sh

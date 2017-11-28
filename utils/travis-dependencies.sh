@@ -11,10 +11,6 @@ sudo apt-get install software-properties-common dirmngr gnupg ca-certificates wg
 # Trusty backports
 sudo bash -c "echo deb http://archive.ubuntu.com/ubuntu trusty-backports main restricted universe multiverse >> /etc/apt/sources.list"
 
-# Kaidan repository
-sudo apt-key adv --recv-key "210EB0BCA70439F0"
-sudo bash -c "echo deb https://raw.githubusercontent.com/kaidanim/packages/master sid main >> /etc/apt/sources.list"
-
 # Qt 5.9 repository
 sudo add-apt-repository ppa:beineri/opt-qt593-trusty -y
 

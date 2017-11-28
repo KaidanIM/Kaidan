@@ -4,22 +4,22 @@ echo "*****************************************"
 echo "Fetching dependencies"
 echo "*****************************************"
 
-apt update
+sudo apt update
 
-apt install software-properties-common dirmngr gnupg ca-certificates wget -y
+sudo apt install software-properties-common dirmngr gnupg ca-certificates wget -y
 
 # Trusty backports
-echo deb http://archive.ubuntu.com/ubuntu trusty-backports main restricted universe multiverse >> /etc/apt/sources.list
+sudo bash -c "echo deb http://archive.ubuntu.com/ubuntu trusty-backports main restricted universe multiverse >> /etc/apt/sources.list"
 
 # Kaidan repository
-apt-key adv --recv-key "210EB0BCA70439F0"
-echo deb https://raw.githubusercontent.com/kaidanim/packages/master sid main >> /etc/apt/sources.list
+sudo apt-key adv --recv-key "210EB0BCA70439F0"
+sudo bash -c "echo deb https://raw.githubusercontent.com/kaidanim/packages/master sid main >> /etc/apt/sources.list"
 
 # Qt 5.9 repository
 sudo add-apt-repository ppa:beineri/opt-qt593-trusty -y
 
-apt update
-apt install cmake \
+sudo apt update
+sudo apt install cmake \
             build-essential \
             ninja-build \
             zlib1g-dev \

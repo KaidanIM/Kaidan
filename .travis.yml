@@ -1,10 +1,12 @@
+language: cpp
+compiler: gcc
 sudo: required
+dist: trusty
 
-services:
-  - docker
-
-before_install:
-  - docker pull debian:sid-slim
+install:
+  - ./utils/travis-dependencies.sh
 
 script:
-  - docker run -v $PWD:/mnt/kaidan debian:sid-slim /bin/bash -c "cd /mnt/kaidan/utils; ./travis-dependencies.sh; ./travis-build.sh"
+  - cd utils
+  - source /opt/qt*/bin/qt*-env.sh
+  - ./travis-build.sh

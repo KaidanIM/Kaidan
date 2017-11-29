@@ -4,27 +4,38 @@ echo "*****************************************"
 echo "Fetching dependencies"
 echo "*****************************************"
 
-apt update
+sudo apt-get update
 
-apt install software-properties-common dirmngr gnupg ca-certificates -y
+sudo apt-get install software-properties-common dirmngr gnupg ca-certificates wget -y
 
-apt-key adv --recv-key "210EB0BCA70439F0"
-echo deb https://raw.githubusercontent.com/kaidanim/packages/master sid main >> /etc/apt/sources.list
+# Trusty backports
+sudo bash -c "echo deb http://archive.ubuntu.com/ubuntu trusty-backports main restricted universe multiverse >> /etc/apt/sources.list"
 
-apt update
-apt install cmake \
+# Qt 5.9 repository
+sudo add-apt-repository ppa:beineri/opt-qt593-trusty -y
+
+sudo apt-get update
+sudo apt install cmake \
             build-essential \
             ninja-build \
             zlib1g-dev \
-            libgloox-dev \
-            libqt5quick5 \
-            libqt5quickcontrols2-5 \
-            libqt5quickwidgets5 \
-            libqt5qml5 \
-            libqt5gui5 \
-            libqt5core5a \
-            qtdeclarative5-dev \
-            qttools5-dev \
-            qt5-default \
-            qtquickcontrols2-5-dev \
-            kirigami2-dev -y
+            qt59base \
+            qt59script \
+            qt59declarative \
+            qt59tools \
+            qt59x11extras \
+            qt59svg \
+            qt59quickcontrols2 \
+            -y -t trusty-backports
+
+# KF5
+wget -c "https://github.com/JBBgameich/precompiled-kf5-linux/releases/download/KF5.40/kf5.40-gcc6-linux64-release.tar.xz"
+tar xf kf5.40-gcc6-linux64-release.tar.xz
+sudo cp -rf kf5-release/* /opt/qt*/
+
+# Gloox
+wget -c "https://github.com/JBBgameich/precompiled-kf5-linux/releases/download/KF5.40/libgloox17_1.0.20-1_amd64.deb"
+wget -c "https://github.com/JBBgameich/precompiled-kf5-linux/releases/download/KF5.40/libgloox-dev_1.0.20-1_amd64.deb"
+sudo dpkg -i libgloox*.deb
+rm libgloox*.deb
+sudo apt install -f -y

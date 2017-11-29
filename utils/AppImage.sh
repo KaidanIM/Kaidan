@@ -17,7 +17,7 @@ cd ../build
 # Find Qt5
 if [ -d /opt/qt59/qml ]; then
     export QMLDIR="/opt/qt59/qml"
-else if [ -d /usr/lib/x86_64-linux-gnu/qt5/qml/ ]; then
+elif [ -d /usr/lib/x86_64-linux-gnu/qt5/qml/ ]; then
     export QMLDIR="/usr/lib/x86_64-linux-gnu/qt5/qml/"
 fi
 export QT_SELECT=qt5

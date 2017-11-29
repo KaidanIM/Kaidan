@@ -17,19 +17,20 @@ cd ../build
 # Find Qt5
 if [ -d /opt/qt59/qml ]; then
     export QMLDIR="/opt/qt59/qml"
+    export KIRIGAMIQMLDIR="/opt/qt59/lib/x86_64-linux-gnu/qml/"
 elif [ -d /usr/lib/x86_64-linux-gnu/qt5/qml/ ]; then
     export QMLDIR="/usr/lib/x86_64-linux-gnu/qt5/qml/"
 fi
 export QT_SELECT=qt5
 
 # Build kaidan
-cmake .. -GNinja -DI18N=1 -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=/usr
+cmake .. -GNinja -DI18N=1 -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=/usr/
 cmake --build .
 DESTDIR=../AppDir cmake --build . --target install
 cd ..
 
 # Copy dependencies into AppDir
-./utils/linuxdeployqt-continuous-x86_64.AppImage $PWD/AppDir/usr/share/applications/kaidan.desktop -qmldir=$QMLDIR -bundle-non-qt-libs
+./utils/linuxdeployqt-continuous-x86_64.AppImage $PWD/AppDir/usr/share/applications/kaidan.desktop -qmldir=$QMLDIR -qmldir=$KIRIGAMIQMLDIR -bundle-non-qt-libs
 
 # Create AppImage
 ./utils/linuxdeployqt-continuous-x86_64.AppImage $PWD/AppDir/usr/share/applications/kaidan.desktop -appimage

@@ -10,3 +10,7 @@ script:
   - cd utils
   - source /opt/qt*/bin/qt*-env.sh
   - ./AppImage.sh
+
+after_success:
+  - wget -c https://github.com/probonopd/uploadtool/raw/master/upload.sh
+  - bash ./upload.sh Kaidan-x86_64.AppImage

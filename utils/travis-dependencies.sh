@@ -31,7 +31,7 @@ sudo apt install cmake \
 # KF5
 wget -c "https://github.com/JBBgameich/precompiled-kf5-linux/releases/download/KF5.40/kf5.40-gcc6-linux64-release.tar.xz"
 tar xf kf5.40-gcc6-linux64-release.tar.xz
-sudo cp -Rf kf5-release/* /opt/qt*/
+sudo cp -rf kf5-release/* /opt/qt*/
 
 # Gloox
 wget -c "https://github.com/JBBgameich/precompiled-kf5-linux/releases/download/KF5.40/libgloox17_1.0.20-1_amd64.deb"

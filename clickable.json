@@ -1,0 +1,12 @@
+{
+  "template": "custom",
+  "dir": "./bin/ubuntu-touch/",
+  "build": "../../utils/build-click.sh",
+  "kill": "kaidan",
+  "sdk": "ubuntu-sdk-16.04",
+  "specificDependencies": true,
+  "dependencies": [
+    "ninja-build",
+    "curl"
+  ]
+}

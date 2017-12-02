@@ -27,6 +27,13 @@ include(GNUInstallDirs)
 # CMake module path
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_SOURCE_DIR}/cmake")
 
+# Ubuntu Touch click package building specific path
+# For internal use by clickable only
+if(UBUNTU_TOUCH)
+	set(CMAKE_PREFIX_PATH ${CMAKE_PREFIX_PATH} "${CMAKE_SOURCE_DIR}/bin/ubuntu-touch/tmp/usr")
+	include_directories("${CMAKE_SOURCE_DIR}/bin/ubuntu-touch/tmp/usr/include")
+endif()
+
 # Find packages
 find_package(Qt5 ${QT_MIN_VERSION} REQUIRED NO_MODULE COMPONENTS Core Qml Quick Sql QuickControls2)
 find_package(KF5Kirigami2 REQUIRED)
@@ -93,6 +100,10 @@ if(SAILFISH_OS)
 		SAILFISH_OS=True
 		PLATFORM_DISPLAY_NAME="Sailfish OS"
 	)
+elseif(UBUNTU_TOUCH)
+	set(KAIDAN_COMPILE_DEFINITIONS
+		UBUNTU_TOUCH=True
+	)
 else()
 	set(KAIDAN_COMPILE_DEFINITIONS
 		NOTIFICATIONS_LIBNOTIFY=True
@@ -109,7 +120,7 @@ target_compile_definitions(${PROJECT_NAME} PRIVATE
 # Install Kaidan
 #
 
-if(UNIX AND NOT APPLE)
+if(UNIX AND NOT APPLE AND NOT UBUNTU_TOUCH)
 	# install kaidan binary
 	install(PROGRAMS ${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}
 		DESTINATION ${CMAKE_INSTALL_FULL_BINDIR}
@@ -132,6 +143,16 @@ if(UNIX AND NOT APPLE)
 	# install desktop file
 	install(FILES "misc/kaidan.desktop"
 		DESTINATION "${CMAKE_INSTALL_FULL_DATADIR}/applications"
+	)
+elseif(UBUNTU_TOUCH)
+	# install kaidan binary
+	install(PROGRAMS ${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}
+		DESTINATION ${CMAKE_INSTALL_FULL_BINDIR}
+	)
+
+	# install kaidan media
+	install(DIRECTORY "data/images"
+		DESTINATION "${CMAKE_INSTALL_FULL_DATADIR}/kaidan.kaidanim"
 	)
 endif()
 

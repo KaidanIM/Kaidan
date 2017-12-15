@@ -2,6 +2,9 @@
 kaidan
 kaidan_automoc.cpp
 
+3rdparty/openssl
+3rdparty/gloox
+
 ################### AppImage #################
 AppDir/
 *.AppImage
@@ -101,10 +104,11 @@ moc_*.cpp
 qrc_*.cpp
 ui_*.h
 Makefile*
-*build-*
 
 # QtCreator
-
+misc/android/gradle.properties
+misc/android/gradle.properties~
+misc/android/local.properties~
 *.autosave
 
 # QtCtreator Qml

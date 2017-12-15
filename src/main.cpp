@@ -35,6 +35,15 @@
 #include <QtQml>
 // Kaidan
 #include "Kaidan.h"
+#include "StatusBar.h"
+
+#ifdef QMAKE_BUILD
+#include "./3rdparty/kirigami/src/kirigamiplugin.h"
+#endif
+
+#ifdef Q_OS_ANDROID
+#include <QtAndroid>
+#endif
 
 enum CommandLineParseResult {
 	CommandLineOk,
@@ -92,8 +101,7 @@ int main(int argc, char *argv[])
 	// Kaidan-Translator
 	QTranslator kaidanTranslator;
 	// load the systems locale or none
-	kaidanTranslator.load(QString(APPLICATION_NAME) + "_" + QLocale::system().name(),
-	                      ":/i18n"); // load the qm files via. rcc (bundled in binary)
+	kaidanTranslator.load(QLocale::system().name(), ":/i18n"); // load qm files from resources
 	app.installTranslator(&kaidanTranslator);
 
 
@@ -141,14 +149,24 @@ int main(int argc, char *argv[])
 	}
 #endif
 
+	qmlRegisterType<StatusBar>("StatusBar", 0, 1, "StatusBar");
+
 	QQmlApplicationEngine engine;
+    
+#ifdef QMAKE_BUILD
+	KirigamiPlugin::getInstance().registerTypes();
+#endif
+    
 	engine.rootContext()->setContextProperty("kaidan", &kaidan);
 
 	engine.load(QUrl("qrc:/qml/main.qml"));
-	QObject *topLevel = engine.rootObjects().value(0);
-	QQuickWindow *window = qobject_cast<QQuickWindow*>(topLevel);
+	if(engine.rootObjects().isEmpty())
+		return -1;
 
-	window->show();
+#ifdef Q_OS_ANDROID
+	//TODO: use QQmlApplicationEngine::objectCreated to ensure QML was actually loaded?
+	QtAndroid::hideSplashScreen();
+#endif
 
 	// execute the app
 	return app.exec();

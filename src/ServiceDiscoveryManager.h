@@ -29,6 +29,8 @@
 #include <gloox/disco.h>
 #include <gloox/discohandler.h>
 #include <gloox/connectionlistener.h>
+// Kaidan
+#include "branding.h"
 
 class ServiceDiscoveryManager : public gloox::DiscoHandler, public gloox::ConnectionListener
 {

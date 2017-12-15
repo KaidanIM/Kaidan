@@ -31,6 +31,7 @@
 #include <gloox/client.h>
 #include <gloox/connectionlistener.h>
 // Kaidan
+#include "branding.h"
 #include "Database.h"
 #include "RosterManager.h"
 #include "MessageSessionHandler.h"

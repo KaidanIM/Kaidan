@@ -51,7 +51,7 @@ Kirigami.ScrollablePage {
 			name: model.name ? model.name : model.jid
 			lastMessage: model.lastMessage
 			unreadMessages: model.unreadMessages
-			avatarImagePath: kaidan.avatarStorage.getHashOfJid(model.jid) != "" ?
+			avatarImagePath: kaidan.avatarStorage.getHashOfJid(model.jid) !== "" ?
 					 kaidan.avatarStorage.getAvatarUrl(model.jid) :
 					 kaidan.getResourcePath("images/fallback-avatar.svg")
 

@@ -25,6 +25,13 @@
     </message>
 </context>
 <context>
+    <name>BackButton</name>
+    <message>
+        <source>Navigate Back</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>ChatPage</name>
     <message>
         <source>Compose message</source>
@@ -33,6 +40,20 @@
     <message>
         <source>Send</source>
         <translation>Senden</translation>
+    </message>
+</context>
+<context>
+    <name>ContextDrawer</name>
+    <message>
+        <source>Actions</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>ForwardButton</name>
+    <message>
+        <source>Navigate Forward</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -52,6 +73,10 @@
     <message>
         <source>Add new contact</source>
         <translation>Neuen Kontakt hinzufügen</translation>
+    </message>
+    <message>
+        <source>Back</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

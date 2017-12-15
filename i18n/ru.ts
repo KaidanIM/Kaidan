@@ -25,6 +25,13 @@
     </message>
 </context>
 <context>
+    <name>BackButton</name>
+    <message>
+        <source>Navigate Back</source>
+        <translation>Назад</translation>
+    </message>
+</context>
+<context>
     <name>ChatPage</name>
     <message>
         <source>Compose message</source>
@@ -36,18 +43,36 @@
     </message>
 </context>
 <context>
+    <name>ContextDrawer</name>
+    <message>
+        <source>Actions</source>
+        <translation>Действия</translation>
+    </message>
+</context>
+<context>
+    <name>ForwardButton</name>
+    <message>
+        <source>Navigate Forward</source>
+        <translation>Вперёд</translation>
+    </message>
+</context>
+<context>
     <name>GlobalDrawer</name>
     <message>
         <source>Logout</source>
-        <translation type="unfinished">Выйти</translation>
+        <translation>Выйти</translation>
     </message>
     <message>
         <source>About</source>
-        <translation type="unfinished">О программе</translation>
+        <translation>О программе</translation>
     </message>
     <message>
         <source>Add new contact</source>
-        <translation type="unfinished"></translation>
+        <translation>Добавить контакт</translation>
+    </message>
+    <message>
+        <source>Back</source>
+        <translation>Назад</translation>
     </message>
 </context>
 <context>
@@ -82,34 +107,34 @@
     </message>
     <message>
         <source>Login</source>
-        <translation type="unfinished"></translation>
+        <translation>Вход</translation>
     </message>
     <message>
         <source>Log in to your Jabber Account</source>
-        <translation type="unfinished"></translation>
+        <translation>Войти в аккаунт Jabber</translation>
     </message>
     <message>
         <source>Your diaspora*-ID:</source>
-        <translation type="unfinished"></translation>
+        <translation>Ваш ID в diaspora*:</translation>
     </message>
     <message>
         <source>user@diaspora.pod</source>
-        <translation type="unfinished"></translation>
+        <translation>пользователь@diaspora.pod</translation>
     </message>
 </context>
 <context>
     <name>RosterAddContactSheet</name>
     <message>
         <source>Nickname:</source>
-        <translation type="unfinished"></translation>
+        <translation>Имя (ник):</translation>
     </message>
     <message>
         <source>Jabber-ID:</source>
-        <translation type="unfinished"></translation>
+        <translation>Jabber ID:</translation>
     </message>
     <message>
         <source>user@example.org</source>
-        <translation type="unfinished">ivanov@mail.ru</translation>
+        <translation>ivanov@mail.ru</translation>
     </message>
     <message>
         <source>Cancel</source>
@@ -117,11 +142,11 @@
     </message>
     <message>
         <source>Add</source>
-        <translation type="unfinished"></translation>
+        <translation>Добавить</translation>
     </message>
     <message>
         <source>Add new contact</source>
-        <translation type="unfinished"></translation>
+        <translation>Добавить контакт</translation>
     </message>
 </context>
 <context>
@@ -135,11 +160,11 @@
     <name>RosterRemoveContactSheet</name>
     <message>
         <source>Do you really want to delete the contact &quot;%1&quot; from your roster?</source>
-        <translation type="unfinished"></translation>
+        <translation>Вы действительно хотите удалить контакт &quot;%1&quot; из своего списка?</translation>
     </message>
     <message>
         <source>Delete contact</source>
-        <translation type="unfinished"></translation>
+        <translation>Удалить контакт</translation>
     </message>
     <message>
         <source>Cancel</source>

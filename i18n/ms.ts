@@ -25,6 +25,13 @@
     </message>
 </context>
 <context>
+    <name>BackButton</name>
+    <message>
+        <source>Navigate Back</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>ChatPage</name>
     <message>
         <source>Compose message</source>
@@ -33,6 +40,20 @@
     <message>
         <source>Send</source>
         <translation>Hantar</translation>
+    </message>
+</context>
+<context>
+    <name>ContextDrawer</name>
+    <message>
+        <source>Actions</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>ForwardButton</name>
+    <message>
+        <source>Navigate Forward</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -48,6 +69,10 @@
     <message>
         <source>Add new contact</source>
         <translation>Tambah kenalan baru</translation>
+    </message>
+    <message>
+        <source>Back</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -66,7 +91,7 @@
     </message>
     <message>
         <source>Password</source>
-        <translation>Kata Laluan</translation>
+        <translation type="vanished">Kata Laluan</translation>
     </message>
     <message>
         <source>Retry</source>

@@ -17,4 +17,5 @@ set(KAIDAN_SOURCES
 	${CURDIR}/ServiceDiscoveryManager.cpp
 	${CURDIR}/VCardManager.cpp
 	${CURDIR}/XmlLogHandler.cpp
+	${CURDIR}/StatusBar.cpp
 )

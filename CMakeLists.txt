@@ -64,8 +64,8 @@ endif()
 
 # Sailfish OS GUI
 if(SAILFISH_OS)
-	if(EXISTS "${CMAKE_SOURCE_DIR}/libs/kaidansf/CMakeLists.txt")
-		include("${CMAKE_SOURCE_DIR}/libs/kaidansf/CMakeLists.txt")
+	if(EXISTS "${CMAKE_SOURCE_DIR}/3rdparty/kaidansf/CMakeLists.txt")
+		include("${CMAKE_SOURCE_DIR}/3rdparty/kaidansf/CMakeLists.txt")
 	else()
 		message(FATAL_ERROR "Could NOT find KaidanSF adaptions for Sailfish OS.")
 	endif()

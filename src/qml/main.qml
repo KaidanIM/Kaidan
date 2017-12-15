@@ -22,6 +22,7 @@
 import QtQuick 2.6
 import QtQuick.Controls.Material 2.0
 import org.kde.kirigami 2.0 as Kirigami
+import StatusBar 0.1
 
 Kirigami.ApplicationWindow {
 	id: root
@@ -34,6 +35,10 @@ Kirigami.ApplicationWindow {
 	header: Kirigami.ApplicationHeader {
 		preferredHeight: Kirigami.Units.gridUnit * 2.25
 	}
+
+    StatusBar {
+        color: Material.color(Material.Green, Material.Shade700)
+    }
 
 	globalDrawer: GlobalDrawer {}
 

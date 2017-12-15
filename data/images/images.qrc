@@ -1,0 +1,13 @@
+<RCC>
+    <qresource prefix="/images/">
+        <file alias="banner.png">banner.png</file>
+        <file alias="chat.png">chat.png</file>
+        <file alias="diaspora.svg">diaspora.svg</file>
+        <file alias="fallback-avatar.svg">fallback-avatar.svg</file>
+        <file alias="message_checkmark.svg">message_checkmark.svg</file>
+        <file alias="xmpp.svg">xmpp.svg</file>
+    </qresource>
+    <qresource prefix="/icons/">
+        <file alias="kaidan.svg">kaidan.svg</file>
+    </qresource>
+</RCC>

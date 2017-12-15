@@ -289,8 +289,10 @@ QString Kaidan::getResourcePath(QString name_)
 	// get the standard app data locations for current platform
 	pathList << QStandardPaths::standardLocations(QStandardPaths::AppDataLocation);
 #ifndef NDEBUG
+#ifdef DEBUG_SOURCE_PATH
 	// add source directory (only for debug builds)
 	pathList << QString(DEBUG_SOURCE_PATH) + QString("/data"); // append debug directory
+#endif
 #endif
 
 	// search for file in directories
@@ -303,6 +305,10 @@ QString Kaidan::getResourcePath(QString name_)
 			return QString("file://") + directory.absoluteFilePath(name_);
 		}
 	}
+	
+	// on Android, we want to fetch images from the application resources
+	if (QFile::exists(":/" + name_))
+		return QString("qrc:/" + name_);
 
 	// no file found
 	qWarning() << "Could NOT find media file:" << name_;

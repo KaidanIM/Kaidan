@@ -1,3 +1,9 @@
-[submodule "libs/kaidansf"]
-	path = libs/kaidansf
+[submodule "3rdparty/kirigami"]
+	path = 3rdparty/kirigami
+	url = https://github.com/KDE/kirigami
+[submodule "3rdparty/breeze-icons"]
+	path = 3rdparty/breeze-icons
+	url = https://github.com/kde/breeze-icons
+[submodule "3rdparty/kaidansf"]
+	path = 3rdparty/kaidansf
 	url = https://github.com/kaidanim/kaidansf

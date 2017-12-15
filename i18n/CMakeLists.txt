@@ -47,7 +47,7 @@ set(LRELEASE_ARGS -compress -nounfinished -removeidentical -silent)
 
 foreach(TS_FILE ${TS_FILES})
 get_filename_component(FILENAME ${TS_FILE} NAME_WE) # only name without extension
-set(QM_FILE "${PROJECT_NAME}_${FILENAME}.qm")       # name for the generated qm file
+set(QM_FILE "${FILENAME}.qm")       # name for the generated qm file
 set(QM_FILES ${QM_FILES} "${CMAKE_CURRENT_BINARY_DIR}/${QM_FILE}")
 
 add_custom_command(

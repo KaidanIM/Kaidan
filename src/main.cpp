@@ -132,9 +132,13 @@ int main(int argc, char *argv[])
 	//
 	// QML-GUI
 	//
+
 #ifndef SAILFISH_OS
 	// QtQuickControls2 Style
-	qputenv("QT_QUICK_CONTROLS_STYLE", "Material");
+	if (qgetenv("QT_QUICK_CONTROLS_STYLE").isEmpty()) {
+		qDebug() << "QT_QUICK_CONTROLS_STYLE not set, setting to Material";
+		qputenv("QT_QUICK_CONTROLS_STYLE", "Material");
+	}
 #endif
 
 	QQmlApplicationEngine engine;

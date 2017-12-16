@@ -32,7 +32,8 @@ sudo apt install cmake \
 wget -c "https://github.com/JBBgameich/precompiled-kf5-linux/releases/download/KF5.40/kf5.40-gcc6-linux64-release.tar.xz"
 tar xf kf5.40-gcc6-linux64-release.tar.xz
 sudo cp -rf kf5-release/* /opt/qt*/
-sudo mv /opt/qt59/lib/x86_64-linux-gnu/qml/* /opt/qt59/qml/
+mkdir -p /opt/qt59/qml/org/kde/
+sudo mv /opt/qt59/lib/x86_64-linux-gnu/qml/org/kde/kirigami.2 /opt/qt59/qml/org/kde/
 
 # Gloox
 wget -c "https://github.com/JBBgameich/precompiled-kf5-linux/releases/download/KF5.40/libgloox17_1.0.20-1_amd64.deb"

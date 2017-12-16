@@ -32,6 +32,10 @@ Kirigami.GlobalDrawer {
 	// show open button on the left side
 	handleVisible: true
 
+	AboutSheet {
+		id: aboutSheet
+	}
+
 	actions: [
 		Kirigami.Action {
 			text: qsTr("Add new contact")
@@ -48,8 +52,7 @@ Kirigami.GlobalDrawer {
 					// disconnect normally, this will emit the
 					// disconncted signal and open the login page
 					kaidan.mainDisconnect();
-				}
-				else {
+				} else {
 					// emit the disconnect signal, to force
 					// the pages being popped and the login
 					// page pushed
@@ -61,12 +64,8 @@ Kirigami.GlobalDrawer {
 			text: qsTr("About")
 			iconName: "help-about"
 			onTriggered: {
-				// prevent opening the about page multiple times
-				while (pageStack.depth > 1) {
-					pageStack.pop();
-				}
-				// open login page
-				pageStack.push(aboutPage);
+				// open about sheet
+				aboutSheet.open();
 			}
 		}
 	]

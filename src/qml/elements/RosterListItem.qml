@@ -56,7 +56,7 @@ Kirigami.SwipeListItem {
 				}
 			}
 			// bottom
-			Kirigami.Label {
+			Controls.Label {
 				Layout.fillWidth: true
 				text: kaidan.removeNewLinesFromString(lastMessage);
 			}

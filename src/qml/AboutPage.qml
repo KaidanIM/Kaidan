@@ -41,17 +41,17 @@ Kirigami.Page {
 			anchors.horizontalCenter: parent.horizontalCenter
 		}
 
-		Kirigami.Label {
+		Controls.Label {
 			text: qsTr("A simple, user-friendly Jabber/XMPP client")
 			anchors.horizontalCenter: parent.horizontalCenter
 		}
 
-		Kirigami.Label {
+		Controls.Label {
 			text: qsTr("License:") + " GPLv3+ / CC BY-SA 4.0"
 			anchors.horizontalCenter: parent.horizontalCenter
 		}
 
-		Kirigami.Label {
+		Controls.Label {
 			text: "Copyright (C) 2016-2017 Kaidan developers and contributors"
 			anchors.horizontalCenter: parent.horizontalCenter
 		}

@@ -43,7 +43,7 @@ Kirigami.Page {
 			Layout.fillWidth: true
 
 			// JID field
-			Kirigami.Label {
+			Controls.Label {
 				id: jidLabel
 				text: qsTr("Your Jabber-ID:")
 
@@ -76,7 +76,7 @@ Kirigami.Page {
 			}
 
 			// Password field
-			Kirigami.Label {
+			Controls.Label {
 				text: qsTr("Your Password:")
 			}
 			Controls.TextField {

@@ -30,7 +30,7 @@ Kirigami.OverlaySheet {
 			Layout.fillWidth: true
 		}
 
-		Kirigami.Label {
+		Controls.Label {
 			text: qsTr("Nickname:")
 		}
 		Controls.TextField {
@@ -39,7 +39,7 @@ Kirigami.OverlaySheet {
 			Layout.fillWidth: true
 		}
 
-		Kirigami.Label {
+		Controls.Label {
 			text: qsTr("Jabber-ID:")
 		}
 		Controls.TextField {

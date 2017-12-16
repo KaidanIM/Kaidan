@@ -19,6 +19,7 @@
  */
 
 import QtQuick 2.6
+import QtQuick.Controls 2.0 as Controls
 import org.kde.kirigami 2.0 as Kirigami
 
 Row {
@@ -58,45 +59,45 @@ Row {
 		}
 
 		Column {
-                        id: layout
+			id: layout
 
-                        Kirigami.Label {
-                                id: label
-                                width: Math.min(implicitWidth, pageStack.lastItem.width * 0.8)
+			Controls.Label {
+				id: label
+				width: Math.min(implicitWidth, pageStack.lastItem.width * 0.8)
 				height: implicitHeight
 				leftPadding: Kirigami.Units.gridUnit * 0.5
 				rightPadding: Kirigami.Units.gridUnit * 0.5
 				topPadding: Kirigami.Units.gridUnit * 0.5
 				bottomPadding: Kirigami.Units.gridUnit * 0.2
-                                text: messageBody
-                                wrapMode: Text.Wrap
-                                color: sentByMe ? "black" : "white"
-                        }
+				text: messageBody
+				wrapMode: Text.Wrap
+				color: sentByMe ? "black" : "white"
+			}
 
-                        Row {
+			Row {
 				id: messageInfo
 				leftPadding: Kirigami.Units.gridUnit * 0.5
 				rightPadding: Kirigami.Units.gridUnit * 0.5
 				bottomPadding: Kirigami.Units.gridUnit * 0.5
 				spacing: Kirigami.Units.gridUnit * 0.5
 
-                                Kirigami.Label {
-                                        id: dateLabel
+				Controls.Label {
+					id: dateLabel
 					height: implicitHeight
                                         text: Qt.formatDateTime(dateTime, "dd MMM, hh:mm")
 					color: sentByMe ? "grey" : "#e0e0e0"
                                 }
 				
 				Image {
-                                        id: checkmark
-                                        visible: (sentByMe && isRead)
+					id: checkmark
+					visible: (sentByMe && isRead)
 					anchors.verticalCenter: dateLabel.verticalCenter
-                                        height: Kirigami.Units.gridUnit * 0.6
-                                        width: Kirigami.Units.gridUnit * 0.6
-                                        source: kaidan.getResourcePath("images/message_checkmark.svg");
+					height: Kirigami.Units.gridUnit * 0.6
+					width: Kirigami.Units.gridUnit * 0.6
+					source: kaidan.getResourcePath("images/message_checkmark.svg");
 					mipmap: true
-                                }
-                        }
-                }
+				}
+			}
+		}
 	}
 }

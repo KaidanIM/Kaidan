@@ -31,7 +31,7 @@ Kirigami.ApplicationWindow {
 	// signals
 	signal addContactDialogRequested()
 
-	header: Kirigami.ToolBarApplicationHeader {
+	header: Kirigami.ApplicationHeader {
 		preferredHeight: Kirigami.Units.gridUnit * 2.25
 	}
 

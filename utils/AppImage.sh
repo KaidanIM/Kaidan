@@ -17,6 +17,7 @@ cd ../build
 # Find Qt5
 if [ -d /opt/qt59/qml ]; then
     sudo mv /opt/qt59/lib/x86_64-linux-gnu/qml/* /opt/qt59/qml/ -r
+    ls /opt/qt59/qml/
     export QMLDIR="/opt/qt59/qml"
 elif [ -d /usr/lib/x86_64-linux-gnu/qt5/qml/ ]; then
     export QMLDIR="/usr/lib/x86_64-linux-gnu/qt5/qml/"

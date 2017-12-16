@@ -27,6 +27,7 @@ sudo apt install cmake \
             qt59svg \
             qt59quickcontrols2 \
             qt59graphicaleffects \
+            qt59svg \
             -y -t trusty-backports
 
 # KF5

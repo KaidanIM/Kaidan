@@ -119,7 +119,7 @@ void MessageHandler::handleMessage(const gloox::Message &stanza, gloox::MessageS
 
 		// add the message to the database
 		messageModel->addMessage(&fromJid, &toJid, &timestamp, &body, &msgId,
-								 isSentByMe, &fromJidResource, &toJidResource);
+					isSentByMe, &fromJidResource, &toJidResource);
 
 		//
 		// Send a new notification | TODO: Resolve nickname from JID
@@ -148,30 +148,27 @@ void MessageHandler::handleMessage(const gloox::Message &stanza, gloox::MessageS
 			newUnreadMessageForJid(&contactJid);
 	}
 
-	if (message->hasEmbeddedStanza()) {
-		// XEP-0184: Message Delivery Receipts
-		// try to get a possible delivery receipt
-		gloox::Receipt *receipt = (gloox::Receipt*) message->findExtension<gloox::Receipt>(gloox::ExtReceipt);
+	// XEP-0184: Message Delivery Receipts
+	// try to get a possible delivery receipt
+	gloox::Receipt *receipt = (gloox::Receipt*) message->findExtension<gloox::Receipt>(gloox::ExtReceipt);
 
-		if (receipt) {
-			// get the type of the receipt
-			gloox::Receipt::ReceiptType receiptType = receipt->rcpt();
-			if (receiptType == gloox::Receipt::Request) {
-				// send the asked confirmation, that the message has been arrived
-				// new message to the author of the request
-				gloox::Message receiptMessage(gloox::Message::Chat, message->from());
+	if (receipt) {
+		// get the type of the receipt
+		gloox::Receipt::ReceiptType receiptType = receipt->rcpt();
+		if (receiptType == gloox::Receipt::Request) {
+			// send the asked confirmation, that the message has been arrived
+			// new message to the author of the request
+			gloox::Message receiptMessage(gloox::Message::Chat, message->from());
 
-				// add the receipt extension containing the request's message id
-				gloox::Receipt *receiptPayload = new gloox::Receipt(gloox::Receipt::Received,
-																	message->id());
-				receiptMessage.addExtension(receiptPayload);
+			// add the receipt extension containing the request's message id
+			gloox::Receipt *receiptPayload = new gloox::Receipt(gloox::Receipt::Received, message->id());
+			receiptMessage.addExtension(receiptPayload);
 
-				// send the receipt message
-				client->send(receiptMessage);
-			} else if (receiptType == gloox::Receipt::Received) {
-				// Delivery Receipt Received -> mark message as read in db
-				messageModel->setMessageAsDelivered(QString::fromStdString(receipt->id()));
-			}
+			// send the receipt message
+			client->send(receiptMessage);
+		} else if (receiptType == gloox::Receipt::Received) {
+			// Delivery Receipt Received -> mark message as read in db
+			messageModel->setMessageAsDelivered(QString::fromStdString(receipt->id()));
 		}
 	}
 }

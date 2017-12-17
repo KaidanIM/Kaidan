@@ -3,6 +3,7 @@
  *
  *  Copyright (C) 2016-2017 LNJ <git@lnj.li>
  *  Copyright (C) 2017 JBBgameich <jbb.mail@gmx.de>
+ *  Copyright (C) 2017 Ilya Bizyaev <bizyaev@zoho.com>
  *
  *  Kaidan is free software: you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -69,7 +70,7 @@ Kirigami.Page {
 			model: kaidan.messageModel
 
 			delegate: ChatMessage {
-				sentByMe: model.recipient != kaidan.jid
+			sentByMe: model.recipient !== kaidan.jid
 				messageBody: model.message
 				dateTime: new Date(timestamp)
 				isRead: model.isDelivered
@@ -97,12 +98,15 @@ Kirigami.Page {
 			RowLayout {
 				width: parent.width
 
-				Controls.TextArea {
+				Controls.TextField {
 					id: messageField
 					Layout.fillWidth: true
 					placeholderText: qsTr("Compose message")
 					wrapMode: Controls.TextArea.Wrap
 					selectByMouse: true
+					onAccepted: {
+						sendButton.onClicked()
+					}
 				}
 
 				Controls.Button {

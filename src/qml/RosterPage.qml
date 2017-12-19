@@ -35,6 +35,15 @@ Kirigami.ScrollablePage {
 		jid: ""
 	}
 
+	mainAction: Kirigami.Action {
+		text: qsTr("Add new contact")
+		iconName: "contact-new"
+		enabled: !addContactSheet.sheetOpen
+		onTriggered: {
+			addContactSheet.open();
+		}
+	}
+
 	ListView {
 		verticalLayoutDirection: ListView.TopToBottom
 		model: kaidan.rosterModel
@@ -70,19 +79,5 @@ Kirigami.ScrollablePage {
 				}
 			]
 		}
-	}
-
-	Component.onCompleted: {
-		function openAddContactSheet() {
-			addContactSheet.open();
-		}
-		function disconnectOpenAddContactSheet() {
-			addContactDialogRequested.disconnect(openAddContactSheet);
-		}
-
-		// open sheet when requested from drawer over signal
-		addContactDialogRequested.connect(openAddContactSheet);
-		// disconnect the open function, when the roster page is closed
-		kaidan.connectionStateDisconnected.connect(disconnectOpenAddContactSheet);
 	}
 }

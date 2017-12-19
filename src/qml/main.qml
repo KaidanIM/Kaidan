@@ -20,7 +20,6 @@
  */
 
 import QtQuick 2.6
-import QtQuick.Controls.Material 2.0
 import org.kde.kirigami 2.0 as Kirigami
 
 Kirigami.ApplicationWindow {
@@ -28,14 +27,16 @@ Kirigami.ApplicationWindow {
 	width: 960
 	height: 540
 
-	// signals
-	signal addContactDialogRequested()
-
+	// Header / ToolBar
 	header: Kirigami.ApplicationHeader {
 		preferredHeight: Kirigami.Units.gridUnit * 2.25
 	}
 
+	// Global and Contextual Drawers
 	globalDrawer: GlobalDrawer {}
+	contextDrawer: Kirigami.ContextDrawer {
+		id: contextDrawer
+	}
 
 	// when the window was closed, disconnect from jabber server
 	onClosing: {

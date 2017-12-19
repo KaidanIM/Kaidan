@@ -1,6 +1,6 @@
 TEMPLATE = app
 
-QT += qml quick quickcontrols2 sql
+QT += qml quick quickcontrols2 svg sql
 android: QT += androidextras
 
 CONFIG += c++11
@@ -41,12 +41,12 @@ HEADERS += \
     src/branding.h \
     src/StatusBar.h
 
-android: INCLUDEPATH += $$PWD/prebuilt/libgloox/android/$$ANDROID_TARGET_ARCH/include
-android: LIBS += -L$$PWD/prebuilt/libgloox/android/$$ANDROID_TARGET_ARCH/lib/
-android: LIBS += -L$$PWD/prebuilt/openssl/android/$$ANDROID_TARGET_ARCH/lib/
+android: INCLUDEPATH += $$PWD/3rdparty/gloox/include
+android: LIBS += -L$$PWD/3rdparty/gloox/lib/
+android: LIBS += -L$$PWD/3rdparty/openssl/lib/
 LIBS += -lgloox -lssl -lcrypto
 
-include(libs/kirigami/kirigami.pri)
+include(3rdparty/kirigami/kirigami.pri)
 
 RESOURCES += kaidan_qml.qrc i18n/0_i18n.qrc data/images/images.qrc
 
@@ -60,10 +60,10 @@ TRANSLATIONS += \
 DEFINES += QMAKE_BUILD
 
 # Additional import path used to resolve QML modules in Qt Creator's code model
-QML_IMPORT_PATH = $$PWD/src/qml $$PWD/libs/kirigami/src
+QML_IMPORT_PATH = $$PWD/src/qml $$PWD/3rdparty/kirigami/src
 
 # Additional import path used to resolve QML modules just for Qt Quick Designer
-QML_DESIGNER_IMPORT_PATH = $$PWD/src/qml $$PWD/libs/kirigami/src
+QML_DESIGNER_IMPORT_PATH = $$PWD/src/qml $$PWD/3rdparty/kirigami/src
 
 # The following define makes your compiler emit warnings if you use
 # any feature of Qt which as been marked deprecated (the exact warnings
@@ -115,3 +115,9 @@ DISTFILES += \
     misc/android/local.properties
 
 ANDROID_PACKAGE_SOURCE_DIR = $$PWD/misc/android
+
+contains(ANDROID_TARGET_ARCH,armeabi-v7a) {
+    ANDROID_EXTRA_LIBS = \
+        $$PWD/3rdparty/openssl/lib/libcrypto.so \
+        $$PWD/3rdparty/openssl/lib/libssl.so
+}

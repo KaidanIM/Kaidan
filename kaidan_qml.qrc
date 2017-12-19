@@ -12,6 +12,7 @@
 		<file alias="qml/elements/MessageCounter.qml">src/qml/elements/MessageCounter.qml</file>
 		<file alias="qml/elements/ChatMessage.qml">src/qml/elements/ChatMessage.qml</file>
 		<file alias="qml/elements/RoundImage.qml">src/qml/elements/RoundImage.qml</file>
+		<file alias="qml/elements/SheetHeading.qml">src/qml/elements/SheetHeading.qml</file>
 
 		<file alias="qtquickcontrols2.conf">misc/qtquickcontrols2.conf</file>
 	</qresource>

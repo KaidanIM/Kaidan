@@ -21,8 +21,10 @@ import QtQuick 2.6
 import QtQuick.Controls 2.0 as Controls
 import QtQuick.Layouts 1.3
 import org.kde.kirigami 2.0 as Kirigami
+import "elements"
 
 Kirigami.OverlaySheet {
+	id: removeContactSheet
 	property string jid;
 
 	onSheetOpenChanged: {
@@ -30,10 +32,9 @@ Kirigami.OverlaySheet {
 	}
 
 	ColumnLayout {
-		Kirigami.Heading {
+		SheetHeading {
 			text: qsTr("Delete contact")
-
-			Layout.fillWidth: true
+			onCloseRequested: removeContactSheet.close()
 		}
 
 		Controls.Label {

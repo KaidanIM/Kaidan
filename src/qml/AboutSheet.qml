@@ -34,7 +34,7 @@ Kirigami.OverlaySheet {
 		Layout.alignment: Qt.AlignHCenter
 
 		Image {
-			source: kaidan.getResourcePath("images/kaidan.svg")
+            source: kaidan.getResourcePath("icons/kaidan.svg")
 			Layout.preferredHeight: Kirigami.Units.gridUnit * 15
 			Layout.fillWidth: true
 			Layout.alignment: Qt.AlignHCenter | Qt.AlignTop

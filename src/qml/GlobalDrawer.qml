@@ -23,7 +23,7 @@ import org.kde.kirigami 2.0 as Kirigami
 Kirigami.GlobalDrawer {
 	id: globalDrawer
 	title: "Kaidan"
-	titleIcon: "kaidan"
+    titleIcon: "kaidan"
 	bannerImageSource: kaidan.getResourcePath("images/banner.png");
 	// make drawer floating (overlay)
 	modal: true

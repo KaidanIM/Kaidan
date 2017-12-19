@@ -10,4 +10,7 @@
     <qresource prefix="/icons/">
         <file alias="kaidan.svg">kaidan.svg</file>
     </qresource>
+    <qresource prefix="/org/kde/kirigami/icons/">
+        <file alias="kaidan.svg">kaidan.svg</file>
+    </qresource>
 </RCC>

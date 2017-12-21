@@ -134,7 +134,7 @@
     </message>
     <message>
         <source>Nickname:</source>
-        <translation>Nickname:</translation>
+        <translation></translation>
     </message>
     <message>
         <source>Jabber-ID:</source>

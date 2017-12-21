@@ -52,6 +52,7 @@ RESOURCES += kaidan_qml.qrc i18n/0_i18n.qrc data/images/images.qrc
 
 TRANSLATIONS += \
     i18n/de.ts \
+    i18n/es.ts \
     i18n/fr.ts \
     i18n/ja.ts \
     i18n/ms.ts \

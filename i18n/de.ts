@@ -28,7 +28,7 @@
     <name>AboutSheet</name>
     <message>
         <source>A simple, user-friendly Jabber/XMPP client</source>
-        <translation type="unfinished">Ein einfacher, benutzerfreundlicher Jabber/XMPP client</translation>
+        <translation>Ein einfacher, benutzerfreundlicher Jabber/XMPP client</translation>
     </message>
     <message>
         <source>License:</source>

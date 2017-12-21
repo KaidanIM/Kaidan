@@ -5,11 +5,11 @@
     <name>AboutPage</name>
     <message>
         <source>About</source>
-        <translation type="unfinished"></translation>
+        <translation>À propos</translation>
     </message>
     <message>
         <source>A simple, user-friendly Jabber/XMPP client</source>
-        <translation type="unfinished"></translation>
+        <translation>Un client Jabber/XMPP, simple et convivial</translation>
     </message>
     <message>
         <source>License:</source>
@@ -17,7 +17,7 @@
     </message>
     <message>
         <source>Sourcecode on Github</source>
-        <translation type="unfinished"></translation>
+        <translation>Code source sur Github</translation>
     </message>
     <message>
         <source>Close</source>
@@ -35,11 +35,11 @@
     <name>ChatPage</name>
     <message>
         <source>Compose message</source>
-        <translation type="unfinished"></translation>
+        <translation>Écrire un message</translation>
     </message>
     <message>
         <source>Send</source>
-        <translation type="unfinished"></translation>
+        <translation>Envoyer</translation>
     </message>
 </context>
 <context>
@@ -60,15 +60,15 @@
     <name>GlobalDrawer</name>
     <message>
         <source>Logout</source>
-        <translation type="unfinished"></translation>
+        <translation>Déconnexion</translation>
     </message>
     <message>
         <source>About</source>
-        <translation type="unfinished"></translation>
+        <translation>À propos</translation>
     </message>
     <message>
         <source>Add new contact</source>
-        <translation type="unfinished"></translation>
+        <translation>Ajouter un nouveau contact</translation>
     </message>
     <message>
         <source>Back</source>
@@ -83,15 +83,15 @@
     </message>
     <message>
         <source>user@example.org</source>
-        <translation type="unfinished"></translation>
+        <translation>utilisateur@example.org</translation>
     </message>
     <message>
         <source>Your Password:</source>
-        <translation type="unfinished"></translation>
+        <translation>Votre mot de passe : </translation>
     </message>
     <message>
         <source>Retry</source>
-        <translation type="unfinished"></translation>
+        <translation>Réessayer</translation>
     </message>
     <message>
         <source>Connect</source>
@@ -99,38 +99,38 @@
     </message>
     <message>
         <source>Connecting...</source>
-        <translation type="unfinished"></translation>
+        <translation>Connexion en cours...</translation>
     </message>
     <message>
         <source>Login</source>
-        <translation type="unfinished"></translation>
+        <translation>Connexion</translation>
     </message>
     <message>
         <source>Log in to your Jabber Account</source>
-        <translation type="unfinished"></translation>
+        <translation>Connexion à votre compte Jabber</translation>
     </message>
     <message>
         <source>Your diaspora*-ID:</source>
-        <translation type="unfinished"></translation>
+        <translation>Votre identifiant diaspora*</translation>
     </message>
     <message>
         <source>user@diaspora.pod</source>
-        <translation type="unfinished"></translation>
+        <translation>utilisateur@diaspora.pod</translation>
     </message>
 </context>
 <context>
     <name>RosterAddContactSheet</name>
     <message>
         <source>Nickname:</source>
-        <translation type="unfinished"></translation>
+        <translation>Pseudonyme :</translation>
     </message>
     <message>
         <source>Jabber-ID:</source>
-        <translation type="unfinished"></translation>
+        <translation>Identifiant Jabber</translation>
     </message>
     <message>
         <source>user@example.org</source>
-        <translation type="unfinished"></translation>
+        <translation>utilisateur@example.org</translation>
     </message>
     <message>
         <source>Cancel</source>
@@ -138,29 +138,29 @@
     </message>
     <message>
         <source>Add</source>
-        <translation type="unfinished"></translation>
+        <translation>Ajouter</translation>
     </message>
     <message>
         <source>Add new contact</source>
-        <translation type="unfinished"></translation>
+        <translation>Ajouter un nouveau contact</translation>
     </message>
 </context>
 <context>
     <name>RosterPage</name>
     <message>
         <source>Contacts</source>
-        <translation type="unfinished"></translation>
+        <translation>Contacts</translation>
     </message>
 </context>
 <context>
     <name>RosterRemoveContactSheet</name>
     <message>
         <source>Do you really want to delete the contact &quot;%1&quot; from your roster?</source>
-        <translation type="unfinished"></translation>
+        <translation>Voulez-vous vraiment supprimer le contact « %1» de votre liste?</translation>
     </message>
     <message>
         <source>Delete contact</source>
-        <translation type="unfinished"></translation>
+        <translation>Supprimer contact</translation>
     </message>
     <message>
         <source>Cancel</source>

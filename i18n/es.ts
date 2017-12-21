@@ -71,7 +71,7 @@
     </message>
     <message>
         <source>Log in to your Jabber Account</source>
-        <translation type="unfinished"></translation>
+        <translation>Inicie sesión en su cuenta Jabber</translation>
     </message>
     <message>
         <source>Your Jabber-ID:</source>

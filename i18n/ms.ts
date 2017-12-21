@@ -5,23 +5,38 @@
     <name>AboutPage</name>
     <message>
         <source>About</source>
-        <translation>Latar Belakang</translation>
+        <translation type="vanished">Latar Belakang</translation>
     </message>
     <message>
         <source>A simple, user-friendly Jabber/XMPP client</source>
-        <translation>Klien Jabber/XMPP yang mudah, mesra pengguna</translation>
+        <translation type="vanished">Klien Jabber/XMPP yang mudah, mesra pengguna</translation>
     </message>
     <message>
         <source>License:</source>
-        <translation>Lesen:</translation>
+        <translation type="vanished">Lesen:</translation>
     </message>
     <message>
         <source>Sourcecode on Github</source>
-        <translation>Kod sumber di Github</translation>
+        <translation type="vanished">Kod sumber di Github</translation>
     </message>
     <message>
         <source>Close</source>
-        <translation>Tutup</translation>
+        <translation type="vanished">Tutup</translation>
+    </message>
+</context>
+<context>
+    <name>AboutSheet</name>
+    <message>
+        <source>A simple, user-friendly Jabber/XMPP client</source>
+        <translation type="unfinished">Klien Jabber/XMPP yang mudah, mesra pengguna</translation>
+    </message>
+    <message>
+        <source>License:</source>
+        <translation type="unfinished">Lesen:</translation>
+    </message>
+    <message>
+        <source>Source code on Github</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -68,7 +83,7 @@
     </message>
     <message>
         <source>Add new contact</source>
-        <translation>Tambah kenalan baru</translation>
+        <translation type="vanished">Tambah kenalan baru</translation>
     </message>
     <message>
         <source>Back</source>
@@ -154,6 +169,10 @@
     <message>
         <source>Contacts</source>
         <translation>Kenalan</translation>
+    </message>
+    <message>
+        <source>Add new contact</source>
+        <translation type="unfinished">Tambah kenalan baru</translation>
     </message>
 </context>
 <context>

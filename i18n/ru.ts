@@ -5,23 +5,38 @@
     <name>AboutPage</name>
     <message>
         <source>About</source>
-        <translation>О программе</translation>
+        <translation type="vanished">О программе</translation>
     </message>
     <message>
         <source>A simple, user-friendly Jabber/XMPP client</source>
-        <translation>Простой и удобный Jabber/XMPP клиент</translation>
+        <translation type="vanished">Простой и удобный Jabber/XMPP клиент</translation>
     </message>
     <message>
         <source>License:</source>
-        <translation>Лицензия:</translation>
+        <translation type="vanished">Лицензия:</translation>
     </message>
     <message>
         <source>Sourcecode on Github</source>
-        <translation>Исходный код на GitHub</translation>
+        <translation type="vanished">Исходный код на GitHub</translation>
     </message>
     <message>
         <source>Close</source>
-        <translation>Закрыть</translation>
+        <translation type="vanished">Закрыть</translation>
+    </message>
+</context>
+<context>
+    <name>AboutSheet</name>
+    <message>
+        <source>A simple, user-friendly Jabber/XMPP client</source>
+        <translation type="unfinished">Простой и удобный Jabber/XMPP клиент</translation>
+    </message>
+    <message>
+        <source>License:</source>
+        <translation type="unfinished">Лицензия:</translation>
+    </message>
+    <message>
+        <source>Source code on Github</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -68,7 +83,7 @@
     </message>
     <message>
         <source>Add new contact</source>
-        <translation>Добавить контакт</translation>
+        <translation type="vanished">Добавить контакт</translation>
     </message>
     <message>
         <source>Back</source>
@@ -154,6 +169,10 @@
     <message>
         <source>Contacts</source>
         <translation>Контакты</translation>
+    </message>
+    <message>
+        <source>Add new contact</source>
+        <translation type="unfinished">Добавить контакт</translation>
     </message>
 </context>
 <context>

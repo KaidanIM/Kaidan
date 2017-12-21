@@ -5,23 +5,34 @@
     <name>AboutPage</name>
     <message>
         <source>About</source>
-        <translation>À propos</translation>
+        <translation type="vanished">À propos</translation>
     </message>
     <message>
         <source>A simple, user-friendly Jabber/XMPP client</source>
-        <translation>Un client Jabber/XMPP, simple et convivial</translation>
+        <translation type="vanished">Un client Jabber/XMPP, simple et convivial</translation>
+    </message>
+    <message>
+        <source>Sourcecode on Github</source>
+        <translation type="vanished">Code source sur Github</translation>
+    </message>
+    <message>
+        <source>Close</source>
+        <translation type="vanished">Fermer</translation>
+    </message>
+</context>
+<context>
+    <name>AboutSheet</name>
+    <message>
+        <source>A simple, user-friendly Jabber/XMPP client</source>
+        <translation type="unfinished">Un client Jabber/XMPP, simple et convivial</translation>
     </message>
     <message>
         <source>License:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Sourcecode on Github</source>
-        <translation>Code source sur Github</translation>
-    </message>
-    <message>
-        <source>Close</source>
-        <translation>Fermer</translation>
+        <source>Source code on Github</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -68,7 +79,7 @@
     </message>
     <message>
         <source>Add new contact</source>
-        <translation>Ajouter un nouveau contact</translation>
+        <translation type="vanished">Ajouter un nouveau contact</translation>
     </message>
     <message>
         <source>Back</source>
@@ -150,6 +161,10 @@
     <message>
         <source>Contacts</source>
         <translation>Contacts</translation>
+    </message>
+    <message>
+        <source>Add new contact</source>
+        <translation type="unfinished">Ajouter un nouveau contact</translation>
     </message>
 </context>
 <context>

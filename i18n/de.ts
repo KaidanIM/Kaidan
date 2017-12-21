@@ -5,23 +5,38 @@
     <name>AboutPage</name>
     <message>
         <source>About</source>
-        <translation>Über</translation>
+        <translation type="vanished">Über</translation>
     </message>
     <message>
         <source>A simple, user-friendly Jabber/XMPP client</source>
-        <translation>Ein einfacher, benutzerfreundlicher Jabber/XMPP client</translation>
+        <translation type="vanished">Ein einfacher, benutzerfreundlicher Jabber/XMPP client</translation>
     </message>
     <message>
         <source>License:</source>
-        <translation>Lizenz:</translation>
+        <translation type="vanished">Lizenz:</translation>
     </message>
     <message>
         <source>Sourcecode on Github</source>
-        <translation>Quellcode auf GitHub</translation>
+        <translation type="vanished">Quellcode auf GitHub</translation>
     </message>
     <message>
         <source>Close</source>
-        <translation>Schließen</translation>
+        <translation type="vanished">Schließen</translation>
+    </message>
+</context>
+<context>
+    <name>AboutSheet</name>
+    <message>
+        <source>A simple, user-friendly Jabber/XMPP client</source>
+        <translation type="unfinished">Ein einfacher, benutzerfreundlicher Jabber/XMPP client</translation>
+    </message>
+    <message>
+        <source>License:</source>
+        <translation type="unfinished">Lizenz:</translation>
+    </message>
+    <message>
+        <source>Source code on Github</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -72,7 +87,7 @@
     </message>
     <message>
         <source>Add new contact</source>
-        <translation>Neuen Kontakt hinzufügen</translation>
+        <translation type="vanished">Neuen Kontakt hinzufügen</translation>
     </message>
     <message>
         <source>Back</source>
@@ -162,6 +177,10 @@
     <message>
         <source>Contacts</source>
         <translation>Kontakte</translation>
+    </message>
+    <message>
+        <source>Add new contact</source>
+        <translation type="unfinished">Neuen Kontakt hinzufügen</translation>
     </message>
 </context>
 <context>

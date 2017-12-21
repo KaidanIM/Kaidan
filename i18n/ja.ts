@@ -2,11 +2,7 @@
 <!DOCTYPE TS>
 <TS version="2.1" language="ja">
 <context>
-    <name>AboutPage</name>
-    <message>
-        <source>About</source>
-        <translation type="unfinished"></translation>
-    </message>
+    <name>AboutSheet</name>
     <message>
         <source>A simple, user-friendly Jabber/XMPP client</source>
         <translation type="unfinished"></translation>
@@ -16,11 +12,7 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Sourcecode on Github</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Close</source>
+        <source>Source code on Github</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -64,10 +56,6 @@
     </message>
     <message>
         <source>About</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Add new contact</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -153,6 +141,10 @@
     <name>RosterPage</name>
     <message>
         <source>Contacts</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Add new contact</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

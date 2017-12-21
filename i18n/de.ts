@@ -36,7 +36,7 @@
     </message>
     <message>
         <source>Source code on Github</source>
-        <translation type="unfinished"></translation>
+        <translation>Quellcode auf GitHub</translation>
     </message>
 </context>
 <context>

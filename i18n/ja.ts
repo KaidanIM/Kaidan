@@ -5,15 +5,15 @@
     <name>AboutSheet</name>
     <message>
         <source>A simple, user-friendly Jabber/XMPP client</source>
-        <translation type="unfinished"></translation>
+        <translation>シンプルで使いやすいJabber / XMPPクライアント</translation>
     </message>
     <message>
         <source>License:</source>
-        <translation type="unfinished"></translation>
+        <translation>ライセンス:</translation>
     </message>
     <message>
         <source>Source code on Github</source>
-        <translation type="unfinished"></translation>
+        <translation>ソースコードは GitHub 上で公開</translation>
     </message>
 </context>
 <context>

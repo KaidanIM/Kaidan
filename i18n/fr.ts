@@ -24,22 +24,22 @@
     <name>AboutSheet</name>
     <message>
         <source>A simple, user-friendly Jabber/XMPP client</source>
-        <translation type="unfinished">Un client Jabber/XMPP, simple et convivial</translation>
+        <translation>Un client Jabber/XMPP, simple et convivial</translation>
     </message>
     <message>
         <source>License:</source>
-        <translation type="unfinished"></translation>
+        <translation>Licence :</translation>
     </message>
     <message>
         <source>Source code on Github</source>
-        <translation type="unfinished"></translation>
+        <translation>Code source sur Github</translation>
     </message>
 </context>
 <context>
     <name>BackButton</name>
     <message>
         <source>Navigate Back</source>
-        <translation type="unfinished"></translation>
+        <translation>Revenir</translation>
     </message>
 </context>
 <context>
@@ -57,14 +57,14 @@
     <name>ContextDrawer</name>
     <message>
         <source>Actions</source>
-        <translation type="unfinished"></translation>
+        <translation>Actions</translation>
     </message>
 </context>
 <context>
     <name>ForwardButton</name>
     <message>
         <source>Navigate Forward</source>
-        <translation type="unfinished"></translation>
+        <translation>Naviguer en avant</translation>
     </message>
 </context>
 <context>
@@ -83,14 +83,14 @@
     </message>
     <message>
         <source>Back</source>
-        <translation type="unfinished"></translation>
+        <translation>Retour</translation>
     </message>
 </context>
 <context>
     <name>LoginPage</name>
     <message>
         <source>Your Jabber-ID:</source>
-        <translation type="unfinished"></translation>
+        <translation>Votre Jabber-ID :</translation>
     </message>
     <message>
         <source>user@example.org</source>
@@ -164,7 +164,7 @@
     </message>
     <message>
         <source>Add new contact</source>
-        <translation type="unfinished">Ajouter un nouveau contact</translation>
+        <translation>Ajouter un nouveau contact</translation>
     </message>
 </context>
 <context>

@@ -32,7 +32,7 @@
     </message>
     <message>
         <source>License:</source>
-        <translation type="unfinished">Lizenz:</translation>
+        <translation>Lizenz:</translation>
     </message>
     <message>
         <source>Source code on Github</source>
@@ -180,7 +180,7 @@
     </message>
     <message>
         <source>Add new contact</source>
-        <translation type="unfinished">Neuen Kontakt hinzufügen</translation>
+        <translation>Neuen Kontakt hinzufügen</translation>
     </message>
 </context>
 <context>

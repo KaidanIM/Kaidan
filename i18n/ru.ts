@@ -1,42 +1,42 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.1" language="ru">
+<TS version="2.0" language="ru">
 <context>
     <name>AboutPage</name>
     <message>
         <source>About</source>
-        <translation type="vanished">О программе</translation>
+        <translation>О программе</translation>
     </message>
     <message>
         <source>A simple, user-friendly Jabber/XMPP client</source>
-        <translation type="vanished">Простой и удобный Jabber/XMPP клиент</translation>
+        <translation>Простой и удобный Jabber/XMPP клиент</translation>
     </message>
     <message>
         <source>License:</source>
-        <translation type="vanished">Лицензия:</translation>
+        <translation>Лицензия:</translation>
     </message>
     <message>
         <source>Sourcecode on Github</source>
-        <translation type="vanished">Исходный код на GitHub</translation>
+        <translation>Исходный код на GitHub</translation>
     </message>
     <message>
         <source>Close</source>
-        <translation type="vanished">Закрыть</translation>
+        <translation>Закрыть</translation>
     </message>
 </context>
 <context>
     <name>AboutSheet</name>
     <message>
         <source>A simple, user-friendly Jabber/XMPP client</source>
-        <translation type="unfinished">Простой и удобный Jabber/XMPP клиент</translation>
+        <translation>Простой и удобный Jabber/XMPP клиент</translation>
     </message>
     <message>
         <source>License:</source>
-        <translation type="unfinished">Лицензия:</translation>
+        <translation>Лицензия:</translation>
     </message>
     <message>
         <source>Source code on Github</source>
-        <translation type="unfinished"></translation>
+        <translation>Исходный код на GitHub</translation>
     </message>
 </context>
 <context>
@@ -83,7 +83,7 @@
     </message>
     <message>
         <source>Add new contact</source>
-        <translation type="vanished">Добавить контакт</translation>
+        <translation>Добавить контакт</translation>
     </message>
     <message>
         <source>Back</source>
@@ -98,7 +98,7 @@
     </message>
     <message>
         <source>user@example.org</source>
-        <translation>ivanov@mail.ru</translation>
+        <translation>ivanov@example.ru</translation>
     </message>
     <message>
         <source>Your Password:</source>
@@ -106,7 +106,7 @@
     </message>
     <message>
         <source>Password</source>
-        <translation type="vanished">Пароль</translation>
+        <translation>Пароль</translation>
     </message>
     <message>
         <source>Retry</source>
@@ -114,7 +114,7 @@
     </message>
     <message>
         <source>Connect</source>
-        <translation>Подключение</translation>
+        <translation>Подключиться</translation>
     </message>
     <message>
         <source>Connecting...</source>
@@ -126,7 +126,7 @@
     </message>
     <message>
         <source>Log in to your Jabber Account</source>
-        <translation>Войти в аккаунт Jabber</translation>
+        <translation>Войдите в аккаунт Jabber</translation>
     </message>
     <message>
         <source>Your diaspora*-ID:</source>
@@ -172,7 +172,7 @@
     </message>
     <message>
         <source>Add new contact</source>
-        <translation type="unfinished">Добавить контакт</translation>
+        <translation>Добавить контакт</translation>
     </message>
 </context>
 <context>
@@ -198,15 +198,15 @@
     <name>main</name>
     <message>
         <source>Successfully parsed command line input.</source>
-        <translation type="vanished">Ввод из командной строки успешно распознан.</translation>
+        <translation>Ввод из командной строки успешно распознан.</translation>
     </message>
     <message>
         <source>Logout</source>
-        <translation type="vanished">Выйти</translation>
+        <translation>Выйти</translation>
     </message>
     <message>
         <source>About</source>
-        <translation type="vanished">О программе</translation>
+        <translation>О программе</translation>
     </message>
 </context>
 </TS>

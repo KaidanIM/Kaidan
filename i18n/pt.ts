@@ -1,73 +1,73 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.1">
+<TS version="2.1" language="pt">
 <context>
     <name>AboutSheet</name>
     <message>
         <source>A simple, user-friendly Jabber/XMPP client</source>
-        <translation type="unfinished"></translation>
+        <translation>Um simples, fácil de usar cliente de Jabber/XMPP</translation>
     </message>
     <message>
         <source>License:</source>
-        <translation type="unfinished"></translation>
+        <translation>Licença:</translation>
     </message>
     <message>
         <source>Source code on Github</source>
-        <translation type="unfinished"></translation>
+        <translation>Código-fonte no Github</translation>
     </message>
 </context>
 <context>
     <name>BackButton</name>
     <message>
         <source>Navigate Back</source>
-        <translation type="unfinished"></translation>
+        <translation>Navegue De Volta</translation>
     </message>
 </context>
 <context>
     <name>ChatPage</name>
     <message>
         <source>Compose message</source>
-        <translation type="unfinished"></translation>
+        <translation>Compor mensagem</translation>
     </message>
     <message>
         <source>Send</source>
-        <translation type="unfinished"></translation>
+        <translation>Enviar</translation>
     </message>
 </context>
 <context>
     <name>ContextDrawer</name>
     <message>
         <source>Actions</source>
-        <translation type="unfinished"></translation>
+        <translation>Ações</translation>
     </message>
 </context>
 <context>
     <name>ForwardButton</name>
     <message>
         <source>Navigate Forward</source>
-        <translation type="unfinished"></translation>
+        <translation>Navegar Para A Frente</translation>
     </message>
 </context>
 <context>
     <name>GlobalDrawer</name>
     <message>
         <source>Back</source>
-        <translation type="unfinished"></translation>
+        <translation>Voltar</translation>
     </message>
     <message>
         <source>Logout</source>
-        <translation type="unfinished"></translation>
+        <translation>Sair</translation>
     </message>
     <message>
         <source>About</source>
-        <translation type="unfinished"></translation>
+        <translation>Sobre</translation>
     </message>
 </context>
 <context>
     <name>LoginPage</name>
     <message>
         <source>Login</source>
-        <translation type="unfinished"></translation>
+        <translation>Entrar</translation>
     </message>
     <message>
         <source>Log in to your Jabber Account</source>

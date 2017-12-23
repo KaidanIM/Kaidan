@@ -50,7 +50,7 @@ sudo apt install kaidan
 ### Compile it yourself
 
 #### Install all dependencies:
- * [Qt](http://doc.qt.io/qt-5/build-sources.html) (Core Qml Quick Sql QuickControls2) (>= 5.7.0)
+ * [Qt](http://doc.qt.io/qt-5/build-sources.html) (Core Qml Quick Sql QuickControls2) (>= 5.8.0)
  * [gloox](https://camaya.net/gloox/download/) (>= 1.0.10)
  * [Kirigami 2](https://phabricator.kde.org/source/kirigami/) (>= 2.0.0)
 
@@ -60,7 +60,9 @@ Build only dependencies:
  * CMake
  * Git (if you don't want to use tarballs/zips from github)
 
-##### On debian *sid* do the following:
+##### On Ubuntu *17.10+*, KDE Neon 16.04 or debian *sid* do the following:
+
+Debian strech and older Ubuntu distros are not supported since they don't provide Qt 5.8 or newer.
 
 ```bash
 sudo apt install apt-transport-https git-core cmake build-essential zlib1g-dev \
@@ -68,20 +70,6 @@ sudo apt install apt-transport-https git-core cmake build-essential zlib1g-dev \
   libqt5qml5 libqt5gui5 libqt5core5a qtdeclarative5-dev qttools5-dev qt5-default \
   qtquickcontrols2-5-dev kirigami2-dev
 ```
-
-##### On debian *stretch* do the following:
-Debian *stretch* has *no* Kirigami 2 packages, so we have to install them from external sources:
-
-```bash
-sudo apt install apt-transport-https software-properties-common dirmngr gnupg
-sudo apt-add-repository "deb https://raw.githubusercontent.com/kaidanim/packages/master sid main"
-sudo apt-key adv --recv-key "210EB0BCA70439F0"
-sudo apt update
-sudo apt install apt-transport-https git-core cmake build-essential zlib1g-dev \
-  libgloox-dev libnotify-bin libqt5quick5 libqt5quickcontrols2-5 libqt5quickwidgets5 \
-  libqt5qml5 libqt5gui5 libqt5core5a qtdeclarative5-dev qttools5-dev qt5-default \
-  qtquickcontrols2-5-dev kirigami2-dev
- ```
 
 #### Get the source code:
 
@@ -89,7 +77,7 @@ sudo apt install apt-transport-https git-core cmake build-essential zlib1g-dev \
 git clone https://github.com/kaidanim/kaidan
 ```
 
-#### Finally compile it:
+#### Compile it:
 
 ```bash
 mkdir kaidan/build ; cd kaidan/build
@@ -105,9 +93,9 @@ make -j$(nproc)
 
 #### If you like it, install it by:
 
- ```bash
- sudo make install
- ```
+```bash
+sudo make install
+```
 
 ----
 

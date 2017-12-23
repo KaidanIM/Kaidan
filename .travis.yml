@@ -2,11 +2,14 @@ language: cpp
 compiler: gcc
 sudo: required
 dist: trusty
-
 install:
   - ./utils/travis-dependencies.sh
-
 script:
   - cd utils
   - source /opt/qt*/bin/qt*-env.sh
   - ./travis-build.sh
+matrix:
+  include:
+    - env: BUILD_SYSTEM=qmake
+    - env: BUILD_SYSTEM=cmake
+

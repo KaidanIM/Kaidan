@@ -122,7 +122,7 @@
     </message>
     <message>
         <source>Your diaspora*-ID:</source>
-        <translation>Votre identifiant diaspora*</translation>
+        <translation>Votre identifiant diaspora* :</translation>
     </message>
     <message>
         <source>user@diaspora.pod</source>
@@ -137,7 +137,7 @@
     </message>
     <message>
         <source>Jabber-ID:</source>
-        <translation>Identifiant Jabber</translation>
+        <translation>Identifiant Jabber :</translation>
     </message>
     <message>
         <source>user@example.org</source>
@@ -171,7 +171,7 @@
     <name>RosterRemoveContactSheet</name>
     <message>
         <source>Do you really want to delete the contact &quot;%1&quot; from your roster?</source>
-        <translation>Voulez-vous vraiment supprimer le contact « %1» de votre liste?</translation>
+        <translation>Voulez-vous vraiment supprimer le contact « %1» de votre liste de contacts ?</translation>
     </message>
     <message>
         <source>Delete contact</source>

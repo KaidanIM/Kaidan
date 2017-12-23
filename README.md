@@ -60,7 +60,7 @@ Build only dependencies:
  * CMake
  * Git (if you don't want to use tarballs/zips from github)
 
-##### On Ubuntu *17.10+* or debian *sid* do the following:
+##### On Ubuntu *17.10+*, KDE Neon 16.04 or debian *sid* do the following:
 
 Debian strech and older Ubuntu distros are not supported since they don't provide Qt 5.8 or newer.
 

@@ -56,6 +56,7 @@ TRANSLATIONS += \
     i18n/fr.ts \
     i18n/ja.ts \
     i18n/ms.ts \
+    i18n/nl.ts \
     i18n/ru.ts \
     i18n/pt.ts
 

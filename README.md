@@ -7,26 +7,23 @@
 [![Translation](https://hosted.weblate.org/widgets/kaidan/-/svg-badge.svg)](https://hosted.weblate.org/projects/kaidan/translations/)
 [![License](https://img.shields.io/badge/License-GPLv3%2B%20%2F%20CC%20BY--SA%204.0-blue.svg)](https://raw.githubusercontent.com/kaidanim/kaidan/master/LICENSE.txt)
 
-![](http://i.imgur.com/k1Aup3h.png)
+![](https://user-images.githubusercontent.com/13557034/34342627-3f82443e-e9b6-11e7-9898-05205e9e9f9b.png)
 
 ## About
 
-Kaidan is a simple, user-friendly Jabber/XMPP client providing a modern user-interface
-using [Kirigami](https://techbase.kde.org/Kirigami) and [QtQuick](http://wiki.qt.io/Qt_Quick).
-The back-end of Kaidan is completely written in C++ using the [gloox](https://camaya.net/gloox/)
-XMPP client library and [Qt 5](https://www.qt.io/).
+Kaidan is a simple, user-friendly Jabber/XMPP client providing a modern user-interface using
+[Kirigami](https://techbase.kde.org/Kirigami) and [QtQuick](http://wiki.qt.io/Qt_Quick). The back-end of
+Kaidan is entirely written in C++ using the [gloox](https://camaya.net/gloox/) XMPP client library and
+[Qt 5](https://www.qt.io/).
 
-Currently Kaidan only has been tested on GNU/Linux Desktops, but because of the use of Qt we shouldn't have
-any problems porting it to all other common platforms, even Android. Nevertheless we will work on another
-GUI using Silica for better look & feel on Sailfish OS soon™ (See [KaidanSF](https://github.com/KaidanIM/KaidanSF)).
-But if you want to get a client for Sailfish OS _now_, maybe take a look at
-[Shmoose](https://github.com/geobra/harbour-shmoose), a fork by an earlier developer of Kaidan.
+Currently Kaidan only has been tested on GNU/Linux Desktops, Android & Plasma Mobile, but of course
+Ubuntu Touch, OS X, iOS and Windows will follow. Of course this is still not everything, i.e. Sailfish OS
+is missing. To support that we need to wait for a proper QtQuickControls 2 style for it or rewrite the GUI
+using Silica. Both options are rather unlikely in the near future, so if you want to get a client for
+Sailfish OS _now_, maybe take a look at [Shmoose](https://github.com/geobra/harbour-shmoose), a fork by an
+earlier developer of Kaidan.
 
 Kaidan is *not* finished yet, so don't expect it working as well as a finished client will do.
-
-## Screenshots
-
-![](http://i.imgur.com/Yfuf6AT.png)
 
 ## Installation
 

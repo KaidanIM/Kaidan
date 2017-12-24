@@ -9,11 +9,11 @@
     </message>
     <message>
         <source>License:</source>
-        <translation type="unfinished"></translation>
+        <translation>Licentie:</translation>
     </message>
     <message>
         <source>Source code on Github</source>
-        <translation type="unfinished"></translation>
+        <translation>Broncode op Github</translation>
     </message>
 </context>
 <context>

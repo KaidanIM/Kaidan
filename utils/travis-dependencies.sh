@@ -2,6 +2,7 @@
 
 echo "*****************************************"
 echo "Fetching dependencies"
+echo "Using build system: ${BUILD_SYSTEM}"
 echo "*****************************************"
 
 sudo apt-get update
@@ -15,7 +16,7 @@ sudo bash -c "echo deb http://archive.ubuntu.com/ubuntu trusty-backports main re
 sudo add-apt-repository ppa:beineri/opt-qt593-trusty -y
 
 sudo apt-get update
-sudo apt install cmake \
+sudo apt-get install cmake \
             build-essential \
             ninja-build \
             zlib1g-dev \
@@ -28,10 +29,12 @@ sudo apt install cmake \
             qt59quickcontrols2 \
             -y -t trusty-backports
 
-# KF5
-wget -c "https://github.com/JBBgameich/precompiled-kf5-linux/releases/download/KF5.40/kf5.40-gcc6-linux64-release.tar.xz"
-tar xf kf5.40-gcc6-linux64-release.tar.xz
-sudo cp -rf kf5-release/* /opt/qt*/
+# KF5 (only needed for cmake)
+if [ $BUILD_SYSTEM == "cmake" ]; then
+	wget -c "https://github.com/JBBgameich/precompiled-kf5-linux/releases/download/KF5.40/kf5.40-gcc6-linux64-release.tar.xz"
+	tar xf kf5.40-gcc6-linux64-release.tar.xz
+	sudo cp -rf kf5-release/* /opt/qt*/
+fi
 
 # Gloox
 wget -c "https://github.com/JBBgameich/precompiled-kf5-linux/releases/download/KF5.40/libgloox17_1.0.20-1_amd64.deb"
@@ -39,3 +42,4 @@ wget -c "https://github.com/JBBgameich/precompiled-kf5-linux/releases/download/K
 sudo dpkg -i libgloox*.deb
 rm libgloox*.deb
 sudo apt install -f -y
+

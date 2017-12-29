@@ -22,7 +22,7 @@
 import QtQuick 2.6
 import QtQuick.Controls 2.0 as Controls
 import QtQuick.Layouts 1.3
-import org.kde.kirigami 2.0 as Kirigami
+import org.kde.kirigami 2.2 as Kirigami
 import "elements"
 
 Kirigami.Page {
@@ -98,20 +98,37 @@ Kirigami.Page {
 			RowLayout {
 				width: parent.width
 
-				Controls.TextField {
+                Controls.TextArea {
 					id: messageField
 					Layout.fillWidth: true
 					placeholderText: qsTr("Compose message")
 					wrapMode: Controls.TextArea.Wrap
 					selectByMouse: true
-					onAccepted: {
-						sendButton.onClicked()
-					}
+                    background: Item {}
+                    Keys.onReturnPressed: {
+                        if (event.key == Qt.Key_Return) {
+                            if (event.modifiers & Qt.ControlModifier) {
+                                messageField.append("")
+                            } else {
+                                console.log(event.key);
+                                event.accepted = true;
+                            }
+                        }
+                    }
 				}
 
-				Controls.Button {
+                Controls.ToolButton {
 					id: sendButton
-					text: qsTr("Send")
+                    Layout.preferredWidth: 60
+                    Layout.preferredHeight: 60
+                    Kirigami.Icon {
+                        source: messageField.text == "" ? "document-send-symbolic" : "document-send"
+                        isMask: true
+                        smooth: true
+                        anchors.centerIn: parent
+                        width: 30
+                        height: width
+                    }
 					onClicked: {
 						// don't send empty messages
 						if (messageField.text == "") {

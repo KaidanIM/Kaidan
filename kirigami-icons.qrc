@@ -4,7 +4,8 @@
         <file alias="bookmark-remove.svg">3rdparty/breeze-icons/icons/actions/22/bookmark-remove.svg</file>
         <file alias="document-decrypt.svg">3rdparty/breeze-icons/icons/actions/22/document-decrypt.svg</file>
         <file alias="contact-new.svg">3rdparty/breeze-icons/icons/actions/22/contact-new.svg</file>
-        <file alias="document-send-symbolic">3rdparty/breeze-icons/icons/actions/symbolic/document-send-symbolic.svg</file>
+        <file alias="document-send.svg">3rdparty/breeze-icons/icons/actions/16/document-send.svg</file>
+        <file alias="document-send-symbolic.svg">3rdparty/breeze-icons/icons/actions/symbolic/document-send-symbolic.svg</file>
         <file alias="folder-sync.svg">3rdparty/breeze-icons/icons/actions/22/folder-sync.svg</file>
         <file alias="go-next.svg">3rdparty/breeze-icons/icons/actions/22/go-next.svg</file>
         <file alias="go-previous.svg">3rdparty/breeze-icons/icons/actions/22/go-previous.svg</file>

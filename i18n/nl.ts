@@ -5,7 +5,7 @@
     <name>AboutSheet</name>
     <message>
         <source>A simple, user-friendly Jabber/XMPP client</source>
-        <translation type="unfinished"></translation>
+        <translation>Een simpele, gebruiksvriendelijke Jabber/XMPP client</translation>
     </message>
     <message>
         <source>License:</source>
@@ -20,147 +20,147 @@
     <name>BackButton</name>
     <message>
         <source>Navigate Back</source>
-        <translation type="unfinished"></translation>
+        <translation>Ga Terug</translation>
     </message>
 </context>
 <context>
     <name>ChatPage</name>
     <message>
         <source>Compose message</source>
-        <translation type="unfinished"></translation>
+        <translation>Stel een bericht op</translation>
     </message>
     <message>
         <source>Send</source>
-        <translation type="unfinished"></translation>
+        <translation>Verstuur</translation>
     </message>
 </context>
 <context>
     <name>ContextDrawer</name>
     <message>
         <source>Actions</source>
-        <translation type="unfinished"></translation>
+        <translation>Handelingen</translation>
     </message>
 </context>
 <context>
     <name>ForwardButton</name>
     <message>
         <source>Navigate Forward</source>
-        <translation type="unfinished"></translation>
+        <translation>Ga Vooruit</translation>
     </message>
 </context>
 <context>
     <name>GlobalDrawer</name>
     <message>
         <source>Back</source>
-        <translation type="unfinished"></translation>
+        <translation>Terug</translation>
     </message>
     <message>
         <source>Log out</source>
-        <translation type="unfinished"></translation>
+        <translation>Log uit</translation>
     </message>
     <message>
         <source>About</source>
-        <translation type="unfinished"></translation>
+        <translation>Over</translation>
     </message>
 </context>
 <context>
     <name>LoginPage</name>
     <message>
         <source>Log in</source>
-        <translation type="unfinished"></translation>
+        <translation>Log in</translation>
     </message>
     <message>
-        <source>Log in to your XMPP account</source>
-        <translation type="unfinished"></translation>
+        <source>Log in to your XMPP Account</source>
+        <translation>Log in op uw XMPP-account</translation>
     </message>
     <message>
         <source>Your Jabber-ID:</source>
-        <translation type="unfinished"></translation>
+        <translation>Uw Jabber-ID:</translation>
     </message>
     <message>
         <source>Your diaspora*-ID:</source>
-        <translation type="unfinished"></translation>
+        <translation>Uw diaspora*-ID:</translation>
     </message>
     <message>
         <source>user@example.org</source>
-        <translation type="unfinished"></translation>
+        <translation>gebruiker@voorbeeld.nl</translation>
     </message>
     <message>
         <source>user@diaspora.pod</source>
-        <translation type="unfinished"></translation>
+        <translation>gebruiker@diaspora.pod</translation>
     </message>
     <message>
         <source>Your Password:</source>
-        <translation type="unfinished"></translation>
+        <translation>Uw Wachtwoord:</translation>
     </message>
     <message>
         <source>Retry</source>
-        <translation type="unfinished"></translation>
+        <translation>Opnieuw proberen</translation>
     </message>
     <message>
         <source>Connect</source>
-        <translation type="unfinished"></translation>
+        <translation>Verbind</translation>
     </message>
     <message>
         <source>Connecting…</source>
-        <translation type="unfinished"></translation>
+        <translation>Verbinden…</translation>
     </message>
 </context>
 <context>
     <name>RosterAddContactSheet</name>
     <message>
         <source>Add new contact</source>
-        <translation type="unfinished"></translation>
+        <translation>Voeg nieuw contact toe</translation>
     </message>
     <message>
         <source>Nickname:</source>
-        <translation type="unfinished"></translation>
+        <translation>Bijnaam:</translation>
     </message>
     <message>
         <source>Jabber-ID:</source>
-        <translation type="unfinished"></translation>
+        <translation>Jabber-ID:</translation>
     </message>
     <message>
         <source>user@example.org</source>
-        <translation type="unfinished"></translation>
+        <translation>gebruiker@voorbeeld.nl</translation>
     </message>
     <message>
         <source>Cancel</source>
-        <translation type="unfinished"></translation>
+        <translation>Annuleer</translation>
     </message>
     <message>
         <source>Add</source>
-        <translation type="unfinished"></translation>
+        <translation>Voeg toe</translation>
     </message>
 </context>
 <context>
     <name>RosterPage</name>
     <message>
         <source>Contacts</source>
-        <translation type="unfinished"></translation>
+        <translation>Contacten</translation>
     </message>
     <message>
         <source>Add new contact</source>
-        <translation type="unfinished"></translation>
+        <translation>Voeg nieuw contact toe</translation>
     </message>
 </context>
 <context>
     <name>RosterRemoveContactSheet</name>
     <message>
         <source>Do you really want to delete the contact &quot;%1&quot; from your roster?</source>
-        <translation type="unfinished"></translation>
+        <translation>Wil je echt het contact &quot;%1&quot; uit je lijst van contacten verwijderen?</translation>
     </message>
     <message>
         <source>Delete contact</source>
-        <translation type="unfinished"></translation>
+        <translation>Verwijder contact</translation>
     </message>
     <message>
         <source>Cancel</source>
-        <translation type="unfinished"></translation>
+        <translation>Annuleer</translation>
     </message>
     <message>
         <source>Delete</source>
-        <translation type="unfinished"></translation>
+        <translation>Verwijder</translation>
     </message>
 </context>
 </TS>

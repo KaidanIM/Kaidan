@@ -27,13 +27,13 @@ import org.kde.kirigami 2.0 as Kirigami
 Kirigami.Page {
 	property bool isRetry
 
-	title: qsTr("Login")
+	title: qsTr("Log in")
 
 	ColumnLayout {
 		anchors.fill: parent
 
 		Kirigami.Heading {
-			text: qsTr("Log in to your Jabber Account")
+			text: qsTr("Log in to your XMPP account")
 			anchors.horizontalCenter: parent.horizontalCenter
 		}
 
@@ -97,7 +97,7 @@ Kirigami.Page {
 					// disable the button
 					connectButton.enabled = false;
 					// indicate that we're connecting now
-					connectButton.text = "<i>" + qsTr("Connecting...") + "</i>";
+					connectButton.text = "<i>" + qsTr("Connecting…") + "</i>";
 
 					// connect to given account data
 					kaidan.jid = jidField.text;

@@ -38,7 +38,7 @@ Kirigami.GlobalDrawer {
 
 	actions: [
 		Kirigami.Action {
-			text: qsTr("Logout")
+			text: qsTr("Log out")
 			iconName: "system-shutdown"
 			onTriggered: {
 				if (kaidan.connected) {

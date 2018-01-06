@@ -68,14 +68,14 @@ Kirigami.OverlaySheet {
 		}
 
 		Controls.Label {
-			text: "Copyright (C) 2016-2017\nKaidan developers and contributors"
+			text: "Copyright © 2016-2018\nKaidan developers and contributors"
 			wrapMode: Text.WordWrap
 			Layout.fillWidth: true
 			horizontalAlignment: Qt.AlignHCenter
 		}
 
 		Controls.ToolButton {
-			text: qsTr("Source code on Github")
+			text: qsTr("Source code on GitHub")
 			onClicked: Qt.openUrlExternally("https://github.com/KaidanIM/Kaidan")
 			Layout.fillWidth: true
 			Layout.alignment: Qt.AlignHCenter

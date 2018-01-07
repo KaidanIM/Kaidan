@@ -16,8 +16,8 @@
         <translation type="vanished">Lesen:</translation>
     </message>
     <message>
-        <source>Sourcecode on Github</source>
-        <translation type="vanished">Kod sumber di Github</translation>
+        <source>Sourcecode on GitHub</source>
+        <translation type="vanished">Kod sumber di GitHub</translation>
     </message>
     <message>
         <source>Close</source>
@@ -35,7 +35,7 @@
         <translation type="unfinished">Lesen:</translation>
     </message>
     <message>
-        <source>Source code on Github</source>
+        <source>Source code on GitHub</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -74,7 +74,7 @@
 <context>
     <name>GlobalDrawer</name>
     <message>
-        <source>Logout</source>
+        <source>Log out</source>
         <translation>Log keluar</translation>
     </message>
     <message>
@@ -117,15 +117,15 @@
         <translation>Hubungi</translation>
     </message>
     <message>
-        <source>Connecting...</source>
+        <source>Connecting…</source>
         <translation>Menghubungi...</translation>
     </message>
     <message>
-        <source>Login</source>
+        <source>Log in</source>
         <translation>Log Masuk</translation>
     </message>
     <message>
-        <source>Log in to your Jabber Account</source>
+        <source>Log in to your XMPP account</source>
         <translation>Log masuk akaun Jabber anda</translation>
     </message>
     <message>

@@ -12,8 +12,8 @@
         <translation type="vanished">Un client Jabber/XMPP, simple et convivial</translation>
     </message>
     <message>
-        <source>Sourcecode on Github</source>
-        <translation type="vanished">Code source sur Github</translation>
+        <source>Sourcecode on GitHub</source>
+        <translation type="vanished">Code source sur GitHub</translation>
     </message>
     <message>
         <source>Close</source>
@@ -31,8 +31,8 @@
         <translation>Licence :</translation>
     </message>
     <message>
-        <source>Source code on Github</source>
-        <translation>Code source sur Github</translation>
+        <source>Source code on GitHub</source>
+        <translation>Code source sur GitHub</translation>
     </message>
 </context>
 <context>
@@ -70,7 +70,7 @@
 <context>
     <name>GlobalDrawer</name>
     <message>
-        <source>Logout</source>
+        <source>Log out</source>
         <translation>Déconnexion</translation>
     </message>
     <message>
@@ -109,15 +109,15 @@
         <translation>Rejoindre</translation>
     </message>
     <message>
-        <source>Connecting...</source>
+        <source>Connecting…</source>
         <translation>Connexion en cours...</translation>
     </message>
     <message>
-        <source>Login</source>
+        <source>Log in</source>
         <translation>Connexion</translation>
     </message>
     <message>
-        <source>Log in to your Jabber Account</source>
+        <source>Log in to your XMPP account</source>
         <translation>Connexion à votre compte Jabber</translation>
     </message>
     <message>

@@ -12,7 +12,7 @@
         <translation>ライセンス:</translation>
     </message>
     <message>
-        <source>Source code on Github</source>
+        <source>Source code on GitHub</source>
         <translation>ソースコードは GitHub 上で公開</translation>
     </message>
 </context>
@@ -51,7 +51,7 @@
 <context>
     <name>GlobalDrawer</name>
     <message>
-        <source>Logout</source>
+        <source>Log out</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -90,15 +90,15 @@
         <translation>接続</translation>
     </message>
     <message>
-        <source>Connecting...</source>
+        <source>Connecting…</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Login</source>
+        <source>Log in</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Log in to your Jabber Account</source>
+        <source>Log in to your XMPP account</source>
         <translation type="unfinished"></translation>
     </message>
     <message>

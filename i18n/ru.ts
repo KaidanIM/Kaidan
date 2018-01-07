@@ -16,7 +16,7 @@
         <translation>Лицензия:</translation>
     </message>
     <message>
-        <source>Sourcecode on Github</source>
+        <source>Sourcecode on GitHub</source>
         <translation>Исходный код на GitHub</translation>
     </message>
     <message>
@@ -35,7 +35,7 @@
         <translation>Лицензия:</translation>
     </message>
     <message>
-        <source>Source code on Github</source>
+        <source>Source code on GitHub</source>
         <translation>Исходный код на GitHub</translation>
     </message>
 </context>
@@ -74,7 +74,7 @@
 <context>
     <name>GlobalDrawer</name>
     <message>
-        <source>Logout</source>
+        <source>Log out</source>
         <translation>Выйти</translation>
     </message>
     <message>
@@ -117,15 +117,15 @@
         <translation>Подключиться</translation>
     </message>
     <message>
-        <source>Connecting...</source>
+        <source>Connecting…</source>
         <translation>Подключение...</translation>
     </message>
     <message>
-        <source>Login</source>
+        <source>Log in</source>
         <translation>Вход</translation>
     </message>
     <message>
-        <source>Log in to your Jabber Account</source>
+        <source>Log in to your XMPP account</source>
         <translation>Войдите в аккаунт Jabber</translation>
     </message>
     <message>
@@ -201,7 +201,7 @@
         <translation>Ввод из командной строки успешно распознан.</translation>
     </message>
     <message>
-        <source>Logout</source>
+        <source>Log out</source>
         <translation>Выйти</translation>
     </message>
     <message>

@@ -57,18 +57,22 @@ Kirigami.SwipeListItem {
 		}
 		// right side
 		ColumnLayout {
-			// top
-			RowLayout {
-				// contact name
-				Kirigami.Heading {
-					text: name
-					level: 3
-					Layout.fillWidth: true
-				}
+			spacing: Kirigami.Units.smallSpacing
+
+			// contact name
+			Kirigami.Heading {
+				text: name
+				elide: Text.ElideRight
+				maximumLineCount: 1
+				level: 3
+				Layout.fillWidth: true
+				Layout.maximumHeight: Kirigami.Units.gridUnit * 1.5
 			}
 			// bottom
 			Controls.Label {
 				Layout.fillWidth: true
+				elide: Text.ElideRight
+				maximumLineCount: 1
 				text: kaidan.removeNewLinesFromString(lastMessage);
 			}
 		}

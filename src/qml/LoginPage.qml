@@ -28,7 +28,7 @@
  *  along with Kaidan.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-import QtQuick 2.0
+import QtQuick 2.7
 import QtQuick.Controls 2.0 as Controls
 import QtQuick.Layouts 1.2
 import org.kde.kirigami 2.0 as Kirigami
@@ -43,7 +43,9 @@ Kirigami.Page {
 
 		Kirigami.Heading {
 			text: qsTr("Log in to your XMPP account")
-			anchors.horizontalCenter: parent.horizontalCenter
+			wrapMode: Text.WordWrap
+			Layout.fillWidth: true
+			horizontalAlignment: Qt.AlignHCenter
 		}
 
 		GridLayout {
@@ -119,36 +121,38 @@ Kirigami.Page {
 
 		RowLayout {
 			id: serviceBar
-			height: Kirigami.Units.gridUnit * 3
 			anchors.horizontalCenter: parent.horizontalCenter
 
-			Row {
-				spacing: 20
-
-				Controls.ToolButton {
-					Image {
-						source: kaidan.getResourcePath("images/diaspora.svg")
-						fillMode: Image.PreserveAspectFit
-						height: serviceBar.height
-					}
-
-					onClicked: {
-						jidField.state = "diaspora";
-						jidLabel.state = "diaspora";
-					}
+			Controls.ToolButton {
+				Layout.preferredHeight: Kirigami.Units.gridUnit * 2.75
+				Layout.preferredWidth: Kirigami.Units.gridUnit * 2.75
+				onClicked: {
+					jidField.state = "diaspora";
+					jidLabel.state = "diaspora";
 				}
 
-				Controls.ToolButton {
-					Image { 
-						source: kaidan.getResourcePath("images/xmpp.svg")
-						fillMode: Image.PreserveAspectFit
-						height: serviceBar.height
-					}
+				Image {
+					source: kaidan.getResourcePath("images/diaspora.svg")
+					fillMode: Image.PreserveAspectFit
+					mipmap: true
+					height: parent.height - Kirigami.Units.smallSpacing
+				}
+			}
 
-					onClicked: {
-						jidField.state = "";
-						jidLabel.state = "";
-					}
+			Controls.ToolButton {
+				Layout.preferredHeight: Kirigami.Units.gridUnit * 2.75
+				Layout.preferredWidth: Kirigami.Units.gridUnit * 2.75
+				padding: Kirigami.Units.smallSpacing
+				onClicked: {
+					jidField.state = "";
+					jidLabel.state = "";
+				}
+
+				Image {
+					source: kaidan.getResourcePath("images/xmpp.svg")
+					fillMode: Image.PreserveAspectFit
+					mipmap: true
+					height: parent.height - Kirigami.Units.smallSpacing
 				}
 			}
 		}

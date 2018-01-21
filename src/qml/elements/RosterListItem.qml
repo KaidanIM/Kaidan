@@ -62,7 +62,7 @@ Kirigami.SwipeListItem {
 			// contact name
 			Kirigami.Heading {
 				text: name
-        textFormat: Text.PlainText
+				textFormat: Text.PlainText
 				elide: Text.ElideRight
 				maximumLineCount: 1
 				level: 3

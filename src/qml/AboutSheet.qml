@@ -60,24 +60,28 @@ Kirigami.OverlaySheet {
 
 		Kirigami.Heading {
 			text: "Kaidan " + kaidan.getVersionString()
+			textFormat: Text.PlainText
 			Layout.fillWidth: true
 			horizontalAlignment: Qt.AlignHCenter
 		}
 
 		Controls.Label {
 			text: "<i>" + qsTr("A simple, user-friendly Jabber/XMPP client") + "</i>"
+			textFormat: Text.RichText
 			Layout.fillWidth: true
 			horizontalAlignment: Qt.AlignHCenter
 		}
 
 		Controls.Label {
 			text: "<b>" + qsTr("License:") + "</b> GPLv3+ / CC BY-SA 4.0"
+			textFormat: Text.RichText
 			Layout.fillWidth: true
 			horizontalAlignment: Qt.AlignHCenter
 		}
 
 		Controls.Label {
 			text: "Copyright © 2016-2018\nKaidan developers and contributors"
+			textFormat: Text.PlainText
 			wrapMode: Text.WordWrap
 			Layout.fillWidth: true
 			horizontalAlignment: Qt.AlignHCenter

@@ -62,6 +62,7 @@ Kirigami.SwipeListItem {
 			// contact name
 			Kirigami.Heading {
 				text: name
+				textFormat: Text.PlainText
 				elide: Text.ElideRight
 				maximumLineCount: 1
 				level: 3
@@ -74,6 +75,7 @@ Kirigami.SwipeListItem {
 				elide: Text.ElideRight
 				maximumLineCount: 1
 				text: kaidan.removeNewLinesFromString(lastMessage);
+				textFormat: Text.PlainText
 			}
 		}
 

@@ -80,6 +80,7 @@ Row {
 				topPadding: Kirigami.Units.gridUnit * 0.5
 				bottomPadding: Kirigami.Units.gridUnit * 0.2
 				text: messageBody
+				textFormat: Text.PlainText
 				wrapMode: Text.Wrap
 				color: sentByMe ? "black" : "white"
 			}

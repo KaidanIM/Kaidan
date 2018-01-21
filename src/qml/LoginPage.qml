@@ -99,19 +99,26 @@ Kirigami.Page {
 			// Connect button
 			Controls.Button {
 				id: connectButton
-				text: isRetry ? qsTr("Retry") : qsTr("Connect")
 				Layout.columnSpan: 2
 				Layout.alignment: Qt.AlignRight
+				Layout.minimumWidth: connectLabel.width
 				onClicked: {
 					// disable the button
 					connectButton.enabled = false;
 					// indicate that we're connecting now
-					connectButton.text = "<i>" + qsTr("Connecting…") + "</i>";
+					connectLabel.text = "<i>" + qsTr("Connecting…") + "</i>";
 
 					// connect to given account data
 					kaidan.jid = jidField.text;
 					kaidan.password = passField.text;
 					kaidan.mainConnect();
+				}
+
+				Controls.Label {
+					id: connectLabel
+					anchors.centerIn: connectButton
+					text: isRetry ? qsTr("Retry") : qsTr("Connect")
+					textFormat: Text.RichText
 				}
 			}
 		}

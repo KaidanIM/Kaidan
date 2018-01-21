@@ -37,7 +37,7 @@ Kirigami.OverlaySheet {
 	property string jid;
 
 	onSheetOpenChanged: {
-		infoLabel.text = qsTr("Do you really want to delete the contact \"%1\" from your roster?").arg(jid);
+		infoLabel.text = qsTr("Do you really want to delete the contact <%1> from your roster?").arg(jid);
 	}
 
 	ColumnLayout {
@@ -50,6 +50,7 @@ Kirigami.OverlaySheet {
 		Controls.Label {
 			id: infoLabel
 			text: ""
+			textFormat: Text.PlainText
 			wrapMode: Text.WordWrap
 
 			Layout.fillWidth: true
@@ -68,7 +69,6 @@ Kirigami.OverlaySheet {
 			Controls.Button {
 				text: qsTr("Delete")
 				onClicked: {
-					print(jid);
 					kaidan.removeContact(jid);
 					close();
 				}

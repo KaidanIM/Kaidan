@@ -62,6 +62,7 @@ Kirigami.SwipeListItem {
 				// contact name
 				Kirigami.Heading {
 					text: name
+					textFormat: Text.PlainText
 					level: 3
 					Layout.fillWidth: true
 				}
@@ -70,6 +71,7 @@ Kirigami.SwipeListItem {
 			Controls.Label {
 				Layout.fillWidth: true
 				text: kaidan.removeNewLinesFromString(lastMessage);
+				textFormat: Text.PlainText
 			}
 		}
 

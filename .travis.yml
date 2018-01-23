@@ -12,4 +12,5 @@ matrix:
   include:
     - env: BUILD_SYSTEM=qmake
     - env: BUILD_SYSTEM=cmake
-
+notifications:
+  email: false

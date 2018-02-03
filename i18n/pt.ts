@@ -12,8 +12,8 @@
         <translation>Licença:</translation>
     </message>
     <message>
-        <source>Source code on Github</source>
-        <translation>Código-fonte no Github</translation>
+        <source>Source code on GitHub</source>
+        <translation>Código-fonte no GitHub</translation>
     </message>
 </context>
 <context>
@@ -55,7 +55,7 @@
         <translation>Voltar</translation>
     </message>
     <message>
-        <source>Logout</source>
+        <source>Log out</source>
         <translation>Sair</translation>
     </message>
     <message>
@@ -66,11 +66,11 @@
 <context>
     <name>LoginPage</name>
     <message>
-        <source>Login</source>
+        <source>Log in</source>
         <translation>Entrar</translation>
     </message>
     <message>
-        <source>Log in to your Jabber Account</source>
+        <source>Log in to your XMPP account</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -102,7 +102,7 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Connecting...</source>
+        <source>Connecting…</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

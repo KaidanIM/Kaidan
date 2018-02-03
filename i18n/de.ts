@@ -16,7 +16,7 @@
         <translation type="vanished">Lizenz:</translation>
     </message>
     <message>
-        <source>Sourcecode on Github</source>
+        <source>Sourcecode on GitHub</source>
         <translation type="vanished">Quellcode auf GitHub</translation>
     </message>
     <message>
@@ -35,7 +35,7 @@
         <translation>Lizenz:</translation>
     </message>
     <message>
-        <source>Source code on Github</source>
+        <source>Source code on GitHub</source>
         <translation>Quellcode auf GitHub</translation>
     </message>
 </context>
@@ -78,7 +78,7 @@
         <translation type="vanished">Kontakt Hinzufügen</translation>
     </message>
     <message>
-        <source>Logout</source>
+        <source>Log out</source>
         <translation>Abmelden</translation>
     </message>
     <message>
@@ -121,15 +121,15 @@
         <translation>Erneut Versuchen</translation>
     </message>
     <message>
-        <source>Connecting...</source>
+        <source>Connecting…</source>
         <translation>Verbinden...</translation>
     </message>
     <message>
-        <source>Login</source>
+        <source>Log in</source>
         <translation>Anmelden</translation>
     </message>
     <message>
-        <source>Log in to your Jabber Account</source>
+        <source>Log in to your XMPP account</source>
         <translation>Anmelden mit deinem Jabber Account</translation>
     </message>
     <message>
@@ -209,7 +209,7 @@
         <translation type="vanished">Kommandozeileneingaben erfolgreich geparst.</translation>
     </message>
     <message>
-        <source>Logout</source>
+        <source>Log out</source>
         <translation type="vanished">Abmelden</translation>
     </message>
     <message>

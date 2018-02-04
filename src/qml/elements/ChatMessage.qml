@@ -1,3 +1,4 @@
+
 /*
  *  Kaidan - A user-friendly XMPP client for every device!
  *
@@ -27,88 +28,101 @@
  *  You should have received a copy of the GNU General Public License
  *  along with Kaidan.  If not, see <http://www.gnu.org/licenses/>.
  */
-
 import QtQuick 2.6
 import QtQuick.Controls 2.0 as Controls
 import org.kde.kirigami 2.0 as Kirigami
+import QtQuick.Layouts 1.3
 
-Row {
-	id: root
-	property bool sentByMe: true
-	property string messageBody: ""
-	property date dateTime: new Date()
-	property bool isRead: false
-	property string recipientAvatarUrl: ""
+RowLayout {
+    id: root
+    property bool sentByMe: true
+    property string messageBody: ""
+    property date dateTime: new Date()
+    property bool isRead: false
+    property string recipientAvatarUrl: ""
 
-	anchors.right: sentByMe ? parent.right : undefined
-	spacing: Kirigami.Units.gridUnit * 0.5
-	layoutDirection: sentByMe ? Qt.RightToLeft : Qt.LeftToRight
+    //anchors.right: sentByMe ? parent.right : undefined
+    spacing: Kirigami.Units.gridUnit * 0.5
+    layoutDirection: sentByMe ? Qt.RightToLeft : Qt.LeftToRight
 
-	RoundImage {
-		id: avatar
-		visible: !sentByMe
-		width: Kirigami.Units.gridUnit * 2.2
-		height: Kirigami.Units.gridUnit * 2.2
-		source: recipientAvatarUrl
-	}
+    Item {
+        Layout.preferredWidth: 5
+    }
 
-	Item {
-		id: bubble
-		height: label.implicitHeight + messageInfo.height
-		width: Math.max(label.width, checkmark.visible ? dateLabel.width + checkmark.width + Kirigami.Units.gridUnit * 1.7
-							       : dateLabel.width + checkmark.width + Kirigami.Units.gridUnit * 0.7)
+    RoundImage {
+        id: avatar
+        visible: !sentByMe
+        source: recipientAvatarUrl
+        height: width
+        fillMode: Image.PreserveAspectFit
+        Layout.preferredWidth: Kirigami.Units.gridUnit * 2.2
+        Layout.preferredHeight: Kirigami.Units.gridUnit * 2.2
+        Layout.alignment: Qt.AlignHCenter | Qt.AlignTop
+        mipmap: true
+    }
 
-		Rectangle {
-			id: box
-			height: parent.height
-			width: parent.width
-			color: sentByMe ? "white" : "#4c9b4a"
-			radius: 2
-			border.width: 1
-			border.color: "#E1DFDF"
-		}
+    Item {
+        id: bubble
+        height: label.implicitHeight + messageInfo.height
+        width: Math.max(label.width, dateLabel.width + checkmark.width
+                        + Kirigami.Units.gridUnit * (checkmark.visible ? 1.7 : 0.7))
 
-		Column {
-			id: layout
+        Rectangle {
+            id: box
+            height: parent.height
+            width: parent.width
+            color: sentByMe ? "white" : "#4c9b4a"
+            radius: 12
+            border.width: 1
+            border.color: "#E1DFDF"
+        }
 
-			Controls.Label {
-				id: label
-				width: Math.min(implicitWidth, pageStack.lastItem.width * 0.8)
-				height: implicitHeight
-				leftPadding: Kirigami.Units.gridUnit * 0.5
-				rightPadding: Kirigami.Units.gridUnit * 0.5
-				topPadding: Kirigami.Units.gridUnit * 0.5
-				bottomPadding: Kirigami.Units.gridUnit * 0.2
-				text: messageBody
-				textFormat: Text.PlainText
-				wrapMode: Text.Wrap
-				color: sentByMe ? "black" : "white"
-			}
+        Column {
+            id: layout
 
-			Row {
-				id: messageInfo
-				leftPadding: Kirigami.Units.gridUnit * 0.5
-				rightPadding: Kirigami.Units.gridUnit * 0.5
-				bottomPadding: Kirigami.Units.gridUnit * 0.5
-				spacing: Kirigami.Units.gridUnit * 0.5
+            Controls.Label {
+                id: label
+                width: Math.min(implicitWidth, pageStack.lastItem.width * 0.8)
+                height: implicitHeight
+                leftPadding: Kirigami.Units.gridUnit * 0.5
+                rightPadding: Kirigami.Units.gridUnit * 0.5
+                topPadding: Kirigami.Units.gridUnit * 0.5
+                bottomPadding: Kirigami.Units.gridUnit * 0.2
+                text: messageBody
+                textFormat: Text.PlainText
+                wrapMode: Text.Wrap
+                color: sentByMe ? "black" : "white"
+            }
 
-				Controls.Label {
-					id: dateLabel
-					height: implicitHeight
-                                        text: Qt.formatDateTime(dateTime, "dd MMM, hh:mm")
-					color: sentByMe ? "grey" : "#e0e0e0"
-                                }
-				
-				Image {
-					id: checkmark
-					visible: (sentByMe && isRead)
-					anchors.verticalCenter: dateLabel.verticalCenter
-					height: Kirigami.Units.gridUnit * 0.6
-					width: Kirigami.Units.gridUnit * 0.6
-					source: kaidan.getResourcePath("images/message_checkmark.svg");
-					mipmap: true
-				}
-			}
-		}
-	}
+            Row {
+                id: messageInfo
+                leftPadding: Kirigami.Units.gridUnit * 0.5
+                rightPadding: Kirigami.Units.gridUnit * 0.5
+                bottomPadding: Kirigami.Units.gridUnit * 0.5
+                spacing: Kirigami.Units.gridUnit * 0.5
+
+                Controls.Label {
+                    id: dateLabel
+                    height: implicitHeight
+                    text: Qt.formatDateTime(dateTime, "dd MMM, hh:mm")
+                    color: sentByMe ? "grey" : "#e0e0e0"
+                }
+
+                Image {
+                    id: checkmark
+                    visible: (sentByMe && isRead)
+                    anchors.verticalCenter: dateLabel.verticalCenter
+                    height: Kirigami.Units.gridUnit * 0.6
+                    width: Kirigami.Units.gridUnit * 0.6
+                    source: kaidan.getResourcePath(
+                                "images/message_checkmark.svg")
+                    mipmap: true
+                }
+            }
+        }
+    }
+
+    Item {
+        Layout.fillWidth: true
+    }
 }

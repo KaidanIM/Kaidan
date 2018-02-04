@@ -112,8 +112,7 @@ RowLayout {
 					anchors.verticalCenter: dateLabel.verticalCenter
 					height: Kirigami.Units.gridUnit * 0.6
 					width: Kirigami.Units.gridUnit * 0.6
-					source: kaidan.getResourcePath(
-								"images/message_checkmark.svg")
+					source: kaidan.getResourcePath("images/message_checkmark.svg")
 					mipmap: true
 				}
 			}

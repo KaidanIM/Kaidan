@@ -30,8 +30,10 @@
 
 import QtQuick 2.6
 import QtQuick.Controls 2.0 as Controls
+import QtQuick.Controls.Material 2.0
 import QtQuick.Layouts 1.3
 import org.kde.kirigami 2.0 as Kirigami
+import QtGraphicalEffects 1.0
 import "elements"
 
 Kirigami.Page {
@@ -47,7 +49,7 @@ Kirigami.Page {
 	bottomPadding: 0
 	topPadding: 0
 
-	Image {
+	background: Image {
 		id: bgimage
 		source: kaidan.getResourcePath("images/chat.png")
 		anchors.fill: parent
@@ -56,20 +58,15 @@ Kirigami.Page {
 		verticalAlignment: Image.AlignTop
 	}
 
+	//
+	// Chat
+	//
 	ColumnLayout {
 		anchors.fill: parent
-
-		//
-		// Chat
-		//
-
 		ListView {
 			Layout.fillWidth: true
 			Layout.fillHeight: true
-			Layout.margins: Kirigami.Units.gridUnit * 0.75
-
-			displayMarginBeginning: 40
-			displayMarginEnd: 40
+			bottomMargin: 20
 
 			verticalLayoutDirection: ListView.BottomToTop
 
@@ -79,66 +76,108 @@ Kirigami.Page {
 			model: kaidan.messageModel
 
 			delegate: ChatMessage {
+				width: parent.width
 				sentByMe: model.recipient !== kaidan.jid
 				messageBody: model.message
 				dateTime: new Date(timestamp)
 				isRead: model.isDelivered
 				recipientAvatarUrl: kaidan.avatarStorage.getHashOfJid(author) !== "" ?
-						    kaidan.avatarStorage.getAvatarUrl(author) :
-						    kaidan.getResourcePath("images/fallback-avatar.svg")
+				                    kaidan.avatarStorage.getAvatarUrl(author) :
+				                    kaidan.getResourcePath("images/fallback-avatar.svg")
 			}
+			Controls.ScrollIndicator.vertical: Controls.ScrollIndicator {}
+		}
+	}
+
+	//
+	// Message Writing
+	//
+	footer: Controls.Pane {
+		id: sendingArea
+		layer.enabled: sendingArea.enabled
+		layer.effect: DropShadow {
+			verticalOffset: 1
+			color: Material.dropShadowColor
+			samples: 20
+			spread: 0.3
+		}
+		Layout.fillWidth: true
+		padding: 0
+		wheelEnabled: true
+		background: Rectangle {
+			color: "white"
 		}
 
+		RowLayout {
+			width: parent.width
 
-		//
-		// Message Writing
-		//
-
-		Controls.Pane {
-			id: sendingArea
-			Layout.fillWidth: true
-			topPadding: Kirigami.Units.gridUnit * 0.1
-			bottomPadding: Kirigami.Units.gridUnit * 0.1
-			wheelEnabled: true
-			background: Rectangle {
-				color: "white"
+			Controls.ToolButton {
+				id: attachButton
+				Layout.preferredWidth: 60
+				Layout.preferredHeight: 60
+				padding: 0
+				Kirigami.Icon {
+					source: "document-send-symbolic"
+					isMask: true
+					smooth: true
+					anchors.centerIn: parent
+					width: 30
+					height: width
+				}
 			}
 
-			RowLayout {
-				width: parent.width
-
-				Controls.TextField {
-					id: messageField
-					Layout.fillWidth: true
-					placeholderText: qsTr("Compose message")
-					wrapMode: Controls.TextArea.Wrap
-					selectByMouse: true
-					onAccepted: {
-						sendButton.onClicked()
+			Controls.TextArea {
+				id: messageField
+				Layout.fillWidth: true
+				placeholderText: qsTr("Compose message")
+				wrapMode: Controls.TextArea.Wrap
+				topPadding: 19
+				bottomPadding: topPadding
+				selectByMouse: true
+				background: Item {}
+				Keys.onReturnPressed: {
+					if (event.key === Qt.Key_Return) {
+						if (event.modifiers & Qt.ControlModifier) {
+							messageField.append("")
+						} else {
+							sendButton.onClicked()
+							event.accepted = true
+						}
 					}
 				}
+			}
 
-				Controls.Button {
-					id: sendButton
-					text: qsTr("Send")
-					onClicked: {
-						// don't send empty messages
-						if (messageField.text == "") {
-							return;
-						}
-
-						// disable the button to prevent sending
-						// the same message several times
-						sendButton.enabled = false;
-
-						// send the message
-						kaidan.sendMessage(recipientJid, messageField.text);
-						// clean up the text field
-						messageField.text = "";
-
-						// reenable the button
-						sendButton.enabled = true;
+			Controls.ToolButton {
+				id: sendButton
+				Layout.preferredWidth: 60
+				Layout.preferredHeight: 60
+				padding: 0
+				Kirigami.Icon {
+					source: "document-send"
+					enabled: sendButton.enabled
+					isMask: true
+					smooth: true
+					anchors.centerIn: parent
+					width: 30
+					height: width
+				}
+				onClicked: {
+					// don't send empty messages
+					if (!messageField.text.length) {
+						return
 					}
+
+					// disable the button to prevent sending
+					// the same message several times
+					sendButton.enabled = false
+
+					// send the message
+					kaidan.sendMessage(recipientJid, messageField.text)
+					// clean up the text field
+					messageField.text = ""
+
+					// reenable the button
+					sendButton.enabled = true
 				}
 			}
 		}

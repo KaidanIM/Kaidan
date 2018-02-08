@@ -27,6 +27,7 @@
  *  You should have received a copy of the GNU General Public License
  *  along with Kaidan.  If not, see <http://www.gnu.org/licenses/>.
  */
+
 import QtQuick 2.6
 import QtQuick.Controls 2.0 as Controls
 import QtQuick.Controls.Material 2.0
@@ -81,8 +82,8 @@ Kirigami.Page {
 				dateTime: new Date(timestamp)
 				isRead: model.isDelivered
 				recipientAvatarUrl: kaidan.avatarStorage.getHashOfJid(author) !== "" ?
-									kaidan.avatarStorage.getAvatarUrl(author) :
-									kaidan.getResourcePath("images/fallback-avatar.svg")
+				                    kaidan.avatarStorage.getAvatarUrl(author) :
+				                    kaidan.getResourcePath("images/fallback-avatar.svg")
 			}
 			Controls.ScrollIndicator.vertical: Controls.ScrollIndicator {}
 		}
@@ -95,14 +96,13 @@ Kirigami.Page {
 		id: sendingArea
 		layer.enabled: sendingArea.enabled
 		layer.effect: DropShadow {
-		  verticalOffset: 1
-		  color: Material.dropShadowColor
-		  samples: 20
-		  spread: 0.3
+			verticalOffset: 1
+			color: Material.dropShadowColor
+			samples: 20
+			spread: 0.3
 		}
 		Layout.fillWidth: true
 		padding: 0
-		leftPadding: 12
 		wheelEnabled: true
 		background: Rectangle {
 			color: "white"
@@ -111,10 +111,11 @@ Kirigami.Page {
 		RowLayout {
 			width: parent.width
 
-			/*Controls.ToolButton {
+			Controls.ToolButton {
 				id: attachButton
 				Layout.preferredWidth: 60
 				Layout.preferredHeight: 60
+				padding: 0
 				Kirigami.Icon {
 					source: "document-send-symbolic"
 					isMask: true
@@ -123,15 +124,15 @@ Kirigami.Page {
 					width: 30
 					height: width
 				}
-			}*/
+			}
 
 			Controls.TextArea {
 				id: messageField
 				Layout.fillWidth: true
 				placeholderText: qsTr("Compose message")
 				wrapMode: Controls.TextArea.Wrap
-				topPadding: 10
-				bottomPadding: 10
+				topPadding: 19
+				bottomPadding: topPadding
 				selectByMouse: true
 				background: Item {}
 				Keys.onReturnPressed: {
@@ -150,7 +151,7 @@ Kirigami.Page {
 				id: sendButton
 				Layout.preferredWidth: 60
 				Layout.preferredHeight: 60
-				//enabled: messageField.text.length - only counts spaces?
+				padding: 0
 				Kirigami.Icon {
 					source: "document-send"
 					enabled: sendButton.enabled

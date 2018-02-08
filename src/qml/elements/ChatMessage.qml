@@ -63,7 +63,7 @@ RowLayout {
 		id: bubble
 		height: label.implicitHeight + messageInfo.height
 		width: Math.max(label.width, dateLabel.width + checkmark.width
-						+ Kirigami.Units.gridUnit * (checkmark.visible ? 1.7 : 0.7))
+		                + Kirigami.Units.gridUnit * (checkmark.visible ? 1.7 : 0.7))
 
 		Rectangle {
 			id: box

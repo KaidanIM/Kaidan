@@ -29,7 +29,7 @@ Kaidan is *not* finished yet, so don't expect it working as well as a finished c
 
 ### Debian Stretch based systems
 
-Add our APT repository to your system
+Add our APT repository to your system (currently very outdated, will be fixed soon™)
 
 ```
 sudo apt install apt-transport-https software-properties-common dirmngr gnupg

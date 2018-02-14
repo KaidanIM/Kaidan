@@ -90,6 +90,7 @@ RowLayout {
 				text: messageBody
 				textFormat: Text.PlainText
 				wrapMode: Text.Wrap
+				font.pixelSize: 16
 				color: sentByMe ? "black" : "white"
 			}
 

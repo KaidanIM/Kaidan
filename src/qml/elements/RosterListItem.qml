@@ -76,6 +76,7 @@ Kirigami.SwipeListItem {
 				maximumLineCount: 1
 				text: kaidan.removeNewLinesFromString(lastMessage);
 				textFormat: Text.PlainText
+				font.pixelSize: 16
 			}
 		}
 

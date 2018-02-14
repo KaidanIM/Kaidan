@@ -2,6 +2,11 @@
 
 # NOTE: To use this script, you need to set ANDROID_NDK_ROOT to your NDK root folder.
 
+if [ -z "$ANDROID_NDK_ROOT" ]; then
+    echo "ANDROID_NDK_ROOT has to be set"
+    exit 1
+fi
+
 KAIDAN_SOURCES=$PWD
 
 echo "*****************************************"

@@ -37,8 +37,8 @@ echo "*****************************************"
     cd /tmp/openssl/
     source ./Setenv-android.sh
     ./config shared --openssldir=$KAIDAN_SOURCES/3rdparty/openssl/
-    make all
-    make install
+    make all -j$(nproc)
+    make install -j$(nproc)
 }
 
 echo "*****************************************"
@@ -65,7 +65,7 @@ echo "*****************************************"
     cd /tmp/gloox
     ./autogen.sh
     ./configure --host=arm --with-openssl=$KAIDAN_SOURCES/3rdparty/openssl/ --prefix=$KAIDAN_SOURCES/3rdparty/gloox/
-    make install
+    make install -j$(nproc)
 }
 
 echo "Installing"

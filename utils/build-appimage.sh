@@ -16,7 +16,7 @@ cd ../build
 export QT_SELECT=qt5
 
 # Build kaidan
-cmake .. -GNinja -DI18N=1 -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=/usr
+cmake .. -GNinja -DI18N=1 -DCMAKE_BUILD_TYPE=Debug -DCMAKE_INSTALL_PREFIX=/usr
 cmake --build .
 DESTDIR=../AppDir cmake --build . --target install
 cd ..

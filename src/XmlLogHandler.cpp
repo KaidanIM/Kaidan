@@ -54,14 +54,17 @@ QString XmlLogHandler::makeXmlPretty(QString xmlIn)
 
 	while (!reader.atEnd()) {
 		reader.readNext();
-		if (!reader.isWhitespace()) {
+		if (!reader.isWhitespace() && !reader.hasError()) {
 			writer.writeCurrentToken(reader);
 		}
 	}
 
 	// remove xml header
-	xmlOut.replace("<?xml version=\"1.0\"?>\n", "");
-	// remove last char (\n)
+	xmlOut.replace("<?xml version=\"1.0\"?>", "");
+
+	// remove first & last char (\n)
+	// first char is needed due to header replacement
+	xmlOut = xmlOut.right(xmlOut.size() - 1);
 	xmlOut = xmlOut.left(xmlOut.size() - 1);
 
 	return xmlOut;

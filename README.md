@@ -49,7 +49,7 @@ sudo apt install kaidan
 #### Install all dependencies:
  * [Qt](http://doc.qt.io/qt-5/build-sources.html) (Core Qml Quick Sql QuickControls2) (>= 5.8.0)
  * [gloox](https://camaya.net/gloox/download/) (>= 1.0.10)
- * [Kirigami 2](https://phabricator.kde.org/source/kirigami/) (>= 2.0.0)
+ * [Kirigami 2](https://phabricator.kde.org/source/kirigami/) (>= 5.42.0)
 
 Build only dependencies:
  * A C++ compiler
@@ -57,7 +57,7 @@ Build only dependencies:
  * CMake
  * Git (if you don't want to use tarballs/zips from github)
 
-##### On Ubuntu *17.10+*, KDE Neon 16.04 or debian *sid* do the following:
+##### On Ubuntu *18.04+*, KDE Neon 16.04 or debian *sid* do the following:
 
 Debian strech and older Ubuntu distros are not supported since they don't provide Qt 5.8 or newer.
 

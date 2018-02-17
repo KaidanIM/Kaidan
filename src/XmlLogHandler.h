@@ -43,7 +43,9 @@ class XmlLogHandler : public gloox::LogHandler
 public:
 	XmlLogHandler(gloox::Client *client);
 	~XmlLogHandler();
-	virtual void handleLog(gloox::LogLevel level, gloox::LogArea area, const std::string &message);
+
+	virtual void handleLog(gloox::LogLevel level, gloox::LogArea area,
+	                       const std::string &message);
 	static QString makeXmlPretty(QString inputXml);
 
 private:

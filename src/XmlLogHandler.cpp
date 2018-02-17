@@ -29,16 +29,21 @@
  */
 
 #include "XmlLogHandler.h"
-#include <gloox/loghandler.h>
+
+// gloox
 #include <gloox/client.h>
+// Qt
 #include <QDebug>
 #include <QXmlStreamReader>
 #include <QXmlStreamWriter>
 
 XmlLogHandler::XmlLogHandler(gloox::Client *client) : client(client)
 {
-	client->logInstance().registerLogHandler(gloox::LogLevelDebug, gloox::LogAreaXmlIncoming |
-	                                         gloox::LogAreaXmlOutgoing, this);
+	client->logInstance().registerLogHandler(
+		gloox::LogLevelDebug,
+		gloox::LogAreaXmlIncoming | gloox::LogAreaXmlOutgoing,
+		this
+	);
 }
 
 XmlLogHandler::~XmlLogHandler()
@@ -46,15 +51,15 @@ XmlLogHandler::~XmlLogHandler()
 	client->logInstance().removeLogHandler(this);
 }
 
-void XmlLogHandler::handleLog(gloox::LogLevel level, gloox::LogArea area, const std::string &message)
+void XmlLogHandler::handleLog(gloox::LogLevel level, gloox::LogArea area,
+                              const std::string &message)
 {
-	if (area == gloox::LogAreaXmlIncoming) {
-		qDebug() << "[XML] [Incoming] <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<";
-		qDebug().noquote() << makeXmlPretty(QString::fromStdString(message));
-	} else if (area == gloox::LogAreaXmlOutgoing) {
-		qDebug() << "[XML] [Outgoing] >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>";
-		qDebug().noquote() << makeXmlPretty(QString::fromStdString(message));
-	}
+	if (area == gloox::LogAreaXmlIncoming)
+		qDebug() << "[client] [incoming] <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<";
+	else if (area == gloox::LogAreaXmlOutgoing)
+		qDebug() << "[client] [outgoing] >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>";
+
+	qDebug().noquote() << makeXmlPretty(QString::fromStdString(message));
 }
 
 QString XmlLogHandler::makeXmlPretty(QString xmlIn)

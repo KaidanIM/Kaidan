@@ -1,30 +1,12 @@
 cmake_minimum_required(VERSION 2.8.11)
 set(CMAKE_CXX_STANDARD 14)
-set(QT_MIN_VERSION "5.7.0")
-set(BOOST_MIN_VERSION "1.34.1")
+set(QT_MIN_VERSION "5.8.0")
 
 project(kaidan)
 
 # CMake options
 option(I18N "Enable i18n support" FALSE)
-option(SAILFISH_OS "Build with Sailfish OS GUI, needs libs/kaidansf submodule" FALSE)
-
-# application name
-set(APPLICATION_ID "io.github.kaidanim")
-set(APPLICATION_NAME "kaidan")
-set(APPLICATION_DISPLAY_NAME "Kaidan")
-set(APPLICATION_DESCRIPTION "Cross platform XMPP client")
-
-
-# Version
-set(VERSION_MAJOR 0)
-set(VERSION_MINOR 4)
-set(VERSION_PATCH 0)
-set(VERSION_EXTRA "dev")
-set(VERSION_STRING "${VERSION_MAJOR}.${VERSION_MINOR}.${VERSION_PATCH}")
-if(VERSION_EXTRA)
-	set(VERSION_STRING ${VERSION_STRING}-${VERSION_EXTRA})
-endif()
+option(SAILFISH_OS "Build with Sailfish OS GUI, needs 3rdparty/kaidansf submodule" FALSE)
 
 # Find includes in corresponding build directories
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
@@ -118,15 +100,7 @@ else()
 endif()
 
 target_compile_definitions(${PROJECT_NAME} PRIVATE
-	APPLICATION_ID="${APPLICATION_ID}"
-	APPLICATION_NAME="${APPLICATION_NAME}"
-	APPLICATION_DISPLAY_NAME="${APPLICATION_DISPLAY_NAME}"
-	APPLICATION_DESCRIPTION="${APPLICATION_DESCRIPTION}"
-
-	VERSION_STRING="${VERSION_STRING}"
-
 	DEBUG_SOURCE_PATH="${CMAKE_SOURCE_DIR}"
-
 	${KAIDAN_COMPILE_DEFINITIONS}
 )
 

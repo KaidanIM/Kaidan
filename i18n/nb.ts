@@ -164,7 +164,7 @@
     </message>
     <message>
         <source>Do you really want to delete the contact &lt;%1&gt; from your roster?</source>
-        <translation type="unfinished"></translation>
+        <translation>Ønsker du virkelig å slette kontakten &lt;%1&gt; fra din kontaktliste?</translation>
     </message>
 </context>
 </TS>

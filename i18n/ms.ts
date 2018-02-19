@@ -54,7 +54,7 @@
     </message>
     <message>
         <source>Send</source>
-        <translation>Hantar</translation>
+        <translation type="vanished">Hantar</translation>
     </message>
 </context>
 <context>
@@ -179,7 +179,7 @@
     <name>RosterRemoveContactSheet</name>
     <message>
         <source>Do you really want to delete the contact &quot;%1&quot; from your roster?</source>
-        <translation>Adakah anda ingin memadam kenalan &quot;%1&quot; daripada roster anda?</translation>
+        <translation type="vanished">Adakah anda ingin memadam kenalan &quot;%1&quot; daripada roster anda?</translation>
     </message>
     <message>
         <source>Delete contact</source>
@@ -192,6 +192,10 @@
     <message>
         <source>Delete</source>
         <translation>Padam</translation>
+    </message>
+    <message>
+        <source>Do you really want to delete the contact &lt;%1&gt; from your roster?</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 </TS>

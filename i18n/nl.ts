@@ -31,7 +31,7 @@
     </message>
     <message>
         <source>Send</source>
-        <translation>Verstuur</translation>
+        <translation type="vanished">Verstuur</translation>
     </message>
 </context>
 <context>
@@ -71,7 +71,7 @@
     </message>
     <message>
         <source>Log in to your XMPP Account</source>
-        <translation>Log in op uw XMPP-account</translation>
+        <translation type="vanished">Log in op uw XMPP-account</translation>
     </message>
     <message>
         <source>Your Jabber-ID:</source>
@@ -104,6 +104,10 @@
     <message>
         <source>Connecting…</source>
         <translation>Verbinden…</translation>
+    </message>
+    <message>
+        <source>Log in to your XMPP account</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -148,7 +152,7 @@
     <name>RosterRemoveContactSheet</name>
     <message>
         <source>Do you really want to delete the contact &quot;%1&quot; from your roster?</source>
-        <translation>Wil je echt het contact &quot;%1&quot; uit je lijst van contacten verwijderen?</translation>
+        <translation type="vanished">Wil je echt het contact &quot;%1&quot; uit je lijst van contacten verwijderen?</translation>
     </message>
     <message>
         <source>Delete contact</source>
@@ -161,6 +165,10 @@
     <message>
         <source>Delete</source>
         <translation>Verwijder</translation>
+    </message>
+    <message>
+        <source>Do you really want to delete the contact &lt;%1&gt; from your roster?</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 </TS>

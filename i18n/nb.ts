@@ -31,7 +31,7 @@
     </message>
     <message>
         <source>Send</source>
-        <translation>Send</translation>
+        <translation type="vanished">Send</translation>
     </message>
 </context>
 <context>
@@ -148,7 +148,7 @@
     <name>RosterRemoveContactSheet</name>
     <message>
         <source>Do you really want to delete the contact &quot;%1&quot; from your roster?</source>
-        <translation>Ønsker du virkelig å slette kontakten &quot;%1&quot; fra din kontaktliste?</translation>
+        <translation type="vanished">Ønsker du virkelig å slette kontakten &quot;%1&quot; fra din kontaktliste?</translation>
     </message>
     <message>
         <source>Delete contact</source>
@@ -161,6 +161,10 @@
     <message>
         <source>Delete</source>
         <translation>Slett</translation>
+    </message>
+    <message>
+        <source>Do you really want to delete the contact &lt;%1&gt; from your roster?</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 </TS>

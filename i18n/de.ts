@@ -68,14 +68,14 @@
     <name>ForwardButton</name>
     <message>
         <source>Navigate Forward</source>
-        <translation>Vorwärts navigieren</translation>
+        <translation>Vorwärts</translation>
     </message>
 </context>
 <context>
     <name>GlobalDrawer</name>
     <message>
         <source>Add Contact</source>
-        <translation type="vanished">Kontakt Hinzufügen</translation>
+        <translation>Kontakt hinzufügen</translation>
     </message>
     <message>
         <source>Log out</source>
@@ -118,11 +118,11 @@
     </message>
     <message>
         <source>Retry</source>
-        <translation>Erneut Versuchen</translation>
+        <translation>Erneut versuchen</translation>
     </message>
     <message>
         <source>Connecting…</source>
-        <translation>Verbinden...</translation>
+        <translation>Verbinden …</translation>
     </message>
     <message>
         <source>Log in</source>
@@ -145,11 +145,11 @@
     <name>RosterAddContactSheet</name>
     <message>
         <source>Add Contact</source>
-        <translation type="vanished">Kontakt Hinzufügen</translation>
+        <translation>Kontakt hinzufügen</translation>
     </message>
     <message>
         <source>Nickname:</source>
-        <translation></translation>
+        <translation>Spitzname:</translation>
     </message>
     <message>
         <source>Jabber-ID:</source>
@@ -186,10 +186,6 @@
 <context>
     <name>RosterRemoveContactSheet</name>
     <message>
-        <source>Do you really want to delete the contact &quot;%1&quot; from your roster?</source>
-        <translation type="vanished">Möchten Sie wirklich &quot;%1&quot; aus Ihrer Kontaktliste entfernen?</translation>
-    </message>
-    <message>
         <source>Delete contact</source>
         <translation>Kontakt entfernen</translation>
     </message>
@@ -203,14 +199,14 @@
     </message>
     <message>
         <source>Do you really want to delete the contact &lt;%1&gt; from your roster?</source>
-        <translation type="unfinished"></translation>
+        <translation>Möchten Sie wirklich &lt;%1&gt; aus Ihrer Kontaktliste entfernen?</translation>
     </message>
 </context>
 <context>
     <name>main</name>
     <message>
         <source>Successfully parsed command line input.</source>
-        <translation type="vanished">Kommandozeileneingaben erfolgreich geparst.</translation>
+        <translation>Kommandozeileneingabe erfolgreich ausgewertet.</translation>
     </message>
     <message>
         <source>Log out</source>

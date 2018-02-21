@@ -67,8 +67,6 @@ void LinkPreviewFetcher::fetchPreview(QString url)
 	QFileInfo localCacheInfo(localCachePath);
 
 	if (localCacheInfo.exists() && localCacheInfo.isFile()) {
-		qDebug() << "Anscheinend wird der Kack hier auch ausgeführt!";
-
 		QFile file(localCachePath);
 
 		if (!file.open(QIODevice::ReadOnly | QIODevice::Text))

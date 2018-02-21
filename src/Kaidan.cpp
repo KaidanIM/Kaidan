@@ -49,6 +49,7 @@
 // Kaidan
 #include "RosterModel.h"
 #include "MessageModel.h"
+#include "LinkPreviewFetcher.h"
 
 Kaidan::Kaidan(QObject *parent) : QObject(parent)
 {
@@ -95,6 +96,9 @@ Kaidan::Kaidan(QObject *parent) : QObject(parent)
 	// use Kaidan as resource, if no set
 	if (jidResource == "")
 		setJidResource(QString(APPLICATION_NAME));
+
+	linkPreviewer = new LinkPreviewFetcher();
+	linkPreviewer->fetchPreview("www.golem.de/news/astronomie-amateur-beobachtet-erstmals-die-geburt-einer-supernova-1802-132910.html");
 }
 
 Kaidan::~Kaidan()

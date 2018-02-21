@@ -42,18 +42,14 @@
 #include <QJsonDocument>
 #include <QJsonObject>
 
-// Json
-// #include <nlohmann/json.hpp>
-// using json = nlohmann::json;
-
 static const QString LINK_PREVIEW_BASE_URL = "https://previews.ada.support/?url=";
 
 LinkPreviewFetcher::LinkPreviewFetcher(QObject *parent): QObject(parent)
 {
 // create previews directory, if it doesn't exists
-QDir cacheDir(QStandardPaths::writableLocation(QStandardPaths::CacheLocation));
-if (!cacheDir.exists("link-previews"))
-	cacheDir.mkpath("link-previews");
+	QDir cacheDir(QStandardPaths::writableLocation(QStandardPaths::CacheLocation));
+	if (!cacheDir.exists("link-previews"))
+		cacheDir.mkpath("link-previews");
 }
 
 LinkPreviewFetcher::~LinkPreviewFetcher()

@@ -50,6 +50,8 @@
 #include "AvatarFileStorage.h"
 #include "XmlLogHandler.h"
 
+class LinkPreviewFetcher;
+
 class Kaidan : public QObject, public gloox::ConnectionListener
 {
 	Q_OBJECT
@@ -132,6 +134,8 @@ private:
 	QString password;
 	QString chatPartner;
 	QTimer *packageFetchTimer;
+
+	LinkPreviewFetcher *linkPreviewer;
 };
 
 #endif

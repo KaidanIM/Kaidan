@@ -9,10 +9,10 @@ echo "*****************************************"
 mkdir ../build; cd ../build/
 
 if [ $BUILD_SYSTEM == "cmake" ]; then
-	cmake .. -GNinja -DI18N=1
+	cmake .. -GNinja -DI18N=1 -DCMAKE_CXX_COMPILER_LAUNCHER=ccache
 	cmake --build .
 elif [ $BUILD_SYSTEM == "qmake" ]; then
 	lrelease ../Kaidan.pro
-	qmake ..
+	qmake "QMAKE_CXX=ccache g++" ..
 	make -j$(nproc)
 fi

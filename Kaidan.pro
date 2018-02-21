@@ -21,7 +21,8 @@ SOURCES += \
     src/ServiceDiscoveryManager.cpp \
     src/VCardManager.cpp \
     src/XmlLogHandler.cpp \
-    src/StatusBar.cpp
+    src/StatusBar.cpp \
+    src/LinkPreviewFetcher.cpp
 
 HEADERS += \
     src/Database.h \
@@ -39,7 +40,8 @@ HEADERS += \
     src/Kaidan.h \
     src/VCardManager.h \
     src/branding.h \
-    src/StatusBar.h
+    src/StatusBar.h \
+    src/LinkPreviewFetcher.h
 
 android: INCLUDEPATH += $$PWD/3rdparty/gloox/include
 android: LIBS += -L$$PWD/3rdparty/gloox/lib/

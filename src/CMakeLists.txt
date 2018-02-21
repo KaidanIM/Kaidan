@@ -18,4 +18,5 @@ set(KAIDAN_SOURCES
 	${CURDIR}/VCardManager.cpp
 	${CURDIR}/XmlLogHandler.cpp
 	${CURDIR}/StatusBar.cpp
+	${CURDIR}/LinkPreviewFetcher.cpp
 )

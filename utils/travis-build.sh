@@ -13,6 +13,6 @@ if [ $BUILD_SYSTEM == "cmake" ]; then
 	cmake --build .
 elif [ $BUILD_SYSTEM == "qmake" ]; then
 	lrelease ../Kaidan.pro
-	qmake ..
+	qmake "QMAKE_CXX=ccache g++" ..
 	make -j$(nproc)
 fi

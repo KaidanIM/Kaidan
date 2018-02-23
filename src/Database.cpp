@@ -41,7 +41,7 @@
 #include <QSqlQuery>
 #include <QSqlRecord>
 
-static const unsigned int DATABASE_LATEST_VERSION = 4;
+static const int DATABASE_LATEST_VERSION = 4;
 static const char *DATABASE_TABLE_INFO = "dbinfo";
 static const char *DATABASE_TABLE_MESSAGES = "Messages";
 static const char *DATABASE_TABLE_ROSTER = "Roster";

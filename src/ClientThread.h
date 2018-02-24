@@ -54,6 +54,7 @@ class ServiceDiscoveryManager;
 class VCardManager;
 class XmlLogHandler;
 class QSettings;
+class QGuiApplication;
 
 using namespace Enums;
 
@@ -105,7 +106,8 @@ public:
 	 */
 	ClientThread(RosterModel *rosterModel, MessageModel *messageModel,
 	             AvatarFileStorage *avatarStorage, Credentials creds,
-	             QSettings *settings, QObject *parent = nullptr);
+	             QSettings *settings, QGuiApplication *app,
+	             QObject *parent = nullptr);
 
 	/*
 	 * Will exit the event loop and waits until thread finishes and then

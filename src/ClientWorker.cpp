@@ -34,6 +34,7 @@
 // Qt
 #include <QDebug>
 #include <QSettings>
+#include <QGuiApplication>
 // Kaidan
 #include "ClientThread.h"
 
@@ -41,7 +42,8 @@
 static const unsigned int RECONNECT_INTERVAL = 5000;
 
 ClientWorker::ClientWorker(GlooxClient* client, ClientThread *controller,
-	QObject* parent) : QObject(parent), client(client), controller(controller)
+                           QGuiApplication *app, QObject* parent)
+	: QObject(parent), client(client), controller(controller)
 {
 	client->registerConnectionListener(this);
 
@@ -52,6 +54,8 @@ ClientWorker::ClientWorker(GlooxClient* client, ClientThread *controller,
 	connect(&reconnectTimer, &QTimer::timeout, this, &ClientWorker::xmppConnect);
 	connect(this, &ClientWorker::stopReconnectTimerRequested,
 	        &reconnectTimer, &QTimer::stop);
+	connect(app, &QGuiApplication::applicationStateChanged,
+	        this, &ClientWorker::setApplicationState);
 }
 
 ClientWorker::~ClientWorker()
@@ -145,4 +149,12 @@ void ClientWorker::reconnect()
 {
 	qDebug().noquote() << QString("[client] Will do reconnect in %1 ms").arg(RECONNECT_INTERVAL);
 	reconnectTimer.start();
+}
+
+void ClientWorker::setApplicationState(Qt::ApplicationState state)
+{
+	if (state == Qt::ApplicationActive)
+		controller->client->setActive();
+	else
+		controller->client->setInactive();
 }

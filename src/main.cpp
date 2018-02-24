@@ -107,6 +107,7 @@ int main(int argc, char *argv[])
 	qRegisterMetaType<MessageModel*>("MessageModel*");
 	qRegisterMetaType<AvatarFileStorage*>("AvatarFileStorage*");
 	qRegisterMetaType<ContactMap>("ContactMap");
+	qRegisterMetaType<Qt::ApplicationState>("Qt::ApplicationState");
 	qmlRegisterUncreatableMetaObject(Enums::staticMetaObject, APPLICATION_ID,
 	                                 1, 0, "Kaidan", "Access to enums & flags only");
 
@@ -127,7 +128,7 @@ int main(int argc, char *argv[])
 	// Kaidan back-end
 	//
 
-	Kaidan kaidan;
+	Kaidan kaidan(&app);
 
 	//
 	// Command line arguments

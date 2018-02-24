@@ -34,6 +34,7 @@ import org.kde.kirigami 2.3 as Kirigami
 import StatusBar 0.1
 import im.kaidan.kaidan 1.0
 import "elements"
+import "settings"
 
 Kirigami.ApplicationWindow {
 	id: root
@@ -61,7 +62,7 @@ Kirigami.ApplicationWindow {
 
 	// when the window was closed, disconnect from jabber server
 	onClosing: {
-		kaidan.mainDisconnect();
+		kaidan.mainDisconnect()
 	}
 
 	// load all pages
@@ -69,6 +70,7 @@ Kirigami.ApplicationWindow {
 	Component {id: loginPage; LoginPage {}}
 	Component {id: rosterPage; RosterPage {}}
 	Component {id: emptyChatPage; EmptyChatPage {}}
+	Component {id: settingsPage; SettingsPage {}}
 
 	function passiveNotification(text) {
 		showPassiveNotification(text, "long")
@@ -78,7 +80,7 @@ Kirigami.ApplicationWindow {
 		// close all pages (we don't know on which page we're on,
 		// thus we don't use replace)
 		while (pageStack.depth > 0)
-			pageStack.pop();
+			pageStack.pop()
 
 		// toggle global drawer
 		globalDrawer.enabled = false

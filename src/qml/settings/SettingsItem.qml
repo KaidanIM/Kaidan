@@ -28,52 +28,35 @@
  *  along with Kaidan.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-import QtQuick 2.6
+import QtQuick 2.7
 import QtQuick.Controls 2.0 as Controls
 import QtQuick.Layouts 1.3
 import org.kde.kirigami 2.0 as Kirigami
 
-Kirigami.OverlaySheet {
-	property string jid
+Kirigami.BasicListItem {
+	property string name
+	property string description
 
-	onSheetOpenChanged: {
-		infoLabel.text = qsTr("Do you really want to delete the contact "
-							  + "<b>%1</b> from your roster?").arg(jid)
-	}
+	reserveSpaceForIcon: false
 
-	ColumnLayout {
-		Kirigami.Heading {
-			text: qsTr("Delete contact")
-
-			Layout.fillWidth: true
-		}
-
-		Controls.Label {
-			id: infoLabel
-			text: ""
-			textFormat: Text.StyledText
-			wrapMode: Text.WordWrap
-
-			Layout.fillWidth: true
-		}
-
-		RowLayout {
-			Layout.topMargin: 10
-			Layout.fillWidth: true
-
-			Controls.Button {
-				text: qsTr("Cancel")
-				onClicked: close()
+	RowLayout {
+		ColumnLayout {
+			Kirigami.Heading {
+				text: name
+				textFormat: Text.PlainText
+				elide: Text.ElideRight
+				maximumLineCount: 1
+				level: 2
 				Layout.fillWidth: true
+				Layout.maximumHeight: Kirigami.Units.gridUnit * 1.5
 			}
 
-			Controls.Button {
-				text: qsTr("Delete")
-				onClicked: {
-					kaidan.removeContact(jid)
-					close()
-				}
+			Controls.Label {
 				Layout.fillWidth: true
+				text: description
+				wrapMode: Text.WordWrap
+				textFormat: Text.PlainText
+				font.pixelSize: 14
 			}
 		}
 	}

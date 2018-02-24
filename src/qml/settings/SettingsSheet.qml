@@ -28,53 +28,26 @@
  *  along with Kaidan.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-import QtQuick 2.6
+import QtQuick 2.7
 import QtQuick.Controls 2.0 as Controls
 import QtQuick.Layouts 1.3
 import org.kde.kirigami 2.0 as Kirigami
 
+/**
+ * This sheet is used on desktop systems instead of a new layer. It doesn't
+ * fill the complete width, so it looks a bit nicer on large screens.
+ */
 Kirigami.OverlaySheet {
-	property string jid
-
-	onSheetOpenChanged: {
-		infoLabel.text = qsTr("Do you really want to delete the contact "
-							  + "<b>%1</b> from your roster?").arg(jid)
-	}
-
 	ColumnLayout {
 		Kirigami.Heading {
-			text: qsTr("Delete contact")
-
 			Layout.fillWidth: true
+			text: settingsPage.title
 		}
 
-		Controls.Label {
-			id: infoLabel
-			text: ""
-			textFormat: Text.StyledText
-			wrapMode: Text.WordWrap
-
-			Layout.fillWidth: true
-		}
-
-		RowLayout {
-			Layout.topMargin: 10
-			Layout.fillWidth: true
-
-			Controls.Button {
-				text: qsTr("Cancel")
-				onClicked: close()
-				Layout.fillWidth: true
-			}
-
-			Controls.Button {
-				text: qsTr("Delete")
-				onClicked: {
-					kaidan.removeContact(jid)
-					close()
-				}
-				Layout.fillWidth: true
-			}
+		SettingsPage {
+			Layout.preferredHeight: root.height * 0.9
+			Layout.maximumHeight: 500
+			id: settingsPage
 		}
 	}
 }

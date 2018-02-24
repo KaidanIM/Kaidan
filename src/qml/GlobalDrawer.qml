@@ -30,43 +30,55 @@
 
 import org.kde.kirigami 2.0 as Kirigami
 import im.kaidan.kaidan 1.0
+import "settings"
 
 Kirigami.GlobalDrawer {
 	id: globalDrawer
 	title: "Kaidan"
-	titleIcon: kaidan.utils.getResourcePath("images/kaidan.svg");
-	bannerImageSource: kaidan.utils.getResourcePath("images/banner.png");
-	// make drawer floating (overlay)
-	modal: true
-	// start with closed drawer
-	drawerOpen: false
-	// show open button on the left side
-	handleVisible: true
+	titleIcon: kaidan.utils.getResourcePath("images/kaidan.svg")
+	bannerImageSource: kaidan.utils.getResourcePath("images/banner.png")
+
+	SettingsSheet {
+		id: settingsSheet
+	}
 
 	actions: [
 		Kirigami.Action {
 			text: qsTr("Invite friends")
 			iconName: "mail-invitation"
 			onTriggered: {
-				kaidan.utils.copyToClipboard("https://i.kaidan.im/#" + kaidan.jid)
-				passiveNotification(qsTr("Invitation link copied to clipboard"))
+				kaidan.utils.copyToClipboard(
+					"https://i.kaidan.im/#" + kaidan.jid)
+				passiveNotification(
+					qsTr("Invitation link copied to clipboard"))
 			}
 		},
-                Kirigami.Action {
-                        text: qsTr("Log out")
-                        iconName: "system-shutdown"
-                        onTriggered: {
-                                // disconnect (open log in page)
-                                kaidan.mainDisconnect(true);
-                        }
-                },
-                Kirigami.Action {
-                        text: qsTr("About")
-                        iconName: "help-about"
-                        onTriggered: {
-                                // open about sheet
-                                aboutDialog.open();
-                        }
-                }
+		Kirigami.Action {
+			text: qsTr("Log out")
+			iconName: "system-shutdown"
+			onTriggered: {
+				// disconnect (open log in page)
+				kaidan.mainDisconnect(true)
+			}
+		},
+		Kirigami.Action {
+			text: qsTr("Settings")
+			iconName: "settings-configure"
+			onTriggered: {
+				// open settings page
+				if (Kirigami.Settings.isMobile)
+				    pageStack.layers.push(settingsPage)
+				else
+				    settingsSheet.open()
+			}
+		},
+		Kirigami.Action {
+			text: qsTr("About")
+			iconName: "help-about"
+			onTriggered: {
+				// open about sheet
+				aboutDialog.open()
+			}
+		}
 	]
 }

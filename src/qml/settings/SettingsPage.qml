@@ -28,53 +28,44 @@
  *  along with Kaidan.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-import QtQuick 2.6
-import QtQuick.Controls 2.0 as Controls
+import QtQuick 2.7
+import QtQuick.Controls 2.3 as Controls
 import QtQuick.Layouts 1.3
-import org.kde.kirigami 2.0 as Kirigami
+import org.kde.kirigami 2.3 as Kirigami
+import im.kaidan.kaidan 1.0
 
-Kirigami.OverlaySheet {
-	property string jid
+/**
+ * The settings page contains options to configure Kaidan.
+ *
+ * It is used on a new layer on mobile and inside of a Sheet on desktop.
+ */
+Kirigami.Page {
+	title: qsTr("Settings")
+	leftPadding: 0
+	topPadding: 0
+	rightPadding: 0
+	bottomPadding: 0
 
-	onSheetOpenChanged: {
-		infoLabel.text = qsTr("Do you really want to delete the contact "
-							  + "<b>%1</b> from your roster?").arg(jid)
+	Controls.StackView {
+		id: stack
+		anchors.fill: parent
+		initialItem: settingsContent
+		clip: true
 	}
 
-	ColumnLayout {
-		Kirigami.Heading {
-			text: qsTr("Delete contact")
-
-			Layout.fillWidth: true
-		}
-
-		Controls.Label {
-			id: infoLabel
-			text: ""
-			textFormat: Text.StyledText
-			wrapMode: Text.WordWrap
-
-			Layout.fillWidth: true
-		}
-
-		RowLayout {
-			Layout.topMargin: 10
-			Layout.fillWidth: true
-
-			Controls.Button {
-				text: qsTr("Cancel")
-				onClicked: close()
-				Layout.fillWidth: true
-			}
-
-			Controls.Button {
-				text: qsTr("Delete")
-				onClicked: {
-					kaidan.removeContact(jid)
-					close()
-				}
-				Layout.fillWidth: true
+	Component {
+		id: settingsContent
+		ColumnLayout {
+			spacing: 0
+			SettingsItem {
+				Layout.alignment: Qt.AlignTop
+				name: qsTr("Change password")
+				description: qsTr("Changes your account's password. You will need to re-enter it on your other devices.")
+				onClicked: stack.push(changePassword)
+				icon: "lock"
+				reserveSpaceForIcon: true
 			}
 		}
 	}
+	Component {id: changePassword; ChangePassword {}}
 }

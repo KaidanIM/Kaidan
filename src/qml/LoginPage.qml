@@ -134,9 +134,8 @@ Kirigami.Page {
 
 			// connect when return was pressed
 			Keys.onPressed: {
-				if (event.key === Qt.Key_Return || event.key === Qt.Key_Enter) {
+				if (event.key === Qt.Key_Return || event.key === Qt.Key_Enter)
 					connectButton.clicked();
-				}
 			}
 		}
 

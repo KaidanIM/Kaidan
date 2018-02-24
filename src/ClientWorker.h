@@ -37,11 +37,8 @@
 // gloox
 #include <gloox/connectionlistener.h>
 
-namespace gloox {
-	class Client;
-}
-
 class ClientThread;
+class GlooxClient;
 
 /**
  * The ClientWorker is used as a QObject-based worker on the ClientThread.
@@ -58,7 +55,7 @@ public:
 	 * @param controller The ClientThread instance for emitting signals.
 	 * @param parent Optional QObject-based parent.
 	 */
-	ClientWorker(gloox::Client *client, ClientThread *contoller,
+	ClientWorker(GlooxClient *client, ClientThread *contoller,
 	             QObject *parent = nullptr);
 
 	~ClientWorker();
@@ -114,7 +111,7 @@ private:
 	 */
 	void reconnect();
 
-	gloox::Client *client;
+	GlooxClient *client;
 	ClientThread *controller;
 	QTimer reconnectTimer;
 };

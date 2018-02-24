@@ -40,7 +40,7 @@
 // interval in seconds in which a new connection will be tryed
 static const unsigned int RECONNECT_INTERVAL = 5000;
 
-ClientWorker::ClientWorker(gloox::Client* client, ClientThread *controller,
+ClientWorker::ClientWorker(GlooxClient* client, ClientThread *controller,
 	QObject* parent) : QObject(parent), client(client), controller(controller)
 {
 	client->registerConnectionListener(this);

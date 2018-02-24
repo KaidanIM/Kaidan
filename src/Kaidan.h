@@ -303,6 +303,11 @@ signals:
 	 */
 	void logInWorked();
 
+	/**
+	 * Show passive notification
+	 */
+	void passiveNotificationRequested(QString text);
+
 private:
 	void connectDatabases();
 

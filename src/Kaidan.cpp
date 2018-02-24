@@ -190,29 +190,32 @@ quint8 Kaidan::getDisconnReason() const
 
 void Kaidan::sendMessage(QString jid, QString message)
 {
-	// TODO: Add offline message cache
-	if (client->isConnected())
+	if (client->isConnected()) {
 		emit client->sendMessageRequested(jid, message);
-	else
-		qWarning() << "[main] Couldn't send message, because not being connected.";
+	} else {
+		emit passiveNotificationRequested(tr("Could not send message, because not being connected."));
+		qWarning() << "[main] Could not send message, because not being connected.";
+	}
 }
 
 void Kaidan::addContact(QString jid, QString nick)
 {
-	// TODO: Add an error notification/message if not connected
-	if (client->isConnected())
+	if (client->isConnected()) {
 		emit client->addContactRequested(jid, nick);
-	else
-		qWarning() << "[main] Couldn't add contact, because not being connected.";
+	} else {
+		emit passiveNotificationRequested(tr("Could not add contact, because not being connected."));
+		qWarning() << "[main] Could not add contact, because not being connected.";
+	}
 }
 
 void Kaidan::removeContact(QString jid)
 {
-	// TODO: Add an error notification/message if not connected
-	if (client->isConnected())
+	if (client->isConnected()) {
 		emit client->removeContactRequested(jid);
-	else
-		qWarning() << "[main] Couldn't remove contact, because not being connected.";
+	} else {
+		emit passiveNotificationRequested(tr("Could not remove contact, because not being connected."));
+		qWarning() << "[main] Could not remove contact, because not being connected.";
+	}
 }
 
 QString Kaidan::getResourcePath(QString name) const
@@ -240,7 +243,7 @@ QString Kaidan::getResourcePath(QString name) const
 			return QString("file://") + directory.absoluteFilePath(name);
 		}
 	}
-	
+
 	// on Android, we want to fetch images from the application resources
 	if (QFile::exists(":/" + name))
 		return QString("qrc:/" + name);

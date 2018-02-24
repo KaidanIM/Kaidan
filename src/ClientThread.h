@@ -31,6 +31,8 @@
 #ifndef CLIENTTHREAD_H
 #define CLIENTTHREAD_H
 
+// gloox
+#include <gloox/client.h>
 // Qt
 #include <QMutex>
 #include <QThread>
@@ -56,7 +58,25 @@ class QSettings;
 using namespace Enums;
 
 /**
- * A class controlling the thread used for the XMPP connection.
+ * @class KaidanClient Needed to replace server after first connection
+ */
+class GlooxClient : public gloox::Client
+{
+public:
+	GlooxClient(gloox::JID jid, std::string password, int port = -1)
+	            : gloox::Client(jid, password, port)
+	{
+	}
+
+	void setJidServer(const std::string &server)
+	{
+		m_jid.setServer(server);
+	}
+};
+
+/**
+ * @class ClientThread A class controlling the thread used for the XMPP
+ * connection.
  * 
  * @see ClientWorker
  */
@@ -213,7 +233,7 @@ private:
 	AvatarFileStorage *avatarStorage;
 	Credentials creds;
 
-	gloox::Client *client;
+	GlooxClient *client;
 	ClientWorker *worker;
 	RosterManager *rosterManager;
 	MessageSessionHandler *messageSessionHandler;

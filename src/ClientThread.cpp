@@ -66,8 +66,8 @@ ClientThread::ClientThread(RosterModel *rosterModel, MessageModel *messageModel,
 	// Set custom thread name
 	setObjectName("XmppClient");
 
-	client = new gloox::Client(gloox::JID(creds.jid.toStdString()),
-	                           creds.password.toStdString());
+	client = new GlooxClient(gloox::JID(creds.jid.toStdString()),
+	                         creds.password.toStdString());
 	client->bindResource(creds.jidResource.toStdString()); // set resource / device name
 	client->setTls(gloox::TLSRequired); // require encryption
 
@@ -142,7 +142,8 @@ void ClientThread::setCredentials(Credentials creds)
 	this->creds = creds;
 
 	client->setUsername(gloox::JID(creds.jid.toStdString()).username());
-	client->setServer(gloox::JID(creds.jid.toStdString()).server());
+	client->setServer(gloox::JID(creds.jid.toStdString()).serverRaw());
+	client->setJidServer(gloox::JID(creds.jid.toStdString()).server());
 	client->setPassword(creds.password.toStdString());
 	client->unbindResource(client->resource());
 	client->bindResource(creds.jidResource.toStdString());

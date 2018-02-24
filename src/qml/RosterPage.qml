@@ -32,10 +32,12 @@ import QtQuick 2.0
 import QtQuick.Layouts 1.3
 import QtQuick.Controls 2.0 as Controls
 import org.kde.kirigami 2.0 as Kirigami
+import io.github.kaidanim 1.0
 import "elements"
 
 Kirigami.ScrollablePage {
-	title: qsTr("Contacts")
+	title: kaidan.connectionState == Enums.StateConnecting ?
+	       qsTr("Connecting…") : qsTr("Contacts")
 
 	RosterAddContactSheet {
 		id: addContactSheet

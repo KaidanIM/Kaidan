@@ -54,6 +54,13 @@ Kirigami.ApplicationWindow {
 		id: contextDrawer
 	}
 
+	AboutDialog {
+		id: aboutDialog
+		focus: true
+		x: (parent.width - width) / 2
+		y: (parent.height - height) / 2
+	}
+
 	// when the window was closed, disconnect from jabber server
 	onClosing: {
 		kaidan.mainDisconnect();

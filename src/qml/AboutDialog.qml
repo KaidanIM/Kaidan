@@ -33,64 +33,76 @@ import QtQuick.Layouts 1.2
 import QtQuick.Controls 2.1 as Controls
 import org.kde.kirigami 2.0 as Kirigami
 
-Kirigami.OverlaySheet {
-	id: aboutSheet
+Controls.Dialog {
+	id: aboutDialog
+	modal: true
+	standardButtons: Controls.Dialog.Ok
+	onAccepted: close()
 
-	ColumnLayout {
-		id: content
-		spacing: Kirigami.Units.gridUnit * 0.6
-		Layout.alignment: Qt.AlignHCenter
+	GridLayout {
+		anchors.fill: parent
+		flow: root.width > root.height ? GridLayout.LeftToRight : GridLayout.TopToBottom
+		columnSpacing: 20
+		rowSpacing: 20
 
 		Image {
 			source: kaidan.getResourcePath("images/kaidan.svg")
-			Layout.preferredHeight: Kirigami.Units.gridUnit * 15
+			Layout.preferredWidth: Kirigami.Units.gridUnit * 9
+			Layout.preferredHeight: Kirigami.Units.gridUnit * 9
 			Layout.fillWidth: true
-			Layout.alignment: Qt.AlignHCenter | Qt.AlignTop
+			Layout.fillHeight: true
+			Layout.alignment: Qt.AlignCenter
 			fillMode: Image.PreserveAspectFit
 			mipmap: true
 			sourceSize: Qt.size(width, height)
+		}
+
+		ColumnLayout {
+			Layout.fillWidth: true
+			Layout.fillHeight: true
+			spacing: Kirigami.gridUnit * 0.6
+
+			Kirigami.Heading {
+				text: "Kaidan " + kaidan.getVersionString()
+				textFormat: Text.PlainText
+				wrapMode: Text.WordWrap
+				Layout.fillWidth: true
+				horizontalAlignment: Qt.AlignHCenter
+			}
+
+			Controls.Label {
+				text: "<i>" + qsTr("A simple, user-friendly Jabber/XMPP client") + "</i>"
+				textFormat: Text.RichText
+				wrapMode: Text.WordWrap
+				Layout.fillWidth: true
+				horizontalAlignment: Qt.AlignHCenter
+			}
+
+			Controls.Label {
+				text: "<b>" + qsTr("License:") + "</b> GPLv3+ / CC BY-SA 4.0"
+				textFormat: Text.RichText
+				wrapMode: Text.WordWrap
+				Layout.fillWidth: true
+				horizontalAlignment: Qt.AlignHCenter
+			}
+
+			Controls.Label {
+				text: "Copyright © 2016-2018\nKaidan developers and contributors"
+				textFormat: Text.PlainText
+				wrapMode: Text.WordWrap
+				Layout.fillWidth: true
+				Layout.preferredWidth: contentWidth
+				horizontalAlignment: Qt.AlignHCenter
+			}
 
 			Controls.ToolButton {
-				anchors.right: parent.right
-				text: "\u2715" // Unicode MULTIPLICATION X
-				onClicked: aboutSheet.close()
+				text: qsTr("Source code on GitHub")
+				onClicked: Qt.openUrlExternally("https://github.com/KaidanIM/Kaidan")
+				Layout.fillWidth: true
+				Layout.alignment: Qt.AlignHCenter
 			}
 		}
-
-		Kirigami.Heading {
-			text: "Kaidan " + kaidan.getVersionString()
-			textFormat: Text.PlainText
-			Layout.fillWidth: true
-			horizontalAlignment: Qt.AlignHCenter
-		}
-
-		Controls.Label {
-			text: "<i>" + qsTr("A simple, user-friendly Jabber/XMPP client") + "</i>"
-			textFormat: Text.RichText
-			Layout.fillWidth: true
-			horizontalAlignment: Qt.AlignHCenter
-		}
-
-		Controls.Label {
-			text: "<b>" + qsTr("License:") + "</b> GPLv3+ / CC BY-SA 4.0"
-			textFormat: Text.RichText
-			Layout.fillWidth: true
-			horizontalAlignment: Qt.AlignHCenter
-		}
-
-		Controls.Label {
-			text: "Copyright © 2016-2018\nKaidan developers and contributors"
-			textFormat: Text.PlainText
-			wrapMode: Text.WordWrap
-			Layout.fillWidth: true
-			horizontalAlignment: Qt.AlignHCenter
-		}
-
-		Controls.ToolButton {
-			text: qsTr("Source code on GitHub")
-			onClicked: Qt.openUrlExternally("https://github.com/KaidanIM/Kaidan")
-			Layout.fillWidth: true
-			Layout.alignment: Qt.AlignHCenter
-		}
 	}
+
+
 }

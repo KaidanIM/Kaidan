@@ -110,7 +110,7 @@
     </message>
     <message>
         <source>Retry</source>
-        <translation>Повторить</translation>
+        <translation type="vanished">Повторить</translation>
     </message>
     <message>
         <source>Connect</source>

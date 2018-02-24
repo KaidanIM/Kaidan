@@ -82,10 +82,6 @@
         <translation type="vanished">合言葉</translation>
     </message>
     <message>
-        <source>Retry</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Connect</source>
         <translation>接続</translation>
     </message>

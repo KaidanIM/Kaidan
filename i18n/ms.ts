@@ -110,7 +110,7 @@
     </message>
     <message>
         <source>Retry</source>
-        <translation>Cuba Lagi</translation>
+        <translation type="vanished">Cuba Lagi</translation>
     </message>
     <message>
         <source>Connect</source>

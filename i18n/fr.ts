@@ -102,7 +102,7 @@
     </message>
     <message>
         <source>Retry</source>
-        <translation>Réessayer</translation>
+        <translation type="vanished">Réessayer</translation>
     </message>
     <message>
         <source>Connect</source>

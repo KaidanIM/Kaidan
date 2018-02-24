@@ -95,7 +95,7 @@
     </message>
     <message>
         <source>Retry</source>
-        <translation>Prøv igjen</translation>
+        <translation type="vanished">Prøv igjen</translation>
     </message>
     <message>
         <source>Connect</source>

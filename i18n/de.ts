@@ -75,7 +75,7 @@
     <name>GlobalDrawer</name>
     <message>
         <source>Add Contact</source>
-        <translation>Kontakt hinzufügen</translation>
+        <translation type="vanished">Kontakt hinzufügen</translation>
     </message>
     <message>
         <source>Log out</source>
@@ -118,7 +118,7 @@
     </message>
     <message>
         <source>Retry</source>
-        <translation>Erneut versuchen</translation>
+        <translation type="vanished">Erneut versuchen</translation>
     </message>
     <message>
         <source>Connecting…</source>
@@ -145,7 +145,7 @@
     <name>RosterAddContactSheet</name>
     <message>
         <source>Add Contact</source>
-        <translation>Kontakt hinzufügen</translation>
+        <translation type="vanished">Kontakt hinzufügen</translation>
     </message>
     <message>
         <source>Nickname:</source>
@@ -206,7 +206,7 @@
     <name>main</name>
     <message>
         <source>Successfully parsed command line input.</source>
-        <translation>Kommandozeileneingabe erfolgreich ausgewertet.</translation>
+        <translation type="vanished">Kommandozeileneingabe erfolgreich ausgewertet.</translation>
     </message>
     <message>
         <source>Log out</source>

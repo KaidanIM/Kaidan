@@ -95,7 +95,7 @@
     </message>
     <message>
         <source>Retry</source>
-        <translation>Rever</translation>
+        <translation type="vanished">Rever</translation>
     </message>
     <message>
         <source>Connect</source>

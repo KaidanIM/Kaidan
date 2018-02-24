@@ -95,7 +95,7 @@
     </message>
     <message>
         <source>Retry</source>
-        <translation>Opnieuw proberen</translation>
+        <translation type="vanished">Opnieuw proberen</translation>
     </message>
     <message>
         <source>Connect</source>

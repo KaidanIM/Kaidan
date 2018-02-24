@@ -37,10 +37,26 @@
 // Kaidan
 #include "ClientThread.h"
 
+// interval in seconds in which a new connection will be tryed
+static const unsigned int RECONNECT_INTERVAL = 5000;
+
 ClientWorker::ClientWorker(gloox::Client* client, ClientThread *controller,
 	QObject* parent) : QObject(parent), client(client), controller(controller)
 {
 	client->registerConnectionListener(this);
+
+	// reconnect timer
+	reconnectTimer.moveToThread(controller);
+	reconnectTimer.setInterval(RECONNECT_INTERVAL);
+	reconnectTimer.setSingleShot(true); // only call once
+	connect(&reconnectTimer, &QTimer::timeout, this, &ClientWorker::xmppConnect);
+	connect(this, &ClientWorker::stopReconnectTimerRequested,
+	        &reconnectTimer, &QTimer::stop);
+}
+
+ClientWorker::~ClientWorker()
+{
+	emit stopReconnectTimerRequested();
 }
 
 void ClientWorker::updateClient()
@@ -107,6 +123,8 @@ void ClientWorker::onDisconnect(gloox::ConnectionError error)
 		if (error == gloox::ConnAuthenticationFailed)
 			// if JID/password is wrong, request new credentials from QML
 			emit controller->newCredentialsNeeded();
+		else if (error != gloox::ConnUserDisconnected)
+			reconnect();
 	}
 }
 
@@ -121,4 +139,10 @@ bool ClientWorker::onTLSConnect(const gloox::CertInfo &info)
 void ClientWorker::stopWorkTimer()
 {
 	controller->workTimer.stop();
+}
+
+void ClientWorker::reconnect()
+{
+	qDebug().noquote() << QString("[client] Will do reconnect in %1 ms").arg(RECONNECT_INTERVAL);
+	reconnectTimer.start();
 }

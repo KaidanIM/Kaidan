@@ -57,7 +57,7 @@ static const unsigned int KAIDAN_CLIENT_LOOP_INTERVAL = 30;
 
 ClientThread::ClientThread(RosterModel *rosterModel, MessageModel *messageModel,
                            AvatarFileStorage *avatarStorage, Credentials creds,
-                           QSettings *settings, QObject *parent):
+                           QSettings *settings, QGuiApplication *app, QObject *parent):
                            QThread(parent), rosterModel(rosterModel),
                            messageModel(messageModel), avatarStorage(avatarStorage),
                            creds(creds), settings(settings),
@@ -71,7 +71,7 @@ ClientThread::ClientThread(RosterModel *rosterModel, MessageModel *messageModel,
 	client->bindResource(creds.jidResource.toStdString()); // set resource / device name
 	client->setTls(gloox::TLSRequired); // require encryption
 
-	worker = new ClientWorker(client, this);
+	worker = new ClientWorker(client, this, app);
 	connect(this, &ClientThread::connectRequested, worker, &ClientWorker::xmppConnect);
 	connect(this, &ClientThread::disconnectRequested, worker, &ClientWorker::xmppDisconnect);
 	connect(this, &ClientThread::stopWorkTimerRequested, worker, &ClientWorker::stopWorkTimer);

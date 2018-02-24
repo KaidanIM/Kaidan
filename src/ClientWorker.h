@@ -39,6 +39,7 @@
 
 class ClientThread;
 class GlooxClient;
+class QGuiApplication;
 
 /**
  * The ClientWorker is used as a QObject-based worker on the ClientThread.
@@ -56,7 +57,7 @@ public:
 	 * @param parent Optional QObject-based parent.
 	 */
 	ClientWorker(GlooxClient *client, ClientThread *contoller,
-	             QObject *parent = nullptr);
+	             QGuiApplication *app, QObject *parent = nullptr);
 
 	~ClientWorker();
 
@@ -87,6 +88,11 @@ public slots:
 	 * thread)
 	 */
 	void stopWorkTimer();
+
+	/**
+	 * Sets the application state used for XEP-0352: Client State Indication
+	 */
+	void setApplicationState(Qt::ApplicationState state);
 
 private:
 	/**

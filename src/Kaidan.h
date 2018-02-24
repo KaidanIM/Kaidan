@@ -46,6 +46,7 @@ class RosterManager;
 class RosterModel;
 class MessageModel;
 class QSettings;
+class QGuiApplication;
 class Database;
 
 using namespace Enums;
@@ -77,7 +78,7 @@ public:
 	/**
 	 * Constructor
 	 */
-	Kaidan(QObject *parent = 0);
+	Kaidan(QGuiApplication *app, QObject *parent = 0);
 
 	/**
 	 * Destructor

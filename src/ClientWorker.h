@@ -33,6 +33,7 @@
 
 // Qt
 #include <QObject>
+#include <QTimer>
 // gloox
 #include <gloox/connectionlistener.h>
 
@@ -59,6 +60,11 @@ public:
 	 */
 	ClientWorker(gloox::Client *client, ClientThread *contoller,
 	             QObject *parent = nullptr);
+
+	~ClientWorker();
+
+signals:
+	void stopReconnectTimerRequested();
 
 public slots:
 	/**
@@ -103,8 +109,14 @@ private:
 	 */
 	virtual bool onTLSConnect(const gloox::CertInfo &info);
 
+	/**
+	 * Start timer to reconnect after connection failed
+	 */
+	void reconnect();
+
 	gloox::Client *client;
 	ClientThread *controller;
+	QTimer reconnectTimer;
 };
 
 #endif // CLIENTWORKER_H

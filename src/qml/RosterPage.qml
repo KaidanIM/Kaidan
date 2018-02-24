@@ -36,7 +36,7 @@ import io.github.kaidanim 1.0
 import "elements"
 
 Kirigami.ScrollablePage {
-	title: kaidan.connectionState == Enums.StateConnecting ?
+	title: kaidan.connectionState === Enums.StateConnecting ?
 	       qsTr("Connecting…") : qsTr("Contacts")
 
 	RosterAddContactSheet {

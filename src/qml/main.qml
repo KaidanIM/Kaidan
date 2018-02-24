@@ -71,6 +71,10 @@ Kirigami.ApplicationWindow {
 	Component {id: loginPage; LoginPage {}}
 	Component {id: rosterPage; RosterPage {}}
 
+	function passiveNotification(text) {
+		showPassiveNotification(text, "long")
+	}
+
 	function openLogInPage() {
 		// close all pages (we don't know on which page we're on,
 		// thus we don't use replace)
@@ -93,8 +97,9 @@ Kirigami.ApplicationWindow {
 	}
 
 	Component.onCompleted: {
-		kaidan.newCredentialsNeeded.connect(openLogInPage);
-		kaidan.logInWorked.connect(closeLogInPage);
+		kaidan.passiveNotificationRequested.connect(passiveNotification)
+		kaidan.newCredentialsNeeded.connect(openLogInPage)
+		kaidan.logInWorked.connect(closeLogInPage)
 
 		// push roster page (trying normal start up)
 		pageStack.push(rosterPage)

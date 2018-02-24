@@ -7,11 +7,11 @@ if [ -z "$ANDROID_NDK_ROOT" ]; then
     exit 1
 fi
 
-KAIDAN_SOURCES=$PWD
+KAIDAN_SOURCES=$(dirname "$(readlink -f "${0}")")/..
 
 echo "*****************************************"
 echo "Fetching Gloox and OpenSSL"
-echo "*****************************************" 
+echo "*****************************************"
 
 echo "Cloning Gloox from SVN"
 svn co svn://svn.camaya.net/gloox/branches/1.0 /tmp/gloox
@@ -66,7 +66,7 @@ echo "*****************************************"
     # Tell configure what flags Android requires.
     export CFLAGS="-fPIE -fPIC"
     export LDFLAGS="-pie"
-    
+
     cd /tmp/gloox
     ./autogen.sh
     ./configure --host=arm --with-openssl=$KAIDAN_SOURCES/3rdparty/openssl/ --prefix=$KAIDAN_SOURCES/3rdparty/gloox/
@@ -80,3 +80,36 @@ rm -rf /tmp/gloox
 rm -rf /tmp/openssl
 rm -rf /tmp/android-arm-toolchain
 rm /tmp/openssl.tar.gz
+
+echo "*****************************************"
+echo "Rendering logos"
+echo "*****************************************"
+rendersvg() {
+    inkscape -z -e $2 -w $3 -h $3 $1
+}
+
+mkdir -p \
+    misc/android/res/mipmap-hdpi \
+    misc/android/res/mipmap-ldpi \
+    misc/android/res/mipmap-mdpi \
+    misc/android/res/mipmap-xhdpi \
+    misc/android/res/mipmap-xxhdpi \
+    misc/android/res/mipmap-xxxhdpi
+
+rendersvg $KAIDAN_SOURCES/misc/kaidan.svg $KAIDAN_SOURCES/misc/android/res/mipmap-hdpi/icon.png 72
+rendersvg $KAIDAN_SOURCES/misc/kaidan.svg $KAIDAN_SOURCES/misc/android/res/mipmap-hdpi/logo.png 144
+
+rendersvg $KAIDAN_SOURCES/misc/kaidan.svg $KAIDAN_SOURCES/misc/android/res/mipmap-ldpi/icon.png 36
+rendersvg $KAIDAN_SOURCES/misc/kaidan.svg $KAIDAN_SOURCES/misc/android/res/mipmap-ldpi/logo.png 72
+
+rendersvg $KAIDAN_SOURCES/misc/kaidan.svg $KAIDAN_SOURCES/misc/android/res/mipmap-mdpi/icon.png 48
+rendersvg $KAIDAN_SOURCES/misc/kaidan.svg $KAIDAN_SOURCES/misc/android/res/mipmap-mdpi/logo.png 96
+
+rendersvg $KAIDAN_SOURCES/misc/kaidan.svg $KAIDAN_SOURCES/misc/android/res/mipmap-xhdpi/icon.png 96
+rendersvg $KAIDAN_SOURCES/misc/kaidan.svg $KAIDAN_SOURCES/misc/android/res/mipmap-xhdpi/logo.png 192
+
+rendersvg $KAIDAN_SOURCES/misc/kaidan.svg $KAIDAN_SOURCES/misc/android/res/mipmap-xxhdpi/icon.png 144
+rendersvg $KAIDAN_SOURCES/misc/kaidan.svg $KAIDAN_SOURCES/misc/android/res/mipmap-xxhdpi/logo.png 288
+
+rendersvg $KAIDAN_SOURCES/misc/kaidan.svg $KAIDAN_SOURCES/misc/android/res/mipmap-xxxhdpi/icon.png 192
+rendersvg $KAIDAN_SOURCES/misc/kaidan.svg $KAIDAN_SOURCES/misc/android/res/mipmap-xxxhdpi/logo.png 384

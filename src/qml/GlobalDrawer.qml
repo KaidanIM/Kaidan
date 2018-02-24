@@ -43,10 +43,6 @@ Kirigami.GlobalDrawer {
 	// show open button on the left side
 	handleVisible: true
 
-	AboutSheet {
-		id: aboutSheet
-	}
-
 	actions: [
 		Kirigami.Action {
 			text: qsTr("Log out")
@@ -61,7 +57,7 @@ Kirigami.GlobalDrawer {
 			iconName: "help-about"
 			onTriggered: {
 				// open about sheet
-				aboutSheet.open();
+				aboutDialog.open();
 			}
 		}
 	]

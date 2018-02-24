@@ -86,6 +86,7 @@ echo "Rendering logos"
 echo "*****************************************"
 rendersvg() {
     inkscape -z -e $2 -w $3 -h $3 $1
+    optipng -quiet $2
 }
 
 mkdir -p \

@@ -79,6 +79,20 @@ namespace Enums {
 	// Alias, so that qDebug outputs the full name, but it can be
 	// abrieviated in the code
 	using DisconnReason = DisconnectionReason;
+
+	/**
+	 * The possible chat states according to XEP-0085. (compatible to gloox::
+	 * ChatStateType)
+	 */
+	enum class ChatStateType : quint8 {
+		ChatStateActive       = gloox::ChatStateActive,
+		ChatStateComposing    = gloox::ChatStateComposing,
+		ChatStatePaused       = gloox::ChatStatePaused,
+		ChatStateInactive     = gloox::ChatStateInactive,
+		ChatStateGone         = gloox::ChatStateGone,
+		ChatStateInvalid      = gloox::ChatStateInvalid
+	};
+	Q_ENUM_NS(ChatStateType)
 }
 
 // Needed workaround to trigger older CMake auto moc versions to generate moc

@@ -44,6 +44,7 @@
 #include "RosterModel.h"
 #include "MessageModel.h"
 #include "AvatarFileStorage.h"
+#include "ChatStateCache.h"
 #include "Globals.h"
 #include "Enums.h"
 #include "StatusBar.h"
@@ -106,6 +107,7 @@ int main(int argc, char *argv[])
 	qRegisterMetaType<RosterModel*>("RosterModel*");
 	qRegisterMetaType<MessageModel*>("MessageModel*");
 	qRegisterMetaType<AvatarFileStorage*>("AvatarFileStorage*");
+	qRegisterMetaType<ChatStateCache*>("ChatStateCache*");
 	qRegisterMetaType<ContactMap>("ContactMap");
 	qRegisterMetaType<Qt::ApplicationState>("Qt::ApplicationState");
 	qmlRegisterUncreatableMetaObject(Enums::staticMetaObject, APPLICATION_ID,

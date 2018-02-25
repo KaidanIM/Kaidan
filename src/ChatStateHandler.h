@@ -1,7 +1,7 @@
 /*
  *  Kaidan - A user-friendly XMPP client for every device!
  *
- *  Copyright (C) 2017-2018 Kaidan developers and contributors
+ *  Copyright (C) 2018 Kaidan developers and contributors
  *  (see the LICENSE file for a full list of copyright authors)
  *
  *  Kaidan is free software: you can redistribute it and/or modify
@@ -28,54 +28,61 @@
  *  along with Kaidan.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef MESSAGESESSIONHANDLER_H
-#define MESSAGESESSIONHANDLER_H
+#ifndef CHATSTATEHANDLER_H
+#define CHATSTATEHANDLER_H
 
-// Qt
-#include <QList>
-// gloox
-#include <gloox/messagesessionhandler.h>
-namespace gloox {
-	class Client;
-	class MessageSession;
-}
 // Kaidan
 #include "Enums.h"
-class MessageHandler;
-class ChatStateHandler;
 class ChatStateCache;
-class MessageModel;
-class RosterModel;
+// gloox
+#include <gloox/chatstatehandler.h>
+namespace gloox {
+	class MessageSession;
+	class ChatStateFilter;
+	class JID;
+}
+// Qt
+#include <QObject>
+#include <QMap>
 
 using namespace Enums;
 
-class MessageSessionHandler : public QObject, public gloox::MessageSessionHandler
+/**
+ * @class ChatStateHandler Class for handling typing and online notifications
+ */
+class ChatStateHandler : public gloox::ChatStateHandler
 {
-	Q_OBJECT
-
 public:
-	MessageSessionHandler(gloox::Client *client, MessageModel *messageModel,
-	                      RosterModel *rosterModel, ChatStateCache *chatStateCache,
-	                      QObject *parent = nullptr);
-	~MessageSessionHandler();
+	ChatStateHandler(ChatStateCache *cache);
+	~ChatStateHandler();
 
-	MessageHandler* getMessageHandler();
-	ChatStateHandler* getChatStateHandler();
+	/**
+	 * Handles a chat state and will update the UI
+	 *
+	 * @param from JID which sent the chat state notification
+	 * @param session The current message session with a JID
+	 */
+	virtual void handleChatState(const gloox::JID &from, gloox::ChatStateType state);
 
-public slots:
+	/**
+	 * Register a new message session for receiving chat state notifications
+	 */
+	void registerMessageSession(gloox::MessageSession *session);
+
+	/**
+	 * Removes and deletes the chat state filter of this JID
+	 */
+	void removeChatStateFilter(const gloox::JID &jid);
+
+	/**
+	 * Sets chat states to inactive, when disconnected
+	 */
 	void handleConnectionState(ConnectionState state);
 
-protected:
-	virtual void handleMessageSession(gloox::MessageSession*);
-
 private:
-	void disposeMessageSessions(const gloox::JID &jid);
-
-	gloox::Client *client;
-	MessageHandler *messageHandler;
-	ChatStateHandler *chatStateHandler;
-
-	QList<gloox::MessageSession*> msgSessions;
+	ChatStateCache *cache;
+	QMap<gloox::JID, gloox::ChatStateFilter*> filters;
+	QMap<QString, ChatStateType> chatStates;
 };
 
-#endif // MESSAGESESSIONHANDLER_H
+#endif // CHATSTATEHANDLER_H

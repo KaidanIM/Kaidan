@@ -1,7 +1,7 @@
 /*
  *  Kaidan - A user-friendly XMPP client for every device!
  *
- *  Copyright (C) 2017-2018 Kaidan developers and contributors
+ *  Copyright (C) 2018 Kaidan developers and contributors
  *  (see the LICENSE file for a full list of copyright authors)
  *
  *  Kaidan is free software: you can redistribute it and/or modify
@@ -28,54 +28,39 @@
  *  along with Kaidan.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef MESSAGESESSIONHANDLER_H
-#define MESSAGESESSIONHANDLER_H
+#include "ChatStateCache.h"
 
-// Qt
-#include <QList>
-// gloox
-#include <gloox/messagesessionhandler.h>
-namespace gloox {
-	class Client;
-	class MessageSession;
-}
-// Kaidan
-#include "Enums.h"
-class MessageHandler;
-class ChatStateHandler;
-class ChatStateCache;
-class MessageModel;
-class RosterModel;
+#include <QDebug>
 
-using namespace Enums;
-
-class MessageSessionHandler : public QObject, public gloox::MessageSessionHandler
+ChatStateCache::ChatStateCache(QObject *parent)
+	: QObject(parent)
 {
-	Q_OBJECT
+	chatStates = QMap<QString, ChatStateType>();
+	chatStates[QString("lnj@conversations.im")] = ChatStateType::ChatStateActive;
+}
 
-public:
-	MessageSessionHandler(gloox::Client *client, MessageModel *messageModel,
-	                      RosterModel *rosterModel, ChatStateCache *chatStateCache,
-	                      QObject *parent = nullptr);
-	~MessageSessionHandler();
+ChatStateCache::~ChatStateCache()
+{
+}
 
-	MessageHandler* getMessageHandler();
-	ChatStateHandler* getChatStateHandler();
+void ChatStateCache::setState(QString jid, ChatStateType state)
+{
+	chatStates[jid] = state;
+	emit chatStatesChanged();
+}
 
-public slots:
-	void handleConnectionState(ConnectionState state);
+quint8 ChatStateCache::getState(QString jid)
+{
+	qDebug() << "[client] ChatStateCache::getState" <<  jid;
 
-protected:
-	virtual void handleMessageSession(gloox::MessageSession*);
+	if (chatStates.contains(jid))
+		return (quint8) chatStates[jid];
+	return (quint8) ChatStateType::ChatStateInvalid;
+}
 
-private:
-	void disposeMessageSessions(const gloox::JID &jid);
-
-	gloox::Client *client;
-	MessageHandler *messageHandler;
-	ChatStateHandler *chatStateHandler;
-
-	QList<gloox::MessageSession*> msgSessions;
-};
-
-#endif // MESSAGESESSIONHANDLER_H
+void ChatStateCache::clearStates()
+{
+	for (QString jid : chatStates.keys())
+		chatStates.remove(jid);
+	emit chatStatesChanged();
+}

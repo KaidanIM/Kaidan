@@ -59,10 +59,14 @@ Kaidan::Kaidan(QGuiApplication *app, QObject *parent) : QObject(parent)
 	messageModel = new MessageModel(database->getDatabase(), this);
 	rosterModel = new RosterModel(database->getDatabase(), this);
 	avatarStorage = new AvatarFileStorage(this);
+	chatStateCache = new ChatStateCache();
+
 	// Connect the avatar changed signal of the avatarStorage with the NOTIFY signal
 	// of the Q_PROPERTY for the avatar storage (so all avatars are updated in QML)
 	connect(avatarStorage, &AvatarFileStorage::avatarIdsChanged,
 	        this, &Kaidan::avatarStorageChanged);
+	connect(chatStateCache, &ChatStateCache::chatStatesChanged,
+	        this, &Kaidan::chatStateCacheChanged);
 
 	//
 	// Load settings data
@@ -82,7 +86,7 @@ Kaidan::Kaidan(QGuiApplication *app, QObject *parent) : QObject(parent)
 
 	// create new client and start thread's main loop (won't connect until requested)
 	client = new ClientThread(rosterModel, messageModel, avatarStorage, creds,
-	                          settings, app);
+	                          chatStateCache, settings, app);
 	client->start();
 
 	connect(client, &ClientThread::connectionStateChanged, [=](ConnectionState state) {
@@ -94,6 +98,7 @@ Kaidan::Kaidan(QGuiApplication *app, QObject *parent) : QObject(parent)
 	connect(client, &ClientThread::newCredentialsNeeded, this, &Kaidan::newCredentialsNeeded);
 	connect(client, &ClientThread::logInWorked, this, &Kaidan::logInWorked);
 	connect(this, &Kaidan::chatPartnerChanged, client, &ClientThread::chatPartnerChanged);
+	connect(this, &Kaidan::messageTyped, client, &ClientThread::messageTyped);
 }
 
 Kaidan::~Kaidan()

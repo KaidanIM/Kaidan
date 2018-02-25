@@ -11,6 +11,8 @@ SOURCES += \
     src/ClientThread.cpp \
     src/ClientWorker.cpp \
     src/AvatarFileStorage.cpp \
+    src/ChatStateHandler.cpp \
+    src/ChatStateCache.cpp \
     src/Database.cpp \
     src/RosterModel.cpp \
     src/RosterManager.cpp \
@@ -42,6 +44,8 @@ HEADERS += \
     src/ClientThread.h \
     src/ClientWorker.h \
     src/VCardManager.h \
+    src/ChatStateHandler.h \
+    src/ChatStateCache.h \
     src/Globals.h \
     src/Enums.h \
     src/StatusBar.h

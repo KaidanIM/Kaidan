@@ -49,6 +49,11 @@ Kirigami.Page {
 	bottomPadding: 0
 	topPadding: 0
 
+	header: ChatStateIndicator {
+		id: chatStateIndicator
+		state: kaidan.chatStates.get(recipientJid)
+	}
+
 	background: Image {
 		id: bgimage
 		source: kaidan.getResourcePath("images/chat.png")

@@ -106,7 +106,7 @@ void ClientWorker::onConnect()
 	// accept credentials and save them
 	controller->creds.isFirstTry = false;
 	controller->settings->setValue("auth/jid", controller->creds.jid);
-	controller->settings->setValue("auth/password", controller->creds.password);
+	controller->settings->setValue("auth/password", QString::fromUtf8(controller->creds.password.toUtf8().toBase64()));
 }
 
 void ClientWorker::onDisconnect(gloox::ConnectionError error)

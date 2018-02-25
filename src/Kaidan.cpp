@@ -73,7 +73,7 @@ Kaidan::Kaidan(QGuiApplication *app, QObject *parent) : QObject(parent)
 
 	creds.jid = settings->value("auth/jid").toString();
 	creds.jidResource = settings->value("auth/resource").toString();
-	creds.password = settings->value("auth/password").toString();
+	creds.password = QString(QByteArray::fromBase64(settings->value("auth/password").toString().toUtf8()));
 	// use Kaidan as resource, if no set
 	if (creds.jidResource == "")
 		setJidResource(QString(APPLICATION_NAME));

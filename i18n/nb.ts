@@ -82,15 +82,15 @@
     <name>Kaidan</name>
     <message>
         <source>Could not send message, because not being connected.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Kunne ikke sende melding, som følge av manglende tilkobling.</translation>
     </message>
     <message>
         <source>Could not add contact, because not being connected.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Kunne ikke legge til kontakt, som følge av manglende tilkobling.</translation>
     </message>
     <message>
         <source>Could not remove contact, because not being connected.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Kunne ikke fjerne kontakt, som følge av manglende tilkobling.</translation>
     </message>
 </context>
 <context>

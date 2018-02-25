@@ -7,3 +7,6 @@
 [submodule "3rdparty/kaidansf"]
 	path = 3rdparty/kaidansf
 	url = https://github.com/kaidanim/kaidansf
+[submodule "3rdparty/gloox"]
+	path = 3rdparty/gloox
+	url = https://github.com/kaidanim/gloox-git

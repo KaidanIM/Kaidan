@@ -2,6 +2,10 @@
 
 # NOTE: To use this script, you need to set ANDROID_NDK_ROOT to your NDK root folder.
 
+mkdir -p \
+    $KAIDAN_SOURCES/bin/android/gloox/ \
+    $KAIDAN_SOURCES/bin/android/openssl/
+
 if [ -z "$ANDROID_NDK_ROOT" ]; then
     echo "ANDROID_NDK_ROOT has to be set"
     exit 1
@@ -13,8 +17,6 @@ echo "*****************************************"
 echo "Fetching Gloox and OpenSSL"
 echo "*****************************************" 
 
-echo "Cloning Gloox from SVN"
-svn co svn://svn.camaya.net/gloox/branches/1.0 /tmp/gloox
 echo "Downloading OpenSSL release tarball"
 wget https://www.openssl.org/source/openssl-1.0.2n.tar.gz -O /tmp/openssl.tar.gz --continue
 echo "Extracting OpenSSL tarball"
@@ -41,7 +43,7 @@ echo "*****************************************"
 {
     cd /tmp/openssl/
     source ./Setenv-android.sh
-    ./config shared --openssldir=$KAIDAN_SOURCES/3rdparty/openssl/
+    ./config shared --openssldir=$KAIDAN_SOURCES/bin/android/openssl/
     make all -j$(nproc)
     make install -j$(nproc)
 }
@@ -66,10 +68,10 @@ echo "*****************************************"
     # Tell configure what flags Android requires.
     export CFLAGS="-fPIE -fPIC"
     export LDFLAGS="-pie"
-    
-    cd /tmp/gloox
+
+    cd $KAIDAN_SOURCES/3rdparty/gloox/
     ./autogen.sh
-    ./configure --host=arm --with-openssl=$KAIDAN_SOURCES/3rdparty/openssl/ --prefix=$KAIDAN_SOURCES/3rdparty/gloox/
+    ./configure --host=arm --with-openssl=$KAIDAN_SOURCES/bin/android/openssl/ --prefix=$KAIDAN_SOURCES/bin/android/gloox/
     make install -j$(nproc)
 }
 

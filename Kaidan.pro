@@ -46,9 +46,9 @@ HEADERS += \
     src/Enums.h \
     src/StatusBar.h
 
-android: INCLUDEPATH += $$PWD/3rdparty/gloox/include
-android: LIBS += -L$$PWD/3rdparty/gloox/lib/
-android: LIBS += -L$$PWD/3rdparty/openssl/lib/
+android: INCLUDEPATH += $$PWD/bin/android/gloox/include/
+android: LIBS += -L$$PWD/bin/android/gloox/lib/
+android: LIBS += -L$$PWD/bin/android/openssl/lib/
 LIBS += -lgloox -lssl -lcrypto
 
 include(3rdparty/kirigami/kirigami.pri)
@@ -127,6 +127,6 @@ ANDROID_PACKAGE_SOURCE_DIR = $$PWD/misc/android
 
 contains(ANDROID_TARGET_ARCH,armeabi-v7a) {
     ANDROID_EXTRA_LIBS = \
-        $$PWD/3rdparty/openssl/lib/libcrypto.so \
-        $$PWD/3rdparty/openssl/lib/libssl.so
+        $$PWD/bin/android/openssl/lib/libcrypto.so \
+        $$PWD/bin/android/openssl/libssl.so
 }

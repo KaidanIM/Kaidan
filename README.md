@@ -48,7 +48,7 @@ sudo apt install kaidan
 
 #### Install all dependencies:
  * [Qt](http://doc.qt.io/qt-5/build-sources.html) (Core Qml Quick Sql QuickControls2) (>= 5.8.0)
- * [gloox](https://camaya.net/gloox/download/) (>= 1.0.10)
+ * [gloox](https://camaya.net/gloox/download/) (>= 1.0.19)
  * [Kirigami 2](https://phabricator.kde.org/source/kirigami/) (>= 5.42.0)
 
 Build only dependencies:

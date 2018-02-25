@@ -5,15 +5,15 @@
     <name>AboutDialog</name>
     <message>
         <source>A simple, user-friendly Jabber/XMPP client</source>
-        <translation type="unfinished">Ein einfacher, benutzerfreundlicher Jabber/XMPP client</translation>
+        <translation>Ein einfacher, benutzerfreundlicher Jabber/XMPP client</translation>
     </message>
     <message>
         <source>License:</source>
-        <translation type="unfinished">Lizenz:</translation>
+        <translation>Lizenz:</translation>
     </message>
     <message>
         <source>Source code on GitHub</source>
-        <translation type="unfinished">Quellcode auf GitHub</translation>
+        <translation>Quellcode auf GitHub</translation>
     </message>
 </context>
 <context>
@@ -113,15 +113,15 @@
     <name>Kaidan</name>
     <message>
         <source>Could not send message, because not being connected.</source>
-        <translation type="unfinished"></translation>
+        <translation>Die Nachricht konnte nicht gesendet werden, da Sie nicht verbunden sind.</translation>
     </message>
     <message>
         <source>Could not add contact, because not being connected.</source>
-        <translation type="unfinished"></translation>
+        <translation>Der Kontakt konnte nicht hinzugefügt werden, da Sie nicht verbunden sind.</translation>
     </message>
     <message>
         <source>Could not remove contact, because not being connected.</source>
-        <translation type="unfinished"></translation>
+        <translation>Der Kontakt konnte nicht entfernt werden, da Sie nicht verbunden sind.</translation>
     </message>
 </context>
 <context>
@@ -214,7 +214,7 @@
     </message>
     <message>
         <source>Connecting…</source>
-        <translation type="unfinished">Verbinden …</translation>
+        <translation>Verbinden…</translation>
     </message>
 </context>
 <context>

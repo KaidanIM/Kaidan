@@ -53,22 +53,22 @@ Rectangle {
 		State {
 			name: "typing"
 			PropertyChanges {
-				text: "typing ..."
+				text: qsTr("typing ...")
 				target: stateLabel
 			}
 		},
 		State {
 			name: "online"
 			PropertyChanges {
-				text: "online"
+				text: qsTr("online")
 				target: stateLabel
 			}
 		},
 		State {
 			name: "offline"
 			PropertyChanges {
-				text: "offline"
-				target: stateLabel
+				visible: false
+				target: background
 			}
 		}
 	]

@@ -2,18 +2,33 @@
 <!DOCTYPE TS>
 <TS version="2.1" language="nl">
 <context>
-    <name>AboutSheet</name>
+    <name>AboutDialog</name>
     <message>
         <source>A simple, user-friendly Jabber/XMPP client</source>
-        <translation>Een simpele, gebruiksvriendelijke Jabber/XMPP client</translation>
+        <translation type="unfinished">Een simpele, gebruiksvriendelijke Jabber/XMPP client</translation>
     </message>
     <message>
         <source>License:</source>
-        <translation>Licentie:</translation>
+        <translation type="unfinished">Licentie:</translation>
     </message>
     <message>
         <source>Source code on GitHub</source>
-        <translation>Broncode op GitHub</translation>
+        <translation type="unfinished">Broncode op GitHub</translation>
+    </message>
+</context>
+<context>
+    <name>AboutSheet</name>
+    <message>
+        <source>A simple, user-friendly Jabber/XMPP client</source>
+        <translation type="vanished">Een simpele, gebruiksvriendelijke Jabber/XMPP client</translation>
+    </message>
+    <message>
+        <source>License:</source>
+        <translation type="vanished">Licentie:</translation>
+    </message>
+    <message>
+        <source>Source code on GitHub</source>
+        <translation type="vanished">Broncode op GitHub</translation>
     </message>
 </context>
 <context>
@@ -61,6 +76,21 @@
     <message>
         <source>About</source>
         <translation>Over</translation>
+    </message>
+</context>
+<context>
+    <name>Kaidan</name>
+    <message>
+        <source>Could not send message, because not being connected.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Could not add contact, because not being connected.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Could not remove contact, because not being connected.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -146,6 +176,10 @@
     <message>
         <source>Add new contact</source>
         <translation>Voeg nieuw contact toe</translation>
+    </message>
+    <message>
+        <source>Connecting…</source>
+        <translation type="unfinished">Verbinden…</translation>
     </message>
 </context>
 <context>

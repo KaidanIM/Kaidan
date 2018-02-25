@@ -2,18 +2,33 @@
 <!DOCTYPE TS>
 <TS version="2.1" language="nb">
 <context>
-    <name>AboutSheet</name>
+    <name>AboutDialog</name>
     <message>
         <source>A simple, user-friendly Jabber/XMPP client</source>
-        <translation>En enkel, brukervennlig Jabber/XMPP-klient</translation>
+        <translation type="unfinished">En enkel, brukervennlig Jabber/XMPP-klient</translation>
     </message>
     <message>
         <source>License:</source>
-        <translation>Lisens:</translation>
+        <translation type="unfinished">Lisens:</translation>
     </message>
     <message>
         <source>Source code on GitHub</source>
-        <translation>Kildekode på GitHub</translation>
+        <translation type="unfinished">Kildekode på GitHub</translation>
+    </message>
+</context>
+<context>
+    <name>AboutSheet</name>
+    <message>
+        <source>A simple, user-friendly Jabber/XMPP client</source>
+        <translation type="vanished">En enkel, brukervennlig Jabber/XMPP-klient</translation>
+    </message>
+    <message>
+        <source>License:</source>
+        <translation type="vanished">Lisens:</translation>
+    </message>
+    <message>
+        <source>Source code on GitHub</source>
+        <translation type="vanished">Kildekode på GitHub</translation>
     </message>
 </context>
 <context>
@@ -61,6 +76,21 @@
     <message>
         <source>About</source>
         <translation>Om</translation>
+    </message>
+</context>
+<context>
+    <name>Kaidan</name>
+    <message>
+        <source>Could not send message, because not being connected.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Could not add contact, because not being connected.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Could not remove contact, because not being connected.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -142,6 +172,10 @@
     <message>
         <source>Add new contact</source>
         <translation>Legg til ny kontakt</translation>
+    </message>
+    <message>
+        <source>Connecting…</source>
+        <translation type="unfinished">Kobler til…</translation>
     </message>
 </context>
 <context>

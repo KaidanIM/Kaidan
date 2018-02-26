@@ -31,10 +31,11 @@
 import QtQuick 2.6
 import QtQuick.Controls 2.0 as Controls
 import org.kde.kirigami 2.0 as Kirigami
+import io.github.kaidanim 1.0
 
 Rectangle {
 	id: background
-	property string text;
+	visible: false
 
 	color: Kirigami.Theme.buttonBackgroundColor
 	opacity: 0.5
@@ -46,29 +47,37 @@ Rectangle {
 		anchors.verticalCenter: parent.verticalCenter
 		topPadding: Kirigami.Units.gridUnit * 0.3
 		anchors.centerIn: parent
-		text: background.text
 	}
 
 	states: [
 		State {
-			name: "typing"
+			name: Enums.ChatStateComposing
 			PropertyChanges {
-				text: qsTr("typing ...")
 				target: stateLabel
+				text: qsTr("typing …")
+				font.italic: true
 			}
-		},
-		State {
-			name: "online"
 			PropertyChanges {
-				text: qsTr("online")
-				target: stateLabel
-			}
-		},
-		State {
-			name: "offline"
-			PropertyChanges {
-				visible: false
 				target: background
+				visible: true
+			}
+		},
+		State {
+			name: Enums.ChatStateActive
+			PropertyChanges {
+				target: stateLabel
+				text: qsTr("online")
+			}
+			PropertyChanges {
+				target: background
+				visible: true
+			}
+		},
+		State {
+			name: Enums.ChatStateGone
+			PropertyChanges {
+				target: background
+				visible: false
 			}
 		}
 	]

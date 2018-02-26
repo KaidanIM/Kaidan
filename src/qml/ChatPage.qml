@@ -51,7 +51,7 @@ Kirigami.Page {
 
 	header: ChatStateIndicator {
 		id: chatStateIndicator
-		state: kaidan.chatStates.get(recipientJid)
+		state: kaidan.chatStates.getState(recipientJid)
 	}
 
 	background: Image {

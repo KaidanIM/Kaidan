@@ -4,7 +4,10 @@
 		<file>es.qm</file>
 		<file>fr.qm</file>
 		<file>ja.qm</file>
-		<file>ru.qm</file>
 		<file>ms.qm</file>
+		<file>nb.qm</file>
+		<file>nl.qm</file>
+		<file>pt.qm</file>
+		<file>ru.qm</file>
 	</qresource>
 </RCC>

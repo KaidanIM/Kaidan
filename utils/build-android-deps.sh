@@ -97,20 +97,20 @@ mkdir -p \
     misc/android/res/mipmap-xxhdpi \
     misc/android/res/mipmap-xxxhdpi
 
-rendersvg $KAIDAN_SOURCES/misc/kaidan.svg $KAIDAN_SOURCES/misc/android/res/mipmap-hdpi/icon.png 72
-rendersvg $KAIDAN_SOURCES/misc/kaidan.svg $KAIDAN_SOURCES/misc/android/res/mipmap-hdpi/logo.png 144
+rendersvg $KAIDAN_SOURCES/misc/kaidan-small-margin.svg $KAIDAN_SOURCES/misc/android/res/mipmap-hdpi/icon.png 72
+rendersvg $KAIDAN_SOURCES/misc/kaidan-small-margin.svg $KAIDAN_SOURCES/misc/android/res/mipmap-hdpi/logo.png 144
 
-rendersvg $KAIDAN_SOURCES/misc/kaidan.svg $KAIDAN_SOURCES/misc/android/res/mipmap-ldpi/icon.png 36
-rendersvg $KAIDAN_SOURCES/misc/kaidan.svg $KAIDAN_SOURCES/misc/android/res/mipmap-ldpi/logo.png 72
+rendersvg $KAIDAN_SOURCES/misc/kaidan-small-margin.svg $KAIDAN_SOURCES/misc/android/res/mipmap-ldpi/icon.png 36
+rendersvg $KAIDAN_SOURCES/misc/kaidan-small-margin.svg $KAIDAN_SOURCES/misc/android/res/mipmap-ldpi/logo.png 72
 
-rendersvg $KAIDAN_SOURCES/misc/kaidan.svg $KAIDAN_SOURCES/misc/android/res/mipmap-mdpi/icon.png 48
-rendersvg $KAIDAN_SOURCES/misc/kaidan.svg $KAIDAN_SOURCES/misc/android/res/mipmap-mdpi/logo.png 96
+rendersvg $KAIDAN_SOURCES/misc/kaidan-small-margin.svg $KAIDAN_SOURCES/misc/android/res/mipmap-mdpi/icon.png 48
+rendersvg $KAIDAN_SOURCES/misc/kaidan-small-margin.svg $KAIDAN_SOURCES/misc/android/res/mipmap-mdpi/logo.png 96
 
-rendersvg $KAIDAN_SOURCES/misc/kaidan.svg $KAIDAN_SOURCES/misc/android/res/mipmap-xhdpi/icon.png 96
-rendersvg $KAIDAN_SOURCES/misc/kaidan.svg $KAIDAN_SOURCES/misc/android/res/mipmap-xhdpi/logo.png 192
+rendersvg $KAIDAN_SOURCES/misc/kaidan-small-margin.svg $KAIDAN_SOURCES/misc/android/res/mipmap-xhdpi/icon.png 96
+rendersvg $KAIDAN_SOURCES/misc/kaidan-small-margin.svg $KAIDAN_SOURCES/misc/android/res/mipmap-xhdpi/logo.png 192
 
-rendersvg $KAIDAN_SOURCES/misc/kaidan.svg $KAIDAN_SOURCES/misc/android/res/mipmap-xxhdpi/icon.png 144
-rendersvg $KAIDAN_SOURCES/misc/kaidan.svg $KAIDAN_SOURCES/misc/android/res/mipmap-xxhdpi/logo.png 288
+rendersvg $KAIDAN_SOURCES/misc/kaidan-small-margin.svg $KAIDAN_SOURCES/misc/android/res/mipmap-xxhdpi/icon.png 144
+rendersvg $KAIDAN_SOURCES/misc/kaidan-small-margin.svg $KAIDAN_SOURCES/misc/android/res/mipmap-xxhdpi/logo.png 288
 
-rendersvg $KAIDAN_SOURCES/misc/kaidan.svg $KAIDAN_SOURCES/misc/android/res/mipmap-xxxhdpi/icon.png 192
-rendersvg $KAIDAN_SOURCES/misc/kaidan.svg $KAIDAN_SOURCES/misc/android/res/mipmap-xxxhdpi/logo.png 384
+rendersvg $KAIDAN_SOURCES/misc/kaidan-small-margin.svg $KAIDAN_SOURCES/misc/android/res/mipmap-xxxhdpi/icon.png 192
+rendersvg $KAIDAN_SOURCES/misc/kaidan-small-margin.svg $KAIDAN_SOURCES/misc/android/res/mipmap-xxxhdpi/logo.png 384

@@ -33,6 +33,7 @@
 #include "ClientWorker.h"
 #include "AvatarFileStorage.h"
 #include "ChatStateCache.h"
+#include "ChatStateHandler.h"
 #include "RosterManager.h"
 #include "PresenceHandler.h"
 #include "ServiceDiscoveryManager.h"
@@ -130,6 +131,8 @@ void ClientThread::run()
 	        rosterManager, &RosterManager::addContact);
 	connect(this, &ClientThread::removeContactRequested,
 	        rosterManager, &RosterManager::removeContact);
+	connect(this, &ClientThread::messageTyped,
+	        messageSessionHandler->getChatStateHandler(), &ChatStateHandler::handleMessageTyped);
 
 	// timed fetching of packages
 	connect(&workTimer, &QTimer::timeout, worker, &ClientWorker::updateClient);

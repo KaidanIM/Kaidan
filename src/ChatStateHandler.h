@@ -50,10 +50,12 @@ using namespace Enums;
 /**
  * @class ChatStateHandler Class for handling typing and online notifications
  */
-class ChatStateHandler : public gloox::ChatStateHandler
+class ChatStateHandler : public QObject, public gloox::ChatStateHandler
 {
+	Q_OBJECT
+
 public:
-	ChatStateHandler(ChatStateCache *cache);
+	ChatStateHandler(ChatStateCache *cache, QObject *parent = nullptr);
 	~ChatStateHandler();
 
 	/**
@@ -78,6 +80,15 @@ public:
 	 * Sets chat states to inactive, when disconnected
 	 */
 	void handleConnectionState(ConnectionState state);
+
+public slots:
+	/**
+	 * Sets the current chat state with the current chat partner to 'typing'
+	 * 
+	 * It'll also start a timer that will turn the state to 'paused', when
+	 * the signal isn't emitted again for some time.
+	 */
+	void handleMessageTyped();
 
 private:
 	ChatStateCache *cache;

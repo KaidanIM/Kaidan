@@ -37,8 +37,8 @@
 #include <gloox/jid.h>
 #include <gloox/chatstatefilter.h>
 
-ChatStateHandler::ChatStateHandler(ChatStateCache *cache)
-	: cache(cache)
+ChatStateHandler::ChatStateHandler(ChatStateCache *cache, QObject *parent)
+	: QObject(parent), cache(cache)
 {
 	filters = QMap<gloox::JID, gloox::ChatStateFilter*>();
 	chatStates = QMap<QString, ChatStateType>();
@@ -86,4 +86,11 @@ void ChatStateHandler::handleConnectionState(ConnectionState state)
 		for (gloox::JID &jid : filters.keys())
 			removeChatStateFilter(jid);
 	}
+}
+
+void ChatStateHandler::handleMessageTyped()
+{
+	qDebug() << QString("[client] Changing own chat state with %1 to 'typing'")
+	            .arg("DEINERMUTTER");
+	
 }

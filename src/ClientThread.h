@@ -125,11 +125,6 @@ public:
 	void setCredentials(Credentials creds);
 
 	/**
-	 * Applys filters to the database for showing the correct chat.
-	 */
-	void setCurrentChatPartner(QString *jid);
-
-	/**
 	 * Returns if connection state is connected.
 	 */
 	bool isConnected()
@@ -213,6 +208,11 @@ signals:
 	 * Emitted, when logging in with new credentials worked
 	 */
 	void logInWorked();
+
+	/**
+	 * Emitted, when a different chat was opened on the GUI
+	 */
+	void chatPartnerChanged(QString chatPartner);
 
 private:
 	/**

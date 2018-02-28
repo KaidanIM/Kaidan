@@ -84,7 +84,7 @@ Kaidan::Kaidan(QGuiApplication *app, QObject *parent) : QObject(parent)
 	client = new ClientThread(rosterModel, messageModel, avatarStorage, creds,
 	                          settings, app);
 	client->start();
-	
+
 	connect(client, &ClientThread::connectionStateChanged, [=](ConnectionState state) {
 		emit this->connectionStateChanged((quint8) state);
 	});
@@ -93,6 +93,7 @@ Kaidan::Kaidan(QGuiApplication *app, QObject *parent) : QObject(parent)
 	});
 	connect(client, &ClientThread::newCredentialsNeeded, this, &Kaidan::newCredentialsNeeded);
 	connect(client, &ClientThread::logInWorked, this, &Kaidan::logInWorked);
+	connect(this, &Kaidan::chatPartnerChanged, client, &ClientThread::chatPartnerChanged);
 }
 
 Kaidan::~Kaidan()
@@ -167,14 +168,9 @@ void Kaidan::setChatPartner(QString chatPartner)
 	if (this->chatPartner == chatPartner)
 		return;
 
-	// set the new chat partner
 	this->chatPartner = chatPartner;
-
-	// filter message for this chat partner
-	messageModel->applyRecipientFilter(&chatPartner, &(creds.jid));
-	client->setCurrentChatPartner(&chatPartner);
-
-	emit chatPartnerChanged();
+	emit chatPartnerChanged(chatPartner); // -> connected to client
+	messageModel->applyRecipientFilter(chatPartner);
 }
 
 quint8 Kaidan::getConnectionState() const

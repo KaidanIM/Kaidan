@@ -42,10 +42,23 @@ public:
 
 	QVariant data(const QModelIndex &index, int role) const Q_DECL_OVERRIDE;
 	QHash<int, QByteArray> roleNames() const Q_DECL_OVERRIDE;
-	void applyRecipientFilter(QString *recipient_, QString *author_);
+
+	/**
+	 * Applies a filter to the database to only show messages of a certain chat
+	 */
+	void applyRecipientFilter(QString recipient);
 
 signals:
-	void recipientChanged();
+	/**
+	 * Emitted when the user opens another chat to apply a filter to the db
+	 */
+	void chatPartnerChanged(QString &jid);
+
+	/**
+	 * Emitted, when connecting
+	 */
+	void ownJidChanged(QString &jid);
+
 	void addMessageRequested(const QString author, const QString recipient,
 	                         const QString timestamp, const QString message,
 	                         const QString msgId, bool sentByMe,
@@ -64,6 +77,8 @@ private slots:
 
 private:
 	QSqlDatabase *database;
+
+	QString ownJid;
 };
 
 #endif // MESSAGEMODEL_H

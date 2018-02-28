@@ -51,16 +51,21 @@ MessageModel::MessageModel(QSqlDatabase *database, QObject *parent):
 	// Ensures that the model is sorted correctly after submitting a new row.
 	setEditStrategy(QSqlTableModel::OnManualSubmit);
 
+	connect(this, &MessageModel::chatPartnerChanged,
+	        this, &MessageModel::applyRecipientFilter, Qt::BlockingQueuedConnection);
+	connect(this, &MessageModel::ownJidChanged, [=](QString &ownJid) {
+		this->ownJid = ownJid;
+	});
 	connect(this, &MessageModel::addMessageRequested, this, &MessageModel::addMessage);
 	connect(this, &MessageModel::setMessageAsSentRequested, this, &MessageModel::setMessageAsSent);
 	connect(this, &MessageModel::setMessageAsDeliveredRequested, this, &MessageModel::setMessageAsDelivered);
 }
 
-void MessageModel::applyRecipientFilter(QString *recipient_, QString *author_)
+void MessageModel::applyRecipientFilter(QString recipient)
 {
-	const QString filterString = QString::fromLatin1("(recipient = '%1' AND "
-	                             "author = '%2') OR (recipient = '%2' AND author = '%1')").arg(
-	                                     *recipient_, *author_);
+	const QString filterString = QString::fromLatin1(
+		"(recipient = '%1' AND author = '%2') OR (recipient = '%2' AND "
+		"author = '%1')").arg(recipient, ownJid);
 	setFilter(filterString);
 	select();
 }

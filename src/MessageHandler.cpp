@@ -69,8 +69,7 @@ QDateTime glooxStampToQDateTime(std::string stamp_)
 MessageHandler::MessageHandler(gloox::Client *client, MessageModel *messageModel,
                                RosterModel *rosterModel, QObject *parent):
                                QObject(parent), client(client),
-                               messageModel(messageModel), rosterModel(rosterModel),
-                               chatPartner("")
+                               messageModel(messageModel), rosterModel(rosterModel)
 {
 }
 
@@ -78,9 +77,9 @@ MessageHandler::~MessageHandler()
 {
 }
 
-void MessageHandler::setCurrentChatPartner(QString *chatPartner)
+void MessageHandler::setChatPartner(QString chatPartner)
 {
-	this->chatPartner = *chatPartner;
+	this->chatPartner = chatPartner;
 
 	resetUnreadMessagesForJid(this->chatPartner);
 }

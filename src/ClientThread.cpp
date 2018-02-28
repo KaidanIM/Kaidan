@@ -121,6 +121,8 @@ void ClientThread::run()
 	// connect slots
 	connect(this, &ClientThread::sendMessageRequested,
 	        messageSessionHandler->getMessageHandler(), &MessageHandler::sendMessage);
+	connect(this, &ClientThread::chatPartnerChanged,
+	        messageSessionHandler->getMessageHandler(), &MessageHandler::setChatPartner);
 	connect(this, &ClientThread::addContactRequested,
 	        rosterManager, &RosterManager::addContact);
 	connect(this, &ClientThread::removeContactRequested,
@@ -147,12 +149,8 @@ void ClientThread::setCredentials(Credentials creds)
 	client->setPassword(creds.password.toStdString());
 	client->unbindResource(client->resource());
 	client->bindResource(creds.jidResource.toStdString());
-}
 
-void ClientThread::setCurrentChatPartner(QString *jid)
-{
-	QMutexLocker locker(&mutex); // => locking mutex in this function
-	messageSessionHandler->getMessageHandler()->setCurrentChatPartner(jid);
+	emit messageModel->ownJidChanged(creds.jid);
 }
 
 void ClientThread::setConnectionState(ConnectionState state)

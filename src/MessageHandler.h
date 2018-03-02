@@ -52,13 +52,13 @@ public:
 		       RosterModel *rosterModel, QObject *parent = nullptr);
 	~MessageHandler();
 
-	void setCurrentChatPartner(QString *chatPartner);
 	virtual void handleMessage(const gloox::Message &message, gloox::MessageSession *session = 0);
 	void updateLastExchangedOfJid(const QString &jid);
 	void newUnreadMessageForJid(const QString &jid);
 	void resetUnreadMessagesForJid(const QString &jid);
 
 public slots:
+	void setChatPartner(QString chatPartner);
 	void sendMessage(QString toJid, QString body);
 
 private:

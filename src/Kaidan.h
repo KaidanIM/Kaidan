@@ -287,7 +287,7 @@ signals:
 	/**
 	 * Emitted when the currently opnened chat has changed
 	 */
-	void chatPartnerChanged();
+	void chatPartnerChanged(QString chatPartner);
 
 	/**
 	 * Emitted when there are no (correct) credentials and new are needed

@@ -152,7 +152,7 @@ elseif(UBUNTU_TOUCH)
 
 	# install kaidan media
 	install(DIRECTORY "data/images"
-		DESTINATION "${CMAKE_INSTALL_FULL_DATADIR}/kaidan.kaidanim"
+		DESTINATION "${CMAKE_INSTALL_FULL_DATADIR}/im.kaidan.kaidan"
 	)
 endif()
 

@@ -36,7 +36,7 @@
  */
 #define APPLICATION_ID "io.github.kaidanim"
 #ifdef UBUNTU_TOUCH
-#define APPLICATION_NAME "kaidan.kaidanim"
+#define APPLICATION_NAME "im.kaidan.kaidan"
 #else
 #define APPLICATION_NAME "kaidan"
 #endif

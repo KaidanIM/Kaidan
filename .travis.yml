@@ -22,6 +22,18 @@ matrix:
       git:
         submodules: false
 
+    - env: BUILD_SYSTEM=qmake
+      os: osx
+      compiler: gcc
+      cache: ccache
+
+    - env: BUILD_SYSTEM=cmake
+      os: osx
+      compiler: gcc
+      cache: ccache
+      git:
+        submodules: false
+
     - env: PLATFORM=ubuntu-touch
       git:
         submodules: false
@@ -29,5 +41,6 @@ matrix:
       cache:
         directories:
           - /var/cache/apt/archives
+
 notifications:
   email: false

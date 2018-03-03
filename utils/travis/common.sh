@@ -8,9 +8,11 @@ fi
 if [[ ${PLATFORM} == "ubuntu-touch" ]]; then
 	export BUILD_SYSTEM="cmake"
 elif [[ ${PLATFORM} == "" ]]; then
-	# currently there's only linux-desktop & ut
-	# otherwise other parameters (as TRAVIS_OS_NAME) could be checked
-	export PLATFORM="linux-desktop"
+	if [[ ${TRAVIS_OS_NAME} == "osx" ]]; then
+		export PLATFORM="osx"
+	else
+		export PLATFORM="linux-desktop"
+	fi
 fi
 
 echo_env() {
@@ -75,6 +77,11 @@ install_linux-desktop_deps() {
 	install_gloox
 }
 
+install_osx_deps() {
+	# install dependencies via. Homebrew (cmake is preinstalled)
+	brew install qt gloox ninja ccache
+}
+
 install_ubuntu-touch_deps() {
 	add_ubuntu-touch_apt_repos
 
@@ -87,5 +94,18 @@ env_setup() {
 	if [ -f /opt/qt5*/bin/qt5*-env.sh ]; then
 		echo "Setting up custom Qt 5.9 installation..."
 		source /opt/qt59/bin/qt59-env.sh
+	fi
+
+	if [ ${PLATFORM} == "osx" ]; then
+		# Add brew installtions to path
+		export PATH="/usr/local/opt/ccache/libexec:$PATH"
+		export PATH="/usr/local/opt/qt/bin:$PATH"
+		export PATH="/usr/local/opt/openssl/bin:$PATH"
+		export PATH="/usr/local/opt/gloox/bin:$PATH"
+
+		export LIBRARY_PATH="/usr/local/opt/openssl/lib:$LIBRARY_PATH"
+		export LIBRARY_PATH="/usr/local/opt/gloox/lib:$LIBRARY_PATH"
+
+		export CPLUS_INCLUDE_PATH="/usr/local/opt/gloox/include:$CPLUS_INCLUDE_PATH"
 	fi
 }

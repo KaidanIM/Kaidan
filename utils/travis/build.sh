@@ -6,7 +6,6 @@ echo "Building Kaidan"
 echo "^^^^^^^^^^^^^^^"
 echo_env
 echo "*****************************************"
-echo
 
 mkdir -p ${TRAVIS_BUILD_DIR}/build
 cd ${TRAVIS_BUILD_DIR}/build
@@ -27,10 +26,10 @@ elif [[ ${BUILD_SYSTEM} == "qmake" ]]; then
 	lrelease ../Kaidan.pro
 
 	qmake ../Kaidan.pro \
-	      "QMAKE_CXX=ccache g++" \
+	      "QMAKE_CXX=ccache ${CXX}" \
 	      "CONFIG+=debug"
 
-	make -j$(nproc)
+	make -j${CPUS_USED}
 else
 	echo "Unknown platform or build system!"
 	exit 1

@@ -3,6 +3,6 @@ Type=Application
 Version=1.0
 Name=Kaidan
 Exec=bin/kaidan
-Icon=kaidan
+Icon=kaidan.svg
 Terminal=false
 X-Ubuntu-Touch=true

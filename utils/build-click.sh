@@ -45,13 +45,18 @@ echo "*****************************************"
 
 ! [ -d $KAIDAN_SOURCES/build ] && mkdir $KAIDAN_SOURCES/build
 cd $KAIDAN_SOURCES/build
-cmake .. -GNinja -DCMAKE_MAKE_PROGRAM=/usr/bin/ninja -DCMAKE_INSTALL_PREFIX=/usr/ -DI18N=1 -DUBUNTU_TOUCH=1
+cmake .. \
+	-GNinja \
+	-DCMAKE_MAKE_PROGRAM=/usr/bin/ninja \
+	-DCMAKE_INSTALL_PREFIX=/usr/ \
+	-DI18N=1 \
+	-DUBUNTU_TOUCH=1
+
 DESTDIR=$CLICK_TARGET_DIR ninja install
 
 sed -e "s/@ARCH@/$ARCH/g" $KAIDAN_SOURCES/misc/ubuntu-touch/manifest.json.in > $CLICK_TARGET_DIR/manifest.json
 cp $KAIDAN_SOURCES/misc/ubuntu-touch/apparmor.json $CLICK_TARGET_DIR
 cp $KAIDAN_SOURCES/misc/ubuntu-touch/kaidan.desktop $CLICK_TARGET_DIR
-cp $KAIDAN_SOURCES/misc/kaidan.svg $CLICK_TARGET_DIR
 
 # Strip out documentation and includes
 rm -r \

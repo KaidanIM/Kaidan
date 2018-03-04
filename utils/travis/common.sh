@@ -5,7 +5,7 @@ if command -v nproc >/dev/null; then
 	export CPUS_USED=$(nproc)
 fi
 
-add_qt_apt_repos() {
+add_linux-desktop_apt_repos() {
 	sudo apt-get install dirmngr
 
 	# trusty backports
@@ -15,7 +15,7 @@ add_qt_apt_repos() {
 	sudo add-apt-repository ppa:beineri/opt-qt593-trusty -y
 }
 
-add_click_apt_repos() {
+add_ubuntu-touch_apt_repos() {
 	sudo add-apt-repository ppa:bhdouglass/clickable -y
 }
 
@@ -37,8 +37,8 @@ install_gloox() {
 	rm libgloox*.deb
 }
 
-install_linux_deps() {
-	add_qt_apt_repos
+install_linux-desktop_deps() {
+	add_linux-desktop_apt_repos
 
 	sudo apt-get update
 	sudo apt-get install -y -t trusty-backports \
@@ -61,8 +61,8 @@ install_linux_deps() {
 	install_gloox
 }
 
-install_click_deps() {
-	add_click_apt_repos
+install_ubuntu-touch_deps() {
+	add_ubuntu-touch_apt_repos
 
 	sudo apt-get update
 	sudo apt-get install clickable

@@ -154,6 +154,12 @@ elseif(UBUNTU_TOUCH)
 	install(DIRECTORY "data/images"
 		DESTINATION "${CMAKE_INSTALL_FULL_DATADIR}/im.kaidan.kaidan"
 	)
+
+	# install icon
+	install(FILES "misc/kaidan.svg"
+		DESTINATION "${CMAKE_INSTALL_PREFIX}"
+	)
+
 endif()
 
 

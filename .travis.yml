@@ -16,10 +16,8 @@ script:
   - ./utils/travis/build.sh
 matrix:
   include:
-    - env: BUILD_SYSTEM=qmake
-    - env: BUILD_SYSTEM=cmake
-    - env: BUILD_VARIANT=click
-      script:
-        - clickable clean build click-build
+    - env: PLATFORM=linux-desktop BUILD_SYSTEM=qmake
+    - env: PLATFORM=linux-desktop BUILD_SYSTEM=cmake
+    - env: PLATFORM=ubuntu-touch BUILD_SYSTEM=cmake
 notifications:
   email: false

@@ -1,5 +1,7 @@
 language: cpp
 compiler: gcc
+services:
+  - docker
 cache:
   ccache: true
   directories:
@@ -16,5 +18,8 @@ matrix:
   include:
     - env: BUILD_SYSTEM=qmake
     - env: BUILD_SYSTEM=cmake
+    - env: BUILD_VARIANT=click
+      script:
+        - clickable clean build click-build
 notifications:
   email: false

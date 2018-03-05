@@ -3,7 +3,8 @@
 
 echo "*****************************************"
 echo "Fetching dependencies"
-echo "Using build system: ${BUILD_SYSTEM}"
+echo "^^^^^^^^^^^^^^^^^^^^^"
+echo_env
 echo "*****************************************"
 
 if [ ${PLATFORM} == "linux-desktop" ]; then

@@ -4,9 +4,7 @@
 echo "*****************************************"
 echo "Building Kaidan"
 echo "^^^^^^^^^^^^^^^"
-echo "PLATFORM=${PLATFORM}"
-echo "BUILD_SYSTEM=${BUILD_SYSTEM}"
-echo "CPUS_USED=${CPUS_USED}"
+echo_env
 echo "*****************************************"
 echo
 

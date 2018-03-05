@@ -13,6 +13,12 @@ elif [[ ${PLATFORM} == "" ]]; then
 	export PLATFORM="linux-desktop"
 fi
 
+echo_env() {
+	echo "PLATFORM=${PLATFORM}"
+	echo "BUILD_SYSTEM=${BUILD_SYSTEM}"
+	echo "CPUS_USED=${CPUS_USED}"
+}
+
 add_linux-desktop_apt_repos() {
 	sudo apt-get install dirmngr
 

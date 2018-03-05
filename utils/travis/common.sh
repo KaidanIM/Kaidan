@@ -5,6 +5,14 @@ if command -v nproc >/dev/null; then
 	export CPUS_USED=$(nproc)
 fi
 
+if [[ ${PLATFORM} == "ubuntu-touch" ]]; then
+	export BUILD_SYSTEM="cmake"
+elif [[ ${PLATFORM} == "" ]]; then
+	# currently there's only linux-desktop & ut
+	# otherwise other parameters (as TRAVIS_OS_NAME) could be checked
+	export PLATFORM="linux-desktop"
+fi
+
 add_linux-desktop_apt_repos() {
 	sudo apt-get install dirmngr
 

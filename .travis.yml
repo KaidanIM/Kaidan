@@ -16,8 +16,14 @@ script:
   - ./utils/travis/build.sh
 matrix:
   include:
-    - env: PLATFORM=linux-desktop BUILD_SYSTEM=qmake
-    - env: PLATFORM=linux-desktop BUILD_SYSTEM=cmake
-    - env: PLATFORM=ubuntu-touch BUILD_SYSTEM=cmake
+    - env: BUILD_SYSTEM=qmake
+
+    - env: BUILD_SYSTEM=cmake
+      git:
+        submodules: false
+
+    - env: PLATFORM=ubuntu-touch
+      git:
+        submodules: false
 notifications:
   email: false

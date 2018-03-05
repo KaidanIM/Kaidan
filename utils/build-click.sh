@@ -39,8 +39,6 @@ install_dependencies() {
 	for PKG in libgloox-dev libgloox17; do
 		install_deb http://neon.plasma-mobile.org:8080/pool/main/g/gloox ${PKG} ${GLOOX_VERSION}
 	done
-
-	find ${CLICK_TARGET_DIR}
 }
 
 build_kaidan() {

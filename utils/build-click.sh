@@ -48,13 +48,12 @@ build_kaidan() {
 	      -GNinja \
 	      -DCMAKE_MAKE_PROGRAM=/usr/bin/ninja \
 	      -DCMAKE_PREFIX_PATH="${CLICK_TARGET_DIR}/usr" \
-	      -DCMAKE_INCLUDE_PATH="${CLICK_TARGET_DIR}/usr/include" \
 	      -DCMAKE_INSTALL_PREFIX="${CLICK_TARGET_DIR}/usr" \
 	      -DI18N=1 \
 	      -DUBUNTU_TOUCH=1 \
 	      -DCLICK_ARCH="${ARCH}"
 
-	ninja install
+	CPLUS_INCLUDE_PATH="${CLICK_TARGET_DIR}/usr/include" ninja install
 }
 
 cleanup_click_dir() {

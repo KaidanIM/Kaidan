@@ -25,5 +25,9 @@ matrix:
     - env: PLATFORM=ubuntu-touch
       git:
         submodules: false
+      # only cache apt archives
+      cache:
+        directories:
+          - /var/cache/apt/archives
 notifications:
   email: false

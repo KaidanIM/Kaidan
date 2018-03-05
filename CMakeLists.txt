@@ -126,7 +126,8 @@ target_compile_definitions(${PROJECT_NAME} PRIVATE
 
 if(UBUNTU_TOUCH AND CLICK_ARCH)
 	# will replace ${CLICK_ARCH} with its value
-	configure_file(misc/ubuntu-touch/manifest.json.in misc/ubuntu-touch/manifest.json)
+	configure_file(${CMAKE_SOURCE_DIR}/misc/ubuntu-touch/manifest.json.in
+	               ${CMAKE_SOURCE_DIR}/misc/ubuntu-touch/manifest.json)
 
 	# install kaidan binary
 	install(PROGRAMS ${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}

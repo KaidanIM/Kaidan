@@ -1,7 +1,7 @@
 {
     "name": "im.kaidan.kaidan",
-    "description": "A Simple and user-friendly Jabber/XMPP client for every device",
-    "architecture": "${CLICK_ARCH}",
+    "description": "A simple and user-friendly Jabber/XMPP client for every device",
+    "architecture": "@CLICK_ARCH@",
     "title": "Kaidan",
     "framework": "ubuntu-sdk-16.04",
     "hooks": {
@@ -10,6 +10,6 @@
             "apparmor": "apparmor.json"
         }
     },
-    "version": "0.3.2",
+    "version": "0.4.0~dev",
     "maintainer": "Kaidan developers <gamerbude@lnj.li>"
 }

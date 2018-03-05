@@ -44,7 +44,7 @@ Then you can install Kaidan
 sudo apt install kaidan
 ```
 
-### Compile it yourself
+### Compile Kaidan for Desktop Linux
 
 #### Install all dependencies:
  * [Qt](http://doc.qt.io/qt-5/build-sources.html) (Core Qml Quick Sql QuickControls2) (>= 5.8.0)
@@ -93,6 +93,14 @@ make -j$(nproc)
 ```bash
 sudo make install
 ```
+
+### Compile Kaidan for Ubuntu Touch
+* Install [clickable](https://github.com/bhdouglass/clickable) and docker
+
+* Run `clickable setup-docker`
+
+* Run `clickable clean build click-build`
+
 
 ----
 

@@ -1,7 +1,7 @@
 #!/bin/bash -e
 
 KAIDAN_SOURCES=$(dirname "$(readlink -f "${0}")")/..
-CLICK_TARGET_DIR="$KAIDAN_SOURCES/build/ubuntu-touch/tmp/" # tmp is hard-coded into clickable
+CLICK_TARGET_DIR="$KAIDAN_SOURCES/bin/ubuntu-touch/tmp/" # tmp is hard-coded into clickable
 
 mkdir -p $CLICK_TARGET_DIR
 
@@ -62,6 +62,7 @@ cleanup_click_dir() {
 	rm -r \
 		$CLICK_TARGET_DIR/usr/include \
 		$CLICK_TARGET_DIR/usr/share/doc \
+		$CLICK_TARGET_DIR/usr/share/locale \
 		$CLICK_TARGET_DIR/usr/lib/$DEB_HOST_MULTIARCH/cmake \
 		$CLICK_TARGET_DIR/usr/lib/$DEB_HOST_MULTIARCH/pkgconfig \
 		$CLICK_TARGET_DIR/usr/lib/$DEB_HOST_MULTIARCH/qt5/mkspecs

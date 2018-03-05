@@ -45,12 +45,13 @@ build_kaidan() {
 	mkdir -p $KAIDAN_SOURCES/build
 	cd $KAIDAN_SOURCES/build
 	cmake .. \
-		-GNinja \
-		-DCMAKE_MAKE_PROGRAM=/usr/bin/ninja \
-		-DCMAKE_INSTALL_PREFIX=/usr/ \
-		-DI18N=1 \
-		-DUBUNTU_TOUCH=1 \
-		-DCLICK_ARCH="${ARCH}"
+	      -GNinja \
+	      -DCMAKE_MAKE_PROGRAM=/usr/bin/ninja \
+	      -DCMAKE_PREFIX_PATH="${KAIDAN_SOURCES}/bin/ubuntu-touch/tmp/usr" \
+	      -DCMAKE_INSTALL_PREFIX=/usr/ \
+	      -DI18N=1 \
+	      -DUBUNTU_TOUCH=1 \
+	      -DCLICK_ARCH="${ARCH}"
 
 	DESTDIR=$CLICK_TARGET_DIR ninja install
 }

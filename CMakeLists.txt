@@ -124,7 +124,7 @@ if(UBUNTU_TOUCH AND CLICK_ARCH)
 
 	# install kaidan binary
 	install(PROGRAMS ${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}
-	        DESTINATION ${CMAKE_INSTALL_FULL_BINDIR}
+	        DESTINATION ${CMAKE_INSTALL_PREFIX}
 	)
 	# install kaidan media
 	install(DIRECTORY "data/images"

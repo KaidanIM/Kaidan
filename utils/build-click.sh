@@ -25,17 +25,17 @@ install_dependencies() {
 	QQC2_VERSION="5.9.3-0ubports2"
 	GLOOX_VERSION="1.0.20-1+16.04+xenial+build1"
 
-	echo "Kirigami 2:"
+	echo "I: Installing Kirigami 2"
 	for PKG in qml-module-org-kde-kirigami2 kirigami2-dev libkf5kirigami2-5; do
 		install_deb https://deb.debian.org/debian/pool/main/k/kirigami2 ${PKG} ${KIRIGAMI_VERSION}
 	done
 
-	echo "QtQuick Controls 2:"
+	echo "I: Installing QtQuick Controls 2"
 	for PKG in qml-module-qtquick-controls2 libqt5quickcontrols2-5 qtquickcontrols2-5-dev qml-module-qtquick-templates2 qml-module-qt-labs-platform libqt5quicktemplates2-5 libqt5quicktemplates2-5; do
 		install_deb https://repo.ubports.com/pool/xenial/main/q/qtquickcontrols2-opensource-src ${PKG} ${QQC2_VERSION}
 	done
 
-	echo "gloox:"
+	echo "I: Installing gloox"
 	for PKG in libgloox-dev libgloox17; do
 		install_deb http://neon.plasma-mobile.org:8080/pool/main/g/gloox ${PKG} ${GLOOX_VERSION}
 	done
@@ -65,6 +65,7 @@ build_kaidan() {
 cleanup_click_dir() {
 	# Strip out documentation and includes
 	rm -r \
+		$CLICK_TARGET_DIR/usr \
 		$CLICK_TARGET_DIR/include \
 		$CLICK_TARGET_DIR/share/doc \
 		$CLICK_TARGET_DIR/share/locale \

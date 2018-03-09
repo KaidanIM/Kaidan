@@ -35,7 +35,11 @@
  * Application information
  */
 #define APPLICATION_ID "io.github.kaidanim"
+#ifdef UBUNTU_TOUCH
+#define APPLICATION_NAME "im.kaidan.kaidan"
+#else
 #define APPLICATION_NAME "kaidan"
+#endif
 #define APPLICATION_DISPLAY_NAME "Kaidan"
 #define APPLICATION_DESCRIPTION "A simple, user-friendly Jabber/XMPP client"
 #define VERSION_STRING "0.4.0-dev"

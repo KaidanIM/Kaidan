@@ -4,9 +4,13 @@ set(QT_MIN_VERSION "5.8.0")
 
 project(kaidan)
 
+set(APPLICATION_ID "im.kaidan.kaidan")
+
 # CMake options
 option(I18N "Enable i18n support" FALSE)
 option(SAILFISH_OS "Build with Sailfish OS GUI, needs 3rdparty/kaidansf submodule" FALSE)
+option(UBUNTU_TOUCH "Building a Ubuntu Touch click (internal use only!)" FALSE)
+option(CLICK_ARCH "Architecture that will be used in the click's manifest")
 
 # Find includes in corresponding build directories
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
@@ -93,6 +97,10 @@ if(SAILFISH_OS)
 		SAILFISH_OS=True
 		PLATFORM_DISPLAY_NAME="Sailfish OS"
 	)
+elseif(UBUNTU_TOUCH)
+	set(KAIDAN_COMPILE_DEFINITIONS
+		UBUNTU_TOUCH=True
+	)
 else()
 	set(KAIDAN_COMPILE_DEFINITIONS
 		NOTIFICATIONS_LIBNOTIFY=True
@@ -109,29 +117,46 @@ target_compile_definitions(${PROJECT_NAME} PRIVATE
 # Install Kaidan
 #
 
-if(UNIX AND NOT APPLE)
+if(UBUNTU_TOUCH AND CLICK_ARCH)
+	# will replace ${CLICK_ARCH} with its value
+	configure_file(${CMAKE_SOURCE_DIR}/misc/ubuntu-touch/manifest.json.in
+	               ${CMAKE_SOURCE_DIR}/misc/ubuntu-touch/manifest.json)
+
 	# install kaidan binary
 	install(PROGRAMS ${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}
-		DESTINATION ${CMAKE_INSTALL_FULL_BINDIR}
+	        DESTINATION ${CMAKE_INSTALL_PREFIX}
+	)
+	# install kaidan media
+	install(DIRECTORY "data/images"
+	        DESTINATION "${CMAKE_INSTALL_FULL_DATADIR}/${APPLICATION_ID}"
+	)
+	# install icon
+	install(FILES "misc/kaidan.svg" "misc/ubuntu-touch/apparmor.json"
+	              "misc/ubuntu-touch/kaidan.desktop" "misc/ubuntu-touch/manifest.json"
+	        DESTINATION "${CMAKE_INSTALL_PREFIX}"
+	)
+elseif(UNIX AND NOT APPLE)
+	# install kaidan binary
+	install(PROGRAMS ${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}
+	        DESTINATION ${CMAKE_INSTALL_FULL_BINDIR}
 	)
 
 	# install kaidan media
 	install(DIRECTORY "data/images"
-		DESTINATION "${CMAKE_INSTALL_FULL_DATADIR}/${PROJECT_NAME}"
+	        DESTINATION "${CMAKE_INSTALL_FULL_DATADIR}/${PROJECT_NAME}"
 	)
 
 	# install icon (scalable + 128x)
 	install(FILES "misc/kaidan.svg"
-		DESTINATION "${CMAKE_INSTALL_FULL_DATADIR}/icons/hicolor/scalable/apps"
+	        DESTINATION "${CMAKE_INSTALL_FULL_DATADIR}/icons/hicolor/scalable/apps"
 	)
 	install(FILES "misc/kaidan-128x128.png"
-		DESTINATION "${CMAKE_INSTALL_FULL_DATADIR}/icons/hicolor/128x128/apps"
-		RENAME "kaidan.png"
+	        DESTINATION "${CMAKE_INSTALL_FULL_DATADIR}/icons/hicolor/128x128/apps"
+	        RENAME "kaidan.png"
 	)
-
 	# install desktop file
 	install(FILES "misc/kaidan.desktop"
-		DESTINATION "${CMAKE_INSTALL_FULL_DATADIR}/applications"
+	        DESTINATION "${CMAKE_INSTALL_FULL_DATADIR}/applications"
 	)
 endif()
 

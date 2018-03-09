@@ -3,11 +3,14 @@
 
 echo "*****************************************"
 echo "Fetching dependencies"
-echo "Using build system: ${BUILD_SYSTEM}"
+echo "^^^^^^^^^^^^^^^^^^^^^"
+echo_env
 echo "*****************************************"
 
-if [[ ${TRAVIS_OS_NAME} == "linux" ]]; then
-	install_linux_deps
+if [ ${PLATFORM} == "linux-desktop" ]; then
+	install_linux-desktop_deps
+elif [ ${PLATFORM} == "ubuntu-touch" ]; then
+	install_ubuntu-touch_deps
 else
 	echo "Can't build on \"${TRAVIS_OS_NAME}\""
 	exit 1

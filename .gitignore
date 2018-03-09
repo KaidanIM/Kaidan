@@ -1,6 +1,7 @@
 ################### Kaidan ####################
 kaidan
 kaidan_automoc.cpp
+misc/ubuntu-touch/manifest.json
 
 3rdparty/openssl
 3rdparty/gloox

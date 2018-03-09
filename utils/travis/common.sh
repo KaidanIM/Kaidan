@@ -5,7 +5,21 @@ if command -v nproc >/dev/null; then
 	export CPUS_USED=$(nproc)
 fi
 
-add_apt_repos() {
+if [[ ${PLATFORM} == "ubuntu-touch" ]]; then
+	export BUILD_SYSTEM="cmake"
+elif [[ ${PLATFORM} == "" ]]; then
+	# currently there's only linux-desktop & ut
+	# otherwise other parameters (as TRAVIS_OS_NAME) could be checked
+	export PLATFORM="linux-desktop"
+fi
+
+echo_env() {
+	echo "PLATFORM=${PLATFORM}"
+	echo "BUILD_SYSTEM=${BUILD_SYSTEM}"
+	echo "CPUS_USED=${CPUS_USED}"
+}
+
+add_linux-desktop_apt_repos() {
 	sudo apt-get install dirmngr
 
 	# trusty backports
@@ -13,6 +27,10 @@ add_apt_repos() {
 
 	# Qt 5.9 repository
 	sudo add-apt-repository ppa:beineri/opt-qt593-trusty -y
+}
+
+add_ubuntu-touch_apt_repos() {
+	sudo add-apt-repository ppa:bhdouglass/clickable -y
 }
 
 install_kf5() {
@@ -33,8 +51,8 @@ install_gloox() {
 	rm libgloox*.deb
 }
 
-install_linux_deps() {
-	add_apt_repos
+install_linux-desktop_deps() {
+	add_linux-desktop_apt_repos
 
 	sudo apt-get update
 	sudo apt-get install -y -t trusty-backports \
@@ -55,6 +73,14 @@ install_linux_deps() {
 		install_kf5
 	fi
 	install_gloox
+}
+
+install_ubuntu-touch_deps() {
+	add_ubuntu-touch_apt_repos
+
+	sudo apt-get update
+	sudo apt-get install clickable
+	clickable setup-docker
 }
 
 env_setup() {

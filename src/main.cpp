@@ -170,6 +170,10 @@ int main(int argc, char *argv[])
 	}
 #endif
 
+#ifdef UBUNTU_TOUCH
+       qputenv("QT_AUTO_SCREEN_SCALE_FACTOR", "true");
+#endif
+
 	// QML type bindings
 #ifdef QMAKE_BUILD
 	KirigamiPlugin::getInstance().registerTypes();

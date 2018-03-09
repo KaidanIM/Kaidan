@@ -1,5 +1,7 @@
 language: cpp
 compiler: gcc
+services:
+  - docker
 cache:
   ccache: true
   directories:
@@ -15,6 +17,17 @@ script:
 matrix:
   include:
     - env: BUILD_SYSTEM=qmake
+
     - env: BUILD_SYSTEM=cmake
+      git:
+        submodules: false
+
+    - env: PLATFORM=ubuntu-touch
+      git:
+        submodules: false
+      # only cache apt archives
+      cache:
+        directories:
+          - /var/cache/apt/archives
 notifications:
   email: false

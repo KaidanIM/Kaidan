@@ -53,7 +53,7 @@ build_kaidan() {
 	      -DUBUNTU_TOUCH=1 \
 	      -DCLICK_ARCH="${ARCH}"
 
-	CPLUS_INCLUDE_PATH="${CLICK_TARGET_DIR}/usr/include" ninja install
+	CXX_FLAGS="-I${CLICK_TARGET_PATH}/usr/include" ninja install
 }
 
 cleanup_click_dir() {

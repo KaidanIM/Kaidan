@@ -25,7 +25,12 @@ earlier developer of Kaidan.
 
 Kaidan is *not* finished yet, so don't expect it working as well as a finished client will do.
 
-## Installation
+## Compilation & Installation
+
+* [Debian Stretch based systems](#debian-stretch-based-systems)
+* [Linux Desktop](#compile-kaidan-for-desktop-linux)
+* [Ubuntu Touch (click package)](#compile-kaidan-for-ubuntu-touch)
+
 
 ### Debian Stretch based systems
 
@@ -95,12 +100,34 @@ sudo make install
 ```
 
 ### Compile Kaidan for Ubuntu Touch
-* Install [clickable](https://github.com/bhdouglass/clickable) and docker
 
-* Run `clickable setup-docker`
+This will fully automatically compile and build a click packge for Ubuntu Touch 16.04. Clickable and our
+build script do the hard work for you, so building is rather simple.
 
-* Run `clickable clean build click-build`
+Build-dependencies:
+ * [Clickable](https://github.com/bhdouglass/clickable)
+ * [Docker](https://www.docker.com/)
+ * Git
 
+#### Set up clickable docker container
+
+After you've installed the dependencies, you need to set up the Ubuntu Touch SDK docker container.
+
+```bash
+clickable setup-docker
+```
+
+#### Clone Kaidan and start build
+
+Now, you can clone our Kaidan repository using git and start building kaidan using clickable.
+
+```bash
+git clone https://github.com/kaidanim/kaidan
+cd kaidan
+clickable clean build click-build
+```
+
+The built click package will be located at `bin/ubuntu-touch/`.
 
 ----
 

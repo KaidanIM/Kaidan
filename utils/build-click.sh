@@ -49,7 +49,7 @@ build_kaidan() {
 	      -DCMAKE_MAKE_PROGRAM=/usr/bin/ninja \
 	      -DCMAKE_PREFIX_PATH="${CLICK_TARGET_DIR}/usr" \
 	      -DCMAKE_INSTALL_PREFIX="${CLICK_TARGET_DIR}/usr" \
-	      -DINCLUDE_DIRECTORIES="${CLICK_TARGET_DIR}/usr/include" \
+	      -DGLOOX_INCLUDE_DIR="${CLICK_TARGET_DIR}/usr/include" \
 	      -DI18N=1 \
 	      -DUBUNTU_TOUCH=1 \
 	      -DCLICK_ARCH="${ARCH}"

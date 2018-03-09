@@ -11,15 +11,13 @@ DEB_HOST_MULTIARCH=$(dpkg-architecture -qDEB_HOST_MULTIARCH)
 install_deb() {
 	BASE_URL="${1}"; PKG="${2}"; VERSION="${3}"
 	DEB_NAME="${PKG}_${VERSION}_${ARCH}.deb"
-	cd /tmp/
 
-	# download deb using curl with a nice progress bar (-o with full path
-	# causes 404s somehow)
-	curl --progress-bar ${BASE_URL}/${DEB_NAME} -o ${DEB_NAME}
+	# download deb using curl with a nice progress bar
+	curl --progress-bar ${BASE_URL}/${DEB_NAME} -o "/tmp/${DEB_NAME}"
 	# install to click
-	dpkg-deb -x ${DEB_NAME} ${CLICK_TARGET_DIR}
+	dpkg-deb -x "/tmp/${DEB_NAME}" ${CLICK_TARGET_DIR}
 	# clean up
-	rm ${DEB_NAME}
+	rm "/tmp/${DEB_NAME}"
 }
 
 install_dependencies() {

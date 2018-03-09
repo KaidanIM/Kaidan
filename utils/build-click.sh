@@ -1,7 +1,7 @@
 #!/bin/bash -e
 
 KAIDAN_SOURCES=$(dirname "$(readlink -f "${0}")")/..
-CLICK_TARGET_DIR="$KAIDAN_SOURCES/bin/ubuntu-touch/tmp/" # tmp is hard-coded into clickable
+CLICK_TARGET_DIR="$KAIDAN_SOURCES/bin/ubuntu-touch/tmp" # tmp is hard-coded into clickable
 
 mkdir -p $CLICK_TARGET_DIR
 
@@ -11,17 +11,19 @@ DEB_HOST_MULTIARCH=$(dpkg-architecture -qDEB_HOST_MULTIARCH)
 install_deb() {
 	BASE_URL="${1}"; PKG="${2}"; VERSION="${3}"
 	DEB_NAME="${PKG}_${VERSION}_${ARCH}.deb"
+	cd /tmp/
 
-	# download deb using curl with a nice progress bar
-	curl --progress-bar ${BASE_URL}/${DEB_NAME} -o /tmp/${DEB_NAME}
+	# download deb using curl with a nice progress bar (-o with full path
+	# causes 404s somehow)
+	curl --progress-bar ${BASE_URL}/${DEB_NAME} -o ${DEB_NAME}
 	# install to click
-	dpkg-deb -x /tmp/${DEB_NAME} ${CLICK_TARGET_DIR}
+	dpkg-deb -x ${DEB_NAME} ${CLICK_TARGET_DIR}
 	# clean up
-	rm /tmp/${DEB_NAME}
+	rm ${DEB_NAME}
 }
 
 install_dependencies() {
-	KIRIGAMI_VERSION="5.43.0+p16.04+git20180221.0430-0"
+	KIRIGAMI_VERSION="5.43.0+p16.04+git20180304.0352-0"
 	QQC2_VERSION="5.9.3-0ubports2"
 	GLOOX_VERSION="1.0.20-1+16.04+xenial+build1"
 

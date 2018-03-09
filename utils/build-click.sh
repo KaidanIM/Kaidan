@@ -13,7 +13,7 @@ install_deb() {
 	DEB_NAME="${PKG}_${VERSION}_${ARCH}.deb"
 
 	# download deb using curl with a nice progress bar
-	curl --progress-bar ${BASE_URL}/${DEB_NAME} -o "/tmp/${DEB_NAME}"
+	curl -L --progress-bar ${BASE_URL}/${DEB_NAME} -o "/tmp/${DEB_NAME}"
 	# install to click
 	dpkg-deb -x "/tmp/${DEB_NAME}" ${CLICK_TARGET_DIR}
 	# clean up
@@ -21,13 +21,13 @@ install_deb() {
 }
 
 install_dependencies() {
-	KIRIGAMI_VERSION="5.43.0+p16.04+git20180304.0352-0"
+	KIRIGAMI_VERSION="5.43.0-1"
 	QQC2_VERSION="5.9.3-0ubports2"
 	GLOOX_VERSION="1.0.20-1+16.04+xenial+build1"
 
 	echo "Kirigami 2:"
 	for PKG in qml-module-org-kde-kirigami2 kirigami2-dev libkf5kirigami2-5; do
-		install_deb https://archive.neon.kde.org/dev/unstable/pool/main/k/kirigami2 ${PKG} ${KIRIGAMI_VERSION}
+		install_deb https://deb.debian.org/debian/pool/main/k/kirigami2 ${PKG} ${KIRIGAMI_VERSION}
 	done
 
 	echo "QtQuick Controls 2:"
@@ -39,6 +39,11 @@ install_dependencies() {
 	for PKG in libgloox-dev libgloox17; do
 		install_deb http://neon.plasma-mobile.org:8080/pool/main/g/gloox ${PKG} ${GLOOX_VERSION}
 	done
+
+	echo "I: Installing QML modules"
+	mv $CLICK_TARGET_DIR/usr/lib/$DEB_HOST_MULTIARCH/qt5/qml/* $CLICK_TARGET_DIR/usr/lib/$DEB_HOST_MULTIARCH
+	echo "I: Installing libraries"
+	mv $CLICK_TARGET_DIR/usr/* $CLICK_TARGET_DIR/
 }
 
 build_kaidan() {
@@ -47,9 +52,9 @@ build_kaidan() {
 	cmake .. \
 	      -GNinja \
 	      -DCMAKE_MAKE_PROGRAM=/usr/bin/ninja \
-	      -DCMAKE_PREFIX_PATH="${CLICK_TARGET_DIR}/usr" \
-	      -DCMAKE_INSTALL_PREFIX="${CLICK_TARGET_DIR}/usr" \
-	      -DGLOOX_INCLUDE_DIR="${CLICK_TARGET_DIR}/usr/include" \
+	      -DCMAKE_PREFIX_PATH="${CLICK_TARGET_DIR}" \
+	      -DCMAKE_INSTALL_PREFIX="${CLICK_TARGET_DIR}" \
+	      -DGLOOX_INCLUDE_DIR="${CLICK_TARGET_DIR}/include" \
 	      -DI18N=1 \
 	      -DUBUNTU_TOUCH=1 \
 	      -DCLICK_ARCH="${ARCH}"
@@ -60,16 +65,12 @@ build_kaidan() {
 cleanup_click_dir() {
 	# Strip out documentation and includes
 	rm -r \
-		$CLICK_TARGET_DIR/usr/include \
-		$CLICK_TARGET_DIR/usr/share/doc \
-		$CLICK_TARGET_DIR/usr/share/locale \
-		$CLICK_TARGET_DIR/usr/lib/$DEB_HOST_MULTIARCH/cmake \
-		$CLICK_TARGET_DIR/usr/lib/$DEB_HOST_MULTIARCH/pkgconfig \
-		$CLICK_TARGET_DIR/usr/lib/$DEB_HOST_MULTIARCH/qt5/mkspecs
-
-	# Move everything to correct locations for Ubuntu Touch
-	mv $CLICK_TARGET_DIR/usr/lib/$DEB_HOST_MULTIARCH/qt5/qml/* $CLICK_TARGET_DIR/usr/lib/$DEB_HOST_MULTIARCH
-	mv $CLICK_TARGET_DIR/usr/* $CLICK_TARGET_DIR/
+		$CLICK_TARGET_DIR/include \
+		$CLICK_TARGET_DIR/share/doc \
+		$CLICK_TARGET_DIR/share/locale \
+		$CLICK_TARGET_DIR/lib/$DEB_HOST_MULTIARCH/cmake \
+		$CLICK_TARGET_DIR/lib/$DEB_HOST_MULTIARCH/pkgconfig \
+		$CLICK_TARGET_DIR/lib/$DEB_HOST_MULTIARCH/qt5/mkspecs
 }
 
 echo "*****************************************"

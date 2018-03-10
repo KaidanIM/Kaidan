@@ -90,7 +90,7 @@ install_linux-desktop_deps() {
 
 install_osx_deps() {
 	# install dependencies via. Homebrew (cmake is preinstalled)
-	brew install qt gloox ninja ccache
+	brew install qt@5.9 gloox ninja ccache
 }
 
 install_ubuntu-touch_deps() {

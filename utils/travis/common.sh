@@ -104,6 +104,7 @@ install_ubuntu-touch_deps() {
 env_setup() {
 	if [ -f /opt/qt5*/bin/qt5*-env.sh ]; then
 		echo "Setting up custom Qt 5.9 installation..."
+		cat /opt/qt59/bin/qt59-env.sh
 		source /opt/qt59/bin/qt59-env.sh
 	fi
 

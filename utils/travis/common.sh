@@ -5,9 +5,8 @@ if command -v nproc >/dev/null; then
 	export CPUS_USED=$(nproc)
 fi
 
-if [[ ${PLATFORM} == "ubuntu-touch" ]]; then
-	export BUILD_SYSTEM="cmake"
-elif [[ ${PLATFORM} == "" ]]; then
+# Set PLATFORM, if unset
+if [[ ${PLATFORM} == "" ]]; then
 	if [[ ${TRAVIS_OS_NAME} == "osx" ]]; then
 		export PLATFORM="osx"
 	else
@@ -15,11 +14,21 @@ elif [[ ${PLATFORM} == "" ]]; then
 	fi
 fi
 
+# PLATFORM specifics
+if [ ${PLATFORM} == "ubuntu-touch" ]; then
+	export BUILD_SYSTEM="cmake"
+fi
+
+if [[ ${LD} == "" ]]; then
+	export LD=${CC}
+fi
+
 echo_env() {
 	echo "PLATFORM=${PLATFORM}"
 	echo "BUILD_SYSTEM=${BUILD_SYSTEM}"
 	echo "CXX=${CXX}"
 	echo "CC=${CC}"
+	echo "LD=${LD}"
 	echo "CPUS_USED=${CPUS_USED}"
 }
 

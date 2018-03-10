@@ -18,6 +18,8 @@ fi
 echo_env() {
 	echo "PLATFORM=${PLATFORM}"
 	echo "BUILD_SYSTEM=${BUILD_SYSTEM}"
+	echo "CXX=${CXX}"
+	echo "CC=${CC}"
 	echo "CPUS_USED=${CPUS_USED}"
 }
 

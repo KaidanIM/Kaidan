@@ -164,13 +164,13 @@ int main(int argc, char *argv[])
 
 	QQmlApplicationEngine engine;
 
-#ifndef SAILFISH_OS
-	// QtQuickControls2 Style
-	if (qgetenv("QT_QUICK_CONTROLS_STYLE").isEmpty()) {
-		qDebug() << "QT_QUICK_CONTROLS_STYLE not set, setting to Material";
-		qputenv("QT_QUICK_CONTROLS_STYLE", "Material");
-	}
-#endif
+// #ifndef SAILFISH_OS
+// 	// QtQuickControls2 Style
+// 	if (qgetenv("QT_QUICK_CONTROLS_STYLE").isEmpty()) {
+// 		qDebug() << "QT_QUICK_CONTROLS_STYLE not set, setting to Material";
+// 		qputenv("QT_QUICK_CONTROLS_STYLE", "Material");
+// 	}
+// #endif
 
 	// QML type bindings
 #ifdef QMAKE_BUILD

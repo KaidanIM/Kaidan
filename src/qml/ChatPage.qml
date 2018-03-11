@@ -124,6 +124,10 @@ Kirigami.Page {
 					width: 30
 					height: width
 				}
+
+				onClicked: {
+					kaidan.messageTyped()
+				}
 			}
 
 			Controls.TextArea {

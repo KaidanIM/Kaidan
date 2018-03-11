@@ -64,6 +64,7 @@ public:
 
 public slots:
 	void handleConnectionState(ConnectionState state);
+	void handleChatPartner(QString chatPartner);
 
 protected:
 	virtual void handleMessageSession(gloox::MessageSession*);
@@ -74,6 +75,7 @@ private:
 	gloox::Client *client;
 	MessageHandler *messageHandler;
 	ChatStateHandler *chatStateHandler;
+	QString chatPartner;
 
 	QList<gloox::MessageSession*> msgSessions;
 };

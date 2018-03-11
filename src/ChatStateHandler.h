@@ -44,6 +44,7 @@ namespace gloox {
 // Qt
 #include <QObject>
 #include <QMap>
+class QTimer;
 
 using namespace Enums;
 
@@ -81,10 +82,15 @@ public:
 	 */
 	void handleConnectionState(ConnectionState state);
 
+	/**
+	 * Updates the current chat partner and will trigger the
+	 */
+	void setChatPartner(QString &chatPartner);
+
 public slots:
 	/**
 	 * Sets the current chat state with the current chat partner to 'typing'
-	 * 
+	 *
 	 * It'll also start a timer that will turn the state to 'paused', when
 	 * the signal isn't emitted again for some time.
 	 */
@@ -94,6 +100,9 @@ private:
 	ChatStateCache *cache;
 	QMap<gloox::JID, gloox::ChatStateFilter*> filters;
 	QMap<QString, ChatStateType> chatStates;
+	QTimer *timer;
+
+	QString chatPartner;
 };
 
 #endif // CHATSTATEHANDLER_H

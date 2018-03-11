@@ -96,3 +96,9 @@ void MessageSessionHandler::handleConnectionState(ConnectionState state)
 		}
 	}
 }
+
+void MessageSessionHandler::handleChatPartner(QString chatPartner)
+{
+	this->chatPartner = chatPartner;
+	chatStateHandler->setChatPartner(chatPartner);
+}

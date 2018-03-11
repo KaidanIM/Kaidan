@@ -33,15 +33,22 @@
 #include "ChatStateCache.h"
 // Qt
 #include <QDebug>
+#include <QTimer>
 // gloox
 #include <gloox/jid.h>
 #include <gloox/chatstatefilter.h>
+
+/**
+ * Delay after the own chat state is set to online, instead of typing
+ */
+static const unsigned int TYPING_END_DELAY = 8000;
 
 ChatStateHandler::ChatStateHandler(ChatStateCache *cache, QObject *parent)
 	: QObject(parent), cache(cache)
 {
 	filters = QMap<gloox::JID, gloox::ChatStateFilter*>();
 	chatStates = QMap<QString, ChatStateType>();
+	timer = new QTimer();
 }
 
 ChatStateHandler::~ChatStateHandler()
@@ -50,12 +57,16 @@ ChatStateHandler::~ChatStateHandler()
 		removeChatStateFilter(jid);
 }
 
-void ChatStateHandler::handleChatState(const gloox::JID &from, gloox::ChatStateType state)
+void ChatStateHandler::setChatPartner(QString &chatPartner)
 {
-	// update chat state of chat partner
-	cache->setState(QString::fromStdString(from.bare()), (ChatStateType) state);
+	// make offline for the old contact
+	timer->stop();
+	emit timer->timeout();
 
-	qDebug() << "[client] handleChatState:" << QString::fromStdString(from.full()) << state;
+	// update chat partner
+	this->chatPartner = chatPartner;
+
+	
 }
 
 void ChatStateHandler::registerMessageSession(gloox::MessageSession* session)
@@ -75,6 +86,26 @@ void ChatStateHandler::removeChatStateFilter(const gloox::JID &jid)
 	filters.remove(jid);
 }
 
+void ChatStateHandler::handleChatState(const gloox::JID &from, gloox::ChatStateType state)
+{
+	// update chat state of chat partner
+	cache->setState(QString::fromStdString(from.bare()), (ChatStateType) state);
+
+	qDebug() << "[client] handleChatState:" << QString::fromStdString(from.full()) << state;
+}
+
+void ChatStateHandler::handleMessageTyped()
+{
+	qDebug() << QString("[client] Changing own chat state with %1 to 'typing'")
+	            .arg(chatPartner);
+	if (filters.contains(gloox::JID(chatPartner.toStdString()))) {
+		QTimer *timer = new QTimer();
+		
+	} else {
+		
+	}
+}
+
 void ChatStateHandler::handleConnectionState(ConnectionState state)
 {
 	if (state == ConnectionState::StateDisconnected) {
@@ -86,11 +117,4 @@ void ChatStateHandler::handleConnectionState(ConnectionState state)
 		for (gloox::JID &jid : filters.keys())
 			removeChatStateFilter(jid);
 	}
-}
-
-void ChatStateHandler::handleMessageTyped()
-{
-	qDebug() << QString("[client] Changing own chat state with %1 to 'typing'")
-	            .arg("DEINERMUTTER");
-	
 }

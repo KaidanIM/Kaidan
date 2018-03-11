@@ -131,6 +131,8 @@ void ClientThread::run()
 	        rosterManager, &RosterManager::addContact);
 	connect(this, &ClientThread::removeContactRequested,
 	        rosterManager, &RosterManager::removeContact);
+	connect(this, &ClientThread::chatPartnerChanged,
+	        messageSessionHandler, &MessageSessionHandler::handleChatPartner);
 	connect(this, &ClientThread::messageTyped,
 	        messageSessionHandler->getChatStateHandler(), &ChatStateHandler::handleMessageTyped);
 

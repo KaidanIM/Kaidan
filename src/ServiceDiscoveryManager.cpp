@@ -73,6 +73,8 @@ void ServiceDiscoveryManager::onDisconnect(gloox::ConnectionError error)
 
 bool ServiceDiscoveryManager::onTLSConnect(const gloox::CertInfo &info)
 {
+	// accept; real check is made in ClientWorker
+	return true;
 }
 
 void ServiceDiscoveryManager::setFeaturesAndIdentity()
@@ -114,6 +116,8 @@ void ServiceDiscoveryManager::handleDiscoItems(const gloox::JID& from, const glo
 
 bool ServiceDiscoveryManager::handleDiscoSet(const gloox::IQ& iq)
 {
+	// not handled disco set
+	return false;
 }
 
 void ServiceDiscoveryManager::handleDiscoError(const gloox::JID &from, const gloox::Error *error, int context)

@@ -173,6 +173,10 @@
         <source>Connecting…</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Offline</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>RosterRemoveContactSheet</name>

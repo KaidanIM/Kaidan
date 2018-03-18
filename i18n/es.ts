@@ -20,7 +20,7 @@
     <name>AboutSheet</name>
     <message>
         <source>A simple, user-friendly Jabber/XMPP client</source>
-        <translation>Un cliente Jabber/XMPP simple y fácil de usar</translation>
+        <translation type="vanished">Un cliente Jabber/XMPP simple y fácil de usar</translation>
     </message>
     <message>
         <source>License:</source>
@@ -46,7 +46,7 @@
     </message>
     <message>
         <source>Send</source>
-        <translation>Enviar</translation>
+        <translation type="vanished">Enviar</translation>
     </message>
 </context>
 <context>
@@ -125,7 +125,7 @@
     </message>
     <message>
         <source>Retry</source>
-        <translation>Reintentar</translation>
+        <translation type="vanished">Reintentar</translation>
     </message>
     <message>
         <source>Connect</source>
@@ -176,6 +176,10 @@
     <message>
         <source>Connecting…</source>
         <translation>Conectando…</translation>
+    </message>
+    <message>
+        <source>Offline</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

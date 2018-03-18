@@ -200,6 +200,10 @@
         <source>Connecting…</source>
         <translation type="unfinished">Connexion en cours...</translation>
     </message>
+    <message>
+        <source>Offline</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>RosterRemoveContactSheet</name>

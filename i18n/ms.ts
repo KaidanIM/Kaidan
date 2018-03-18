@@ -204,6 +204,10 @@
         <source>Connecting…</source>
         <translation type="unfinished">Menghubungi...</translation>
     </message>
+    <message>
+        <source>Offline</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>RosterRemoveContactSheet</name>

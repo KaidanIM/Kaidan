@@ -5,22 +5,22 @@
     <name>AboutDialog</name>
     <message>
         <source>A simple, user-friendly Jabber/XMPP client</source>
-        <translation type="unfinished">Un cliente Jabber / XMPP simple y fácil de usar</translation>
+        <translation>Un cliente Jabber/XMPP simple y fácil de usar</translation>
     </message>
     <message>
         <source>License:</source>
-        <translation type="unfinished">Licencia:</translation>
+        <translation>Licencia:</translation>
     </message>
     <message>
         <source>Source code on GitHub</source>
-        <translation type="unfinished">Código fuente en GitHub</translation>
+        <translation>Código fuente en GitHub</translation>
     </message>
 </context>
 <context>
     <name>AboutSheet</name>
     <message>
         <source>A simple, user-friendly Jabber/XMPP client</source>
-        <translation type="vanished">Un cliente Jabber / XMPP simple y fácil de usar</translation>
+        <translation>Un cliente Jabber/XMPP simple y fácil de usar</translation>
     </message>
     <message>
         <source>License:</source>
@@ -42,18 +42,18 @@
     <name>ChatPage</name>
     <message>
         <source>Compose message</source>
-        <translation>Crear Mensaje</translation>
+        <translation>Crear mensaje</translation>
     </message>
     <message>
         <source>Send</source>
-        <translation type="vanished">transmitir</translation>
+        <translation>Enviar</translation>
     </message>
 </context>
 <context>
     <name>ContextDrawer</name>
     <message>
         <source>Actions</source>
-        <translation>Actions</translation>
+        <translation>Acciones</translation>
     </message>
 </context>
 <context>
@@ -67,7 +67,7 @@
     <name>GlobalDrawer</name>
     <message>
         <source>Back</source>
-        <translation>Espalda</translation>
+        <translation>Atrás</translation>
     </message>
     <message>
         <source>Log out</source>
@@ -75,22 +75,22 @@
     </message>
     <message>
         <source>About</source>
-        <translation>acerca de</translation>
+        <translation>Acerca de</translation>
     </message>
 </context>
 <context>
     <name>Kaidan</name>
     <message>
         <source>Could not send message, because not being connected.</source>
-        <translation type="unfinished"></translation>
+        <translation>No se pudo enviar el mensaje porque no está conectado.</translation>
     </message>
     <message>
         <source>Could not add contact, because not being connected.</source>
-        <translation type="unfinished"></translation>
+        <translation>No se pudo añadir el contacto porque no está conectado.</translation>
     </message>
     <message>
         <source>Could not remove contact, because not being connected.</source>
-        <translation type="unfinished"></translation>
+        <translation>No se pudo eliminar el contacto porque no está conectado.</translation>
     </message>
 </context>
 <context>
@@ -101,7 +101,7 @@
     </message>
     <message>
         <source>Log in to your XMPP account</source>
-        <translation>Inicie sesión en su cuenta Jabber</translation>
+        <translation>Inicie sesión en su cuenta XMPP</translation>
     </message>
     <message>
         <source>Your Jabber-ID:</source>
@@ -109,11 +109,11 @@
     </message>
     <message>
         <source>Your diaspora*-ID:</source>
-        <translation>Su diáspora * -ID:</translation>
+        <translation>Su diaspora*-ID:</translation>
     </message>
     <message>
         <source>user@example.org</source>
-        <translation>usuario@ejemplo.org</translation>
+        <translation>usuario@example.org</translation>
     </message>
     <message>
         <source>user@diaspora.pod</source>
@@ -121,11 +121,11 @@
     </message>
     <message>
         <source>Your Password:</source>
-        <translation>Su Contraseña:</translation>
+        <translation>Su contraseña:</translation>
     </message>
     <message>
         <source>Retry</source>
-        <translation type="vanished">Rever</translation>
+        <translation>Reintentar</translation>
     </message>
     <message>
         <source>Connect</source>
@@ -133,7 +133,7 @@
     </message>
     <message>
         <source>Connecting…</source>
-        <translation>Conectando...</translation>
+        <translation>Conectando…</translation>
     </message>
 </context>
 <context>
@@ -144,7 +144,7 @@
     </message>
     <message>
         <source>Nickname:</source>
-        <translation>Apodo:</translation>
+        <translation>Alias:</translation>
     </message>
     <message>
         <source>Jabber-ID:</source>
@@ -152,7 +152,7 @@
     </message>
     <message>
         <source>user@example.org</source>
-        <translation>usuario@ejemplo.org</translation>
+        <translation>usuario@example.org</translation>
     </message>
     <message>
         <source>Cancel</source>
@@ -160,7 +160,7 @@
     </message>
     <message>
         <source>Add</source>
-        <translation>añadir</translation>
+        <translation>Añadir</translation>
     </message>
 </context>
 <context>
@@ -175,7 +175,7 @@
     </message>
     <message>
         <source>Connecting…</source>
-        <translation type="unfinished">Conectando...</translation>
+        <translation>Conectando…</translation>
     </message>
 </context>
 <context>
@@ -198,7 +198,7 @@
     </message>
     <message>
         <source>Do you really want to delete the contact &lt;%1&gt; from your roster?</source>
-        <translation type="unfinished"></translation>
+        <translation>¿Realmente desea borrar el contacto &lt;%1&gt; de su lista?</translation>
     </message>
 </context>
 </TS>

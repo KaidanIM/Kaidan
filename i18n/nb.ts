@@ -211,7 +211,7 @@
     </message>
     <message>
         <source>Offline</source>
-        <translation type="unfinished"></translation>
+        <translation>Frakoblet</translation>
     </message>
 </context>
 <context>

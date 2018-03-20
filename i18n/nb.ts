@@ -5,15 +5,15 @@
     <name>AboutDialog</name>
     <message>
         <source>A simple, user-friendly Jabber/XMPP client</source>
-        <translation type="unfinished">En enkel, brukervennlig Jabber/XMPP-klient</translation>
+        <translation>En enkel, brukervennlig XMPP-klient</translation>
     </message>
     <message>
         <source>License:</source>
-        <translation type="unfinished">Lisens:</translation>
+        <translation>Lisens:</translation>
     </message>
     <message>
         <source>Source code on GitHub</source>
-        <translation type="unfinished">Kildekode på GitHub</translation>
+        <translation>Kildekode på GitHub</translation>
     </message>
 </context>
 <context>

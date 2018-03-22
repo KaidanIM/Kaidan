@@ -257,7 +257,7 @@ def main():
 		),
 		CopyrightTarget(
 			files = [
-				"misc/kaidan.svg", "misc/kaidan-128x128.png", "misc/android/res/mipmap-*/icon.png",
+				"misc/kaidan.svg", "misc/kaidan-small-margin.svg", "misc/kaidan-128x128.png",
 				"data/images/fallback-avatar.svg", "data/images/banner.png"
 			],
 			licenseName = "CC-BY-SA-4.0",

@@ -172,35 +172,35 @@
     </message>
     <message>
         <source>Invalid username or password.</source>
-        <translation type="unfinished"></translation>
+        <translation>Falscher Benutzername oder falsches Passwort.</translation>
     </message>
     <message>
         <source>Cannot connect to the server. Please check your internet connection.</source>
-        <translation type="unfinished"></translation>
+        <translation>Konnte nicht zum Server verbinden. Überprüfen Sie Ihre Internetverbindung.</translation>
     </message>
     <message>
         <source>The server doesn&apos;t support secure connections.</source>
-        <translation type="unfinished"></translation>
+        <translation>Dieser Server unterstützt keine sicheren Verbindungen.</translation>
     </message>
     <message>
         <source>Error while trying to connect securely.</source>
-        <translation type="unfinished"></translation>
+        <translation>Fehler bei der Herstellung einer sicheren Verbindung.</translation>
     </message>
     <message>
         <source>Could not resolve the server&apos;s address. Please check your JID again.</source>
-        <translation type="unfinished"></translation>
+        <translation>Konnte den Servernamen nicht auflösen. Bitte überprüfen sie Ihre JID.</translation>
     </message>
     <message>
         <source>Could not connect to the server.</source>
-        <translation type="unfinished"></translation>
+        <translation>Konnte nicht zum Server verbinden.</translation>
     </message>
     <message>
         <source>Authentification protocol not supported by the server.</source>
-        <translation type="unfinished"></translation>
+        <translation>Authentifizierungsprotokolle nicht vom Server unterstützt.</translation>
     </message>
     <message>
         <source>An unknown error occured; see log for details.</source>
-        <translation type="unfinished"></translation>
+        <translation>Ein unbekannter Fehler ist aufgetreten: Sehen Sie die Logdatei für mehr Details ein.</translation>
     </message>
 </context>
 <context>
@@ -250,7 +250,7 @@
     </message>
     <message>
         <source>Offline</source>
-        <translation type="unfinished"></translation>
+        <translation>Offline</translation>
     </message>
 </context>
 <context>

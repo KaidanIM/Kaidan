@@ -196,11 +196,13 @@ Kirigami.Page {
 		} else if (error === Enums.ConnTlsFailed) {
 			passiveNotification(qsTr("Error while trying to connect securely."))
 		} else if (error === Enums.ConnDnsError) {
-			passiveNotification(qsTr("Could not resolve this address. Please check your JID again!"))
+			passiveNotification(qsTr("Could not resolve the server's address. Please check your JID again."))
 		} else if (error === Enums.ConnConnectionRefused) {
 			passiveNotification(qsTr("Could not connect to the server."))
 		} else if (error === Enums.ConnNoSupportedAuth) {
 			passiveNotification(qsTr("Authentification protocol not supported by the server."))
+		} else {
+			passiveNotification(qsTr("An unknown error occured; see log for details."))
 		}
 	}
 

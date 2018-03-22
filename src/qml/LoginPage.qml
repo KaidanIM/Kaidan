@@ -186,11 +186,31 @@ Kirigami.Page {
 		}
 	}
 
+	function handleConnectionError(error) {
+		if (error === Enums.ConnAuthenticationFailed) {
+			passiveNotification(qsTr("Invalid username or password."))
+		} else if (error === Enums.ConnNotConnected) {
+			passiveNotification(qsTr("Cannot connect to the server. Please check your internet connection."))
+		} else if (error === Enums.ConnTlsNotAvailable) {
+			passiveNotification(qsTr("The server doesn't support secure connections."))
+		} else if (error === Enums.ConnTlsFailed) {
+			passiveNotification(qsTr("Error while trying to connect securely."))
+		} else if (error === Enums.ConnDnsError) {
+			passiveNotification(qsTr("Could not resolve this address. Please check your JID again!"))
+		} else if (error === Enums.ConnConnectionRefused) {
+			passiveNotification(qsTr("Could not connect to the server."))
+		} else if (error === Enums.ConnNoSupportedAuth) {
+			passiveNotification(qsTr("Authentification protocol not supported by the server."))
+		}
+	}
+
 	Component.onCompleted: {
 		kaidan.connectionStateChanged.connect(handleConnectionState)
+		kaidan.disconnReasonChanged.connect(handleConnectionError)
 	}
 
 	Component.onDestruction: {
 		kaidan.connectionStateChanged.disconnect(handleConnectionState)
+		kaidan.disconnReasonChanged.disconnect(handleConnectionError)
 	}
 }

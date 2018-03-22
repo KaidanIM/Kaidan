@@ -26,6 +26,8 @@ earlier developer of Kaidan.
 
 Kaidan is *not* finished yet, so don't expect it working as well as a finished client will do.
 
+For a list of supported XEPs, have a look at the [Wiki](https://github.com/KaidanIM/Kaidan/wiki/Supported-XMPP-Extension-Protocols-(XEPs)).
+
 ## Compilation & Installation
 
 * [Debian sid based systems](#debian-sid-based-systems)

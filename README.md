@@ -28,19 +28,18 @@ Kaidan is *not* finished yet, so don't expect it working as well as a finished c
 
 ## Compilation & Installation
 
-* [Debian Stretch based systems](#debian-stretch-based-systems)
+* [Debian sid based systems](#debian-sid-based-systems)
 * [Linux Desktop](#compile-kaidan-for-desktop-linux)
 * [Ubuntu Touch (click package)](#compile-kaidan-for-ubuntu-touch)
 
 
-### Debian Stretch based systems
+### Debian sid based systems
 
-Add our APT repository to your system (currently very outdated, will be fixed soon™)
+Add our APT repository to your system
 
 ```
-sudo apt install apt-transport-https software-properties-common dirmngr gnupg
-sudo apt-add-repository "deb https://raw.githubusercontent.com/kaidanim/packages/master stretch main"
-sudo apt-key adv --recv-key "210EB0BCA70439F0"
+sudo echo "deb https://kaidanim.github.io/packages sid main" > /etc/apt/sources.list.d/kaidan.list
+wget https://kaidanim.github.io/packages/pub.asc -qO - | sudo apt-key add -
 sudo apt update
 ```
 

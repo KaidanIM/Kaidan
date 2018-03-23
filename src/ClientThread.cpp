@@ -40,6 +40,7 @@
 #include "MessageHandler.h"
 #include "VCardManager.h"
 #include "XmlLogHandler.h"
+#include "HttpUploadHandler.h"
 #include "Kaidan.h"
 // Qt
 #include <QDebug>
@@ -52,6 +53,8 @@
 #include <gloox/carbons.h>
 #include <gloox/vcardmanager.h>
 #include <gloox/vcardupdate.h>
+#include "gloox-extensions/httpuploadrequest.h"
+#include "gloox-extensions/httpuploadslot.h"
 
 // package fetch interval in ms
 static const unsigned int KAIDAN_CLIENT_LOOP_INTERVAL = 30;
@@ -109,7 +112,10 @@ void ClientThread::run()
 	vCardManager = new VCardManager(client, avatarStorage, rosterModel);
 	rosterManager = new RosterManager(kaidan, client, rosterModel, vCardManager);
 	presenceHandler = new PresenceHandler(client);
-	serviceDiscoveryManager = new ServiceDiscoveryManager(client, client->disco());
+	httpUploadHandler = new HttpUploadHandler(client);
+	serviceDiscoveryManager = new ServiceDiscoveryManager(
+		client, client->disco(), httpUploadHandler->getUploadManager()
+	);
 	xmlLogHandler = new XmlLogHandler(client);
 
 	// Register Stanza Extensions
@@ -118,6 +124,8 @@ void ClientThread::run()
 	client->registerStanzaExtension(new gloox::Forward());
 	client->registerStanzaExtension(new gloox::Carbons());
 	client->registerStanzaExtension(new gloox::VCardUpdate());
+	client->registerStanzaExtension(new gloox::HttpUploadRequest());
+	client->registerStanzaExtension(new gloox::HttpUploadSlot());
 
 	// connect slots
 	connect(this, &ClientThread::sendMessageRequested,

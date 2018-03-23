@@ -23,7 +23,12 @@ SOURCES += \
     src/ServiceDiscoveryManager.cpp \
     src/VCardManager.cpp \
     src/XmlLogHandler.cpp \
-    src/StatusBar.cpp
+    src/StatusBar.cpp \
+    src/HttpUploadHandler.cpp \
+    src/QtHttpUploader.cpp \
+    src/gloox-extensions/httpuploadmanager.cpp \
+    src/gloox-extensions/httpuploadrequest.cpp \
+    src/gloox-extensions/httpuploadslot.cpp
 
 HEADERS += \
     src/Database.h \
@@ -44,7 +49,14 @@ HEADERS += \
     src/VCardManager.h \
     src/Globals.h \
     src/Enums.h \
-    src/StatusBar.h
+    src/StatusBar.h \
+    src/HttpUploadHandler.h \
+    src/QtHttpUploader.h \
+    src/gloox-extensions/httpuploadmanager.h \
+    src/gloox-extensions/httpuploadrequest.h \
+    src/gloox-extensions/httpuploadslot.h \
+    src/gloox-extensions/httpuploadhandler.h \
+    src/gloox-extensions/httpuploader.h
 
 android: INCLUDEPATH += $$PWD/3rdparty/gloox/include
 android: LIBS += -L$$PWD/3rdparty/gloox/lib/

@@ -33,6 +33,8 @@
 //
 
 #include "ServiceDiscoveryManager.h"
+// Std
+#include <stdexcept>
 // Qt
 #include <QString>
 #include <QDebug>
@@ -41,14 +43,16 @@
 #include <gloox/client.h>
 #include <gloox/disco.h>
 #include <gloox/carbons.h>
+#include "gloox-extensions/httpuploadmanager.h"
 // Kaidan
 #include "Globals.h"
 
-ServiceDiscoveryManager::ServiceDiscoveryManager(gloox::Client *client, gloox::Disco *disco)
-{
-	this->disco = disco;
-	this->client = client;
+static const unsigned int DISCO_SERVER_ITEM_INFO = 10001;
 
+ServiceDiscoveryManager::ServiceDiscoveryManager(gloox::Client *client, gloox::Disco *disco,
+	gloox::HttpUploadManager *httpUploadManager) : client(client), disco(disco),
+	httpUploadManager(httpUploadManager)
+{
 	// register as disco handler
 	disco->registerDiscoHandler(this);
 	// register as connection listener
@@ -63,8 +67,9 @@ ServiceDiscoveryManager::~ServiceDiscoveryManager()
 
 void ServiceDiscoveryManager::onConnect()
 {
-	// request the disco info from the server
+	// request disco info & items from the server
 	disco->getDiscoInfo(gloox::JID(client->server()), std::string(), this, 0);
+	disco->getDiscoItems(gloox::JID(client->server()), std::string(), this, 0);
 }
 
 void ServiceDiscoveryManager::onDisconnect(gloox::ConnectionError error)
@@ -103,15 +108,39 @@ void ServiceDiscoveryManager::handleDiscoInfo(const gloox::JID& from, const gloo
 	if (from.bare() == client->server()) {
 		// XEP-0280: Message Carbons
 		if (info.hasFeature(gloox::XMLNS_MESSAGE_CARBONS)) {
+			// send IQ to server to enable message carbons
 			gloox::IQ iq(gloox::IQ::Set, gloox::JID(), client->getID());
 			iq.addExtension(new gloox::Carbons(gloox::Carbons::Enable));
 			client->send(iq);
 		}
 	}
+
+	if (context == DISCO_SERVER_ITEM_INFO) {
+		for (gloox::Disco::Identity *identity : info.identities()) {
+			// check identity for file storage
+			if (identity->category() == "store" && identity->type() == "file") {
+				httpUploadManager->tryAddFileStoreService(from, info);
+				// break out of for loop to not add one service multiple times
+				break;
+			}
+		}
+	}
 }
 
-void ServiceDiscoveryManager::handleDiscoItems(const gloox::JID& from, const gloox::Disco::Items& items, int context)
+void ServiceDiscoveryManager::handleDiscoItems(const gloox::JID& from,
+                                               const gloox::Disco::Items& items,
+                                               int context)
 {
+	if (from.bare() == client->server()) {
+		// get all disco items of the server and check their disco info
+		for (gloox::Disco::Item *item : items.items()) {
+			// don't rerequest info of server
+			if (item->jid().bare() == client->server())
+				continue;
+
+			disco->getDiscoInfo(item->jid(), std::string(), this, DISCO_SERVER_ITEM_INFO);
+		}
+	}
 }
 
 bool ServiceDiscoveryManager::handleDiscoSet(const gloox::IQ& iq)
@@ -120,8 +149,11 @@ bool ServiceDiscoveryManager::handleDiscoSet(const gloox::IQ& iq)
 	return false;
 }
 
-void ServiceDiscoveryManager::handleDiscoError(const gloox::JID &from, const gloox::Error *error, int context)
+void ServiceDiscoveryManager::handleDiscoError(const gloox::JID &from,
+                                               const gloox::Error *error,
+                                               int context)
 {
-	qWarning() << "[ServiceDiscoveryManager] Error occured with"
-			   << QString::fromStdString(from.full()) << "in context" << context;
+	qWarning() << "[client] [disco] Error occured with"
+	           << QString::fromStdString(from.full()) << "in context" << context;
 }
+

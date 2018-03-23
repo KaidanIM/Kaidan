@@ -96,7 +96,11 @@ int main(int argc, char *argv[])
 	//
 
 	// create a qt app
+#if HAVE_QWIDGETS
 	QApplication app(argc, argv);
+#else
+	QGuiApplication app(argc, argv);
+#endif
 
 	// name, display name, description
 	QGuiApplication::setApplicationName(APPLICATION_NAME);

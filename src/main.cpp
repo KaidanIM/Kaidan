@@ -32,7 +32,11 @@
 #include <QCommandLineParser>
 #include <QCommandLineOption>
 #include <QDebug>
+#if HAVE_QWIDGETS
+#include <QApplication>
+#else
 #include <QGuiApplication>
+#endif
 #include <QLocale>
 #include <qqml.h>
 #include <QQmlApplicationEngine>
@@ -92,7 +96,7 @@ int main(int argc, char *argv[])
 	//
 
 	// create a qt app
-	QGuiApplication app(argc, argv);
+	QApplication app(argc, argv);
 
 	// name, display name, description
 	QGuiApplication::setApplicationName(APPLICATION_NAME);

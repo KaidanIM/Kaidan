@@ -51,6 +51,7 @@ class MessageSessionHandler;
 class MessageModel;
 class AvatarFileStorage;
 class PresenceHandler;
+class HttpUploadHandler;
 class ServiceDiscoveryManager;
 class VCardManager;
 class XmlLogHandler;
@@ -241,6 +242,7 @@ private:
 	ClientWorker *worker;
 	RosterManager *rosterManager;
 	MessageSessionHandler *messageSessionHandler;
+	HttpUploadHandler *httpUploadHandler;
 	PresenceHandler *presenceHandler;
 	ServiceDiscoveryManager *serviceDiscoveryManager;
 	VCardManager *vCardManager;

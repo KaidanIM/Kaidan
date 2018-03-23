@@ -52,6 +52,7 @@ class MessageModel;
 class AvatarFileStorage;
 class PresenceCache;
 class PresenceHandler;
+class HttpUploadHandler;
 class ServiceDiscoveryManager;
 class VCardManager;
 class XmlLogHandler;
@@ -250,6 +251,7 @@ private:
 	RosterManager *rosterManager;
 	MessageSessionHandler *messageSessionHandler;
 	PresenceCache *presenceCache;
+	HttpUploadHandler *httpUploadHandler;
 	PresenceHandler *presenceHandler;
 	ServiceDiscoveryManager *serviceDiscoveryManager;
 	VCardManager *vCardManager;

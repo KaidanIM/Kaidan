@@ -18,9 +18,11 @@ set(KAIDAN_SOURCES
 	${CURDIR}/PresenceCache.cpp
 	${CURDIR}/PresenceHandler.cpp
 	${CURDIR}/ServiceDiscoveryManager.cpp
+	${CURDIR}/HttpUploadHandler.cpp
 	${CURDIR}/VCardManager.cpp
 	${CURDIR}/XmlLogHandler.cpp
 	${CURDIR}/StatusBar.cpp
+	${CURDIR}/QtHttpUploader.cpp
 
 	# SingleApplication
 	${CURDIR}/singleapp/singleapplication.cpp
@@ -28,4 +30,9 @@ set(KAIDAN_SOURCES
 
 	# needed to trigger moc generation
 	${CURDIR}/Enums.h
+
+	# kaidan gloox extensions (need to be merged into gloox upstream)
+	${CURDIR}/gloox-extensions/httpuploadmanager.cpp
+	${CURDIR}/gloox-extensions/httpuploadrequest.cpp
+	${CURDIR}/gloox-extensions/httpuploadslot.cpp
 )

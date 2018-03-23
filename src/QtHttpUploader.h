@@ -1,7 +1,7 @@
 /*
  *  Kaidan - A user-friendly XMPP client for every device!
  *
- *  Copyright (C) 2017-2018 Kaidan developers and contributors
+ *  Copyright (C) 2018 Kaidan developers and contributors
  *  (see the LICENSE file for a full list of copyright authors)
  *
  *  Kaidan is free software: you can redistribute it and/or modify
@@ -28,44 +28,53 @@
  *  along with Kaidan.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-//
-// XEP-0030: Service Discovery | https://xmpp.org/extensions/xep-0030.html
-//
+#ifndef QTHTTPUPLOADER_H
+#define QTHTTPUPLOADER_H
 
-#ifndef SERVICEDISCOVERYMANAGER_H
-#define SERVICEDISCOVERYMANAGER_H
+#include <string.h>
+#include "gloox-extensions/httpuploader.h"
+#include <QObject>
 
-// gloox
-#include <gloox/discohandler.h>
-#include <gloox/connectionlistener.h>
-namespace gloox {
-	class Client;
-	class Disco;
-	class HttpUploadManager;
-}
-
-class ServiceDiscoveryManager : public gloox::DiscoHandler, public gloox::ConnectionListener
+/**
+ * @todo write docs
+ */
+class QtHttpUploader : public QObject, public gloox::HttpUploader
 {
+	Q_OBJECT
+
 public:
-	ServiceDiscoveryManager(gloox::Client *client, gloox::Disco *disco,
-	                        gloox::HttpUploadManager *httpUploadManager);
-	~ServiceDiscoveryManager();
+	/**
+	 * Will register this uploader to the HttpUploadManager
+	 *
+	 * @param manager The HttpUploadManager this uploader will be used with
+	 */
+	QtHttpUploader(gloox::HttpUploadManager *manager, QObject *parent = nullptr);
 
-	void setFeaturesAndIdentity();
+	~QtHttpUploader();
 
-	void handleDiscoInfo(const gloox::JID &from, const gloox::Disco::Info &info, int context);
-	void handleDiscoItems(const gloox::JID &from, const gloox::Disco::Items &items, int context);
-	void handleDiscoError(const gloox::JID &from, const gloox::Error *error, int context);
-	bool handleDiscoSet(const gloox::IQ &iq);
+	/**
+	 * @return True, if currently uploading a file
+	 */
+	virtual bool busy();
 
-	virtual void onConnect();
-	virtual void onDisconnect(gloox::ConnectionError error);
-	virtual bool onTLSConnect(const gloox::CertInfo &info);
+	/**
+	 * It does supports parallel uploads
+	 */
+	virtual bool supportsParallel()
+	{
+		return true;
+	}
+
+	/**
+	 * @see gloox::HttpUploader::uploadFile
+	 */
+	virtual void uploadFile(int id, std::string putUrl,
+	                        gloox::HeaderFieldMap putHeaders,
+	                        std::string localPath);
 
 private:
-	gloox::Client *client;
-	gloox::Disco *disco;
-	gloox::HttpUploadManager *httpUploadManager;
+	gloox::HttpUploadManager *manager;
+	unsigned int runningTasks = 0;
 };
 
-#endif // SERVICEDISCOVERYMANAGER_H
+#endif // QTHTTPUPLOADER_H

@@ -1,7 +1,7 @@
 /*
  *  Kaidan - A user-friendly XMPP client for every device!
  *
- *  Copyright (C) 2017-2018 Kaidan developers and contributors
+ *  Copyright (C) 2018 Kaidan developers and contributors
  *  (see the LICENSE file for a full list of copyright authors)
  *
  *  Kaidan is free software: you can redistribute it and/or modify
@@ -28,44 +28,43 @@
  *  along with Kaidan.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-//
-// XEP-0030: Service Discovery | https://xmpp.org/extensions/xep-0030.html
-//
+#include "HttpUploadHandler.h"
+#include "QtHttpUploader.h"
+#include "gloox-extensions/httpuploadmanager.h"
 
-#ifndef SERVICEDISCOVERYMANAGER_H
-#define SERVICEDISCOVERYMANAGER_H
+HttpUploadHandler::HttpUploadHandler(gloox::Client *client, QObject *parent)
+	: QObject(parent), client(client)
+{
+	manager = new gloox::HttpUploadManager(client);
+	uploader = new QtHttpUploader(manager);
 
-// gloox
-#include <gloox/discohandler.h>
-#include <gloox/connectionlistener.h>
-namespace gloox {
-	class Client;
-	class Disco;
-	class HttpUploadManager;
+	manager->registerHttpUploadHandler(this);
 }
 
-class ServiceDiscoveryManager : public gloox::DiscoHandler, public gloox::ConnectionListener
+void HttpUploadHandler::handleUploadFailed(int id, gloox::HttpUploadError error,
+                                           const std::string &text,
+                                           const std::string &stamp)
 {
-public:
-	ServiceDiscoveryManager(gloox::Client *client, gloox::Disco *disco,
-	                        gloox::HttpUploadManager *httpUploadManager);
-	~ServiceDiscoveryManager();
+}
 
-	void setFeaturesAndIdentity();
+void HttpUploadHandler::handleUploadFinished(int id, std::string &getUrl)
+{
+}
 
-	void handleDiscoInfo(const gloox::JID &from, const gloox::Disco::Info &info, int context);
-	void handleDiscoItems(const gloox::JID &from, const gloox::Disco::Items &items, int context);
-	void handleDiscoError(const gloox::JID &from, const gloox::Error *error, int context);
-	bool handleDiscoSet(const gloox::IQ &iq);
+void HttpUploadHandler::handleUploadProcess(int id, long unsigned int sent,
+                                            long unsigned int total)
+{
+}
 
-	virtual void onConnect();
-	virtual void onDisconnect(gloox::ConnectionError error);
-	virtual bool onTLSConnect(const gloox::CertInfo &info);
+void HttpUploadHandler::handleUploadServiceRemoved(const gloox::JID &jid)
+{
+}
 
-private:
-	gloox::Client *client;
-	gloox::Disco *disco;
-	gloox::HttpUploadManager *httpUploadManager;
-};
+void HttpUploadHandler::handleUploadServiceAdded(const gloox::JID &jid,
+                                                 unsigned long maxFileSize)
+{
+}
 
-#endif // SERVICEDISCOVERYMANAGER_H
+void HttpUploadHandler::handleFileSizeLimitChanged(unsigned long maxFileSize)
+{
+}

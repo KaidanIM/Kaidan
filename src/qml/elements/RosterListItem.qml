@@ -58,6 +58,7 @@ Kirigami.SwipeListItem {
 		// right side
 		ColumnLayout {
 			spacing: Kirigami.Units.smallSpacing
+			Layout.fillWidth: true
 
 			// contact name
 			Kirigami.Heading {
@@ -87,11 +88,6 @@ Kirigami.SwipeListItem {
 
 			Layout.preferredHeight: Kirigami.Units.gridUnit * 1.25
 			Layout.preferredWidth: Kirigami.Units.gridUnit * 1.25
-		}
-
-		// placeholder
-		Item {
-			width: Kirigami.Units.gridUnit * 2.5
 		}
 	}
 }

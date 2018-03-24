@@ -82,15 +82,27 @@
     <name>Kaidan</name>
     <message>
         <source>Could not send message, because not being connected.</source>
-        <translation>No se pudo enviar el mensaje porque no está conectado.</translation>
+        <translation type="vanished">No se pudo enviar el mensaje porque no está conectado.</translation>
     </message>
     <message>
         <source>Could not add contact, because not being connected.</source>
-        <translation>No se pudo añadir el contacto porque no está conectado.</translation>
+        <translation type="vanished">No se pudo añadir el contacto porque no está conectado.</translation>
     </message>
     <message>
         <source>Could not remove contact, because not being connected.</source>
-        <translation>No se pudo eliminar el contacto porque no está conectado.</translation>
+        <translation type="vanished">No se pudo eliminar el contacto porque no está conectado.</translation>
+    </message>
+    <message>
+        <source>Could not send message, as a result of not being connected.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Could not add contact, as a result of not being connected.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Could not remove contact, as a result of not being connected.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -235,6 +247,13 @@
     <message>
         <source>Do you really want to delete the contact &lt;%1&gt; from your roster?</source>
         <translation>¿Realmente desea borrar el contacto &lt;%1&gt; de su lista?</translation>
+    </message>
+</context>
+<context>
+    <name>ToolBarApplicationHeader</name>
+    <message>
+        <source>More Actions</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 </TS>

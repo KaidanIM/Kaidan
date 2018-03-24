@@ -62,15 +62,15 @@
 <context>
     <name>Kaidan</name>
     <message>
-        <source>Could not send message, because not being connected.</source>
+        <source>Could not send message, as a result of not being connected.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Could not add contact, because not being connected.</source>
+        <source>Could not add contact, as a result of not being connected.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Could not remove contact, because not being connected.</source>
+        <source>Could not remove contact, as a result of not being connected.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -207,6 +207,13 @@
     </message>
     <message>
         <source>Delete</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>ToolBarApplicationHeader</name>
+    <message>
+        <source>More Actions</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

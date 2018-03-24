@@ -81,28 +81,16 @@
 <context>
     <name>Kaidan</name>
     <message>
-        <source>Could not send message, because not being connected.</source>
-        <translation type="obsolete">Kunne ikke sende melding, som følge av manglende tilkobling.</translation>
-    </message>
-    <message>
-        <source>Could not add contact, because not being connected.</source>
-        <translation type="obsolete">Kunne ikke legge til kontakt, som følge av manglende tilkobling.</translation>
-    </message>
-    <message>
-        <source>Could not remove contact, because not being connected.</source>
-        <translation type="obsolete">Kunne ikke fjerne kontakt, som følge av manglende tilkobling.</translation>
-    </message>
-    <message>
         <source>Could not send message, as a result of not being connected.</source>
-        <translation type="unfinished"></translation>
+        <translation>Kunne ikke sende melding, som følge av manglende tilkobling.</translation>
     </message>
     <message>
         <source>Could not add contact, as a result of not being connected.</source>
-        <translation type="unfinished"></translation>
+        <translation>Kunne ikke legge til kontakt, som følge av manglende tilkobling.</translation>
     </message>
     <message>
         <source>Could not remove contact, as a result of not being connected.</source>
-        <translation type="unfinished"></translation>
+        <translation>Kunne ikke fjerne kontakt, som følge av manglende tilkobling.</translation>
     </message>
 </context>
 <context>
@@ -149,35 +137,35 @@
     </message>
     <message>
         <source>Invalid username or password.</source>
-        <translation type="unfinished"></translation>
+        <translation>Ugyldig brukernavn eller passord.</translation>
     </message>
     <message>
         <source>Cannot connect to the server. Please check your internet connection.</source>
-        <translation type="unfinished"></translation>
+        <translation>Kan ikke koble til tjeneren. Sjekk din internettilknytning.</translation>
     </message>
     <message>
         <source>The server doesn&apos;t support secure connections.</source>
-        <translation type="unfinished"></translation>
+        <translation>Tjeneren støtter ikke sikre tilkoblinger.</translation>
     </message>
     <message>
         <source>Error while trying to connect securely.</source>
-        <translation type="unfinished"></translation>
+        <translation>Feil under forsøk på sikker tilkobling.</translation>
     </message>
     <message>
         <source>Could not resolve the server&apos;s address. Please check your JID again.</source>
-        <translation type="unfinished"></translation>
+        <translation>Kunne ikke fortolke tjenerens adresse. Sjekk din JID igjen.</translation>
     </message>
     <message>
         <source>Could not connect to the server.</source>
-        <translation type="unfinished"></translation>
+        <translation>Kunne ikke koble til tjeneren.</translation>
     </message>
     <message>
         <source>Authentification protocol not supported by the server.</source>
-        <translation type="unfinished"></translation>
+        <translation>Identitetsbekreftelsesprotokollen støttes ikke av tjeneren.</translation>
     </message>
     <message>
         <source>An unknown error occured; see log for details.</source>
-        <translation type="unfinished"></translation>
+        <translation>En ukjent feil inntraff; sjekk loggen for detaljer.</translation>
     </message>
 </context>
 <context>
@@ -219,7 +207,7 @@
     </message>
     <message>
         <source>Connecting…</source>
-        <translation type="unfinished">Kobler til…</translation>
+        <translation>Kobler til…</translation>
     </message>
     <message>
         <source>Offline</source>

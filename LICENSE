@@ -5,8 +5,9 @@
 Files: src/*
 Copyright: 2016-2018, LNJ <git@lnj.li>
            2016-2018, JBB <jbb.prv@gmx.de>
-           2017-2018, Ilya Bizyaev <bizyaev@zoho.com>
            2018, Allan Nordhøy <epost@anotheragency.no>
+           2017-2018, Ilya Bizyaev <bizyaev@zoho.com>
+           2018, Marco Martin <notmart@gmail.com>
            2016, Marzanna <MRZA-MRZA@users.noreply.github.com>
 License: GPL-3+ with OpenSSL exception
 
@@ -16,8 +17,8 @@ Copyright: 2017-2018, LNJ <git@lnj.li>
            2018, Allan Nordhøy <epost@anotheragency.no>
            2017-2018, Joeke de Graaf <mappack@null.net>
            2017, Ilya Bizyaev <bizyaev@zoho.com>
-           2017, ZatroxDE <zatroxde@outlook.com>
            2018, advocatux <advocatux@airpost.net>
+           2017, ZatroxDE <zatroxde@outlook.com>
            2018, Andreas Kleinert <Andy.Kleinert@gmail.com>
            2017, Emmanuel Gil Peyrot <linkmauve@linkmauve.fr>
            2017, Muhammad Nur Hidayat Yasuyoshi (MNH48.com) <muhdnurhidayat96@yahoo.com>

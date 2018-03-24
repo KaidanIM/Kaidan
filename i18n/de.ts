@@ -113,15 +113,27 @@
     <name>Kaidan</name>
     <message>
         <source>Could not send message, because not being connected.</source>
-        <translation>Die Nachricht konnte nicht gesendet werden, da Sie nicht verbunden sind.</translation>
+        <translation type="vanished">Die Nachricht konnte nicht gesendet werden, da Sie nicht verbunden sind.</translation>
     </message>
     <message>
         <source>Could not add contact, because not being connected.</source>
-        <translation>Der Kontakt konnte nicht hinzugefügt werden, da Sie nicht verbunden sind.</translation>
+        <translation type="vanished">Der Kontakt konnte nicht hinzugefügt werden, da Sie nicht verbunden sind.</translation>
     </message>
     <message>
         <source>Could not remove contact, because not being connected.</source>
-        <translation>Der Kontakt konnte nicht entfernt werden, da Sie nicht verbunden sind.</translation>
+        <translation type="vanished">Der Kontakt konnte nicht entfernt werden, da Sie nicht verbunden sind.</translation>
+    </message>
+    <message>
+        <source>Could not send message, as a result of not being connected.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Could not add contact, as a result of not being connected.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Could not remove contact, as a result of not being connected.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -270,6 +282,13 @@
     <message>
         <source>Do you really want to delete the contact &lt;%1&gt; from your roster?</source>
         <translation>Möchten Sie wirklich &lt;%1&gt; aus Ihrer Kontaktliste entfernen?</translation>
+    </message>
+</context>
+<context>
+    <name>ToolBarApplicationHeader</name>
+    <message>
+        <source>More Actions</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

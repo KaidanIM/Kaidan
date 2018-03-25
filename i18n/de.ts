@@ -125,15 +125,15 @@
     </message>
     <message>
         <source>Could not send message, as a result of not being connected.</source>
-        <translation type="unfinished"></translation>
+        <translation>Konnte Nachricht nicht versenden, da Sie nicht verbunden sind.</translation>
     </message>
     <message>
         <source>Could not add contact, as a result of not being connected.</source>
-        <translation type="unfinished"></translation>
+        <translation>Konnte den Kontakt nicht hinzufügen, da Sie nicht verbunden sind.</translation>
     </message>
     <message>
         <source>Could not remove contact, as a result of not being connected.</source>
-        <translation type="unfinished"></translation>
+        <translation>Konnte den Kontakt nicht entfernen, da Sie nicht verbunden sind.</translation>
     </message>
 </context>
 <context>
@@ -172,7 +172,7 @@
     </message>
     <message>
         <source>Log in to your XMPP account</source>
-        <translation>Anmelden mit deinem Jabber Account</translation>
+        <translation>Anmelden mit deinem XMPP Account</translation>
     </message>
     <message>
         <source>Your diaspora*-ID:</source>
@@ -285,33 +285,33 @@
     </message>
     <message>
         <source>Do you really want to delete the contact &lt;b&gt;%1&lt;/b&gt; from your roster?</source>
-        <translation type="unfinished"></translation>
+        <translation>Möchten Sie wirklich den Kontakt &lt;b&gt;%1&lt;/b&gt; von Ihrer Kontaktliste entfernen?</translation>
     </message>
 </context>
 <context>
     <name>SubRequestAcceptSheet</name>
     <message>
         <source>Subscription Request</source>
-        <translation type="unfinished"></translation>
+        <translation>Abonnement-Anfrage</translation>
     </message>
     <message>
         <source>You received a subscription request by &lt;b&gt;%1&lt;/b&gt;. If you accept it, the account will have access to your presence status.</source>
-        <translation type="unfinished"></translation>
+        <translation>Sie haben eine Abonnement-Anfrage von &lt;b&gt;%1&lt;/b&gt; erhalten. Wenn sie diese akzeptieren, hat dieser Account zugriff auf Ihren Präsenzstatus.</translation>
     </message>
     <message>
         <source>Decline</source>
-        <translation type="unfinished"></translation>
+        <translation>Ablehnen</translation>
     </message>
     <message>
         <source>Accept</source>
-        <translation type="unfinished"></translation>
+        <translation>Annehmen</translation>
     </message>
 </context>
 <context>
     <name>ToolBarApplicationHeader</name>
     <message>
         <source>More Actions</source>
-        <translation type="unfinished"></translation>
+        <translation>Mehr Aktionen</translation>
     </message>
 </context>
 <context>

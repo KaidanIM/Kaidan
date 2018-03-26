@@ -34,9 +34,8 @@
 // Qt
 #include <QObject>
 #include <QString>
-// gloox
-#include <gloox/connectionlistener.h>
 // Kaidan
+#include "ChatStateCache.h"
 #include "ClientThread.h"
 #include "Globals.h"
 #include "Enums.h"
@@ -67,6 +66,7 @@ class Kaidan : public QObject
 	Q_PROPERTY(RosterModel* rosterModel READ getRosterModel NOTIFY rosterModelChanged)
 	Q_PROPERTY(MessageModel* messageModel READ getMessageModel NOTIFY messageModelChanged)
 	Q_PROPERTY(AvatarFileStorage* avatarStorage READ getAvatarStorage NOTIFY avatarStorageChanged)
+	Q_PROPERTY(ChatStateCache* chatStates READ getChatStateCache NOTIFY chatStateCacheChanged)
 	Q_PROPERTY(quint8 connectionState READ getConnectionState NOTIFY connectionStateChanged)
 	Q_PROPERTY(quint8 disconnReason READ getDisconnReason NOTIFY disconnReasonChanged)
 	Q_PROPERTY(QString jid READ getJid WRITE setJid NOTIFY jidChanged)
@@ -252,10 +252,19 @@ public:
 		return avatarStorage;
 	}
 
+	/**
+	 * Get the chat state cache
+	 */
+	ChatStateCache* getChatStateCache() const
+	{
+		return chatStateCache;
+	}
+
 signals:
 	void rosterModelChanged();
 	void messageModelChanged();
 	void avatarStorageChanged();
+	void chatStateCacheChanged();
 
 	/**
 	 * Emitted, when the client's connection state has changed (e.g. when
@@ -308,6 +317,11 @@ signals:
 	 */
 	void passiveNotificationRequested(QString text);
 
+	/**
+	 * Emitted, when the user types in a message (a char was added/deleted)
+	 */
+	void messageTyped();
+
 private:
 	void connectDatabases();
 
@@ -317,6 +331,7 @@ private:
 	RosterManager *rosterManager;
 	MessageModel *messageModel;
 	AvatarFileStorage *avatarStorage;
+	ChatStateCache *chatStateCache;
 	QSettings *settings;
 
 	ClientThread::Credentials creds;

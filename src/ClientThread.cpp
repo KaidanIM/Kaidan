@@ -32,6 +32,8 @@
 // Kaidan
 #include "ClientWorker.h"
 #include "AvatarFileStorage.h"
+#include "ChatStateCache.h"
+#include "ChatStateHandler.h"
 #include "RosterManager.h"
 #include "PresenceHandler.h"
 #include "ServiceDiscoveryManager.h"
@@ -57,11 +59,11 @@ static const unsigned int KAIDAN_CLIENT_LOOP_INTERVAL = 30;
 
 ClientThread::ClientThread(RosterModel *rosterModel, MessageModel *messageModel,
                            AvatarFileStorage *avatarStorage, Credentials creds,
-                           QSettings *settings, QGuiApplication *app, QObject *parent):
-                           QThread(parent), rosterModel(rosterModel),
-                           messageModel(messageModel), avatarStorage(avatarStorage),
-                           creds(creds), settings(settings),
-                           connState(ConnectionState::StateNone)
+                           ChatStateCache *chatStateCache, QSettings *settings,
+                           QGuiApplication *app, QObject *parent)
+	: QThread(parent), rosterModel(rosterModel), messageModel(messageModel),
+	avatarStorage(avatarStorage), creds(creds), chatStateCache(chatStateCache),
+	settings(settings), connState(ConnectionState::StateNone)
 {
 	// Set custom thread name
 	setObjectName("XmppClient");
@@ -78,6 +80,7 @@ ClientThread::ClientThread(RosterModel *rosterModel, MessageModel *messageModel,
 
 	// The constructor is executed in the main thread, so we still need to move
 	// all QObject-based objects to the client thread.
+	chatStateCache->moveToThread(this);
 	worker->moveToThread(this);
 	workTimer.moveToThread(this);
 }
@@ -104,7 +107,8 @@ void ClientThread::run()
 	//
 
 	// components
-	messageSessionHandler = new MessageSessionHandler(client, messageModel, rosterModel);
+	messageSessionHandler = new MessageSessionHandler(client, messageModel,
+	                                                  rosterModel, chatStateCache);
 	vCardManager = new VCardManager(client, avatarStorage, rosterModel);
 	rosterManager = new RosterManager(client, rosterModel, vCardManager);
 	presenceHandler = new PresenceHandler(client);
@@ -127,6 +131,10 @@ void ClientThread::run()
 	        rosterManager, &RosterManager::addContact);
 	connect(this, &ClientThread::removeContactRequested,
 	        rosterManager, &RosterManager::removeContact);
+	connect(this, &ClientThread::chatPartnerChanged,
+	        messageSessionHandler, &MessageSessionHandler::handleChatPartner);
+	connect(this, &ClientThread::messageTyped,
+	        messageSessionHandler->getChatStateHandler(), &ChatStateHandler::handleMessageTyped);
 
 	// timed fetching of packages
 	connect(&workTimer, &QTimer::timeout, worker, &ClientWorker::updateClient);

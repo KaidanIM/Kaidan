@@ -49,6 +49,7 @@ class RosterModel;
 class MessageSessionHandler;
 class MessageModel;
 class AvatarFileStorage;
+class ChatStateCache;
 class PresenceHandler;
 class ServiceDiscoveryManager;
 class VCardManager;
@@ -106,8 +107,8 @@ public:
 	 */
 	ClientThread(RosterModel *rosterModel, MessageModel *messageModel,
 	             AvatarFileStorage *avatarStorage, Credentials creds,
-	             QSettings *settings, QGuiApplication *app,
-	             QObject *parent = nullptr);
+	             ChatStateCache *chatStateCache, QSettings *settings,
+	             QGuiApplication *app, QObject *parent = nullptr);
 
 	/*
 	 * Will exit the event loop and waits until thread finishes and then
@@ -214,6 +215,11 @@ signals:
 	 */
 	void chatPartnerChanged(QString chatPartner);
 
+	/**
+	 * Emitted, when the user types in a message (a char was added/deleted)
+	 */
+	void messageTyped();
+
 private:
 	/**
 	 * Emits the signal for a given connection state.
@@ -233,6 +239,7 @@ private:
 	RosterModel *rosterModel;
 	MessageModel *messageModel;
 	AvatarFileStorage *avatarStorage;
+	ChatStateCache *chatStateCache;
 	Credentials creds;
 
 	GlooxClient *client;

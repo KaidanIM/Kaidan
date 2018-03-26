@@ -48,6 +48,7 @@
 #include "RosterModel.h"
 #include "MessageModel.h"
 #include "AvatarFileStorage.h"
+#include "ChatStateCache.h"
 #include "Globals.h"
 #include "Enums.h"
 #include "StatusBar.h"
@@ -114,6 +115,7 @@ int main(int argc, char *argv[])
 	qRegisterMetaType<RosterModel*>("RosterModel*");
 	qRegisterMetaType<MessageModel*>("MessageModel*");
 	qRegisterMetaType<AvatarFileStorage*>("AvatarFileStorage*");
+	qRegisterMetaType<ChatStateCache*>("ChatStateCache*");
 	qRegisterMetaType<ContactMap>("ContactMap");
 	qRegisterMetaType<Qt::ApplicationState>("Qt::ApplicationState");
 	qmlRegisterUncreatableMetaObject(Enums::staticMetaObject, APPLICATION_ID,
@@ -170,13 +172,13 @@ int main(int argc, char *argv[])
 
 	QQmlApplicationEngine engine;
 
-#ifndef SAILFISH_OS
-	// QtQuickControls2 Style
-	if (qgetenv("QT_QUICK_CONTROLS_STYLE").isEmpty()) {
-		qDebug() << "QT_QUICK_CONTROLS_STYLE not set, setting to Material";
-		qputenv("QT_QUICK_CONTROLS_STYLE", "Material");
-	}
-#endif
+// #ifndef SAILFISH_OS
+// 	// QtQuickControls2 Style
+// 	if (qgetenv("QT_QUICK_CONTROLS_STYLE").isEmpty()) {
+// 		qDebug() << "QT_QUICK_CONTROLS_STYLE not set, setting to Material";
+// 		qputenv("QT_QUICK_CONTROLS_STYLE", "Material");
+// 	}
+// #endif
 
 #ifdef UBUNTU_TOUCH
        qputenv("QT_AUTO_SCREEN_SCALE_FACTOR", "true");

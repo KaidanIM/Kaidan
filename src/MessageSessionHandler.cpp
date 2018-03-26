@@ -30,26 +30,75 @@
 
 #include "MessageSessionHandler.h"
 #include "MessageHandler.h"
+#include "ChatStateHandler.h"
+// gloox
+#include <gloox/chatstatefilter.h>
 
 MessageSessionHandler::MessageSessionHandler(gloox::Client *client,
-	MessageModel *messageModel, RosterModel *rosterModel) : client(client),
-	messageModel(messageModel)
+                                             MessageModel *messageModel,
+                                             RosterModel *rosterModel,
+                                             ChatStateCache *chatStateCache,
+                                             QObject *parent)
+	: QObject(parent), client(client)
 {
 	client->registerMessageSessionHandler(this);
 	messageHandler = new MessageHandler(client, messageModel, rosterModel);
+	chatStateHandler = new ChatStateHandler(chatStateCache);
+
+	msgSessions = QList<gloox::MessageSession*>();
 }
 
 MessageSessionHandler::~MessageSessionHandler()
 {
 	delete messageHandler;
-}
-
-void MessageSessionHandler::handleMessageSession(gloox::MessageSession *session)
-{
-	session->registerMessageHandler(messageHandler);
+	delete chatStateHandler;
 }
 
 MessageHandler* MessageSessionHandler::getMessageHandler()
 {
 	return messageHandler;
+}
+
+ChatStateHandler* MessageSessionHandler::getChatStateHandler()
+{
+	return chatStateHandler;
+}
+
+void MessageSessionHandler::handleMessageSession(gloox::MessageSession *session)
+{
+	// close old message sessions with this JID
+	disposeMessageSessions(session->target().bareJID());
+	// save new session
+	msgSessions << session;
+
+	session->registerMessageHandler(messageHandler);
+	chatStateHandler->registerMessageSession(session);
+}
+
+void MessageSessionHandler::disposeMessageSessions(const gloox::JID &jid)
+{
+	for (gloox::MessageSession *session : msgSessions) {
+		if (session->target().bareJID() == jid.bareJID()) {
+			msgSessions.removeOne(session);
+			client->disposeMessageSession(session);
+		}
+	}
+}
+
+void MessageSessionHandler::handleConnectionState(ConnectionState state)
+{
+	chatStateHandler->handleConnectionState(state);
+
+	if (state == ConnectionState::StateDisconnected) {
+		for (gloox::MessageSession *session : msgSessions) {
+			msgSessions.removeOne(session);
+			client->disposeMessageSession(session);
+		}
+	}
+}
+
+void MessageSessionHandler::handleChatPartner(QString chatPartner)
+{
+	this->chatPartner = chatPartner;
+	chatStateHandler->setChatPartner(chatPartner);
 }

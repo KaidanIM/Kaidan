@@ -1,7 +1,7 @@
 /*
  *  Kaidan - A user-friendly XMPP client for every device!
  *
- *  Copyright (C) 2017-2018 Kaidan developers and contributors
+ *  Copyright (C) 2018 Kaidan developers and contributors
  *  (see the LICENSE file for a full list of copyright authors)
  *
  *  Kaidan is free software: you can redistribute it and/or modify
@@ -28,56 +28,49 @@
  *  along with Kaidan.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef MESSAGESESSIONHANDLER_H
-#define MESSAGESESSIONHANDLER_H
+#ifndef CHATSTATECACHE_H
+#define CHATSTATECACHE_H
 
-// Qt
-#include <QList>
-// gloox
-#include <gloox/messagesessionhandler.h>
-namespace gloox {
-	class Client;
-	class MessageSession;
-}
-// Kaidan
+#include <QObject>
+#include <QMap>
 #include "Enums.h"
-class MessageHandler;
+
 class ChatStateHandler;
-class ChatStateCache;
-class MessageModel;
-class RosterModel;
 
 using namespace Enums;
 
-class MessageSessionHandler : public QObject, public gloox::MessageSessionHandler
+/**
+ * @class ChatStateCache Class that will cache chat states and deploy them to QML
+ */
+class ChatStateCache : public QObject
 {
 	Q_OBJECT
+	friend ChatStateHandler;
 
 public:
-	MessageSessionHandler(gloox::Client *client, MessageModel *messageModel,
-	                      RosterModel *rosterModel, ChatStateCache *chatStateCache,
-	                      QObject *parent = nullptr);
-	~MessageSessionHandler();
+	ChatStateCache(QObject *parent = nullptr);
+	~ChatStateCache();
 
-	MessageHandler* getMessageHandler();
-	ChatStateHandler* getChatStateHandler();
+	/**
+	 * Get the current chat state of a JID
+	 * 
+	 * @param jid The chat partner's JID
+	 * @return The ChatStateType, is ChatStateType::ChatStateInvalid, if no information
+	 *         present.
+	 */
+	Q_INVOKABLE quint8 getState(QString jid);
 
-public slots:
-	void handleConnectionState(ConnectionState state);
-	void handleChatPartner(QString chatPartner);
-
-protected:
-	virtual void handleMessageSession(gloox::MessageSession*);
+signals:
+	/**
+	 * Emitted, when one of the chat's states has changed
+	 */
+	void chatStatesChanged();
 
 private:
-	void disposeMessageSessions(const gloox::JID &jid);
+	void setState(QString jid, ChatStateType state);
+	void clearStates();
 
-	gloox::Client *client;
-	MessageHandler *messageHandler;
-	ChatStateHandler *chatStateHandler;
-	QString chatPartner;
-
-	QList<gloox::MessageSession*> msgSessions;
+	QMap<QString, ChatStateType> chatStates;
 };
 
-#endif // MESSAGESESSIONHANDLER_H
+#endif // CHATSTATECACHE_H

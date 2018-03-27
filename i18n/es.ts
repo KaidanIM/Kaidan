@@ -94,15 +94,15 @@
     </message>
     <message>
         <source>Could not send message, as a result of not being connected.</source>
-        <translation type="unfinished"></translation>
+        <translation>No se pudo enviar el mensaje debido a que no está conectado.</translation>
     </message>
     <message>
         <source>Could not add contact, as a result of not being connected.</source>
-        <translation type="unfinished"></translation>
+        <translation>No se pudo añadir el contacto debido a que no está conectado.</translation>
     </message>
     <message>
         <source>Could not remove contact, as a result of not being connected.</source>
-        <translation type="unfinished"></translation>
+        <translation>No se pudo eliminar el contacto debido a que no está conectado.</translation>
     </message>
 </context>
 <context>
@@ -276,7 +276,7 @@
     <name>ToolBarApplicationHeader</name>
     <message>
         <source>More Actions</source>
-        <translation type="unfinished"></translation>
+        <translation>Más acciones</translation>
     </message>
 </context>
 </TS>

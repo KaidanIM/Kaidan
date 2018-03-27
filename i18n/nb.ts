@@ -264,7 +264,7 @@
     <name>ToolBarApplicationHeader</name>
     <message>
         <source>More Actions</source>
-        <translation type="unfinished"></translation>
+        <translation>Flere handlinger</translation>
     </message>
 </context>
 </TS>

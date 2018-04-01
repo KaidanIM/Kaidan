@@ -40,7 +40,7 @@ For a list of supported XEPs, have a look at the [Wiki](https://github.com/Kaida
 Add our APT repository to your system
 
 ```
-sudo echo "deb https://kaidanim.github.io/packages sid main" > /etc/apt/sources.list.d/kaidan.list
+sudo echo "deb http://www.kaidan.im/packages sid main" > /etc/apt/sources.list.d/kaidan.list
 wget https://kaidanim.github.io/packages/pub.asc -qO - | sudo apt-key add -
 sudo apt update
 ```

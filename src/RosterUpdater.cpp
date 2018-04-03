@@ -109,8 +109,10 @@ bool RosterUpdater::handleSubscriptionRequest(const gloox::JID& jid, const std::
 {
 	qDebug() << "[RosterUpdater] Automatically accepting arrived subscription request from"
 	         << QString::fromStdString(jid.full());
-	// automatically accept the subscription request
-	return true;
+	// TODO: Ask user to accept
+
+	// do not automatically accept the subscription request
+	return false;
 }
 
 bool RosterUpdater::handleUnsubscriptionRequest(const gloox::JID& jid,
@@ -118,7 +120,7 @@ bool RosterUpdater::handleUnsubscriptionRequest(const gloox::JID& jid,
 {
 	qDebug() << "[RosterUpdater]" << QString::fromStdString(jid.full())
 	         << "has unsubscribed from your presence; also unsubscribing from its presence";
-	// automatically also unsubscribing from the contact
+	// automatically also unsubscribe from the contact
 	return true;
 }
 

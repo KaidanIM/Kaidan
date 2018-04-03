@@ -54,7 +54,7 @@ public:
 	~RosterManager();
 
 public slots:
-	void addContact(const QString jid, const QString name);
+	void addContact(const QString jid, const QString name, const QString msg);
 	void removeContact(const QString jid);
 
 private:

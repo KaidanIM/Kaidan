@@ -125,7 +125,7 @@ public:
 	 * @param nick A simple nick name for the new contact, which should be
 	 *             used to display in the roster.
 	 */
-	Q_INVOKABLE void addContact(QString jid, QString nick);
+	Q_INVOKABLE void addContact(QString jid, QString nick, QString msg);
 
 	/**
 	 * Remove a contact from your roster

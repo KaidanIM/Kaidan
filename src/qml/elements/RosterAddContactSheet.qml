@@ -28,15 +28,37 @@
  *  along with Kaidan.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-import QtQuick 2.0
+import QtQuick 2.7
 import QtQuick.Controls 2.0 as Controls
-import QtQuick.Layouts 1.2
+import QtQuick.Layouts 1.3
 import org.kde.kirigami 2.0 as Kirigami
 
 Kirigami.OverlaySheet {
 	ColumnLayout {
+		Layout.fillWidth: true
+
 		Kirigami.Heading {
-			text: qsTr("Add new contact") + "          "
+			text: qsTr("Add new contact")
+			Layout.fillWidth: true
+		}
+
+		Controls.Label {
+			text: qsTr("This will also send a request to access the " +
+			           "presence of the contact.")
+			textFormat: Text.PlainText
+			wrapMode: Text.WordWrap
+			Layout.fillWidth: true
+			bottomPadding: 10
+		}
+
+		Controls.Label {
+			text: qsTr("Jabber-ID:")
+		}
+		Controls.TextField {
+			id: jidField
+			placeholderText: qsTr("user@example.org")
+			inputMethodHints: Qt.ImhEmailCharactersOnly | Qt.ImhPreferLowercase
+			selectByMouse: true
 			Layout.fillWidth: true
 		}
 
@@ -50,13 +72,17 @@ Kirigami.OverlaySheet {
 		}
 
 		Controls.Label {
-			text: qsTr("Jabber-ID:")
-		}
-		Controls.TextField {
-			id: jidField
-			placeholderText: qsTr("user@example.org")
-			selectByMouse: true
+			text: qsTr("Optional message:")
+			textFormat: Text.PlainText
 			Layout.fillWidth: true
+		}
+		Controls.TextArea {
+			id: msgField
+			Layout.fillWidth: true
+			Layout.minimumHeight: Kirigami.Units.gridUnit * 4
+			placeholderText: qsTr("Tell your chat partner who you are.")
+			wrapMode: Controls.TextArea.Wrap
+			selectByMouse: true
 		}
 
 		RowLayout {
@@ -65,27 +91,29 @@ Kirigami.OverlaySheet {
 			Controls.Button {
 				text: qsTr("Cancel")
 				onClicked: {
-					clearInput();
-					close();
+					clearInput()
+					close()
 				}
 				Layout.fillWidth: true
 			}
 
 			Controls.Button {
+				id: addButton
 				text: qsTr("Add")
-				enabled: jidField.length > 0
+				enabled: jidField.length >= 3 && jidField.contains("@")
 				onClicked: {
-					kaidan.addContact(jidField.text, nickField.text);
-					clearInput();
-					close();
+					kaidan.addContact(jidField.text, nickField.text, msgField.text)
+					clearInput()
+					close()
 				}
 				Layout.fillWidth: true
 			}
 		}
 	}
-	
+
 	function clearInput() {
 		jidField.text = "";
 		nickField.text = "";
+		msgField.text = "";
 	}
 }

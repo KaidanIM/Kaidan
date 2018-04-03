@@ -2,12 +2,12 @@
 	<qresource prefix="/">
 		<file alias="qml/main.qml">src/qml/main.qml</file>
 		<file alias="qml/RosterPage.qml">src/qml/RosterPage.qml</file>
-		<file alias="qml/RosterAddContactSheet.qml">src/qml/RosterAddContactSheet.qml</file>
-		<file alias="qml/RosterRemoveContactSheet.qml">src/qml/RosterRemoveContactSheet.qml</file>
 		<file alias="qml/LoginPage.qml">src/qml/LoginPage.qml</file>
 		<file alias="qml/ChatPage.qml">src/qml/ChatPage.qml</file>
 		<file alias="qml/AboutDialog.qml">src/qml/AboutDialog.qml</file>
 		<file alias="qml/GlobalDrawer.qml">src/qml/GlobalDrawer.qml</file>
+		<file alias="qml/elements/RosterAddContactSheet.qml">src/qml/elements/RosterAddContactSheet.qml</file>
+		<file alias="qml/elements/RosterRemoveContactSheet.qml">src/qml/elements/RosterRemoveContactSheet.qml</file>
 		<file alias="qml/elements/RosterListItem.qml">src/qml/elements/RosterListItem.qml</file>
 		<file alias="qml/elements/MessageCounter.qml">src/qml/elements/MessageCounter.qml</file>
 		<file alias="qml/elements/ChatMessage.qml">src/qml/elements/ChatMessage.qml</file>

@@ -187,7 +187,7 @@ signals:
 	/**
 	 * Emit to add a new contact to the roster.
 	 */
-	void addContactRequested(QString jid, QString name);
+	void addContactRequested(QString jid, QString name, QString msg);
 
 	/**
 	 * Emit to remove a contact from the roster.

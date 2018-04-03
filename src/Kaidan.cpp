@@ -194,10 +194,10 @@ void Kaidan::sendMessage(QString jid, QString message)
 	}
 }
 
-void Kaidan::addContact(QString jid, QString nick)
+void Kaidan::addContact(QString jid, QString nick, QString msg)
 {
 	if (client->isConnected()) {
-		emit client->addContactRequested(jid, nick);
+		emit client->addContactRequested(jid, nick, msg);
 	} else {
 		emit passiveNotificationRequested(tr("Could not add contact, as a result of not being connected."));
 		qWarning() << "[main] Could not add contact, as a result of not being connected.";

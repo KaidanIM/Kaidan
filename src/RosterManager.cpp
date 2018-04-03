@@ -51,7 +51,7 @@ void RosterManager::addContact(const QString jid, const QString nick)
 {
 	// don't set any groups
 	gloox::StringList groups;
-	rosterManager->add(jid.toStdString(), nick.toStdString(), groups);
+	rosterManager->subscribe(jid.toStdString(), nick.toStdString(), groups);
 }
 
 void RosterManager::removeContact(const QString jid)

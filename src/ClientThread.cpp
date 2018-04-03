@@ -40,6 +40,7 @@
 #include "MessageHandler.h"
 #include "VCardManager.h"
 #include "XmlLogHandler.h"
+#include "Kaidan.h"
 // Qt
 #include <QDebug>
 #include <QMutexLocker>
@@ -127,6 +128,9 @@ void ClientThread::run()
 	        rosterManager, &RosterManager::addContact);
 	connect(this, &ClientThread::removeContactRequested,
 	        rosterManager, &RosterManager::removeContact);
+	connect(kaidan, &Kaidan::vCardRequested, [=](QString jid) {
+		vCardManager->fetchVCard(jid);
+	});
 
 	// timed fetching of packages
 	connect(&workTimer, &QTimer::timeout, worker, &ClientWorker::updateClient);

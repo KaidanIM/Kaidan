@@ -246,7 +246,30 @@
     </message>
     <message>
         <source>Do you really want to delete the contact &lt;%1&gt; from your roster?</source>
-        <translation>¿Realmente desea borrar el contacto &lt;%1&gt; de su lista?</translation>
+        <translation type="vanished">¿Realmente desea borrar el contacto &lt;%1&gt; de su lista?</translation>
+    </message>
+    <message>
+        <source>Do you really want to delete the contact &lt;b&gt;%1&lt;/b&gt; from your roster?</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>SubRequestAcceptSheet</name>
+    <message>
+        <source>Subscription Request</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>You received a subscription request by &lt;b&gt;%1&lt;/b&gt;. If you accept it, the account will have access to your presence status.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Decline</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Accept</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

@@ -21,7 +21,7 @@ install_deb() {
 }
 
 install_dependencies() {
-	KIRIGAMI_VERSION="5.43.0-1"
+	KIRIGAMI_VERSION="5.44.0-2"
 	QQC2_VERSION="5.9.3-0ubports2"
 	GLOOX_VERSION="1.0.20-1+16.04+xenial+build1"
 

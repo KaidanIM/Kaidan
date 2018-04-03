@@ -6,6 +6,7 @@
 		<file alias="qml/ChatPage.qml">src/qml/ChatPage.qml</file>
 		<file alias="qml/AboutDialog.qml">src/qml/AboutDialog.qml</file>
 		<file alias="qml/GlobalDrawer.qml">src/qml/GlobalDrawer.qml</file>
+		<file alias="qml/elements/SubRequestAcceptSheet.qml">src/qml/elements/SubRequestAcceptSheet.qml</file>
 		<file alias="qml/elements/RosterAddContactSheet.qml">src/qml/elements/RosterAddContactSheet.qml</file>
 		<file alias="qml/elements/RosterRemoveContactSheet.qml">src/qml/elements/RosterRemoveContactSheet.qml</file>
 		<file alias="qml/elements/RosterListItem.qml">src/qml/elements/RosterListItem.qml</file>

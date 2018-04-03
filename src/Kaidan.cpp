@@ -82,7 +82,7 @@ Kaidan::Kaidan(QGuiApplication *app, QObject *parent) : QObject(parent)
 
 	// create new client and start thread's main loop (won't connect until requested)
 	client = new ClientThread(rosterModel, messageModel, avatarStorage, creds,
-	                          settings, app);
+	                          settings, this, app);
 	client->start();
 
 	connect(client, &ClientThread::connectionStateChanged, [=](ConnectionState state) {

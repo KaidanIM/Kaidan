@@ -57,11 +57,11 @@ static const unsigned int KAIDAN_CLIENT_LOOP_INTERVAL = 30;
 
 ClientThread::ClientThread(RosterModel *rosterModel, MessageModel *messageModel,
                            AvatarFileStorage *avatarStorage, Credentials creds,
-                           QSettings *settings, QGuiApplication *app, QObject *parent):
-                           QThread(parent), rosterModel(rosterModel),
-                           messageModel(messageModel), avatarStorage(avatarStorage),
-                           creds(creds), settings(settings),
-                           connState(ConnectionState::StateNone)
+                           QSettings *settings, Kaidan *kaidan,
+                           QGuiApplication *app, QObject *parent)
+	: QThread(parent), rosterModel(rosterModel), messageModel(messageModel),
+	avatarStorage(avatarStorage), creds(creds), settings(settings),
+	connState(ConnectionState::StateNone), kaidan(kaidan)
 {
 	// Set custom thread name
 	setObjectName("XmppClient");
@@ -106,7 +106,7 @@ void ClientThread::run()
 	// components
 	messageSessionHandler = new MessageSessionHandler(client, messageModel, rosterModel);
 	vCardManager = new VCardManager(client, avatarStorage, rosterModel);
-	rosterManager = new RosterManager(client, rosterModel, vCardManager);
+	rosterManager = new RosterManager(kaidan, client, rosterModel, vCardManager);
 	presenceHandler = new PresenceHandler(client);
 	serviceDiscoveryManager = new ServiceDiscoveryManager(client, client->disco());
 	xmlLogHandler = new XmlLogHandler(client);

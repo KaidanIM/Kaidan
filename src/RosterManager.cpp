@@ -29,15 +29,18 @@
  */
 
 #include "RosterManager.h"
+#include "Kaidan.h"
 
-RosterManager::RosterManager(gloox::Client *client, RosterModel* rosterModel,
-                             VCardManager *vCardManager, QObject *parent) : QObject(parent)
+RosterManager::RosterManager(Kaidan *kaidan, gloox::Client *client,
+                             RosterModel* rosterModel, VCardManager *vCardManager,
+                             QObject *parent)
+	: QObject(parent), rosterModel(rosterModel)
 {
-	this->rosterModel = rosterModel;
 	rosterManager = client->rosterManager();
 
 	// register the roster updater as roster listener (asynchronous sub handling)
-	rosterUpdater = new RosterUpdater(rosterModel, rosterManager, vCardManager);
+	rosterUpdater = new RosterUpdater(kaidan, rosterModel, rosterManager,
+	                                  vCardManager);
 	rosterManager->registerRosterListener(rosterUpdater, false);
 }
 

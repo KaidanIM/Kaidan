@@ -43,6 +43,7 @@
 namespace gloox {
 	class Client;
 }
+class Kaidan;
 class ClientWorker;
 class RosterManager;
 class RosterModel;
@@ -106,7 +107,7 @@ public:
 	 */
 	ClientThread(RosterModel *rosterModel, MessageModel *messageModel,
 	             AvatarFileStorage *avatarStorage, Credentials creds,
-	             QSettings *settings, QGuiApplication *app,
+	             QSettings *settings, Kaidan *kaidan, QGuiApplication *app,
 	             QObject *parent = nullptr);
 
 	/*
@@ -235,6 +236,7 @@ private:
 	AvatarFileStorage *avatarStorage;
 	Credentials creds;
 
+	Kaidan *kaidan;
 	GlooxClient *client;
 	ClientWorker *worker;
 	RosterManager *rosterManager;

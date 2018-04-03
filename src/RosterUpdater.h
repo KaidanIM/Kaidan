@@ -41,13 +41,16 @@
 #include "RosterModel.h"
 #include "VCardManager.h"
 
+class Kaidan;
+
 class RosterUpdater : public QObject, public gloox::RosterListener
 {
 	Q_OBJECT
 
 public:
-	RosterUpdater(RosterModel* rosterModel, gloox::RosterManager *rosterManager,
-	              VCardManager *vCardManager, QObject *parent = nullptr);
+	RosterUpdater(Kaidan *kaidan, RosterModel* rosterModel,
+	              gloox::RosterManager *rosterManager, VCardManager *vCardManager,
+	              QObject *parent = nullptr);
 	~RosterUpdater();
 
 	// gloox::RosterListener
@@ -66,7 +69,11 @@ public:
 	virtual void handleNonrosterPresence(const gloox::Presence& presence);
 	virtual void handleRosterError(const gloox::IQ& iq);
 
+private slots:
+	void handleSubscriptionAnswer(QString jid, bool accepted);
+
 private:
+	Kaidan *kaidan;
 	RosterModel *rosterModel;
 	gloox::RosterManager *rosterManager;
 	VCardManager *vCardManager;

@@ -36,9 +36,9 @@ RosterManager::RosterManager(gloox::Client *client, RosterModel* rosterModel,
 	this->rosterModel = rosterModel;
 	rosterManager = client->rosterManager();
 
-	// register the roster updater as roster listener
+	// register the roster updater as roster listener (asynchronous sub handling)
 	rosterUpdater = new RosterUpdater(rosterModel, rosterManager, vCardManager);
-	rosterManager->registerRosterListener(rosterUpdater);
+	rosterManager->registerRosterListener(rosterUpdater, false);
 }
 
 RosterManager::~RosterManager()

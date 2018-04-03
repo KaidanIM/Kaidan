@@ -97,21 +97,22 @@ void RosterUpdater::handleSelfPresence(const gloox::RosterItem& item,
 {
 }
 
-void RosterUpdater::handleItemSubscribed(const gloox::JID& jid)
+void RosterUpdater::handleItemSubscribed(const gloox::JID &jid)
 {
 }
 
-void RosterUpdater::handleItemUnsubscribed(const gloox::JID& jid)
+void RosterUpdater::handleItemUnsubscribed(const gloox::JID &jid)
 {
 }
 
 bool RosterUpdater::handleSubscriptionRequest(const gloox::JID& jid, const std::string& msg)
 {
-	qDebug() << "[RosterUpdater] Automatically accepting arrived subscription request from"
+	qDebug() << "[RosterUpdater] Subscription request arrived from"
 	         << QString::fromStdString(jid.full());
+
 	// TODO: Ask user to accept
 
-	// do not automatically accept the subscription request
+	// return value is ignored, because we're using asynchronous subscription handling
 	return false;
 }
 
@@ -120,7 +121,10 @@ bool RosterUpdater::handleUnsubscriptionRequest(const gloox::JID& jid,
 {
 	qDebug() << "[RosterUpdater]" << QString::fromStdString(jid.full())
 	         << "has unsubscribed from your presence; also unsubscribing from its presence";
-	// automatically also unsubscribe from the contact
+
+	rosterManager->unsubscribe(jid);
+
+	// return value is ignored, because we're using asynchronous subscription handling
 	return true;
 }
 

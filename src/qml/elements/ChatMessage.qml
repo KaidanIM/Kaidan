@@ -36,10 +36,10 @@ import QtQuick.Layouts 1.3
 RowLayout {
 	id: root
 	property bool sentByMe: true
-	property string messageBody: ""
-	property date dateTime: new Date()
+	property string messageBody;
+	property date dateTime;
 	property bool isRead: false
-	property string recipientAvatarUrl: ""
+	property string recipientAvatarUrl;
 
 	spacing: Kirigami.Units.gridUnit * 0.5
 	layoutDirection: sentByMe ? Qt.RightToLeft : Qt.LeftToRight
@@ -103,6 +103,7 @@ RowLayout {
 
 				Controls.Label {
 					id: dateLabel
+					visible: date
 					height: implicitHeight
 					text: Qt.formatDateTime(dateTime, "dd MMM, hh:mm")
 					color: sentByMe ? "grey" : "#e0e0e0"

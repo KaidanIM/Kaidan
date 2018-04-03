@@ -28,11 +28,12 @@
  *  along with Kaidan.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-import QtQuick 2.6
+import QtQuick 2.7
 import QtQuick.Controls.Material 2.0
-import org.kde.kirigami 2.0 as Kirigami
+import org.kde.kirigami 2.3 as Kirigami
 import StatusBar 0.1
 import io.github.kaidanim 1.0
+import "elements"
 
 Kirigami.ApplicationWindow {
 	id: root
@@ -59,6 +60,10 @@ Kirigami.ApplicationWindow {
 		focus: true
 		x: (parent.width - width) / 2
 		y: (parent.height - height) / 2
+	}
+
+	SubRequestAcceptSheet {
+		id: subReqAcceptSheet
 	}
 
 	// when the window was closed, disconnect from jabber server
@@ -96,14 +101,31 @@ Kirigami.ApplicationWindow {
 		pageStack.replace(rosterPage)
 	}
 
+	function handleSubRequest(from, message) {
+		kaidan.vCardRequested(from)
+	
+		subReqAcceptSheet.from = from
+		subReqAcceptSheet.message = message
+
+		subReqAcceptSheet.open()
+	}
+
 	Component.onCompleted: {
 		kaidan.passiveNotificationRequested.connect(passiveNotification)
 		kaidan.newCredentialsNeeded.connect(openLogInPage)
 		kaidan.logInWorked.connect(closeLogInPage)
+		kaidan.subscriptionRequestReceived.connect(handleSubRequest)
 
 		// push roster page (trying normal start up)
 		pageStack.push(rosterPage)
 		// Annouce that we're ready and the back-end can start with connecting
 		kaidan.start()
+	}
+
+	Component.onDestruction: {
+		kaidan.passiveNotificationRequested.disconnect(passiveNotification)
+		kaidan.newCredentialsNeeded.disconnect(openLogInPage)
+		kaidan.logInWorked.disconnect(closeLogInPage)
+		kaidan.subscriptionRequestReceived.disconnect(handleSubRequest)
 	}
 }

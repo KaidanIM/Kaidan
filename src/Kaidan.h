@@ -308,6 +308,16 @@ signals:
 	 */
 	void passiveNotificationRequested(QString text);
 
+	/**
+	 * Emitted, whan a subscription request was received
+	 */
+	void subscriptionRequestReceived(QString from, QString msg);
+
+	/**
+	 * Incoming subscription request was accepted or declined by the user
+	 */
+	void subscriptionRequestAnswered(QString jid, bool accepted);
+
 private:
 	void connectDatabases();
 

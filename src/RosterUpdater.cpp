@@ -31,6 +31,7 @@
 // Kaidan
 #include "RosterUpdater.h"
 #include "RosterModel.h"
+#include "Kaidan.h"
 // Std
 #include <iostream>
 #include <string.h>
@@ -38,11 +39,14 @@
 #include <QDateTime>
 #include <QDebug>
 
-RosterUpdater::RosterUpdater(RosterModel *rosterModel, gloox::RosterManager *rosterManager,
-                             VCardManager *vCardManager, QObject *parent):
-                             QObject(parent), rosterModel(rosterModel),
-                             rosterManager(rosterManager), vCardManager(vCardManager)
+RosterUpdater::RosterUpdater(Kaidan *kaidan, RosterModel *rosterModel,
+                             gloox::RosterManager *rosterManager,
+                             VCardManager *vCardManager, QObject *parent)
+	: QObject(parent), kaidan(kaidan), rosterModel(rosterModel),
+	rosterManager(rosterManager), vCardManager(vCardManager)
 {
+	connect(kaidan, &Kaidan::subscriptionRequestAnswered,
+	        this, &RosterUpdater::handleSubscriptionAnswer);
 }
 
 RosterUpdater::~RosterUpdater()
@@ -110,10 +114,19 @@ bool RosterUpdater::handleSubscriptionRequest(const gloox::JID& jid, const std::
 	qDebug() << "[RosterUpdater] Subscription request arrived from"
 	         << QString::fromStdString(jid.full());
 
-	// TODO: Ask user to accept
+	// emit signal to ask user
+	emit kaidan->subscriptionRequestReceived(
+		QString::fromStdString(jid.bare()), QString::fromStdString(msg)
+	);
 
 	// return value is ignored, because we're using asynchronous subscription handling
-	return false;
+	return true;
+}
+
+void RosterUpdater::handleSubscriptionAnswer(QString jid, bool accepted)
+{
+	// send reply to subscription request
+	rosterManager->ackSubscriptionRequest(gloox::JID(jid.toStdString()), accepted);
 }
 
 bool RosterUpdater::handleUnsubscriptionRequest(const gloox::JID& jid,
@@ -122,6 +135,7 @@ bool RosterUpdater::handleUnsubscriptionRequest(const gloox::JID& jid,
 	qDebug() << "[RosterUpdater]" << QString::fromStdString(jid.full())
 	         << "has unsubscribed from your presence; also unsubscribing from its presence";
 
+	// also unsubscribe from other end
 	rosterManager->unsubscribe(jid);
 
 	// return value is ignored, because we're using asynchronous subscription handling

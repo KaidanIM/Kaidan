@@ -41,13 +41,16 @@
 #include "RosterUpdater.h"
 #include "VCardManager.h"
 
+class Kaidan;
+
 class RosterManager : public QObject
 {
 	Q_OBJECT
 
 public:
-	RosterManager(gloox::Client *client, RosterModel *rosterModel,
-	              VCardManager *vCardManager, QObject *parent = nullptr);
+	RosterManager(Kaidan *kaidan, gloox::Client *client,
+	              RosterModel *rosterModel, VCardManager *vCardManager,
+	              QObject *parent = nullptr);
 	~RosterManager();
 
 public slots:

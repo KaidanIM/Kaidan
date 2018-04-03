@@ -318,6 +318,14 @@ signals:
 	 */
 	void subscriptionRequestAnswered(QString jid, bool accepted);
 
+	/**
+	 * Request VCard of any JID
+	 *
+	 * Is required when the avatar (or other information) of a JID are
+	 * requested and the JID is not in the roster.
+	 */
+	void vCardRequested(QString jid);
+
 private:
 	void connectDatabases();
 

@@ -217,6 +217,18 @@
         <source>Add new contact</source>
         <translation>Ajouter un nouveau contact</translation>
     </message>
+    <message>
+        <source>This will also send a request to access the presence of the contact.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Optional message:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Tell your chat partner who you are.</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>RosterPage</name>

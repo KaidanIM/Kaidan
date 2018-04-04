@@ -74,6 +74,9 @@ void RosterUpdater::handleItemAdded(const gloox::JID &jid)
 	gloox::RosterItem *item = rosterManager->getRosterItem(jid);
 	emit rosterModel->insertContactRequested(QString::fromStdString(jid.bare()),
 	                                         QString::fromStdString(item->name()));
+
+	// fetch VCard of the new contact
+	vCardManager->fetchVCard(QString::fromStdString(jid.bare()));
 }
 
 void RosterUpdater::handleItemRemoved(const gloox::JID &jid)

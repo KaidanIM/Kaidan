@@ -247,15 +247,15 @@
     </message>
     <message>
         <source>This will also send a request to access the presence of the contact.</source>
-        <translation type="unfinished"></translation>
+        <translation>Dies wird auch eine Abonnement-Anfrage senden, um die Präsenz des Kontakts zu empfangen.</translation>
     </message>
     <message>
         <source>Optional message:</source>
-        <translation type="unfinished"></translation>
+        <translation>Optionale Nachricht:</translation>
     </message>
     <message>
         <source>Tell your chat partner who you are.</source>
-        <translation type="unfinished"></translation>
+        <translation>Sagen Sie Ihrem Kontakt, wer Sie sind.</translation>
     </message>
 </context>
 <context>

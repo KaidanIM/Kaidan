@@ -208,15 +208,15 @@
     </message>
     <message>
         <source>This will also send a request to access the presence of the contact.</source>
-        <translation type="unfinished"></translation>
+        <translation>Esto también enviará una solicitud para acceder a la presencia del contacto.</translation>
     </message>
     <message>
         <source>Optional message:</source>
-        <translation type="unfinished"></translation>
+        <translation>Mensaje opcional:</translation>
     </message>
     <message>
         <source>Tell your chat partner who you are.</source>
-        <translation type="unfinished"></translation>
+        <translation>Dígale a su compañero de conversación quien es.</translation>
     </message>
 </context>
 <context>

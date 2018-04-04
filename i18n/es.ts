@@ -250,26 +250,26 @@
     </message>
     <message>
         <source>Do you really want to delete the contact &lt;b&gt;%1&lt;/b&gt; from your roster?</source>
-        <translation type="unfinished"></translation>
+        <translation>¿Realmente desea eliminar el contacto &lt;b&gt;%1&lt;/b&gt; de su lista?</translation>
     </message>
 </context>
 <context>
     <name>SubRequestAcceptSheet</name>
     <message>
         <source>Subscription Request</source>
-        <translation type="unfinished"></translation>
+        <translation>Solicitud de suscripción</translation>
     </message>
     <message>
         <source>You received a subscription request by &lt;b&gt;%1&lt;/b&gt;. If you accept it, the account will have access to your presence status.</source>
-        <translation type="unfinished"></translation>
+        <translation>Ha recibido una solicitud de suscripción de &lt;b&gt;%1&lt;/b&gt;. Si la acepta, la cuenta tendrá acceso a su estado de presencia.</translation>
     </message>
     <message>
         <source>Decline</source>
-        <translation type="unfinished"></translation>
+        <translation>Rechazar</translation>
     </message>
     <message>
         <source>Accept</source>
-        <translation type="unfinished"></translation>
+        <translation>Aceptar</translation>
     </message>
 </context>
 <context>

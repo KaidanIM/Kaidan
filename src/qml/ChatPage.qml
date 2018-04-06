@@ -183,7 +183,10 @@ Kirigami.Page {
 					height: width
 				}
 				onClicked: {
-					mediaDrawer.open()
+					if (Kirigami.Settings.isMobile)
+						mediaDrawer.open()
+					else
+						openFileDialog("All files (*)")
 				}
 			}
 

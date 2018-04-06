@@ -35,8 +35,13 @@
 #include <map>
 
 namespace gloox {
+	//
+	// XEP-0363: HTTP File Upload
+	//
+
 	static const std::string XMLNS_HTTPUPLOAD = "urn:xmpp:http:upload:0";
 
+	// random number above normal StanzaExtensions
 	static const int EXT_HTTPUPLOADREQUEST = 0x10AD; //=> 4269
 	static const int EXT_HTTPUPLOADSLOT = 4270;
 
@@ -58,6 +63,13 @@ namespace gloox {
 		UploadFileNotFound,      /* Couldn't find or read file on disk */
 		UploadHttpError          /* Error occured while uploading via HTTPS */
 	};
+
+	//
+	// XEP-0231: Bits of Binary
+	//
+
+	static const std::string XMLNS_BITSOFBINARY = "urn:xmpp:bob";
+	static const int EXT_BITSOFBINARY = 4271;
 }
 
 #endif // GLOOXEXTS_H__

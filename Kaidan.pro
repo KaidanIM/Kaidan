@@ -33,7 +33,8 @@ SOURCES += \
     src/gloox-extensions/httpuploadrequest.cpp \
     src/gloox-extensions/httpuploadslot.cpp \
     src/gloox-extensions/bitsofbinarydata.cpp \
-    src/gloox-extensions/bitsofbinarymanager.cpp
+    src/gloox-extensions/bitsofbinarymanager.cpp \
+    src/gloox-extensions/bitsofbinarymemorycache.cpp
 
 HEADERS += \
     src/Database.h \
@@ -68,7 +69,9 @@ HEADERS += \
     src/gloox-extensions/bitsofbinarydata.h \
     src/gloox-extensions/bitsofbinarymanager.h \
     src/gloox-extensions/bitsofbinaryhandler.h \
-    src/gloox-extensions/bitsofbinarycache.h
+    src/gloox-extensions/bitsofbinarycache.h \
+    src/gloox-extensions/bitsofbinarymemorycache.h
+
 
 android: INCLUDEPATH += $$PWD/3rdparty/gloox/include
 android: LIBS += -L$$PWD/3rdparty/gloox/lib/

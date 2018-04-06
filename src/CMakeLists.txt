@@ -37,4 +37,5 @@ set(KAIDAN_SOURCES
 	${CURDIR}/gloox-extensions/httpuploadslot.cpp
 	${CURDIR}/gloox-extensions/bitsofbinarydata.cpp
 	${CURDIR}/gloox-extensions/bitsofbinarymanager.cpp
+	${CURDIR}/gloox-extensions/bitsofbinarymemorycache.cpp
 )

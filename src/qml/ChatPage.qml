@@ -68,38 +68,37 @@ Kirigami.Page {
 	Kirigami.OverlayDrawer {
 		id: mediaDrawer
 		edge: Qt.BottomEdge
-		contentItem: Item {
-			implicitHeight: content.height + Kirigami.Units.gridUnit
+		contentItem: RowLayout {
+			id: content
+			Layout.alignment: Qt.AlignHCenter
+			Layout.fillHeight: true
 
-			RowLayout {
-				id: content
-				Layout.fillWidth: true
-				anchors.centerIn: parent
-
-				IconButton {
-					buttonText: qsTr("Image")
-					imageSource: qsTr("image-jpeg")
-					onClicked: {
-						fileDialog.selectedNameFilter =  "Image files (*.jpg *.png)"
-						fileDialog.open()
-					}
+			IconButton {
+				description: qsTr("Image")
+				imageUrl: qsTr("image-jpeg")
+				onClicked: {
+					fileDialog.selectedNameFilter = "Images (*.jpg *.jpeg *.png *.gif)"
+					fileDialog.open()
 				}
-				IconButton {
-					buttonText: qsTr("Video")
-					imageSource: qsTr("video-mp4")
-					onClicked: {
-						fileDialog.selectedNameFilter = "Videos (*.mp4 *.mkv *.avi *.webm)"
-						fileDialog.open()
-					}
+				Layout.alignment: Qt.AlignHCenter
+			}
+			IconButton {
+				description: qsTr("Video")
+				imageUrl: qsTr("video-mp4")
+				onClicked: {
+					fileDialog.selectedNameFilter = "Videos (*.mp4 *.mkv *.avi *.webm)"
+					fileDialog.open()
 				}
-				IconButton {
-					buttonText: qsTr("Document")
-					imageSource: qsTr("x-office-document")
-					onClicked: {
-						fileDialog.selectedNameFilter = "Documents (*.doc *.docx *.odt)"
-						fileDialog.open()
-					}
+				Layout.alignment: Qt.AlignHCenter
+			}
+			IconButton {
+				description: qsTr("Document")
+				imageUrl: qsTr("x-office-document")
+				onClicked: {
+					fileDialog.selectedNameFilter = "Documents (*.doc *.docx *.odt)"
+					fileDialog.open()
 				}
+				Layout.alignment: Qt.AlignHCenter
 			}
 		}
 	}
@@ -181,7 +180,6 @@ Kirigami.Page {
 				}
 				onClicked: {
 					mediaDrawer.open()
-// 					fileDialog.open()
 				}
 			}
 

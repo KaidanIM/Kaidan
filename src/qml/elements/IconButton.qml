@@ -3,22 +3,34 @@ import QtQuick.Controls 2.0 as Controls
 import QtQuick.Layouts 1.3
 
 Controls.ToolButton {
-	property string buttonText
-	property string imageSource
+	id: button
 
-	implicitHeight: buttonContent.height + Kirigami.Units.gridUnit
+	property string description
+	property string imageUrl
+	property real scaleFactor: 5
+
+	Layout.fillHeight: true
+	Layout.preferredHeight: Kirigami.Units.gridUnit * (scaleFactor + 2)
+	Layout.preferredWidth: Kirigami.Units.gridUnit * scaleFactor + Kirigami.Units.smallSpacing * 2
 
 	ColumnLayout {
-		id: buttonContent
-
 		Kirigami.Icon {
-			height: 50
-			width: height
+			id: icon
+			Layout.fillHeight: true
+			Layout.fillWidth: true
+			height: Kirigami.Units.gridUnit * scaleFactor
+			width: Kirigami.Units.gridUnit * scaleFactor
+			Layout.leftMargin: Kirigami.Units.smallSpacing
+			Layout.rightMargin: Kirigami.Units.smallSpacing
 
-			source: imageSource
+			Layout.alignment: Qt.AlignHCenter | Qt.AlignTop
+
+			source: imageUrl
 		}
+
 		Controls.Label {
-			text: buttonText
+			text: description
+			Layout.alignment: Qt.AlignHCenter | Qt.AlignBottom
 		}
 	}
 }

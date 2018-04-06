@@ -70,6 +70,13 @@ namespace gloox {
 
 	static const std::string XMLNS_BITSOFBINARY = "urn:xmpp:bob";
 	static const int EXT_BITSOFBINARY = 4271;
+
+	//
+	// XEP-0372: References
+	//
+
+	static const std::string XMLNS_REFERENCES = "urn:xmpp:reference:0";
+	static const int EXT_REFERENCES = 4272;
 }
 
 #endif // GLOOXEXTS_H__

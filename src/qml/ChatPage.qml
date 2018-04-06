@@ -55,6 +55,7 @@ Kirigami.Page {
 		id: fileDialog
 		title: "Please choose a file to upload"
 		folder: shortcuts.home
+		nameFilters: [ "Image files (*.jpg *.png)",  "Videos (*.mp4 *.mkv *.avi *.webm)", "Documents (*.doc *.docx *.odt)", "All files (*)" ]
 		selectMultiple: true
 		onAccepted: {
 			console.log("You chose: " + fileDialog.fileUrls)
@@ -78,14 +79,26 @@ Kirigami.Page {
 				IconButton {
 					buttonText: qsTr("Image")
 					imageSource: qsTr("image-jpeg")
+					onClicked: {
+						fileDialog.selectedNameFilter =  "Image files (*.jpg *.png)"
+						fileDialog.open()
+					}
 				}
 				IconButton {
 					buttonText: qsTr("Video")
 					imageSource: qsTr("video-mp4")
+					onClicked: {
+						fileDialog.selectedNameFilter = "Videos (*.mp4 *.mkv *.avi *.webm)"
+						fileDialog.open()
+					}
 				}
 				IconButton {
 					buttonText: qsTr("Document")
 					imageSource: qsTr("x-office-document")
+					onClicked: {
+						fileDialog.selectedNameFilter = "Documents (*.doc *.docx *.odt)"
+						fileDialog.open()
+					}
 				}
 			}
 		}

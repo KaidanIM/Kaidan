@@ -18,5 +18,8 @@
         <file alias="overflow-menu.svg">3rdparty/breeze-icons/icons/actions/22/overflow-menu.svg</file>
         <file alias="system-shutdown.svg">3rdparty/breeze-icons/icons/actions/22/system-shutdown.svg</file>
         <file alias="view-list-icons.svg">3rdparty/breeze-icons/icons/actions/22/view-list-icons.svg</file>
+        <file alias="image-jpeg.svg">3rdparty/breeze-icons/icons/mimetypes/64/image-jpeg.svg</file>
+        <file alias="video-mp4.svg">3rdparty/breeze-icons/icons/mimetypes/64/video-mp4.svg</file>
+        <file alias="x-office-document.svg">3rdparty/breeze-icons/icons/mimetypes/64/x-office-document.svg</file>
     </qresource>
 </RCC>

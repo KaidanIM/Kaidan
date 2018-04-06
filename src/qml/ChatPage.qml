@@ -32,9 +32,11 @@ import QtQuick 2.6
 import QtQuick.Controls 2.0 as Controls
 import QtQuick.Controls.Material 2.0
 import QtQuick.Layouts 1.3
-import org.kde.kirigami 2.0 as Kirigami
+import org.kde.kirigami 2.2 as Kirigami
 import QtGraphicalEffects 1.0
 import "elements"
+
+import QtQuick.Dialogs 1.0
 
 Kirigami.Page {
 	id: root
@@ -48,6 +50,46 @@ Kirigami.Page {
 	rightPadding: 0
 	bottomPadding: 0
 	topPadding: 0
+
+	FileDialog {
+		id: fileDialog
+		title: "Please choose a file to upload"
+		folder: shortcuts.home
+		selectMultiple: true
+		onAccepted: {
+			console.log("You chose: " + fileDialog.fileUrls)
+		}
+		onRejected: {
+			console.log("Canceled")
+		}
+	}
+
+	Kirigami.OverlayDrawer {
+		id: mediaDrawer
+		edge: Qt.BottomEdge
+		contentItem: Item {
+			implicitHeight: content.height + Kirigami.Units.gridUnit
+
+			RowLayout {
+				id: content
+				Layout.fillWidth: true
+				anchors.centerIn: parent
+
+				IconButton {
+					buttonText: qsTr("Image")
+					imageSource: qsTr("image-jpeg")
+				}
+				IconButton {
+					buttonText: qsTr("Video")
+					imageSource: qsTr("video-mp4")
+				}
+				IconButton {
+					buttonText: qsTr("Document")
+					imageSource: qsTr("x-office-document")
+				}
+			}
+		}
+	}
 
 	background: Image {
 		id: bgimage
@@ -123,6 +165,10 @@ Kirigami.Page {
 					anchors.centerIn: parent
 					width: 30
 					height: width
+				}
+				onClicked: {
+					mediaDrawer.open()
+// 					fileDialog.open()
 				}
 			}
 

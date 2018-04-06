@@ -5,8 +5,8 @@ import QtQuick.Layouts 1.3
 Controls.ToolButton {
 	id: button
 
-	property string description
-	property string imageUrl
+	property string buttonText
+	property string iconSource
 	property real scaleFactor: 5
 
 	Layout.fillHeight: true
@@ -25,11 +25,11 @@ Controls.ToolButton {
 
 			Layout.alignment: Qt.AlignHCenter | Qt.AlignTop
 
-			source: imageUrl
+			source: iconSource
 		}
 
 		Controls.Label {
-			text: description
+			text: buttonText
 			Layout.alignment: Qt.AlignHCenter | Qt.AlignBottom
 		}
 	}

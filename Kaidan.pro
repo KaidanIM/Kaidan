@@ -28,7 +28,8 @@ SOURCES += \
     src/QtHttpUploader.cpp \
     src/gloox-extensions/httpuploadmanager.cpp \
     src/gloox-extensions/httpuploadrequest.cpp \
-    src/gloox-extensions/httpuploadslot.cpp
+    src/gloox-extensions/httpuploadslot.cpp \
+    src/gloox-extensions/bitsofbinarydata.cpp
 
 HEADERS += \
     src/Database.h \
@@ -56,7 +57,8 @@ HEADERS += \
     src/gloox-extensions/httpuploadrequest.h \
     src/gloox-extensions/httpuploadslot.h \
     src/gloox-extensions/httpuploadhandler.h \
-    src/gloox-extensions/httpuploader.h
+    src/gloox-extensions/httpuploader.h \
+    src/gloox-extensions/bitsofbinarydata.h
 
 android: INCLUDEPATH += $$PWD/3rdparty/gloox/include
 android: LIBS += -L$$PWD/3rdparty/gloox/lib/

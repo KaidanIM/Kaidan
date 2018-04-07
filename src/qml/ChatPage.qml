@@ -55,7 +55,7 @@ Kirigami.Page {
 		id: fileDialog
 		title: "Please choose a file to upload"
 		folder: shortcuts.home
-		nameFilters: [ "Image files (*.jpg *.png)",  "Videos (*.mp4 *.mkv *.avi *.webm)", "Documents (*.doc *.docx *.odt)", "All files (*)" ]
+		nameFilters: [ "Image files (*.jpg *.png)",  "Videos (*.mp4 *.mkv *.avi *.webm)", "Audio Files (*.mp3 *.wav *.flac *.ogg *.m4a *.mka)", "Documents (*.doc *.docx *.odt)", "All files (*)" ]
 		selectMultiple: true
 		onAccepted: {
 			console.log("You chose: " + fileDialog.fileUrls)
@@ -82,7 +82,7 @@ Kirigami.Page {
 			IconButton {
 				buttonText: qsTr("Video")
 				iconSource: "video-mp4"
-				onClicked: openFileDialog("Videos (*.mp4 *.mpv *.avi)")
+				onClicked: openFileDialog("Videos (*.mp4 *.mpv *.avi *.webm)")
 				Layout.alignment: Qt.AlignHCenter
 			}
 			IconButton {

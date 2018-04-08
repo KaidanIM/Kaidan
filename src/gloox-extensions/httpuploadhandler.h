@@ -42,6 +42,13 @@ namespace gloox {
 	/**
 	 * @class HttpUploadHandler A virtual interface that enables objects to
 	 * receive HTTP File Upload (@xep{0363}) events.
+	 *
+	 * It can be registered at the @c HttpUploadManager.
+	 *
+	 * XEP Version: 0.5
+	 *
+	 * @author Linus Jahn <lnj@kaidan.im>
+	 * @since 1.0.21
 	 */
 	class GLOOX_API HttpUploadHandler
 	{

@@ -35,6 +35,18 @@
 #include <gloox/gloox.h>
 
 namespace gloox {
+	/**
+	 * @class HttpUploadRequest The request to get an @c HttpUploadSlot for
+	 * uploading a file to an HTTP server, implemented as StanzaExtension.
+	 * (@xep{0363})
+	 *
+	 * @c HttpUploadManager for details how to use it.
+	 *
+	 * XEP Version: 0.5
+	 *
+	 * @author Linus Jahn <lnj@kaidan.im>
+	 * @since 1.0.21
+	 */
 	class GLOOX_API HttpUploadRequest : public StanzaExtension
 	{
 	public:

@@ -39,4 +39,5 @@ set(KAIDAN_SOURCES
 	${CURDIR}/gloox-extensions/bitsofbinarymanager.cpp
 	${CURDIR}/gloox-extensions/bitsofbinarymemorycache.cpp
 	${CURDIR}/gloox-extensions/reference.cpp
+	${CURDIR}/gloox-extensions/processinghints.cpp
 )

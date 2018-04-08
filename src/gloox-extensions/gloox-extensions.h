@@ -84,6 +84,28 @@ namespace gloox {
 
 	static const std::string XMLNS_PROCESSINGHINTS = "urn:xmpp:hints";
 	static const int EXT_PROCESSINGHINTS = 4273;
+
+	//
+	// XEP-0300: Use of Cryptographic Hash functions in XMPP
+	//
+
+	static const std::string XMLNS_HASHES_2 = "urn:xmpp:hashes:2";
+	static const int EXT_HASHES = 4274;
+
+	static const std::string XMLNS_HASH_MD5 = "urn:xmpp:hash-function-text-names:md5";
+	static const std::string XMLNS_HASH_SHA_1 = "urn:xmpp:hash-function-text-names:sha-1";
+	static const std::string XMLNS_HASH_SHA_224 = "urn:xmpp:hash-function-text-names:sha-224";
+	static const std::string XMLNS_HASH_SHA_256 = "urn:xmpp:hash-function-text-names:sha-256";
+	static const std::string XMLNS_HASH_SHA_384 = "urn:xmpp:hash-function-text-names:sha-384";
+	static const std::string XMLNS_HASH_SHA_512 = "urn:xmpp:hash-function-text-names:sha-512";
+	static const std::string XMLNS_HASH_SHA3_224 = "urn:xmpp:hash-function-text-names:sha3-224";
+	static const std::string XMLNS_HASH_SHA3_256 = "urn:xmpp:hash-function-text-names:sha3-256";
+	static const std::string XMLNS_HASH_SHA3_384 = "urn:xmpp:hash-function-text-names:sha3-384";
+	static const std::string XMLNS_HASH_SHA3_512 = "urn:xmpp:hash-function-text-names:sha3-512";
+	static const std::string XMLNS_HASH_BLAKE2B_160 = "urn:xmpp:hash-function-text-names:id-blake2b160";
+	static const std::string XMLNS_HASH_BLAKE2B_256 = "urn:xmpp:hash-function-text-names:id-blake2b256";
+	static const std::string XMLNS_HASH_BLAKE2B_384 = "urn:xmpp:hash-function-text-names:id-blake2b384";
+	static const std::string XMLNS_HASH_BLAKE2B_512 = "urn:xmpp:hash-function-text-names:id-blake2b512";
 }
 
 #endif // GLOOXEXTS_H__

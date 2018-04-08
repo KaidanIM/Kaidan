@@ -39,6 +39,11 @@ namespace gloox {
 	/**
 	 * @class BitsOfBinaryData An implementation of Bits of Binary (@xep{0231})
 	 * as a StanzaExtension.
+	 *
+	 * XEP Version: 1.0
+	 *
+	 * @author Linus Jahn <lnj@kaidan.im>
+	 * @since 1.0.21
 	 */
 	class GLOOX_API BitsOfBinaryData : public gloox::StanzaExtension
 	{

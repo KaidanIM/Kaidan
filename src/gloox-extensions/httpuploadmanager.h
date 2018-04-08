@@ -43,7 +43,8 @@ namespace gloox {
 	class HttpUploader;
 
 	/**
-	 * @brief An manager that handles upload services and can upload files (@xep{0363}).
+	 * @class HttpUploadManager A manager that handles upload services and
+	 * can upload files (@xep{0363}).
 	 *
 	 * First, you need to register the HTTP File Upload stanza extensions to
 	 * make them usable in your gloox @c Client.
@@ -134,7 +135,7 @@ namespace gloox {
 	 * XEP Version: 0.5
 	 *
 	 * @author Linus Jahn <lnj@kaidan.im>
-	 * @since 1.0
+	 * @since 1.0.21
 	 */
 	class GLOOX_API HttpUploadManager : public IqHandler
 	{

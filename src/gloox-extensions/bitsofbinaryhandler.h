@@ -39,6 +39,11 @@ namespace gloox {
 	/**
 	 * @class BitsOfBinaryHandler A virtual interface that enables objects to
 	 * receive Bits of Binary (@xep{0231}) events.
+	 *
+	 * XEP Version: 1.0
+	 *
+	 * @author Linus Jahn <lnj@kaidan.im>
+	 * @since 1.0.21
 	 */
 	class BitsOfBinaryHandler
 	{

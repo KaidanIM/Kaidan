@@ -44,6 +44,11 @@ namespace gloox {
 	 * that can be used with @c HttpUploadManager.
 	 *
 	 * This class is only used for uploading files from disk to the server.
+	 *
+	 * XEP Version: 0.5
+	 *
+	 * @author Linus Jahn <lnj@kaidan.im>
+	 * @since 1.0.21
 	 */
 	class GLOOX_API HttpUploader
 	{

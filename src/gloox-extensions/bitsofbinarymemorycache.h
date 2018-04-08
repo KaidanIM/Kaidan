@@ -38,6 +38,11 @@ namespace gloox {
 	/**
 	 * @class BitsOfBinaryMemoryCache An implementation of an @c BitsOfBinaryCache
 	 * using main memory for caching.
+	 *
+	 * XEP Version: 0.5
+	 *
+	 * @author Linus Jahn <lnj@kaidan.im>
+	 * @since 1.0.21
 	 */
 	class GLOOX_API BitsOfBinaryMemoryCache : gloox::BitsOfBinaryCache
 	{

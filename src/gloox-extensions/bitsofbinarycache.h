@@ -38,7 +38,12 @@ namespace gloox {
 
 	/**
 	 * @class BitsOfBinaryCache A virtual interface that enables objects to
-	 * cache Bits of Binary data.
+	 * cache Bits of Binary (@xep{0231}) data.
+	 *
+	 * XEP Version: 1.0
+	 *
+	 * @author Linus Jahn <lnj@kaidan.im>
+	 * @since 1.0.21
 	 */
 	class BitsOfBinaryCache
 	{

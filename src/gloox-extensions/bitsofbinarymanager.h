@@ -40,7 +40,13 @@ namespace gloox {
 	class BitsOfBinaryHandler;
 
 	/**
-	 * @todo write docs
+	 * @class BitsOfBinaryManager A manager for handling incoming
+	 * @c BitsOfBinaryData requests and replys. (@xep{0231})
+	 *
+	 * XEP Version: 1.0
+	 *
+	 * @author Linus Jahn <lnj@kaidan.im>
+	 * @since 1.0.21
 	 */
 	class BitsOfBinaryManager : IqHandler
 	{

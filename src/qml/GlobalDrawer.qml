@@ -66,7 +66,7 @@ Kirigami.GlobalDrawer {
 		},
 		Kirigami.Action {
 			text: qsTr("Settings")
-			iconName: "systemsettings"
+			iconName: "preferences-other"
 			onTriggered: {
 				// open settings page
 				if (Kirigami.Settings.isMobile)

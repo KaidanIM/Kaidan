@@ -30,6 +30,8 @@
 
 import QtQuick.Controls 2.0 as Controls
 import org.kde.kirigami 2.0 as Kirigami
+import QtQuick.Layouts 1.3
+import QtQuick 2.6
 
 Controls.Popup {
 	id: settingsPopup
@@ -40,9 +42,17 @@ Controls.Popup {
 	height: Kirigami.Units.gridUnit * 30
 	modal: true
 
-	Kirigami.Heading {
-		text: "Settings"
-	}
+	ColumnLayout {
+		Kirigami.Heading {
+			id: heading
+			text: "Settings"
+		}
 
-	SettingsPage {}
+		Item {
+			width: settingsPopup.width
+			height: settingsPopup.height - heading.height
+
+			SettingsPage {}
+		}
+	}
 }

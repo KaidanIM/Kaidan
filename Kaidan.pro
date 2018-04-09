@@ -34,7 +34,8 @@ SOURCES += \
     src/gloox-extensions/bitsofbinarymemorycache.cpp \
     src/gloox-extensions/reference.cpp \
     src/gloox-extensions/processinghints.cpp \
-    src/gloox-extensions/hash.cpp
+    src/gloox-extensions/hash.cpp \
+    src/gloox-extensions/jinglefile.cpp
 
 HEADERS += \
     src/Database.h \
@@ -70,7 +71,8 @@ HEADERS += \
     src/gloox-extensions/bitsofbinarymemorycache.h \
     src/gloox-extensions/reference.h \
     src/gloox-extensions/processinghints.h \
-    src/gloox-extensions/hash.h
+    src/gloox-extensions/hash.h \
+    src/gloox-extensions/jinglefile.h
 
 
 android: INCLUDEPATH += $$PWD/3rdparty/gloox/include

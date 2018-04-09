@@ -113,6 +113,13 @@ namespace gloox {
 
 	static const std::string XMLNS_THUMBS = "urn:xmpp:thumbs:1";
 	static const int EXT_THUMBS = 4277;
+
+	//
+	// XEP-0234: Jingle File Transfer
+	//
+
+	static const std::string XMLNS_JINGLE_FILE_TRANSFER_5 = "urn:xmpp:jingle:apps:file-transfer:5";
+	static const int EXT_JINGLE_FILE = 4275;
 }
 
 #endif // GLOOXEXTS_H__

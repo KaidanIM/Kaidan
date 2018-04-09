@@ -106,7 +106,55 @@ namespace gloox {
 		 * Get a filter string for filtering in the client
 		 */
 		virtual const std::string& filterString() const;
-	
+
+		/**
+		 * Returns true if stanza extension is valid
+		 */
+		bool valid() const
+		{
+			return m_valid;
+		}
+
+		/**
+		 * Get type of reference
+		 */
+		ReferenceType type() const
+		{
+			return m_type;
+		}
+
+		/**
+		 * Get URI
+		 */
+		std::string uri() const
+		{
+			return m_uri;
+		}
+
+		/**
+		 * Get anchor
+		 */
+		std::string anchor() const
+		{
+			return m_anchor;
+		}
+
+		/**
+		 * Get begin (negative value, if not set)
+		 */
+		int begin() const
+		{
+			return m_begin;
+		}
+
+		/**
+		 * Get end (negative value, if not set)
+		 */
+		int end() const
+		{
+			return m_end;
+		}
+
 	private:
 		bool m_valid;
 		ReferenceType m_type = None;

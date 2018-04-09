@@ -36,4 +36,5 @@ set(KAIDAN_SOURCES
 	${CURDIR}/gloox-extensions/reference.cpp
 	${CURDIR}/gloox-extensions/processinghints.cpp
 	${CURDIR}/gloox-extensions/hash.cpp
+	${CURDIR}/gloox-extensions/jinglefile.cpp
 )

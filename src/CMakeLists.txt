@@ -43,4 +43,5 @@ set(KAIDAN_SOURCES
 	${CURDIR}/gloox-extensions/hash.cpp
 	${CURDIR}/gloox-extensions/thumb.cpp
 	${CURDIR}/gloox-extensions/jinglefile.cpp
+	${CURDIR}/gloox-extensions/sims.cpp
 )

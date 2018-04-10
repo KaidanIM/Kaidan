@@ -120,6 +120,13 @@ namespace gloox {
 
 	static const std::string XMLNS_JINGLE_FILE_TRANSFER_5 = "urn:xmpp:jingle:apps:file-transfer:5";
 	static const int EXT_JINGLE_FILE = 4275;
+
+	//
+	// XEP-0385: Stateless Inline Media Sharing (SIMS)
+	//
+
+	static const std::string XMLNS_SIMS = "urn:xmpp:sims:1";
+	static const int EXT_SIMS = 4276;
 }
 
 #endif // GLOOXEXTS_H__

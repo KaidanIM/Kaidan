@@ -75,6 +75,7 @@ Kirigami.ApplicationWindow {
 	Component {id: chatPage; ChatPage {}}
 	Component {id: loginPage; LoginPage {}}
 	Component {id: rosterPage; RosterPage {}}
+	Component {id: emptyChatPage; EmptyChatPage {}}
 
 	function passiveNotification(text) {
 		showPassiveNotification(text, "long")
@@ -99,6 +100,7 @@ Kirigami.ApplicationWindow {
 
 		// replace page with roster page
 		pageStack.replace(rosterPage)
+		pageStack.push(emptyChatPage)
 	}
 
 	function handleSubRequest(from, message) {
@@ -118,6 +120,7 @@ Kirigami.ApplicationWindow {
 
 		// push roster page (trying normal start up)
 		pageStack.push(rosterPage)
+		pageStack.push(emptyChatPage)
 		// Annouce that we're ready and the back-end can start with connecting
 		kaidan.start()
 	}

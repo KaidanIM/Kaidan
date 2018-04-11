@@ -37,6 +37,16 @@ Kirigami.ScrollablePage {
 	anchors.fill: parent
 	title: "Settings"
 
+	actions {
+		main: Kirigami.Action {
+			visible: Kirigami.Settings.isMobile
+			iconName: "window-close"
+			onTriggered: {
+				pageStack.layers.pop();
+			}
+		}
+	}
+
 	ColumnLayout {
 		SettingsItem {
 			name: "Test Item 1"

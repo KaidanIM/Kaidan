@@ -42,7 +42,7 @@ Kirigami.ScrollablePage {
 			visible: Kirigami.Settings.isMobile
 			iconName: "window-close"
 			onTriggered: {
-				pageStack.layers.pop();
+				pageStack.layers.pop()
 			}
 		}
 	}

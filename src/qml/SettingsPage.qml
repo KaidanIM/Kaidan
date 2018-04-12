@@ -1,7 +1,7 @@
 /*
  *  Kaidan - A user-friendly XMPP client for every device!
  *
- *  Copyright (C) 2017-2018 Kaidan developers and contributors
+ *  Copyright (C) 2018 Kaidan developers and contributors
  *  (see the LICENSE file for a full list of copyright authors)
  *
  *  Kaidan is free software: you can redistribute it and/or modify
@@ -29,51 +29,39 @@
  */
 
 import org.kde.kirigami 2.0 as Kirigami
-import io.github.kaidanim 1.0
+import QtQuick.Layouts 1.3
+import "elements"
 
-Kirigami.GlobalDrawer {
-	id: globalDrawer
-	title: "Kaidan"
-	titleIcon: "kaidan"
-	bannerImageSource: kaidan.getResourcePath("images/banner.png");
-	// make drawer floating (overlay)
-	modal: true
-	// start with closed drawer
-	drawerOpen: false
-	// show open button on the left side
-	handleVisible: true
+Kirigami.ScrollablePage {
+	id: page
+	anchors.fill: parent
+	title: "Settings"
 
-	SettingsPopup {
-		id: settingsPopup
-	}
-
-	actions: [
-		Kirigami.Action {
-			text: qsTr("Log out")
-			iconName: "system-shutdown"
+	actions {
+		main: Kirigami.Action {
+			visible: Kirigami.Settings.isMobile
+			iconName: "window-close"
 			onTriggered: {
-				// disconnect (open log in page)
-				kaidan.mainDisconnect(true);
-			}
-		},
-		Kirigami.Action {
-			text: qsTr("About")
-			iconName: "help-about"
-			onTriggered: {
-				// open about sheet
-				aboutDialog.open();
-			}
-		},
-		Kirigami.Action {
-			text: qsTr("Settings")
-			iconName: "preferences-other"
-			onTriggered: {
-				// open settings page
-				if (Kirigami.Settings.isMobile)
-					pageStack.layers.push(settingsPage)
-				else
-					settingsPopup.open();
+				pageStack.layers.pop()
 			}
 		}
-	]
+	}
+
+	ColumnLayout {
+		SettingsItem {
+			name: "Test Item 1"
+			description: "Test Item Description"
+			onClicked: {
+				
+			}
+		}
+		SettingsItem {
+			name: "Test Item 2"
+			description: "Test Item Description"
+		}
+		SettingsItem {
+			name: "Test Item 3"
+			description: "Test Item Description"
+		}
+	}
 }

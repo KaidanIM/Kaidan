@@ -75,6 +75,7 @@ Kirigami.ApplicationWindow {
 	Component {id: chatPage; ChatPage {}}
 	Component {id: loginPage; LoginPage {}}
 	Component {id: rosterPage; RosterPage {}}
+	Component {id: settingsPage; SettingsPage {}}
 
 	function passiveNotification(text) {
 		showPassiveNotification(text, "long")

@@ -1,7 +1,7 @@
 /*
  *  Kaidan - A user-friendly XMPP client for every device!
  *
- *  Copyright (C) 2017-2018 Kaidan developers and contributors
+ *  Copyright (C) 2018 Kaidan developers and contributors
  *  (see the LICENSE file for a full list of copyright authors)
  *
  *  Kaidan is free software: you can redistribute it and/or modify
@@ -27,53 +27,47 @@
  *  You should have received a copy of the GNU General Public License
  *  along with Kaidan.  If not, see <http://www.gnu.org/licenses/>.
  */
-
+import QtQuick 2.6
+import QtQuick.Controls 2.0 as Controls
+import QtQuick.Layouts 1.3
 import org.kde.kirigami 2.0 as Kirigami
-import io.github.kaidanim 1.0
 
-Kirigami.GlobalDrawer {
-	id: globalDrawer
-	title: "Kaidan"
-	titleIcon: "kaidan"
-	bannerImageSource: kaidan.getResourcePath("images/banner.png");
-	// make drawer floating (overlay)
-	modal: true
-	// start with closed drawer
-	drawerOpen: false
-	// show open button on the left side
-	handleVisible: true
+Kirigami.BasicListItem {
+	property string name;
+	property string description;
+	property Item ownPage
 
-	SettingsPopup {
-		id: settingsPopup
-	}
+	id: listItem
 
-	actions: [
-		Kirigami.Action {
-			text: qsTr("Log out")
-			iconName: "system-shutdown"
-			onTriggered: {
-				// disconnect (open log in page)
-				kaidan.mainDisconnect(true);
+	reserveSpaceForIcon: false
+	
+	RowLayout {
+		ColumnLayout {
+			Kirigami.Heading {
+				id: nameLabel
+				text: name
+				textFormat: Text.PlainText
+				elide: Text.ElideRight
+				maximumLineCount: 1
+				level: 3
+				Layout.fillWidth: true
+				Layout.maximumHeight: Kirigami.Units.gridUnit * 1.5
 			}
-		},
-		Kirigami.Action {
-			text: qsTr("About")
-			iconName: "help-about"
-			onTriggered: {
-				// open about sheet
-				aboutDialog.open();
+
+			// bottom
+			Controls.Label {
+				id: descriptionLabel
+				Layout.fillWidth: true
+				elide: Text.ElideRight
+				maximumLineCount: 1
+				text: description
+				textFormat: Text.PlainText
+				font.pixelSize: 16
 			}
-		},
-		Kirigami.Action {
-			text: qsTr("Settings")
-			iconName: "preferences-other"
-			onTriggered: {
-				// open settings page
-				if (Kirigami.Settings.isMobile)
-					pageStack.layers.push(settingsPage)
-				else
-					settingsPopup.open();
-			}
+			height: nameLabel.height + descriptionLabel.height
 		}
-	]
+
+		Controls.Switch {
+		}
+	}
 }

@@ -42,9 +42,24 @@ Kirigami.Page {
 		verticalAlignment: Image.AlignTop
 	}
 
-	Controls.Label {
-		anchors.centerIn: parent
+	Rectangle {
+		height: text.implicitHeight
+		width: text.implicitWidth
 
-		text: qsTr("Please select a contact to start messaging")
+		color: "lightgrey"
+		anchors.centerIn: parent
+		radius: Kirigami.Units.gridUnit
+
+		Controls.Label {
+			id: text
+			anchors.centerIn: parent
+
+			leftPadding: Kirigami.Units.gridUnit * 0.4
+			rightPadding: Kirigami.Units.gridUnit * 0.4
+			topPadding: Kirigami.Units.gridUnit * 0.4
+			bottomPadding: Kirigami.Units.gridUnit * 0.4
+
+			text: qsTr("Please select a contact to start messaging")
+		}
 	}
 }

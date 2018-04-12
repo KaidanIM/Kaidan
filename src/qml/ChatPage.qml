@@ -82,7 +82,7 @@ Kirigami.Page {
 			IconButton {
 				buttonText: qsTr("Video")
 				iconSource: "video-mp4"
-				onClicked: openFileDialog("Videos (*.mp4 *.mpv *.avi *.webm)")
+				onClicked: openFileDialog("Videos (*.mp4 *.mkv *.avi *.webm)")
 				Layout.alignment: Qt.AlignHCenter
 			}
 			IconButton {

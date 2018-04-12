@@ -30,8 +30,18 @@
 
 import QtQuick.Controls 2.0 as Controls
 import org.kde.kirigami 2.0 as Kirigami
+import QtQuick 2.7
 
 Kirigami.Page {
+	background: Image {
+		id: bgimage
+		source: kaidan.getResourcePath("images/chat.png")
+		anchors.fill: parent
+		fillMode: Image.Tile
+		horizontalAlignment: Image.AlignLeft
+		verticalAlignment: Image.AlignTop
+	}
+
 	Controls.Label {
 		anchors.centerIn: parent
 

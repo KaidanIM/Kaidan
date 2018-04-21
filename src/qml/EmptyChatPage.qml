@@ -43,15 +43,15 @@ Kirigami.Page {
 	}
 
 	Rectangle {
-		height: text.implicitHeight
-		width: text.implicitWidth
+		height: label.implicitHeight
+		width: label.implicitWidth
 
 		color: "lightgrey"
 		anchors.centerIn: parent
 		radius: Kirigami.Units.gridUnit
 
 		Controls.Label {
-			id: text
+			id: label
 			anchors.centerIn: parent
 
 			leftPadding: Kirigami.Units.gridUnit * 0.4
@@ -59,7 +59,7 @@ Kirigami.Page {
 			topPadding: Kirigami.Units.gridUnit * 0.4
 			bottomPadding: Kirigami.Units.gridUnit * 0.4
 
-			text: qsTr("Please select a contact to start messaging")
+			text: qsTr("Please select a chat to start messaging")
 		}
 	}
 }

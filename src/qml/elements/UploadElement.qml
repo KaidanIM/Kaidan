@@ -1,7 +1,7 @@
 /*
  *  Kaidan - A user-friendly XMPP client for every device!
  *
- *  Copyright (C) 2016-2018 Kaidan developers and contributors
+ *  Copyright (C) 2018 Kaidan developers and contributors
  *  (see the LICENSE file for a full list of copyright authors)
  *
  *  Kaidan is free software: you can redistribute it and/or modify
@@ -33,15 +33,13 @@ import QtQuick.Layouts 1.3
 import org.kde.kirigami 2.2 as Kirigami
 import "elements"
 
-
 ChatMessage {
-	property var progress
-	property string type
+	property var sentBytes
+	property var totalBytes
+	property var type
 	property string fileName
 
 	sentByMe: true
-
-	state: type
 
 	RowLayout {
 		Kirigami.Icon {
@@ -51,52 +49,19 @@ ChatMessage {
 		ColumnLayout {
 			Controls.Label {
 				text: fileName
+				source: type === Enums.MediaTypeImage ? "image-jpeg" :
+				        type === Enums.MediaTypeVideo ? "video-mp4" :
+					type === Enums.MediaTypeAudio ? "audio-mp3" :
+					type === Enums.MediaTypeDocument ? "x-office-document" :
+					type === Enums.MediaTypeOther ? "text-x-plain"
 			}
 
 			Controls.ProgressBar {
 				id: uploadProgress
 				Layout.fillWidth: true
 
-				value: progress
+				value: sentBytes / totalBytes
 			}
 		}
 	}
-
-	states: [
-		State {
-			name: "image"
-			PropertyChanges {
-				target: fileIcon
-				source: "image-jpeg"
-			}
-		}
-		State {
-			name: "video"
-			PropertyChanges {
-				target: fileIcon
-				source: "video-mp4"
-			}
-		}
-		State {
-			name: "audio"
-			PropertyChanges {
-				target: fileIcon
-				source: "audio-mp3"
-			}
-		}
-		State {
-			name: "document"
-			PropertyChanges {
-				target: fileIcon
-				source: "x-office-document"
-			}
-		}
-		State {
-			name: "file"
-			PropertyChanges {
-				target: fileIcon
-				source: "text-x-plain"
-			}
-		}
-	]
 }

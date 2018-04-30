@@ -40,7 +40,7 @@
 <context>
     <name>EmptyChatPage</name>
     <message>
-        <source>Please select a contact to start messaging</source>
+        <source>Please select a chat to start messaging</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

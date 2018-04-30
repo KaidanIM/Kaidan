@@ -38,6 +38,13 @@
     </message>
 </context>
 <context>
+    <name>EmptyChatPage</name>
+    <message>
+        <source>Please select a chat to start messaging</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>ForwardButton</name>
     <message>
         <source>Navigate Forward</source>

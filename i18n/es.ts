@@ -60,7 +60,7 @@
     <name>EmptyChatPage</name>
     <message>
         <source>Please select a chat to start messaging</source>
-        <translation type="unfinished"></translation>
+        <translation>Seleccione un chat para comenzar a enviar mensajes</translation>
     </message>
 </context>
 <context>

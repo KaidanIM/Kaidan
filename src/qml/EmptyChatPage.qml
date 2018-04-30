@@ -43,10 +43,11 @@ Kirigami.Page {
 	}
 
 	Rectangle {
-		height: label.implicitHeight
-		width: label.implicitWidth
+		height: label.height
+		width: label.width
 
 		color: "lightgrey"
+
 		anchors.centerIn: parent
 		radius: Kirigami.Units.gridUnit
 

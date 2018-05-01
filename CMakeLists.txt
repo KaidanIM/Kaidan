@@ -46,6 +46,7 @@ if(NOT UBUNTU_TOUCH)
 	if(Qt5Widgets_FOUND)
 		set(HAVE_QWIDGETS 1)
 		add_definitions(-DHAVE_QWIDGETS)
+		set(__Qt5Widgets_LIBRARIES Qt5::Widgets)
 	endif()
 endif()
 
@@ -97,7 +98,7 @@ target_link_libraries(${PROJECT_NAME}
 	Qt5::Sql
 	Qt5::Qml
 	Qt5::Quick
-	Qt5::Widgets
+	${__Qt5Widgets_LIBRARIES}
 	${GLOOX_LIBRARIES}
 )
 

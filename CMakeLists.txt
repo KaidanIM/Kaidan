@@ -34,15 +34,19 @@ set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_SOURCE_DIR}/cmake")
 # Find packages
 find_package(Qt5 ${QT_MIN_VERSION} REQUIRED NO_MODULE COMPONENTS Core Qml Quick Sql QuickControls2)
 find_package(KF5Kirigami2 REQUIRED)
-find_package(Qt5Widgets)
 find_package(Gloox REQUIRED)
 
-set_package_properties(Qt5Widgets PROPERTIES DESCRIPTION "Integration with QWidget based desktop styles"
-                       TYPE OPTIONAL
-                      )
-if(Qt5Widgets_FOUND)
-  set(HAVE_QWIDGETS 1)
-  add_definitions(-DHAVE_QWIDGETS)
+# optional QWidget style integration (not on ubuntu touch)
+if(NOT UBUNTU_TOUCH)
+	find_package(Qt5Widgets)
+	set_package_properties(Qt5Widgets PROPERTIES
+		DESCRIPTION "Integration with QWidget based desktop styles"
+		TYPE OPTIONAL
+	)
+	if(Qt5Widgets_FOUND)
+		set(HAVE_QWIDGETS 1)
+		add_definitions(-DHAVE_QWIDGETS)
+	endif()
 endif()
 
 #

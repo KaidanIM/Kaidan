@@ -5,11 +5,11 @@
     <name>AboutDialog</name>
     <message>
         <source>A simple, user-friendly Jabber/XMPP client</source>
-        <translation type="unfinished">Klien Jabber/XMPP yang mudah, mesra pengguna</translation>
+        <translation>Klien Jabber/XMPP yang mudah, mesra pengguna</translation>
     </message>
     <message>
         <source>License:</source>
-        <translation type="unfinished">Lesen:</translation>
+        <translation>Lesen:</translation>
     </message>
     <message>
         <source>View source code online</source>
@@ -54,7 +54,7 @@
     <name>BackButton</name>
     <message>
         <source>Navigate Back</source>
-        <translation type="unfinished"></translation>
+        <translation>Ke Belakang</translation>
     </message>
 </context>
 <context>
@@ -72,21 +72,21 @@
     <name>ContextDrawer</name>
     <message>
         <source>Actions</source>
-        <translation type="unfinished"></translation>
+        <translation>Tindakan</translation>
     </message>
 </context>
 <context>
     <name>EmptyChatPage</name>
     <message>
         <source>Please select a chat to start messaging</source>
-        <translation type="unfinished"></translation>
+        <translation>Sila pilih seseorang untuk mula menghantar mesej</translation>
     </message>
 </context>
 <context>
     <name>ForwardButton</name>
     <message>
         <source>Navigate Forward</source>
-        <translation type="unfinished"></translation>
+        <translation>Ke Depan</translation>
     </message>
 </context>
 <context>
@@ -105,22 +105,22 @@
     </message>
     <message>
         <source>Back</source>
-        <translation type="unfinished"></translation>
+        <translation>Kembali</translation>
     </message>
 </context>
 <context>
     <name>Kaidan</name>
     <message>
         <source>Could not send message, as a result of not being connected.</source>
-        <translation type="unfinished"></translation>
+        <translation>Tidak dapat hantar mesej, kerana anda tiada sambungan internet.</translation>
     </message>
     <message>
         <source>Could not add contact, as a result of not being connected.</source>
-        <translation type="unfinished"></translation>
+        <translation>Tidak dapat menambah kenalan, kerana anda tiada sambungan internet.</translation>
     </message>
     <message>
         <source>Could not remove contact, as a result of not being connected.</source>
-        <translation type="unfinished"></translation>
+        <translation>Tidak dapat membuang kenalan, kerana anda tiada sambungan internet.</translation>
     </message>
 </context>
 <context>
@@ -147,19 +147,19 @@
     </message>
     <message>
         <source>Connect</source>
-        <translation>Hubungi</translation>
+        <translation>Sambung</translation>
     </message>
     <message>
         <source>Connecting…</source>
-        <translation>Menghubungi...</translation>
+        <translation>Menyambung…</translation>
     </message>
     <message>
         <source>Log in</source>
-        <translation>Log Masuk</translation>
+        <translation>Log masuk</translation>
     </message>
     <message>
         <source>Log in to your XMPP account</source>
-        <translation>Log masuk akaun Jabber anda</translation>
+        <translation>Log masuk akaun XMPP anda</translation>
     </message>
     <message>
         <source>Your diaspora*-ID:</source>
@@ -171,35 +171,35 @@
     </message>
     <message>
         <source>Invalid username or password.</source>
-        <translation type="unfinished"></translation>
+        <translation>Nama pengguna atau kata laluan tidak sah.</translation>
     </message>
     <message>
         <source>Cannot connect to the server. Please check your internet connection.</source>
-        <translation type="unfinished"></translation>
+        <translation>Tidak dapat menghubungi pelayan. Sila periksa sambungan internet anda.</translation>
     </message>
     <message>
         <source>The server doesn&apos;t support secure connections.</source>
-        <translation type="unfinished"></translation>
+        <translation>Pelayan tidak menyokong sambungan selamat.</translation>
     </message>
     <message>
         <source>Error while trying to connect securely.</source>
-        <translation type="unfinished"></translation>
+        <translation>Ralat ketika cuba untuk menyambung secara selamat.</translation>
     </message>
     <message>
         <source>Could not resolve the server&apos;s address. Please check your JID again.</source>
-        <translation type="unfinished"></translation>
+        <translation>Tidak dapat menetapkan alamat pelayan. Sila periksa semula JID anda.</translation>
     </message>
     <message>
         <source>Could not connect to the server.</source>
-        <translation type="unfinished"></translation>
+        <translation>Tidak dapat menghubungi pelayan.</translation>
     </message>
     <message>
         <source>Authentification protocol not supported by the server.</source>
-        <translation type="unfinished"></translation>
+        <translation>Protokol pengesahan tidak disokong oleh pelayan.</translation>
     </message>
     <message>
         <source>An unknown error occured; see log for details.</source>
-        <translation type="unfinished"></translation>
+        <translation>Telah berlaku ralat tidak diketahui; lihat log untuk maklumat lanjut.</translation>
     </message>
 </context>
 <context>
@@ -210,7 +210,7 @@
     </message>
     <message>
         <source>Jabber-ID:</source>
-        <translation>ID Jabber</translation>
+        <translation>ID Jabber:</translation>
     </message>
     <message>
         <source>user@example.org</source>
@@ -230,15 +230,15 @@
     </message>
     <message>
         <source>This will also send a request to access the presence of the contact.</source>
-        <translation type="unfinished"></translation>
+        <translation>Ini juga akan menghantar permintaan untuk mencapai kehadiran kenalan.</translation>
     </message>
     <message>
         <source>Optional message:</source>
-        <translation type="unfinished"></translation>
+        <translation>Mesej pilihan:</translation>
     </message>
     <message>
         <source>Tell your chat partner who you are.</source>
-        <translation type="unfinished"></translation>
+        <translation>Beritahu pasangan sembang siapakah diri anda sebenarnya.</translation>
     </message>
 </context>
 <context>
@@ -249,15 +249,15 @@
     </message>
     <message>
         <source>Add new contact</source>
-        <translation type="unfinished">Tambah kenalan baru</translation>
+        <translation>Tambah kenalan baru</translation>
     </message>
     <message>
         <source>Connecting…</source>
-        <translation type="unfinished">Menghubungi...</translation>
+        <translation>Menyambung…</translation>
     </message>
     <message>
         <source>Offline</source>
-        <translation type="unfinished"></translation>
+        <translation>Luar talian</translation>
     </message>
 </context>
 <context>
@@ -280,33 +280,33 @@
     </message>
     <message>
         <source>Do you really want to delete the contact &lt;b&gt;%1&lt;/b&gt; from your roster?</source>
-        <translation type="unfinished"></translation>
+        <translation>Adakah anda ingin memadam kenalan &lt;b&gt;%1&lt;/b&gt; daripada roster anda?</translation>
     </message>
 </context>
 <context>
     <name>SubRequestAcceptSheet</name>
     <message>
         <source>Subscription Request</source>
-        <translation type="unfinished"></translation>
+        <translation>Permintaan Langganan</translation>
     </message>
     <message>
         <source>You received a subscription request by &lt;b&gt;%1&lt;/b&gt;. If you accept it, the account will have access to your presence status.</source>
-        <translation type="unfinished"></translation>
+        <translation>Anda menerima permintaan langganan daripada &lt;b&gt;%1&lt;/b&gt;. Jika anda terima, akaun tersebut boleh mencapai status kehadiran anda.</translation>
     </message>
     <message>
         <source>Decline</source>
-        <translation type="unfinished"></translation>
+        <translation>Tolak</translation>
     </message>
     <message>
         <source>Accept</source>
-        <translation type="unfinished"></translation>
+        <translation>Terima</translation>
     </message>
 </context>
 <context>
     <name>ToolBarApplicationHeader</name>
     <message>
         <source>More Actions</source>
-        <translation type="unfinished"></translation>
+        <translation>Tindakan Lanjut</translation>
     </message>
 </context>
 </TS>

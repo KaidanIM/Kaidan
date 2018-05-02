@@ -64,7 +64,7 @@
     <name>EmptyChatPage</name>
     <message>
         <source>Please select a chat to start messaging</source>
-        <translation type="unfinished"></translation>
+        <translation>Velg en sludring for å begynne å sende meldinger</translation>
     </message>
 </context>
 <context>

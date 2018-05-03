@@ -205,7 +205,7 @@ namespace gloox {
 		 * @return Returns -1, if the upload directly failed, otherwise
 		 * the ID which will be used to track later events
 		 */
-		int uploadFile(std::string &path, bool queue = true,
+		int uploadFile(std::string path, bool queue = true,
 		               std::string contentType = std::string(""),
 		               std::string name = std::string(""),
 		               unsigned long length = 0);

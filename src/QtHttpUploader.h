@@ -70,7 +70,7 @@ public:
 	 */
 	virtual void uploadFile(int id, std::string putUrl,
 	                        gloox::HeaderFieldMap putHeaders,
-	                        std::string localPath);
+	                        std::string &localPath, std::string &contentType);
 
 private:
 	gloox::HttpUploadManager *manager;

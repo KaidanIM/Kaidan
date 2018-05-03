@@ -40,7 +40,7 @@
 #include "MessageHandler.h"
 #include "VCardManager.h"
 #include "XmlLogHandler.h"
-#include "HttpUploadHandler.h"
+#include "UploadHandler.h"
 #include "Kaidan.h"
 // Qt
 #include <QDebug>
@@ -118,9 +118,9 @@ void ClientThread::run()
 	vCardManager = new VCardManager(client, avatarStorage, rosterModel);
 	rosterManager = new RosterManager(kaidan, client, rosterModel, vCardManager);
 	presenceHandler = new PresenceHandler(client);
-	httpUploadHandler = new HttpUploadHandler(client);
+	uploadHandler = new UploadHandler(client);
 	serviceDiscoveryManager = new ServiceDiscoveryManager(
-		client, client->disco(), httpUploadHandler->getUploadManager()
+		client, client->disco(), uploadHandler->getUploadManager()
 	);
 	xmlLogHandler = new XmlLogHandler(client);
 
@@ -138,6 +138,8 @@ void ClientThread::run()
 	        messageSessionHandler->getMessageHandler(), &MessageHandler::sendMessage);
 	connect(this, &ClientThread::chatPartnerChanged,
 	        messageSessionHandler->getMessageHandler(), &MessageHandler::setChatPartner);
+	connect(this, &ClientThread::sendFileRequested,
+	        uploadHandler, &UploadHandler::uploadFile);
 	connect(this, &ClientThread::addContactRequested,
 	        rosterManager, &RosterManager::addContact);
 	connect(this, &ClientThread::removeContactRequested,

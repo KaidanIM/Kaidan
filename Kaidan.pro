@@ -24,7 +24,7 @@ SOURCES += \
     src/VCardManager.cpp \
     src/XmlLogHandler.cpp \
     src/StatusBar.cpp \
-    src/HttpUploadHandler.cpp \
+    src/UploadHandler.cpp \
     src/QtHttpUploader.cpp \
     src/gloox-extensions/httpuploadmanager.cpp \
     src/gloox-extensions/httpuploadrequest.cpp \
@@ -57,7 +57,7 @@ HEADERS += \
     src/Globals.h \
     src/Enums.h \
     src/StatusBar.h \
-    src/HttpUploadHandler.h \
+    src/UploadHandler.h \
     src/QtHttpUploader.h \
     src/gloox-extensions/httpuploadmanager.h \
     src/gloox-extensions/httpuploadrequest.h \

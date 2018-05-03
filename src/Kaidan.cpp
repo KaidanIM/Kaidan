@@ -194,6 +194,18 @@ void Kaidan::sendMessage(QString jid, QString message)
 	}
 }
 
+void Kaidan::sendFile(QString jid, QString filePath)
+{
+	if (client->isConnected()) {
+		// convert file-URLs to file paths
+		filePath.replace("file://", "");
+		emit client->sendFileRequested(jid, filePath);
+	} else {
+		emit passiveNotificationRequested(tr("Could not send file, as a result of not being connected."));
+		qWarning() << "[main] Could not send file, as a result of not being connected.";
+	}
+}
+
 void Kaidan::addContact(QString jid, QString nick, QString msg)
 {
 	if (client->isConnected()) {

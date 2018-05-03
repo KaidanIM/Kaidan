@@ -58,7 +58,7 @@ bool HttpUploadManager::valid()
 	return uploader && handler && uploadServices.size() > 0;
 }
 
-int HttpUploadManager::uploadFile(std::string &path, bool queue,
+int HttpUploadManager::uploadFile(std::string path, bool queue,
                                   std::string contentType, std::string name,
                                   unsigned long length)
 {
@@ -185,7 +185,7 @@ void HttpUploadManager::handleIqID(const gloox::IQ &iq, int context)
 
 		uploader->uploadFile(
 			context, slot->putUrl(), slot->putHeaderFields(),
-			uploadQueue[context]->path
+			uploadQueue[context]->path, uploadQueue[context]->contentType
 		);
 	} else {
 		HttpUploadRequest *request = (HttpUploadRequest*) iq.findExtension(EXT_HTTPUPLOADREQUEST);
@@ -230,10 +230,14 @@ void HttpUploadManager::handleIqID(const gloox::IQ &iq, int context)
 
 void HttpUploadManager::uploadFinished(int id)
 {
+	std::string name = uploadQueue[id]->name;
 	std::string getUrl = uploadQueue[id]->getUrl;
+	std::string contentType = uploadQueue[id]->contentType;
+	unsigned long length = uploadQueue[id]->length;
+
 	uploadQueue.erase(id);
 
-	handler->handleUploadFinished(id, getUrl);
+	handler->handleUploadFinished(id, name, getUrl, contentType, length);
 	startNextUpload();
 }
 

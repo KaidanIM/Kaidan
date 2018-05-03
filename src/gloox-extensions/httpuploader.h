@@ -58,7 +58,8 @@ namespace gloox {
 		 */
 		virtual void uploadFile(int id, std::string putUrl,
 		                        HeaderFieldMap putHeaders,
-		                        std::string localPath) = 0;
+		                        std::string& localPath,
+		                        std::string& contentType) = 0;
 
 		/**
 		 * Returns true, if supporting multiple uploads at the same time

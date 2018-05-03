@@ -90,9 +90,14 @@ namespace gloox {
 		 * Called, when an upload has successfully finished
 		 *
 		 * @param id Upload job id
+		 * @param name The file name that was used for the file upload
 		 * @param getUrl HTTPS GET url to share with others and download the file
+		 * @param contentType The MIME-type of the file (can be empty)
+		 * @param length The file size in bytes
 		 */
-		virtual void handleUploadFinished(int id, std::string &getUrl) = 0;
+		virtual void handleUploadFinished(int id, std::string& name,
+		                                  std::string& getUrl, std::string& contentType,
+		                                  unsigned long& length) = 0;
 
 		/**
 		 * Called, when an upload job has failed

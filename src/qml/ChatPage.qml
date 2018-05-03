@@ -30,7 +30,7 @@
 
 import QtQuick 2.6
 import QtQuick.Controls 2.0 as Controls
-import QtQuick.Dialogs 1.0
+import QtQuick.Dialogs 1.2
 import QtQuick.Layouts 1.3
 import org.kde.kirigami 2.2 as Kirigami
 import QtGraphicalEffects 1.0
@@ -47,15 +47,20 @@ Kirigami.ScrollablePage {
 
 	FileDialog {
 		id: fileDialog
-		title: "Please choose a file to upload"
+		title: qsTr("Please choose a file to upload")
 		folder: shortcuts.home
-		nameFilters: [ "Image files (*.jpg *.png)",  "Videos (*.mp4 *.mkv *.avi *.webm)", "Audio Files (*.mp3 *.wav *.flac *.ogg *.m4a *.mka)", "Documents (*.doc *.docx *.odt)", "All files (*)" ]
-		selectMultiple: true
+		nameFilters: [
+			"Images (*.jpg *.jpeg *.png *.gif)",
+			"Videos (*.mp4 *.mkv *.avi *.webm)",
+			"Audio files (*.mp3 *.wav *.flac *.ogg *.m4a *.mka)",
+			"Documents (*.doc *.docx *.odt)",
+			"All files (*)"
+		]
+		// TODO: support multiple files
+		// Currently the problem is that the fileUrls list isn't cleared
 		onAccepted: {
-			console.log("You chose: " + fileDialog.fileUrls)
-		}
-		onRejected: {
-			console.log("Canceled")
+			console.log("You chose: " + fileUrl)
+			kaidan.sendFile(recipientJid, fileUrl)
 		}
 	}
 
@@ -82,7 +87,7 @@ Kirigami.ScrollablePage {
 			IconButton {
 				buttonText: qsTr("Audio")
 				iconSource: "audio-mp3"
-				onClicked: openFileDialog("Audio Files (*.mp3 *.wav *.flac *.ogg *.m4a *.mka)")
+				onClicked: openFileDialog("Audio files (*.mp3 *.wav *.flac *.ogg *.m4a *.mka)")
 				Layout.alignment: Qt.AlignHCenter
 			}
 			IconButton {

@@ -122,6 +122,11 @@ public:
 	Q_INVOKABLE void sendMessage(QString jid, QString message);
 
 	/**
+	 * Upload and send file
+	 */
+	Q_INVOKABLE void sendFile(QString jid, QString filePath);
+
+	/**
 	 * Add a contact to your roster
 	 *
 	 * @param nick A simple nick name for the new contact, which should be

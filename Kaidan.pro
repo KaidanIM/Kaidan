@@ -25,7 +25,7 @@ SOURCES += \
     src/VCardManager.cpp \
     src/XmlLogHandler.cpp \
     src/StatusBar.cpp \
-    src/HttpUploadHandler.cpp \
+    src/UploadHandler.cpp \
     src/QtHttpUploader.cpp \
     src/singleapp/singleapplication.cpp \
     src/singleapp/singleapplication_p.cpp \
@@ -63,7 +63,7 @@ HEADERS += \
     src/Globals.h \
     src/Enums.h \
     src/StatusBar.h \
-    src/HttpUploadHandler.h \
+    src/UploadHandler.h \
     src/QtHttpUploader.h \
     src/singleapp/singleapplication.h \
     src/singleapp/singleapplication_p.h \

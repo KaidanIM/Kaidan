@@ -52,7 +52,7 @@ class MessageModel;
 class AvatarFileStorage;
 class PresenceCache;
 class PresenceHandler;
-class HttpUploadHandler;
+class UploadHandler;
 class ServiceDiscoveryManager;
 class VCardManager;
 class XmlLogHandler;
@@ -165,27 +165,32 @@ signals:
 	 * Emitted when the connection state has changed.
 	 */
 	void connectionStateChanged(ConnectionState state);
-	
+
 	/**
 	 * Emitted when the client failed to connect giving the reason of it.
 	 */
 	void disconnReasonChanged(DisconnReason reason);
-	
+
 	/**
 	 * Emit to start connecting on the client's thread.
 	 */
 	void connectRequested();
-	
+
 	/**
 	 * Emit to start the disconnection on the client's thread.
 	 */
 	void disconnectRequested();
-	
+
 	/**
 	 * Emit to send a message to a chat partner.
 	 */
 	void sendMessageRequested(QString toJid, QString message);
-	
+
+	/**
+	 * Emit to start uploading and sending a file
+	 */
+	void sendFileRequested(QString jid, QString filePath);
+
 	/**
 	 * Emit to add a new contact to the roster.
 	 */
@@ -250,9 +255,9 @@ private:
 	ClientWorker *worker;
 	RosterManager *rosterManager;
 	MessageSessionHandler *messageSessionHandler;
-	PresenceCache *presenceCache;
-	HttpUploadHandler *httpUploadHandler;
 	PresenceHandler *presenceHandler;
+	PresenceCache *presenceCache;
+	UploadHandler *uploadHandler;
 	ServiceDiscoveryManager *serviceDiscoveryManager;
 	VCardManager *vCardManager;
 	XmlLogHandler *xmlLogHandler;

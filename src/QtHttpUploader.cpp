@@ -59,7 +59,7 @@ bool QtHttpUploader::busy()
 
 void QtHttpUploader::uploadFile(int id, std::string putUrl,
                                 gloox::HeaderFieldMap putHeaders,
-                                std::string localPath)
+                                std::string &localPath, std::string &contentType)
 {
 	// open file for read
 	QFile *file = new QFile(QString::fromStdString(localPath));
@@ -69,13 +69,16 @@ void QtHttpUploader::uploadFile(int id, std::string putUrl,
 	}
 
 	// get Content-Type
-	QMimeDatabase mimeDb;
-	QString contentType = mimeDb.mimeTypeForFile(QString::fromStdString(
-	                                             localPath)).name();
+	if (contentType.empty()) {
+		QMimeDatabase mimeDb;
+		contentType = mimeDb.mimeTypeForFile(QString::fromStdString(
+		                                     localPath)).name().toStdString();
+	}
 
 	// create http put request
 	QNetworkRequest request(QUrl(QString::fromStdString(putUrl)));
-	request.setHeader(QNetworkRequest::ContentTypeHeader, contentType);
+	request.setHeader(QNetworkRequest::ContentTypeHeader,
+	                  QString::fromStdString(contentType));
 	for (auto &field : putHeaders) {
 		request.setRawHeader(field.first.c_str(), field.second.c_str());
 	}

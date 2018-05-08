@@ -30,7 +30,9 @@
 
 #include "UploadHandler.h"
 #include "QtHttpUploader.h"
+#include "MessageHandler.h"
 // gloox
+#include <gloox/message.h>
 #include "gloox-extensions/httpuploadmanager.h"
 #include "gloox-extensions/reference.h"
 #include "gloox-extensions/sims.h"
@@ -41,8 +43,9 @@
 #include <QMimeDatabase>
 #include <QDebug>
 
-UploadHandler::UploadHandler(gloox::Client *client, QObject *parent)
-	: QObject(parent), client(client)
+UploadHandler::UploadHandler(gloox::Client *client, MessageHandler *msgHandler,
+                             QObject *parent)
+	: QObject(parent), client(client), msgHandler(msgHandler)
 {
 	manager = new gloox::HttpUploadManager(client);
 	uploader = new QtHttpUploader(manager);
@@ -58,6 +61,17 @@ void UploadHandler::uploadFile(QString jid, QString filePath)
 
 	int id = manager->uploadFile(filePath.toStdString(), true,
 	                             contentType.toStdString());
+
+	if (id < 0) {
+		// failure
+		// TODO: send passive notification
+	} else {
+		// save for later processing/sending
+		MediaSharingMeta meta;
+		meta.jid = jid;
+
+		mediaShares[id] = meta;
+	}
 }
 
 void UploadHandler::handleUploadFailed(int id, gloox::HttpUploadError error,
@@ -74,6 +88,11 @@ void UploadHandler::handleUploadFinished(int id, std::string &name,
 {
 	qDebug() << "[client] A file upload has finished.";
 	// TODO: send SIMS message (and optionally also create jingle object)
+	// for now only send a normal text message with the get URL.
+	msgHandler->sendMessage(mediaShares[id].jid, QString::fromStdString(getUrl));
+
+	// the media meta isn't needed anymore, so delete it
+	mediaShares.remove(id);
 }
 
 void UploadHandler::handleUploadProcess(int id, long unsigned int sent,

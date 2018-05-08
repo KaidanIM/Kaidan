@@ -42,6 +42,7 @@ namespace gloox {
 	class Client;
 }
 
+class MessageHandler;
 class QtHttpUploader;
 
 /**
@@ -55,7 +56,8 @@ public:
 	/**
 	 * Default constructor
 	 */
-	UploadHandler(gloox::Client *client, QObject *parent = nullptr);
+	UploadHandler(gloox::Client *client, MessageHandler *msgHandler,
+	              QObject *parent = nullptr);
 
 	gloox::HttpUploadManager* getUploadManager()
 	{
@@ -126,11 +128,16 @@ protected:
 	                                const std::string &stamp = gloox::EmptyString);
 
 private:
+	struct MediaSharingMeta {
+		QString jid;
+	};
+
 	gloox::Client *client;
 	gloox::HttpUploadManager *manager;
+	MessageHandler* msgHandler;
 	QtHttpUploader *uploader;
 
-	QMap<int, std::string> filePaths;
+	QMap<int, MediaSharingMeta> mediaShares;
 };
 
 #endif // UPLOADHANDLER_H

@@ -35,13 +35,16 @@
 #include <QObject>
 #include <QSqlDatabase>
 // gloox
-#include <gloox/client.h>
-#include <gloox/message.h>
 #include <gloox/messagehandler.h>
-#include <gloox/messagesession.h>
 // Kaidan
 #include "MessageModel.h"
 #include "RosterModel.h"
+
+namespace gloox {
+	class Client;
+	class Message;
+	class MessageSession;
+}
 
 class MessageHandler : public QObject, public gloox::MessageHandler
 {
@@ -53,6 +56,13 @@ public:
 	~MessageHandler();
 
 	virtual void handleMessage(const gloox::Message &message, gloox::MessageSession *session = 0);
+
+	/**
+	 * Handles a message with a possible receipt or receipt request
+	 */
+	void handleReceiptMessage(const gloox::Message *message,
+	                          bool isCarbonMessage);
+
 	void updateLastExchangedOfJid(const QString &jid);
 	void newUnreadMessageForJid(const QString &jid);
 	void resetUnreadMessagesForJid(const QString &jid);

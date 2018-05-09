@@ -86,6 +86,8 @@ void MessageHandler::setChatPartner(QString chatPartner)
 
 void MessageHandler::handleMessage(const gloox::Message &stanza, gloox::MessageSession *session)
 {
+	bool isCarbonMessage = false;
+
 	// this should contain the real message (e.g. containing the body)
 	gloox::Message *message = const_cast<gloox::Message*>(&stanza);
 	// if the real message is in a message carbon extract it from there
@@ -94,8 +96,10 @@ void MessageHandler::handleMessage(const gloox::Message &stanza, gloox::MessageS
 		const gloox::Carbons *carbon = stanza.findExtension<const gloox::Carbons>(gloox::ExtCarbons);
 
 		// if the extension exists and contains a message, use it as the real message
-		if(carbon && carbon->embeddedStanza())
+		if (carbon && carbon->embeddedStanza()) {
+			isCarbonMessage = true;
 			message = static_cast<gloox::Message*>(carbon->embeddedStanza());
+		}
 	}
 
 	QString body = QString::fromStdString(message->body());
@@ -136,7 +140,7 @@ void MessageHandler::handleMessage(const gloox::Message &stanza, gloox::MessageS
 		// Send a new notification | TODO: Resolve nickname from JID
 		//
 
-		if (!isSentByMe)
+		if (!isSentByMe && !isCarbonMessage)
 			Notifications::sendMessageNotification(message->from().full(), body.toStdString());
 
 		//
@@ -155,7 +159,7 @@ void MessageHandler::handleMessage(const gloox::Message &stanza, gloox::MessageS
 
 		// Increase unread message counter
 		// don't add new unread message if chat is opened or we wrote the message
-		if (chatPartner != contactJid && !isSentByMe)
+		if (!isCarbonMessage && chatPartner != contactJid && !isSentByMe)
 			newUnreadMessageForJid(contactJid);
 	}
 

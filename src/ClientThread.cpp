@@ -52,6 +52,7 @@
 #include <gloox/carbons.h>
 #include <gloox/vcardmanager.h>
 #include <gloox/vcardupdate.h>
+#include <gloox/delayeddelivery.h>
 
 // package fetch interval in ms
 static const unsigned int KAIDAN_CLIENT_LOOP_INTERVAL = 30;

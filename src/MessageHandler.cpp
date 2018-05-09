@@ -36,6 +36,9 @@
 #include <QDebug>
 #include <QString>
 // gloox
+#include <gloox/client.h>
+#include <gloox/message.h>
+#include <gloox/messagesession.h>
 #include <gloox/receipt.h>
 #include <gloox/carbons.h>
 // Kaidan
@@ -104,7 +107,7 @@ void MessageHandler::handleMessage(const gloox::Message &stanza, gloox::MessageS
 
 	QString body = QString::fromStdString(message->body());
 
-	if (body.size() > 0) {
+	if (!body.isEmpty()) {
 		//
 		// Extract information of the message
 		//
@@ -164,28 +167,40 @@ void MessageHandler::handleMessage(const gloox::Message &stanza, gloox::MessageS
 	}
 
 	// XEP-0184: Message Delivery Receipts
-	// try to get a possible delivery receipt
+	// try to handle a possible delivery receipt
+	handleReceiptMessage(message, isCarbonMessage);
+}
+
+void MessageHandler::handleReceiptMessage(const gloox::Message *message,
+                                          bool isCarbonMessage)
+{
+	// check if message contains receipt
 	gloox::Receipt *receipt = (gloox::Receipt*) message->findExtension<gloox::Receipt>(gloox::ExtReceipt);
+	if (!receipt)
+		return;
 
-	if (receipt) {
-		// get the type of the receipt
-		gloox::Receipt::ReceiptType receiptType = receipt->rcpt();
-		if (receiptType == gloox::Receipt::Request) {
-			// send the asked confirmation, that the message has been arrived
-			// new message to the author of the request
-			gloox::Message receiptMessage(gloox::Message::Chat, message->from());
+	// get the type of the receipt
+	gloox::Receipt::ReceiptType receiptType = receipt->rcpt();
 
-			// add the receipt extension containing the request's message id
-			gloox::Receipt *receiptPayload = new gloox::Receipt(gloox::Receipt::Received, message->id());
-			receiptMessage.addExtension(receiptPayload);
+	if (receiptType == gloox::Receipt::Request && !isCarbonMessage) {
+		// carbon messages won't be accepted to not send a receipt to own msgs
+		// carbon msgs from other contacts should be processed by the first client
 
-			// send the receipt message
-			client->send(receiptMessage);
-		} else if (receiptType == gloox::Receipt::Received) {
-			// Delivery Receipt Received -> mark message as read in db
-			emit messageModel->setMessageAsDeliveredRequested(
-				QString::fromStdString(receipt->id()));
-		}
+		// send the asked confirmation, that the message has been arrived
+		// new message to the author of the request
+		gloox::Message receiptMessage(gloox::Message::Chat, message->from());
+
+		// add the receipt extension containing the request's message id
+		gloox::Receipt *receiptPayload = new gloox::Receipt(gloox::Receipt::Received, message->id());
+		receiptMessage.addExtension(receiptPayload);
+
+		// send the receipt message
+		client->send(receiptMessage);
+
+	} else if (receiptType == gloox::Receipt::Received) {
+		// Delivery Receipt Received -> mark message as read in db
+		emit messageModel->setMessageAsDeliveredRequested(
+			QString::fromStdString(receipt->id()));
 	}
 }
 

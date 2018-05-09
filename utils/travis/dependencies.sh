@@ -1,6 +1,10 @@
 #!/bin/bash -e
 . utils/travis/common.sh
 
+if [ $PLATFORM != "ubuntu-touch" ]; then
+	sudo apt update
+fi
+
 echo "*****************************************"
 echo "Fetching dependencies"
 echo "^^^^^^^^^^^^^^^^^^^^^"

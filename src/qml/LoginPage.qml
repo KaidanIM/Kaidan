@@ -48,7 +48,7 @@ Kirigami.Page {
 		}
 
 		GridLayout {
-			columns: 2
+			columns: 1
 			width: parent.width
 			Layout.fillWidth: true
 
@@ -100,9 +100,7 @@ Kirigami.Page {
 			// Connect button
 			Controls.Button {
 				id: connectButton
-				Layout.columnSpan: 2
-				Layout.alignment: Qt.AlignRight
-				Layout.minimumWidth: connectLabel.width
+				Layout.fillWidth: true
 				states: [
 					State {
 						name: "connecting"

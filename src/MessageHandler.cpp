@@ -45,26 +45,21 @@
 #include "MessageModel.h"
 #include "Notifications.h"
 
-QDateTime glooxStampToQDateTime(std::string stamp_)
+QDateTime stringToQDateTime(std::string stamp)
 {
-	QString stamp = QString::fromStdString(stamp_);
+	QString qStamp = QString::fromStdString(stamp);
 	QDateTime dateTime;
 
-	if (stamp.contains('Z')) {
-		dateTime = QDateTime::fromString(stamp, "yyyy-MM-ddThh:mm:ss.zzzZ");
-	} else if (stamp.contains('-') && stamp.contains(':') && stamp.contains('.')) {
-		dateTime = QDateTime::fromString(stamp, "yyyy-MM-ddThh:mm:ss.zzz");
-	} else if (stamp.contains('-') && stamp.contains(':')) {
-		dateTime = QDateTime::fromString(stamp, "yyyy-MM-ddThh:mm:ss");
-	} else if (stamp.contains(':') && stamp.contains('T')) {
-		dateTime = QDateTime::fromString(stamp, "yyyyMMddThh:mm:ss");
-	} else {
-		dateTime = QDateTime::fromString(stamp, "hh:mm");
-	}
+	if (qStamp.contains('.'))
+		dateTime = QDateTime::fromString(qStamp, Qt::ISODateWithMs);
+	else
+		dateTime = QDateTime::fromString(qStamp, Qt::ISODate);
 
 	if (!dateTime.isValid())
-		return QDateTime();
+		return QDateTime::currentDateTime().toUTC();
 
+	// XMPP timestamps are always in UTC
+	// also read it as such if 'Z' is missing in ISO timestamp
 	dateTime.setTimeSpec(Qt::UTC);
 	return dateTime;
 }
@@ -127,12 +122,13 @@ void MessageHandler::handleMessage(const gloox::Message &stanza, gloox::MessageS
 
 		const gloox::DelayedDelivery *delayedDelivery = message->when();
 		if (delayedDelivery)
-			timestamp = glooxStampToQDateTime(delayedDelivery->stamp())
+			timestamp = stringToQDateTime(delayedDelivery->stamp())
 			            .toString(Qt::ISODate);
 
 		// fallback: use current time from local clock
 		if (timestamp.isEmpty())
-			timestamp = QDateTime::currentDateTime().toString(Qt::ISODate);
+			timestamp = QDateTime::currentDateTime().toUTC()
+			            .toString(Qt::ISODate);
 
 		// add the message to the database
 		emit messageModel->addMessageRequested(fromJid, toJid, timestamp,
@@ -211,11 +207,11 @@ void MessageHandler::sendMessage(QString toJid, QString body)
 	                       body.toStdString());
 
 	// add the message to the database
-	const QString timestamp = QDateTime::currentDateTime().toString(Qt::ISODate);
+	const QString timestamp = QDateTime::currentDateTime().toUTC().toString(Qt::ISODate);
 	const QString id = QString::fromStdString(message.id());
 	const QString fromJid = QString::fromStdString(client->jid().bare());
 
-	emit messageModel->addMessageRequested(fromJid, toJid, timestamp, body, id, true); 
+	emit messageModel->addMessageRequested(fromJid, toJid, timestamp, body, id, true);
 
 	// XEP-0184: Message Delivery Receipts
 	// request a delivery receipt from the other client

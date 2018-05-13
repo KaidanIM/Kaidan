@@ -37,7 +37,8 @@ Kirigami.OverlaySheet {
 	property string jid;
 
 	onSheetOpenChanged: {
-		infoLabel.text = qsTr("Do you really want to delete the contact <%1> from your roster?").arg(jid);
+		infoLabel.text = qsTr("Do you really want to delete the contact " +
+		                      "<b>%1</b> from your roster?").arg(jid);
 	}
 
 	ColumnLayout {
@@ -50,7 +51,7 @@ Kirigami.OverlaySheet {
 		Controls.Label {
 			id: infoLabel
 			text: ""
-			textFormat: Text.PlainText
+			textFormat: Text.RichText
 			wrapMode: Text.WordWrap
 
 			Layout.fillWidth: true

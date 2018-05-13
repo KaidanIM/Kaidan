@@ -29,16 +29,19 @@
  */
 
 #include "RosterManager.h"
+#include "Kaidan.h"
 
-RosterManager::RosterManager(gloox::Client *client, RosterModel* rosterModel,
-                             VCardManager *vCardManager, QObject *parent) : QObject(parent)
+RosterManager::RosterManager(Kaidan *kaidan, gloox::Client *client,
+                             RosterModel* rosterModel, VCardManager *vCardManager,
+                             QObject *parent)
+	: QObject(parent), rosterModel(rosterModel)
 {
-	this->rosterModel = rosterModel;
 	rosterManager = client->rosterManager();
 
-	// register the roster updater as roster listener
-	rosterUpdater = new RosterUpdater(rosterModel, rosterManager, vCardManager);
-	rosterManager->registerRosterListener(rosterUpdater);
+	// register the roster updater as roster listener (asynchronous sub handling)
+	rosterUpdater = new RosterUpdater(kaidan, rosterModel, rosterManager,
+	                                  vCardManager);
+	rosterManager->registerRosterListener(rosterUpdater, false);
 }
 
 RosterManager::~RosterManager()
@@ -47,11 +50,13 @@ RosterManager::~RosterManager()
 	delete rosterUpdater;
 }
 
-void RosterManager::addContact(const QString jid, const QString nick)
+void RosterManager::addContact(const QString jid, const QString nick,
+                               const QString msg)
 {
 	// don't set any groups
 	gloox::StringList groups;
-	rosterManager->add(jid.toStdString(), nick.toStdString(), groups);
+	rosterManager->subscribe(jid.toStdString(), nick.toStdString(),
+	                         groups, msg.toStdString());
 }
 
 void RosterManager::removeContact(const QString jid)

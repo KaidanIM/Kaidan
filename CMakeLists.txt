@@ -36,6 +36,20 @@ find_package(Qt5 ${QT_MIN_VERSION} REQUIRED NO_MODULE COMPONENTS Core Qml Quick 
 find_package(KF5Kirigami2 REQUIRED)
 find_package(Gloox REQUIRED)
 
+# optional QWidget style integration (not on ubuntu touch)
+if(NOT UBUNTU_TOUCH)
+	find_package(Qt5Widgets)
+	set_package_properties(Qt5Widgets PROPERTIES
+		DESCRIPTION "Integration with QWidget based desktop styles"
+		TYPE OPTIONAL
+	)
+	if(Qt5Widgets_FOUND)
+		set(HAVE_QWIDGETS 1)
+		add_definitions(-DHAVE_QWIDGETS)
+		set(__Qt5Widgets_LIBRARIES Qt5::Widgets)
+	endif()
+endif()
+
 #
 # Load submodules
 #
@@ -84,6 +98,7 @@ target_link_libraries(${PROJECT_NAME}
 	Qt5::Sql
 	Qt5::Qml
 	Qt5::Quick
+	${__Qt5Widgets_LIBRARIES}
 	${GLOOX_LIBRARIES}
 )
 

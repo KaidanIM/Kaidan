@@ -1,7 +1,7 @@
 /*
  *  Kaidan - A user-friendly XMPP client for every device!
  *
- *  Copyright (C) 2017-2018 Kaidan developers and contributors
+ *  Copyright (C) 2016-2018 Kaidan developers and contributors
  *  (see the LICENSE file for a full list of copyright authors)
  *
  *  Kaidan is free software: you can redistribute it and/or modify
@@ -28,64 +28,39 @@
  *  along with Kaidan.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-import QtQuick 2.0
 import QtQuick.Controls 2.0 as Controls
-import QtQuick.Layouts 1.2
 import org.kde.kirigami 2.0 as Kirigami
+import QtQuick 2.7
 
-Kirigami.OverlaySheet {
-	ColumnLayout {
-		Kirigami.Heading {
-			text: qsTr("Add new contact") + "          "
-			Layout.fillWidth: true
-		}
-
-		Controls.Label {
-			text: qsTr("Nickname:")
-		}
-		Controls.TextField {
-			id: nickField
-			selectByMouse: true
-			Layout.fillWidth: true
-		}
-
-		Controls.Label {
-			text: qsTr("Jabber-ID:")
-		}
-		Controls.TextField {
-			id: jidField
-			placeholderText: qsTr("user@example.org")
-			selectByMouse: true
-			Layout.fillWidth: true
-		}
-
-		RowLayout {
-			Layout.topMargin: 10
-
-			Controls.Button {
-				text: qsTr("Cancel")
-				onClicked: {
-					clearInput();
-					close();
-				}
-				Layout.fillWidth: true
-			}
-
-			Controls.Button {
-				text: qsTr("Add")
-				enabled: jidField.length > 0
-				onClicked: {
-					kaidan.addContact(jidField.text, nickField.text);
-					clearInput();
-					close();
-				}
-				Layout.fillWidth: true
-			}
-		}
+Kirigami.Page {
+	background: Image {
+		id: bgimage
+		source: kaidan.getResourcePath("images/chat.png")
+		anchors.fill: parent
+		fillMode: Image.Tile
+		horizontalAlignment: Image.AlignLeft
+		verticalAlignment: Image.AlignTop
 	}
-	
-	function clearInput() {
-		jidField.text = "";
-		nickField.text = "";
+
+	Rectangle {
+		height: label.height
+		width: label.width
+
+		color: "lightgrey"
+
+		anchors.centerIn: parent
+		radius: Kirigami.Units.gridUnit
+
+		Controls.Label {
+			id: label
+			anchors.centerIn: parent
+
+			leftPadding: Kirigami.Units.gridUnit * 0.4
+			rightPadding: Kirigami.Units.gridUnit * 0.4
+			topPadding: Kirigami.Units.gridUnit * 0.4
+			bottomPadding: Kirigami.Units.gridUnit * 0.4
+
+			text: qsTr("Please select a chat to start messaging")
+		}
 	}
 }

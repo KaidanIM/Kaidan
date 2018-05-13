@@ -5,15 +5,15 @@
     <name>AboutDialog</name>
     <message>
         <source>A simple, user-friendly Jabber/XMPP client</source>
-        <translation type="unfinished">En enkel, brukervennlig Jabber/XMPP-klient</translation>
+        <translation>En enkel, brukervennlig XMPP-klient</translation>
     </message>
     <message>
         <source>License:</source>
-        <translation type="unfinished">Lisens:</translation>
+        <translation>Lisens:</translation>
     </message>
     <message>
         <source>Source code on GitHub</source>
-        <translation type="unfinished">Kildekode på GitHub</translation>
+        <translation>Kildekode på GitHub</translation>
     </message>
 </context>
 <context>
@@ -57,6 +57,13 @@
     </message>
 </context>
 <context>
+    <name>EmptyChatPage</name>
+    <message>
+        <source>Please select a chat to start messaging</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>ForwardButton</name>
     <message>
         <source>Navigate Forward</source>
@@ -81,16 +88,16 @@
 <context>
     <name>Kaidan</name>
     <message>
-        <source>Could not send message, because not being connected.</source>
-        <translation type="unfinished"></translation>
+        <source>Could not send message, as a result of not being connected.</source>
+        <translation>Kunne ikke sende melding, som følge av manglende tilkobling.</translation>
     </message>
     <message>
-        <source>Could not add contact, because not being connected.</source>
-        <translation type="unfinished"></translation>
+        <source>Could not add contact, as a result of not being connected.</source>
+        <translation>Kunne ikke legge til kontakt, som følge av manglende tilkobling.</translation>
     </message>
     <message>
-        <source>Could not remove contact, because not being connected.</source>
-        <translation type="unfinished"></translation>
+        <source>Could not remove contact, as a result of not being connected.</source>
+        <translation>Kunne ikke fjerne kontakt, som følge av manglende tilkobling.</translation>
     </message>
 </context>
 <context>
@@ -135,6 +142,38 @@
         <source>Connecting…</source>
         <translation>Kobler til…</translation>
     </message>
+    <message>
+        <source>Invalid username or password.</source>
+        <translation>Ugyldig brukernavn eller passord.</translation>
+    </message>
+    <message>
+        <source>Cannot connect to the server. Please check your internet connection.</source>
+        <translation>Kan ikke koble til tjeneren. Sjekk din internettilknytning.</translation>
+    </message>
+    <message>
+        <source>The server doesn&apos;t support secure connections.</source>
+        <translation>Tjeneren støtter ikke sikre tilkoblinger.</translation>
+    </message>
+    <message>
+        <source>Error while trying to connect securely.</source>
+        <translation>Feil under forsøk på sikker tilkobling.</translation>
+    </message>
+    <message>
+        <source>Could not resolve the server&apos;s address. Please check your JID again.</source>
+        <translation>Kunne ikke fortolke tjenerens adresse. Sjekk din JID igjen.</translation>
+    </message>
+    <message>
+        <source>Could not connect to the server.</source>
+        <translation>Kunne ikke koble til tjeneren.</translation>
+    </message>
+    <message>
+        <source>Authentification protocol not supported by the server.</source>
+        <translation>Identitetsbekreftelsesprotokollen støttes ikke av tjeneren.</translation>
+    </message>
+    <message>
+        <source>An unknown error occured; see log for details.</source>
+        <translation>En ukjent feil inntraff; sjekk loggen for detaljer.</translation>
+    </message>
 </context>
 <context>
     <name>RosterAddContactSheet</name>
@@ -162,6 +201,18 @@
         <source>Add</source>
         <translation>Legg til</translation>
     </message>
+    <message>
+        <source>This will also send a request to access the presence of the contact.</source>
+        <translation>Dette vil også sende en forespørsel om tilgang til kontaktens tilstedeværelsesinfo.</translation>
+    </message>
+    <message>
+        <source>Optional message:</source>
+        <translation>Valgfri melding:</translation>
+    </message>
+    <message>
+        <source>Tell your chat partner who you are.</source>
+        <translation>Fortell din sludrepartner hvem du er.</translation>
+    </message>
 </context>
 <context>
     <name>RosterPage</name>
@@ -175,7 +226,11 @@
     </message>
     <message>
         <source>Connecting…</source>
-        <translation type="unfinished">Kobler til…</translation>
+        <translation>Kobler til…</translation>
+    </message>
+    <message>
+        <source>Offline</source>
+        <translation>Frakoblet</translation>
     </message>
 </context>
 <context>
@@ -198,7 +253,37 @@
     </message>
     <message>
         <source>Do you really want to delete the contact &lt;%1&gt; from your roster?</source>
-        <translation>Ønsker du virkelig å slette kontakten &lt;%1&gt; fra din kontaktliste?</translation>
+        <translation type="vanished">Ønsker du virkelig å slette kontakten &lt;%1&gt; fra din kontaktliste?</translation>
+    </message>
+    <message>
+        <source>Do you really want to delete the contact &lt;b&gt;%1&lt;/b&gt; from your roster?</source>
+        <translation>Ønsker du virkelig å slette kontakten &lt;b&gt;%1&lt;/b&gt; from din kontaktliste?</translation>
+    </message>
+</context>
+<context>
+    <name>SubRequestAcceptSheet</name>
+    <message>
+        <source>Subscription Request</source>
+        <translation>Abonnementsforespørsel</translation>
+    </message>
+    <message>
+        <source>You received a subscription request by &lt;b&gt;%1&lt;/b&gt;. If you accept it, the account will have access to your presence status.</source>
+        <translation>Du har mottatt en abonnementsforespørsel av &lt;b&gt;%1&lt;/b&gt;. Hvis du godtar den, vil kontoen ha tilgang til din tilstedeværelsesstatus.</translation>
+    </message>
+    <message>
+        <source>Decline</source>
+        <translation>Avslå</translation>
+    </message>
+    <message>
+        <source>Accept</source>
+        <translation>Godta</translation>
+    </message>
+</context>
+<context>
+    <name>ToolBarApplicationHeader</name>
+    <message>
+        <source>More Actions</source>
+        <translation>Flere handlinger</translation>
     </message>
 </context>
 </TS>

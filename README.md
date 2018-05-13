@@ -1,6 +1,7 @@
 # Kaidan - A user-friendly XMPP client for every device!
 
 [![Build Status](https://travis-ci.org/KaidanIM/Kaidan.svg?branch=master)](https://travis-ci.org/KaidanIM/Kaidan)
+[![Plasma Mobile CI Build Status](https://img.shields.io/jenkins/s/http/mobile.neon.pangea.pub:8080/job/xenial_unstable_KaidanIM_kaidan-packaging-deb.svg)](http://mobile.neon.pangea.pub:8080/job/xenial_unstable_KaidanIM_kaidan-packaging-deb)
 [![Release](https://img.shields.io/github/release/kaidanim/kaidan.svg)](https://github.com/kaidanim/kaidan/releases)
 [![Downloads](https://img.shields.io/github/downloads/kaidanim/kaidan/total.svg)](https://github.com/kaidanim/kaidan/releases)
 [![Issues](https://img.shields.io/github/issues/kaidanim/kaidan.svg)](https://github.com/kaidanim/kaidan/issues)
@@ -25,21 +26,22 @@ earlier developer of Kaidan.
 
 Kaidan is *not* finished yet, so don't expect it working as well as a finished client will do.
 
+For a list of supported XEPs, have a look at the [Wiki](https://github.com/KaidanIM/Kaidan/wiki/Supported-XMPP-Extension-Protocols-(XEPs)).
+
 ## Compilation & Installation
 
-* [Debian Stretch based systems](#debian-stretch-based-systems)
+* [Debian sid based systems](#debian-sid-based-systems)
 * [Linux Desktop](#compile-kaidan-for-desktop-linux)
 * [Ubuntu Touch (click package)](#compile-kaidan-for-ubuntu-touch)
 
 
-### Debian Stretch based systems
+### Debian sid based systems
 
-Add our APT repository to your system (currently very outdated, will be fixed soon™)
+Add our APT repository to your system
 
 ```
-sudo apt install apt-transport-https software-properties-common dirmngr gnupg
-sudo apt-add-repository "deb https://raw.githubusercontent.com/kaidanim/packages/master stretch main"
-sudo apt-key adv --recv-key "210EB0BCA70439F0"
+sudo echo "deb https://www.kaidan.im/packages sid main" > /etc/apt/sources.list.d/kaidan.list
+wget https://www.kaidan.im/packages/pub.asc -qO - | sudo apt-key add -
 sudo apt update
 ```
 

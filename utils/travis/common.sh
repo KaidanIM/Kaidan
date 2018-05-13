@@ -39,7 +39,7 @@ add_linux-desktop_apt_repos() {
 	sudo bash -c "echo deb http://archive.ubuntu.com/ubuntu trusty-backports main restricted universe multiverse >> /etc/apt/sources.list"
 
 	# Qt 5.9 repository
-	sudo add-apt-repository ppa:beineri/opt-qt593-trusty -y
+	sudo add-apt-repository -y ppa:beineri/opt-qt-5.10.1-trusty
 }
 
 add_ubuntu-touch_apt_repos() {
@@ -73,13 +73,13 @@ install_linux-desktop_deps() {
 	                     build-essential \
 	                     ninja-build \
 	                     zlib1g-dev \
-	                     qt59base \
-	                     qt59script \
-	                     qt59declarative \
-	                     qt59tools \
-	                     qt59x11extras \
-	                     qt59svg \
-	                     qt59quickcontrols2
+	                     qt510base \
+	                     qt510script \
+	                     qt510declarative \
+	                     qt510tools \
+	                     qt510x11extras \
+	                     qt510svg \
+	                     qt510quickcontrols2
 
 	# KF5 (only for cmake; qmake compiles kirigami from submodule)
 	if [[ $BUILD_SYSTEM == "cmake" ]]; then
@@ -103,9 +103,8 @@ install_ubuntu-touch_deps() {
 
 env_setup() {
 	if [ -f /opt/qt5*/bin/qt5*-env.sh ]; then
-		echo "Setting up custom Qt 5.9 installation..."
-		cat /opt/qt59/bin/qt59-env.sh
-		source /opt/qt59/bin/qt59-env.sh
+		echo "I: Setting up custom Qt installation..."
+		source /opt/qt5*/bin/qt5*-env.sh
 	fi
 
 	if [ ${PLATFORM} == "osx" ]; then

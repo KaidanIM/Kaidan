@@ -28,66 +28,92 @@
  *  along with Kaidan.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-import QtQuick 2.3
-import QtQuick.Layouts 1.3
+import QtQuick 2.7
 import QtQuick.Controls 2.0 as Controls
+import QtQuick.Layouts 1.3
 import org.kde.kirigami 2.0 as Kirigami
 
-Kirigami.SwipeListItem {
-	property string name;
-	property string lastMessage;
-	property int unreadMessages;
-	property string avatarImagePath;
+Kirigami.OverlaySheet {
+	ColumnLayout {
+		Layout.fillWidth: true
 
-	id: listItem
-	topPadding: Kirigami.Units.smallSpacing * 1.5
-	height: Kirigami.Units.gridUnit * 3.5
-
-	RowLayout {
-		spacing: Kirigami.Units.gridUnit * 0.5
-
-		// left side: Avatar
-		RoundImage {
-			source: avatarImagePath
-			width: height
-			fillMode: Image.PreserveAspectFit
-			Layout.preferredHeight: parent.height
-			Layout.preferredWidth: parent.height
-			mipmap: true
-		}
-		// right side
-		ColumnLayout {
-			spacing: Kirigami.Units.smallSpacing
+		Kirigami.Heading {
+			text: qsTr("Add new contact")
 			Layout.fillWidth: true
-
-			// contact name
-			Kirigami.Heading {
-				text: name
-				textFormat: Text.PlainText
-				elide: Text.ElideRight
-				maximumLineCount: 1
-				level: 3
-				Layout.fillWidth: true
-				Layout.maximumHeight: Kirigami.Units.gridUnit * 1.5
-			}
-			// bottom
-			Controls.Label {
-				Layout.fillWidth: true
-				elide: Text.ElideRight
-				maximumLineCount: 1
-				text: kaidan.removeNewLinesFromString(lastMessage);
-				textFormat: Text.PlainText
-				font.pixelSize: 16
-			}
 		}
 
-		// unread message counter
-		MessageCounter {
-			visible: unreadMessages > 0
-			counter: unreadMessages
-
-			Layout.preferredHeight: Kirigami.Units.gridUnit * 1.25
-			Layout.preferredWidth: Kirigami.Units.gridUnit * 1.25
+		Controls.Label {
+			text: qsTr("This will also send a request to access the " +
+			           "presence of the contact.")
+			textFormat: Text.PlainText
+			wrapMode: Text.WordWrap
+			Layout.fillWidth: true
+			bottomPadding: 10
 		}
+
+		Controls.Label {
+			text: qsTr("Jabber-ID:")
+		}
+		Controls.TextField {
+			id: jidField
+			placeholderText: qsTr("user@example.org")
+			inputMethodHints: Qt.ImhEmailCharactersOnly | Qt.ImhPreferLowercase
+			selectByMouse: true
+			Layout.fillWidth: true
+		}
+
+		Controls.Label {
+			text: qsTr("Nickname:")
+		}
+		Controls.TextField {
+			id: nickField
+			selectByMouse: true
+			Layout.fillWidth: true
+		}
+
+		Controls.Label {
+			text: qsTr("Optional message:")
+			textFormat: Text.PlainText
+			Layout.fillWidth: true
+		}
+		Controls.TextArea {
+			id: msgField
+			Layout.fillWidth: true
+			Layout.minimumHeight: Kirigami.Units.gridUnit * 4
+			placeholderText: qsTr("Tell your chat partner who you are.")
+			wrapMode: Controls.TextArea.Wrap
+			selectByMouse: true
+		}
+
+		RowLayout {
+			Layout.topMargin: 10
+
+			Controls.Button {
+				text: qsTr("Cancel")
+				onClicked: {
+					clearInput()
+					close()
+				}
+				Layout.fillWidth: true
+			}
+
+			Controls.Button {
+				id: addButton
+				text: qsTr("Add")
+				enabled: jidField.length >= 3 && jidField.contains("@")
+				onClicked: {
+					kaidan.addContact(jidField.text, nickField.text, msgField.text)
+					clearInput()
+					close()
+				}
+				Layout.fillWidth: true
+			}
+		}
+	}
+
+	function clearInput() {
+		jidField.text = "";
+		nickField.text = "";
+		msgField.text = "";
 	}
 }

@@ -80,6 +80,13 @@
     </message>
 </context>
 <context>
+    <name>EmptyChatPage</name>
+    <message>
+        <source>Please select a chat to start messaging</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>ForwardButton</name>
     <message>
         <source>Navigate Forward</source>
@@ -108,15 +115,15 @@
 <context>
     <name>Kaidan</name>
     <message>
-        <source>Could not send message, because not being connected.</source>
+        <source>Could not send message, as a result of not being connected.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Could not add contact, because not being connected.</source>
+        <source>Could not add contact, as a result of not being connected.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Could not remove contact, because not being connected.</source>
+        <source>Could not remove contact, as a result of not being connected.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -166,6 +173,38 @@
         <source>user@diaspora.pod</source>
         <translation>пользователь@diaspora.pod</translation>
     </message>
+    <message>
+        <source>Invalid username or password.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cannot connect to the server. Please check your internet connection.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The server doesn&apos;t support secure connections.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Error while trying to connect securely.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Could not resolve the server&apos;s address. Please check your JID again.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Could not connect to the server.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Authentification protocol not supported by the server.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>An unknown error occured; see log for details.</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>RosterAddContactSheet</name>
@@ -193,6 +232,18 @@
         <source>Add new contact</source>
         <translation>Добавить контакт</translation>
     </message>
+    <message>
+        <source>This will also send a request to access the presence of the contact.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Optional message:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Tell your chat partner who you are.</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>RosterPage</name>
@@ -207,6 +258,10 @@
     <message>
         <source>Connecting…</source>
         <translation type="unfinished">Подключение...</translation>
+    </message>
+    <message>
+        <source>Offline</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -228,7 +283,33 @@
         <translation>Удалить</translation>
     </message>
     <message>
-        <source>Do you really want to delete the contact &lt;%1&gt; from your roster?</source>
+        <source>Do you really want to delete the contact &lt;b&gt;%1&lt;/b&gt; from your roster?</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>SubRequestAcceptSheet</name>
+    <message>
+        <source>Subscription Request</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>You received a subscription request by &lt;b&gt;%1&lt;/b&gt;. If you accept it, the account will have access to your presence status.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Decline</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Accept</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>ToolBarApplicationHeader</name>
+    <message>
+        <source>More Actions</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

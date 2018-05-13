@@ -1,7 +1,7 @@
 /*
  *  Kaidan - A user-friendly XMPP client for every device!
  *
- *  Copyright (C) 2017-2018 Kaidan developers and contributors
+ *  Copyright (C) 2018 Kaidan developers and contributors
  *  (see the LICENSE file for a full list of copyright authors)
  *
  *  Kaidan is free software: you can redistribute it and/or modify
@@ -28,54 +28,60 @@
  *  along with Kaidan.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef MESSAGEHANDLER_H
-#define MESSAGEHANDLER_H
+import QtQuick 2.7
+import QtQuick.Controls 2.1 as Controls
+import QtQuick.Layouts 1.3
+import org.kde.kirigami 2.3 as Kirigami
 
-// Qt
-#include <QObject>
-#include <QSqlDatabase>
-// gloox
-#include <gloox/messagehandler.h>
-// Kaidan
-#include "MessageModel.h"
-#include "RosterModel.h"
+Kirigami.OverlaySheet {
+	property string from;
+	property string message;
 
-namespace gloox {
-	class Client;
-	class Message;
-	class MessageSession;
+	ColumnLayout {
+		spacing: 10
+
+		Kirigami.Heading {
+			text: qsTr("Subscription Request")
+			Layout.fillWidth: true
+		}
+
+		Controls.Label {
+			text: qsTr("You received a subscription request by <b>%1</b>. " +
+				"If you accept it, the account will have access to your " +
+				"presence status.").arg(from)
+			wrapMode: Text.WordWrap
+			Layout.fillWidth: true
+		}
+
+		ChatMessage {
+			visible: message.length > 0
+			sentByMe: false
+			messageBody: message
+			recipientAvatarUrl: kaidan.avatarStorage.getHashOfJid(from) !== "" ?
+			                    kaidan.avatarStorage.getAvatarUrl(from) :
+			                    kaidan.getResourcePath("images/fallback-avatar.svg")
+		}
+
+		RowLayout {
+			Layout.topMargin: 10
+
+			Controls.Button {
+				Layout.fillWidth: true
+				text: qsTr("Decline")
+				onClicked: {
+					kaidan.subscriptionRequestAnswered(from, false)
+					close()
+				}
+			}
+
+			Controls.Button {
+				Layout.fillWidth: true
+				text: qsTr("Accept")
+				onClicked: {
+					kaidan.subscriptionRequestAnswered(from, true)
+					close()
+				}
+			}
+		}
+	}
 }
-
-class MessageHandler : public QObject, public gloox::MessageHandler
-{
-	Q_OBJECT
-
-public:
-	MessageHandler(gloox::Client *client, MessageModel *messageModel,
-		       RosterModel *rosterModel, QObject *parent = nullptr);
-	~MessageHandler();
-
-	virtual void handleMessage(const gloox::Message &message, gloox::MessageSession *session = 0);
-
-	/**
-	 * Handles a message with a possible receipt or receipt request
-	 */
-	void handleReceiptMessage(const gloox::Message *message,
-	                          bool isCarbonMessage);
-
-	void updateLastExchangedOfJid(const QString &jid);
-	void newUnreadMessageForJid(const QString &jid);
-	void resetUnreadMessagesForJid(const QString &jid);
-
-public slots:
-	void setChatPartner(QString chatPartner);
-	void sendMessage(QString toJid, QString body);
-
-private:
-	gloox::Client *client;
-	MessageModel *messageModel;
-	RosterModel *rosterModel;
-	QString chatPartner;
-};
-
-#endif // MESSAGEHANDLER_H

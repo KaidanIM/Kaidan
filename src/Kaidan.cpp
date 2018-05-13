@@ -82,7 +82,7 @@ Kaidan::Kaidan(QGuiApplication *app, QObject *parent) : QObject(parent)
 
 	// create new client and start thread's main loop (won't connect until requested)
 	client = new ClientThread(rosterModel, messageModel, avatarStorage, creds,
-	                          settings, app);
+	                          settings, this, app);
 	client->start();
 
 	connect(client, &ClientThread::connectionStateChanged, [=](ConnectionState state) {
@@ -189,18 +189,18 @@ void Kaidan::sendMessage(QString jid, QString message)
 	if (client->isConnected()) {
 		emit client->sendMessageRequested(jid, message);
 	} else {
-		emit passiveNotificationRequested(tr("Could not send message, because not being connected."));
-		qWarning() << "[main] Could not send message, because not being connected.";
+		emit passiveNotificationRequested(tr("Could not send message, as a result of not being connected."));
+		qWarning() << "[main] Could not send message, as a result of not being connected.";
 	}
 }
 
-void Kaidan::addContact(QString jid, QString nick)
+void Kaidan::addContact(QString jid, QString nick, QString msg)
 {
 	if (client->isConnected()) {
-		emit client->addContactRequested(jid, nick);
+		emit client->addContactRequested(jid, nick, msg);
 	} else {
-		emit passiveNotificationRequested(tr("Could not add contact, because not being connected."));
-		qWarning() << "[main] Could not add contact, because not being connected.";
+		emit passiveNotificationRequested(tr("Could not add contact, as a result of not being connected."));
+		qWarning() << "[main] Could not add contact, as a result of not being connected.";
 	}
 }
 
@@ -209,8 +209,8 @@ void Kaidan::removeContact(QString jid)
 	if (client->isConnected()) {
 		emit client->removeContactRequested(jid);
 	} else {
-		emit passiveNotificationRequested(tr("Could not remove contact, because not being connected."));
-		qWarning() << "[main] Could not remove contact, because not being connected.";
+		emit passiveNotificationRequested(tr("Could not remove contact, as a result of not being connected."));
+		qWarning() << "[main] Could not remove contact, as a result of not being connected.";
 	}
 }
 

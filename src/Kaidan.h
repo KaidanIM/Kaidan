@@ -125,7 +125,7 @@ public:
 	 * @param nick A simple nick name for the new contact, which should be
 	 *             used to display in the roster.
 	 */
-	Q_INVOKABLE void addContact(QString jid, QString nick);
+	Q_INVOKABLE void addContact(QString jid, QString nick, QString msg);
 
 	/**
 	 * Remove a contact from your roster
@@ -307,6 +307,24 @@ signals:
 	 * Show passive notification
 	 */
 	void passiveNotificationRequested(QString text);
+
+	/**
+	 * Emitted, whan a subscription request was received
+	 */
+	void subscriptionRequestReceived(QString from, QString msg);
+
+	/**
+	 * Incoming subscription request was accepted or declined by the user
+	 */
+	void subscriptionRequestAnswered(QString jid, bool accepted);
+
+	/**
+	 * Request VCard of any JID
+	 *
+	 * Is required when the avatar (or other information) of a JID are
+	 * requested and the JID is not in the roster.
+	 */
+	void vCardRequested(QString jid);
 
 private:
 	void connectDatabases();

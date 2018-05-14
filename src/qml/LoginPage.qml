@@ -105,7 +105,7 @@ Kirigami.Page {
 			Controls.Button {
 				id: connectButton
 				Layout.fillWidth: true
-                		highlighted: true
+				highlighted: true
 				
 				states: [
 					State {
@@ -132,7 +132,7 @@ Kirigami.Page {
 					id: connectLabel
 					anchors.centerIn: connectButton
 					text: qsTr("Connect")
-                    			color: Kirigami.Theme.highlightedTextColor
+					color: Kirigami.Theme.highlightedTextColor
 					textFormat: Text.RichText
 				}
 			}

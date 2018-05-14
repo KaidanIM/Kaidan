@@ -30,7 +30,6 @@
 
 import QtQuick 2.7
 import QtQuick.Controls 2.0 as Controls
-import QtQuick.Controls.Material 2.0
 import QtQuick.Layouts 1.2
 import org.kde.kirigami 2.0 as Kirigami
 import io.github.kaidanim 1.0
@@ -106,11 +105,7 @@ Kirigami.Page {
 			Controls.Button {
 				id: connectButton
 				Layout.fillWidth: true
-				
-				background: Rectangle {
-                    			implicitHeight: 2 * connectLabel.height
-					color: Material.color(Material.Green, Material.Shade700)
-                		}
+                		highlighted: true
 				
 				states: [
 					State {
@@ -137,7 +132,7 @@ Kirigami.Page {
 					id: connectLabel
 					anchors.centerIn: connectButton
 					text: qsTr("Connect")
-					color: "white"
+                    			color: Kirigami.Theme.highlightedTextColor
 					textFormat: Text.RichText
 				}
 			}

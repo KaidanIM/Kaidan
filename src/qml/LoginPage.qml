@@ -30,6 +30,7 @@
 
 import QtQuick 2.7
 import QtQuick.Controls 2.0 as Controls
+import QtQuick.Controls.Material 2.0
 import QtQuick.Layouts 1.2
 import org.kde.kirigami 2.0 as Kirigami
 import io.github.kaidanim 1.0
@@ -108,7 +109,7 @@ Kirigami.Page {
 				
 				background: Rectangle {
                     			implicitHeight: 2 * connectLabel.height
-                    			color: "#4CAF50"
+					color: Material.color(Material.Green, Material.Shade700)
                 		}
 				
 				states: [

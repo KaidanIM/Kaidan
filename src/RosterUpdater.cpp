@@ -62,7 +62,10 @@ void RosterUpdater::handleRoster(const gloox::Roster &roster)
 		QString name = QString::fromStdString(item.second->name());
 
 		contactList[jid] = name;
-		vCardManager->fetchVCard(jid);
+
+		// fetch avatar from vCard, if no avatar in cache
+		if (kaidan->getAvatarStorage()->getHashOfJid(jid).isEmpty())
+			vCardManager->fetchVCard(jid);
 	}
 
 	// replace current contacts with new ones from server

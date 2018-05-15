@@ -43,7 +43,7 @@ AvatarFileStorage::AvatarFileStorage(QObject *parent) : QObject(parent)
 		cacheDir.mkpath("avatars");
 
 	// search for the avatar list file (hash <-> jid)
-	QString avatarFilePath = getAvatarPath("avatar_list.sha3-256");
+	QString avatarFilePath = getAvatarPath("avatar_list.sha1");
 
 	try {
 		// check if file was found
@@ -82,12 +82,13 @@ AvatarFileStorage::~AvatarFileStorage()
 {
 }
 
-AvatarFileStorage::AddAvatarResult AvatarFileStorage::addAvatar(const QString &jid, const QByteArray &avatar)
+AvatarFileStorage::AddAvatarResult AvatarFileStorage::addAvatar(const QString &jid,
+	const QByteArray &avatar)
 {
 	AddAvatarResult result;
 
 	// generate a hexadecimal hash of the raw avatar
-	result.hash = QString(QCryptographicHash::hash(avatar, QCryptographicHash::Sha3_256).toHex());
+	result.hash = QString(QCryptographicHash::hash(avatar, QCryptographicHash::Sha1).toHex());
 	// set the new hash and the `hasChanged` tag
 	if (jidAvatarMap[jid] != result.hash) {
 		jidAvatarMap[jid] = result.hash;
@@ -153,7 +154,7 @@ bool AvatarFileStorage::hasAvatarHash(const QString& hash) const
 void AvatarFileStorage::saveAvatarsFile()
 {
 	QFile file(QStandardPaths::writableLocation(QStandardPaths::CacheLocation) +
-		QDir::separator() + QString("avatars") + QDir::separator() + QString("avatar_list.sha3-256"));
+		QDir::separator() + QString("avatars") + QDir::separator() + QString("avatar_list.sha1"));
 	if (!file.open(QIODevice::WriteOnly | QIODevice::Text))
 		return;
 

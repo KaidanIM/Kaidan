@@ -50,11 +50,11 @@ Kirigami.Page {
 		ColumnLayout {
 			width: parent.width
 			Layout.fillWidth: true
-			
+
 			// For desktop or tablet devices
-            		Layout.alignment: Qt.AlignCenter
-            		Layout.maximumWidth: 450
-			
+			Layout.alignment: Qt.AlignCenter
+			Layout.maximumWidth: 450
+
 
 			// JID field
 			Controls.Label {
@@ -106,7 +106,7 @@ Kirigami.Page {
 				id: connectButton
 				Layout.fillWidth: true
 				highlighted: true
-				
+
 				states: [
 					State {
 						name: "connecting"

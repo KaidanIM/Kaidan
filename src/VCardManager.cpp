@@ -54,12 +54,11 @@ void VCardManager::fetchVCard(QString jid)
 
 void VCardManager::handleVCard(const gloox::JID& jid, const gloox::VCard* vcard)
 {
-	std::string avatarString = vcard->photo().binval;
-	if (avatarString.length() <= 0)
-		return;
+	QByteArray avatarBytes = QByteArray(vcard->photo().binval.c_str(),
+	                                    vcard->photo().binval.length());
 
-	QByteArray avatarBytes(avatarString.c_str(), avatarString.length());
-	avatarStorage->addAvatar(QString::fromStdString(jid.bare()), avatarBytes);
+	if (!avatarBytes.isEmpty())
+		avatarStorage->addAvatar(QString::fromStdString(jid.bare()), avatarBytes);
 }
 
 void VCardManager::handleVCardResult(VCardContext context, const gloox::JID &jid, gloox::StanzaError stanzaError)
@@ -70,8 +69,13 @@ void VCardManager::handlePresence(const gloox::Presence& presence)
 {
 	const gloox::VCardUpdate *vcupdate = presence.findExtension<gloox::VCardUpdate>
 		(gloox::ExtVCardUpdate);
-	if (vcupdate && vcupdate->hash().size() > 0)
+
+	// if their photo hash differs from what we have saved locally, refetch the vCard
+	if (vcupdate && !vcupdate->hash().empty() &&
+	    avatarStorage->getHashOfJid(QString::fromStdString(
+	    presence.from().bare())).toStdString() != vcupdate->hash()) {
 		fetchVCard(QString::fromStdString(presence.from().bare()));
+	}
 }
 
 void VCardManager::onConnect()
@@ -83,7 +87,7 @@ void VCardManager::onDisconnect(gloox::ConnectionError error)
 {
 }
 
-bool VCardManager::onTLSConnect(const gloox::CertInfo& info)
+bool VCardManager::onTLSConnect(const gloox::CertInfo &info)
 {
 	return true;
 }

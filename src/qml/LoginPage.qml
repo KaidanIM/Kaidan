@@ -53,7 +53,7 @@ Kirigami.Page {
 
 			// For desktop or tablet devices
 			Layout.alignment: Qt.AlignCenter
-			Layout.maximumWidth: 450
+			Layout.maximumWidth: Kirigami.Units.gridUnit * 25
 
 
 			// JID field

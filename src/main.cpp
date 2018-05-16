@@ -137,6 +137,7 @@ int main(int argc, char *argv[])
 	qRegisterMetaType<EntityPresence*>("EntityPresence*");
 	qRegisterMetaType<Qt::ApplicationState>("Qt::ApplicationState");
 	qRegisterMetaType<gloox::Presence::PresenceType>("gloox::Presence::PresenceType");
+	qRegisterMetaType<MessageType>("MessageType");
 	qmlRegisterUncreatableMetaObject(Enums::staticMetaObject, APPLICATION_ID,
 	                                 1, 0, "Kaidan", "Access to enums & flags only");
 

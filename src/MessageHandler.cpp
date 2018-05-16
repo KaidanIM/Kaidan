@@ -44,6 +44,7 @@
 // Kaidan
 #include "MessageModel.h"
 #include "Notifications.h"
+#include "Enums.h"
 
 QDateTime stringToQDateTime(std::string stamp)
 {
@@ -131,9 +132,10 @@ void MessageHandler::handleMessage(const gloox::Message &stanza, gloox::MessageS
 			            .toString(Qt::ISODate);
 
 		// add the message to the database
-		emit messageModel->addMessageRequested(fromJid, toJid, timestamp,
-		                                       body, msgId, isSentByMe,
-		                                       fromJidResource, toJidResource);
+		emit messageModel->addMessageRequested(
+			fromJid, toJid, timestamp, body, msgId, isSentByMe,
+			MessageType::MessageText, fromJidResource, toJidResource
+		);
 
 		//
 		// Send a new notification | TODO: Resolve nickname from JID
@@ -211,7 +213,9 @@ void MessageHandler::sendMessage(QString toJid, QString body)
 	const QString id = QString::fromStdString(message.id());
 	const QString fromJid = QString::fromStdString(client->jid().bare());
 
-	emit messageModel->addMessageRequested(fromJid, toJid, timestamp, body, id, true);
+	emit messageModel->addMessageRequested(
+		fromJid, toJid, timestamp, body, id, true, MessageType::MessageText
+	);
 
 	// XEP-0184: Message Delivery Receipts
 	// request a delivery receipt from the other client

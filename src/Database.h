@@ -34,6 +34,8 @@
 #include <QObject>
 #include <QSqlDatabase>
 
+class QSqlQuery;
+
 class Database : public QObject
 {
     Q_OBJECT
@@ -54,6 +56,8 @@ private:
 	void convertDatabaseToV2();
 	void convertDatabaseToV3();
 	void convertDatabaseToV4();
+	void convertDatabaseToV5();
+	void execQuery(QSqlQuery &query);
 
 	QSqlDatabase database;
 	int version;

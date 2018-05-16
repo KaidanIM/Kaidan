@@ -52,7 +52,7 @@ class MessageHandler : public QObject, public gloox::MessageHandler
 
 public:
 	MessageHandler(gloox::Client *client, MessageModel *messageModel,
-		       RosterModel *rosterModel, QObject *parent = nullptr);
+	               RosterModel *rosterModel, QObject *parent = nullptr);
 	~MessageHandler();
 
 	virtual void handleMessage(const gloox::Message &message, gloox::MessageSession *session = 0);

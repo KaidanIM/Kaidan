@@ -41,7 +41,7 @@
 #include <QSqlQuery>
 #include <QSqlRecord>
 
-static const int DATABASE_LATEST_VERSION = 4;
+static const int DATABASE_LATEST_VERSION = 5;
 static const char *DATABASE_TABLE_INFO = "dbinfo";
 static const char *DATABASE_TABLE_MESSAGES = "Messages";
 static const char *DATABASE_TABLE_ROSTER = "Roster";
@@ -124,21 +124,22 @@ bool Database::needToConvert()
 
 void Database::convertDatabase()
 {
-	qDebug() << "[Database] Converting database to latest version from verion" << version;
-	switch (version) {
-	case 0:
-		createNewDatabase();
-		break;
-	case 1:
-		convertDatabaseToV2(); version = 2;
-	case 2:
-		convertDatabaseToV3(); version = 3;
-	case 3:
-		convertDatabaseToV4(); version = 4;
-		// only break on last convertion step, to not enter default (!)
-		break;
-	default:
-		createNewDatabase();
+	qDebug() << "[database] Converting database to latest version from verion" << version;
+	while (version < DATABASE_LATEST_VERSION) {
+		switch (version) {
+		case 0:
+			createNewDatabase(); version = DATABASE_LATEST_VERSION; break;
+		case 1:
+			convertDatabaseToV2(); version = 2; break;
+		case 2:
+			convertDatabaseToV3(); version = 3; break;
+		case 3:
+			convertDatabaseToV4(); version = 4; break;
+		case 4:
+			convertDatabaseToV5(); version = 5; break;
+		default:
+			break;
+		}
 	}
 
 	QSqlQuery query(database);
@@ -195,6 +196,8 @@ void Database::createNewDatabase()
 	            "'id' TEXT NOT NULL,"
 	            "'isSent' BOOL,"      // is sent to server
 	            "'isDelivered' BOOL," // message has arrived at other client
+	            "'type' INTEGER,"     // type of message (text/image/video/...)
+	            "'mediaUrl' TEXT,"
 	            "FOREIGN KEY('author') REFERENCES Roster ('jid'),"
 	            "FOREIGN KEY('recipient') REFERENCES Roster ('jid')"
 	            ")"))
@@ -207,16 +210,11 @@ void Database::createDbInfoTable()
 {
 	QSqlQuery query(database);
 	query.prepare("CREATE TABLE IF NOT EXISTS 'dbinfo' (version INTEGER NOT NULL)");
-
-	if (!query.exec()) {
-		qFatal("Failed to query database: %s", qPrintable(query.lastError().text()));
-	}
+	execQuery(query);
 	
 	query.prepare(QString("INSERT INTO 'dbinfo' (version) VALUES (%1)")
 		.arg(DATABASE_LATEST_VERSION));
-	if (!query.exec()) {
-		qFatal("Failed to query database: %s", qPrintable(query.lastError().text()));
-	}
+	execQuery(query);
 }
 
 void Database::convertDatabaseToV2()
@@ -229,8 +227,7 @@ void Database::convertDatabaseToV3()
 {
 	QSqlQuery query(database);
 	query.prepare("ALTER TABLE Roster ADD avatarHash TEXT");
-	if (!query.exec())
-		qFatal("Failed to query database: %s", qPrintable(query.lastError().text()));
+	execQuery(query);
 }
 
 void Database::convertDatabaseToV4()
@@ -241,35 +238,43 @@ void Database::convertDatabaseToV4()
 	// and copy everything to the normal table again
 	query.prepare("CREATE TEMPORARY TABLE roster_backup(jid,name,lastExchanged,"
 		"unreadMessages,lastMessage,lastOnline,activity,status,mood);");
-	if (!query.exec()) {
-		qDebug() << query.executedQuery();
-		qFatal("Failed to query database: %s", qPrintable(query.lastError().text()));
-	}
+	execQuery(query);
+
 	query.prepare("INSERT INTO roster_backup SELECT jid,name,lastExchanged,unreadMessages,"
 		"lastMessage,lastOnline,activity,status,mood FROM Roster;");
-	if (!query.exec()) {
-		qDebug() << query.executedQuery();
-		qFatal("Failed to query database: %s", qPrintable(query.lastError().text()));
-	}
+	execQuery(query);
+
 	query.prepare("DROP TABLE Roster;");
-	if (!query.exec()) {
-		qDebug() << query.executedQuery();
-		qFatal("Failed to query database: %s", qPrintable(query.lastError().text()));
-	}
+	execQuery(query);
+
 	query.prepare("CREATE TABLE Roster('jid' TEXT NOT NULL,'name' TEXT NOT NULL,"
 		"'lastExchanged' TEXT NOT NULL,'unreadMessages' INTEGER,'lastMessage' TEXT,"
 		"'lastOnline' TEXT,'activity' TEXT,'status' TEXT,'mood' TEXT);");
-	if (!query.exec()) {
-		qDebug() << query.executedQuery();
-		qFatal("Failed to query database: %s", qPrintable(query.lastError().text()));
-	}
+	execQuery(query);
+
 	query.prepare("INSERT INTO Roster SELECT jid,name,lastExchanged,unreadMessages,"
 		"lastMessage,lastOnline,activity,status,mood FROM Roster_backup;");
-	if (!query.exec()) {
-		qDebug() << query.executedQuery();
-		qFatal("Failed to query database: %s", qPrintable(query.lastError().text()));
-	}
+	execQuery(query);
+
 	query.prepare("DROP TABLE Roster_backup;");
+	execQuery(query);
+}
+
+void Database::convertDatabaseToV5()
+{
+	QSqlQuery query(database);
+	query.prepare("ALTER TABLE 'Messages' ADD 'type' INTEGER");
+	execQuery(query);
+
+	query.prepare("UPDATE Messages SET type = 0 WHERE type IS NULL");
+	execQuery(query);
+
+	query.prepare("ALTER TABLE 'Messages' ADD 'mediaUrl' TEXT");
+	execQuery(query);
+}
+
+void Database::execQuery(QSqlQuery &query)
+{
 	if (!query.exec()) {
 		qDebug() << query.executedQuery();
 		qFatal("Failed to query database: %s", qPrintable(query.lastError().text()));

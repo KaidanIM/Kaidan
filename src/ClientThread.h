@@ -231,6 +231,13 @@ private:
 	 */
 	void setConnectionError(gloox::ConnectionError error);
 
+	/**
+	 * Generates a random alphanumeric string
+	 *
+	 * @param length The length of the generated string
+	 */
+	QString generateRandomString(unsigned int length = 4) const;
+
 	RosterModel *rosterModel;
 	MessageModel *messageModel;
 	AvatarFileStorage *avatarStorage;

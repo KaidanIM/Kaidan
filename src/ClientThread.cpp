@@ -68,7 +68,9 @@ ClientThread::ClientThread(RosterModel *rosterModel, MessageModel *messageModel,
 	// Set custom thread name
 	setObjectName("XmppClient");
 
-	client = new GlooxClient(gloox::JID(creds.jid.toStdString()),
+	QString jid = QString("%1/%2.%3").arg(creds.jid, creds.jidResource,
+	                                      generateRandomString());
+	client = new GlooxClient(gloox::JID(jid.toStdString()),
 	                         creds.password.toStdString());
 	client->bindResource(creds.jidResource.toStdString()); // set resource / device name
 	client->setTls(gloox::TLSRequired); // require encryption
@@ -168,4 +170,19 @@ void ClientThread::setConnectionError(gloox::ConnectionError error)
 {
 	connError = error;
 	emit disconnReasonChanged((DisconnReason) error);
+}
+
+QString ClientThread::generateRandomString(unsigned int length) const
+{
+	const QString possibleCharacters("ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklm"
+	                                 "nopqrstuvwxyz0123456789");
+	const int numOfChars = possibleCharacters.length();
+
+	QString randomString;
+	for (int i = 0; i < length; ++i) {
+		int index = qrand() % numOfChars;
+		QChar nextChar = possibleCharacters.at(index);
+		randomString.append(nextChar);
+	}
+	return randomString;
 }

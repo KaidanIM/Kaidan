@@ -91,6 +91,9 @@ CommandLineParseResult parseCommandLine(QCommandLineParser &parser, QString *err
 
 int main(int argc, char *argv[])
 {
+	// initialize random generator
+	qsrand(time(NULL));
+
 	//
 	// App
 	//

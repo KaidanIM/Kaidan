@@ -103,6 +103,9 @@ ClientThread::~ClientThread()
 
 void ClientThread::run()
 {
+	// initialize random generator
+	qsrand(time(NULL));
+
 	//
 	// Construct client and subclasses
 	//

@@ -119,6 +119,7 @@ int main(int argc, char *argv[])
 	qRegisterMetaType<AvatarFileStorage*>("AvatarFileStorage*");
 	qRegisterMetaType<ContactMap>("ContactMap");
 	qRegisterMetaType<Qt::ApplicationState>("Qt::ApplicationState");
+	qRegisterMetaType<MessageType>("MessageType");
 	qmlRegisterUncreatableMetaObject(Enums::staticMetaObject, APPLICATION_ID,
 	                                 1, 0, "Kaidan", "Access to enums & flags only");
 

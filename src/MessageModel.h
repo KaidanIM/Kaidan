@@ -32,6 +32,9 @@
 #define MESSAGEMODEL_H
 
 #include <QSqlTableModel>
+#include "Enums.h"
+
+using namespace Enums;
 
 class MessageModel : public QSqlTableModel
 {
@@ -61,7 +64,8 @@ signals:
 
 	void addMessageRequested(const QString author, const QString recipient,
 	                         const QString timestamp, const QString message,
-	                         const QString msgId, bool sentByMe,
+	                         const QString msgId, bool sentByMe, MessageType type,
+	                         const QString mediaUrl = QString(),
 	                         const QString author_resource = QString(),
 	                         const QString recipient_resource = QString());
 	void setMessageAsSentRequested(const QString msgId);
@@ -69,8 +73,10 @@ signals:
 
 private slots:
 	void addMessage(const QString author, const QString recipient,
-	                const QString timestamp, const QString message, const QString msgId, 
-	                bool sentByMe, const QString author_resource = QString(),
+	                const QString timestamp, const QString message,
+	                const QString msgId, bool sentByMe, MessageType type,
+	                const QString mediaUrl = QString(),
+	                const QString author_resource = QString(),
 	                const QString recipient_resource = QString());
 	void setMessageAsSent(const QString msgId);
 	void setMessageAsDelivered(const QString msgId);

@@ -105,8 +105,9 @@ void MessageModel::setMessageAsDelivered(const QString msgId)
 
 void MessageModel::addMessage(const QString author, const QString recipient,
                               const QString timestamp, const QString message,
-                              const QString msgId, bool sentByMe,
-                              const QString author_resource, const QString recipient_resource)
+                              const QString msgId, bool sentByMe, MessageType type,
+                              const QString mediaUrl, const QString author_resource,
+                              const QString recipient_resource)
 {
 	//
 	// add the new message
@@ -122,6 +123,8 @@ void MessageModel::addMessage(const QString author, const QString recipient,
 	record.setValue("id", msgId);
 	record.setValue("isSent", !sentByMe);
 	record.setValue("isDelivered", !sentByMe);
+	record.setValue("type", (quint8) type);
+	record.setValue("mediaUrl", mediaUrl);
 
 	if (!insertRecord(rowCount(), record)) {
 		qWarning() << "Failed to add message to DB:" << lastError().text();

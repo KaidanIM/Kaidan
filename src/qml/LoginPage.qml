@@ -47,10 +47,14 @@ Kirigami.Page {
 			horizontalAlignment: Qt.AlignHCenter
 		}
 
-		GridLayout {
-			columns: 2
+		ColumnLayout {
 			width: parent.width
 			Layout.fillWidth: true
+
+			// For desktop or tablet devices
+			Layout.alignment: Qt.AlignCenter
+			Layout.maximumWidth: Kirigami.Units.gridUnit * 25
+
 
 			// JID field
 			Controls.Label {
@@ -100,9 +104,9 @@ Kirigami.Page {
 			// Connect button
 			Controls.Button {
 				id: connectButton
-				Layout.columnSpan: 2
-				Layout.alignment: Qt.AlignRight
-				Layout.minimumWidth: connectLabel.width
+				Layout.fillWidth: true
+				highlighted: true
+
 				states: [
 					State {
 						name: "connecting"
@@ -128,6 +132,7 @@ Kirigami.Page {
 					id: connectLabel
 					anchors.centerIn: connectButton
 					text: qsTr("Connect")
+					color: Kirigami.Theme.highlightedTextColor
 					textFormat: Text.RichText
 				}
 			}

@@ -39,12 +39,15 @@
 // Kaidan
 #include "MessageModel.h"
 #include "RosterModel.h"
+#include "Enums.h"
 
 namespace gloox {
 	class Client;
 	class Message;
 	class MessageSession;
 }
+
+using namespace Enums;
 
 class MessageHandler : public QObject, public gloox::MessageHandler
 {
@@ -66,6 +69,25 @@ public:
 	void updateLastExchangedOfJid(const QString &jid);
 	void newUnreadMessageForJid(const QString &jid);
 	void resetUnreadMessagesForJid(const QString &jid);
+
+	/**
+	 * (Only) sends the message to the recipient
+	 *
+	 * @param toJid Recipient (bare JID)
+	 * @param body Message body / text of the message
+	 * @param id Custom id used for the message
+	 */
+	void sendOnlyMessage(QString &toJid, QString &body, const std::string &id);
+
+	/**
+	 * Saves a message to the database
+	 *
+	 * @param toJid Recipient (bare JID)
+	 * @param body Message body / text of the message
+	 * @param id Custom id used for the message
+	 * @param type Custom message type (useful for media sharing / file uploads)
+	 */
+	void addMessageToDb(QString &toJid, QString &body, QString id, MessageType type);
 
 public slots:
 	void setChatPartner(QString chatPartner);

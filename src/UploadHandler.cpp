@@ -41,6 +41,8 @@
 #include "gloox-extensions/hash.h"
 // Qt
 #include <QMimeDatabase>
+#include <QMimeType>
+#include <QDateTime>
 #include <QDebug>
 
 UploadHandler::UploadHandler(gloox::Client *client, MessageHandler *msgHandler,
@@ -57,10 +59,11 @@ void UploadHandler::uploadFile(QString jid, QString filePath)
 {
 	// get MIME-type
 	QMimeDatabase mimeDb;
-	QString contentType = mimeDb.mimeTypeForFile(filePath).name();
+	QMimeType mimeType = mimeDb.mimeTypeForFile(filePath);
+	QString mimeTypeStr = mimeType.name();
 
 	int id = manager->uploadFile(filePath.toStdString(), true,
-	                             contentType.toStdString());
+	                             mimeTypeStr.toStdString());
 
 	if (id < 0) {
 		// failure
@@ -69,8 +72,15 @@ void UploadHandler::uploadFile(QString jid, QString filePath)
 		// save for later processing/sending
 		MediaSharingMeta meta;
 		meta.jid = jid;
+		meta.msgId = client->getID();
 
 		mediaShares[id] = meta;
+
+		QString body = "";
+		msgHandler->addMessageToDb(
+			jid, body, QString::fromStdString(meta.msgId),
+			getMessageType(mimeType)
+		);
 	}
 }
 
@@ -89,7 +99,8 @@ void UploadHandler::handleUploadFinished(int id, std::string &name,
 	qDebug() << "[client] A file upload has finished.";
 	// TODO: send SIMS message (and optionally also create jingle object)
 	// for now only send a normal text message with the get URL.
-	msgHandler->sendMessage(mediaShares[id].jid, QString::fromStdString(getUrl));
+	QString body = QString::fromStdString(getUrl);
+	msgHandler->sendOnlyMessage(mediaShares[id].jid, body, mediaShares[id].msgId);
 
 	// the media meta isn't needed anymore, so delete it
 	mediaShares.remove(id);
@@ -111,4 +122,22 @@ void UploadHandler::handleUploadServiceAdded(const gloox::JID &jid,
 
 void UploadHandler::handleFileSizeLimitChanged(unsigned long maxFileSize)
 {
+}
+
+MessageType UploadHandler::getMessageType(QMimeType& type)
+{
+	if (type.inherits("image/jpeg") || type.inherits("image/png") ||
+	    type.inherits("image/gif"))
+		return MessageType::MessageImage;
+	else if (type.inherits("audio/flac") || type.inherits("audio/mp4") ||
+	         type.inherits("audio/ogg") || type.inherits("audio/wav") ||
+	         type.inherits("audio/mpeg") || type.inherits("audio/webm"))
+		return MessageType::MessageAudio;
+	else if (type.inherits("video/mpeg") || type.inherits("video/x-msvideo") ||
+	         type.inherits("video/quicktime") || type.inherits("video/mp4") ||
+	         type.inherits("video/x-matroska"))
+		return MessageType::MessageVideo;
+	else if (type.inherits("text/plain"))
+		return MessageType::MessageDocument;
+	return MessageType::MessageFile;
 }

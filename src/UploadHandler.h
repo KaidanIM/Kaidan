@@ -31,6 +31,8 @@
 #ifndef UPLOADHANDLER_H
 #define UPLOADHANDLER_H
 
+// Kaidan
+#include "Enums.h"
 // gloox
 #include "gloox-extensions/httpuploadhandler.h"
 #include "gloox-extensions/httpuploadmanager.h"
@@ -42,8 +44,11 @@ namespace gloox {
 	class Client;
 }
 
+class QMimeType;
 class MessageHandler;
 class QtHttpUploader;
+
+using namespace Enums;
 
 /**
  * @class UploadHandler Class for handling and starting HTTP File Uploads
@@ -63,6 +68,12 @@ public:
 	{
 		return manager;
 	}
+
+signals:
+	/**
+	 * Connect to it to be notified about progress on uploads
+	 */
+	void uploadProgressMade(QString msgId, unsigned long sent, unsigned long total);
 
 public slots:
 	/**
@@ -128,13 +139,16 @@ protected:
 	                                const std::string &stamp = gloox::EmptyString);
 
 private:
+	MessageType getMessageType(QMimeType &type);
+
 	struct MediaSharingMeta {
 		QString jid;
+		std::string msgId;
 	};
 
 	gloox::Client *client;
 	gloox::HttpUploadManager *manager;
-	MessageHandler* msgHandler;
+	MessageHandler *msgHandler;
 	QtHttpUploader *uploader;
 
 	QMap<int, MediaSharingMeta> mediaShares;

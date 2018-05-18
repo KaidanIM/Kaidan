@@ -46,6 +46,7 @@ namespace gloox {
 
 class QMimeType;
 class MessageHandler;
+class MessageModel;
 class QtHttpUploader;
 
 using namespace Enums;
@@ -62,7 +63,7 @@ public:
 	 * Default constructor
 	 */
 	UploadHandler(gloox::Client *client, MessageHandler *msgHandler,
-	              QObject *parent = nullptr);
+	              MessageModel *msgModel, QObject *parent = nullptr);
 
 	gloox::HttpUploadManager* getUploadManager()
 	{
@@ -149,6 +150,7 @@ private:
 	gloox::Client *client;
 	gloox::HttpUploadManager *manager;
 	MessageHandler *msgHandler;
+	MessageModel *msgModel;
 	QtHttpUploader *uploader;
 
 	QMap<int, MediaSharingMeta> mediaShares;

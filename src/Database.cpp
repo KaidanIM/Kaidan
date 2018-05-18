@@ -41,7 +41,7 @@
 #include <QSqlQuery>
 #include <QSqlRecord>
 
-static const int DATABASE_LATEST_VERSION = 5;
+static const int DATABASE_LATEST_VERSION = 6;
 static const char *DATABASE_TABLE_INFO = "dbinfo";
 static const char *DATABASE_TABLE_MESSAGES = "Messages";
 static const char *DATABASE_TABLE_ROSTER = "Roster";
@@ -137,6 +137,8 @@ void Database::convertDatabase()
 			convertDatabaseToV4(); version = 4; break;
 		case 4:
 			convertDatabaseToV5(); version = 5; break;
+		case 5:
+			convertDatabaseToV6(); version = 6; break;
 		default:
 			break;
 		}
@@ -167,16 +169,17 @@ void Database::createNewDatabase()
 	//
 
 	if (!query.exec("CREATE TABLE IF NOT EXISTS 'Roster' ("
-			"'jid' TEXT NOT NULL,"
-			"'name' TEXT NOT NULL,"
-			"'lastExchanged' TEXT NOT NULL,"
-			"'unreadMessages' INTEGER,"
-			"'lastMessage' TEXT,"
-			"'lastOnline' TEXT,"     // < UNUSED v
-			"'activity' TEXT,"
-			"'status' TEXT,"
-			"'mood' TEXT"           // < UNUSED ^
-	                ")"))
+	    "'jid' TEXT NOT NULL,"
+	    "'name' TEXT NOT NULL,"
+	    "'lastExchanged' TEXT NOT NULL,"
+	    "'unreadMessages' INTEGER,"
+	    "'lastMessage' TEXT,"
+	    "'lastOnline' TEXT,"     // < UNUSED v
+	    "'activity' TEXT,"
+	    "'status' TEXT,"
+	    "'mood' TEXT"           // < UNUSED ^
+	    ")"
+	   ))
 	{
 		qFatal("Error creating roster table: Failed to query database: %s", qPrintable(query.lastError().text()));
 	}
@@ -185,22 +188,26 @@ void Database::createNewDatabase()
 	// Messages
 	//
 
-	if (!query.exec(
-	            "CREATE TABLE IF NOT EXISTS 'Messages' ("
-	            "'author' TEXT NOT NULL,"
-	            "'author_resource' TEXT,"
-	            "'recipient' TEXT NOT NULL,"
-	            "'recipient_resource' TEXT,"
-	            "'timestamp' TEXT NOT NULL,"
-	            "'message' TEXT NOT NULL,"
-	            "'id' TEXT NOT NULL,"
-	            "'isSent' BOOL,"      // is sent to server
-	            "'isDelivered' BOOL," // message has arrived at other client
-	            "'type' INTEGER,"     // type of message (text/image/video/...)
-	            "'mediaUrl' TEXT,"
-	            "FOREIGN KEY('author') REFERENCES Roster ('jid'),"
-	            "FOREIGN KEY('recipient') REFERENCES Roster ('jid')"
-	            ")"))
+	if (!query.exec("CREATE TABLE IF NOT EXISTS 'Messages' ("
+	    "'author' TEXT NOT NULL,"
+	    "'author_resource' TEXT,"
+	    "'recipient' TEXT NOT NULL,"
+	    "'recipient_resource' TEXT,"
+	    "'timestamp' TEXT NOT NULL,"
+	    "'message' TEXT NOT NULL,"
+	    "'id' TEXT NOT NULL,"
+	    "'isSent' BOOL,"      // is sent to server
+	    "'isDelivered' BOOL," // message has arrived at other client
+	    "'type' INTEGER,"     // type of message (text/image/video/...)
+	    "'mediaUrl' TEXT,"
+	    "'mediaSize' INTEGER,"
+	    "'mediaContentType' TEXT,"
+	    "'mediaLastModified' INTEGER,"
+	    "'mediaLocation' TEXT,"
+	    "FOREIGN KEY('author') REFERENCES Roster ('jid'),"
+	    "FOREIGN KEY('recipient') REFERENCES Roster ('jid')"
+	    ")"
+	   ))
 	{
 		qFatal("Error creating messages table: Failed to query database: %s", qPrintable(query.lastError().text()));
 	}
@@ -271,6 +278,16 @@ void Database::convertDatabaseToV5()
 
 	query.prepare("ALTER TABLE 'Messages' ADD 'mediaUrl' TEXT");
 	execQuery(query);
+}
+
+void Database::convertDatabaseToV6()
+{
+	QSqlQuery query(database);
+	for (QString column : {"'mediaSize' INTEGER", "'mediaContentType' TEXT",
+	                       "'mediaLastModified' INTEGER", "'mediaLocation' TEXT"}) {
+		query.prepare(QString("ALTER TABLE 'Messages' ADD ").append(column));
+		execQuery(query);
+	}
 }
 
 void Database::execQuery(QSqlQuery &query)

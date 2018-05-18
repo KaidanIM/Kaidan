@@ -59,6 +59,7 @@ MessageModel::MessageModel(QSqlDatabase *database, QObject *parent):
 	connect(this, &MessageModel::addMessageRequested, this, &MessageModel::addMessage);
 	connect(this, &MessageModel::setMessageAsSentRequested, this, &MessageModel::setMessageAsSent);
 	connect(this, &MessageModel::setMessageAsDeliveredRequested, this, &MessageModel::setMessageAsDelivered);
+	connect(this, &MessageModel::updateMessageRequested, this, &MessageModel::updateMessage);
 }
 
 void MessageModel::applyRecipientFilter(QString recipient)
@@ -103,28 +104,66 @@ void MessageModel::setMessageAsDelivered(const QString msgId)
 	submitAll();
 }
 
-void MessageModel::addMessage(const QString author, const QString recipient,
-                              const QString timestamp, const QString message,
-                              const QString msgId, bool sentByMe, MessageType type,
-                              const QString mediaUrl, const QString author_resource,
-                              const QString recipient_resource)
+void MessageModel::updateMessage(const QString id, Message msg)
+{
+	QStringList list;
+	if (!msg.timestamp.isEmpty())
+		list << QString("'timestamp' = '%1'").arg(msg.timestamp);
+	if (!msg.message.isEmpty())
+		list << QString("'message' = '%1'").arg(msg.message);
+	if (!msg.id.isEmpty())
+		list << QString("'id' = '%1'").arg(msg.id);
+	if (!msg.mediaUrl.isEmpty())
+		list << QString("'mediaUrl' = '%1'").arg(msg.mediaUrl);
+	if (msg.mediaSize)
+		list << QString("'mediaSize' = %1").arg(msg.mediaSize);
+	if (!msg.mediaContentType.isEmpty())
+		list << QString("'mediaContentType' = '%1'").arg(msg.mediaContentType);
+	if (msg.mediaLastModified)
+		list << QString("'mediaLastModified' = %1").arg(msg.mediaLastModified);
+	if (!msg.mediaLocation.isEmpty())
+		list << QString("'mediaLocation' = '%1'").arg(msg.mediaLocation);
+
+	QString sets;
+	bool isFirst = true;
+	for (auto part : list) {
+		if (!isFirst)
+			sets.append(", ");
+		sets.append(part);
+		isFirst = false;
+	}
+
+	QString command = "UPDATE 'Messages' SET %1 WHERE 'id' = '%2'";
+	command = command.arg(sets, id);
+
+	QSqlQuery query(*database);
+	query.exec(command);
+}
+
+void MessageModel::addMessage(Message msg)
 {
 	//
 	// add the new message
 	//
 
 	QSqlRecord record = this->record();
-	record.setValue("author", author);
-	record.setValue("author_resource", author_resource);
-	record.setValue("recipient", recipient);
-	record.setValue("recipient_resource", recipient_resource);
-	record.setValue("timestamp", timestamp);
-	record.setValue("message", message);
-	record.setValue("id", msgId);
-	record.setValue("isSent", !sentByMe);
-	record.setValue("isDelivered", !sentByMe);
-	record.setValue("type", (quint8) type);
-	record.setValue("mediaUrl", mediaUrl);
+	record.setValue("author", msg.author);
+	record.setValue("author_resource", msg.authorResource);
+	record.setValue("recipient", msg.recipient);
+	record.setValue("recipient_resource", msg.recipientResource);
+	record.setValue("timestamp", msg.timestamp);
+	record.setValue("message", msg.message);
+	record.setValue("id", msg.id);
+	record.setValue("isSent", !msg.sentByMe);
+	record.setValue("isDelivered", !msg.sentByMe);
+	record.setValue("type", (quint8) msg.type);
+	record.setValue("mediaUrl", msg.mediaUrl);
+	if (msg.mediaSize)
+		record.setValue("mediaSize", msg.mediaSize);
+	record.setValue("mediaContentType", msg.mediaContentType);
+	if (msg.mediaLastModified)
+		record.setValue("mediaLastModified", msg.mediaLastModified);
+	record.setValue("mediaLocation", msg.mediaLocation);
 
 	if (!insertRecord(rowCount(), record)) {
 		qWarning() << "Failed to add message to DB:" << lastError().text();

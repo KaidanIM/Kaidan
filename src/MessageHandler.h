@@ -86,8 +86,10 @@ public:
 	 * @param body Message body / text of the message
 	 * @param id Custom id used for the message
 	 * @param type Custom message type (useful for media sharing / file uploads)
+	 * @param mediaLocation Location on local storage to media file
 	 */
-	void addMessageToDb(QString &toJid, QString &body, QString id, MessageType type);
+	void addMessageToDb(QString &toJid, QString &body, QString id,
+	                    MessageType type, QString mediaLocation = "");
 
 public slots:
 	void setChatPartner(QString chatPartner);

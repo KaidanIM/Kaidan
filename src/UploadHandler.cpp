@@ -46,8 +46,8 @@
 #include <QDebug>
 
 UploadHandler::UploadHandler(gloox::Client *client, MessageHandler *msgHandler,
-                             QObject *parent)
-	: QObject(parent), client(client), msgHandler(msgHandler)
+                             MessageModel *msgModel, QObject *parent)
+	: QObject(parent), client(client), msgHandler(msgHandler), msgModel(msgModel)
 {
 	manager = new gloox::HttpUploadManager(client);
 	uploader = new QtHttpUploader(manager);
@@ -61,6 +61,7 @@ void UploadHandler::uploadFile(QString jid, QString filePath)
 	QMimeDatabase mimeDb;
 	QMimeType mimeType = mimeDb.mimeTypeForFile(filePath);
 	QString mimeTypeStr = mimeType.name();
+	qDebug() << filePath;
 
 	int id = manager->uploadFile(filePath.toStdString(), true,
 	                             mimeTypeStr.toStdString());
@@ -79,7 +80,7 @@ void UploadHandler::uploadFile(QString jid, QString filePath)
 		QString body = "";
 		msgHandler->addMessageToDb(
 			jid, body, QString::fromStdString(meta.msgId),
-			getMessageType(mimeType)
+			getMessageType(mimeType), filePath
 		);
 	}
 }
@@ -97,6 +98,17 @@ void UploadHandler::handleUploadFinished(int id, std::string &name,
                                          unsigned long &size)
 {
 	qDebug() << "[client] A file upload has finished.";
+	// save new information to database
+	MessageModel::Message msg;
+	msg.mediaUrl = QString::fromStdString(getUrl);
+	msg.mediaContentType = QString::fromStdString(contentType);
+	msg.mediaSize = size;
+	// TODO: mediaLastModified
+
+	emit msgModel->updateMessageRequested(
+		QString::fromStdString(mediaShares[id].msgId), msg
+	);
+
 	// TODO: send SIMS message (and optionally also create jingle object)
 	// for now only send a normal text message with the get URL.
 	QString body = QString::fromStdString(getUrl);

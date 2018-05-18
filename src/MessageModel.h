@@ -51,6 +51,23 @@ public:
 	 */
 	void applyRecipientFilter(QString recipient);
 
+	struct Message {
+		QString author;
+		QString authorResource;
+		QString recipient;
+		QString recipientResource;
+		QString timestamp;
+		QString message;
+		QString id;
+		bool sentByMe;
+		MessageType type;
+		QString mediaUrl;
+		quint64 mediaSize;
+		QString mediaContentType;
+		quint64 mediaLastModified;
+		QString mediaLocation;
+	};
+
 signals:
 	/**
 	 * Emitted when the user opens another chat to apply a filter to the db
@@ -62,24 +79,16 @@ signals:
 	 */
 	void ownJidChanged(QString &jid);
 
-	void addMessageRequested(const QString author, const QString recipient,
-	                         const QString timestamp, const QString message,
-	                         const QString msgId, bool sentByMe, MessageType type,
-	                         const QString mediaUrl = QString(),
-	                         const QString author_resource = QString(),
-	                         const QString recipient_resource = QString());
+	void addMessageRequested(Message msg);
 	void setMessageAsSentRequested(const QString msgId);
 	void setMessageAsDeliveredRequested(const QString msgId);
+	void updateMessageRequested(const QString id, Message msg);
 
 private slots:
-	void addMessage(const QString author, const QString recipient,
-	                const QString timestamp, const QString message,
-	                const QString msgId, bool sentByMe, MessageType type,
-	                const QString mediaUrl = QString(),
-	                const QString author_resource = QString(),
-	                const QString recipient_resource = QString());
+	void addMessage(Message msg);
 	void setMessageAsSent(const QString msgId);
 	void setMessageAsDelivered(const QString msgId);
+	void updateMessage(const QString id, Message msg);
 
 private:
 	QSqlDatabase *database;

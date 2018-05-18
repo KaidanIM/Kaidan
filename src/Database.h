@@ -57,6 +57,7 @@ private:
 	void convertDatabaseToV3();
 	void convertDatabaseToV4();
 	void convertDatabaseToV5();
+	void convertDatabaseToV6();
 	void execQuery(QSqlQuery &query);
 
 	QSqlDatabase database;

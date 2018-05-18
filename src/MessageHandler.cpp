@@ -108,13 +108,13 @@ void MessageHandler::handleMessage(const gloox::Message &stanza, gloox::MessageS
 		//
 
 		// author is only the 'bare' JID: e.g. 'albert@einstein.ch'
-		const QString fromJid = QString::fromStdString(message->from().bare());
-		const QString fromJidResource = QString::fromStdString(message->from().resource());
-		const QString toJid = QString::fromStdString(message->to().bare());
-		const QString toJidResource = QString::fromStdString(message->to().resource());
-		const QString msgId = QString::fromStdString(message->id());
-		const bool isSentByMe = fromJid == QString::fromStdString(client->jid().bare());
-		QString timestamp;
+		MessageModel::Message msg;
+		msg.author = QString::fromStdString(message->from().bare());
+		msg.authorResource = QString::fromStdString(message->from().resource());
+		msg.recipient = QString::fromStdString(message->to().bare());
+		msg.recipientResource = QString::fromStdString(message->to().resource());
+		msg.id = QString::fromStdString(message->id());
+		msg.sentByMe = (msg.author == QString::fromStdString(client->jid().bare()));
 
 		//
 		// If it is a delayed delivery (containing a timestamp), use its timestamp
@@ -122,25 +122,22 @@ void MessageHandler::handleMessage(const gloox::Message &stanza, gloox::MessageS
 
 		const gloox::DelayedDelivery *delayedDelivery = message->when();
 		if (delayedDelivery)
-			timestamp = stringToQDateTime(delayedDelivery->stamp())
+			msg.timestamp = stringToQDateTime(delayedDelivery->stamp())
 			            .toString(Qt::ISODate);
 
 		// fallback: use current time from local clock
-		if (timestamp.isEmpty())
-			timestamp = QDateTime::currentDateTime().toUTC()
+		if (msg.timestamp.isEmpty())
+			msg.timestamp = QDateTime::currentDateTime().toUTC()
 			            .toString(Qt::ISODate);
 
 		// add the message to the database
-		emit messageModel->addMessageRequested(
-			fromJid, toJid, timestamp, body, msgId, isSentByMe,
-			MessageType::MessageText, fromJidResource, toJidResource
-		);
+		emit messageModel->addMessageRequested(msg);
 
 		//
 		// Send a new notification | TODO: Resolve nickname from JID
 		//
 
-		if (!isSentByMe && !isCarbonMessage)
+		if (!msg.sentByMe && !isCarbonMessage)
 			Notifications::sendMessageNotification(message->from().full(), body.toStdString());
 
 		//
@@ -149,7 +146,7 @@ void MessageHandler::handleMessage(const gloox::Message &stanza, gloox::MessageS
 
 		// the contact can differ if the message is really from a contact or just
 		// a forward of another of the user's clients
-		const QString contactJid = isSentByMe ? toJid : fromJid;
+		const QString contactJid = msg.sentByMe ? msg.recipient : msg.author;
 
 		// update the last message for this contact
 		emit rosterModel->setLastMessageRequested(contactJid, body);
@@ -159,7 +156,7 @@ void MessageHandler::handleMessage(const gloox::Message &stanza, gloox::MessageS
 
 		// Increase unread message counter
 		// don't add new unread message if chat is opened or we wrote the message
-		if (!isCarbonMessage && chatPartner != contactJid && !isSentByMe)
+		if (!isCarbonMessage && chatPartner != contactJid && !msg.sentByMe)
 			newUnreadMessageForJid(contactJid);
 	}
 
@@ -226,15 +223,20 @@ void MessageHandler::sendOnlyMessage(QString &toJid, QString &body, const std::s
 }
 
 void MessageHandler::addMessageToDb(QString &toJid, QString &body, QString id,
-                                    MessageType type)
+                                     MessageType type, QString mediaLocation)
 {
 	// add the message to the database
-	const QString timestamp = QDateTime::currentDateTime().toUTC().toString(Qt::ISODate);
-	const QString fromJid = QString::fromStdString(client->jid().bare());
+	MessageModel::Message msg;
+	msg.timestamp = QDateTime::currentDateTime().toUTC().toString(Qt::ISODate);
+	msg.author = QString::fromStdString(client->jid().bare());
+	msg.recipient = toJid;
+	msg.message = body;
+	msg.id = id;
+	msg.sentByMe = true;
+	msg.type = type;
+	msg.mediaLocation = mediaLocation;
 
-	emit messageModel->addMessageRequested(
-		fromJid, toJid, timestamp, body, id, true, type
-	);
+	emit messageModel->addMessageRequested(msg);
 
 	// update the last message for this contact
 	emit rosterModel->setLastMessageRequested(toJid, body);

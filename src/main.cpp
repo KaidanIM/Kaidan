@@ -116,6 +116,7 @@ int main(int argc, char *argv[])
 	// register qMetaTypes
 	qRegisterMetaType<RosterModel*>("RosterModel*");
 	qRegisterMetaType<MessageModel*>("MessageModel*");
+	qRegisterMetaType<MessageModel::Message>("Message");
 	qRegisterMetaType<AvatarFileStorage*>("AvatarFileStorage*");
 	qRegisterMetaType<ContactMap>("ContactMap");
 	qRegisterMetaType<Qt::ApplicationState>("Qt::ApplicationState");

@@ -118,7 +118,9 @@ void ClientThread::run()
 	vCardManager = new VCardManager(client, avatarStorage, rosterModel);
 	rosterManager = new RosterManager(kaidan, client, rosterModel, vCardManager);
 	presenceHandler = new PresenceHandler(client);
-	uploadHandler = new UploadHandler(client, messageSessionHandler->getMessageHandler());
+	uploadHandler = new UploadHandler(
+		client, messageSessionHandler->getMessageHandler(), messageModel
+	);
 	serviceDiscoveryManager = new ServiceDiscoveryManager(
 		client, client->disco(), uploadHandler->getUploadManager()
 	);

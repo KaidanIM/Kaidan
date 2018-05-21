@@ -57,6 +57,7 @@
 #include <gloox/delayeddelivery.h>
 #include "gloox-extensions/httpuploadrequest.h"
 #include "gloox-extensions/httpuploadslot.h"
+#include "gloox-extensions/reference.h"
 
 // package fetch interval in ms
 static const unsigned int KAIDAN_CLIENT_LOOP_INTERVAL = 30;
@@ -138,6 +139,7 @@ void ClientThread::run()
 	client->registerStanzaExtension(new gloox::VCardUpdate());
 	client->registerStanzaExtension(new gloox::HttpUploadRequest());
 	client->registerStanzaExtension(new gloox::HttpUploadSlot());
+	client->registerStanzaExtension(new gloox::Reference(gloox::Reference::Data));
 
 	// connect slots
 	connect(this, &ClientThread::sendMessageRequested,
@@ -148,6 +150,8 @@ void ClientThread::run()
 	        uploadHandler, &UploadHandler::uploadFile);
 	connect(this, &ClientThread::addContactRequested,
 	        rosterManager, &RosterManager::addContact);
+	connect(uploadHandler, &UploadHandler::uploadProgressMade,
+	        kaidan, &Kaidan::uploadProgressMade);
 	connect(this, &ClientThread::removeContactRequested,
 	        rosterManager, &RosterManager::removeContact);
 	connect(kaidan, &Kaidan::vCardRequested, [=](QString jid) {

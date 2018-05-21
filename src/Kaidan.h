@@ -124,7 +124,7 @@ public:
 	/**
 	 * Upload and send file
 	 */
-	Q_INVOKABLE void sendFile(QString jid, QString filePath);
+	Q_INVOKABLE void sendFile(QString jid, QString filePath, QString message);
 
 	/**
 	 * Add a contact to your roster
@@ -345,7 +345,7 @@ signals:
 	void subscriptionRequestAnswered(QString jid, bool accepted);
 
 	/**
-	 * Request VCard of any JID
+	 * Request vCard of any JID
 	 *
 	 * Is required when the avatar (or other information) of a JID are
 	 * requested and the JID is not in the roster.
@@ -358,6 +358,11 @@ signals:
 	 * Is called when Kaidan was used to open an XMPP URI (i.e. 'xmpp:kaidan@muc.kaidan.im?join')
 	 */
 	void xmppUriReceived(QString uri);
+
+	/**
+	 * The upload progress of a file upload has changed
+	 */
+	void uploadProgressMade(QString msgId, unsigned long sent, unsigned long total);
 
 public slots:
 	/**

@@ -59,8 +59,8 @@ Kirigami.ScrollablePage {
 		// TODO: support multiple files
 		// Currently the problem is that the fileUrls list isn't cleared
 		onAccepted: {
-			console.log("You chose: " + fileUrl)
-			kaidan.sendFile(recipientJid, fileUrl)
+			// TODO: Add sheet for entering description, maybe later also image cropping
+			kaidan.sendFile(recipientJid, fileUrl, "")
 		}
 	}
 

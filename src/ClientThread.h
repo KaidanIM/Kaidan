@@ -189,7 +189,7 @@ signals:
 	/**
 	 * Emit to start uploading and sending a file
 	 */
-	void sendFileRequested(QString jid, QString filePath);
+	void sendFileRequested(QString jid, QString filePath, QString message);
 
 	/**
 	 * Emit to add a new contact to the roster.

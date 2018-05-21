@@ -47,8 +47,13 @@ namespace gloox {
 	class MessageSession;
 }
 
+class QMimeType;
+
 using namespace Enums;
 
+/**
+ * @class MessageHandler Handler for incoming and outgoing messages
+ */
 class MessageHandler : public QObject, public gloox::MessageHandler
 {
 	Q_OBJECT
@@ -90,6 +95,11 @@ public:
 	 */
 	void addMessageToDb(QString &toJid, QString &body, QString id,
 	                    MessageType type, QString mediaLocation = "");
+
+	/**
+	 * Get the message type from mime type
+	 */
+	MessageType getMessageType(QMimeType &type);
 
 public slots:
 	void setChatPartner(QString chatPartner);

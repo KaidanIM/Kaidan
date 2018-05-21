@@ -35,12 +35,18 @@
 #include <QDateTime>
 #include <QDebug>
 #include <QString>
+#include <QMimeDatabase>
+#include <QMimeType>
 // gloox
 #include <gloox/client.h>
 #include <gloox/message.h>
 #include <gloox/messagesession.h>
 #include <gloox/receipt.h>
 #include <gloox/carbons.h>
+#include "gloox-extensions/gloox-extensions.h"
+#include "gloox-extensions/reference.h"
+#include "gloox-extensions/sims.h"
+#include "gloox-extensions/jinglefile.h"
 // Kaidan
 #include "MessageModel.h"
 #include "Notifications.h"
@@ -115,6 +121,36 @@ void MessageHandler::handleMessage(const gloox::Message &stanza, gloox::MessageS
 		msg.recipientResource = QString::fromStdString(message->to().resource());
 		msg.id = QString::fromStdString(message->id());
 		msg.sentByMe = (msg.author == QString::fromStdString(client->jid().bare()));
+		msg.message = body;
+		msg.type = MessageType::MessageText; // only text, no media
+
+		//
+		// Get media sharing (SIMS) information
+		//
+
+		const gloox::Reference *ref = message->findExtension
+		                              <gloox::Reference>(gloox::EXT_REFERENCES);
+		if (ref && ref->getEmbeddedSIMS()) {
+			gloox::SIMS *sims = ref->getEmbeddedSIMS();
+			gloox::StringList sources = sims->sources();
+			for (auto &source : sources) {
+				if (source.rfind("https://", 0) == 0 ||
+				    source.rfind("http://", 0) == 0) {
+					msg.mediaUrl = QString::fromStdString(source);
+					break;
+				}
+			}
+
+			gloox::Jingle::File *file = sims->file();
+			if (file && file->valid()) {
+				msg.message = QString::fromStdString(file->desc());
+				msg.mediaSize = file->size();
+				msg.mediaContentType = QString::fromStdString(file->mediaType());
+				msg.mediaLastModified = stringToQDateTime(file->date()).toTime_t();
+				QMimeType mimeType = QMimeDatabase().mimeTypeForName(msg.mediaContentType);
+				msg.type = getMessageType(mimeType);
+			}
+		}
 
 		//
 		// If it is a delayed delivery (containing a timestamp), use its timestamp
@@ -260,4 +296,22 @@ void MessageHandler::resetUnreadMessagesForJid(const QString &jid)
 {
 	// reset the unread message count to 0
 	emit rosterModel->setUnreadMessageCountRequested(jid, 0);
+}
+
+MessageType MessageHandler::getMessageType(QMimeType& type)
+{
+	if (type.inherits("image/jpeg") || type.inherits("image/png") ||
+	    type.inherits("image/gif"))
+		return MessageType::MessageImage;
+	else if (type.inherits("audio/flac") || type.inherits("audio/mp4") ||
+	         type.inherits("audio/ogg") || type.inherits("audio/wav") ||
+	         type.inherits("audio/mpeg") || type.inherits("audio/webm"))
+		return MessageType::MessageAudio;
+	else if (type.inherits("video/mpeg") || type.inherits("video/x-msvideo") ||
+	         type.inherits("video/quicktime") || type.inherits("video/mp4") ||
+	         type.inherits("video/x-matroska"))
+		return MessageType::MessageVideo;
+	else if (type.inherits("text/plain"))
+		return MessageType::MessageDocument;
+	return MessageType::MessageFile;
 }

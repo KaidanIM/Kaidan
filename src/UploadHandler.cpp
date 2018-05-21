@@ -55,7 +55,7 @@ UploadHandler::UploadHandler(gloox::Client *client, MessageHandler *msgHandler,
 	manager->registerHttpUploadHandler(this);
 }
 
-void UploadHandler::uploadFile(QString jid, QString filePath)
+void UploadHandler::uploadFile(QString jid, QString filePath, QString message)
 {
 	// get MIME-type
 	QMimeDatabase mimeDb;
@@ -74,13 +74,14 @@ void UploadHandler::uploadFile(QString jid, QString filePath)
 		MediaSharingMeta meta;
 		meta.jid = jid;
 		meta.msgId = client->getID();
+		meta.message = message;
 
 		mediaShares[id] = meta;
 
-		QString body = "";
+		MessageType type = msgHandler->getMessageType(mimeType);
 		msgHandler->addMessageToDb(
-			jid, body, QString::fromStdString(meta.msgId),
-			getMessageType(mimeType), filePath
+			jid, message, QString::fromStdString(meta.msgId),
+			MessageType::MessageFile, filePath
 		);
 	}
 }
@@ -109,10 +110,41 @@ void UploadHandler::handleUploadFinished(int id, std::string &name,
 		QString::fromStdString(mediaShares[id].msgId), msg
 	);
 
-	// TODO: send SIMS message (and optionally also create jingle object)
-	// for now only send a normal text message with the get URL.
-	QString body = QString::fromStdString(getUrl);
-	msgHandler->sendOnlyMessage(mediaShares[id].jid, body, mediaShares[id].msgId);
+	//
+	// Create SIMS element
+	//
+	// TODO: generate thumbnail
+	// TODO: hashes
+	// TODO: lastModified / date
+	std::string date = "";
+	gloox::Jingle::File *fileInfo = new gloox::Jingle::File(
+		name, size, std::list<gloox::Hash>(), contentType, date,
+		mediaShares[id].message.toStdString()
+	);
+
+	// list of sources for the file (TODO: jingle as fallback)
+	gloox::StringList sources;
+	sources.emplace_back(getUrl);
+
+	gloox::SIMS *sims = new gloox::SIMS(fileInfo, sources);
+
+	gloox::Reference *simsRef = new gloox::Reference(gloox::Reference::Data);
+	simsRef->embedSIMS(sims);
+
+	//
+	// Create message
+	//
+	gloox::JID to(mediaShares[id].jid.toStdString());
+	// message body for clients without SIMS support
+	std::string msgBody = getUrl;
+	if (!mediaShares[id].message.isEmpty())
+		msgBody = msgBody.append("\n").append(mediaShares[id].message.toStdString());
+
+	gloox::Message message(gloox::Message::Chat, to.bareJID(), msgBody);
+	message.setID(mediaShares[id].msgId);
+	message.addExtension((gloox::StanzaExtension*) simsRef);
+
+	client->send(message);
 
 	// the media meta isn't needed anymore, so delete it
 	mediaShares.remove(id);
@@ -134,22 +166,4 @@ void UploadHandler::handleUploadServiceAdded(const gloox::JID &jid,
 
 void UploadHandler::handleFileSizeLimitChanged(unsigned long maxFileSize)
 {
-}
-
-MessageType UploadHandler::getMessageType(QMimeType& type)
-{
-	if (type.inherits("image/jpeg") || type.inherits("image/png") ||
-	    type.inherits("image/gif"))
-		return MessageType::MessageImage;
-	else if (type.inherits("audio/flac") || type.inherits("audio/mp4") ||
-	         type.inherits("audio/ogg") || type.inherits("audio/wav") ||
-	         type.inherits("audio/mpeg") || type.inherits("audio/webm"))
-		return MessageType::MessageAudio;
-	else if (type.inherits("video/mpeg") || type.inherits("video/x-msvideo") ||
-	         type.inherits("video/quicktime") || type.inherits("video/mp4") ||
-	         type.inherits("video/x-matroska"))
-		return MessageType::MessageVideo;
-	else if (type.inherits("text/plain"))
-		return MessageType::MessageDocument;
-	return MessageType::MessageFile;
 }

@@ -228,7 +228,7 @@ class LicenseTarget:
 def main():
 	copyrightTargets = [
 		CopyrightTarget(
-			directories = ["src"],
+			directories = ["src", "utils", "misc"],
 			licenseName = "GPL-3+ with OpenSSL exception"
 		),
 		CopyrightTarget(

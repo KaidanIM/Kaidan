@@ -114,11 +114,15 @@ void UploadHandler::handleUploadFinished(int id, std::string &name,
 	// Create SIMS element
 	//
 	// TODO: generate thumbnail
-	// TODO: hashes
 	// TODO: lastModified / date
+	QtHttpUploader::HashResult hashResults = uploader->getHashResults(id);
+	std::list<gloox::Hash> hashes;
+	hashes.emplace_back(gloox::Hash("sha-256", hashResults.sha256.toBase64().toStdString()));
+	hashes.emplace_back(gloox::Hash("sha3-256", hashResults.sha3_256.toBase64().toStdString()));
+
 	std::string date = "";
 	gloox::Jingle::File *fileInfo = new gloox::Jingle::File(
-		name, size, std::list<gloox::Hash>(), contentType, date,
+		name, size, hashes, contentType, date,
 		mediaShares[id].message.toStdString()
 	);
 

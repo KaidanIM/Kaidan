@@ -34,15 +34,41 @@
 #include <string.h>
 #include "gloox-extensions/httpuploader.h"
 #include <QObject>
+#include <QFile>
+#include <QCryptographicHash>
+#include <QMap>
 
 /**
- * @todo write docs
+ * @class UploadFile Modified QFile for doing uploading and hashing, without
+ * reading multple times
+ */
+class UploadFile : public QFile
+{
+	Q_OBJECT
+
+public:
+	UploadFile(QString name, QObject *parent = nullptr);
+
+	QByteArray read(qint64 maxSize);
+
+signals:
+	void bytesRead(const QByteArray &bytes);
+};
+
+
+/**
+ * @class QtHttpUploader Implementation of an HTTP File Uploader in Qt
  */
 class QtHttpUploader : public QObject, public gloox::HttpUploader
 {
 	Q_OBJECT
 
 public:
+	struct HashResult {
+		QByteArray sha256;
+		QByteArray sha3_256;
+	};
+
 	/**
 	 * Will register this uploader to the HttpUploadManager
 	 *
@@ -72,9 +98,28 @@ public:
 	                        gloox::HeaderFieldMap putHeaders,
 	                        std::string &localPath, std::string &contentType);
 
+	/**
+	 * Get all generated checksums of a file upload
+	 */
+	HashResult getHashResults(int id) const;
+
 private:
+	struct HashData {
+		HashData()
+			: sha256(new QCryptographicHash(QCryptographicHash::Sha256)),
+			sha3_256(new QCryptographicHash(QCryptographicHash::Sha3_256))
+		{
+		};
+
+		QCryptographicHash *sha256;
+		QCryptographicHash *sha3_256;
+	};
+
+	void processHashes(int id, const QByteArray &bytes);
+
 	gloox::HttpUploadManager *manager;
 	unsigned int runningTasks = 0;
+	QMap<int, HashData> hashCache;
 };
 
 #endif // QTHTTPUPLOADER_H

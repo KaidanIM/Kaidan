@@ -41,6 +41,19 @@
 // Kaidan
 #include "Globals.h"
 
+UploadFile::UploadFile(QString name, QObject* parent) :
+	QFile(name, parent)
+{
+}
+
+QByteArray UploadFile::read(qint64 maxSize)
+{
+	QByteArray bytes = QFile::read(maxSize);
+	emit bytesRead(bytes);
+
+	return bytes;
+}
+
 QtHttpUploader::QtHttpUploader(gloox::HttpUploadManager *manager,
                                QObject *parent)
 	: QObject(parent), manager(manager)
@@ -62,37 +75,48 @@ void QtHttpUploader::uploadFile(int id, std::string putUrl,
                                 std::string &localPath, std::string &contentType)
 {
 	// open file for read
-	QFile *file = new QFile(QString::fromStdString(localPath));
+	UploadFile *file = new UploadFile(QString::fromStdString(localPath));
 	if (!file->open(QIODevice::ReadOnly)) {
 		manager->uploadFailed(id, gloox::UploadFileNotFound);
 		return;
 	}
 
-	// get Content-Type
-	if (contentType.empty()) {
-		QMimeDatabase mimeDb;
-		contentType = mimeDb.mimeTypeForFile(QString::fromStdString(
-		                                     localPath)).name().toStdString();
-	}
+	// save empty data (will be used for saving hashing progress)
+	HashData hashData;
+	hashCache[id] = hashData;
 
-	// create http put request
+	// to not read the file several times, we'll generate the hashes directly
+	// while uploading
+	connect(file, &UploadFile::bytesRead, [=] (const QByteArray &bytes) {
+		processHashes(id, bytes);
+	});
+
+
+	//
+	// Create HTTP PUT request
+	//
+
 	QNetworkRequest request(QUrl(QString::fromStdString(putUrl)));
-	request.setHeader(QNetworkRequest::ContentTypeHeader,
-	                  QString::fromStdString(contentType));
+	if (!contentType.empty())
+		request.setHeader(QNetworkRequest::ContentTypeHeader,
+		                  QString::fromStdString(contentType));
 	for (auto &field : putHeaders) {
 		request.setRawHeader(field.first.c_str(), field.second.c_str());
 	}
 
+
 	// send put request and start uploading
 	QNetworkAccessManager *netMngr = new QNetworkAccessManager();
 	QNetworkReply *reply = netMngr->put(request, file);
-
 	runningTasks++;
+
 
 	// handle finished
 	connect(reply, &QNetworkReply::finished, [=] () {
 		runningTasks--;
 		manager->uploadFinished(id);
+		// after this was handled by the manager, we can delete the hashes
+		hashCache.remove(id);
 	});
 
 	// error handling
@@ -100,6 +124,11 @@ void QtHttpUploader::uploadFile(int id, std::string putUrl,
 	        [=] (QNetworkReply::NetworkError code) {
 		runningTasks--;
 		manager->uploadFailed(id, gloox::UploadHttpError);
+
+		hashCache.remove(id);
+		file->deleteLater();
+		netMngr->deleteLater();
+		reply->deleteLater();
 	});
 
 	// upload progress
@@ -111,7 +140,24 @@ void QtHttpUploader::uploadFile(int id, std::string putUrl,
 	});
 
 	// delete everything when finished
-	connect(reply, &QNetworkReply::finished, file, &QFile::deleteLater);
+	connect(reply, &QNetworkReply::finished, file, &UploadFile::deleteLater);
 	connect(reply, &QNetworkReply::finished, netMngr, &QNetworkAccessManager::deleteLater);
 	connect(reply, &QNetworkReply::finished, reply, &QNetworkAccessManager::deleteLater);
+}
+
+void QtHttpUploader::processHashes(int id, const QByteArray &bytes)
+{
+	hashCache[id].sha256->addData(bytes);
+	hashCache[id].sha3_256->addData(bytes);
+}
+
+QtHttpUploader::HashResult QtHttpUploader::getHashResults(int id) const
+{
+	QtHttpUploader::HashResult result;
+	if (!hashCache.contains(id))
+		return result;
+
+	result.sha256 = hashCache[id].sha256->result();
+	result.sha3_256 = hashCache[id].sha3_256->result();
+	return result;
 }

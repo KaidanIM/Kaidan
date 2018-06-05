@@ -1,14 +1,10 @@
 # Kaidan - A user-friendly XMPP client for every device!
 
-[![Build Status](https://travis-ci.org/KaidanIM/Kaidan.svg?branch=master)](https://travis-ci.org/KaidanIM/Kaidan)
 [![Plasma Mobile CI Build Status](https://img.shields.io/jenkins/s/http/mobile.neon.pangea.pub:8080/job/xenial_unstable_KaidanIM_kaidan-packaging-deb.svg)](http://mobile.neon.pangea.pub:8080/job/xenial_unstable_KaidanIM_kaidan-packaging-deb)
-[![Release](https://img.shields.io/github/release/kaidanim/kaidan.svg)](https://github.com/kaidanim/kaidan/releases)
-[![Downloads](https://img.shields.io/github/downloads/kaidanim/kaidan/total.svg)](https://github.com/kaidanim/kaidan/releases)
-[![Issues](https://img.shields.io/github/issues/kaidanim/kaidan.svg)](https://github.com/kaidanim/kaidan/issues)
 [![Translation](https://hosted.weblate.org/widgets/kaidan/-/svg-badge.svg)](https://hosted.weblate.org/projects/kaidan/translations/)
 [![license](https://img.shields.io/badge/License-GPLv3%2B%20%2F%20CC%20BY--SA%204.0-blue.svg)](https://raw.githubusercontent.com/kaidanim/kaidan/master/LICENSE)
 
-![](https://user-images.githubusercontent.com/13557034/34342627-3f82443e-e9b6-11e7-9898-05205e9e9f9b.png)
+![Kaidan v0.3 screenshot](https://git.kaidan.im/kaidan/kaidan/uploads/da4886ea50581517bde0278a804b311c/kaidan-screenshot-0.3.png)
 
 ## About
 
@@ -78,7 +74,7 @@ sudo apt install apt-transport-https git-core cmake build-essential zlib1g-dev \
 #### Get the source code:
 
 ```bash
-git clone https://github.com/kaidanim/kaidan
+git clone https://git.kaidan.im/kaidan/kaidan
 ```
 
 #### Compile it:
@@ -124,14 +120,9 @@ clickable setup-docker
 Now, you can clone our Kaidan repository using git and start building kaidan using clickable.
 
 ```bash
-git clone https://github.com/kaidanim/kaidan
+git clone https://git.kaidan.im/kaidan/kaidan
 cd kaidan
 clickable clean build click-build
 ```
 
 The built click package will be located at `bin/ubuntu-touch/`.
-
-----
-
-![GPLv3](https://www.gnu.org/graphics/gplv3-127x51.png)
-![CC BY-SA 4.0](https://i.creativecommons.org/l/by-sa/4.0/88x31.png)

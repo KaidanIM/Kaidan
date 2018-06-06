@@ -71,8 +71,8 @@ RowLayout {
 			height: parent.height
 			width: parent.width
 			color: sentByMe ? "white" : "#4c9b4a"
-			radius: 12
-			border.width: 1
+			radius: Kirigami.Units.smallSpacing * 2
+			border.width: Kirigami.Units.smallSpacing * 0.2
 			border.color: "#E1DFDF"
 		}
 
@@ -83,23 +83,23 @@ RowLayout {
 				id: label
 				width: Math.min(implicitWidth, pageStack.lastItem.width * 0.8)
 				height: implicitHeight
-				leftPadding: Kirigami.Units.gridUnit * 0.5
-				rightPadding: Kirigami.Units.gridUnit * 0.5
-				topPadding: Kirigami.Units.gridUnit * 0.5
-				bottomPadding: Kirigami.Units.gridUnit * 0.2
+				leftPadding: Kirigami.Units.smallSpacing * 2
+				rightPadding: Kirigami.Units.smallSpacing * 2
+				topPadding: Kirigami.Units.smallSpacing
+				bottomPadding: Kirigami.Units.smallSpacing * 0.5
 				text: messageBody
 				textFormat: Text.PlainText
 				wrapMode: Text.Wrap
-				font.pixelSize: 16
+				font.pointSize: 11
 				color: sentByMe ? "black" : "white"
 			}
 
 			Row {
 				id: messageInfo
-				leftPadding: Kirigami.Units.gridUnit * 0.5
-				rightPadding: Kirigami.Units.gridUnit * 0.5
-				bottomPadding: Kirigami.Units.gridUnit * 0.5
-				spacing: Kirigami.Units.gridUnit * 0.5
+				leftPadding: Kirigami.Units.smallSpacing * 2
+				rightPadding: Kirigami.Units.smallSpacing * 2
+				bottomPadding: Kirigami.Units.smallSpacing
+				spacing: Kirigami.Units.smallSpacing
 
 				Controls.Label {
 					id: dateLabel

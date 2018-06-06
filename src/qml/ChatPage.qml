@@ -66,11 +66,11 @@ Kirigami.Page {
 		ListView {
 			Layout.fillWidth: true
 			Layout.fillHeight: true
-			bottomMargin: 20
+			bottomMargin: Kirigami.Units.gridUnit
 
 			verticalLayoutDirection: ListView.BottomToTop
 
-			spacing: 12
+			spacing: Kirigami.Units.smallSpacing * 2
 
 			// connect the database
 			model: kaidan.messageModel

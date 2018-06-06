@@ -13,6 +13,8 @@ echo "*****************************************"
 
 if [ ${PLATFORM} == "linux-desktop" ]; then
 	install_linux-desktop_deps
+elif [ ${PLATFORM} == "osx" ]; then
+	install_osx_deps
 elif [ ${PLATFORM} == "ubuntu-touch" ]; then
 	install_ubuntu-touch_deps
 else

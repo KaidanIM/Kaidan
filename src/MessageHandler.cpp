@@ -149,6 +149,8 @@ void MessageHandler::handleMessage(const gloox::Message &stanza, gloox::MessageS
 				msg.mediaLastModified = stringToQDateTime(file->date()).toTime_t();
 				QMimeType mimeType = QMimeDatabase().mimeTypeForName(msg.mediaContentType);
 				msg.type = getMessageType(mimeType);
+				for (gloox::Hash &hash : file->hashes())
+					msg.mediaHashes.append(QString::fromStdString(hash.tag()->xml()));
 			}
 		}
 

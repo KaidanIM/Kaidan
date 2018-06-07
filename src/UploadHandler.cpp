@@ -99,28 +99,28 @@ void UploadHandler::handleUploadFinished(int id, std::string &name,
                                          unsigned long &size)
 {
 	qDebug() << "[client] A file upload has finished.";
-	// save new information to database
+	// prepare new database message
 	MessageModel::Message msg;
 	msg.mediaUrl = QString::fromStdString(getUrl);
 	msg.mediaContentType = QString::fromStdString(contentType);
 	msg.mediaSize = size;
-	// TODO: mediaLastModified
 
-	emit msgModel->updateMessageRequested(
-		QString::fromStdString(mediaShares[id].msgId), msg
-	);
-
-	//
-	// Create SIMS element
-	//
 	// TODO: generate thumbnail
 	// TODO: lastModified / date
+
+	// Hashes
 	QtHttpUploader::HashResult hashResults = uploader->getHashResults(id);
 	std::list<gloox::Hash> hashes;
 	hashes.emplace_back(gloox::Hash("sha-256", hashResults.sha256.toBase64().toStdString()));
 	hashes.emplace_back(gloox::Hash("sha3-256", hashResults.sha3_256.toBase64().toStdString()));
+	// save hashes in database field
+	for (gloox::Hash &hash : hashes)
+		msg.mediaHashes.append(QString::fromStdString(hash.tag()->xml()));
 
+	// last modified date
 	std::string date = "";
+
+	// file meta information
 	gloox::Jingle::File *fileInfo = new gloox::Jingle::File(
 		name, size, hashes, contentType, date,
 		mediaShares[id].message.toStdString()
@@ -130,14 +130,11 @@ void UploadHandler::handleUploadFinished(int id, std::string &name,
 	gloox::StringList sources;
 	sources.emplace_back(getUrl);
 
+	// create message
 	gloox::SIMS *sims = new gloox::SIMS(fileInfo, sources);
-
 	gloox::Reference *simsRef = new gloox::Reference(gloox::Reference::Data);
 	simsRef->embedSIMS(sims);
 
-	//
-	// Create message
-	//
 	gloox::JID to(mediaShares[id].jid.toStdString());
 	// message body for clients without SIMS support
 	std::string msgBody = getUrl;
@@ -149,6 +146,11 @@ void UploadHandler::handleUploadFinished(int id, std::string &name,
 	message.addExtension((gloox::StanzaExtension*) simsRef);
 
 	client->send(message);
+
+	// save to database
+	emit msgModel->updateMessageRequested(
+		QString::fromStdString(mediaShares[id].msgId), msg
+	);
 
 	// the media meta isn't needed anymore, so delete it
 	mediaShares.remove(id);

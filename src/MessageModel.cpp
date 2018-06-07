@@ -106,38 +106,49 @@ void MessageModel::setMessageAsDelivered(const QString msgId)
 
 void MessageModel::updateMessage(const QString id, Message msg)
 {
-	QStringList list;
+	QMap<QString, QVariant> values;
 	if (!msg.timestamp.isEmpty())
-		list << QString("'timestamp' = '%1'").arg(msg.timestamp);
+		values["timestamp"] = msg.timestamp;
 	if (!msg.message.isEmpty())
-		list << QString("'message' = '%1'").arg(msg.message);
+		values["message"] = msg.message;
 	if (!msg.id.isEmpty())
-		list << QString("'id' = '%1'").arg(msg.id);
+		values["id"] = msg.id;
 	if (!msg.mediaUrl.isEmpty())
-		list << QString("'mediaUrl' = '%1'").arg(msg.mediaUrl);
+		values["mediaUrl"] = msg.mediaUrl;
 	if (msg.mediaSize)
-		list << QString("'mediaSize' = %1").arg(msg.mediaSize);
+		values["mediaSize"] = msg.mediaSize;
 	if (!msg.mediaContentType.isEmpty())
-		list << QString("'mediaContentType' = '%1'").arg(msg.mediaContentType);
+		values["mediaContentType"] = msg.mediaContentType;
 	if (msg.mediaLastModified)
-		list << QString("'mediaLastModified' = %1").arg(msg.mediaLastModified);
+		values["mediaLastModified"] = msg.mediaLastModified;
 	if (!msg.mediaLocation.isEmpty())
-		list << QString("'mediaLocation' = '%1'").arg(msg.mediaLocation);
+		values["mediaLocation"] = msg.mediaLocation;
+	if (!msg.mediaThumb.isEmpty())
+		values["mediaThumb"] = msg.mediaThumb;
+	if (!msg.mediaHashes.isEmpty())
+		values["mediaHashes"] = msg.mediaHashes;
 
-	QString sets;
+	// generate command
+	QString command = "UPDATE 'Messages' SET ";
 	bool isFirst = true;
-	for (auto part : list) {
+	for (auto key : values.keys()) {
 		if (!isFirst)
-			sets.append(", ");
-		sets.append(part);
+			command.append(", ");
+		command.append(QString("%1 = :%1").arg(key));
 		isFirst = false;
 	}
-
-	QString command = "UPDATE 'Messages' SET %1 WHERE 'id' = '%2'";
-	command = command.arg(sets, id);
+	command.append(QString(" WHERE 'id' = '%1'").arg(id));
 
 	QSqlQuery query(*database);
-	query.exec(command);
+	query.prepare(command);
+	for (auto key : values.keys()) {
+		query.bindValue(QString(":%1").arg(key), values[key]);
+	}
+
+	if (!query.exec()) {
+		qDebug() << query.executedQuery();
+		qWarning("Failed to query database: %s", qPrintable(query.lastError().text()));
+	}
 }
 
 void MessageModel::addMessage(Message msg)
@@ -164,6 +175,8 @@ void MessageModel::addMessage(Message msg)
 	if (msg.mediaLastModified)
 		record.setValue("mediaLastModified", msg.mediaLastModified);
 	record.setValue("mediaLocation", msg.mediaLocation);
+	record.setValue("mediaThumb", msg.mediaThumb);
+	record.setValue("mediaHashes", msg.mediaHashes);
 
 	if (!insertRecord(rowCount(), record)) {
 		qWarning() << "Failed to add message to DB:" << lastError().text();

@@ -66,6 +66,8 @@ public:
 		QString mediaContentType;
 		quint64 mediaLastModified;
 		QString mediaLocation;
+		QByteArray mediaThumb;
+		QString mediaHashes;
 	};
 
 signals:

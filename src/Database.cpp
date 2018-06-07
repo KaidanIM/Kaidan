@@ -41,7 +41,7 @@
 #include <QSqlQuery>
 #include <QSqlRecord>
 
-static const int DATABASE_LATEST_VERSION = 6;
+static const int DATABASE_LATEST_VERSION = 7;
 static const char *DATABASE_TABLE_INFO = "dbinfo";
 static const char *DATABASE_TABLE_MESSAGES = "Messages";
 static const char *DATABASE_TABLE_ROSTER = "Roster";
@@ -139,6 +139,8 @@ void Database::convertDatabase()
 			convertDatabaseToV5(); version = 5; break;
 		case 5:
 			convertDatabaseToV6(); version = 6; break;
+		case 6:
+			convertDatabaseToV7(); version = 7; break;
 		default:
 			break;
 		}
@@ -204,6 +206,8 @@ void Database::createNewDatabase()
 	    "'mediaContentType' TEXT,"
 	    "'mediaLastModified' INTEGER,"
 	    "'mediaLocation' TEXT,"
+	    "'mediaThumb' BLOB,"
+	    "'mediaHashes' TEXT,"
 	    "FOREIGN KEY('author') REFERENCES Roster ('jid'),"
 	    "FOREIGN KEY('recipient') REFERENCES Roster ('jid')"
 	    ")"
@@ -288,6 +292,15 @@ void Database::convertDatabaseToV6()
 		query.prepare(QString("ALTER TABLE 'Messages' ADD ").append(column));
 		execQuery(query);
 	}
+}
+
+void Database::convertDatabaseToV7()
+{
+	QSqlQuery query(database);
+	query.prepare(QString("ALTER TABLE 'Messages' ADD 'mediaThumb' BLOB"));
+	execQuery(query);
+	query.prepare(QString("ALTER TABLE 'Messages' ADD 'mediaHashes' TEXT"));
+	execQuery(query);
 }
 
 void Database::execQuery(QSqlQuery &query)

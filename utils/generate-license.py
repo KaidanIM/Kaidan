@@ -35,6 +35,7 @@ REPLACE_USER_IDS = [
 	("Ellenjott [LNJ] <git@lnj.li>", "LNJ <git@lnj.li>"),
 	("JBBgameich <jbbgameich@outlook.com>", "JBB <jbb.prv@gmx.de>"),
 	("JBBgameich <jbbgameich@gmail.com>", "JBB <jbb.prv@gmx.de>"),
+	("JBBgameich <jbb.prv@gmx.de>", "JBB <jbb.prv@gmx.de>"),
 	("Linus Jahn <linus.jahn@searchmetrics.com>", "LNJ <git@lnj.li>"),
 	("Georg <s.g.b@gmx.de>", "geobra <s.g.b@gmx.de>")
 ]

@@ -96,8 +96,8 @@ Controls.Dialog {
 			}
 
 			Controls.ToolButton {
-				text: qsTr("Source code on GitHub")
-				onClicked: Qt.openUrlExternally("https://github.com/KaidanIM/Kaidan")
+				text: qsTr("View source code online")
+				onClicked: Qt.openUrlExternally("https://git.kaidan.im/kaidan/kaidan")
 				Layout.fillWidth: true
 				Layout.alignment: Qt.AlignHCenter
 			}

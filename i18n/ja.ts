@@ -13,7 +13,11 @@
     </message>
     <message>
         <source>Source code on GitHub</source>
-        <translation type="unfinished">ソースコードは GitHub 上で公開</translation>
+        <translation type="obsolete">ソースコードは GitHub 上で公開</translation>
+    </message>
+    <message>
+        <source>View source code online</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

@@ -13,7 +13,11 @@
     </message>
     <message>
         <source>Source code on GitHub</source>
-        <translation>Kildekode på GitHub</translation>
+        <translation type="vanished">Kildekode på GitHub</translation>
+    </message>
+    <message>
+        <source>View source code online</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

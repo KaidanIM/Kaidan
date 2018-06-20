@@ -13,7 +13,11 @@
     </message>
     <message>
         <source>Source code on GitHub</source>
-        <translation type="unfinished">Código-fonte no GitHub</translation>
+        <translation type="obsolete">Código-fonte no GitHub</translation>
+    </message>
+    <message>
+        <source>View source code online</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

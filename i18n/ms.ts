@@ -12,7 +12,7 @@
         <translation type="unfinished">Lesen:</translation>
     </message>
     <message>
-        <source>Source code on GitHub</source>
+        <source>View source code online</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

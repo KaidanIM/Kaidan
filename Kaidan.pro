@@ -37,6 +37,7 @@ SOURCES += \
     src/gloox-extensions/bitsofbinarymemorycache.cpp \
     src/gloox-extensions/reference.cpp \
     src/gloox-extensions/processinghints.cpp \
+    src/gloox-extensions/thumb.cpp \
     src/gloox-extensions/hash.cpp
 
 HEADERS += \
@@ -76,6 +77,7 @@ HEADERS += \
     src/gloox-extensions/bitsofbinarymemorycache.h \
     src/gloox-extensions/reference.h \
     src/gloox-extensions/processinghints.h \
+    src/gloox-extensions/thumb.h \
     src/gloox-extensions/hash.h
 
 

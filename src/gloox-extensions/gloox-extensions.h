@@ -106,6 +106,13 @@ namespace gloox {
 	static const std::string XMLNS_HASH_BLAKE2B_256 = "urn:xmpp:hash-function-text-names:id-blake2b256";
 	static const std::string XMLNS_HASH_BLAKE2B_384 = "urn:xmpp:hash-function-text-names:id-blake2b384";
 	static const std::string XMLNS_HASH_BLAKE2B_512 = "urn:xmpp:hash-function-text-names:id-blake2b512";
+
+	//
+	// XEP-0264: Jingle Content Thumbnails
+	//
+
+	static const std::string XMLNS_THUMBS = "urn:xmpp:thumbs:1";
+	static const int EXT_THUMBS = 4277;
 }
 
 #endif // GLOOXEXTS_H__

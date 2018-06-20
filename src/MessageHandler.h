@@ -66,6 +66,12 @@ public:
 	virtual void handleMessage(const gloox::Message &message, gloox::MessageSession *session = 0);
 
 	/**
+	 * Handles and processes media sharing content of messages
+	 */
+	void handleMediaSharing(const gloox::Message *message,
+	                        MessageModel::Message *msg);
+
+	/**
 	 * Handles a message with a possible receipt or receipt request
 	 */
 	void handleReceiptMessage(const gloox::Message *message,

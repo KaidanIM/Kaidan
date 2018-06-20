@@ -47,6 +47,7 @@
 #include "gloox-extensions/reference.h"
 #include "gloox-extensions/sims.h"
 #include "gloox-extensions/jinglefile.h"
+#include "gloox-extensions/bitsofbinarydata.h"
 // Kaidan
 #include "MessageModel.h"
 #include "Notifications.h"
@@ -124,35 +125,8 @@ void MessageHandler::handleMessage(const gloox::Message &stanza, gloox::MessageS
 		msg.message = body;
 		msg.type = MessageType::MessageText; // only text, no media
 
-		//
-		// Get media sharing (SIMS) information
-		//
-
-		const gloox::Reference *ref = message->findExtension
-		                              <gloox::Reference>(gloox::EXT_REFERENCES);
-		if (ref && ref->getEmbeddedSIMS()) {
-			gloox::SIMS *sims = ref->getEmbeddedSIMS();
-			gloox::StringList sources = sims->sources();
-			for (auto &source : sources) {
-				if (source.rfind("https://", 0) == 0 ||
-				    source.rfind("http://", 0) == 0) {
-					msg.mediaUrl = QString::fromStdString(source);
-					break;
-				}
-			}
-
-			gloox::Jingle::File *file = sims->file();
-			if (file && file->valid()) {
-				msg.message = QString::fromStdString(file->desc());
-				msg.mediaSize = file->size();
-				msg.mediaContentType = QString::fromStdString(file->mediaType());
-				msg.mediaLastModified = stringToQDateTime(file->date()).toTime_t();
-				QMimeType mimeType = QMimeDatabase().mimeTypeForName(msg.mediaContentType);
-				msg.type = getMessageType(mimeType);
-				for (gloox::Hash &hash : file->hashes())
-					msg.mediaHashes.append(QString::fromStdString(hash.tag()->xml()));
-			}
-		}
+		// handle media sharing (SIMS) content
+		handleMediaSharing(const_cast<gloox::Message*>(message), &msg);
 
 		//
 		// If it is a delayed delivery (containing a timestamp), use its timestamp
@@ -201,6 +175,59 @@ void MessageHandler::handleMessage(const gloox::Message &stanza, gloox::MessageS
 	// XEP-0184: Message Delivery Receipts
 	// try to handle a possible delivery receipt
 	handleReceiptMessage(message, isCarbonMessage);
+}
+
+void MessageHandler::handleMediaSharing(const gloox::Message *message,
+                                        MessageModel::Message *msg)
+{
+	//
+	// Get media sharing (SIMS) information
+	//
+
+	const gloox::Reference *ref = message->findExtension
+						<gloox::Reference>(gloox::EXT_REFERENCES);
+	if (ref && ref->getEmbeddedSIMS()) {
+		gloox::SIMS *sims = ref->getEmbeddedSIMS();
+		gloox::StringList sources = sims->sources();
+		for (auto &source : sources) {
+			if (source.rfind("https://", 0) == 0 ||
+				source.rfind("http://", 0) == 0) {
+				msg->mediaUrl = QString::fromStdString(source);
+				break;
+			}
+		}
+
+		gloox::Jingle::File *file = sims->file();
+		if (file && file->valid()) {
+			msg->message = QString::fromStdString(file->desc());
+			msg->mediaSize = file->size();
+			msg->mediaContentType = QString::fromStdString(file->mediaType());
+			msg->mediaLastModified = stringToQDateTime(file->date()).toTime_t();
+			QMimeType mimeType = QMimeDatabase().mimeTypeForName(msg->mediaContentType);
+			msg->type = getMessageType(mimeType);
+			for (gloox::Hash &hash : file->hashes())
+				msg->mediaHashes.append(QString::fromStdString(hash.tag()->xml()));
+
+			// extract thumbnail
+			const gloox::Jingle::Thumb *thumb = file->thumb();
+			if (thumb && thumb->valid()) {
+				// check if uri is valid (it is a BoB content id [cid])
+				std::string uri = thumb->uri();
+				if (uri.rfind("cid:", 0) == 0) {
+					const gloox::BitsOfBinaryData *thumbData = message->
+						findExtension<gloox::BitsOfBinaryData>(gloox::EXT_BITSOFBINARY);
+
+					// check if thumbnail uri matches the attached data uri
+					if (thumbData && thumb->uri() == uri.substr(4, uri.length() - 4)) {
+						// save media thumbnail
+						msg->mediaThumb = QByteArray::fromBase64(
+							QByteArray::fromStdString(thumbData->data())
+						);
+					}
+				}
+			}
+		}
+	}
 }
 
 void MessageHandler::handleReceiptMessage(const gloox::Message *message,

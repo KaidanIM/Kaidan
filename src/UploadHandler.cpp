@@ -33,16 +33,21 @@
 #include "MessageHandler.h"
 // gloox
 #include <gloox/message.h>
+#include <gloox/base64.h>
 #include "gloox-extensions/httpuploadmanager.h"
 #include "gloox-extensions/reference.h"
 #include "gloox-extensions/sims.h"
 #include "gloox-extensions/processinghints.h"
 #include "gloox-extensions/jinglefile.h"
 #include "gloox-extensions/hash.h"
+#include "gloox-extensions/thumb.h"
+#include "gloox-extensions/bitsofbinarydata.h"
 // Qt
 #include <QMimeDatabase>
 #include <QMimeType>
 #include <QDateTime>
+#include <QBuffer>
+#include <QImage>
 #include <QDebug>
 
 UploadHandler::UploadHandler(gloox::Client *client, MessageHandler *msgHandler,
@@ -61,7 +66,6 @@ void UploadHandler::uploadFile(QString jid, QString filePath, QString message)
 	QMimeDatabase mimeDb;
 	QMimeType mimeType = mimeDb.mimeTypeForFile(filePath);
 	QString mimeTypeStr = mimeType.name();
-	qDebug() << filePath;
 
 	int id = manager->uploadFile(filePath.toStdString(), true,
 	                             mimeTypeStr.toStdString());
@@ -75,10 +79,11 @@ void UploadHandler::uploadFile(QString jid, QString filePath, QString message)
 		meta.jid = jid;
 		meta.msgId = client->getID();
 		meta.message = message;
+		meta.filePath = filePath;
+		meta.type = msgHandler->getMessageType(mimeType);
 
 		mediaShares[id] = meta;
 
-		MessageType type = msgHandler->getMessageType(mimeType);
 		msgHandler->addMessageToDb(
 			jid, message, QString::fromStdString(meta.msgId),
 			MessageType::MessageFile, filePath
@@ -91,6 +96,8 @@ void UploadHandler::handleUploadFailed(int id, gloox::HttpUploadError error,
                                        const std::string &stamp)
 {
 	qDebug() << "[client] A file upload has failed.";
+	// the media meta isn't needed anymore, so delete it
+	mediaShares.remove(id);
 }
 
 void UploadHandler::handleUploadFinished(int id, std::string &name,
@@ -105,7 +112,6 @@ void UploadHandler::handleUploadFinished(int id, std::string &name,
 	msg.mediaContentType = QString::fromStdString(contentType);
 	msg.mediaSize = size;
 
-	// TODO: generate thumbnail
 	// TODO: lastModified / date
 
 	// Hashes
@@ -120,10 +126,30 @@ void UploadHandler::handleUploadFinished(int id, std::string &name,
 	// last modified date
 	std::string date = "";
 
+	// thumbnail
+	QSize thumbSize = generateMediaThumb(mediaShares[id].filePath,
+	                                     mediaShares[id].type, &msg.mediaThumb);
+	gloox::Jingle::Thumb *thumb = nullptr;
+	gloox::BitsOfBinaryData *thumbBob = nullptr;
+	if (!msg.mediaThumb.isEmpty()) {
+		// encode to base64
+		std::string thumbData = gloox::Base64::encode64(
+			std::string(msg.mediaThumb.constData(), msg.mediaThumb.length())
+		);
+		// create BoB content identifier
+		std::string thumbCid = gloox::BitsOfBinaryData::generateContentId(thumbData);
+		// create BoB data object
+		thumbBob = new gloox::BitsOfBinaryData(thumbData, thumbCid, "image/jpeg");
+		// create thumb object (links to BoB data)
+		thumb = new gloox::Jingle::Thumb(
+			"cid:" + thumbCid, thumbSize.width(), thumbSize.height(), "image/jpeg"
+		);
+	}
+
 	// file meta information
 	gloox::Jingle::File *fileInfo = new gloox::Jingle::File(
 		name, size, hashes, contentType, date,
-		mediaShares[id].message.toStdString()
+		mediaShares[id].message.toStdString(), thumb
 	);
 
 	// list of sources for the file (TODO: jingle as fallback)
@@ -144,6 +170,8 @@ void UploadHandler::handleUploadFinished(int id, std::string &name,
 	gloox::Message message(gloox::Message::Chat, to.bareJID(), msgBody);
 	message.setID(mediaShares[id].msgId);
 	message.addExtension((gloox::StanzaExtension*) simsRef);
+	if (thumbBob)
+		message.addExtension(thumbBob); // thumbnail BoB data
 
 	client->send(message);
 
@@ -172,4 +200,26 @@ void UploadHandler::handleUploadServiceAdded(const gloox::JID &jid,
 
 void UploadHandler::handleFileSizeLimitChanged(unsigned long maxFileSize)
 {
+}
+
+QSize UploadHandler::generateMediaThumb(QString &filePath, MessageType type,
+                                       QByteArray *bytes)
+{
+	if (type != MessageType::MessageImage)
+		return QSize(0, 0);
+
+	// results should be about 1-3 kB large
+	int finalSize = 40;
+
+	QImage img(filePath);
+	// Qt::FastTransformation is used because quality doesn't matter at this
+	// size; you won't be able to really see a large difference
+	img = img.scaled(finalSize, finalSize, Qt::KeepAspectRatio, Qt::FastTransformation);
+
+	// save image to byte array
+	QBuffer buffer(bytes);
+	buffer.open(QIODevice::WriteOnly);
+	img.save(&buffer, "JPEG", 90);
+
+	return img.size();
 }

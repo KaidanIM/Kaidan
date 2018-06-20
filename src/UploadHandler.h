@@ -37,6 +37,11 @@
 // Qt
 #include <QObject>
 #include <QMap>
+#include <QSize>
+// Kaidan
+#include "Enums.h"
+
+using namespace Enums;
 
 namespace gloox {
 	class Client;
@@ -133,10 +138,18 @@ protected:
 	                                const std::string &stamp = gloox::EmptyString);
 
 private:
+	/**
+	 * Generates a media thumbnail (currently only image thumbs)
+	 */
+	QSize generateMediaThumb(QString &filePath, MessageType type,
+	                        QByteArray *bytes);
+
 	struct MediaSharingMeta {
 		QString jid;
 		std::string msgId;
 		QString message;
+		QString filePath;
+		MessageType type;
 	};
 
 	gloox::Client *client;

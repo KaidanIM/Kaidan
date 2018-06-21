@@ -31,6 +31,20 @@ For a list of supported XEPs, have a look at the [Wiki](https://github.com/Kaida
 * [Ubuntu Touch (click package)](#compile-kaidan-for-ubuntu-touch)
 
 
+### Flatpak capable systems (most recent Linux distributions)
+
+Kaidan flatpak builds are kindly provided by KDE. Add their repository to your system
+```
+flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
+flatpak remote-add --if-not-exists kdeapps --from https://distribute.kde.org/kdeapps.flatpakrepo
+```
+
+You can now install kaidan
+
+```
+flatpak install kdeapps im.kaidan.kaidan
+```
+
 ### Debian sid based systems
 
 Add our APT repository to your system

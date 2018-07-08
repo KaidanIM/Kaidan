@@ -134,13 +134,6 @@ int main(int argc, char *argv[])
 	kaidanTranslator.load(QLocale::system().name(), ":/i18n");
 	app.installTranslator(&kaidanTranslator);
 
-
-	//
-	// Kaidan back-end
-	//
-
-	Kaidan kaidan(&app);
-
 	//
 	// Command line arguments
 	//
@@ -166,6 +159,11 @@ int main(int argc, char *argv[])
 		break;
 	}
 
+	//
+	// Kaidan back-end
+	//
+
+	Kaidan kaidan(&app);
 
 	//
 	// QML-GUI

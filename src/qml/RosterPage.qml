@@ -32,7 +32,7 @@ import QtQuick 2.0
 import QtQuick.Layouts 1.3
 import QtQuick.Controls 2.0 as Controls
 import org.kde.kirigami 2.0 as Kirigami
-import io.github.kaidanim 1.0
+import im.kaidan.kaidan 1.0
 import "elements"
 
 Kirigami.ScrollablePage {

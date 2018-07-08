@@ -32,7 +32,7 @@ import QtQuick 2.7
 import QtQuick.Controls.Material 2.0
 import org.kde.kirigami 2.3 as Kirigami
 import StatusBar 0.1
-import io.github.kaidanim 1.0
+import im.kaidan.kaidan 1.0
 import "elements"
 
 Kirigami.ApplicationWindow {

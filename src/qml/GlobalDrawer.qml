@@ -29,7 +29,7 @@
  */
 
 import org.kde.kirigami 2.0 as Kirigami
-import io.github.kaidanim 1.0
+import im.kaidan.kaidan 1.0
 
 Kirigami.GlobalDrawer {
 	id: globalDrawer

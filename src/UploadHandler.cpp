@@ -49,6 +49,7 @@
 #include <QBuffer>
 #include <QImage>
 #include <QDebug>
+#include <QFileInfo>
 
 UploadHandler::UploadHandler(gloox::Client *client, MessageHandler *msgHandler,
                              MessageModel *msgModel, QObject *parent)
@@ -95,7 +96,7 @@ void UploadHandler::handleUploadFailed(int id, gloox::HttpUploadError error,
                                        const std::string &text,
                                        const std::string &stamp)
 {
-	qDebug() << "[client] A file upload has failed.";
+	qDebug() << "[client] A file upload has failed." << error;
 	// the media meta isn't needed anymore, so delete it
 	mediaShares.remove(id);
 }
@@ -112,8 +113,6 @@ void UploadHandler::handleUploadFinished(int id, std::string &name,
 	msg.mediaContentType = QString::fromStdString(contentType);
 	msg.mediaSize = size;
 
-	// TODO: lastModified / date
-
 	// Hashes
 	QtHttpUploader::HashResult hashResults = uploader->getHashResults(id);
 	std::list<gloox::Hash> hashes;
@@ -124,11 +123,16 @@ void UploadHandler::handleUploadFinished(int id, std::string &name,
 		msg.mediaHashes.append(QString::fromStdString(hash.tag()->xml()));
 
 	// last modified date
-	std::string date = "";
+	QFileInfo fInfo(mediaShares[id].filePath);
+	QDateTime modifyTime = fInfo.lastModified();
+
+	msg.mediaLastModified = modifyTime.isValid() ? modifyTime.toTime_t() : -1;
+	std::string modifyTimeStr = modifyTime.isValid() ? modifyTime.toUTC()
+	                            .toString(Qt::ISODate).toStdString() : "";
 
 	// thumbnail
-	QSize thumbSize = generateMediaThumb(mediaShares[id].filePath,
-	                                     mediaShares[id].type, &msg.mediaThumb);
+	QSize thumbSize = generateMediaThumb(mediaShares[id].filePath, mediaShares[id].type,
+	                                     &msg.mediaThumb);
 	gloox::Jingle::Thumb *thumb = nullptr;
 	gloox::BitsOfBinaryData *thumbBob = nullptr;
 	if (!msg.mediaThumb.isEmpty()) {
@@ -148,7 +152,7 @@ void UploadHandler::handleUploadFinished(int id, std::string &name,
 
 	// file meta information
 	gloox::Jingle::File *fileInfo = new gloox::Jingle::File(
-		name, size, hashes, contentType, date,
+		name, size, hashes, contentType, modifyTimeStr,
 		mediaShares[id].message.toStdString(), thumb
 	);
 

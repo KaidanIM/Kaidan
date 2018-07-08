@@ -17,7 +17,7 @@
     </message>
     <message>
         <source>View source code online</source>
-        <translation type="unfinished"></translation>
+        <translation>Quellcode online einsehen</translation>
     </message>
 </context>
 <context>
@@ -87,7 +87,7 @@
     <name>EmptyChatPage</name>
     <message>
         <source>Please select a chat to start messaging</source>
-        <translation type="unfinished"></translation>
+        <translation>Bitten wählen Sie einen Chat aus um zu beginnen</translation>
     </message>
 </context>
 <context>
@@ -273,39 +273,39 @@
     <name>RosterListItem</name>
     <message>
         <source>Error: Please check the JID.</source>
-        <translation type="unfinished"></translation>
+        <translation>Fehler: Bitte überprüfen Sie die JID.</translation>
     </message>
     <message>
         <source>Available</source>
-        <translation type="unfinished"></translation>
+        <translation>Verfügbar</translation>
     </message>
     <message>
         <source>Free for chat</source>
-        <translation type="unfinished"></translation>
+        <translation>Frei zum Chatten</translation>
     </message>
     <message>
         <source>Away</source>
-        <translation type="unfinished"></translation>
+        <translation>Abwesend</translation>
     </message>
     <message>
         <source>Do not disturb</source>
-        <translation type="unfinished"></translation>
+        <translation>DnD (Nicht stören)</translation>
     </message>
     <message>
         <source>Away for longer</source>
-        <translation type="unfinished"></translation>
+        <translation>Für längere Zeit abwesend</translation>
     </message>
     <message>
         <source>Offline</source>
-        <translation type="unfinished">Offline</translation>
+        <translation>Offline</translation>
     </message>
     <message>
         <source>Error</source>
-        <translation type="unfinished"></translation>
+        <translation>Fehler</translation>
     </message>
     <message>
         <source>Invalid</source>
-        <translation type="unfinished"></translation>
+        <translation>Ungültig</translation>
     </message>
 </context>
 <context>

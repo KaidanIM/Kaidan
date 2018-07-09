@@ -13,7 +13,7 @@
     </message>
     <message>
         <source>View source code online</source>
-        <translation type="unfinished"></translation>
+        <translation>Lihat kod sumber dalam talian</translation>
     </message>
 </context>
 <context>

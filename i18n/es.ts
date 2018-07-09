@@ -17,7 +17,7 @@
     </message>
     <message>
         <source>View source code online</source>
-        <translation type="unfinished"></translation>
+        <translation>Vea el código fuente en línea</translation>
     </message>
 </context>
 <context>

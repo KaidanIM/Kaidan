@@ -135,9 +135,13 @@ void Kaidan::mainDisconnect(bool openLogInPage)
 	if (client->isConnected())
 		emit client->disconnectRequested();
 
-	// trigger the gui to open the log in page in case the was wanted:
-	if (openLogInPage)
+	if (openLogInPage) {
+		// clear password
+		settings->remove("auth/password");
+		setPassword(QString());
+		// trigger log in page
 		emit newCredentialsNeeded();
+	}
 }
 
 void Kaidan::setJid(QString jid)

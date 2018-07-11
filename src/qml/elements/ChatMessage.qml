@@ -29,95 +29,88 @@
  */
 
 import QtQuick 2.6
+import QtGraphicalEffects 1.0
+import QtQuick.Layouts 1.3
 import QtQuick.Controls 2.0 as Controls
 import org.kde.kirigami 2.0 as Kirigami
-import QtQuick.Layouts 1.3
 
 RowLayout {
 	id: root
+
 	property bool sentByMe: true
-	property string messageBody;
-	property date dateTime;
+	property string messageBody
+	property date dateTime
 	property bool isRead: false
-	property string recipientAvatarUrl;
+	property string recipientAvatarUrl
 
-	spacing: Kirigami.Units.gridUnit * 0.5
+	// own messages are on the right, others on the left
 	layoutDirection: sentByMe ? Qt.RightToLeft : Qt.LeftToRight
-
-	Item {
-		Layout.preferredWidth: 5
-	}
+	spacing: Kirigami.Units.largeSpacing
+	width: parent.width - Kirigami.Units.largeSpacing * 4
+	anchors.horizontalCenter: parent.horizontalCenter
 
 	RoundImage {
 		id: avatar
 		visible: !sentByMe
 		source: recipientAvatarUrl
-		height: width
 		fillMode: Image.PreserveAspectFit
-		Layout.preferredWidth: Kirigami.Units.gridUnit * 2.2
-		Layout.preferredHeight: Kirigami.Units.gridUnit * 2.2
-		Layout.alignment: Qt.AlignHCenter | Qt.AlignTop
 		mipmap: true
+		height: width
+		Layout.preferredHeight: Kirigami.Units.gridUnit * 2.2
+		Layout.preferredWidth: Kirigami.Units.gridUnit * 2.2
+		Layout.alignment: Qt.AlignHCenter | Qt.AlignTop
+		sourceSize.height: Kirigami.Units.gridUnit * 2.2
+		sourceSize.width: Kirigami.Units.gridUnit * 2.2
 	}
 
-	Item {
-		id: bubble
-		height: label.implicitHeight + messageInfo.height
-		width: Math.max(label.width, dateLabel.width + checkmark.width
-		                + Kirigami.Units.gridUnit * (checkmark.visible ? 1.7 : 0.7))
+	Rectangle {
+		id: box
+		Layout.preferredWidth: content.width + Kirigami.Units.gridUnit * 0.9
+		Layout.preferredHeight: content.height + Kirigami.Units.gridUnit * 0.6
 
-		Rectangle {
-			id: box
-			height: parent.height
-			width: parent.width
-			color: sentByMe ? "white" : "#4c9b4a"
-			radius: 12
-			border.width: 1
-			border.color: "#E1DFDF"
+		color: sentByMe ? Kirigami.Theme.complementaryTextColor : Kirigami.Theme.highlightColor
+		radius: Kirigami.Units.smallSpacing * 2
+
+		layer.enabled: box.visible
+		layer.effect: DropShadow {
+			verticalOffset: Kirigami.Units.gridUnit * 0.08
+			horizontalOffset: Kirigami.Units.gridUnit * 0.08
+			color: Kirigami.Theme.disabledTextColor
+			samples: 10
+			spread: 0.1
+		}
+	}
+
+	ColumnLayout {
+		id: content
+		spacing: 0
+		anchors.centerIn: box
+
+		Controls.Label {
+			text: messageBody
+			textFormat: Text.PlainText
+			wrapMode: Text.Wrap
+			color: sentByMe ? Kirigami.Theme.buttonTextColor : Kirigami.Theme.complementaryTextColor
+
+			Layout.maximumWidth: root.width - Kirigami.Units.gridUnit * 6
 		}
 
-		Column {
-			id: layout
-
+		RowLayout {
 			Controls.Label {
-				id: label
-				width: Math.min(implicitWidth, pageStack.lastItem.width * 0.8)
-				height: implicitHeight
-				leftPadding: Kirigami.Units.gridUnit * 0.5
-				rightPadding: Kirigami.Units.gridUnit * 0.5
-				topPadding: Kirigami.Units.gridUnit * 0.5
-				bottomPadding: Kirigami.Units.gridUnit * 0.2
-				text: messageBody
-				textFormat: Text.PlainText
-				wrapMode: Text.Wrap
-				font.pixelSize: 16
-				color: sentByMe ? "black" : "white"
+				id: dateLabel
+				text: Qt.formatDateTime(dateTime, "dd. MMM yyyy, hh:mm")
+				color: Kirigami.Theme.disabledTextColor
+				font.pixelSize: Kirigami.Units.gridUnit * 0.8
 			}
 
-			Row {
-				id: messageInfo
-				leftPadding: Kirigami.Units.gridUnit * 0.5
-				rightPadding: Kirigami.Units.gridUnit * 0.5
-				bottomPadding: Kirigami.Units.gridUnit * 0.5
-				spacing: Kirigami.Units.gridUnit * 0.5
-
-				Controls.Label {
-					id: dateLabel
-					visible: date
-					height: implicitHeight
-					text: Qt.formatDateTime(dateTime, "dd MMM, hh:mm")
-					color: sentByMe ? "grey" : "#e0e0e0"
-				}
-
-				Image {
-					id: checkmark
-					visible: (sentByMe && isRead)
-					anchors.verticalCenter: dateLabel.verticalCenter
-					height: Kirigami.Units.gridUnit * 0.6
-					width: Kirigami.Units.gridUnit * 0.6
-					source: kaidan.getResourcePath("images/message_checkmark.svg")
-					mipmap: true
-				}
+			Image {
+				id: checkmark
+				visible: (sentByMe && isRead)
+				source: kaidan.getResourcePath("images/message_checkmark.svg")
+				Layout.preferredHeight: Kirigami.Units.gridUnit * 0.65
+				Layout.preferredWidth: Kirigami.Units.gridUnit * 0.65
+				sourceSize.height: Kirigami.Units.gridUnit * 0.65
+				sourceSize.width: Kirigami.Units.gridUnit * 0.65
 			}
 		}
 	}

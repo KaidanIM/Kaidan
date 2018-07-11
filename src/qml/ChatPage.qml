@@ -30,24 +30,17 @@
 
 import QtQuick 2.6
 import QtQuick.Controls 2.0 as Controls
-import QtQuick.Controls.Material 2.0
 import QtQuick.Layouts 1.3
 import org.kde.kirigami 2.0 as Kirigami
 import QtGraphicalEffects 1.0
 import "elements"
 
-Kirigami.Page {
-	id: root
-
+Kirigami.ScrollablePage {
 	property string chatName
 	property string recipientJid
 
 	title: chatName
-
-	leftPadding: 0
-	rightPadding: 0
-	bottomPadding: 0
-	topPadding: 0
+	keyboardNavigationEnabled: true
 
 	background: Image {
 		id: bgimage
@@ -58,46 +51,34 @@ Kirigami.Page {
 		verticalAlignment: Image.AlignTop
 	}
 
-	//
 	// Chat
-	//
-	ColumnLayout {
-		anchors.fill: parent
-		ListView {
-			Layout.fillWidth: true
-			Layout.fillHeight: true
-			bottomMargin: 20
+	mainItem: ListView {
+		verticalLayoutDirection: ListView.BottomToTop
+		spacing: Kirigami.Units.smallSpacing * 2
 
-			verticalLayoutDirection: ListView.BottomToTop
+		// connect the database
+		model: kaidan.messageModel
 
-			spacing: 12
-
-			// connect the database
-			model: kaidan.messageModel
-
-			delegate: ChatMessage {
-				width: parent.width
-				sentByMe: model.recipient !== kaidan.jid
-				messageBody: model.message
-				dateTime: new Date(timestamp)
-				isRead: model.isDelivered
-				recipientAvatarUrl: kaidan.avatarStorage.getHashOfJid(author) !== "" ?
-				                    kaidan.avatarStorage.getAvatarUrl(author) :
-				                    kaidan.getResourcePath("images/fallback-avatar.svg")
+		delegate: ChatMessage {
+			sentByMe: model.recipient !== kaidan.jid
+			messageBody: model.message
+			dateTime: new Date(model.timestamp)
+			isRead: model.isDelivered
+			recipientAvatarUrl: {
+				kaidan.avatarStorage.getHashOfJid(author) !== "" ?
+				kaidan.avatarStorage.getAvatarUrl(author) :
+				kaidan.getResourcePath("images/fallback-avatar.svg")
 			}
-			Controls.ScrollIndicator.vertical: Controls.ScrollIndicator {}
 		}
 	}
 
-	//
 	// Message Writing
-	//
 	footer: Controls.Pane {
 		id: sendingArea
 		layer.enabled: sendingArea.enabled
 		layer.effect: DropShadow {
 			verticalOffset: 1
-			color: Material.dropShadowColor
+			color: Kirigami.Theme.disabledTextColor
 			samples: 20
 			spread: 0.3
 		}
@@ -109,19 +90,19 @@ Kirigami.Page {
 		}
 
 		RowLayout {
-			width: parent.width
+			anchors.fill: parent
 
 			Controls.ToolButton {
 				id: attachButton
-				Layout.preferredWidth: 60
-				Layout.preferredHeight: 60
+				Layout.preferredWidth: Kirigami.Units.gridUnit * 3
+				Layout.preferredHeight: Kirigami.Units.gridUnit * 3
 				padding: 0
 				Kirigami.Icon {
 					source: "document-send-symbolic"
 					isMask: true
 					smooth: true
 					anchors.centerIn: parent
-					width: 30
+					width: Kirigami.Units.gridUnit * 2
 					height: width
 				}
 			}
@@ -131,7 +112,7 @@ Kirigami.Page {
 				Layout.fillWidth: true
 				placeholderText: qsTr("Compose message")
 				wrapMode: Controls.TextArea.Wrap
-				topPadding: 19
+				topPadding: Kirigami.Units.gridUnit * 0.8
 				bottomPadding: topPadding
 				selectByMouse: true
 				background: Item {}
@@ -149,8 +130,8 @@ Kirigami.Page {
 
 			Controls.ToolButton {
 				id: sendButton
-				Layout.preferredWidth: 60
-				Layout.preferredHeight: 60
+				Layout.preferredWidth: Kirigami.Units.gridUnit * 3
+				Layout.preferredHeight: Kirigami.Units.gridUnit * 3
 				padding: 0
 				Kirigami.Icon {
 					source: "document-send"
@@ -158,7 +139,7 @@ Kirigami.Page {
 					isMask: true
 					smooth: true
 					anchors.centerIn: parent
-					width: 30
+					width: Kirigami.Units.gridUnit * 2
 					height: width
 				}
 				onClicked: {

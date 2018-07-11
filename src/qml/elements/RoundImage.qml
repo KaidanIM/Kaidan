@@ -38,8 +38,9 @@ Image {
 	layer.enabled: isRound
 	layer.effect: OpacityMask {
 		maskSource: Item {
-			width: img.width
-			height: img.height
+			width: img.paintedWidth
+			height: img.paintedHeight
+
 			Rectangle {
 				anchors.centerIn: parent
 				width: Math.min(img.width, img.height)

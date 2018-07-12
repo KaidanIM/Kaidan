@@ -51,7 +51,7 @@ Kirigami.OverlaySheet {
 		Controls.Label {
 			id: infoLabel
 			text: ""
-			textFormat: Text.RichText
+			textFormat: Text.StyledText
 			wrapMode: Text.WordWrap
 
 			Layout.fillWidth: true

@@ -72,7 +72,7 @@ Controls.Dialog {
 
 			Controls.Label {
 				text: "<i>" + qsTr("A simple, user-friendly Jabber/XMPP client") + "</i>"
-				textFormat: Text.RichText
+				textFormat: Text.StyledText
 				wrapMode: Text.WordWrap
 				Layout.fillWidth: true
 				horizontalAlignment: Qt.AlignHCenter
@@ -80,7 +80,7 @@ Controls.Dialog {
 
 			Controls.Label {
 				text: "<b>" + qsTr("License:") + "</b> GPLv3+ / CC BY-SA 4.0"
-				textFormat: Text.RichText
+				textFormat: Text.StyledText
 				wrapMode: Text.WordWrap
 				Layout.fillWidth: true
 				horizontalAlignment: Qt.AlignHCenter

@@ -133,7 +133,7 @@ Kirigami.Page {
 					anchors.centerIn: connectButton
 					text: qsTr("Connect")
 					color: Kirigami.Theme.highlightedTextColor
-					textFormat: Text.RichText
+					textFormat: Text.StyledText
 				}
 			}
 

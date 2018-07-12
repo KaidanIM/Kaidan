@@ -100,9 +100,14 @@ Kirigami.OverlaySheet {
 			Controls.Button {
 				id: addButton
 				text: qsTr("Add")
-				enabled: jidField.length >= 3 && jidField.contains("@")
+				enabled: {
+					jidField.length >= 3 && // JID needs to be at least 3 chars longs
+					jidField.text.includes("@") && // JID has to contain '@'
+					jidField.text.slice(-1) !== "@" // last character is no '@'
+				}
 				onClicked: {
-					kaidan.addContact(jidField.text, nickField.text, msgField.text)
+					kaidan.addContact(jidField.text.toLowerCase(),
+					                  nickField.text, msgField.text)
 					clearInput()
 					close()
 				}

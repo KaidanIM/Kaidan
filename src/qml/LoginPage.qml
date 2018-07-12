@@ -123,7 +123,7 @@ Kirigami.Page {
 
 				onClicked: {
 					// connect to given account data
-					kaidan.jid = jidField.text
+					kaidan.jid = jidField.text.toLowerCase()
 					kaidan.password = passField.text
 					kaidan.mainConnect()
 				}

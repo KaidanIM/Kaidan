@@ -42,6 +42,7 @@
 #include "Enums.h"
 
 class AvatarFileStorage;
+class PresenceCache;
 class RosterManager;
 class RosterModel;
 class MessageModel;
@@ -67,6 +68,7 @@ class Kaidan : public QObject
 	Q_PROPERTY(RosterModel* rosterModel READ getRosterModel NOTIFY rosterModelChanged)
 	Q_PROPERTY(MessageModel* messageModel READ getMessageModel NOTIFY messageModelChanged)
 	Q_PROPERTY(AvatarFileStorage* avatarStorage READ getAvatarStorage NOTIFY avatarStorageChanged)
+	Q_PROPERTY(PresenceCache* presenceCache READ getPresenceCache NOTIFY presenceCacheChanged)
 	Q_PROPERTY(quint8 connectionState READ getConnectionState NOTIFY connectionStateChanged)
 	Q_PROPERTY(quint8 disconnReason READ getDisconnReason NOTIFY disconnReasonChanged)
 	Q_PROPERTY(QString jid READ getJid WRITE setJid NOTIFY jidChanged)
@@ -252,10 +254,19 @@ public:
 		return avatarStorage;
 	}
 
+	/**
+	 * Get the presence cache
+	 */
+	PresenceCache* getPresenceCache() const
+	{
+		return presenceCache;
+	}
+
 signals:
 	void rosterModelChanged();
 	void messageModelChanged();
 	void avatarStorageChanged();
+	void presenceCacheChanged();
 
 	/**
 	 * Emitted, when the client's connection state has changed (e.g. when
@@ -335,6 +346,7 @@ private:
 	RosterManager *rosterManager;
 	MessageModel *messageModel;
 	AvatarFileStorage *avatarStorage;
+	PresenceCache *presenceCache;
 	QSettings *settings;
 
 	ClientThread::Credentials creds;

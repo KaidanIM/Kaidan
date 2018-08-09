@@ -50,6 +50,7 @@ class RosterModel;
 class MessageSessionHandler;
 class MessageModel;
 class AvatarFileStorage;
+class PresenceCache;
 class PresenceHandler;
 class ServiceDiscoveryManager;
 class VCardManager;
@@ -106,9 +107,9 @@ public:
 	 * @param parent Optional QObject-based parent
 	 */
 	ClientThread(RosterModel *rosterModel, MessageModel *messageModel,
-	             AvatarFileStorage *avatarStorage, Credentials creds,
-	             QSettings *settings, Kaidan *kaidan, QGuiApplication *app,
-	             QObject *parent = nullptr);
+	             AvatarFileStorage *avatarStorage, PresenceCache *presenceCache,
+	             Credentials creds, QSettings *settings, Kaidan *kaidan,
+	             QGuiApplication *app, QObject *parent = nullptr);
 
 	/*
 	 * Will exit the event loop and waits until thread finishes and then
@@ -248,6 +249,7 @@ private:
 	ClientWorker *worker;
 	RosterManager *rosterManager;
 	MessageSessionHandler *messageSessionHandler;
+    PresenceCache *presenceCache;
 	PresenceHandler *presenceHandler;
 	ServiceDiscoveryManager *serviceDiscoveryManager;
 	VCardManager *vCardManager;

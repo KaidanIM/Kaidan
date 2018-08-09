@@ -29,10 +29,12 @@
  */
 
 #include "PresenceHandler.h"
+#include "PresenceCache.h"
+#include <QDebug>
 
-PresenceHandler::PresenceHandler(gloox::Client *client)
+PresenceHandler::PresenceHandler(gloox::Client *client, PresenceCache *cache)
+	: client(client), cache(cache)
 {
-	this->client = client;
 	client->registerPresenceHandler(this);
 }
 
@@ -43,4 +45,9 @@ PresenceHandler::~PresenceHandler()
 void PresenceHandler::handlePresence(const gloox::Presence &presence)
 {
 	// Subscription requests are now managed in the RosterUpdater
+	emit cache->presenceArrived(
+		QString::fromStdString(presence.from().bare()),
+		QString::fromStdString(presence.from().resource()),
+		presence.subtype(), QString::fromStdString(presence.status())
+	);
 }

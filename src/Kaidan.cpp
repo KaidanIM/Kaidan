@@ -39,6 +39,7 @@
 #include <QCoreApplication>
 // Kaidan
 #include "AvatarFileStorage.h"
+#include "PresenceCache.h"
 #include "RosterModel.h"
 #include "MessageModel.h"
 #include "Database.h"
@@ -59,6 +60,7 @@ Kaidan::Kaidan(QGuiApplication *app, QObject *parent) : QObject(parent)
 	messageModel = new MessageModel(database->getDatabase(), this);
 	rosterModel = new RosterModel(database->getDatabase(), this);
 	avatarStorage = new AvatarFileStorage(this);
+	presenceCache = new PresenceCache(this);
 	// Connect the avatar changed signal of the avatarStorage with the NOTIFY signal
 	// of the Q_PROPERTY for the avatar storage (so all avatars are updated in QML)
 	connect(avatarStorage, &AvatarFileStorage::avatarIdsChanged,
@@ -81,7 +83,7 @@ Kaidan::Kaidan(QGuiApplication *app, QObject *parent) : QObject(parent)
 	creds.isFirstTry = false;
 
 	// create new client and start thread's main loop (won't connect until requested)
-	client = new ClientThread(rosterModel, messageModel, avatarStorage, creds,
+	client = new ClientThread(rosterModel, messageModel, avatarStorage, presenceCache, creds,
 	                          settings, this, app);
 	client->start();
 
@@ -103,6 +105,7 @@ Kaidan::~Kaidan()
 	delete messageModel;
 	delete database;
 	delete avatarStorage;
+	delete presenceCache;
 	delete settings;
 }
 

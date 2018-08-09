@@ -31,13 +31,16 @@
 import QtQuick 2.3
 import QtQuick.Layouts 1.3
 import QtQuick.Controls 2.0 as Controls
+import QtGraphicalEffects 1.0
 import org.kde.kirigami 2.0 as Kirigami
 
 Kirigami.SwipeListItem {
-	property string name;
-	property string lastMessage;
-	property int unreadMessages;
-	property string avatarImagePath;
+	property string name
+	property string lastMessage
+	property int unreadMessages
+	property string avatarImagePath
+	property int presenceType
+	property string presenceErrorMsg
 
 	id: listItem
 	topPadding: Kirigami.Units.smallSpacing * 1.5
@@ -47,14 +50,52 @@ Kirigami.SwipeListItem {
 		spacing: Kirigami.Units.gridUnit * 0.5
 
 		// left side: Avatar
-		RoundImage {
-			source: avatarImagePath
-			width: height
-			fillMode: Image.PreserveAspectFit
+		Item {
+			id: avatarSpace
 			Layout.preferredHeight: parent.height
 			Layout.preferredWidth: parent.height
-			mipmap: true
+
+			RoundImage {
+				id: avatar
+				anchors.fill: parent
+				source: avatarImagePath
+				width: height
+				fillMode: Image.PreserveAspectFit
+				mipmap: true
+			}
+
+			Rectangle {
+				id: presenceIndicator
+				visible: presenceType !== 8 // invisible when presence is invalid
+				anchors.right: avatarSpace.right
+				anchors.bottom: avatarSpace.bottom
+
+				width: Kirigami.Units.gridUnit
+				height: Kirigami.Units.gridUnit
+
+				color: {
+					presenceType === 0 ? "green" :         // available
+					presenceType === 1 ? "darkgreen" :     // chat
+					presenceType === 2 ? "orange" :        // away
+					presenceType === 3 ? "orange" :        // do not disturb
+					presenceType === 4 ? "orange" :        // extended away
+					presenceType === 7 ? "red" :           // error
+					presenceType === 6 ? "red" :           // error
+					"lightgrey" // unavailable (offline) (5), probe (6), invalid (8)
+				}
+				radius: Math.min(width, height) * 0.5
+				// shadow
+				layer.enabled: presenceIndicator.visible
+				layer.effect: DropShadow {
+					verticalOffset: Kirigami.Units.gridUnit * 0.08
+					horizontalOffset: Kirigami.Units.gridUnit * 0.08
+					color: Kirigami.Theme.disabledTextColor
+					samples: 10
+					spread: 0.1
+				}
+			}
 		}
+
 		// right side
 		ColumnLayout {
 			spacing: Kirigami.Units.smallSpacing
@@ -71,13 +112,21 @@ Kirigami.SwipeListItem {
 				Layout.maximumHeight: Kirigami.Units.gridUnit * 1.5
 			}
 			// bottom
-			Controls.Label {
+			RowLayout {
 				Layout.fillWidth: true
-				elide: Text.ElideRight
-				maximumLineCount: 1
-				text: kaidan.removeNewLinesFromString(lastMessage);
-				textFormat: Text.PlainText
-				font.pixelSize: 16
+
+				Controls.Label {
+					Layout.fillWidth: true
+					elide: Text.ElideRight
+					maximumLineCount: 1
+					text: {
+						presenceType === 7 ? // error presence type
+						qsTr("Error: Please check the JID.") :
+						kaidan.removeNewLinesFromString(lastMessage)
+					}
+					textFormat: Text.PlainText
+					font.pixelSize: 16
+				}
 			}
 		}
 

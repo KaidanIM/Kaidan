@@ -33,6 +33,7 @@
 #include "ClientWorker.h"
 #include "AvatarFileStorage.h"
 #include "RosterManager.h"
+#include "PresenceCache.h"
 #include "PresenceHandler.h"
 #include "ServiceDiscoveryManager.h"
 #include "Database.h"
@@ -58,12 +59,12 @@
 static const unsigned int KAIDAN_CLIENT_LOOP_INTERVAL = 30;
 
 ClientThread::ClientThread(RosterModel *rosterModel, MessageModel *messageModel,
-                           AvatarFileStorage *avatarStorage, Credentials creds,
-                           QSettings *settings, Kaidan *kaidan,
+                           AvatarFileStorage *avatarStorage, PresenceCache *presenceCache,
+                           Credentials creds, QSettings *settings, Kaidan *kaidan,
                            QGuiApplication *app, QObject *parent)
 	: QThread(parent), rosterModel(rosterModel), messageModel(messageModel),
-	avatarStorage(avatarStorage), creds(creds), settings(settings),
-	connState(ConnectionState::StateNone), kaidan(kaidan)
+	avatarStorage(avatarStorage), presenceCache(presenceCache), creds(creds),
+	settings(settings),	connState(ConnectionState::StateNone), kaidan(kaidan)
 {
 	// Set custom thread name
 	setObjectName("XmppClient");
@@ -114,7 +115,7 @@ void ClientThread::run()
 	messageSessionHandler = new MessageSessionHandler(client, messageModel, rosterModel);
 	vCardManager = new VCardManager(client, avatarStorage, rosterModel);
 	rosterManager = new RosterManager(kaidan, client, rosterModel, vCardManager);
-	presenceHandler = new PresenceHandler(client);
+	presenceHandler = new PresenceHandler(client, presenceCache);
 	serviceDiscoveryManager = new ServiceDiscoveryManager(client, client->disco());
 	xmlLogHandler = new XmlLogHandler(client);
 

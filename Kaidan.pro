@@ -19,6 +19,7 @@ SOURCES += \
     src/MessageSessionHandler.cpp \
     src/MessageModel.cpp \
     src/Notifications.cpp \
+    src/PresenceCache.cpp \
     src/PresenceHandler.cpp \
     src/ServiceDiscoveryManager.cpp \
     src/VCardManager.cpp \
@@ -36,6 +37,7 @@ HEADERS += \
     src/MessageSessionHandler.h \
     src/MessageModel.h \
     src/Notifications.h \
+    src/PresenceCache.h \
     src/PresenceHandler.h \
     src/MessageHandler.h \
     src/Kaidan.h \

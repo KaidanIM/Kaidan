@@ -43,11 +43,14 @@
 #include <QQmlContext>
 #include <QTranslator>
 #include <QLibraryInfo>
+// gloox
+#include <gloox/presence.h>
 // Kaidan
 #include "Kaidan.h"
 #include "RosterModel.h"
 #include "MessageModel.h"
 #include "AvatarFileStorage.h"
+#include "PresenceCache.h"
 #include "Globals.h"
 #include "Enums.h"
 #include "StatusBar.h"
@@ -118,7 +121,11 @@ int main(int argc, char *argv[])
 	qRegisterMetaType<MessageModel*>("MessageModel*");
 	qRegisterMetaType<AvatarFileStorage*>("AvatarFileStorage*");
 	qRegisterMetaType<ContactMap>("ContactMap");
+	qRegisterMetaType<PresenceCache*>("PresenceCache*");
+	qRegisterMetaType<ContactPresences*>("ContactPresences*");
+	qRegisterMetaType<EntityPresence*>("EntityPresence*");
 	qRegisterMetaType<Qt::ApplicationState>("Qt::ApplicationState");
+	qRegisterMetaType<gloox::Presence::PresenceType>("gloox::Presence::PresenceType");
 	qmlRegisterUncreatableMetaObject(Enums::staticMetaObject, APPLICATION_ID,
 	                                 1, 0, "Kaidan", "Access to enums & flags only");
 

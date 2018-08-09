@@ -36,15 +36,18 @@
 #include <gloox/presence.h>
 #include <gloox/presencehandler.h>
 
+class PresenceCache;
+
 class PresenceHandler : public gloox::PresenceHandler
 {
 public:
-	PresenceHandler(gloox::Client *client);
+	PresenceHandler(gloox::Client *client, PresenceCache *cache);
 	~PresenceHandler();
 	virtual void handlePresence(const gloox::Presence &presence);
 
 private:
 	gloox::Client *client;
+	PresenceCache *cache;
 };
 
 #endif // PRESENCEHANDLER_H

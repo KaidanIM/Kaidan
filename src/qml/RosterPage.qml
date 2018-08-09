@@ -63,27 +63,27 @@ Kirigami.ScrollablePage {
 		verticalLayoutDirection: ListView.TopToBottom
 		model: kaidan.rosterModel
 		delegate: RosterListItem {
+			id: rosterItem
 			name: model.name ? model.name : model.jid
 			lastMessage: model.lastMessage
+			presenceType: kaidan.presenceCache.getDefaultPresType(model.jid)
 			unreadMessages: model.unreadMessages
 			avatarImagePath: kaidan.avatarStorage.getHashOfJid(model.jid) !== "" ?
 					 kaidan.avatarStorage.getAvatarUrl(model.jid) :
 					 kaidan.getResourcePath("images/fallback-avatar.svg")
-
 			onClicked: {
 				// first push the chat page
 				pageStack.push(chatPage, {
 					"chatName": (model.name ? model.name : model.jid),
 					"recipientJid": model.jid
-				});
+				})
 
 				// then set the message filter for this jid
 				// this will update the unread message count,
 				// which will update the roster and will reset the
 				// model variable
-				kaidan.chatPartner = model.jid;
+				kaidan.chatPartner = model.jid
 			}
-
 			actions: [
 				Kirigami.Action {
 					iconName: "bookmark-remove"
@@ -93,6 +93,20 @@ Kirigami.ScrollablePage {
 					}
 				}
 			]
+
+			function newPresenceArrived(jid) {
+				if (jid === model.jid) {
+					rosterItem.presenceType = kaidan.presenceCache.
+					                          getDefaultPresType(model.jid)
+				}
+			}
+
+			Component.onCompleted: {
+				kaidan.presenceCache.presenceChanged.connect(newPresenceArrived)
+			}
+			Component.onDestruction: {
+				kaidan.presenceCache.presenceChanged.disconnect(newPresenceArrived)
+			}
 		}
 	}
 }

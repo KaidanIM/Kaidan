@@ -35,14 +35,16 @@ import QtGraphicalEffects 1.0
 import org.kde.kirigami 2.0 as Kirigami
 
 Kirigami.SwipeListItem {
+	id: listItem
+
 	property string name
+	property string jid
 	property string lastMessage
 	property int unreadMessages
 	property string avatarImagePath
 	property int presenceType
-	property string presenceErrorMsg
+	property string statusMsg
 
-	id: listItem
 	topPadding: Kirigami.Units.smallSpacing * 1.5
 	height: Kirigami.Units.gridUnit * 3.5
 
@@ -62,6 +64,13 @@ Kirigami.SwipeListItem {
 				width: height
 				fillMode: Image.PreserveAspectFit
 				mipmap: true
+
+				Controls.ToolTip {
+					visible: hovered
+					delay: Qt.styleHints.mousePressAndHoldInterval
+					text: generateToolTipText(listItem.name, listItem.jid,
+					                          listItem.presenceType, listItem.statusMsg)
+				}
 			}
 
 			Rectangle {
@@ -73,16 +82,7 @@ Kirigami.SwipeListItem {
 				width: Kirigami.Units.gridUnit
 				height: Kirigami.Units.gridUnit
 
-				color: {
-					presenceType === 0 ? "green" :         // available
-					presenceType === 1 ? "darkgreen" :     // chat
-					presenceType === 2 ? "orange" :        // away
-					presenceType === 3 ? "orange" :        // do not disturb
-					presenceType === 4 ? "orange" :        // extended away
-					presenceType === 7 ? "red" :           // error
-					presenceType === 6 ? "red" :           // error
-					"lightgrey" // unavailable (offline) (5), probe (6), invalid (8)
-				}
+				color: presenceTypeToColor(presenceType)
 				radius: Math.min(width, height) * 0.5
 				// shadow
 				layer.enabled: presenceIndicator.visible
@@ -138,5 +138,50 @@ Kirigami.SwipeListItem {
 			Layout.preferredHeight: Kirigami.Units.gridUnit * 1.25
 			Layout.preferredWidth: Kirigami.Units.gridUnit * 1.25
 		}
+	}
+
+	/**
+	 * Returns the colour beloning to the given presence status type
+	 */
+	function presenceTypeToColor(type) {
+		return type === 0 ? "green" :        // available
+			type === 1 ? "darkgreen" :     // chat
+			type === 2 ? "orange" :        // away
+			type === 3 ? "orange" :        // do not disturb
+			type === 4 ? "orange" :        // extended away
+			type === 7 ? "red" :           // error
+			type === 6 ? "red" :           // error
+			"lightgrey" // unavailable (offline) (5), probe (6), invalid (8)
+	}
+
+	/**
+	 * Generates a styled text telling some basic information about the contact,
+	 * is used for a tooltip
+	 */
+	function generateToolTipText(name, jid, statusType, statusMsg) {
+		// header (contact name)
+		var string = "<h3>" + name + "</h3>"
+		// in small: JID (only if differs name)
+		if (name !== jid) {
+			string += "<h5><i>" + jid + "</i></h5>"
+		}
+
+		// presence status type
+		string += "<font color='" + presenceTypeToColor(statusType) + "'>"
+		string += statusType === 0 ? qsTr("Available") :
+		          statusType === 1 ? qsTr("Free for chat") :
+		          statusType === 2 ? qsTr("Away") :
+		          statusType === 3 ? qsTr("Do not disturb") :
+		          statusType === 4 ? qsTr("Away for longer") :
+		          statusType === 5 ? qsTr("Offline") :
+		          statusType === 7 ? qsTr("Error") :
+		          qsTr("Invalid")
+		string += "</font>"
+
+		// presence status message
+		if (statusMsg !== "") {
+			string += ": " + statusMsg
+		}
+		return string
 	}
 }

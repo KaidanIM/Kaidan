@@ -72,7 +72,7 @@ quint8 PresenceCache::getDefaultPresType(QString jid)
 }
 
 ContactPresences::ContactPresences(QString jid, QObject* parent)
-	 : jid(jid), defaultPresence(new EntityPresence(gloox::Presence::Unavailable, "Offline")),
+	 : jid(jid), defaultPresence(new EntityPresence(gloox::Presence::Unavailable, "")),
 	   QObject(parent)
 {
 }

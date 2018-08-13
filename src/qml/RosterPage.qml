@@ -65,8 +65,10 @@ Kirigami.ScrollablePage {
 		delegate: RosterListItem {
 			id: rosterItem
 			name: model.name ? model.name : model.jid
+			jid: model.jid
 			lastMessage: model.lastMessage
 			presenceType: kaidan.presenceCache.getDefaultPresType(model.jid)
+			statusMsg: kaidan.presenceCache.getDefaultStatus(model.jid)
 			unreadMessages: model.unreadMessages
 			avatarImagePath: kaidan.avatarStorage.getHashOfJid(model.jid) !== "" ?
 					 kaidan.avatarStorage.getAvatarUrl(model.jid) :
@@ -98,6 +100,8 @@ Kirigami.ScrollablePage {
 				if (jid === model.jid) {
 					rosterItem.presenceType = kaidan.presenceCache.
 					                          getDefaultPresType(model.jid)
+					rosterItem.statusMsg = kaidan.presenceCache.
+					                       getDefaultStatus(model.jid)
 				}
 			}
 

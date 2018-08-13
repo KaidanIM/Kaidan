@@ -1,7 +1,7 @@
 /*
  *  Kaidan - A user-friendly XMPP client for every device!
  *
- *  Copyright (C) 2017-2018 Kaidan developers and contributors
+ *  Copyright (C) 2016-2018 Kaidan developers and contributors
  *  (see the LICENSE file for a full list of copyright authors)
  *
  *  Kaidan is free software: you can redistribute it and/or modify
@@ -51,9 +51,12 @@ MessageModel::MessageModel(QSqlDatabase *database, QObject *parent):
 	connect(this, &MessageModel::chatPartnerChanged,
 	        this, &MessageModel::applyRecipientFilter);
 	connect(this, &MessageModel::addMessageRequested, this, &MessageModel::addMessage);
-	connect(this, &MessageModel::setMessageAsSentRequested, this, &MessageModel::setMessageAsSent);
-	connect(this, &MessageModel::setMessageAsDeliveredRequested, this, &MessageModel::setMessageAsDelivered);
-	connect(this, &MessageModel::updateMessageRequested, this, &MessageModel::updateMessage);
+	connect(this, &MessageModel::setMessageAsSentRequested,
+	        this, &MessageModel::setMessageAsSent);
+	connect(this, &MessageModel::setMessageAsDeliveredRequested,
+	        this, &MessageModel::setMessageAsDelivered);
+	connect(this, &MessageModel::updateMessageRequested,
+	        this, &MessageModel::updateMessage);
 }
 
 void MessageModel::applyRecipientFilter(QString recipient)

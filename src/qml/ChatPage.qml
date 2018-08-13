@@ -33,6 +33,7 @@ import QtQuick.Controls 2.0 as Controls
 import QtQuick.Layouts 1.3
 import org.kde.kirigami 2.2 as Kirigami
 import QtGraphicalEffects 1.0
+import im.kaidan.kaidan 1.0
 import "elements"
 
 Kirigami.ScrollablePage {
@@ -44,13 +45,17 @@ Kirigami.ScrollablePage {
 	title: chatName
 	keyboardNavigationEnabled: true
 
+	SendMediaSheet {
+		id: sendMediaSheet
+	}
+
 	FileChooser {
 		id: fileChooser
 		title: qsTr("Select a file")
-
 		onAccepted: {
-			// TODO: Add sheet for entering description, maybe later also image cropping
-			kaidan.sendFile(recipientJid, fileUrl, "")
+			sendMediaSheet.jid = recipientJid
+			sendMediaSheet.fileUrl = fileUrl
+			sendMediaSheet.open()
 		}
 
 	}
@@ -131,6 +136,8 @@ Kirigami.ScrollablePage {
 				kaidan.avatarStorage.getAvatarUrl(author) :
 				kaidan.getResourcePath("images/fallback-avatar.svg")
 			}
+			mediaType: Enums.MessageImage
+			mediaUrl: model.mediaUrl
 		}
 	}
 

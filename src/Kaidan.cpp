@@ -34,19 +34,21 @@
 #include <QClipboard>
 #include <QDebug>
 #include <QDir>
+#include <QFileInfo>
 #include <QGuiApplication>
+#include <QMimeDatabase>
+#include <QMimeType>
 #include <QSettings>
-#include <QString>
 #include <QStandardPaths>
 #include <QUrl>
 // QXmpp
 #include <QXmppClient.h>
 // Kaidan
 #include "AvatarFileStorage.h"
-#include "PresenceCache.h"
+#include "Database.h"
 #include "RosterModel.h"
 #include "MessageModel.h"
-#include "Database.h"
+#include "PresenceCache.h"
 
 Kaidan::Kaidan(QGuiApplication *app, bool enableLogging, QObject *parent) : QObject(parent)
 {
@@ -257,4 +259,24 @@ void Kaidan::copyToClipboard(QString text)
 {
 	QClipboard *clipboard = QGuiApplication::clipboard();
 	clipboard->setText(text);
+}
+
+bool Kaidan::isImageFile(QString fileUrl) const
+{
+	QMimeDatabase mimeDb;
+	QMimeType type = mimeDb.mimeTypeForUrl(QUrl(fileUrl));
+	if (type.inherits("image/jpeg") || type.inherits("image/png"))
+		return true;
+	return false;
+}
+
+QString Kaidan::fileNameFromUrl(QString url)
+{
+	return QUrl(url).fileName();
+}
+
+QString Kaidan::fileSizeFromUrl(QString url)
+{
+	qint64 size = QFileInfo(QUrl(url).toLocalFile()).size();
+	return QLocale::system().formattedDataSize(size);
 }

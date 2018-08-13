@@ -28,45 +28,28 @@
  *  along with Kaidan.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef ROSTERMODEL_H
-#define ROSTERMODEL_H
+/**
+ * This element is used in the @see SendMediaSheet to display information about a selected image to
+ * the user. It just displays the image in a rectangle.
+ */
 
-// Qt
-#include <QSqlTableModel>
-#include "Globals.h"
+import QtQuick 2.6
+import QtQuick.Controls 2.0 as Controls
+import QtQuick.Layouts 1.3
+import org.kde.kirigami 2.0 as Kirigami
 
-class QSqlDatabase;
-class Database;
+Rectangle {
+	color: Kirigami.Theme.backgroundColor
 
-class RosterModel : public QSqlTableModel
-{
-	Q_OBJECT
+	Layout.preferredWidth: Kirigami.Units.gridUnit * 32
+	Layout.preferredHeight: Kirigami.Units.gridUnit * 18
+	Layout.alignment: Qt.AlignHCenter
 
-public:
-	RosterModel(QSqlDatabase *database, QObject *parent = 0);
-
-	QHash<int, QByteArray> roleNames() const;
-	QVariant data(const QModelIndex &index, int role) const;
-
-signals:
-	void insertContactRequested(QString jid, QString nickname);
-	void removeContactRequested(QString jid);
-	void setContactNameRequested(QString jid, QString nickname);
-	void setLastExchangedRequested(const QString jid, QString date);
-	void setUnreadMessageCountRequested(const QString jid, const int unreadMessageCount);
-	void setLastMessageRequested(const QString jid, QString message);
-	void newUnreadMessageRequested(const QString jid);
-	void replaceContactsRequested(const ContactMap &contactMap);
-
-private slots:
-	void insertContact(QString jid, QString nickname);
-	void removeContact(QString jid);
-	void setContactName(QString jid, QString nickname);
-	void setLastExchanged(const QString jid, QString date);
-	void setUnreadMessageCount(const QString jid, const int unreadMessageCount);
-	void newUnreadMessage(const QString jid);
-	void setLastMessage(const QString jid, QString message);
-	void replaceContacts(const ContactMap &contactMap);
-};
-
-#endif // ROSTERMODEL_H
+	Image {
+		anchors.fill: parent
+		source: sourceUrl
+		fillMode: Image.PreserveAspectFit
+		asynchronous: true // image might be very large
+		mipmap: true
+	}
+}

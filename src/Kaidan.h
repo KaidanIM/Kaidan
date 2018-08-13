@@ -140,6 +140,12 @@ public:
 	}
 
 	/**
+	 * Checks whether a file is an image and could be displayed as such.
+	 * @param fileUrl URL to the possible image file
+	 */
+	Q_INVOKABLE bool isImageFile(QString fileUrl) const;
+
+	/**
 	 * Set own JID used for connection
 	 *
 	 * To really change the JID of the current connection, you'll need to
@@ -233,6 +239,16 @@ public:
 	{
 		return uploadServiceFound;
 	}
+
+	/**
+	 * Returns the file name from a URL
+	 */
+	Q_INVOKABLE QString fileNameFromUrl(QString url);
+
+	/**
+	 * Returns the file size from a URL
+	 */
+	Q_INVOKABLE QString fileSizeFromUrl(QString url);
 
 signals:
 	void rosterModelChanged();

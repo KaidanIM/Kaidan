@@ -109,11 +109,11 @@
     </message>
     <message>
         <source>Invite friends</source>
-        <translation type="unfinished"></translation>
+        <translation>Undang kawan</translation>
     </message>
     <message>
         <source>Invitation link copied to clipboard</source>
-        <translation type="unfinished"></translation>
+        <translation>Pautan undangan telah disalin ke papan klip</translation>
     </message>
 </context>
 <context>
@@ -133,7 +133,7 @@
     <message>
         <source>The link will be opened after you have connected.</source>
         <extracomment>The link is an XMPP-URI (i.e. &apos;xmpp:kaidan@muc.kaidan.im?join&apos; for joining a chat)</extracomment>
-        <translation type="unfinished"></translation>
+        <translation>Pautan akan dibuka selepas anda disambungkan.</translation>
     </message>
 </context>
 <context>
@@ -258,39 +258,39 @@
     <name>RosterListItem</name>
     <message>
         <source>Error: Please check the JID.</source>
-        <translation type="unfinished"></translation>
+        <translation>Ralat: Sila periksa JID.</translation>
     </message>
     <message>
         <source>Available</source>
-        <translation type="unfinished"></translation>
+        <translation>Sedang lapang</translation>
     </message>
     <message>
         <source>Free for chat</source>
-        <translation type="unfinished"></translation>
+        <translation>Boleh sembang</translation>
     </message>
     <message>
         <source>Away</source>
-        <translation type="unfinished"></translation>
+        <translation>Tidak lapang</translation>
     </message>
     <message>
         <source>Do not disturb</source>
-        <translation type="unfinished"></translation>
+        <translation>Jangan ganggu</translation>
     </message>
     <message>
         <source>Away for longer</source>
-        <translation type="unfinished"></translation>
+        <translation>Tidak lapang lebih lama</translation>
     </message>
     <message>
         <source>Offline</source>
-        <translation type="unfinished">Luar talian</translation>
+        <translation>Tiada dalam talian</translation>
     </message>
     <message>
         <source>Error</source>
-        <translation type="unfinished"></translation>
+        <translation>Ralat</translation>
     </message>
     <message>
         <source>Invalid</source>
-        <translation type="unfinished"></translation>
+        <translation>Tidak sah</translation>
     </message>
 </context>
 <context>

@@ -75,6 +75,7 @@ CommandLineParseResult parseCommandLine(QCommandLineParser &parser, QString *err
 	// add all possible arguments
 	QCommandLineOption helpOption = parser.addHelpOption();
 	QCommandLineOption versionOption = parser.addVersionOption();
+	parser.addOption({"disable-xml-log", "Disable output of full XMPP XML stream."});
 
 	// parse arguments
 	if (!parser.parse(QGuiApplication::arguments())) {
@@ -170,7 +171,7 @@ int main(int argc, char *argv[])
 	// Kaidan back-end
 	//
 
-	Kaidan kaidan(&app);
+	Kaidan kaidan(&app, !parser.isSet("disable-xml-log"));
 
 	//
 	// QML-GUI

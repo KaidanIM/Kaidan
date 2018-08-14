@@ -109,7 +109,7 @@ public:
 	ClientThread(RosterModel *rosterModel, MessageModel *messageModel,
 	             AvatarFileStorage *avatarStorage, PresenceCache *presenceCache,
 	             Credentials creds, QSettings *settings, Kaidan *kaidan,
-	             QGuiApplication *app, QObject *parent = nullptr);
+	             QGuiApplication *app, bool enableLogging = true, QObject *parent = nullptr);
 
 	/*
 	 * Will exit the event loop and waits until thread finishes and then
@@ -249,11 +249,12 @@ private:
 	ClientWorker *worker;
 	RosterManager *rosterManager;
 	MessageSessionHandler *messageSessionHandler;
-    PresenceCache *presenceCache;
+	PresenceCache *presenceCache;
 	PresenceHandler *presenceHandler;
 	ServiceDiscoveryManager *serviceDiscoveryManager;
 	VCardManager *vCardManager;
 	XmlLogHandler *xmlLogHandler;
+	bool enableLogging;
 	QSettings *settings;
 	QMutex mutex;
 	QTimer workTimer;

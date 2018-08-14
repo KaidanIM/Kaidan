@@ -80,7 +80,7 @@ public:
 	/**
 	 * Constructor
 	 */
-	Kaidan(QGuiApplication *app, QObject *parent = 0);
+	Kaidan(QGuiApplication *app, bool enableLogging = true, QObject *parent = 0);
 
 	/**
 	 * Destructor

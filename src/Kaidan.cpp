@@ -44,7 +44,7 @@
 #include "MessageModel.h"
 #include "Database.h"
 
-Kaidan::Kaidan(QGuiApplication *app, QObject *parent) : QObject(parent)
+Kaidan::Kaidan(QGuiApplication *app, bool enableLogging, QObject *parent) : QObject(parent)
 {
 	//
 	// Database and components
@@ -84,7 +84,7 @@ Kaidan::Kaidan(QGuiApplication *app, QObject *parent) : QObject(parent)
 
 	// create new client and start thread's main loop (won't connect until requested)
 	client = new ClientThread(rosterModel, messageModel, avatarStorage, presenceCache, creds,
-	                          settings, this, app);
+	                          settings, this, app, enableLogging);
 	client->start();
 
 	connect(client, &ClientThread::connectionStateChanged, [=](ConnectionState state) {

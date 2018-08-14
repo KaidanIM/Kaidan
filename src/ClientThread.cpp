@@ -61,10 +61,11 @@ static const unsigned int KAIDAN_CLIENT_LOOP_INTERVAL = 30;
 ClientThread::ClientThread(RosterModel *rosterModel, MessageModel *messageModel,
                            AvatarFileStorage *avatarStorage, PresenceCache *presenceCache,
                            Credentials creds, QSettings *settings, Kaidan *kaidan,
-                           QGuiApplication *app, QObject *parent)
+                           QGuiApplication *app, bool enableLogging, QObject *parent)
 	: QThread(parent), rosterModel(rosterModel), messageModel(messageModel),
 	avatarStorage(avatarStorage), presenceCache(presenceCache), creds(creds),
-	settings(settings),	connState(ConnectionState::StateNone), kaidan(kaidan)
+	settings(settings), connState(ConnectionState::StateNone), kaidan(kaidan),
+	enableLogging(enableLogging)
 {
 	// Set custom thread name
 	setObjectName("XmppClient");
@@ -99,7 +100,8 @@ ClientThread::~ClientThread()
 
 	delete worker;
 	delete messageSessionHandler;
-	delete xmlLogHandler;
+	if (xmlLogHandler)
+		delete xmlLogHandler;
 }
 
 void ClientThread::run()
@@ -117,7 +119,8 @@ void ClientThread::run()
 	rosterManager = new RosterManager(kaidan, client, rosterModel, vCardManager);
 	presenceHandler = new PresenceHandler(client, presenceCache);
 	serviceDiscoveryManager = new ServiceDiscoveryManager(client, client->disco());
-	xmlLogHandler = new XmlLogHandler(client);
+	if (enableLogging)
+		xmlLogHandler = new XmlLogHandler(client);
 
 	// Register Stanza Extensions
 	client->registerStanzaExtension(new gloox::Receipt(gloox::Receipt::Request));

@@ -9,7 +9,7 @@
     </message>
     <message>
         <source>License:</source>
-        <translation type="unfinished">Licence :</translation>
+        <translation type="unfinished">Licence&#xa0;:</translation>
     </message>
     <message>
         <source>Source code on GitHub</source>
@@ -47,7 +47,7 @@
     </message>
     <message>
         <source>License:</source>
-        <translation type="vanished">Licence :</translation>
+        <translation type="vanished">Licence&#xa0;:</translation>
     </message>
     <message>
         <source>Source code on GitHub</source>
@@ -163,7 +163,7 @@
     </message>
     <message>
         <source>Your diaspora*-ID:</source>
-        <translation>Votre identifiant diaspora* :</translation>
+        <translation>Votre identifiant diaspora*&#x202f;:</translation>
     </message>
     <message>
         <source>user@diaspora.pod</source>
@@ -210,7 +210,7 @@
     </message>
     <message>
         <source>Jabber-ID:</source>
-        <translation>Identifiant Jabber :</translation>
+        <translation>Identifiant Jabber&#x202f;:</translation>
     </message>
     <message>
         <source>user@example.org</source>
@@ -242,6 +242,45 @@
     </message>
 </context>
 <context>
+    <name>RosterListItem</name>
+    <message>
+        <source>Error: Please check the JID.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Available</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Free for chat</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Away</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Do not disturb</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Away for longer</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Offline</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Error</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Invalid</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>RosterPage</name>
     <message>
         <source>Contacts</source>
@@ -264,7 +303,7 @@
     <name>RosterRemoveContactSheet</name>
     <message>
         <source>Do you really want to delete the contact &quot;%1&quot; from your roster?</source>
-        <translation type="vanished">Voulez-vous vraiment supprimer le contact « %1» de votre liste de contacts ?</translation>
+        <translation type="vanished">Voulez-vous vraiment supprimer le contact « %1» de votre liste de contacts&#x202f;?</translation>
     </message>
     <message>
         <source>Delete contact</source>

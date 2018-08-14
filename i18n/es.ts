@@ -5,7 +5,7 @@
     <name>AboutDialog</name>
     <message>
         <source>A simple, user-friendly Jabber/XMPP client</source>
-        <translation>Un cliente Jabber/XMPP simple y fácil de usar</translation>
+        <translation>Un cliente de Jabber/XMPP sencillo y fácil de usar</translation>
     </message>
     <message>
         <source>License:</source>
@@ -24,7 +24,7 @@
     <name>AboutSheet</name>
     <message>
         <source>A simple, user-friendly Jabber/XMPP client</source>
-        <translation type="vanished">Un cliente Jabber/XMPP simple y fácil de usar</translation>
+        <translation>Un cliente de Jabber/XMPP sencillo y fácil de usar</translation>
     </message>
     <message>
         <source>License:</source>
@@ -90,11 +90,11 @@
     </message>
     <message>
         <source>Invite friends</source>
-        <translation type="unfinished"></translation>
+        <translation>Invitar amigos</translation>
     </message>
     <message>
         <source>Invitation link copied to clipboard</source>
-        <translation type="unfinished"></translation>
+        <translation>Copiado el enlace de invitación al portapapeles</translation>
     </message>
 </context>
 <context>
@@ -126,7 +126,7 @@
     <message>
         <source>The link will be opened after you have connected.</source>
         <extracomment>The link is an XMPP-URI (i.e. &apos;xmpp:kaidan@muc.kaidan.im?join&apos; for joining a chat)</extracomment>
-        <translation type="unfinished"></translation>
+        <translation>El enlace se abrirá después de que se haya conectado.</translation>
     </message>
 </context>
 <context>
@@ -247,39 +247,39 @@
     <name>RosterListItem</name>
     <message>
         <source>Error: Please check the JID.</source>
-        <translation type="unfinished"></translation>
+        <translation>Error: compruebe el JID.</translation>
     </message>
     <message>
         <source>Available</source>
-        <translation type="unfinished"></translation>
+        <translation>Disponible</translation>
     </message>
     <message>
         <source>Free for chat</source>
-        <translation type="unfinished"></translation>
+        <translation>Libre para chatear</translation>
     </message>
     <message>
         <source>Away</source>
-        <translation type="unfinished"></translation>
+        <translation>Ausente</translation>
     </message>
     <message>
         <source>Do not disturb</source>
-        <translation type="unfinished"></translation>
+        <translation>No molestar</translation>
     </message>
     <message>
         <source>Away for longer</source>
-        <translation type="unfinished"></translation>
+        <translation>Ausente por bastante tiempo</translation>
     </message>
     <message>
         <source>Offline</source>
-        <translation type="unfinished">Desconectado</translation>
+        <translation>Desconectado</translation>
     </message>
     <message>
         <source>Error</source>
-        <translation type="unfinished"></translation>
+        <translation>Error</translation>
     </message>
     <message>
         <source>Invalid</source>
-        <translation type="unfinished"></translation>
+        <translation>No válido</translation>
     </message>
 </context>
 <context>

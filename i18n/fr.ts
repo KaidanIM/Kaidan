@@ -126,6 +126,11 @@
         <source>Could not remove contact, as a result of not being connected.</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>The link will be opened after you have connected.</source>
+        <extracomment>The link is an XMPP-URI (i.e. &apos;xmpp:kaidan@muc.kaidan.im?join&apos; for joining a chat)</extracomment>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>LoginPage</name>

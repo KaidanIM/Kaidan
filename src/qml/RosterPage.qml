@@ -44,6 +44,7 @@ Kirigami.ScrollablePage {
 
 	RosterAddContactSheet {
 		id: addContactSheet
+		jid: ""
 	}
 	RosterRemoveContactSheet {
 		id: removeContactSheet
@@ -105,11 +106,19 @@ Kirigami.ScrollablePage {
 				}
 			}
 
+			function xmppUriReceived(uri) {
+				// 'xmpp:' has length of 5
+				addContactSheet.jid = uri.substr(5)
+				addContactSheet.open()
+			}
+
 			Component.onCompleted: {
 				kaidan.presenceCache.presenceChanged.connect(newPresenceArrived)
+				kaidan.xmppUriReceived.connect(xmppUriReceived)
 			}
 			Component.onDestruction: {
 				kaidan.presenceCache.presenceChanged.disconnect(newPresenceArrived)
+				kaidan.xmppUriReceived.disconnect(xmppUriReceived)
 			}
 		}
 	}

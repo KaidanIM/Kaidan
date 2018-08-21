@@ -24,7 +24,9 @@ SOURCES += \
     src/ServiceDiscoveryManager.cpp \
     src/VCardManager.cpp \
     src/XmlLogHandler.cpp \
-    src/StatusBar.cpp
+    src/StatusBar.cpp \
+    src/singleapp/singleapplication.cpp \
+    src/singleapp/singleapplication_p.cpp
 
 HEADERS += \
     src/Database.h \
@@ -46,7 +48,9 @@ HEADERS += \
     src/VCardManager.h \
     src/Globals.h \
     src/Enums.h \
-    src/StatusBar.h
+    src/StatusBar.h \
+    src/singleapp/singleapplication.h \
+    src/singleapp/singleapplication_p.h
 
 android: INCLUDEPATH += $$PWD/3rdparty/gloox/include
 android: LIBS += -L$$PWD/3rdparty/gloox/lib/

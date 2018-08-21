@@ -37,7 +37,9 @@ REPLACE_USER_IDS = [
 	("JBBgameich <jbbgameich@gmail.com>", "JBB <jbb.prv@gmx.de>"),
 	("JBBgameich <jbb.prv@gmx.de>", "JBB <jbb.prv@gmx.de>"),
 	("Linus Jahn <linus.jahn@searchmetrics.com>", "LNJ <git@lnj.li>"),
-	("Georg <s.g.b@gmx.de>", "geobra <s.g.b@gmx.de>")
+	("Georg <s.g.b@gmx.de>", "geobra <s.g.b@gmx.de>"),
+	("Muhammad Nur Hidayat Yasuyoshi (MNH48.com) <muhdnurhidayat96@yahoo.com>",
+	 "Muhammad Nur Hidayat Yasuyoshi <mnh48mail@gmail.com>")
 ]
 
 # These user ids will be excluded from any targets
@@ -237,13 +239,14 @@ def main():
 			licenseName = "GPL-3+ with OpenSSL exception"
 		),
 		CopyrightTarget(
-			files = ["src/StatusBar.cpp", "src/StatusBar.h", "data/images/xmpp.svg",
-			         "utils/generate-license.py"],
+			files = ["src/StatusBar.cpp", "src/StatusBar.h", "src/singleapp/*",
+			         "data/images/xmpp.svg", "utils/generate-license.py"],
 			licenseName = "MIT",
 			authorList = {
 				"J-P Nurmi <jpnurmi@gmail.com>": CopyrightAuthor(years = "2016"),
 				"Raja Sandhu, XMPP Standards Foundation": CopyrightAuthor(years = "2007"),
-				"LNJ <git@lnj.li>": CopyrightAuthor(years = "2018")
+				"LNJ <git@lnj.li>": CopyrightAuthor(years = "2018"),
+				"Itay Grudev <itay+github.com@grudev.com>": CopyrightAuthor(years = "2015-2018")
 			}
 		),
 		CopyrightTarget(

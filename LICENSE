@@ -19,6 +19,7 @@ License: GPL-3+ with OpenSSL exception
 Files: i18n/*
 Copyright: 2017-2018, LNJ <git@lnj.li>
            2017-2018, JBB <jbb.prv@gmx.de>
+           2017-2018, Muhammad Nur Hidayat Yasuyoshi <mnh48mail@gmail.com>
            2018, Allan Nordhøy <epost@anotheragency.no>
            2018, advocatux <advocatux@airpost.net>
            2017-2018, Joeke de Graaf <mappack@null.net>
@@ -26,16 +27,17 @@ Copyright: 2017-2018, LNJ <git@lnj.li>
            2017, ZatroxDE <zatroxde@outlook.com>
            2018, Andreas Kleinert <Andy.Kleinert@gmail.com>
            2017, Emmanuel Gil Peyrot <linkmauve@linkmauve.fr>
-           2017, Muhammad Nur Hidayat Yasuyoshi (MNH48.com) <muhdnurhidayat96@yahoo.com>
 License: GPL-3+ with OpenSSL exception
 
 Files: src/StatusBar.cpp
        src/StatusBar.h
+       src/singleapp/*
        data/images/xmpp.svg
        utils/generate-license.py
 Copyright: 2016, J-P Nurmi <jpnurmi@gmail.com>
            2007, Raja Sandhu, XMPP Standards Foundation
            2018, LNJ <git@lnj.li>
+           2015-2018, Itay Grudev <itay+github.com@grudev.com>
 License: MIT
 
 Files: data/images/message_checkmark.svg

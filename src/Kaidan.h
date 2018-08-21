@@ -262,6 +262,11 @@ public:
 		return presenceCache;
 	}
 
+	/**
+	 * Adds XMPP URI to open as soon as possible
+	 */
+	void addOpenUri(QByteArray uri);
+
 signals:
 	void rosterModelChanged();
 	void messageModelChanged();
@@ -337,6 +342,23 @@ signals:
 	 */
 	void vCardRequested(QString jid);
 
+	/**
+	 * XMPP URI received
+	 *
+	 * Is called when Kaidan was used to open an XMPP URI (i.e. 'xmpp:kaidan@muc.kaidan.im?join')
+	 */
+	void xmppUriReceived(QString uri);
+
+public slots:
+	/**
+	 * Receives messages from another instance of the application
+	 */
+	void receiveMessage(quint32 instanceId, QByteArray msg)
+	{
+		// currently we only send XMPP URIs
+		addOpenUri(msg);
+	}
+
 private:
 	void connectDatabases();
 
@@ -351,6 +373,8 @@ private:
 
 	ClientThread::Credentials creds;
 	QString chatPartner;
+
+	QString openUriCache;
 };
 
 #endif

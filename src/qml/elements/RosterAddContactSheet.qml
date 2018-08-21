@@ -34,6 +34,8 @@ import QtQuick.Layouts 1.3
 import org.kde.kirigami 2.0 as Kirigami
 
 Kirigami.OverlaySheet {
+	property string jid: ""
+
 	ColumnLayout {
 		Layout.fillWidth: true
 
@@ -56,6 +58,7 @@ Kirigami.OverlaySheet {
 		}
 		Controls.TextField {
 			id: jidField
+			text: jid
 			placeholderText: qsTr("user@example.org")
 			inputMethodHints: Qt.ImhEmailCharactersOnly | Qt.ImhPreferLowercase
 			selectByMouse: true
@@ -117,6 +120,7 @@ Kirigami.OverlaySheet {
 	}
 
 	function clearInput() {
+		jid = "";
 		jidField.text = "";
 		nickField.text = "";
 		msgField.text = "";

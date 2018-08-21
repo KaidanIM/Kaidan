@@ -96,6 +96,18 @@ Kaidan::Kaidan(QGuiApplication *app, bool enableLogging, QObject *parent) : QObj
 	connect(client, &ClientThread::newCredentialsNeeded, this, &Kaidan::newCredentialsNeeded);
 	connect(client, &ClientThread::logInWorked, this, &Kaidan::logInWorked);
 	connect(this, &Kaidan::chatPartnerChanged, client, &ClientThread::chatPartnerChanged);
+
+	connect(client, &ClientThread::connectionStateChanged, [=] (ConnectionState state) {
+		// Open (possible) cached URI when connected.
+		// This is needed because the XMPP URIs can't be opened when Kaidan is not connected.
+		if (state == ConnectionState::StateConnected && !openUriCache.isEmpty()) {
+			// delay is needed because sometimes the RosterPage needs to be loaded first
+			QTimer::singleShot(300, [=] () {
+				emit xmppUriReceived(openUriCache);
+				openUriCache = "";
+			});
+		}
+	});
 }
 
 Kaidan::~Kaidan()
@@ -126,7 +138,6 @@ bool Kaidan::mainConnect()
 		return false;
 	}
 
-	// TODO: check if jid is valid first
 	client->setCredentials(creds);
 	emit client->connectRequested();
 	return true;
@@ -254,4 +265,20 @@ QString Kaidan::getResourcePath(QString name) const
 	// no file found
 	qWarning() << "[main] Could NOT find media file:" << name;
 	return QString("");
+}
+
+void Kaidan::addOpenUri(QByteArray uri)
+{
+	qDebug() << "[main]" << uri;
+
+	if (!uri.startsWith("xmpp:") || !uri.contains("@"))
+		return;
+
+	if (client->isConnected()) {
+		emit xmppUriReceived(QString::fromUtf8(uri));
+	} else {
+		//: The link is an XMPP-URI (i.e. 'xmpp:kaidan@muc.kaidan.im?join' for joining a chat)
+		emit passiveNotificationRequested(tr("The link will be opened after you have connected."));
+		openUriCache = QString::fromUtf8(uri);
+	}
 }

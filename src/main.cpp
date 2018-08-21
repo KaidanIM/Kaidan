@@ -54,6 +54,8 @@
 #include "Globals.h"
 #include "Enums.h"
 #include "StatusBar.h"
+// SingleApplication (Qt5 replacement for QtSingleApplication)
+#include "singleapp/singleapplication.h"
 
 #ifdef QMAKE_BUILD
 #include "./3rdparty/kirigami/src/kirigamiplugin.h"
@@ -72,10 +74,17 @@ enum CommandLineParseResult {
 
 CommandLineParseResult parseCommandLine(QCommandLineParser &parser, QString *errorMessage)
 {
+	// application description
+	parser.setApplicationDescription(QString(APPLICATION_DISPLAY_NAME) +
+	                                 " - " + QString(APPLICATION_DESCRIPTION));
+
 	// add all possible arguments
 	QCommandLineOption helpOption = parser.addHelpOption();
 	QCommandLineOption versionOption = parser.addVersionOption();
 	parser.addOption({"disable-xml-log", "Disable output of full XMPP XML stream."});
+	parser.addOption({{"m", "multiple"}, "Allow multiple instances to be started."});
+	parser.addPositionalArgument("xmpp-uri", "An XMPP-URI to open (i.e. join a chat).",
+	                             "[xmpp-uri]");
 
 	// parse arguments
 	if (!parser.parse(QGuiApplication::arguments())) {
@@ -103,17 +112,12 @@ int main(int argc, char *argv[])
 	//
 
 	// create a qt app
-#if HAVE_QWIDGETS
-	QApplication app(argc, argv);
-#else
-	QGuiApplication app(argc, argv);
-#endif
+	SingleApplication app(argc, argv, true);
 
 	// name, display name, description
 	QGuiApplication::setApplicationName(APPLICATION_NAME);
 	QGuiApplication::setApplicationDisplayName(APPLICATION_DISPLAY_NAME);
 	QGuiApplication::setApplicationVersion(VERSION_STRING);
-
 	// attributes
 	QGuiApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
 
@@ -148,9 +152,6 @@ int main(int argc, char *argv[])
 
 	// create parser and add a description
 	QCommandLineParser parser;
-	parser.setApplicationDescription(QString(APPLICATION_DISPLAY_NAME) +
-	                                 " - " + QString(APPLICATION_DESCRIPTION));
-
 	// parse the arguments
 	QString commandLineErrorMessage;
 	switch (parseCommandLine(parser, &commandLineErrorMessage)) {
@@ -167,11 +168,33 @@ int main(int argc, char *argv[])
 		break;
 	}
 
+	// check if another instance already runs
+	if (app.isSecondary() && !parser.isSet("multiple")) {
+		qDebug().noquote() << QString("Another instance of %1 is already running.")
+		                      .arg(APPLICATION_DISPLAY_NAME)
+		                   << "You can enable multiple instances by specifying '--multiple'.";
+
+		// send a possible link to the primary instance
+		if (!parser.positionalArguments().isEmpty())
+			app.sendMessage(parser.positionalArguments()[0].toUtf8());
+		return 0;
+	}
+
+
 	//
 	// Kaidan back-end
 	//
 
 	Kaidan kaidan(&app, !parser.isSet("disable-xml-log"));
+
+	// receive messages from other instances of Kaidan
+	kaidan.connect(&app, &SingleApplication::receivedMessage,
+	               &kaidan, &Kaidan::receiveMessage);
+
+	// open the XMPP-URI/link (if given)
+	if (!parser.positionalArguments().isEmpty())
+		kaidan.addOpenUri(parser.positionalArguments()[0].toUtf8());
+
 
 	//
 	// QML-GUI

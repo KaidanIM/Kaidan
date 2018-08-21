@@ -22,6 +22,10 @@ set(KAIDAN_SOURCES
 	${CURDIR}/XmlLogHandler.cpp
 	${CURDIR}/StatusBar.cpp
 
+	# SingleApplication
+	${CURDIR}/singleapp/singleapplication.cpp
+	${CURDIR}/singleapp/singleapplication_p.cpp
+
 	# needed to trigger moc generation
 	${CURDIR}/Enums.h
 )

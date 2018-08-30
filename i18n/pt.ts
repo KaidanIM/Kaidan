@@ -88,6 +88,14 @@
         <source>About</source>
         <translation>Sobre</translation>
     </message>
+    <message>
+        <source>Invite friends</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Invitation link copied to clipboard</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>Kaidan</name>

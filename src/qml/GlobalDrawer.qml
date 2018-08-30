@@ -45,20 +45,28 @@ Kirigami.GlobalDrawer {
 
 	actions: [
 		Kirigami.Action {
-			text: qsTr("Log out")
-			iconName: "system-shutdown"
+			text: qsTr("Invite friends")
+			iconName: "mail-invitation"
 			onTriggered: {
-				// disconnect (open log in page)
-				kaidan.mainDisconnect(true);
+				kaidan.copyToClipboard("https://i.kaidan.im/#" + kaidan.jid)
+				passiveNotification(qsTr("Invitation link copied to clipboard"))
 			}
 		},
-		Kirigami.Action {
-			text: qsTr("About")
-			iconName: "help-about"
-			onTriggered: {
-				// open about sheet
-				aboutDialog.open();
-			}
-		}
+                Kirigami.Action {
+                        text: qsTr("Log out")
+                        iconName: "system-shutdown"
+                        onTriggered: {
+                                // disconnect (open log in page)
+                                kaidan.mainDisconnect(true);
+                        }
+                },
+                Kirigami.Action {
+                        text: qsTr("About")
+                        iconName: "help-about"
+                        onTriggered: {
+                                // open about sheet
+                                aboutDialog.open();
+                        }
+                }
 	]
 }

@@ -267,6 +267,11 @@ public:
 	 */
 	void addOpenUri(QByteArray uri);
 
+	/**
+	 * Copy text to the clipboard
+	 */
+	Q_INVOKABLE void copyToClipboard(QString text);
+
 signals:
 	void rosterModelChanged();
 	void messageModelChanged();

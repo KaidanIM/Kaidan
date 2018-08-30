@@ -36,7 +36,8 @@
 #include <QSettings>
 #include <QString>
 #include <QStandardPaths>
-#include <QCoreApplication>
+#include <QClipboard>
+#include <QGuiApplication>
 // Kaidan
 #include "AvatarFileStorage.h"
 #include "PresenceCache.h"
@@ -281,4 +282,10 @@ void Kaidan::addOpenUri(QByteArray uri)
 		emit passiveNotificationRequested(tr("The link will be opened after you have connected."));
 		openUriCache = QString::fromUtf8(uri);
 	}
+}
+
+void Kaidan::copyToClipboard(QString text)
+{
+	QClipboard *clipboard = QGuiApplication::clipboard();
+	clipboard->setText(text);
 }

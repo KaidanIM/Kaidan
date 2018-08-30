@@ -121,11 +121,11 @@
     </message>
     <message>
         <source>Invite friends</source>
-        <translation type="unfinished"></translation>
+        <translation>Freunde einladen</translation>
     </message>
     <message>
         <source>Invitation link copied to clipboard</source>
-        <translation type="unfinished"></translation>
+        <translation>Einladungslink wurde in die Zwischenablage kopiert</translation>
     </message>
 </context>
 <context>
@@ -157,7 +157,7 @@
     <message>
         <source>The link will be opened after you have connected.</source>
         <extracomment>The link is an XMPP-URI (i.e. &apos;xmpp:kaidan@muc.kaidan.im?join&apos; for joining a chat)</extracomment>
-        <translation type="unfinished"></translation>
+        <translation>Der Link wird nach Aufbau der Verbindung geöffnet.</translation>
     </message>
 </context>
 <context>

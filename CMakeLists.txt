@@ -43,12 +43,15 @@ if(NOT UBUNTU_TOUCH)
 		DESCRIPTION "Integration with QWidget based desktop styles"
 		TYPE OPTIONAL
 	)
-	if(Qt5Widgets_FOUND)
-		set(HAVE_QWIDGETS 1)
-		add_definitions(-DHAVE_QWIDGETS)
-		set(__Qt5Widgets_LIBRARIES Qt5::Widgets)
-	endif()
 endif()
+
+if(Qt5Widgets_FOUND)
+	add_definitions(-DHAVE_QWIDGETS -DQAPPLICATION_CLASS=QApplication)
+	set(__Qt5Widgets_LIBRARIES Qt5::Widgets)
+else()
+	add_definitions(-DQAPPLICATION_CLASS=QGuiApplication)
+endif()
+
 
 #
 # Load submodules

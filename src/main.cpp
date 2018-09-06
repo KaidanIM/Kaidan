@@ -32,11 +32,6 @@
 #include <QCommandLineParser>
 #include <QCommandLineOption>
 #include <QDebug>
-#if HAVE_QWIDGETS
-#include <QApplication>
-#else
-#include <QGuiApplication>
-#endif
 #include <QLocale>
 #include <qqml.h>
 #include <QQmlApplicationEngine>
@@ -54,6 +49,12 @@
 #include "Globals.h"
 #include "Enums.h"
 #include "StatusBar.h"
+
+#ifndef QAPPLICATION_CLASS
+#define QAPPLICATION_CLASS QApplication
+#endif
+#include QT_STRINGIFY(QAPPLICATION_CLASS)
+
 // SingleApplication (Qt5 replacement for QtSingleApplication)
 #include "singleapp/singleapplication.h"
 

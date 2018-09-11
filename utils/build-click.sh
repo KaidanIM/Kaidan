@@ -21,12 +21,12 @@ install_deb() {
 }
 
 install_dependencies() {
-	KIRIGAMI_VERSION="5.44.0-2"
+	KIRIGAMI_VERSION="5.49.0-1"
 	GLOOX_VERSION="1.0.20-1+16.04+xenial+build1"
 
 	echo "I: Installing Kirigami 2"
 	for PKG in qml-module-org-kde-kirigami2 kirigami2-dev libkf5kirigami2-5; do
-		install_deb http://snapshot.debian.org/archive/debian/20180430T215634Z/pool/main/k/kirigami2 ${PKG} ${KIRIGAMI_VERSION}
+		install_deb http://repo.ubports.com/pool/xenial/main/k/kirigami2 ${PKG} ${KIRIGAMI_VERSION}
 	done
 
 	echo "I: Installing gloox"

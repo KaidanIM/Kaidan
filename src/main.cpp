@@ -112,6 +112,11 @@ int main(int argc, char *argv[])
 	// App
 	//
 
+#ifdef UBUNTU_TOUCH
+	qputenv("QT_AUTO_SCREEN_SCALE_FACTOR", "true");
+	qputenv("QT_QUICK_CONTROLS_MOBILE", "true");
+#endif
+
 	// create a qt app
 	SingleApplication app(argc, argv, true);
 
@@ -209,10 +214,6 @@ int main(int argc, char *argv[])
 		qDebug() << "QT_QUICK_CONTROLS_STYLE not set, setting to Material";
 		qputenv("QT_QUICK_CONTROLS_STYLE", "Material");
 	}
-#endif
-
-#ifdef UBUNTU_TOUCH
-       qputenv("QT_AUTO_SCREEN_SCALE_FACTOR", "true");
 #endif
 
 	// QML type bindings

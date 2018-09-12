@@ -11,6 +11,7 @@ option(I18N "Enable i18n support" FALSE)
 option(SAILFISH_OS "Build with Sailfish OS GUI, needs 3rdparty/kaidansf submodule" FALSE)
 option(UBUNTU_TOUCH "Building a Ubuntu Touch click (internal use only!)" FALSE)
 option(CLICK_ARCH "Architecture that will be used in the click's manifest")
+option(CLICK_DATE "Date used in the version number in the click's manifest")
 
 # Find includes in corresponding build directories
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
@@ -84,10 +85,17 @@ if(NOT SAILFISH_OS)
 	set(KAIDAN_QML_QRC kaidan_qml.qrc)
 endif()
 
+# Include bundled icons on Ubuntu Touch,
+# because its icon theme is missing some required icons
+if(UBUNTU_TOUCH)
+	set(KAIDAN_ICONS_QRC kirigami-icons.qrc)
+endif()
+
 add_executable(${PROJECT_NAME}
 	${KAIDAN_SOURCES}
 	${KAIDAN_QML_QRC}
-	${I18N_QRC_CPP}     # only set if enabled
+	${KAIDAN_ICONS_QRC} # only set if enabled
+	${I18N_QRC_CPP}     #
 	${KAIDANSF_SOURCES} #
 )
 

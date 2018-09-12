@@ -241,6 +241,9 @@ QString Kaidan::getResourcePath(QString name) const
 	pathList << QCoreApplication::applicationDirPath() + QString("/../share/") + QString(APPLICATION_NAME);
 	// get the standard app data locations for current platform
 	pathList << QStandardPaths::standardLocations(QStandardPaths::AppDataLocation);
+#ifdef UBUNTU_TOUCH
+	pathList << QString("./share/") + QString(APPLICATION_NAME);
+#endif
 #ifndef NDEBUG
 #ifdef DEBUG_SOURCE_PATH
 	// add source directory (only for debug builds)

@@ -5,6 +5,7 @@ CLICK_TARGET_DIR="$KAIDAN_SOURCES/bin/ubuntu-touch/tmp" # tmp is hard-coded into
 
 mkdir -p $CLICK_TARGET_DIR
 
+DATE=$(date +%Y%m%d)
 ARCH=$(dpkg-architecture -qDEB_HOST_ARCH)
 DEB_HOST_MULTIARCH=$(dpkg-architecture -qDEB_HOST_MULTIARCH)
 
@@ -21,21 +22,13 @@ install_deb() {
 }
 
 install_dependencies() {
-	KIRIGAMI_VERSION="5.49.0-1"
 	GLOOX_VERSION="1.0.20-1+16.04+xenial+build1"
-
-	echo "I: Installing Kirigami 2"
-	for PKG in qml-module-org-kde-kirigami2 kirigami2-dev libkf5kirigami2-5; do
-		install_deb http://repo.ubports.com/pool/xenial/main/k/kirigami2 ${PKG} ${KIRIGAMI_VERSION}
-	done
 
 	echo "I: Installing gloox"
 	for PKG in libgloox-dev libgloox17; do
 		install_deb http://neon.plasma-mobile.org:8080/pool/main/g/gloox ${PKG} ${GLOOX_VERSION}
 	done
 
-	echo "I: Installing QML modules"
-	mv $CLICK_TARGET_DIR/usr/lib/$DEB_HOST_MULTIARCH/qt5/qml/* $CLICK_TARGET_DIR/usr/lib/$DEB_HOST_MULTIARCH
 	echo "I: Installing libraries"
 	mv $CLICK_TARGET_DIR/usr/* $CLICK_TARGET_DIR/
 }
@@ -51,7 +44,9 @@ build_kaidan() {
 	      -DGLOOX_INCLUDE_DIR="${CLICK_TARGET_DIR}/include" \
 	      -DI18N=1 \
 	      -DUBUNTU_TOUCH=1 \
-	      -DCLICK_ARCH="${ARCH}"
+	      -DCLICK_ARCH="${ARCH}" \
+	      -DCLICK_DATE="${DATE}" \
+	      -DCMAKE_BUILD_TYPE=Release
 
 	ninja install
 }
@@ -62,10 +57,7 @@ cleanup_click_dir() {
 		$CLICK_TARGET_DIR/usr \
 		$CLICK_TARGET_DIR/include \
 		$CLICK_TARGET_DIR/share/doc \
-		$CLICK_TARGET_DIR/share/locale \
-		$CLICK_TARGET_DIR/lib/$DEB_HOST_MULTIARCH/cmake \
-		$CLICK_TARGET_DIR/lib/$DEB_HOST_MULTIARCH/pkgconfig \
-		$CLICK_TARGET_DIR/lib/$DEB_HOST_MULTIARCH/qt5/mkspecs
+		$CLICK_TARGET_DIR/lib/$DEB_HOST_MULTIARCH/pkgconfig
 }
 
 echo "*****************************************"

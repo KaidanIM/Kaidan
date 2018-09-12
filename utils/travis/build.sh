@@ -13,7 +13,7 @@ cd ${TRAVIS_BUILD_DIR}/build
 
 if [[ ${PLATFORM} == "ubuntu-touch" ]]; then
 	cd ..
-	clickable clean build click-build
+	clickable clean build click-build review publish
 elif [[ ${BUILD_SYSTEM} == "cmake" ]]; then
 	cmake .. \
 	      -GNinja \

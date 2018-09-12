@@ -13,6 +13,7 @@ cd ${TRAVIS_BUILD_DIR}/build
 
 if [[ ${PLATFORM} == "ubuntu-touch" ]]; then
 	cd ..
+	git submodule update --init --remote --checkout
 	clickable clean build click-build review publish
 elif [[ ${BUILD_SYSTEM} == "cmake" ]]; then
 	cmake .. \

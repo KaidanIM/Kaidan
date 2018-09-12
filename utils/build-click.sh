@@ -5,7 +5,7 @@ CLICK_TARGET_DIR="$KAIDAN_SOURCES/bin/ubuntu-touch/tmp" # tmp is hard-coded into
 
 mkdir -p $CLICK_TARGET_DIR
 
-DATE=$(date +%Y%m%d)
+DATE=$(date +%Y%m%d.%H%M)
 ARCH=$(dpkg-architecture -qDEB_HOST_ARCH)
 DEB_HOST_MULTIARCH=$(dpkg-architecture -qDEB_HOST_MULTIARCH)
 

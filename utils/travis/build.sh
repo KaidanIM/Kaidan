@@ -8,8 +8,8 @@ echo_env
 echo "*****************************************"
 echo
 
-mkdir -p ${TRAVIS_BUILD_DIR}/build
-cd ${TRAVIS_BUILD_DIR}/build
+mkdir -p ${BUILD_DIR}/build
+cd ${BUILD_DIR}/build
 
 if [[ ${PLATFORM} == "ubuntu-touch" ]]; then
 	cd ..

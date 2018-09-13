@@ -14,7 +14,10 @@ cd ${BUILD_DIR}/build
 if [[ ${PLATFORM} == "ubuntu-touch" ]]; then
 	cd ..
 	git submodule update --init --remote --checkout
-	clickable clean build click-build review publish
+	clickable clean build click-build review
+	if [ ! -z $OPENSTORE_API_KEY ]; then
+		clickable publish
+	fi
 elif [[ ${BUILD_SYSTEM} == "cmake" ]]; then
 	cmake .. \
 	      -GNinja \

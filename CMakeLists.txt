@@ -8,7 +8,6 @@ set(APPLICATION_ID "im.kaidan.kaidan")
 
 # CMake options
 option(I18N "Enable i18n support" FALSE)
-option(SAILFISH_OS "Build with Sailfish OS GUI, needs 3rdparty/kaidansf submodule" FALSE)
 option(UBUNTU_TOUCH "Building a Ubuntu Touch click (internal use only!)" FALSE)
 option(CLICK_ARCH "Architecture that will be used in the click's manifest")
 option(CLICK_DATE "Date used in the version number in the click's manifest")
@@ -66,24 +65,10 @@ if(I18N)
 	include("${CMAKE_SOURCE_DIR}/i18n/CMakeLists.txt")
 endif()
 
-# Sailfish OS GUI
-if(SAILFISH_OS)
-	if(EXISTS "${CMAKE_SOURCE_DIR}/3rdparty/kaidansf/CMakeLists.txt")
-		include("${CMAKE_SOURCE_DIR}/3rdparty/kaidansf/CMakeLists.txt")
-	else()
-		message(FATAL_ERROR "Could NOT find KaidanSF adaptions for Sailfish OS.")
-	endif()
-endif()
-
 
 #
 # Sources / Resources
 #
-
-# normal kirigami GUI, if no Sailfish OS build
-if(NOT SAILFISH_OS)
-	set(KAIDAN_QML_QRC kaidan_qml.qrc)
-endif()
 
 # Include bundled icons on Ubuntu Touch,
 # because its icon theme is missing some required icons
@@ -93,10 +78,9 @@ endif()
 
 add_executable(${PROJECT_NAME}
 	${KAIDAN_SOURCES}
-	${KAIDAN_QML_QRC}
 	${KAIDAN_ICONS_QRC} # only set if enabled
 	${I18N_QRC_CPP}     #
-	${KAIDANSF_SOURCES} #
+	"kaidan_qml.qrc"
 )
 
 
@@ -118,12 +102,7 @@ target_link_libraries(${PROJECT_NAME}
 # Global C++ variables
 #
 
-if(SAILFISH_OS)
-	set(KAIDAN_COMPILE_DEFINITIONS
-		SAILFISH_OS=True
-		PLATFORM_DISPLAY_NAME="Sailfish OS"
-	)
-elseif(UBUNTU_TOUCH)
+if(UBUNTU_TOUCH)
 	set(KAIDAN_COMPILE_DEFINITIONS
 		UBUNTU_TOUCH=True
 	)

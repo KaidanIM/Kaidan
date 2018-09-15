@@ -126,7 +126,7 @@ void UploadHandler::handleUploadFinished(int id, std::string &name,
 	QFileInfo fInfo(mediaShares[id].filePath);
 	QDateTime modifyTime = fInfo.lastModified();
 
-	msg.mediaLastModified = modifyTime.isValid() ? modifyTime.toTime_t() : -1;
+	msg.mediaLastModified = modifyTime.isValid() ? modifyTime.toMSecsSinceEpoch() : -1;
 	std::string modifyTimeStr = modifyTime.isValid() ? modifyTime.toUTC()
 	                            .toString(Qt::ISODate).toStdString() : "";
 

@@ -202,7 +202,7 @@ void MessageHandler::handleMediaSharing(const gloox::Message *message,
 			msg->message = QString::fromStdString(file->desc());
 			msg->mediaSize = file->size();
 			msg->mediaContentType = QString::fromStdString(file->mediaType());
-			msg->mediaLastModified = stringToQDateTime(file->date()).toTime_t();
+			msg->mediaLastModified = stringToQDateTime(file->date()).toMSecsSinceEpoch();
 			QMimeType mimeType = QMimeDatabase().mimeTypeForName(msg->mediaContentType);
 			msg->type = getMessageType(mimeType);
 			for (gloox::Hash &hash : file->hashes())

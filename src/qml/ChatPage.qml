@@ -158,6 +158,7 @@ Kirigami.ScrollablePage {
 
 			Controls.ToolButton {
 				id: attachButton
+				visible: kaidan.httpUploadEnabled
 				Layout.preferredWidth: Kirigami.Units.gridUnit * 3
 				Layout.preferredHeight: Kirigami.Units.gridUnit * 3
 				padding: 0

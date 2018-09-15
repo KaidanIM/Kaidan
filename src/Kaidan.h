@@ -75,6 +75,7 @@ class Kaidan : public QObject
 	Q_PROPERTY(QString jidResource READ getJidResource WRITE setJidResource NOTIFY jidResourceChanged)
 	Q_PROPERTY(QString password READ getPassword WRITE setPassword NOTIFY passwordChanged)
 	Q_PROPERTY(QString chatPartner READ getChatPartner WRITE setChatPartner NOTIFY chatPartnerChanged)
+	Q_PROPERTY(bool httpUploadEnabled READ getHttpUploadEnabled NOTIFY httpUploadChanged)
 
 public:
 	/**
@@ -277,6 +278,14 @@ public:
 	 */
 	Q_INVOKABLE void copyToClipboard(QString text);
 
+	/**
+	 * Returns true, if XEP-0363: HTTP File Upload was discovered
+	 */
+	bool getHttpUploadEnabled()
+	{
+		return hasHttpUpload;
+	}
+
 signals:
 	void rosterModelChanged();
 	void messageModelChanged();
@@ -364,6 +373,11 @@ signals:
 	 */
 	void uploadProgressMade(QString msgId, unsigned long sent, unsigned long total);
 
+	/**
+	 * XEP-0363: HTTP File Upload was discovered (or isn't working anymore)
+	 */
+	void httpUploadChanged();
+
 public slots:
 	/**
 	 * Receives messages from another instance of the application
@@ -372,6 +386,15 @@ public slots:
 	{
 		// currently we only send XMPP URIs
 		addOpenUri(msg);
+	}
+
+	/**
+	 * Enables XEP-0363: HTTP File Upload
+	 */
+	void enableHttpUpload()
+	{
+		hasHttpUpload = true;
+		emit httpUploadChanged();
 	}
 
 private:
@@ -390,6 +413,8 @@ private:
 	QString chatPartner;
 
 	QString openUriCache;
+
+	bool hasHttpUpload = false;
 };
 
 #endif

@@ -76,6 +76,11 @@ signals:
 	 */
 	void uploadProgressMade(QString msgId, unsigned long sent, unsigned long total);
 
+	/**
+	 * XEP-0363: HTTP File Upload service has been found
+	 */
+	void uploadServiceFound();
+
 public slots:
 	/**
 	 * Starts uploading a file

@@ -108,6 +108,12 @@ Kaidan::Kaidan(QGuiApplication *app, bool enableLogging, QObject *parent) : QObj
 				openUriCache = "";
 			});
 		}
+
+		// on disconnection, disable file upload
+		if (state == ConnectionState::StateDisconnected) {
+			hasHttpUpload = false;
+			emit httpUploadChanged();
+		}
 	});
 }
 

@@ -200,6 +200,7 @@ void UploadHandler::handleUploadServiceRemoved(const gloox::JID &jid)
 void UploadHandler::handleUploadServiceAdded(const gloox::JID &jid,
                                              unsigned long maxFileSize)
 {
+	emit uploadServiceFound();
 }
 
 void UploadHandler::handleFileSizeLimitChanged(unsigned long maxFileSize)

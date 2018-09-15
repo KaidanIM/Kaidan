@@ -152,6 +152,8 @@ void ClientThread::run()
 	        rosterManager, &RosterManager::addContact);
 	connect(uploadHandler, &UploadHandler::uploadProgressMade,
 	        kaidan, &Kaidan::uploadProgressMade);
+	connect(uploadHandler, &UploadHandler::uploadServiceFound,
+	        kaidan, &Kaidan::enableHttpUpload);
 	connect(this, &ClientThread::removeContactRequested,
 	        rosterManager, &RosterManager::removeContact);
 	connect(kaidan, &Kaidan::vCardRequested, [=](QString jid) {

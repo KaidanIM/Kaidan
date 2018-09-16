@@ -33,7 +33,7 @@
 
 #include <QtGlobal>
 #include <QObject>
-#include <gloox/gloox.h>
+#include <QXmppClient.h>
 
 namespace Enums {
 	Q_NAMESPACE
@@ -42,11 +42,9 @@ namespace Enums {
 	 * Enumeration of possible connection states.
 	 */
 	enum class ConnectionState : quint8 {
-		StateNone,
-		StateConnecting,
-		StateConnected,
-		StateDisconnecting,
-		StateDisconnected
+		StateDisconnected = QXmppClient::DisconnectedState,
+		StateConnecting = QXmppClient::ConnectingState,
+		StateConnected = QXmppClient::ConnectedState
 	};
 	Q_ENUM_NS(ConnectionState)
 
@@ -55,25 +53,20 @@ namespace Enums {
 	 * ConnectionError)
 	 */
 	enum class DisconnectionReason : quint8 {
-		ConnNoError = gloox::ConnNoError,
-		ConnStreamError = gloox::ConnStreamError,
-		ConnStreamVersionError = gloox::ConnStreamVersionError,
-		ConnStreamClosed = gloox::ConnStreamClosed,
-		ConnProxyAuthRequired = gloox::ConnProxyAuthRequired,
-		ConnProxyAuthFailed = gloox::ConnProxyAuthFailed,
-		ConnProxyNoSupportedAuth = gloox::ConnProxyNoSupportedAuth,
-		ConnIoError = gloox::ConnIoError,
-		ConnParseError = gloox::ConnParseError,
-		ConnConnectionRefused = gloox::ConnConnectionRefused,
-		ConnDnsError = gloox::ConnDnsError,
-		ConnOutOfMemory = gloox::ConnOutOfMemory,
-		ConnNoSupportedAuth = gloox::ConnNoSupportedAuth,
-		ConnTlsFailed = gloox::ConnTlsFailed,
-		ConnTlsNotAvailable = gloox::ConnTlsNotAvailable,
-		ConnCompressionFailed = gloox::ConnCompressionFailed,
-		ConnAuthenticationFailed = gloox::ConnAuthenticationFailed,
-		ConnUserDisconnected = gloox::ConnUserDisconnected,
-		ConnNotConnected = gloox::ConnNotConnected
+		ConnNoError,
+		ConnAuthenticationFailed,
+		ConnNotConnected,
+		ConnTlsFailed,
+		ConnTlsNotAvailable,
+		ConnDnsError,
+		ConnConnectionRefused,
+		ConnNoSupportedAuth,
+		ConnProxyUnreachable,
+		ConnProxyAuthRequired,
+		ConnProxyAuthFailed,
+		ConnProxyNoSupportedAuth,
+		ConnStreamError,
+		ConnUserDisconnected,
 	};
 	Q_ENUM_NS(DisconnectionReason)
 

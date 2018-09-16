@@ -31,14 +31,16 @@
 #include "Kaidan.h"
 
 // Qt
+#include <QClipboard>
 #include <QDebug>
 #include <QDir>
-#include <QUrl>
+#include <QGuiApplication>
 #include <QSettings>
 #include <QString>
 #include <QStandardPaths>
-#include <QClipboard>
-#include <QGuiApplication>
+#include <QUrl>
+// QXmpp
+#include <QXmppClient.h>
 // Kaidan
 #include "AvatarFileStorage.h"
 #include "PresenceCache.h"
@@ -48,85 +50,53 @@
 
 Kaidan::Kaidan(QGuiApplication *app, bool enableLogging, QObject *parent) : QObject(parent)
 {
-	//
-	// Database and components
-	//
-
-	// setup database
+	// Database setup
 	database = new Database();
 	database->openDatabase();
 	if (database->needToConvert())
 		database->convertDatabase();
 
-	// setup components
-	messageModel = new MessageModel(database->getDatabase(), this);
-	rosterModel = new RosterModel(database->getDatabase(), this);
-	avatarStorage = new AvatarFileStorage(this);
-	presenceCache = new PresenceCache(this);
+	// Caching components
+	caches = new ClientWorker::Caches(database);
+
 	// Connect the avatar changed signal of the avatarStorage with the NOTIFY signal
 	// of the Q_PROPERTY for the avatar storage (so all avatars are updated in QML)
-	connect(avatarStorage, &AvatarFileStorage::avatarIdsChanged,
+	connect(caches->avatarStorage, &AvatarFileStorage::avatarIdsChanged,
 	        this, &Kaidan::avatarStorageChanged);
 
 	//
-	// Load settings data
+	// Load settings
 	//
 
-	// init settings (-> "kaidan/kaidan.conf")
-	settings = new QSettings(QString(APPLICATION_NAME), QString(APPLICATION_NAME));
-
-	creds.jid = settings->value("auth/jid").toString();
-	creds.jidResource = settings->value("auth/resource").toString();
-	creds.password = QString(QByteArray::fromBase64(settings->value("auth/password").toString().toUtf8()));
+	creds.jid = caches->settings->value("auth/jid").toString();
+	creds.jidResource = caches->settings->value("auth/resource").toString();
+	creds.password = QString(QByteArray::fromBase64(caches->settings->value("auth/password")
+	                 .toString().toUtf8()));
 	// use Kaidan as resource, if no set
-	if (creds.jidResource == "")
+	if (creds.jidResource.isEmpty())
 		setJidResource(QString(APPLICATION_NAME));
-
 	creds.isFirstTry = false;
 
-	// create new client and start thread's main loop (won't connect until requested)
-	client = new ClientThread(rosterModel, messageModel, avatarStorage, presenceCache, creds,
-	                          settings, this, app, enableLogging);
-	client->start();
+	//
+	// Start ClientWorker on new thread
+	//
 
-	connect(client, &ClientThread::connectionStateChanged, [=](ConnectionState state) {
-		emit this->connectionStateChanged((quint8) state);
-	});
-	connect(client, &ClientThread::disconnReasonChanged, [=](DisconnReason reason) {
-		emit this->disconnReasonChanged((quint8) reason);
-	});
-	connect(client, &ClientThread::newCredentialsNeeded, this, &Kaidan::newCredentialsNeeded);
-	connect(client, &ClientThread::logInWorked, this, &Kaidan::logInWorked);
-	connect(this, &Kaidan::chatPartnerChanged, client, &ClientThread::chatPartnerChanged);
+	// create new thread for client connection
+	cltThrd = new ClientThread();
+	client = new ClientWorker(caches, this, enableLogging, app);
+	client->setCredentials(creds);
 
-	connect(client, &ClientThread::connectionStateChanged, [=] (ConnectionState state) {
-		// Open (possible) cached URI when connected.
-		// This is needed because the XMPP URIs can't be opened when Kaidan is not connected.
-		if (state == ConnectionState::StateConnected && !openUriCache.isEmpty()) {
-			// delay is needed because sometimes the RosterPage needs to be loaded first
-			QTimer::singleShot(300, [=] () {
-				emit xmppUriReceived(openUriCache);
-				openUriCache = "";
-			});
-		}
+	client->moveToThread(cltThrd);
+	connect(cltThrd, &QThread::started, client, &ClientWorker::main);
 
-		// on disconnection, disable file upload
-		if (state == ConnectionState::StateDisconnected) {
-			hasHttpUpload = false;
-			emit httpUploadChanged();
-		}
-	});
+	cltThrd->start();
 }
 
 Kaidan::~Kaidan()
 {
 	delete client;
-	delete rosterModel;
-	delete messageModel;
+	delete caches;
 	delete database;
-	delete avatarStorage;
-	delete presenceCache;
-	delete settings;
 }
 
 void Kaidan::start()
@@ -137,33 +107,59 @@ void Kaidan::start()
 		mainConnect();
 }
 
-bool Kaidan::mainConnect()
+void Kaidan::mainConnect()
 {
-	if (client->isConnected()) {
+	if (connectionState != ConnectionState::StateDisconnected) {
 		qWarning() << "[main] Tried to connect, even if still connected!"
 		           << "Requesting disconnect.";
 		emit client->disconnectRequested();
-		return false;
 	}
 
-	client->setCredentials(creds);
+	emit client->credentialsUpdated(creds);
 	emit client->connectRequested();
-	return true;
 }
 
 void Kaidan::mainDisconnect(bool openLogInPage)
 {
 	// disconnect the client if connected or connecting
-	if (client->isConnected())
+	if (connectionState != ConnectionState::StateDisconnected)
 		emit client->disconnectRequested();
 
 	if (openLogInPage) {
 		// clear password
-		settings->remove("auth/password");
+		caches->settings->remove("auth/password");
 		setPassword(QString());
 		// trigger log in page
 		emit newCredentialsNeeded();
 	}
+}
+
+void Kaidan::setConnectionState(QXmppClient::State state)
+{
+	this->connectionState = (ConnectionState) state;
+	emit connectionStateChanged();
+
+	// Open the possibly cached URI when connected.
+	// This is needed because the XMPP URIs can't be opened when Kaidan is not connected.
+	if (connectionState == ConnectionState::StateConnected && !openUriCache.isEmpty()) {
+		// delay is needed because sometimes the RosterPage needs to be loaded first
+		QTimer::singleShot(300, [=] () {
+			emit xmppUriReceived(openUriCache);
+			openUriCache = "";
+		});
+	}
+
+	// on disconnection, disable file upload
+	if (connectionState == ConnectionState::StateDisconnected) {
+		hasHttpUpload = false;
+		emit httpUploadChanged();
+	}
+}
+
+void Kaidan::setDisconnReason(Enums::DisconnectionReason reason)
+{
+	disconnReason = reason;
+	emit disconnReasonChanged((quint8) reason);
 }
 
 void Kaidan::setJid(QString jid)
@@ -178,7 +174,8 @@ void Kaidan::setJidResource(QString jidResource)
 	// JID resource won't influence the authentication, so we don't need
 	// to set the first try flag and can save it.
 	creds.jidResource = jidResource;
-	settings->setValue("auth/resource", jidResource);
+
+	caches->settings->setValue("auth/resource", jidResource);
 }
 
 void Kaidan::setPassword(QString password)
@@ -195,24 +192,18 @@ void Kaidan::setChatPartner(QString chatPartner)
 		return;
 
 	this->chatPartner = chatPartner;
-	emit chatPartnerChanged(chatPartner); // -> connected to client
-	messageModel->applyRecipientFilter(chatPartner);
-}
-
-quint8 Kaidan::getConnectionState() const
-{
-	return (quint8) client->getConnectionState();
+	emit chatPartnerChanged(chatPartner);
+	caches->msgModel->applyRecipientFilter(chatPartner);
 }
 
 quint8 Kaidan::getDisconnReason() const
 {
-	// gloox::ConnectionError -> (Kaidan) Enums::DisconnReason
-	return (quint8) client->getConnectionError();
+	return (quint8) disconnReason;
 }
 
 void Kaidan::sendMessage(QString jid, QString message)
 {
-	if (client->isConnected()) {
+	if (connectionState == ConnectionState::StateConnected) {
 		emit client->sendMessageRequested(jid, message);
 	} else {
 		emit passiveNotificationRequested(tr("Could not send message, as a result of not being connected."));
@@ -222,34 +213,15 @@ void Kaidan::sendMessage(QString jid, QString message)
 
 void Kaidan::sendFile(QString jid, QString filePath, QString message)
 {
-	if (client->isConnected()) {
+	if (connectionState == ConnectionState::StateConnected) {
 		// convert file-URLs to file paths
 		filePath.replace("file://", "");
 		filePath.replace("qrc:", "");
 		emit client->sendFileRequested(jid, filePath, message);
 	} else {
-		emit passiveNotificationRequested(tr("Could not send file, as a result of not being connected."));
+		emit passiveNotificationRequested(tr("Could not send file, as a result of not being "
+		                                     "connected."));
 		qWarning() << "[main] Could not send file, as a result of not being connected.";
-	}
-}
-
-void Kaidan::addContact(QString jid, QString nick, QString msg)
-{
-	if (client->isConnected()) {
-		emit client->addContactRequested(jid, nick, msg);
-	} else {
-		emit passiveNotificationRequested(tr("Could not add contact, as a result of not being connected."));
-		qWarning() << "[main] Could not add contact, as a result of not being connected.";
-	}
-}
-
-void Kaidan::removeContact(QString jid)
-{
-	if (client->isConnected()) {
-		emit client->removeContactRequested(jid);
-	} else {
-		emit passiveNotificationRequested(tr("Could not remove contact, as a result of not being connected."));
-		qWarning() << "[main] Could not remove contact, as a result of not being connected.";
 	}
 }
 
@@ -298,7 +270,7 @@ void Kaidan::addOpenUri(QByteArray uri)
 	if (!uri.startsWith("xmpp:") || !uri.contains("@"))
 		return;
 
-	if (client->isConnected()) {
+	if (connectionState == ConnectionState::StateConnected) {
 		emit xmppUriReceived(QString::fromUtf8(uri));
 	} else {
 		//: The link is an XMPP-URI (i.e. 'xmpp:kaidan@muc.kaidan.im?join' for joining a chat)

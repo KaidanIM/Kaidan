@@ -40,8 +40,9 @@
 #include <QLibraryInfo>
 #include <QIcon>
 
-// gloox
-#include <gloox/presence.h>
+// QXmpp
+#include <QXmppClient.h>
+
 // Kaidan
 #include "Kaidan.h"
 #include "RosterModel.h"
@@ -155,8 +156,9 @@ Q_DECL_EXPORT int main(int argc, char *argv[])
 	qRegisterMetaType<PresenceCache*>("PresenceCache*");
 	qRegisterMetaType<ContactPresences*>("ContactPresences*");
 	qRegisterMetaType<EntityPresence*>("EntityPresence*");
+	qRegisterMetaType<ClientWorker::Credentials>("Credentials");
 	qRegisterMetaType<Qt::ApplicationState>("Qt::ApplicationState");
-	qRegisterMetaType<gloox::Presence::PresenceType>("gloox::Presence::PresenceType");
+	qRegisterMetaType<QXmppClient::State>("QXmppClient::State");
 	qRegisterMetaType<MessageType>("MessageType");
 	qmlRegisterUncreatableMetaObject(Enums::staticMetaObject, APPLICATION_ID,
 	                                 1, 0, "Kaidan", "Access to enums & flags only");
@@ -247,7 +249,6 @@ Q_DECL_EXPORT int main(int argc, char *argv[])
 		qputenv("QT_QUICK_CONTROLS_STYLE", defaultStyle.toLatin1());
 	}
 #endif
-
 	// QML type bindings
 #ifdef STATIC_BUILD
 	KirigamiPlugin::getInstance().registerTypes();

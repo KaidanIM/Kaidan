@@ -1,7 +1,7 @@
 /*
  *  Kaidan - A user-friendly XMPP client for every device!
  *
- *  Copyright (C) 2017-2018 Kaidan developers and contributors
+ *  Copyright (C) 2016-2018 Kaidan developers and contributors
  *  (see the LICENSE file for a full list of copyright authors)
  *
  *  Kaidan is free software: you can redistribute it and/or modify
@@ -33,23 +33,21 @@
 
 // Qt
 #include <QObject>
-// gloox
-#include <gloox/client.h>
-#include <gloox/rostermanager.h>
+// QXmpp
+#include <QXmppRosterManager.h>
 // Kaidan
 #include "RosterModel.h"
-#include "RosterUpdater.h"
 #include "VCardManager.h"
 
 class Kaidan;
+class QXmppClient;
 
 class RosterManager : public QObject
 {
 	Q_OBJECT
 
 public:
-	RosterManager(Kaidan *kaidan, gloox::Client *client,
-	              RosterModel *rosterModel, VCardManager *vCardManager,
+	RosterManager(Kaidan *kaidan, QXmppClient *client, RosterModel *rosterModel,
 	              QObject *parent = nullptr);
 	~RosterManager();
 
@@ -57,10 +55,14 @@ public slots:
 	void addContact(const QString jid, const QString name, const QString msg);
 	void removeContact(const QString jid);
 
+private slots:
+	void populateRoster();
+
 private:
-	RosterModel *rosterModel;
-	RosterUpdater *rosterUpdater;
-	gloox::RosterManager *rosterManager;
+	Kaidan *kaidan;
+	RosterModel *model;
+	QXmppClient *client;
+	QXmppRosterManager &manager;
 };
 
 #endif // ROSTERMANAGER_H

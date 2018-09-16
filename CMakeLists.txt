@@ -40,12 +40,10 @@ include(FeatureSummary)
 kde_enable_exceptions()
 
 # Find packages
+find_package(PkgConfig REQUIRED)
 find_package(Qt5 ${QT_MIN_VERSION} REQUIRED NO_MODULE COMPONENTS Core Qml Quick Svg Sql QuickControls2)
 find_package(KF5Kirigami2 REQUIRED)
-find_package(PkgConfig REQUIRED)
-
-pkg_search_module(GLOOX REQUIRED gloox)
-include_directories(${GLOOX_INCLUDE_DIRS})
+pkg_check_modules(QXmpp REQUIRED qxmpp>=0.9)
 
 # Optional QWidget style integration (not on mobile)
 if(NOT UBUNTU_TOUCH AND NOT ANDROID)
@@ -125,11 +123,6 @@ add_executable(${PROJECT_NAME}
 	"kaidan_qml.qrc"
 )
 
-
-#
-# Linker Flags
-#
-
 target_link_libraries(${PROJECT_NAME}
 	Qt5::Core
 	Qt5::Sql
@@ -138,7 +131,15 @@ target_link_libraries(${PROJECT_NAME}
 	Qt5::Svg
 	Qt5::Network
 	${__Qt5Widgets_LIBRARIES}
-	${GLOOX_LIBRARIES} ${GLOOX_LDFLAGS}
+	${QXmpp_LIBRARIES}
+)
+
+target_include_directories(${PROJECT_NAME} PUBLIC
+	${QXmpp_INCLUDE_DIRS}
+)
+
+target_compile_options(${PROJECT_NAME} PUBLIC
+	${QXmpp_CFLAGS_OTHER}
 )
 
 if (ANDROID OR WIN32)
@@ -152,14 +153,14 @@ endif()
 if (WIN32 AND STATIC_BUILD)
 	pkg_check_modules(QT5ALL Qt5Gui Qt5Quick Qt5QuickControls2 Qt5Network Qt5Qml Qt5Svg Qt5Sql)
 	foreach(plugin ${Qt5Gui_PLUGINS} ${Qt5Network_PLUGINS} ${Qt5Qml_PLUGINS} ${Qt5Svg_PLUGINS} ${Qt5Sql_PLUGINS})
-	  get_target_property(_loc ${plugin} LOCATION)
-	  message("Plugin ${plugin} is at location ${_loc}")
-	  set(plugin_libs ${plugin_libs} ${_loc})
+		get_target_property(_loc ${plugin} LOCATION)
+		message("Plugin ${plugin} is at location ${_loc}")
+		set(plugin_libs ${plugin_libs} ${_loc})
 	endforeach()
 	pkg_search_module(SQLITE REQUIRED sqlite3)
 
 	set(QT_QML_PATH ${_qt5Quick_install_prefix})
-	
+
 	find_library(KIRIGAMI_PLUGIN kirigamiplugin PATHS ${CMAKE_PREFIX_PATH}/${KDE_INSTALL_QMLDIR}/org/kde/kirigami.2)
 	find_library(QUICK_PLUGIN qtquick2plugin PATHS ${QT_QML_PATH}/qml/QtQuick.2)
 	find_library(LABS_PLATFORM_PLUGIN qtlabsplatformplugin PATHS ${QT_QML_PATH}/qml/Qt/labs/platform)

@@ -53,15 +53,6 @@ Kirigami.OverlaySheet {
 			Layout.fillWidth: true
 		}
 
-		ChatMessage {
-			visible: message.length > 0
-			sentByMe: false
-			messageBody: message
-			recipientAvatarUrl: kaidan.avatarStorage.getHashOfJid(from) !== "" ?
-			                    kaidan.avatarStorage.getAvatarUrl(from) :
-			                    kaidan.getResourcePath("images/fallback-avatar.svg")
-		}
-
 		RowLayout {
 			Layout.topMargin: 10
 

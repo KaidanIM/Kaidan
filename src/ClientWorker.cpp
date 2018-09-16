@@ -1,7 +1,7 @@
 /*
  *  Kaidan - A user-friendly XMPP client for every device!
  *
- *  Copyright (C) 2017-2018 Kaidan developers and contributors
+ *  Copyright (C) 2016-2018 Kaidan developers and contributors
  *  (see the LICENSE file for a full list of copyright authors)
  *
  *  Kaidan is free software: you can redistribute it and/or modify
@@ -29,132 +29,107 @@
  */
 
 #include "ClientWorker.h"
-// gloox
-#include <gloox/client.h>
 // Qt
 #include <QDebug>
 #include <QSettings>
 #include <QGuiApplication>
+// QXmpp
+#include <QXmppClient.h>
+#include <QXmppConfiguration.h>
+#include <QXmppPresence.h>
 // Kaidan
-#include "ClientThread.h"
+#include "Kaidan.h"
+#include "RosterManager.h"
 
-// interval in seconds in which a new connection will be tryed
-static const unsigned int RECONNECT_INTERVAL = 5000;
-
-ClientWorker::ClientWorker(GlooxClient* client, ClientThread *controller,
-                           QGuiApplication *app, QObject* parent)
-	: QObject(parent), client(client), controller(controller)
+ClientWorker::ClientWorker(Caches *caches, Kaidan *kaidan, bool enableLogging, QGuiApplication *app,
+                           QObject* parent)
+	: QObject(parent), caches(caches), kaidan(kaidan), enableLogging(enableLogging), app(app)
 {
-	client->registerConnectionListener(this);
+	client = new QXmppClient();
+	client->moveToThread(thread);
 
-	// reconnect timer
-	reconnectTimer.moveToThread(controller);
-	reconnectTimer.setInterval(RECONNECT_INTERVAL);
-	reconnectTimer.setSingleShot(true); // only call once
-	connect(&reconnectTimer, &QTimer::timeout, this, &ClientWorker::xmppConnect);
-	connect(this, &ClientWorker::stopReconnectTimerRequested,
-	        &reconnectTimer, &QTimer::stop);
-	connect(app, &QGuiApplication::applicationStateChanged,
-	        this, &ClientWorker::setApplicationState);
+	rosterManager = new RosterManager(kaidan, client,  caches->rosterModel);
+	rosterManager->moveToThread(thread);
+
+	connect(this, &ClientWorker::credentialsUpdated, this, &ClientWorker::setCredentials);
 }
 
 ClientWorker::~ClientWorker()
 {
-	emit stopReconnectTimerRequested();
 }
 
-void ClientWorker::updateClient()
+void ClientWorker::main()
 {
-	if (controller->connState != ConnectionState::StateNone && controller->connState !=
-	    ConnectionState::StateDisconnected) {
-		controller->mutex.lock();
-		client->recv(0);
-		controller->mutex.unlock();
-	}
+	// initialize random generator
+	qsrand(time(NULL));
+
+	connect(client, &QXmppClient::stateChanged, kaidan, &Kaidan::setConnectionState);
+	connect(client, &QXmppClient::connected, this, &ClientWorker::onConnect);
+	connect(client, &QXmppClient::error, this, &ClientWorker::onConnectionError);
+
+	connect(this, &ClientWorker::connectRequested, this, &ClientWorker::xmppConnect);
+	connect(this, &ClientWorker::disconnectRequested, client, &QXmppClient::disconnectFromServer);
 }
 
 void ClientWorker::xmppConnect()
 {
-	qDebug() << "[client] Connecting...";
-	controller->setConnectionState(ConnectionState::StateConnecting);
-	controller->mutex.lock();
-	client->connect(false);
-	controller->mutex.unlock();
-}
+	QXmppConfiguration config;
+	config.setJid(creds.jid);
+	config.setResource(creds.jidResource.append(".").append(generateRandomString()));
+	config.setPassword(creds.password);
+	config.setAutoAcceptSubscriptions(false);
+	config.setStreamSecurityMode(QXmppConfiguration::TLSRequired);
+	config.setAutoReconnectionEnabled(true); // will automatically reconnect
+	// on first try we must be sure that we connect successfully
+	// otherwise this could end in a reconnection loop
+	if (creds.isFirstTry)
+		config.setAutoReconnectionEnabled(false);
 
-void ClientWorker::xmppDisconnect()
-{
-	qDebug() << "[client] Disconnecting...";
-	if (controller->connState != ConnectionState::StateDisconnecting) {
-		controller->setConnectionState(ConnectionState::StateDisconnecting);
-		controller->mutex.lock();
-		client->disconnect();
-		controller->mutex.unlock();
-	}
+	client->connectToServer(config, QXmppPresence(QXmppPresence::Available));
 }
 
 void ClientWorker::onConnect()
 {
 	// no mutex needed, because this is called from updateClient()
 	qDebug() << "[client] Connected successfully to server";
-	controller->setConnectionState(ConnectionState::StateConnected);
 
 	// Emit signal, that logging in with these credentials has worked for the first time
-	if (controller->creds.isFirstTry)
-		emit controller->logInWorked();
+	if (creds.isFirstTry)
+		emit kaidan->logInWorked();
 
 	// accept credentials and save them
-	controller->creds.isFirstTry = false;
-	controller->settings->setValue("auth/jid", controller->creds.jid);
-	controller->settings->setValue("auth/password", QString::fromUtf8(controller->creds.password.toUtf8().toBase64()));
+	creds.isFirstTry = false;
+	caches->settings->setValue("auth/jid", creds.jid);
+	caches->settings->setValue("auth/password",
+	                           QString::fromUtf8(creds.password.toUtf8().toBase64()));
+
+	// after first log in we always want to automatically reconnect
+	client->configuration().setAutoReconnectionEnabled(true);
 }
 
-void ClientWorker::onDisconnect(gloox::ConnectionError error)
+void ClientWorker::onConnectionError(QXmppClient::Error error)
 {
 	// no mutex needed, because this is called from updateClient()
-	qDebug() << "[client] Disconnected:" << (DisconnReason) error;
-
-	// update connection state and error
-	controller->setConnectionError(error);
-	controller->setConnectionState(ConnectionState::StateDisconnected);
+	qDebug() << "[client] Disconnected:" << error;
 
 	// Check if first time connecting with these credentials
-	if (controller->creds.isFirstTry) {
+	if (creds.isFirstTry || error == QXmppClient::XmppStreamError) {
 		// always request new credentials, when failed to connect on first time
-		emit controller->newCredentialsNeeded();
-	} else {
-		// already connected with these credentials once
-		if (error == gloox::ConnAuthenticationFailed)
-			// if JID/password is wrong, request new credentials from QML
-			emit controller->newCredentialsNeeded();
-		else if (error != gloox::ConnUserDisconnected)
-			reconnect();
+		emit kaidan->newCredentialsNeeded();
 	}
 }
 
-bool ClientWorker::onTLSConnect(const gloox::CertInfo &info)
+QString ClientWorker::generateRandomString(unsigned int length) const
 {
-	// no mutex needed, because this is called from updateClient()
-	// accept certificate
-	qDebug() << "[client] Accepted TLS certificate without checking";
-	return true;
-}
+	const QString possibleCharacters("ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklm"
+	                                 "nopqrstuvwxyz0123456789");
+	const int numOfChars = possibleCharacters.length();
 
-void ClientWorker::stopWorkTimer()
-{
-	controller->workTimer.stop();
-}
-
-void ClientWorker::reconnect()
-{
-	qDebug().noquote() << QString("[client] Will do reconnect in %1 ms").arg(RECONNECT_INTERVAL);
-	reconnectTimer.start();
-}
-
-void ClientWorker::setApplicationState(Qt::ApplicationState state)
-{
-	if (state == Qt::ApplicationActive)
-		controller->client->setActive();
-	else
-		controller->client->setInactive();
+	QString randomString;
+	for (unsigned int i = 0; i < length; ++i) {
+		int index = qrand() % numOfChars;
+		QChar nextChar = possibleCharacters.at(index);
+		randomString.append(nextChar);
+	}
+	return randomString;
 }

@@ -1,7 +1,7 @@
 /*
  *  Kaidan - A user-friendly XMPP client for every device!
  *
- *  Copyright (C) 2017-2018 Kaidan developers and contributors
+ *  Copyright (C) 2016-2018 Kaidan developers and contributors
  *  (see the LICENSE file for a full list of copyright authors)
  *
  *  Kaidan is free software: you can redistribute it and/or modify
@@ -30,42 +30,92 @@
 
 #include "RosterManager.h"
 #include "Kaidan.h"
+#include "Globals.h"
+#include <QXmppClient.h>
+#include <QXmppRosterManager.h>
 
-RosterManager::RosterManager(Kaidan *kaidan, gloox::Client *client,
-                             RosterModel* rosterModel, VCardManager *vCardManager,
-                             QObject *parent)
-	: QObject(parent), rosterModel(rosterModel)
+RosterManager::RosterManager(Kaidan *kaidan, QXmppClient *client, RosterModel *rosterModel,
+	                       QObject *parent)
+	: QObject(parent), kaidan(kaidan), model(rosterModel), client(client),
+	  manager(client->rosterManager())
 {
-	rosterManager = client->rosterManager();
+	connect(&manager, &QXmppRosterManager::rosterReceived,
+	        this, &RosterManager::populateRoster);
 
-	// register the roster updater as roster listener (asynchronous sub handling)
-	rosterUpdater = new RosterUpdater(kaidan, rosterModel, rosterManager,
-	                                  vCardManager);
-	rosterManager->registerRosterListener(rosterUpdater, false);
+	connect(&manager, &QXmppRosterManager::itemAdded, [=] (QString jid) {
+		QXmppRosterIq::Item item = manager.getRosterEntry(jid);
+		emit model->insertContactRequested(jid, item.name());
+
+		// TODO: get vcard/avatar
+	});
+
+	connect(&manager, &QXmppRosterManager::itemChanged, [=] (QString jid) {
+		QXmppRosterIq::Item item = manager.getRosterEntry(jid);
+		emit model->editContactNameRequested(jid, item.name());
+	});
+
+	connect(&manager, &QXmppRosterManager::itemRemoved, [=] (QString jid) {
+		emit model->removeContactRequested(jid);
+	});
+
+	connect(&manager, &QXmppRosterManager::subscriptionReceived, [=] (QString jid) {
+		// emit signal to ask user
+		emit kaidan->subscriptionRequestReceived(jid, QString());
+	});
+	connect(kaidan, &Kaidan::subscriptionRequestAnswered, [=] (QString jid, bool accepted) {
+		if (accepted)
+			manager.acceptSubscription(jid);
+		else
+			manager.refuseSubscription(jid);
+	});
+
+	connect(kaidan, &Kaidan::addContact, this, &RosterManager::addContact);
+	connect(kaidan, &Kaidan::removeContact, this, &RosterManager::removeContact);
 }
 
 RosterManager::~RosterManager()
 {
-	rosterManager->removeRosterListener();
-	delete rosterUpdater;
 }
 
-void RosterManager::addContact(const QString jid, const QString nick,
-                               const QString msg)
+void RosterManager::populateRoster()
 {
-	// don't set any groups
-	gloox::StringList groups;
-	rosterManager->subscribe(jid.toStdString(), nick.toStdString(),
-	                         groups, msg.toStdString());
+	qDebug() << "[client] [RosterManager] Populating roster";
+	// create a new list of contacts
+	ContactMap contactList;
+	for (auto const& jid : manager.getRosterBareJids()) {
+		QString name = manager.getRosterEntry(jid).name();
+		contactList[jid] = name;
+
+		// TODO: fetch avatar
+	}
+
+	// replace current contacts with new ones from server
+	emit model->replaceContactsRequested(contactList);
+}
+
+void RosterManager::addContact(const QString jid, const QString name, const QString msg)
+{
+	if (client->state() == QXmppClient::ConnectedState) {
+		manager.subscribe(jid, msg);
+		manager.renameItem(jid, name);
+	} else {
+		emit kaidan->passiveNotificationRequested(
+			tr("Could not add contact, as a result of not being connected.")
+		);
+		qWarning() << "[client] [RosterManager] Could not add contact, as a result of "
+		              "not being connected.";
+	}
 }
 
 void RosterManager::removeContact(const QString jid)
 {
-	// cancel possible subscriptions
-	// don't send our presence anymore
-	rosterManager->cancel(jid.toStdString());
-	// don't receive the JID's presence anymore
-	rosterManager->unsubscribe(jid.toStdString());
-	// remove contact from roster
-	rosterManager->remove(jid.toStdString());
+	if (client->state() == QXmppClient::ConnectedState) {
+		manager.unsubscribe(jid);
+	} else {
+		emit kaidan->passiveNotificationRequested(
+			tr("Could not remove contact, as a result of not being connected.")
+		);
+		qWarning() << "[client] [RosterManager] Could not remove contact, as a result of "
+		              "not being connected.";
+	}
 }

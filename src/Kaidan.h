@@ -34,21 +34,14 @@
 // Qt
 #include <QObject>
 #include <QString>
-// gloox
-#include <gloox/connectionlistener.h>
 // Kaidan
-#include "ClientThread.h"
+#include "ClientWorker.h"
 #include "Globals.h"
 #include "Enums.h"
 
-class AvatarFileStorage;
-class PresenceCache;
-class RosterManager;
-class RosterModel;
-class MessageModel;
-class QSettings;
 class QGuiApplication;
 class Database;
+class QXmppClient;
 
 using namespace Enums;
 
@@ -99,7 +92,7 @@ public:
 	 * If you haven't set a username and password, they are used from the
 	 * last successful login (the settings file).
 	 */
-	Q_INVOKABLE bool mainConnect();
+	Q_INVOKABLE void mainConnect();
 
 	/**
 	 * Disconnect from XMPP server
@@ -128,21 +121,6 @@ public:
 	Q_INVOKABLE void sendFile(QString jid, QString filePath, QString message);
 
 	/**
-	 * Add a contact to your roster
-	 *
-	 * @param nick A simple nick name for the new contact, which should be
-	 *             used to display in the roster.
-	 */
-	Q_INVOKABLE void addContact(QString jid, QString nick, QString msg);
-
-	/**
-	 * Remove a contact from your roster
-	 *
-	 * Only the JID is needed.
-	 */
-	Q_INVOKABLE void removeContact(QString jid);
-
-	/**
 	 * Returns a URL to a given resource file name
 	 *
 	 * This will check various paths which could contain the searched file.
@@ -154,7 +132,10 @@ public:
 	/**
 	 * Returns the current ConnectionState
 	 */
-	Q_INVOKABLE quint8 getConnectionState() const;
+	Q_INVOKABLE quint8 getConnectionState() const
+	{
+		return (quint8) connectionState;
+	}
 
 	/**
 	 * Returns the last disconnection reason
@@ -241,7 +222,7 @@ public:
 	 */
 	RosterModel* getRosterModel() const
 	{
-		return rosterModel;
+		return caches->rosterModel;
 	}
 
 	/**
@@ -249,7 +230,7 @@ public:
 	 */
 	MessageModel* getMessageModel() const
 	{
-		return messageModel;
+		return caches->msgModel;
 	}
 
 	/**
@@ -257,7 +238,7 @@ public:
 	 */
 	AvatarFileStorage* getAvatarStorage() const
 	{
-		return avatarStorage;
+		return caches->avatarStorage;
 	}
 
 	/**
@@ -265,7 +246,7 @@ public:
 	 */
 	PresenceCache* getPresenceCache() const
 	{
-		return presenceCache;
+		return caches->presCache;
 	}
 
 	/**
@@ -296,7 +277,7 @@ signals:
 	 * Emitted, when the client's connection state has changed (e.g. when
 	 * successfully connected or when disconnected)
 	 */
-	void connectionStateChanged(quint8 state);
+	void connectionStateChanged();
 
 	/**
 	 * Emitted, when the client failed to connect and gives the reason in
@@ -378,11 +359,36 @@ signals:
 	 */
 	void httpUploadChanged();
 
+	/**
+	 * Add a contact to your roster
+	 *
+	 * @param nick A simple nick name for the new contact, which should be
+	 *             used to display in the roster.
+	 */
+	void addContact(QString jid, QString nick, QString msg);
+
+	/**
+	 * Remove a contact from your roster
+	 *
+	 * Only the JID is needed.
+	 */
+	void removeContact(QString jid);
+
 public slots:
+	/**
+	 * Set current connection state
+	 */
+	void setConnectionState(QXmppClient::State state);
+
+	/**
+	 * Sets the disconnection error/reason
+	 */
+	void setDisconnReason(DisconnectionReason reason);
+
 	/**
 	 * Receives messages from another instance of the application
 	 */
-	void receiveMessage(quint32 instanceId, QByteArray msg)
+	void receiveMessage(quint32, QByteArray msg)
 	{
 		// currently we only send XMPP URIs
 		addOpenUri(msg);
@@ -400,21 +406,18 @@ public slots:
 private:
 	void connectDatabases();
 
-	ClientThread *client;
+	ClientWorker *client;
+	ClientThread *cltThrd;
 	Database *database;
-	RosterModel *rosterModel;
-	RosterManager *rosterManager;
-	MessageModel *messageModel;
-	AvatarFileStorage *avatarStorage;
-	PresenceCache *presenceCache;
-	QSettings *settings;
-
-	ClientThread::Credentials creds;
+	ClientWorker::Caches *caches;
+	ClientWorker::Credentials creds;
 	QString chatPartner;
 
 	QString openUriCache;
 
 	bool hasHttpUpload = false;
+	ConnectionState connectionState = ConnectionState::StateDisconnected;
+	DisconnReason disconnReason = DisconnReason::ConnNoError;
 };
 
 #endif

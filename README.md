@@ -135,7 +135,7 @@ clickable setup-docker
 Now, you can clone our Kaidan repository using git and start building kaidan using clickable.
 
 ```bash
-git clone https://git.kaidan.im/kaidan/kaidan
+git clone --recursive https://git.kaidan.im/kaidan/kaidan
 cd kaidan
 clickable clean build click-build
 ```

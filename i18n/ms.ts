@@ -58,6 +58,13 @@
     </message>
 </context>
 <context>
+    <name>ChatMessage</name>
+    <message>
+        <source>Message copied to clipboard</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>ChatPage</name>
     <message>
         <source>Compose message</source>
@@ -66,6 +73,30 @@
     <message>
         <source>Send</source>
         <translation type="vanished">Hantar</translation>
+    </message>
+    <message>
+        <source>Please choose a file to upload</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Image</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Video</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Audio</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Document</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Other file</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -134,6 +165,10 @@
         <source>The link will be opened after you have connected.</source>
         <extracomment>The link is an XMPP-URI (i.e. &apos;xmpp:kaidan@muc.kaidan.im?join&apos; for joining a chat)</extracomment>
         <translation>Pautan akan dibuka selepas anda disambungkan.</translation>
+    </message>
+    <message>
+        <source>Could not send file, as a result of not being connected.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -359,6 +394,13 @@
     <message>
         <source>More Actions</source>
         <translation>Tindakan Lanjut</translation>
+    </message>
+</context>
+<context>
+    <name>ToolBarPageHeader</name>
+    <message>
+        <source>More Actions</source>
+        <translation type="unfinished">Tindakan Lanjut</translation>
     </message>
 </context>
 </TS>

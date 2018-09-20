@@ -71,6 +71,15 @@ RowLayout {
 		color: sentByMe ? Kirigami.Theme.complementaryTextColor : Kirigami.Theme.highlightColor
 		radius: Kirigami.Units.smallSpacing * 2
 
+		MouseArea {
+			anchors.fill: parent
+			acceptedButtons: Qt.RightButton
+			onClicked: {
+				kaidan.copyToClipboard(messageBody)
+				passiveNotification(qsTr("Message copied to clipboard"))
+			}
+		}
+
 		layer.enabled: box.visible
 		layer.effect: DropShadow {
 			verticalOffset: Kirigami.Units.gridUnit * 0.08

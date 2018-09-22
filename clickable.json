@@ -8,6 +8,7 @@
   "dependencies": [
     "ninja-build",
     "curl",
+    "extra-cmake-modules",
     "kirigami2-dev:armhf"
   ]
 }

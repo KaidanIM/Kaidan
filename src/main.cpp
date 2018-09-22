@@ -38,6 +38,8 @@
 #include <QQmlContext>
 #include <QTranslator>
 #include <QLibraryInfo>
+#include <QIcon>
+
 // gloox
 #include <gloox/presence.h>
 // Kaidan
@@ -55,8 +57,10 @@
 #endif
 #include QT_STRINGIFY(QAPPLICATION_CLASS)
 
+#ifndef Q_OS_ANDROID
 // SingleApplication (Qt5 replacement for QtSingleApplication)
 #include "singleapp/singleapplication.h"
+#endif
 
 #ifdef QMAKE_BUILD
 #include "./3rdparty/kirigami/src/kirigamiplugin.h"
@@ -117,15 +121,19 @@ int main(int argc, char *argv[])
 	qputenv("QT_QUICK_CONTROLS_MOBILE", "true");
 #endif
 
-	// create a qt app
-	SingleApplication app(argc, argv, true);
-
 	// name, display name, description
 	QGuiApplication::setApplicationName(APPLICATION_NAME);
 	QGuiApplication::setApplicationDisplayName(APPLICATION_DISPLAY_NAME);
 	QGuiApplication::setApplicationVersion(VERSION_STRING);
 	// attributes
 	QGuiApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
+
+	// create a qt app
+#ifdef Q_OS_ANDROID
+	QGuiApplication app(argc, argv);
+#else
+	SingleApplication app(argc, argv, true);
+#endif
 
 	// register qMetaTypes
 	qRegisterMetaType<RosterModel*>("RosterModel*");
@@ -176,6 +184,7 @@ int main(int argc, char *argv[])
 		break;
 	}
 
+#ifndef Q_OS_ANDROID
 	// check if another instance already runs
 	if (app.isSecondary() && !parser.isSet("multiple")) {
 		qDebug().noquote() << QString("Another instance of %1 is already running.")
@@ -187,6 +196,7 @@ int main(int argc, char *argv[])
 			app.sendMessage(parser.positionalArguments()[0].toUtf8());
 		return 0;
 	}
+#endif
 
 
 	//
@@ -195,18 +205,23 @@ int main(int argc, char *argv[])
 
 	Kaidan kaidan(&app, !parser.isSet("disable-xml-log"));
 
+#ifndef Q_OS_ANDROID
 	// receive messages from other instances of Kaidan
 	kaidan.connect(&app, &SingleApplication::receivedMessage,
 	               &kaidan, &Kaidan::receiveMessage);
+#endif
 
 	// open the XMPP-URI/link (if given)
 	if (!parser.positionalArguments().isEmpty())
 		kaidan.addOpenUri(parser.positionalArguments()[0].toUtf8());
 
-
 	//
 	// QML-GUI
 	//
+
+	if (QIcon::themeName().isEmpty()) {
+		QIcon::setThemeName("breeze");
+	}
 
 	QQmlApplicationEngine engine;
 

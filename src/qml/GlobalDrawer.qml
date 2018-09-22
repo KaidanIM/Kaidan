@@ -34,7 +34,7 @@ import im.kaidan.kaidan 1.0
 Kirigami.GlobalDrawer {
 	id: globalDrawer
 	title: "Kaidan"
-	titleIcon: "kaidan"
+	titleIcon: kaidan.getResourcePath("images/kaidan.svg");
 	bannerImageSource: kaidan.getResourcePath("images/banner.png");
 	// make drawer floating (overlay)
 	modal: true

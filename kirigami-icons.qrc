@@ -1,17 +1,17 @@
 <RCC>
-    <qresource prefix="/org/kde/kirigami/icons/">
+    <qresource prefix="/icons/breeze">
+        <file alias="index.theme">3rdparty/breeze-icons/icons/index.theme</file>
+    </qresource>
+    
+    <qresource prefix="/icons/breeze/actions/22">
         <file alias="application-menu.svg">3rdparty/breeze-icons/icons/actions/22/application-menu.svg</file>
         <file alias="bookmark-remove.svg">3rdparty/breeze-icons/icons/actions/22/bookmark-remove.svg</file>
         <file alias="document-decrypt.svg">3rdparty/breeze-icons/icons/actions/22/document-decrypt.svg</file>
         <file alias="contact-new.svg">3rdparty/breeze-icons/icons/actions/22/contact-new.svg</file>
         <file alias="dialog-close.svg">3rdparty/breeze-icons/icons/actions/22/dialog-close.svg</file>
-        <file alias="document-send.svg">3rdparty/breeze-icons/icons/actions/16/document-send.svg</file>
-        <file alias="document-send-symbolic.svg">3rdparty/breeze-icons/icons/actions/symbolic/document-send-symbolic.svg</file>
         <file alias="folder-sync.svg">3rdparty/breeze-icons/icons/actions/22/folder-sync.svg</file>
         <file alias="go-next.svg">3rdparty/breeze-icons/icons/actions/22/go-next.svg</file>
         <file alias="go-previous.svg">3rdparty/breeze-icons/icons/actions/22/go-previous.svg</file>
-        <file alias="go-next-symbolic.svg">3rdparty/breeze-icons/icons/actions/symbolic/go-next-symbolic.svg</file>
-        <file alias="go-previous-symbolic.svg">3rdparty/breeze-icons/icons/actions/symbolic/go-previous-symbolic.svg</file>
         <file alias="go-up.svg">3rdparty/breeze-icons/icons/actions/22/go-up.svg</file>
         <file alias="handle-left.svg">3rdparty/breeze-icons/icons/actions/22/handle-left.svg</file>
         <file alias="handle-right.svg">3rdparty/breeze-icons/icons/actions/22/handle-right.svg</file>
@@ -20,10 +20,26 @@
         <file alias="overflow-menu.svg">3rdparty/breeze-icons/icons/actions/22/overflow-menu.svg</file>
         <file alias="system-shutdown.svg">3rdparty/breeze-icons/icons/actions/22/system-shutdown.svg</file>
         <file alias="view-list-icons.svg">3rdparty/breeze-icons/icons/actions/22/view-list-icons.svg</file>
+    </qresource>
+    
+    <qresource prefix="/icons/breeze/actions/16">
+        <file alias="document-send.svg">3rdparty/breeze-icons/icons/actions/16/document-send.svg</file>
+    </qresource>
+    
+    <qresource prefix="/icons/breeze/actions/symbolic">
+        <file alias="document-send-symbolic.svg">3rdparty/breeze-icons/icons/actions/symbolic/document-send-symbolic.svg</file>
+        <file alias="go-next-symbolic.svg">3rdparty/breeze-icons/icons/actions/symbolic/go-next-symbolic.svg</file>
+        <file alias="go-previous-symbolic.svg">3rdparty/breeze-icons/icons/actions/symbolic/go-previous-symbolic.svg</file>
+    </qresource>
+    
+    <qresource prefix="/icons/breeze/mimetypes/64">
         <file alias="image-jpeg.svg">3rdparty/breeze-icons/icons/mimetypes/64/image-jpeg.svg</file>
         <file alias="video-mp4.svg">3rdparty/breeze-icons/icons/mimetypes/64/video-mp4.svg</file>
         <file alias="x-office-document.svg">3rdparty/breeze-icons/icons/mimetypes/64/x-office-document.svg</file>
         <file alias="audio-mp3.svg">3rdparty/breeze-icons/icons/mimetypes/64/audio-mp3.svg</file>
+    </qresource>
+    
+    <qresource prefix="/icons/breeze/mimetypes/22">
         <file alias="text-x-plain.svg">3rdparty/breeze-icons/icons/mimetypes/22/text-x-plain.svg</file>
     </qresource>
 </RCC>

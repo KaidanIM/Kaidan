@@ -1,4 +1,5 @@
 cmake_minimum_required(VERSION 2.8.11)
+find_package(ECM 5.45.0 REQUIRED NO_MODULE)
 set(CMAKE_CXX_STANDARD 14)
 set(QT_MIN_VERSION "5.8.0")
 
@@ -19,25 +20,32 @@ set(CMAKE_INCLUDE_CURRENT_DIR ON)
 set(CMAKE_AUTOMOC ON)
 set(CMAKE_AUTOUIC ON)
 set(CMAKE_AUTORCC ON)
-
-# CMake modules include
-include(FeatureSummary)
-include(GNUInstallDirs)
+set(AUTOMOC_MOC_OPTIONS -Muri=im.kaidan.kaidan)
 
 #
 # Dependecies
 #
 
 # CMake module path
-set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_SOURCE_DIR}/cmake")
+set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_SOURCE_DIR}/cmake" ${ECM_MODULE_PATH} ${ECM_KDE_MODULE_DIR})
+
+# CMake modules include
+include(GNUInstallDirs)
+include(KDEInstallDirs)
+include(KDECompilerSettings NO_POLICY_SCOPE)
+include(KDECMakeSettings)
+include(ECMInstallIcons)
+include(ECMAddAppIcon)
+include(FeatureSummary)
+kde_enable_exceptions()
 
 # Find packages
-find_package(Qt5 ${QT_MIN_VERSION} REQUIRED NO_MODULE COMPONENTS Core Qml Quick Sql QuickControls2)
+find_package(Qt5 ${QT_MIN_VERSION} REQUIRED NO_MODULE COMPONENTS Core Qml Quick Svg Sql QuickControls2)
 find_package(KF5Kirigami2 REQUIRED)
 find_package(Gloox REQUIRED)
 
-# optional QWidget style integration (not on ubuntu touch)
-if(NOT UBUNTU_TOUCH)
+# optional QWidget style integration (not on mobile)
+if(NOT UBUNTU_TOUCH AND NOT ANDROID)
 	find_package(Qt5Widgets)
 	set_package_properties(Qt5Widgets PROPERTIES
 		DESCRIPTION "Integration with QWidget based desktop styles"
@@ -50,6 +58,12 @@ if(Qt5Widgets_FOUND)
 	set(__Qt5Widgets_LIBRARIES Qt5::Widgets)
 else()
 	add_definitions(-DQAPPLICATION_CLASS=QGuiApplication)
+endif()
+
+if (ANDROID)
+	find_package(Qt5 REQUIRED COMPONENTS AndroidExtras)
+	find_library(CRYPTO_LIBRARIES crypto)
+	find_library(SSL_LIBRARIES ssl)
 endif()
 
 
@@ -70,18 +84,25 @@ endif()
 # Sources / Resources
 #
 
-# Include bundled icons on Ubuntu Touch,
-# because its icon theme is missing some required icons
-if(UBUNTU_TOUCH)
+# Include bundled icons on Ubuntu Touch and Android
+if(UBUNTU_TOUCH OR ANDROID)
 	set(KAIDAN_ICONS_QRC kirigami-icons.qrc)
+endif()
+
+# Bundle images on Android
+if(ANDROID)
+	set(KAIDAN_IMAGES_QRC "data/images/images.qrc")
 endif()
 
 add_executable(${PROJECT_NAME}
 	${KAIDAN_SOURCES}
-	${KAIDAN_ICONS_QRC} # only set if enabled
-	${I18N_QRC_CPP}     #
+	${KAIDAN_ICONS_QRC}  # only set if enabled
+	${KAIDAN_IMAGES_QRC} #
+	${I18N_QRC_CPP}      #
 	"kaidan_qml.qrc"
 )
+set_target_properties(${PROJECT_NAME} PROPERTIES C_VISIBILITY_PRESET default)
+set_target_properties(${PROJECT_NAME} PROPERTIES CXX_VISIBILITY_PRESET default)
 
 
 #
@@ -93,10 +114,14 @@ target_link_libraries(${PROJECT_NAME}
 	Qt5::Sql
 	Qt5::Qml
 	Qt5::Quick
+	Qt5::Svg
 	${__Qt5Widgets_LIBRARIES}
 	${GLOOX_LIBRARIES}
 )
 
+if (ANDROID)
+	target_link_libraries(${PROJECT_NAME} Qt5::AndroidExtras Qt5::QuickControls2 KF5::Kirigami2 ${CRYPTO_LIBRARIES} ${SSL_LIBRARIES})
+endif()
 
 #
 # Global C++ variables
@@ -106,7 +131,7 @@ if(UBUNTU_TOUCH)
 	set(KAIDAN_COMPILE_DEFINITIONS
 		UBUNTU_TOUCH=True
 	)
-else()
+elseif(NOT ANDROID)
 	set(KAIDAN_COMPILE_DEFINITIONS
 		NOTIFICATIONS_LIBNOTIFY=True
 	)
@@ -128,7 +153,7 @@ if(UBUNTU_TOUCH AND CLICK_ARCH)
 	               ${CMAKE_SOURCE_DIR}/misc/ubuntu-touch/manifest.json)
 
 	# install kaidan binary
-	install(PROGRAMS ${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}
+	install(PROGRAMS ${CMAKE_CURRENT_BINARY_DIR}/bin/${PROJECT_NAME}
 	        DESTINATION ${CMAKE_INSTALL_PREFIX}
 	)
 	# install kaidan media
@@ -142,7 +167,7 @@ if(UBUNTU_TOUCH AND CLICK_ARCH)
 	)
 elseif(UNIX AND NOT APPLE)
 	# install kaidan binary
-	install(PROGRAMS ${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}
+	install(PROGRAMS ${CMAKE_CURRENT_BINARY_DIR}/bin/${PROJECT_NAME}
 	        DESTINATION ${CMAKE_INSTALL_FULL_BINDIR}
 	)
 

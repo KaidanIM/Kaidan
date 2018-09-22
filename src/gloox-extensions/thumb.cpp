@@ -30,6 +30,7 @@
 
 #include "thumb.h"
 #include "gloox-extensions.h"
+#include <QString>
 
 using namespace gloox;
 using namespace gloox::Jingle;
@@ -53,8 +54,8 @@ Thumb::Thumb(const Tag* tag)
 		m_mediaType = tag->findAttribute("media-type");
 	try {
 		// conversion can cause invalid_argument / out_of_range exception
-		m_width = std::stoul(tag->findAttribute("width"));
-		m_height = std::stoul(tag->findAttribute("height"));
+		m_width = QString::fromStdString(tag->findAttribute("width")).toULong();
+		m_height = QString::fromStdString(tag->findAttribute("height")).toULong();
 	} catch (std::invalid_argument &e) {
 		// Couldn't parse size: input probably doesn't contain valid number
 	} catch (std::out_of_range &e) {

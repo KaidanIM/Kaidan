@@ -35,6 +35,7 @@
 
 //FIXME: remove
 #include <iostream>
+#include <QString>
 
 using namespace gloox;
 
@@ -79,8 +80,8 @@ Reference::Reference(const Tag* tag)
 	if (tag->hasAttribute("begin") && tag->hasAttribute("end")) {
 		try {
 			// conversion can cause invalid_argument / out_of_range exception
-			m_begin = std::stoi(tag->findAttribute("start"));
-			m_end = std::stoi(tag->findAttribute("end"));
+			m_begin = QString::fromStdString(tag->findAttribute("start")).toInt();
+			m_end = QString::fromStdString(tag->findAttribute("end")).toInt();
 		} catch (std::invalid_argument &e) {
 			// Couldn't parse size: input probably doesn't contain valid number
 		} catch (std::out_of_range &e) {

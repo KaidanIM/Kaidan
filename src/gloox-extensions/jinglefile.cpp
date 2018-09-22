@@ -31,6 +31,7 @@
 #include "jinglefile.h"
 #include "gloox-extensions.h"
 #include <gloox/util.h>
+#include <QString>
 
 using namespace gloox;
 using namespace gloox::Jingle;
@@ -62,7 +63,7 @@ File::File(const Tag* tag)
 	if (tag->hasChild("size")) {
 		try {
 			// conversion can cause invalid_argument / out_of_range exception
-			m_size = std::stol(tag->findChild("size")->cdata());
+			m_size = QString::fromStdString(tag->findChild("size")->cdata()).toLong();
 		} catch (std::invalid_argument &e) {
 			// Couldn't parse size: input probably doesn't contain valid number
 		} catch (std::out_of_range &e) {
@@ -75,7 +76,7 @@ File::File(const Tag* tag)
 		if (range->hasAttribute("offset")) {
 			try {
 				// conversion can cause invalid_argument / out_of_range exception
-				m_offset = std::stol(tag->findAttribute("offset"));
+				m_offset = QString::fromStdString(tag->findAttribute("offset")).toLong();
 			} catch (std::invalid_argument &e) {
 				// Couldn't parse size: input probably doesn't contain valid number
 			} catch (std::out_of_range &e) {
@@ -85,7 +86,7 @@ File::File(const Tag* tag)
 		if (range->hasAttribute("length")) {
 			try {
 				// conversion can cause invalid_argument / out_of_range exception
-				m_length = std::stol(tag->findAttribute("length"));
+				m_length = QString::fromStdString(tag->findAttribute("length")).toLong();
 			} catch (std::invalid_argument &e) {
 				// Couldn't parse size: input probably doesn't contain valid number
 			} catch (std::out_of_range &e) {

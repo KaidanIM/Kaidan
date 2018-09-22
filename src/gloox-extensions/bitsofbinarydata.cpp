@@ -33,6 +33,7 @@
 #include <gloox/gloox.h>
 #include <gloox/base64.h>
 #include <gloox/sha.h>
+#include <QString>
 
 using namespace gloox;
 
@@ -69,7 +70,7 @@ BitsOfBinaryData::BitsOfBinaryData(const Tag* tag)
 	if (tag->hasAttribute("max-age")) {
 		try {
 			// conversion can cause invalid_argument / out_of_range exception
-			m_maxAge = std::stol(tag->findAttribute("max-age"));
+			m_maxAge = QString::fromStdString(tag->findAttribute("max-age")).toLong();
 		} catch (std::invalid_argument &e) {
 			// Couldn't parse size: input probably doesn't contain valid number
 		} catch (std::out_of_range &e) {

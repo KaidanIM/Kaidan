@@ -40,6 +40,7 @@
 
 #include <fstream>
 #include <sys/stat.h>
+#include <QString>
 
 using namespace gloox;
 
@@ -110,8 +111,8 @@ void HttpUploadManager::tryAddFileStoreService(const JID &jid,
 
 		try {
 			// get max file size for uploads from form data
-			unsigned long maxFileSize = std::stoul(
-				form->field("max-file-size")->value());
+			unsigned long maxFileSize = QString::fromStdString(
+				form->field("max-file-size")->value()).toULong();
 
 			// register new upload service
 			addUploadService(jid, maxFileSize);

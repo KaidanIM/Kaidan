@@ -31,6 +31,7 @@
 #include "httpuploadrequest.h"
 #include "gloox-extensions.h"
 #include <gloox/tag.h>
+#include <QString>
 
 using namespace gloox;
 
@@ -61,7 +62,7 @@ HttpUploadRequest::HttpUploadRequest(const Tag *tag) : gloox::StanzaExtension(EX
 		m_contentType = tag->findAttribute("contentType");
 		try {
 			// conversion can cause invalid_argument / out_of_range exception
-			m_size = std::stoul(tag->findAttribute("size"));
+			m_size = QString::fromStdString(tag->findAttribute("size")).toULong();
 			m_valid = true;
 		} catch (std::invalid_argument &e) {
 			// Couldn't parse size: input probably doesn't contain valid number
@@ -86,7 +87,7 @@ Tag* HttpUploadRequest::tag() const
 {
 	Tag *tag = new Tag("request", XMLNS, XMLNS_HTTPUPLOAD);
 	tag->addAttribute("filename", m_filename);
-	tag->addAttribute("size", std::to_string(m_size));
+	tag->addAttribute("size", QString::number(m_size).toStdString());
 	if (!m_contentType.empty())
 		tag->addAttribute("content-type", m_contentType);
 

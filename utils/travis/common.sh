@@ -42,9 +42,10 @@ add_ubuntu-touch_apt_repos() {
 }
 
 install_kf5() {
-	wget -c "https://github.com/JBBgameich/precompiled-kf5-linux/releases/download/KF5.40/kf5.40-gcc6-linux64-release.tar.xz"
-	tar xf kf5.40-gcc6-linux64-release.tar.xz
-	sudo cp -rf kf5-release/* /opt/qt*/
+	wget -c "https://github.com/kf5builds/precompiled-kf5-linux/releases/download/kf5.50/kf5-5.50.0-Release-ubuntu-trusty-amd64.tar.xz"
+	mkdir /tmp/kf5
+	tar xf kf5-5.50.0-Release-ubuntu-trusty-amd64.tar.xz -C /tmp/kf5
+	sudo cp -rf /tmp/kf5/* /opt/qt*/
 }
 
 install_gloox() {

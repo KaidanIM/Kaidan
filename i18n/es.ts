@@ -85,7 +85,7 @@
     </message>
     <message>
         <source>Select a file</source>
-        <translation type="unfinished"></translation>
+        <translation>Elegir un archivo</translation>
     </message>
 </context>
 <context>
@@ -100,6 +100,24 @@
     <message>
         <source>Please select a chat to start messaging</source>
         <translation>Seleccione un chat para comenzar a enviar mensajes</translation>
+    </message>
+</context>
+<context>
+    <name>FileChooser</name>
+    <message>
+        <source>Select a file</source>
+        <translation type="vanished">Elegir un archivo</translation>
+    </message>
+</context>
+<context>
+    <name>FileChooserMobile</name>
+    <message>
+        <source>go to parent folder</source>
+        <translation type="vanished">ir a la carpeta superior</translation>
+    </message>
+    <message>
+        <source>Close</source>
+        <translation type="vanished">Cerrar</translation>
     </message>
 </context>
 <context>

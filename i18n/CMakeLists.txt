@@ -69,6 +69,7 @@ set(I18N_QRC_NAME 0_i18n)
 set(I18N_QRC_INPUT ${CMAKE_CURRENT_LIST_DIR}/${I18N_QRC_NAME}.qrc)
 set(I18N_QRC_COPY ${CMAKE_CURRENT_BINARY_DIR}/kaidan_i18n.qrc)
 set(I18N_QRC_CPP ${CMAKE_CURRENT_BINARY_DIR}/qrc_kaidan_i18n.cpp)
+set_property(SOURCE ${CMAKE_CURRENT_BINARY_DIR}/qrc_kaidan_i18n.cpp PROPERTY SKIP_AUTOGEN ON)
 
 # Copy the QRC file to the output directory, because the files listed in the
 # qrc file are relative to that directory.

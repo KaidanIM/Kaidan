@@ -224,6 +224,7 @@ void Kaidan::sendFile(QString jid, QString filePath, QString message)
 	if (client->isConnected()) {
 		// convert file-URLs to file paths
 		filePath.replace("file://", "");
+		filePath.replace("qrc:", "");
 		emit client->sendFileRequested(jid, filePath, message);
 	} else {
 		emit passiveNotificationRequested(tr("Could not send file, as a result of not being connected."));

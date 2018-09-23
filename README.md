@@ -3,14 +3,14 @@
 [![Plasma Mobile CI Build Status](https://img.shields.io/jenkins/s/http/mobile.neon.pangea.pub:8080/job/xenial_unstable_KaidanIM_kaidan-packaging-deb.svg)](http://mobile.neon.pangea.pub:8080/job/xenial_unstable_KaidanIM_kaidan-packaging-deb)
 [![Translation](https://hosted.weblate.org/widgets/kaidan/-/svg-badge.svg)](https://hosted.weblate.org/projects/kaidan/translations/)
 [![license](https://img.shields.io/badge/License-GPLv3%2B%20%2F%20CC%20BY--SA%204.0-blue.svg)](https://raw.githubusercontent.com/kaidanim/kaidan/master/LICENSE)
-[![Donations](http://img.shields.io/liberapay/patrons/kaidan.svg?logo=liberapay)](https://liberapay.com/kaidan)
+[![Donations](https://img.shields.io/liberapay/patrons/kaidan.svg?logo=liberapay)](https://liberapay.com/kaidan)
 
 ![Kaidan v0.3 screenshot](https://git.kaidan.im/kaidan/kaidan/uploads/da4886ea50581517bde0278a804b311c/kaidan-screenshot-0.3.png)
 
 ## About
 
 Kaidan is a simple, user-friendly Jabber/XMPP client providing a modern user-interface using
-[Kirigami](https://techbase.kde.org/Kirigami) and [QtQuick](http://wiki.qt.io/Qt_Quick). The back-end of
+[Kirigami](https://techbase.kde.org/Kirigami) and [QtQuick](https://wiki.qt.io/Qt_Quick). The back-end of
 Kaidan is entirely written in C++ using the [gloox](https://camaya.net/gloox/) XMPP client library and
 [Qt 5](https://www.qt.io/).
 
@@ -65,7 +65,7 @@ sudo apt install kaidan
 ### Compile Kaidan for Desktop Linux
 
 #### Install all dependencies:
- * [Qt](http://doc.qt.io/qt-5/build-sources.html) (Core Qml Quick Sql QuickControls2) (>= 5.8.0)
+ * [Qt](https://doc.qt.io/qt-5/build-sources.html) (Core Qml Quick Sql QuickControls2) (>= 5.8.0)
  * [gloox](https://camaya.net/gloox/download/) (>= 1.0.19)
  * [Kirigami 2](https://phabricator.kde.org/source/kirigami/) (>= 5.42.0)
 

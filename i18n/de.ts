@@ -108,7 +108,7 @@
     </message>
     <message>
         <source>Select a file</source>
-        <translation type="unfinished"></translation>
+        <translation>Eine Datei auswählen</translation>
     </message>
 </context>
 <context>
@@ -127,6 +127,10 @@
 </context>
 <context>
     <name>FileChooserMobile</name>
+    <message>
+        <source>go to parent folder</source>
+        <translation type="vanished">zum übergeordneten Ordner wechseln</translation>
+    </message>
     <message>
         <source>Close</source>
         <translation type="obsolete">Schließen</translation>

@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 2.8.11)
-find_package(ECM 5.45.0 REQUIRED NO_MODULE)
+find_package(ECM 5.40.0 REQUIRED NO_MODULE)
 set(CMAKE_CXX_STANDARD 14)
 set(QT_MIN_VERSION "5.8.0")
 

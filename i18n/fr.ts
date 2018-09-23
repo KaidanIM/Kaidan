@@ -79,10 +79,6 @@
         <translation type="vanished">Envoyer</translation>
     </message>
     <message>
-        <source>Please choose a file to upload</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Image</source>
         <translation type="unfinished"></translation>
     </message>
@@ -102,6 +98,10 @@
         <source>Other file</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Select a file</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>ContextDrawer</name>
@@ -115,6 +115,24 @@
     <message>
         <source>Please select a chat to start messaging</source>
         <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>FileChooser</name>
+    <message>
+        <source>Select a file</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>FileChooserMobile</name>
+    <message>
+        <source>go to parent folder</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Close</source>
+        <translation type="unfinished">Fermer</translation>
     </message>
 </context>
 <context>

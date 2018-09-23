@@ -418,7 +418,7 @@
     <name>ToolBarPageHeader</name>
     <message>
         <source>More Actions</source>
-        <translation type="unfinished">Tindakan Lanjut</translation>
+        <translation type="obsolete">Tindakan Lanjut</translation>
     </message>
 </context>
 </TS>

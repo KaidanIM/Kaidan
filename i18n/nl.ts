@@ -395,11 +395,4 @@
         <translation type="unfinished"></translation>
     </message>
 </context>
-<context>
-    <name>ToolBarPageHeader</name>
-    <message>
-        <source>More Actions</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
 </TS>

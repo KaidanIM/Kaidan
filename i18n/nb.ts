@@ -399,7 +399,7 @@
     <name>ToolBarPageHeader</name>
     <message>
         <source>More Actions</source>
-        <translation type="unfinished">Flere handlinger</translation>
+        <translation type="obsolete">Flere handlinger</translation>
     </message>
 </context>
 </TS>

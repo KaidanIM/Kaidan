@@ -69,7 +69,7 @@
     <name>ChatMessage</name>
     <message>
         <source>Message copied to clipboard</source>
-        <translation type="unfinished"></translation>
+        <translation>Nachricht wurde in die Zwischenablage kopiert</translation>
     </message>
 </context>
 <context>
@@ -83,24 +83,28 @@
         <translation type="vanished">Senden</translation>
     </message>
     <message>
+        <source>Please choose a file to upload</source>
+        <translation type="vanished">Datei zum Hochladen auswählen</translation>
+    </message>
+    <message>
         <source>Image</source>
-        <translation type="unfinished"></translation>
+        <translation>Bild</translation>
     </message>
     <message>
         <source>Video</source>
-        <translation type="unfinished"></translation>
+        <translation>Video</translation>
     </message>
     <message>
         <source>Audio</source>
-        <translation type="unfinished"></translation>
+        <translation>Ton</translation>
     </message>
     <message>
         <source>Document</source>
-        <translation type="unfinished"></translation>
+        <translation>Dokument</translation>
     </message>
     <message>
         <source>Other file</source>
-        <translation type="unfinished"></translation>
+        <translation>Andere Datei</translation>
     </message>
     <message>
         <source>Select a file</source>
@@ -210,7 +214,7 @@
     </message>
     <message>
         <source>Could not send file, as a result of not being connected.</source>
-        <translation type="unfinished"></translation>
+        <translation>Konnte Datei nicht senden, da Sie nicht verbunden sind.</translation>
     </message>
 </context>
 <context>
@@ -446,7 +450,7 @@
     <name>ToolBarPageHeader</name>
     <message>
         <source>More Actions</source>
-        <translation type="unfinished">Mehr Aktionen</translation>
+        <translation type="vanished">Mehr Aktionen</translation>
     </message>
 </context>
 <context>

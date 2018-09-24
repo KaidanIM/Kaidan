@@ -21,9 +21,8 @@
         <file alias="system-shutdown.svg">3rdparty/breeze-icons/icons/actions/22/system-shutdown.svg</file>
         <file alias="view-list-icons.svg">3rdparty/breeze-icons/icons/actions/22/view-list-icons.svg</file>
 	<file alias="go-parent-folder.svg">3rdparty/breeze-icons/icons/actions/22/go-parent-folder.svg</file>
-	<file alias="dialog-close.svg">3rdparty/breeze-icons/icons/actions/22/dialog-close.svg</file>
-        <file alias="folder.svg">3rdparty/breeze-icons/icons/actions/22/folder.svg</file>
-        <file alias="text-x-plain.svg">3rdparty/breeze-icons/icons/actions/22/text-x-plain.svg</file>
+        <file alias="folder.svg">3rdparty/breeze-icons/icons/places/22/folder.svg</file>
+        <file alias="text-x-plain.svg">3rdparty/breeze-icons/icons/mimetypes/22/text-x-plain.svg</file>
     </qresource>
     
     <qresource prefix="/icons/breeze/actions/16">

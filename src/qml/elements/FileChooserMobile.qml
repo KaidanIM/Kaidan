@@ -53,7 +53,7 @@ Item {
 					tooltip: qsTr("go to parent folder")
 					iconName: "go-parent-folder"
 					onTriggered: fileModel.folder = fileModel.parentFolder
-					enabled: true
+					enabled: fileModel.parentFolder != "file:///"
 				}
 				right: Kirigami.Action {
 					tooltip: qsTr("Close")

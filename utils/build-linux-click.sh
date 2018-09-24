@@ -22,11 +22,11 @@ install_deb() {
 }
 
 install_dependencies() {
-	GLOOX_VERSION="1.0.20-1+16.04+xenial+build1"
+	QXMPP_VERSION="0.9.3-1build1"
 
-	echo "I: Installing gloox"
-	for PKG in libgloox-dev libgloox17; do
-		install_deb http://neon.plasma-mobile.org:8080/pool/main/g/gloox ${PKG} ${GLOOX_VERSION}
+	echo "I: Installing QXMPP"
+	for PKG in libqxmpp-dev libqxmpp0; do
+		install_deb http://de.archive.ubuntu.com/ubuntu/pool/universe/q/qxmpp/ ${PKG} ${QXMPP_VERSION}
 	done
 
 	echo "I: Installing libraries"

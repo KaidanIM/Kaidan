@@ -1,0 +1,30 @@
+click-xenial:
+  image: kaidan/ubuntu-touch-xenial
+  script:
+    - utils/travis/build.sh
+  variables:
+    PLATFORM: ubuntu-touch
+
+ubuntu-trusty:
+  image: kaidan/ubuntu-trusty
+  script:
+    - utils/travis/build.sh
+
+neon-bionic:
+  image: kaidan/neon-bionic
+  script:
+    - utils/travis/build.sh
+
+debian-sid:
+  image: kaidan/debian-unstable
+  script:
+    - utils/travis/build.sh
+
+archlinux:
+  image: kaidan/archlinux
+  script:
+    - utils/travis/build.sh
+
+variables:
+  GIT_SUBMODULE_STRATEGY: recursive
+  BUILD_SYSTEM: cmake

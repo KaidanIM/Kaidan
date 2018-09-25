@@ -31,7 +31,7 @@ elif [[ ${BUILD_SYSTEM} == "qmake" ]]; then
 	lrelease ../Kaidan.pro
 
 	qmake ../Kaidan.pro \
-	      "QMAKE_CXX=ccache g++" \
+	      "CONFIG+=ccache" \
 	      "CONFIG+=debug"
 
 	make -j$(nproc)

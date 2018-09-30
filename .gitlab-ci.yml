@@ -4,6 +4,9 @@ click-xenial:
     - utils/travis/build.sh
   variables:
     PLATFORM: ubuntu-touch
+  artifacts:
+    paths: bin/ubuntu-touch/*.click
+    expire_in: 1 week
 
 ubuntu-trusty:
   image: kaidan/ubuntu-trusty

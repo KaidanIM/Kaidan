@@ -43,6 +43,13 @@
     </message>
 </context>
 <context>
+    <name>ChatMessage</name>
+    <message>
+        <source>Message copied to clipboard</source>
+        <translation type="vanished">Melding kopiert til utklippstavle</translation>
+    </message>
+</context>
+<context>
     <name>ChatPage</name>
     <message>
         <source>Compose message</source>
@@ -54,27 +61,27 @@
     </message>
     <message>
         <source>Image</source>
-        <translation type="unfinished"></translation>
+        <translation>Bilde</translation>
     </message>
     <message>
         <source>Video</source>
-        <translation type="unfinished"></translation>
+        <translation>Video</translation>
     </message>
     <message>
         <source>Audio</source>
-        <translation type="unfinished"></translation>
+        <translation>Lyd</translation>
     </message>
     <message>
         <source>Document</source>
-        <translation type="unfinished"></translation>
+        <translation>Dokument</translation>
     </message>
     <message>
         <source>Other file</source>
-        <translation type="unfinished"></translation>
+        <translation>Annen fil</translation>
     </message>
     <message>
         <source>Select a file</source>
-        <translation type="unfinished"></translation>
+        <translation>Velg en fil</translation>
     </message>
 </context>
 <context>
@@ -89,6 +96,24 @@
     <message>
         <source>Please select a chat to start messaging</source>
         <translation>Velg en sludring for å begynne å sende meldinger</translation>
+    </message>
+</context>
+<context>
+    <name>FileChooser</name>
+    <message>
+        <source>Select a file</source>
+        <translation type="vanished">Velg en fil</translation>
+    </message>
+</context>
+<context>
+    <name>FileChooserMobile</name>
+    <message>
+        <source>go to parent folder</source>
+        <translation type="vanished">gå til overnevnt mappe</translation>
+    </message>
+    <message>
+        <source>Close</source>
+        <translation type="vanished">Lukk</translation>
     </message>
 </context>
 <context>
@@ -139,6 +164,10 @@
         <source>The link will be opened after you have connected.</source>
         <extracomment>The link is an XMPP-URI (i.e. &apos;xmpp:kaidan@muc.kaidan.im?join&apos; for joining a chat)</extracomment>
         <translation>Lenken vil åpnes etter at du har koblet til.</translation>
+    </message>
+    <message>
+        <source>Could not send file, as a result of not being connected.</source>
+        <translation type="vanished">Kunne ikke sende fil, som resultat av å ikke være tilkoblet.</translation>
     </message>
 </context>
 <context>
@@ -406,7 +435,7 @@
     <name>UploadManager</name>
     <message>
         <source>Could not send file, as a result of not being connected.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Kunne ikke sende fil, som resultat av å ikke være tilkoblet.</translation>
     </message>
     <message>
         <source>File</source>

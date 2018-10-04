@@ -125,7 +125,7 @@ Kirigami.SwipeListItem {
 						kaidan.removeNewLinesFromString(lastMessage)
 					}
 					textFormat: Text.PlainText
-					font.pixelSize: 16
+					font.pixelSize: Kirigami.Units.gridUnit * 0.8
 				}
 			}
 		}

@@ -148,7 +148,7 @@ Kirigami.ScrollablePage {
 		padding: 0
 		wheelEnabled: true
 		background: Rectangle {
-			color: "white"
+			color: Kirigami.Theme.viewBackgroundColor
 		}
 
 		RowLayout {

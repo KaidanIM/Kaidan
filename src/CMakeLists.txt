@@ -17,7 +17,7 @@ set(KAIDAN_SOURCES
 # 	${CURDIR}/ServiceDiscoveryManager.cpp
 # 	${CURDIR}/UploadHandler.cpp
 # 	${CURDIR}/VCardManager.cpp
-# 	${CURDIR}/XmlLogHandler.cpp
+	${CURDIR}/LogHandler.cpp
 	${CURDIR}/StatusBar.cpp
 # 	${CURDIR}/QtHttpUploader.cpp
 

@@ -46,6 +46,7 @@ class QGuiApplication;
 #include "RosterModel.h"
 #include "AvatarFileStorage.h"
 #include "PresenceCache.h"
+class LogHandler;
 class Kaidan;
 class ClientWorker;
 class RosterManager;
@@ -175,6 +176,7 @@ private:
 	Caches *caches;
 	Kaidan *kaidan;
 	QXmppClient *client;
+	LogHandler *logger;
 	Credentials creds;
 	bool enableLogging;
 	QGuiApplication *app;

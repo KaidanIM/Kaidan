@@ -1,7 +1,7 @@
 /*
  *  Kaidan - A user-friendly XMPP client for every device!
  *
- *  Copyright (C) 2017-2018 Kaidan developers and contributors
+ *  Copyright (C) 2016-2018 Kaidan developers and contributors
  *  (see the LICENSE file for a full list of copyright authors)
  *
  *  Kaidan is free software: you can redistribute it and/or modify
@@ -28,41 +28,49 @@
  *  along with Kaidan.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include "XmlLogHandler.h"
+#include "LogHandler.h"
 
-// gloox
-#include <gloox/client.h>
 // Qt
 #include <QDebug>
 #include <QXmlStreamReader>
 #include <QXmlStreamWriter>
+// QXmpp
+#include <QXmppClient.h>
+#include <QXmppLogger.h>
 
-XmlLogHandler::XmlLogHandler(gloox::Client *client) : client(client)
+LogHandler::LogHandler(QXmppClient *client, QObject *parent) : QObject(parent), client(client)
 {
-	client->logInstance().registerLogHandler(
-		gloox::LogLevelDebug,
-		gloox::LogAreaXmlIncoming | gloox::LogAreaXmlOutgoing,
-		this
-	);
+	client->logger()->setLoggingType(QXmppLogger::SignalLogging);
 }
 
-XmlLogHandler::~XmlLogHandler()
+void LogHandler::enableLogging(bool enabled)
 {
-	client->logInstance().removeLogHandler(this);
+	// check if we need to change something
+	if (this->enabled == enabled)
+		return;
+	// update enabled status
+	this->enabled = enabled;
+
+	// apply change: enable or disable
+	if (enabled)
+		connect(client->logger(), &QXmppLogger::message, this, &LogHandler::handleLog);
+	else
+		disconnect(client->logger(), &QXmppLogger::message, this, &LogHandler::handleLog);
 }
 
-void XmlLogHandler::handleLog(gloox::LogLevel level, gloox::LogArea area,
-                              const std::string &message)
+void LogHandler::handleLog(QXmppLogger::MessageType type, const QString &text)
 {
-	if (area == gloox::LogAreaXmlIncoming)
+	if (type == QXmppLogger::ReceivedMessage)
 		qDebug() << "[client] [incoming] <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<";
-	else if (area == gloox::LogAreaXmlOutgoing)
+	else if (type == QXmppLogger::SentMessage)
 		qDebug() << "[client] [outgoing] >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>";
+	else
+		return;
 
-	qDebug().noquote() << makeXmlPretty(QString::fromStdString(message));
+	qDebug().noquote() << makeXmlPretty(text);
 }
 
-QString XmlLogHandler::makeXmlPretty(QString xmlIn)
+QString LogHandler::makeXmlPretty(QString xmlIn)
 {
 	QString xmlOut;
 

@@ -39,6 +39,7 @@
 #include <QXmppPresence.h>
 // Kaidan
 #include "Kaidan.h"
+#include "LogHandler.h"
 #include "RosterManager.h"
 #include "MessageHandler.h"
 
@@ -47,6 +48,8 @@ ClientWorker::ClientWorker(Caches *caches, Kaidan *kaidan, bool enableLogging, Q
 	: QObject(parent), caches(caches), kaidan(kaidan), enableLogging(enableLogging), app(app)
 {
 	client = new QXmppClient(this);
+	logger = new LogHandler(client, this);
+	logger->enableLogging(enableLogging);
 	rosterManager = new RosterManager(kaidan, client,  caches->rosterModel, this);
 	msgHandler = new MessageHandler(kaidan, client, caches->msgModel, this);
 
@@ -56,6 +59,7 @@ ClientWorker::ClientWorker(Caches *caches, Kaidan *kaidan, bool enableLogging, Q
 ClientWorker::~ClientWorker()
 {
 	delete client;
+	delete logger;
 	delete rosterManager;
 	delete msgHandler;
 }

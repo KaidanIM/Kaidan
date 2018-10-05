@@ -1,7 +1,7 @@
 /*
  *  Kaidan - A user-friendly XMPP client for every device!
  *
- *  Copyright (C) 2017-2018 Kaidan developers and contributors
+ *  Copyright (C) 2016-2018 Kaidan developers and contributors
  *  (see the LICENSE file for a full list of copyright authors)
  *
  *  Kaidan is free software: you can redistribute it and/or modify
@@ -28,28 +28,44 @@
  *  along with Kaidan.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef XMLLOGHANDLER_H
-#define XMLLOGHANDLER_H
+#ifndef LOGHANDLER_H
+#define LOGHANDLER_H
 
-#include <gloox/loghandler.h>
+#include <QObject>
+#include <QXmppLogger.h>
 
-class QString;
-namespace gloox {
-	class Client;
-}
+class QXmppClient;
 
-class XmlLogHandler : public gloox::LogHandler
+class LogHandler : public QObject
 {
-public:
-	XmlLogHandler(gloox::Client *client);
-	~XmlLogHandler();
+	Q_OBJECT
 
-	virtual void handleLog(gloox::LogLevel level, gloox::LogArea area,
-	                       const std::string &message);
-	static QString makeXmlPretty(QString inputXml);
+public:
+	/**
+	 * Default constructor
+	 */
+	LogHandler(QXmppClient *client, QObject *parent = nullptr);
+
+	/**
+	 * Enable/disable logging to stdout (default: disabled)
+	 */
+	void enableLogging(bool enable);
+
+public slots:
+	/**
+	 * Handles logging messages and processes them (currently only output
+	 * of XML streams)
+	 */
+	void handleLog(QXmppLogger::MessageType type, const QString &text);
 
 private:
-	gloox::Client *client;
+	/**
+	 * Adds new lines to XML data and makes it more readable
+	 */
+	static QString makeXmlPretty(QString inputXml);
+
+	QXmppClient *client;
+	bool enabled = false;
 };
 
-#endif // XMLLOGHANDLER_H
+#endif // LOGHANDLER_H

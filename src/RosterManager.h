@@ -35,6 +35,7 @@
 #include <QObject>
 // QXmpp
 #include <QXmppRosterManager.h>
+#include <QXmppMessage.h>
 // Kaidan
 #include "RosterModel.h"
 #include "VCardManager.h"
@@ -49,7 +50,6 @@ class RosterManager : public QObject
 public:
 	RosterManager(Kaidan *kaidan, QXmppClient *client, RosterModel *rosterModel,
 	              QObject *parent = nullptr);
-	~RosterManager();
 
 public slots:
 	void addContact(const QString jid, const QString name, const QString msg);
@@ -57,12 +57,14 @@ public slots:
 
 private slots:
 	void populateRoster();
+	void handleMessage(const QXmppMessage &msg);
 
 private:
 	Kaidan *kaidan;
 	RosterModel *model;
 	QXmppClient *client;
 	QXmppRosterManager &manager;
+	QString chatPartner;
 };
 
 #endif // ROSTERMANAGER_H

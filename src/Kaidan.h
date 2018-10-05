@@ -106,16 +106,6 @@ public:
 	Q_INVOKABLE void mainDisconnect(bool openLogInPage = false);
 
 	/**
-	 * Send a text message to any JID
-	 *
-	 * Currently only contacts are displayed on the RosterPage (there is no
-	 * way to view a list of all chats -> for contacts and non-contacts), so
-	 * you should only send messages to JIDs from your roster, otherwise you
-	 * won't be able to see the message history.
-	 */
-	Q_INVOKABLE void sendMessage(QString jid, QString message);
-
-	/**
 	 * Upload and send file
 	 */
 	Q_INVOKABLE void sendFile(QString jid, QString filePath, QString message);
@@ -358,6 +348,16 @@ signals:
 	 * XEP-0363: HTTP File Upload was discovered (or isn't working anymore)
 	 */
 	void httpUploadChanged();
+
+	/**
+	 * Send a text message to any JID
+	 *
+	 * Currently only contacts are displayed on the RosterPage (there is no
+	 * way to view a list of all chats -> for contacts and non-contacts), so
+	 * you should only send messages to JIDs from your roster, otherwise you
+	 * won't be able to see the message history.
+	 */
+	void sendMessage(QString jid, QString message);
 
 	/**
 	 * Add a contact to your roster

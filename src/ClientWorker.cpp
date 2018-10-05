@@ -40,22 +40,24 @@
 // Kaidan
 #include "Kaidan.h"
 #include "RosterManager.h"
+#include "MessageHandler.h"
 
 ClientWorker::ClientWorker(Caches *caches, Kaidan *kaidan, bool enableLogging, QGuiApplication *app,
                            QObject* parent)
 	: QObject(parent), caches(caches), kaidan(kaidan), enableLogging(enableLogging), app(app)
 {
-	client = new QXmppClient();
-	client->moveToThread(thread);
-
-	rosterManager = new RosterManager(kaidan, client,  caches->rosterModel);
-	rosterManager->moveToThread(thread);
+	client = new QXmppClient(this);
+	rosterManager = new RosterManager(kaidan, client,  caches->rosterModel, this);
+	msgHandler = new MessageHandler(kaidan, client, caches->msgModel, this);
 
 	connect(this, &ClientWorker::credentialsUpdated, this, &ClientWorker::setCredentials);
 }
 
 ClientWorker::~ClientWorker()
 {
+	delete client;
+	delete rosterManager;
+	delete msgHandler;
 }
 
 void ClientWorker::main()

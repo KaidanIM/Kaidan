@@ -57,7 +57,7 @@ Kaidan::Kaidan(QGuiApplication *app, bool enableLogging, QObject *parent) : QObj
 		database->convertDatabase();
 
 	// Caching components
-	caches = new ClientWorker::Caches(database);
+	caches = new ClientWorker::Caches(database, this);
 
 	// Connect the avatar changed signal of the avatarStorage with the NOTIFY signal
 	// of the Q_PROPERTY for the avatar storage (so all avatars are updated in QML)
@@ -97,6 +97,7 @@ Kaidan::~Kaidan()
 	delete client;
 	delete caches;
 	delete database;
+	delete cltThrd;
 }
 
 void Kaidan::start()
@@ -199,16 +200,6 @@ void Kaidan::setChatPartner(QString chatPartner)
 quint8 Kaidan::getDisconnReason() const
 {
 	return (quint8) disconnReason;
-}
-
-void Kaidan::sendMessage(QString jid, QString message)
-{
-	if (connectionState == ConnectionState::StateConnected) {
-		emit client->sendMessageRequested(jid, message);
-	} else {
-		emit passiveNotificationRequested(tr("Could not send message, as a result of not being connected."));
-		qWarning() << "[main] Could not send message, as a result of not being connected.";
-	}
 }
 
 void Kaidan::sendFile(QString jid, QString filePath, QString message)

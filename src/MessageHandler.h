@@ -1,7 +1,7 @@
 /*
  *  Kaidan - A user-friendly XMPP client for every device!
  *
- *  Copyright (C) 2017-2018 Kaidan developers and contributors
+ *  Copyright (C) 2016-2018 Kaidan developers and contributors
  *  (see the LICENSE file for a full list of copyright authors)
  *
  *  Kaidan is free software: you can redistribute it and/or modify
@@ -33,20 +33,14 @@
 
 // Qt
 #include <QObject>
-#include <QSqlDatabase>
-// gloox
-#include <gloox/messagehandler.h>
+// QXmpp
+#include <QXmppMessage.h>
+#include <QXmppMessageReceiptManager.h>
 // Kaidan
-#include "MessageModel.h"
-#include "RosterModel.h"
 #include "Enums.h"
 
-namespace gloox {
-	class Client;
-	class Message;
-	class MessageSession;
-}
-
+class Kaidan;
+class MessageModel;
 class QMimeType;
 
 using namespace Enums;
@@ -54,67 +48,30 @@ using namespace Enums;
 /**
  * @class MessageHandler Handler for incoming and outgoing messages
  */
-class MessageHandler : public QObject, public gloox::MessageHandler
+class MessageHandler : public QObject
 {
 	Q_OBJECT
 
 public:
-	MessageHandler(gloox::Client *client, MessageModel *messageModel,
-	               RosterModel *rosterModel, QObject *parent = nullptr);
-	~MessageHandler();
-
-	virtual void handleMessage(const gloox::Message &message, gloox::MessageSession *session = 0);
-
-	/**
-	 * Handles and processes media sharing content of messages
-	 */
-	void handleMediaSharing(const gloox::Message *message,
-	                        MessageModel::Message *msg);
-
-	/**
-	 * Handles a message with a possible receipt or receipt request
-	 */
-	void handleReceiptMessage(const gloox::Message *message,
-	                          bool isCarbonMessage);
-
-	void updateLastExchangedOfJid(const QString &jid);
-	void newUnreadMessageForJid(const QString &jid);
-	void resetUnreadMessagesForJid(const QString &jid);
-
-	/**
-	 * (Only) sends the message to the recipient
-	 *
-	 * @param toJid Recipient (bare JID)
-	 * @param body Message body / text of the message
-	 * @param id Custom id used for the message
-	 */
-	void sendOnlyMessage(QString &toJid, QString &body, const std::string &id);
-
-	/**
-	 * Saves a message to the database
-	 *
-	 * @param toJid Recipient (bare JID)
-	 * @param body Message body / text of the message
-	 * @param id Custom id used for the message
-	 * @param type Custom message type (useful for media sharing / file uploads)
-	 * @param mediaLocation Location on local storage to media file
-	 */
-	void addMessageToDb(QString &toJid, QString &body, QString id,
-	                    MessageType type, QString mediaLocation = "");
-
-	/**
-	 * Get the message type from mime type
-	 */
-	MessageType getMessageType(QMimeType &type);
+	MessageHandler(Kaidan *kaidan, QXmppClient *client, MessageModel *model,
+	               QObject *parent = nullptr);
 
 public slots:
-	void setChatPartner(QString chatPartner);
+	/**
+	 * Handles incoming messages from the server
+	 */
+	void handleMessage(const QXmppMessage &msg);
+
+	/**
+	 * Sends a new message to the server and inserts it into the database
+	 */
 	void sendMessage(QString toJid, QString body);
 
 private:
-	gloox::Client *client;
-	MessageModel *messageModel;
-	RosterModel *rosterModel;
+	Kaidan *kaidan;
+	QXmppClient *client;
+	QXmppMessageReceiptManager receiptManager;
+	MessageModel *model;
 	QString chatPartner;
 };
 

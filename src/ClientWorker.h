@@ -49,6 +49,7 @@ class QGuiApplication;
 class Kaidan;
 class ClientWorker;
 class RosterManager;
+class MessageHandler;
 
 class ClientThread : public QThread
 {
@@ -77,11 +78,11 @@ class ClientWorker : public QObject
 
 public:
 	struct Caches {
-		Caches(Database *database)
-			: msgModel(new MessageModel(database->getDatabase())),
-			  rosterModel(new RosterModel(database->getDatabase())),
-			  avatarStorage(new AvatarFileStorage()),
-			  presCache(new PresenceCache()),
+		Caches(Database *database, QObject *parent = nullptr)
+			: msgModel(new MessageModel(database->getDatabase(), parent)),
+			  rosterModel(new RosterModel(database->getDatabase(), parent)),
+			  avatarStorage(new AvatarFileStorage(parent)),
+			  presCache(new PresenceCache(parent)),
 			  settings(new QSettings(APPLICATION_NAME, APPLICATION_NAME))
 		{
 		}
@@ -179,6 +180,7 @@ private:
 	QGuiApplication *app;
 
 	RosterManager *rosterManager;
+	MessageHandler *msgHandler;
 };
 
 #endif // CLIENTWORKER_H

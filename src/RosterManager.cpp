@@ -31,7 +31,9 @@
 #include "RosterManager.h"
 #include "Kaidan.h"
 #include "Globals.h"
+// QXmpp
 #include <QXmppClient.h>
+#include <QXmppUtils.h>
 #include <QXmppRosterManager.h>
 
 RosterManager::RosterManager(Kaidan *kaidan, QXmppClient *client, RosterModel *rosterModel,
@@ -71,10 +73,15 @@ RosterManager::RosterManager(Kaidan *kaidan, QXmppClient *client, RosterModel *r
 
 	connect(kaidan, &Kaidan::addContact, this, &RosterManager::addContact);
 	connect(kaidan, &Kaidan::removeContact, this, &RosterManager::removeContact);
-}
 
-RosterManager::~RosterManager()
-{
+	connect(kaidan, &Kaidan::chatPartnerChanged, [=] (QString chatPartner) {
+		this->chatPartner = chatPartner;
+
+		// reset unread message counter
+		emit model->setUnreadMessageCountRequested(chatPartner, 0);
+	});
+
+	connect(client, &QXmppClient::messageReceived, this, &RosterManager::handleMessage);
 }
 
 void RosterManager::populateRoster()
@@ -119,3 +126,27 @@ void RosterManager::removeContact(const QString jid)
 		              "not being connected.";
 	}
 }
+
+void RosterManager::handleMessage(const QXmppMessage &msg)
+{
+	if (msg.body().isEmpty())
+		return;
+
+	// TODO: Check if it's a carbon message (will need QXmpp v0.10)
+	// msg.from() can be our JID, if it's a carbon/forward from another client
+	bool sentByMe = QXmppUtils::jidToBareJid(msg.from()) == client->configuration().jidBare();
+	QString contactJid = sentByMe ? QXmppUtils::jidToBareJid(msg.to())
+	                              : QXmppUtils::jidToBareJid(msg.from());
+
+	// update last message of the contact
+	emit model->setLastMessageRequested(contactJid, msg.body());
+
+	// update last exchanged datetime (sorting order in contact list)
+	QString dateTime = QDateTime::currentDateTime().toUTC().toString(Qt::ISODate);
+	emit model->setLastExchangedRequested(contactJid, dateTime);
+
+	// update unread message counter
+	if (!sentByMe && chatPartner != contactJid)
+		emit model->newUnreadMessageRequested(contactJid);
+}
+

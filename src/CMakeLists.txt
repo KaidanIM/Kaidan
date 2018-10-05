@@ -4,14 +4,12 @@ set(CURDIR ${CMAKE_CURRENT_LIST_DIR})
 set(KAIDAN_SOURCES
 	${CURDIR}/main.cpp
 	${CURDIR}/Kaidan.cpp
-# 	${CURDIR}/ClientThread.cpp
 	${CURDIR}/ClientWorker.cpp
 	${CURDIR}/AvatarFileStorage.cpp
 	${CURDIR}/Database.cpp
 	${CURDIR}/RosterModel.cpp
 	${CURDIR}/RosterManager.cpp
-# 	${CURDIR}/MessageHandler.cpp
-# 	${CURDIR}/MessageSessionHandler.cpp
+ 	${CURDIR}/MessageHandler.cpp
 	${CURDIR}/MessageModel.cpp
 	${CURDIR}/Notifications.cpp
 	${CURDIR}/PresenceCache.cpp

@@ -141,3 +141,5 @@ install_manifest.txt
 *.swp
 .vscode/
 .directory
+src/tags
+

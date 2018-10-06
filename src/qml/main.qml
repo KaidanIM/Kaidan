@@ -37,8 +37,6 @@ import "elements"
 
 Kirigami.ApplicationWindow {
 	id: root
-	width: 960
-	height: 540
 
 	// Header / ToolBar
 	header: Kirigami.ApplicationHeader {

@@ -33,6 +33,7 @@ import QtQuick.Layouts 1.3
 import QtQuick.Controls 2.0 as Controls
 import QtGraphicalEffects 1.0
 import org.kde.kirigami 2.0 as Kirigami
+import im.kaidan.kaidan 1.0
 
 Kirigami.SwipeListItem {
 	id: listItem
@@ -120,7 +121,7 @@ Kirigami.SwipeListItem {
 					elide: Text.ElideRight
 					maximumLineCount: 1
 					text: {
-						presenceType === 7 ? // error presence type
+						presenceType === Enums.PresError ? // error presence type
 						qsTr("Error: Please check the JID.") :
 						kaidan.removeNewLinesFromString(lastMessage)
 					}
@@ -144,14 +145,13 @@ Kirigami.SwipeListItem {
 	 * Returns the colour beloning to the given presence status type
 	 */
 	function presenceTypeToColor(type) {
-		return type === 0 ? "green" :        // available
-			type === 1 ? "darkgreen" :     // chat
-			type === 2 ? "orange" :        // away
-			type === 3 ? "orange" :        // do not disturb
-			type === 4 ? "orange" :        // extended away
-			type === 7 ? "red" :           // error
-			type === 6 ? "red" :           // error
-			"lightgrey" // unavailable (offline) (5), probe (6), invalid (8)
+		return type === Enums.PresOnline ? "green" :
+			type === Enums.PresChat ? "darkgreen" :
+			type === Enums.PresAway ? "orange" :
+			type === Enums.PresDND ? "orange" :
+			type === Enums.PresXA ? "orange" :
+			type === Enums.PresError ? "red" :
+			"lightgrey" // unavailable (offline)
 	}
 
 	/**
@@ -168,14 +168,14 @@ Kirigami.SwipeListItem {
 
 		// presence status type
 		string += "<font color='" + presenceTypeToColor(statusType) + "'>"
-		string += statusType === 0 ? qsTr("Available") :
-		          statusType === 1 ? qsTr("Free for chat") :
-		          statusType === 2 ? qsTr("Away") :
-		          statusType === 3 ? qsTr("Do not disturb") :
-		          statusType === 4 ? qsTr("Away for longer") :
-		          statusType === 5 ? qsTr("Offline") :
-		          statusType === 7 ? qsTr("Error") :
-		          qsTr("Invalid")
+		string += statusType === Enums.PresOnline ? qsTr("Available") :
+		          statusType === Enums.PresChat ? qsTr("Free for chat") :
+		          statusType === Enums.PresAway ? qsTr("Away") :
+		          statusType === Enums.PresDND ? qsTr("Do not disturb") :
+		          statusType === Enums.PresXA ? qsTr("Away for longer") :
+		          statusType === Enums.PresUnavailable ? qsTr("Offline") :
+		          statusType === Enums.PresError ? qsTr("Error") :
+		          "Invalid" // should never be displayed
 		string += "</font>"
 
 		// presence status message

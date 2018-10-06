@@ -13,7 +13,6 @@ set(KAIDAN_SOURCES
 	${CURDIR}/MessageModel.cpp
 	${CURDIR}/Notifications.cpp
 	${CURDIR}/PresenceCache.cpp
-# 	${CURDIR}/PresenceHandler.cpp
 # 	${CURDIR}/ServiceDiscoveryManager.cpp
 # 	${CURDIR}/UploadHandler.cpp
 # 	${CURDIR}/VCardManager.cpp

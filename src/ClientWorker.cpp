@@ -53,6 +53,9 @@ ClientWorker::ClientWorker(Caches *caches, Kaidan *kaidan, bool enableLogging, Q
 	rosterManager = new RosterManager(kaidan, client,  caches->rosterModel, this);
 	msgHandler = new MessageHandler(kaidan, client, caches->msgModel, this);
 
+	connect(client, &QXmppClient::presenceReceived,
+	        caches->presCache, &PresenceCache::updatePresenceRequested);
+
 	connect(this, &ClientWorker::credentialsUpdated, this, &ClientWorker::setCredentials);
 }
 

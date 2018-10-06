@@ -86,6 +86,21 @@ namespace Enums {
 		MessageDocument
 	};
 	Q_ENUM_NS(MessageType)
+
+	/**
+	 * Enumeration of contact availability states
+	 */
+	enum class AvailabilityTypes : quint8 {
+		PresError,
+		PresUnavailable,
+		PresOnline,
+		PresAway,
+		PresXA,
+		PresDND,
+		PresChat,
+		PresInvisible
+	};
+	Q_ENUM_NS(AvailabilityTypes)
 }
 
 // Needed workaround to trigger older CMake auto moc versions to generate moc

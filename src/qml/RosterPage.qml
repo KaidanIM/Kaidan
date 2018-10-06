@@ -69,8 +69,8 @@ Kirigami.ScrollablePage {
 			name: model.name ? model.name : model.jid
 			jid: model.jid
 			lastMessage: model.lastMessage
-			presenceType: kaidan.presenceCache.getDefaultPresType(model.jid)
-			statusMsg: kaidan.presenceCache.getDefaultStatus(model.jid)
+			presenceType: kaidan.presenceCache.getPresenceType(model.jid)
+			statusMsg: kaidan.presenceCache.getStatusText(model.jid)
 			unreadMessages: model.unreadMessages
 			avatarImagePath: kaidan.avatarStorage.getHashOfJid(model.jid) !== "" ?
 					 kaidan.avatarStorage.getAvatarUrl(model.jid) :
@@ -105,9 +105,9 @@ Kirigami.ScrollablePage {
 			function newPresenceArrived(jid) {
 				if (jid === model.jid) {
 					rosterItem.presenceType = kaidan.presenceCache.
-					                          getDefaultPresType(model.jid)
+					                          getPresenceType(model.jid)
 					rosterItem.statusMsg = kaidan.presenceCache.
-					                       getDefaultStatus(model.jid)
+					                       getStatusText(model.jid)
 				}
 			}
 

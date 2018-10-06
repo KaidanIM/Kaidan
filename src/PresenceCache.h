@@ -1,7 +1,7 @@
 /*
  *  Kaidan - A user-friendly XMPP client for every device!
  *
- *  Copyright (C) 2017-2018 Kaidan developers and contributors
+ *  Copyright (C) 2016-2018 Kaidan developers and contributors
  *  (see the LICENSE file for a full list of copyright authors)
  *
  *  Kaidan is free software: you can redistribute it and/or modify
@@ -34,99 +34,7 @@
 #include <QObject>
 #include <QMap>
 #include <QQmlListProperty>
-#include <gloox/presence.h>
-
-/**
- * @class EntityPresence Holds a presence for a single XMPP entity (JID with resource)
- */
-class EntityPresence : public QObject
-{
-	Q_OBJECT
-	Q_PROPERTY(quint8 type READ getType NOTIFY typeChanged)
-	Q_PROPERTY(QString status READ getStatus NOTIFY statusChanged)
-
-public:
-	EntityPresence(gloox::Presence::PresenceType type, QString status)
-	 : type(type), status(status)
-	{
-	}
-
-	quint8 getType() const
-	{
-		return (quint8) type;
-	}
-
-	void setType(quint8 type)
-	{
-		this->type = (gloox::Presence::PresenceType) type;
-		emit typeChanged();
-	}
-
-	QString getStatus() const
-	{
-		return status;
-	}
-
-	void setStatus(QString status)
-	{
-		this->status = status;
-		emit statusChanged();
-	}
-
-signals:
-	void typeChanged();
-	void statusChanged();
-
-private:
-	gloox::Presence::PresenceType type;
-	QString status;
-};
-
-/**
- * @class ContactPresences Holds presences for each resource of a JID
- */
-class ContactPresences : public QObject
-{
-	Q_OBJECT
-	Q_PROPERTY(QQmlListProperty<QString> resources READ getResources NOTIFY resourcesChanged)
-
-public:
-	ContactPresences(QString jid, QObject *parent = nullptr);
-	~ContactPresences();
-
-	QQmlListProperty<QString> getResources();
-
-	Q_INVOKABLE EntityPresence* getResourcePresence(QString resource)
-	{
-		if (!presences.contains(resource))
-			presences[resource] = new EntityPresence(gloox::Presence::Unavailable, QString());
-		return presences[resource];
-	}
-
-	Q_INVOKABLE QString getDefaultResource()
-	{
-		if (!presences.empty())
-			return presences.firstKey();
-		else
-			return "";
-	}
-
-	Q_INVOKABLE EntityPresence* getDefaultPresence()
-	{
-		if (!presences.empty())
-			return presences.first();
-		else
-			return defaultPresence;
-	}
-
-signals:
-	void resourcesChanged();
-
-private:
-	QMap<QString, EntityPresence*> presences;
-	QString jid;
-	EntityPresence *defaultPresence;
-};
+#include <QXmppPresence.h>
 
 /**
  * @class PresenceCache A cache for presence holders for certain JIDs
@@ -136,43 +44,37 @@ class PresenceCache : public QObject
 	Q_OBJECT
 
 public:
-	/**
-	 * Default constructor
-	 */
 	PresenceCache(QObject *parent = nullptr);
 
 	/**
-	 * Destructor
+	 * Return one of the status texts from all resources
 	 */
-	~PresenceCache();
+	Q_INVOKABLE QString getStatusText(QString bareJid);
 
 	/**
-	 * Get presences of a certain JID
-	 * @param jid Account address of the presences
+	 * Returns one of the presence types from all resources
 	 */
-	Q_INVOKABLE ContactPresences* getPresences(QString jid)
-	{
-		if (!presences.contains(jid))
-			presences[jid] = new ContactPresences(jid);
-		return presences[jid];
-	}
-
-	Q_INVOKABLE QString getDefaultStatus(QString jid);
-
-	Q_INVOKABLE quint8 getDefaultPresType(QString jid);
+	Q_INVOKABLE quint8 getPresenceType(QString bareJid);
 
 signals:
-	void presenceArrived(QString jid, QString resource,
-	                     gloox::Presence::PresenceType type, QString status);
-
+	/**
+	 * Notifies about changed presences
+	 */
 	void presenceChanged(QString jid);
 
+	/**
+	 * Is connected to updatePresence
+	 */
+	void updatePresenceRequested(QXmppPresence presence);
+
 private slots:
-	void updatePresence(QString jid, QString resource,
-	                    gloox::Presence::PresenceType type, QString status);
+	/**
+	 * @brief Updates the presence cache, it will ignore subscribe presences
+	 */
+	void updatePresence(QXmppPresence presence);
 
 private:
-	QMap<QString, ContactPresences*> presences;
+	QMap<QString, QMap<QString, QXmppPresence>> presences;
 };
 
 #endif // PRESENCECACHE_H

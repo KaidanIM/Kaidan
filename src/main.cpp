@@ -154,8 +154,7 @@ Q_DECL_EXPORT int main(int argc, char *argv[])
 	qRegisterMetaType<AvatarFileStorage*>("AvatarFileStorage*");
 	qRegisterMetaType<ContactMap>("ContactMap");
 	qRegisterMetaType<PresenceCache*>("PresenceCache*");
-	qRegisterMetaType<ContactPresences*>("ContactPresences*");
-	qRegisterMetaType<EntityPresence*>("EntityPresence*");
+	qRegisterMetaType<QXmppPresence>("QXmppPresence");
 	qRegisterMetaType<ClientWorker::Credentials>("Credentials");
 	qRegisterMetaType<Qt::ApplicationState>("Qt::ApplicationState");
 	qRegisterMetaType<QXmppClient::State>("QXmppClient::State");

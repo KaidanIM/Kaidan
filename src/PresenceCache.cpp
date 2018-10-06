@@ -1,7 +1,7 @@
 /*
  *  Kaidan - A user-friendly XMPP client for every device!
  *
- *  Copyright (C) 2017-2018 Kaidan developers and contributors
+ *  Copyright (C) 2016-2018 Kaidan developers and contributors
  *  (see the LICENSE file for a full list of copyright authors)
  *
  *  Kaidan is free software: you can redistribute it and/or modify
@@ -29,67 +29,70 @@
  */
 
 #include "PresenceCache.h"
+#include "Enums.h"
+#include <QXmppUtils.h>
+
+using namespace Enums;
 
 PresenceCache::PresenceCache(QObject *parent) : QObject(parent)
 {
-	connect(this, &PresenceCache::presenceArrived, this, &PresenceCache::updatePresence);
+	connect(this, &PresenceCache::updatePresenceRequested, this, &PresenceCache::updatePresence);
 }
 
-PresenceCache::~PresenceCache()
+void PresenceCache::updatePresence(QXmppPresence presence)
 {
-	for (auto &key : presences.keys()) {
-		delete presences[key];
-		presences.remove(key);
-	}
-}
+	if (presence.type() != QXmppPresence::Available &&
+	    presence.type() != QXmppPresence::Unavailable/* &&
+	    presence.type() != QXmppPresence::Error*/)
+		return;
 
-void PresenceCache::updatePresence(QString jid, QString resource,
-                                   gloox::Presence::PresenceType type, QString status)
-{
+	QString jid = QXmppUtils::jidToBareJid(presence.from());
+	QString resource = QXmppUtils::jidToResource(presence.from());
+
 	if (!presences.contains(jid))
-		presences[jid] = new ContactPresences(jid);
+		presences[jid] = QMap<QString, QXmppPresence>();
 
-	presences[jid]->getResourcePresence(resource)->setType(type);
-	presences[jid]->getResourcePresence(resource)->setStatus(status);
+	presences[jid][resource] = presence;
 
 	emit presenceChanged(jid);
 }
 
-QString PresenceCache::getDefaultStatus(QString jid)
+quint8 PresenceCache::getPresenceType(QString bareJid)
 {
-	if (!presences.contains(jid))
-		presences[jid] = new ContactPresences(jid);
+	if (!presences.contains(bareJid))
+		return (quint8) AvailabilityTypes::PresUnavailable;
 
-	return presences[jid]->getDefaultPresence()->getStatus();
-}
+	QXmppPresence pres = presences[bareJid].last();
 
-quint8 PresenceCache::getDefaultPresType(QString jid)
-{
-	if (!presences.contains(jid))
-		presences[jid] = new ContactPresences(jid);
-
-	return presences[jid]->getDefaultPresence()->getType();
-}
-
-ContactPresences::ContactPresences(QString jid, QObject* parent)
-	 : jid(jid), defaultPresence(new EntityPresence(gloox::Presence::Unavailable, "")),
-	   QObject(parent)
-{
-}
-
-ContactPresences::~ContactPresences()
-{
-	for (auto &key : presences.keys()) {
-		delete presences[key];
-		presences.remove(key);
+	if (pres.type() == QXmppPresence::Unavailable) {
+		return (quint8) AvailabilityTypes::PresUnavailable;
+	} else if (pres.type() == QXmppPresence::Available) {
+		switch (pres.availableStatusType()) {
+			case QXmppPresence::Online:
+				return (quint8) AvailabilityTypes::PresOnline;
+			case QXmppPresence::Away:
+				return (quint8) AvailabilityTypes::PresAway;
+			case QXmppPresence::XA:
+				return (quint8) AvailabilityTypes::PresXA;
+			case QXmppPresence::DND:
+				return (quint8) AvailabilityTypes::PresDND;
+			case QXmppPresence::Chat:
+				return (quint8) AvailabilityTypes::PresChat;
+			case QXmppPresence::Invisible:
+				return (quint8) AvailabilityTypes::PresInvisible;
+			default:
+				return (quint8) AvailabilityTypes::PresUnavailable;
+		}
+	} else if (pres.type() == QXmppPresence::Error) {
+		return (quint8) AvailabilityTypes::PresError;
 	}
+	return (quint8) AvailabilityTypes::PresUnavailable;
 }
 
-QQmlListProperty<QString> ContactPresences::getResources()
+QString PresenceCache::getStatusText(QString bareJid)
 {
-	QList<QString*> qList;
-	for (auto &key : presences.keys()) {
-		qList << &key;
-	}
-	return QQmlListProperty<QString>((QObject*) this, qList);
+	if (!presences.contains(bareJid))
+		return "";
+
+	return presences[bareJid].last().statusText();
 }

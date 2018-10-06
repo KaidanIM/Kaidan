@@ -1,7 +1,7 @@
 /*
  *  Kaidan - A user-friendly XMPP client for every device!
  *
- *  Copyright (C) 2017-2018 Kaidan developers and contributors
+ *  Copyright (C) 2016-2018 Kaidan developers and contributors
  *  (see the LICENSE file for a full list of copyright authors)
  *
  *  Kaidan is free software: you can redistribute it and/or modify
@@ -28,44 +28,44 @@
  *  along with Kaidan.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-//
-// XEP-0030: Service Discovery | https://xmpp.org/extensions/xep-0030.html
-//
+#ifndef DISCOVERYMANAGER_H
+#define DISCOVERYMANAGER_H
 
-#ifndef SERVICEDISCOVERYMANAGER_H
-#define SERVICEDISCOVERYMANAGER_H
+#include <QObject>
+#include <QXmppClient.h>
 
-// gloox
-#include <gloox/discohandler.h>
-#include <gloox/connectionlistener.h>
-namespace gloox {
-	class Client;
-	class Disco;
-	class HttpUploadManager;
-}
+class QXmppDiscoveryManager;
 
-class ServiceDiscoveryManager : public gloox::DiscoHandler, public gloox::ConnectionListener
+/**
+ * @class DiscoveryManager Manager for outgoing/incoming service discovery requests and results
+ *
+ * XEP-0030: Service Discovery (https://xmpp.org/extensions/xep-0030.html)
+ */
+class DiscoveryManager : public QObject
 {
 public:
-	ServiceDiscoveryManager(gloox::Client *client, gloox::Disco *disco,
-	                        gloox::HttpUploadManager *httpUploadManager);
-	~ServiceDiscoveryManager();
+	DiscoveryManager(QXmppClient *client, QObject *parent = nullptr);
 
-	void setFeaturesAndIdentity();
+	~DiscoveryManager();
 
-	void handleDiscoInfo(const gloox::JID &from, const gloox::Disco::Info &info, int context);
-	void handleDiscoItems(const gloox::JID &from, const gloox::Disco::Items &items, int context);
-	void handleDiscoError(const gloox::JID &from, const gloox::Error *error, int context);
-	bool handleDiscoSet(const gloox::IQ &iq);
+	/**
+	 * Will request disco info and items from the server (on connection)
+	 */
+	void handleConnection();
 
-	virtual void onConnect();
-	virtual void onDisconnect(gloox::ConnectionError error);
-	virtual bool onTLSConnect(const gloox::CertInfo &info);
+	/**
+	 * Handles incoming results of disco item requests
+	 */
+	void handleItems(const QXmppDiscoveryIq&);
+
+	/**
+	 * Handles incoming results of disco info requests
+	 */
+	void handleInfo(const QXmppDiscoveryIq&);
 
 private:
-	gloox::Client *client;
-	gloox::Disco *disco;
-	gloox::HttpUploadManager *httpUploadManager;
+	QXmppClient *client;
+	QXmppDiscoveryManager *manager;
 };
 
-#endif // SERVICEDISCOVERYMANAGER_H
+#endif // DISCOVERYMANAGER_H

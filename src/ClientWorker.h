@@ -51,6 +51,7 @@ class Kaidan;
 class ClientWorker;
 class RosterManager;
 class MessageHandler;
+class DiscoveryManager;
 
 class ClientThread : public QThread
 {
@@ -132,7 +133,7 @@ public slots:
 
 	/**
 	 * Sets the new credentials for next connect.
-	 * 
+	 *
 	 * @param creds The new credentials for the next connect
 	 */
 	void setCredentials(Credentials creds)
@@ -183,6 +184,7 @@ private:
 
 	RosterManager *rosterManager;
 	MessageHandler *msgHandler;
+	DiscoveryManager *discoManager;
 };
 
 #endif // CLIENTWORKER_H

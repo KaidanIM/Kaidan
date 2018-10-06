@@ -33,15 +33,18 @@
 #include <QDebug>
 #include <QSettings>
 #include <QGuiApplication>
+#include <QSysInfo>
 // QXmpp
 #include <QXmppClient.h>
 #include <QXmppConfiguration.h>
 #include <QXmppPresence.h>
+#include <QXmppVersionManager.h>
 // Kaidan
 #include "Kaidan.h"
 #include "LogHandler.h"
 #include "RosterManager.h"
 #include "MessageHandler.h"
+#include "DiscoveryManager.h"
 
 ClientWorker::ClientWorker(Caches *caches, Kaidan *kaidan, bool enableLogging, QGuiApplication *app,
                            QObject* parent)
@@ -52,11 +55,17 @@ ClientWorker::ClientWorker(Caches *caches, Kaidan *kaidan, bool enableLogging, Q
 	logger->enableLogging(enableLogging);
 	rosterManager = new RosterManager(kaidan, client,  caches->rosterModel, this);
 	msgHandler = new MessageHandler(kaidan, client, caches->msgModel, this);
+	discoManager = new DiscoveryManager(client, this);
 
 	connect(client, &QXmppClient::presenceReceived,
 	        caches->presCache, &PresenceCache::updatePresenceRequested);
 
 	connect(this, &ClientWorker::credentialsUpdated, this, &ClientWorker::setCredentials);
+
+	// publish kaidan version
+	client->versionManager().setClientName(APPLICATION_DISPLAY_NAME);
+	client->versionManager().setClientVersion(VERSION_STRING);
+	client->versionManager().setClientOs(QSysInfo::prettyProductName());
 }
 
 ClientWorker::~ClientWorker()
@@ -65,6 +74,7 @@ ClientWorker::~ClientWorker()
 	delete logger;
 	delete rosterManager;
 	delete msgHandler;
+	delete discoManager;
 }
 
 void ClientWorker::main()

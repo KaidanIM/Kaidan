@@ -45,6 +45,7 @@
 #include "RosterManager.h"
 #include "MessageHandler.h"
 #include "DiscoveryManager.h"
+#include "VCardManager.h"
 
 ClientWorker::ClientWorker(Caches *caches, Kaidan *kaidan, bool enableLogging, QGuiApplication *app,
                            QObject* parent)
@@ -53,7 +54,9 @@ ClientWorker::ClientWorker(Caches *caches, Kaidan *kaidan, bool enableLogging, Q
 	client = new QXmppClient(this);
 	logger = new LogHandler(client, this);
 	logger->enableLogging(enableLogging);
-	rosterManager = new RosterManager(kaidan, client,  caches->rosterModel, this);
+	vCardManager = new VCardManager(client, caches->avatarStorage, this);
+	rosterManager = new RosterManager(kaidan, client,  caches->rosterModel,
+	                                  caches->avatarStorage, vCardManager, this);
 	msgHandler = new MessageHandler(kaidan, client, caches->msgModel, this);
 	discoManager = new DiscoveryManager(client, this);
 
@@ -75,6 +78,7 @@ ClientWorker::~ClientWorker()
 	delete rosterManager;
 	delete msgHandler;
 	delete discoManager;
+	delete vCardManager;
 }
 
 void ClientWorker::main()

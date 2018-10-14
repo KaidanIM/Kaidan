@@ -1,7 +1,7 @@
 /*
  *  Kaidan - A user-friendly XMPP client for every device!
  *
- *  Copyright (C) 2017-2018 Kaidan developers and contributors
+ *  Copyright (C) 2016-2018 Kaidan developers and contributors
  *  (see the LICENSE file for a full list of copyright authors)
  *
  *  Kaidan is free software: you can redistribute it and/or modify
@@ -41,7 +41,6 @@ class AvatarFileStorage : public QObject
 
 public:
 	AvatarFileStorage(QObject *parent = 0);
-	~AvatarFileStorage();
 
 	struct AddAvatarResult {
 		/* SHA1 HEX Hash */
@@ -59,6 +58,16 @@ public:
 	 * @param avatar The binary avatar (not in base64)
 	 */
 	AddAvatarResult addAvatar(const QString &jid, const QByteArray &avatar);
+
+	/**
+	 * Clears the user's avatar
+	 */
+	void clearAvatar(QString &jid);
+
+	/**
+	 * Deletes the avatar with this hash, if it isn't used anymore
+	 */
+	void cleanUp(QString &oldHash);
 
 	/**
 	 * Returns the path to the avatar of the JID

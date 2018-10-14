@@ -1,7 +1,7 @@
 /*
  *  Kaidan - A user-friendly XMPP client for every device!
  *
- *  Copyright (C) 2017-2018 Kaidan developers and contributors
+ *  Copyright (C) 2016-2018 Kaidan developers and contributors
  *  (see the LICENSE file for a full list of copyright authors)
  *
  *  Kaidan is free software: you can redistribute it and/or modify
@@ -29,65 +29,50 @@
  */
 
 #include "VCardManager.h"
-#include <gloox/vcardupdate.h>
+#include "AvatarFileStorage.h"
+#include <QXmppClient.h>
+#include <QXmppUtils.h>
+#include <QXmppVCardIq.h>
 
-VCardManager::VCardManager(gloox::Client *client, AvatarFileStorage *avatarStorage,
-			   RosterModel *rosterModel)
+VCardManager::VCardManager(QXmppClient *client, AvatarFileStorage *avatars, QObject *parent)
+	: QObject(parent), client(client), manager(client->vCardManager()), avatarStorage(avatars)
 {
-	this->client = client;
-	this->vCardManager = new gloox::VCardManager(client);
-	this->avatarStorage = avatarStorage;
-	this->rosterModel = rosterModel;
-	client->registerPresenceHandler(this);
-	client->registerConnectionListener(this);
-}
+	connect(&manager, &QXmppVCardManager::vCardReceived, this, &VCardManager::handleVCard);
+	connect(client, &QXmppClient::presenceReceived, this, &VCardManager::handlePresence);
 
-VCardManager::~VCardManager()
-{
-	delete vCardManager;
+	// Currently we're not requesting the own VCard on every connection because it is probably
+	// way too resource intensive on mobile connections with many reconnects.
+	// Actually we would need to request our own avatar, calculate the hash of it and publish
+	// that in our presence.
+	//
+	// XEP-0084: User Avatar - probably best option (as long as the servers support XEP-0398:
+	//                         User Avatar to vCard-Based Avatars Conversion)
 }
 
 void VCardManager::fetchVCard(QString jid)
 {
-	vCardManager->fetchVCard(gloox::JID(jid.toStdString()), this);
+	client->vCardManager().requestVCard(jid);
 }
 
-void VCardManager::handleVCard(const gloox::JID& jid, const gloox::VCard* vcard)
+void VCardManager::handleVCard(const QXmppVCardIq &iq)
 {
-	QByteArray avatarBytes = QByteArray(vcard->photo().binval.c_str(),
-	                                    vcard->photo().binval.length());
-
-	if (!avatarBytes.isEmpty())
-		avatarStorage->addAvatar(QString::fromStdString(jid.bare()), avatarBytes);
+	if (!iq.photo().isEmpty())
+		avatarStorage->addAvatar(QXmppUtils::jidToBareJid(iq.from()), iq.photo());
 }
 
-void VCardManager::handleVCardResult(VCardContext context, const gloox::JID &jid, gloox::StanzaError stanzaError)
+void VCardManager::handlePresence(const QXmppPresence &presence)
 {
-}
+	if (presence.vCardUpdateType() == QXmppPresence::VCardUpdateValidPhoto) {
+		QString hash = avatarStorage->getHashOfJid(QXmppUtils::jidToBareJid(presence.from()));
+		QString newHash = presence.photoHash();
 
-void VCardManager::handlePresence(const gloox::Presence& presence)
-{
-	const gloox::VCardUpdate *vcupdate = presence.findExtension<gloox::VCardUpdate>
-		(gloox::ExtVCardUpdate);
+		// check if hash differs and we need to refetch the avatar
+		if (hash != newHash)
+			manager.requestVCard(QXmppUtils::jidToBareJid(presence.from()));
 
-	// if their photo hash differs from what we have saved locally, refetch the vCard
-	if (vcupdate && !vcupdate->hash().empty() &&
-	    avatarStorage->getHashOfJid(QString::fromStdString(
-	    presence.from().bare())).toStdString() != vcupdate->hash()) {
-		fetchVCard(QString::fromStdString(presence.from().bare()));
+	} else if (presence.vCardUpdateType() == QXmppPresence::VCardUpdateNoPhoto) {
+		QString bareJid = QXmppUtils::jidToBareJid(presence.from());
+		avatarStorage->clearAvatar(bareJid);
 	}
-}
-
-void VCardManager::onConnect()
-{
-	vCardManager->fetchVCard(client->jid().bare(), this);
-}
-
-void VCardManager::onDisconnect(gloox::ConnectionError error)
-{
-}
-
-bool VCardManager::onTLSConnect(const gloox::CertInfo &info)
-{
-	return true;
+	// ignore VCardUpdateNone (protocol unsupported) and VCardUpdateNotReady
 }

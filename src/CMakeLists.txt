@@ -15,7 +15,7 @@ set(KAIDAN_SOURCES
 	${CURDIR}/PresenceCache.cpp
 	${CURDIR}/DiscoveryManager.cpp
 # 	${CURDIR}/UploadHandler.cpp
-# 	${CURDIR}/VCardManager.cpp
+	${CURDIR}/VCardManager.cpp
 	${CURDIR}/LogHandler.cpp
 	${CURDIR}/StatusBar.cpp
 # 	${CURDIR}/QtHttpUploader.cpp

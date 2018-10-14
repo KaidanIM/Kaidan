@@ -1,7 +1,7 @@
 /*
  *  Kaidan - A user-friendly XMPP client for every device!
  *
- *  Copyright (C) 2017-2018 Kaidan developers and contributors
+ *  Copyright (C) 2016-2018 Kaidan developers and contributors
  *  (see the LICENSE file for a full list of copyright authors)
  *
  *  Kaidan is free software: you can redistribute it and/or modify
@@ -31,37 +31,37 @@
 #ifndef VCARDMANAGER_H
 #define VCARDMANAGER_H
 
-// gloox
-#include <gloox/client.h>
-#include <gloox/vcardhandler.h>
-#include <gloox/vcardmanager.h>
-#include <gloox/presencehandler.h>
-#include <gloox/connectionlistener.h>
-// Kaidan
-#include "AvatarFileStorage.h"
-#include "RosterModel.h"
+#include <QObject>
+#include <QXmppVCardManager.h>
+#include <QXmppPresence.h>
 
-class VCardManager : public gloox::VCardHandler, public gloox::PresenceHandler,
-	public gloox::ConnectionListener
+class AvatarFileStorage;
+class QXmppClient;
+
+class VCardManager : public QObject
 {
 public:
-	VCardManager(gloox::Client *client, AvatarFileStorage *avatarStorage, RosterModel *rosterModel);
-	~VCardManager();
+	VCardManager(QXmppClient *client, AvatarFileStorage *avatars, QObject *parent = nullptr);
 
+	/**
+	 * Will request the VCard from the server
+	 */
 	void fetchVCard(QString jid);
-	virtual void handleVCard(const gloox::JID &jid, const gloox::VCard *vcard);
-	virtual void handleVCardResult(VCardContext context, const gloox::JID &jid,
-				       gloox::StanzaError stanzaError = gloox::StanzaErrorUndefined);
-	virtual void handlePresence(const gloox::Presence &presence);
-	virtual void onConnect();
-	virtual void onDisconnect(gloox::ConnectionError error);
-	virtual bool onTLSConnect(const gloox::CertInfo &info);
+
+	/**
+	 * Handles incoming VCards and processes them (save avatar, etc.)
+	 */
+	void handleVCard(const QXmppVCardIq &iq);
+
+	/**
+	 * Handles incoming presences and checks if the avatar needs to be refreshed
+	 */
+	void handlePresence(const QXmppPresence &presence);
 
 private:
-	gloox::Client *client;
-	gloox::VCardManager *vCardManager;
+	QXmppClient *client;
+	QXmppVCardManager &manager;
 	AvatarFileStorage *avatarStorage;
-	RosterModel *rosterModel;
 };
 
 #endif // VCARDMANAGER_H

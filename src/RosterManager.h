@@ -42,6 +42,7 @@
 
 class Kaidan;
 class QXmppClient;
+class VCardManager;
 
 class RosterManager : public QObject
 {
@@ -49,6 +50,7 @@ class RosterManager : public QObject
 
 public:
 	RosterManager(Kaidan *kaidan, QXmppClient *client, RosterModel *rosterModel,
+	              AvatarFileStorage *avatarStorage, VCardManager *vCardManager,
 	              QObject *parent = nullptr);
 
 public slots:
@@ -61,8 +63,11 @@ private slots:
 
 private:
 	Kaidan *kaidan;
-	RosterModel *model;
 	QXmppClient *client;
+	RosterModel *model;
+	AvatarFileStorage *avatarStorage;
+	VCardManager *vCardManager;
+
 	QXmppRosterManager &manager;
 	QString chatPartner;
 };

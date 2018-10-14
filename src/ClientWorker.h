@@ -52,6 +52,7 @@ class ClientWorker;
 class RosterManager;
 class MessageHandler;
 class DiscoveryManager;
+class VCardManager;
 
 class ClientThread : public QThread
 {
@@ -185,6 +186,7 @@ private:
 	RosterManager *rosterManager;
 	MessageHandler *msgHandler;
 	DiscoveryManager *discoManager;
+	VCardManager *vCardManager;
 };
 
 #endif // CLIENTWORKER_H

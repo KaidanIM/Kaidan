@@ -31,15 +31,18 @@
 #include "RosterManager.h"
 #include "Kaidan.h"
 #include "Globals.h"
+#include "VCardManager.h"
+#include "ClientWorker.h"
 // QXmpp
 #include <QXmppClient.h>
 #include <QXmppUtils.h>
 #include <QXmppRosterManager.h>
 
-RosterManager::RosterManager(Kaidan *kaidan, QXmppClient *client, RosterModel *rosterModel,
+RosterManager::RosterManager(Kaidan *kaidan, QXmppClient *client, RosterModel *model,
+	                       AvatarFileStorage *avatarStorage, VCardManager *vCardManager,
 	                       QObject *parent)
-	: QObject(parent), kaidan(kaidan), model(rosterModel), client(client),
-	  manager(client->rosterManager())
+	: QObject(parent), kaidan(kaidan), client(client), model(model),
+	avatarStorage(avatarStorage), vCardManager(vCardManager), manager(client->rosterManager())
 {
 	connect(&manager, &QXmppRosterManager::rosterReceived,
 	        this, &RosterManager::populateRoster);
@@ -48,7 +51,7 @@ RosterManager::RosterManager(Kaidan *kaidan, QXmppClient *client, RosterModel *r
 		QXmppRosterIq::Item item = manager.getRosterEntry(jid);
 		emit model->insertContactRequested(jid, item.name());
 
-		// TODO: get vcard/avatar
+		vCardManager->fetchVCard(jid);
 	});
 
 	connect(&manager, &QXmppRosterManager::itemChanged, [=] (QString jid) {
@@ -71,6 +74,7 @@ RosterManager::RosterManager(Kaidan *kaidan, QXmppClient *client, RosterModel *r
 			manager.refuseSubscription(jid);
 	});
 
+	// user actions
 	connect(kaidan, &Kaidan::addContact, this, &RosterManager::addContact);
 	connect(kaidan, &Kaidan::removeContact, this, &RosterManager::removeContact);
 
@@ -93,7 +97,8 @@ void RosterManager::populateRoster()
 		QString name = manager.getRosterEntry(jid).name();
 		contactList[jid] = name;
 
-		// TODO: fetch avatar
+		if (avatarStorage->getHashOfJid(jid).isEmpty())
+			vCardManager->fetchVCard(jid);
 	}
 
 	// replace current contacts with new ones from server

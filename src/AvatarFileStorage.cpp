@@ -1,7 +1,7 @@
 /*
  *  Kaidan - A user-friendly XMPP client for every device!
  *
- *  Copyright (C) 2017-2018 Kaidan developers and contributors
+ *  Copyright (C) 2016-2018 Kaidan developers and contributors
  *  (see the LICENSE file for a full list of copyright authors)
  *
  *  Kaidan is free software: you can redistribute it and/or modify
@@ -79,10 +79,6 @@ AvatarFileStorage::AvatarFileStorage(QObject *parent) : QObject(parent)
 	}
 }
 
-AvatarFileStorage::~AvatarFileStorage()
-{
-}
-
 AvatarFileStorage::AddAvatarResult AvatarFileStorage::addAvatar(const QString &jid,
 	const QByteArray &avatar)
 {
@@ -90,11 +86,16 @@ AvatarFileStorage::AddAvatarResult AvatarFileStorage::addAvatar(const QString &j
 
 	// generate a hexadecimal hash of the raw avatar
 	result.hash = QString(QCryptographicHash::hash(avatar, QCryptographicHash::Sha1).toHex());
+	QString oldHash = jidAvatarMap[jid];
+
 	// set the new hash and the `hasChanged` tag
-	if (jidAvatarMap[jid] != result.hash) {
+	if (oldHash != result.hash) {
 		jidAvatarMap[jid] = result.hash;
 		result.hasChanged = true;
 		emit avatarIdsChanged();
+
+		// delete the avatar if it isn't used anymore
+		cleanUp(oldHash);
 	}
 
 	// abort if the avatar with this hash is already saved
@@ -126,6 +127,40 @@ AvatarFileStorage::AddAvatarResult AvatarFileStorage::addAvatar(const QString &j
 	return result;
 }
 
+void AvatarFileStorage::clearAvatar(QString &jid)
+{
+	QString oldHash;
+	if (jidAvatarMap.contains(jid))
+		oldHash = jidAvatarMap[jid];
+
+	// if user had no avatar before, just return
+	if (oldHash.isEmpty()) {
+		return;
+	} else {
+		jidAvatarMap.remove(jid);
+		saveAvatarsFile();
+		cleanUp(oldHash);
+		emit avatarIdsChanged();
+	}
+}
+
+void AvatarFileStorage::cleanUp(QString &oldHash)
+{
+	if (oldHash.isEmpty())
+		return;
+
+	// check if the same avatar is still used by another account
+	if (jidAvatarMap.values().contains(oldHash))
+		return;
+
+	// delete the old avatar locally
+	QString path = QStandardPaths::writableLocation(QStandardPaths::CacheLocation) +
+	               QDir::separator() + QString("avatars");
+	QDir dir(path);
+	if (dir.exists(oldHash))
+		dir.remove(oldHash);
+}
+
 QString AvatarFileStorage::getAvatarPath(const QString &hash) const
 {
 	return QStandardPaths::locate(QStandardPaths::CacheLocation, QString("avatars") +
@@ -154,8 +189,10 @@ bool AvatarFileStorage::hasAvatarHash(const QString& hash) const
 
 void AvatarFileStorage::saveAvatarsFile()
 {
-	QFile file(QStandardPaths::writableLocation(QStandardPaths::CacheLocation) +
-		QDir::separator() + QString("avatars") + QDir::separator() + QString("avatar_list.sha1"));
+	QString path = QStandardPaths::writableLocation(QStandardPaths::CacheLocation) +
+	               QDir::separator() + QString("avatars") + QDir::separator() +
+	               QString("avatar_list.sha1");
+	QFile file(path);
 	if (!file.open(QIODevice::WriteOnly | QIODevice::Text))
 		return;
 

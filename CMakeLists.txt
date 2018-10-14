@@ -41,7 +41,7 @@ kde_enable_exceptions()
 
 # Find packages
 find_package(PkgConfig REQUIRED)
-find_package(Qt5 ${QT_MIN_VERSION} REQUIRED NO_MODULE COMPONENTS Core Qml Quick Svg Sql QuickControls2)
+find_package(Qt5 ${QT_MIN_VERSION} REQUIRED NO_MODULE COMPONENTS Core Qml Quick Svg Sql QuickControls2 Xml)
 find_package(KF5Kirigami2 REQUIRED)
 pkg_check_modules(QXmpp REQUIRED qxmpp>=0.9)
 
@@ -130,6 +130,7 @@ target_link_libraries(${PROJECT_NAME}
 	Qt5::Quick
 	Qt5::Svg
 	Qt5::Network
+	Qt5::Xml
 	${__Qt5Widgets_LIBRARIES}
 	${QXmpp_LIBRARIES}
 )

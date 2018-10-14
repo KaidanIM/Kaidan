@@ -41,7 +41,7 @@
 #include <QSqlQuery>
 #include <QSqlRecord>
 
-static const int DATABASE_LATEST_VERSION = 7;
+static const int DATABASE_LATEST_VERSION = 8;
 static const char *DATABASE_TABLE_INFO = "dbinfo";
 static const char *DATABASE_TABLE_MESSAGES = "Messages";
 static const char *DATABASE_TABLE_ROSTER = "Roster";
@@ -141,6 +141,8 @@ void Database::convertDatabase()
 			convertDatabaseToV6(); version = 6; break;
 		case 6:
 			convertDatabaseToV7(); version = 7; break;
+		case 7:
+			convertDatabaseToV8(); version = 8; break;
 		default:
 			break;
 		}
@@ -171,17 +173,12 @@ void Database::createNewDatabase()
 	//
 
 	if (!query.exec("CREATE TABLE IF NOT EXISTS 'Roster' ("
-	    "'jid' TEXT NOT NULL,"
-	    "'name' TEXT NOT NULL,"
-	    "'lastExchanged' TEXT NOT NULL,"
-	    "'unreadMessages' INTEGER,"
-	    "'lastMessage' TEXT,"
-	    "'lastOnline' TEXT,"     // < UNUSED v
-	    "'activity' TEXT,"
-	    "'status' TEXT,"
-	    "'mood' TEXT"           // < UNUSED ^
-	    ")"
-	   ))
+	                "'jid' TEXT NOT NULL,"
+	                "'name' TEXT,"
+	                "'lastExchanged' TEXT NOT NULL,"
+	                "'unreadMessages' INTEGER,"
+	                "'lastMessage' TEXT"
+	                ")"))
 	{
 		qFatal("Error creating roster table: Failed to query database: %s", qPrintable(query.lastError().text()));
 	}
@@ -300,6 +297,34 @@ void Database::convertDatabaseToV7()
 	query.prepare(QString("ALTER TABLE 'Messages' ADD 'mediaThumb' BLOB"));
 	execQuery(query);
 	query.prepare(QString("ALTER TABLE 'Messages' ADD 'mediaHashes' TEXT"));
+	execQuery(query);
+}
+
+void Database::convertDatabaseToV8()
+{
+	QSqlQuery query(database);
+
+	query.prepare("CREATE TEMPORARY TABLE roster_backup(jid, name, lastExchanged, "
+	              "unreadMessages, lastMessage);");
+	execQuery(query);
+
+	query.prepare("INSERT INTO roster_backup SELECT jid, name, lastExchanged, unreadMessages, "
+	              "lastMessage FROM Roster;");
+	execQuery(query);
+
+	query.prepare("DROP TABLE Roster;");
+	execQuery(query);
+
+	query.prepare("CREATE TABLE IF NOT EXISTS Roster ('jid' TEXT NOT NULL,'name' TEXT,"
+	              "'lastExchanged' TEXT NOT NULL, 'unreadMessages' INTEGER,"
+	              "'lastMessage' TEXT);");
+	execQuery(query);
+
+	query.prepare("INSERT INTO Roster SELECT jid, name, lastExchanged, unreadMessages, "
+	              "lastMessage FROM Roster_backup;");
+	execQuery(query);
+
+	query.prepare("DROP TABLE roster_backup;");
 	execQuery(query);
 }
 

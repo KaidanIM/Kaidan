@@ -56,6 +56,7 @@ public:
 public slots:
 	void addContact(const QString jid, const QString name, const QString msg);
 	void removeContact(const QString jid);
+	void handleSendMessage(const QString jid, const QString message);
 
 private slots:
 	void populateRoster();

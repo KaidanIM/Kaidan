@@ -56,7 +56,7 @@ RosterManager::RosterManager(Kaidan *kaidan, QXmppClient *client, RosterModel *m
 
 	connect(&manager, &QXmppRosterManager::itemChanged, [=] (QString jid) {
 		QXmppRosterIq::Item item = manager.getRosterEntry(jid);
-		emit model->editContactNameRequested(jid, item.name());
+		emit model->setContactNameRequested(jid, item.name());
 	});
 
 	connect(&manager, &QXmppRosterManager::itemRemoved, [=] (QString jid) {
@@ -77,6 +77,7 @@ RosterManager::RosterManager(Kaidan *kaidan, QXmppClient *client, RosterModel *m
 	// user actions
 	connect(kaidan, &Kaidan::addContact, this, &RosterManager::addContact);
 	connect(kaidan, &Kaidan::removeContact, this, &RosterManager::removeContact);
+	connect(kaidan, &Kaidan::sendMessage, this, &RosterManager::handleSendMessage);
 
 	connect(kaidan, &Kaidan::chatPartnerChanged, [=] (QString chatPartner) {
 		this->chatPartner = chatPartner;
@@ -123,12 +124,25 @@ void RosterManager::removeContact(const QString jid)
 {
 	if (client->state() == QXmppClient::ConnectedState) {
 		manager.unsubscribe(jid);
+		manager.removeItem(jid);
 	} else {
 		emit kaidan->passiveNotificationRequested(
 			tr("Could not remove contact, as a result of not being connected.")
 		);
 		qWarning() << "[client] [RosterManager] Could not remove contact, as a result of "
 		              "not being connected.";
+	}
+}
+
+void RosterManager::handleSendMessage(const QString jid, const QString message)
+{
+	if (client->state() == QXmppClient::ConnectedState) {
+		// update last message of the contact
+		emit model->setLastMessageRequested(jid, message);
+
+		// update last exchanged datetime (sorting order in contact list)
+		QString dateTime = QDateTime::currentDateTime().toUTC().toString(Qt::ISODate);
+		emit model->setLastExchangedRequested(jid, dateTime);
 	}
 }
 

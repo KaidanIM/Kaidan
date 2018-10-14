@@ -49,10 +49,9 @@ public:
 	QVariant data(const QModelIndex &index, int role) const;
 
 signals:
-	void clearDataRequested();
 	void insertContactRequested(QString jid, QString nickname);
 	void removeContactRequested(QString jid);
-	void editContactNameRequested(QString jid, QString nickname);
+	void setContactNameRequested(QString jid, QString nickname);
 	void setLastExchangedRequested(const QString jid, QString date);
 	void setUnreadMessageCountRequested(const QString jid, const int unreadMessageCount);
 	void setLastMessageRequested(const QString jid, QString message);
@@ -60,20 +59,14 @@ signals:
 	void replaceContactsRequested(const ContactMap &contactMap);
 
 private slots:
-	void clearData();
 	void insertContact(QString jid, QString nickname);
 	void removeContact(QString jid);
-	void editContactName(QString jid, QString nickname);
+	void setContactName(QString jid, QString nickname);
 	void setLastExchanged(const QString jid, QString date);
 	void setUnreadMessageCount(const QString jid, const int unreadMessageCount);
 	void newUnreadMessage(const QString jid);
 	void setLastMessage(const QString jid, QString message);
 	void replaceContacts(const ContactMap &contactMap);
-
-private:
-	QStringList getJidList();
-	void removeContactList(QStringList &jidList);
-	int getUnreadMessageCount(const QString &jid);
 };
 
 #endif // ROSTERMODEL_H

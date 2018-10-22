@@ -83,7 +83,7 @@ Debian strech and older Ubuntu distros are not supported since they don't provid
 sudo apt install apt-transport-https git-core cmake build-essential zlib1g-dev \
   libgloox-dev libnotify-bin libqt5quick5 libqt5quickcontrols2-5 libqt5quickwidgets5 \
   libqt5qml5 libqt5gui5 libqt5core5a qtdeclarative5-dev qttools5-dev qt5-default \
-  qtquickcontrols2-5-dev kirigami2-dev extra-cmake-modules
+  qtquickcontrols2-5-dev kirigami2-dev extra-cmake-modules libqt5svg5-dev
 ```
 
 #### Get the source code:

@@ -18,13 +18,21 @@ if [ -z "$QT_ANDROID" ]; then
     exit 1
 fi
 
+# Build type is one of: 
+# Debug, Release, RelWithDebInfo and MinSizeRel
+BUILD_TYPE="${BUILD_TYPE:-Debug}"
+# Android SDK Tools version available on the system
+ANDROID_SDK_BUILD_TOOLS_REVISION=${ANDROID_SDK_BUILD_TOOLS_REVISION:-25.0.3}
+# Build API version
+ANDROID_API_VERSION=21
+
 KAIDAN_SOURCES=$(dirname "$(readlink -f "${0}")")/..
 GLOOX_PATH=/tmp/gloox
 OPENSSL_PATH=/tmp/openssl
 OPENSSL_SETENV=$OPENSSL_PATH/Setenv-android.sh
 CUSTOM_ANDROID_TOOLCHAIN=/tmp/android-arm-toolchain
-ANDROID_API_VERSION=21
-ANDROID_SDK_BUILD_TOOLS_REVISION=25.0.3
+
+echo "-- Starting $BUILD_TYPE build of Kaidan --"
 
 echo "*****************************************"
 echo "Fetching dependencies if required"
@@ -102,7 +110,7 @@ echo "*****************************************"
 
     cd $GLOOX_PATH
     ./autogen.sh
-    ./configure --host=arm --with-openssl=$CUSTOM_ANDROID_TOOLCHAIN --prefix=$CUSTOM_ANDROID_TOOLCHAIN
+    ./configure --host=arm --with-openssl=$CUSTOM_ANDROID_TOOLCHAIN --prefix=$CUSTOM_ANDROID_TOOLCHAIN --with-tests=no --with-examples=no
     make -j$(nproc)
     make install
 }
@@ -129,7 +137,8 @@ echo "*****************************************"
         -DANDROID_NDK=$ANDROID_NDK_ROOT \
         -DANDROID_SDK_ROOT=$ANDROID_SDK_ROOT \
         -DANDROID_SDK_BUILD_TOOLS_REVISION=$ANDROID_SDK_BUILD_TOOLS_REVISION \
-        -DCMAKE_INSTALL_PREFIX=$CUSTOM_ANDROID_TOOLCHAIN
+        -DCMAKE_INSTALL_PREFIX=$CUSTOM_ANDROID_TOOLCHAIN \
+        -DCMAKE_BUILD_TYPE=$BUILD_TYPE
     make -j$(nproc)
     make install
     rm -rf $KAIDAN_SOURCES/3rdparty/kirigami/build
@@ -173,7 +182,7 @@ echo "*****************************************"
         -DANDROID_SDK_ROOT=$ANDROID_SDK_ROOT \
         -DANDROID_SDK_BUILD_TOOLS_REVISION=$ANDROID_SDK_BUILD_TOOLS_REVISION \
         -DCMAKE_INSTALL_PREFIX=$CUSTOM_ANDROID_TOOLCHAIN \
-        -DANDROID_APK_DIR=../misc/android \
+        -DANDROID_APK_DIR=../misc/android -DCMAKE_BUILD_TYPE=$BUILD_TYPE \
         -DKF5Kirigami2_DIR=$CUSTOM_ANDROID_TOOLCHAIN/lib/cmake/KF5Kirigami2 -DI18N=1
     make create-apk-kaidan -j$(nproc)
 }

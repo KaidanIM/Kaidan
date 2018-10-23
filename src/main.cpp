@@ -52,6 +52,10 @@
 #include "Enums.h"
 #include "StatusBar.h"
 
+#ifdef STATIC_BUILD
+#include "static_plugins.h"
+#endif
+
 #ifndef QAPPLICATION_CLASS
 #define QAPPLICATION_CLASS QApplication
 #endif
@@ -62,7 +66,8 @@
 #include "singleapp/singleapplication.h"
 #endif
 
-#ifdef QMAKE_BUILD
+#ifdef STATIC_BUILD
+#define KIRIGAMI_BUILD_TYPE_STATIC
 #include "./3rdparty/kirigami/src/kirigamiplugin.h"
 #endif
 
@@ -107,8 +112,14 @@ CommandLineParseResult parseCommandLine(QCommandLineParser &parser, QString *err
 	return CommandLineOk;
 }
 
-int main(int argc, char *argv[])
+Q_DECL_EXPORT int main(int argc, char *argv[])
 {
+#ifdef _WIN32
+	if (AttachConsole(ATTACH_PARENT_PROCESS)) {
+		freopen("CONOUT$", "w", stdout);
+		freopen("CONOUT$", "w", stderr);
+	}
+#endif
 	// initialize random generator
 	qsrand(time(NULL));
 
@@ -224,17 +235,21 @@ int main(int argc, char *argv[])
 	}
 
 	QQmlApplicationEngine engine;
-
 #ifndef SAILFISH_OS
 	// QtQuickControls2 Style
 	if (qgetenv("QT_QUICK_CONTROLS_STYLE").isEmpty()) {
-		qDebug() << "QT_QUICK_CONTROLS_STYLE not set, setting to Material";
-		qputenv("QT_QUICK_CONTROLS_STYLE", "Material");
+#ifdef Q_OS_WIN
+		QString defaultStyle = "Universal";
+#else
+		QString defaultStyle = "Material";
+#endif
+		qDebug() << "QT_QUICK_CONTROLS_STYLE not set, setting to " + defaultStyle;
+		qputenv("QT_QUICK_CONTROLS_STYLE", defaultStyle.toLatin1());
 	}
 #endif
 
 	// QML type bindings
-#ifdef QMAKE_BUILD
+#ifdef STATIC_BUILD
 	KirigamiPlugin::getInstance().registerTypes();
 #endif
 	qmlRegisterType<StatusBar>("StatusBar", 0, 1, "StatusBar");

@@ -106,7 +106,7 @@ TRANSLATIONS += \
     i18n/ru.ts \
     i18n/pt.ts
 
-DEFINES += QMAKE_BUILD
+DEFINES += STATIC_BUILD
 
 # Additional import path used to resolve QML modules in Qt Creator's code model
 QML_IMPORT_PATH = $$PWD/src/qml $$PWD/3rdparty/kirigami/src

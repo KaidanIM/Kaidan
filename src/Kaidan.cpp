@@ -33,6 +33,7 @@
 // Qt
 #include <QDebug>
 #include <QDir>
+#include <QUrl>
 #include <QSettings>
 #include <QString>
 #include <QStandardPaths>
@@ -254,6 +255,10 @@ void Kaidan::removeContact(QString jid)
 
 QString Kaidan::getResourcePath(QString name) const
 {
+	// We generally prefer to first search for files in application resources
+	if (QFile::exists(":/" + name))
+		return QString("qrc:/" + name);
+
 	// list of file paths where to search for the resource file
 	QStringList pathList;
 	// add relative path from binary (only works if installed)
@@ -277,13 +282,9 @@ QString Kaidan::getResourcePath(QString name) const
 		// look up the file
 		if (directory.exists(name)) {
 			// found the file, return the path
-			return QString("file://") + directory.absoluteFilePath(name);
+			return QUrl::fromLocalFile(directory.absoluteFilePath(name)).toString();
 		}
 	}
-
-	// on Android, we want to fetch images from the application resources
-	if (QFile::exists(":/" + name))
-		return QString("qrc:/" + name);
 
 	// no file found
 	qWarning() << "[main] Could NOT find media file:" << name;

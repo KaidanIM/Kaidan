@@ -28,55 +28,45 @@
  *  along with Kaidan.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-import QtQuick 2.6
-import org.kde.kirigami 2.0 as Kirigami
+// This file imports static plugin classes for static plugins
+#include <QtPlugin>
 
-Item {
-	id: root
+#ifdef __APPLE__
+Q_IMPORT_PLUGIN(QIOSIntegrationPlugin)
+Q_IMPORT_PLUGIN(QMacHeifPlugin)
+Q_IMPORT_PLUGIN(QMacJp2Plugin)
+Q_IMPORT_PLUGIN(QICNSPlugin)
+Q_IMPORT_PLUGIN(QTgaPlugin)
+Q_IMPORT_PLUGIN(QTiffPlugin)
+Q_IMPORT_PLUGIN(QWbmpPlugin)
+Q_IMPORT_PLUGIN(QWebpPlugin)
+#endif // __APPLE__
 
-	property string filter: "*"
-	property string filterName: "All files"
-	property string fileUrl
-	property bool selectFolder: false
-	property string title: qsTr("Select a file")
-	signal accepted
+Q_IMPORT_PLUGIN (QWindowsIntegrationPlugin);
 
-	Loader {
-		id: fileChooserLoader
-	}
+// Media support
+Q_IMPORT_PLUGIN(QSvgPlugin)
+Q_IMPORT_PLUGIN(QSvgIconPlugin)
+Q_IMPORT_PLUGIN(QGifPlugin)
+Q_IMPORT_PLUGIN(QICOPlugin)
+Q_IMPORT_PLUGIN(QJpegPlugin)
 
-	function open() {
-		fileChooserLoader.item.open()
-	}
+// Qt Quick and network
+Q_IMPORT_PLUGIN(QLocalClientConnectionFactory)
+Q_IMPORT_PLUGIN(QTcpServerConnectionFactory)
+Q_IMPORT_PLUGIN(QGenericEnginePlugin)
+Q_IMPORT_PLUGIN(QSQLiteDriverPlugin)
+Q_IMPORT_PLUGIN(KirigamiPlugin)
 
-	Component.onCompleted: {
-		if (Kirigami.Settings.isMobile) {
-			fileChooserLoader.setSource("FileChooserMobile.qml",
-			{
-				"nameFilter": filter,
-				"title": title
-			})
-		}
-		else if (!Kirigami.Settings.isMobile) {
-			var selectedNameFilter = filterName + " (" + filter + ")"
-			fileChooserLoader.setSource("FileChooserDesktop.qml",
-			{
-				"selectedNameFilter": selectedNameFilter,
-				"selectFolder": selectFolder,
-				"title": title
-			})
-		}
-		else {
-			fileChooserLoader.setSource("FileChooserDesktop.qml")
-		}
-	}
-
-	Connections {
-		target: fileChooserLoader.item
-		onAccepted: {
-			fileUrl = fileChooserLoader.item.file
-			root.accepted()
-			console.log("Child file dialog accepted. URL: " + fileUrl)
-		}
-	}
-}
+Q_IMPORT_PLUGIN(QtQuick2Plugin)
+Q_IMPORT_PLUGIN(QtLabsPlatformPlugin)
+Q_IMPORT_PLUGIN(QtGraphicalEffectsPlugin)
+Q_IMPORT_PLUGIN(QtGraphicalEffectsPrivatePlugin)
+Q_IMPORT_PLUGIN(QtQuickControls2Plugin)
+Q_IMPORT_PLUGIN(QtQuickControls2MaterialStylePlugin)
+Q_IMPORT_PLUGIN(QtQuickControls2UniversalStylePlugin)
+Q_IMPORT_PLUGIN(QtQuickLayoutsPlugin)
+Q_IMPORT_PLUGIN(QtQuick2WindowPlugin)
+Q_IMPORT_PLUGIN(QmlShapesPlugin)
+Q_IMPORT_PLUGIN(QtQuickTemplates2Plugin)
+Q_IMPORT_PLUGIN(QtQmlModelsPlugin)

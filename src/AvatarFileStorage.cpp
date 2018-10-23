@@ -31,6 +31,7 @@
 #include "AvatarFileStorage.h"
 
 #include <QDir>
+#include <QUrl>
 #include <QStandardPaths>
 #include <QCryptographicHash>
 #include <QDebug>
@@ -143,7 +144,7 @@ QString AvatarFileStorage::getAvatarPathOfJid(const QString& jid) const
 
 QString AvatarFileStorage::getAvatarUrl(const QString &jid) const
 {
-	return QString("file://") + getAvatarPathOfJid(jid);
+	return QUrl::fromLocalFile(getAvatarPathOfJid(jid)).toString();
 }
 
 bool AvatarFileStorage::hasAvatarHash(const QString& hash) const

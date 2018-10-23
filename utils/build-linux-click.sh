@@ -22,7 +22,19 @@ install_deb() {
 }
 
 install_dependencies() {
+	LIBIDN_VERSION="1.33-2.2ubuntu1"
+	GNUTLS_VERSION="3.2.11-2ubuntu1.2"
 	GLOOX_VERSION="1.0.20-1+16.04+xenial+build1"
+
+	echo "I: Installing libidn"
+	for PKG in libidn11-dev libidn11; do
+		install_deb http://ports.ubuntu.com/ubuntu-ports/pool/main/libi/libidn ${PKG} ${LIBIDN_VERSION}
+	done
+
+	echo "I: Installing gnutls"
+	for PKG in libgnutls28-dev libgnutls28; do
+		install_deb http://ports.ubuntu.com/ubuntu-ports/pool/universe/g/gnutls28 ${PKG} ${GNUTLS_VERSION}
+	done
 
 	echo "I: Installing gloox"
 	for PKG in libgloox-dev libgloox17; do
@@ -30,18 +42,20 @@ install_dependencies() {
 	done
 
 	echo "I: Installing libraries"
-	mv $CLICK_TARGET_DIR/usr/* $CLICK_TARGET_DIR/
+	cp -R $CLICK_TARGET_DIR/usr/* $CLICK_TARGET_DIR/
 }
 
 build_kaidan() {
 	mkdir -p $KAIDAN_SOURCES/build
 	cd $KAIDAN_SOURCES/build
+	export PKG_CONFIG_PATH=$PKG_CONFIG_PATH:$CLICK_TARGET_DIR/lib/$DEB_HOST_MULTIARCH/pkgconfig
+	export LDFLAGS="${LDFLAGS} -L${CLICK_TARGET_DIR}/lib/$DEB_HOST_MULTIARCH"
 	cmake .. \
 	      -GNinja \
 	      -DCMAKE_MAKE_PROGRAM=/usr/bin/ninja \
 	      -DCMAKE_PREFIX_PATH="${CLICK_TARGET_DIR}" \
 	      -DCMAKE_INSTALL_PREFIX="${CLICK_TARGET_DIR}" \
-	      -DGLOOX_INCLUDE_DIR="${CLICK_TARGET_DIR}/include" \
+	      -DCMAKE_CXX_FLAGS=-isystem\ ${CLICK_TARGET_DIR}/include \
 	      -DI18N=1 \
 	      -DUBUNTU_TOUCH=1 \
 	      -DCLICK_ARCH="${ARCH}" \
@@ -57,7 +71,8 @@ cleanup_click_dir() {
 		$CLICK_TARGET_DIR/usr \
 		$CLICK_TARGET_DIR/include \
 		$CLICK_TARGET_DIR/share/doc \
-		$CLICK_TARGET_DIR/lib/$DEB_HOST_MULTIARCH/pkgconfig
+		$CLICK_TARGET_DIR/lib/$DEB_HOST_MULTIARCH/pkgconfig \
+		$CLICK_TARGET_DIR/lib/$DEB_HOST_MULTIARCH/libidn.so
 }
 
 echo "*****************************************"

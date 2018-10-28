@@ -75,16 +75,19 @@ signals:
 	 * Emitted when the user opens another chat to apply a filter to the db
 	 */
 	void chatPartnerChanged(QString &jid);
-
-	/**
-	 * Emitted, when connecting
-	 */
-	void ownJidChanged(QString &jid);
-
 	void addMessageRequested(Message msg);
 	void setMessageAsSentRequested(const QString msgId);
 	void setMessageAsDeliveredRequested(const QString msgId);
 	void updateMessageRequested(const QString id, Message msg);
+
+public slots:
+	/**
+	 * Set own JID for displaying correct messages
+	 */
+	void setOwnJid(const QString &jid)
+	{
+		ownJid = jid;
+	}
 
 private slots:
 	void addMessage(Message msg);

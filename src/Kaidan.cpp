@@ -118,6 +118,9 @@ void Kaidan::mainConnect()
 
 	emit client->credentialsUpdated(creds);
 	emit client->connectRequested();
+
+	// update own JID to display correct messages
+	caches->msgModel->setOwnJid(creds.jid);
 }
 
 void Kaidan::mainDisconnect(bool openLogInPage)

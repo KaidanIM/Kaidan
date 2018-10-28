@@ -39,23 +39,17 @@
 #include <QSqlRecord>
 #include <QSqlQuery>
 
-static const char *conversationsTableName = "Messages";
-
 MessageModel::MessageModel(QSqlDatabase *database, QObject *parent):
 	QSqlTableModel(parent, *database), database(database)
 {
-	setTable(conversationsTableName);
+	setTable("Messages");
 	// sort in descending order of the timestamp column
 	setSort(4, Qt::DescendingOrder);
 
-	// Ensures that the model is sorted correctly after submitting a new row.
 	setEditStrategy(QSqlTableModel::OnManualSubmit);
 
 	connect(this, &MessageModel::chatPartnerChanged,
-	        this, &MessageModel::applyRecipientFilter, Qt::BlockingQueuedConnection);
-	connect(this, &MessageModel::ownJidChanged, [=](QString &ownJid) {
-		this->ownJid = ownJid;
-	});
+	        this, &MessageModel::applyRecipientFilter);
 	connect(this, &MessageModel::addMessageRequested, this, &MessageModel::addMessage);
 	connect(this, &MessageModel::setMessageAsSentRequested, this, &MessageModel::setMessageAsSent);
 	connect(this, &MessageModel::setMessageAsDeliveredRequested, this, &MessageModel::setMessageAsDelivered);
@@ -65,8 +59,9 @@ MessageModel::MessageModel(QSqlDatabase *database, QObject *parent):
 void MessageModel::applyRecipientFilter(QString recipient)
 {
 	const QString filterString = QString::fromLatin1(
-		"(recipient = '%1' AND author = '%2') OR (recipient = '%2' AND "
-		"author = '%1')").arg(recipient, ownJid);
+		"(recipient = '%1' AND author = '%2') OR (recipient = '%2' AND author = '%1')")
+		.arg(recipient, ownJid);
+
 	setFilter(filterString);
 	select();
 }
@@ -92,63 +87,70 @@ QHash<int, QByteArray> MessageModel::roleNames() const
 
 void MessageModel::setMessageAsSent(const QString msgId)
 {
-	QSqlQuery newQuery(*database);
-	newQuery.exec(QString("UPDATE 'Messages' SET 'isSent' = 1 WHERE id = '%1'").arg(msgId));
+	for (int i = 0; i < rowCount(); ++i) {
+		QSqlRecord rec = record(i);
+		if (rec.value("id").toString() == msgId) {
+			rec.setValue("isSent", true);
+			setRecord(i, rec);
+			break;
+		}
+	}
 	submitAll();
 }
 
 void MessageModel::setMessageAsDelivered(const QString msgId)
 {
-	QSqlQuery newQuery(*database);
-	newQuery.exec(QString("UPDATE 'Messages' SET 'isDelivered' = 1 WHERE id = '%1'").arg(msgId));
+	for (int i = 0; i < rowCount(); ++i) {
+		QSqlRecord rec = record(i);
+		if (rec.value("id").toString() == msgId) {
+			rec.setValue("isDelivered", true);
+			setRecord(i, rec);
+			break;
+		}
+	}
 	submitAll();
 }
 
 void MessageModel::updateMessage(const QString id, Message msg)
 {
-	QMap<QString, QVariant> values;
+	QSqlRecord rec;
+	int recId;
+	bool found = false;
+	for (int i = 0; i < rowCount(); ++i) {
+		rec = record(i);
+		if (rec.value("id").toString() == id) {
+			recId = i;
+			found = true;
+			break;
+		}
+	}
+
+	if (!found)
+		return;
+
 	if (!msg.timestamp.isEmpty())
-		values["timestamp"] = msg.timestamp;
+		rec.setValue("timestamp", msg.timestamp);
 	if (!msg.message.isEmpty())
-		values["message"] = msg.message;
+		rec.setValue("message", msg.message);
 	if (!msg.id.isEmpty())
-		values["id"] = msg.id;
+		rec.setValue("id", msg.id);
 	if (!msg.mediaUrl.isEmpty())
-		values["mediaUrl"] = msg.mediaUrl;
+		rec.setValue("mediaUrl", msg.mediaUrl);
 	if (msg.mediaSize)
-		values["mediaSize"] = msg.mediaSize;
+		rec.setValue("mediaSize", msg.mediaSize);
 	if (!msg.mediaContentType.isEmpty())
-		values["mediaContentType"] = msg.mediaContentType;
+		rec.setValue("mediaContentType", msg.mediaContentType);
 	if (msg.mediaLastModified)
-		values["mediaLastModified"] = msg.mediaLastModified;
+		rec.setValue("mediaLastModified", msg.mediaLastModified);
 	if (!msg.mediaLocation.isEmpty())
-		values["mediaLocation"] = msg.mediaLocation;
+		rec.setValue("mediaLocation", msg.mediaLocation);
 	if (!msg.mediaThumb.isEmpty())
-		values["mediaThumb"] = msg.mediaThumb;
+		rec.setValue("mediaThumb", msg.mediaThumb);
 	if (!msg.mediaHashes.isEmpty())
-		values["mediaHashes"] = msg.mediaHashes;
+		rec.setValue("mediaHashes", msg.mediaHashes);
 
-	// generate command
-	QString command = "UPDATE 'Messages' SET ";
-	bool isFirst = true;
-	for (auto key : values.keys()) {
-		if (!isFirst)
-			command.append(", ");
-		command.append(QString("%1 = :%1").arg(key));
-		isFirst = false;
-	}
-	command.append(QString(" WHERE 'id' = '%1'").arg(id));
-
-	QSqlQuery query(*database);
-	query.prepare(command);
-	for (auto key : values.keys()) {
-		query.bindValue(QString(":%1").arg(key), values[key]);
-	}
-
-	if (!query.exec()) {
-		qDebug() << query.executedQuery();
-		qWarning("Failed to query database: %s", qPrintable(query.lastError().text()));
-	}
+	setRecord(recId, rec);
+	submitAll();
 }
 
 void MessageModel::addMessage(Message msg)
@@ -159,9 +161,7 @@ void MessageModel::addMessage(Message msg)
 
 	QSqlRecord record = this->record();
 	record.setValue("author", msg.author);
-	record.setValue("author_resource", msg.authorResource);
 	record.setValue("recipient", msg.recipient);
-	record.setValue("recipient_resource", msg.recipientResource);
 	record.setValue("timestamp", msg.timestamp);
 	record.setValue("message", msg.message);
 	record.setValue("id", msg.id);
@@ -178,7 +178,7 @@ void MessageModel::addMessage(Message msg)
 	record.setValue("mediaThumb", msg.mediaThumb);
 	record.setValue("mediaHashes", msg.mediaHashes);
 
-	if (!insertRecord(rowCount(), record)) {
+	if (!insertRecord(0, record)) {
 		qWarning() << "Failed to add message to DB:" << lastError().text();
 		return;
 	}

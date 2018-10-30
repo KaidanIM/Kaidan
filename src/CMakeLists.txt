@@ -14,10 +14,10 @@ set(KAIDAN_SOURCES
 	${CURDIR}/Notifications.cpp
 	${CURDIR}/PresenceCache.cpp
 	${CURDIR}/DiscoveryManager.cpp
-# 	${CURDIR}/UploadHandler.cpp
 	${CURDIR}/VCardManager.cpp
 	${CURDIR}/LogHandler.cpp
 	${CURDIR}/StatusBar.cpp
+# 	${CURDIR}/UploadHandler.cpp
 # 	${CURDIR}/QtHttpUploader.cpp
 
 	# SingleApplication
@@ -40,4 +40,7 @@ set(KAIDAN_SOURCES
 # 	${CURDIR}/gloox-extensions/thumb.cpp
 # 	${CURDIR}/gloox-extensions/jinglefile.cpp
 # 	${CURDIR}/gloox-extensions/sims.cpp
+
+	# kaidan QXmpp extensions (need to be merged into QXmpp upstream)
+	${CURDIR}/qxmpp-exts/QXmppHttpUploadIq.cpp
 )

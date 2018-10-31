@@ -36,10 +36,8 @@
 #include "Globals.h"
 
 DiscoveryManager::DiscoveryManager(QXmppClient *client, QObject *parent)
-	: QObject(parent), client(client), manager(new QXmppDiscoveryManager())
+	: QObject(parent), client(client), manager(client->findExtension<QXmppDiscoveryManager>())
 {
-	client->addExtension(manager);
-
 	// we're a normal client (not a server, gateway, server component, etc.)
 	manager->setClientCategory("client");
 	manager->setClientName(APPLICATION_DISPLAY_NAME);
@@ -64,7 +62,6 @@ DiscoveryManager::DiscoveryManager(QXmppClient *client, QObject *parent)
 
 DiscoveryManager::~DiscoveryManager()
 {
-	delete manager;
 }
 
 void DiscoveryManager::handleConnection()

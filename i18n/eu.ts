@@ -5,358 +5,357 @@
     <name>AboutDialog</name>
     <message>
         <source>A simple, user-friendly Jabber/XMPP client</source>
-        <translation type="unfinished"></translation>
+        <translation>Erabiltzeko erraza den Jabber/XMPP bezero bat</translation>
     </message>
     <message>
         <source>License:</source>
-        <translation type="unfinished"></translation>
+        <translation>Lizentzia:</translation>
     </message>
     <message>
         <source>View source code online</source>
-        <translation type="unfinished"></translation>
+        <translation>Ikusi iturburu kodea linean</translation>
     </message>
 </context>
 <context>
     <name>BackButton</name>
     <message>
         <source>Navigate Back</source>
-        <translation type="unfinished"></translation>
+        <translation type="vanished">Atzerantz nabigatu</translation>
     </message>
 </context>
 <context>
     <name>ChatMessage</name>
     <message>
         <source>Message copied to clipboard</source>
-        <translation type="unfinished"></translation>
+        <translation type="vanished">Mezua arbelean kopiatua</translation>
     </message>
 </context>
 <context>
     <name>ChatPage</name>
     <message>
         <source>Compose message</source>
-        <translation type="unfinished"></translation>
+        <translation>Mezua sortu</translation>
     </message>
     <message>
         <source>Image</source>
-        <translation type="unfinished"></translation>
+        <translation>Irudia</translation>
     </message>
     <message>
         <source>Video</source>
-        <translation type="unfinished"></translation>
+        <translation>Bideoa</translation>
     </message>
     <message>
         <source>Audio</source>
-        <translation type="unfinished"></translation>
+        <translation>Audioa</translation>
     </message>
     <message>
         <source>Document</source>
-        <translation type="unfinished"></translation>
+        <translation>Dokumentua</translation>
     </message>
     <message>
         <source>Other file</source>
-        <translation type="unfinished"></translation>
+        <translation>Beste artxibo bat</translation>
     </message>
     <message>
         <source>Select a file</source>
-        <translation type="unfinished"></translation>
+        <translation>Artxibo bat aukeratu</translation>
     </message>
 </context>
 <context>
     <name>ContextDrawer</name>
     <message>
         <source>Actions</source>
-        <translation type="unfinished"></translation>
+        <translation type="vanished">Jarduerak</translation>
     </message>
 </context>
 <context>
     <name>EmptyChatPage</name>
     <message>
         <source>Please select a chat to start messaging</source>
-        <translation type="unfinished"></translation>
+        <translation>Hauta ezazu txat bat mezuak bidaltzen hasteko</translation>
     </message>
 </context>
 <context>
     <name>FileChooser</name>
     <message>
         <source>Select a file</source>
-        <translation type="unfinished"></translation>
+        <translation type="vanished">Artxibo bat aukeratu</translation>
     </message>
 </context>
 <context>
     <name>FileChooserMobile</name>
     <message>
         <source>go to parent folder</source>
-        <translation type="unfinished"></translation>
+        <translation type="vanished">maila bat goragoko karpetara joan</translation>
     </message>
     <message>
         <source>Close</source>
-        <translation type="unfinished"></translation>
+        <translation type="vanished">Itxi</translation>
     </message>
 </context>
 <context>
     <name>ForwardButton</name>
     <message>
         <source>Navigate Forward</source>
-        <translation type="unfinished"></translation>
+        <translation type="vanished">Aurrerantz nabigatu</translation>
     </message>
 </context>
 <context>
     <name>GlobalDrawer</name>
     <message>
         <source>Back</source>
-        <translation type="unfinished"></translation>
+        <translation type="vanished">Atzera</translation>
     </message>
     <message>
         <source>Log out</source>
-        <translation type="unfinished"></translation>
+        <translation>Saioa itxi</translation>
     </message>
     <message>
         <source>About</source>
-        <translation type="unfinished"></translation>
+        <translation>Honi buruz</translation>
     </message>
     <message>
         <source>Invite friends</source>
-        <translation type="unfinished"></translation>
+        <translation>Lagunak gonbidatu</translation>
     </message>
     <message>
         <source>Invitation link copied to clipboard</source>
-        <translation type="unfinished"></translation>
+        <translation>Gonbidapen esteka arbelean kopiatua</translation>
     </message>
 </context>
 <context>
     <name>Kaidan</name>
     <message>
         <source>Could not send message, as a result of not being connected.</source>
-        <translation type="unfinished"></translation>
+        <translation type="vanished">Ezin izan da mezua bidali, konektaturik ez zaudelako.</translation>
     </message>
     <message>
         <source>Could not add contact, as a result of not being connected.</source>
-        <translation type="unfinished"></translation>
+        <translation type="vanished">Ezin izan da kontaktua gehitu, konektaturik ez zaudelako.</translation>
     </message>
     <message>
         <source>Could not remove contact, as a result of not being connected.</source>
-        <translation type="unfinished"></translation>
+        <translation type="vanished">Ezin izan da kontaktua ezabatu, konektaturik ez zaudelako.</translation>
     </message>
     <message>
         <source>The link will be opened after you have connected.</source>
         <extracomment>The link is an XMPP-URI (i.e. &apos;xmpp:kaidan@muc.kaidan.im?join&apos; for joining a chat)</extracomment>
-        <translation type="unfinished"></translation>
+        <translation>Esteka konektatu ondoren irekiko da.</translation>
     </message>
     <message>
         <source>Could not send file, as a result of not being connected.</source>
-        <translation type="unfinished"></translation>
+        <translation type="vanished">Ezin izan da artxiboa bidali, konektaturik ez zaudelako.</translation>
     </message>
 </context>
 <context>
     <name>LoginPage</name>
     <message>
         <source>Log in</source>
-        <translation type="unfinished"></translation>
+        <translation>Saioa hasi</translation>
     </message>
     <message>
         <source>Log in to your XMPP account</source>
-        <translation type="unfinished"></translation>
+        <translation>Hasi saioa zure XMPP kontuan</translation>
     </message>
     <message>
         <source>Your Jabber-ID:</source>
-        <translation type="unfinished"></translation>
+        <translation>Zure Jabber-IDa:</translation>
     </message>
     <message>
         <source>Your diaspora*-ID:</source>
-        <translation type="unfinished"></translation>
+        <translation>Zure diaspora*-IDa:</translation>
     </message>
     <message>
         <source>user@example.org</source>
-        <translation type="unfinished"></translation>
+        <translation>erabiltzailea@example.org</translation>
     </message>
     <message>
         <source>user@diaspora.pod</source>
-        <translation type="unfinished"></translation>
+        <translation>erabiltzailea@diaspora.pod</translation>
     </message>
     <message>
         <source>Your Password:</source>
-        <translation type="unfinished"></translation>
+        <translation>Zure Pasahitza:</translation>
     </message>
     <message>
         <source>Connecting…</source>
-        <translation type="unfinished"></translation>
+        <translation>Konektatzen…</translation>
     </message>
     <message>
         <source>Connect</source>
-        <translation type="unfinished"></translation>
+        <translation>Konektatu</translation>
     </message>
     <message>
         <source>Invalid username or password.</source>
-        <translation type="unfinished"></translation>
+        <translation>Erabiltzaile edo pasahitz okerra.</translation>
     </message>
     <message>
         <source>Cannot connect to the server. Please check your internet connection.</source>
-        <translation type="unfinished"></translation>
+        <translation>Ezin da zerbitzarira konektatu. Mesedez egiaztatu zure internet konexioa.</translation>
     </message>
     <message>
         <source>The server doesn&apos;t support secure connections.</source>
-        <translation type="unfinished"></translation>
+        <translation>Zerbitzariak ez du konexio segururik onartzen.</translation>
     </message>
     <message>
         <source>Error while trying to connect securely.</source>
-        <translation type="unfinished"></translation>
+        <translation>Akatsa segurtasunez konektatzerakoan.</translation>
     </message>
     <message>
         <source>Could not resolve the server&apos;s address. Please check your JID again.</source>
-        <translation type="unfinished"></translation>
+        <translation>Ezin izan da zerbitzariaren helbidea ebatzi. Mesedez egiazta ezazu zure JIDa berriz.</translation>
     </message>
     <message>
         <source>Could not connect to the server.</source>
-        <translation type="unfinished"></translation>
+        <translation>Ezin izan da zerbitzarira konektatu.</translation>
     </message>
     <message>
         <source>Authentification protocol not supported by the server.</source>
-        <translation type="unfinished"></translation>
+        <translation>Autentifikazio protokoloa ez da zerbitzariarekin bateragarria.</translation>
     </message>
     <message>
         <source>An unknown error occured; see log for details.</source>
-        <translation type="unfinished"></translation>
+        <translation>Akats ezezagun bat gertatu da; ikusi xehetasunak log edo erregistroetan.</translation>
+    </message>
+</context>
+<context>
+    <name>MessageHandler</name>
+    <message>
+        <source>Could not send message, as a result of not being connected.</source>
+        <translation type="unfinished">Ezin izan da mezua bidali, konektaturik ez zaudelako.</translation>
     </message>
 </context>
 <context>
     <name>RosterAddContactSheet</name>
     <message>
         <source>Add new contact</source>
-        <translation type="unfinished"></translation>
+        <translation type="vanished">Kontaktu berria gehitu</translation>
     </message>
     <message>
         <source>Nickname:</source>
-        <translation type="unfinished"></translation>
+        <translation type="vanished">Ezizena:</translation>
     </message>
     <message>
         <source>Jabber-ID:</source>
-        <translation type="unfinished"></translation>
+        <translation type="vanished">Jabber-IDa:</translation>
     </message>
     <message>
         <source>user@example.org</source>
-        <translation type="unfinished"></translation>
+        <translation type="vanished">erabiltzailea@example.org</translation>
     </message>
     <message>
         <source>Cancel</source>
-        <translation type="unfinished"></translation>
+        <translation type="vanished">Utzi</translation>
     </message>
     <message>
         <source>Add</source>
-        <translation type="unfinished"></translation>
+        <translation type="vanished">Gehitu</translation>
     </message>
     <message>
         <source>This will also send a request to access the presence of the contact.</source>
-        <translation type="unfinished"></translation>
+        <translation type="vanished">Honek kontaktuaren presentziara sarbide eskaera bidaliko du.</translation>
     </message>
     <message>
         <source>Optional message:</source>
-        <translation type="unfinished"></translation>
+        <translation type="vanished">Aukerako mezua:</translation>
     </message>
     <message>
         <source>Tell your chat partner who you are.</source>
-        <translation type="unfinished"></translation>
+        <translation type="vanished">Esan nor zaren zure berriketa lagunari.</translation>
     </message>
 </context>
 <context>
     <name>RosterListItem</name>
     <message>
         <source>Error: Please check the JID.</source>
-        <translation type="unfinished"></translation>
+        <translation type="vanished">Errorea: Mesedez egiaztatu JIDa.</translation>
     </message>
     <message>
         <source>Available</source>
-        <translation type="unfinished"></translation>
+        <translation type="vanished">Eskuragarri</translation>
     </message>
     <message>
         <source>Free for chat</source>
-        <translation type="unfinished"></translation>
+        <translation type="vanished">Libre berriketarako</translation>
     </message>
     <message>
         <source>Away</source>
-        <translation type="unfinished"></translation>
+        <translation type="vanished">Kanpoan</translation>
     </message>
     <message>
         <source>Do not disturb</source>
-        <translation type="unfinished"></translation>
+        <translation type="vanished">Ez molestatu</translation>
     </message>
     <message>
         <source>Away for longer</source>
-        <translation type="unfinished"></translation>
+        <translation type="vanished">Kanpoan denbora luzerako</translation>
     </message>
     <message>
         <source>Offline</source>
-        <translation type="unfinished"></translation>
+        <translation type="vanished">Lineaz kanpo</translation>
     </message>
     <message>
         <source>Error</source>
-        <translation type="unfinished"></translation>
+        <translation type="vanished">Errorea</translation>
     </message>
     <message>
         <source>Invalid</source>
-        <translation type="unfinished"></translation>
+        <translation type="vanished">Baliogabea</translation>
+    </message>
+</context>
+<context>
+    <name>RosterManager</name>
+    <message>
+        <source>Could not add contact, as a result of not being connected.</source>
+        <translation type="unfinished">Ezin izan da kontaktua gehitu, konektaturik ez zaudelako.</translation>
+    </message>
+    <message>
+        <source>Could not remove contact, as a result of not being connected.</source>
+        <translation type="unfinished">Ezin izan da kontaktua ezabatu, konektaturik ez zaudelako.</translation>
     </message>
 </context>
 <context>
     <name>RosterPage</name>
     <message>
         <source>Connecting…</source>
-        <translation type="unfinished"></translation>
+        <translation>Konektatzen…</translation>
     </message>
     <message>
         <source>Contacts</source>
-        <translation type="unfinished"></translation>
+        <translation>Kontaktuak</translation>
     </message>
     <message>
         <source>Add new contact</source>
-        <translation type="unfinished"></translation>
+        <translation>Kontaktu berria gehitu</translation>
     </message>
     <message>
         <source>Offline</source>
-        <translation type="unfinished"></translation>
+        <translation>Lineaz kanpo</translation>
     </message>
 </context>
 <context>
     <name>RosterRemoveContactSheet</name>
     <message>
         <source>Delete contact</source>
-        <translation type="unfinished"></translation>
+        <translation type="vanished">Kontaktua ezabatu</translation>
     </message>
     <message>
         <source>Cancel</source>
-        <translation type="unfinished"></translation>
+        <translation type="vanished">Utzi</translation>
     </message>
     <message>
         <source>Delete</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Do you really want to delete the contact &lt;b&gt;%1&lt;/b&gt; from your roster?</source>
-        <translation type="unfinished"></translation>
+        <translation type="vanished">Ezabatu</translation>
     </message>
 </context>
 <context>
-    <name>SubRequestAcceptSheet</name>
+    <name>UploadManager</name>
     <message>
-        <source>Subscription Request</source>
-        <translation type="unfinished"></translation>
+        <source>Could not send file, as a result of not being connected.</source>
+        <translation type="unfinished">Ezin izan da artxiboa bidali, konektaturik ez zaudelako.</translation>
     </message>
     <message>
-        <source>You received a subscription request by &lt;b&gt;%1&lt;/b&gt;. If you accept it, the account will have access to your presence status.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Decline</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Accept</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>ToolBarApplicationHeader</name>
-    <message>
-        <source>More Actions</source>
+        <source>File</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

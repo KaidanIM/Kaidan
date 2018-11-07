@@ -41,7 +41,7 @@ cdnew() {
 
 export QT_SELECT=qt5
 
-if [ ! -f "$KIRIGAMI_BUILD/lib64/libKF5Kirigami2.so" ]; then
+if [ ! -f "$KIRIGAMI_BUILD/lib/libKF5Kirigami2.so" ]; then
 echo "*****************************************"
 echo "Building Kirigami"
 echo "*****************************************"
@@ -50,8 +50,9 @@ echo "*****************************************"
     cmake .. \
         -DECM_DIR=/usr/share/ECM/cmake \
         -DCMAKE_PREFIX_PATH=$QT_LINUX \
-        -DCMAKE_BUILD_TYPE=$BUILD_TYPE -DCMAKE_INSTALL_PREFIX=$KIRIGAMI_BUILD
-    
+        -DCMAKE_BUILD_TYPE=$BUILD_TYPE -DCMAKE_INSTALL_PREFIX=$KIRIGAMI_BUILD \
+        -DCMAKE_INSTALL_LIBDIR=$KIRIGAMI_BUILD/lib
+
     make -j$(nproc)
     make install
     rm -rf $KAIDAN_SOURCES/3rdparty/kirigami/build
@@ -64,11 +65,11 @@ echo "Building Kaidan"
 echo "*****************************************"
 {
     cdnew $KAIDAN_SOURCES/build
-    
+
     cmake .. \
         -DECM_DIR=/usr/share/ECM/cmake \
         -DCMAKE_PREFIX_PATH=$QT_LINUX \
-        -DKF5Kirigami2_DIR=$KIRIGAMI_BUILD/lib64/cmake/KF5Kirigami2 -DI18N=1 \
+        -DKF5Kirigami2_DIR=$KIRIGAMI_BUILD/lib/cmake/KF5Kirigami2 -DI18N=1 \
         -DCMAKE_BUILD_TYPE=$BUILD_TYPE -DCMAKE_INSTALL_PREFIX=/usr
     
     make -j$(nproc)
@@ -90,8 +91,8 @@ echo "Packing into AppImage"
 echo "*****************************************"
 {
     cd $KAIDAN_SOURCES
-    export LD_LIBRARY_PATH=$QT_LINUX/lib/:$KIRIGAMI_BUILD/lib64:$LD_LIBRARY_PATH
+    export LD_LIBRARY_PATH=$QT_LINUX/lib/:$KIRIGAMI_BUILD/lib:$LD_LIBRARY_PATH
     export PATH=$QT_LINUX/bin/:$PATH
     
-    $KAIDAN_SOURCES/3rdparty/linuxdeployqt-continuous-x86_64.AppImage $KAIDAN_SOURCES/AppDir/usr/share/applications/kaidan.desktop -qmake=$QT_LINUX/bin/qmake -qmldir=$KAIDAN_SOURCES/src/qml/ -qmlimport=$KIRIGAMI_BUILD/lib64/qml/ -appimage -no-copy-copyright-files
+    $KAIDAN_SOURCES/3rdparty/linuxdeployqt-continuous-x86_64.AppImage $KAIDAN_SOURCES/AppDir/usr/share/applications/kaidan.desktop -qmake=$QT_LINUX/bin/qmake -qmldir=$KAIDAN_SOURCES/src/qml/ -qmlimport=$KIRIGAMI_BUILD/lib/qml/ -appimage -no-copy-copyright-files
 }

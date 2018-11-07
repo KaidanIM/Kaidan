@@ -8,6 +8,8 @@
     "ninja-build",
     "curl",
     "extra-cmake-modules",
-    "kirigami2-dev:armhf"
+    "kirigami2-dev:$(dpkg-architecture -qDEB_HOST_ARCH)",
+    "libidn11-dev:$(dpkg-architecture -qDEB_HOST_ARCH)",
+    "libgnutls-dev:$(dpkg-architecture -qDEB_HOST_ARCH)"
   ]
 }

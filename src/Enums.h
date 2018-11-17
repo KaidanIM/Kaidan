@@ -49,8 +49,7 @@ namespace Enums {
 	Q_ENUM_NS(ConnectionState)
 
 	/**
-	 * Enumeration of possible disconnection reasons (compatible to gloox::
-	 * ConnectionError)
+	 * Enumeration of possible disconnection reasons
 	 */
 	enum class DisconnectionReason : quint8 {
 		ConnNoError,

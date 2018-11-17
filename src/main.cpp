@@ -159,8 +159,6 @@ Q_DECL_EXPORT int main(int argc, char *argv[])
 	qRegisterMetaType<Qt::ApplicationState>("Qt::ApplicationState");
 	qRegisterMetaType<QXmppClient::State>("QXmppClient::State");
 	qRegisterMetaType<MessageType>("MessageType");
-	qmlRegisterUncreatableMetaObject(Enums::staticMetaObject, APPLICATION_ID,
-	                                 1, 0, "Kaidan", "Access to enums & flags only");
 
 	// Qt-Translator
 	QTranslator qtTranslator;
@@ -244,7 +242,7 @@ Q_DECL_EXPORT int main(int argc, char *argv[])
 #else
 		QString defaultStyle = "Material";
 #endif
-		qDebug() << "QT_QUICK_CONTROLS_STYLE not set, setting to " + defaultStyle;
+		qDebug() << "QT_QUICK_CONTROLS_STYLE not set, setting to" << defaultStyle;
 		qputenv("QT_QUICK_CONTROLS_STYLE", defaultStyle.toLatin1());
 	}
 #endif

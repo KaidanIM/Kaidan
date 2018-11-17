@@ -53,6 +53,7 @@ class RosterManager;
 class MessageHandler;
 class DiscoveryManager;
 class VCardManager;
+class UploadManager;
 
 class ClientThread : public QThread
 {
@@ -78,6 +79,7 @@ protected:
 class ClientWorker : public QObject
 {
 	Q_OBJECT
+	Q_PROPERTY(UploadManager* uploadManager READ getUploadManager)
 
 public:
 	struct Caches {
@@ -125,6 +127,11 @@ public:
 	             QObject *parent = nullptr);
 
 	~ClientWorker();
+
+	UploadManager* getUploadManager()
+	{
+		return uploadManager;
+	}
 
 public slots:
 	/**
@@ -187,6 +194,7 @@ private:
 	MessageHandler *msgHandler;
 	DiscoveryManager *discoManager;
 	VCardManager *vCardManager;
+	UploadManager *uploadManager;
 };
 
 #endif // CLIENTWORKER_H

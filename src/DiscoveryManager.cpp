@@ -76,7 +76,12 @@ void DiscoveryManager::handleInfo(const QXmppDiscoveryIq&)
 	// TODO: enable carbons and discovery http file upload
 }
 
-void DiscoveryManager::handleItems(const QXmppDiscoveryIq&)
+void DiscoveryManager::handleItems(const QXmppDiscoveryIq &iq)
 {
-	// TODO: request disco info for every item to discover http file upload and other services
+	// request info from all items
+	for (const QXmppDiscoveryIq::Item &item : iq.items()) {
+		if (item.jid() == client->configuration().domain())
+			continue;
+		manager->requestInfo(item.jid());
+	}
 }

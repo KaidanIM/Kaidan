@@ -68,17 +68,11 @@ class Kaidan : public QObject
 	Q_PROPERTY(QString jidResource READ getJidResource WRITE setJidResource NOTIFY jidResourceChanged)
 	Q_PROPERTY(QString password READ getPassword WRITE setPassword NOTIFY passwordChanged)
 	Q_PROPERTY(QString chatPartner READ getChatPartner WRITE setChatPartner NOTIFY chatPartnerChanged)
-	Q_PROPERTY(bool httpUploadEnabled READ getHttpUploadEnabled NOTIFY httpUploadChanged)
+	Q_PROPERTY(bool uploadServiceFound READ getUploadServiceFound NOTIFY uploadServiceFoundChanged)
 
 public:
-	/**
-	 * Constructor
-	 */
 	Kaidan(QGuiApplication *app, bool enableLogging = true, QObject *parent = 0);
 
-	/**
-	 * Destructor
-	 */
 	~Kaidan();
 
 	/**
@@ -104,11 +98,6 @@ public:
 	 * emitted.
 	 */
 	Q_INVOKABLE void mainDisconnect(bool openLogInPage = false);
-
-	/**
-	 * Upload and send file
-	 */
-	Q_INVOKABLE void sendFile(QString jid, QString filePath, QString message);
 
 	/**
 	 * Returns a URL to a given resource file name
@@ -195,7 +184,7 @@ public:
 	/**
 	 * Set the currently opened chat
 	 *
-	 * This will set a filter on the database to only view the wanted messages.
+	 * This will set a filter on the database to only view the related messages.
 	 */
 	void setChatPartner(QString jid);
 
@@ -207,33 +196,21 @@ public:
 		return chatPartner;
 	}
 
-	/**
-	 * Get the roster model
-	 */
 	RosterModel* getRosterModel() const
 	{
 		return caches->rosterModel;
 	}
 
-	/**
-	 * Get the message model
-	 */
 	MessageModel* getMessageModel() const
 	{
 		return caches->msgModel;
 	}
 
-	/**
-	 * Get the avatar storage
-	 */
 	AvatarFileStorage* getAvatarStorage() const
 	{
 		return caches->avatarStorage;
 	}
 
-	/**
-	 * Get the presence cache
-	 */
 	PresenceCache* getPresenceCache() const
 	{
 		return caches->presCache;
@@ -250,11 +227,11 @@ public:
 	Q_INVOKABLE void copyToClipboard(QString text);
 
 	/**
-	 * Returns true, if XEP-0363: HTTP File Upload was discovered
+	 * Returns whether an HTTP File Upload service has been found
 	 */
-	bool getHttpUploadEnabled()
+	bool getUploadServiceFound() const
 	{
-		return hasHttpUpload;
+		return uploadServiceFound;
 	}
 
 signals:
@@ -345,9 +322,9 @@ signals:
 	void uploadProgressMade(QString msgId, unsigned long sent, unsigned long total);
 
 	/**
-	 * XEP-0363: HTTP File Upload was discovered (or isn't working anymore)
+	 * An HTTP File Upload service was discovered
 	 */
-	void httpUploadChanged();
+	void uploadServiceFoundChanged();
 
 	/**
 	 * Send a text message to any JID
@@ -358,6 +335,11 @@ signals:
 	 * won't be able to see the message history.
 	 */
 	void sendMessage(QString jid, QString message);
+
+	/**
+	 * Upload and send file
+	 */
+	void sendFile(QString jid, QString filePath, QString message);
 
 	/**
 	 * Add a contact to your roster
@@ -395,12 +377,12 @@ public slots:
 	}
 
 	/**
-	 * Enables XEP-0363: HTTP File Upload
+	 * Enables HTTP File Upload to be used (will be called from UploadManager)
 	 */
-	void enableHttpUpload()
+	void setUploadServiceFound(bool enabled)
 	{
-		hasHttpUpload = true;
-		emit httpUploadChanged();
+		uploadServiceFound = enabled;
+		emit uploadServiceFoundChanged();
 	}
 
 private:
@@ -415,7 +397,7 @@ private:
 
 	QString openUriCache;
 
-	bool hasHttpUpload = false;
+	bool uploadServiceFound = false;
 	ConnectionState connectionState = ConnectionState::StateDisconnected;
 	DisconnReason disconnReason = DisconnReason::ConnNoError;
 };

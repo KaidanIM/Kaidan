@@ -9,7 +9,7 @@ set(KAIDAN_SOURCES
 	${CURDIR}/Database.cpp
 	${CURDIR}/RosterModel.cpp
 	${CURDIR}/RosterManager.cpp
- 	${CURDIR}/MessageHandler.cpp
+	${CURDIR}/MessageHandler.cpp
 	${CURDIR}/MessageModel.cpp
 	${CURDIR}/Notifications.cpp
 	${CURDIR}/PresenceCache.cpp
@@ -17,7 +17,7 @@ set(KAIDAN_SOURCES
 	${CURDIR}/VCardManager.cpp
 	${CURDIR}/LogHandler.cpp
 	${CURDIR}/StatusBar.cpp
-# 	${CURDIR}/UploadHandler.cpp
+	${CURDIR}/UploadManager.cpp
 # 	${CURDIR}/QtHttpUploader.cpp
 
 	# SingleApplication
@@ -43,4 +43,6 @@ set(KAIDAN_SOURCES
 
 	# kaidan QXmpp extensions (need to be merged into QXmpp upstream)
 	${CURDIR}/qxmpp-exts/QXmppHttpUploadIq.cpp
+	${CURDIR}/qxmpp-exts/QXmppUploadRequestManager.cpp
+	${CURDIR}/qxmpp-exts/QXmppUploadManager.cpp
 )

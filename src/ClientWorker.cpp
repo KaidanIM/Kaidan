@@ -46,6 +46,7 @@
 #include "MessageHandler.h"
 #include "DiscoveryManager.h"
 #include "VCardManager.h"
+#include "UploadManager.h"
 
 ClientWorker::ClientWorker(Caches *caches, Kaidan *kaidan, bool enableLogging, QGuiApplication *app,
                            QObject* parent)
@@ -59,6 +60,7 @@ ClientWorker::ClientWorker(Caches *caches, Kaidan *kaidan, bool enableLogging, Q
 	                                  caches->avatarStorage, vCardManager, this);
 	msgHandler = new MessageHandler(kaidan, client, caches->msgModel, this);
 	discoManager = new DiscoveryManager(client, this);
+	uploadManager = new UploadManager(kaidan, client, caches->msgModel, rosterManager, this);
 
 	connect(client, &QXmppClient::presenceReceived,
 	        caches->presCache, &PresenceCache::updatePresenceRequested);
@@ -79,6 +81,7 @@ ClientWorker::~ClientWorker()
 	delete msgHandler;
 	delete discoManager;
 	delete vCardManager;
+	delete uploadManager;
 }
 
 void ClientWorker::main()

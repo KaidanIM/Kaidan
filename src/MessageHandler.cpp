@@ -105,7 +105,7 @@ void MessageHandler::sendMessage(QString toJid, QString body)
 		qWarning() << "[client] [MessageHandler] Could not send message, as a result of "
 		              "not being connected.";
 		return;
-        }
+	}
 
 	MessageModel::Message msg;
 	msg.author = client->configuration().jidBare();

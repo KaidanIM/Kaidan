@@ -152,12 +152,6 @@ void Kaidan::setConnectionState(QXmppClient::State state)
 			openUriCache = "";
 		});
 	}
-
-	// on disconnection, disable file upload
-	if (connectionState == ConnectionState::StateDisconnected) {
-		hasHttpUpload = false;
-		emit httpUploadChanged();
-	}
 }
 
 void Kaidan::setDisconnReason(Enums::DisconnectionReason reason)
@@ -203,20 +197,6 @@ void Kaidan::setChatPartner(QString chatPartner)
 quint8 Kaidan::getDisconnReason() const
 {
 	return (quint8) disconnReason;
-}
-
-void Kaidan::sendFile(QString jid, QString filePath, QString message)
-{
-	if (connectionState == ConnectionState::StateConnected) {
-		// convert file-URLs to file paths
-		filePath.replace("file://", "");
-		filePath.replace("qrc:", "");
-		emit client->sendFileRequested(jid, filePath, message);
-	} else {
-		emit passiveNotificationRequested(tr("Could not send file, as a result of not being "
-		                                     "connected."));
-		qWarning() << "[main] Could not send file, as a result of not being connected.";
-	}
 }
 
 QString Kaidan::getResourcePath(QString name) const

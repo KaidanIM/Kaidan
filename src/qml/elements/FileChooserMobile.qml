@@ -50,7 +50,7 @@ Item {
 			actions {
 				main: Kirigami.Action {
 					id: parentFolderButton
-					tooltip: qsTr("go to parent folder")
+					tooltip: qsTr("Go to parent folder")
 					iconName: "go-parent-folder"
 					onTriggered: fileModel.folder = fileModel.parentFolder
 					enabled: fileModel.folder != "file:///"

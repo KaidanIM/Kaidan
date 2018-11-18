@@ -277,6 +277,12 @@ QString Kaidan::fileNameFromUrl(QString url)
 
 QString Kaidan::fileSizeFromUrl(QString url)
 {
+#if QT_VERSION >= 0x051000 // Qt 5.10 or later
 	qint64 size = QFileInfo(QUrl(url).toLocalFile()).size();
 	return QLocale::system().formattedDataSize(size);
+#else
+	// before Qt 5.10: sizes will always be in MiB
+	double size = QFileInfo(QUrl(url).toLocalFile()).size();
+	return QString::number(qRound(size / 1024.0 / 10.24) / 100.0).append(" MiB");
+#endif
 }

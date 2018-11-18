@@ -114,7 +114,7 @@ Kirigami.ScrollablePage {
 	}
 
 	// Chat
-	mainItem: ListView {
+	ListView {
 		verticalLayoutDirection: ListView.BottomToTop
 		spacing: Kirigami.Units.smallSpacing * 2
 

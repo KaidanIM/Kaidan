@@ -127,12 +127,12 @@
 <context>
     <name>FileChooserMobile</name>
     <message>
-        <source>go to parent folder</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Close</source>
         <translation type="unfinished">Fermer</translation>
+    </message>
+    <message>
+        <source>Go to parent folder</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -172,24 +172,8 @@
 <context>
     <name>Kaidan</name>
     <message>
-        <source>Could not send message, as a result of not being connected.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Could not add contact, as a result of not being connected.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Could not remove contact, as a result of not being connected.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>The link will be opened after you have connected.</source>
         <extracomment>The link is an XMPP-URI (i.e. &apos;xmpp:kaidan@muc.kaidan.im?join&apos; for joining a chat)</extracomment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Could not send file, as a result of not being connected.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -269,6 +253,13 @@
     </message>
 </context>
 <context>
+    <name>MessageHandler</name>
+    <message>
+        <source>Could not send message, as a result of not being connected.</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>RosterAddContactSheet</name>
     <message>
         <source>Nickname:</source>
@@ -341,8 +332,15 @@
         <source>Error</source>
         <translation type="unfinished"></translation>
     </message>
+</context>
+<context>
+    <name>RosterManager</name>
     <message>
-        <source>Invalid</source>
+        <source>Could not add contact, as a result of not being connected.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Could not remove contact, as a result of not being connected.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -389,6 +387,21 @@
     </message>
 </context>
 <context>
+    <name>SendMediaSheet</name>
+    <message>
+        <source>Caption</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cancel</source>
+        <translation type="unfinished">Annuler</translation>
+    </message>
+    <message>
+        <source>Send</source>
+        <translation type="unfinished">Envoyer</translation>
+    </message>
+</context>
+<context>
     <name>SubRequestAcceptSheet</name>
     <message>
         <source>Subscription Request</source>
@@ -409,6 +422,13 @@
 </context>
 <context>
     <name>ToolBarApplicationHeader</name>
+    <message>
+        <source>More Actions</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>ToolBarPageHeader</name>
     <message>
         <source>More Actions</source>
         <translation type="unfinished"></translation>

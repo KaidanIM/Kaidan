@@ -135,12 +135,12 @@
 <context>
     <name>FileChooserMobile</name>
     <message>
-        <source>go to parent folder</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Close</source>
         <translation type="unfinished">Schließen</translation>
+    </message>
+    <message>
+        <source>Go to parent folder</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -197,15 +197,15 @@
     </message>
     <message>
         <source>Could not send message, as a result of not being connected.</source>
-        <translation>Konnte Nachricht nicht versenden, da Sie nicht verbunden sind.</translation>
+        <translation type="vanished">Konnte Nachricht nicht versenden, da Sie nicht verbunden sind.</translation>
     </message>
     <message>
         <source>Could not add contact, as a result of not being connected.</source>
-        <translation>Konnte den Kontakt nicht hinzufügen, da Sie nicht verbunden sind.</translation>
+        <translation type="vanished">Konnte den Kontakt nicht hinzufügen, da Sie nicht verbunden sind.</translation>
     </message>
     <message>
         <source>Could not remove contact, as a result of not being connected.</source>
-        <translation>Konnte den Kontakt nicht entfernen, da Sie nicht verbunden sind.</translation>
+        <translation type="vanished">Konnte den Kontakt nicht entfernen, da Sie nicht verbunden sind.</translation>
     </message>
     <message>
         <source>The link will be opened after you have connected.</source>
@@ -214,7 +214,7 @@
     </message>
     <message>
         <source>Could not send file, as a result of not being connected.</source>
-        <translation>Konnte Datei nicht senden, da Sie nicht verbunden sind.</translation>
+        <translation type="vanished">Konnte Datei nicht senden, da Sie nicht verbunden sind.</translation>
     </message>
 </context>
 <context>
@@ -297,6 +297,13 @@
     </message>
 </context>
 <context>
+    <name>MessageHandler</name>
+    <message>
+        <source>Could not send message, as a result of not being connected.</source>
+        <translation type="unfinished">Konnte Nachricht nicht versenden, da Sie nicht verbunden sind.</translation>
+    </message>
+</context>
+<context>
     <name>RosterAddContactSheet</name>
     <message>
         <source>Add Contact</source>
@@ -375,7 +382,18 @@
     </message>
     <message>
         <source>Invalid</source>
-        <translation>Ungültig</translation>
+        <translation type="vanished">Ungültig</translation>
+    </message>
+</context>
+<context>
+    <name>RosterManager</name>
+    <message>
+        <source>Could not add contact, as a result of not being connected.</source>
+        <translation type="unfinished">Konnte den Kontakt nicht hinzufügen, da Sie nicht verbunden sind.</translation>
+    </message>
+    <message>
+        <source>Could not remove contact, as a result of not being connected.</source>
+        <translation type="unfinished">Konnte den Kontakt nicht entfernen, da Sie nicht verbunden sind.</translation>
     </message>
 </context>
 <context>
@@ -421,6 +439,21 @@
     </message>
 </context>
 <context>
+    <name>SendMediaSheet</name>
+    <message>
+        <source>Caption</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cancel</source>
+        <translation type="unfinished">Abbrechen</translation>
+    </message>
+    <message>
+        <source>Send</source>
+        <translation type="unfinished">Senden</translation>
+    </message>
+</context>
+<context>
     <name>SubRequestAcceptSheet</name>
     <message>
         <source>Subscription Request</source>
@@ -450,7 +483,7 @@
     <name>ToolBarPageHeader</name>
     <message>
         <source>More Actions</source>
-        <translation type="vanished">Mehr Aktionen</translation>
+        <translation>Mehr Aktionen</translation>
     </message>
 </context>
 <context>

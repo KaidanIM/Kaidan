@@ -123,12 +123,12 @@
 <context>
     <name>FileChooserMobile</name>
     <message>
-        <source>go to parent folder</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Close</source>
         <translation type="unfinished">Tutup</translation>
+    </message>
+    <message>
+        <source>Go to parent folder</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -169,24 +169,20 @@
     <name>Kaidan</name>
     <message>
         <source>Could not send message, as a result of not being connected.</source>
-        <translation>Tidak dapat hantar mesej, kerana anda tiada sambungan internet.</translation>
+        <translation type="vanished">Tidak dapat hantar mesej, kerana anda tiada sambungan internet.</translation>
     </message>
     <message>
         <source>Could not add contact, as a result of not being connected.</source>
-        <translation>Tidak dapat menambah kenalan, kerana anda tiada sambungan internet.</translation>
+        <translation type="vanished">Tidak dapat menambah kenalan, kerana anda tiada sambungan internet.</translation>
     </message>
     <message>
         <source>Could not remove contact, as a result of not being connected.</source>
-        <translation>Tidak dapat membuang kenalan, kerana anda tiada sambungan internet.</translation>
+        <translation type="vanished">Tidak dapat membuang kenalan, kerana anda tiada sambungan internet.</translation>
     </message>
     <message>
         <source>The link will be opened after you have connected.</source>
         <extracomment>The link is an XMPP-URI (i.e. &apos;xmpp:kaidan@muc.kaidan.im?join&apos; for joining a chat)</extracomment>
         <translation>Pautan akan dibuka selepas anda disambungkan.</translation>
-    </message>
-    <message>
-        <source>Could not send file, as a result of not being connected.</source>
-        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -269,6 +265,13 @@
     </message>
 </context>
 <context>
+    <name>MessageHandler</name>
+    <message>
+        <source>Could not send message, as a result of not being connected.</source>
+        <translation type="unfinished">Tidak dapat hantar mesej, kerana anda tiada sambungan internet.</translation>
+    </message>
+</context>
+<context>
     <name>RosterAddContactSheet</name>
     <message>
         <source>Nickname:</source>
@@ -343,7 +346,18 @@
     </message>
     <message>
         <source>Invalid</source>
-        <translation>Tidak sah</translation>
+        <translation type="vanished">Tidak sah</translation>
+    </message>
+</context>
+<context>
+    <name>RosterManager</name>
+    <message>
+        <source>Could not add contact, as a result of not being connected.</source>
+        <translation type="unfinished">Tidak dapat menambah kenalan, kerana anda tiada sambungan internet.</translation>
+    </message>
+    <message>
+        <source>Could not remove contact, as a result of not being connected.</source>
+        <translation type="unfinished">Tidak dapat membuang kenalan, kerana anda tiada sambungan internet.</translation>
     </message>
 </context>
 <context>
@@ -389,6 +403,21 @@
     </message>
 </context>
 <context>
+    <name>SendMediaSheet</name>
+    <message>
+        <source>Caption</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cancel</source>
+        <translation type="unfinished">Batal</translation>
+    </message>
+    <message>
+        <source>Send</source>
+        <translation type="unfinished">Hantar</translation>
+    </message>
+</context>
+<context>
     <name>SubRequestAcceptSheet</name>
     <message>
         <source>Subscription Request</source>
@@ -418,7 +447,7 @@
     <name>ToolBarPageHeader</name>
     <message>
         <source>More Actions</source>
-        <translation type="obsolete">Tindakan Lanjut</translation>
+        <translation type="unfinished">Tindakan Lanjut</translation>
     </message>
 </context>
 </TS>

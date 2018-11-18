@@ -108,11 +108,11 @@
 <context>
     <name>FileChooserMobile</name>
     <message>
-        <source>go to parent folder</source>
+        <source>Close</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Close</source>
+        <source>Go to parent folder</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -150,24 +150,20 @@
     <name>Kaidan</name>
     <message>
         <source>Could not send message, as a result of not being connected.</source>
-        <translation>Kunne ikke sende melding, som følge av manglende tilkobling.</translation>
+        <translation type="vanished">Kunne ikke sende melding, som følge av manglende tilkobling.</translation>
     </message>
     <message>
         <source>Could not add contact, as a result of not being connected.</source>
-        <translation>Kunne ikke legge til kontakt, som følge av manglende tilkobling.</translation>
+        <translation type="vanished">Kunne ikke legge til kontakt, som følge av manglende tilkobling.</translation>
     </message>
     <message>
         <source>Could not remove contact, as a result of not being connected.</source>
-        <translation>Kunne ikke fjerne kontakt, som følge av manglende tilkobling.</translation>
+        <translation type="vanished">Kunne ikke fjerne kontakt, som følge av manglende tilkobling.</translation>
     </message>
     <message>
         <source>The link will be opened after you have connected.</source>
         <extracomment>The link is an XMPP-URI (i.e. &apos;xmpp:kaidan@muc.kaidan.im?join&apos; for joining a chat)</extracomment>
         <translation>Lenken vil åpnes etter at du har koblet til.</translation>
-    </message>
-    <message>
-        <source>Could not send file, as a result of not being connected.</source>
-        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -246,6 +242,13 @@
     </message>
 </context>
 <context>
+    <name>MessageHandler</name>
+    <message>
+        <source>Could not send message, as a result of not being connected.</source>
+        <translation type="unfinished">Kunne ikke sende melding, som følge av manglende tilkobling.</translation>
+    </message>
+</context>
+<context>
     <name>RosterAddContactSheet</name>
     <message>
         <source>Add new contact</source>
@@ -320,7 +323,18 @@
     </message>
     <message>
         <source>Invalid</source>
-        <translation>Ugyldig</translation>
+        <translation type="vanished">Ugyldig</translation>
+    </message>
+</context>
+<context>
+    <name>RosterManager</name>
+    <message>
+        <source>Could not add contact, as a result of not being connected.</source>
+        <translation type="unfinished">Kunne ikke legge til kontakt, som følge av manglende tilkobling.</translation>
+    </message>
+    <message>
+        <source>Could not remove contact, as a result of not being connected.</source>
+        <translation type="unfinished">Kunne ikke fjerne kontakt, som følge av manglende tilkobling.</translation>
     </message>
 </context>
 <context>
@@ -370,6 +384,21 @@
     </message>
 </context>
 <context>
+    <name>SendMediaSheet</name>
+    <message>
+        <source>Caption</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cancel</source>
+        <translation type="unfinished">Avbryt</translation>
+    </message>
+    <message>
+        <source>Send</source>
+        <translation type="unfinished">Send</translation>
+    </message>
+</context>
+<context>
     <name>SubRequestAcceptSheet</name>
     <message>
         <source>Subscription Request</source>
@@ -399,7 +428,7 @@
     <name>ToolBarPageHeader</name>
     <message>
         <source>More Actions</source>
-        <translation type="obsolete">Flere handlinger</translation>
+        <translation type="unfinished">Flere handlinger</translation>
     </message>
 </context>
 </TS>

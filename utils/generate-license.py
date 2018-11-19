@@ -275,6 +275,13 @@ def main():
 			}
 		),
 		CopyrightTarget(
+			files = ["src/EmojiModel.cpp", "src/EmojiModel.h", "qml/elements/EmojiPicker.qml"],
+			licenseName = "GPL-3+",
+			authorList = {
+				"Konstantinos Sideris <siderisk@auth.gr>": CopyrightAuthor(years = "2017"),
+			},
+		),
+		CopyrightTarget(
 			files = ["data/images/message_checkmark.svg", "data/images/diaspora.svg"],
 			licenseName = "GPL-3+",
 			authorList = {

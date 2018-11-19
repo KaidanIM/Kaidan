@@ -52,6 +52,7 @@
 #include "Globals.h"
 #include "Enums.h"
 #include "StatusBar.h"
+#include "EmojiModel.h"
 
 #ifdef STATIC_BUILD
 #include "static_plugins.h"
@@ -164,6 +165,7 @@ Q_DECL_EXPORT int main(int argc, char *argv[])
 	qRegisterMetaType<QXmppClient::State>("QXmppClient::State");
 	qRegisterMetaType<MessageType>("MessageType");
 	qRegisterMetaType<DisconnectionReason>("DisconnectionReason");
+	qRegisterMetaType<EmojiModel*>("EmojiModel");
 
 	// Qt-Translator
 	QTranslator qtTranslator;
@@ -256,6 +258,7 @@ Q_DECL_EXPORT int main(int argc, char *argv[])
 	KirigamiPlugin::getInstance().registerTypes();
 #endif
 	qmlRegisterType<StatusBar>("StatusBar", 0, 1, "StatusBar");
+	qmlRegisterType<EmojiModel>("EmojiModel", 0, 1, "EmojiModel");
 	qmlRegisterUncreatableMetaObject(Enums::staticMetaObject, APPLICATION_ID,
 		1, 0, "Enums", "Can't create object; only enums defined!");
 

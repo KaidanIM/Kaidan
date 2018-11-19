@@ -34,6 +34,7 @@ import QtQuick.Layouts 1.3
 import org.kde.kirigami 2.2 as Kirigami
 import QtGraphicalEffects 1.0
 import im.kaidan.kaidan 1.0
+import EmojiModel 0.1
 import "elements"
 
 Kirigami.ScrollablePage {
@@ -215,6 +216,39 @@ Kirigami.ScrollablePage {
 						}
 					}
 				}
+			}
+
+			EmojiPicker {
+				x: -width + parent.width
+				y: -height - 16
+
+				width: Kirigami.Units.gridUnit * 20
+				height: Kirigami.Units.gridUnit * 15
+
+				id: emojiPicker
+
+				emojiModel: EmojiModel {
+					id: emojiModel
+				}
+
+				textArea: messageField
+			}
+
+			Controls.ToolButton {
+				id: emojiPickerButton
+				Layout.preferredWidth: Kirigami.Units.gridUnit * 3
+				Layout.preferredHeight: Kirigami.Units.gridUnit * 3
+				padding: 0
+				Kirigami.Icon {
+					source: "preferences-desktop-emoticons"
+					enabled: sendButton.enabled
+					isMask: true
+					smooth: true
+					anchors.centerIn: parent
+					width: Kirigami.Units.gridUnit * 2
+					height: width
+				}
+				onClicked: emojiPicker.visible ? emojiPicker.close() : emojiPicker.open()
 			}
 
 			Controls.ToolButton {

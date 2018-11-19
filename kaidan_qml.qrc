@@ -22,6 +22,7 @@
 		<file alias="qml/elements/SendMediaSheet.qml">src/qml/elements/SendMediaSheet.qml</file>
 		<file alias="qml/elements/MediaPreviewImage.qml">src/qml/elements/MediaPreviewImage.qml</file>
 		<file alias="qml/elements/MediaPreviewOther.qml">src/qml/elements/MediaPreviewOther.qml</file>
+		<file alias="qml/elements/EmojiPicker.qml">src/qml/elements/EmojiPicker.qml</file>
 
 		<file alias="qtquickcontrols2.conf">misc/qtquickcontrols2.conf</file>
 	</qresource>

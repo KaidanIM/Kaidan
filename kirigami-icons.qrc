@@ -46,4 +46,8 @@
     <qresource prefix="/icons/breeze/mimetypes/22">
         <file alias="text-x-plain.svg">3rdparty/breeze-icons/icons/mimetypes/22/text-x-plain.svg</file>
     </qresource>
+
+    <qresource prefix="icons/breeze/preferences/32">
+        <file alias="preferences-desktop-emoticons.svg">3rdparty/breeze-icons/icons/preferences/32/preferences-desktop-emoticons.svg</file>
+    </qresource>
 </RCC>

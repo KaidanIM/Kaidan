@@ -25,7 +25,7 @@ if [ ! -f "$KAIDAN_SOURCES/3rdparty/kirigami/.git" ] || [ ! -f "$KAIDAN_SOURCES/
     git submodule update --init
 fi
 
-if [ ! -d "$KAIDAN_SOURCES/3rdparty/qxmpp/.git" ]; then
+if [ ! -e "$KAIDAN_SOURCES/3rdparty/qxmpp/.git" ]; then
     echo "Cloning QXmpp"
     git clone https://github.com/qxmpp-project/qxmpp.git 3rdparty/qxmpp
 fi

@@ -8,45 +8,30 @@ mkdir -p $CLICK_TARGET_DIR
 DATE=$(date +%Y%m%d.%H%M)
 ARCH=$(dpkg-architecture -qDEB_HOST_ARCH)
 DEB_HOST_MULTIARCH=$(dpkg-architecture -qDEB_HOST_MULTIARCH)
+BUILD_DIR="build-${ARCH}"
 
-case ${ARCH} in
-	"amd64")
-		UBUNTU_MIRROR="http://archive.ubuntu.com/ubuntu"
-	;;
-	"armhf")
-		UBUNTU_MIRROR="http://ports.ubuntu.com/ubuntu-ports"
-	;;
-esac
+build_qxmpp() {
+	mkdir -p $KAIDAN_SOURCES/3rdparty/qxmpp/$BUILD_DIR
+	cd $KAIDAN_SOURCES/3rdparty/qxmpp/$BUILD_DIR
 
-install_deb() {
-	BASE_URL="${1}"; PKG="${2}"; VERSION="${3}"
-	DEB_NAME="${PKG}_${VERSION}_${ARCH}.deb"
+	cmake -GNinja \
+                -DCMAKE_BUILD_TYPE=Release \
+                -DBUILD_TESTS=0 \
+                -DBUILD_EXAMPLES=0 \
+                -DCMAKE_MAKE_PROGRAM=/usr/bin/ninja \
+                -DCMAKE_PREFIX_PATH="${CLICK_TARGET_DIR}" \
+                -DCMAKE_INSTALL_PREFIX="${CLICK_TARGET_DIR}" \
+                $KAIDAN_SOURCES/3rdparty/qxmpp
 
-	# download deb using curl with a nice progress bar
-	curl -L --progress-bar ${BASE_URL}/${DEB_NAME} -o "/tmp/${DEB_NAME}"
-	# install to click
-	dpkg-deb -x "/tmp/${DEB_NAME}" ${CLICK_TARGET_DIR}
-	# clean up
-	rm "/tmp/${DEB_NAME}"
-}
-
-install_dependencies() {
-	QXMPP_VERSION="0.9.3-1build1"
-
-	echo "I: Installing QXMPP"
-	for PKG in libqxmpp-dev libqxmpp0; do
-		install_deb ${UBUNTU_MIRROR}/pool/universe/q/qxmpp/ ${PKG} ${QXMPP_VERSION}
-	done
-
-	echo "I: Installing libraries"
-	cp -R $CLICK_TARGET_DIR/usr/* $CLICK_TARGET_DIR/
+	ninja install
 }
 
 build_kaidan() {
-	mkdir -p $KAIDAN_SOURCES/build
-	cd $KAIDAN_SOURCES/build
-	export PKG_CONFIG_PATH=$PKG_CONFIG_PATH:$CLICK_TARGET_DIR/lib/$DEB_HOST_MULTIARCH/pkgconfig
-	export LDFLAGS="${LDFLAGS} -L${CLICK_TARGET_DIR}/lib/$DEB_HOST_MULTIARCH"
+	mkdir -p $KAIDAN_SOURCES/$BUILD_DIR
+	cd $KAIDAN_SOURCES/$BUILD_DIR
+	export PKG_CONFIG_PATH=$PKG_CONFIG_PATH:$CLICK_TARGET_DIR/lib/$DEB_HOST_MULTIARCH/pkgconfig:$CLICK_TARGET_DIR/lib/pkgconfig
+	export LDFLAGS="${LDFLAGS} -L${CLICK_TARGET_DIR}/lib/$DEB_HOST_MULTIARCH -L${CLICK_TARGET_DIR}/lib"
+
 	cmake .. \
 	      -GNinja \
 	      -DCMAKE_MAKE_PROGRAM=/usr/bin/ninja \
@@ -66,23 +51,16 @@ build_kaidan() {
 cleanup_click_dir() {
 	# Strip out documentation and includes
 	rm -r \
-		$CLICK_TARGET_DIR/usr \
-		$CLICK_TARGET_DIR/include \
-		$CLICK_TARGET_DIR/share/doc \
-		$CLICK_TARGET_DIR/lib/$DEB_HOST_MULTIARCH/pkgconfig
+		$CLICK_TARGET_DIR/include
 }
 
-echo "*****************************************"
-echo "Downloading Debian packages"
-echo "*****************************************"
-
-install_dependencies
 
 
 echo "*****************************************"
 echo "Building Kaidan"
 echo "*****************************************"
 
+build_qxmpp
 build_kaidan
 
 cleanup_click_dir

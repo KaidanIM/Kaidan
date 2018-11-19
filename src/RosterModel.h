@@ -57,7 +57,7 @@ signals:
 	void setUnreadMessageCountRequested(const QString jid, const int unreadMessageCount);
 	void setLastMessageRequested(const QString jid, QString message);
 	void newUnreadMessageRequested(const QString jid);
-	void replaceContactsRequested(const ContactMap contactMap);
+	void replaceContactsRequested(const ContactMap &contactMap);
 
 private slots:
 	void clearData();
@@ -68,7 +68,7 @@ private slots:
 	void setUnreadMessageCount(const QString jid, const int unreadMessageCount);
 	void newUnreadMessage(const QString jid);
 	void setLastMessage(const QString jid, QString message);
-	void replaceContacts(const ContactMap contactMap);
+	void replaceContacts(const ContactMap &contactMap);
 
 private:
 	QStringList getJidList();

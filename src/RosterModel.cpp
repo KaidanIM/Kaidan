@@ -222,7 +222,7 @@ void RosterModel::setLastMessage(const QString jid, QString message)
 	submit();
 }
 
-void RosterModel::replaceContacts(const QMap<QString, QString> contactList)
+void RosterModel::replaceContacts(const ContactMap &contactList)
 {
 	// This will first remove a list of JIDs from the DB that were deleted on
 	// the server, then it'll update all the nick names. This is made so

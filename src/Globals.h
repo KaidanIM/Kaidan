@@ -47,6 +47,6 @@
 /**
  * Map of JIDs to contact names
  */
-typedef QMap<QString, QString> ContactMap;
+typedef QHash<QString, QString> ContactMap;
 
 #endif // GLOBALS_H

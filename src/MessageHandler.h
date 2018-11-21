@@ -34,6 +34,7 @@
 // Qt
 #include <QObject>
 // QXmpp
+#include <QXmppGlobal.h>
 #include <QXmppMessage.h>
 #include <QXmppMessageReceiptManager.h>
 // Kaidan
@@ -42,6 +43,10 @@
 class Kaidan;
 class MessageModel;
 class QMimeType;
+class QXmppDiscoveryIq;
+#if QXMPP_VERSION >= 0x000904
+class QXmppCarbonManager;
+#endif
 
 using namespace Enums;
 
@@ -56,6 +61,8 @@ public:
 	MessageHandler(Kaidan *kaidan, QXmppClient *client, MessageModel *model,
 	               QObject *parent = nullptr);
 
+	~MessageHandler();
+
 public slots:
 	/**
 	 * Handles incoming messages from the server
@@ -67,11 +74,19 @@ public slots:
 	 */
 	void sendMessage(QString toJid, QString body);
 
+	/**
+	 * Handles service discovery info and enables carbons if feature was found
+	 */
+	void handleDiscoInfo(const QXmppDiscoveryIq &);
+
 private:
 	Kaidan *kaidan;
 	QXmppClient *client;
 	QXmppMessageReceiptManager receiptManager;
 	MessageModel *model;
+#if QXMPP_VERSION >= 0x000904
+	QXmppCarbonManager *carbonManager;
+#endif
 	QString chatPartner;
 };
 

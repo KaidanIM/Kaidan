@@ -164,8 +164,10 @@ void RosterManager::handleMessage(const QXmppMessage &msg)
 	QString dateTime = QDateTime::currentDateTime().toUTC().toString(Qt::ISODate);
 	emit model->setLastExchangedRequested(contactJid, dateTime);
 
-	// update unread message counter
-	if (!sentByMe && chatPartner != contactJid)
+	// when we sent a message we can ignore all unread message notifications
+	if (sentByMe)
+		emit model->setUnreadMessageCountRequested(contactJid, 0);
+	// update unread message counter, if chat is not active
+	else if (!sentByMe && chatPartner != contactJid)
 		emit model->newUnreadMessageRequested(contactJid);
 }
-

@@ -36,6 +36,10 @@
 #include <QXmppClient.h>
 #include <QXmppUtils.h>
 #include <QXmppRosterManager.h>
+#include <QXmppDiscoveryManager.h>
+#if QXMPP_VERSION >= 0x000904
+#include <QXmppCarbonManager.h>
+#endif
 // Kaidan
 #include "Kaidan.h"
 #include "MessageModel.h"
@@ -53,6 +57,33 @@ MessageHandler::MessageHandler(Kaidan *kaidan, QXmppClient *client, MessageModel
 		[=] (const QString&, const QString &id) {
 		emit model->setMessageAsDeliveredRequested(id);
 	});
+
+#if QXMPP_VERSION >= 0x000904 // QXmppCarbonManager was added in v0.9.4
+	carbonManager = new QXmppCarbonManager();
+	client->addExtension(carbonManager);
+
+	// messages sent to our account (forwarded from another client)
+	connect(carbonManager, &QXmppCarbonManager::messageReceived,
+	        client, &QXmppClient::messageReceived);
+	// messages sent from our account (but another client)
+	connect(carbonManager, &QXmppCarbonManager::messageSent,
+	        client, &QXmppClient::messageReceived);
+
+	// carbons discovery
+	QXmppDiscoveryManager *discoManager = client->findExtension<QXmppDiscoveryManager>();
+	if (!discoManager)
+		return;
+
+	connect(discoManager, &QXmppDiscoveryManager::infoReceived,
+	        this, &MessageHandler::handleDiscoInfo);
+#endif
+}
+
+MessageHandler::~MessageHandler()
+{
+#if QXMPP_VERSION >= 0x000904
+	delete carbonManager;
+#endif
 }
 
 void MessageHandler::handleMessage(const QXmppMessage &msg)
@@ -126,3 +157,13 @@ void MessageHandler::sendMessage(QString toJid, QString body)
 	client->sendPacket(m);
 }
 
+void MessageHandler::handleDiscoInfo(const QXmppDiscoveryIq &info)
+{
+#if QXMPP_VERSION >= 0x000904
+	if (info.from() != client->configuration().domain())
+		return;
+	// enable carbons, if feature found
+	if (info.features().contains(QString("urn:xmpp:carbons:2")))
+		carbonManager->setCarbonsEnabled(true);
+#endif
+}

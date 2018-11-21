@@ -5,10 +5,10 @@
 Files: src/*
        utils/*
        misc/*
-Copyright: 2016-2018, LNJ <git@lnj.li>
-           2016-2018, JBB <jbb.prv@gmx.de>
-           2018, Allan Nordhøy <epost@anotheragency.no>
+Copyright: 2016-2018, Linus Jahn <lnj@kaidan.im>
+           2016-2018, Jonah Brüchert <jbb@kaidan.im>
            2017-2018, Ilya Bizyaev <bizyaev@zoho.com>
+           2018, Allan Nordhøy <epost@anotheragency.no>
            2018, Bjarne Roß <ross.b@freenet.de>
            2018, SohnyBohny <sohny.bean@streber24.de>
            2018, Marco Martin <notmart@gmail.com>
@@ -17,8 +17,8 @@ Copyright: 2016-2018, LNJ <git@lnj.li>
 License: GPL-3+ with OpenSSL exception
 
 Files: i18n/*
-Copyright: 2017-2018, LNJ <git@lnj.li>
-           2017-2018, JBB <jbb.prv@gmx.de>
+Copyright: 2017-2018, Linus Jahn <lnj@kaidan.im>
+           2017-2018, Jonah Brüchert <jbb@kaidan.im>
            2017-2018, Muhammad Nur Hidayat Yasuyoshi <mnh48mail@gmail.com>
            2018, Allan Nordhøy <epost@anotheragency.no>
            2018, advocatux <advocatux@airpost.net>

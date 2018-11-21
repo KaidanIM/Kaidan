@@ -32,11 +32,14 @@ import datetime
 # These user ids will be replaced for the LICENSE file
 # If you want to be added to this list, please open an issue or pull request!
 REPLACE_USER_IDS = [
-	("Ellenjott [LNJ] <git@lnj.li>", "LNJ <git@lnj.li>"),
-	("JBBgameich <jbbgameich@outlook.com>", "JBB <jbb.prv@gmx.de>"),
-	("JBBgameich <jbbgameich@gmail.com>", "JBB <jbb.prv@gmx.de>"),
-	("JBBgameich <jbb.prv@gmx.de>", "JBB <jbb.prv@gmx.de>"),
-	("Linus Jahn <linus.jahn@searchmetrics.com>", "LNJ <git@lnj.li>"),
+	("Ellenjott [LNJ] <git@lnj.li>", "Linus Jahn <lnj@kaidan.im>"),
+	("LNJ <git@lnj.li>", "Linus Jahn <lnj@kaidan.im>"),
+	("Linus Jahn <linus.jahn@searchmetrics.com>", "Linus Jahn <lnj@kaidan.im>"),
+	("JBBgameich <jbbgameich@outlook.com>", "Jonah Brüchert <jbb@kaidan.im>"),
+	("JBBgameich <jbbgameich@gmail.com>", "Jonah Brüchert <jbb@kaidan.im>"),
+	("JBBgameich <jbb.prv@gmx.de>", "Jonah Brüchert <jbb@kaidan.im>"),
+	("JBB <jbb.prv@gmx.de>", "Jonah Brüchert <jbb@kaidan.im>"),
+	("Jonah Brüchert <jbb.prv@gmx.de>", "Jonah Brüchert <jbb@kaidan.im>"),
 	("Georg <s.g.b@gmx.de>", "geobra <s.g.b@gmx.de>"),
 	("Muhammad Nur Hidayat Yasuyoshi (MNH48.com) <muhdnurhidayat96@yahoo.com>",
 	 "Muhammad Nur Hidayat Yasuyoshi <mnh48mail@gmail.com>")

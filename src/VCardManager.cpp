@@ -64,7 +64,7 @@ void VCardManager::handlePresence(const QXmppPresence &presence)
 {
 	if (presence.vCardUpdateType() == QXmppPresence::VCardUpdateValidPhoto) {
 		QString hash = avatarStorage->getHashOfJid(QXmppUtils::jidToBareJid(presence.from()));
-		QString newHash = presence.photoHash();
+		QString newHash = presence.photoHash().toHex();
 
 		// check if hash differs and we need to refetch the avatar
 		if (hash != newHash)

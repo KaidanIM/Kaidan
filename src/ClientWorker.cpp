@@ -71,6 +71,11 @@ ClientWorker::ClientWorker(Caches *caches, Kaidan *kaidan, bool enableLogging, Q
 	client->versionManager().setClientName(APPLICATION_DISPLAY_NAME);
 	client->versionManager().setClientVersion(VERSION_STRING);
 	client->versionManager().setClientOs(QSysInfo::prettyProductName());
+
+#if QXMPP_VERSION >= 0x000904
+	// Client State Indication
+	connect(app, &QGuiApplication::applicationStateChanged, this, &ClientWorker::setCsiState);
+#endif
 }
 
 ClientWorker::~ClientWorker()
@@ -159,3 +164,13 @@ QString ClientWorker::generateRandomString(unsigned int length) const
 	}
 	return randomString;
 }
+
+#if QXMPP_VERSION >= 0x000904 // after QXmpp v0.9.4
+void ClientWorker::setCsiState(Qt::ApplicationState state)
+{
+	if (state == Qt::ApplicationActive)
+		client->setActive(true);
+	else
+		client->setActive(false);
+}
+#endif

@@ -62,6 +62,7 @@ Kirigami.ScrollablePage {
 
 	ListView {
 		verticalLayoutDirection: ListView.TopToBottom
+		focus: true
 		model: kaidan.rosterModel
 		delegate: RosterListItem {
 			id: rosterItem
@@ -74,6 +75,10 @@ Kirigami.ScrollablePage {
 			avatarImagePath: kaidan.avatarStorage.getHashOfJid(model.jid) !== "" ?
 					 kaidan.avatarStorage.getAvatarUrl(model.jid) :
 					 kaidan.getResourcePath("images/fallback-avatar.svg")
+			backgroundColor: {
+				kaidan.chatPartner == model.jid ? Kirigami.Theme.highlightColor
+				                                : Kirigami.Theme.backgroundColor
+			}
 			onClicked: {
 				// first push the chat page
 				pageStack.push(chatPage, {

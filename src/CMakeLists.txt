@@ -19,10 +19,6 @@ set(KAIDAN_SOURCES
 	${CURDIR}/StatusBar.cpp
 	${CURDIR}/UploadManager.cpp
 
-	# SingleApplication
-	${CURDIR}/singleapp/singleapplication.cpp
-	${CURDIR}/singleapp/singleapplication_p.cpp
-
 	# needed to trigger moc generation
 	${CURDIR}/Enums.h
 
@@ -31,3 +27,10 @@ set(KAIDAN_SOURCES
 	${CURDIR}/qxmpp-exts/QXmppUploadRequestManager.cpp
 	${CURDIR}/qxmpp-exts/QXmppUploadManager.cpp
 )
+
+if (NOT ANDROID AND NOT IOS)
+	set (KAIDAN_SOURCES ${KAIDAN_SOURCES}
+		${CURDIR}/singleapp/singleapplication.cpp
+		${CURDIR}/singleapp/singleapplication_p.cpp
+	)
+endif()

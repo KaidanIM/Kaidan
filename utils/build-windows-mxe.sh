@@ -16,8 +16,6 @@ BUILD_TYPE="${BUILD_TYPE:-Debug}"
 MXE_TARGET="${MXE_TARGET:-i686-w64-mingw32.static}"
 
 KAIDAN_SOURCES=$(dirname "$(readlink -f "${0}")")/..
-KIRIGAMI_BUILD=/tmp/kirigami-linux-build
-GLOOX_BUILD=/tmp/gloox-windows-build
 
 echo "-- Starting $BUILD_TYPE build of Kaidan --"
 
@@ -30,9 +28,9 @@ if [ ! -f "$KAIDAN_SOURCES/3rdparty/kirigami/.git" ] || [ ! -f "$KAIDAN_SOURCES/
     git submodule update --init
 fi
 
-if [ ! -d "$GLOOX_BUILD" ]; then
-    echo "Cloning Gloox from SVN"
-    svn co svn://svn.camaya.net/gloox/branches/1.0 $GLOOX_BUILD
+if [ ! -d "$KAIDAN_SOURCES/3rdparty/qxmpp/.git" ]; then
+    echo "Cloning QXmpp"
+    git clone https://github.com/qxmpp-project/qxmpp.git 3rdparty/qxmpp
 fi
 
 if [ ! -d $MXE_ROOT ]; then
@@ -87,16 +85,20 @@ echo "*****************************************"
 }
 fi
 
-if [ ! -f "$MXE_ROOT/usr/$MXE_TARGET/lib/pkgconfig/gloox.pc" ]; then
+if [ ! -f "$MXE_ROOT/usr/$MXE_TARGET/lib/pkgconfig/qxmpp.pc" ]; then
 echo "*****************************************"
-echo "Building Gloox"
+echo "Building QXmpp"
 echo "*****************************************"
 {
-    cd $GLOOX_BUILD
-    ./autogen.sh
-    ./configure --host=$MXE_TARGET --prefix=$MXE_ROOT/usr/$MXE_TARGET --libdir=$MXE_ROOT/usr/$MXE_TARGET/lib --with-tests=no --with-examples=no # --with-schannel
+    cdnew $KAIDAN_SOURCES/3rdparty/qxmpp/build
+    $MXE_TARGET-cmake .. \
+        -DBUILD_TESTS=OFF \
+        -DBUILD_EXAMPLES=OFF \
+        -DCMAKE_BUILD_TYPE=$BUILD_TYPE
+
     make -j$(nproc)
     make install
+    rm -rf $KAIDAN_SOURCES/3rdparty/qxmpp/build
 }
 fi
 

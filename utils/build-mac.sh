@@ -13,6 +13,7 @@ BUILD_TYPE="${BUILD_TYPE:-Debug}"
 
 KAIDAN_SOURCES=$(dirname "$(greadlink -f "${0}")")/..
 KIRIGAMI_BUILD=/tmp/kirigami-mac-build
+QXMPP_BUILD=/tmp/qxmpp-mac-build
 
 echo "-- Starting $BUILD_TYPE build of Kaidan --"
 
@@ -25,6 +26,11 @@ if [ ! -f "$KAIDAN_SOURCES/3rdparty/kirigami/.git" ] || [ ! -f "$KAIDAN_SOURCES/
     git submodule update --init
 fi
 
+if [ ! -d "$KAIDAN_SOURCES/3rdparty/qxmpp/.git" ]; then
+    echo "Cloning QXmpp"
+    git clone https://github.com/qxmpp-project/qxmpp.git 3rdparty/qxmpp
+fi
+
 cdnew() {
     if [ -d "$1" ]; then
         rm -rf "$1"
@@ -32,6 +38,24 @@ cdnew() {
     mkdir $1
     cd $1
 }
+
+export QT_SELECT=qt5
+
+if [ ! -f "$QXMPP_BUILD/lib/pkgconfig/qxmpp.pc" ]; then
+echo "*****************************************"
+echo "Building QXmpp"
+echo "*****************************************"
+{
+    cdnew $KAIDAN_SOURCES/3rdparty/qxmpp/build
+    cmake .. \
+        -DCMAKE_PREFIX_PATH=$QT_MACOS \
+        -DBUILD_EXAMPLES=OFF \
+        -DCMAKE_BUILD_TYPE=$BUILD_TYPE -DCMAKE_INSTALL_PREFIX=$QXMPP_BUILD
+    make -j$(sysctl -n hw.logicalcpu)
+    make install
+    rm -rf $KAIDAN_SOURCES/3rdparty/qxmpp/build
+}
+fi
 
 if [ ! -f "$KIRIGAMI_BUILD/lib/libKF5Kirigami2.dylib" ]; then
 echo "*****************************************"
@@ -45,11 +69,43 @@ echo "*****************************************"
         -DECM_ADDITIONAL_FIND_ROOT_PATH=$QT_MACOS \
         -DCMAKE_BUILD_TYPE=$BUILD_TYPE -DCMAKE_INSTALL_PREFIX=$KIRIGAMI_BUILD
     
-    make -j$(nproc)
+    make -j$(sysctl -n hw.logicalcpu)
     make install
     rm -rf $KAIDAN_SOURCES/3rdparty/kirigami/build
 }
 fi
+
+if [ ! -f "$KAIDAN_SOURCES/misc/macos/kaidan.icns" ]; then
+echo "*****************************************"
+echo "Rendering logos"
+echo "*****************************************"
+if [ ! $(command -v inkscape)  ] || [ ! $(command -v optipng) ]; then
+echo "Icons can'be generated"
+exit 1
+fi
+
+rendersvg() {
+    inkscape -z -e $2 -w $3 -h $3 -d $4 $1
+    optipng -quiet $2
+}
+
+macoslogo() {
+    rendersvg $KAIDAN_SOURCES/misc/kaidan-small-margin.svg "$KAIDAN_SOURCES/misc/macos/kaidan.iconset/icon_$1x$1.png" $1 72
+    rendersvg $KAIDAN_SOURCES/misc/kaidan-small-margin.svg "$KAIDAN_SOURCES/misc/macos/kaidan.iconset/icon_$(( $1 * 2 ))x$(( $1 * 2 ))@2x.png" $(( $1 * 2 )) 144
+}
+
+mkdir -p $KAIDAN_SOURCES/misc/macos/kaidan.iconset
+
+macoslogo 16
+macoslogo 32
+macoslogo 128
+macoslogo 256
+macoslogo 512
+
+iconutil --convert icns "$KAIDAN_SOURCES/misc/macos/kaidan.iconset"
+fi
+
+export PKG_CONFIG_PATH=$QXMPP_BUILD/lib/pkgconfig
 
 if [ ! -f "$KAIDAN_SOURCES/build/bin/kaidan" ]; then
 echo "*****************************************"
@@ -57,41 +113,15 @@ echo "Building Kaidan"
 echo "*****************************************"
 {
     cdnew $KAIDAN_SOURCES/build
-    
+
     cmake .. \
         -DECM_DIR=/usr/local/share/ECM/cmake \
-        -DCMAKE_PREFIX_PATH=$QT_MACOS \
-        -DECM_ADDITIONAL_FIND_ROOT_PATH=$QT_MACOS \
+        -DCMAKE_PREFIX_PATH=$QT_MACOS\;$KIRIGAMI_BUILD\;$QXMPP_BUILD \
         -DKF5Kirigami2_DIR=$KIRIGAMI_BUILD/lib/cmake/KF5Kirigami2 -DI18N=1 \
         -DCMAKE_BUILD_TYPE=$BUILD_TYPE
-    
-    make -j$(nproc)
-}
-fi
 
-if [ ! -f "$KAIDAN_SOURCES/misc/macos/kaidan.icns" ]; then
-    echo "*****************************************"
-    echo "Rendering logos"
-    echo "*****************************************"
-    rendersvg() {
-        inkscape -z -e $2 -w $3 -h $3 -d $4 $1
-        optipng -quiet $2
-    }
-    
-    macoslogo() {
-        rendersvg $KAIDAN_SOURCES/misc/kaidan-small-margin.svg "$KAIDAN_SOURCES/misc/macos/kaidan.iconset/icon_$1x$1.png" $1 72
-        rendersvg $KAIDAN_SOURCES/misc/kaidan-small-margin.svg "$KAIDAN_SOURCES/misc/macos/kaidan.iconset/icon_$(( $1 * 2 ))x$(( $1 * 2 ))@2x.png" $(( $1 * 2 )) 144
-    }
-    
-    mkdir -p $KAIDAN_SOURCES/misc/macos/kaidan.iconset
-    
-    macoslogo 16
-    macoslogo 32
-    macoslogo 128
-    macoslogo 256
-    macoslogo 512
-    
-    iconutil --convert icns "$KAIDAN_SOURCES/misc/macos/kaidan.iconset"
+    make -j$(sysctl -n hw.logicalcpu)
+}
 fi
 
 echo "*****************************************"

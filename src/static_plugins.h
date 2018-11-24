@@ -31,7 +31,7 @@
 // This file imports static plugin classes for static plugins
 #include <QtPlugin>
 
-#ifdef __APPLE__
+#ifdef Q_OS_IOS
 Q_IMPORT_PLUGIN(QIOSIntegrationPlugin)
 Q_IMPORT_PLUGIN(QMacHeifPlugin)
 Q_IMPORT_PLUGIN(QMacJp2Plugin)
@@ -40,9 +40,11 @@ Q_IMPORT_PLUGIN(QTgaPlugin)
 Q_IMPORT_PLUGIN(QTiffPlugin)
 Q_IMPORT_PLUGIN(QWbmpPlugin)
 Q_IMPORT_PLUGIN(QWebpPlugin)
-#endif // __APPLE__
+#endif //Q_OS_IOS
 
-Q_IMPORT_PLUGIN (QWindowsIntegrationPlugin);
+#ifdef Q_OS_WIN
+Q_IMPORT_PLUGIN(QWindowsIntegrationPlugin);
+#endif
 
 // Media support
 Q_IMPORT_PLUGIN(QSvgPlugin)

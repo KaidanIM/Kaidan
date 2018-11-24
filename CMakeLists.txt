@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 2.8.11)
+cmake_minimum_required(VERSION 2.8.12)
 find_package(ECM 5.40.0 REQUIRED NO_MODULE)
 set(CMAKE_CXX_STANDARD 14)
 set(QT_MIN_VERSION "5.8.0")
@@ -43,10 +43,10 @@ kde_enable_exceptions()
 find_package(PkgConfig REQUIRED)
 find_package(Qt5 ${QT_MIN_VERSION} REQUIRED NO_MODULE COMPONENTS Core Qml Quick Svg Sql QuickControls2 Xml)
 find_package(KF5Kirigami2 REQUIRED)
-pkg_check_modules(QXmpp REQUIRED qxmpp>=0.9)
+pkg_search_module(QXmpp REQUIRED qxmpp>=0.9)
 
 # Optional QWidget style integration (not on mobile)
-if(NOT UBUNTU_TOUCH AND NOT ANDROID)
+if(NOT UBUNTU_TOUCH AND NOT ANDROID AND NOT IOS)
 	find_package(Qt5Widgets)
 	set_package_properties(Qt5Widgets PROPERTIES
 		DESCRIPTION "Integration with QWidget based desktop styles"
@@ -62,14 +62,12 @@ else()
 	add_definitions(-DQAPPLICATION_CLASS=QGuiApplication)
 endif()
 
-if (ANDROID)
+if(ANDROID)
 	find_package(Qt5 REQUIRED COMPONENTS AndroidExtras)
 endif()
 
-if (ANDROID OR WIN32)
-	pkg_search_module(OPENSSL REQUIRED openssl)
-
-	include_directories(${OPENSSL_INCLUDE_DIRS})
+if(ANDROID OR WIN32)
+	pkg_search_module(OPENSSL REQUIRED openssl IMPORTED_TARGET)
 	message(STATUS "Using OpenSSL ${OPENSSL_VERSION}")
 endif()
 
@@ -104,6 +102,7 @@ endif()
 # Set app icon
 if(APPLE)
 	set(KAIDAN_ICNS "${CMAKE_SOURCE_DIR}/misc/macos/kaidan.icns")
+	set_source_files_properties(${KAIDAN_ICNS} PROPERTIES MACOSX_PACKAGE_LOCATION "Resources")
 elseif(WIN32)
 	include(ECMAddAppIcon)
 	file(GLOB WIN_ICONS_SRCS "${CMAKE_SOURCE_DIR}/misc/windows/*kaidan.png")
@@ -132,8 +131,11 @@ target_link_libraries(${PROJECT_NAME}
 	Qt5::Network
 	Qt5::Xml
 	${__Qt5Widgets_LIBRARIES}
-	${QXmpp_LIBRARIES}
+	# currently needs to be hardcoded for windows builds
+	qxmpp
 )
+
+link_directories(${QXmpp_LIBDIR})
 
 target_include_directories(${PROJECT_NAME} PUBLIC
 	${QXmpp_INCLUDE_DIRS}
@@ -143,26 +145,69 @@ target_compile_options(${PROJECT_NAME} PUBLIC
 	${QXmpp_CFLAGS_OTHER}
 )
 
-if (ANDROID OR WIN32)
-	target_link_libraries(${PROJECT_NAME} Qt5::QuickControls2 KF5::Kirigami2 ${OPENSSL_LIBRARIES})
+if(ANDROID OR WIN32 OR IOS)
+	target_link_libraries(${PROJECT_NAME} Qt5::QuickControls2 KF5::Kirigami2)
 endif()
 
-if (ANDROID)
+if(ANDROID OR WIN32)
+	target_link_libraries(${PROJECT_NAME} PkgConfig::OPENSSL)
+endif()
+
+if(ANDROID)
 	target_link_libraries(${PROJECT_NAME} Qt5::AndroidExtras)
 endif()
 
-if (WIN32 AND STATIC_BUILD)
-	pkg_check_modules(QT5ALL Qt5Gui Qt5Quick Qt5QuickControls2 Qt5Network Qt5Qml Qt5Svg Qt5Sql)
-	foreach(plugin ${Qt5Gui_PLUGINS} ${Qt5Network_PLUGINS} ${Qt5Qml_PLUGINS} ${Qt5Svg_PLUGINS} ${Qt5Sql_PLUGINS})
-		get_target_property(_loc ${plugin} LOCATION)
-		message("Plugin ${plugin} is at location ${_loc}")
-		set(plugin_libs ${plugin_libs} ${_loc})
+if(STATIC_BUILD)
+	add_definitions(-DQXMPP_STATIC)
+
+	find_package(Perl REQUIRED)
+
+	set(STATIC_DEPENDENCIES_CMAKE_FILE "${CMAKE_BINARY_DIR}/QtStaticDependencies.cmake")
+	if(EXISTS ${STATIC_DEPENDENCIES_CMAKE_FILE})
+		file(REMOVE ${STATIC_DEPENDENCIES_CMAKE_FILE})
+	endif()
+
+	get_target_property(QT_LIBDIR Qt5::Core LOCATION)
+	get_filename_component(QT_LIBDIR ${QT_LIBDIR} DIRECTORY)
+
+	macro(CONVERT_PRL_LIBS_TO_CMAKE _qt_component)
+		if(TARGET Qt5::${_qt_component})
+			get_target_property(_lib_location Qt5::${_qt_component} LOCATION)
+			execute_process(COMMAND ${PERL_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/utils/convert-prl-libs-to-cmake.pl
+				--lib ${_lib_location}
+				--libdir ${QT_LIBDIR}
+				--out ${STATIC_DEPENDENCIES_CMAKE_FILE}
+				--component ${_qt_component}
+				--compiler ${CMAKE_CXX_COMPILER_ID}
+			)
+		endif()
+	endmacro()
+
+	link_directories(${_qt5_install_prefix}/../)
+
+	foreach(qt_module Gui Quick QuickControls2 Network Qml Svg Sql QSQLiteDriverPlugin
+             QJpegPlugin QGifPlugin QSvgPlugin QSvgIconPlugin QICOPlugin QGenericEnginePlugin
+	         QLocalClientConnectionFactory QTcpServerConnectionFactory)
+		CONVERT_PRL_LIBS_TO_CMAKE(${qt_module})
 	endforeach()
-	pkg_search_module(SQLITE REQUIRED sqlite3)
+
+	if(WIN32)
+		CONVERT_PRL_LIBS_TO_CMAKE(QWindowsIntegrationPlugin)
+	elseif(IOS)
+		foreach(qt_module QIOSIntegrationPlugin QMacHeifPlugin QMacJp2Plugin
+			QICNSPlugin QTgaPlugin QTiffPlugin QWbmpPlugin QWebpPlugin)
+			CONVERT_PRL_LIBS_TO_CMAKE(${qt_module})
+		endforeach()
+	endif()
+
+	if(NOT EXISTS ${STATIC_DEPENDENCIES_CMAKE_FILE})
+		message(FATAL_ERROR "Unable to find ${STATIC_DEPENDENCIES_CMAKE_FILE}")
+	endif()
+	include(${STATIC_DEPENDENCIES_CMAKE_FILE})
 
 	set(QT_QML_PATH ${_qt5Quick_install_prefix})
 
-	find_library(KIRIGAMI_PLUGIN kirigamiplugin PATHS ${CMAKE_PREFIX_PATH}/${KDE_INSTALL_QMLDIR}/org/kde/kirigami.2)
+	find_library(KIRIGAMI_PLUGIN kirigamiplugin PATHS ${Kirigami2_INSTALL_PREFIX}/${KDE_INSTALL_QMLDIR}/org/kde/kirigami.2)
 	find_library(QUICK_PLUGIN qtquick2plugin PATHS ${QT_QML_PATH}/qml/QtQuick.2)
 	find_library(LABS_PLATFORM_PLUGIN qtlabsplatformplugin PATHS ${QT_QML_PATH}/qml/Qt/labs/platform)
 	find_library(GRAPHEFFECTS_PLUGIN qtgraphicaleffectsplugin PATHS ${QT_QML_PATH}/qml/QtGraphicalEffects)
@@ -175,14 +220,17 @@ if (WIN32 AND STATIC_BUILD)
 	find_library(QSHAPES_PLUGIN qmlshapesplugin PATHS ${QT_QML_PATH}/qml/QtQuick/Shapes)
 	find_library(QTEMPLATES_PLUGIN qtquicktemplates2plugin PATHS ${QT_QML_PATH}/qml/QtQuick/Templates.2)
 	find_library(QMODELS_PLUGIN modelsplugin PATHS ${QT_QML_PATH}/qml/QtQml/Models.2)
-	find_library(WIN_SECUR32 secur32)
-	find_library(QT_FONT_SUPPORT Qt5FontDatabaseSupport)
-	find_library(QT_THEME_SUPPORT Qt5ThemeSupport)
-	find_library(QT_EVENT_SUPPORT Qt5EventDispatcherSupport)
-	find_library(QT_ACCESSIBILITY_SUPPORT Qt5AccessibilitySupport)
-	find_library(QT_UIAUTO_SUPPORT Qt5WindowsUIAutomationSupport)
 	target_link_libraries(${PROJECT_NAME}
 		${plugin_libs}
+		Qt5::QSQLiteDriverPlugin
+		Qt5::QJpegPlugin
+		Qt5::QGifPlugin
+		Qt5::QSvgPlugin
+		Qt5::QSvgIconPlugin
+		Qt5::QICOPlugin
+		Qt5::QGenericEnginePlugin
+		Qt5::QLocalClientConnectionFactory
+		Qt5::QTcpServerConnectionFactory
 		${KIRIGAMI_PLUGIN}
 		${QUICK_PLUGIN}
 		${LABS_PLATFORM_PLUGIN}
@@ -196,32 +244,49 @@ if (WIN32 AND STATIC_BUILD)
 		${QSHAPES_PLUGIN}
 		${QTEMPLATES_PLUGIN}
 		${QMODELS_PLUGIN}
-		${SQLITE_LIBRARIES}
-		${QT_EVENT_SUPPORT}
-		${QT_FONT_SUPPORT}
-		${QT_THEME_SUPPORT}
-		${QT_ACCESSIBILITY_SUPPORT}
-		${QT_UIAUTO_SUPPORT}
-		jpeg
-		${__Qt5Widgets_LIBRARIES} ${WIN_SECUR32}
-		${QT5ALL_LDFLAGS})
+		${__Qt5Widgets_LIBRARIES}
+	)
+
+	if(WIN32)
+		target_link_libraries(${PROJECT_NAME}
+			Qt5::QWindowsIntegrationPlugin
+		)
+	elseif(IOS)
+		target_link_libraries(${PROJECT_NAME}
+			Qt5::QIOSIntegrationPlugin
+			Qt5::QMacHeifPlugin
+			Qt5::QMacJp2Plugin
+			Qt5::QICNSPlugin
+			Qt5::QTgaPlugin
+			Qt5::QTiffPlugin
+			Qt5::QWbmpPlugin
+			Qt5::QWebpPlugin
+		)
+	endif()
 endif()
 
 # Set a custom plist file for the app bundle
-set_target_properties(${PROJECT_NAME} PROPERTIES MACOSX_BUNDLE_INFO_PLIST ${CMAKE_SOURCE_DIR}/misc/macos/Info.plist)
+if(APPLE)
+	if(IOS)
+		set_target_properties(${PROJECT_NAME} PROPERTIES MACOSX_BUNDLE_INFO_PLIST ${CMAKE_SOURCE_DIR}/misc/ios/Info.plist)
+	else()
+		set_target_properties(${PROJECT_NAME} PROPERTIES MACOSX_BUNDLE_INFO_PLIST ${CMAKE_SOURCE_DIR}/misc/macos/Info.plist)
+	endif()
+endif()
 
 #
 # Global C++ variables
 #
 
+# iOS-specific linker flags
+if(IOS)
+	set(CMAKE_EXE_LINKER_FLAGS ${CMAKE_EXE_LINKER_FLAGS} "-Wl,-e,_qt_main_wrapper -u _qt_registerPlatformPlugin")
+endif()
+
 if(UBUNTU_TOUCH)
-	set(KAIDAN_COMPILE_DEFINITIONS
-		UBUNTU_TOUCH=True
-	)
-elseif(NOT ANDROID)
-	set(KAIDAN_COMPILE_DEFINITIONS
-		NOTIFICATIONS_LIBNOTIFY=True
-	)
+	set(KAIDAN_COMPILE_DEFINITIONS UBUNTU_TOUCH=True)
+elseif(NOT ANDROID AND NOT IOS AND NOT WIN32)
+	set(KAIDAN_COMPILE_DEFINITIONS NOTIFICATIONS_LIBNOTIFY=True)
 endif()
 
 if(STATIC_BUILD)

@@ -110,6 +110,27 @@ COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER
 IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
 CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE."""
 
+MIT_APPLE_LICENSE = """Redistribution and use in source and binary forms, with or without
+modification, are permitted provided that the following conditions
+are met:
+1. Redistributions of source code must retain the above copyright
+   notice, this list of conditions and the following disclaimer.
+2. Redistributions in binary form must reproduce the above copyright
+   notice, this list of conditions and the following disclaimer in the
+   documentation and/or other materials provided with the distribution.
+
+THIS SOFTWARE IS PROVIDED BY APPLE INC. AND ITS CONTRIBUTORS ``AS IS''
+AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO,
+THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
+PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL APPLE INC. OR ITS CONTRIBUTORS
+BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF
+SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS
+INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
+CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
+ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF
+THE POSSIBILITY OF SUCH DAMAGE."""
+
 class CopyrightAuthor:
 	def __init__(self, score = 0, dates = None, years = "", uid = ""):
 		self.dates = dates or list([]);
@@ -282,6 +303,13 @@ def main():
 			},
 			comment = "data/images/chat.png: From <https://www.toptal.com/designers/subtlepatterns/inspiration-geometry/>"
 		),
+		CopyrightTarget(
+			files = ["utils/convert-prl-libs-to-cmake.pl"],
+			licenseName = "MIT-Apple",
+			authorList = {
+				"Konstantin Tokarev <annulen@yandex.ru>": CopyrightAuthor(years = "2016")
+			}
+		),
 		LicenseTarget(
 			name = "GPL-3+ with OpenSSL exception",
 			content = GPL3_OPENSSL_LICENSE
@@ -293,6 +321,10 @@ def main():
 		LicenseTarget(
 			name = "MIT",
 			content = MIT_LICENSE
+		),
+		LicenseTarget(
+			name = "MIT-Apple",
+			content = MIT_APPLE_LICENSE
 		)
 	];
 

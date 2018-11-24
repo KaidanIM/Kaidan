@@ -25,9 +25,10 @@ BUILD_TYPE="${BUILD_TYPE:-Debug}"
 ANDROID_SDK_BUILD_TOOLS_REVISION=${ANDROID_SDK_BUILD_TOOLS_REVISION:-25.0.3}
 # Build API version
 ANDROID_API_VERSION=21
+# Build architecture
+ANDROID_ARCH=${ANDROID_ARCH:-armv7}
 
 KAIDAN_SOURCES=$(dirname "$(readlink -f "${0}")")/..
-GLOOX_PATH=/tmp/gloox
 OPENSSL_PATH=/tmp/openssl
 OPENSSL_SETENV=$OPENSSL_PATH/Setenv-android.sh
 CUSTOM_ANDROID_TOOLCHAIN=/tmp/android-arm-toolchain
@@ -38,14 +39,14 @@ echo "*****************************************"
 echo "Fetching dependencies if required"
 echo "*****************************************"
 
-if [ ! -d "$GLOOX_PATH" ]; then
-    echo "Cloning Gloox from SVN"
-    svn co svn://svn.camaya.net/gloox/branches/1.0 $GLOOX_PATH
+if [ ! -d "$KAIDAN_SOURCES/3rdparty/qxmpp/.git" ]; then
+    echo "Cloning QXmpp"
+    git clone https://github.com/qxmpp-project/qxmpp.git 3rdparty/qxmpp
 fi
 
 if [ ! -d "$OPENSSL_PATH" ]; then
     echo "Cloning OpenSSL into $OPENSSL_PATH"
-    git clone --depth=1 git://git.openssl.org/openssl.git $OPENSSL_PATH
+    git clone --branch OpenSSL_1_0_2-stable --depth=1 git://git.openssl.org/openssl.git $OPENSSL_PATH
 fi
 
 if [ ! -f "$OPENSSL_SETENV" ]; then
@@ -78,41 +79,27 @@ echo "*****************************************"
 
 {
     cd $OPENSSL_PATH
-    source ./Setenv-android.sh
+    source $OPENSSL_SETENV
     export ANDROID_NDK=$ANDROID_NDK_ROOT
-    ./Configure shared android-armeabi --prefix=$CUSTOM_ANDROID_TOOLCHAIN
-    make build_libs -j$(nproc) SHLIB_VERSION_NUMBER= SHLIB_EXT=.so
-    make install_sw SHLIB_VERSION_NUMBER= SHLIB_EXT=.so
-}
-fi
 
-if [ ! -f "$CUSTOM_ANDROID_TOOLCHAIN/lib/libgloox.a" ]; then
-echo "*****************************************"
-echo "Building Gloox"
-echo "*****************************************"
+    case ${ANDROID_ARCH} in
+        x86)
+            sed -ie 's/_ANDROID_ARCH=.*$/_ANDROID_ARCH="arch-x86"/' $OPENSSL_SETENV
+            sed -ie 's/_ANDROID_EABI=.*$/_ANDROID_EABI="x86-4.9"/' $OPENSSL_SETENV
+        ;;
+        armv7)
+            sed -ie 's/_ANDROID_ARCH=.*$/_ANDROID_ARCH="arch-arm"/' $OPENSSL_SETENV
+            sed -ie 's/_ANDROID_EABI=.*$/_ANDROID_EABI="arm-linux-androideabi-4.9"/' $OPENSSL_SETENV
+        ;;
+    esac
 
-{
-    # Add the standalone toolchain to the search path.
-    export PATH=$CUSTOM_ANDROID_TOOLCHAIN/bin:$PATH
+    ./Configure --prefix=$CUSTOM_ANDROID_TOOLCHAIN shared android-${ANDROID_ARCH}
+    #./Configure -I${ANDROID_NDK_ROOT}/sysroot/usr/include -I${ANDROID_NDK_ROOT}/sysroot/usr/include/${CROSS_COMPILE::-1}/ shared android-${ANDROID_ARCH}
 
-    # Tell configure what tools to use.
-    export target_host=arm-linux-androideabi
-    export AR=$target_host-ar
-    export AS=$target_host-clang
-    export CC=$target_host-clang
-    export CXX=$target_host-clang++
-    export LD=$target_host-ld
-    export STRIP=$target_host-strip
-
-    # Tell configure what flags Android requires.
-    export CFLAGS="-fPIE -fPIC"
-    export LDFLAGS="-pie"
-
-    cd $GLOOX_PATH
-    ./autogen.sh
-    ./configure --host=arm --with-openssl=$CUSTOM_ANDROID_TOOLCHAIN --prefix=$CUSTOM_ANDROID_TOOLCHAIN --with-tests=no --with-examples=no
-    make -j$(nproc)
-    make install
+    make depend
+    make CALC_VERSIONS="SHLIB_COMPAT=; SHLIB_SOVER=" build_libs -j$(nproc) || return
+    make -k CALC_VERSIONS="SHLIB_COMPAT=; SHLIB_SOVER=" install_sw -j$(nproc)
+    cp -v libcrypto.so libssl.so $CUSTOM_ANDROID_TOOLCHAIN/lib
 }
 fi
 
@@ -124,6 +111,28 @@ cdnew() {
     cd $1
 }
 
+if [ ! -f "$CUSTOM_ANDROID_TOOLCHAIN/lib/pkgconfig/qxmpp.pc" ]; then
+echo "*****************************************"
+echo "Building QXmpp"
+echo "*****************************************"
+{
+    cdnew $KAIDAN_SOURCES/3rdparty/qxmpp/build
+    cmake .. \
+        -DCMAKE_TOOLCHAIN_FILE=/usr/share/ECM/toolchain/Android.cmake \
+        -DECM_ADDITIONAL_FIND_ROOT_PATH=$QT_ANDROID \
+        -DANDROID_NDK=$ANDROID_NDK_ROOT \
+        -DANDROID_SDK_ROOT=$ANDROID_SDK_ROOT \
+        -DANDROID_SDK_BUILD_TOOLS_REVISION=$ANDROID_SDK_BUILD_TOOLS_REVISION \
+        -DCMAKE_PREFIX_PATH=$QT_ANDROID \
+        -DBUILD_EXAMPLES=OFF -DBUILD_TESTS=OFF \
+        -DCMAKE_BUILD_TYPE=$BUILD_TYPE -DCMAKE_INSTALL_PREFIX=$CUSTOM_ANDROID_TOOLCHAIN
+
+    make -j$(nproc)
+    make install
+    rm -rf $KAIDAN_SOURCES/3rdparty/qxmpp/build
+}
+fi
+
 if [ ! -f "$CUSTOM_ANDROID_TOOLCHAIN/lib/libKF5Kirigami2.so" ]; then
 echo "*****************************************"
 echo "Building Kirigami"
@@ -132,7 +141,7 @@ echo "*****************************************"
     cdnew $KAIDAN_SOURCES/3rdparty/kirigami/build
     cmake .. \
         -DCMAKE_TOOLCHAIN_FILE=/usr/share/ECM/toolchain/Android.cmake \
-        -DECM_ADDITIONAL_FIND_ROOT_PATH=$QT_ANDROID  \
+        -DECM_ADDITIONAL_FIND_ROOT_PATH=$QT_ANDROID \
         -DCMAKE_PREFIX_PATH=$QT_ANDROID/ \
         -DANDROID_NDK=$ANDROID_NDK_ROOT \
         -DANDROID_SDK_ROOT=$ANDROID_SDK_ROOT \
@@ -145,7 +154,7 @@ echo "*****************************************"
 }
 fi
 
-if [ ! -d "$KAIDAN_SOURCES/misc/android/res/mipmap-ldpi" ]; then
+if [ ! -d "$KAIDAN_SOURCES/misc/android/res/mipmap-xxxhdpi" ]; then
     echo "*****************************************"
     echo "Rendering logos"
     echo "*****************************************"
@@ -168,6 +177,8 @@ if [ ! -d "$KAIDAN_SOURCES/misc/android/res/mipmap-ldpi" ]; then
     androidlogo xxxhdpi 192
 fi
 
+export PKG_CONFIG_PATH=$CUSTOM_ANDROID_TOOLCHAIN/lib/pkgconfig
+
 echo "*****************************************"
 echo "Building Kaidan"
 echo "*****************************************"
@@ -183,7 +194,7 @@ echo "*****************************************"
         -DANDROID_SDK_BUILD_TOOLS_REVISION=$ANDROID_SDK_BUILD_TOOLS_REVISION \
         -DCMAKE_INSTALL_PREFIX=$CUSTOM_ANDROID_TOOLCHAIN \
         -DANDROID_APK_DIR=../misc/android -DCMAKE_BUILD_TYPE=$BUILD_TYPE \
-        -DKF5Kirigami2_DIR=$CUSTOM_ANDROID_TOOLCHAIN/lib/cmake/KF5Kirigami2 -DI18N=1
+        -DI18N=1
     make create-apk-kaidan -j$(nproc)
 }
 

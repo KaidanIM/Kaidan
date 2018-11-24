@@ -13,6 +13,7 @@ BUILD_TYPE="${BUILD_TYPE:-Debug}"
 
 KAIDAN_SOURCES=$(dirname "$(readlink -f "${0}")")/..
 KIRIGAMI_BUILD=/tmp/kirigami-linux-build
+QXMPP_BUILD=/tmp/qxmpp-linux-build
 
 echo "-- Starting $BUILD_TYPE build of Kaidan --"
 
@@ -23,6 +24,11 @@ echo "*****************************************"
 if [ ! -f "$KAIDAN_SOURCES/3rdparty/kirigami/.git" ] || [ ! -f "$KAIDAN_SOURCES/3rdparty/breeze-icons/.git" ]; then
     echo "Cloning Kirigami and Breeze icons"
     git submodule update --init
+fi
+
+if [ ! -d "$KAIDAN_SOURCES/3rdparty/qxmpp/.git" ]; then
+    echo "Cloning QXmpp"
+    git clone https://github.com/qxmpp-project/qxmpp.git 3rdparty/qxmpp
 fi
 
 if [ ! -f "$KAIDAN_SOURCES/3rdparty/linuxdeployqt-continuous-x86_64.AppImage" ]; then
@@ -40,6 +46,24 @@ cdnew() {
 }
 
 export QT_SELECT=qt5
+
+if [ ! -f "$QXMPP_BUILD/lib/pkgconfig/qxmpp.pc" ]; then
+echo "*****************************************"
+echo "Building QXmpp"
+echo "*****************************************"
+{
+    cdnew $KAIDAN_SOURCES/3rdparty/qxmpp/build
+    cmake .. \
+        -DCMAKE_PREFIX_PATH=$QT_LINUX \
+        -DBUILD_EXAMPLES=OFF \
+        -DCMAKE_BUILD_TYPE=$BUILD_TYPE -DCMAKE_INSTALL_PREFIX=$QXMPP_BUILD \
+        -DCMAKE_INSTALL_LIBDIR=$QXMPP_BUILD/lib
+
+    make -j$(nproc)
+    make install
+    rm -rf $KAIDAN_SOURCES/3rdparty/qxmpp/build
+}
+fi
 
 if [ ! -f "$KIRIGAMI_BUILD/lib/libKF5Kirigami2.so" ]; then
 echo "*****************************************"
@@ -59,6 +83,8 @@ echo "*****************************************"
 }
 fi
 
+export PKG_CONFIG_PATH=$QXMPP_BUILD/lib/pkgconfig
+
 if [ ! -f "$KAIDAN_SOURCES/build/bin/kaidan" ]; then
 echo "*****************************************"
 echo "Building Kaidan"
@@ -68,8 +94,8 @@ echo "*****************************************"
 
     cmake .. \
         -DECM_DIR=/usr/share/ECM/cmake \
-        -DCMAKE_PREFIX_PATH=$QT_LINUX \
-        -DKF5Kirigami2_DIR=$KIRIGAMI_BUILD/lib/cmake/KF5Kirigami2 -DI18N=1 \
+        -DCMAKE_PREFIX_PATH=$QT_LINUX\;$KIRIGAMI_BUILD\;$QXMPP_BUILD \
+        -DI18N=1 \
         -DCMAKE_BUILD_TYPE=$BUILD_TYPE -DCMAKE_INSTALL_PREFIX=/usr
     
     make -j$(nproc)

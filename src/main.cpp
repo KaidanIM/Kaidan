@@ -62,7 +62,7 @@
 #endif
 #include QT_STRINGIFY(QAPPLICATION_CLASS)
 
-#ifndef Q_OS_ANDROID
+#if !defined(Q_OS_IOS) && !defined(Q_OS_ANDROID)
 // SingleApplication (Qt5 replacement for QtSingleApplication)
 #include "singleapp/singleapplication.h"
 #endif
@@ -74,6 +74,10 @@
 
 #ifdef Q_OS_ANDROID
 #include <QtAndroid>
+#endif
+
+#ifdef Q_OS_WIN
+#include <windows.h>
 #endif
 
 enum CommandLineParseResult {
@@ -115,7 +119,7 @@ CommandLineParseResult parseCommandLine(QCommandLineParser &parser, QString *err
 
 Q_DECL_EXPORT int main(int argc, char *argv[])
 {
-#ifdef _WIN32
+#ifdef Q_OS_WIN
 	if (AttachConsole(ATTACH_PARENT_PROCESS)) {
 		freopen("CONOUT$", "w", stdout);
 		freopen("CONOUT$", "w", stderr);
@@ -141,7 +145,7 @@ Q_DECL_EXPORT int main(int argc, char *argv[])
 	QGuiApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
 
 	// create a qt app
-#ifdef Q_OS_ANDROID
+#if defined(Q_OS_IOS) || defined(Q_OS_ANDROID)
 	QGuiApplication app(argc, argv);
 #else
 	SingleApplication app(argc, argv, true);
@@ -194,7 +198,7 @@ Q_DECL_EXPORT int main(int argc, char *argv[])
 		break;
 	}
 
-#ifndef Q_OS_ANDROID
+#if !defined(Q_OS_IOS) && !defined(Q_OS_ANDROID)
 	// check if another instance already runs
 	if (app.isSecondary() && !parser.isSet("multiple")) {
 		qDebug().noquote() << QString("Another instance of %1 is already running.")
@@ -215,7 +219,7 @@ Q_DECL_EXPORT int main(int argc, char *argv[])
 
 	Kaidan kaidan(&app, !parser.isSet("disable-xml-log"));
 
-#ifndef Q_OS_ANDROID
+#if !defined(Q_OS_IOS) && !defined(Q_OS_ANDROID)
 	// receive messages from other instances of Kaidan
 	kaidan.connect(&app, &SingleApplication::receivedMessage,
 	               &kaidan, &Kaidan::receiveMessage);

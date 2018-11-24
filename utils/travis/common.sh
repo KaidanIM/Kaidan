@@ -77,10 +77,7 @@ install_linux-desktop_deps() {
 	                     qt510svg \
 	                     qt510quickcontrols2
 
-	# KF5 (only for cmake; qmake compiles kirigami from submodule)
-	if [[ $BUILD_SYSTEM == "cmake" ]]; then
-		install_kf5
-	fi
+	install_kf5
 	install_gloox
 }
 

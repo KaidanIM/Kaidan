@@ -16,8 +16,6 @@ script:
   - ./utils/travis/build.sh
 matrix:
   include:
-    - env: BUILD_SYSTEM=qmake
-
     - env: BUILD_SYSTEM=cmake
       git:
         submodules: false

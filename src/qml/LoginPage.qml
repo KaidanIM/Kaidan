@@ -192,7 +192,8 @@ Kirigami.Page {
 		}
 	}
 
-	function handleConnectionError(error) {
+	function handleConnectionError() {
+		var error = kaidan.disconnReason
 		if (error === Enums.ConnAuthenticationFailed) {
 			passiveNotification(qsTr("Invalid username or password."))
 		} else if (error === Enums.ConnNotConnected) {

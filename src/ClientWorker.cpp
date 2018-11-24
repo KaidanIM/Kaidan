@@ -148,6 +148,37 @@ void ClientWorker::onConnectionError(QXmppClient::Error error)
 		// always request new credentials, when failed to connect on first time
 		emit kaidan->newCredentialsNeeded();
 	}
+
+	if (error == QXmppClient::NoError) {
+		emit disconnReasonChanged(DisconnReason::ConnUserDisconnected);
+	} else if (error == QXmppClient::KeepAliveError) {
+		emit disconnReasonChanged(DisconnReason::ConnKeepAliveError);
+	} else if (error == QXmppClient::XmppStreamError) {
+		QXmppStanza::Error::Condition xError = client->xmppStreamError();
+		qDebug() << xError;
+		if (xError == QXmppStanza::Error::NotAuthorized) {
+			emit disconnReasonChanged(DisconnReason::ConnAuthenticationFailed);
+		} else {
+			emit disconnReasonChanged(DisconnReason::ConnNotConnected);
+		}
+	} else if (error == QXmppClient::SocketError) {
+		QAbstractSocket::SocketError sError = client->socketError();
+		if (sError == QAbstractSocket::ConnectionRefusedError ||
+		    sError == QAbstractSocket::RemoteHostClosedError) {
+			emit disconnReasonChanged(DisconnReason::ConnConnectionRefused);
+		} else if (sError == QAbstractSocket::HostNotFoundError) {
+			emit disconnReasonChanged(DisconnReason::ConnDnsError);
+		} else if (sError == QAbstractSocket::SocketAccessError) {
+			emit disconnReasonChanged(DisconnReason::ConnNoNetworkPermission);
+		} else if (sError == QAbstractSocket::SocketTimeoutError) {
+			emit disconnReasonChanged(DisconnReason::ConnKeepAliveError);
+		} else if (sError == QAbstractSocket::SslHandshakeFailedError ||
+		           sError == QAbstractSocket::SslInternalError) {
+			emit disconnReasonChanged(DisconnReason::ConnTlsFailed);
+		} else {
+			emit disconnReasonChanged(DisconnReason::ConnNotConnected);
+		}
+	}
 }
 
 QString ClientWorker::generateRandomString(unsigned int length) const

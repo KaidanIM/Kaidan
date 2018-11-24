@@ -41,6 +41,7 @@ class QGuiApplication;
 #include <QXmppClient.h>
 // Kaidan
 #include "Globals.h"
+#include "Enums.h"
 #include "Database.h"
 #include "MessageModel.h"
 #include "RosterModel.h"
@@ -54,6 +55,8 @@ class MessageHandler;
 class DiscoveryManager;
 class VCardManager;
 class UploadManager;
+
+using namespace Enums;
 
 class ClientThread : public QThread
 {
@@ -155,13 +158,14 @@ public slots:
 	void xmppConnect();
 
 signals:
+	// emitted by 'Kaidan' to us:
 	void connectRequested();
 	void disconnectRequested();
 	void credentialsUpdated(Credentials creds);
-	void sendMessageRequested(QString jid, QString message);
-	void sendFileRequested(QString jid, QString filePath, QString message);
-	void addContactRequested(QString jid, QString nick, QString message);
-	void removeContactRequested(QString jid);
+
+	// emitted by us:
+	// connection state is directly connected (client -> kaidan) without this step
+	void disconnReasonChanged(DisconnectionReason reason);
 
 private slots:
 	/**

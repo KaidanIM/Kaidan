@@ -87,10 +87,10 @@ Kaidan::Kaidan(QGuiApplication *app, bool enableLogging, QObject *parent) : QObj
 	cltThrd = new ClientThread();
 	client = new ClientWorker(caches, this, enableLogging, app);
 	client->setCredentials(creds);
+	connect(client, &ClientWorker::disconnReasonChanged, this, &Kaidan::setDisconnReason);
 
 	client->moveToThread(cltThrd);
 	connect(cltThrd, &QThread::started, client, &ClientWorker::main);
-
 	cltThrd->start();
 }
 
@@ -156,10 +156,10 @@ void Kaidan::setConnectionState(QXmppClient::State state)
 	}
 }
 
-void Kaidan::setDisconnReason(Enums::DisconnectionReason reason)
+void Kaidan::setDisconnReason(DisconnectionReason reason)
 {
 	disconnReason = reason;
-	emit disconnReasonChanged((quint8) reason);
+	emit disconnReasonChanged();
 }
 
 void Kaidan::setJid(QString jid)

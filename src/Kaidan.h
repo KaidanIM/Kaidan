@@ -266,7 +266,7 @@ signals:
 	 * Emitted, when the client failed to connect and gives the reason in
 	 * a DisconnectionReason enumatrion.
 	 */
-	void disconnReasonChanged(quint8 reason);
+	void disconnReasonChanged();
 
 	/**
 	 * Emitted when the JID was changed

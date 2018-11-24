@@ -53,6 +53,7 @@ namespace Enums {
 	 */
 	enum class DisconnectionReason : quint8 {
 		ConnNoError,
+		ConnUserDisconnected,
 		ConnAuthenticationFailed,
 		ConnNotConnected,
 		ConnTlsFailed,
@@ -60,12 +61,8 @@ namespace Enums {
 		ConnDnsError,
 		ConnConnectionRefused,
 		ConnNoSupportedAuth,
-		ConnProxyUnreachable,
-		ConnProxyAuthRequired,
-		ConnProxyAuthFailed,
-		ConnProxyNoSupportedAuth,
-		ConnStreamError,
-		ConnUserDisconnected,
+		ConnKeepAliveError,
+		ConnNoNetworkPermission
 	};
 	Q_ENUM_NS(DisconnectionReason)
 

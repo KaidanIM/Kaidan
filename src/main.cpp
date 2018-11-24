@@ -163,6 +163,7 @@ Q_DECL_EXPORT int main(int argc, char *argv[])
 	qRegisterMetaType<Qt::ApplicationState>("Qt::ApplicationState");
 	qRegisterMetaType<QXmppClient::State>("QXmppClient::State");
 	qRegisterMetaType<MessageType>("MessageType");
+	qRegisterMetaType<DisconnectionReason>("DisconnectionReason");
 
 	// Qt-Translator
 	QTranslator qtTranslator;

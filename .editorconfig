@@ -1,0 +1,59 @@
+# EditorConfig file, https://EditorConfig.org
+
+# top-most EditorConfig file
+root = true
+
+# Unix-style newlines with a newline ending every file
+[*]
+end_of_line = lf
+trim_trailing_whitespace = true
+insert_final_newline = true
+charset = utf-8
+
+# Tab indentation (no size specified)
+[src/*.*]
+indent_style = tab
+
+[src/qml/**]
+indent_style = tab
+
+[utils/travis/**]
+indent_style = tab
+
+[*.py]
+indent_style = tab
+
+[*.plist]
+indent_style = tab
+
+[CMakeLists.txt]
+indent_style = tab
+
+# 4 space indentation
+[src/qxmpp-exts/**]
+indent_style = space
+indent_size = 4
+
+[src/singleapp/**]
+indent_style = space
+indent_size = 4
+
+[misc/android/{AndroidManifest.xml,build.gradle}]
+indent_style = space
+indent_size = 4
+
+[utils/build-*]
+indent_style = space
+indent_size = 4
+
+[clickable.json]
+indent_style = space
+indent_size = 2
+
+[*.qrc]
+indent_style = space
+indent_size = 4
+
+[*.pl]
+indent_style = space
+indent_size = 4

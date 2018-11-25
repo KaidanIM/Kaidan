@@ -18,6 +18,7 @@ if [[ ${PLATFORM} == "ubuntu-touch" ]]; then
 	if [ ! -z $OPENSTORE_API_KEY ]; then
 		clickable publish
 	fi
+	mv bin/ubuntu-touch/*.click .
 elif [[ ${BUILD_SYSTEM} == "cmake" ]]; then
 	cmake .. \
 	      -GNinja \

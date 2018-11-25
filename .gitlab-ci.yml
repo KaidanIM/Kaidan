@@ -17,7 +17,7 @@ click-xenial:
     PLATFORM: ubuntu-touch
   artifacts:
     paths:
-      - bin/ubuntu-touch/*.click
+      - "*.click"
     expire_in: 1 week
 
 ubuntu-trusty:

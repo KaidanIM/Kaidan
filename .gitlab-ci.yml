@@ -1,3 +1,14 @@
+linux-appimage:
+  image: kaidan/ubuntu-trusty
+  script:
+    - utils/build-linux-appimage.sh
+  variables:
+    QT_LINUX: /opt/qt510
+  artifacts:
+    paths:
+      - "*.AppImage"
+    expire_in: 1 week
+
 click-xenial:
   image: kaidan/ubuntu-touch-xenial
   script:

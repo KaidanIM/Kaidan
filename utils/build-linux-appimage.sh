@@ -2,12 +2,11 @@
 
 # NOTE: To use this script, you need to set $QT_LINUX to your Qt for Linux installation
 
-if [ -z "$QT_LINUX" ]; then
-    echo "QT_LINUX has to be set"
-    exit 1
-fi
+# Path to Qt installation
+QT_LINUX=${QT_LINUX:-/usr}
+echo Using Qt installation from $QT_LINUX
 
-# Build type is one of: 
+# Build type is one of:
 # Debug, Release, RelWithDebInfo and MinSizeRel
 BUILD_TYPE="${BUILD_TYPE:-Debug}"
 
@@ -31,12 +30,6 @@ if [ ! -d "$KAIDAN_SOURCES/3rdparty/qxmpp/.git" ]; then
     git clone https://github.com/qxmpp-project/qxmpp.git 3rdparty/qxmpp
 fi
 
-if [ ! -f "$KAIDAN_SOURCES/3rdparty/linuxdeployqt-continuous-x86_64.AppImage" ]; then
-    echo "Downloading linuxdeployqt"
-    wget -P $KAIDAN_SOURCES/3rdparty/ https://github.com/probonopd/linuxdeployqt/releases/download/continuous/linuxdeployqt-continuous-x86_64.AppImage
-    chmod +x $KAIDAN_SOURCES/3rdparty/linuxdeployqt-continuous-x86_64.AppImage
-fi
-
 cdnew() {
     if [ -d "$1" ]; then
         rm -rf "$1"
@@ -44,6 +37,17 @@ cdnew() {
     mkdir $1
     cd $1
 }
+
+if [ ! -f "$KAIDAN_SOURCES/3rdparty/linuxdeployqt/squashfs-root/AppRun" ]; then
+    echo "Downloading linuxdeployqt"
+    wget --continue -P $KAIDAN_SOURCES/3rdparty/ https://github.com/probonopd/linuxdeployqt/releases/download/continuous/linuxdeployqt-continuous-x86_64.AppImage
+    chmod +x $KAIDAN_SOURCES/3rdparty/linuxdeployqt-continuous-x86_64.AppImage
+
+    echo "Extracting linuxdeployqt"
+    cdnew $KAIDAN_SOURCES/3rdparty/linuxdeployqt
+    $KAIDAN_SOURCES/3rdparty/linuxdeployqt-continuous-x86_64.AppImage --appimage-extract
+    cd $KAIDAN_SOURCES
+fi
 
 export QT_SELECT=qt5
 
@@ -55,7 +59,7 @@ echo "*****************************************"
     cdnew $KAIDAN_SOURCES/3rdparty/qxmpp/build
     cmake .. \
         -DCMAKE_PREFIX_PATH=$QT_LINUX \
-        -DBUILD_EXAMPLES=OFF \
+        -DBUILD_EXAMPLES=OFF -DBUILD_TESTS=OFF \
         -DCMAKE_BUILD_TYPE=$BUILD_TYPE -DCMAKE_INSTALL_PREFIX=$QXMPP_BUILD \
         -DCMAKE_INSTALL_LIBDIR=$QXMPP_BUILD/lib
 
@@ -97,7 +101,7 @@ echo "*****************************************"
         -DCMAKE_PREFIX_PATH=$QT_LINUX\;$KIRIGAMI_BUILD\;$QXMPP_BUILD \
         -DI18N=1 \
         -DCMAKE_BUILD_TYPE=$BUILD_TYPE -DCMAKE_INSTALL_PREFIX=/usr
-    
+
     make -j$(nproc)
 }
 fi
@@ -119,6 +123,10 @@ echo "*****************************************"
     cd $KAIDAN_SOURCES
     export LD_LIBRARY_PATH=$QT_LINUX/lib/:$KIRIGAMI_BUILD/lib:$LD_LIBRARY_PATH
     export PATH=$QT_LINUX/bin/:$PATH
-    
-    $KAIDAN_SOURCES/3rdparty/linuxdeployqt-continuous-x86_64.AppImage $KAIDAN_SOURCES/AppDir/usr/share/applications/kaidan.desktop -qmake=$QT_LINUX/bin/qmake -qmldir=$KAIDAN_SOURCES/src/qml/ -qmlimport=$KIRIGAMI_BUILD/lib/qml/ -appimage -no-copy-copyright-files
+
+    $KAIDAN_SOURCES/3rdparty/linuxdeployqt/squashfs-root/AppRun \
+        $KAIDAN_SOURCES/AppDir/usr/share/applications/kaidan.desktop \
+        -qmldir=$KAIDAN_SOURCES/src/qml/ \
+        -qmlimport=$(find $KIRIGAMI_BUILD -type d -name qml) \
+        -appimage -no-copy-copyright-files
 }

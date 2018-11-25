@@ -12,7 +12,7 @@ BUILD_TYPE="${BUILD_TYPE:-Debug}"
 
 KAIDAN_SOURCES=$(dirname "$(readlink -f "${0}")")/..
 KIRIGAMI_BUILD=/tmp/kirigami-linux-build
-QXMPP_BUILD=/tmp/qxmpp-linux-build
+QXMPP_BUILD=${QXMPP_BUILD:-/tmp/qxmpp-linux-build}
 
 echo "-- Starting $BUILD_TYPE build of Kaidan --"
 
@@ -51,7 +51,7 @@ fi
 
 export QT_SELECT=qt5
 
-if [ ! -f "$QXMPP_BUILD/lib/pkgconfig/qxmpp.pc" ]; then
+if ! $(find $QXMPP_BUILD -name libqxmpp.so >/dev/null); then
 echo "*****************************************"
 echo "Building QXmpp"
 echo "*****************************************"
@@ -123,21 +123,16 @@ echo "*****************************************"
     cd $KAIDAN_SOURCES
     export LD_LIBRARY_PATH=$QT_LINUX/lib/:$KIRIGAMI_BUILD/lib:$LD_LIBRARY_PATH
     export PATH=$QT_LINUX/bin/:$PATH
-
     # set qmake binary when using portable Qt; linuxdeployqt will find it on its
     # own on global installs
     if [ -f $QT_LINUX/bin/qmake ]; then
-        $KAIDAN_SOURCES/3rdparty/linuxdeployqt/squashfs-root/AppRun \
-            $KAIDAN_SOURCES/AppDir/usr/share/applications/kaidan.desktop \
-            -qmake=$QMAKE_BINARY \
-            -qmldir=$KAIDAN_SOURCES/src/qml/ \
-            -qmlimport=$KIRIGAMI_BUILD/lib/qml/ \
-            -appimage -no-copy-copyright-files
-    else
-        $KAIDAN_SOURCES/3rdparty/linuxdeployqt/squashfs-root/AppRun \
-            $KAIDAN_SOURCES/AppDir/usr/share/applications/kaidan.desktop \
-            -qmldir=$KAIDAN_SOURCES/src/qml/ \
-            -qmlimport=$KIRIGAMI_BUILD/lib/qml/ \
-            -appimage -no-copy-copyright-files
+        QMAKE_BINARY="-qmake=$QT_LINUX/bin/qmake"
     fi
+
+    $KAIDAN_SOURCES/3rdparty/linuxdeployqt/squashfs-root/AppRun \
+        $KAIDAN_SOURCES/AppDir/usr/share/applications/kaidan.desktop \
+        -qmldir=$KAIDAN_SOURCES/src/qml/ \
+        -qmlimport=$KIRIGAMI_BUILD/lib/qml/ \
+        -appimage -no-copy-copyright-files \
+        $QMAKE_BINARY
 }

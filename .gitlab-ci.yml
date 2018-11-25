@@ -1,18 +1,17 @@
 linux-appimage:
-  image: kaidan/ubuntu-trusty
-  script:
-    - utils/build-linux-appimage.sh
+  image: kaidan/ubuntu-xenial
+  script: utils/build-linux-appimage.sh
   variables:
-    QT_LINUX: /opt/qt510
+    QXMPP_BUILD: /usr
   artifacts:
     paths:
       - "*.AppImage"
+      - "*.AppImage.zsync"
     expire_in: 1 week
 
 click-xenial:
   image: kaidan/ubuntu-touch-xenial
-  script:
-    - utils/travis/build.sh
+  script: utils/travis/build.sh
   variables:
     PLATFORM: ubuntu-touch
   artifacts:
@@ -22,24 +21,21 @@ click-xenial:
 
 ubuntu-trusty:
   image: kaidan/ubuntu-trusty
-  script:
-    - utils/travis/build.sh
+  script: utils/travis/build.sh
 
 neon-bionic:
   image: kaidan/neon-bionic
-  script:
-    - utils/travis/build.sh
+  script: utils/travis/build.sh
 
 debian-sid:
   image: kaidan/debian-unstable
-  script:
-    - utils/travis/build.sh
+  script: utils/travis/build.sh
 
 archlinux:
   image: kaidan/archlinux
-  script:
-    - utils/travis/build.sh
+  script: utils/travis/build.sh
 
 variables:
   GIT_SUBMODULE_STRATEGY: recursive
   BUILD_SYSTEM: cmake
+  BUILD_TYPE: Release

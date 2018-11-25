@@ -76,8 +76,11 @@ Kirigami.ScrollablePage {
 					 kaidan.avatarStorage.getAvatarUrl(model.jid) :
 					 kaidan.getResourcePath("images/fallback-avatar.svg")
 			backgroundColor: {
-				kaidan.chatPartner == model.jid ? Kirigami.Theme.highlightColor
-				                                : Kirigami.Theme.backgroundColor
+				if (!Kirigami.Settings.isMobile && kaidan.chatPartner == model.jid) {
+					Kirigami.Theme.highlightColor
+				} else {
+					Kirigami.Theme.backgroundColor
+				}
 			}
 			onClicked: {
 				// first push the chat page

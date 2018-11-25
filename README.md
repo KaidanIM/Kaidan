@@ -11,7 +11,7 @@
 
 Kaidan is a simple, user-friendly Jabber/XMPP client providing a modern user-interface using
 [Kirigami](https://techbase.kde.org/Kirigami) and [QtQuick](https://wiki.qt.io/Qt_Quick). The back-end of
-Kaidan is entirely written in C++ using the [gloox](https://camaya.net/gloox/) XMPP client library and
+Kaidan is entirely written in C++ using the [qxmpp](https://github.com/qxmpp-project/qxmpp) XMPP client library and
 [Qt 5](https://www.qt.io/).
 
 Currently Kaidan only has been tested on GNU/Linux Desktops, Android & Plasma Mobile, but of course
@@ -37,7 +37,7 @@ how to do that:
 
 Here are the general dependencies of Kaidan listed:
  * [Qt](https://doc.qt.io/qt-5/build-sources.html) (Core Qml Quick Svg Sql QuickControls2) (>= 5.8.0)
- * [gloox](https://camaya.net/gloox/download/) (>= 1.0.19)
+ * [qxmpp](https://github.com/qxmpp-project/qxmpp) (>= 0.9.0)
  * [Kirigami 2](https://phabricator.kde.org/source/kirigami/) (>= 5.42.0)
  * [ECM (extra-cmake-modules)](https://api.kde.org/ecm/manual/ecm.7.html)
 

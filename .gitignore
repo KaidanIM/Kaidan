@@ -8,6 +8,7 @@ misc/android/res/mipmap-*
 
 3rdparty/openssl
 3rdparty/qxmpp
+3rdparty/linuxdeployqt
 
 ################### AppImage #################
 AppDir/

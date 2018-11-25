@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/bash -e
 
 # NOTE: To use this script, you need to set $QT_LINUX to your Qt for Linux installation
 
@@ -124,9 +124,20 @@ echo "*****************************************"
     export LD_LIBRARY_PATH=$QT_LINUX/lib/:$KIRIGAMI_BUILD/lib:$LD_LIBRARY_PATH
     export PATH=$QT_LINUX/bin/:$PATH
 
-    $KAIDAN_SOURCES/3rdparty/linuxdeployqt/squashfs-root/AppRun \
-        $KAIDAN_SOURCES/AppDir/usr/share/applications/kaidan.desktop \
-        -qmldir=$KAIDAN_SOURCES/src/qml/ \
-        -qmlimport=$(find $KIRIGAMI_BUILD -type d -name qml) \
-        -appimage -no-copy-copyright-files
+    # set qmake binary when using portable Qt; linuxdeployqt will find it on its
+    # own on global installs
+    if [ -f $QT_LINUX/bin/qmake ]; then
+        $KAIDAN_SOURCES/3rdparty/linuxdeployqt/squashfs-root/AppRun \
+            $KAIDAN_SOURCES/AppDir/usr/share/applications/kaidan.desktop \
+            -qmake=$QMAKE_BINARY \
+            -qmldir=$KAIDAN_SOURCES/src/qml/ \
+            -qmlimport=$KIRIGAMI_BUILD/lib/qml/ \
+            -appimage -no-copy-copyright-files
+    else
+        $KAIDAN_SOURCES/3rdparty/linuxdeployqt/squashfs-root/AppRun \
+            $KAIDAN_SOURCES/AppDir/usr/share/applications/kaidan.desktop \
+            -qmldir=$KAIDAN_SOURCES/src/qml/ \
+            -qmlimport=$KIRIGAMI_BUILD/lib/qml/ \
+            -appimage -no-copy-copyright-files
+    fi
 }

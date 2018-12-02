@@ -38,11 +38,6 @@ import "elements"
 Kirigami.ApplicationWindow {
 	id: root
 
-	// Header / ToolBar
-	header: Kirigami.ApplicationHeader {
-		preferredHeight: Kirigami.Units.gridUnit * 2.25
-	}
-
 	StatusBar {
 		color: Material.color(Material.Green, Material.Shade700)
 	}
@@ -104,7 +99,7 @@ Kirigami.ApplicationWindow {
 
 	function handleSubRequest(from, message) {
 		kaidan.vCardRequested(from)
-	
+
 		subReqAcceptSheet.from = from
 		subReqAcceptSheet.message = message
 

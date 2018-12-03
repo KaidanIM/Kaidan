@@ -111,6 +111,8 @@ elseif(WIN32)
 	message(STATUS ${KAIDAN_ICNS})
 endif()
 
+link_directories(${QXmpp_LIBDIR})
+
 add_executable(${PROJECT_NAME}
 	MACOSX_BUNDLE
 	WIN32
@@ -134,8 +136,6 @@ target_link_libraries(${PROJECT_NAME}
 	# currently needs to be hardcoded for windows builds
 	qxmpp
 )
-
-link_directories(${QXmpp_LIBDIR})
 
 target_include_directories(${PROJECT_NAME} PUBLIC
 	${QXmpp_INCLUDE_DIRS}

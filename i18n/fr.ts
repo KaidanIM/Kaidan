@@ -17,7 +17,7 @@
     </message>
     <message>
         <source>View source code online</source>
-        <translation type="unfinished"></translation>
+        <translation>voir le code source en ligne</translation>
     </message>
 </context>
 <context>
@@ -62,6 +62,13 @@
     </message>
 </context>
 <context>
+    <name>ChatMessage</name>
+    <message>
+        <source>Message copied to clipboard</source>
+        <translation type="vanished">Message copié dans le presse-papier</translation>
+    </message>
+</context>
+<context>
     <name>ChatPage</name>
     <message>
         <source>Compose message</source>
@@ -73,27 +80,27 @@
     </message>
     <message>
         <source>Image</source>
-        <translation type="unfinished"></translation>
+        <translation>Image</translation>
     </message>
     <message>
         <source>Video</source>
-        <translation type="unfinished"></translation>
+        <translation>Vidéo</translation>
     </message>
     <message>
         <source>Audio</source>
-        <translation type="unfinished"></translation>
+        <translation>Audio</translation>
     </message>
     <message>
         <source>Document</source>
-        <translation type="unfinished"></translation>
+        <translation>Document</translation>
     </message>
     <message>
         <source>Other file</source>
-        <translation type="unfinished"></translation>
+        <translation>Autre fichier</translation>
     </message>
     <message>
         <source>Select a file</source>
-        <translation type="unfinished"></translation>
+        <translation>Sélectionner un fichier</translation>
     </message>
 </context>
 <context>
@@ -107,11 +114,22 @@
     <name>EmptyChatPage</name>
     <message>
         <source>Please select a chat to start messaging</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Sélectionner une conversation pour commencer</translation>
+    </message>
+</context>
+<context>
+    <name>FileChooser</name>
+    <message>
+        <source>Select a file</source>
+        <translation type="vanished">Sélectionner un fichier</translation>
     </message>
 </context>
 <context>
     <name>FileChooserMobile</name>
+    <message>
+        <source>go to parent folder</source>
+        <translation type="vanished">aller au dossier parent</translation>
+    </message>
     <message>
         <source>Close</source>
         <translation type="obsolete">Fermer</translation>
@@ -144,19 +162,35 @@
     </message>
     <message>
         <source>Invite friends</source>
-        <translation type="unfinished"></translation>
+        <translation>Inviter des amis</translation>
     </message>
     <message>
         <source>Invitation link copied to clipboard</source>
-        <translation type="unfinished"></translation>
+        <translation>Lien d&apos;invitation copié dans le presse papier</translation>
     </message>
 </context>
 <context>
     <name>Kaidan</name>
     <message>
+        <source>Could not send message, as a result of not being connected.</source>
+        <translation type="obsolete">Vous n&apos;êtes pas connecté. Impossible d&apos;envoyer le message</translation>
+    </message>
+    <message>
+        <source>Could not add contact, as a result of not being connected.</source>
+        <translation type="obsolete">Vous n&apos;êtes pas conecté. Impossible d&apos;ajouter un contact.</translation>
+    </message>
+    <message>
+        <source>Could not remove contact, as a result of not being connected.</source>
+        <translation type="obsolete">Vous n&apos;êtes pas connecté. Impossible de supprimer un contact.</translation>
+    </message>
+    <message>
         <source>The link will be opened after you have connected.</source>
         <extracomment>The link is an XMPP-URI (i.e. &apos;xmpp:kaidan@muc.kaidan.im?join&apos; for joining a chat)</extracomment>
-        <translation type="unfinished"></translation>
+        <translation>Le lien s&apos;ouvrira une fois que vous serez connecté.</translation>
+    </message>
+    <message>
+        <source>Could not send file, as a result of not being connected.</source>
+        <translation type="vanished">Vous n&apos;êtes pas connecté. Impossible d&apos;envoyer le fichier.</translation>
     </message>
 </context>
 <context>
@@ -183,7 +217,7 @@
     </message>
     <message>
         <source>Connecting…</source>
-        <translation>Connexion en cours...</translation>
+        <translation>Connexion en cours…</translation>
     </message>
     <message>
         <source>Log in</source>
@@ -203,42 +237,42 @@
     </message>
     <message>
         <source>Invalid username or password.</source>
-        <translation type="unfinished"></translation>
+        <translation>Nom d&apos;utilisateur ou mot de passe invalide.</translation>
     </message>
     <message>
         <source>Cannot connect to the server. Please check your internet connection.</source>
-        <translation type="unfinished"></translation>
+        <translation>Impossible de se connecter au server. Veuillez tester votre connexion internet.</translation>
     </message>
     <message>
         <source>The server doesn&apos;t support secure connections.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Le server ne permet pas les connexions securisées</translation>
     </message>
     <message>
         <source>Error while trying to connect securely.</source>
-        <translation type="unfinished"></translation>
+        <translation>Une erreur est survenue lors de la connexion sécurisée.</translation>
     </message>
     <message>
         <source>Could not resolve the server&apos;s address. Please check your JID again.</source>
-        <translation type="unfinished"></translation>
+        <translation>Impossible d&apos;atteindre l&apos;adresse du serveur. Veuillez vérifier votre identifiant Jabber (JID).</translation>
     </message>
     <message>
         <source>Could not connect to the server.</source>
-        <translation type="unfinished"></translation>
+        <translation>Impossible de se connecter au serveur.</translation>
     </message>
     <message>
         <source>Authentification protocol not supported by the server.</source>
-        <translation type="unfinished"></translation>
+        <translation>Protocol d&apos;autentification non supporté par le serveur.</translation>
     </message>
     <message>
         <source>An unknown error occured; see log for details.</source>
-        <translation type="unfinished"></translation>
+        <translation>Une error inconnu est survenue; voir les log pour les détails.</translation>
     </message>
 </context>
 <context>
     <name>MessageHandler</name>
     <message>
         <source>Could not send message, as a result of not being connected.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Vous n&apos;êtes pas connecté. Impossible d&apos;envoyer le message</translation>
     </message>
 </context>
 <context>
@@ -269,14 +303,65 @@
     </message>
 </context>
 <context>
+    <name>RosterListItem</name>
+    <message>
+        <source>Error: Please check the JID.</source>
+        <translation type="vanished">Erreur : veuillez vérifier votre utilisateur jabber (JID).</translation>
+    </message>
+    <message>
+        <source>Available</source>
+        <translation type="vanished">Disponible</translation>
+    </message>
+    <message>
+        <source>Free for chat</source>
+        <translation type="vanished">Libre pour discuter</translation>
+    </message>
+    <message>
+        <source>Away</source>
+        <translation type="vanished">Absent</translation>
+    </message>
+    <message>
+        <source>Do not disturb</source>
+        <translation type="vanished">Ne pas déranger</translation>
+    </message>
+    <message>
+        <source>Away for longer</source>
+        <translation type="vanished">Absent pour longtemps</translation>
+    </message>
+    <message>
+        <source>Offline</source>
+        <translation type="vanished">Hors ligne</translation>
+    </message>
+    <message>
+        <source>Error</source>
+        <translation type="vanished">Erreur</translation>
+    </message>
+    <message>
+        <source>Invalid</source>
+        <translation type="vanished">Invalide</translation>
+    </message>
+</context>
+<context>
     <name>RosterManager</name>
     <message>
         <source>Could not add contact, as a result of not being connected.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Vous n&apos;êtes pas conecté. Impossible d&apos;ajouter un contact.</translation>
     </message>
     <message>
         <source>Could not remove contact, as a result of not being connected.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Vous n&apos;êtes pas connecté. Impossible de supprimer un contact.</translation>
+    </message>
+    <message>
+        <source>This will also send a request to access the presence of the contact.</source>
+        <translation type="vanished">Cette action va aussi envoyer une requête pour s&apos;assurer de la présence du contact.</translation>
+    </message>
+    <message>
+        <source>Optional message:</source>
+        <translation type="vanished">Message optionnel :</translation>
+    </message>
+    <message>
+        <source>Tell your chat partner who you are.</source>
+        <translation type="obsolete">Informez votre contact qui vous êtes.</translation>
     </message>
 </context>
 <context>
@@ -295,7 +380,7 @@
     </message>
     <message>
         <source>Offline</source>
-        <translation type="unfinished"></translation>
+        <translation>Hors ligne</translation>
     </message>
 </context>
 <context>
@@ -316,6 +401,10 @@
         <source>Delete</source>
         <translation type="vanished">Supprimer</translation>
     </message>
+    <message>
+        <source>Do you really want to delete the contact &lt;b&gt;%1&lt;/b&gt; from your roster?</source>
+        <translation type="vanished">Voulez vous vraiment supprimer le contact &lt;b&gt;1%1&lt;/b&gt;2 de votre liste ?</translation>
+    </message>
 </context>
 <context>
     <name>SendMediaSheet</name>
@@ -327,16 +416,36 @@
         <source>Send</source>
         <translation type="obsolete">Envoyer</translation>
     </message>
+    <message>
+        <source>Subscription Request</source>
+        <translation type="vanished">Demande d&apos;abonnement</translation>
+    </message>
+    <message>
+        <source>You received a subscription request by &lt;b&gt;%1&lt;/b&gt;. If you accept it, the account will have access to your presence status.</source>
+        <translation type="vanished">Vous avez reçus une demande d&apos;abonnement de la par de &lt;b&gt;1%1&lt;/b&gt;2. Si vous acceptez, il aura accès à votre status.</translation>
+    </message>
+    <message>
+        <source>Decline</source>
+        <translation type="vanished">Refuser</translation>
+    </message>
 </context>
 <context>
     <name>UploadManager</name>
     <message>
         <source>Could not send file, as a result of not being connected.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Vous n&apos;êtes pas connecté. Impossible d&apos;envoyer le fichier.</translation>
+    </message>
+    <message>
+        <source>Accept</source>
+        <translation type="vanished">Accepter</translation>
     </message>
     <message>
         <source>File</source>
         <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>More Actions</source>
+        <translation type="vanished">Plus d&apos;actions</translation>
     </message>
 </context>
 </TS>

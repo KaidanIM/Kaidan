@@ -36,6 +36,8 @@
 
 using namespace Enums;
 
+class QMimeType;
+
 class MessageModel : public QSqlTableModel
 {
 	Q_OBJECT
@@ -69,6 +71,8 @@ public:
 		QByteArray mediaThumb;
 		QString mediaHashes;
 	};
+
+	static MessageType messageTypeFromMimeType(const QMimeType &);
 
 signals:
 	/**

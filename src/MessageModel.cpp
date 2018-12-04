@@ -33,6 +33,7 @@
 // C++
 #include <iostream>
 // Qt 5
+#include <QMimeType>
 #include <QDateTime>
 #include <QDebug>
 #include <QSqlError>
@@ -86,6 +87,24 @@ QHash<int, QByteArray> MessageModel::roleNames() const
 		roles.insert(Qt::UserRole + i, record().fieldName(i).toUtf8());
 	}
 	return roles;
+}
+
+MessageType MessageModel::messageTypeFromMimeType(const QMimeType &type)
+{
+	if (type.inherits("image/jpeg") || type.inherits("image/png") ||
+	    type.inherits("image/gif"))
+		return MessageType::MessageImage;
+	else if (type.inherits("audio/flac") || type.inherits("audio/mp4") ||
+	         type.inherits("audio/ogg") || type.inherits("audio/wav") ||
+	         type.inherits("audio/mpeg") || type.inherits("audio/webm"))
+		return MessageType::MessageAudio;
+	else if (type.inherits("video/mpeg") || type.inherits("video/x-msvideo") ||
+	         type.inherits("video/quicktime") || type.inherits("video/mp4") ||
+	         type.inherits("video/x-matroska"))
+		return MessageType::MessageVideo;
+	else if (type.inherits("text/plain"))
+		return MessageType::MessageDocument;
+	return MessageType::MessageFile;
 }
 
 void MessageModel::setMessageAsSent(const QString msgId)

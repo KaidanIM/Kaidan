@@ -80,16 +80,18 @@ void UploadManager::sendFile(QString jid, QString fileUrl, QString body)
 	QFileInfo file(QUrl(fileUrl).toLocalFile());
 	int id = manager.uploadFile(file);
 
+	QMimeType mimeType = QMimeDatabase().mimeTypeForFile(file);
+
 	MessageModel::Message *msg = new MessageModel::Message();
 	msg->author = client->configuration().jidBare();
 	msg->recipient = jid;
 	msg->id = QXmppUtils::generateStanzaHash(48);
 	msg->sentByMe = true;
 	msg->message = body;
-	msg->type = MessageType::MessageFile;
+	msg->type = MessageModel::messageTypeFromMimeType(mimeType);
 	msg->timestamp = QDateTime::currentDateTime().toUTC().toString(Qt::ISODate);
 	msg->mediaSize = file.size();
-	msg->mediaContentType = QMimeDatabase().mimeTypeForFile(file).name();
+	msg->mediaContentType = mimeType.name();
 	msg->mediaLastModified = file.lastModified().currentMSecsSinceEpoch();
 	msg->mediaLocation = file.absolutePath();
 

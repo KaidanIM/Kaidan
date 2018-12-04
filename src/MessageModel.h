@@ -76,13 +76,6 @@ public:
 
 signals:
 	/**
-	 * Emit when the data has been changed
-	 *
-	 * This is somehow necessary because some changes don't have an effect on the QML side.
-	 */
-	void modelChanged();
-
-	/**
 	 * Emitted when the user opens another chat to apply a filter to the db
 	 */
 	void chatPartnerChanged(QString &jid);

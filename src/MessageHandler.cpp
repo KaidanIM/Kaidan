@@ -31,7 +31,9 @@
 #include "MessageHandler.h"
 // Qt
 #include <QDateTime>
+#include <QMimeDatabase>
 #include <QString>
+#include <QUrl>
 // QXmpp
 #include <QXmppClient.h>
 #include <QXmppUtils.h>
@@ -100,7 +102,33 @@ void MessageHandler::handleMessage(const QXmppMessage &msg)
 	entry.id = msg.id();
 	entry.sentByMe = (entry.author == client->configuration().jidBare());
 	entry.message = msg.body();
-	entry.type = MessageType::MessageText; // text message without media
+	entry.type = MessageType::MessageText; // default to text message without media
+
+	// check if message contains a link
+	QList<QString> bodyWords = msg.body().split(" ");
+	for (const QString &word : bodyWords) {
+		bool isLink = word.startsWith("https://") || word.startsWith("http://");
+		if (!isLink)
+			continue;
+
+		// check message type by file name in link
+		// This is hacky, but needed without SIMS or an additional HTTP request.
+		// Also, this can be useful when a user manually posts an HTTP url.
+		QUrl url(word);
+		QList<QMimeType> mediaTypes = QMimeDatabase().mimeTypesForFileName(url.fileName());
+		for (const QMimeType &type : mediaTypes) {
+			MessageType mType = MessageModel::messageTypeFromMimeType(type);
+			if (mType == MessageType::MessageImage ||
+			    mType == MessageType::MessageAudio ||
+			    mType == MessageType::MessageVideo) {
+				entry.type = mType;
+				entry.mediaContentType = type.name();
+				entry.mediaUrl = url.toEncoded();
+				break;
+			}
+		}
+		break; // we can only handle one link
+	}
 
 	// get possible delay (timestamp)
 	QDateTime stamp = msg.stamp();

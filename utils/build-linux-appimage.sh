@@ -133,6 +133,7 @@ echo "*****************************************"
         $KAIDAN_SOURCES/AppDir/usr/share/applications/kaidan.desktop \
         -qmldir=$KAIDAN_SOURCES/src/qml/ \
         -qmlimport=$KIRIGAMI_BUILD/lib/qml/ \
+        -extra-plugins="imageformats/libqsvg.so,imageformats/libqjpeg.so" \
         -appimage -no-copy-copyright-files \
         $QMAKE_BINARY
 }

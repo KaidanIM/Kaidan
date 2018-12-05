@@ -344,7 +344,12 @@ elseif(UNIX AND NOT APPLE)
 	)
 	# install desktop file
 	install(FILES "misc/kaidan.desktop"
-	        DESTINATION "${CMAKE_INSTALL_FULL_DATADIR}/applications"
+	        DESTINATION "${KDE_INSTALL_APPDIR}"
+	)
+	# install metainfo
+	install(FILES "misc/metadata.xml"
+		DESTINATION "${KDE_INSTALL_METAINFODIR}"
+		RENAME "im.kaidan.kaidan.appdata.xml"
 	)
 endif()
 

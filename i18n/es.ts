@@ -265,7 +265,7 @@
     <name>MessageHandler</name>
     <message>
         <source>Could not send message, as a result of not being connected.</source>
-        <translation type="unfinished">No se pudo enviar el mensaje debido a que no está conectado.</translation>
+        <translation>No se pudo enviar el mensaje porque no está conectado.</translation>
     </message>
 </context>
 <context>
@@ -350,11 +350,11 @@
     <name>RosterManager</name>
     <message>
         <source>Could not add contact, as a result of not being connected.</source>
-        <translation type="unfinished">No se pudo añadir el contacto debido a que no está conectado.</translation>
+        <translation>No se pudo añadir el contacto porque no está conectado.</translation>
     </message>
     <message>
         <source>Could not remove contact, as a result of not being connected.</source>
-        <translation type="unfinished">No se pudo eliminar el contacto debido a que no está conectado.</translation>
+        <translation>No se pudo eliminar el contacto porque no está conectado.</translation>
     </message>
 </context>
 <context>
@@ -451,11 +451,11 @@
     <name>UploadManager</name>
     <message>
         <source>Could not send file, as a result of not being connected.</source>
-        <translation type="unfinished">No se pudo enviar el archivo porque no está conectado.</translation>
+        <translation>No se pudo enviar el archivo porque no está conectado.</translation>
     </message>
     <message>
         <source>File</source>
-        <translation type="unfinished"></translation>
+        <translation>Archivo</translation>
     </message>
 </context>
 </TS>

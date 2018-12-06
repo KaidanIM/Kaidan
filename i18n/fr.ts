@@ -58,14 +58,7 @@
     <name>BackButton</name>
     <message>
         <source>Navigate Back</source>
-        <translation>Revenir</translation>
-    </message>
-</context>
-<context>
-    <name>ChatMessage</name>
-    <message>
-        <source>Message copied to clipboard</source>
-        <translation type="unfinished"></translation>
+        <translation type="vanished">Revenir</translation>
     </message>
 </context>
 <context>
@@ -107,7 +100,7 @@
     <name>ContextDrawer</name>
     <message>
         <source>Actions</source>
-        <translation>Actions</translation>
+        <translation type="vanished">Actions</translation>
     </message>
 </context>
 <context>
@@ -118,28 +111,17 @@
     </message>
 </context>
 <context>
-    <name>FileChooser</name>
-    <message>
-        <source>Select a file</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
     <name>FileChooserMobile</name>
     <message>
         <source>Close</source>
-        <translation type="unfinished">Fermer</translation>
-    </message>
-    <message>
-        <source>Go to parent folder</source>
-        <translation type="unfinished"></translation>
+        <translation type="obsolete">Fermer</translation>
     </message>
 </context>
 <context>
     <name>ForwardButton</name>
     <message>
         <source>Navigate Forward</source>
-        <translation>Naviguer en avant</translation>
+        <translation type="vanished">Naviguer en avant</translation>
     </message>
 </context>
 <context>
@@ -158,7 +140,7 @@
     </message>
     <message>
         <source>Back</source>
-        <translation>Retour</translation>
+        <translation type="vanished">Retour</translation>
     </message>
     <message>
         <source>Invite friends</source>
@@ -263,74 +245,27 @@
     <name>RosterAddContactSheet</name>
     <message>
         <source>Nickname:</source>
-        <translation>Pseudonyme :</translation>
+        <translation type="vanished">Pseudonyme :</translation>
     </message>
     <message>
         <source>Jabber-ID:</source>
-        <translation>Identifiant Jabber&#x202f;:</translation>
+        <translation type="vanished">Identifiant Jabber&#x202f;:</translation>
     </message>
     <message>
         <source>user@example.org</source>
-        <translation>utilisateur@example.org</translation>
+        <translation type="vanished">utilisateur@example.org</translation>
     </message>
     <message>
         <source>Cancel</source>
-        <translation>Annuler</translation>
+        <translation type="vanished">Annuler</translation>
     </message>
     <message>
         <source>Add</source>
-        <translation>Ajouter</translation>
+        <translation type="vanished">Ajouter</translation>
     </message>
     <message>
         <source>Add new contact</source>
-        <translation>Ajouter un nouveau contact</translation>
-    </message>
-    <message>
-        <source>This will also send a request to access the presence of the contact.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Optional message:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Tell your chat partner who you are.</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>RosterListItem</name>
-    <message>
-        <source>Error: Please check the JID.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Available</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Free for chat</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Away</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Do not disturb</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Away for longer</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Offline</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Error</source>
-        <translation type="unfinished"></translation>
+        <translation type="vanished">Ajouter un nouveau contact</translation>
     </message>
 </context>
 <context>
@@ -371,66 +306,36 @@
     </message>
     <message>
         <source>Delete contact</source>
-        <translation>Supprimer contact</translation>
+        <translation type="vanished">Supprimer contact</translation>
     </message>
     <message>
         <source>Cancel</source>
-        <translation>Annuler</translation>
+        <translation type="vanished">Annuler</translation>
     </message>
     <message>
         <source>Delete</source>
-        <translation>Supprimer</translation>
-    </message>
-    <message>
-        <source>Do you really want to delete the contact &lt;b&gt;%1&lt;/b&gt; from your roster?</source>
-        <translation type="unfinished"></translation>
+        <translation type="vanished">Supprimer</translation>
     </message>
 </context>
 <context>
     <name>SendMediaSheet</name>
     <message>
-        <source>Caption</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Cancel</source>
-        <translation type="unfinished">Annuler</translation>
+        <translation type="obsolete">Annuler</translation>
     </message>
     <message>
         <source>Send</source>
-        <translation type="unfinished">Envoyer</translation>
+        <translation type="obsolete">Envoyer</translation>
     </message>
 </context>
 <context>
-    <name>SubRequestAcceptSheet</name>
+    <name>UploadManager</name>
     <message>
-        <source>Subscription Request</source>
+        <source>Could not send file, as a result of not being connected.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>You received a subscription request by &lt;b&gt;%1&lt;/b&gt;. If you accept it, the account will have access to your presence status.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Decline</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Accept</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>ToolBarApplicationHeader</name>
-    <message>
-        <source>More Actions</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>ToolBarPageHeader</name>
-    <message>
-        <source>More Actions</source>
+        <source>File</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

@@ -39,14 +39,7 @@
     <name>BackButton</name>
     <message>
         <source>Navigate Back</source>
-        <translation>Navegue De Volta</translation>
-    </message>
-</context>
-<context>
-    <name>ChatMessage</name>
-    <message>
-        <source>Message copied to clipboard</source>
-        <translation type="unfinished"></translation>
+        <translation type="vanished">Navegue De Volta</translation>
     </message>
 </context>
 <context>
@@ -88,7 +81,7 @@
     <name>ContextDrawer</name>
     <message>
         <source>Actions</source>
-        <translation>Ações</translation>
+        <translation type="vanished">Ações</translation>
     </message>
 </context>
 <context>
@@ -99,35 +92,17 @@
     </message>
 </context>
 <context>
-    <name>FileChooser</name>
-    <message>
-        <source>Select a file</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>FileChooserMobile</name>
-    <message>
-        <source>Close</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Go to parent folder</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
     <name>ForwardButton</name>
     <message>
         <source>Navigate Forward</source>
-        <translation>Navegar Para A Frente</translation>
+        <translation type="vanished">Navegar Para A Frente</translation>
     </message>
 </context>
 <context>
     <name>GlobalDrawer</name>
     <message>
         <source>Back</source>
-        <translation>Voltar</translation>
+        <translation type="vanished">Voltar</translation>
     </message>
     <message>
         <source>Log out</source>
@@ -233,80 +208,6 @@
     </message>
 </context>
 <context>
-    <name>RosterAddContactSheet</name>
-    <message>
-        <source>Add new contact</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Nickname:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Jabber-ID:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>user@example.org</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Cancel</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Add</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>This will also send a request to access the presence of the contact.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Optional message:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Tell your chat partner who you are.</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>RosterListItem</name>
-    <message>
-        <source>Error: Please check the JID.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Available</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Free for chat</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Away</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Do not disturb</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Away for longer</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Offline</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Error</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
     <name>RosterManager</name>
     <message>
         <source>Could not add contact, as a result of not being connected.</source>
@@ -337,69 +238,20 @@
     </message>
 </context>
 <context>
-    <name>RosterRemoveContactSheet</name>
-    <message>
-        <source>Delete contact</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Cancel</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Delete</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Do you really want to delete the contact &lt;b&gt;%1&lt;/b&gt; from your roster?</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
     <name>SendMediaSheet</name>
     <message>
-        <source>Caption</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Cancel</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Send</source>
-        <translation type="unfinished">Enviar</translation>
+        <translation type="obsolete">Enviar</translation>
     </message>
 </context>
 <context>
-    <name>SubRequestAcceptSheet</name>
+    <name>UploadManager</name>
     <message>
-        <source>Subscription Request</source>
+        <source>Could not send file, as a result of not being connected.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>You received a subscription request by &lt;b&gt;%1&lt;/b&gt;. If you accept it, the account will have access to your presence status.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Decline</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Accept</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>ToolBarApplicationHeader</name>
-    <message>
-        <source>More Actions</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>ToolBarPageHeader</name>
-    <message>
-        <source>More Actions</source>
+        <source>File</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

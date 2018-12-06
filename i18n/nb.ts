@@ -39,14 +39,7 @@
     <name>BackButton</name>
     <message>
         <source>Navigate Back</source>
-        <translation>Tilbake</translation>
-    </message>
-</context>
-<context>
-    <name>ChatMessage</name>
-    <message>
-        <source>Message copied to clipboard</source>
-        <translation type="unfinished"></translation>
+        <translation type="vanished">Tilbake</translation>
     </message>
 </context>
 <context>
@@ -88,7 +81,7 @@
     <name>ContextDrawer</name>
     <message>
         <source>Actions</source>
-        <translation>Handling</translation>
+        <translation type="vanished">Handling</translation>
     </message>
 </context>
 <context>
@@ -99,35 +92,17 @@
     </message>
 </context>
 <context>
-    <name>FileChooser</name>
-    <message>
-        <source>Select a file</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>FileChooserMobile</name>
-    <message>
-        <source>Close</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Go to parent folder</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
     <name>ForwardButton</name>
     <message>
         <source>Navigate Forward</source>
-        <translation>Framover</translation>
+        <translation type="vanished">Framover</translation>
     </message>
 </context>
 <context>
     <name>GlobalDrawer</name>
     <message>
         <source>Back</source>
-        <translation>Tilbake</translation>
+        <translation type="vanished">Tilbake</translation>
     </message>
     <message>
         <source>Log out</source>
@@ -252,74 +227,74 @@
     <name>RosterAddContactSheet</name>
     <message>
         <source>Add new contact</source>
-        <translation>Legg til ny kontakt</translation>
+        <translation type="vanished">Legg til ny kontakt</translation>
     </message>
     <message>
         <source>Nickname:</source>
-        <translation>Kallenavn:</translation>
+        <translation type="vanished">Kallenavn:</translation>
     </message>
     <message>
         <source>Jabber-ID:</source>
-        <translation>Jabber-ID:</translation>
+        <translation type="vanished">Jabber-ID:</translation>
     </message>
     <message>
         <source>user@example.org</source>
-        <translation>bruker@eksempel.no</translation>
+        <translation type="vanished">bruker@eksempel.no</translation>
     </message>
     <message>
         <source>Cancel</source>
-        <translation>Avbryt</translation>
+        <translation type="vanished">Avbryt</translation>
     </message>
     <message>
         <source>Add</source>
-        <translation>Legg til</translation>
+        <translation type="vanished">Legg til</translation>
     </message>
     <message>
         <source>This will also send a request to access the presence of the contact.</source>
-        <translation>Dette vil også sende en forespørsel om tilgang til kontaktens tilstedeværelsesinfo.</translation>
+        <translation type="vanished">Dette vil også sende en forespørsel om tilgang til kontaktens tilstedeværelsesinfo.</translation>
     </message>
     <message>
         <source>Optional message:</source>
-        <translation>Valgfri melding:</translation>
+        <translation type="vanished">Valgfri melding:</translation>
     </message>
     <message>
         <source>Tell your chat partner who you are.</source>
-        <translation>Fortell din sludrepartner hvem du er.</translation>
+        <translation type="vanished">Fortell din sludrepartner hvem du er.</translation>
     </message>
 </context>
 <context>
     <name>RosterListItem</name>
     <message>
         <source>Error: Please check the JID.</source>
-        <translation>Feil: Sjekk JID-en.</translation>
+        <translation type="vanished">Feil: Sjekk JID-en.</translation>
     </message>
     <message>
         <source>Available</source>
-        <translation>Tilgjengelig</translation>
+        <translation type="vanished">Tilgjengelig</translation>
     </message>
     <message>
         <source>Free for chat</source>
-        <translation>Ledig for sludring</translation>
+        <translation type="vanished">Ledig for sludring</translation>
     </message>
     <message>
         <source>Away</source>
-        <translation>Borte</translation>
+        <translation type="vanished">Borte</translation>
     </message>
     <message>
         <source>Do not disturb</source>
-        <translation>Ikke forstyrr</translation>
+        <translation type="vanished">Ikke forstyrr</translation>
     </message>
     <message>
         <source>Away for longer</source>
-        <translation>Lengre tids fravær</translation>
+        <translation type="vanished">Lengre tids fravær</translation>
     </message>
     <message>
         <source>Offline</source>
-        <translation>Frakoblet</translation>
+        <translation type="vanished">Frakoblet</translation>
     </message>
     <message>
         <source>Error</source>
-        <translation>Feil</translation>
+        <translation type="vanished">Feil</translation>
     </message>
     <message>
         <source>Invalid</source>
@@ -364,15 +339,15 @@
     </message>
     <message>
         <source>Delete contact</source>
-        <translation>Slett kontakt</translation>
+        <translation type="vanished">Slett kontakt</translation>
     </message>
     <message>
         <source>Cancel</source>
-        <translation>Avbryt</translation>
+        <translation type="vanished">Avbryt</translation>
     </message>
     <message>
         <source>Delete</source>
-        <translation>Slett</translation>
+        <translation type="vanished">Slett</translation>
     </message>
     <message>
         <source>Do you really want to delete the contact &lt;%1&gt; from your roster?</source>
@@ -380,55 +355,62 @@
     </message>
     <message>
         <source>Do you really want to delete the contact &lt;b&gt;%1&lt;/b&gt; from your roster?</source>
-        <translation>Ønsker du virkelig å slette kontakten &lt;b&gt;%1&lt;/b&gt; from din kontaktliste?</translation>
+        <translation type="vanished">Ønsker du virkelig å slette kontakten &lt;b&gt;%1&lt;/b&gt; from din kontaktliste?</translation>
     </message>
 </context>
 <context>
     <name>SendMediaSheet</name>
     <message>
-        <source>Caption</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Cancel</source>
-        <translation type="unfinished">Avbryt</translation>
+        <translation type="obsolete">Avbryt</translation>
     </message>
     <message>
         <source>Send</source>
-        <translation type="unfinished">Send</translation>
+        <translation type="obsolete">Send</translation>
     </message>
 </context>
 <context>
     <name>SubRequestAcceptSheet</name>
     <message>
         <source>Subscription Request</source>
-        <translation>Abonnementsforespørsel</translation>
+        <translation type="vanished">Abonnementsforespørsel</translation>
     </message>
     <message>
         <source>You received a subscription request by &lt;b&gt;%1&lt;/b&gt;. If you accept it, the account will have access to your presence status.</source>
-        <translation>Du har mottatt en abonnementsforespørsel av &lt;b&gt;%1&lt;/b&gt;. Hvis du godtar den, vil kontoen ha tilgang til din tilstedeværelsesstatus.</translation>
+        <translation type="vanished">Du har mottatt en abonnementsforespørsel av &lt;b&gt;%1&lt;/b&gt;. Hvis du godtar den, vil kontoen ha tilgang til din tilstedeværelsesstatus.</translation>
     </message>
     <message>
         <source>Decline</source>
-        <translation>Avslå</translation>
+        <translation type="vanished">Avslå</translation>
     </message>
     <message>
         <source>Accept</source>
-        <translation>Godta</translation>
+        <translation type="vanished">Godta</translation>
     </message>
 </context>
 <context>
     <name>ToolBarApplicationHeader</name>
     <message>
         <source>More Actions</source>
-        <translation>Flere handlinger</translation>
+        <translation type="vanished">Flere handlinger</translation>
     </message>
 </context>
 <context>
     <name>ToolBarPageHeader</name>
     <message>
         <source>More Actions</source>
-        <translation type="unfinished">Flere handlinger</translation>
+        <translation type="obsolete">Flere handlinger</translation>
+    </message>
+</context>
+<context>
+    <name>UploadManager</name>
+    <message>
+        <source>Could not send file, as a result of not being connected.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>File</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 </TS>

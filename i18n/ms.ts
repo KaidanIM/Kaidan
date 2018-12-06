@@ -54,14 +54,7 @@
     <name>BackButton</name>
     <message>
         <source>Navigate Back</source>
-        <translation>Ke Belakang</translation>
-    </message>
-</context>
-<context>
-    <name>ChatMessage</name>
-    <message>
-        <source>Message copied to clipboard</source>
-        <translation type="unfinished"></translation>
+        <translation type="vanished">Ke Belakang</translation>
     </message>
 </context>
 <context>
@@ -103,7 +96,7 @@
     <name>ContextDrawer</name>
     <message>
         <source>Actions</source>
-        <translation>Tindakan</translation>
+        <translation type="vanished">Tindakan</translation>
     </message>
 </context>
 <context>
@@ -114,28 +107,17 @@
     </message>
 </context>
 <context>
-    <name>FileChooser</name>
-    <message>
-        <source>Select a file</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
     <name>FileChooserMobile</name>
     <message>
         <source>Close</source>
-        <translation type="unfinished">Tutup</translation>
-    </message>
-    <message>
-        <source>Go to parent folder</source>
-        <translation type="unfinished"></translation>
+        <translation type="obsolete">Tutup</translation>
     </message>
 </context>
 <context>
     <name>ForwardButton</name>
     <message>
         <source>Navigate Forward</source>
-        <translation>Ke Depan</translation>
+        <translation type="vanished">Ke Depan</translation>
     </message>
 </context>
 <context>
@@ -154,7 +136,7 @@
     </message>
     <message>
         <source>Back</source>
-        <translation>Kembali</translation>
+        <translation type="vanished">Kembali</translation>
     </message>
     <message>
         <source>Invite friends</source>
@@ -275,74 +257,74 @@
     <name>RosterAddContactSheet</name>
     <message>
         <source>Nickname:</source>
-        <translation>Nama panggilan:</translation>
+        <translation type="vanished">Nama panggilan:</translation>
     </message>
     <message>
         <source>Jabber-ID:</source>
-        <translation>ID Jabber:</translation>
+        <translation type="vanished">ID Jabber:</translation>
     </message>
     <message>
         <source>user@example.org</source>
-        <translation>contoh＠emel.com</translation>
+        <translation type="vanished">contoh＠emel.com</translation>
     </message>
     <message>
         <source>Cancel</source>
-        <translation>Batal</translation>
+        <translation type="vanished">Batal</translation>
     </message>
     <message>
         <source>Add</source>
-        <translation>Tambah</translation>
+        <translation type="vanished">Tambah</translation>
     </message>
     <message>
         <source>Add new contact</source>
-        <translation>Tambah kenalan baru</translation>
+        <translation type="vanished">Tambah kenalan baru</translation>
     </message>
     <message>
         <source>This will also send a request to access the presence of the contact.</source>
-        <translation>Ini juga akan menghantar permintaan untuk mencapai kehadiran kenalan.</translation>
+        <translation type="vanished">Ini juga akan menghantar permintaan untuk mencapai kehadiran kenalan.</translation>
     </message>
     <message>
         <source>Optional message:</source>
-        <translation>Mesej pilihan:</translation>
+        <translation type="vanished">Mesej pilihan:</translation>
     </message>
     <message>
         <source>Tell your chat partner who you are.</source>
-        <translation>Beritahu pasangan sembang siapakah diri anda sebenarnya.</translation>
+        <translation type="vanished">Beritahu pasangan sembang siapakah diri anda sebenarnya.</translation>
     </message>
 </context>
 <context>
     <name>RosterListItem</name>
     <message>
         <source>Error: Please check the JID.</source>
-        <translation>Ralat: Sila periksa JID.</translation>
+        <translation type="vanished">Ralat: Sila periksa JID.</translation>
     </message>
     <message>
         <source>Available</source>
-        <translation>Sedang lapang</translation>
+        <translation type="vanished">Sedang lapang</translation>
     </message>
     <message>
         <source>Free for chat</source>
-        <translation>Boleh sembang</translation>
+        <translation type="vanished">Boleh sembang</translation>
     </message>
     <message>
         <source>Away</source>
-        <translation>Tidak lapang</translation>
+        <translation type="vanished">Tidak lapang</translation>
     </message>
     <message>
         <source>Do not disturb</source>
-        <translation>Jangan ganggu</translation>
+        <translation type="vanished">Jangan ganggu</translation>
     </message>
     <message>
         <source>Away for longer</source>
-        <translation>Tidak lapang lebih lama</translation>
+        <translation type="vanished">Tidak lapang lebih lama</translation>
     </message>
     <message>
         <source>Offline</source>
-        <translation>Tiada dalam talian</translation>
+        <translation type="vanished">Tiada dalam talian</translation>
     </message>
     <message>
         <source>Error</source>
-        <translation>Ralat</translation>
+        <translation type="vanished">Ralat</translation>
     </message>
     <message>
         <source>Invalid</source>
@@ -387,67 +369,74 @@
     </message>
     <message>
         <source>Delete contact</source>
-        <translation>Padam kenalan</translation>
+        <translation type="vanished">Padam kenalan</translation>
     </message>
     <message>
         <source>Cancel</source>
-        <translation>Batal</translation>
+        <translation type="vanished">Batal</translation>
     </message>
     <message>
         <source>Delete</source>
-        <translation>Padam</translation>
+        <translation type="vanished">Padam</translation>
     </message>
     <message>
         <source>Do you really want to delete the contact &lt;b&gt;%1&lt;/b&gt; from your roster?</source>
-        <translation>Adakah anda ingin memadam kenalan &lt;b&gt;%1&lt;/b&gt; daripada roster anda?</translation>
+        <translation type="vanished">Adakah anda ingin memadam kenalan &lt;b&gt;%1&lt;/b&gt; daripada roster anda?</translation>
     </message>
 </context>
 <context>
     <name>SendMediaSheet</name>
     <message>
-        <source>Caption</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Cancel</source>
-        <translation type="unfinished">Batal</translation>
+        <translation type="obsolete">Batal</translation>
     </message>
     <message>
         <source>Send</source>
-        <translation type="unfinished">Hantar</translation>
+        <translation type="obsolete">Hantar</translation>
     </message>
 </context>
 <context>
     <name>SubRequestAcceptSheet</name>
     <message>
         <source>Subscription Request</source>
-        <translation>Permintaan Langganan</translation>
+        <translation type="vanished">Permintaan Langganan</translation>
     </message>
     <message>
         <source>You received a subscription request by &lt;b&gt;%1&lt;/b&gt;. If you accept it, the account will have access to your presence status.</source>
-        <translation>Anda menerima permintaan langganan daripada &lt;b&gt;%1&lt;/b&gt;. Jika anda terima, akaun tersebut boleh mencapai status kehadiran anda.</translation>
+        <translation type="vanished">Anda menerima permintaan langganan daripada &lt;b&gt;%1&lt;/b&gt;. Jika anda terima, akaun tersebut boleh mencapai status kehadiran anda.</translation>
     </message>
     <message>
         <source>Decline</source>
-        <translation>Tolak</translation>
+        <translation type="vanished">Tolak</translation>
     </message>
     <message>
         <source>Accept</source>
-        <translation>Terima</translation>
+        <translation type="vanished">Terima</translation>
     </message>
 </context>
 <context>
     <name>ToolBarApplicationHeader</name>
     <message>
         <source>More Actions</source>
-        <translation>Tindakan Lanjut</translation>
+        <translation type="vanished">Tindakan Lanjut</translation>
     </message>
 </context>
 <context>
     <name>ToolBarPageHeader</name>
     <message>
         <source>More Actions</source>
-        <translation type="unfinished">Tindakan Lanjut</translation>
+        <translation type="obsolete">Tindakan Lanjut</translation>
+    </message>
+</context>
+<context>
+    <name>UploadManager</name>
+    <message>
+        <source>Could not send file, as a result of not being connected.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>File</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 </TS>

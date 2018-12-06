@@ -12,15 +12,8 @@
         <translation></translation>
     </message>
     <message>
-        <source>Source code on GitHub</source>
-        <translation></translation>
-    </message>
-</context>
-<context>
-    <name>BackButton</name>
-    <message>
-        <source>Navigate Back</source>
-        <translation></translation>
+        <source>View source code online</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -29,27 +22,40 @@
         <source>Compose message</source>
         <translation></translation>
     </message>
-</context>
-<context>
-    <name>ContextDrawer</name>
     <message>
-        <source>Actions</source>
-        <translation></translation>
+        <source>Select a file</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Image</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Video</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Audio</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Document</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Other file</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
-    <name>ForwardButton</name>
+    <name>EmptyChatPage</name>
     <message>
-        <source>Navigate Forward</source>
-        <translation></translation>
+        <source>Please select a chat to start messaging</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>GlobalDrawer</name>
-    <message>
-        <source>Back</source>
-        <translation></translation>
-    </message>
     <message>
         <source>Log out</source>
         <translation></translation>
@@ -58,20 +64,21 @@
         <source>About</source>
         <translation></translation>
     </message>
+    <message>
+        <source>Invite friends</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Invitation link copied to clipboard</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>Kaidan</name>
     <message>
-        <source>Could not send message, because not being connected.</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>Could not add contact, because not being connected.</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>Could not remove contact, because not being connected.</source>
-        <translation></translation>
+        <source>The link will be opened after you have connected.</source>
+        <extracomment>The link is an XMPP-URI (i.e. &apos;xmpp:kaidan@muc.kaidan.im?join&apos; for joining a chat)</extracomment>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -112,32 +119,55 @@
         <source>Connect</source>
         <translation></translation>
     </message>
+    <message>
+        <source>Invalid username or password.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cannot connect to the server. Please check your internet connection.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The server doesn&apos;t support secure connections.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Error while trying to connect securely.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Could not resolve the server&apos;s address. Please check your JID again.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Could not connect to the server.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Authentification protocol not supported by the server.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>An unknown error occured; see log for details.</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
-    <name>RosterAddContactSheet</name>
+    <name>MessageHandler</name>
     <message>
-        <source>Add new contact</source>
-        <translation></translation>
+        <source>Could not send message, as a result of not being connected.</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>RosterManager</name>
+    <message>
+        <source>Could not add contact, as a result of not being connected.</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Nickname:</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>Jabber-ID:</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>user@example.org</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>Cancel</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>Add</source>
-        <translation></translation>
+        <source>Could not remove contact, as a result of not being connected.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -160,22 +190,14 @@
     </message>
 </context>
 <context>
-    <name>RosterRemoveContactSheet</name>
+    <name>UploadManager</name>
     <message>
-        <source>Do you really want to delete the contact &lt;%1&gt; from your roster?</source>
-        <translation></translation>
+        <source>Could not send file, as a result of not being connected.</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Delete contact</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>Cancel</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>Delete</source>
-        <translation></translation>
+        <source>File</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 </TS>

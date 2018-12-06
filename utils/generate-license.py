@@ -48,7 +48,8 @@ REPLACE_USER_IDS = [
 # These user ids will be excluded from any targets
 EXCLUDE_USER_IDS = [
 	"Weblate <noreply@weblate.org>",
-	"anonymous <> <None>"
+	"anonymous <> <None>",
+	"Kaidan Translations <translations@kaidan.im>"
 ]
 
 GPL3_OPENSSL_LICENSE = """This program is free software; you can redistribute it and/or modify it under

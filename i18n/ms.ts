@@ -268,7 +268,7 @@
     <name>MessageHandler</name>
     <message>
         <source>Could not send message, as a result of not being connected.</source>
-        <translation type="unfinished">Tidak dapat hantar mesej, kerana anda tiada sambungan internet.</translation>
+        <translation>Tidak dapat hantar mesej, kerana anda tiada sambungan internet.</translation>
     </message>
 </context>
 <context>
@@ -353,11 +353,11 @@
     <name>RosterManager</name>
     <message>
         <source>Could not add contact, as a result of not being connected.</source>
-        <translation type="unfinished">Tidak dapat menambah kenalan, kerana anda tiada sambungan internet.</translation>
+        <translation>Tidak dapat menambah kenalan, kerana anda tiada sambungan internet.</translation>
     </message>
     <message>
         <source>Could not remove contact, as a result of not being connected.</source>
-        <translation type="unfinished">Tidak dapat membuang kenalan, kerana anda tiada sambungan internet.</translation>
+        <translation>Tidak dapat membuang kenalan, kerana anda tiada sambungan internet.</translation>
     </message>
 </context>
 <context>
@@ -450,11 +450,11 @@
     <name>UploadManager</name>
     <message>
         <source>Could not send file, as a result of not being connected.</source>
-        <translation type="unfinished">Tidak dapat menghantar fail, kerana anda tidak disambung ke internet.</translation>
+        <translation>Tidak dapat menghantar fail, kerana anda tidak disambung ke internet.</translation>
     </message>
     <message>
         <source>File</source>
-        <translation type="unfinished"></translation>
+        <translation>Fail</translation>
     </message>
 </context>
 </TS>

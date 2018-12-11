@@ -5,72 +5,72 @@
     <name>AboutDialog</name>
     <message>
         <source>A simple, user-friendly Jabber/XMPP client</source>
-        <translation type="unfinished"></translation>
+        <translation>Prosty, przyjazny dla użytkownika klient Jabber/XMPP</translation>
     </message>
     <message>
         <source>License:</source>
-        <translation type="unfinished"></translation>
+        <translation>Licencja:</translation>
     </message>
     <message>
         <source>View source code online</source>
-        <translation type="unfinished"></translation>
+        <translation>Zobacz kod źródłowy online</translation>
     </message>
 </context>
 <context>
     <name>ChatPage</name>
     <message>
         <source>Compose message</source>
-        <translation type="unfinished"></translation>
+        <translation>Złożenie wiadomości</translation>
     </message>
     <message>
         <source>Image</source>
-        <translation type="unfinished"></translation>
+        <translation>Obraz</translation>
     </message>
     <message>
         <source>Video</source>
-        <translation type="unfinished"></translation>
+        <translation>Video</translation>
     </message>
     <message>
         <source>Audio</source>
-        <translation type="unfinished"></translation>
+        <translation>Audio</translation>
     </message>
     <message>
         <source>Document</source>
-        <translation type="unfinished"></translation>
+        <translation>Dokument</translation>
     </message>
     <message>
         <source>Other file</source>
-        <translation type="unfinished"></translation>
+        <translation>Inne akta</translation>
     </message>
     <message>
         <source>Select a file</source>
-        <translation type="unfinished"></translation>
+        <translation>Wybierz plik</translation>
     </message>
 </context>
 <context>
     <name>EmptyChatPage</name>
     <message>
         <source>Please select a chat to start messaging</source>
-        <translation type="unfinished"></translation>
+        <translation>Wybierz czat, aby rozpocząć wysyłanie wiadomości</translation>
     </message>
 </context>
 <context>
     <name>GlobalDrawer</name>
     <message>
         <source>Log out</source>
-        <translation type="unfinished"></translation>
+        <translation>Wyloguj się</translation>
     </message>
     <message>
         <source>About</source>
-        <translation type="unfinished"></translation>
+        <translation>O programie</translation>
     </message>
     <message>
         <source>Invite friends</source>
-        <translation type="unfinished"></translation>
+        <translation>Zaproś przyjaciół</translation>
     </message>
     <message>
         <source>Invitation link copied to clipboard</source>
-        <translation type="unfinished"></translation>
+        <translation>Link zaproszenia skopiowany do schowka</translation>
     </message>
 </context>
 <context>
@@ -78,126 +78,126 @@
     <message>
         <source>The link will be opened after you have connected.</source>
         <extracomment>The link is an XMPP-URI (i.e. &apos;xmpp:kaidan@muc.kaidan.im?join&apos; for joining a chat)</extracomment>
-        <translation type="unfinished"></translation>
+        <translation>Link zostanie otwarty po nawiązaniu połączenia.</translation>
     </message>
 </context>
 <context>
     <name>LoginPage</name>
     <message>
         <source>Log in</source>
-        <translation type="unfinished"></translation>
+        <translation>Zaloguj się</translation>
     </message>
     <message>
         <source>Log in to your XMPP account</source>
-        <translation type="unfinished"></translation>
+        <translation>Zaloguj się na swoje konto XMPP</translation>
     </message>
     <message>
         <source>Your Jabber-ID:</source>
-        <translation type="unfinished"></translation>
+        <translation>Twój Jabber-ID:</translation>
     </message>
     <message>
         <source>Your diaspora*-ID:</source>
-        <translation type="unfinished"></translation>
+        <translation>Twój identyfikator diaspory*-ID:</translation>
     </message>
     <message>
         <source>user@example.org</source>
-        <translation type="unfinished"></translation>
+        <translation>user@example.org</translation>
     </message>
     <message>
         <source>user@diaspora.pod</source>
-        <translation type="unfinished"></translation>
+        <translation>user@diaspora.pod</translation>
     </message>
     <message>
         <source>Your Password:</source>
-        <translation type="unfinished"></translation>
+        <translation>Twoje hasło:</translation>
     </message>
     <message>
         <source>Connecting…</source>
-        <translation type="unfinished"></translation>
+        <translation>Łączenie…</translation>
     </message>
     <message>
         <source>Connect</source>
-        <translation type="unfinished"></translation>
+        <translation>Połącz</translation>
     </message>
     <message>
         <source>Invalid username or password.</source>
-        <translation type="unfinished"></translation>
+        <translation>Niepoprawny login lub hasło</translation>
     </message>
     <message>
         <source>Cannot connect to the server. Please check your internet connection.</source>
-        <translation type="unfinished"></translation>
+        <translation>Nie można połączyć się z serwerem. Proszę sprawdzić połączenie internetowe.</translation>
     </message>
     <message>
         <source>The server doesn&apos;t support secure connections.</source>
-        <translation type="unfinished"></translation>
+        <translation>Serwer nie obsługuje bezpiecznych połączeń.</translation>
     </message>
     <message>
         <source>Error while trying to connect securely.</source>
-        <translation type="unfinished"></translation>
+        <translation>Błąd podczas próby bezpiecznego połączenia.</translation>
     </message>
     <message>
         <source>Could not resolve the server&apos;s address. Please check your JID again.</source>
-        <translation type="unfinished"></translation>
+        <translation>Nie udało się rozwiązać adresu serwera. Proszę sprawdzić ponownie swój JID.</translation>
     </message>
     <message>
         <source>Could not connect to the server.</source>
-        <translation type="unfinished"></translation>
+        <translation>Nie można było połączyć się z serwerem.</translation>
     </message>
     <message>
         <source>Authentification protocol not supported by the server.</source>
-        <translation type="unfinished"></translation>
+        <translation>Protokół uwierzytelniania nie jest obsługiwany przez serwer.</translation>
     </message>
     <message>
         <source>An unknown error occured; see log for details.</source>
-        <translation type="unfinished"></translation>
+        <translation>Wystąpił nieznany błąd; szczegóły w dzienniku.</translation>
     </message>
 </context>
 <context>
     <name>MessageHandler</name>
     <message>
         <source>Could not send message, as a result of not being connected.</source>
-        <translation type="unfinished"></translation>
+        <translation>Nie można było wysłać wiadomości, w wyniku braku połączenia.</translation>
     </message>
 </context>
 <context>
     <name>RosterManager</name>
     <message>
         <source>Could not add contact, as a result of not being connected.</source>
-        <translation type="unfinished"></translation>
+        <translation>Nie można dodać styku, w wyniku nie podłączenia.</translation>
     </message>
     <message>
         <source>Could not remove contact, as a result of not being connected.</source>
-        <translation type="unfinished"></translation>
+        <translation>Nie można usunąć styku, ponieważ nie jest on połączony.</translation>
     </message>
 </context>
 <context>
     <name>RosterPage</name>
     <message>
         <source>Connecting…</source>
-        <translation type="unfinished"></translation>
+        <translation>Łączenie…</translation>
     </message>
     <message>
         <source>Contacts</source>
-        <translation type="unfinished"></translation>
+        <translation>Kontakty</translation>
     </message>
     <message>
         <source>Add new contact</source>
-        <translation type="unfinished"></translation>
+        <translation>Dodaj nowy kontakt</translation>
     </message>
     <message>
         <source>Offline</source>
-        <translation type="unfinished"></translation>
+        <translation>Offline</translation>
     </message>
 </context>
 <context>
     <name>UploadManager</name>
     <message>
         <source>Could not send file, as a result of not being connected.</source>
-        <translation type="unfinished"></translation>
+        <translation>Nie można wysłać pliku, w wyniku braku połączenia.</translation>
     </message>
     <message>
         <source>File</source>
-        <translation type="unfinished"></translation>
+        <translation>Pilnik</translation>
     </message>
 </context>
 </TS>

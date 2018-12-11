@@ -5,7 +5,7 @@
     <name>AboutDialog</name>
     <message>
         <source>A simple, user-friendly Jabber/XMPP client</source>
-        <translation type="unfinished">Een simpele, gebruiksvriendelijke Jabber/XMPP client</translation>
+        <translation type="unfinished">Een eenvoudige, gebruiksvriendelijke Jabber/XMPP-client</translation>
     </message>
     <message>
         <source>License:</source>
@@ -17,7 +17,7 @@
     </message>
     <message>
         <source>View source code online</source>
-        <translation type="unfinished"></translation>
+        <translation>Broncode online bekijken</translation>
     </message>
 </context>
 <context>
@@ -54,27 +54,27 @@
     </message>
     <message>
         <source>Image</source>
-        <translation type="unfinished"></translation>
+        <translation>Beeld</translation>
     </message>
     <message>
         <source>Video</source>
-        <translation type="unfinished"></translation>
+        <translation>Video</translation>
     </message>
     <message>
         <source>Audio</source>
-        <translation type="unfinished"></translation>
+        <translation>Audio</translation>
     </message>
     <message>
         <source>Document</source>
-        <translation type="unfinished"></translation>
+        <translation>Document</translation>
     </message>
     <message>
         <source>Other file</source>
-        <translation type="unfinished"></translation>
+        <translation>Ander bestand</translation>
     </message>
     <message>
         <source>Select a file</source>
-        <translation type="unfinished"></translation>
+        <translation>Selecteer een bestand</translation>
     </message>
 </context>
 <context>
@@ -88,7 +88,7 @@
     <name>EmptyChatPage</name>
     <message>
         <source>Please select a chat to start messaging</source>
-        <translation type="unfinished"></translation>
+        <translation>Selecteer een chat om een bericht te starten</translation>
     </message>
 </context>
 <context>
@@ -114,11 +114,11 @@
     </message>
     <message>
         <source>Invite friends</source>
-        <translation type="unfinished"></translation>
+        <translation>Nodig vrienden uit</translation>
     </message>
     <message>
         <source>Invitation link copied to clipboard</source>
-        <translation type="unfinished"></translation>
+        <translation>Uitnodiging link gekopieerd naar klembord</translation>
     </message>
 </context>
 <context>
@@ -126,7 +126,7 @@
     <message>
         <source>The link will be opened after you have connected.</source>
         <extracomment>The link is an XMPP-URI (i.e. &apos;xmpp:kaidan@muc.kaidan.im?join&apos; for joining a chat)</extracomment>
-        <translation type="unfinished"></translation>
+        <translation>De link wordt geopend nadat u verbinding hebt gemaakt.</translation>
     </message>
 </context>
 <context>
@@ -173,46 +173,46 @@
     </message>
     <message>
         <source>Log in to your XMPP account</source>
-        <translation type="unfinished"></translation>
+        <translation>Log in op uw XMPP-account</translation>
     </message>
     <message>
         <source>Invalid username or password.</source>
-        <translation type="unfinished"></translation>
+        <translation>Ongeldige gebruikersnaam of wachtwoord.</translation>
     </message>
     <message>
         <source>Cannot connect to the server. Please check your internet connection.</source>
-        <translation type="unfinished"></translation>
+        <translation>Kan geen verbinding maken met de server. Controleer uw internetverbinding.</translation>
     </message>
     <message>
         <source>The server doesn&apos;t support secure connections.</source>
-        <translation type="unfinished"></translation>
+        <translation>De server ondersteunt geen beveiligde verbindingen.</translation>
     </message>
     <message>
         <source>Error while trying to connect securely.</source>
-        <translation type="unfinished"></translation>
+        <translation>Fout bij het maken van een veilige verbinding.</translation>
     </message>
     <message>
         <source>Could not resolve the server&apos;s address. Please check your JID again.</source>
-        <translation type="unfinished"></translation>
+        <translation>Kan het adres van de server niet oplossen. Controleer uw JID opnieuw.</translation>
     </message>
     <message>
         <source>Could not connect to the server.</source>
-        <translation type="unfinished"></translation>
+        <translation>Kan geen verbinding maken met de server.</translation>
     </message>
     <message>
         <source>Authentification protocol not supported by the server.</source>
-        <translation type="unfinished"></translation>
+        <translation>Authentificatieprotocol niet ondersteund door de server.</translation>
     </message>
     <message>
         <source>An unknown error occured; see log for details.</source>
-        <translation type="unfinished"></translation>
+        <translation>Er is een onbekende fout opgetreden; zie logboek voor details.</translation>
     </message>
 </context>
 <context>
     <name>MessageHandler</name>
     <message>
         <source>Could not send message, as a result of not being connected.</source>
-        <translation type="unfinished"></translation>
+        <translation>Kan geen bericht verzenden, omdat er geen verbinding is gemaakt.</translation>
     </message>
 </context>
 <context>
@@ -246,11 +246,11 @@
     <name>RosterManager</name>
     <message>
         <source>Could not add contact, as a result of not being connected.</source>
-        <translation type="unfinished"></translation>
+        <translation>Kan geen contact toevoegen als gevolg van het niet aansluiten.</translation>
     </message>
     <message>
         <source>Could not remove contact, as a result of not being connected.</source>
-        <translation type="unfinished"></translation>
+        <translation>Kan het contact niet verwijderen als gevolg van het niet zijn aangesloten.</translation>
     </message>
 </context>
 <context>
@@ -265,11 +265,11 @@
     </message>
     <message>
         <source>Connecting…</source>
-        <translation type="unfinished">Verbinden…</translation>
+        <translation type="unfinished">Verbinding maken…</translation>
     </message>
     <message>
         <source>Offline</source>
-        <translation type="unfinished"></translation>
+        <translation>Offline</translation>
     </message>
 </context>
 <context>
@@ -306,11 +306,11 @@
     <name>UploadManager</name>
     <message>
         <source>Could not send file, as a result of not being connected.</source>
-        <translation type="unfinished"></translation>
+        <translation>Kan geen bestand verzenden als gevolg van het niet aansluiten.</translation>
     </message>
     <message>
         <source>File</source>
-        <translation type="unfinished"></translation>
+        <translation>Bestand</translation>
     </message>
 </context>
 </TS>

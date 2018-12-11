@@ -5,11 +5,11 @@
     <name>AboutDialog</name>
     <message>
         <source>A simple, user-friendly Jabber/XMPP client</source>
-        <translation type="unfinished">Простой и удобный Jabber/XMPP клиент</translation>
+        <translation>Простой и удобный Jabber/XMPP клиент</translation>
     </message>
     <message>
         <source>License:</source>
-        <translation type="unfinished">Лицензия:</translation>
+        <translation>Права:</translation>
     </message>
     <message>
         <source>Source code on GitHub</source>
@@ -17,7 +17,7 @@
     </message>
     <message>
         <source>View source code online</source>
-        <translation type="unfinished"></translation>
+        <translation>Просмотреть исходный код онлайн</translation>
     </message>
 </context>
 <context>
@@ -77,27 +77,27 @@
     </message>
     <message>
         <source>Image</source>
-        <translation type="unfinished"></translation>
+        <translation>Изображение</translation>
     </message>
     <message>
         <source>Video</source>
-        <translation type="unfinished"></translation>
+        <translation>Видео</translation>
     </message>
     <message>
         <source>Audio</source>
-        <translation type="unfinished"></translation>
+        <translation>Звук</translation>
     </message>
     <message>
         <source>Document</source>
-        <translation type="unfinished"></translation>
+        <translation>Документ</translation>
     </message>
     <message>
         <source>Other file</source>
-        <translation type="unfinished"></translation>
+        <translation>Другой файл</translation>
     </message>
     <message>
         <source>Select a file</source>
-        <translation type="unfinished"></translation>
+        <translation>Выберите файл</translation>
     </message>
 </context>
 <context>
@@ -111,7 +111,7 @@
     <name>EmptyChatPage</name>
     <message>
         <source>Please select a chat to start messaging</source>
-        <translation type="unfinished"></translation>
+        <translation>Чтобы начать обмен сообщениями, выберите чат.</translation>
     </message>
 </context>
 <context>
@@ -148,11 +148,11 @@
     </message>
     <message>
         <source>Invite friends</source>
-        <translation type="unfinished"></translation>
+        <translation>Пригласить друзей</translation>
     </message>
     <message>
         <source>Invitation link copied to clipboard</source>
-        <translation type="unfinished"></translation>
+        <translation>Ссылка на приглашение скопирована в буфер обмена</translation>
     </message>
 </context>
 <context>
@@ -160,7 +160,7 @@
     <message>
         <source>The link will be opened after you have connected.</source>
         <extracomment>The link is an XMPP-URI (i.e. &apos;xmpp:kaidan@muc.kaidan.im?join&apos; for joining a chat)</extracomment>
-        <translation type="unfinished"></translation>
+        <translation>Ссылка будет открыта после подключения.</translation>
     </message>
 </context>
 <context>
@@ -211,42 +211,42 @@
     </message>
     <message>
         <source>Invalid username or password.</source>
-        <translation type="unfinished"></translation>
+        <translation>Неверное имя пользователя или пароль.</translation>
     </message>
     <message>
         <source>Cannot connect to the server. Please check your internet connection.</source>
-        <translation type="unfinished"></translation>
+        <translation>Не удается подключиться к серверу. Пожалуйста, проверьте подключение к Интернету.</translation>
     </message>
     <message>
         <source>The server doesn&apos;t support secure connections.</source>
-        <translation type="unfinished"></translation>
+        <translation>Сервер не поддерживает безопасные соединения.</translation>
     </message>
     <message>
         <source>Error while trying to connect securely.</source>
-        <translation type="unfinished"></translation>
+        <translation>Ошибка при попытке надежного подключения.</translation>
     </message>
     <message>
         <source>Could not resolve the server&apos;s address. Please check your JID again.</source>
-        <translation type="unfinished"></translation>
+        <translation>Не смог определить адрес сервера. Пожалуйста, проверьте ваш JID еще раз.</translation>
     </message>
     <message>
         <source>Could not connect to the server.</source>
-        <translation type="unfinished"></translation>
+        <translation>Не смог подключиться к серверу.</translation>
     </message>
     <message>
         <source>Authentification protocol not supported by the server.</source>
-        <translation type="unfinished"></translation>
+        <translation>Протокол аутентификации не поддерживается сервером.</translation>
     </message>
     <message>
         <source>An unknown error occured; see log for details.</source>
-        <translation type="unfinished"></translation>
+        <translation>Произошла неизвестная ошибка; подробности см. в журнале.</translation>
     </message>
 </context>
 <context>
     <name>MessageHandler</name>
     <message>
         <source>Could not send message, as a result of not being connected.</source>
-        <translation type="unfinished"></translation>
+        <translation>Не смог отправить сообщение, в результате того, что не был подключен.</translation>
     </message>
 </context>
 <context>
@@ -280,11 +280,11 @@
     <name>RosterManager</name>
     <message>
         <source>Could not add contact, as a result of not being connected.</source>
-        <translation type="unfinished"></translation>
+        <translation>Невозможно добавить контакт, так как он не был подключен.</translation>
     </message>
     <message>
         <source>Could not remove contact, as a result of not being connected.</source>
-        <translation type="unfinished"></translation>
+        <translation>Не удалось удалить контакт из-за отсутствия подключения.</translation>
     </message>
 </context>
 <context>
@@ -299,11 +299,11 @@
     </message>
     <message>
         <source>Connecting…</source>
-        <translation type="unfinished">Подключение...</translation>
+        <translation>Соединение…</translation>
     </message>
     <message>
         <source>Offline</source>
-        <translation type="unfinished"></translation>
+        <translation>Не в сети</translation>
     </message>
 </context>
 <context>
@@ -340,11 +340,11 @@
     <name>UploadManager</name>
     <message>
         <source>Could not send file, as a result of not being connected.</source>
-        <translation type="unfinished"></translation>
+        <translation>Не смог отправить файл, так как не был подключен.</translation>
     </message>
     <message>
         <source>File</source>
-        <translation type="unfinished"></translation>
+        <translation>Файл</translation>
     </message>
 </context>
 <context>

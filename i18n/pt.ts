@@ -5,7 +5,7 @@
     <name>AboutDialog</name>
     <message>
         <source>A simple, user-friendly Jabber/XMPP client</source>
-        <translation type="unfinished">Um simples, fácil de usar cliente de Jabber/XMPP</translation>
+        <translation type="unfinished">Um cliente Jabber/XMPP simples e fácil de usar</translation>
     </message>
     <message>
         <source>License:</source>
@@ -17,7 +17,7 @@
     </message>
     <message>
         <source>View source code online</source>
-        <translation type="unfinished"></translation>
+        <translation>Ver código-fonte online</translation>
     </message>
 </context>
 <context>
@@ -54,27 +54,27 @@
     </message>
     <message>
         <source>Image</source>
-        <translation type="unfinished"></translation>
+        <translation>Imagem</translation>
     </message>
     <message>
         <source>Video</source>
-        <translation type="unfinished"></translation>
+        <translation>Vídeo</translation>
     </message>
     <message>
         <source>Audio</source>
-        <translation type="unfinished"></translation>
+        <translation>Áudio</translation>
     </message>
     <message>
         <source>Document</source>
-        <translation type="unfinished"></translation>
+        <translation>Documento</translation>
     </message>
     <message>
         <source>Other file</source>
-        <translation type="unfinished"></translation>
+        <translation>Outro arquivo</translation>
     </message>
     <message>
         <source>Select a file</source>
-        <translation type="unfinished"></translation>
+        <translation>Seleccione um ficheiro</translation>
     </message>
 </context>
 <context>
@@ -88,7 +88,7 @@
     <name>EmptyChatPage</name>
     <message>
         <source>Please select a chat to start messaging</source>
-        <translation type="unfinished"></translation>
+        <translation>Selecione um bate-papo para começar a enviar mensagens</translation>
     </message>
 </context>
 <context>
@@ -114,11 +114,11 @@
     </message>
     <message>
         <source>Invite friends</source>
-        <translation type="unfinished"></translation>
+        <translation>Convide amigos</translation>
     </message>
     <message>
         <source>Invitation link copied to clipboard</source>
-        <translation type="unfinished"></translation>
+        <translation>Link de convite copiado para a área de transferência</translation>
     </message>
 </context>
 <context>
@@ -126,7 +126,7 @@
     <message>
         <source>The link will be opened after you have connected.</source>
         <extracomment>The link is an XMPP-URI (i.e. &apos;xmpp:kaidan@muc.kaidan.im?join&apos; for joining a chat)</extracomment>
-        <translation type="unfinished"></translation>
+        <translation>O link será aberto depois de você ter se conectado.</translation>
     </message>
 </context>
 <context>
@@ -137,104 +137,104 @@
     </message>
     <message>
         <source>Log in to your XMPP account</source>
-        <translation type="unfinished"></translation>
+        <translation>Inicie sessão na sua conta XMPP</translation>
     </message>
     <message>
         <source>Your Jabber-ID:</source>
-        <translation type="unfinished"></translation>
+        <translation>O teu Jabber-ID:</translation>
     </message>
     <message>
         <source>Your diaspora*-ID:</source>
-        <translation type="unfinished"></translation>
+        <translation>A sua diáspora*-ID:</translation>
     </message>
     <message>
         <source>user@example.org</source>
-        <translation type="unfinished"></translation>
+        <translation>user@example.org</translation>
     </message>
     <message>
         <source>user@diaspora.pod</source>
-        <translation type="unfinished"></translation>
+        <translation>user@diaspora.pod</translation>
     </message>
     <message>
         <source>Your Password:</source>
-        <translation type="unfinished"></translation>
+        <translation>Sua Senha:</translation>
     </message>
     <message>
         <source>Connect</source>
-        <translation type="unfinished"></translation>
+        <translation>Conectar</translation>
     </message>
     <message>
         <source>Connecting…</source>
-        <translation type="unfinished"></translation>
+        <translation>A ligar…</translation>
     </message>
     <message>
         <source>Invalid username or password.</source>
-        <translation type="unfinished"></translation>
+        <translation>Nome de usuário ou senha inválidos.</translation>
     </message>
     <message>
         <source>Cannot connect to the server. Please check your internet connection.</source>
-        <translation type="unfinished"></translation>
+        <translation>Não é possível conectar ao servidor. Por favor, verifique a sua ligação à Internet.</translation>
     </message>
     <message>
         <source>The server doesn&apos;t support secure connections.</source>
-        <translation type="unfinished"></translation>
+        <translation>O servidor não suporta conexões seguras.</translation>
     </message>
     <message>
         <source>Error while trying to connect securely.</source>
-        <translation type="unfinished"></translation>
+        <translation>Erro ao tentar conectar com segurança.</translation>
     </message>
     <message>
         <source>Could not resolve the server&apos;s address. Please check your JID again.</source>
-        <translation type="unfinished"></translation>
+        <translation>Não foi possível resolver o endereço do servidor. Por favor, verifique o seu JID novamente.</translation>
     </message>
     <message>
         <source>Could not connect to the server.</source>
-        <translation type="unfinished"></translation>
+        <translation>Não consegui ligar-me ao servidor.</translation>
     </message>
     <message>
         <source>Authentification protocol not supported by the server.</source>
-        <translation type="unfinished"></translation>
+        <translation>Protocolo de autenticação não suportado pelo servidor.</translation>
     </message>
     <message>
         <source>An unknown error occured; see log for details.</source>
-        <translation type="unfinished"></translation>
+        <translation>Ocorreu um erro desconhecido; consulte o registo para mais detalhes.</translation>
     </message>
 </context>
 <context>
     <name>MessageHandler</name>
     <message>
         <source>Could not send message, as a result of not being connected.</source>
-        <translation type="unfinished"></translation>
+        <translation>Não foi possível enviar mensagem, como resultado de não estar conectado.</translation>
     </message>
 </context>
 <context>
     <name>RosterManager</name>
     <message>
         <source>Could not add contact, as a result of not being connected.</source>
-        <translation type="unfinished"></translation>
+        <translation>Não foi possível adicionar contacto, por não estar ligado.</translation>
     </message>
     <message>
         <source>Could not remove contact, as a result of not being connected.</source>
-        <translation type="unfinished"></translation>
+        <translation>Não foi possível remover o contato, como resultado de não estar conectado.</translation>
     </message>
 </context>
 <context>
     <name>RosterPage</name>
     <message>
         <source>Contacts</source>
-        <translation type="unfinished"></translation>
+        <translation>Contatos</translation>
     </message>
     <message>
         <source>Add new contact</source>
-        <translation type="unfinished"></translation>
+        <translation>Adicionar novo contacto</translation>
     </message>
     <message>
         <source>Connecting…</source>
-        <translation type="unfinished"></translation>
+        <translation>Conectando…</translation>
     </message>
     <message>
         <source>Offline</source>
-        <translation type="unfinished"></translation>
+        <translation>Offline</translation>
     </message>
 </context>
 <context>
@@ -248,11 +248,11 @@
     <name>UploadManager</name>
     <message>
         <source>Could not send file, as a result of not being connected.</source>
-        <translation type="unfinished"></translation>
+        <translation>Não foi possível enviar arquivo, como resultado de não estar conectado.</translation>
     </message>
     <message>
         <source>File</source>
-        <translation type="unfinished"></translation>
+        <translation>Arquivo</translation>
     </message>
 </context>
 </TS>

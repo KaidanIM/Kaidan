@@ -87,9 +87,7 @@ Item {
 						if (fileIsDir) {
 							if (fileName === "..")
 								fileModel.folder = fileModel.parentFolder
-							else if (fileName === ".")
-								return
-							else
+							else if (fileName !== ".")
 								fileModel.folder = "file://" + filePath
 						} else {
 							root.fileUrl = filePath

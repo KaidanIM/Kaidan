@@ -13,6 +13,7 @@
 		<file alias="qml/elements/RosterListItem.qml">src/qml/elements/RosterListItem.qml</file>
 		<file alias="qml/elements/MessageCounter.qml">src/qml/elements/MessageCounter.qml</file>
 		<file alias="qml/elements/ChatMessage.qml">src/qml/elements/ChatMessage.qml</file>
+		<file alias="qml/elements/ChatMessageImage.qml">src/qml/elements/ChatMessageImage.qml</file>
 		<file alias="qml/elements/RoundImage.qml">src/qml/elements/RoundImage.qml</file>
 		<file alias="qml/elements/IconButton.qml">src/qml/elements/IconButton.qml</file>
 		<file alias="qml/elements/FileChooser.qml">src/qml/elements/FileChooser.qml</file>

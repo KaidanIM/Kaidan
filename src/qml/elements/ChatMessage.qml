@@ -44,14 +44,18 @@ RowLayout {
 	property bool isRead: false
 	property string recipientAvatarUrl
 	property int mediaType
-	property string mediaUrl
+	property string mediaGetUrl
 	property string mediaLocation
 
 	// own messages are on the right, others on the left
 	layoutDirection: sentByMe ? Qt.RightToLeft : Qt.LeftToRight
-	spacing: Kirigami.Units.largeSpacing
-	width: parent.width - Kirigami.Units.largeSpacing * 4
-	anchors.horizontalCenter: parent.horizontalCenter
+	spacing: 8
+	width: parent.width
+
+	// placeholder
+	Item {
+		Layout.preferredWidth: 5
+	}
 
 	RoundImage {
 		id: avatar
@@ -60,73 +64,86 @@ RowLayout {
 		fillMode: Image.PreserveAspectFit
 		mipmap: true
 		height: width
+		Layout.alignment: Qt.AlignHCenter | Qt.AlignTop
 		Layout.preferredHeight: Kirigami.Units.gridUnit * 2.2
 		Layout.preferredWidth: Kirigami.Units.gridUnit * 2.2
-		Layout.alignment: Qt.AlignHCenter | Qt.AlignTop
 		sourceSize.height: Kirigami.Units.gridUnit * 2.2
 		sourceSize.width: Kirigami.Units.gridUnit * 2.2
 	}
 
-	Rectangle {
-		id: box
-		Layout.preferredWidth: content.width + Kirigami.Units.gridUnit * 0.9
-		Layout.preferredHeight: content.height + Kirigami.Units.gridUnit * 0.6
+	// message bubble/box
+	Item {
+		Layout.preferredWidth: content.width + 13
+		Layout.preferredHeight: content.height + 8
 
-		color: sentByMe ? Kirigami.Theme.complementaryTextColor : Kirigami.Theme.highlightColor
-		radius: Kirigami.Units.smallSpacing * 2
-
-		MouseArea {
+		Rectangle {
+			id: box
 			anchors.fill: parent
-			acceptedButtons: Qt.RightButton
-			onClicked: {
-				kaidan.copyToClipboard(messageBody)
-				passiveNotification(qsTr("Message copied to clipboard"))
-			}
-		}
 
-		layer.enabled: box.visible
-		layer.effect: DropShadow {
-			verticalOffset: Kirigami.Units.gridUnit * 0.08
-			horizontalOffset: Kirigami.Units.gridUnit * 0.08
-			color: Kirigami.Theme.disabledTextColor
-			samples: 10
-			spread: 0.1
+			color: sentByMe ? Kirigami.Theme.complementaryTextColor
+			                : Kirigami.Theme.highlightColor
+			radius: Kirigami.Units.smallSpacing * 2
+
+			MouseArea {
+				anchors.fill: parent
+				acceptedButtons: Qt.RightButton
+				onClicked: {
+					kaidan.copyToClipboard(messageBody)
+					passiveNotification(qsTr("Message copied to clipboard"))
+				}
+			}
+
+			layer.enabled: box.visible
+			layer.effect: DropShadow {
+				verticalOffset: Kirigami.Units.gridUnit * 0.08
+				horizontalOffset: Kirigami.Units.gridUnit * 0.08
+				color: Kirigami.Theme.disabledTextColor
+				samples: 10
+				spread: 0.1
+			}
 		}
 
 		ColumnLayout {
 			id: content
 			spacing: 0
-			anchors.centerIn: box
+			anchors.centerIn: parent
+			anchors.margins: 4
 
-			Image {
-				id: image
-				visible: mediaType === Enums.MessageImage
-				source: {
-					mediaLocation !== "" ? "file://" + mediaLocation : mediaUrl
+			// media loader
+			Loader {
+				id: media
+				source: mediaType === Enums.MessageImage ? "ChatMessageImage.qml"
+				                                         : ""
+				property string sourceUrl: {
+					mediaLocation === "" ? mediaGetUrl
+					                     : "file://" + mediaLocation
 				}
-				fillMode: Image.PreserveAspectFit
-				asynchronous: true // might be a large image
-
-				Layout.preferredHeight: paintedHeight
 				Layout.maximumWidth: root.width - Kirigami.Units.gridUnit * 6
-				Layout.bottomMargin: Kirigami.Units.smallSpacing
+				Layout.preferredHeight: mediaType === Enums.MessageImage && loaded ?
+				                        item.paintedHeight : 0
 			}
 
+			// message body
 			Controls.Label {
 				visible: messageBody !== ""
 				text: messageBody
 				textFormat: Text.PlainText
 				wrapMode: Text.Wrap
-				color: sentByMe ? Kirigami.Theme.buttonTextColor : Kirigami.Theme.complementaryTextColor
+				color: sentByMe ? Kirigami.Theme.buttonTextColor
+				                : Kirigami.Theme.complementaryTextColor
 
-				Layout.maximumWidth: Math.min(root.width - Kirigami.Units.gridUnit * 6, image.width)
+				Layout.maximumWidth: mediaType === Enums.MessageImage && media.width !== 0
+				                     ? media.width
+				                     : root.width - Kirigami.Units.gridUnit * 6
 			}
 
+			// message meta: date, isRead
 			RowLayout {
 				Controls.Label {
 					id: dateLabel
 					text: Qt.formatDateTime(dateTime, "dd. MMM yyyy, hh:mm")
-					color: Kirigami.Theme.disabledTextColor
+					color: sentByMe ? Kirigami.Theme.disabledTextColor
+					                : Qt.darker(Kirigami.Theme.disabledTextColor, 1.3)
 					font.pixelSize: Kirigami.Units.gridUnit * 0.8
 				}
 
@@ -143,6 +160,7 @@ RowLayout {
 		}
 	}
 
+	// placeholder
 	Item {
 		Layout.fillWidth: true
 	}

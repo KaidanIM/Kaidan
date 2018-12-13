@@ -93,7 +93,7 @@ void UploadManager::sendFile(QString jid, QString fileUrl, QString body)
 	msg->mediaSize = file.size();
 	msg->mediaContentType = mimeType.name();
 	msg->mediaLastModified = file.lastModified().currentMSecsSinceEpoch();
-	msg->mediaLocation = file.absolutePath();
+	msg->mediaLocation = file.filePath();
 
 	emit msgModel->addMessageRequested(*msg);
 	// message cache to edit on success/failure

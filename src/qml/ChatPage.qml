@@ -37,8 +37,6 @@ import im.kaidan.kaidan 1.0
 import "elements"
 
 Kirigami.ScrollablePage {
-	id: root
-
 	property string chatName
 	property string recipientJid
 
@@ -136,8 +134,9 @@ Kirigami.ScrollablePage {
 				kaidan.avatarStorage.getAvatarUrl(author) :
 				kaidan.getResourcePath("images/fallback-avatar.svg")
 			}
-			mediaType: Enums.MessageImage
-			mediaUrl: model.mediaUrl
+			mediaType: model.type
+			mediaGetUrl: model.mediaUrl
+			mediaLocation: model.mediaLocation
 		}
 	}
 
@@ -150,12 +149,13 @@ Kirigami.ScrollablePage {
 			color: Kirigami.Theme.disabledTextColor
 			samples: 20
 			spread: 0.3
+			cached: true // element is static
 		}
 		Layout.fillWidth: true
 		padding: 0
 		wheelEnabled: true
 		background: Rectangle {
-			color: Kirigami.Theme.View.backgroundColor
+			color: Kirigami.Theme.backgroundColor
 		}
 
 		RowLayout {

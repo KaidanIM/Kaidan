@@ -277,7 +277,7 @@ QString Kaidan::fileNameFromUrl(QString url)
 
 QString Kaidan::fileSizeFromUrl(QString url)
 {
-#if QT_VERSION >= 0x051000 // Qt 5.10 or later
+#if QT_VERSION >= QT_VERSION_CHECK(5, 10, 0) // Qt 5.10 or later
 	qint64 size = QFileInfo(QUrl(url).toLocalFile()).size();
 	return QLocale::system().formattedDataSize(size);
 #else

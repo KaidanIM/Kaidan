@@ -34,6 +34,7 @@
 #include <QFile>
 #include <QFileInfo>
 #include <QNetworkReply>
+#include <QMutex>
 #include "QXmppUploadRequestManager.h"
 
 class QNetworkAccessManager;
@@ -45,6 +46,8 @@ class QXmppUploadManager; // needed for QXmppHttpUpload
 class QXMPP_EXPORT QXmppHttpUpload : public QXmppLoggable
 {
     Q_OBJECT
+    Q_PROPERTY(qint64 bytesSent READ bytesSent NOTIFY bytesSentChanged)
+    Q_PROPERTY(qint64 bytesTotal READ bytesTotal NOTIFY bytesTotalChanged)
 
 public:
     QXmppHttpUpload(QXmppUploadManager *manager);
@@ -71,16 +74,20 @@ public:
     QXmppHttpUploadSlotIq slot() const;
     void setSlot(const QXmppHttpUploadSlotIq &slot);
 
-    qint64 progress() const;
+    qint64 bytesSent() const;
+    qint64 bytesTotal() const;
+
+    bool started() const;
 
 public slots:
     void startUpload();
-    void abortUpload();
+    void abort();
 
 signals:
     void uploadFinished();
-    void uploadProgressed(qint64 sent, qint64 total);
     void uploadFailed(QNetworkReply::NetworkError code);
+    void bytesSentChanged();
+    void bytesTotalChanged();
 
 private slots:
     void handleProgressed(qint64 sent, qint64 total);
@@ -97,7 +104,9 @@ private:
     QXmppHttpUploadRequestIq m_requestError;
     QXmppHttpUploadSlotIq m_slot;
 
+    bool m_started = false;
     qint64 m_bytesSent;
+    qint64 m_bytesTotal;
     QNetworkReply::NetworkError m_uploadError;
     QNetworkAccessManager *m_netManager;
     QNetworkReply *m_putReply;
@@ -114,15 +123,16 @@ class QXMPP_EXPORT QXmppUploadManager : public QXmppUploadRequestManager
 
 public:
     QXmppUploadManager();
+    ~QXmppUploadManager();
 
     bool httpAllowed();
     void setHttpAllowed(bool httpAllowed);
 
 public slots:
-    int uploadFile(const QFileInfo &file, bool allowParallel = false, QString customFileName = "");
+    const QXmppHttpUpload* uploadFile(const QFileInfo &file, bool allowParallel = false,
+                                      QString customFileName = "");
 
 signals:
-    void uploadStarted(const QXmppHttpUpload *upload);
     void uploadSucceeded(const QXmppHttpUpload *upload);
     void uploadFailed(const QXmppHttpUpload *upload);
 
@@ -133,7 +143,6 @@ private slots:
     void handleRequestError(const QXmppHttpUploadRequestIq &request);
 
     void handleUploadFinished();
-    void handleUploadProgressed(qint64 sent, qint64 total);
     void handleUploadFailed(QNetworkReply::NetworkError code);
 
 private:

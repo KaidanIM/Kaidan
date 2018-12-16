@@ -47,6 +47,7 @@ class QGuiApplication;
 #include "RosterModel.h"
 #include "AvatarFileStorage.h"
 #include "PresenceCache.h"
+#include "TransferCache.h"
 class LogHandler;
 class Kaidan;
 class ClientWorker;
@@ -91,6 +92,7 @@ public:
 			  rosterModel(new RosterModel(database->getDatabase(), parent)),
 			  avatarStorage(new AvatarFileStorage(parent)),
 			  presCache(new PresenceCache(parent)),
+			  transferCache(new TransferCache(parent)),
 			  settings(new QSettings(APPLICATION_NAME, APPLICATION_NAME))
 		{
 		}
@@ -101,6 +103,7 @@ public:
 			delete rosterModel;
 			delete avatarStorage;
 			delete presCache;
+			delete transferCache;
 			delete settings;
 		}
 
@@ -108,6 +111,7 @@ public:
 		RosterModel *rosterModel;
 		AvatarFileStorage *avatarStorage;
 		PresenceCache *presCache;
+		TransferCache* transferCache;
 		QSettings *settings;
 	};
 

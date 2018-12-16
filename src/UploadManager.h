@@ -45,6 +45,7 @@ using namespace Enums;
 
 class Kaidan;
 class RosterManager;
+class TransferCache;
 
 /**
  * @class UploadManager Class for handling and starting HTTP File Uploads
@@ -57,8 +58,9 @@ public:
 	/**
 	 * Default constructor
 	 */
-	UploadManager(Kaidan *kaidan, QXmppClient *client, MessageModel *msgModel,
-	              RosterManager *rosterManager, QObject *parent = nullptr);
+	UploadManager(Kaidan* kaidan, QXmppClient* client, MessageModel* msgModel,
+	              RosterManager* rosterManager, TransferCache* transfers,
+	              QObject* parent = nullptr);
 
 signals:
 	/**
@@ -73,7 +75,6 @@ public slots:
 	void sendFile(QString jid, QString filePath, QString message);
 
 	void handleUploadFailed(const QXmppHttpUpload *upload);
-	void handleUploadProgressed(const QXmppHttpUpload *upload);
 	void handleUploadSucceeded(const QXmppHttpUpload *upload);
 
 private:
@@ -82,6 +83,7 @@ private:
 	QXmppUploadManager manager;
 	MessageModel *msgModel;
 	RosterManager *rosterManager;
+	TransferCache* transfers;
 
 	QMap<int, MessageModel::Message*> messages;
 };

@@ -58,10 +58,11 @@ class Kaidan : public QObject
 {
 	Q_OBJECT
 
-	Q_PROPERTY(RosterModel* rosterModel READ getRosterModel NOTIFY rosterModelChanged)
-	Q_PROPERTY(MessageModel* messageModel READ getMessageModel NOTIFY messageModelChanged)
+	Q_PROPERTY(RosterModel* rosterModel READ getRosterModel CONSTANT)
+	Q_PROPERTY(MessageModel* messageModel READ getMessageModel CONSTANT)
 	Q_PROPERTY(AvatarFileStorage* avatarStorage READ getAvatarStorage NOTIFY avatarStorageChanged)
-	Q_PROPERTY(PresenceCache* presenceCache READ getPresenceCache NOTIFY presenceCacheChanged)
+	Q_PROPERTY(PresenceCache* presenceCache READ getPresenceCache CONSTANT)
+	Q_PROPERTY(TransferCache* transferCache READ getTransferCache CONSTANT)
 	Q_PROPERTY(quint8 connectionState READ getConnectionState NOTIFY connectionStateChanged)
 	Q_PROPERTY(quint8 disconnReason READ getDisconnReason NOTIFY disconnReasonChanged)
 	Q_PROPERTY(QString jid READ getJid WRITE setJid NOTIFY jidChanged)
@@ -222,6 +223,11 @@ public:
 		return caches->presCache;
 	}
 
+	TransferCache* getTransferCache() const
+	{
+		return caches->transferCache;
+	}
+
 	/**
 	 * Adds XMPP URI to open as soon as possible
 	 */
@@ -258,10 +264,7 @@ public:
 	Q_INVOKABLE QString formatMessage(QString message);
 
 signals:
-	void rosterModelChanged();
-	void messageModelChanged();
 	void avatarStorageChanged();
-	void presenceCacheChanged();
 
 	/**
 	 * Emitted, when the client's connection state has changed (e.g. when

@@ -38,6 +38,7 @@ import im.kaidan.kaidan 1.0
 RowLayout {
 	id: root
 
+	property string msgId
 	property bool sentByMe: true
 	property string messageBody
 	property date dateTime
@@ -49,6 +50,12 @@ RowLayout {
 	property var textEdit
 	property bool isLastMessage
 	property bool edited
+	property var upload: {
+		if (mediaType != Enums.MessageText && mediaGetUrl == ""
+		    && kaidan.transferCache.hasUpload(msgId)) {
+			kaidan.transferCache.uploadByMessageId(model.id)
+		}
+	}
 
 	// own messages are on the right, others on the left
 	layoutDirection: sentByMe ? Qt.RightToLeft : Qt.LeftToRight
@@ -164,6 +171,23 @@ RowLayout {
 
 			// message meta: date, isRead
 			RowLayout {
+				Controls.ProgressBar {
+					id: progressBar
+					value: upload.progress
+					visible: kaidan.transferCache.hasUpload(msgId)
+
+					function updateVisibility() {
+						progressBar.visible = kaidan.transferCache.hasUpload(msgId)
+					}
+
+					Component.onCompleted: {
+						kaidan.transferCache.jobsChanged.connect(updateVisibility)
+					}
+					Component.onDestruction: {
+						kaidan.transferCache.jobsChanged.disconnect(updateVisibility)
+					}
+				}
+
 				Controls.Label {
 					id: dateLabel
 					text: Qt.formatDateTime(dateTime, "dd. MMM yyyy, hh:mm")

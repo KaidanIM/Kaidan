@@ -30,6 +30,7 @@
 
 #include <QMimeDatabase>
 #include <QMimeType>
+#include <QMutexLocker>
 #include <QNetworkAccessManager>
 #include <QNetworkRequest>
 #include <QNetworkReply>
@@ -38,13 +39,13 @@
 QXmppHttpUpload::QXmppHttpUpload(QXmppUploadManager *manager)
     : QXmppLoggable(), m_manager(manager), m_netManager(new QNetworkAccessManager())
 {
-    connect(this, &QXmppHttpUpload::uploadProgressed, this, &QXmppHttpUpload::handleProgressed);
 }
 
 QXmppHttpUpload::QXmppHttpUpload(const QXmppHttpUpload &upload)
-    : QXmppLoggable(), m_manager(upload.m_manager), m_customFileName(upload.m_customFileName), 
+    : QXmppLoggable(), m_manager(upload.m_manager), m_customFileName(upload.m_customFileName),
     m_fileInfo(upload.m_fileInfo), m_requestId(upload.m_requestId),
-    m_requestError(upload.m_requestError), m_slot(upload.m_slot), m_bytesSent(upload.m_bytesSent),
+    m_requestError(upload.m_requestError), m_slot(upload.m_slot),
+    m_bytesSent(upload.m_bytesSent), m_bytesTotal(upload.m_bytesTotal),
     m_uploadError(upload.m_uploadError), m_netManager(new QNetworkAccessManager())
 {
 }
@@ -52,8 +53,6 @@ QXmppHttpUpload::QXmppHttpUpload(const QXmppHttpUpload &upload)
 QXmppHttpUpload::~QXmppHttpUpload()
 {
     delete m_netManager;
-//     if (m_putReply)
-//         delete m_putReply;
 }
 
 QXmppHttpUpload& QXmppHttpUpload::operator=(const QXmppHttpUpload &other)
@@ -66,6 +65,7 @@ QXmppHttpUpload& QXmppHttpUpload::operator=(const QXmppHttpUpload &other)
         m_requestError = other.m_requestError;
         m_slot = other.m_slot;
         m_bytesSent = other.m_bytesSent;
+        m_bytesTotal = other.m_bytesTotal;
         m_uploadError = other.m_uploadError;
     }
     return *this;
@@ -119,6 +119,7 @@ QFileInfo QXmppHttpUpload::fileInfo() const
 void QXmppHttpUpload::setFileInfo(const QFileInfo &fileInfo)
 {
     m_fileInfo = fileInfo;
+    m_bytesTotal = m_fileInfo.size();
 }
 
 QXmppHttpUploadSlotIq QXmppHttpUpload::slot() const
@@ -141,22 +142,40 @@ void QXmppHttpUpload::setRequestError(const QXmppHttpUploadRequestIq &requestErr
     m_requestError = requestError;
 }
 
+bool QXmppHttpUpload::started() const
+{
+    return m_started;
+}
+
 /// Returns the number of bytes sent to the server.
 
-qint64 QXmppHttpUpload::progress() const
+qint64 QXmppHttpUpload::bytesSent() const
 {
     return m_bytesSent;
 }
 
-void QXmppHttpUpload::handleProgressed(qint64 sent, qint64)
+qint64 QXmppHttpUpload::bytesTotal() const
 {
-    m_bytesSent = sent;
+    return m_bytesTotal;
+}
+
+void QXmppHttpUpload::handleProgressed(qint64 sent, qint64 total)
+{
+    if (m_bytesSent != sent) {
+        m_bytesSent = sent;
+        emit bytesSentChanged();
+    }
+    if (m_bytesTotal != total) {
+        m_bytesTotal = total;
+        emit bytesTotalChanged();
+    }
 }
 
 /// Starts uploading the file. It assumes that a valid slot and fileInfo are set.
 
 void QXmppHttpUpload::startUpload()
 {
+    m_started = true;
     QNetworkRequest request(m_slot.putUrl());
 
     // include the file's content-type
@@ -180,21 +199,28 @@ void QXmppHttpUpload::startUpload()
     m_putReply = m_netManager->put(request, file);
 
     connect(m_putReply, &QNetworkReply::finished, this, &QXmppHttpUpload::uploadFinished);
-    connect(m_putReply, &QNetworkReply::uploadProgress, this, &QXmppHttpUpload::uploadProgressed);
+    connect(m_putReply, &QNetworkReply::uploadProgress, this, &QXmppHttpUpload::handleProgressed);
     connect(m_putReply, QOverload<QNetworkReply::NetworkError>::of(&QNetworkReply::error),
             this, &QXmppHttpUpload::uploadFailed);
 
     // delete file object after upload
-    connect(m_putReply, &QNetworkReply::finished, file, &QFile::deleteLater);
+    connect(m_putReply, &QNetworkReply::finished, [this, file] () {
+        file->deleteLater();
+        m_started = false;
+    });
     connect(m_putReply, QOverload<QNetworkReply::NetworkError>::of(&QNetworkReply::error),
-            file, &QFile::deleteLater);
+            [this, file] () {
+        file->deleteLater();
+        m_started = false;
+    });
 }
 
-void QXmppHttpUpload::abortUpload()
+void QXmppHttpUpload::abort()
 {
-    if (m_putReply) {
+    if (m_started) {
         m_putReply->abort();
         emit uploadFailed(QNetworkReply::NoError);
+        m_started = false;
     }
 }
 
@@ -207,6 +233,13 @@ QXmppUploadManager::QXmppUploadManager()
             this, &QXmppUploadManager::handleRequestError);
 }
 
+QXmppUploadManager::~QXmppUploadManager()
+{
+    for (QXmppHttpUpload *upload : m_uploads) {
+        upload->abort();
+    }
+}
+
 /// Requests an upload slot and starts uploading the file
 ///
 /// \param file The file to be uploaded.
@@ -215,7 +248,7 @@ QXmppUploadManager::QXmppUploadManager()
 /// \return Returns the upload's id. The id is unique per session (as long as the UploadManager
 /// exists).
 
-int QXmppUploadManager::uploadFile(const QFileInfo &file, bool allowParallel, QString customFileName)
+const QXmppHttpUpload* QXmppUploadManager::uploadFile(const QFileInfo &file, bool allowParallel, QString customFileName)
 {
     auto *upload = new QXmppHttpUpload(this);
     upload->setFileInfo(file);
@@ -225,8 +258,6 @@ int QXmppUploadManager::uploadFile(const QFileInfo &file, bool allowParallel, QS
     // connect signals
     connect(upload, &QXmppHttpUpload::uploadFinished,
             this, &QXmppUploadManager::handleUploadFinished);
-    connect(upload, &QXmppHttpUpload::uploadProgressed,
-            this, &QXmppUploadManager::handleUploadProgressed);
     connect(upload, &QXmppHttpUpload::uploadFailed,
             this, &QXmppUploadManager::handleUploadFailed);
 
@@ -235,7 +266,7 @@ int QXmppUploadManager::uploadFile(const QFileInfo &file, bool allowParallel, QS
     if (m_runningJobs == 0 || allowParallel)
         startNextUpload();
 
-    return upload->id();
+    return upload;
 }
 
 void QXmppUploadManager::startNextUpload()
@@ -262,8 +293,6 @@ void QXmppUploadManager::startNextUpload()
             startNextUpload();
         return;
     }
-
-    emit uploadStarted(upload);
 }
 
 /// Handles requested upload slots
@@ -303,13 +332,6 @@ void QXmppUploadManager::handleRequestError(const QXmppHttpUploadRequestIq &requ
             return;
         }
     }
-}
-
-/// Handles upload progress
-
-void QXmppUploadManager::handleUploadProgressed(qint64 sent, qint64 total)
-{
-    qDebug() << "progress" << sent << total;
 }
 
 /// Handles finished uploads

@@ -42,6 +42,7 @@
 
 // QXmpp
 #include <QXmppClient.h>
+#include "qxmpp-exts/QXmppUploadManager.h"
 
 // Kaidan
 #include "Kaidan.h"
@@ -49,6 +50,7 @@
 #include "MessageModel.h"
 #include "AvatarFileStorage.h"
 #include "PresenceCache.h"
+#include "UploadManager.h"
 #include "Globals.h"
 #include "Enums.h"
 #include "StatusBar.h"
@@ -166,6 +168,7 @@ Q_DECL_EXPORT int main(int argc, char *argv[])
 	qRegisterMetaType<MessageType>("MessageType");
 	qRegisterMetaType<DisconnectionReason>("DisconnectionReason");
 	qRegisterMetaType<EmojiModel*>("EmojiModel");
+	qRegisterMetaType<TransferJob*>("TransferJob*");
 
 	// Qt-Translator
 	QTranslator qtTranslator;

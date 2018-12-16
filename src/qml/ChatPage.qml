@@ -126,6 +126,7 @@ Kirigami.ScrollablePage {
 		model: kaidan.messageModel
 
 		delegate: ChatMessage {
+			msgId: model.id
 			sentByMe: model.recipient !== kaidan.jid
 			messageBody: model.message
 			dateTime: new Date(model.timestamp)

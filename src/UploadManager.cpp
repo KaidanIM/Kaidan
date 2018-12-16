@@ -32,11 +32,13 @@
 #include "Kaidan.h"
 #include "MessageHandler.h"
 #include "RosterManager.h"
+#include "TransferCache.h"
 // QXmpp
 #include <QXmppUtils.h>
 // Qt
 #include <QMimeDatabase>
 #include <QMimeType>
+#include <QMutexLocker>
 #include <QDateTime>
 #include <QBuffer>
 #include <QImage>
@@ -44,9 +46,10 @@
 #include <QFileInfo>
 
 UploadManager::UploadManager(Kaidan *kaidan, QXmppClient *client, MessageModel *msgModel,
-                             RosterManager *rosterManager, QObject *parent)
+                             RosterManager* rosterManager, TransferCache* transfers,
+                             QObject* parent)
 	: QObject(parent), kaidan(kaidan), client(client), msgModel(msgModel),
-	rosterManager(rosterManager)
+	rosterManager(rosterManager), transfers(transfers)
 {
 	client->addExtension(&manager);
 
@@ -78,14 +81,15 @@ void UploadManager::sendFile(QString jid, QString fileUrl, QString body)
 	qDebug() << "[client] [UploadManager] Adding upload for file:" << fileUrl;
 
 	QFileInfo file(QUrl(fileUrl).toLocalFile());
-	int id = manager.uploadFile(file);
+	const QXmppHttpUpload* upload = manager.uploadFile(file);
 
 	QMimeType mimeType = QMimeDatabase().mimeTypeForFile(file);
+	const QString msgId = QXmppUtils::generateStanzaHash(48);
 
 	auto *msg = new MessageModel::Message();
 	msg->author = client->configuration().jidBare();
 	msg->recipient = jid;
-	msg->id = QXmppUtils::generateStanzaHash(48);
+	msg->id = msgId;
 	msg->sentByMe = true;
 	msg->message = body;
 	msg->type = MessageModel::messageTypeFromMimeType(mimeType);
@@ -95,9 +99,11 @@ void UploadManager::sendFile(QString jid, QString fileUrl, QString body)
 	msg->mediaLastModified = file.lastModified().currentMSecsSinceEpoch();
 	msg->mediaLocation = file.filePath();
 
+	// cache message and upload
+	emit transfers->addUploadRequested(msgId, upload->bytesTotal());
+	messages.insert(upload->id(), msg);
+
 	emit msgModel->addMessageRequested(*msg);
-	// message cache to edit on success/failure
-	messages.insert(id, msg);
 
 	// update last message
 	QString lastMessage = tr("File");
@@ -105,6 +111,10 @@ void UploadManager::sendFile(QString jid, QString fileUrl, QString body)
 		lastMessage = lastMessage.append(": ").append(body);
 
 	rosterManager->handleSendMessage(jid, lastMessage);
+
+	connect(upload, &QXmppHttpUpload::bytesSentChanged, this, [upload, this, msgId] () {
+		emit transfers->setUploadBytesSentRequested(msgId, upload->bytesSent());
+	});
 }
 
 void UploadManager::handleUploadSucceeded(const QXmppHttpUpload *upload)
@@ -135,14 +145,13 @@ void UploadManager::handleUploadSucceeded(const QXmppHttpUpload *upload)
 	// TODO: handle error
 
 	messages.remove(upload->id());
-}
-
-void UploadManager::handleUploadProgressed(const QXmppHttpUpload*)
-{
+	emit transfers->removeUploadRequested(originalMsg->id);
 }
 
 void UploadManager::handleUploadFailed(const QXmppHttpUpload *upload)
 {
 	qDebug() << "[client] [UploadManager] A file upload has failed.";
+	const QString &msgId = messages.value(upload->id())->id;
 	messages.remove(upload->id());
+	emit transfers->removeUploadRequested(msgId);
 }

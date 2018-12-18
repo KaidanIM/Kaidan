@@ -144,7 +144,7 @@ void QXmppUploadRequestManager::setClient(QXmppClient *client)
 {
     QXmppClientExtension::setClient(client);
     // connect to service discovery manager
-    QXmppDiscoveryManager *disco = client->findExtension<QXmppDiscoveryManager>();
+    auto *disco = client->findExtension<QXmppDiscoveryManager>();
     if (disco) {
         // scan info of all entities for upload services
         // Could this lead to another client being added as upload service?

@@ -92,7 +92,7 @@ ClientWorker::~ClientWorker()
 void ClientWorker::main()
 {
 	// initialize random generator
-	qsrand(time(NULL));
+	qsrand(time(nullptr));
 
 	connect(client, &QXmppClient::stateChanged, kaidan, &Kaidan::setConnectionState);
 	connect(client, &QXmppClient::connected, this, &ClientWorker::onConnect);

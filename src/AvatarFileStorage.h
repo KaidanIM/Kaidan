@@ -40,7 +40,7 @@ class AvatarFileStorage : public QObject
 	Q_OBJECT
 
 public:
-	AvatarFileStorage(QObject *parent = 0);
+	AvatarFileStorage(QObject *parent = nullptr);
 
 	struct AddAvatarResult {
 		/* SHA1 HEX Hash */

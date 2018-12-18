@@ -82,7 +82,7 @@ void UploadManager::sendFile(QString jid, QString fileUrl, QString body)
 
 	QMimeType mimeType = QMimeDatabase().mimeTypeForFile(file);
 
-	MessageModel::Message *msg = new MessageModel::Message();
+	auto *msg = new MessageModel::Message();
 	msg->author = client->configuration().jidBare();
 	msg->recipient = jid;
 	msg->id = QXmppUtils::generateStanzaHash(48);

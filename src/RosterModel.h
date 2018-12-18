@@ -43,7 +43,7 @@ class RosterModel : public QSqlTableModel
 	Q_OBJECT
 
 public:
-	RosterModel(QSqlDatabase *database, QObject *parent = 0);
+	RosterModel(QSqlDatabase *database, QObject *parent = nullptr);
 
 	QHash<int, QByteArray> roleNames() const;
 	QVariant data(const QModelIndex &index, int role) const;

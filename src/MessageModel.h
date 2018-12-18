@@ -43,7 +43,7 @@ class MessageModel : public QSqlTableModel
 	Q_OBJECT
 
 public:
-	MessageModel(QSqlDatabase *database, QObject *parent = 0);
+	MessageModel(QSqlDatabase *database, QObject *parent = nullptr);
 
 	QVariant data(const QModelIndex &index, int role) const Q_DECL_OVERRIDE;
 	QHash<int, QByteArray> roleNames() const Q_DECL_OVERRIDE;

@@ -71,7 +71,7 @@ class Kaidan : public QObject
 	Q_PROPERTY(bool uploadServiceFound READ getUploadServiceFound NOTIFY uploadServiceFoundChanged)
 
 public:
-	Kaidan(QGuiApplication *app, bool enableLogging = true, QObject *parent = 0);
+	Kaidan(QGuiApplication *app, bool enableLogging = true, QObject *parent = nullptr);
 
 	~Kaidan();
 

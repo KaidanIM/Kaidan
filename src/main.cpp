@@ -126,7 +126,7 @@ Q_DECL_EXPORT int main(int argc, char *argv[])
 	}
 #endif
 	// initialize random generator
-	qsrand(time(NULL));
+	qsrand(time(nullptr));
 
 	//
 	// App

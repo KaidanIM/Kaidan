@@ -72,7 +72,7 @@ MessageHandler::MessageHandler(Kaidan *kaidan, QXmppClient *client, MessageModel
 	        client, &QXmppClient::messageReceived);
 
 	// carbons discovery
-	QXmppDiscoveryManager *discoManager = client->findExtension<QXmppDiscoveryManager>();
+	auto *discoManager = client->findExtension<QXmppDiscoveryManager>();
 	if (!discoManager)
 		return;
 

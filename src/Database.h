@@ -41,7 +41,7 @@ class Database : public QObject
     Q_OBJECT
 
 public:
-	Database(QObject *parent = 0);
+	Database(QObject *parent = nullptr);
 	~Database();
 
 	QSqlDatabase* getDatabase();

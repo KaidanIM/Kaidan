@@ -217,7 +217,7 @@ QXmppUploadManager::QXmppUploadManager()
 
 int QXmppUploadManager::uploadFile(const QFileInfo &file, bool allowParallel, QString customFileName)
 {
-    QXmppHttpUpload *upload = new QXmppHttpUpload(this);
+    auto *upload = new QXmppHttpUpload(this);
     upload->setFileInfo(file);
     upload->setCustomFileName(customFileName);
     upload->setId(m_nextJobId++);
@@ -317,7 +317,7 @@ void QXmppUploadManager::handleUploadProgressed(qint64 sent, qint64 total)
 
 void QXmppUploadManager::handleUploadFinished()
 {
-    QXmppHttpUpload *upload = (QXmppHttpUpload*) sender();
+    auto *upload = (QXmppHttpUpload*) sender();
     if (upload) {
         m_uploads.removeAll(upload);
         emit uploadSucceeded(upload);

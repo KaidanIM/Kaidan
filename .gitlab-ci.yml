@@ -33,6 +33,12 @@ neon-bionic-clazy:
     CMAKE_CXX_COMPILER: clazy
   script: utils/travis/build.sh
 
+neon-bionic-qmllint:
+  image: kaidan/neon-bionic
+  script: qmllint $(find . -name "*.qml")
+  variables:
+    QT_SELECT: 5
+
 debian-sid:
   image: kaidan/debian-unstable
   script: utils/travis/build.sh

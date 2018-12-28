@@ -36,4 +36,9 @@ Image {
 	source: sourceUrl
 	fillMode: Image.PreserveAspectFit
 	asynchronous: true // might be a large image
+
+	MouseArea {
+		anchors.fill: parent
+		onClicked: Qt.openUrlExternally(sourceUrl)
+	}
 }

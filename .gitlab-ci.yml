@@ -27,6 +27,12 @@ neon-bionic:
   image: kaidan/neon-bionic
   script: utils/travis/build.sh
 
+neon-bionic-clazy:
+  image: kaidan/neon-bionic
+  variables:
+    CMAKE_CXX_COMPILER: clazy
+  script: utils/travis/build.sh
+
 debian-sid:
   image: kaidan/debian-unstable
   script: utils/travis/build.sh

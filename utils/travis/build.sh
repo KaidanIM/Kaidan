@@ -24,7 +24,8 @@ elif [[ ${BUILD_SYSTEM} == "cmake" ]]; then
 	      -GNinja \
 	      -DCMAKE_BUILD_TYPE=Debug \
 	      -DI18N=1 \
-	      -DCMAKE_CXX_COMPILER_LAUNCHER=ccache
+	      -DCMAKE_CXX_COMPILER_LAUNCHER=ccache \
+	      -DCMAKE_CXX_COMPILER=${CMAKE_CXX_COMPILER:-"g++"}
 
 	cmake --build .
 else

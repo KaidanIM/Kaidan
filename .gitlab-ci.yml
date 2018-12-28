@@ -1,4 +1,44 @@
+stages:
+  - test
+  - build
+  - deploy
+
+clazy:
+  stage: test
+  image: kaidan/neon-bionic
+  variables:
+    CMAKE_CXX_COMPILER: clazy
+  script: utils/travis/build.sh
+
+qmllint:
+  stage: test
+  image: kaidan/neon-bionic
+  script: qmllint $(find . -name "*.qml")
+  variables:
+    QT_SELECT: 5
+
+ubuntu-trusty:
+  stage: build
+  image: kaidan/ubuntu-trusty
+  script: utils/travis/build.sh
+
+neon-bionic:
+  stage: build
+  image: kaidan/neon-bionic
+  script: utils/travis/build.sh
+
+debian-sid:
+  stage: build
+  image: kaidan/debian-unstable
+  script: utils/travis/build.sh
+
+archlinux:
+  stage: build
+  image: kaidan/archlinux
+  script: utils/travis/build.sh
+
 linux-appimage:
+  stage: deploy
   image: kaidan/ubuntu-xenial
   script: utils/build-linux-appimage.sh
   variables:
@@ -10,6 +50,7 @@ linux-appimage:
     expire_in: 1 week
 
 click-xenial:
+  stage: deploy
   image: kaidan/ubuntu-touch-xenial
   script: utils/travis/build.sh
   variables:
@@ -18,34 +59,6 @@ click-xenial:
     paths:
       - "*.click"
     expire_in: 1 week
-
-ubuntu-trusty:
-  image: kaidan/ubuntu-trusty
-  script: utils/travis/build.sh
-
-neon-bionic:
-  image: kaidan/neon-bionic
-  script: utils/travis/build.sh
-
-neon-bionic-clazy:
-  image: kaidan/neon-bionic
-  variables:
-    CMAKE_CXX_COMPILER: clazy
-  script: utils/travis/build.sh
-
-neon-bionic-qmllint:
-  image: kaidan/neon-bionic
-  script: qmllint $(find . -name "*.qml")
-  variables:
-    QT_SELECT: 5
-
-debian-sid:
-  image: kaidan/debian-unstable
-  script: utils/travis/build.sh
-
-archlinux:
-  image: kaidan/archlinux
-  script: utils/travis/build.sh
 
 variables:
   GIT_SUBMODULE_STRATEGY: recursive

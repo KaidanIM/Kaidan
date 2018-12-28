@@ -126,11 +126,12 @@ RowLayout {
 			// message body
 			Controls.Label {
 				visible: messageBody !== ""
-				text: messageBody
-				textFormat: Text.PlainText
+				text: kaidan.formatMessage(messageBody)
+				textFormat: Text.StyledText
 				wrapMode: Text.Wrap
 				color: sentByMe ? Kirigami.Theme.buttonTextColor
 				                : Kirigami.Theme.complementaryTextColor
+				onLinkActivated: Qt.openUrlExternally(link)
 
 				Layout.maximumWidth: mediaType === Enums.MessageImage && media.width !== 0
 				                     ? media.width

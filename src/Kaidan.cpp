@@ -286,3 +286,27 @@ QString Kaidan::fileSizeFromUrl(QString url)
 	return QString::number(qRound(size / 1024.0 / 10.24) / 100.0).append(" MiB");
 #endif
 }
+
+QString Kaidan::formatMessage(QString message)
+{
+	// escape all special XML chars (as '<' and '>')
+	message = message.toHtmlEscaped();
+
+	return processMsgFormatting(message.split(" "));
+}
+
+QString Kaidan::processMsgFormatting(QStringList list, bool isFirst)
+{
+	if (list.isEmpty())
+		return "";
+
+	// add space before word (if word is not the first)
+	QString prepend = isFirst ? "" : " ";
+
+	// link highlighting
+	if (list.first().startsWith("https://") || list.first().startsWith("http://"))
+		return prepend + QString("<a href='%1'>%1</a>").arg(list.first())
+		       + processMsgFormatting(list.mid(1), false);
+
+	return prepend + list.first() + processMsgFormatting(list.mid(1), false);
+}

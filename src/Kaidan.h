@@ -47,10 +47,10 @@ using namespace Enums;
 
 /**
  * @class Kaidan Kaidan's Back-End Class
- * 
+ *
  * @brief This class will initiate the complete back-end, including the @see Database
  * connection, viewing models (@see MessageModel, @see RosterModel), etc.
- * 
+ *
  * This class will run in the main thread, only the XMPP connection runs in another
  * thread (@see ClientThread).
  */
@@ -93,7 +93,7 @@ public:
 	 *
 	 * This will disconnect the client from the server. When disconnected,
 	 * the connectionStateChanged signal will be emitted.
-	 * 
+	 *
 	 * @param openLogInPage If true, the newCredentialsNeeded signal will be
 	 * emitted.
 	 */
@@ -250,6 +250,13 @@ public:
 	 */
 	Q_INVOKABLE QString fileSizeFromUrl(QString url);
 
+	/**
+	 * Styles/formats a message for displaying
+	 *
+	 * This currently only adds some link highlighting
+	 */
+	Q_INVOKABLE QString formatMessage(QString message);
+
 signals:
 	void rosterModelChanged();
 	void messageModelChanged();
@@ -403,6 +410,11 @@ public slots:
 
 private:
 	void connectDatabases();
+
+	/**
+	 * Highlights links in a list of words
+	 */
+	QString processMsgFormatting(QStringList words, bool isFirst = true);
 
 	ClientWorker *client;
 	ClientThread *cltThrd;

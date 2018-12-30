@@ -107,6 +107,11 @@ MessageType MessageModel::messageTypeFromMimeType(const QMimeType &type)
 	return MessageType::MessageFile;
 }
 
+QString MessageModel::lastMessageId(QString jid) const
+{
+	return lastMsgIdCache.value(jid, "");
+}
+
 void MessageModel::setMessageAsSent(const QString msgId)
 {
 	for (int i = 0; i < rowCount(); ++i) {
@@ -150,12 +155,15 @@ void MessageModel::updateMessage(const QString id, Message msg)
 	if (!found)
 		return;
 
+	QString newId = msg.id.isEmpty() ? id : msg.id;
+	rec.setValue("id", newId);
+	rec.setValue("edited", msg.edited);
+	rec.setValue("isSent", msg.isSent);
+	rec.setValue("isDelivered", msg.isDelivered);
 	if (!msg.timestamp.isEmpty())
 		rec.setValue("timestamp", msg.timestamp);
 	if (!msg.message.isEmpty())
 		rec.setValue("message", msg.message);
-	if (!msg.id.isEmpty())
-		rec.setValue("id", msg.id);
 	if (!msg.mediaUrl.isEmpty())
 		rec.setValue("mediaUrl", msg.mediaUrl);
 	if (msg.mediaSize)
@@ -173,6 +181,12 @@ void MessageModel::updateMessage(const QString id, Message msg)
 
 	setRecord(recId, rec);
 	submitAll();
+
+	// check if we're author/recipient
+	QVariant jid = rec.value("author").toString() == ownJid ? rec.value("recipient")
+	               : rec.value("author");
+	// update last message id
+	lastMsgIdCache[jid.toString()] = newId;
 }
 
 void MessageModel::addMessage(Message msg)
@@ -187,9 +201,10 @@ void MessageModel::addMessage(Message msg)
 	record.setValue("timestamp", msg.timestamp);
 	record.setValue("message", msg.message);
 	record.setValue("id", msg.id);
-	record.setValue("isSent", !msg.sentByMe);
-	record.setValue("isDelivered", !msg.sentByMe);
+	record.setValue("isSent", msg.isSent);
+	record.setValue("isDelivered", msg.isDelivered);
 	record.setValue("type", (quint8) msg.type);
+	record.setValue("edited", msg.edited);
 	record.setValue("mediaUrl", msg.mediaUrl);
 	if (msg.mediaSize)
 		record.setValue("mediaSize", msg.mediaSize);
@@ -206,4 +221,11 @@ void MessageModel::addMessage(Message msg)
 	}
 
 	submitAll();
+
+	// update last message id
+	if (!msg.id.isEmpty()) {
+		// check if we're author/recipient
+		QString jid = msg.author == ownJid ? msg.recipient : msg.author;
+		lastMsgIdCache[jid] = msg.id;
+	}
 }

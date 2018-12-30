@@ -251,6 +251,10 @@
         <source>Could not send message, as a result of not being connected.</source>
         <translation type="unfinished">Kunne ikke sende melding, som følge av manglende tilkobling.</translation>
     </message>
+    <message>
+        <source>Could not correct message, as a result of not being connected.</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>RosterAddContactSheet</name>

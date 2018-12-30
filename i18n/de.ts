@@ -295,6 +295,10 @@
         <source>Could not send message, as a result of not being connected.</source>
         <translation>Konnte Nachricht nicht versenden, da Sie nicht verbunden sind.</translation>
     </message>
+    <message>
+        <source>Could not correct message, as a result of not being connected.</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>RosterAddContactSheet</name>

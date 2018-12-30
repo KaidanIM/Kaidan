@@ -41,7 +41,7 @@
 #include <QSqlQuery>
 #include <QSqlRecord>
 
-static const int DATABASE_LATEST_VERSION = 8;
+static const int DATABASE_LATEST_VERSION = 9;
 static const char *DATABASE_TABLE_INFO = "dbinfo";
 static const char *DATABASE_TABLE_MESSAGES = "Messages";
 static const char *DATABASE_TABLE_ROSTER = "Roster";
@@ -124,7 +124,7 @@ bool Database::needToConvert()
 
 void Database::convertDatabase()
 {
-	qDebug() << "[database] Converting database to latest version from verion" << version;
+	qDebug() << "[database] Converting database to latest version from version" << version;
 	while (version < DATABASE_LATEST_VERSION) {
 		switch (version) {
 		case 0:
@@ -143,6 +143,8 @@ void Database::convertDatabase()
 			convertDatabaseToV7(); version = 7; break;
 		case 7:
 			convertDatabaseToV8(); version = 8; break;
+		case 8:
+			convertDatabaseToV9(); version = 9; break;
 		default:
 			break;
 		}
@@ -161,7 +163,7 @@ void Database::convertDatabase()
 void Database::createNewDatabase()
 {
 	QSqlQuery query(database);
-	
+
 	//
 	// DB info
 	//
@@ -205,6 +207,7 @@ void Database::createNewDatabase()
 	    "'mediaLocation' TEXT,"
 	    "'mediaThumb' BLOB,"
 	    "'mediaHashes' TEXT,"
+	    "'edited' BOOL," // whether the message has been edited
 	    "FOREIGN KEY('author') REFERENCES Roster ('jid'),"
 	    "FOREIGN KEY('recipient') REFERENCES Roster ('jid')"
 	    ")"
@@ -219,7 +222,7 @@ void Database::createDbInfoTable()
 	QSqlQuery query(database);
 	query.prepare("CREATE TABLE IF NOT EXISTS 'dbinfo' (version INTEGER NOT NULL)");
 	execQuery(query);
-	
+
 	query.prepare(QString("INSERT INTO 'dbinfo' (version) VALUES (%1)")
 		.arg(DATABASE_LATEST_VERSION));
 	execQuery(query);
@@ -325,6 +328,14 @@ void Database::convertDatabaseToV8()
 	execQuery(query);
 
 	query.prepare("DROP TABLE roster_backup;");
+	execQuery(query);
+}
+
+void Database::convertDatabaseToV9()
+{
+	QSqlQuery query(database);
+
+	query.prepare("ALTER TABLE 'Messages' ADD 'edited' BOOL");
 	execQuery(query);
 }
 

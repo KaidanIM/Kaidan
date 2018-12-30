@@ -248,6 +248,10 @@
         <source>Could not send message, as a result of not being connected.</source>
         <translation>Не смог отправить сообщение, в результате того, что не был подключен.</translation>
     </message>
+    <message>
+        <source>Could not correct message, as a result of not being connected.</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>RosterAddContactSheet</name>

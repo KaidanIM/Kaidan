@@ -53,6 +53,7 @@ MessageHandler::MessageHandler(Kaidan *kaidan, QXmppClient *client, MessageModel
 {
 	connect(client, &QXmppClient::messageReceived, this, &MessageHandler::handleMessage);
 	connect(kaidan, &Kaidan::sendMessage, this, &MessageHandler::sendMessage);
+	connect(kaidan, &Kaidan::correctMessage, this, &MessageHandler::correctMessage);
 
 	client->addExtension(&receiptManager);
 	connect(&receiptManager, &QXmppMessageReceiptManager::messageDelivered,
@@ -140,7 +141,18 @@ void MessageHandler::handleMessage(const QXmppMessage &msg)
 	entry.timestamp = stamp.toUTC().toString(Qt::ISODate);
 
 	// save the message to the database
+#if QXMPP_VERSION >= QT_VERSION_CHECK(1, 0, 0)
+	// in case of message correction, replace old message
+	if (msg.replaceId().isEmpty()) {
+		emit model->addMessageRequested(entry);
+	} else {
+		entry.edited = true;
+		emit model->updateMessageRequested(msg.replaceId(), entry);
+	}
+#else
+	// no message correction with old QXmpp
 	emit model->addMessageRequested(entry);
+#endif
 
 	// Send a message notification
 	//
@@ -184,8 +196,49 @@ void MessageHandler::sendMessage(QString toJid, QString body)
 	m.setId(msg.id);
 	m.setReceiptRequested(true);
 
-	// TODO: check return code
-	client->sendPacket(m);
+	bool success = client->sendPacket(m);
+	if (success)
+		emit model->setMessageAsSentRequested(msg.id);
+	// TODO: handle error
+}
+
+void MessageHandler::correctMessage(QString toJid, QString msgId, QString body)
+{
+	// TODO: load old message from model and put everything into the new message
+	//       instead of only the new body
+
+	// TODO: Add offline message cache and send when connnected again
+	if (client->state() != QXmppClient::ConnectedState) {
+		emit kaidan->passiveNotificationRequested(
+			tr("Could not correct message, as a result of not being connected.")
+		);
+		qWarning() << "[client] [MessageHandler] Could not correct message, as a result of "
+		              "not being connected.";
+		return;
+	}
+
+	MessageModel::Message msg;
+	msg.author = client->configuration().jidBare();
+	msg.recipient = toJid;
+	msg.id = QXmppUtils::generateStanzaHash(48);
+	msg.sentByMe = true;
+	msg.message = body;
+	msg.type = MessageType::MessageText; // text message without media
+	msg.edited = true;
+
+	emit model->updateMessageRequested(msgId, msg);
+
+	QXmppMessage m(msg.author, msg.recipient, body);
+	m.setId(msg.id);
+	m.setReceiptRequested(true);
+#if QXMPP_VERSION >= QT_VERSION_CHECK(1, 0, 0)
+	m.setReplaceId(msgId);
+#endif
+
+	bool success = client->sendPacket(m);
+	if (success)
+		emit model->setMessageAsSentRequested(msg.id);
+	// TODO: handle error
 }
 
 void MessageHandler::handleDiscoInfo(const QXmppDiscoveryIq &info)

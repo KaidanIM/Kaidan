@@ -60,6 +60,7 @@ private:
 	void convertDatabaseToV6();
 	void convertDatabaseToV7();
 	void convertDatabaseToV8();
+	void convertDatabaseToV9();
 	void execQuery(QSqlQuery &query);
 
 	QSqlDatabase database;

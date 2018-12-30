@@ -75,6 +75,11 @@ public slots:
 	void sendMessage(QString toJid, QString body);
 
 	/**
+	 * Sends the corrected version of a message
+	 */
+	void correctMessage(QString toJid, QString msgId, QString newBody);
+
+	/**
 	 * Handles service discovery info and enables carbons if feature was found
 	 */
 	void handleDiscoInfo(const QXmppDiscoveryIq &);

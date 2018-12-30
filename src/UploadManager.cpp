@@ -129,8 +129,10 @@ void UploadManager::handleUploadSucceeded(const QXmppHttpUpload *upload)
 	m.setOutOfBandUrl(upload->slot().getUrl().toEncoded());
 #endif
 
-	// TODO: check return code
-	client->sendPacket(m);
+	bool success = client->sendPacket(m);
+	if (success)
+		emit msgModel->setMessageAsSentRequested(originalMsg->id);
+	// TODO: handle error
 
 	messages.remove(upload->id());
 }

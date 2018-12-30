@@ -360,6 +360,13 @@ signals:
 	void sendMessage(QString jid, QString message);
 
 	/**
+	 * Correct the last message
+	 *
+	 * To get/check the last message id, use `kaidan.messageModel.lastMessageId(jid)`
+	 */
+	void correctMessage(QString toJid, QString msgId, QString message);
+
+	/**
 	 * Upload and send file
 	 */
 	void sendFile(QString jid, QString filePath, QString message);

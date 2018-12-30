@@ -63,6 +63,9 @@ public:
 		QString id;
 		bool sentByMe;
 		MessageType type;
+		bool edited = false;
+		bool isSent = false;
+		bool isDelivered = false;
 		QString mediaUrl;
 		quint64 mediaSize;
 		QString mediaContentType;
@@ -73,6 +76,14 @@ public:
 	};
 
 	static MessageType messageTypeFromMimeType(const QMimeType &);
+
+	/**
+	 * Returns the last message id of a contact
+	 *
+	 * The result can be empty, if the last message was sent in a previous session. This
+	 * is, because we currently can't be sure if there were other messages since then.
+	 */
+	Q_INVOKABLE QString lastMessageId(QString jid) const;
 
 signals:
 	/**
@@ -103,6 +114,8 @@ private:
 	QSqlDatabase *database;
 
 	QString ownJid;
+
+	QHash<QString, QString> lastMsgIdCache;
 };
 
 #endif // MESSAGEMODEL_H

@@ -274,6 +274,10 @@
         <source>Could not send message, as a result of not being connected.</source>
         <translation type="unfinished">Vous n&apos;êtes pas connecté. Impossible d&apos;envoyer le message</translation>
     </message>
+    <message>
+        <source>Could not correct message, as a result of not being connected.</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>RosterAddContactSheet</name>

@@ -224,6 +224,10 @@
         <source>Could not send message, as a result of not being connected.</source>
         <translation type="unfinished">Ezin izan da mezua bidali, konektaturik ez zaudelako.</translation>
     </message>
+    <message>
+        <source>Could not correct message, as a result of not being connected.</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>RosterAddContactSheet</name>

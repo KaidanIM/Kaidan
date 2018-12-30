@@ -158,6 +158,10 @@
         <source>Could not send message, as a result of not being connected.</source>
         <translation>Impossibile inviare messaggi a causa della mancata connessione.</translation>
     </message>
+    <message>
+        <source>Could not correct message, as a result of not being connected.</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>RosterManager</name>

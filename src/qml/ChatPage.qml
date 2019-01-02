@@ -137,6 +137,9 @@ Kirigami.ScrollablePage {
 			mediaType: model.type
 			mediaGetUrl: model.mediaUrl
 			mediaLocation: model.mediaLocation
+			isLastMessage: model.id === kaidan.messageModel.lastMessageId(recipientJid)
+			textEdit: messageField
+			edited: model.edited
 		}
 	}
 
@@ -185,6 +188,7 @@ Kirigami.ScrollablePage {
 
 			Controls.TextArea {
 				id: messageField
+
 				Layout.fillWidth: true
 				placeholderText: qsTr("Compose message")
 				wrapMode: Controls.TextArea.Wrap
@@ -192,6 +196,15 @@ Kirigami.ScrollablePage {
 				bottomPadding: topPadding
 				selectByMouse: true
 				background: Item {}
+				state: "compose"
+				states: [
+					State {
+						name: "compose"
+					},
+					State {
+						name: "edit"
+					}
+				]
 				Keys.onReturnPressed: {
 					if (event.key === Qt.Key_Return) {
 						if (event.modifiers & Qt.ControlModifier) {
@@ -210,7 +223,12 @@ Kirigami.ScrollablePage {
 				Layout.preferredHeight: Kirigami.Units.gridUnit * 3
 				padding: 0
 				Kirigami.Icon {
-					source: "document-send"
+					source: {
+						if (messageField.state == "compose")
+							return "document-send"
+						else if (messageField.state == "edit")
+							return "edit-symbolic"
+					}
 					enabled: sendButton.enabled
 					isMask: true
 					smooth: true
@@ -229,9 +247,16 @@ Kirigami.ScrollablePage {
 					sendButton.enabled = false
 
 					// send the message
-					kaidan.sendMessage(recipientJid, messageField.text)
+					if (messageField.state == "compose") {
+						kaidan.sendMessage(recipientJid, messageField.text)
+					} else if (messageField.state == "edit") {
+						kaidan.correctMessage(recipientJid, kaidan.messageModel.lastMessageId(recipientJid),
+						                      messageField.text)
+					}
+
 					// clean up the text field
 					messageField.text = ""
+					messageField.state = "compose"
 
 					// reenable the button
 					sendButton.enabled = true

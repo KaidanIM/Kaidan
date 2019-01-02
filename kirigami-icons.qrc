@@ -33,6 +33,7 @@
         <file alias="document-send-symbolic.svg">3rdparty/breeze-icons/icons/actions/symbolic/document-send-symbolic.svg</file>
         <file alias="go-next-symbolic.svg">3rdparty/breeze-icons/icons/actions/symbolic/go-next-symbolic.svg</file>
         <file alias="go-previous-symbolic.svg">3rdparty/breeze-icons/icons/actions/symbolic/go-previous-symbolic.svg</file>
+        <file alias="edit-symbolic.svg">3rdparty/breeze-icons/icons/actions/symbolic/edit-symbolic.svg</file>
     </qresource>
     
     <qresource prefix="/icons/breeze/mimetypes/64">

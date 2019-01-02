@@ -31,7 +31,7 @@
 import QtQuick 2.6
 import QtGraphicalEffects 1.0
 import QtQuick.Layouts 1.3
-import QtQuick.Controls 2.0 as Controls
+import QtQuick.Controls 2.3 as Controls
 import org.kde.kirigami 2.0 as Kirigami
 import im.kaidan.kaidan 1.0
 
@@ -46,6 +46,9 @@ RowLayout {
 	property int mediaType
 	property string mediaGetUrl
 	property string mediaLocation
+	property var textEdit
+	property bool isLastMessage
+	property bool edited
 
 	// own messages are on the right, others on the left
 	layoutDirection: sentByMe ? Qt.RightToLeft : Qt.LeftToRight
@@ -86,10 +89,31 @@ RowLayout {
 
 			MouseArea {
 				anchors.fill: parent
-				acceptedButtons: Qt.RightButton
+				acceptedButtons: Qt.LeftButton | Qt.RightButton
 				onClicked: {
-					kaidan.copyToClipboard(messageBody)
-					passiveNotification(qsTr("Message copied to clipboard"))
+					if (mouse.button === Qt.RightButton)
+						contextMenu.popup()
+				}
+				onPressAndHold: {
+					if (mouse.source === Qt.MouseEventNotSynthesized)
+						contextMenu.popup()
+				}
+			}
+
+			Controls.Menu {
+				id: contextMenu
+				Controls.MenuItem {
+					text: qsTr("Copy Message")
+					onTriggered: kaidan.copyToClipboard(messageBody)
+				}
+
+				Controls.MenuItem {
+					text: qsTr("Edit Message")
+					visible: isLastMessage && sentByMe
+					onTriggered: {
+						textEdit.text = messageBody
+						textEdit.state = "edit"
+					}
 				}
 			}
 
@@ -157,6 +181,12 @@ RowLayout {
 					sourceSize.height: Kirigami.Units.gridUnit * 0.65
 					sourceSize.width: Kirigami.Units.gridUnit * 0.65
 				}
+				Kirigami.Icon {
+					source: "edit-symbolic"
+					visible: edited
+					Layout.preferredHeight: Kirigami.Units.gridUnit * 0.65
+					Layout.preferredWidth: Kirigami.Units.gridUnit * 0.65
+                }
 			}
 		}
 	}

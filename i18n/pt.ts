@@ -5,11 +5,11 @@
     <name>AboutDialog</name>
     <message>
         <source>A simple, user-friendly Jabber/XMPP client</source>
-        <translation type="unfinished">Um cliente Jabber/XMPP simples e fácil de usar</translation>
+        <translation>Um cliente Jabber/XMPP simples e fácil de usar</translation>
     </message>
     <message>
         <source>License:</source>
-        <translation type="unfinished">Licença:</translation>
+        <translation>Licença:</translation>
     </message>
     <message>
         <source>Source code on GitHub</source>
@@ -70,7 +70,7 @@
     </message>
     <message>
         <source>Other file</source>
-        <translation>Outro arquivo</translation>
+        <translation>Outro ficheiro</translation>
     </message>
     <message>
         <source>Select a file</source>
@@ -252,11 +252,11 @@
     <name>UploadManager</name>
     <message>
         <source>Could not send file, as a result of not being connected.</source>
-        <translation>Não foi possível enviar arquivo, como resultado de não estar conectado.</translation>
+        <translation>Não foi possível enviar ficheiro, como resultado de não estar conectado.</translation>
     </message>
     <message>
         <source>File</source>
-        <translation>Arquivo</translation>
+        <translation>Ficheiro</translation>
     </message>
 </context>
 </TS>

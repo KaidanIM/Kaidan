@@ -57,7 +57,7 @@ echo "*****************************************"
     cmake .. \
         -DBUILD_SHARED_LIBS=OFF \
         -DCMAKE_PREFIX_PATH=$QT_IOS \
-        -DBUILD_EXAMPLES=OFF -DBUILD_TESTS=OFF \
+        -DBUILD_EXAMPLES=OFF -DBUILD_TESTS=OFF -DBUILD_SHARED=OFF \
         -DCMAKE_BUILD_TYPE=$BUILD_TYPE -DCMAKE_INSTALL_PREFIX=$QXMPP_BUILD \
         -DCMAKE_TOOLCHAIN_FILE=../../ios-cmake/ios.toolchain.cmake \
         -DIOS_PLATFORM=$IOS_PLATFORM \
@@ -144,6 +144,6 @@ cdnew $KAIDAN_SOURCES/build
         -DIOS_PLATFORM=$IOS_PLATFORM \
         -DIOS_DEPLOYMENT_TARGET="10.0" \
         -DIOS_ARCH="arm64"
-   
+
 }
 fi

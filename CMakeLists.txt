@@ -158,7 +158,7 @@ if(ANDROID)
 endif()
 
 if(STATIC_BUILD)
-	add_definitions(-DQXMPP_STATIC)
+	add_definitions(-DQXMPP_BUILD)
 
 	find_package(Perl REQUIRED)
 
@@ -218,6 +218,7 @@ if(STATIC_BUILD)
 	find_library(QLAYOUTS_PLUGIN qquicklayoutsplugin PATHS ${QT_QML_PATH}/qml/QtQuick/Layouts)
 	find_library(QWINDOW_PLUGIN windowplugin PATHS ${QT_QML_PATH}/qml/QtQuick/Window.2)
 	find_library(QSHAPES_PLUGIN qmlshapesplugin PATHS ${QT_QML_PATH}/qml/QtQuick/Shapes)
+	find_library(QUICKSHAPES Qt5QuickShapes PATHS ${QT_LIBDIR})
 	find_library(QTEMPLATES_PLUGIN qtquicktemplates2plugin PATHS ${QT_QML_PATH}/qml/QtQuick/Templates.2)
 	find_library(QMODELS_PLUGIN modelsplugin PATHS ${QT_QML_PATH}/qml/QtQml/Models.2)
 	target_link_libraries(${PROJECT_NAME}
@@ -242,6 +243,7 @@ if(STATIC_BUILD)
 		${QLAYOUTS_PLUGIN}
 		${QWINDOW_PLUGIN}
 		${QSHAPES_PLUGIN}
+		${QUICKSHAPES}
 		${QTEMPLATES_PLUGIN}
 		${QMODELS_PLUGIN}
 		${__Qt5Widgets_LIBRARIES}

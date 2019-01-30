@@ -7,7 +7,7 @@ if [ -z "$MXE_ROOT" ]; then
     exit 1
 fi
 
-# Build type is one of: 
+# Build type is one of:
 # Debug, Release, RelWithDebInfo and MinSizeRel
 BUILD_TYPE="${BUILD_TYPE:-Debug}"
 # MXE target is one of:
@@ -78,7 +78,7 @@ echo "*****************************************"
         -DECM_DIR=/usr/share/ECM/cmake \
         -DSTATIC_LIBRARY=1 \
         -DCMAKE_BUILD_TYPE=$BUILD_TYPE
-    
+
     make -j$(nproc)
     make install
     rm -rf $KAIDAN_SOURCES/3rdparty/kirigami/build
@@ -94,6 +94,7 @@ echo "*****************************************"
     $MXE_TARGET-cmake .. \
         -DBUILD_TESTS=OFF \
         -DBUILD_EXAMPLES=OFF \
+        -DBUILD_SHARED=OFF \
         -DCMAKE_BUILD_TYPE=$BUILD_TYPE
 
     make -j$(nproc)
@@ -110,14 +111,14 @@ if [ ! -d "$KAIDAN_SOURCES/misc/windows" ]; then
         inkscape -z -e $2 -w $3 -h $3 $1
         optipng -quiet $2
     }
-    
+
     winlogo() {
         rendersvg $KAIDAN_SOURCES/misc/kaidan-small-margin.svg "$KAIDAN_SOURCES/misc/windows/$1-kaidan.png" $1
         optipng -o9 "$KAIDAN_SOURCES/misc/windows/$1-kaidan.png"
     }
-    
+
     mkdir -p $KAIDAN_SOURCES/misc/windows
-    
+
     winlogo 16
     winlogo 32
     winlogo 48
@@ -130,12 +131,12 @@ echo "Building Kaidan"
 echo "*****************************************"
 {
     cdnew $KAIDAN_SOURCES/build
-    
+
     $MXE_TARGET-cmake .. \
         -DECM_DIR=/usr/share/ECM/cmake -DI18N=1 \
         -DSTATIC_BUILD=1 \
         -DCMAKE_BUILD_TYPE=$BUILD_TYPE
-    
+
     make -j$(nproc)
 }
 fi

@@ -96,10 +96,8 @@ Kaidan::Kaidan(QGuiApplication *app, bool enableLogging, QObject *parent) : QObj
 
 Kaidan::~Kaidan()
 {
-	delete client;
 	delete caches;
 	delete database;
-	delete cltThrd;
 }
 
 void Kaidan::start()

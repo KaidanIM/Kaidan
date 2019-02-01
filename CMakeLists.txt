@@ -1,4 +1,5 @@
 cmake_minimum_required(VERSION 2.8.12)
+cmake_policy(SET CMP0071 NEW)
 find_package(ECM 5.40.0 REQUIRED NO_MODULE)
 set(CMAKE_CXX_STANDARD 14)
 set(QT_MIN_VERSION "5.8.0")
@@ -44,6 +45,13 @@ find_package(PkgConfig REQUIRED)
 find_package(Qt5 ${QT_MIN_VERSION} REQUIRED NO_MODULE COMPONENTS Core Qml Quick Svg Sql QuickControls2 Xml)
 find_package(KF5Kirigami2 REQUIRED)
 pkg_search_module(QXmpp REQUIRED qxmpp>=0.9)
+
+# Optional QtQuickCompiler
+find_package(Qt5QuickCompiler)
+set_package_properties(Qt5QuickCompiler PROPERTIES
+        DESCRIPTION "Compile QML at build time"
+        TYPE OPTIONAL
+)
 
 # Optional QWidget style integration (not on mobile)
 if(NOT UBUNTU_TOUCH AND NOT ANDROID AND NOT IOS)
@@ -113,15 +121,21 @@ endif()
 
 link_directories(${QXmpp_LIBDIR})
 
+if(Qt5QuickCompiler_FOUND)
+	qtquick_compiler_add_resources(KAIDAN_QML_QRC kaidan_qml.qrc)
+else()
+	qt5_add_resources(KAIDAN_QML_QRC kaidan_qml.qrc)
+endif()
+
 add_executable(${PROJECT_NAME}
 	MACOSX_BUNDLE
 	WIN32
 	${KAIDAN_ICNS}
 	${KAIDAN_SOURCES}
+	${KAIDAN_QML_QRC}
 	${KAIDAN_ICONS_QRC}  # only set if enabled
 	${KAIDAN_IMAGES_QRC} #
 	${I18N_QRC_CPP}      #
-	"kaidan_qml.qrc"
 )
 
 target_link_libraries(${PROJECT_NAME}

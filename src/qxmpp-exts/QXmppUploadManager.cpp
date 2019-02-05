@@ -292,7 +292,6 @@ void QXmppUploadManager::handleSlot(const QXmppHttpUploadSlotIq &slot)
 
 void QXmppUploadManager::handleRequestError(const QXmppHttpUploadRequestIq &request)
 {
-    qDebug() << "Handeln wir mal n request error";
     for (QXmppHttpUpload *upload : m_uploads) {
         if (upload->requestId() == request.id()) {
             m_runningJobs--;
@@ -317,6 +316,7 @@ void QXmppUploadManager::handleUploadProgressed(qint64 sent, qint64 total)
 
 void QXmppUploadManager::handleUploadFinished()
 {
+    m_runningJobs--;
     auto *upload = (QXmppHttpUpload*) sender();
     if (upload) {
         m_uploads.removeAll(upload);
@@ -329,6 +329,7 @@ void QXmppUploadManager::handleUploadFinished()
 
 void QXmppUploadManager::handleUploadFailed(QNetworkReply::NetworkError code)
 {
+    m_runningJobs--;
     qDebug() << "Upload failed" << code;
 }
 

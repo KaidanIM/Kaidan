@@ -104,8 +104,11 @@ void MessageHandler::handleMessage(const QXmppMessage &msg)
 	entry.message = msg.body();
 	entry.type = MessageType::MessageText; // default to text message without media
 
-	// check if message contains a link
+	// check if message contains a link and also check out of band url
 	QList<QString> bodyWords = msg.body().split(" ");
+#if QXMPP_VERSION >= QT_VERSION_CHECK(1, 0, 0)
+	bodyWords.prepend(msg.outOfBandUrl());
+#endif
 	for (const QString &word : bodyWords) {
 		bool isLink = word.startsWith("https://") || word.startsWith("http://");
 		if (!isLink)

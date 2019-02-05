@@ -125,6 +125,9 @@ void UploadManager::handleUploadSucceeded(const QXmppHttpUpload *upload)
 	m.setId(originalMsg->id);
 	m.setReceiptRequested(true);
 	m.setStamp(QXmppUtils::datetimeFromString(originalMsg->timestamp));
+#if QXMPP_VERSION >= QT_VERSION_CHECK(1, 0, 0)
+	m.setOutOfBandUrl(upload->slot().getUrl().toEncoded());
+#endif
 
 	// TODO: check return code
 	client->sendPacket(m);

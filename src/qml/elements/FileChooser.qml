@@ -74,7 +74,7 @@ Item {
 	Connections {
 		target: fileChooserLoader.item
 		onAccepted: {
-			fileUrl = fileChooserLoader.item.file
+			fileUrl = fileChooserLoader.item.fileUrl
 			root.accepted()
 			console.log("Child file dialog accepted. URL: " + fileUrl)
 		}

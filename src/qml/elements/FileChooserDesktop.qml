@@ -29,7 +29,7 @@
  */
 
 import QtQuick 2.6
-import Qt.labs.platform 1.0
+import QtQuick.Dialogs 1.2
 
 FileDialog {
 	id: fileDialog

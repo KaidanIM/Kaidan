@@ -1,5 +1,4 @@
 cmake_minimum_required(VERSION 2.8.12)
-cmake_policy(SET CMP0071 NEW)
 find_package(ECM 5.40.0 REQUIRED NO_MODULE)
 set(CMAKE_CXX_STANDARD 14)
 set(QT_MIN_VERSION "5.8.0")
@@ -14,6 +13,7 @@ option(STATIC_BUILD "Build Kaidan statically")
 option(UBUNTU_TOUCH "Building a Ubuntu Touch click (internal use only!)" FALSE)
 option(CLICK_ARCH "Architecture that will be used in the click's manifest")
 option(CLICK_DATE "Date used in the version number in the click's manifest")
+option(QUICK_COMPILER "Use QtQuick compiler to improve performance" TRUE)
 
 # Find includes in corresponding build directories
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
@@ -47,11 +47,13 @@ find_package(KF5Kirigami2 REQUIRED)
 pkg_search_module(QXmpp REQUIRED qxmpp>=0.9)
 
 # Optional QtQuickCompiler
-find_package(Qt5QuickCompiler)
-set_package_properties(Qt5QuickCompiler PROPERTIES
-        DESCRIPTION "Compile QML at build time"
-        TYPE OPTIONAL
-)
+if(QUICK_COMPILER)
+	find_package(Qt5QuickCompiler)
+	set_package_properties(Qt5QuickCompiler PROPERTIES
+		DESCRIPTION "Compile QML at build time"
+	        TYPE OPTIONAL
+	)
+endif()
 
 # Optional QWidget style integration (not on mobile)
 if(NOT UBUNTU_TOUCH AND NOT ANDROID AND NOT IOS)
@@ -121,7 +123,7 @@ endif()
 
 link_directories(${QXmpp_LIBDIR})
 
-if(Qt5QuickCompiler_FOUND)
+if(QUICK_COMPILER)
 	qtquick_compiler_add_resources(KAIDAN_QML_QRC kaidan_qml.qrc)
 else()
 	qt5_add_resources(KAIDAN_QML_QRC kaidan_qml.qrc)

@@ -57,6 +57,7 @@ build_kaidan() {
 	      -DUBUNTU_TOUCH=1 \
 	      -DCLICK_ARCH="${ARCH}" \
 	      -DCLICK_DATE="${DATE}" \
+	      -DQUICK_COMPILER=OFF \
 	      -DCMAKE_BUILD_TYPE=Release
 
 	ninja install

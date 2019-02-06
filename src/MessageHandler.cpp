@@ -91,7 +91,6 @@ MessageHandler::~MessageHandler()
 
 void MessageHandler::handleMessage(const QXmppMessage &msg)
 {
-	// TODO: Enable carbons (currently needs QXmpp master)
 	bool isCarbonMessage = false;
 
 	if (msg.body().isEmpty())
@@ -124,7 +123,9 @@ void MessageHandler::handleMessage(const QXmppMessage &msg)
 			MessageType mType = MessageModel::messageTypeFromMimeType(type);
 			if (mType == MessageType::MessageImage ||
 			    mType == MessageType::MessageAudio ||
-			    mType == MessageType::MessageVideo) {
+			    mType == MessageType::MessageVideo ||
+			    mType == MessageType::MessageDocument ||
+			    mType == MessageType::MessageFile) {
 				entry.type = mType;
 				entry.mediaContentType = type.name();
 				entry.mediaUrl = url.toEncoded();

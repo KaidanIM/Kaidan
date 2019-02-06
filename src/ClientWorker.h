@@ -56,6 +56,7 @@ class MessageHandler;
 class DiscoveryManager;
 class VCardManager;
 class UploadManager;
+class DownloadManager;
 
 using namespace Enums;
 
@@ -83,7 +84,6 @@ protected:
 class ClientWorker : public QObject
 {
 	Q_OBJECT
-	Q_PROPERTY(UploadManager* uploadManager READ getUploadManager)
 
 public:
 	struct Caches {
@@ -134,11 +134,6 @@ public:
 	             QObject *parent = nullptr);
 
 	~ClientWorker();
-
-	UploadManager* getUploadManager()
-	{
-		return uploadManager;
-	}
 
 public slots:
 	/**
@@ -210,6 +205,7 @@ private:
 	DiscoveryManager *discoManager;
 	VCardManager *vCardManager;
 	UploadManager *uploadManager;
+	DownloadManager *downloadManager;
 };
 
 #endif // CLIENTWORKER_H

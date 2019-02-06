@@ -66,11 +66,13 @@ void TransferJob::setBytesTotal(qint64 bytesTotal)
 TransferCache::TransferCache(QObject *parent)
 	: QObject(parent)
 {
-	connect(this, &TransferCache::addUploadRequested, this, &TransferCache::addUpload);
-	connect(this, &TransferCache::removeUploadRequested,
-	        this, &TransferCache::removeUpload);
-	connect(this, &TransferCache::setUploadBytesSentRequested,
-	        this, &TransferCache::setUploadBytesSent);
+	connect(this, &TransferCache::addJobRequested, this, &TransferCache::addJob);
+	connect(this, &TransferCache::removeJobRequested,
+	        this, &TransferCache::removeJob);
+	connect(this, &TransferCache::setJobBytesSentRequested,
+	        this, &TransferCache::setJobBytesSent);
+	connect(this, &TransferCache::setJobProgressRequested,
+	        this, &TransferCache::setJobBytesSent);
 }
 
 TransferCache::~TransferCache()
@@ -79,7 +81,7 @@ TransferCache::~TransferCache()
 	QMutexLocker locker(&mutex);
 }
 
-void TransferCache::addUpload(const QString& msgId, qint64 bytesTotal)
+void TransferCache::addJob(const QString& msgId, qint64 bytesTotal)
 {
 	QMutexLocker locker(&mutex);
 	uploads.insert(msgId, new TransferJob(bytesTotal));
@@ -88,7 +90,7 @@ void TransferCache::addUpload(const QString& msgId, qint64 bytesTotal)
 	emit jobsChanged();
 }
 
-void TransferCache::removeUpload(const QString& msgId)
+void TransferCache::removeJob(const QString& msgId)
 {
 	QMutexLocker locker(&mutex);
 	delete uploads[msgId];
@@ -104,7 +106,7 @@ bool TransferCache::hasUpload(QString msgId) const
 	return uploads.contains(msgId);
 }
 
-TransferJob* TransferCache::uploadByMessageId(QString msgId) const
+TransferJob* TransferCache::jobByMessageId(QString msgId) const
 {
 	QMutexLocker locker(&mutex);
 	TransferJob* job = uploads.value(msgId);
@@ -113,7 +115,19 @@ TransferJob* TransferCache::uploadByMessageId(QString msgId) const
 	return job;
 }
 
-void TransferCache::setUploadBytesSent(const QString& msgId, qint64 bytesSent)
+void TransferCache::setJobProgress(const QString &msgId, qint64 bytesSent, qint64 bytesTotal)
 {
-	uploadByMessageId(msgId)->setBytesSent(bytesSent);
+	TransferJob* job = jobByMessageId(msgId);
+
+	QMutexLocker locker(&mutex);
+	job->setBytesTotal(bytesTotal);
+	job->setBytesSent(bytesSent);
+}
+
+void TransferCache::setJobBytesSent(const QString &msgId, qint64 bytesSent)
+{
+	TransferJob* job = jobByMessageId(msgId);
+
+	QMutexLocker locker(&mutex);
+	job->setBytesSent(bytesSent);
 }

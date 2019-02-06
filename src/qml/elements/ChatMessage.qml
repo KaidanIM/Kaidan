@@ -50,10 +50,11 @@ RowLayout {
 	property var textEdit
 	property bool isLastMessage
 	property bool edited
+	property bool isLoading: kaidan.transferCache.hasUpload(msgId)
 	property var upload: {
-		if (mediaType !== Enums.MessageText && mediaGetUrl === ""
-		    && kaidan.transferCache.hasUpload(msgId)) {
-			kaidan.transferCache.uploadByMessageId(model.id)
+		if (mediaType !== Enums.MessageText &&
+		    kaidan.transferCache.hasUpload(msgId)) {
+			kaidan.transferCache.jobByMessageId(model.id)
 		}
 	}
 
@@ -140,18 +141,30 @@ RowLayout {
 			anchors.centerIn: parent
 			anchors.margins: 4
 
+			Controls.ToolButton {
+				visible: {
+					mediaType !== Enums.MessageText && !isLoading && mediaLocation === ""
+				}
+				text: qsTr("Download")
+				onClicked: {
+					print("Donwload")
+					kaidan.downloadMedia(msgId, mediaGetUrl)
+				}
+			}
+
 			// media loader
 			Loader {
 				id: media
-				source: mediaType === Enums.MessageImage ? "ChatMessageImage.qml"
-				                                         : ""
-				property string sourceUrl: {
-					mediaLocation === "" ? mediaGetUrl
-					                     : "file://" + mediaLocation
+				source: {
+					if (mediaType == Enums.MessageImage &&
+					    mediaLocation !== "")
+						"ChatMessageImage.qml"
+					else
+						""
 				}
+				property string sourceUrl: "file://" + mediaLocation
 				Layout.maximumWidth: root.width - Kirigami.Units.gridUnit * 6
-				Layout.preferredHeight: mediaType === Enums.MessageImage && loaded ?
-				                        item.paintedHeight : 0
+				Layout.preferredHeight: loaded ? item.paintedHeight : 0
 			}
 
 			// message body
@@ -171,21 +184,10 @@ RowLayout {
 
 			// message meta: date, isRead
 			RowLayout {
+				// progress bar for upload/download status
 				Controls.ProgressBar {
-					id: progressBar
+					visible: isLoading
 					value: upload.progress
-					visible: kaidan.transferCache.hasUpload(msgId)
-
-					function updateVisibility() {
-						progressBar.visible = kaidan.transferCache.hasUpload(msgId)
-					}
-
-					Component.onCompleted: {
-						kaidan.transferCache.jobsChanged.connect(updateVisibility)
-					}
-					Component.onDestruction: {
-						kaidan.transferCache.jobsChanged.disconnect(updateVisibility)
-					}
 				}
 
 				Controls.Label {
@@ -218,5 +220,16 @@ RowLayout {
 	// placeholder
 	Item {
 		Layout.fillWidth: true
+	}
+
+	function updateIsLoading() {
+		isLoading = kaidan.transferCache.hasUpload(msgId)
+	}
+
+	Component.onCompleted: {
+		kaidan.transferCache.jobsChanged.connect(updateIsLoading)
+	}
+	Component.onDestruction: {
+		kaidan.transferCache.jobsChanged.disconnect(updateIsLoading)
 	}
 }

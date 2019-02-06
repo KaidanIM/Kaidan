@@ -389,6 +389,14 @@ signals:
 	 */
 	void removeContact(QString jid);
 
+	/**
+	 * @brief Downloads an attached media file of a message
+	 *
+	 * @param msgId The message
+	 * @param url the media url from the message
+	 */
+	void downloadMedia(QString msgId, QString url);
+
 public slots:
 	/**
 	 * Set current connection state

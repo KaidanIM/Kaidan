@@ -84,12 +84,14 @@ public:
 	/**
 	 * Returns the upload associated with the message id (used for progress)
 	 */
-	Q_INVOKABLE TransferJob* uploadByMessageId(QString msgId) const;
+	Q_INVOKABLE TransferJob* jobByMessageId(QString msgId) const;
 
 public slots:
-	Q_INVOKABLE void addUpload(const QString &msgId, qint64 bytesTotal);
-	Q_INVOKABLE void removeUpload(const QString& msgId);
-	Q_INVOKABLE void setUploadBytesSent(const QString& msgId, qint64 bytesSent);
+	Q_INVOKABLE void addJob(const QString &msgId, qint64 bytesTotal);
+	Q_INVOKABLE void removeJob(const QString& msgId);
+	Q_INVOKABLE void setJobBytesSent(const QString& msgId, qint64 bytesSent);
+	Q_INVOKABLE void setJobProgress(const QString& msgId, qint64 bytesSent,
+	                                qint64 bytesTotal);
 
 signals:
 	/**
@@ -97,9 +99,11 @@ signals:
 	 * about changes of hasUpload().
 	 */
 	void jobsChanged();
-	void addUploadRequested(const QString& msgId, qint64 bytesTotal);
-	void removeUploadRequested(const QString& msgId);
-	void setUploadBytesSentRequested(const QString& msgId, qint64 bytesSent);
+	void addJobRequested(const QString& msgId, qint64 bytesTotal);
+	void removeJobRequested(const QString& msgId);
+	void setJobBytesSentRequested(const QString& msgId, qint64 bytesSent);
+	void setJobProgressRequested(const QString& msgId, qint64 bytesSent,
+	                             qint64 bytesTotal);
 
 private:
 	QMap<QString, TransferJob*> uploads;

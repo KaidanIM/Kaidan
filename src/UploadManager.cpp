@@ -100,7 +100,7 @@ void UploadManager::sendFile(QString jid, QString fileUrl, QString body)
 	msg->mediaLocation = file.filePath();
 
 	// cache message and upload
-	emit transfers->addUploadRequested(msgId, upload->bytesTotal());
+	emit transfers->addJobRequested(msgId, upload->bytesTotal());
 	messages.insert(upload->id(), msg);
 
 	emit msgModel->addMessageRequested(*msg);
@@ -113,7 +113,7 @@ void UploadManager::sendFile(QString jid, QString fileUrl, QString body)
 	rosterManager->handleSendMessage(jid, lastMessage);
 
 	connect(upload, &QXmppHttpUpload::bytesSentChanged, this, [upload, this, msgId] () {
-		emit transfers->setUploadBytesSentRequested(msgId, upload->bytesSent());
+		emit transfers->setJobBytesSentRequested(msgId, upload->bytesSent());
 	});
 }
 
@@ -145,7 +145,7 @@ void UploadManager::handleUploadSucceeded(const QXmppHttpUpload *upload)
 	// TODO: handle error
 
 	messages.remove(upload->id());
-	emit transfers->removeUploadRequested(originalMsg->id);
+	emit transfers->removeJobRequested(originalMsg->id);
 }
 
 void UploadManager::handleUploadFailed(const QXmppHttpUpload *upload)
@@ -153,5 +153,5 @@ void UploadManager::handleUploadFailed(const QXmppHttpUpload *upload)
 	qDebug() << "[client] [UploadManager] A file upload has failed.";
 	const QString &msgId = messages.value(upload->id())->id;
 	messages.remove(upload->id());
-	emit transfers->removeUploadRequested(msgId);
+	emit transfers->removeJobRequested(msgId);
 }

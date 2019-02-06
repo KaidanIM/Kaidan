@@ -124,6 +124,8 @@ MessageModel::MessageModel(QObject *parent)
 
 	connect(this, &MessageModel::removeMessagesRequested, this, &MessageModel::removeMessages);
 	connect(this, &MessageModel::removeMessagesRequested, MessageDb::instance(), &MessageDb::removeMessages);
+
+	connect(this, &MessageModel::mamBacklogRetrieved, this, &MessageModel::handleMamBacklogRetrieved);
 }
 
 MessageModel::~MessageModel() = default;
@@ -241,13 +243,28 @@ QVariant MessageModel::data(const QModelIndex &index, int role) const
 
 void MessageModel::fetchMore(const QModelIndex &)
 {
-	emit MessageDb::instance()->fetchMessagesRequested(
-			AccountManager::instance()->jid(), m_currentChatJid, m_messages.size());
+	if (!m_fetchedAllFromDb) {
+		emit MessageDb::instance()->fetchMessagesRequested(
+				AccountManager::instance()->jid(), m_currentChatJid, m_messages.size());
+	} else if (!m_fetchedAllFromMam) {
+		// use earliest timestamp
+		const auto lastStamp = [this]() -> QDateTime {
+			const auto stamp1 = m_mamBacklogLastStamp.isNull() ? QDateTime::currentDateTimeUtc() : m_mamBacklogLastStamp;
+			if (!m_messages.empty()) {
+				return std::min(stamp1, m_messages.constLast().stamp());
+			}
+			return stamp1;
+		};
+
+		emit Kaidan::instance()->client()->messageHandler()->retrieveBacklogMessagesRequested(m_currentChatJid, lastStamp());
+		m_mamLoading = true;
+	}
+	// already fetched everything from DB and MAM
 }
 
 bool MessageModel::canFetchMore(const QModelIndex &) const
 {
-	return !m_fetchedAll;
+	return !m_fetchedAllFromDb || (!m_fetchedAllFromMam && !m_mamLoading);
 }
 
 QString MessageModel::currentAccountJid()
@@ -331,7 +348,10 @@ bool MessageModel::canCorrectMessage(int index) const
 
 void MessageModel::handleMessagesFetched(const QVector<Message> &msgs)
 {
-	if (msgs.isEmpty())
+	if (msgs.length() < DB_MSG_QUERY_LIMIT)
+		m_fetchedAllFromDb = true;
+
+	if (msgs.empty())
 		return;
 
 	beginInsertRows(QModelIndex(), rowCount(), rowCount() + msgs.length() - 1);
@@ -341,9 +361,23 @@ void MessageModel::handleMessagesFetched(const QVector<Message> &msgs)
 		m_messages << msg;
 	}
 	endInsertRows();
+}
 
-	if (msgs.length() < DB_MSG_QUERY_LIMIT)
-		m_fetchedAll = true;
+void MessageModel::handleMamBacklogRetrieved(const QString &accountJid, const QString &jid, const QDateTime &lastStamp, bool complete)
+{
+	if (m_currentAccountJid == accountJid && m_currentChatJid == jid) {
+		// The stamp is required for the following scenario (that already happened to me).
+		// The full count of messages is requested and returned, but no message has a body
+		// and so no new message is added to the MessageModel. The MessageModel then tries
+		// to load the same messages over and over again.
+		// Solution: Cache the last stamp from the query and request messages older than
+		// that
+		m_mamBacklogLastStamp = lastStamp;
+		m_mamLoading = false;
+		if (complete) {
+			m_fetchedAllFromMam = true;
+		}
+	}
 }
 
 void MessageModel::removeMessages(const QString &accountJid, const QString &chatJid)
@@ -360,7 +394,10 @@ void MessageModel::removeAllMessages()
 		endRemoveRows();
 	}
 
-	m_fetchedAll = false;
+	m_fetchedAllFromDb = false;
+	m_fetchedAllFromMam = false;
+	m_mamLoading = false;
+	m_mamBacklogLastStamp = QDateTime();
 }
 
 void MessageModel::insertMessage(int idx, const Message &msg)
@@ -582,9 +619,13 @@ void MessageModel::showMessageNotification(const Message &message, MessageOrigin
 
 	switch (origin) {
 	case MessageOrigin::UserInput:
+	case MessageOrigin::MamInitial:
+	case MessageOrigin::MamBacklog:
 		// no notifications
 		return;
 	case MessageOrigin::Stream:
+	case MessageOrigin::MamCatchUp:
+		showMessageNotification(msg);
 		break;
 	}
 

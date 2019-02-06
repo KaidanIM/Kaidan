@@ -265,12 +265,15 @@ void MessageDb::addMessage(const Message &msg, MessageOrigin origin)
 {
 	// deduplication
 	switch (origin) {
+	case MessageOrigin::MamBacklog:
+	case MessageOrigin::MamCatchUp:
 	case MessageOrigin::Stream:
 		if (checkMessageExists(msg)) {
 			// message deduplicated (messageAdded() signal is not emitted)
 			return;
 		}
 		break;
+	case MessageOrigin::MamInitial:
 	case MessageOrigin::UserInput:
 		// no deduplication required
 		break;

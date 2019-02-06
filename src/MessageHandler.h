@@ -33,12 +33,18 @@
 // Qt
 #include <QObject>
 // QXmpp
+#include <QXmppGlobal.h>
+#include <QXmppMamManager.h>
 #include <QXmppMessageReceiptManager.h>
 // Kaidan
 #include "Message.h"
+#include "Enums.h"
 
 class ClientWorker;
 class Kaidan;
+
+class QMimeType;
+
 class QXmppMessage;
 class QXmppDiscoveryIq;
 class QXmppCarbonManager;
@@ -56,6 +62,9 @@ public:
 	~MessageHandler();
 
 public slots:
+	void handleRosterReceived();
+	void handleLastMessageStampFetched(const QDateTime &stamp);
+
 	/**
 	 * Handles incoming messages from the server.
 	 */
@@ -87,7 +96,12 @@ signals:
 				  bool isSpoiler,
 				  const QString &spoilerHint);
 
+	void retrieveBacklogMessagesRequested(const QString &jid, const QDateTime &stamp);
+
 private slots:
+	void handleConnected();
+	void handleDisonnected();
+
 	/**
 	 * Handles pending messages found in the database.
 	 */
@@ -95,11 +109,36 @@ private slots:
 
 	void sendPendingMessage(const Message &message);
 
+	void handleArchiveMessage(const QString &queryId, const QXmppMessage &message);
+	void handleArchiveResults(const QString &queryId,
+	                          const QXmppResultSetReply &resultSetReply,
+	                          bool complete);
+
+	void retrieveInitialMessages();
+	void retrieveCatchUpMessages(const QDateTime &stamp);
+	void retrieveBacklogMessages(const QString &jid, const QDateTime &last);
+
 private:
 	bool parseMediaUri(Message &message, const QString &uri, bool isBodyPart);
+
+	struct BacklogQueryState {
+		QString chatJid;
+		QDateTime lastTimestamp;
+	};
 
 	ClientWorker *m_clientWorker;
 	QXmppClient *m_client;
 	QXmppMessageReceiptManager m_receiptManager;
 	QXmppCarbonManager *m_carbonManager;
+	QXmppMamManager *m_mamManager;
+
+	QDateTime m_lastMessageStamp;
+	bool m_lastMessageLoaded = false;
+
+	// All messages after the intitial message
+	QVector<QString> m_runningInitialMessageQueryIds;
+	// Mapping of all running MAM backlog queries to their chat JIDs
+	QMap<QString, BacklogQueryState> m_runningBacklogQueryIds;
+	// query id of the MAM query for catching up all missing messages
+	QString m_runnningCatchUpQueryId;
 };

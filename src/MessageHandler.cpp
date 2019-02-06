@@ -40,13 +40,21 @@
 #include "ClientWorker.h"
 #include "Globals.h"
 #include "Kaidan.h"
+#include "Database.h"
+#include "Message.h"
+#include "MessageDb.h"
 #include "MessageModel.h"
 #include "MediaUtils.h"
+
+// Number of messages fetched at once when loading MAM backlog
+constexpr int MAM_BACKLOG_FETCH_COUNT = 40;
 
 MessageHandler::MessageHandler(ClientWorker *clientWorker, QXmppClient *client, QObject *parent)
 	: QObject(parent),
 	  m_clientWorker(clientWorker),
-	  m_client(client)
+	  m_client(client),
+	  m_carbonManager(new QXmppCarbonManager),
+	  m_mamManager(new QXmppMamManager)
 {
 	connect(client, &QXmppClient::messageReceived, this, [=](const QXmppMessage &msg) {
 		handleMessage(msg, MessageOrigin::Stream);
@@ -57,7 +65,13 @@ MessageHandler::MessageHandler(ClientWorker *clientWorker, QXmppClient *client, 
 	connect(MessageModel::instance(), &MessageModel::sendChatStateRequested,
 	        this, &MessageHandler::sendChatState);
 
-	client->addExtension(&m_receiptManager);
+	connect(client, &QXmppClient::connected, this, &MessageHandler::handleConnected);
+	connect(client, &QXmppClient::disconnected, this, &MessageHandler::handleDisonnected);
+	connect(client->findExtension<QXmppRosterManager>(), &QXmppRosterManager::rosterReceived,
+	        this, &MessageHandler::handleRosterReceived);
+	connect(MessageDb::instance(), &MessageDb::lastMessageStampFetched,
+	        this, &MessageHandler::handleLastMessageStampFetched);
+
 	connect(&m_receiptManager, &QXmppMessageReceiptManager::messageDelivered,
 		this, [=](const QString &, const QString &id) {
 		emit MessageModel::instance()->updateMessageRequested(id, [](Message &msg) {
@@ -66,15 +80,21 @@ MessageHandler::MessageHandler(ClientWorker *clientWorker, QXmppClient *client, 
 		});
 	});
 
-	m_carbonManager = new QXmppCarbonManager();
-	client->addExtension(m_carbonManager);
-
 	// messages sent to our account (forwarded from another client)
 	connect(m_carbonManager, &QXmppCarbonManager::messageReceived,
 	        client, &QXmppClient::messageReceived);
 	// messages sent from our account (but another client)
 	connect(m_carbonManager, &QXmppCarbonManager::messageSent,
 	        client, &QXmppClient::messageReceived);
+
+	connect(m_mamManager, &QXmppMamManager::archivedMessageReceived, this, &MessageHandler::handleArchiveMessage);
+	connect(m_mamManager, &QXmppMamManager::resultsRecieved, this, &MessageHandler::handleArchiveResults);
+
+	connect(this, &MessageHandler::retrieveBacklogMessagesRequested, this, &MessageHandler::retrieveBacklogMessages);
+
+	client->addExtension(&m_receiptManager);
+	client->addExtension(m_carbonManager);
+	client->addExtension(m_mamManager);
 
 	// carbons discovery
 	auto *discoveryManager = client->findExtension<QXmppDiscoveryManager>();
@@ -86,11 +106,44 @@ MessageHandler::MessageHandler(ClientWorker *clientWorker, QXmppClient *client, 
 
 	connect(MessageModel::instance(), &MessageModel::pendingMessagesFetched,
 			this, &MessageHandler::handlePendingMessages);
+
+	// get last message stamp to retrieve all new messages from the server since then
+	emit MessageDb::instance()->fetchLastMessageStampRequested();
 }
 
 MessageHandler::~MessageHandler()
 {
 	delete m_carbonManager;
+	delete m_mamManager;
+}
+
+void MessageHandler::handleRosterReceived()
+{
+	// retrieve initial messages for each contact, if there is no last message locally
+	if (m_lastMessageLoaded && m_lastMessageStamp.isNull())
+		retrieveInitialMessages();
+}
+
+void MessageHandler::handleLastMessageStampFetched(const QDateTime &stamp)
+{
+	m_lastMessageStamp = stamp;
+	m_lastMessageLoaded = true;
+
+	// this is for the case that loading the last message took longer than connecting to
+	// the server:
+
+	// if already connected directly retrieve messages
+	if (m_client->isConnected()) {
+		// if there are no messages at all, load initial history,
+		// otherwise load all missed messages since last online.
+		if (stamp.isNull()) {
+			// only start if roster was received already
+			if (m_client->findExtension<QXmppRosterManager>()->isRosterReceived())
+				retrieveInitialMessages();
+		} else {
+			retrieveCatchUpMessages(stamp);
+		}
+	}
 }
 
 void MessageHandler::handleMessage(const QXmppMessage &msg, MessageOrigin origin)
@@ -219,6 +272,29 @@ void MessageHandler::handleDiscoInfo(const QXmppDiscoveryIq &info)
 		m_carbonManager->setCarbonsEnabled(true);
 }
 
+void MessageHandler::handleConnected()
+{
+	// retrieve missed messages, if the last saved message has been loaded and exists
+	if (m_lastMessageLoaded && !m_lastMessageStamp.isNull()) {
+		retrieveCatchUpMessages(m_lastMessageStamp);
+	}
+}
+
+void MessageHandler::handleDisonnected()
+{
+	// clear all running backlog queries
+	std::for_each(m_runningBacklogQueryIds.constKeyValueBegin(),
+				  m_runningBacklogQueryIds.constKeyValueEnd(),
+				  [=](const std::pair<QString, BacklogQueryState> &pair) {
+		emit MessageModel::instance()->mamBacklogRetrieved(
+				m_client->configuration().jidBare(), pair.second.chatJid, pair.second.lastTimestamp, false);
+	});
+	m_runningBacklogQueryIds.clear();
+
+	m_runningInitialMessageQueryIds.clear();
+	m_runnningCatchUpQueryId.clear();
+}
+
 void MessageHandler::sendPendingMessage(const Message &message)
 {
 	if (m_client->state() == QXmppClient::ConnectedState) {
@@ -303,4 +379,101 @@ void MessageHandler::handlePendingMessages(const QVector<Message> &messages)
 	for (const Message &message : qAsConst(messages)) {
 		sendPendingMessage(message);
 	}
+}
+
+void MessageHandler::handleArchiveMessage(const QString &queryId,
+                                          const QXmppMessage &message)
+{
+	if (queryId == m_runnningCatchUpQueryId) {
+		handleMessage(message, MessageOrigin::MamCatchUp);
+	} else if (m_runningInitialMessageQueryIds.contains(queryId)) {
+		// TODO: request other message if this message is empty (e.g. no body)
+		handleMessage(message, MessageOrigin::MamInitial);
+	} else if (m_runningBacklogQueryIds.contains(queryId)) {
+		handleMessage(message, MessageOrigin::MamBacklog);
+		// update last stamp
+		auto &lastTimestamp = m_runningBacklogQueryIds[queryId].lastTimestamp;
+		if (lastTimestamp > message.stamp()) {
+			lastTimestamp = message.stamp();
+		}
+	}
+}
+
+void MessageHandler::handleArchiveResults(const QString &queryId,
+                                          const QXmppResultSetReply &,
+                                          bool complete)
+{
+	if (queryId == m_runnningCatchUpQueryId) {
+		m_runnningCatchUpQueryId.clear();
+		emit Kaidan::instance()->database()->commitRequested();
+		return;
+	}
+
+	if (m_runningInitialMessageQueryIds.contains(queryId)) {
+		m_runningInitialMessageQueryIds.removeOne(queryId);
+
+		if (m_runningInitialMessageQueryIds.isEmpty()) {
+			emit Kaidan::instance()->database()->commitRequested();
+
+			// so this won't be triggered again on reconnect
+			m_lastMessageStamp = QDateTime::currentDateTimeUtc();
+		}
+		return;
+	}
+
+	if (m_runningBacklogQueryIds.contains(queryId)) {
+		const auto state = m_runningBacklogQueryIds.take(queryId);
+		emit MessageModel::instance()->mamBacklogRetrieved(m_client->configuration().jidBare(), state.chatJid, state.lastTimestamp, complete);
+	}
+}
+
+void MessageHandler::retrieveInitialMessages()
+{
+	QXmppResultSetQuery queryLimit;
+	// load only one message per user (the rest can be loaded when needed)
+	queryLimit.setMax(1);
+	// query last (newest) first
+	queryLimit.setBefore("");
+
+	const auto bareJids = m_client->findExtension<QXmppRosterManager>()->getRosterBareJids();
+	if (bareJids.isEmpty()) {
+		return;
+	}
+
+	m_runningInitialMessageQueryIds.clear();
+	m_runningInitialMessageQueryIds.reserve(bareJids.size());
+
+	for (const auto &jid : bareJids) {
+		m_runningInitialMessageQueryIds.push_back(m_mamManager->retrieveArchivedMessages(
+			QString(),
+			QString(),
+			jid,
+			QDateTime(),
+			QDateTime(),
+			queryLimit
+		));
+	}
+
+	emit Kaidan::instance()->database()->transactionRequested();
+}
+
+void MessageHandler::retrieveCatchUpMessages(const QDateTime &stamp)
+{
+	QXmppResultSetQuery queryLimit;
+	// no limit
+	queryLimit.setMax(-1);
+
+	m_runnningCatchUpQueryId = m_mamManager->retrieveArchivedMessages({}, {}, {}, stamp, {}, queryLimit);
+
+	emit Kaidan::instance()->database()->transactionRequested();
+}
+
+void MessageHandler::retrieveBacklogMessages(const QString &jid, const QDateTime &stamp)
+{
+	QXmppResultSetQuery queryLimit;
+	queryLimit.setBefore("");
+	queryLimit.setMax(MAM_BACKLOG_FETCH_COUNT);
+
+	const auto id = m_mamManager->retrieveArchivedMessages({}, {}, jid, {}, stamp, queryLimit);
+	m_runningBacklogQueryIds.insert(id, BacklogQueryState { jid, stamp });
 }

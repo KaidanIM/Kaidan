@@ -42,8 +42,11 @@
 
 // QXmpp
 #include <QXmppClient.h>
-#include <QXmppVersionIq.h>
+#include <QXmppDiscoveryIq.h>
 #include <QXmppVCardIq.h>
+#include <QXmppRegisterIq.h>
+#include <QXmppResultSet.h>
+#include <QXmppVersionIq.h>
 
 // Kaidan
 #include "AccountManager.h"
@@ -85,9 +88,14 @@
 Q_DECLARE_METATYPE(Qt::ApplicationState)
 
 Q_DECLARE_METATYPE(QXmppClient::State)
+#if QXMPP_VERSION < QT_VERSION_CHECK(1, 4, 0)
+Q_DECLARE_METATYPE(QXmppMessage)
+#endif
 Q_DECLARE_METATYPE(QXmppMessage::State)
+Q_DECLARE_METATYPE(QXmppDiscoveryIq);
 Q_DECLARE_METATYPE(QXmppPresence)
 Q_DECLARE_METATYPE(QXmppStanza::Error)
+Q_DECLARE_METATYPE(QXmppResultSetReply);
 Q_DECLARE_METATYPE(QXmppVCardIq)
 Q_DECLARE_METATYPE(QXmppVersionIq)
 
@@ -279,6 +287,11 @@ Q_DECL_EXPORT int main(int argc, char *argv[])
 	qRegisterMetaType<MediaRecorder::Error>();
 	qRegisterMetaType<ServerListModel::Role>();
 	qRegisterMetaType<ChatState::State>();
+
+	// QXmpp
+	qRegisterMetaType<QXmppResultSetReply>();
+	qRegisterMetaType<QXmppMessage>();
+	qRegisterMetaType<QXmppDiscoveryIq>();
 
 	// Qt-Translator
 	QTranslator qtTranslator;

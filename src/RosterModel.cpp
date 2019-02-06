@@ -66,6 +66,9 @@ RosterModel::RosterModel(QObject *parent)
 	        this, &RosterModel::replaceItems);
 	connect(this, &RosterModel::replaceItemsRequested, RosterDb::instance(), &RosterDb::replaceItems);
 
+	connect(MessageDb::instance(), &MessageDb::messageAdded,
+	        this, &RosterModel::handleMessageAdded);
+
 	connect(AccountManager::instance(), &AccountManager::jidChanged, this, [=]() {
 		beginResetModel();
 		m_items.clear();
@@ -286,8 +289,16 @@ void RosterModel::handleMessageAdded(const Message &message, MessageOrigin origi
 		// if we sent a message (with another device), reset counter
 		newUnreadMessages = 0;
 	} else if (MessageModel::instance()->currentChatJid() != contactJid) {
-		// increase counter, if chat isn't open
-		newUnreadMessages = itr->unreadMessages() + 1;
+		// increase counter, if chat isn't open and message is new
+		switch (origin) {
+		case MessageOrigin::Stream:
+		case MessageOrigin::UserInput:
+		case MessageOrigin::MamCatchUp:
+			newUnreadMessages = itr->unreadMessages() + 1;
+		case MessageOrigin::MamBacklog:
+		case MessageOrigin::MamInitial:
+			break;
+		}
 	}
 
 	if (newUnreadMessages.has_value()) {

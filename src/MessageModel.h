@@ -180,6 +180,7 @@ signals:
 	void chatStateChanged();
 	void sendChatStateRequested(const QString &bareJid, QXmppMessage::State state);
 	void handleChatStateRequested(const QString &bareJid, QXmppMessage::State state);
+	void mamBacklogRetrieved(const QString &accountJid, const QString &jid, const QDateTime &lastStamp, bool complete);
 
 	/**
 	 * Emitted to remove all messages of an account or an account's chat.
@@ -191,6 +192,7 @@ signals:
 
 private slots:
 	void handleMessagesFetched(const QVector<Message> &m_messages);
+	void handleMamBacklogRetrieved(const QString &accountJid, const QString &jid, const QDateTime &lastStamp, bool complete);
 
 	void addMessage(const Message &msg);
 	void updateMessage(const QString &id,
@@ -228,7 +230,10 @@ private:
 	QVector<Message> m_messages;
 	QString m_currentAccountJid;
 	QString m_currentChatJid;
-	bool m_fetchedAll = false;
+	bool m_fetchedAllFromDb = false;
+	bool m_fetchedAllFromMam = false;
+	bool m_mamLoading = false;
+	QDateTime m_mamBacklogLastStamp;
 
 	QXmppMessage::State m_chatPartnerChatState = QXmppMessage::State::None;
 	QXmppMessage::State m_ownChatState = QXmppMessage::State::None;

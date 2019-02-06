@@ -143,6 +143,9 @@ Q_DECLARE_METATYPE(Message)
 enum class MessageOrigin : quint8 {
 	Stream,
 	UserInput,
+	MamInitial,
+	MamCatchUp,
+	MamBacklog,
 };
 
 Q_DECLARE_METATYPE(MessageOrigin);

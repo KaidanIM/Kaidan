@@ -62,8 +62,10 @@ Kirigami.OverlaySheet {
 		//       - Enabled/Disable image compression
 
 		// caption/description text field
+		// disabled for now; most other clients (currently) don't support this
 		Controls.TextField {
 			id: descField
+			visible: false
 			text: ""
 			placeholderText: qsTr("Caption")
 			selectByMouse: true

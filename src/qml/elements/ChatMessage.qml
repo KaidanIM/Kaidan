@@ -51,7 +51,7 @@ RowLayout {
 	property bool isLastMessage
 	property bool edited
 	property var upload: {
-		if (mediaType != Enums.MessageText && mediaGetUrl == ""
+		if (mediaType !== Enums.MessageText && mediaGetUrl === ""
 		    && kaidan.transferCache.hasUpload(msgId)) {
 			kaidan.transferCache.uploadByMessageId(model.id)
 		}
@@ -210,7 +210,7 @@ RowLayout {
 					visible: edited
 					Layout.preferredHeight: Kirigami.Units.gridUnit * 0.65
 					Layout.preferredWidth: Kirigami.Units.gridUnit * 0.65
-                }
+				}
 			}
 		}
 	}

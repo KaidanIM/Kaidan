@@ -28,49 +28,55 @@
  *  along with Kaidan.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef ROSTERMANAGER_H
-#define ROSTERMANAGER_H
+#ifndef ROSTERDB_H
+#define ROSTERDB_H
 
+// C++
+#include <functional>
 // Qt
 #include <QObject>
+class QSqlQuery;
+class QSqlRecord;
 // Kaidan
-class AvatarFileStorage;
-class Kaidan;
-class RosterModel;
-class VCardManager;
-// QXmpp
-class QXmppClient;
-class QXmppMessage;
-class QXmppRosterManager;
+#include "RosterItem.h"
+class Database;
 
-class RosterManager : public QObject
+class RosterDb : public QObject
 {
 	Q_OBJECT
-
 public:
-	RosterManager(Kaidan *kaidan, QXmppClient *client, RosterModel *rosterModel,
-	              AvatarFileStorage *avatarStorage, VCardManager *vCardManager,
-	              QObject *parent = nullptr);
+	RosterDb(Database *db, QObject *parent = nullptr);
+
+	static void parseItemsFromQuery(QSqlQuery &query, QVector<RosterItem> &items);
+
+	/**
+	 * Creates an @c QSqlRecord for updating an old item to a new item.
+	 *
+	 * @param oldMsg Full item as it is currently saved
+	 * @param newMsg Full item as it should be after the update query ran.
+	 */
+	static QSqlRecord createUpdateRecord(const RosterItem &oldItem,
+	                                     const RosterItem &newItem);
+
+signals:
+	void fetchItemsRequested();
+	void itemsFetched(const QVector<RosterItem> &items);
 
 public slots:
-	void addContact(const QString &jid, const QString &name, const QString &msg);
-	void removeContact(const QString &jid);
-	void handleSendMessage(const QString &jid, const QString &message,
-	                       bool isSpoiler = false, const QString &spoilerHint = QString());
+	void addItem(const RosterItem &item);
+	void addItems(const QVector<RosterItem> &items);
+	void removeItem(const QString &jid);
+	void updateItem(const QString &jid,
+	                const std::function<void (RosterItem &)> &updateItem);
+	void replaceItems(const QHash<QString, RosterItem> &items);
+	void setItemName(const QString &jid, const QString &name);
+	void clearAll();
 
 private slots:
-	void populateRoster();
-	void handleMessage(const QXmppMessage &msg);
+	void fetchItems();
 
 private:
-	Kaidan *kaidan;
-	QXmppClient *client;
-	RosterModel *model;
-	AvatarFileStorage *avatarStorage;
-	VCardManager *vCardManager;
-
-	QXmppRosterManager &manager;
-	QString m_chatPartner;
+	Database *m_db;
 };
 
-#endif // ROSTERMANAGER_H
+#endif // ROSTERDB_H

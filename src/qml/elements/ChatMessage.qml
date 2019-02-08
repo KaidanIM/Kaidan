@@ -47,7 +47,6 @@ RowLayout {
 	property int mediaType
 	property string mediaGetUrl
 	property string mediaLocation
-	property bool isLastMessage
 	property bool edited
 	property bool isLoading: kaidan.transferCache.hasUpload(msgId)
 	property string name
@@ -58,8 +57,8 @@ RowLayout {
 		}
 	}
 	property bool isSpoiler
-	property bool isShowingSpoiler
 	property string spoilerHint
+	property bool isShowingSpoiler: false
 
 	signal messageEditRequested(string id, string body)
 
@@ -137,7 +136,7 @@ RowLayout {
 
 				Controls.MenuItem {
 					text: qsTr("Edit Message")
-					enabled: isLastMessage && sentByMe
+					enabled: kaidan.messageModel.canCorrectMessage(msgId)
 					onTriggered: root.messageEditRequested(msgId, messageBody)
 				}
 			}
@@ -196,11 +195,14 @@ RowLayout {
 
 				Controls.ToolButton {
 					visible: {
-						(mediaType !== Enums.MessageText && !isLoading && mediaLocation === "")
+						mediaType !== Enums.MessageText &&
+								!isLoading &&
+								mediaLocation === "" &&
+								mediaGetUrl !== ""
 					}
 					text: qsTr("Download")
 					onClicked: {
-						print("Donwload")
+						print("Downloading " + mediaGetUrl + "...")
 						kaidan.downloadMedia(msgId, mediaGetUrl)
 					}
 				}
@@ -209,7 +211,7 @@ RowLayout {
 				Loader {
 					id: media
 					source: {
-						if (mediaType == Enums.MessageImage &&
+						if (mediaType === Enums.MessageImage &&
 							mediaLocation !== "")
 							"ChatMessageImage.qml"
 						else
@@ -251,7 +253,7 @@ RowLayout {
 				// progress bar for upload/download status
 				Controls.ProgressBar {
 					visible: isLoading
-					value: upload.progress
+					value: isLoading ? upload.progress : 0
 				}
 
 				Controls.Label {

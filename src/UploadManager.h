@@ -85,7 +85,7 @@ private:
 	RosterManager *rosterManager;
 	TransferCache* transfers;
 
-	QMap<int, MessageModel::Message*> messages;
+	QMap<int, Message*> messages;
 };
 
 #endif // UPLOADMANAGER_H

@@ -53,8 +53,8 @@ using namespace Enums;
  * @brief This class will initiate the complete back-end, including the @see Database
  * connection, viewing models (@see MessageModel, @see RosterModel), etc.
  *
- * This class will run in the main thread, only the XMPP connection runs in another
- * thread (@see ClientThread).
+ * This class will run in the main thread, the XMPP connection and the database managers
+ * run in other threads.
  */
 class Kaidan : public QObject
 {
@@ -72,7 +72,6 @@ class Kaidan : public QObject
 	Q_PROPERTY(QString jid READ getJid WRITE setJid NOTIFY jidChanged)
 	Q_PROPERTY(QString jidResource READ getJidResource WRITE setJidResource NOTIFY jidResourceChanged)
 	Q_PROPERTY(QString password READ getPassword WRITE setPassword NOTIFY passwordChanged)
-	Q_PROPERTY(QString chatPartner READ getChatPartner WRITE setChatPartner NOTIFY chatPartnerChanged)
 	Q_PROPERTY(bool uploadServiceFound READ getUploadServiceFound NOTIFY uploadServiceFoundChanged)
 
 public:
@@ -158,49 +157,34 @@ public:
 		return creds.password;
 	}
 
-	/**
-	 * Set the currently opened chat
-	 *
-	 * This will set a filter on the database to only view the related messages.
-	 */
-	void setChatPartner(const QString &jid);
-
-	/**
-	 * Get the currrently opened chat
-	 */
-	QString getChatPartner() const
-	{
-		return chatPartner;
-	}
-
 	RosterModel* getRosterModel() const
 	{
-		return caches->rosterModel;
+		return m_caches->rosterModel;
 	}
 
 	MessageModel* getMessageModel() const
 	{
-		return caches->msgModel;
+		return m_caches->msgModel;
 	}
 
 	AvatarFileStorage* getAvatarStorage() const
 	{
-		return caches->avatarStorage;
+		return m_caches->avatarStorage;
 	}
 
 	PresenceCache* getPresenceCache() const
 	{
-		return caches->presCache;
+		return m_caches->presCache;
 	}
 
 	TransferCache* getTransferCache() const
 	{
-		return caches->transferCache;
+		return m_caches->transferCache;
 	}
 
 	QSettings* getSettings() const
 	{
-		return caches->settings;
+		return m_caches->settings;
 	}
 
 	QmlUtils* getUtils() const
@@ -252,11 +236,6 @@ signals:
 	 * Emitted when the used password for logging in has changed
 	 */
 	void passwordChanged();
-
-	/**
-	 * Emitted when the currently opnened chat has changed
-	 */
-	void chatPartnerChanged(QString chatPartner);
 
 	/**
 	 * Emitted when there are no (correct) credentials and new are needed
@@ -407,13 +386,15 @@ private:
 	void connectDatabases();
 
 	QmlUtils *m_utils;
-	Database *database;
-	ClientWorker::Caches *caches;
-	ClientThread *cltThrd;
-	ClientWorker *client;
+	Database *m_database;
+	QThread *m_dbThrd;
+	MessageDb *m_msgDb;
+	RosterDb *m_rosterDb;
+	QThread *m_cltThrd;
+	ClientWorker::Caches *m_caches;
+	ClientWorker *m_client;
 
 	ClientWorker::Credentials creds;
-	QString chatPartner;
 	QString openUriCache;
 	bool uploadServiceFound = false;
 	ConnectionState connectionState = ConnectionState::StateDisconnected;

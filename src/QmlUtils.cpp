@@ -29,16 +29,18 @@
  */
 
 #include "QmlUtils.h"
-#include <QColor>
+// Qt
 #include <QClipboard>
+#include <QColor>
 #include <QDebug>
 #include <QDir>
 #include <QFile>
 #include <QFileInfo>
 #include <QGuiApplication>
 #include <QMimeDatabase>
-#include <QUrl>
 #include <QStandardPaths>
+#include <QUrl>
+// QXmpp
 #include "qxmpp-exts/QXmppColorGenerator.h"
 
 QmlUtils::QmlUtils(QObject *parent)
@@ -81,7 +83,7 @@ QString QmlUtils::getResourcePath(const QString &name) const
 
 	// no file found
 	qWarning() << "[main] Could NOT find media file:" << name;
-	return "";
+	return QString();
 }
 
 bool QmlUtils::isImageFile(const QUrl &fileUrl) const
@@ -123,18 +125,18 @@ QString QmlUtils::formatMessage(const QString &message) const
 QColor QmlUtils::getUserColor(const QString &nickName) const
 {
 	QXmppColorGenerator::RGBColor color = QXmppColorGenerator::generateColor(nickName);
-	return QColor(color.red, color.green, color.blue);
+	return {color.red, color.green, color.blue};
 }
 
 QString QmlUtils::processMsgFormatting(const QStringList &list, bool isFirst) const
 {
 	if (list.isEmpty())
-		return "";
+		return QString();
 
 	// link highlighting
 	if (list.first().startsWith("https://") || list.first().startsWith("http://"))
-		return (isFirst ? "" : " ") + QString("<a href='%1'>%1</a>").arg(list.first())
+		return (isFirst ? QString() : " ") + QString("<a href='%1'>%1</a>").arg(list.first())
 		       + processMsgFormatting(list.mid(1), false);
 
-	return (isFirst ? "" : " ") + list.first() + processMsgFormatting(list.mid(1), false);
+	return (isFirst ? QString() : " ") + list.first() + processMsgFormatting(list.mid(1), false);
 }

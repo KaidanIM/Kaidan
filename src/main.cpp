@@ -29,33 +29,34 @@
  */
 
 // Qt
-#include <QCommandLineParser>
 #include <QCommandLineOption>
+#include <QCommandLineParser>
 #include <QDebug>
+#include <QIcon>
+#include <QLibraryInfo>
 #include <QLocale>
-#include <qqml.h>
 #include <QQmlApplicationEngine>
 #include <QQmlContext>
 #include <QTranslator>
-#include <QLibraryInfo>
-#include <QIcon>
+#include <qqml.h>
 
 // QXmpp
-#include <QXmppClient.h>
 #include "qxmpp-exts/QXmppUploadManager.h"
+#include <QXmppClient.h>
 
 // Kaidan
-#include "Kaidan.h"
-#include "RosterModel.h"
-#include "MessageModel.h"
 #include "AvatarFileStorage.h"
-#include "PresenceCache.h"
-#include "UploadManager.h"
-#include "Globals.h"
-#include "Enums.h"
-#include "StatusBar.h"
 #include "EmojiModel.h"
+#include "Enums.h"
+#include "Globals.h"
+#include "Kaidan.h"
+#include "Message.h"
+#include "MessageModel.h"
+#include "PresenceCache.h"
 #include "QmlUtils.h"
+#include "RosterModel.h"
+#include "StatusBar.h"
+#include "UploadManager.h"
 
 #ifdef STATIC_BUILD
 #include "static_plugins.h"
@@ -156,11 +157,11 @@ Q_DECL_EXPORT int main(int argc, char *argv[])
 #endif
 
 	// register qMetaTypes
+	qRegisterMetaType<RosterItem>("RosterItem");
 	qRegisterMetaType<RosterModel*>("RosterModel*");
+	qRegisterMetaType<Message>("Message");
 	qRegisterMetaType<MessageModel*>("MessageModel*");
-	qRegisterMetaType<MessageModel::Message>("Message");
 	qRegisterMetaType<AvatarFileStorage*>("AvatarFileStorage*");
-	qRegisterMetaType<ContactMap>("ContactMap");
 	qRegisterMetaType<PresenceCache*>("PresenceCache*");
 	qRegisterMetaType<QXmppPresence>("QXmppPresence");
 	qRegisterMetaType<ClientWorker::Credentials>("Credentials");
@@ -170,18 +171,23 @@ Q_DECL_EXPORT int main(int argc, char *argv[])
 	qRegisterMetaType<DisconnectionReason>("DisconnectionReason");
 	qRegisterMetaType<TransferJob*>("TransferJob*");
 	qRegisterMetaType<QmlUtils*>("QmlUtils*");
+	qRegisterMetaType<QVector<Message>>("QVector<Message>");
+	qRegisterMetaType<QVector<RosterItem>>("QVector<RosterItem>");
+	qRegisterMetaType<QHash<QString,RosterItem>>("QHash<QString,RosterItem>");
+	qRegisterMetaType<std::function<void(RosterItem&)>>("std::function<void(RosterItem&)>");
+	qRegisterMetaType<std::function<void(Message&)>>("std::function<void(Message&)>");
 
 	// Qt-Translator
 	QTranslator qtTranslator;
 	qtTranslator.load("qt_" + QLocale::system().name(),
 	                  QLibraryInfo::location(QLibraryInfo::TranslationsPath));
-	app.installTranslator(&qtTranslator);
+	QCoreApplication::installTranslator(&qtTranslator);
 
 	// Kaidan-Translator
 	QTranslator kaidanTranslator;
 	// load the systems locale or none from resources
 	kaidanTranslator.load(QLocale::system().name(), ":/i18n");
-	app.installTranslator(&kaidanTranslator);
+	QCoreApplication::installTranslator(&kaidanTranslator);
 
 	//
 	// Command line arguments
@@ -228,8 +234,8 @@ Q_DECL_EXPORT int main(int argc, char *argv[])
 
 #if !defined(Q_OS_IOS) && !defined(Q_OS_ANDROID)
 	// receive messages from other instances of Kaidan
-	kaidan.connect(&app, &SingleApplication::receivedMessage,
-	               &kaidan, &Kaidan::receiveMessage);
+	Kaidan::connect(&app, &SingleApplication::receivedMessage,
+			&kaidan, &Kaidan::receiveMessage);
 #endif
 
 	// open the XMPP-URI/link (if given)

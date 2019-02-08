@@ -86,18 +86,18 @@ void UploadManager::sendFile(QString jid, QString fileUrl, QString body)
 	QMimeType mimeType = QMimeDatabase().mimeTypeForFile(file);
 	const QString msgId = QXmppUtils::generateStanzaHash(48);
 
-	auto *msg = new MessageModel::Message();
-	msg->author = client->configuration().jidBare();
-	msg->recipient = jid;
-	msg->id = msgId;
-	msg->sentByMe = true;
-	msg->message = body;
-	msg->type = MessageModel::messageTypeFromMimeType(mimeType);
-	msg->timestamp = QDateTime::currentDateTime().toUTC().toString(Qt::ISODate);
-	msg->mediaSize = file.size();
-	msg->mediaContentType = mimeType.name();
-	msg->mediaLastModified = file.lastModified().currentMSecsSinceEpoch();
-	msg->mediaLocation = file.filePath();
+	auto *msg = new Message;
+	msg->setFrom(client->configuration().jidBare());
+	msg->setTo(jid);
+	msg->setId(msgId);
+	msg->setSentByMe(true);
+	msg->setBody(body);
+	msg->setMediaType(Message::mediaTypeFromMimeType(mimeType));
+	msg->setStamp(QDateTime::currentDateTimeUtc());
+	msg->setMediaSize(file.size());
+	msg->setMediaContentType(mimeType.name());
+	msg->setMediaLastModified(file.lastModified());
+	msg->setMediaLocation(file.filePath());
 
 	// cache message and upload
 	emit transfers->addJobRequested(msgId, upload->bytesTotal());
@@ -121,37 +121,42 @@ void UploadManager::handleUploadSucceeded(const QXmppHttpUpload *upload)
 {
 	qDebug() << "[client] [UploadManager] A file upload has succeeded. Now sending message.";
 
-	MessageModel::Message *originalMsg = messages.value(upload->id());
-	MessageModel::Message msgUpdate;
-	msgUpdate.mediaUrl = upload->slot().getUrl().toEncoded();
-	msgUpdate.message = upload->slot().getUrl().toDisplayString();
-	if (!originalMsg->message.isEmpty())
-		msgUpdate.message = msgUpdate.message.prepend(originalMsg->message + "\n");
+	Message *originalMsg = messages.value(upload->id());
 
-	emit msgModel->updateMessageRequested(originalMsg->id, msgUpdate);
+	const QString oobUrl = upload->slot().getUrl().toEncoded();
+	const QString body = originalMsg->body().isEmpty()
+	                     ? oobUrl
+	                     : originalMsg->body() + "\n" + oobUrl;
+
+	emit msgModel->updateMessageRequested(originalMsg->id(), [=] (Message &msg) {
+#if QXMPP_VERSION >= QT_VERSION_CHECK(1, 0, 0)
+		msg.setOutOfBandUrl(oobUrl);
+#endif
+		msg.setBody(body);
+	});
 
 	// send message
-	QXmppMessage m(originalMsg->author, originalMsg->recipient, msgUpdate.message);
-	m.setId(originalMsg->id);
+	QXmppMessage m(originalMsg->from(), originalMsg->to(), body);
+	m.setId(originalMsg->id());
 	m.setReceiptRequested(true);
-	m.setStamp(QXmppUtils::datetimeFromString(originalMsg->timestamp));
+	m.setStamp(originalMsg->stamp());
 #if QXMPP_VERSION >= QT_VERSION_CHECK(1, 0, 0)
 	m.setOutOfBandUrl(upload->slot().getUrl().toEncoded());
 #endif
 
 	bool success = client->sendPacket(m);
 	if (success)
-		emit msgModel->setMessageAsSentRequested(originalMsg->id);
+		emit msgModel->setMessageAsSentRequested(originalMsg->id());
 	// TODO: handle error
 
 	messages.remove(upload->id());
-	emit transfers->removeJobRequested(originalMsg->id);
+	emit transfers->removeJobRequested(originalMsg->id());
 }
 
 void UploadManager::handleUploadFailed(const QXmppHttpUpload *upload)
 {
 	qDebug() << "[client] [UploadManager] A file upload has failed.";
-	const QString &msgId = messages.value(upload->id())->id;
+	const QString &msgId = messages.value(upload->id())->id();
 	messages.remove(upload->id());
 	emit transfers->removeJobRequested(msgId);
 }

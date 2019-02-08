@@ -80,22 +80,10 @@ ClientWorker::ClientWorker(Caches *caches, Kaidan *kaidan, bool enableLogging, Q
 	client->versionManager().setClientVersion(VERSION_STRING);
 	client->versionManager().setClientOs(QSysInfo::prettyProductName());
 
-#if QXMPP_VERSION >= 0x000904
+#if QXMPP_VERSION >= QT_VERSION_CHECK(1, 0, 0)
 	// Client State Indication
 	connect(app, &QGuiApplication::applicationStateChanged, this, &ClientWorker::setCsiState);
 #endif
-}
-
-ClientWorker::~ClientWorker()
-{
-	delete client;
-	delete logger;
-	delete rosterManager;
-	delete msgHandler;
-	delete discoManager;
-	delete vCardManager;
-	delete uploadManager;
-	delete downloadManager;
 }
 
 void ClientWorker::main()
@@ -199,7 +187,7 @@ QString ClientWorker::generateRandomString(unsigned int length) const
 	return randomString;
 }
 
-#if QXMPP_VERSION >= 0x000904 // after QXmpp v0.9.4
+#if QXMPP_VERSION >= QT_VERSION_CHECK(1, 0, 0)
 void ClientWorker::setCsiState(Qt::ApplicationState state)
 {
 	if (state == Qt::ApplicationActive)

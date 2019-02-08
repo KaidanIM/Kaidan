@@ -33,7 +33,7 @@
 #include <QMutexLocker>
 
 TransferJob::TransferJob(qint64 bytesTotal)
-	: QObject(), progress(0.0), bytesSent(0), bytesTotal(bytesTotal)
+        : progress(0.0), bytesSent(0), bytesTotal(bytesTotal)
 {
 }
 
@@ -52,7 +52,7 @@ void TransferJob::setBytesSent(qint64 bytesSent)
 	this->bytesSent = bytesSent;
 	emit bytesSentChanged();
 	if (bytesTotal != 0)
-		setProgress((qreal) bytesSent / (qreal) bytesTotal);
+		setProgress(qreal(bytesSent) / qreal(bytesTotal));
 }
 
 void TransferJob::setBytesTotal(qint64 bytesTotal)
@@ -62,7 +62,7 @@ void TransferJob::setBytesTotal(qint64 bytesTotal)
 	this->bytesTotal = bytesTotal;
 	emit bytesTotalChanged();
 	if (bytesTotal != 0)
-		setProgress((qreal) bytesSent / (qreal) bytesTotal);
+		setProgress(qreal(bytesSent) / qreal(bytesTotal));
 }
 
 TransferCache::TransferCache(QObject *parent)

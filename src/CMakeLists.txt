@@ -5,11 +5,15 @@ set(KAIDAN_SOURCES
 	src/ClientWorker.cpp
 	src/AvatarFileStorage.cpp
 	src/Database.cpp
+	src/RosterItem.cpp
 	src/RosterModel.cpp
+	src/RosterDb.cpp
 	src/RosterManager.cpp
 	src/RegistrationManager.cpp
-	src/MessageHandler.cpp
+	src/Message.cpp
 	src/MessageModel.cpp
+	src/MessageDb.cpp
+	src/MessageHandler.cpp
 	src/Notifications.cpp
 	src/PresenceCache.cpp
 	src/DiscoveryManager.cpp
@@ -21,9 +25,11 @@ set(KAIDAN_SOURCES
 	src/TransferCache.cpp
 	src/DownloadManager.cpp
 	src/QmlUtils.cpp
+	src/Utils.cpp
 
-	# needed to trigger moc generation
+	# needed to trigger moc generation / to be displayed in IDEs
 	src/Enums.h
+	src/Globals.h
 
 	# kaidan QXmpp extensions (need to be merged into QXmpp upstream)
 	src/qxmpp-exts/QXmppHttpUploadIq.cpp
@@ -31,7 +37,7 @@ set(KAIDAN_SOURCES
 	src/qxmpp-exts/QXmppUploadManager.cpp
 	src/qxmpp-exts/QXmppColorGenerator.cpp
 
-        # hsluv-c required for color generation
+	# hsluv-c required for color generation
 	src/hsluv-c/hsluv.c
 )
 

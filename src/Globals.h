@@ -31,6 +31,8 @@
 #ifndef GLOBALS_H
 #define GLOBALS_H
 
+#include <QString>
+
 // Application information
 #define APPLICATION_DESCRIPTION "A simple, user-friendly Jabber/XMPP client"
 
@@ -47,9 +49,12 @@ const QString KAIDAN_RESOURCE_RANDOM_CHARS = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefgh
 #define NS_CARBONS "urn:xmpp:carbons:2"
 #define NS_REGISTER "jabber:iq:register"
 
-/**
- * Map of JIDs to contact names
- */
-typedef QHash<QString, QString> ContactMap;
+// SQL
+#define DB_CONNECTION "kaidan-messages"
+#define DB_FILENAME "messages.sqlite3"
+#define DB_MSG_QUERY_LIMIT 20
+#define DB_TABLE_INFO "dbinfo"
+#define DB_TABLE_ROSTER "Roster"
+#define DB_TABLE_MESSAGES "Messages"
 
 #endif // GLOBALS_H

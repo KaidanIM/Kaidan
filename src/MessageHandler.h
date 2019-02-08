@@ -35,23 +35,19 @@
 #include <QObject>
 // QXmpp
 #include <QXmppGlobal.h>
-#include <QXmppMessage.h>
 #include <QXmppMessageReceiptManager.h>
-// Kaidan
-#include "Enums.h"
 
 class Kaidan;
 class MessageModel;
 class QMimeType;
+class QXmppMessage;
 class QXmppDiscoveryIq;
 #if QXMPP_VERSION >= QT_VERSION_CHECK(1, 0, 0)
 class QXmppCarbonManager;
 #endif
 
-using namespace Enums;
-
 /**
- * @class MessageHandler Handler for incoming and outgoing messages
+ * @class MessageHandler Handler for incoming and outgoing messages.
  */
 class MessageHandler : public QObject
 {
@@ -65,22 +61,22 @@ public:
 
 public slots:
 	/**
-	 * Handles incoming messages from the server
+	 * Handles incoming messages from the server.
 	 */
 	void handleMessage(const QXmppMessage &msg);
 
 	/**
-	 * Sends a new message to the server and inserts it into the database
+	 * Sends a new message to the server and inserts it into the database.
 	 */
-	void sendMessage(QString toJid, QString body, bool isSpoiler, QString spoilerHint);
+	void sendMessage(const QString& toJid, const QString& body, bool isSpoiler, const QString& spoilerHint);
 
 	/**
-	 * Sends the corrected version of a message
+	 * Sends the corrected version of a message.
 	 */
-	void correctMessage(QString toJid, QString msgId, QString newBody);
+	void correctMessage(const QString& toJid, const QString& msgId, const QString& newBody);
 
 	/**
-	 * Handles service discovery info and enables carbons if feature was found
+	 * Handles service discovery info and enables carbons if feature was found.
 	 */
 	void handleDiscoInfo(const QXmppDiscoveryIq &);
 

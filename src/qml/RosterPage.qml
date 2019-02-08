@@ -82,17 +82,11 @@ Kirigami.ScrollablePage {
 				}
 			}
 			onClicked: {
-				// first push the chat page
+				kaidan.messageModel.chatPartner = model.jid
 				pageStack.push(chatPage, {
 					"chatName": (model.name ? model.name : model.jid),
 					"recipientJid": model.jid
 				})
-
-				// then set the message filter for this jid
-				// this will update the unread message count,
-				// which will update the roster and will reset the
-				// model variable
-				kaidan.chatPartner = model.jid
 			}
 			actions: [
 				Kirigami.Action {

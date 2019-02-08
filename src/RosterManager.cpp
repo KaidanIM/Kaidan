@@ -29,45 +29,57 @@
  */
 
 #include "RosterManager.h"
-#include "Kaidan.h"
-#include "Globals.h"
-#include "VCardManager.h"
+// Kaidan
 #include "ClientWorker.h"
+#include "Globals.h"
+#include "Kaidan.h"
+#include "VCardManager.h"
 // QXmpp
 #include <QXmppClient.h>
-#include <QXmppUtils.h>
 #include <QXmppRosterManager.h>
+#include <QXmppUtils.h>
 
-RosterManager::RosterManager(Kaidan *kaidan, QXmppClient *client, RosterModel *model,
-	                       AvatarFileStorage *avatarStorage, VCardManager *vCardManager,
-	                       QObject *parent)
-	: QObject(parent), kaidan(kaidan), client(client), model(model),
-	avatarStorage(avatarStorage), vCardManager(vCardManager), manager(client->rosterManager())
+RosterManager::RosterManager(Kaidan *kaidan,
+                             QXmppClient *client,
+                             RosterModel *model,
+                             AvatarFileStorage *avatarStorage,
+                             VCardManager *vCardManager,
+                             QObject *parent)
+    : QObject(parent),
+      kaidan(kaidan),
+      client(client),
+      model(model),
+      avatarStorage(avatarStorage),
+      vCardManager(vCardManager),
+      manager(client->rosterManager())
 {
 	connect(&manager, &QXmppRosterManager::rosterReceived,
 	        this, &RosterManager::populateRoster);
 
-	connect(&manager, &QXmppRosterManager::itemAdded, [=] (QString jid) {
-		QXmppRosterIq::Item item = manager.getRosterEntry(jid);
-		emit model->insertContactRequested(jid, item.name());
+	connect(&manager, &QXmppRosterManager::itemAdded,
+	        [this, vCardManager, model] (const QString &jid) {
+		emit model->addItemRequested(RosterItem(manager.getRosterEntry(jid)));
 
 		vCardManager->fetchVCard(jid);
 	});
 
-	connect(&manager, &QXmppRosterManager::itemChanged, [=] (QString jid) {
-		QXmppRosterIq::Item item = manager.getRosterEntry(jid);
-		emit model->setContactNameRequested(jid, item.name());
+	connect(&manager, &QXmppRosterManager::itemChanged,
+	        this, [this, model] (QString jid) {
+		emit model->updateItemRequested(m_chatPartner,
+		                                [this, &jid] (RosterItem &item) {
+			item.setName(manager.getRosterEntry(jid).name());
+		});
 	});
 
-	connect(&manager, &QXmppRosterManager::itemRemoved, [=] (QString jid) {
-		emit model->removeContactRequested(jid);
-	});
+	connect(&manager, &QXmppRosterManager::itemRemoved, model, &RosterModel::removeItemRequested);
 
-	connect(&manager, &QXmppRosterManager::subscriptionReceived, [=] (QString jid) {
+	connect(&manager, &QXmppRosterManager::subscriptionReceived,
+	        this, [kaidan] (const QString &jid) {
 		// emit signal to ask user
 		emit kaidan->subscriptionRequestReceived(jid, QString());
 	});
-	connect(kaidan, &Kaidan::subscriptionRequestAnswered, [=] (QString jid, bool accepted) {
+	connect(kaidan, &Kaidan::subscriptionRequestAnswered,
+	        this, [=] (QString jid, bool accepted) {
 		if (accepted)
 			manager.acceptSubscription(jid);
 		else
@@ -79,13 +91,6 @@ RosterManager::RosterManager(Kaidan *kaidan, QXmppClient *client, RosterModel *m
 	connect(kaidan, &Kaidan::removeContact, this, &RosterManager::removeContact);
 	connect(kaidan, &Kaidan::sendMessage, this, &RosterManager::handleSendMessage);
 
-	connect(kaidan, &Kaidan::chatPartnerChanged, [=] (QString chatPartner) {
-		this->chatPartner = chatPartner;
-
-		// reset unread message counter
-		emit model->setUnreadMessageCountRequested(chatPartner, 0);
-	});
-
 	connect(client, &QXmppClient::messageReceived, this, &RosterManager::handleMessage);
 }
 
@@ -93,20 +98,21 @@ void RosterManager::populateRoster()
 {
 	qDebug() << "[client] [RosterManager] Populating roster";
 	// create a new list of contacts
-	ContactMap contactList;
-	for (auto const& jid : manager.getRosterBareJids()) {
-		QString name = manager.getRosterEntry(jid).name();
-		contactList[jid] = name;
+	QHash<QString, RosterItem> items;
+	for (const auto &jid : manager.getRosterBareJids()) {
+		items[jid] = RosterItem(manager.getRosterEntry(jid));
 
 		if (avatarStorage->getHashOfJid(jid).isEmpty())
 			vCardManager->fetchVCard(jid);
 	}
 
-	// replace current contacts with new ones from server
-	emit model->replaceContactsRequested(contactList);
+	if (!items.isEmpty()) {
+		// replace current contacts with new ones from server
+		emit model->replaceItemsRequested(items);
+	}
 }
 
-void RosterManager::addContact(const QString jid, const QString name, const QString msg)
+void RosterManager::addContact(const QString &jid, const QString &name, const QString &msg)
 {
 	if (client->state() == QXmppClient::ConnectedState) {
 		manager.addItem(jid, name);
@@ -120,7 +126,7 @@ void RosterManager::addContact(const QString jid, const QString name, const QStr
 	}
 }
 
-void RosterManager::removeContact(const QString jid)
+void RosterManager::removeContact(const QString &jid)
 {
 	if (client->state() == QXmppClient::ConnectedState) {
 		manager.unsubscribe(jid);
@@ -135,18 +141,22 @@ void RosterManager::removeContact(const QString jid)
 }
 
 void RosterManager::handleSendMessage(const QString &jid, const QString &message,
-                                      bool isSpoiler, const QString spoilerHint)
+                                      bool isSpoiler, const QString &spoilerHint)
 {
 	if (client->state() == QXmppClient::ConnectedState) {
-		// update last message of the contact
-		emit model->setLastMessageRequested(jid,
-		        isSpoiler ? spoilerHint.isEmpty() ? tr("Spoiler") : spoilerHint
-		                  : message
-		);
+		// update roster item
+		const QString lastMessage =
+		        isSpoiler ? spoilerHint.isEmpty() ? tr("Spoiler")
+		                                          : spoilerHint
+		                  : message;
+		// sorting order in contact list
+		const QDateTime dateTime = QDateTime::currentDateTimeUtc();
 
-		// update last exchanged datetime (sorting order in contact list)
-		QString dateTime = QDateTime::currentDateTime().toUTC().toString(Qt::ISODate);
-		emit model->setLastExchangedRequested(jid, dateTime);
+		emit model->updateItemRequested(jid,
+		                                [=] (RosterItem &item) {
+			item.setLastMessage(lastMessage);
+			item.setLastExchanged(dateTime);
+		});
 	}
 }
 
@@ -155,7 +165,6 @@ void RosterManager::handleMessage(const QXmppMessage &msg)
 	if (msg.body().isEmpty())
 		return;
 
-	// TODO: Check if it's a carbon message (will need QXmpp v0.10)
 	// msg.from() can be our JID, if it's a carbon/forward from another client
 	QString fromJid = QXmppUtils::jidToBareJid(msg.from());
 	bool sentByMe = fromJid == client->configuration().jidBare();
@@ -163,13 +172,21 @@ void RosterManager::handleMessage(const QXmppMessage &msg)
 	                              : fromJid;
 
 	// update last exchanged datetime (sorting order in contact list)
-	QString dateTime = QDateTime::currentDateTimeUtc().toString(Qt::ISODate);
-	emit model->setLastExchangedRequested(contactJid, dateTime);
+	const QDateTime dateTime = QDateTime::currentDateTimeUtc();
 
-	// when we sent a message we can ignore all unread message notifications
-	if (sentByMe)
-		emit model->setUnreadMessageCountRequested(contactJid, 0);
 	// update unread message counter, if chat is not active
-	else if (chatPartner != contactJid)
-		emit model->newUnreadMessageRequested(contactJid);
+	if (sentByMe) {
+		// if we sent a message (with another device), reset counter
+		emit model->updateItemRequested(contactJid,
+		                                [dateTime] (RosterItem &item) {
+			item.setLastExchanged(dateTime);
+			item.setUnreadMessages(0);
+		});
+	} else if (m_chatPartner != contactJid) {
+		emit model->updateItemRequested(contactJid,
+		                                [dateTime] (RosterItem &item) {
+			item.setLastExchanged(dateTime);
+			item.setUnreadMessages(item.unreadMessages() + 1);
+		});
+	}
 }

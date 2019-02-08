@@ -28,202 +28,258 @@
  *  along with Kaidan.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-// Kaidan
 #include "MessageModel.h"
-// C++
-#include <iostream>
+// Kaidan
+#include "Kaidan.h"
+#include "MessageDb.h"
 // Qt 5
 #include <QMimeType>
-#include <QDateTime>
-#include <QDebug>
-#include <QSqlError>
-#include <QSqlRecord>
-#include <QSqlQuery>
+// QXmpp
+#include <QXmppUtils.h>
 
-MessageModel::MessageModel(QSqlDatabase *database, QObject *parent):
-	QSqlTableModel(parent, *database), database(database)
+MessageModel::MessageModel(Kaidan *kaidan, MessageDb *msgDb, QObject *parent)
+        : QAbstractListModel(parent),
+          kaidan(kaidan),
+          msgDb(msgDb)
 {
-	setTable("Messages");
-	// sort in descending order of the timestamp column
-	setSort(4, Qt::DescendingOrder);
+	connect(msgDb, &MessageDb::messagesFetched,
+	        this, &MessageModel::handleMessagesFetched);
 
-	setEditStrategy(QSqlTableModel::OnManualSubmit);
+	connect(this, &MessageModel::addMessageRequested,
+	        this, &MessageModel::addMessage);
+	connect(this, &MessageModel::addMessageRequested,
+	        msgDb, &MessageDb::addMessage);
 
-	connect(this, &MessageModel::chatPartnerChanged,
-	        this, &MessageModel::applyRecipientFilter);
-	connect(this, &MessageModel::addMessageRequested, this, &MessageModel::addMessage);
-	connect(this, &MessageModel::setMessageAsSentRequested,
-	        this, &MessageModel::setMessageAsSent);
-	connect(this, &MessageModel::setMessageAsDeliveredRequested,
-	        this, &MessageModel::setMessageAsDelivered);
 	connect(this, &MessageModel::updateMessageRequested,
 	        this, &MessageModel::updateMessage);
+	connect(this, &MessageModel::updateMessageRequested,
+	        msgDb, &MessageDb::updateMessage);
+
+	connect(this, &MessageModel::setMessageAsSentRequested,
+	        this, &MessageModel::setMessageAsSent);
+	connect(this, &MessageModel::setMessageAsSentRequested,
+	        msgDb, &MessageDb::setMessageAsSent);
+
+	connect(this, &MessageModel::setMessageAsDeliveredRequested,
+	        this, &MessageModel::setMessageAsDelivered);
+	connect(this, &MessageModel::setMessageAsDeliveredRequested,
+	        msgDb, &MessageDb::setMessageAsDelivered);
 }
 
-void MessageModel::applyRecipientFilter(QString recipient)
-{
-	const QString filterString = QString::fromLatin1(
-		"(recipient = '%1' AND author = '%2') OR (recipient = '%2' AND author = '%1')")
-		.arg(recipient, ownJid);
+MessageModel::~MessageModel() = default;
 
-	setFilter(filterString);
-	select();
+bool MessageModel::isEmpty() const
+{
+	return m_messages.isEmpty();
 }
 
-QVariant MessageModel::data(const QModelIndex &index, int role) const
+int MessageModel::rowCount(const QModelIndex&) const
 {
-	if (role < Qt::UserRole)
-		return QSqlTableModel::data(index, role);
-
-	const QSqlRecord sqlRecord = record(index.row());
-	return sqlRecord.value(role - Qt::UserRole);
+	return m_messages.length();
 }
 
 QHash<int, QByteArray> MessageModel::roleNames() const
 {
 	QHash<int, QByteArray> roles;
-	// record() returns an empty QSqlRecord
-	for (int i = 0; i < this->record().count(); i++) {
-		roles.insert(Qt::UserRole + i, record().fieldName(i).toUtf8());
-	}
+	roles[Timestamp] = "timestamp";
+	roles[Id] = "id";
+	roles[Body] = "body";
+	roles[SentByMe] = "sentByMe";
+	roles[MediaType] = "mediaType";
+	roles[IsEdited] = "isEdited";
+	roles[IsSent] = "isSent";
+	roles[IsDelivered] = "isDelivered";
+	roles[MediaUrl] = "mediaUrl";
+	roles[MediaSize] = "mediaSize";
+	roles[MediaContentType] = "mediaContentType";
+	roles[MediaLastModified] = "mediaLastModifed";
+	roles[MediaLocation] = "mediaLocation";
+	roles[MediaThumb] = "mediaThumb";
+	roles[IsSpoiler] = "isSpoiler";
+	roles[SpoilerHint] = "spoilerHint";
 	return roles;
 }
 
-MessageType MessageModel::messageTypeFromMimeType(const QMimeType &type)
+QVariant MessageModel::data(const QModelIndex &index, int role) const
 {
-	if (type.inherits("image/jpeg") || type.inherits("image/png") ||
-	    type.inherits("image/gif"))
-		return MessageType::MessageImage;
-	else if (type.inherits("audio/flac") || type.inherits("audio/mp4") ||
-	         type.inherits("audio/ogg") || type.inherits("audio/wav") ||
-	         type.inherits("audio/mpeg") || type.inherits("audio/webm"))
-		return MessageType::MessageAudio;
-	else if (type.inherits("video/mpeg") || type.inherits("video/x-msvideo") ||
-	         type.inherits("video/quicktime") || type.inherits("video/mp4") ||
-	         type.inherits("video/x-matroska"))
-		return MessageType::MessageVideo;
-	else if (type.inherits("text/plain"))
-		return MessageType::MessageDocument;
-	return MessageType::MessageFile;
-}
-
-QString MessageModel::lastMessageId(QString jid) const
-{
-	return lastMsgIdCache.value(jid, "");
-}
-
-void MessageModel::setMessageAsSent(const QString msgId)
-{
-	for (int i = 0; i < rowCount(); ++i) {
-		QSqlRecord rec = record(i);
-		if (rec.value("id").toString() == msgId) {
-			rec.setValue("isSent", true);
-			setRecord(i, rec);
-			break;
-		}
+	if (!hasIndex(index.row(), index.column(), index.parent())) {
+		qWarning() << "Could not get data from message model." << index << role;
+		return {};
 	}
-	submitAll();
+	Message msg = m_messages.at(index.row());
+
+	switch (role) {
+	case Timestamp:
+		return msg.stamp();
+	case Id:
+		return msg.id();
+	case Body:
+		return msg.body();
+	case SentByMe:
+		return msg.sentByMe();
+	case MediaType:
+		return int(msg.mediaType());
+	case IsEdited:
+		return msg.isEdited();
+	case IsSent:
+		return msg.isSent();
+	case IsDelivered:
+		return msg.isDelivered();
+	case MediaUrl:
+		return msg.outOfBandUrl();
+	case MediaLocation:
+		return msg.mediaLocation();
+	case MediaContentType:
+		return msg.mediaContentType();
+	case MediaSize:
+		return msg.mediaLastModified();
+	case MediaLastModified:
+		return msg.mediaLastModified();
+	case IsSpoiler:
+		return msg.isSpoiler();
+	case SpoilerHint:
+		return msg.spoilerHint();
+
+	// TODO: add (only useful as soon as we have got SIMS)
+	case MediaThumb:
+		return {};
+	}
+	return {};
 }
 
-void MessageModel::setMessageAsDelivered(const QString msgId)
+void MessageModel::fetchMore(const QModelIndex &)
 {
-	for (int i = 0; i < rowCount(); ++i) {
-		QSqlRecord rec = record(i);
-		if (rec.value("id").toString() == msgId) {
-			rec.setValue("isDelivered", true);
-			setRecord(i, rec);
-			break;
-		}
-	}
-	submitAll();
+	emit msgDb->fetchMessagesRequested(kaidan->getJid(), chatPartner(),
+	                                   m_messages.size());
 }
 
-void MessageModel::updateMessage(const QString id, Message msg)
+bool MessageModel::canFetchMore(const QModelIndex &) const
 {
-	QSqlRecord rec;
-	int recId;
-	bool found = false;
-	for (int i = 0; i < rowCount(); ++i) {
-		rec = record(i);
-		if (rec.value("id").toString() == id) {
-			recId = i;
-			found = true;
-			break;
-		}
-	}
+	return !m_fetchedAll;
+}
 
-	if (!found)
+QString MessageModel::chatPartner()
+{
+	return m_chatPartner;
+}
+
+void MessageModel::setChatPartner(const QString &chatPartner)
+{
+	if (chatPartner == m_chatPartner)
 		return;
 
-	rec.setValue("id", msg.id.isEmpty() ? id : msg.id);
-	rec.setValue("edited", msg.edited);
-	rec.setValue("isSent", msg.isSent);
-	rec.setValue("isDelivered", msg.isDelivered);
-	if (!msg.timestamp.isEmpty())
-		rec.setValue("timestamp", msg.timestamp);
-	if (!msg.message.isEmpty())
-		rec.setValue("message", msg.message);
-	if (!msg.mediaUrl.isEmpty())
-		rec.setValue("mediaUrl", msg.mediaUrl);
-	if (msg.mediaSize)
-		rec.setValue("mediaSize", msg.mediaSize);
-	if (!msg.mediaContentType.isEmpty())
-		rec.setValue("mediaContentType", msg.mediaContentType);
-	if (msg.mediaLastModified)
-		rec.setValue("mediaLastModified", msg.mediaLastModified);
-	if (!msg.mediaLocation.isEmpty())
-		rec.setValue("mediaLocation", msg.mediaLocation);
-	if (!msg.mediaThumb.isEmpty())
-		rec.setValue("mediaThumb", msg.mediaThumb);
-	if (!msg.mediaHashes.isEmpty())
-		rec.setValue("mediaHashes", msg.mediaHashes);
+	m_chatPartner = chatPartner;
+	m_fetchedAll = false;
 
-	setRecord(recId, rec);
-	submitAll();
+	emit chatPartnerChanged(chatPartner);
+	clearAll();
+}
 
-	// update last message id
-	if (!msg.id.isEmpty() && msg.author == ownJid) {
-		lastMsgIdCache[msg.recipient] = msg.id;
+bool MessageModel::canCorrectMessage(const QString &msgId) const
+{
+	// Only allow correction of the latest message sent by us
+	for (const auto &msg : m_messages) {
+		if (msg.from() == kaidan->getJid())
+			return msg.id() == msgId;
+	}
+	return false;
+}
+
+void MessageModel::handleMessagesFetched(const QVector<Message> &msgs)
+{
+	if (msgs.isEmpty())
+		return;
+
+	beginInsertRows(QModelIndex(), rowCount(), rowCount() + msgs.length() - 1);
+	for (auto msg : msgs) {
+		msg.setSentByMe(kaidan->getJid() == msg.from());
+		m_messages << msg;
+	}
+	endInsertRows();
+
+	if (msgs.length() < DB_MSG_QUERY_LIMIT)
+		m_fetchedAll = true;
+}
+
+void MessageModel::clearAll()
+{
+	if (!m_messages.isEmpty()) {
+		beginRemoveRows(QModelIndex(), 0, rowCount() - 1);
+		m_messages.clear();
+		endRemoveRows();
 	}
 }
 
-void MessageModel::addMessage(Message msg)
+void MessageModel::insertMessage(int idx, const Message &msg)
 {
-	//
-	// add the new message
-	//
+	beginInsertRows(QModelIndex(), idx, idx);
+	m_messages.insert(idx, msg);
+	endInsertRows();
+}
 
-	QSqlRecord record = this->record();
-	record.setValue("author", msg.author);
-	record.setValue("recipient", msg.recipient);
-	record.setValue("timestamp", msg.timestamp);
-	record.setValue("message", msg.message);
-	record.setValue("id", msg.id);
-	record.setValue("isSent", msg.isSent);
-	record.setValue("isDelivered", msg.isDelivered);
-	record.setValue("type", (quint8) msg.type);
-	record.setValue("edited", msg.edited);
-	record.setValue("mediaUrl", msg.mediaUrl);
-	record.setValue("isSpoiler", msg.isSpoiler);
-	record.setValue("spoilerHint", msg.spoilerHint);
-	if (msg.mediaSize)
-		record.setValue("mediaSize", msg.mediaSize);
-	record.setValue("mediaContentType", msg.mediaContentType);
-	if (msg.mediaLastModified)
-		record.setValue("mediaLastModified", msg.mediaLastModified);
-	record.setValue("mediaLocation", msg.mediaLocation);
-	record.setValue("mediaThumb", msg.mediaThumb);
-	record.setValue("mediaHashes", msg.mediaHashes);
+void MessageModel::addMessage(const Message &msg)
+{
+	if (QXmppUtils::jidToBareJid(msg.from()) == m_chatPartner
+	    || QXmppUtils::jidToBareJid(msg.to()) == m_chatPartner) {
+		// index where to add the new message
+		int i = 0;
+		for (const auto &message : m_messages) {
+			if (msg.stamp() > message.stamp()) {
+				insertMessage(i, msg);
+				return;
+			}
+			i++;
+		}
 
-	if (!insertRecord(0, record)) {
-		qWarning() << "Failed to add message to DB:" << lastError().text();
-		return;
+		// add message to the end of the list
+		insertMessage(i, msg);
 	}
+}
 
-	submitAll();
+void MessageModel::updateMessage(const QString &id,
+                                 const std::function<void (Message &)> &updateMsg)
+{
+	for (int i = 0; i < m_messages.length(); i++) {
+		if (m_messages.at(i).id() == id) {
+			// update message
+			Message msg = m_messages.at(i);
+			updateMsg(msg);
 
-	// update last message id, in case we're author
-	if (!msg.id.isEmpty() && msg.author == ownJid) {
-		lastMsgIdCache[msg.recipient] = msg.id;
+			// check if item was actually modified
+			if (m_messages.at(i) == msg)
+				return;
+
+			// check, if the position of the new message may be different
+			if (msg.stamp() == m_messages.at(i).stamp()) {
+				beginRemoveRows(QModelIndex(), i, i);
+				m_messages.removeAt(i);
+				endRemoveRows();
+
+				// add the message at the same position
+				insertMessage(i, msg);
+			} else {
+				beginRemoveRows(QModelIndex(), i, i);
+				m_messages.removeAt(i);
+				endRemoveRows();
+
+				// put to new position
+				addMessage(msg);
+			}
+			break;
+		}
 	}
+}
+
+void MessageModel::setMessageAsSent(const QString &msgId)
+{
+	updateMessage(msgId, [] (Message &msg) {
+		msg.setIsSent(true);
+	});
+}
+
+void MessageModel::setMessageAsDelivered(const QString &msgId)
+{
+	updateMessage(msgId, [] (Message &msg) {
+		msg.setIsDelivered(true);
+	});
 }

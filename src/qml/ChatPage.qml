@@ -137,17 +137,16 @@ Kirigami.ScrollablePage {
 
 		delegate: ChatMessage {
 			msgId: model.id
-			sentByMe: model.recipient !== kaidan.jid
-			messageBody: model.message
+			sentByMe: model.sentByMe
+			messageBody: model.body
 			dateTime: new Date(model.timestamp)
 			isRead: model.isDelivered
-			recipientAvatarUrl: kaidan.avatarStorage.getAvatarUrl(author)
+			recipientAvatarUrl: kaidan.avatarStorage.getAvatarUrl(model.author)
 			name: chatName
-			mediaType: model.type
+			mediaType: model.mediaType
 			mediaGetUrl: model.mediaUrl
 			mediaLocation: model.mediaLocation
-			isLastMessage: model.id === kaidan.messageModel.lastMessageId(recipientJid)
-			edited: model.edited
+			edited: model.isEdited
 			isSpoiler: model.isSpoiler
 			isShowingSpoiler: false
 			spoilerHint: model.spoilerHint
@@ -294,7 +293,6 @@ Kirigami.ScrollablePage {
 				Kirigami.Icon {
 					source: "preferences-desktop-emoticons"
 					enabled: sendButton.enabled
-					color: "transparent"
 					isMask: false
 					smooth: true
 					anchors.centerIn: parent
@@ -317,7 +315,6 @@ Kirigami.ScrollablePage {
 							return "edit-symbolic"
 					}
 					enabled: sendButton.enabled
-					color: "transparent"
 					isMask: true
 					smooth: true
 					anchors.centerIn: parent

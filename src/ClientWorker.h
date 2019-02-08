@@ -34,7 +34,6 @@
 // Qt
 #include <QObject>
 #include <QTimer>
-#include <QThread>
 #include <QSettings>
 class QGuiApplication;
 // QXmpp
@@ -61,24 +60,6 @@ class DownloadManager;
 
 using namespace Enums;
 
-class ClientThread : public QThread
-{
-	Q_OBJECT
-	friend ClientWorker;
-
-public:
-	ClientThread()
-	{
-		setObjectName("QXmppClient");
-	}
-
-protected:
-	void run() override
-	{
-		exec();
-	}
-};
-
 /**
  * The ClientWorker is used as a QObject-based worker on the ClientThread.
  */
@@ -88,14 +69,16 @@ class ClientWorker : public QObject
 
 public:
 	struct Caches {
-		Caches(Database *database, QObject *parent = nullptr)
-			: msgModel(new MessageModel(database->getDatabase(), parent)),
-			  rosterModel(new RosterModel(database->getDatabase(), parent)),
+		Caches(Kaidan *kaidan, RosterDb *rosterDb, MessageDb *msgDb,
+		       QObject *parent = nullptr)
+		        : msgModel(new MessageModel(kaidan, msgDb, parent)),
+		          rosterModel(new RosterModel(rosterDb, parent)),
 			  avatarStorage(new AvatarFileStorage(parent)),
 			  presCache(new PresenceCache(parent)),
 			  transferCache(new TransferCache(parent)),
 			  settings(new QSettings(APPLICATION_NAME, APPLICATION_NAME))
 		{
+			rosterModel->setMessageModel(msgModel);
 		}
 
 		~Caches()
@@ -133,8 +116,6 @@ public:
 	 */
 	ClientWorker(Caches *caches, Kaidan *kaidan, bool enableLogging, QGuiApplication *app,
 	             QObject *parent = nullptr);
-
-	~ClientWorker();
 
 public slots:
 	/**
@@ -178,7 +159,7 @@ private slots:
 	 */
 	void onConnectionError(QXmppClient::Error error);
 
-#if QXMPP_VERSION >= 0x000904 // after QXmpp v0.9.4
+#if QXMPP_VERSION >= QT_VERSION_CHECK(1, 0, 0)
 	/**
 	 * Uses the QGuiApplication state to reduce network traffic when window is minimized
 	 */

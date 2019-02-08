@@ -28,49 +28,65 @@
  *  along with Kaidan.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef ROSTERMANAGER_H
-#define ROSTERMANAGER_H
+#ifndef ROSTERITEM_H
+#define ROSTERITEM_H
 
-// Qt
-#include <QObject>
-// Kaidan
-class AvatarFileStorage;
-class Kaidan;
-class RosterModel;
-class VCardManager;
-// QXmpp
-class QXmppClient;
-class QXmppMessage;
-class QXmppRosterManager;
+#include <QDateTime>
+#include "QXmppRosterIq.h"
 
-class RosterManager : public QObject
+/**
+ * Item containing one contact / conversation.
+ */
+class RosterItem
 {
-	Q_OBJECT
-
 public:
-	RosterManager(Kaidan *kaidan, QXmppClient *client, RosterModel *rosterModel,
-	              AvatarFileStorage *avatarStorage, VCardManager *vCardManager,
-	              QObject *parent = nullptr);
+	RosterItem() = default;
+	RosterItem(const QXmppRosterIq::Item &item);
 
-public slots:
-	void addContact(const QString &jid, const QString &name, const QString &msg);
-	void removeContact(const QString &jid);
-	void handleSendMessage(const QString &jid, const QString &message,
-	                       bool isSpoiler = false, const QString &spoilerHint = QString());
+	QString jid() const;
+	void setJid(const QString &jid);
 
-private slots:
-	void populateRoster();
-	void handleMessage(const QXmppMessage &msg);
+	QString name() const;
+	void setName(const QString &name);
+
+	int unreadMessages() const;
+	void setUnreadMessages(int unreadMessages);
+
+	QDateTime lastExchanged() const;
+	void setLastExchanged(const QDateTime &lastExchanged);
+
+	QString lastMessage() const;
+	void setLastMessage(const QString &lastMessage);
+
+	bool operator==(const RosterItem &other) const;
+	bool operator!=(const RosterItem &other) const;
 
 private:
-	Kaidan *kaidan;
-	QXmppClient *client;
-	RosterModel *model;
-	AvatarFileStorage *avatarStorage;
-	VCardManager *vCardManager;
+	/**
+	 * JID of the contact.
+	 */
+	QString m_jid;
 
-	QXmppRosterManager &manager;
-	QString m_chatPartner;
+	/**
+	 * Name of the contact.
+	 */
+	QString m_name;
+
+	/**
+	 * Number of messages unread by the user.
+	 */
+	int m_unreadMessages = 0;
+
+	/**
+	 * Last activity of the conversation, e.g. an incoming message.
+	 * This is used to sort the contacts on the roster page.
+	 */
+	QDateTime m_lastExchanged = QDateTime::currentDateTimeUtc();
+
+	/**
+	 * Last message of the conversation.
+	 */
+	QString m_lastMessage;
 };
 
-#endif // ROSTERMANAGER_H
+#endif // ROSTERITEM_H

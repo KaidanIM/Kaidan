@@ -29,208 +29,209 @@
  */
 
 #include "RosterModel.h"
-
-#include <QDateTime>
-#include <QDebug>
+// Kaidan
+#include "RosterDb.h"
+#include "MessageModel.h"
+// C++
+#include <functional>
+// Qt
+#include <QSqlDatabase>
 #include <QSqlError>
 #include <QSqlQuery>
 #include <QSqlRecord>
-#include <QSqlDatabase>
 
-RosterModel::RosterModel(QSqlDatabase *database, QObject *parent):
-	QSqlTableModel(parent, *database)
+RosterModel::RosterModel(RosterDb *rosterDb, QObject *parent)
+        : QAbstractListModel(parent),
+          rosterDb(rosterDb)
 {
-	setTable("Roster");
-	setEditStrategy(QSqlTableModel::OnManualSubmit);
+	connect(rosterDb, &RosterDb::itemsFetched,
+		this, &RosterModel::handleItemsFetched);
 
-	// sort from last time exchanged
-	setSort(2, Qt::DescendingOrder);
+	connect(this, &RosterModel::addItemRequested, this, &RosterModel::addItem);
+	connect(this, &RosterModel::addItemRequested, rosterDb, &RosterDb::addItem);
 
-	select();
+	connect(this, &RosterModel::removeItemRequested,
+	        this, &RosterModel::removeItem);
+	connect(this, &RosterModel::removeItemRequested,
+	        rosterDb, &RosterDb::removeItem);
 
-	connect(this, &RosterModel::insertContactRequested, this, &RosterModel::insertContact);
-	connect(this, &RosterModel::removeContactRequested, this, &RosterModel::removeContact);
-	connect(this, &RosterModel::setContactNameRequested, this, &RosterModel::setContactName);
-	connect(this, &RosterModel::setLastExchangedRequested, this, &RosterModel::setLastExchanged);
-	connect(this, &RosterModel::setUnreadMessageCountRequested, this, &RosterModel::setUnreadMessageCount);
-	connect(this, &RosterModel::setLastMessageRequested, this, &RosterModel::setLastMessage);
-	connect(this, &RosterModel::newUnreadMessageRequested, this, &RosterModel::newUnreadMessage);
-	connect(this, &RosterModel::replaceContactsRequested, this, &RosterModel::replaceContacts);
+	connect(this, &RosterModel::updateItemRequested,
+	        this, &RosterModel::updateItem);
+	connect(this, &RosterModel::updateItemRequested,
+	        rosterDb, &RosterDb::updateItem);
+
+	connect(this, &RosterModel::replaceItemsRequested,
+	        this, &RosterModel::replaceItems);
+	connect(this, &RosterModel::replaceItemsRequested,
+	        rosterDb, &RosterDb::replaceItems);
+
+	emit rosterDb->fetchItemsRequested();
+}
+
+void RosterModel::setMessageModel(MessageModel *model)
+{
+	connect(model, &MessageModel::chatPartnerChanged,
+	        this, [=] (const QString &chatPartner) {
+		// reset unread message counter
+		emit updateItemRequested(chatPartner,
+		                         [] (RosterItem &item) {
+			item.setUnreadMessages(0);
+		});
+	});
+}
+
+bool RosterModel::isEmpty() const
+{
+	return m_items.isEmpty();
+}
+
+int RosterModel::rowCount(const QModelIndex&) const
+{
+	return m_items.length();
 }
 
 QHash<int, QByteArray> RosterModel::roleNames() const
 {
 	QHash<int, QByteArray> roles;
-	// record() returns an empty QSqlRecord
-	for (int i = 0; i < this->record().count(); i ++) {
-		roles.insert(Qt::UserRole + i + 1, record().fieldName(i).toUtf8());
-	}
+	roles[JidRole] = "jid";
+	roles[NameRole] = "name";
+	roles[LastExchangedRole] = "lastExchanged";
+	roles[UnreadMessagesRole] = "unreadMessages";
+	roles[LastMessageRole] = "lastMessage";
 	return roles;
 }
 
 QVariant RosterModel::data(const QModelIndex &index, int role) const
 {
-	QVariant value;
+	if (!hasIndex(index.row(), index.column(), index.parent())) {
+		qWarning() << "Could not get data from roster model." << index << role;
+		return {};
+	}
 
-	if (index.isValid()) {
-		if (role < Qt::UserRole) {
-			value = QSqlQueryModel::data(index, role);
-		} else {
-			int columnIdx = role - Qt::UserRole - 1;
-			QModelIndex modelIndex = this->index(index.row(), columnIdx);
-			value = QSqlQueryModel::data(modelIndex, Qt::DisplayRole);
+	switch (role) {
+	case JidRole:
+		return m_items.at(index.row()).jid();
+	case NameRole:
+		return m_items.at(index.row()).name();
+	case LastExchangedRole:
+		return m_items.at(index.row()).lastExchanged();
+	case UnreadMessagesRole:
+		return m_items.at(index.row()).unreadMessages();
+	case LastMessageRole:
+		return m_items.at(index.row()).lastMessage();
+	}
+	return {};
+}
+
+void RosterModel::handleItemsFetched(const QVector<RosterItem> &items)
+{
+	beginResetModel();
+	m_items = items;
+	endResetModel();
+}
+
+void RosterModel::addItem(const RosterItem &item)
+{
+	// prepend the item, if no timestamp is set
+	if (item.lastExchanged().isNull()) {
+		insertContact(0, item);
+		return;
+	}
+
+	// index where to add the new contact
+	int i = 0;
+	for (const auto &itrItem : m_items) {
+		if (item.lastExchanged().toMSecsSinceEpoch() >= itrItem.lastExchanged().toMSecsSinceEpoch()) {
+			insertContact(i, item);
+			return;
 		}
+		i++;
 	}
-	return value;
+
+	// append the item to the end of the list
+	insertContact(i, item);
 }
 
-void RosterModel::insertContact(QString jid, QString name)
+void RosterModel::removeItem(const QString &jid)
 {
-	// create a new record
-	QSqlRecord newRecord = record();
-
-	// set the given data
-	newRecord.setValue("jid", jid);
-	newRecord.setValue("name", name);
-	newRecord.setValue("lastExchanged", QDateTime::currentDateTime().toString(Qt::ISODate));
-	newRecord.setValue("unreadMessages", 0);
-
-	// inster the record into the DB (or print error)
-	if (!insertRecord(rowCount(), newRecord)) {
-		qWarning() << "Failed to save Contact into DB:"
-		           << lastError().text();
-	}
-	submitAll();
-}
-
-void RosterModel::removeContact(QString jid)
-{
-	for (int i = 0; i < rowCount(); ++i) {
-		if (record(i).value("jid").toString() == jid) {
-			removeRow(i);
-			break;
+	QMutableVectorIterator<RosterItem> itr(m_items);
+	int i = 0;
+	while (itr.hasNext()) {
+		if (itr.next().jid() == jid) {
+			beginRemoveRows(QModelIndex(), i, i);
+			itr.remove();
+			endRemoveRows();
+			return;
 		}
+		i++;
 	}
-	submitAll();
+
 }
 
-void RosterModel::setContactName(QString jid, QString name)
+void RosterModel::updateItem(const QString &jid,
+                             const std::function<void (RosterItem &)> &updateItem)
 {
-	for (int i = 0; i < rowCount(); ++i) {
-		QSqlRecord rec = record(i);
-		if (rec.value("jid").toString() == jid) {
-			rec.setValue("name", name);
-			setRecord(i, rec);
-			break;
-		}
-	}
-	submitAll();
-}
+	for (int i = 0; i < m_items.length(); i++) {
+		if (m_items.at(i).jid() == jid) {
+			// update item
+			RosterItem item = m_items.at(i);
+			updateItem(item);
 
-void RosterModel::setLastExchanged(const QString jid, QString date)
-{
-	for (int i = 0; i < rowCount(); ++i) {
-		QSqlRecord rec = record(i);
-		if (rec.value("jid").toString() == jid) {
-			rec.setValue("lastExchanged", date);
-			setRecord(i, rec);
-			break;
-		}
-	}
-	submitAll();
-}
+			// check if item was actually modified
+			if (m_items.at(i) == item)
+				return;
 
-void RosterModel::setUnreadMessageCount(const QString jid, const int count)
-{
-	for (int i = 0; i < rowCount(); ++i) {
-		QSqlRecord rec = record(i);
-		if (rec.value("jid").toString() == jid) {
-			rec.setValue("unreadMessages", count);
-			setRecord(i, rec);
-			break;
-		}
-	}
-	submitAll();
-}
+			// check, if the position of the new item may be different
+			if (item.lastExchanged() == m_items.at(i).lastExchanged()) {
+				beginRemoveRows(QModelIndex(), i, i);
+				m_items.removeAt(i);
+				endRemoveRows();
 
-void RosterModel::newUnreadMessage(const QString jid)
-{
-	for (int i = 0; i < rowCount(); ++i) {
-		QSqlRecord rec = record(i);
-		if (rec.value("jid").toString() == jid) {
-			// increase unreadMessages by one
-			rec.setValue("unreadMessages", rec.value("unreadMessages").toInt() + 1);
-			setRecord(i, rec);
-			break;
-		}
-	}
-	submitAll();
-}
+				// add the item at the same position
+				insertContact(i, item);
+			} else {
+				beginRemoveRows(QModelIndex(), i, i);
+				m_items.removeAt(i);
+				endRemoveRows();
 
-void RosterModel::setLastMessage(const QString jid, QString message)
-{
-	for (int i = 0; i < rowCount(); ++i) {
-		QSqlRecord rec = record(i);
-		if (rec.value("jid").toString() == jid) {
-			rec.setValue("lastMessage", message);
-			setRecord(i, rec);
-			break;
-		}
-	}
-	submitAll();
-}
-
-void RosterModel::replaceContacts(const ContactMap &contactList)
-{
-	// This will first remove a list of JIDs from the DB that were deleted on
-	// the server, then it'll update all the nick names. This is made so
-	// complicated, because otherwise information about lastExchanged, lastMessage,
-	// etc. were lost.
-
-	// list of the JIDs from the DB
-	QStringList currentJids;
-	for (int i = 0; i < rowCount(); ++i)
-		currentJids << record(i).value("jid").toString();
-
-	// add all JIDs to a delete list that are in the original list but not in the new one
-	QList<int> rowsToDelete;
-	for (int i = 0; i < currentJids.length(); i++) {
-		if (!contactList.contains(currentJids.at(i)))
-			rowsToDelete << i;
-	}
-
-	// remove rows
-	for (const int row : rowsToDelete)
-		removeRow(row);
-
-	// Update all contact nicknames / add new contacts
-	for (auto &jid : contactList.keys()) {
-		QString name = contactList[jid];
-
-		if (currentJids.contains(jid)) {
-			// find row and set name
-			for (int i = 0; i < rowCount(); ++i) {
-				QSqlRecord rec = record(i);
-				if (rec.value("jid").toString() == jid) {
-					rec.setValue("name", name);
-					setRecord(i, rec);
-					break;
-				}
+				// put to new position
+				addItem(item);
 			}
-		} else {
-			// add new row
-			QSqlRecord rec = record();
-			// set the given data
-			rec.setValue("jid", jid);
-			rec.setValue("name", name);
-			rec.setValue("lastExchanged", QDateTime::currentDateTime().toUTC()
-			                              .toString(Qt::ISODate));
-			rec.setValue("unreadMessages", 0);
-
-			if (!insertRecord(rowCount(), rec))
-				qWarning() << "Failed to save Contact into DB:" << lastError().text();
+			break;
 		}
 	}
+}
 
-	submitAll();
+void RosterModel::replaceItems(const QHash<QString, RosterItem> &items)
+{
+	QVector<RosterItem> newItems;
+	for (auto item : items.values()) {
+		// find old item
+		auto oldItem = std::find_if(
+			m_items.begin(),
+			m_items.end(),
+			[&] (const RosterItem &oldItem) {
+				return oldItem.jid() == item.jid();
+			}
+		);
+
+		// use the old item's values, if found
+		if (oldItem != m_items.end()) {
+			item.setLastMessage(oldItem->lastMessage());
+			item.setLastExchanged(oldItem->lastExchanged());
+			item.setUnreadMessages(oldItem->unreadMessages());
+		}
+
+		newItems << item;
+	}
+
+	// replace all items
+	handleItemsFetched(newItems);
+}
+
+void RosterModel::insertContact(int i, const RosterItem &item)
+{
+	beginInsertRows(QModelIndex(), i, i);
+	m_items.insert(i, item);
+	endInsertRows();
 }

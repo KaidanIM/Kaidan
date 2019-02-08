@@ -31,42 +31,56 @@
 #ifndef ROSTERMODEL_H
 #define ROSTERMODEL_H
 
-// Qt
-#include <QSqlTableModel>
-#include "Globals.h"
+#include <QAbstractListModel>
+#include <QVector>
+#include "RosterItem.h"
 
-class QSqlDatabase;
-class Database;
+class Kaidan;
+class RosterDb;
+class MessageModel;
 
-class RosterModel : public QSqlTableModel
+class RosterModel : public QAbstractListModel
 {
 	Q_OBJECT
-
 public:
-	RosterModel(QSqlDatabase *database, QObject *parent = nullptr);
+	enum RosterItemRoles {
+		JidRole,
+		NameRole,
+		LastExchangedRole,
+		UnreadMessagesRole,
+		LastMessageRole,
+	};
 
-	QHash<int, QByteArray> roleNames() const;
-	QVariant data(const QModelIndex &index, int role) const;
+	RosterModel(RosterDb *rosterDb, QObject *parent = nullptr);
+
+	void setMessageModel(MessageModel *model);
+
+	Q_REQUIRED_RESULT bool isEmpty() const;
+	Q_REQUIRED_RESULT int rowCount(const QModelIndex &parent = QModelIndex()) const override;
+	Q_REQUIRED_RESULT QHash<int, QByteArray> roleNames() const override;
+	Q_REQUIRED_RESULT QVariant data(const QModelIndex &index, int role) const override;
 
 signals:
-	void insertContactRequested(QString jid, QString nickname);
-	void removeContactRequested(QString jid);
-	void setContactNameRequested(QString jid, QString nickname);
-	void setLastExchangedRequested(const QString jid, QString date);
-	void setUnreadMessageCountRequested(const QString jid, const int unreadMessageCount);
-	void setLastMessageRequested(const QString jid, QString message);
-	void newUnreadMessageRequested(const QString jid);
-	void replaceContactsRequested(const ContactMap &contactMap);
+	void addItemRequested(const RosterItem &item);
+	void removeItemRequested(const QString &jid);
+	void updateItemRequested(const QString &jid,
+	                         const std::function<void (RosterItem &)> &updateItem);
+	void replaceItemsRequested(const QHash<QString, RosterItem> &items);
 
 private slots:
-	void insertContact(QString jid, QString nickname);
-	void removeContact(QString jid);
-	void setContactName(QString jid, QString nickname);
-	void setLastExchanged(const QString jid, QString date);
-	void setUnreadMessageCount(const QString jid, const int unreadMessageCount);
-	void newUnreadMessage(const QString jid);
-	void setLastMessage(const QString jid, QString message);
-	void replaceContacts(const ContactMap &contactMap);
+	void handleItemsFetched(const QVector<RosterItem> &items);
+
+	void addItem(const RosterItem &item);
+	void removeItem(const QString &jid);
+	void updateItem(const QString &jid,
+	                const std::function<void (RosterItem &)> &updateItem);
+	void replaceItems(const QHash<QString, RosterItem> &items);
+
+private:
+	void insertContact(int i, const RosterItem &item);
+
+	RosterDb *rosterDb;
+	QVector<RosterItem> m_items;
 };
 
 #endif // ROSTERMODEL_H

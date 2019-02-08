@@ -28,49 +28,73 @@
  *  along with Kaidan.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef ROSTERMANAGER_H
-#define ROSTERMANAGER_H
+#include "RosterItem.h"
 
-// Qt
-#include <QObject>
-// Kaidan
-class AvatarFileStorage;
-class Kaidan;
-class RosterModel;
-class VCardManager;
-// QXmpp
-class QXmppClient;
-class QXmppMessage;
-class QXmppRosterManager;
-
-class RosterManager : public QObject
+RosterItem::RosterItem(const QXmppRosterIq::Item &item)
+    : m_jid(item.bareJid()), m_name(item.name())
 {
-	Q_OBJECT
+}
 
-public:
-	RosterManager(Kaidan *kaidan, QXmppClient *client, RosterModel *rosterModel,
-	              AvatarFileStorage *avatarStorage, VCardManager *vCardManager,
-	              QObject *parent = nullptr);
+QString RosterItem::jid() const
+{
+	return m_jid;
+}
 
-public slots:
-	void addContact(const QString &jid, const QString &name, const QString &msg);
-	void removeContact(const QString &jid);
-	void handleSendMessage(const QString &jid, const QString &message,
-	                       bool isSpoiler = false, const QString &spoilerHint = QString());
+void RosterItem::setJid(const QString &jid)
+{
+	m_jid = jid;
+}
 
-private slots:
-	void populateRoster();
-	void handleMessage(const QXmppMessage &msg);
+QString RosterItem::name() const
+{
+	return m_name;
+}
 
-private:
-	Kaidan *kaidan;
-	QXmppClient *client;
-	RosterModel *model;
-	AvatarFileStorage *avatarStorage;
-	VCardManager *vCardManager;
+void RosterItem::setName(const QString &name)
+{
+	m_name = name;
+}
 
-	QXmppRosterManager &manager;
-	QString m_chatPartner;
-};
+int RosterItem::unreadMessages() const
+{
+	return m_unreadMessages;
+}
 
-#endif // ROSTERMANAGER_H
+void RosterItem::setUnreadMessages(int unreadMessages)
+{
+	m_unreadMessages = unreadMessages;
+}
+
+QDateTime RosterItem::lastExchanged() const
+{
+	return m_lastExchanged;
+}
+
+void RosterItem::setLastExchanged(const QDateTime &lastExchanged)
+{
+	m_lastExchanged = lastExchanged;
+}
+
+QString RosterItem::lastMessage() const
+{
+	return m_lastMessage;
+}
+
+void RosterItem::setLastMessage(const QString &lastMessage)
+{
+	m_lastMessage = lastMessage;
+}
+
+bool RosterItem::operator==(const RosterItem &other) const
+{
+	return m_jid == other.jid() &&
+	       m_name == other.name() &&
+	       m_lastMessage == other.lastMessage() &&
+	       m_lastExchanged == other.lastExchanged() &&
+	       m_unreadMessages == other.unreadMessages();
+}
+
+bool RosterItem::operator!=(const RosterItem &other) const
+{
+	return !operator==(other);
+}

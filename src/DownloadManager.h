@@ -46,8 +46,11 @@ class DownloadJob : public QObject
 {
 	Q_OBJECT
 public:
-	DownloadJob(QString msgId, QUrl source, QString filePath,
-	            QNetworkAccessManager *netMngr, TransferCache *transferCache,
+	DownloadJob(QString msgId,
+	            QUrl source,
+	            QString filePath,
+	            QNetworkAccessManager *netMngr,
+	            TransferCache *transferCache,
 	            Kaidan *kaidan);
 
 	QString downloadLocation() const;
@@ -99,8 +102,8 @@ signals:
 	void abortDownloadRequested(const QString msgId);
 
 public slots:
-	void startDownload(const QString msgId, const QString url);
-	void abortDownload(const QString msgId);
+	void startDownload(const QString &msgId, const QString &url);
+	void abortDownload(const QString &msgId);
 
 private:
 	DownloadThread *thread;

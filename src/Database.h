@@ -36,6 +36,10 @@
 
 class QSqlQuery;
 
+/**
+ * The Database class manages the SQL database. It opens the database and converts old
+ * formats.
+ */
 class Database : public QObject
 {
     Q_OBJECT
@@ -44,15 +48,52 @@ public:
 	Database(QObject *parent = nullptr);
 	~Database();
 
-	QSqlDatabase* getDatabase();
-	bool needToConvert();
-	void convertDatabase();
+	/**
+	 * Opens the database for reading and writing and guarantees the database to be
+	 * up-to-date.
+	 */
 	void openDatabase();
 
+	/**
+	 * Begins a transaction if none has been started.
+	 */
+	void transaction();
+
+	/**
+	 * Commits the transaction if every transaction has been finished.
+	 */
+	void commit();
+
 private:
+	/**
+	 * @return true if the database has to be converted using @c convertDatabase()
+	 * because the database is not up-to-date.
+	 */
+	bool needToConvert();
+
+	/**
+	 * Converts the database to latest model.
+	 */
+	void convertDatabase();
+
+	/**
+	 * Loads the database information and detects the database version.
+	 */
 	void loadDatabaseInfo();
+
+	/**
+	 * Creates the database information table which contains the database version.
+	 */
 	void createDbInfoTable();
+
+	/**
+	 * Creates a new database without content.
+	 */
 	void createNewDatabase();
+
+	/*
+	 * Upgrades the database to the next version.
+	 */
 	void convertDatabaseToV2();
 	void convertDatabaseToV3();
 	void convertDatabaseToV4();
@@ -62,10 +103,18 @@ private:
 	void convertDatabaseToV8();
 	void convertDatabaseToV9();
 	void convertDatabaseToV10();
-	void execQuery(QSqlQuery &query);
 
-	QSqlDatabase database;
-	int version;
+	QSqlDatabase m_database;
+
+	/**
+	 * -1	: Database not loaded.
+	 * 0	: Database not existent.
+	 * 1	: Old database before Kaidan v0.3.
+	 * > 1	: Database version.
+	 */
+	int m_version = -1;
+
+	int m_transactions = 0;
 };
 
 #endif // DATABASE_H

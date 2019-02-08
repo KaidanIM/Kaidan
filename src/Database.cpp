@@ -29,142 +29,169 @@
  */
 
 #include "Database.h"
+#include "Globals.h"
+#include "Utils.h"
 
 #include <QDebug>
 #include <QDir>
 #include <QFile>
+#include <QSqlDatabase>
+#include <QSqlDriver>
+#include <QSqlError>
+#include <QSqlField>
+#include <QSqlQuery>
+#include <QSqlRecord>
 #include <QStandardPaths>
 #include <QString>
 #include <QStringList>
-#include <QSqlDatabase>
-#include <QSqlError>
-#include <QSqlQuery>
-#include <QSqlRecord>
 
 static const int DATABASE_LATEST_VERSION = 10;
-static const char *DATABASE_TABLE_INFO = "dbinfo";
-static const char *DATABASE_TABLE_MESSAGES = "Messages";
-static const char *DATABASE_TABLE_ROSTER = "Roster";
 
-Database::Database(QObject *parent) : QObject(parent)
+Database::Database(QObject *parent)
+    : QObject(parent)
 {
-	version = -1;
-
-	database = QSqlDatabase::addDatabase("QSQLITE", "kaidan_default_db");
-	if (!database.isValid()) {
-		qFatal("Cannot add database: %s", qPrintable(database.lastError().text()));
-	}
 }
 
 Database::~Database()
 {
-	database.close();
-}
-
-QSqlDatabase* Database::getDatabase()
-{
-	return &database;
+	m_database.close();
 }
 
 void Database::openDatabase()
 {
+	m_database = QSqlDatabase::addDatabase("QSQLITE", DB_CONNECTION);
+	if (!m_database.isValid())
+		qFatal("Cannot add database: %s", qPrintable(m_database.lastError().text()));
+
 	const QDir writeDir = QStandardPaths::writableLocation(QStandardPaths::AppDataLocation);
 	if (!writeDir.mkpath(".")) {
 		qFatal("Failed to create writable directory at %s", qPrintable(writeDir.absolutePath()));
 	}
 
 	// Ensure that we have a writable location on all devices.
-	const QString fileName = writeDir.absoluteFilePath("messages.sqlite3");
+	const QString fileName = writeDir.absoluteFilePath(DB_FILENAME);
 	// open() will create the SQLite database if it doesn't exist.
-	database.setDatabaseName(fileName);
-	if (!database.open()) {
-		qFatal("Cannot open database: %s", qPrintable(database.lastError().text()));
-		QFile::remove(fileName);
+	m_database.setDatabaseName(fileName);
+	if (!m_database.open()) {
+		qFatal("Cannot open database: %s", qPrintable(m_database.lastError().text()));
 	}
 
 	loadDatabaseInfo();
+
+	if (needToConvert())
+		convertDatabase();
+}
+
+void Database::transaction()
+{
+	if (!m_transactions) {
+		// currently no transactions running
+		if (!m_database.transaction()) {
+			qWarning() << "Could not begin transaction on database:"
+			           << m_database.lastError().text();
+		}
+	}
+	// increase counter
+	m_transactions++;
+}
+
+void Database::commit()
+{
+	// reduce counter
+	m_transactions--;
+	Q_ASSERT(m_transactions >= 0);
+
+	if (!m_transactions) {
+		// no transaction requested anymore
+		if (!m_database.commit()) {
+			qWarning() << "Could not commit transaction on database:"
+			           << m_database.lastError().text();
+		}
+	}
 }
 
 void Database::loadDatabaseInfo()
 {
-	QStringList tables = database.tables();
-	if (!tables.contains(DATABASE_TABLE_INFO)) {
-		if (tables.contains(DATABASE_TABLE_MESSAGES) &&
-			tables.contains(DATABASE_TABLE_ROSTER)) {
+	QStringList tables = m_database.tables();
+	if (!tables.contains(DB_TABLE_INFO)) {
+		if (tables.contains(DB_TABLE_MESSAGES) &&
+			tables.contains(DB_TABLE_ROSTER))
 			// old Kaidan v0.1/v0.2 table
-			version = 1;
-		} else {
-			version = 0;
-		}
+			m_version = 1;
+		else
+			m_version = 0;
 		// we've got all we want; do not query for a db version
 		return;
 	}
 
-	QSqlQuery query(database);
-	query.prepare("SELECT version FROM dbinfo");
-	if (!query.exec()) {
-		qWarning("Cannot query database info: %s", qPrintable(database.lastError().text()));
-	}
+	QSqlQuery query(m_database);
+	Utils::execQuery(query, "SELECT version FROM dbinfo");
 
 	QSqlRecord record = query.record();
 	int versionCol = record.indexOf("version");
 
 	while (query.next()) {
-		version = query.value(versionCol).toInt();
+		m_version = query.value(versionCol).toInt();
 	}
 }
 
 bool Database::needToConvert()
 {
-	if (version < DATABASE_LATEST_VERSION) {
-		return true;
-	}
-	return false;
+	return m_version < DATABASE_LATEST_VERSION;
 }
 
 void Database::convertDatabase()
 {
-	qDebug() << "[database] Converting database to latest version from version" << version;
-	while (version < DATABASE_LATEST_VERSION) {
-		switch (version) {
+	qDebug() << "[database] Converting database to latest version from version" << m_version;
+	transaction();
+	while (m_version < DATABASE_LATEST_VERSION) {
+		switch (m_version) {
 		case 0:
-			createNewDatabase(); version = DATABASE_LATEST_VERSION; break;
+			createNewDatabase(); m_version = DATABASE_LATEST_VERSION; break;
 		case 1:
-			convertDatabaseToV2(); version = 2; break;
+			convertDatabaseToV2(); m_version = 2; break;
 		case 2:
-			convertDatabaseToV3(); version = 3; break;
+			convertDatabaseToV3(); m_version = 3; break;
 		case 3:
-			convertDatabaseToV4(); version = 4; break;
+			convertDatabaseToV4(); m_version = 4; break;
 		case 4:
-			convertDatabaseToV5(); version = 5; break;
+			convertDatabaseToV5(); m_version = 5; break;
 		case 5:
-			convertDatabaseToV6(); version = 6; break;
+			convertDatabaseToV6(); m_version = 6; break;
 		case 6:
-			convertDatabaseToV7(); version = 7; break;
+			convertDatabaseToV7(); m_version = 7; break;
 		case 7:
-			convertDatabaseToV8(); version = 8; break;
+			convertDatabaseToV8(); m_version = 8; break;
 		case 8:
-			convertDatabaseToV9(); version = 9; break;
+			convertDatabaseToV9(); m_version = 9; break;
 		case 9:
-			convertDatabaseToV10(); version = 10; break;
+			convertDatabaseToV10(); m_version = 10; break;
 		default:
 			break;
 		}
 	}
 
-	QSqlQuery query(database);
-	query.prepare(QString("UPDATE dbinfo SET version = %1").arg(DATABASE_LATEST_VERSION));
-	if (!query.exec()) {
-		qDebug("Failed to query database: %s", qPrintable(query.lastError().text()));
-	}
+	QSqlRecord updateRecord;
+	updateRecord.append(Utils::createSqlField("version", DATABASE_LATEST_VERSION));
 
-	database.commit();
-	version = DATABASE_LATEST_VERSION;
+	QSqlQuery query(m_database);
+	Utils::execQuery(
+	        query,
+	        m_database.driver()->sqlStatement(
+	                QSqlDriver::UpdateStatement,
+	                DB_TABLE_INFO,
+	                updateRecord,
+	                false
+	        )
+	);
+
+	commit();
+	m_version = DATABASE_LATEST_VERSION;
 }
 
 void Database::createNewDatabase()
 {
-	QSqlQuery query(database);
+	QSqlQuery query(m_database);
 
 	//
 	// DB info
@@ -223,13 +250,25 @@ void Database::createNewDatabase()
 
 void Database::createDbInfoTable()
 {
-	QSqlQuery query(database);
-	query.prepare("CREATE TABLE IF NOT EXISTS 'dbinfo' (version INTEGER NOT NULL)");
-	execQuery(query);
+	QSqlQuery query(m_database);
+	Utils::execQuery(
+	        query,
+	        "CREATE TABLE IF NOT EXISTS 'dbinfo' (version INTEGER NOT NULL)"
+	);
 
-	query.prepare(QString("INSERT INTO 'dbinfo' (version) VALUES (%1)")
-		.arg(DATABASE_LATEST_VERSION));
-	execQuery(query);
+
+	QSqlRecord insertRecord;
+	insertRecord.append(Utils::createSqlField("version", DATABASE_LATEST_VERSION));
+
+	Utils::execQuery(
+	        query,
+	        m_database.driver()->sqlStatement(
+	                QSqlDriver::InsertStatement,
+	                DB_TABLE_INFO,
+	                insertRecord,
+	                false
+	        )
+	);
 }
 
 void Database::convertDatabaseToV2()
@@ -240,123 +279,78 @@ void Database::convertDatabaseToV2()
 
 void Database::convertDatabaseToV3()
 {
-	QSqlQuery query(database);
-	query.prepare("ALTER TABLE Roster ADD avatarHash TEXT");
-	execQuery(query);
+	QSqlQuery query(m_database);
+	Utils::execQuery(query, "ALTER TABLE Roster ADD avatarHash TEXT");
 }
 
 void Database::convertDatabaseToV4()
 {
-	QSqlQuery query(database);
+	QSqlQuery query(m_database);
 	// SQLite doesn't support the ALTER TABLE drop columns feature, so we have to use a workaround.
 	// we copy all rows into a back-up table (but without `avatarHash`), and then delete the old table
 	// and copy everything to the normal table again
-	query.prepare("CREATE TEMPORARY TABLE roster_backup(jid,name,lastExchanged,"
-		"unreadMessages,lastMessage,lastOnline,activity,status,mood);");
-	execQuery(query);
-
-	query.prepare("INSERT INTO roster_backup SELECT jid,name,lastExchanged,unreadMessages,"
-		"lastMessage,lastOnline,activity,status,mood FROM Roster;");
-	execQuery(query);
-
-	query.prepare("DROP TABLE Roster;");
-	execQuery(query);
-
-	query.prepare("CREATE TABLE Roster('jid' TEXT NOT NULL,'name' TEXT NOT NULL,"
-		"'lastExchanged' TEXT NOT NULL,'unreadMessages' INTEGER,'lastMessage' TEXT,"
-		"'lastOnline' TEXT,'activity' TEXT,'status' TEXT,'mood' TEXT);");
-	execQuery(query);
-
-	query.prepare("INSERT INTO Roster SELECT jid,name,lastExchanged,unreadMessages,"
-		"lastMessage,lastOnline,activity,status,mood FROM Roster_backup;");
-	execQuery(query);
-
-	query.prepare("DROP TABLE Roster_backup;");
-	execQuery(query);
+	Utils::execQuery(query, "CREATE TEMPORARY TABLE roster_backup(jid,name,lastExchanged,"
+	                        "unreadMessages,lastMessage,lastOnline,activity,status,mood);");
+	Utils::execQuery(query, "INSERT INTO roster_backup SELECT jid,name,lastExchanged,unreadMessages,"
+	                        "lastMessage,lastOnline,activity,status,mood FROM Roster;");
+	Utils::execQuery(query, "DROP TABLE Roster;");
+	Utils::execQuery(query, "CREATE TABLE Roster('jid' TEXT NOT NULL,'name' TEXT NOT NULL,"
+	                        "'lastExchanged' TEXT NOT NULL,'unreadMessages' INTEGER,'lastMessage' TEXT,"
+	                        "'lastOnline' TEXT,'activity' TEXT,'status' TEXT,'mood' TEXT);");
+	Utils::execQuery(query, "INSERT INTO Roster SELECT jid,name,lastExchanged,unreadMessages,"
+	                        "lastMessage,lastOnline,activity,status,mood FROM Roster_backup;");
+	Utils::execQuery(query, "DROP TABLE Roster_backup;");
 }
 
 void Database::convertDatabaseToV5()
 {
-	QSqlQuery query(database);
-	query.prepare("ALTER TABLE 'Messages' ADD 'type' INTEGER");
-	execQuery(query);
-
-	query.prepare("UPDATE Messages SET type = 0 WHERE type IS NULL");
-	execQuery(query);
-
-	query.prepare("ALTER TABLE 'Messages' ADD 'mediaUrl' TEXT");
-	execQuery(query);
+	QSqlQuery query(m_database);
+	Utils::execQuery(query, "ALTER TABLE 'Messages' ADD 'type' INTEGER");
+	Utils::execQuery(query, "UPDATE Messages SET type = 0 WHERE type IS NULL");
+	Utils::execQuery(query, "ALTER TABLE 'Messages' ADD 'mediaUrl' TEXT");
 }
 
 void Database::convertDatabaseToV6()
 {
-	QSqlQuery query(database);
+	QSqlQuery query(m_database);
 	for (QString column : {"'mediaSize' INTEGER", "'mediaContentType' TEXT",
 	                       "'mediaLastModified' INTEGER", "'mediaLocation' TEXT"}) {
-		query.prepare(QString("ALTER TABLE 'Messages' ADD ").append(column));
-		execQuery(query);
+		Utils::execQuery(query, QString("ALTER TABLE 'Messages' ADD ").append(column));
 	}
 }
 
 void Database::convertDatabaseToV7()
 {
-	QSqlQuery query(database);
-	query.prepare(QString("ALTER TABLE 'Messages' ADD 'mediaThumb' BLOB"));
-	execQuery(query);
-	query.prepare(QString("ALTER TABLE 'Messages' ADD 'mediaHashes' TEXT"));
-	execQuery(query);
+	QSqlQuery query(m_database);
+	Utils::execQuery(query, "ALTER TABLE 'Messages' ADD 'mediaThumb' BLOB");
+	Utils::execQuery(query, "ALTER TABLE 'Messages' ADD 'mediaHashes' TEXT");
 }
 
 void Database::convertDatabaseToV8()
 {
-	QSqlQuery query(database);
-
-	query.prepare("CREATE TEMPORARY TABLE roster_backup(jid, name, lastExchanged, "
-	              "unreadMessages, lastMessage);");
-	execQuery(query);
-
-	query.prepare("INSERT INTO roster_backup SELECT jid, name, lastExchanged, unreadMessages, "
-	              "lastMessage FROM Roster;");
-	execQuery(query);
-
-	query.prepare("DROP TABLE Roster;");
-	execQuery(query);
-
-	query.prepare("CREATE TABLE IF NOT EXISTS Roster ('jid' TEXT NOT NULL,'name' TEXT,"
-	              "'lastExchanged' TEXT NOT NULL, 'unreadMessages' INTEGER,"
-	              "'lastMessage' TEXT);");
-	execQuery(query);
-
-	query.prepare("INSERT INTO Roster SELECT jid, name, lastExchanged, unreadMessages, "
-	              "lastMessage FROM Roster_backup;");
-	execQuery(query);
-
-	query.prepare("DROP TABLE roster_backup;");
-	execQuery(query);
+	QSqlQuery query(m_database);
+	Utils::execQuery(query, "CREATE TEMPORARY TABLE roster_backup(jid, name, lastExchanged, "
+	                        "unreadMessages, lastMessage);");
+	Utils::execQuery(query, "INSERT INTO roster_backup SELECT jid, name, lastExchanged, unreadMessages, "
+	                        "lastMessage FROM Roster;");
+	Utils::execQuery(query, "DROP TABLE Roster;");
+	Utils::execQuery(query, "CREATE TABLE IF NOT EXISTS Roster ('jid' TEXT NOT NULL,'name' TEXT,"
+	                        "'lastExchanged' TEXT NOT NULL, 'unreadMessages' INTEGER,"
+	                        "'lastMessage' TEXT);");
+	Utils::execQuery(query, "INSERT INTO Roster SELECT jid, name, lastExchanged, unreadMessages, "
+	                        "lastMessage FROM Roster_backup;");
+	Utils::execQuery(query, "DROP TABLE roster_backup;");
 }
 
 void Database::convertDatabaseToV9()
 {
-	QSqlQuery query(database);
-
-	query.prepare("ALTER TABLE 'Messages' ADD 'edited' BOOL");
-	execQuery(query);
+	QSqlQuery query(m_database);
+	Utils::execQuery(query, "ALTER TABLE 'Messages' ADD 'edited' BOOL");
 }
 
 void Database::convertDatabaseToV10()
 {
-	QSqlQuery query(database);
-
-	query.prepare("ALTER TABLE 'Messages' ADD 'isSpoiler' BOOL");
-	execQuery(query);
-	query.prepare("ALTER TABLE 'Messages' ADD 'spoilerHint' TEXT");
-	execQuery(query);
-}
-
-void Database::execQuery(QSqlQuery &query)
-{
-	if (!query.exec()) {
-		qDebug() << query.executedQuery();
-		qFatal("Failed to query database: %s", qPrintable(query.lastError().text()));
-	}
+	QSqlQuery query(m_database);
+	Utils::execQuery(query, "ALTER TABLE 'Messages' ADD 'isSpoiler' BOOL");
+	Utils::execQuery(query, "ALTER TABLE 'Messages' ADD 'spoilerHint' TEXT");
 }

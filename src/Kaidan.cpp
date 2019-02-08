@@ -34,45 +34,59 @@
 #include <QDebug>
 #include <QGuiApplication>
 #include <QSettings>
+#include <QThread>
 // QXmpp
-#include <QXmppClient.h>
 #include "qxmpp-exts/QXmppColorGenerator.h"
+#include <QXmppClient.h>
 // Kaidan
 #include "AvatarFileStorage.h"
 #include "Database.h"
-#include "RosterModel.h"
+#include "MessageDb.h"
 #include "MessageModel.h"
 #include "PresenceCache.h"
 #include "QmlUtils.h"
+#include "RosterDb.h"
+#include "RosterModel.h"
 
 Kaidan *Kaidan::s_instance = nullptr;
 
 Kaidan::Kaidan(QGuiApplication *app, bool enableLogging, QObject *parent)
-        : QObject(parent), m_utils(new QmlUtils(this)), database(new Database())
+        : QObject(parent),
+          m_utils(new QmlUtils(this)),
+          m_database(new Database()),
+          m_dbThrd(new QThread()),
+          m_msgDb(new MessageDb()),
+          m_rosterDb(new RosterDb(m_database)),
+          m_cltThrd(new QThread())
 {
 	Q_ASSERT(!Kaidan::s_instance);
 	Kaidan::s_instance = this;
 
 	// Database setup
-	database->openDatabase();
-	if (database->needToConvert())
-		database->convertDatabase();
+	m_database->moveToThread(m_dbThrd);
+	m_msgDb->moveToThread(m_dbThrd);
+	m_rosterDb->moveToThread(m_dbThrd);
+
+	connect(m_dbThrd, &QThread::started, m_database, &Database::openDatabase);
+
+	m_dbThrd->setObjectName("SqlDatabase");
+	m_dbThrd->start();
 
 	// Caching components
-	caches = new ClientWorker::Caches(database, this);
+	m_caches = new ClientWorker::Caches(this, m_rosterDb, m_msgDb, this);
 	// Connect the avatar changed signal of the avatarStorage with the NOTIFY signal
 	// of the Q_PROPERTY for the avatar storage (so all avatars are updated in QML)
-	connect(caches->avatarStorage, &AvatarFileStorage::avatarIdsChanged,
+	connect(m_caches->avatarStorage, &AvatarFileStorage::avatarIdsChanged,
 	        this, &Kaidan::avatarStorageChanged);
 
 	//
 	// Load settings
 	//
 
-	creds.jid = caches->settings->value(KAIDAN_SETTINGS_AUTH_JID).toString();
-	creds.jidResource = caches->settings->value(KAIDAN_SETTINGS_AUTH_RESOURCE)
+	creds.jid = m_caches->settings->value(KAIDAN_SETTINGS_AUTH_JID).toString();
+	creds.jidResource = m_caches->settings->value(KAIDAN_SETTINGS_AUTH_RESOURCE)
 	                    .toString();
-	creds.password = QString(QByteArray::fromBase64(caches->settings->value(
+	creds.password = QString(QByteArray::fromBase64(m_caches->settings->value(
 	                 KAIDAN_SETTINGS_AUTH_PASSWD).toString().toUtf8()));
 	// use Kaidan as resource, if no set
 	if (creds.jidResource.isEmpty())
@@ -83,20 +97,21 @@ Kaidan::Kaidan(QGuiApplication *app, bool enableLogging, QObject *parent)
 	// Start ClientWorker on new thread
 	//
 
-	cltThrd = new ClientThread();
-	client = new ClientWorker(caches, this, enableLogging, app);
-	client->setCredentials(creds);
-	connect(client, &ClientWorker::disconnReasonChanged, this, &Kaidan::setDisconnReason);
+	m_client = new ClientWorker(m_caches, this, enableLogging, app);
+	m_client->setCredentials(creds);
+	m_client->moveToThread(m_cltThrd);
 
-	client->moveToThread(cltThrd);
-	connect(cltThrd, &QThread::started, client, &ClientWorker::main);
-	cltThrd->start();
+	connect(m_client, &ClientWorker::disconnReasonChanged, this, &Kaidan::setDisconnReason);
+	connect(m_cltThrd, &QThread::started, m_client, &ClientWorker::main);
+
+	m_client->setObjectName("XmppClient");
+	m_cltThrd->start();
 }
 
 Kaidan::~Kaidan()
 {
-	delete caches;
-	delete database;
+	delete m_caches;
+	delete m_database;
 	Kaidan::s_instance = nullptr;
 }
 
@@ -113,25 +128,22 @@ void Kaidan::mainConnect()
 	if (connectionState != ConnectionState::StateDisconnected) {
 		qWarning() << "[main] Tried to connect, even if still connected!"
 		           << "Requesting disconnect.";
-		emit client->disconnectRequested();
+		emit m_client->disconnectRequested();
 	}
 
-	emit client->credentialsUpdated(creds);
-	emit client->connectRequested();
-
-	// update own JID to display correct messages
-	caches->msgModel->setOwnJid(creds.jid);
+	emit m_client->credentialsUpdated(creds);
+	emit m_client->connectRequested();
 }
 
 void Kaidan::mainDisconnect(bool openLogInPage)
 {
 	// disconnect the client if connected or connecting
 	if (connectionState != ConnectionState::StateDisconnected)
-		emit client->disconnectRequested();
+		emit m_client->disconnectRequested();
 
 	if (openLogInPage) {
 		// clear password
-		caches->settings->remove(KAIDAN_SETTINGS_AUTH_PASSWD);
+		m_caches->settings->remove(KAIDAN_SETTINGS_AUTH_PASSWD);
 		setPassword(QString());
 		// trigger log in page
 		emit newCredentialsNeeded();
@@ -140,7 +152,7 @@ void Kaidan::mainDisconnect(bool openLogInPage)
 
 void Kaidan::setConnectionState(QXmppClient::State state)
 {
-	this->connectionState = (ConnectionState) state;
+	this->connectionState = static_cast<ConnectionState>(state);
 	emit connectionStateChanged();
 
 	// Open the possibly cached URI when connected.
@@ -173,7 +185,7 @@ void Kaidan::setJidResource(const QString &jidResource)
 	// to set the first try flag and can save it.
 	creds.jidResource = jidResource;
 
-	caches->settings->setValue(KAIDAN_SETTINGS_AUTH_RESOURCE, jidResource);
+	m_caches->settings->setValue(KAIDAN_SETTINGS_AUTH_RESOURCE, jidResource);
 }
 
 void Kaidan::setPassword(const QString &password)
@@ -181,17 +193,6 @@ void Kaidan::setPassword(const QString &password)
 	creds.password = password;
 	// credentials were modified -> first try
 	creds.isFirstTry = true;
-}
-
-void Kaidan::setChatPartner(const QString &chatPartner)
-{
-	// check if different
-	if (this->chatPartner == chatPartner)
-		return;
-
-	this->chatPartner = chatPartner;
-	emit chatPartnerChanged(chatPartner);
-	caches->msgModel->applyRecipientFilter(chatPartner);
 }
 
 quint8 Kaidan::getDisconnReason() const

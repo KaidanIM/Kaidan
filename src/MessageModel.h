@@ -31,93 +31,84 @@
 #ifndef MESSAGEMODEL_H
 #define MESSAGEMODEL_H
 
-#include <QSqlTableModel>
-#include "Enums.h"
-
-using namespace Enums;
+#include <QAbstractListModel>
+#include "Message.h"
 
 class QMimeType;
+class MessageDb;
+class Kaidan;
 
-class MessageModel : public QSqlTableModel
+class MessageModel : public QAbstractListModel
 {
 	Q_OBJECT
+	Q_PROPERTY(QString chatPartner READ chatPartner WRITE setChatPartner
+	                               NOTIFY chatPartnerChanged)
 
 public:
-	MessageModel(QSqlDatabase *database, QObject *parent = nullptr);
-
-	QVariant data(const QModelIndex &index, int role) const Q_DECL_OVERRIDE;
-	QHash<int, QByteArray> roleNames() const Q_DECL_OVERRIDE;
-
-	/**
-	 * Applies a filter to the database to only show messages of a certain chat
-	 */
-	void applyRecipientFilter(QString recipient);
-
-	struct Message {
-		QString author;
-		QString authorResource;
-		QString recipient;
-		QString recipientResource;
-		QString timestamp;
-		QString message;
-		QString id;
-		bool sentByMe;
-		MessageType type;
-		bool edited = false;
-		bool isSent = false;
-		bool isDelivered = false;
-		bool isSpoiler = false;
-		QString spoilerHint;
-		QString mediaUrl;
-		quint64 mediaSize;
-		QString mediaContentType;
-		quint64 mediaLastModified;
-		QString mediaLocation;
-		QByteArray mediaThumb;
-		QString mediaHashes;
+	enum MessageRoles {
+		Timestamp = Qt::UserRole + 1,
+		Id,
+		Body,
+		SentByMe,
+		MediaType,
+		IsEdited,
+		IsSent,
+		IsDelivered,
+		MediaUrl,
+		MediaSize,
+		MediaContentType,
+		MediaLastModified,
+		MediaLocation,
+		MediaThumb,
+		IsSpoiler,
+		SpoilerHint
 	};
+	Q_ENUM(MessageRoles)
 
-	static MessageType messageTypeFromMimeType(const QMimeType &);
+	MessageModel(Kaidan *kaidan, MessageDb *msgDb, QObject *parent = nullptr);
+	~MessageModel();
 
-	/**
-	 * Returns the last message id of a contact
-	 *
-	 * The result can be empty, if the last message was sent in a previous session. This
-	 * is, because we currently can't be sure if there were other messages since then.
-	 */
-	Q_INVOKABLE QString lastMessageId(QString jid) const;
+	Q_REQUIRED_RESULT bool isEmpty() const;
+	Q_REQUIRED_RESULT int rowCount(const QModelIndex &parent = QModelIndex()) const override;
+	Q_REQUIRED_RESULT QHash<int, QByteArray> roleNames() const override;
+	Q_REQUIRED_RESULT QVariant data(const QModelIndex &index, int role) const override;
+
+	Q_INVOKABLE void fetchMore(const QModelIndex &parent) override;
+	Q_INVOKABLE bool canFetchMore(const QModelIndex &parent) const override;
+
+	QString chatPartner();
+	void setChatPartner(const QString &chatPartner);
+
+	Q_INVOKABLE bool canCorrectMessage(const QString &msgId) const;
 
 signals:
-	/**
-	 * Emitted when the user opens another chat to apply a filter to the db
-	 */
-	void chatPartnerChanged(QString &jid);
-	void addMessageRequested(Message msg);
-	void setMessageAsSentRequested(const QString msgId);
-	void setMessageAsDeliveredRequested(const QString msgId);
-	void updateMessageRequested(const QString id, Message msg);
+	void chatPartnerChanged(const QString &chatPartner);
 
-public slots:
-	/**
-	 * Set own JID for displaying correct messages
-	 */
-	void setOwnJid(const QString &jid)
-	{
-		ownJid = jid;
-	}
+	void addMessageRequested(const Message &msg);
+	void updateMessageRequested(const QString &id,
+	                            const std::function<void (Message &)> &updateMsg);
+	void setMessageAsSentRequested(const QString &msgId);
+	void setMessageAsDeliveredRequested(const QString &msgId);
 
 private slots:
-	void addMessage(Message msg);
-	void setMessageAsSent(const QString msgId);
-	void setMessageAsDelivered(const QString msgId);
-	void updateMessage(const QString id, Message msg);
+	void handleMessagesFetched(const QVector<Message> &m_messages);
+
+	void addMessage(const Message &msg);
+	void updateMessage(const QString &id,
+	                   const std::function<void (Message &)> &updateMsg);
+	void setMessageAsSent(const QString &msgId);
+	void setMessageAsDelivered(const QString &msgId);
 
 private:
-	QSqlDatabase *database;
+	void clearAll();
+	void insertMessage(int i, const Message &msg);
 
-	QString ownJid;
+	Kaidan *kaidan;
+	MessageDb *msgDb;
 
-	QHash<QString, QString> lastMsgIdCache;
+	QVector<Message> m_messages;
+	QString m_chatPartner;
+	bool m_fetchedAll = false;
 };
 
 #endif // MESSAGEMODEL_H

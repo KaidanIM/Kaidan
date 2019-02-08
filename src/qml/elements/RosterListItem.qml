@@ -67,7 +67,7 @@ Kirigami.SwipeListItem {
 				mipmap: true
 
 				Controls.ToolTip {
-					visible: hovered
+					visible: hovered && !Kirigami.Settings.isMobile
 					delay: Qt.styleHints.mousePressAndHoldInterval
 					text: generateToolTipText(listItem.name, listItem.jid,
 					                          listItem.presenceType, listItem.statusMsg)

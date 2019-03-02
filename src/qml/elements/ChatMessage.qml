@@ -117,7 +117,7 @@ RowLayout {
 
 				Controls.MenuItem {
 					text: qsTr("Edit Message")
-					visible: isLastMessage && sentByMe
+					enabled: isLastMessage && sentByMe
 					onTriggered: {
 						textEdit.text = messageBody
 						textEdit.state = "edit"

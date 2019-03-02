@@ -243,7 +243,7 @@ Kirigami.ScrollablePage {
 				Kirigami.Icon {
 					source: "preferences-desktop-emoticons"
 					enabled: sendButton.enabled
-					isMask: true
+					isMask: false
 					smooth: true
 					anchors.centerIn: parent
 					width: Kirigami.Units.gridUnit * 2

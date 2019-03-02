@@ -3,13 +3,8 @@
   "dir": "./bin/ubuntu-touch/",
   "build": "../../utils/build-linux-click.sh",
   "kill": "kaidan",
-  "specificDependencies": true,
-  "dependencies": [
+  "dependencies_build": [
     "ninja-build",
-    "curl",
-    "extra-cmake-modules",
-    "kirigami2-dev:$(dpkg-architecture -qDEB_HOST_ARCH)",
-    "libidn11-dev:$(dpkg-architecture -qDEB_HOST_ARCH)",
-    "libgnutls-dev:$(dpkg-architecture -qDEB_HOST_ARCH)"
+    "extra-cmake-modules"
   ]
 }

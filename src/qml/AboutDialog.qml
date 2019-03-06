@@ -87,7 +87,7 @@ Controls.Dialog {
 			}
 
 			Controls.Label {
-				text: "Copyright © 2016-2018\nKaidan developers and contributors"
+				text: "Copyright © 2016-2019\nKaidan developers and contributors"
 				textFormat: Text.PlainText
 				wrapMode: Text.WordWrap
 				Layout.fillWidth: true

@@ -30,8 +30,9 @@
 
 import QtQuick 2.7
 import QtQuick.Controls 2.0 as Controls
+import QtQuick.Controls.Material 2.0
 import QtQuick.Layouts 1.2
-import org.kde.kirigami 2.0 as Kirigami
+import org.kde.kirigami 2.5 as Kirigami
 import im.kaidan.kaidan 1.0
 
 Kirigami.Page {
@@ -105,7 +106,8 @@ Kirigami.Page {
 			Controls.Button {
 				id: connectButton
 				Layout.fillWidth: true
-				highlighted: true
+				Kirigami.Theme.backgroundColor: Material.accent
+				text: qsTr("Connect")
 
 				states: [
 					State {
@@ -113,9 +115,6 @@ Kirigami.Page {
 						PropertyChanges {
 							target: connectButton
 							enabled: false
-						}
-						PropertyChanges {
-							target: connectLabel
 							text: "<i>" + qsTr("Connecting…") + "</i>"
 						}
 					}
@@ -126,14 +125,6 @@ Kirigami.Page {
 					kaidan.jid = jidField.text.toLowerCase()
 					kaidan.password = passField.text
 					kaidan.mainConnect()
-				}
-
-				Controls.Label {
-					id: connectLabel
-					anchors.centerIn: connectButton
-					text: qsTr("Connect")
-					color: Kirigami.Theme.highlightedTextColor
-					textFormat: Text.StyledText
 				}
 			}
 

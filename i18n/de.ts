@@ -304,7 +304,7 @@
     </message>
     <message>
         <source>Could not correct message, as a result of not being connected.</source>
-        <translation type="unfinished"></translation>
+        <translation>Konnte Nachricht nicht korrigieren, da Sie nicht verbunden sind.</translation>
     </message>
 </context>
 <context>

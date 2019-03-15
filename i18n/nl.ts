@@ -85,6 +85,13 @@
     </message>
 </context>
 <context>
+    <name>DownloadJob</name>
+    <message>
+        <source>Download failed.</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>EmptyChatPage</name>
     <message>
         <source>Please select a chat to start messaging</source>

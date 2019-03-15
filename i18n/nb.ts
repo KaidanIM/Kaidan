@@ -260,7 +260,7 @@
     </message>
     <message>
         <source>Could not correct message, as a result of not being connected.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Kunne ikke korrigere melding, siden du ikke er tilkoblet.</translation>
     </message>
 </context>
 <context>

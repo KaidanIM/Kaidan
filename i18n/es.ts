@@ -276,7 +276,7 @@
     </message>
     <message>
         <source>Could not correct message, as a result of not being connected.</source>
-        <translation type="unfinished"></translation>
+        <translation>No se pudo corregir el mensaje porque no está conectado.</translation>
     </message>
 </context>
 <context>

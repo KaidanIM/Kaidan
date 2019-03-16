@@ -43,6 +43,7 @@
 #include <QUrl>
 // QXmpp
 #include <QXmppClient.h>
+#include "qxmpp-exts/QXmppColorGenerator.h"
 // Kaidan
 #include "AvatarFileStorage.h"
 #include "Database.h"
@@ -291,6 +292,12 @@ QString Kaidan::formatMessage(QString message)
 	message = message.toHtmlEscaped();
 
 	return processMsgFormatting(message.split(" "));
+}
+
+QColor Kaidan::getUserColor(QString nickName) const
+{
+	QXmppColorGenerator::RGBColor color = QXmppColorGenerator::generateColor(nickName);
+	return QColor(color.red, color.green, color.blue);
 }
 
 QString Kaidan::processMsgFormatting(QStringList list, bool isFirst)

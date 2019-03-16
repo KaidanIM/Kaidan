@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 #
-# Copyright (C) 2018 Linus Jahn <lnj@kaidan.im>
+# Copyright (C) 2018-2019 Linus Jahn <lnj@kaidan.im>
 #
 # Permission is hereby granted, free of charge, to any person obtaining a copy of
 # this software and associated documentation files (the "Software"), to deal in
@@ -168,8 +168,8 @@ def createLongField(name, heading, content):
 
 class CopyrightTarget:
 	def __init__(self, directories = None, files = None, licenseName = "",
-	             licenseContent = "", replaceUids = None, excludeUids = None,
-	             authorList = None, comment = ""):
+		     licenseContent = "", replaceUids = None, excludeUids = None,
+		     authorList = None, additionalAuthors = None, comment = ""):
 		self.repo = git.Repo(".");
 		self.files = files or list([]);
 		self.directories = directories or list([]);
@@ -183,6 +183,8 @@ class CopyrightTarget:
 		self.excludeUids.extend(EXCLUDE_USER_IDS);
 
 		self.authorList = authorList or self.getAuthorList();
+		if additionalAuthors:
+			self.authorList.update(additionalAuthors)
 
 	def replaceUid(self, uid):
 		for pair in self.replaceUids:
@@ -200,7 +202,7 @@ class CopyrightTarget:
 		for commit in commitList:
 			# create user id and check replacements and excludes
 			uid = "{} <{}>".format(commit.author.name,
-			                       commit.author.email);
+					       commit.author.email);
 			uid = self.replaceUid(uid);
 
 			if uid in self.excludeUids:
@@ -265,13 +267,17 @@ def main():
 		),
 		CopyrightTarget(
 			files = ["src/StatusBar.cpp", "src/StatusBar.h", "src/singleapp/*",
-			         "data/images/xmpp.svg", "utils/generate-license.py"],
+				 "src/hsluv-c/*", "data/images/xmpp.svg",
+				 "utils/generate-license.py"],
 			licenseName = "MIT",
 			authorList = {
 				"J-P Nurmi <jpnurmi@gmail.com>": CopyrightAuthor(years = "2016"),
 				"Raja Sandhu, XMPP Standards Foundation": CopyrightAuthor(years = "2007"),
-				"LNJ <git@lnj.li>": CopyrightAuthor(years = "2018"),
-				"Itay Grudev <itay+github.com@grudev.com>": CopyrightAuthor(years = "2015-2018")
+				"Linus Jahn <lnj@kaidan.im>": CopyrightAuthor(years = "2018-2019"),
+				"Itay Grudev <itay+github.com@grudev.com>": CopyrightAuthor(years = "2015-2018"),
+				"Alexei Boronine <alexei@boronine.com>": CopyrightAuthor(years = "2015"),
+				"Roger Tallada <info@rogertallada.com>": CopyrightAuthor(years = "2015"),
+				"Martin Mitas <mity@morous.org>": CopyrightAuthor(years = "2017"),
 			}
 		),
 		CopyrightTarget(
@@ -289,7 +295,7 @@ def main():
 				"Gregor Santner <gsantner@mailbox.org>": CopyrightAuthor(years = "2016"),
 			},
 			comment = "message_checkmark.svg: Originally from conversations, optimized using SVGO by LNJ <git@lnj.li>\n"
-			          "diaspora.svg: Originally from dandelion, <https://github.com/diaspora-for-android/dandelion>"
+				  "diaspora.svg: Originally from dandelion, <https://github.com/diaspora-for-android/dandelion>"
 		),
 		CopyrightTarget(
 			files = [

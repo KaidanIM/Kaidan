@@ -34,6 +34,7 @@
 // Qt
 #include <QObject>
 #include <QString>
+#include <QColor>
 // Kaidan
 #include "ClientWorker.h"
 #include "Globals.h"
@@ -262,6 +263,11 @@ public:
 	 * This currently only adds some link highlighting
 	 */
 	Q_INVOKABLE QString formatMessage(QString message);
+
+	/**
+	 * Returns a consistent user color generated from the nickname.
+	 */
+	Q_INVOKABLE QColor getUserColor(QString nickName) const;
 
 signals:
 	void avatarStorageChanged();

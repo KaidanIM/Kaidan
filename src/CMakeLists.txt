@@ -29,6 +29,10 @@ set(KAIDAN_SOURCES
 	${CURDIR}/qxmpp-exts/QXmppHttpUploadIq.cpp
 	${CURDIR}/qxmpp-exts/QXmppUploadRequestManager.cpp
 	${CURDIR}/qxmpp-exts/QXmppUploadManager.cpp
+        ${CURDIR}/qxmpp-exts/QXmppColorGenerator.cpp
+
+        # hsluv-c required for color generation
+        ${CURDIR}/hsluv-c/hsluv.c
 )
 
 if (NOT ANDROID AND NOT IOS)

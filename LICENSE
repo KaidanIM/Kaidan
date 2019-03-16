@@ -27,6 +27,7 @@ Copyright: 2017-2018, Linus Jahn <lnj@kaidan.im>
            2017, Ilya Bizyaev <bizyaev@zoho.com>
            2017, ZatroxDE <zatroxde@outlook.com>
            2018, aitzol berasategi <aitzol@disroot.org>
+           2019, ssantos <ssantos@web.de>
            2018, oiseauroch <tobias.ollive@mailoo.org>
            2018, Andreas Kleinert <Andy.Kleinert@gmail.com>
            2017, Emmanuel Gil Peyrot <linkmauve@linkmauve.fr>
@@ -35,12 +36,16 @@ License: GPL-3+ with OpenSSL exception
 Files: src/StatusBar.cpp
        src/StatusBar.h
        src/singleapp/*
+       src/hsluv-c/*
        data/images/xmpp.svg
        utils/generate-license.py
 Copyright: 2016, J-P Nurmi <jpnurmi@gmail.com>
            2007, Raja Sandhu, XMPP Standards Foundation
-           2018, LNJ <git@lnj.li>
+           2018-2019, Linus Jahn <lnj@kaidan.im>
            2015-2018, Itay Grudev <itay+github.com@grudev.com>
+           2015, Alexei Boronine <alexei@boronine.com>
+           2015, Roger Tallada <info@rogertallada.com>
+           2017, Martin Mitas <mity@morous.org>
 License: MIT
 
 Files: src/EmojiModel.cpp

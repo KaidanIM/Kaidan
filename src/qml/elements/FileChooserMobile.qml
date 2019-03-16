@@ -51,13 +51,15 @@ Item {
 				main: Kirigami.Action {
 					id: parentFolderButton
 					tooltip: qsTr("Go to parent folder")
-					iconName: "go-parent-folder"
+					icon.name: "go-parent-folder"
+					icon.color: "transparent"
 					onTriggered: fileModel.folder = fileModel.parentFolder
 					enabled: fileModel.folder != "file:///"
 				}
 				right: Kirigami.Action {
 					tooltip: qsTr("Close")
-					iconName: "dialog-close"
+					icon.name: "dialog-close"
+					icon.color: "transparent"
 					onTriggered: pageStack.pop()
 					enabled: true
 				}
@@ -81,6 +83,7 @@ Item {
 					reserveSpaceForIcon: true
 
 					icon: (fileIsDir ? "folder" : "text-x-plain")
+					iconColor: "transparent"
 					label: fileName + (fileIsDir ? "/" : "")
 
 					onClicked: {

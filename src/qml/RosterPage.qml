@@ -72,9 +72,7 @@ Kirigami.ScrollablePage {
 			presenceType: kaidan.presenceCache.getPresenceType(model.jid)
 			statusMsg: kaidan.presenceCache.getStatusText(model.jid)
 			unreadMessages: model.unreadMessages
-			avatarImagePath: kaidan.avatarStorage.getHashOfJid(model.jid) !== "" ?
-					 kaidan.avatarStorage.getAvatarUrl(model.jid) :
-					 kaidan.getResourcePath("images/fallback-avatar.svg")
+			avatarImagePath: kaidan.avatarStorage.getAvatarUrl(model.jid)
 			backgroundColor: {
 				if (!Kirigami.Settings.isMobile && kaidan.chatPartner == model.jid) {
 					Kirigami.Theme.highlightColor

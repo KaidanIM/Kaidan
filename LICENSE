@@ -15,6 +15,7 @@ Copyright: 2016-2019, Linus Jahn <lnj@kaidan.im>
            2018, Marco Martin <notmart@gmail.com>
            2017, probonopd <probonopd@users.noreply.github.com>
            2016, Marzanna <MRZA-MRZA@users.noreply.github.com>
+           2017-2018, Eike Hein <hein@kde.org>
 License: GPL-3+ with OpenSSL exception
 
 Files: i18n/*
@@ -66,10 +67,8 @@ Comment:
 Files: misc/kaidan.svg
        misc/kaidan-small-margin.svg
        misc/kaidan-128x128.png
-       data/images/fallback-avatar.svg
        data/images/banner.png
 Copyright: 2016-2017, Ilya Bizyaev <bizyaev@zoho.com>
-           2017, LNJ <git@lnj.li>
            2016, MBB <mbb-mail@gmx.de>
 License: CC-BY-SA-4.0
 

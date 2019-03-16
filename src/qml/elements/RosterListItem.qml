@@ -58,20 +58,29 @@ Kirigami.SwipeListItem {
 			Layout.preferredHeight: parent.height
 			Layout.preferredWidth: parent.height
 
+			Controls.ToolTip {
+				visible: hovered && !Kirigami.Settings.isMobile
+				delay: Qt.styleHints.mousePressAndHoldInterval
+				text: generateToolTipText(listItem.name, listItem.jid,
+				                          listItem.presenceType, listItem.statusMsg)
+			}
+
 			RoundImage {
 				id: avatar
+				visible: avatarImagePath !== ""
 				anchors.fill: parent
 				source: avatarImagePath
 				width: height
 				fillMode: Image.PreserveAspectFit
 				mipmap: true
+			}
 
-				Controls.ToolTip {
-					visible: hovered && !Kirigami.Settings.isMobile
-					delay: Qt.styleHints.mousePressAndHoldInterval
-					text: generateToolTipText(listItem.name, listItem.jid,
-					                          listItem.presenceType, listItem.statusMsg)
-				}
+			TextAvatar {
+				visible: avatarImagePath == ""
+				anchors.fill: parent
+				width: height
+				id: textAvatar
+				name: listItem.name
 			}
 
 			Rectangle {

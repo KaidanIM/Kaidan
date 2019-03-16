@@ -131,11 +131,8 @@ Kirigami.ScrollablePage {
 			messageBody: model.message
 			dateTime: new Date(model.timestamp)
 			isRead: model.isDelivered
-			recipientAvatarUrl: {
-				kaidan.avatarStorage.getHashOfJid(author) !== "" ?
-				kaidan.avatarStorage.getAvatarUrl(author) :
-				kaidan.getResourcePath("images/fallback-avatar.svg")
-			}
+			recipientAvatarUrl: kaidan.avatarStorage.getAvatarUrl(author)
+			name: chatName
 			mediaType: model.type
 			mediaGetUrl: model.mediaUrl
 			mediaLocation: model.mediaLocation

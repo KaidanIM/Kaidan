@@ -259,7 +259,10 @@ def main():
 	copyrightTargets = [
 		CopyrightTarget(
 			directories = ["src", "utils", "misc"],
-			licenseName = "GPL-3+ with OpenSSL exception"
+			licenseName = "GPL-3+ with OpenSSL exception",
+			additionalAuthors = {
+				"Eike Hein <hein@kde.org>": CopyrightAuthor(years = "2017-2018")
+			}
 		),
 		CopyrightTarget(
 			directories = ["i18n"],
@@ -300,12 +303,11 @@ def main():
 		CopyrightTarget(
 			files = [
 				"misc/kaidan.svg", "misc/kaidan-small-margin.svg", "misc/kaidan-128x128.png",
-				"data/images/fallback-avatar.svg", "data/images/banner.png"
+				"data/images/banner.png"
 			],
 			licenseName = "CC-BY-SA-4.0",
 			authorList = {
 				"Ilya Bizyaev <bizyaev@zoho.com>": CopyrightAuthor(years = "2016-2017"),
-				"LNJ <git@lnj.li>": CopyrightAuthor(years = "2017"),
 				"MBB <mbb-mail@gmx.de>": CopyrightAuthor(years = "2016"),
 			}
 		),

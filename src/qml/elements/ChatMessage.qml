@@ -51,6 +51,7 @@ RowLayout {
 	property bool isLastMessage
 	property bool edited
 	property bool isLoading: kaidan.transferCache.hasUpload(msgId)
+	property string name
 	property var upload: {
 		if (mediaType !== Enums.MessageText &&
 		    kaidan.transferCache.hasUpload(msgId)) {
@@ -70,7 +71,7 @@ RowLayout {
 
 	RoundImage {
 		id: avatar
-		visible: !sentByMe
+		visible: !sentByMe && recipientAvatarUrl !== ""
 		source: recipientAvatarUrl
 		fillMode: Image.PreserveAspectFit
 		mipmap: true
@@ -80,6 +81,15 @@ RowLayout {
 		Layout.preferredWidth: Kirigami.Units.gridUnit * 2.2
 		sourceSize.height: Kirigami.Units.gridUnit * 2.2
 		sourceSize.width: Kirigami.Units.gridUnit * 2.2
+	}
+
+	TextAvatar {
+		id: textAvatar
+		visible: !sentByMe && recipientAvatarUrl == ""
+		name: root.name
+		Layout.alignment: Qt.AlignHCenter | Qt.AlignTop
+		Layout.preferredHeight: Kirigami.Units.gridUnit * 2.2
+		Layout.preferredWidth: Kirigami.Units.gridUnit * 2.2
 	}
 
 	// message bubble/box

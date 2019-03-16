@@ -43,6 +43,7 @@ linux-appimage:
   script: utils/build-linux-appimage.sh
   variables:
     QXMPP_BUILD: /usr
+  allow_failure: true
   artifacts:
     paths:
       - "*.AppImage"

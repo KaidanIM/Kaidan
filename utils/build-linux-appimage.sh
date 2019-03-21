@@ -129,6 +129,8 @@ echo "*****************************************"
         QMAKE_BINARY="-qmake=$QT_LINUX/bin/qmake"
     fi
 
+    export VERSION="continuous"
+
     $KAIDAN_SOURCES/3rdparty/linuxdeployqt/squashfs-root/AppRun \
         $KAIDAN_SOURCES/AppDir/usr/share/applications/kaidan.desktop \
         -qmldir=$KAIDAN_SOURCES/src/qml/ \

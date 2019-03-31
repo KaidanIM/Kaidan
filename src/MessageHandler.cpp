@@ -110,8 +110,7 @@ void MessageHandler::handleMessage(const QXmppMessage &msg)
 	bodyWords.prepend(msg.outOfBandUrl());
 #endif
 	for (const QString &word : bodyWords) {
-		bool isLink = word.startsWith("https://") || word.startsWith("http://");
-		if (!isLink)
+		if (!word.startsWith("https://") || !word.startsWith("http://"))
 			continue;
 
 		// check message type by file name in link
@@ -136,10 +135,9 @@ void MessageHandler::handleMessage(const QXmppMessage &msg)
 	}
 
 	// get possible delay (timestamp)
-	QDateTime stamp = msg.stamp();
-	if (!stamp.isValid() || stamp.isNull())
-		stamp = QDateTime::currentDateTime();
-	entry.timestamp = stamp.toUTC().toString(Qt::ISODate);
+	entry.timestamp = (msg.stamp().isNull() || !msg.stamp().isValid())
+	                  ? QDateTime::currentDateTimeUtc().toString(Qt::ISODate)
+	                  : msg.stamp().toUTC().toString(Qt::ISODate);
 
 	// save the message to the database
 #if QXMPP_VERSION >= QT_VERSION_CHECK(1, 0, 0)
@@ -197,8 +195,7 @@ void MessageHandler::sendMessage(QString toJid, QString body)
 	m.setId(msg.id);
 	m.setReceiptRequested(true);
 
-	bool success = client->sendPacket(m);
-	if (success)
+	if (client->sendPacket(m))
 		emit model->setMessageAsSentRequested(msg.id);
 	// TODO: handle error
 }
@@ -236,8 +233,7 @@ void MessageHandler::correctMessage(QString toJid, QString msgId, QString body)
 	m.setReplaceId(msgId);
 #endif
 
-	bool success = client->sendPacket(m);
-	if (success)
+	if (client->sendPacket(m))
 		emit model->setMessageAsSentRequested(msg.id);
 	// TODO: handle error
 }

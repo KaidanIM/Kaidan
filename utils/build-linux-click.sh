@@ -51,7 +51,8 @@ build_kaidan() {
 cleanup_click_dir() {
 	# Strip out documentation and includes
 	rm -r \
-		$CLICK_TARGET_DIR/include
+		$CLICK_TARGET_DIR/include \
+		$CLICK_TARGET_DIR/lib/${DEB_HOST_MULTIARCH}/{cmake,pkgconfig}
 }
 
 

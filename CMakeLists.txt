@@ -3,6 +3,10 @@ find_package(ECM 5.40.0 REQUIRED NO_MODULE)
 set(CMAKE_CXX_STANDARD 14)
 set(QT_MIN_VERSION "5.8.0")
 
+if(POLICY CMP0071)
+	cmake_policy(SET CMP0071 NEW)
+endif()
+
 project(kaidan)
 
 set(APPLICATION_ID "im.kaidan.kaidan")
@@ -32,7 +36,6 @@ set(AUTOMOC_MOC_OPTIONS -Muri=im.kaidan.kaidan)
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${ECM_MODULE_PATH} ${ECM_KDE_MODULE_DIR})
 
 # CMake modules include
-include(GNUInstallDirs)
 include(KDEInstallDirs)
 include(KDECompilerSettings NO_POLICY_SCOPE)
 include(KDECMakeSettings)

@@ -207,10 +207,15 @@ rgb2xyz(Triplet* in_out)
 static double
 y2l(double y)
 {
+/* FIXME: cbrt can't be used in mingw */
+#ifndef _WIN32
     if(y <= epsilon)
         return y * kappa;
     else
         return 116.0 * cbrt(y) - 16.0;
+#else
+    return y * kappa;
+#endif
 }
 
 static double

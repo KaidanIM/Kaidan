@@ -51,7 +51,8 @@ void TransferJob::setBytesSent(qint64 bytesSent)
 		return;
 	this->bytesSent = bytesSent;
 	emit bytesSentChanged();
-	setProgress((qreal) bytesSent / (qreal) bytesTotal);
+	if (bytesTotal != 0)
+		setProgress((qreal) bytesSent / (qreal) bytesTotal);
 }
 
 void TransferJob::setBytesTotal(qint64 bytesTotal)
@@ -60,7 +61,8 @@ void TransferJob::setBytesTotal(qint64 bytesTotal)
 		return;
 	this->bytesTotal = bytesTotal;
 	emit bytesTotalChanged();
-	setProgress((qreal) bytesSent / (qreal) bytesTotal);
+	if (bytesTotal != 0)
+		setProgress((qreal) bytesSent / (qreal) bytesTotal);
 }
 
 TransferCache::TransferCache(QObject *parent)

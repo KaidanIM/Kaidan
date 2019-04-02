@@ -153,9 +153,10 @@ void RosterManager::handleMessage(const QXmppMessage &msg)
 
 	// TODO: Check if it's a carbon message (will need QXmpp v0.10)
 	// msg.from() can be our JID, if it's a carbon/forward from another client
-	bool sentByMe = QXmppUtils::jidToBareJid(msg.from()) == client->configuration().jidBare();
+	QString fromJid = QXmppUtils::jidToBareJid(msg.from());
+	bool sentByMe = fromJid == client->configuration().jidBare();
 	QString contactJid = sentByMe ? QXmppUtils::jidToBareJid(msg.to())
-	                              : QXmppUtils::jidToBareJid(msg.from());
+	                              : fromJid;
 
 	// update last message of the contact
 	emit model->setLastMessageRequested(contactJid, msg.body());
@@ -168,6 +169,6 @@ void RosterManager::handleMessage(const QXmppMessage &msg)
 	if (sentByMe)
 		emit model->setUnreadMessageCountRequested(contactJid, 0);
 	// update unread message counter, if chat is not active
-	else if (!sentByMe && chatPartner != contactJid)
+	else if (chatPartner != contactJid)
 		emit model->newUnreadMessageRequested(contactJid);
 }

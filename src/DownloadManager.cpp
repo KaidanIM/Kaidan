@@ -74,13 +74,11 @@ void DownloadManager::startDownload(const QString msgId, const QString url)
 	}
 
 	// we want to save files to 'Downloads/Kaidan/'
-	QString filePath = QStandardPaths::writableLocation(
-	                        QStandardPaths::DownloadLocation);
-	filePath += "/";
-	filePath += APPLICATION_DISPLAY_NAME;
-	filePath += "/";
+	QString dirPath =
+	        QStandardPaths::writableLocation(QStandardPaths::DownloadLocation)
+	        + QDir::separator() + APPLICATION_DISPLAY_NAME + QDir::separator();
 
-	DownloadJob *dl = new DownloadJob(msgId, QUrl(url), filePath, netMngr,
+	DownloadJob *dl = new DownloadJob(msgId, QUrl(url), dirPath, netMngr,
 	                                  transferCache, kaidan);
 	dl->moveToThread(thread);
 	downloads[msgId] = dl;
@@ -129,16 +127,15 @@ void DownloadJob::startDownload()
 	file.setFileName(filePath + source.fileName());
 	int counter = 1;
 	while (file.exists()) {
-		QString newName = filePath + source.fileName() + "-"
-		                  + QString::number(counter);
-		file.setFileName(newName);
-		counter++;
+		file.setFileName(filePath + source.fileName() + "-"
+		                 + QString::number(counter++));
 	}
 
 	if (!file.open(QIODevice::WriteOnly)) {
-		qWarning() << "Could not open file for writing";
-		emit kaidan->passiveNotificationRequested("Could not open file for "
-		                                          "writing");
+		qWarning() << "Could not open file for writing:"
+		           << file.errorString();
+		emit kaidan->passiveNotificationRequested(
+		        tr("Could not save file: %1").arg(file.errorString()));
 		emit failed();
 		return;
 	}
@@ -157,9 +154,11 @@ void DownloadJob::startDownload()
 		emit finished();
 	});
 	connect(reply, QOverload<QNetworkReply::NetworkError>::of(&QNetworkReply::error),
-	        [this] () {
+	        [this, reply] () {
 		emit transferCache->removeJobRequested(msgId);
-		emit kaidan->passiveNotificationRequested(tr("Download failed."));
+		qWarning() << "Couldn't download file:" << reply->errorString();
+		emit kaidan->passiveNotificationRequested(
+		        tr("Download failed: %1").arg(reply->errorString()));
 		emit finished();
 	});
 	connect(reply, &QNetworkReply::readyRead, this, [this, reply](){

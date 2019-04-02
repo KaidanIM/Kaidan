@@ -92,7 +92,6 @@ AvatarFileStorage::AddAvatarResult AvatarFileStorage::addAvatar(const QString &j
 	if (oldHash != result.hash) {
 		jidAvatarMap[jid] = result.hash;
 		result.hasChanged = true;
-		emit avatarIdsChanged();
 
 		// delete the avatar if it isn't used anymore
 		cleanUp(oldHash);
@@ -100,11 +99,9 @@ AvatarFileStorage::AddAvatarResult AvatarFileStorage::addAvatar(const QString &j
 
 	// abort if the avatar with this hash is already saved
 	// only update GUI, if avatar really has changed
-	bool hasAvatar = hasAvatarHash(result.hash);
-	if (hasAvatar && result.hasChanged) {
-		emit avatarIdsChanged();
-		return result;
-	} else if (hasAvatar) {
+	if (hasAvatarHash(result.hash)) {
+		if (result.hasChanged)
+			emit avatarIdsChanged();
 		return result;
 	}
 

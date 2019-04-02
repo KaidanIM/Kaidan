@@ -339,7 +339,7 @@ void QXmppUploadManager::handleRequestError(const QXmppHttpUploadRequestIq &requ
 void QXmppUploadManager::handleUploadFinished()
 {
     m_runningJobs--;
-    auto *upload = (QXmppHttpUpload*) sender();
+    auto *upload = static_cast<QXmppHttpUpload*>(sender());
     if (upload) {
         m_uploads.removeAll(upload);
         emit uploadSucceeded(upload);

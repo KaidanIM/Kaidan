@@ -72,7 +72,7 @@ public slots:
 	/**
 	 * Sends a new message to the server and inserts it into the database
 	 */
-	void sendMessage(QString toJid, QString body);
+	void sendMessage(QString toJid, QString body, bool isSpoiler, QString spoilerHint);
 
 	/**
 	 * Sends the corrected version of a message

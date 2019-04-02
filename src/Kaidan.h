@@ -366,7 +366,7 @@ signals:
 	 * you should only send messages to JIDs from your roster, otherwise you
 	 * won't be able to see the message history.
 	 */
-	void sendMessage(QString jid, QString message);
+	void sendMessage(QString jid, QString message, bool isSpoiler, QString spoilerHint);
 
 	/**
 	 * Correct the last message

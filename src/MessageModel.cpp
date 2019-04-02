@@ -160,6 +160,7 @@ void MessageModel::updateMessage(const QString id, Message msg)
 	rec.setValue("edited", msg.edited);
 	rec.setValue("isSent", msg.isSent);
 	rec.setValue("isDelivered", msg.isDelivered);
+	rec.setValue("isSpoiler", msg.isSpoiler);
 	if (!msg.timestamp.isEmpty())
 		rec.setValue("timestamp", msg.timestamp);
 	if (!msg.message.isEmpty())
@@ -206,6 +207,8 @@ void MessageModel::addMessage(Message msg)
 	record.setValue("type", (quint8) msg.type);
 	record.setValue("edited", msg.edited);
 	record.setValue("mediaUrl", msg.mediaUrl);
+	record.setValue("isSpoiler", msg.isSpoiler);
+	record.setValue("spoilerHint", msg.spoilerHint);
 	if (msg.mediaSize)
 		record.setValue("mediaSize", msg.mediaSize);
 	record.setValue("mediaContentType", msg.mediaContentType);

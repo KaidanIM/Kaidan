@@ -66,6 +66,8 @@ public:
 		bool edited = false;
 		bool isSent = false;
 		bool isDelivered = false;
+		bool isSpoiler = false;
+		QString spoilerHint;
 		QString mediaUrl;
 		quint64 mediaSize;
 		QString mediaContentType;

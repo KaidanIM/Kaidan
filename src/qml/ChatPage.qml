@@ -40,9 +40,18 @@ import "elements"
 Kirigami.ScrollablePage {
 	property string chatName
 	property string recipientJid
+	property bool isWritingSpoiler
 
 	title: chatName
 	keyboardNavigationEnabled: true
+	actions.contextualActions: [
+		Kirigami.Action {
+			visible: !isWritingSpoiler
+			iconSource: "password-show-off"
+			text: qsTr("Send a spoiler message")
+			onTriggered: isWritingSpoiler = true
+		}
+	]
 
 	SendMediaSheet {
 		id: sendMediaSheet
@@ -56,7 +65,6 @@ Kirigami.ScrollablePage {
 			sendMediaSheet.fileUrl = fileUrl
 			sendMediaSheet.open()
 		}
-
 	}
 
 	function openFileDialog(filterName, filter) {
@@ -139,6 +147,9 @@ Kirigami.ScrollablePage {
 			isLastMessage: model.id === kaidan.messageModel.lastMessageId(recipientJid)
 			textEdit: messageField
 			edited: model.edited
+			isSpoiler: model.isSpoiler
+			isShowingSpoiler: false
+			spoilerHint: model.spoilerHint
 		}
 	}
 
@@ -153,7 +164,6 @@ Kirigami.ScrollablePage {
 			spread: 0.3
 			cached: true // element is static
 		}
-		Layout.fillWidth: true
 		padding: 0
 		wheelEnabled: true
 		background: Rectangle {
@@ -162,6 +172,7 @@ Kirigami.ScrollablePage {
 
 		RowLayout {
 			anchors.fill: parent
+			Layout.preferredHeight: Kirigami.Units.gridUnit * 3
 
 			Controls.ToolButton {
 				id: attachButton
@@ -185,32 +196,67 @@ Kirigami.ScrollablePage {
 				}
 			}
 
-			Controls.TextArea {
-				id: messageField
-
+			ColumnLayout {
+				Layout.minimumHeight: messageField.height + Kirigami.Units.smallSpacing * 2
 				Layout.fillWidth: true
-				placeholderText: qsTr("Compose message")
-				wrapMode: Controls.TextArea.Wrap
-				topPadding: Kirigami.Units.gridUnit * 0.8
-				bottomPadding: topPadding
-				selectByMouse: true
-				background: Item {}
-				state: "compose"
-				states: [
-					State {
-						name: "compose"
-					},
-					State {
-						name: "edit"
+				spacing: 0
+				RowLayout {
+					visible: isWritingSpoiler
+					Controls.TextArea {
+						id: spoilerHintField
+						Layout.fillWidth: true
+						placeholderText: qsTr("Spoiler hint")
+						wrapMode: Controls.TextArea.Wrap
+						selectByMouse: true
+						background: Item {}
 					}
-				]
-				Keys.onReturnPressed: {
-					if (event.key === Qt.Key_Return) {
-						if (event.modifiers & Qt.ControlModifier) {
-							messageField.append("")
-						} else {
-							sendButton.onClicked()
-							event.accepted = true
+					Controls.ToolButton {
+						Layout.preferredWidth: Kirigami.Units.gridUnit * 1.5
+						Layout.preferredHeight: Kirigami.Units.gridUnit * 1.5
+						padding: 0
+						Kirigami.Icon {
+							source: "tab-close"
+							smooth: true
+							anchors.centerIn: parent
+							width: Kirigami.Units.gridUnit * 1.5
+							height: width
+						}
+						onClicked: {
+							isWritingSpoiler = false
+							spoilerHintField.text = ""
+						}
+					}
+				}
+				Kirigami.Separator {
+					visible: isWritingSpoiler
+					Layout.fillWidth: true
+				}
+				Controls.TextArea {
+					id: messageField
+
+					Layout.fillWidth: true
+					Layout.alignment: Qt.AlignVCenter
+					placeholderText: qsTr("Compose message")
+					wrapMode: Controls.TextArea.Wrap
+					selectByMouse: true
+					background: Item {}
+					state: "compose"
+					states: [
+						State {
+							name: "compose"
+						},
+						State {
+							name: "edit"
+						}
+					]
+					Keys.onReturnPressed: {
+						if (event.key === Qt.Key_Return) {
+							if (event.modifiers & Qt.ControlModifier) {
+								messageField.append("")
+							} else {
+								sendButton.onClicked()
+								event.accepted = true
+							}
 						}
 					}
 				}
@@ -280,15 +326,18 @@ Kirigami.ScrollablePage {
 
 					// send the message
 					if (messageField.state == "compose") {
-						kaidan.sendMessage(recipientJid, messageField.text)
+						kaidan.sendMessage(recipientJid, messageField.text,
+								   isWritingSpoiler, spoilerHintField.text)
 					} else if (messageField.state == "edit") {
 						kaidan.correctMessage(recipientJid, kaidan.messageModel.lastMessageId(recipientJid),
 						                      messageField.text)
 					}
 
-					// clean up the text field
+					// clean up the text fields
 					messageField.text = ""
 					messageField.state = "compose"
+					spoilerHintField.text = ""
+					isWritingSpoiler = false
 
 					// reenable the button
 					sendButton.enabled = true

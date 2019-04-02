@@ -54,10 +54,13 @@ RowLayout {
 	property string name
 	property var upload: {
 		if (mediaType !== Enums.MessageText &&
-		    kaidan.transferCache.hasUpload(msgId)) {
+			kaidan.transferCache.hasUpload(msgId)) {
 			kaidan.transferCache.jobByMessageId(model.id)
 		}
 	}
+	property bool isSpoiler
+	property bool isShowingSpoiler
+	property string spoilerHint
 
 	// own messages are on the right, others on the left
 	layoutDirection: sentByMe ? Qt.RightToLeft : Qt.LeftToRight
@@ -100,10 +103,17 @@ RowLayout {
 		Rectangle {
 			id: box
 			anchors.fill: parent
-
 			color: sentByMe ? Kirigami.Theme.complementaryTextColor
-			                : Kirigami.Theme.highlightColor
+							: Kirigami.Theme.highlightColor
 			radius: Kirigami.Units.smallSpacing * 2
+			layer.enabled: box.visible
+			layer.effect: DropShadow {
+				verticalOffset: Kirigami.Units.gridUnit * 0.08
+				horizontalOffset: Kirigami.Units.gridUnit * 0.08
+				color: Kirigami.Theme.disabledTextColor
+				samples: 10
+				spread: 0.1
+			}
 
 			MouseArea {
 				anchors.fill: parent
@@ -122,7 +132,7 @@ RowLayout {
 				id: contextMenu
 				Controls.MenuItem {
 					text: qsTr("Copy Message")
-					onTriggered: kaidan.copyToClipboard(messageBody)
+					onTriggered: isShowingSpoiler ? kaidan.copyToClipboard(messageBody) : kaidan.copyToClipboard(spoilerHint)
 				}
 
 				Controls.MenuItem {
@@ -134,15 +144,6 @@ RowLayout {
 					}
 				}
 			}
-
-			layer.enabled: box.visible
-			layer.effect: DropShadow {
-				verticalOffset: Kirigami.Units.gridUnit * 0.08
-				horizontalOffset: Kirigami.Units.gridUnit * 0.08
-				color: Kirigami.Theme.disabledTextColor
-				samples: 10
-				spread: 0.1
-			}
 		}
 
 		ColumnLayout {
@@ -150,48 +151,104 @@ RowLayout {
 			spacing: 0
 			anchors.centerIn: parent
 			anchors.margins: 4
-
-			Controls.ToolButton {
-				visible: {
-					mediaType !== Enums.MessageText && !isLoading && mediaLocation === ""
+			RowLayout {
+				id: spoilerHintRow
+				visible: isSpoiler
+				MouseArea {
+					anchors.fill: parent
+					acceptedButtons: Qt.LeftButton | Qt.RightButton
+					onClicked: {
+						if (mouse.button === Qt.LeftButton){
+							isShowingSpoiler = !isShowingSpoiler
+						}
+					}
 				}
-				text: qsTr("Download")
-				onClicked: {
-					print("Donwload")
-					kaidan.downloadMedia(msgId, mediaGetUrl)
+				Controls.Label {
+					id: dateLabeltest
+					text: spoilerHint == "" ? qsTr("Spoiler") : spoilerHint
+					color: sentByMe ? Kirigami.Theme.buttonTextColor
+								: Kirigami.Theme.complementaryTextColor
+					font.pixelSize: Kirigami.Units.gridUnit * 0.8
+				}
+
+				Item {
+					Layout.fillWidth: true
+					height: 1
+				}
+
+				Kirigami.Icon {
+					height: 28
+					width: 28
+					source: isShowingSpoiler ? "password-show-off" : "password-show-on"
+					color: sentByMe ? Kirigami.Theme.buttonTextColor : Kirigami.Theme.complementaryTextColor
+				}
+			}
+			Kirigami.Separator {
+				visible: isSpoiler
+				Layout.fillWidth: true
+				color: {
+					var bgColor = sentByMe ? Kirigami.Theme.backgroundColor : Kirigami.Theme.highlightColor
+					var textColor = sentByMe ? Kirigami.Theme.textColor : Kirigami.Theme.buttonTextColor
+					return Qt.tint(textColor, Qt.rgba(bgColor.r, bgColor.g, bgColor.b, 0.7))
 				}
 			}
 
-			// media loader
-			Loader {
-				id: media
-				source: {
-					if (mediaType == Enums.MessageImage &&
-					    mediaLocation !== "")
-						"ChatMessageImage.qml"
-					else
-						""
+			ColumnLayout {
+				visible: isSpoiler && isShowingSpoiler || !isSpoiler
+
+
+				Controls.ToolButton {
+					visible: {
+						(mediaType !== Enums.MessageText && !isLoading && mediaLocation === "")
+					}
+					text: qsTr("Download")
+					onClicked: {
+						print("Donwload")
+						kaidan.downloadMedia(msgId, mediaGetUrl)
+					}
 				}
-				property string sourceUrl: "file://" + mediaLocation
-				Layout.maximumWidth: root.width - Kirigami.Units.gridUnit * 6
-				Layout.preferredHeight: loaded ? item.paintedHeight : 0
+
+				// media loader
+				Loader {
+					id: media
+					source: {
+						if (mediaType == Enums.MessageImage &&
+							mediaLocation !== "")
+							"ChatMessageImage.qml"
+						else
+							""
+					}
+					property string sourceUrl: "file://" + mediaLocation
+					Layout.maximumWidth: root.width - Kirigami.Units.gridUnit * 6
+					Layout.preferredHeight: loaded ? item.paintedHeight : 0
+				}
+
+
+				// message body
+				Controls.Label {
+					id: messageLabel
+					visible: messageBody !== ""
+					text: kaidan.formatMessage(messageBody)
+					textFormat: Text.StyledText
+					wrapMode: Text.Wrap
+					color: sentByMe ? Kirigami.Theme.buttonTextColor
+									: Kirigami.Theme.complementaryTextColor
+					onLinkActivated: Qt.openUrlExternally(link)
+
+					Layout.maximumWidth: mediaType === Enums.MessageImage && media.width !== 0
+										? media.width
+										: root.width - Kirigami.Units.gridUnit * 6
+				}
+				Kirigami.Separator {
+					visible: isSpoiler && isShowingSpoiler
+					Layout.fillWidth: true
+					color: {
+						var bgColor = sentByMe ? Kirigami.Theme.backgroundColor : Kirigami.Theme.highlightColor
+						var textColor = sentByMe ? Kirigami.Theme.textColor : Kirigami.Theme.buttonTextColor
+						return Qt.tint(textColor, Qt.rgba(bgColor.r, bgColor.g, bgColor.b, 0.7))
+					}
+				}
 			}
-
-			// message body
-			Controls.Label {
-				visible: messageBody !== ""
-				text: kaidan.formatMessage(messageBody)
-				textFormat: Text.StyledText
-				wrapMode: Text.Wrap
-				color: sentByMe ? Kirigami.Theme.buttonTextColor
-				                : Kirigami.Theme.complementaryTextColor
-				onLinkActivated: Qt.openUrlExternally(link)
-
-				Layout.maximumWidth: mediaType === Enums.MessageImage && media.width !== 0
-				                     ? media.width
-				                     : root.width - Kirigami.Units.gridUnit * 6
-			}
-
 			// message meta: date, isRead
 			RowLayout {
 				// progress bar for upload/download status

@@ -134,11 +134,15 @@ void RosterManager::removeContact(const QString jid)
 	}
 }
 
-void RosterManager::handleSendMessage(const QString jid, const QString message)
+void RosterManager::handleSendMessage(const QString &jid, const QString &message,
+                                      bool isSpoiler, const QString spoilerHint)
 {
 	if (client->state() == QXmppClient::ConnectedState) {
 		// update last message of the contact
-		emit model->setLastMessageRequested(jid, message);
+		emit model->setLastMessageRequested(jid,
+		        isSpoiler ? spoilerHint.isEmpty() ? tr("Spoiler") : spoilerHint
+		                  : message
+		);
 
 		// update last exchanged datetime (sorting order in contact list)
 		QString dateTime = QDateTime::currentDateTime().toUTC().toString(Qt::ISODate);
@@ -158,11 +162,8 @@ void RosterManager::handleMessage(const QXmppMessage &msg)
 	QString contactJid = sentByMe ? QXmppUtils::jidToBareJid(msg.to())
 	                              : fromJid;
 
-	// update last message of the contact
-	emit model->setLastMessageRequested(contactJid, msg.body());
-
 	// update last exchanged datetime (sorting order in contact list)
-	QString dateTime = QDateTime::currentDateTime().toUTC().toString(Qt::ISODate);
+	QString dateTime = QDateTime::currentDateTimeUtc().toString(Qt::ISODate);
 	emit model->setLastExchangedRequested(contactJid, dateTime);
 
 	// when we sent a message we can ignore all unread message notifications

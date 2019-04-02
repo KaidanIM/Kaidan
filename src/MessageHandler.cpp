@@ -102,6 +102,14 @@ void MessageHandler::handleMessage(const QXmppMessage &msg)
 	entry.id = msg.id();
 	entry.sentByMe = (entry.author == client->configuration().jidBare());
 	entry.message = msg.body();
+	for (const QXmppElement &extension : msg.extensions()) {
+		if (extension.tagName() == "spoiler" &&
+		    extension.attribute("xmlns") == NS_SPOILERS) {
+			entry.isSpoiler = true;
+			entry.spoilerHint = extension.value();
+			break;
+		}
+	}
 	entry.type = MessageType::MessageText; // default to text message without media
 
 	// check if message contains a link and also check out of band url
@@ -166,9 +174,16 @@ void MessageHandler::handleMessage(const QXmppMessage &msg)
 	if (!entry.sentByMe && !isCarbonMessage)
 		Notifications::sendMessageNotification(contactName.toStdString(),
 		                                       msg.body().toStdString());
+
+	// TODO: Move back following call to RosterManager::handleMessage when spoiler
+	// messages are implemented in QXmpp
+	emit kaidan->getRosterModel()->setLastMessageRequested(contactJid,
+	        entry.isSpoiler ? entry.spoilerHint.isEmpty() ? tr("Spoiler") : entry.spoilerHint
+	                        : msg.body()
+	);
 }
 
-void MessageHandler::sendMessage(QString toJid, QString body)
+void MessageHandler::sendMessage(QString toJid, QString body, bool isSpoiler, QString spoilerHint)
 {
 	// TODO: Add offline message cache and send when connnected again
 	if (client->state() != QXmppClient::ConnectedState) {
@@ -181,19 +196,30 @@ void MessageHandler::sendMessage(QString toJid, QString body)
 	}
 
 	MessageModel::Message msg;
+	msg.isSpoiler = isSpoiler;
+	msg.spoilerHint = spoilerHint;
 	msg.author = client->configuration().jidBare();
 	msg.recipient = toJid;
 	msg.id = QXmppUtils::generateStanzaHash(48);
 	msg.sentByMe = true;
 	msg.message = body;
 	msg.type = MessageType::MessageText; // text message without media
-	msg.timestamp = QDateTime::currentDateTime().toUTC().toString(Qt::ISODate);
+	msg.timestamp = QDateTime::currentDateTimeUtc().toString(Qt::ISODate);
 
 	emit model->addMessageRequested(msg);
 
 	QXmppMessage m(msg.author, msg.recipient, body);
 	m.setId(msg.id);
 	m.setReceiptRequested(true);
+	if (isSpoiler) {
+		QXmppElementList extensions = m.extensions();
+		QXmppElement spoiler = QXmppElement();
+		spoiler.setTagName("spoiler");
+		spoiler.setValue(msg.spoilerHint);
+		spoiler.setAttribute("xmlns", NS_SPOILERS);
+		extensions.append(spoiler);
+		m.setExtensions(extensions);
+	}
 
 	if (client->sendPacket(m))
 		emit model->setMessageAsSentRequested(msg.id);

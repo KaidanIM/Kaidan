@@ -41,7 +41,7 @@
 #include <QSqlQuery>
 #include <QSqlRecord>
 
-static const int DATABASE_LATEST_VERSION = 9;
+static const int DATABASE_LATEST_VERSION = 10;
 static const char *DATABASE_TABLE_INFO = "dbinfo";
 static const char *DATABASE_TABLE_MESSAGES = "Messages";
 static const char *DATABASE_TABLE_ROSTER = "Roster";
@@ -145,6 +145,8 @@ void Database::convertDatabase()
 			convertDatabaseToV8(); version = 8; break;
 		case 8:
 			convertDatabaseToV9(); version = 9; break;
+		case 9:
+			convertDatabaseToV10(); version = 10; break;
 		default:
 			break;
 		}
@@ -208,6 +210,8 @@ void Database::createNewDatabase()
 	    "'mediaThumb' BLOB,"
 	    "'mediaHashes' TEXT,"
 	    "'edited' BOOL," // whether the message has been edited
+	    "'spoilerHint' TEXT," //spoiler hint if isSpoiler
+	    "'isSpoiler' BOOL," // message is spoiler
 	    "FOREIGN KEY('author') REFERENCES Roster ('jid'),"
 	    "FOREIGN KEY('recipient') REFERENCES Roster ('jid')"
 	    ")"
@@ -336,6 +340,16 @@ void Database::convertDatabaseToV9()
 	QSqlQuery query(database);
 
 	query.prepare("ALTER TABLE 'Messages' ADD 'edited' BOOL");
+	execQuery(query);
+}
+
+void Database::convertDatabaseToV10()
+{
+	QSqlQuery query(database);
+
+	query.prepare("ALTER TABLE 'Messages' ADD 'isSpoiler' BOOL");
+	execQuery(query);
+	query.prepare("ALTER TABLE 'Messages' ADD 'spoilerHint' TEXT");
 	execQuery(query);
 }
 

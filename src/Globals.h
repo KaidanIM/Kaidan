@@ -44,6 +44,9 @@
 #define APPLICATION_DESCRIPTION "A simple, user-friendly Jabber/XMPP client"
 #define VERSION_STRING "0.4.0-dev"
 
+// XML namespaces
+#define NS_SPOILERS "urn:xmpp:spoiler:0"
+
 /**
  * Map of JIDs to contact names
  */

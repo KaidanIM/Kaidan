@@ -23,6 +23,9 @@
 	<file alias="go-parent-folder.svg">3rdparty/breeze-icons/icons/actions/22/go-parent-folder.svg</file>
         <file alias="folder.svg">3rdparty/breeze-icons/icons/places/22/folder.svg</file>
         <file alias="text-x-plain.svg">3rdparty/breeze-icons/icons/mimetypes/22/text-x-plain.svg</file>
+        <file alias="tab-close.svg">3rdparty/breeze-icons/icons/actions/22/tab-close.svg</file>
+        <file alias="password-show-on.svg">3rdparty/breeze-icons/icons/actions/22/password-show-on.svg</file>
+        <file alias="password-show-off.svg">3rdparty/breeze-icons/icons/actions/22/password-show-off.svg</file>
     </qresource>
     
     <qresource prefix="/icons/breeze/actions/16">

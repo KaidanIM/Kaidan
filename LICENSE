@@ -9,6 +9,7 @@ Copyright: 2016-2019, Linus Jahn <lnj@kaidan.im>
            2016-2019, Jonah Brüchert <jbb@kaidan.im>
            2017-2019, Ilya Bizyaev <bizyaev@zoho.com>
            2018, Allan Nordhøy <epost@anotheragency.no>
+           2019, Xavier <xavi@delape.net>
            2018, Nicolas Fella <nicolas.fella@gmx.de>
            2018, Bjarne Roß <ross.b@freenet.de>
            2018, SohnyBohny <sohny.bean@streber24.de>
@@ -38,10 +39,8 @@ Files: src/StatusBar.cpp
        src/StatusBar.h
        src/singleapp/*
        src/hsluv-c/*
-       data/images/xmpp.svg
        utils/generate-license.py
 Copyright: 2016, J-P Nurmi <jpnurmi@gmail.com>
-           2007, Raja Sandhu, XMPP Standards Foundation
            2018-2019, Linus Jahn <lnj@kaidan.im>
            2015-2018, Itay Grudev <itay+github.com@grudev.com>
            2015, Alexei Boronine <alexei@boronine.com>
@@ -56,13 +55,10 @@ Copyright: 2017, Konstantinos Sideris <siderisk@auth.gr>
 License: GPL-3+
 
 Files: data/images/message_checkmark.svg
-       data/images/diaspora.svg
 Copyright: 2014, Michael Kurz <betheg@bitcloner.org>
-           2016, Gregor Santner <gsantner@mailbox.org>
 License: GPL-3+
 Comment: 
  message_checkmark.svg: Originally from conversations, optimized using SVGO by LNJ <git@lnj.li>
- diaspora.svg: Originally from dandelion, <https://github.com/diaspora-for-android/dandelion>
 
 Files: misc/kaidan.svg
        misc/kaidan-small-margin.svg

@@ -61,16 +61,6 @@ Kirigami.Page {
 			Controls.Label {
 				id: jidLabel
 				text: qsTr("Your Jabber-ID:")
-
-				states: [
-					State {
-						name: "diaspora"
-						PropertyChanges {
-							target: jidLabel
-							text: qsTr("Your diaspora*-ID:")
-						}
-					}
-				]
 			}
 			Controls.TextField {
 				id: jidField
@@ -78,16 +68,6 @@ Kirigami.Page {
 				placeholderText: qsTr("user@example.org")
 				Layout.fillWidth: true
 				selectByMouse: true
-
-				states: [
-					State {
-						name: "diaspora"
-						PropertyChanges {
-							target: jidField
-							placeholderText: qsTr("user@diaspora.pod")
-						}
-					}
-				]
 			}
 
 			// Password field
@@ -136,42 +116,9 @@ Kirigami.Page {
 			}
 		}
 
-		RowLayout {
-			id: serviceBar
-			anchors.horizontalCenter: parent.horizontalCenter
-
-			Controls.ToolButton {
-				Layout.preferredHeight: Kirigami.Units.gridUnit * 2.75
-				Layout.preferredWidth: Kirigami.Units.gridUnit * 2.75
-				onClicked: {
-					jidField.state = "diaspora";
-					jidLabel.state = "diaspora";
-				}
-
-				Image {
-					source: kaidan.getResourcePath("images/diaspora.svg")
-					fillMode: Image.PreserveAspectFit
-					mipmap: true
-					height: parent.height - Kirigami.Units.smallSpacing
-				}
-			}
-
-			Controls.ToolButton {
-				Layout.preferredHeight: Kirigami.Units.gridUnit * 2.75
-				Layout.preferredWidth: Kirigami.Units.gridUnit * 2.75
-				padding: Kirigami.Units.smallSpacing
-				onClicked: {
-					jidField.state = "";
-					jidLabel.state = "";
-				}
-
-				Image {
-					source: kaidan.getResourcePath("images/xmpp.svg")
-					fillMode: Image.PreserveAspectFit
-					mipmap: true
-					height: parent.height - Kirigami.Units.smallSpacing
-				}
-			}
+		// placeholder
+		Item {
+			Layout.preferredHeight: Kirigami.Units.gridUnit * 3
 		}
 	}
 

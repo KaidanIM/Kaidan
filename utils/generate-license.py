@@ -270,12 +270,10 @@ def main():
 		),
 		CopyrightTarget(
 			files = ["src/StatusBar.cpp", "src/StatusBar.h", "src/singleapp/*",
-				 "src/hsluv-c/*", "data/images/xmpp.svg",
-				 "utils/generate-license.py"],
+				 "src/hsluv-c/*", "utils/generate-license.py"],
 			licenseName = "MIT",
 			authorList = {
 				"J-P Nurmi <jpnurmi@gmail.com>": CopyrightAuthor(years = "2016"),
-				"Raja Sandhu, XMPP Standards Foundation": CopyrightAuthor(years = "2007"),
 				"Linus Jahn <lnj@kaidan.im>": CopyrightAuthor(years = "2018-2019"),
 				"Itay Grudev <itay+github.com@grudev.com>": CopyrightAuthor(years = "2015-2018"),
 				"Alexei Boronine <alexei@boronine.com>": CopyrightAuthor(years = "2015"),
@@ -291,14 +289,12 @@ def main():
 			},
 		),
 		CopyrightTarget(
-			files = ["data/images/message_checkmark.svg", "data/images/diaspora.svg"],
+			files = ["data/images/message_checkmark.svg"],
 			licenseName = "GPL-3+",
 			authorList = {
 				"Michael Kurz <betheg@bitcloner.org>": CopyrightAuthor(years = "2014"),
-				"Gregor Santner <gsantner@mailbox.org>": CopyrightAuthor(years = "2016"),
 			},
-			comment = "message_checkmark.svg: Originally from conversations, optimized using SVGO by LNJ <git@lnj.li>\n"
-				  "diaspora.svg: Originally from dandelion, <https://github.com/diaspora-for-android/dandelion>"
+			comment = "message_checkmark.svg: Originally from conversations, optimized using SVGO by LNJ <git@lnj.li>"
 		),
 		CopyrightTarget(
 			files = [

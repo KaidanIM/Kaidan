@@ -123,8 +123,7 @@ RowLayout {
 						contextMenu.popup()
 				}
 				onPressAndHold: {
-					if (mouse.source === Qt.MouseEventNotSynthesized)
-						contextMenu.popup()
+					contextMenu.popup()
 				}
 			}
 

@@ -21,6 +21,7 @@ set(KAIDAN_SOURCES
 	${CURDIR}/EmojiModel.cpp
 	${CURDIR}/TransferCache.cpp
 	${CURDIR}/DownloadManager.cpp
+	${CURDIR}/Utils.cpp
 
 	# needed to trigger moc generation
 	${CURDIR}/Enums.h

@@ -55,6 +55,7 @@
 #include "Enums.h"
 #include "StatusBar.h"
 #include "EmojiModel.h"
+#include "Utils.h"
 
 #ifdef STATIC_BUILD
 #include "static_plugins.h"
@@ -169,6 +170,7 @@ Q_DECL_EXPORT int main(int argc, char *argv[])
 	qRegisterMetaType<DisconnectionReason>("DisconnectionReason");
 	qRegisterMetaType<EmojiModel*>("EmojiModel");
 	qRegisterMetaType<TransferJob*>("TransferJob*");
+	qRegisterMetaType<Utils*>("Utils*");
 
 	// Qt-Translator
 	QTranslator qtTranslator;
@@ -244,7 +246,6 @@ Q_DECL_EXPORT int main(int argc, char *argv[])
 	}
 
 	QQmlApplicationEngine engine;
-#ifndef SAILFISH_OS
 	// QtQuickControls2 Style
 	if (qgetenv("QT_QUICK_CONTROLS_STYLE").isEmpty()) {
 #ifdef Q_OS_WIN
@@ -255,7 +256,6 @@ Q_DECL_EXPORT int main(int argc, char *argv[])
 		qDebug() << "QT_QUICK_CONTROLS_STYLE not set, setting to" << defaultStyle;
 		qputenv("QT_QUICK_CONTROLS_STYLE", defaultStyle.toLatin1());
 	}
-#endif
 	// QML type bindings
 #ifdef STATIC_BUILD
 	KirigamiPlugin::getInstance().registerTypes();
@@ -271,7 +271,6 @@ Q_DECL_EXPORT int main(int argc, char *argv[])
 		return -1;
 
 #ifdef Q_OS_ANDROID
-	//TODO: use QQmlApplicationEngine::objectCreated to ensure QML was actually loaded?
 	QtAndroid::hideSplashScreen();
 #endif
 

@@ -43,6 +43,7 @@
 class QGuiApplication;
 class Database;
 class QXmppClient;
+class Utils;
 
 using namespace Enums;
 
@@ -59,6 +60,7 @@ class Kaidan : public QObject
 {
 	Q_OBJECT
 
+	Q_PROPERTY(Utils* utils READ getUtils CONSTANT)
 	Q_PROPERTY(RosterModel* rosterModel READ getRosterModel CONSTANT)
 	Q_PROPERTY(MessageModel* messageModel READ getMessageModel CONSTANT)
 	Q_PROPERTY(AvatarFileStorage* avatarStorage READ getAvatarStorage NOTIFY avatarStorageChanged)
@@ -74,7 +76,6 @@ class Kaidan : public QObject
 
 public:
 	Kaidan(QGuiApplication *app, bool enableLogging = true, QObject *parent = nullptr);
-
 	~Kaidan();
 
 	/**
@@ -102,15 +103,6 @@ public:
 	Q_INVOKABLE void mainDisconnect(bool openLogInPage = false);
 
 	/**
-	 * Returns a URL to a given resource file name
-	 *
-	 * This will check various paths which could contain the searched file.
-	 * If the file was found, it'll return a `file://` or a `qrc:/` url to
-	 * the file.
-	 */
-	Q_INVOKABLE QString getResourcePath(QString resourceName) const;
-
-	/**
 	 * Returns the current ConnectionState
 	 */
 	Q_INVOKABLE quint8 getConnectionState() const
@@ -124,36 +116,12 @@ public:
 	Q_INVOKABLE quint8 getDisconnReason() const;
 
 	/**
-	 * Returns a string of this build's Kaidan version
-	 */
-	Q_INVOKABLE QString getVersionString() const
-	{
-		return QString(VERSION_STRING);
-	}
-
-	/**
-	 * Returns a string without new lines, unneeded spaces, etc.
-	 *
-	 * See QString::simplified for more information.
-	 */
-	Q_INVOKABLE QString removeNewLinesFromString(QString input) const
-	{
-		return input.simplified();
-	}
-
-	/**
-	 * Checks whether a file is an image and could be displayed as such.
-	 * @param fileUrl URL to the possible image file
-	 */
-	Q_INVOKABLE bool isImageFile(QString fileUrl) const;
-
-	/**
 	 * Set own JID used for connection
 	 *
 	 * To really change the JID of the current connection, you'll need to
 	 * reconnect.
 	 */
-	void setJid(QString jid);
+	void setJid(const QString &jid);
 
 	/**
 	 * Get the current JID
@@ -166,7 +134,7 @@ public:
 	/**
 	 * Set a optional custom JID resource (device name)
 	 */
-	void setJidResource(QString jidResource);
+	void setJidResource(const QString &jidResource);
 
 	/**
 	 * Get the JID resoruce
@@ -179,7 +147,7 @@ public:
 	/**
 	 * Set the password for next connection
 	 */
-	void setPassword(QString password);
+	void setPassword(const QString &password);
 
 	/**
 	 * Get the currently used password
@@ -194,7 +162,7 @@ public:
 	 *
 	 * This will set a filter on the database to only view the related messages.
 	 */
-	void setChatPartner(QString jid);
+	void setChatPartner(const QString &jid);
 
 	/**
 	 * Get the currrently opened chat
@@ -229,15 +197,15 @@ public:
 		return caches->transferCache;
 	}
 
+	Utils* getUtils() const
+	{
+		return utils;
+	}
+
 	/**
 	 * Adds XMPP URI to open as soon as possible
 	 */
-	void addOpenUri(QByteArray uri);
-
-	/**
-	 * Copy text to the clipboard
-	 */
-	Q_INVOKABLE void copyToClipboard(QString text);
+	void addOpenUri(const QByteArray &uri);
 
 	/**
 	 * Returns whether an HTTP File Upload service has been found
@@ -246,28 +214,6 @@ public:
 	{
 		return uploadServiceFound;
 	}
-
-	/**
-	 * Returns the file name from a URL
-	 */
-	Q_INVOKABLE QString fileNameFromUrl(QString url);
-
-	/**
-	 * Returns the file size from a URL
-	 */
-	Q_INVOKABLE QString fileSizeFromUrl(QString url);
-
-	/**
-	 * Styles/formats a message for displaying
-	 *
-	 * This currently only adds some link highlighting
-	 */
-	Q_INVOKABLE QString formatMessage(QString message);
-
-	/**
-	 * Returns a consistent user color generated from the nickname.
-	 */
-	Q_INVOKABLE QColor getUserColor(QString nickName) const;
 
 signals:
 	void avatarStorageChanged();
@@ -435,20 +381,15 @@ public slots:
 private:
 	void connectDatabases();
 
-	/**
-	 * Highlights links in a list of words
-	 */
-	QString processMsgFormatting(QStringList words, bool isFirst = true);
-
-	ClientWorker *client;
-	ClientThread *cltThrd;
+	Utils *utils;
 	Database *database;
 	ClientWorker::Caches *caches;
+	ClientThread *cltThrd;
+	ClientWorker *client;
+
 	ClientWorker::Credentials creds;
 	QString chatPartner;
-
 	QString openUriCache;
-
 	bool uploadServiceFound = false;
 	ConnectionState connectionState = ConnectionState::StateDisconnected;
 	DisconnReason disconnReason = DisconnReason::ConnNoError;

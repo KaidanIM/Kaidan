@@ -131,7 +131,7 @@ RowLayout {
 				id: contextMenu
 				Controls.MenuItem {
 					text: qsTr("Copy Message")
-					onTriggered: isShowingSpoiler ? kaidan.copyToClipboard(messageBody) : kaidan.copyToClipboard(spoilerHint)
+					onTriggered: isShowingSpoiler ? kaidan.utils.copyToClipboard(messageBody) : kaidan.copyToClipboard(spoilerHint)
 				}
 
 				Controls.MenuItem {
@@ -227,7 +227,7 @@ RowLayout {
 				Controls.Label {
 					id: messageLabel
 					visible: messageBody !== ""
-					text: kaidan.formatMessage(messageBody)
+					text: kaidan.utils.formatMessage(messageBody)
 					textFormat: Text.StyledText
 					wrapMode: Text.Wrap
 					color: sentByMe ? Kirigami.Theme.buttonTextColor
@@ -267,7 +267,7 @@ RowLayout {
 				Image {
 					id: checkmark
 					visible: (sentByMe && isRead)
-					source: kaidan.getResourcePath("images/message_checkmark.svg")
+					source: kaidan.utils.getResourcePath("images/message_checkmark.svg")
 					Layout.preferredHeight: Kirigami.Units.gridUnit * 0.65
 					Layout.preferredWidth: Kirigami.Units.gridUnit * 0.65
 					sourceSize.height: Kirigami.Units.gridUnit * 0.65

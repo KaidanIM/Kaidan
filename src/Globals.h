@@ -44,6 +44,11 @@
 #define APPLICATION_DESCRIPTION "A simple, user-friendly Jabber/XMPP client"
 #define VERSION_STRING "0.4.0-dev"
 
+// Kaidan settings
+#define KAIDAN_SETTINGS_AUTH_JID "auth/jid"
+#define KAIDAN_SETTINGS_AUTH_RESOURCE "auth/resource"
+#define KAIDAN_SETTINGS_AUTH_PASSWD "auth/password"
+
 // XML namespaces
 #define NS_SPOILERS "urn:xmpp:spoiler:0"
 

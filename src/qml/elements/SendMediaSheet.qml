@@ -38,7 +38,7 @@ Kirigami.OverlaySheet {
 
 	property string jid
 	property string fileUrl
-	property bool isImage: kaidan.isImageFile(fileUrl)
+	property bool isImage: kaidan.utils.isImageFile(fileUrl)
 
 	showCloseButton: false
 

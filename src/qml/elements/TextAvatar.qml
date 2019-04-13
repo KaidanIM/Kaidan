@@ -37,7 +37,7 @@ Rectangle {
 
 	property string name
 
-	color: Qt.lighter(kaidan.getUserColor(name))
+	color: Qt.lighter(kaidan.utils.getUserColor(name))
 	radius: width * 0.5
 
 	Text {

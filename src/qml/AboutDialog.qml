@@ -46,7 +46,7 @@ Controls.Dialog {
 		rowSpacing: 20
 
 		Image {
-			source: kaidan.getResourcePath("images/kaidan.svg")
+			source: kaidan.utils.getResourcePath("images/kaidan.svg")
 			Layout.preferredWidth: Kirigami.Units.gridUnit * 9
 			Layout.preferredHeight: Kirigami.Units.gridUnit * 9
 			Layout.fillWidth: true
@@ -63,7 +63,7 @@ Controls.Dialog {
 			spacing: Kirigami.gridUnit * 0.6
 
 			Kirigami.Heading {
-				text: "Kaidan " + kaidan.getVersionString()
+				text: "Kaidan " + kaidan.utils.getVersionString()
 				textFormat: Text.PlainText
 				wrapMode: Text.WordWrap
 				Layout.fillWidth: true

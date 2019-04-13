@@ -89,7 +89,7 @@ Item {
 			// file name
 			Controls.Label {
 				Layout.fillWidth: true
-				text: kaidan.fileNameFromUrl(sourceUrl)
+				text: kaidan.utils.fileNameFromUrl(sourceUrl)
 				textFormat: Text.PlainText
 				elide: Text.ElideRight
 				maximumLineCount: 1
@@ -98,7 +98,7 @@ Item {
 			// file size
 			Controls.Label {
 				Layout.fillWidth: true
-				text: kaidan.fileSizeFromUrl(sourceUrl)
+				text: kaidan.utils.fileSizeFromUrl(sourceUrl)
 				textFormat: Text.PlainText
 				elide: Text.ElideRight
 				maximumLineCount: 1

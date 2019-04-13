@@ -132,7 +132,7 @@ Kirigami.SwipeListItem {
 					text: {
 						presenceType === Enums.PresError ? // error presence type
 						qsTr("Error: Please check the JID.") :
-						kaidan.removeNewLinesFromString(lastMessage)
+						kaidan.utils.removeNewLinesFromString(lastMessage)
 					}
 					textFormat: Text.PlainText
 					font.pixelSize: Kirigami.Units.gridUnit * 0.8

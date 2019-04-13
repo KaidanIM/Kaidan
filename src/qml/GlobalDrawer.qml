@@ -34,8 +34,8 @@ import im.kaidan.kaidan 1.0
 Kirigami.GlobalDrawer {
 	id: globalDrawer
 	title: "Kaidan"
-	titleIcon: kaidan.getResourcePath("images/kaidan.svg");
-	bannerImageSource: kaidan.getResourcePath("images/banner.png");
+	titleIcon: kaidan.utils.getResourcePath("images/kaidan.svg");
+	bannerImageSource: kaidan.utils.getResourcePath("images/banner.png");
 	// make drawer floating (overlay)
 	modal: true
 	// start with closed drawer
@@ -48,7 +48,7 @@ Kirigami.GlobalDrawer {
 			text: qsTr("Invite friends")
 			iconName: "mail-invitation"
 			onTriggered: {
-				kaidan.copyToClipboard("https://i.kaidan.im/#" + kaidan.jid)
+				kaidan.utils.copyToClipboard("https://i.kaidan.im/#" + kaidan.jid)
 				passiveNotification(qsTr("Invitation link copied to clipboard"))
 			}
 		},

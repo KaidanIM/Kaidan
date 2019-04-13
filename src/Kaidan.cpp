@@ -50,18 +50,18 @@
 #include "RosterModel.h"
 #include "MessageModel.h"
 #include "PresenceCache.h"
+#include "Utils.h"
 
-Kaidan::Kaidan(QGuiApplication *app, bool enableLogging, QObject *parent) : QObject(parent)
+Kaidan::Kaidan(QGuiApplication *app, bool enableLogging, QObject *parent)
+        : QObject(parent), utils(new Utils(this)), database(new Database())
 {
 	// Database setup
-	database = new Database();
 	database->openDatabase();
 	if (database->needToConvert())
 		database->convertDatabase();
 
 	// Caching components
 	caches = new ClientWorker::Caches(database, this);
-
 	// Connect the avatar changed signal of the avatarStorage with the NOTIFY signal
 	// of the Q_PROPERTY for the avatar storage (so all avatars are updated in QML)
 	connect(caches->avatarStorage, &AvatarFileStorage::avatarIdsChanged,
@@ -71,20 +71,20 @@ Kaidan::Kaidan(QGuiApplication *app, bool enableLogging, QObject *parent) : QObj
 	// Load settings
 	//
 
-	creds.jid = caches->settings->value("auth/jid").toString();
-	creds.jidResource = caches->settings->value("auth/resource").toString();
-	creds.password = QString(QByteArray::fromBase64(caches->settings->value("auth/password")
-	                 .toString().toUtf8()));
+	creds.jid = caches->settings->value(KAIDAN_SETTINGS_AUTH_JID).toString();
+	creds.jidResource = caches->settings->value(KAIDAN_SETTINGS_AUTH_RESOURCE)
+	                    .toString();
+	creds.password = QString(QByteArray::fromBase64(caches->settings->value(
+	                 KAIDAN_SETTINGS_AUTH_PASSWD).toString().toUtf8()));
 	// use Kaidan as resource, if no set
 	if (creds.jidResource.isEmpty())
-		setJidResource(QString(APPLICATION_NAME));
+		setJidResource(APPLICATION_DISPLAY_NAME);
 	creds.isFirstTry = false;
 
 	//
 	// Start ClientWorker on new thread
 	//
 
-	// create new thread for client connection
 	cltThrd = new ClientThread();
 	client = new ClientWorker(caches, this, enableLogging, app);
 	client->setCredentials(creds);
@@ -161,14 +161,14 @@ void Kaidan::setDisconnReason(DisconnectionReason reason)
 	emit disconnReasonChanged();
 }
 
-void Kaidan::setJid(QString jid)
+void Kaidan::setJid(const QString &jid)
 {
 	creds.jid = jid;
 	// credentials were modified -> first try
 	creds.isFirstTry = true;
 }
 
-void Kaidan::setJidResource(QString jidResource)
+void Kaidan::setJidResource(const QString &jidResource)
 {
 	// JID resource won't influence the authentication, so we don't need
 	// to set the first try flag and can save it.
@@ -177,14 +177,14 @@ void Kaidan::setJidResource(QString jidResource)
 	caches->settings->setValue("auth/resource", jidResource);
 }
 
-void Kaidan::setPassword(QString password)
+void Kaidan::setPassword(const QString &password)
 {
 	creds.password = password;
 	// credentials were modified -> first try
 	creds.isFirstTry = true;
 }
 
-void Kaidan::setChatPartner(QString chatPartner)
+void Kaidan::setChatPartner(const QString &chatPartner)
 {
 	// check if different
 	if (this->chatPartner == chatPartner)
@@ -200,45 +200,7 @@ quint8 Kaidan::getDisconnReason() const
 	return (quint8) disconnReason;
 }
 
-QString Kaidan::getResourcePath(QString name) const
-{
-	// We generally prefer to first search for files in application resources
-	if (QFile::exists(":/" + name))
-		return QString("qrc:/" + name);
-
-	// list of file paths where to search for the resource file
-	QStringList pathList;
-	// add relative path from binary (only works if installed)
-	pathList << QCoreApplication::applicationDirPath() + QString("/../share/") + QString(APPLICATION_NAME);
-	// get the standard app data locations for current platform
-	pathList << QStandardPaths::standardLocations(QStandardPaths::AppDataLocation);
-#ifdef UBUNTU_TOUCH
-	pathList << QString("./share/") + QString(APPLICATION_NAME);
-#endif
-#ifndef NDEBUG
-#ifdef DEBUG_SOURCE_PATH
-	// add source directory (only for debug builds)
-	pathList << QString(DEBUG_SOURCE_PATH) + QString("/data");
-#endif
-#endif
-
-	// search for file in directories
-	for (int i = 0; i < pathList.size(); i++) {
-		// open directory
-		QDir directory(pathList.at(i));
-		// look up the file
-		if (directory.exists(name)) {
-			// found the file, return the path
-			return QUrl::fromLocalFile(directory.absoluteFilePath(name)).toString();
-		}
-	}
-
-	// no file found
-	qWarning() << "[main] Could NOT find media file:" << name;
-	return QString("");
-}
-
-void Kaidan::addOpenUri(QByteArray uri)
+void Kaidan::addOpenUri(const QByteArray &uri)
 {
 	qDebug() << "[main]" << uri;
 
@@ -252,66 +214,4 @@ void Kaidan::addOpenUri(QByteArray uri)
 		emit passiveNotificationRequested(tr("The link will be opened after you have connected."));
 		openUriCache = QString::fromUtf8(uri);
 	}
-}
-
-void Kaidan::copyToClipboard(QString text)
-{
-	QClipboard *clipboard = QGuiApplication::clipboard();
-	clipboard->setText(text);
-}
-
-bool Kaidan::isImageFile(QString fileUrl) const
-{
-	QMimeDatabase mimeDb;
-	QMimeType type = mimeDb.mimeTypeForUrl(QUrl(fileUrl));
-	if (type.inherits("image/jpeg") || type.inherits("image/png"))
-		return true;
-	return false;
-}
-
-QString Kaidan::fileNameFromUrl(QString url)
-{
-	return QUrl(url).fileName();
-}
-
-QString Kaidan::fileSizeFromUrl(QString url)
-{
-#if QT_VERSION >= QT_VERSION_CHECK(5, 10, 0) // Qt 5.10 or later
-	qint64 size = QFileInfo(QUrl(url).toLocalFile()).size();
-	return QLocale::system().formattedDataSize(size);
-#else
-	// before Qt 5.10: sizes will always be in MiB
-	double size = QFileInfo(QUrl(url).toLocalFile()).size();
-	return QString::number(qRound(size / 1024.0 / 10.24) / 100.0).append(" MiB");
-#endif
-}
-
-QString Kaidan::formatMessage(QString message)
-{
-	// escape all special XML chars (as '<' and '>')
-	message = message.toHtmlEscaped();
-
-	return processMsgFormatting(message.split(" "));
-}
-
-QColor Kaidan::getUserColor(QString nickName) const
-{
-	QXmppColorGenerator::RGBColor color = QXmppColorGenerator::generateColor(nickName);
-	return QColor(color.red, color.green, color.blue);
-}
-
-QString Kaidan::processMsgFormatting(QStringList list, bool isFirst)
-{
-	if (list.isEmpty())
-		return "";
-
-	// add space before word (if word is not the first)
-	QString prepend = isFirst ? "" : " ";
-
-	// link highlighting
-	if (list.first().startsWith("https://") || list.first().startsWith("http://"))
-		return prepend + QString("<a href='%1'>%1</a>").arg(list.first())
-		       + processMsgFormatting(list.mid(1), false);
-
-	return prepend + list.first() + processMsgFormatting(list.mid(1), false);
 }

@@ -44,7 +44,7 @@ class Kaidan;
 class MessageModel;
 class QMimeType;
 class QXmppDiscoveryIq;
-#if QXMPP_VERSION >= 0x000904
+#if QXMPP_VERSION >= QT_VERSION_CHECK(1, 0, 0)
 class QXmppCarbonManager;
 #endif
 
@@ -89,7 +89,7 @@ private:
 	QXmppClient *client;
 	QXmppMessageReceiptManager receiptManager;
 	MessageModel *model;
-#if QXMPP_VERSION >= 0x000904
+#if QXMPP_VERSION >= QT_VERSION_CHECK(1, 0, 0)
 	QXmppCarbonManager *carbonManager;
 #endif
 	QString chatPartner;

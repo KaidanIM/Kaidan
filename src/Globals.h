@@ -49,8 +49,12 @@
 #define KAIDAN_SETTINGS_AUTH_RESOURCE "auth/resource"
 #define KAIDAN_SETTINGS_AUTH_PASSWD "auth/password"
 
+const QString KAIDAN_RESOURCE_RANDOM_CHARS = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnop"
+                                             "qrstuvwxyz0123456789";
+
 // XML namespaces
 #define NS_SPOILERS "urn:xmpp:spoiler:0"
+#define NS_CARBONS "urn:xmpp:carbons:2"
 
 /**
  * Map of JIDs to contact names

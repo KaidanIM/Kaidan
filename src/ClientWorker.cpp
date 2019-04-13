@@ -51,7 +51,7 @@
 
 ClientWorker::ClientWorker(Caches *caches, Kaidan *kaidan, bool enableLogging, QGuiApplication *app,
                            QObject* parent)
-	: QObject(parent), caches(caches), kaidan(kaidan), enableLogging(enableLogging), app(app)
+        : QObject(parent), caches(caches), kaidan(kaidan), enableLogging(enableLogging), app(app)
 {
 	client = new QXmppClient(this);
 	logger = new LogHandler(client, this);
@@ -135,8 +135,8 @@ void ClientWorker::onConnect()
 
 	// accept credentials and save them
 	creds.isFirstTry = false;
-	caches->settings->setValue("auth/jid", creds.jid);
-	caches->settings->setValue("auth/password",
+	caches->settings->setValue(KAIDAN_SETTINGS_AUTH_JID, creds.jid);
+	caches->settings->setValue(KAIDAN_SETTINGS_AUTH_PASSWD,
 	                           QString::fromUtf8(creds.password.toUtf8().toBase64()));
 
 	// after first log in we always want to automatically reconnect
@@ -188,16 +188,10 @@ void ClientWorker::onConnectionError(QXmppClient::Error error)
 
 QString ClientWorker::generateRandomString(unsigned int length) const
 {
-	const QString possibleCharacters("ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklm"
-	                                 "nopqrstuvwxyz0123456789");
-	const int numOfChars = possibleCharacters.length();
-
 	QString randomString;
-	for (unsigned int i = 0; i < length; ++i) {
-		int index = qrand() % numOfChars;
-		QChar nextChar = possibleCharacters.at(index);
-		randomString.append(nextChar);
-	}
+	for (int i = 0; i < length; ++i)
+		randomString.append(KAIDAN_RESOURCE_RANDOM_CHARS.at(
+		                    qrand() % KAIDAN_RESOURCE_RANDOM_CHARS.length()));
 	return randomString;
 }
 

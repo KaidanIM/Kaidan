@@ -31,16 +31,9 @@
 #include "Kaidan.h"
 
 // Qt
-#include <QClipboard>
 #include <QDebug>
-#include <QDir>
-#include <QFileInfo>
 #include <QGuiApplication>
-#include <QMimeDatabase>
-#include <QMimeType>
 #include <QSettings>
-#include <QStandardPaths>
-#include <QUrl>
 // QXmpp
 #include <QXmppClient.h>
 #include "qxmpp-exts/QXmppColorGenerator.h"
@@ -132,7 +125,7 @@ void Kaidan::mainDisconnect(bool openLogInPage)
 
 	if (openLogInPage) {
 		// clear password
-		caches->settings->remove("auth/password");
+		caches->settings->remove(KAIDAN_SETTINGS_AUTH_PASSWD);
 		setPassword(QString());
 		// trigger log in page
 		emit newCredentialsNeeded();
@@ -174,7 +167,7 @@ void Kaidan::setJidResource(const QString &jidResource)
 	// to set the first try flag and can save it.
 	creds.jidResource = jidResource;
 
-	caches->settings->setValue("auth/resource", jidResource);
+	caches->settings->setValue(KAIDAN_SETTINGS_AUTH_RESOURCE, jidResource);
 }
 
 void Kaidan::setPassword(const QString &password)
@@ -197,7 +190,7 @@ void Kaidan::setChatPartner(const QString &chatPartner)
 
 quint8 Kaidan::getDisconnReason() const
 {
-	return (quint8) disconnReason;
+	return static_cast<quint8>(disconnReason);
 }
 
 void Kaidan::addOpenUri(const QByteArray &uri)

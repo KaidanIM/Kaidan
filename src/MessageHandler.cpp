@@ -39,7 +39,7 @@
 #include <QXmppUtils.h>
 #include <QXmppRosterManager.h>
 #include <QXmppDiscoveryManager.h>
-#if QXMPP_VERSION >= 0x000904
+#if QXMPP_VERSION >= QT_VERSION_CHECK(1, 0, 0)
 #include <QXmppCarbonManager.h>
 #endif
 // Kaidan
@@ -61,7 +61,7 @@ MessageHandler::MessageHandler(Kaidan *kaidan, QXmppClient *client, MessageModel
 		emit model->setMessageAsDeliveredRequested(id);
 	});
 
-#if QXMPP_VERSION >= 0x000904 // QXmppCarbonManager was added in v0.9.4
+#if QXMPP_VERSION >= QT_VERSION_CHECK(1, 0, 0)
 	carbonManager = new QXmppCarbonManager();
 	client->addExtension(carbonManager);
 
@@ -84,7 +84,7 @@ MessageHandler::MessageHandler(Kaidan *kaidan, QXmppClient *client, MessageModel
 
 MessageHandler::~MessageHandler()
 {
-#if QXMPP_VERSION >= 0x000904
+#if QXMPP_VERSION >= QT_VERSION_CHECK(1, 0, 0)
 	delete carbonManager;
 #endif
 }
@@ -266,11 +266,11 @@ void MessageHandler::correctMessage(QString toJid, QString msgId, QString body)
 
 void MessageHandler::handleDiscoInfo(const QXmppDiscoveryIq &info)
 {
-#if QXMPP_VERSION >= 0x000904
+#if QXMPP_VERSION >= QT_VERSION_CHECK(1, 0, 0)
 	if (info.from() != client->configuration().domain())
 		return;
 	// enable carbons, if feature found
-	if (info.features().contains(QString("urn:xmpp:carbons:2")))
+	if (info.features().contains(NS_CARBONS))
 		carbonManager->setCarbonsEnabled(true);
 #endif
 }

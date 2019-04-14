@@ -67,6 +67,22 @@
         <source>Message copied to clipboard</source>
         <translation type="vanished">Message copié dans le presse-papier</translation>
     </message>
+    <message>
+        <source>Copy Message</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit Message</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Spoiler</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Download</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>ChatPage</name>
@@ -102,6 +118,14 @@
         <source>Select a file</source>
         <translation>Sélectionner un fichier</translation>
     </message>
+    <message>
+        <source>Send a spoiler message</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Spoiler hint</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>ContextDrawer</name>
@@ -113,7 +137,11 @@
 <context>
     <name>DownloadJob</name>
     <message>
-        <source>Download failed.</source>
+        <source>Could not save file: %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Download failed: %1</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -128,7 +156,7 @@
     <name>FileChooser</name>
     <message>
         <source>Select a file</source>
-        <translation type="vanished">Sélectionner un fichier</translation>
+        <translation>Sélectionner un fichier</translation>
     </message>
 </context>
 <context>
@@ -139,7 +167,11 @@
     </message>
     <message>
         <source>Close</source>
-        <translation type="obsolete">Fermer</translation>
+        <translation type="unfinished">Fermer</translation>
+    </message>
+    <message>
+        <source>Go to parent folder</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -236,11 +268,11 @@
     </message>
     <message>
         <source>Your diaspora*-ID:</source>
-        <translation>Votre identifiant diaspora*&#x202f;:</translation>
+        <translation type="vanished">Votre identifiant diaspora*&#x202f;:</translation>
     </message>
     <message>
         <source>user@diaspora.pod</source>
-        <translation>utilisateur@diaspora.pod</translation>
+        <translation type="vanished">utilisateur@diaspora.pod</translation>
     </message>
     <message>
         <source>Invalid username or password.</source>
@@ -285,67 +317,83 @@
         <source>Could not correct message, as a result of not being connected.</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Spoiler</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>RosterAddContactSheet</name>
     <message>
         <source>Nickname:</source>
-        <translation type="vanished">Pseudonyme :</translation>
+        <translation>Pseudonyme :</translation>
     </message>
     <message>
         <source>Jabber-ID:</source>
-        <translation type="vanished">Identifiant Jabber&#x202f;:</translation>
+        <translation>Identifiant Jabber&#x202f;:</translation>
     </message>
     <message>
         <source>user@example.org</source>
-        <translation type="vanished">utilisateur@example.org</translation>
+        <translation>utilisateur@example.org</translation>
     </message>
     <message>
         <source>Cancel</source>
-        <translation type="vanished">Annuler</translation>
+        <translation>Annuler</translation>
     </message>
     <message>
         <source>Add</source>
-        <translation type="vanished">Ajouter</translation>
+        <translation>Ajouter</translation>
     </message>
     <message>
         <source>Add new contact</source>
-        <translation type="vanished">Ajouter un nouveau contact</translation>
+        <translation>Ajouter un nouveau contact</translation>
+    </message>
+    <message>
+        <source>This will also send a request to access the presence of the contact.</source>
+        <translation type="unfinished">Cette action va aussi envoyer une requête pour s&apos;assurer de la présence du contact.</translation>
+    </message>
+    <message>
+        <source>Optional message:</source>
+        <translation type="unfinished">Message optionnel :</translation>
+    </message>
+    <message>
+        <source>Tell your chat partner who you are.</source>
+        <translation type="unfinished">Informez votre contact qui vous êtes.</translation>
     </message>
 </context>
 <context>
     <name>RosterListItem</name>
     <message>
         <source>Error: Please check the JID.</source>
-        <translation type="vanished">Erreur : veuillez vérifier votre utilisateur jabber (JID).</translation>
+        <translation>Erreur : veuillez vérifier votre utilisateur jabber (JID).</translation>
     </message>
     <message>
         <source>Available</source>
-        <translation type="vanished">Disponible</translation>
+        <translation>Disponible</translation>
     </message>
     <message>
         <source>Free for chat</source>
-        <translation type="vanished">Libre pour discuter</translation>
+        <translation>Libre pour discuter</translation>
     </message>
     <message>
         <source>Away</source>
-        <translation type="vanished">Absent</translation>
+        <translation>Absent</translation>
     </message>
     <message>
         <source>Do not disturb</source>
-        <translation type="vanished">Ne pas déranger</translation>
+        <translation>Ne pas déranger</translation>
     </message>
     <message>
         <source>Away for longer</source>
-        <translation type="vanished">Absent pour longtemps</translation>
+        <translation>Absent pour longtemps</translation>
     </message>
     <message>
         <source>Offline</source>
-        <translation type="vanished">Hors ligne</translation>
+        <translation>Hors ligne</translation>
     </message>
     <message>
         <source>Error</source>
-        <translation type="vanished">Erreur</translation>
+        <translation>Erreur</translation>
     </message>
     <message>
         <source>Invalid</source>
@@ -373,6 +421,10 @@
     <message>
         <source>Tell your chat partner who you are.</source>
         <translation type="obsolete">Informez votre contact qui vous êtes.</translation>
+    </message>
+    <message>
+        <source>Spoiler</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -402,30 +454,30 @@
     </message>
     <message>
         <source>Delete contact</source>
-        <translation type="vanished">Supprimer contact</translation>
+        <translation>Supprimer contact</translation>
     </message>
     <message>
         <source>Cancel</source>
-        <translation type="vanished">Annuler</translation>
+        <translation>Annuler</translation>
     </message>
     <message>
         <source>Delete</source>
-        <translation type="vanished">Supprimer</translation>
+        <translation>Supprimer</translation>
     </message>
     <message>
         <source>Do you really want to delete the contact &lt;b&gt;%1&lt;/b&gt; from your roster?</source>
-        <translation type="vanished">Voulez vous vraiment supprimer le contact &lt;b&gt;1%1&lt;/b&gt;2 de votre liste ?</translation>
+        <translation>Voulez vous vraiment supprimer le contact &lt;b&gt;1%1&lt;/b&gt;2 de votre liste ?</translation>
     </message>
 </context>
 <context>
     <name>SendMediaSheet</name>
     <message>
         <source>Cancel</source>
-        <translation type="obsolete">Annuler</translation>
+        <translation type="unfinished">Annuler</translation>
     </message>
     <message>
         <source>Send</source>
-        <translation type="obsolete">Envoyer</translation>
+        <translation type="unfinished">Envoyer</translation>
     </message>
     <message>
         <source>Subscription Request</source>
@@ -438,6 +490,29 @@
     <message>
         <source>Decline</source>
         <translation type="vanished">Refuser</translation>
+    </message>
+    <message>
+        <source>Caption</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>SubRequestAcceptSheet</name>
+    <message>
+        <source>Subscription Request</source>
+        <translation type="unfinished">Demande d&apos;abonnement</translation>
+    </message>
+    <message>
+        <source>You received a subscription request by &lt;b&gt;%1&lt;/b&gt;. If you accept it, the account will have access to your presence status.</source>
+        <translation type="unfinished">Vous avez reçus une demande d&apos;abonnement de la par de &lt;b&gt;1%1&lt;/b&gt;2. Si vous acceptez, il aura accès à votre status.</translation>
+    </message>
+    <message>
+        <source>Decline</source>
+        <translation type="unfinished">Refuser</translation>
+    </message>
+    <message>
+        <source>Accept</source>
+        <translation type="unfinished">Accepter</translation>
     </message>
 </context>
 <context>

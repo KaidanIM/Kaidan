@@ -29,6 +29,22 @@
         <source>Message copied to clipboard</source>
         <translation type="vanished">Mezua arbelean kopiatua</translation>
     </message>
+    <message>
+        <source>Copy Message</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit Message</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Spoiler</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Download</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>ChatPage</name>
@@ -60,6 +76,14 @@
         <source>Select a file</source>
         <translation>Artxibo bat aukeratu</translation>
     </message>
+    <message>
+        <source>Send a spoiler message</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Spoiler hint</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>ContextDrawer</name>
@@ -71,7 +95,11 @@
 <context>
     <name>DownloadJob</name>
     <message>
-        <source>Download failed.</source>
+        <source>Could not save file: %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Download failed: %1</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -86,7 +114,7 @@
     <name>FileChooser</name>
     <message>
         <source>Select a file</source>
-        <translation type="vanished">Artxibo bat aukeratu</translation>
+        <translation>Artxibo bat aukeratu</translation>
     </message>
 </context>
 <context>
@@ -97,7 +125,11 @@
     </message>
     <message>
         <source>Close</source>
-        <translation type="vanished">Itxi</translation>
+        <translation>Itxi</translation>
+    </message>
+    <message>
+        <source>Go to parent folder</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -170,7 +202,7 @@
     </message>
     <message>
         <source>Your diaspora*-ID:</source>
-        <translation>Zure diaspora*-IDa:</translation>
+        <translation type="vanished">Zure diaspora*-IDa:</translation>
     </message>
     <message>
         <source>user@example.org</source>
@@ -178,7 +210,7 @@
     </message>
     <message>
         <source>user@diaspora.pod</source>
-        <translation>erabiltzailea@diaspora.pod</translation>
+        <translation type="vanished">erabiltzailea@diaspora.pod</translation>
     </message>
     <message>
         <source>Your Password:</source>
@@ -235,79 +267,83 @@
         <source>Could not correct message, as a result of not being connected.</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Spoiler</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>RosterAddContactSheet</name>
     <message>
         <source>Add new contact</source>
-        <translation type="vanished">Kontaktu berria gehitu</translation>
+        <translation>Kontaktu berria gehitu</translation>
     </message>
     <message>
         <source>Nickname:</source>
-        <translation type="vanished">Ezizena:</translation>
+        <translation>Ezizena:</translation>
     </message>
     <message>
         <source>Jabber-ID:</source>
-        <translation type="vanished">Jabber-IDa:</translation>
+        <translation>Jabber-IDa:</translation>
     </message>
     <message>
         <source>user@example.org</source>
-        <translation type="vanished">erabiltzailea@example.org</translation>
+        <translation>erabiltzailea@example.org</translation>
     </message>
     <message>
         <source>Cancel</source>
-        <translation type="vanished">Utzi</translation>
+        <translation>Utzi</translation>
     </message>
     <message>
         <source>Add</source>
-        <translation type="vanished">Gehitu</translation>
+        <translation>Gehitu</translation>
     </message>
     <message>
         <source>This will also send a request to access the presence of the contact.</source>
-        <translation type="vanished">Honek kontaktuaren presentziara sarbide eskaera bidaliko du.</translation>
+        <translation>Honek kontaktuaren presentziara sarbide eskaera bidaliko du.</translation>
     </message>
     <message>
         <source>Optional message:</source>
-        <translation type="vanished">Aukerako mezua:</translation>
+        <translation>Aukerako mezua:</translation>
     </message>
     <message>
         <source>Tell your chat partner who you are.</source>
-        <translation type="vanished">Esan nor zaren zure berriketa lagunari.</translation>
+        <translation>Esan nor zaren zure berriketa lagunari.</translation>
     </message>
 </context>
 <context>
     <name>RosterListItem</name>
     <message>
         <source>Error: Please check the JID.</source>
-        <translation type="vanished">Errorea: Mesedez egiaztatu JIDa.</translation>
+        <translation>Errorea: Mesedez egiaztatu JIDa.</translation>
     </message>
     <message>
         <source>Available</source>
-        <translation type="vanished">Eskuragarri</translation>
+        <translation>Eskuragarri</translation>
     </message>
     <message>
         <source>Free for chat</source>
-        <translation type="vanished">Libre berriketarako</translation>
+        <translation>Libre berriketarako</translation>
     </message>
     <message>
         <source>Away</source>
-        <translation type="vanished">Kanpoan</translation>
+        <translation>Kanpoan</translation>
     </message>
     <message>
         <source>Do not disturb</source>
-        <translation type="vanished">Ez molestatu</translation>
+        <translation>Ez molestatu</translation>
     </message>
     <message>
         <source>Away for longer</source>
-        <translation type="vanished">Kanpoan denbora luzerako</translation>
+        <translation>Kanpoan denbora luzerako</translation>
     </message>
     <message>
         <source>Offline</source>
-        <translation type="vanished">Lineaz kanpo</translation>
+        <translation>Lineaz kanpo</translation>
     </message>
     <message>
         <source>Error</source>
-        <translation type="vanished">Errorea</translation>
+        <translation>Errorea</translation>
     </message>
     <message>
         <source>Invalid</source>
@@ -323,6 +359,10 @@
     <message>
         <source>Could not remove contact, as a result of not being connected.</source>
         <translation type="unfinished">Ezin izan da kontaktua ezabatu, konektaturik ez zaudelako.</translation>
+    </message>
+    <message>
+        <source>Spoiler</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -348,15 +388,53 @@
     <name>RosterRemoveContactSheet</name>
     <message>
         <source>Delete contact</source>
-        <translation type="vanished">Kontaktua ezabatu</translation>
+        <translation>Kontaktua ezabatu</translation>
     </message>
     <message>
         <source>Cancel</source>
-        <translation type="vanished">Utzi</translation>
+        <translation>Utzi</translation>
     </message>
     <message>
         <source>Delete</source>
-        <translation type="vanished">Ezabatu</translation>
+        <translation>Ezabatu</translation>
+    </message>
+    <message>
+        <source>Do you really want to delete the contact &lt;b&gt;%1&lt;/b&gt; from your roster?</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>SendMediaSheet</name>
+    <message>
+        <source>Caption</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cancel</source>
+        <translation type="unfinished">Utzi</translation>
+    </message>
+    <message>
+        <source>Send</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>SubRequestAcceptSheet</name>
+    <message>
+        <source>Subscription Request</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>You received a subscription request by &lt;b&gt;%1&lt;/b&gt;. If you accept it, the account will have access to your presence status.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Decline</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Accept</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

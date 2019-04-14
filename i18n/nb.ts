@@ -48,6 +48,22 @@
         <source>Message copied to clipboard</source>
         <translation type="vanished">Melding kopiert til utklippstavle</translation>
     </message>
+    <message>
+        <source>Copy Message</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit Message</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Spoiler</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Download</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>ChatPage</name>
@@ -83,6 +99,14 @@
         <source>Select a file</source>
         <translation>Velg en fil</translation>
     </message>
+    <message>
+        <source>Send a spoiler message</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Spoiler hint</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>ContextDrawer</name>
@@ -94,7 +118,11 @@
 <context>
     <name>DownloadJob</name>
     <message>
-        <source>Download failed.</source>
+        <source>Could not save file: %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Download failed: %1</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -109,7 +137,7 @@
     <name>FileChooser</name>
     <message>
         <source>Select a file</source>
-        <translation type="vanished">Velg en fil</translation>
+        <translation>Velg en fil</translation>
     </message>
 </context>
 <context>
@@ -120,7 +148,11 @@
     </message>
     <message>
         <source>Close</source>
-        <translation type="vanished">Lukk</translation>
+        <translation>Lukk</translation>
+    </message>
+    <message>
+        <source>Go to parent folder</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -193,7 +225,7 @@
     </message>
     <message>
         <source>Your diaspora*-ID:</source>
-        <translation>Din diaspora*-ID:</translation>
+        <translation type="vanished">Din diaspora*-ID:</translation>
     </message>
     <message>
         <source>user@example.org</source>
@@ -201,7 +233,7 @@
     </message>
     <message>
         <source>user@diaspora.pod</source>
-        <translation>bruker@diaspora.pod</translation>
+        <translation type="vanished">bruker@diaspora.pod</translation>
     </message>
     <message>
         <source>Your Password:</source>
@@ -262,79 +294,83 @@
         <source>Could not correct message, as a result of not being connected.</source>
         <translation type="unfinished">Kunne ikke korrigere melding, siden du ikke er tilkoblet.</translation>
     </message>
+    <message>
+        <source>Spoiler</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>RosterAddContactSheet</name>
     <message>
         <source>Add new contact</source>
-        <translation type="vanished">Legg til ny kontakt</translation>
+        <translation>Legg til ny kontakt</translation>
     </message>
     <message>
         <source>Nickname:</source>
-        <translation type="vanished">Kallenavn:</translation>
+        <translation>Kallenavn:</translation>
     </message>
     <message>
         <source>Jabber-ID:</source>
-        <translation type="vanished">Jabber-ID:</translation>
+        <translation>Jabber-ID:</translation>
     </message>
     <message>
         <source>user@example.org</source>
-        <translation type="vanished">bruker@eksempel.no</translation>
+        <translation>bruker@eksempel.no</translation>
     </message>
     <message>
         <source>Cancel</source>
-        <translation type="vanished">Avbryt</translation>
+        <translation>Avbryt</translation>
     </message>
     <message>
         <source>Add</source>
-        <translation type="vanished">Legg til</translation>
+        <translation>Legg til</translation>
     </message>
     <message>
         <source>This will also send a request to access the presence of the contact.</source>
-        <translation type="vanished">Dette vil også sende en forespørsel om tilgang til kontaktens tilstedeværelsesinfo.</translation>
+        <translation>Dette vil også sende en forespørsel om tilgang til kontaktens tilstedeværelsesinfo.</translation>
     </message>
     <message>
         <source>Optional message:</source>
-        <translation type="vanished">Valgfri melding:</translation>
+        <translation>Valgfri melding:</translation>
     </message>
     <message>
         <source>Tell your chat partner who you are.</source>
-        <translation type="vanished">Fortell din sludrepartner hvem du er.</translation>
+        <translation>Fortell din sludrepartner hvem du er.</translation>
     </message>
 </context>
 <context>
     <name>RosterListItem</name>
     <message>
         <source>Error: Please check the JID.</source>
-        <translation type="vanished">Feil: Sjekk JID-en.</translation>
+        <translation>Feil: Sjekk JID-en.</translation>
     </message>
     <message>
         <source>Available</source>
-        <translation type="vanished">Tilgjengelig</translation>
+        <translation>Tilgjengelig</translation>
     </message>
     <message>
         <source>Free for chat</source>
-        <translation type="vanished">Ledig for sludring</translation>
+        <translation>Ledig for sludring</translation>
     </message>
     <message>
         <source>Away</source>
-        <translation type="vanished">Borte</translation>
+        <translation>Borte</translation>
     </message>
     <message>
         <source>Do not disturb</source>
-        <translation type="vanished">Ikke forstyrr</translation>
+        <translation>Ikke forstyrr</translation>
     </message>
     <message>
         <source>Away for longer</source>
-        <translation type="vanished">Lengre tids fravær</translation>
+        <translation>Lengre tids fravær</translation>
     </message>
     <message>
         <source>Offline</source>
-        <translation type="vanished">Frakoblet</translation>
+        <translation>Frakoblet</translation>
     </message>
     <message>
         <source>Error</source>
-        <translation type="vanished">Feil</translation>
+        <translation>Feil</translation>
     </message>
     <message>
         <source>Invalid</source>
@@ -350,6 +386,10 @@
     <message>
         <source>Could not remove contact, as a result of not being connected.</source>
         <translation type="unfinished">Kunne ikke fjerne kontakt, som følge av manglende tilkobling.</translation>
+    </message>
+    <message>
+        <source>Spoiler</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -379,15 +419,15 @@
     </message>
     <message>
         <source>Delete contact</source>
-        <translation type="vanished">Slett kontakt</translation>
+        <translation>Slett kontakt</translation>
     </message>
     <message>
         <source>Cancel</source>
-        <translation type="vanished">Avbryt</translation>
+        <translation>Avbryt</translation>
     </message>
     <message>
         <source>Delete</source>
-        <translation type="vanished">Slett</translation>
+        <translation>Slett</translation>
     </message>
     <message>
         <source>Do you really want to delete the contact &lt;%1&gt; from your roster?</source>
@@ -395,37 +435,41 @@
     </message>
     <message>
         <source>Do you really want to delete the contact &lt;b&gt;%1&lt;/b&gt; from your roster?</source>
-        <translation type="vanished">Ønsker du virkelig å slette kontakten &lt;b&gt;%1&lt;/b&gt; from din kontaktliste?</translation>
+        <translation>Ønsker du virkelig å slette kontakten &lt;b&gt;%1&lt;/b&gt; from din kontaktliste?</translation>
     </message>
 </context>
 <context>
     <name>SendMediaSheet</name>
     <message>
         <source>Cancel</source>
-        <translation type="obsolete">Avbryt</translation>
+        <translation type="unfinished">Avbryt</translation>
     </message>
     <message>
         <source>Send</source>
-        <translation type="obsolete">Send</translation>
+        <translation type="unfinished">Send</translation>
+    </message>
+    <message>
+        <source>Caption</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>SubRequestAcceptSheet</name>
     <message>
         <source>Subscription Request</source>
-        <translation type="vanished">Abonnementsforespørsel</translation>
+        <translation>Abonnementsforespørsel</translation>
     </message>
     <message>
         <source>You received a subscription request by &lt;b&gt;%1&lt;/b&gt;. If you accept it, the account will have access to your presence status.</source>
-        <translation type="vanished">Du har mottatt en abonnementsforespørsel av &lt;b&gt;%1&lt;/b&gt;. Hvis du godtar den, vil kontoen ha tilgang til din tilstedeværelsesstatus.</translation>
+        <translation>Du har mottatt en abonnementsforespørsel av &lt;b&gt;%1&lt;/b&gt;. Hvis du godtar den, vil kontoen ha tilgang til din tilstedeværelsesstatus.</translation>
     </message>
     <message>
         <source>Decline</source>
-        <translation type="vanished">Avslå</translation>
+        <translation>Avslå</translation>
     </message>
     <message>
         <source>Accept</source>
-        <translation type="vanished">Godta</translation>
+        <translation>Godta</translation>
     </message>
 </context>
 <context>

@@ -31,18 +31,8 @@
 #ifndef GLOBALS_H
 #define GLOBALS_H
 
-/**
- * Application information
- */
-#define APPLICATION_ID "im.kaidan.kaidan"
-#ifdef UBUNTU_TOUCH
-#define APPLICATION_NAME "im.kaidan.kaidan"
-#else
-#define APPLICATION_NAME "kaidan"
-#endif
-#define APPLICATION_DISPLAY_NAME "Kaidan"
+// Application information
 #define APPLICATION_DESCRIPTION "A simple, user-friendly Jabber/XMPP client"
-#define VERSION_STRING "0.4.0-dev"
 
 // Kaidan settings
 #define KAIDAN_SETTINGS_AUTH_JID "auth/jid"

@@ -10,6 +10,13 @@ endif()
 project(kaidan)
 
 set(APPLICATION_ID "im.kaidan.kaidan")
+set(APPLICATION_NAME "kaidan")
+set(APPLICATION_DISPLAY_NAME "Kaidan")
+if(UBUNTU_TOUCH)
+	set(APPLICATION_NAME "${APPLICATION_ID}")
+endif()
+set(VERSION_STRING "0.4.0-dev")
+set(DEVELOPMENT_BUILD TRUE)
 
 # CMake options
 option(I18N "Enable i18n support" FALSE)
@@ -26,7 +33,7 @@ set(CMAKE_INCLUDE_CURRENT_DIR ON)
 set(CMAKE_AUTOMOC ON)
 set(CMAKE_AUTOUIC ON)
 set(CMAKE_AUTORCC ON)
-set(AUTOMOC_MOC_OPTIONS -Muri=im.kaidan.kaidan)
+set(AUTOMOC_MOC_OPTIONS -Muri=${APPLICATION_ID})
 
 #
 # Dependecies
@@ -54,7 +61,7 @@ if(QUICK_COMPILER)
 	find_package(Qt5QuickCompiler)
 	set_package_properties(Qt5QuickCompiler PROPERTIES
 		DESCRIPTION "Compile QML at build time"
-	        TYPE OPTIONAL
+		TYPE OPTIONAL
 	)
 endif()
 
@@ -319,6 +326,10 @@ endif()
 
 target_compile_definitions(${PROJECT_NAME} PRIVATE
 	DEBUG_SOURCE_PATH="${CMAKE_SOURCE_DIR}"
+	VERSION_STRING="${VERSION_STRING}"
+	APPLICATION_ID="${APPLICATION_ID}"
+	APPLICATION_NAME="${APPLICATION_NAME}"
+	APPLICATION_DISPLAY_NAME="${APPLICATION_DISPLAY_NAME}"
 	${KAIDAN_COMPILE_DEFINITIONS}
 )
 
@@ -326,7 +337,17 @@ target_compile_definitions(${PROJECT_NAME} PRIVATE
 # Install Kaidan
 #
 
+if(ANDROID)
+	configure_file(${CMAKE_SOURCE_DIR}/misc/android/AndroidManifest.xml.in
+	               ${CMAKE_SOURCE_DIR}/misc/android/AndroidManifest.xml)
+endif()
+
 if(UBUNTU_TOUCH AND CLICK_ARCH)
+	set(CLICK_VERSION ${VERSION_STRING})
+	if(DEVELOPMENT_BUILD)
+		set(CLICK_VERSION "${CLICK_VERSION}.${CLICK_DATE}")
+	endif()
+
 	# will replace ${CLICK_ARCH} with its value
 	configure_file(${CMAKE_SOURCE_DIR}/misc/ubuntu-touch/manifest.json.in
 	               ${CMAKE_SOURCE_DIR}/misc/ubuntu-touch/manifest.json)

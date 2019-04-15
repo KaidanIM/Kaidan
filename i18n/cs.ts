@@ -5,79 +5,79 @@
     <name>AboutDialog</name>
     <message>
         <source>A simple, user-friendly Jabber/XMPP client</source>
-        <translation type="unfinished"></translation>
+        <translation>Jednoduchý a uživatelsky přívětivý Jabber/XMPP klient</translation>
     </message>
     <message>
         <source>License:</source>
-        <translation type="unfinished"></translation>
+        <translation>Licence:</translation>
     </message>
     <message>
         <source>View source code online</source>
-        <translation type="unfinished"></translation>
+        <translation>Prohlédnout zdrojový kód online</translation>
     </message>
 </context>
 <context>
     <name>ChatPage</name>
     <message>
         <source>Compose message</source>
-        <translation type="unfinished"></translation>
+        <translation>Vytvořit zprávu</translation>
     </message>
     <message>
         <source>Image</source>
-        <translation type="unfinished"></translation>
+        <translation>Obrázek</translation>
     </message>
     <message>
         <source>Video</source>
-        <translation type="unfinished"></translation>
+        <translation>Video</translation>
     </message>
     <message>
         <source>Audio</source>
-        <translation type="unfinished"></translation>
+        <translation>Audio</translation>
     </message>
     <message>
         <source>Document</source>
-        <translation type="unfinished"></translation>
+        <translation>Dokument</translation>
     </message>
     <message>
         <source>Other file</source>
-        <translation type="unfinished"></translation>
+        <translation>Další soubor</translation>
     </message>
     <message>
         <source>Select a file</source>
-        <translation type="unfinished"></translation>
+        <translation>Vybrat soubor</translation>
     </message>
 </context>
 <context>
     <name>DownloadJob</name>
     <message>
         <source>Download failed.</source>
-        <translation type="unfinished"></translation>
+        <translation>Stahování selhalo.</translation>
     </message>
 </context>
 <context>
     <name>EmptyChatPage</name>
     <message>
         <source>Please select a chat to start messaging</source>
-        <translation type="unfinished"></translation>
+        <translation>Pro zahájení konverzace vyberte chat</translation>
     </message>
 </context>
 <context>
     <name>GlobalDrawer</name>
     <message>
         <source>Log out</source>
-        <translation type="unfinished"></translation>
+        <translation>Odhlásit se</translation>
     </message>
     <message>
         <source>About</source>
-        <translation type="unfinished"></translation>
+        <translation>O aplikaci</translation>
     </message>
     <message>
         <source>Invite friends</source>
-        <translation type="unfinished"></translation>
+        <translation>Pozvat přátele</translation>
     </message>
     <message>
         <source>Invitation link copied to clipboard</source>
-        <translation type="unfinished"></translation>
+        <translation>Zvací odkaz zkopírován do schránky</translation>
     </message>
 </context>
 <context>
@@ -85,130 +85,131 @@
     <message>
         <source>The link will be opened after you have connected.</source>
         <extracomment>The link is an XMPP-URI (i.e. &apos;xmpp:kaidan@muc.kaidan.im?join&apos; for joining a chat)</extracomment>
-        <translation type="unfinished"></translation>
+        <translation>Odkaz se  otevře jakmile se připojíte.</translation>
     </message>
 </context>
 <context>
     <name>LoginPage</name>
     <message>
         <source>Log in</source>
-        <translation type="unfinished"></translation>
+        <translation>Přihlásit se</translation>
     </message>
     <message>
         <source>Log in to your XMPP account</source>
-        <translation type="unfinished"></translation>
+        <translation>Přihlásit se ke svému XMPP účtu</translation>
     </message>
     <message>
         <source>Your Jabber-ID:</source>
-        <translation type="unfinished"></translation>
+        <translation>Vaše Jabber-ID:</translation>
     </message>
     <message>
         <source>Your diaspora*-ID:</source>
-        <translation type="unfinished"></translation>
+        <translation>Vaše diaspora*-ID:</translation>
     </message>
     <message>
         <source>user@example.org</source>
-        <translation type="unfinished"></translation>
+        <translation>uživatel@example.org</translation>
     </message>
     <message>
         <source>user@diaspora.pod</source>
-        <translation type="unfinished"></translation>
+        <translation>uživatel@diaspora.pod</translation>
     </message>
     <message>
         <source>Your Password:</source>
-        <translation type="unfinished"></translation>
+        <translation>Vaše heslo:</translation>
     </message>
     <message>
         <source>Connecting…</source>
-        <translation type="unfinished"></translation>
+        <translation>Připojování…</translation>
     </message>
     <message>
         <source>Connect</source>
-        <translation type="unfinished"></translation>
+        <translation>Připojit</translation>
     </message>
     <message>
         <source>Invalid username or password.</source>
-        <translation type="unfinished"></translation>
+        <translation>Neplatný uživatel nebo heslo.</translation>
     </message>
     <message>
         <source>Cannot connect to the server. Please check your internet connection.</source>
-        <translation type="unfinished"></translation>
+        <translation>Nelze se připojit k serveru.
+Prosím zkontrolujte své připojení k internetu.</translation>
     </message>
     <message>
         <source>The server doesn&apos;t support secure connections.</source>
-        <translation type="unfinished"></translation>
+        <translation>Server nepodporuje bezpečná připojení.</translation>
     </message>
     <message>
         <source>Error while trying to connect securely.</source>
-        <translation type="unfinished"></translation>
+        <translation>Hlášení o chybě při pokusu o bezpečné připojení.</translation>
     </message>
     <message>
         <source>Could not resolve the server&apos;s address. Please check your JID again.</source>
-        <translation type="unfinished"></translation>
+        <translation>Neznámá adresa serveru. Zkontrolujte znovu vaše JID.</translation>
     </message>
     <message>
         <source>Could not connect to the server.</source>
-        <translation type="unfinished"></translation>
+        <translation>Nebylo možné se připojit k serveru.</translation>
     </message>
     <message>
         <source>Authentification protocol not supported by the server.</source>
-        <translation type="unfinished"></translation>
+        <translation>Ověřovací protokol není kompatibilní se serverem.</translation>
     </message>
     <message>
         <source>An unknown error occured; see log for details.</source>
-        <translation type="unfinished"></translation>
+        <translation>Došlo k neznámmé chybě; pro více informací zkontrolujte seznam logů.</translation>
     </message>
 </context>
 <context>
     <name>MessageHandler</name>
     <message>
         <source>Could not send message, as a result of not being connected.</source>
-        <translation type="unfinished"></translation>
+        <translation>Nelze odeslat zprávu, nejste připojeni.</translation>
     </message>
     <message>
         <source>Could not correct message, as a result of not being connected.</source>
-        <translation type="unfinished"></translation>
+        <translation>Zprávu nelze editovat, neboť nejste připojeni.</translation>
     </message>
 </context>
 <context>
     <name>RosterManager</name>
     <message>
         <source>Could not add contact, as a result of not being connected.</source>
-        <translation type="unfinished"></translation>
+        <translation>Nelze přidat kontakt, neboť nejste připojeni.</translation>
     </message>
     <message>
         <source>Could not remove contact, as a result of not being connected.</source>
-        <translation type="unfinished"></translation>
+        <translation>Nelze smazat kontakt, neboť nejste připojeni.</translation>
     </message>
 </context>
 <context>
     <name>RosterPage</name>
     <message>
         <source>Connecting…</source>
-        <translation type="unfinished"></translation>
+        <translation>Připojování…</translation>
     </message>
     <message>
         <source>Contacts</source>
-        <translation type="unfinished"></translation>
+        <translation>Kontakty</translation>
     </message>
     <message>
         <source>Add new contact</source>
-        <translation type="unfinished"></translation>
+        <translation>Přidat nový kontakt</translation>
     </message>
     <message>
         <source>Offline</source>
-        <translation type="unfinished"></translation>
+        <translation>Odpojen</translation>
     </message>
 </context>
 <context>
     <name>UploadManager</name>
     <message>
         <source>Could not send file, as a result of not being connected.</source>
-        <translation type="unfinished"></translation>
+        <translation>Soubor nelze odeslat, neboť nejste připojeni.</translation>
     </message>
     <message>
         <source>File</source>
-        <translation type="unfinished"></translation>
+        <translation>Soubor</translation>
     </message>
 </context>
 </TS>

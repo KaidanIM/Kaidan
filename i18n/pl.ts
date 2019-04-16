@@ -230,16 +230,16 @@
         <translation type="unfinished">Dodaj nowy kontakt</translation>
     </message>
     <message>
+        <source>user@example.org</source>
+        <translation type="unfinished">user@example.org</translation>
+    </message>
+    <message>
         <source>This will also send a request to access the presence of the contact.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Jabber-ID:</source>
         <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>user@example.org</source>
-        <translation type="unfinished">user@example.org</translation>
     </message>
     <message>
         <source>Nickname:</source>
@@ -265,6 +265,10 @@
 <context>
     <name>RosterListItem</name>
     <message>
+        <source>Offline</source>
+        <translation type="unfinished">Offline</translation>
+    </message>
+    <message>
         <source>Error: Please check the JID.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -287,10 +291,6 @@
     <message>
         <source>Away for longer</source>
         <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Offline</source>
-        <translation type="unfinished">Offline</translation>
     </message>
     <message>
         <source>Error</source>

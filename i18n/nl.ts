@@ -321,6 +321,10 @@
 <context>
     <name>RosterListItem</name>
     <message>
+        <source>Offline</source>
+        <translation type="unfinished">Offline</translation>
+    </message>
+    <message>
         <source>Error: Please check the JID.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -343,10 +347,6 @@
     <message>
         <source>Away for longer</source>
         <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Offline</source>
-        <translation type="unfinished">Offline</translation>
     </message>
     <message>
         <source>Error</source>

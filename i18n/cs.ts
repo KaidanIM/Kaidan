@@ -17,6 +17,25 @@
     </message>
 </context>
 <context>
+    <name>ChatMessage</name>
+    <message>
+        <source>Copy Message</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit Message</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Spoiler</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Download</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>ChatPage</name>
     <message>
         <source>Compose message</source>
@@ -46,12 +65,28 @@
         <source>Select a file</source>
         <translation>Vybrat soubor</translation>
     </message>
+    <message>
+        <source>Send a spoiler message</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Spoiler hint</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DownloadJob</name>
     <message>
         <source>Download failed.</source>
-        <translation>Stahování selhalo.</translation>
+        <translation type="vanished">Stahování selhalo.</translation>
+    </message>
+    <message>
+        <source>Could not save file: %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Download failed: %1</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -59,6 +94,24 @@
     <message>
         <source>Please select a chat to start messaging</source>
         <translation>Pro zahájení konverzace vyberte chat</translation>
+    </message>
+</context>
+<context>
+    <name>FileChooser</name>
+    <message>
+        <source>Select a file</source>
+        <translation type="unfinished">Vybrat soubor</translation>
+    </message>
+</context>
+<context>
+    <name>FileChooserMobile</name>
+    <message>
+        <source>Go to parent folder</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Close</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -104,7 +157,7 @@
     </message>
     <message>
         <source>Your diaspora*-ID:</source>
-        <translation>Vaše diaspora*-ID:</translation>
+        <translation type="vanished">Vaše diaspora*-ID:</translation>
     </message>
     <message>
         <source>user@example.org</source>
@@ -112,7 +165,7 @@
     </message>
     <message>
         <source>user@diaspora.pod</source>
-        <translation>uživatel@diaspora.pod</translation>
+        <translation type="vanished">uživatel@diaspora.pod</translation>
     </message>
     <message>
         <source>Your Password:</source>
@@ -170,6 +223,84 @@ Prosím zkontrolujte své připojení k internetu.</translation>
         <source>Could not correct message, as a result of not being connected.</source>
         <translation>Zprávu nelze editovat, neboť nejste připojeni.</translation>
     </message>
+    <message>
+        <source>Spoiler</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>RosterAddContactSheet</name>
+    <message>
+        <source>Add new contact</source>
+        <translation type="unfinished">Přidat nový kontakt</translation>
+    </message>
+    <message>
+        <source>This will also send a request to access the presence of the contact.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Jabber-ID:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>user@example.org</source>
+        <translation type="unfinished">uživatel@example.org</translation>
+    </message>
+    <message>
+        <source>Nickname:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Optional message:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Tell your chat partner who you are.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cancel</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Add</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>RosterListItem</name>
+    <message>
+        <source>Error: Please check the JID.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Available</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Free for chat</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Away</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Do not disturb</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Away for longer</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Offline</source>
+        <translation type="unfinished">Odpojen</translation>
+    </message>
+    <message>
+        <source>Error</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>RosterManager</name>
@@ -180,6 +311,10 @@ Prosím zkontrolujte své připojení k internetu.</translation>
     <message>
         <source>Could not remove contact, as a result of not being connected.</source>
         <translation>Nelze smazat kontakt, neboť nejste připojeni.</translation>
+    </message>
+    <message>
+        <source>Spoiler</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -199,6 +334,59 @@ Prosím zkontrolujte své připojení k internetu.</translation>
     <message>
         <source>Offline</source>
         <translation>Odpojen</translation>
+    </message>
+</context>
+<context>
+    <name>RosterRemoveContactSheet</name>
+    <message>
+        <source>Do you really want to delete the contact &lt;b&gt;%1&lt;/b&gt; from your roster?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Delete contact</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cancel</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Delete</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>SendMediaSheet</name>
+    <message>
+        <source>Caption</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cancel</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Send</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>SubRequestAcceptSheet</name>
+    <message>
+        <source>Subscription Request</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>You received a subscription request by &lt;b&gt;%1&lt;/b&gt;. If you accept it, the account will have access to your presence status.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Decline</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Accept</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

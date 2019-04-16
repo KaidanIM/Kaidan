@@ -406,12 +406,12 @@
 <context>
     <name>SendMediaSheet</name>
     <message>
-        <source>Caption</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Cancel</source>
         <translation type="unfinished">Utzi</translation>
+    </message>
+    <message>
+        <source>Caption</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Send</source>

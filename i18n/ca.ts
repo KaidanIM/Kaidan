@@ -5,128 +5,128 @@
     <name>AboutDialog</name>
     <message>
         <source>A simple, user-friendly Jabber/XMPP client</source>
-        <translation type="unfinished"></translation>
+        <translation>Client Jabber/XMPP senzill i fàcil d&apos;usar</translation>
     </message>
     <message>
         <source>License:</source>
-        <translation type="unfinished"></translation>
+        <translation>Llicència:</translation>
     </message>
     <message>
         <source>View source code online</source>
-        <translation type="unfinished"></translation>
+        <translation>Vegeu el codi font en línia</translation>
     </message>
 </context>
 <context>
     <name>ChatMessage</name>
     <message>
         <source>Copy Message</source>
-        <translation type="unfinished"></translation>
+        <translation>Copia el missatge</translation>
     </message>
     <message>
         <source>Edit Message</source>
-        <translation type="unfinished"></translation>
+        <translation>Edita el missatge</translation>
     </message>
     <message>
         <source>Spoiler</source>
-        <translation type="unfinished"></translation>
+        <translation>Filtració</translation>
     </message>
     <message>
         <source>Download</source>
-        <translation type="unfinished"></translation>
+        <translation>Descarrega</translation>
     </message>
 </context>
 <context>
     <name>ChatPage</name>
     <message>
         <source>Compose message</source>
-        <translation type="unfinished"></translation>
+        <translation>Crea un missatge</translation>
     </message>
     <message>
         <source>Image</source>
-        <translation type="unfinished"></translation>
+        <translation>Imatge</translation>
     </message>
     <message>
         <source>Video</source>
-        <translation type="unfinished"></translation>
+        <translation>Vídeo</translation>
     </message>
     <message>
         <source>Audio</source>
-        <translation type="unfinished"></translation>
+        <translation>Àudio</translation>
     </message>
     <message>
         <source>Document</source>
-        <translation type="unfinished"></translation>
+        <translation>Document</translation>
     </message>
     <message>
         <source>Other file</source>
-        <translation type="unfinished"></translation>
+        <translation>Un altre fitxer</translation>
     </message>
     <message>
         <source>Select a file</source>
-        <translation type="unfinished"></translation>
+        <translation>Selecciona un fitxer</translation>
     </message>
     <message>
         <source>Send a spoiler message</source>
-        <translation type="unfinished"></translation>
+        <translation>Envia una filtració</translation>
     </message>
     <message>
         <source>Spoiler hint</source>
-        <translation type="unfinished"></translation>
+        <translation>Indici de la filtració</translation>
     </message>
 </context>
 <context>
     <name>DownloadJob</name>
     <message>
         <source>Could not save file: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>El fitxer %1 no s&apos;ha pogut desar</translation>
     </message>
     <message>
         <source>Download failed: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>La descàrrega ha fallat: %1</translation>
     </message>
 </context>
 <context>
     <name>EmptyChatPage</name>
     <message>
         <source>Please select a chat to start messaging</source>
-        <translation type="unfinished"></translation>
+        <translation>Seleccioneu un xat per començar</translation>
     </message>
 </context>
 <context>
     <name>FileChooser</name>
     <message>
         <source>Select a file</source>
-        <translation type="unfinished"></translation>
+        <translation>Seleccioneu un fitxer</translation>
     </message>
 </context>
 <context>
     <name>FileChooserMobile</name>
     <message>
         <source>Go to parent folder</source>
-        <translation type="unfinished"></translation>
+        <translation>Vés a la carpeta superior</translation>
     </message>
     <message>
         <source>Close</source>
-        <translation type="unfinished"></translation>
+        <translation>Tanca</translation>
     </message>
 </context>
 <context>
     <name>GlobalDrawer</name>
     <message>
         <source>Log out</source>
-        <translation type="unfinished"></translation>
+        <translation>Surt</translation>
     </message>
     <message>
         <source>About</source>
-        <translation type="unfinished"></translation>
+        <translation>Quant a</translation>
     </message>
     <message>
         <source>Invite friends</source>
-        <translation type="unfinished"></translation>
+        <translation>Invita amistats</translation>
     </message>
     <message>
         <source>Invitation link copied to clipboard</source>
-        <translation type="unfinished"></translation>
+        <translation>S&apos;ha copiat l&apos;enllaç d&apos;invitació al porta-retalls</translation>
     </message>
 </context>
 <context>
@@ -134,257 +134,257 @@
     <message>
         <source>The link will be opened after you have connected.</source>
         <extracomment>The link is an XMPP-URI (i.e. &apos;xmpp:kaidan@muc.kaidan.im?join&apos; for joining a chat)</extracomment>
-        <translation type="unfinished"></translation>
+        <translation>L&apos;enllaç s&apos;obrirà després de que us hagueu connectat.</translation>
     </message>
 </context>
 <context>
     <name>LoginPage</name>
     <message>
         <source>Log in</source>
-        <translation type="unfinished"></translation>
+        <translation>Entra</translation>
     </message>
     <message>
         <source>Log in to your XMPP account</source>
-        <translation type="unfinished"></translation>
+        <translation>Entreu amb el vostre compte XMPP</translation>
     </message>
     <message>
         <source>Your Jabber-ID:</source>
-        <translation type="unfinished"></translation>
+        <translation>El vostre ID de Jabber:</translation>
     </message>
     <message>
         <source>user@example.org</source>
-        <translation type="unfinished"></translation>
+        <translation>usuari@exemple.org</translation>
     </message>
     <message>
         <source>Your Password:</source>
-        <translation type="unfinished"></translation>
+        <translation>La vostra contrasenya:</translation>
     </message>
     <message>
         <source>Connecting…</source>
-        <translation type="unfinished"></translation>
+        <translation>Connectant…</translation>
     </message>
     <message>
         <source>Connect</source>
-        <translation type="unfinished"></translation>
+        <translation>Connecta</translation>
     </message>
     <message>
         <source>Invalid username or password.</source>
-        <translation type="unfinished"></translation>
+        <translation>Usuari o contrasenya invàlids.</translation>
     </message>
     <message>
         <source>Cannot connect to the server. Please check your internet connection.</source>
-        <translation type="unfinished"></translation>
+        <translation>No s&apos;ha pogut connectar al servidor. Comproveu la vostra connexió a internet.</translation>
     </message>
     <message>
         <source>The server doesn&apos;t support secure connections.</source>
-        <translation type="unfinished"></translation>
+        <translation>El servidor no és compatible amb connexions segures.</translation>
     </message>
     <message>
         <source>Error while trying to connect securely.</source>
-        <translation type="unfinished"></translation>
+        <translation>S&apos;ha produït un error provant de connectar de forma segura.</translation>
     </message>
     <message>
         <source>Could not resolve the server&apos;s address. Please check your JID again.</source>
-        <translation type="unfinished"></translation>
+        <translation>No s&apos;ha pogut resoldre l&apos;adreça del servidor. Torneu a comprovar el vostre IDJ.</translation>
     </message>
     <message>
         <source>Could not connect to the server.</source>
-        <translation type="unfinished"></translation>
+        <translation>No s&apos;ha pogut connectar al servidor.</translation>
     </message>
     <message>
         <source>Authentification protocol not supported by the server.</source>
-        <translation type="unfinished"></translation>
+        <translation>Protocol d&apos;autenticació no compatible amb el servidor.</translation>
     </message>
     <message>
         <source>An unknown error occured; see log for details.</source>
-        <translation type="unfinished"></translation>
+        <translation>S&apos;ha produït un error desconegut. Vegeu el registre per més detalls.</translation>
     </message>
 </context>
 <context>
     <name>MessageHandler</name>
     <message>
         <source>Could not send message, as a result of not being connected.</source>
-        <translation type="unfinished"></translation>
+        <translation>No s&apos;ha pogut enviar el missatge perquè no teniu connexió.</translation>
     </message>
     <message>
         <source>Could not correct message, as a result of not being connected.</source>
-        <translation type="unfinished"></translation>
+        <translation>No s&apos;ha pogut corregir el missatge perquè no teniu connexió.</translation>
     </message>
     <message>
         <source>Spoiler</source>
-        <translation type="unfinished"></translation>
+        <translation>Filtració</translation>
     </message>
 </context>
 <context>
     <name>RosterAddContactSheet</name>
     <message>
         <source>Add new contact</source>
-        <translation type="unfinished"></translation>
+        <translation>Afegeix un nou contacte</translation>
     </message>
     <message>
         <source>This will also send a request to access the presence of the contact.</source>
-        <translation type="unfinished"></translation>
+        <translation>Això també enviarà una petició d&apos;accés la disponibilitat del contacte.</translation>
     </message>
     <message>
         <source>Jabber-ID:</source>
-        <translation type="unfinished"></translation>
+        <translation>ID Jabber:</translation>
     </message>
     <message>
         <source>user@example.org</source>
-        <translation type="unfinished"></translation>
+        <translation>usuari@exemple.org</translation>
     </message>
     <message>
         <source>Nickname:</source>
-        <translation type="unfinished"></translation>
+        <translation>Àlies:</translation>
     </message>
     <message>
         <source>Optional message:</source>
-        <translation type="unfinished"></translation>
+        <translation>Missatge opcional:</translation>
     </message>
     <message>
         <source>Tell your chat partner who you are.</source>
-        <translation type="unfinished"></translation>
+        <translation>Digueu al vostre interlocutor/a qui sou.</translation>
     </message>
     <message>
         <source>Cancel</source>
-        <translation type="unfinished"></translation>
+        <translation>Cancel·la</translation>
     </message>
     <message>
         <source>Add</source>
-        <translation type="unfinished"></translation>
+        <translation>Afegeix</translation>
     </message>
 </context>
 <context>
     <name>RosterListItem</name>
     <message>
         <source>Error: Please check the JID.</source>
-        <translation type="unfinished"></translation>
+        <translation>Error: Comproveu el IDJ.</translation>
     </message>
     <message>
         <source>Available</source>
-        <translation type="unfinished"></translation>
+        <translation>Disponible</translation>
     </message>
     <message>
         <source>Free for chat</source>
-        <translation type="unfinished"></translation>
+        <translation>Lliure per xatejar</translation>
     </message>
     <message>
         <source>Away</source>
-        <translation type="unfinished"></translation>
+        <translation>Lluny</translation>
     </message>
     <message>
         <source>Do not disturb</source>
-        <translation type="unfinished"></translation>
+        <translation>No em molesteu</translation>
     </message>
     <message>
         <source>Away for longer</source>
-        <translation type="unfinished"></translation>
+        <translation>He sortit una estona</translation>
     </message>
     <message>
         <source>Offline</source>
-        <translation type="unfinished"></translation>
+        <translation>Fora de línia</translation>
     </message>
     <message>
         <source>Error</source>
-        <translation type="unfinished"></translation>
+        <translation>Error</translation>
     </message>
 </context>
 <context>
     <name>RosterManager</name>
     <message>
         <source>Could not add contact, as a result of not being connected.</source>
-        <translation type="unfinished"></translation>
+        <translation>No s&apos;ha pogut afegir el contacte perquè no hi ha connexió.</translation>
     </message>
     <message>
         <source>Could not remove contact, as a result of not being connected.</source>
-        <translation type="unfinished"></translation>
+        <translation>No s&apos;ha pogut eliminar el contacte perquè no hi ha connexió.</translation>
     </message>
     <message>
         <source>Spoiler</source>
-        <translation type="unfinished"></translation>
+        <translation>Filtració</translation>
     </message>
 </context>
 <context>
     <name>RosterPage</name>
     <message>
         <source>Connecting…</source>
-        <translation type="unfinished"></translation>
+        <translation>Connectant…</translation>
     </message>
     <message>
         <source>Contacts</source>
-        <translation type="unfinished"></translation>
+        <translation>Contactes</translation>
     </message>
     <message>
         <source>Add new contact</source>
-        <translation type="unfinished"></translation>
+        <translation>Afegeix un nou contacte</translation>
     </message>
     <message>
         <source>Offline</source>
-        <translation type="unfinished"></translation>
+        <translation>Fora de línia</translation>
     </message>
 </context>
 <context>
     <name>RosterRemoveContactSheet</name>
     <message>
         <source>Do you really want to delete the contact &lt;b&gt;%1&lt;/b&gt; from your roster?</source>
-        <translation type="unfinished"></translation>
+        <translation>Segur que voleu eliminar el contacte &lt;b&gt;%1&lt;/b&gt; de la vostra llista?</translation>
     </message>
     <message>
         <source>Delete contact</source>
-        <translation type="unfinished"></translation>
+        <translation>Elimina el contacte</translation>
     </message>
     <message>
         <source>Cancel</source>
-        <translation type="unfinished"></translation>
+        <translation>Cancel·la</translation>
     </message>
     <message>
         <source>Delete</source>
-        <translation type="unfinished"></translation>
+        <translation>Elimina</translation>
     </message>
 </context>
 <context>
     <name>SendMediaSheet</name>
     <message>
         <source>Caption</source>
-        <translation type="unfinished"></translation>
+        <translation>Llegenda</translation>
     </message>
     <message>
         <source>Cancel</source>
-        <translation type="unfinished"></translation>
+        <translation>Cancel·la</translation>
     </message>
     <message>
         <source>Send</source>
-        <translation type="unfinished"></translation>
+        <translation>Envia</translation>
     </message>
 </context>
 <context>
     <name>SubRequestAcceptSheet</name>
     <message>
         <source>Subscription Request</source>
-        <translation type="unfinished"></translation>
+        <translation>Petició de subscripció</translation>
     </message>
     <message>
         <source>You received a subscription request by &lt;b&gt;%1&lt;/b&gt;. If you accept it, the account will have access to your presence status.</source>
-        <translation type="unfinished"></translation>
+        <translation>Heu rebut una petició de subscripció de &lt;b&gt;%1&lt;/b&gt;. Si l&apos;acceptau, aquest compte tendrà accés al vostre estat de dispobibilitat.</translation>
     </message>
     <message>
         <source>Decline</source>
-        <translation type="unfinished"></translation>
+        <translation>Rebutja</translation>
     </message>
     <message>
         <source>Accept</source>
-        <translation type="unfinished"></translation>
+        <translation>Accepta</translation>
     </message>
 </context>
 <context>
     <name>UploadManager</name>
     <message>
         <source>Could not send file, as a result of not being connected.</source>
-        <translation type="unfinished"></translation>
+        <translation>No s&apos;ha pogut enviar el fitxer perquè no hi ha connexió.</translation>
     </message>
     <message>
         <source>File</source>
-        <translation type="unfinished"></translation>
+        <translation>Fitxer</translation>
     </message>
 </context>
 </TS>

@@ -39,7 +39,7 @@
     <name>ChatPage</name>
     <message>
         <source>Compose message</source>
-        <translation>Comporre il messaggio</translation>
+        <translation>Componi il messaggio</translation>
     </message>
     <message>
         <source>Image</source>
@@ -63,7 +63,7 @@
     </message>
     <message>
         <source>Select a file</source>
-        <translation>Selezionare un file</translation>
+        <translation>Seleziona un file</translation>
     </message>
     <message>
         <source>Send a spoiler message</source>
@@ -89,7 +89,7 @@
     <name>EmptyChatPage</name>
     <message>
         <source>Please select a chat to start messaging</source>
-        <translation>Selezionare una chat per avviare la messaggistica</translation>
+        <translation>Seleziona una conversazione per iniziare a messaggiare</translation>
     </message>
 </context>
 <context>
@@ -126,7 +126,7 @@
     </message>
     <message>
         <source>Invitation link copied to clipboard</source>
-        <translation>Invito link copiato negli appunti</translation>
+        <translation>Collegamento dell&apos;invito copiato negli appunti</translation>
     </message>
 </context>
 <context>
@@ -134,7 +134,7 @@
     <message>
         <source>The link will be opened after you have connected.</source>
         <extracomment>The link is an XMPP-URI (i.e. &apos;xmpp:kaidan@muc.kaidan.im?join&apos; for joining a chat)</extracomment>
-        <translation>Il link verrà aperto dopo aver effettuato la connessione.</translation>
+        <translation>Il collegamento verrà aperto appena ti sarai connesso.</translation>
     </message>
 </context>
 <context>
@@ -160,10 +160,6 @@
         <translation>nome@esempio.org</translation>
     </message>
     <message>
-        <source>user@diaspora.pod</source>
-        <translation type="vanished">user@diaspora.pod</translation>
-    </message>
-    <message>
         <source>Your Password:</source>
         <translation>La tua password:</translation>
     </message>
@@ -181,7 +177,7 @@
     </message>
     <message>
         <source>Cannot connect to the server. Please check your internet connection.</source>
-        <translation>Impossibile connettersi al server. Si prega di controllare la connessione internet.</translation>
+        <translation>Impossibile connettersi al server. Per favore controlla la tua connessione a internet.</translation>
     </message>
     <message>
         <source>The server doesn&apos;t support secure connections.</source>
@@ -205,18 +201,18 @@
     </message>
     <message>
         <source>An unknown error occured; see log for details.</source>
-        <translation>Si è verificato un errore sconosciuto; per i dettagli si veda il registro.</translation>
+        <translation>Si è verificato un errore sconosciuto; per i dettagli guarda il registro.</translation>
     </message>
 </context>
 <context>
     <name>MessageHandler</name>
     <message>
         <source>Could not send message, as a result of not being connected.</source>
-        <translation>Impossibile inviare messaggi a causa della mancata connessione.</translation>
+        <translation>Impossibile inviare messaggi, perchè non sei connesso.</translation>
     </message>
     <message>
         <source>Could not correct message, as a result of not being connected.</source>
-        <translation type="unfinished"></translation>
+        <translation>Impossibile correggere messaggi, perchè non sei connesso.</translation>
     </message>
     <message>
         <source>Spoiler</source>
@@ -301,11 +297,11 @@
     <name>RosterManager</name>
     <message>
         <source>Could not add contact, as a result of not being connected.</source>
-        <translation>Non ha potuto aggiungere contatto, come risultato di non essere collegato.</translation>
+        <translation>Non è possibile aggiungere il contatto, perchè non sei connesso.</translation>
     </message>
     <message>
         <source>Could not remove contact, as a result of not being connected.</source>
-        <translation>Impossibile rimuovere il contatto, a causa della mancata connessione.</translation>
+        <translation>Impossibile rimuovere il contatto, perchè non sei connesso.</translation>
     </message>
     <message>
         <source>Spoiler</source>
@@ -388,7 +384,7 @@
     <name>UploadManager</name>
     <message>
         <source>Could not send file, as a result of not being connected.</source>
-        <translation>Impossibile inviare file, a causa della mancata connessione.</translation>
+        <translation>Impossibile inviare file, perchè non sei connesso.</translation>
     </message>
     <message>
         <source>File</source>

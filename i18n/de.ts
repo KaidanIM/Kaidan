@@ -73,19 +73,19 @@
     </message>
     <message>
         <source>Copy Message</source>
-        <translation type="unfinished"></translation>
+        <translation>Nachricht kopieren</translation>
     </message>
     <message>
         <source>Edit Message</source>
-        <translation type="unfinished"></translation>
+        <translation>Nachricht bearbeiten</translation>
     </message>
     <message>
         <source>Spoiler</source>
-        <translation type="unfinished"></translation>
+        <translation>Versteckte Nachricht</translation>
     </message>
     <message>
         <source>Download</source>
-        <translation type="unfinished"></translation>
+        <translation>Herunterladen</translation>
     </message>
 </context>
 <context>
@@ -128,11 +128,11 @@
     </message>
     <message>
         <source>Send a spoiler message</source>
-        <translation type="unfinished"></translation>
+        <translation>Versteckte Nachricht senden</translation>
     </message>
     <message>
         <source>Spoiler hint</source>
-        <translation type="unfinished"></translation>
+        <translation>Titel für versteckte Nachricht</translation>
     </message>
 </context>
 <context>
@@ -146,11 +146,11 @@
     <name>DownloadJob</name>
     <message>
         <source>Could not save file: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Datei konnte nicht gespeichert werden: %1</translation>
     </message>
     <message>
         <source>Download failed: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Herunterladen fehlgeschlagen: %1</translation>
     </message>
 </context>
 <context>
@@ -164,7 +164,7 @@
     <name>FileChooser</name>
     <message>
         <source>Select a file</source>
-        <translation type="unfinished">Eine Datei auswählen</translation>
+        <translation>Datei auswählen</translation>
     </message>
 </context>
 <context>
@@ -175,11 +175,11 @@
     </message>
     <message>
         <source>Close</source>
-        <translation type="unfinished">Schließen</translation>
+        <translation>Schließen</translation>
     </message>
     <message>
         <source>Go to parent folder</source>
-        <translation type="unfinished"></translation>
+        <translation>In übergeordneten Ordner wechseln</translation>
     </message>
 </context>
 <context>
@@ -347,7 +347,7 @@
     </message>
     <message>
         <source>Spoiler</source>
-        <translation type="unfinished"></translation>
+        <translation>Spoiler</translation>
     </message>
 </context>
 <context>
@@ -444,7 +444,7 @@
     </message>
     <message>
         <source>Spoiler</source>
-        <translation type="unfinished"></translation>
+        <translation>Versteckte Nachricht</translation>
     </message>
 </context>
 <context>
@@ -493,15 +493,15 @@
     <name>SendMediaSheet</name>
     <message>
         <source>Cancel</source>
-        <translation type="unfinished">Abbrechen</translation>
+        <translation>Abbrechen</translation>
     </message>
     <message>
         <source>Send</source>
-        <translation type="unfinished">Senden</translation>
+        <translation>Senden</translation>
     </message>
     <message>
         <source>Caption</source>
-        <translation type="unfinished"></translation>
+        <translation>Beschriftung</translation>
     </message>
 </context>
 <context>

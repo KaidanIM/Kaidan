@@ -50,11 +50,11 @@
     </message>
     <message>
         <source>Copy Message</source>
-        <translation type="unfinished"></translation>
+        <translation>Kopier melding</translation>
     </message>
     <message>
         <source>Edit Message</source>
-        <translation type="unfinished"></translation>
+        <translation>Rediger melding</translation>
     </message>
     <message>
         <source>Spoiler</source>
@@ -62,7 +62,7 @@
     </message>
     <message>
         <source>Download</source>
-        <translation type="unfinished"></translation>
+        <translation>Last ned</translation>
     </message>
 </context>
 <context>
@@ -119,11 +119,11 @@
     <name>DownloadJob</name>
     <message>
         <source>Could not save file: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Kunne ikke lagre fil: %1</translation>
     </message>
     <message>
         <source>Download failed: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Nedlasting mislyktes: %1</translation>
     </message>
 </context>
 <context>

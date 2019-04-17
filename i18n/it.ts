@@ -20,19 +20,19 @@
     <name>ChatMessage</name>
     <message>
         <source>Copy Message</source>
-        <translation type="unfinished"></translation>
+        <translation>Copia Messaggio</translation>
     </message>
     <message>
         <source>Edit Message</source>
-        <translation type="unfinished"></translation>
+        <translation>Modifica Messaggio</translation>
     </message>
     <message>
         <source>Spoiler</source>
-        <translation type="unfinished"></translation>
+        <translation>Spoiler</translation>
     </message>
     <message>
         <source>Download</source>
-        <translation type="unfinished"></translation>
+        <translation>Scarica</translation>
     </message>
 </context>
 <context>
@@ -67,22 +67,22 @@
     </message>
     <message>
         <source>Send a spoiler message</source>
-        <translation type="unfinished"></translation>
+        <translation>Invia un messaggio con spoiler</translation>
     </message>
     <message>
         <source>Spoiler hint</source>
-        <translation type="unfinished"></translation>
+        <translation>Accenno dello spoiler</translation>
     </message>
 </context>
 <context>
     <name>DownloadJob</name>
     <message>
         <source>Could not save file: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Impossibile salvare il file: %1</translation>
     </message>
     <message>
         <source>Download failed: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Scaricamento non riuscito: %1</translation>
     </message>
 </context>
 <context>
@@ -96,18 +96,18 @@
     <name>FileChooser</name>
     <message>
         <source>Select a file</source>
-        <translation type="unfinished">Selezionare un file</translation>
+        <translation>Seleziona un file</translation>
     </message>
 </context>
 <context>
     <name>FileChooserMobile</name>
     <message>
         <source>Go to parent folder</source>
-        <translation type="unfinished"></translation>
+        <translation>Vai al livello superiore</translation>
     </message>
     <message>
         <source>Close</source>
-        <translation type="unfinished"></translation>
+        <translation>Chiudi</translation>
     </message>
 </context>
 <context>
@@ -216,14 +216,14 @@
     </message>
     <message>
         <source>Spoiler</source>
-        <translation type="unfinished"></translation>
+        <translation>Spoiler</translation>
     </message>
 </context>
 <context>
     <name>RosterAddContactSheet</name>
     <message>
         <source>Add new contact</source>
-        <translation type="unfinished">Aggiungi nuovo contatto</translation>
+        <translation>Aggiungi nuovo contatto</translation>
     </message>
     <message>
         <source>user@example.org</source>
@@ -231,31 +231,31 @@
     </message>
     <message>
         <source>This will also send a request to access the presence of the contact.</source>
-        <translation type="unfinished"></translation>
+        <translation>Questo invierà anche una richiesta di accesso allo stato di presenza del contatto.</translation>
     </message>
     <message>
         <source>Jabber-ID:</source>
-        <translation type="unfinished"></translation>
+        <translation>Jabber-ID:</translation>
     </message>
     <message>
         <source>Nickname:</source>
-        <translation type="unfinished"></translation>
+        <translation>Soprannome:</translation>
     </message>
     <message>
         <source>Optional message:</source>
-        <translation type="unfinished"></translation>
+        <translation>Messaggio opzionale:</translation>
     </message>
     <message>
         <source>Tell your chat partner who you are.</source>
-        <translation type="unfinished"></translation>
+        <translation>Scrivi al contatto della conversazione chi sei.</translation>
     </message>
     <message>
         <source>Cancel</source>
-        <translation type="unfinished"></translation>
+        <translation>Annulla</translation>
     </message>
     <message>
         <source>Add</source>
-        <translation type="unfinished"></translation>
+        <translation>Aggiungi</translation>
     </message>
 </context>
 <context>
@@ -266,31 +266,31 @@
     </message>
     <message>
         <source>Error: Please check the JID.</source>
-        <translation type="unfinished"></translation>
+        <translation>Errore: per favore controlla il JID.</translation>
     </message>
     <message>
         <source>Available</source>
-        <translation type="unfinished"></translation>
+        <translation>Disponibile</translation>
     </message>
     <message>
         <source>Free for chat</source>
-        <translation type="unfinished"></translation>
+        <translation>Disponibile a conversare</translation>
     </message>
     <message>
         <source>Away</source>
-        <translation type="unfinished"></translation>
+        <translation>Lontano dal dispositivo</translation>
     </message>
     <message>
         <source>Do not disturb</source>
-        <translation type="unfinished"></translation>
+        <translation>Non disturbare</translation>
     </message>
     <message>
         <source>Away for longer</source>
-        <translation type="unfinished"></translation>
+        <translation>Lontano per tanto tempo</translation>
     </message>
     <message>
         <source>Error</source>
-        <translation type="unfinished"></translation>
+        <translation>Errore</translation>
     </message>
 </context>
 <context>
@@ -305,7 +305,7 @@
     </message>
     <message>
         <source>Spoiler</source>
-        <translation type="unfinished"></translation>
+        <translation>Spoiler</translation>
     </message>
 </context>
 <context>
@@ -331,53 +331,53 @@
     <name>RosterRemoveContactSheet</name>
     <message>
         <source>Do you really want to delete the contact &lt;b&gt;%1&lt;/b&gt; from your roster?</source>
-        <translation type="unfinished"></translation>
+        <translation>Vuoi veramente eliminare il contatto &lt;b&gt;%1&lt;/b&gt; dalla tua lista?</translation>
     </message>
     <message>
         <source>Delete contact</source>
-        <translation type="unfinished"></translation>
+        <translation>Elimina contatto</translation>
     </message>
     <message>
         <source>Cancel</source>
-        <translation type="unfinished"></translation>
+        <translation>Annulla</translation>
     </message>
     <message>
         <source>Delete</source>
-        <translation type="unfinished"></translation>
+        <translation>Elimina</translation>
     </message>
 </context>
 <context>
     <name>SendMediaSheet</name>
     <message>
         <source>Caption</source>
-        <translation type="unfinished"></translation>
+        <translation>Descrizione</translation>
     </message>
     <message>
         <source>Cancel</source>
-        <translation type="unfinished"></translation>
+        <translation>Annulla</translation>
     </message>
     <message>
         <source>Send</source>
-        <translation type="unfinished"></translation>
+        <translation>Invia</translation>
     </message>
 </context>
 <context>
     <name>SubRequestAcceptSheet</name>
     <message>
         <source>Subscription Request</source>
-        <translation type="unfinished"></translation>
+        <translation>Richiesta di Sottoscrizione</translation>
     </message>
     <message>
         <source>You received a subscription request by &lt;b&gt;%1&lt;/b&gt;. If you accept it, the account will have access to your presence status.</source>
-        <translation type="unfinished"></translation>
+        <translation>Hai ricevuto una richiesta di sottoscrizione da &lt;b&gt;%1&lt;/b&gt;. Se la accetti, l&apos;account avrà accesso al tuo stato di presenza.</translation>
     </message>
     <message>
         <source>Decline</source>
-        <translation type="unfinished"></translation>
+        <translation>Rifiuta</translation>
     </message>
     <message>
         <source>Accept</source>
-        <translation type="unfinished"></translation>
+        <translation>Accetta</translation>
     </message>
 </context>
 <context>

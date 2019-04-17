@@ -65,19 +65,19 @@
     </message>
     <message>
         <source>Copy Message</source>
-        <translation type="unfinished"></translation>
+        <translation>Salin Mesej</translation>
     </message>
     <message>
         <source>Edit Message</source>
-        <translation type="unfinished"></translation>
+        <translation>Sunting Mesej</translation>
     </message>
     <message>
         <source>Spoiler</source>
-        <translation type="unfinished"></translation>
+        <translation>Spoiler</translation>
     </message>
     <message>
         <source>Download</source>
-        <translation type="unfinished"></translation>
+        <translation>Muat Turun</translation>
     </message>
 </context>
 <context>
@@ -116,11 +116,11 @@
     </message>
     <message>
         <source>Send a spoiler message</source>
-        <translation type="unfinished"></translation>
+        <translation>Hantar mesej spoiler</translation>
     </message>
     <message>
         <source>Spoiler hint</source>
-        <translation type="unfinished"></translation>
+        <translation>Tip spoiler</translation>
     </message>
 </context>
 <context>
@@ -134,11 +134,11 @@
     <name>DownloadJob</name>
     <message>
         <source>Could not save file: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Tidak dapat menyimpan fail: %1</translation>
     </message>
     <message>
         <source>Download failed: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Muat turun gagal: %1</translation>
     </message>
 </context>
 <context>
@@ -159,11 +159,11 @@
     <name>FileChooserMobile</name>
     <message>
         <source>Close</source>
-        <translation type="unfinished">Tutup</translation>
+        <translation>Tutup</translation>
     </message>
     <message>
         <source>Go to parent folder</source>
-        <translation type="unfinished"></translation>
+        <translation>Naik ke folder atas</translation>
     </message>
 </context>
 <context>
@@ -311,11 +311,11 @@
     </message>
     <message>
         <source>Could not correct message, as a result of not being connected.</source>
-        <translation type="unfinished"></translation>
+        <translation>Tidak dapat membetulkan mesej, kerana anda tidak sambung ke internet.</translation>
     </message>
     <message>
         <source>Spoiler</source>
-        <translation type="unfinished"></translation>
+        <translation>Spoiler</translation>
     </message>
 </context>
 <context>
@@ -408,7 +408,7 @@
     </message>
     <message>
         <source>Spoiler</source>
-        <translation type="unfinished"></translation>
+        <translation>Spoiler</translation>
     </message>
 </context>
 <context>
@@ -457,15 +457,15 @@
     <name>SendMediaSheet</name>
     <message>
         <source>Cancel</source>
-        <translation type="unfinished">Batal</translation>
+        <translation>Batal</translation>
     </message>
     <message>
         <source>Send</source>
-        <translation type="unfinished">Hantar</translation>
+        <translation>Hantar</translation>
     </message>
     <message>
         <source>Caption</source>
-        <translation type="unfinished"></translation>
+        <translation>Kapsyen</translation>
     </message>
 </context>
 <context>

@@ -292,6 +292,7 @@ Kirigami.ScrollablePage {
 				Kirigami.Icon {
 					source: "preferences-desktop-emoticons"
 					enabled: sendButton.enabled
+					color: "transparent"
 					isMask: false
 					smooth: true
 					anchors.centerIn: parent
@@ -314,6 +315,7 @@ Kirigami.ScrollablePage {
 							return "edit-symbolic"
 					}
 					enabled: sendButton.enabled
+					color: "transparent"
 					isMask: true
 					smooth: true
 					anchors.centerIn: parent

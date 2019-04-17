@@ -47,7 +47,6 @@ RowLayout {
 	property int mediaType
 	property string mediaGetUrl
 	property string mediaLocation
-	property var textEdit
 	property bool isLastMessage
 	property bool edited
 	property bool isLoading: kaidan.transferCache.hasUpload(msgId)
@@ -61,6 +60,8 @@ RowLayout {
 	property bool isSpoiler
 	property bool isShowingSpoiler
 	property string spoilerHint
+
+	signal messageEditRequested(string id, string body)
 
 	// own messages are on the right, others on the left
 	layoutDirection: sentByMe ? Qt.RightToLeft : Qt.LeftToRight
@@ -137,10 +138,7 @@ RowLayout {
 				Controls.MenuItem {
 					text: qsTr("Edit Message")
 					enabled: isLastMessage && sentByMe
-					onTriggered: {
-						textEdit.text = messageBody
-						textEdit.state = "edit"
-					}
+					onTriggered: root.messageEditRequested(msgId, messageBody)
 				}
 			}
 		}
@@ -157,7 +155,7 @@ RowLayout {
 					anchors.fill: parent
 					acceptedButtons: Qt.LeftButton | Qt.RightButton
 					onClicked: {
-						if (mouse.button === Qt.LeftButton){
+						if (mouse.button === Qt.LeftButton) {
 							isShowingSpoiler = !isShowingSpoiler
 						}
 					}

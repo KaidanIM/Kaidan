@@ -41,6 +41,7 @@ Kirigami.ScrollablePage {
 	property string chatName
 	property string recipientJid
 	property bool isWritingSpoiler
+	property string messageToCorrect
 
 	title: chatName
 	keyboardNavigationEnabled: true
@@ -145,11 +146,16 @@ Kirigami.ScrollablePage {
 			mediaGetUrl: model.mediaUrl
 			mediaLocation: model.mediaLocation
 			isLastMessage: model.id === kaidan.messageModel.lastMessageId(recipientJid)
-			textEdit: messageField
 			edited: model.edited
 			isSpoiler: model.isSpoiler
 			isShowingSpoiler: false
 			spoilerHint: model.spoilerHint
+
+			onMessageEditRequested: {
+				messageToCorrect = id
+				messageField.text = body
+				messageField.state = "edit"
+			}
 		}
 	}
 
@@ -327,10 +333,10 @@ Kirigami.ScrollablePage {
 					// send the message
 					if (messageField.state == "compose") {
 						kaidan.sendMessage(recipientJid, messageField.text,
-								   isWritingSpoiler, spoilerHintField.text)
+										   isWritingSpoiler, spoilerHintField.text)
 					} else if (messageField.state == "edit") {
-						kaidan.correctMessage(recipientJid, kaidan.messageModel.lastMessageId(recipientJid),
-						                      messageField.text)
+						kaidan.correctMessage(recipientJid, messageToCorrect,
+											  messageField.text)
 					}
 
 					// clean up the text fields

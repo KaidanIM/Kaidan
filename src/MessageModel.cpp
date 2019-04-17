@@ -183,11 +183,10 @@ void MessageModel::updateMessage(const QString id, Message msg)
 	setRecord(recId, rec);
 	submitAll();
 
-	// check if we're author/recipient
-	QVariant jid = rec.value("author").toString() == ownJid ? rec.value("recipient")
-	               : rec.value("author");
 	// update last message id
-	lastMsgIdCache[jid.toString()] = newId;
+	if (!msg.id.isEmpty() && msg.author == ownJid) {
+		lastMsgIdCache[msg.recipient] = msg.id;
+	}
 }
 
 void MessageModel::addMessage(Message msg)
@@ -225,10 +224,8 @@ void MessageModel::addMessage(Message msg)
 
 	submitAll();
 
-	// update last message id
-	if (!msg.id.isEmpty()) {
-		// check if we're author/recipient
-		QString jid = msg.author == ownJid ? msg.recipient : msg.author;
-		lastMsgIdCache[jid] = msg.id;
+	// update last message id, in case we're author
+	if (!msg.id.isEmpty() && msg.author == ownJid) {
+		lastMsgIdCache[msg.recipient] = msg.id;
 	}
 }

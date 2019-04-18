@@ -159,7 +159,6 @@ void MessageModel::updateMessage(const QString id, Message msg)
 	rec.setValue("edited", msg.edited);
 	rec.setValue("isSent", msg.isSent);
 	rec.setValue("isDelivered", msg.isDelivered);
-	rec.setValue("isSpoiler", msg.isSpoiler);
 	if (!msg.timestamp.isEmpty())
 		rec.setValue("timestamp", msg.timestamp);
 	if (!msg.message.isEmpty())

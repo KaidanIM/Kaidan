@@ -116,7 +116,7 @@ void MessageHandler::handleMessage(const QXmppMessage &msg)
 	bodyWords.prepend(msg.outOfBandUrl());
 #endif
 	for (const QString &word : bodyWords) {
-		if (!word.startsWith("https://") || !word.startsWith("http://"))
+		if (!word.startsWith("https://") && !word.startsWith("http://"))
 			continue;
 
 		// check message type by file name in link

@@ -14,7 +14,7 @@ cd ${BUILD_DIR}/build
 if [[ ${PLATFORM} == "ubuntu-touch" ]]; then
 	cd ..
 	git submodule update --init --remote --checkout
-	clickable clean build click-build review
+	clickable clean build-libs build click-build review
 	if [ ! -z $OPENSTORE_API_KEY ] && [ ! -z $CI_COMMIT_TAG ]; then
 		clickable publish
 	fi

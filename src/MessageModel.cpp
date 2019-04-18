@@ -155,8 +155,7 @@ void MessageModel::updateMessage(const QString id, Message msg)
 	if (!found)
 		return;
 
-	QString newId = msg.id.isEmpty() ? id : msg.id;
-	rec.setValue("id", newId);
+	rec.setValue("id", msg.id.isEmpty() ? id : msg.id);
 	rec.setValue("edited", msg.edited);
 	rec.setValue("isSent", msg.isSent);
 	rec.setValue("isDelivered", msg.isDelivered);

@@ -91,8 +91,6 @@ MessageHandler::~MessageHandler()
 
 void MessageHandler::handleMessage(const QXmppMessage &msg)
 {
-	bool isCarbonMessage = false;
-
 	if (msg.body().isEmpty())
 		return;
 
@@ -154,6 +152,7 @@ void MessageHandler::handleMessage(const QXmppMessage &msg)
 		emit model->addMessageRequested(entry);
 	} else {
 		entry.edited = true;
+		entry.id = "";
 		emit model->updateMessageRequested(msg.replaceId(), entry);
 	}
 #else
@@ -171,7 +170,7 @@ void MessageHandler::handleMessage(const QXmppMessage &msg)
 	if (contactName.isEmpty())
 		contactName = contactJid;
 
-	if (!entry.sentByMe && !isCarbonMessage)
+	if (!entry.sentByMe)
 		Notifications::sendMessageNotification(contactName.toStdString(),
 		                                       msg.body().toStdString());
 
@@ -244,7 +243,6 @@ void MessageHandler::correctMessage(QString toJid, QString msgId, QString body)
 	MessageModel::Message msg;
 	msg.author = client->configuration().jidBare();
 	msg.recipient = toJid;
-	msg.id = QXmppUtils::generateStanzaHash(48);
 	msg.sentByMe = true;
 	msg.message = body;
 	msg.type = MessageType::MessageText; // text message without media
@@ -253,7 +251,6 @@ void MessageHandler::correctMessage(QString toJid, QString msgId, QString body)
 	emit model->updateMessageRequested(msgId, msg);
 
 	QXmppMessage m(msg.author, msg.recipient, body);
-	m.setId(msg.id);
 	m.setReceiptRequested(true);
 #if QXMPP_VERSION >= QT_VERSION_CHECK(1, 0, 0)
 	m.setReplaceId(msgId);

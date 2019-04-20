@@ -20,19 +20,19 @@
     <name>ChatMessage</name>
     <message>
         <source>Copy Message</source>
-        <translation type="unfinished"></translation>
+        <translation>Zkopírovat zprávu</translation>
     </message>
     <message>
         <source>Edit Message</source>
-        <translation type="unfinished"></translation>
+        <translation>Editovat zprávu</translation>
     </message>
     <message>
         <source>Spoiler</source>
-        <translation type="unfinished"></translation>
+        <translation>«Spoiler»</translation>
     </message>
     <message>
         <source>Download</source>
-        <translation type="unfinished"></translation>
+        <translation>Stahnout</translation>
     </message>
 </context>
 <context>
@@ -67,11 +67,11 @@
     </message>
     <message>
         <source>Send a spoiler message</source>
-        <translation type="unfinished"></translation>
+        <translation>Zaslat «spoiler» zprávu</translation>
     </message>
     <message>
         <source>Spoiler hint</source>
-        <translation type="unfinished"></translation>
+        <translation>«Spoiler» tip</translation>
     </message>
 </context>
 <context>
@@ -82,11 +82,11 @@
     </message>
     <message>
         <source>Could not save file: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Soubor nelze uložit: %1</translation>
     </message>
     <message>
         <source>Download failed: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Chyba při stahování: %1</translation>
     </message>
 </context>
 <context>
@@ -100,18 +100,18 @@
     <name>FileChooser</name>
     <message>
         <source>Select a file</source>
-        <translation type="unfinished">Vybrat soubor</translation>
+        <translation>Vybrat soubor</translation>
     </message>
 </context>
 <context>
     <name>FileChooserMobile</name>
     <message>
         <source>Go to parent folder</source>
-        <translation type="unfinished"></translation>
+        <translation>Přesun o adresář výše</translation>
     </message>
     <message>
         <source>Close</source>
-        <translation type="unfinished"></translation>
+        <translation>Zavřít</translation>
     </message>
 </context>
 <context>
@@ -225,81 +225,81 @@ Prosím zkontrolujte své připojení k internetu.</translation>
     </message>
     <message>
         <source>Spoiler</source>
-        <translation type="unfinished"></translation>
+        <translation>«Spoiler»</translation>
     </message>
 </context>
 <context>
     <name>RosterAddContactSheet</name>
     <message>
         <source>Add new contact</source>
-        <translation type="unfinished">Přidat nový kontakt</translation>
+        <translation>Přidat nový kontakt</translation>
     </message>
     <message>
         <source>This will also send a request to access the presence of the contact.</source>
-        <translation type="unfinished"></translation>
+        <translation>Zároveň odešle požkontakt přístupu k informaci o přítomnosti kontaktu.</translation>
     </message>
     <message>
         <source>Jabber-ID:</source>
-        <translation type="unfinished"></translation>
+        <translation>Jabber-ID:</translation>
     </message>
     <message>
         <source>user@example.org</source>
-        <translation type="unfinished">uživatel@example.org</translation>
+        <translation>uživatel@example.org</translation>
     </message>
     <message>
         <source>Nickname:</source>
-        <translation type="unfinished"></translation>
+        <translation>Alias:</translation>
     </message>
     <message>
         <source>Optional message:</source>
-        <translation type="unfinished"></translation>
+        <translation>Volitelná zpráva:</translation>
     </message>
     <message>
         <source>Tell your chat partner who you are.</source>
-        <translation type="unfinished"></translation>
+        <translation>Sdělit chatující proti-straně kdo jste.</translation>
     </message>
     <message>
         <source>Cancel</source>
-        <translation type="unfinished"></translation>
+        <translation>Zrušit</translation>
     </message>
     <message>
         <source>Add</source>
-        <translation type="unfinished"></translation>
+        <translation>Přidat</translation>
     </message>
 </context>
 <context>
     <name>RosterListItem</name>
     <message>
         <source>Error: Please check the JID.</source>
-        <translation type="unfinished"></translation>
+        <translation>Chyba: zkontrolujte prosím JID.</translation>
     </message>
     <message>
         <source>Available</source>
-        <translation type="unfinished"></translation>
+        <translation>Dostupný</translation>
     </message>
     <message>
         <source>Free for chat</source>
-        <translation type="unfinished"></translation>
+        <translation>Dostupný k chatování</translation>
     </message>
     <message>
         <source>Away</source>
-        <translation type="unfinished"></translation>
+        <translation>Nepřítomný</translation>
     </message>
     <message>
         <source>Do not disturb</source>
-        <translation type="unfinished"></translation>
+        <translation>Nerušit</translation>
     </message>
     <message>
         <source>Away for longer</source>
-        <translation type="unfinished"></translation>
+        <translation>Dlouhodobě nepřítomný</translation>
     </message>
     <message>
         <source>Offline</source>
-        <translation type="unfinished">Odpojen</translation>
+        <translation>Nepřipojen</translation>
     </message>
     <message>
         <source>Error</source>
-        <translation type="unfinished"></translation>
+        <translation>Chyba</translation>
     </message>
 </context>
 <context>
@@ -314,7 +314,7 @@ Prosím zkontrolujte své připojení k internetu.</translation>
     </message>
     <message>
         <source>Spoiler</source>
-        <translation type="unfinished"></translation>
+        <translation>«Spoiler»</translation>
     </message>
 </context>
 <context>
@@ -340,53 +340,53 @@ Prosím zkontrolujte své připojení k internetu.</translation>
     <name>RosterRemoveContactSheet</name>
     <message>
         <source>Do you really want to delete the contact &lt;b&gt;%1&lt;/b&gt; from your roster?</source>
-        <translation type="unfinished"></translation>
+        <translation>Opravdu chcete smazat kontakt &lt;b&gt;%1&lt;/b&gt; z vašeho seznamu?</translation>
     </message>
     <message>
         <source>Delete contact</source>
-        <translation type="unfinished"></translation>
+        <translation>Smazat kontakt</translation>
     </message>
     <message>
         <source>Cancel</source>
-        <translation type="unfinished"></translation>
+        <translation>Zrušit</translation>
     </message>
     <message>
         <source>Delete</source>
-        <translation type="unfinished"></translation>
+        <translation>Smazat</translation>
     </message>
 </context>
 <context>
     <name>SendMediaSheet</name>
     <message>
         <source>Caption</source>
-        <translation type="unfinished"></translation>
+        <translation>Titulek</translation>
     </message>
     <message>
         <source>Cancel</source>
-        <translation type="unfinished"></translation>
+        <translation>Zrušit</translation>
     </message>
     <message>
         <source>Send</source>
-        <translation type="unfinished"></translation>
+        <translation>Odeslat</translation>
     </message>
 </context>
 <context>
     <name>SubRequestAcceptSheet</name>
     <message>
         <source>Subscription Request</source>
-        <translation type="unfinished"></translation>
+        <translation>Žádost o přihlášení</translation>
     </message>
     <message>
         <source>You received a subscription request by &lt;b&gt;%1&lt;/b&gt;. If you accept it, the account will have access to your presence status.</source>
-        <translation type="unfinished"></translation>
+        <translation>Obdržena žádost o přihlášení od &lt;b&gt;%1&lt;/b&gt;. Pokud přijmete, daný účet bude mít přístup k vašemu statusu.</translation>
     </message>
     <message>
         <source>Decline</source>
-        <translation type="unfinished"></translation>
+        <translation>Odmítnout</translation>
     </message>
     <message>
         <source>Accept</source>
-        <translation type="unfinished"></translation>
+        <translation>Přijmout</translation>
     </message>
 </context>
 <context>

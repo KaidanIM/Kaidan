@@ -31,11 +31,11 @@
     </message>
     <message>
         <source>Copy Message</source>
-        <translation type="unfinished"></translation>
+        <translation>Mezua kopiatu</translation>
     </message>
     <message>
         <source>Edit Message</source>
-        <translation type="unfinished"></translation>
+        <translation>Mezua editatu</translation>
     </message>
     <message>
         <source>Spoiler</source>
@@ -43,7 +43,7 @@
     </message>
     <message>
         <source>Download</source>
-        <translation type="unfinished"></translation>
+        <translation>Deskargatu</translation>
     </message>
 </context>
 <context>
@@ -96,11 +96,11 @@
     <name>DownloadJob</name>
     <message>
         <source>Could not save file: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Ezin izan da %1 fitxategia gorde</translation>
     </message>
     <message>
         <source>Download failed: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Deskarga akatsa: %1</translation>
     </message>
 </context>
 <context>
@@ -129,7 +129,7 @@
     </message>
     <message>
         <source>Go to parent folder</source>
-        <translation type="unfinished"></translation>
+        <translation>Karpeta nagusira joan</translation>
     </message>
 </context>
 <context>
@@ -261,11 +261,11 @@
     <name>MessageHandler</name>
     <message>
         <source>Could not send message, as a result of not being connected.</source>
-        <translation type="unfinished">Ezin izan da mezua bidali, konektaturik ez zaudelako.</translation>
+        <translation>Ezin izan da mezua bidali, konektaturik ez  dagoelako.</translation>
     </message>
     <message>
         <source>Could not correct message, as a result of not being connected.</source>
-        <translation type="unfinished"></translation>
+        <translation>Ezin izan da mezua zuzendu konektaturik ez zaudelako.</translation>
     </message>
     <message>
         <source>Spoiler</source>
@@ -354,11 +354,11 @@
     <name>RosterManager</name>
     <message>
         <source>Could not add contact, as a result of not being connected.</source>
-        <translation type="unfinished">Ezin izan da kontaktua gehitu, konektaturik ez zaudelako.</translation>
+        <translation>Ezin izan da kontaktua gehitu, konektaturik ez zaudelako.</translation>
     </message>
     <message>
         <source>Could not remove contact, as a result of not being connected.</source>
-        <translation type="unfinished">Ezin izan da kontaktua ezabatu, konektaturik ez zaudelako.</translation>
+        <translation>Ezin izan da kontaktua ezabatu, konektaturik ez zaudelako.</translation>
     </message>
     <message>
         <source>Spoiler</source>
@@ -400,48 +400,48 @@
     </message>
     <message>
         <source>Do you really want to delete the contact &lt;b&gt;%1&lt;/b&gt; from your roster?</source>
-        <translation type="unfinished"></translation>
+        <translation>Ziur al zaude &lt;b&gt;%1&lt;/b&gt; kontaktua zure zerrendatik ezabatu nahi duzula?</translation>
     </message>
 </context>
 <context>
     <name>SendMediaSheet</name>
     <message>
         <source>Cancel</source>
-        <translation type="unfinished">Utzi</translation>
+        <translation>Utzi</translation>
     </message>
     <message>
         <source>Caption</source>
-        <translation type="unfinished"></translation>
+        <translation>Izenburua</translation>
     </message>
     <message>
         <source>Send</source>
-        <translation type="unfinished"></translation>
+        <translation>Bidali</translation>
     </message>
 </context>
 <context>
     <name>SubRequestAcceptSheet</name>
     <message>
         <source>Subscription Request</source>
-        <translation type="unfinished"></translation>
+        <translation>Izen emate eskaera</translation>
     </message>
     <message>
         <source>You received a subscription request by &lt;b&gt;%1&lt;/b&gt;. If you accept it, the account will have access to your presence status.</source>
-        <translation type="unfinished"></translation>
+        <translation>Izen emate eskaera jaso duzu &lt;b&gt;%1&lt;/b&gt;-(r)engandik. Onartzen baldin baduzu, kontuak sarbidea izango du zure presentzia egoerara.</translation>
     </message>
     <message>
         <source>Decline</source>
-        <translation type="unfinished"></translation>
+        <translation>Ukatu</translation>
     </message>
     <message>
         <source>Accept</source>
-        <translation type="unfinished"></translation>
+        <translation>Onartu</translation>
     </message>
 </context>
 <context>
     <name>UploadManager</name>
     <message>
         <source>Could not send file, as a result of not being connected.</source>
-        <translation type="unfinished">Ezin izan da artxiboa bidali, konektaturik ez zaudelako.</translation>
+        <translation>Ezin izan da artxiboa bidali, konektaturik ez zaudelako.</translation>
     </message>
     <message>
         <source>File</source>

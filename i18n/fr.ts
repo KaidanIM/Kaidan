@@ -5,19 +5,19 @@
     <name>AboutDialog</name>
     <message>
         <source>A simple, user-friendly Jabber/XMPP client</source>
-        <translation type="unfinished">Un client Jabber/XMPP, simple et convivial</translation>
+        <translation>Un client Jabber/XMPP, simple et convivial</translation>
     </message>
     <message>
         <source>License:</source>
-        <translation type="unfinished">Licence&#xa0;:</translation>
+        <translation>Licence :</translation>
     </message>
     <message>
         <source>Source code on GitHub</source>
-        <translation type="obsolete">Code source sur GitHub</translation>
+        <translation type="vanished">Code source sur GitHub</translation>
     </message>
     <message>
         <source>View source code online</source>
-        <translation>voir le code source en ligne</translation>
+        <translation>Voir le code source en ligne</translation>
     </message>
 </context>
 <context>
@@ -47,7 +47,7 @@
     </message>
     <message>
         <source>License:</source>
-        <translation type="vanished">Licence&#xa0;:</translation>
+        <translation type="vanished">Licence :</translation>
     </message>
     <message>
         <source>Source code on GitHub</source>
@@ -58,7 +58,7 @@
     <name>BackButton</name>
     <message>
         <source>Navigate Back</source>
-        <translation type="vanished">Revenir</translation>
+        <translation type="vanished">Retour</translation>
     </message>
 </context>
 <context>
@@ -69,19 +69,19 @@
     </message>
     <message>
         <source>Copy Message</source>
-        <translation type="unfinished"></translation>
+        <translation>Copier le message</translation>
     </message>
     <message>
         <source>Edit Message</source>
-        <translation type="unfinished"></translation>
+        <translation>Modifier le message</translation>
     </message>
     <message>
         <source>Spoiler</source>
-        <translation type="unfinished"></translation>
+        <translation>Révélation</translation>
     </message>
     <message>
         <source>Download</source>
-        <translation type="unfinished"></translation>
+        <translation>Télécharger</translation>
     </message>
 </context>
 <context>
@@ -120,11 +120,11 @@
     </message>
     <message>
         <source>Send a spoiler message</source>
-        <translation type="unfinished"></translation>
+        <translation>Envoyer un message contenant une révélation</translation>
     </message>
     <message>
         <source>Spoiler hint</source>
-        <translation type="unfinished"></translation>
+        <translation>Indice sur la révélation</translation>
     </message>
 </context>
 <context>
@@ -138,25 +138,25 @@
     <name>DownloadJob</name>
     <message>
         <source>Could not save file: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Impossible d&apos;enregistrer : %1</translation>
     </message>
     <message>
         <source>Download failed: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Échec du téléchargement : %1</translation>
     </message>
 </context>
 <context>
     <name>EmptyChatPage</name>
     <message>
         <source>Please select a chat to start messaging</source>
-        <translation type="unfinished">Sélectionner une conversation pour commencer</translation>
+        <translation>Sélectionnez une discussion pour commencer</translation>
     </message>
 </context>
 <context>
     <name>FileChooser</name>
     <message>
         <source>Select a file</source>
-        <translation>Sélectionner un fichier</translation>
+        <translation>Sélectionnez un fichier</translation>
     </message>
 </context>
 <context>
@@ -167,11 +167,11 @@
     </message>
     <message>
         <source>Close</source>
-        <translation type="unfinished">Fermer</translation>
+        <translation>Fermer</translation>
     </message>
     <message>
         <source>Go to parent folder</source>
-        <translation type="unfinished"></translation>
+        <translation>Aller au dossier parent</translation>
     </message>
 </context>
 <context>
@@ -205,46 +205,46 @@
     </message>
     <message>
         <source>Invitation link copied to clipboard</source>
-        <translation>Lien d&apos;invitation copié dans le presse papier</translation>
+        <translation>Lien d&apos;invitation copié dans le presse-papier</translation>
     </message>
 </context>
 <context>
     <name>Kaidan</name>
     <message>
         <source>Could not send message, as a result of not being connected.</source>
-        <translation type="obsolete">Vous n&apos;êtes pas connecté. Impossible d&apos;envoyer le message</translation>
+        <translation type="vanished">Impossible d&apos;envoyer le message car vous n&apos;êtes pas connecté(e).</translation>
     </message>
     <message>
         <source>Could not add contact, as a result of not being connected.</source>
-        <translation type="obsolete">Vous n&apos;êtes pas conecté. Impossible d&apos;ajouter un contact.</translation>
+        <translation type="vanished">Impossible d&apos;ajouter un contact car vous n&apos;êtes pas connecté(e).</translation>
     </message>
     <message>
         <source>Could not remove contact, as a result of not being connected.</source>
-        <translation type="obsolete">Vous n&apos;êtes pas connecté. Impossible de supprimer un contact.</translation>
+        <translation type="vanished">Impossible de supprimer le contact car vous n&apos;êtes pas connecté(e).</translation>
     </message>
     <message>
         <source>The link will be opened after you have connected.</source>
         <extracomment>The link is an XMPP-URI (i.e. &apos;xmpp:kaidan@muc.kaidan.im?join&apos; for joining a chat)</extracomment>
-        <translation>Le lien s&apos;ouvrira une fois que vous serez connecté.</translation>
+        <translation>Le lien s&apos;ouvrira une fois que vous serez connecté(e).</translation>
     </message>
     <message>
         <source>Could not send file, as a result of not being connected.</source>
-        <translation type="vanished">Vous n&apos;êtes pas connecté. Impossible d&apos;envoyer le fichier.</translation>
+        <translation type="vanished">Impossible d&apos;envoyer le fichier car vous n&apos;êtes pas connecté(e).</translation>
     </message>
 </context>
 <context>
     <name>LoginPage</name>
     <message>
         <source>Your Jabber-ID:</source>
-        <translation>Votre Jabber-ID :</translation>
+        <translation>Votre identifiant Jabber :</translation>
     </message>
     <message>
         <source>user@example.org</source>
-        <translation>utilisateur@example.org</translation>
+        <translation>utilisateur@exemple.org</translation>
     </message>
     <message>
         <source>Your Password:</source>
-        <translation>Votre mot de passe : </translation>
+        <translation>Votre mot de passe :</translation>
     </message>
     <message>
         <source>Retry</source>
@@ -268,7 +268,7 @@
     </message>
     <message>
         <source>Your diaspora*-ID:</source>
-        <translation type="vanished">Votre identifiant diaspora*&#x202f;:</translation>
+        <translation type="vanished">Votre identifiant diaspora* :</translation>
     </message>
     <message>
         <source>user@diaspora.pod</source>
@@ -276,15 +276,15 @@
     </message>
     <message>
         <source>Invalid username or password.</source>
-        <translation>Nom d&apos;utilisateur ou mot de passe invalide.</translation>
+        <translation>Nom d&apos;utilisateur/trice ou mot de passe invalide.</translation>
     </message>
     <message>
         <source>Cannot connect to the server. Please check your internet connection.</source>
-        <translation>Impossible de se connecter au server. Veuillez tester votre connexion internet.</translation>
+        <translation>Impossible de se connecter au server. Veuillez tester votre connexion à internet.</translation>
     </message>
     <message>
         <source>The server doesn&apos;t support secure connections.</source>
-        <translation type="unfinished">Le server ne permet pas les connexions securisées</translation>
+        <translation>Le server ne permet pas les connexions securisées</translation>
     </message>
     <message>
         <source>Error while trying to connect securely.</source>
@@ -292,7 +292,7 @@
     </message>
     <message>
         <source>Could not resolve the server&apos;s address. Please check your JID again.</source>
-        <translation>Impossible d&apos;atteindre l&apos;adresse du serveur. Veuillez vérifier votre identifiant Jabber (JID).</translation>
+        <translation>Impossible d&apos;atteindre l&apos;adresse du serveur. Veuillez vérifier votre identifiant Jabber.</translation>
     </message>
     <message>
         <source>Could not connect to the server.</source>
@@ -304,22 +304,22 @@
     </message>
     <message>
         <source>An unknown error occured; see log for details.</source>
-        <translation>Une error inconnu est survenue; voir les log pour les détails.</translation>
+        <translation>Une erreur inconnue est survenue, consultez les journaux pour plus de détails.</translation>
     </message>
 </context>
 <context>
     <name>MessageHandler</name>
     <message>
         <source>Could not send message, as a result of not being connected.</source>
-        <translation type="unfinished">Vous n&apos;êtes pas connecté. Impossible d&apos;envoyer le message</translation>
+        <translation>Impossible d&apos;envoyer le message car vous n&apos;êtes pas connecté(e).</translation>
     </message>
     <message>
         <source>Could not correct message, as a result of not being connected.</source>
-        <translation type="unfinished"></translation>
+        <translation>Impossible de corriger le message car vous n&apos;êtes pas connecté(e).</translation>
     </message>
     <message>
         <source>Spoiler</source>
-        <translation type="unfinished"></translation>
+        <translation>Révélation</translation>
     </message>
 </context>
 <context>
@@ -330,11 +330,11 @@
     </message>
     <message>
         <source>Jabber-ID:</source>
-        <translation>Identifiant Jabber&#x202f;:</translation>
+        <translation>Identifiant Jabber :</translation>
     </message>
     <message>
         <source>user@example.org</source>
-        <translation>utilisateur@example.org</translation>
+        <translation>utilisateur@exemple.org</translation>
     </message>
     <message>
         <source>Cancel</source>
@@ -350,22 +350,22 @@
     </message>
     <message>
         <source>This will also send a request to access the presence of the contact.</source>
-        <translation type="unfinished">Cette action va aussi envoyer une requête pour s&apos;assurer de la présence du contact.</translation>
+        <translation>Cette action va aussi envoyer une requête pour s&apos;assurer de la présence du contact.</translation>
     </message>
     <message>
         <source>Optional message:</source>
-        <translation type="unfinished">Message optionnel :</translation>
+        <translation>Message facultatif :</translation>
     </message>
     <message>
         <source>Tell your chat partner who you are.</source>
-        <translation type="unfinished">Informez votre contact qui vous êtes.</translation>
+        <translation>Informez votre contact sur votre identité.</translation>
     </message>
 </context>
 <context>
     <name>RosterListItem</name>
     <message>
         <source>Error: Please check the JID.</source>
-        <translation>Erreur : veuillez vérifier votre utilisateur jabber (JID).</translation>
+        <translation>Erreur : veuillez vérifier votre identifiant Jabber.</translation>
     </message>
     <message>
         <source>Available</source>
@@ -377,7 +377,7 @@
     </message>
     <message>
         <source>Away</source>
-        <translation>Absent</translation>
+        <translation>Absent(e)</translation>
     </message>
     <message>
         <source>Do not disturb</source>
@@ -385,7 +385,7 @@
     </message>
     <message>
         <source>Away for longer</source>
-        <translation>Absent pour longtemps</translation>
+        <translation>Absent(e) pour longtemps</translation>
     </message>
     <message>
         <source>Offline</source>
@@ -404,11 +404,11 @@
     <name>RosterManager</name>
     <message>
         <source>Could not add contact, as a result of not being connected.</source>
-        <translation type="unfinished">Vous n&apos;êtes pas conecté. Impossible d&apos;ajouter un contact.</translation>
+        <translation>Impossible d&apos;ajouter un contact car vous n&apos;êtes pas connecté(e).</translation>
     </message>
     <message>
         <source>Could not remove contact, as a result of not being connected.</source>
-        <translation type="unfinished">Vous n&apos;êtes pas connecté. Impossible de supprimer un contact.</translation>
+        <translation>Impossible de supprimer le contact car vous n&apos;êtes pas connecté(e).</translation>
     </message>
     <message>
         <source>This will also send a request to access the presence of the contact.</source>
@@ -416,15 +416,15 @@
     </message>
     <message>
         <source>Optional message:</source>
-        <translation type="vanished">Message optionnel :</translation>
+        <translation type="vanished">Message facultatif :</translation>
     </message>
     <message>
         <source>Tell your chat partner who you are.</source>
-        <translation type="obsolete">Informez votre contact qui vous êtes.</translation>
+        <translation type="vanished">Informez votre contact de votre identité.</translation>
     </message>
     <message>
         <source>Spoiler</source>
-        <translation type="unfinished"></translation>
+        <translation>Révélation</translation>
     </message>
 </context>
 <context>
@@ -439,7 +439,7 @@
     </message>
     <message>
         <source>Connecting…</source>
-        <translation type="unfinished">Connexion en cours...</translation>
+        <translation>Connexion en cours…</translation>
     </message>
     <message>
         <source>Offline</source>
@@ -450,7 +450,7 @@
     <name>RosterRemoveContactSheet</name>
     <message>
         <source>Do you really want to delete the contact &quot;%1&quot; from your roster?</source>
-        <translation type="vanished">Voulez-vous vraiment supprimer le contact « %1» de votre liste de contacts&#x202f;?</translation>
+        <translation type="vanished">Voulez-vous vraiment supprimer le contact « %1 » de votre répertoire ?</translation>
     </message>
     <message>
         <source>Delete contact</source>
@@ -466,18 +466,18 @@
     </message>
     <message>
         <source>Do you really want to delete the contact &lt;b&gt;%1&lt;/b&gt; from your roster?</source>
-        <translation>Voulez vous vraiment supprimer le contact &lt;b&gt;1%1&lt;/b&gt;2 de votre liste ?</translation>
+        <translation>Voulez-vous vraiment supprimer le contact &lt;b&gt;%1&lt;/b&gt; de votre répertoire ?</translation>
     </message>
 </context>
 <context>
     <name>SendMediaSheet</name>
     <message>
         <source>Cancel</source>
-        <translation type="unfinished">Annuler</translation>
+        <translation>Annuler</translation>
     </message>
     <message>
         <source>Send</source>
-        <translation type="unfinished">Envoyer</translation>
+        <translation>Envoyer</translation>
     </message>
     <message>
         <source>Subscription Request</source>
@@ -485,7 +485,7 @@
     </message>
     <message>
         <source>You received a subscription request by &lt;b&gt;%1&lt;/b&gt;. If you accept it, the account will have access to your presence status.</source>
-        <translation type="vanished">Vous avez reçus une demande d&apos;abonnement de la par de &lt;b&gt;1%1&lt;/b&gt;2. Si vous acceptez, il aura accès à votre status.</translation>
+        <translation type="vanished">Vous avez reçu une demande d&apos;abonnement de la part de &lt;b&gt;%1&lt;/b&gt;. Si vous acceptez, il aura accès à votre statut de présence.</translation>
     </message>
     <message>
         <source>Decline</source>
@@ -493,33 +493,33 @@
     </message>
     <message>
         <source>Caption</source>
-        <translation type="unfinished"></translation>
+        <translation>Légende</translation>
     </message>
 </context>
 <context>
     <name>SubRequestAcceptSheet</name>
     <message>
         <source>Subscription Request</source>
-        <translation type="unfinished">Demande d&apos;abonnement</translation>
+        <translation>Demande d&apos;abonnement</translation>
     </message>
     <message>
         <source>You received a subscription request by &lt;b&gt;%1&lt;/b&gt;. If you accept it, the account will have access to your presence status.</source>
-        <translation type="unfinished">Vous avez reçus une demande d&apos;abonnement de la par de &lt;b&gt;1%1&lt;/b&gt;2. Si vous acceptez, il aura accès à votre status.</translation>
+        <translation>Vous avez reçu une demande d&apos;abonnement de la part de &lt;b&gt;%1&lt;/b&gt;. Si vous acceptez, il aura accès à votre statut de présence.</translation>
     </message>
     <message>
         <source>Decline</source>
-        <translation type="unfinished">Refuser</translation>
+        <translation>Refuser</translation>
     </message>
     <message>
         <source>Accept</source>
-        <translation type="unfinished">Accepter</translation>
+        <translation>Accepter</translation>
     </message>
 </context>
 <context>
     <name>UploadManager</name>
     <message>
         <source>Could not send file, as a result of not being connected.</source>
-        <translation type="unfinished">Vous n&apos;êtes pas connecté. Impossible d&apos;envoyer le fichier.</translation>
+        <translation>Impossible d&apos;envoyer le fichier car vous n&apos;êtes pas connecté(e).</translation>
     </message>
     <message>
         <source>Accept</source>
@@ -527,7 +527,7 @@
     </message>
     <message>
         <source>File</source>
-        <translation type="unfinished"></translation>
+        <translation>Fichier</translation>
     </message>
     <message>
         <source>More Actions</source>

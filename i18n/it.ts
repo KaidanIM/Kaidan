@@ -227,7 +227,7 @@
     </message>
     <message>
         <source>user@example.org</source>
-        <translation type="unfinished">nome@esempio.org</translation>
+        <translation>nome@esempio.org</translation>
     </message>
     <message>
         <source>This will also send a request to access the presence of the contact.</source>
@@ -262,7 +262,7 @@
     <name>RosterListItem</name>
     <message>
         <source>Offline</source>
-        <translation type="unfinished">Non in linea</translation>
+        <translation>Non in linea</translation>
     </message>
     <message>
         <source>Error: Please check the JID.</source>

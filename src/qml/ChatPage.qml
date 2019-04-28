@@ -78,6 +78,7 @@ Kirigami.ScrollablePage {
 	Kirigami.OverlayDrawer {
 		id: mediaDrawer
 		edge: Qt.BottomEdge
+		height: Kirigami.Units.gridUnit * 8
 		contentItem: RowLayout {
 			id: content
 			Layout.alignment: Qt.AlignHCenter

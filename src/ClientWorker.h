@@ -51,6 +51,7 @@ class QGuiApplication;
 class LogHandler;
 class Kaidan;
 class ClientWorker;
+class RegistrationManager;
 class RosterManager;
 class MessageHandler;
 class DiscoveryManager;
@@ -200,6 +201,7 @@ private:
 	bool enableLogging;
 	QGuiApplication *app;
 
+	RegistrationManager *registrationManager;
 	RosterManager *rosterManager;
 	MessageHandler *msgHandler;
 	DiscoveryManager *discoManager;

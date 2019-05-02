@@ -342,12 +342,29 @@ signals:
 	void removeContact(QString jid);
 
 	/**
-	 * @brief Downloads an attached media file of a message
+	 * Downloads an attached media file of a message
 	 *
 	 * @param msgId The message
 	 * @param url the media url from the message
 	 */
 	void downloadMedia(QString msgId, QString url);
+
+	/**
+	 * Changes the user's password on the server
+	 *
+	 * @param newPassword The new password
+	 */
+	void changePassword(const QString &newPassword);
+
+	/**
+	 * Emitted, when changing the password has succeeded.
+	 */
+	void passwordChangeSucceeded();
+
+	/**
+	 * Emitted, when changing the password has failed.
+	 */
+	void passwordChangeFailed();
 
 public slots:
 	/**

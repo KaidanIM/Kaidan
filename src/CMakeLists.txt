@@ -1,44 +1,43 @@
-set(CURDIR ${CMAKE_CURRENT_LIST_DIR})
-
 # set Kaidans sources (used in main cmake file)
 set(KAIDAN_SOURCES
-	${CURDIR}/main.cpp
-	${CURDIR}/Kaidan.cpp
-	${CURDIR}/ClientWorker.cpp
-	${CURDIR}/AvatarFileStorage.cpp
-	${CURDIR}/Database.cpp
-	${CURDIR}/RosterModel.cpp
-	${CURDIR}/RosterManager.cpp
-	${CURDIR}/MessageHandler.cpp
-	${CURDIR}/MessageModel.cpp
-	${CURDIR}/Notifications.cpp
-	${CURDIR}/PresenceCache.cpp
-	${CURDIR}/DiscoveryManager.cpp
-	${CURDIR}/VCardManager.cpp
-	${CURDIR}/LogHandler.cpp
-	${CURDIR}/StatusBar.cpp
-	${CURDIR}/UploadManager.cpp
-	${CURDIR}/EmojiModel.cpp
-	${CURDIR}/TransferCache.cpp
-	${CURDIR}/DownloadManager.cpp
-	${CURDIR}/Utils.cpp
+	src/main.cpp
+	src/Kaidan.cpp
+	src/ClientWorker.cpp
+	src/AvatarFileStorage.cpp
+	src/Database.cpp
+	src/RosterModel.cpp
+	src/RosterManager.cpp
+	src/RegistrationManager.cpp
+	src/MessageHandler.cpp
+	src/MessageModel.cpp
+	src/Notifications.cpp
+	src/PresenceCache.cpp
+	src/DiscoveryManager.cpp
+	src/VCardManager.cpp
+	src/LogHandler.cpp
+	src/StatusBar.cpp
+	src/UploadManager.cpp
+	src/EmojiModel.cpp
+	src/TransferCache.cpp
+	src/DownloadManager.cpp
+	src/Utils.cpp
 
 	# needed to trigger moc generation
-	${CURDIR}/Enums.h
+	src/Enums.h
 
 	# kaidan QXmpp extensions (need to be merged into QXmpp upstream)
-	${CURDIR}/qxmpp-exts/QXmppHttpUploadIq.cpp
-	${CURDIR}/qxmpp-exts/QXmppUploadRequestManager.cpp
-	${CURDIR}/qxmpp-exts/QXmppUploadManager.cpp
-        ${CURDIR}/qxmpp-exts/QXmppColorGenerator.cpp
+	src/qxmpp-exts/QXmppHttpUploadIq.cpp
+	src/qxmpp-exts/QXmppUploadRequestManager.cpp
+	src/qxmpp-exts/QXmppUploadManager.cpp
+	src/qxmpp-exts/QXmppColorGenerator.cpp
 
         # hsluv-c required for color generation
-        ${CURDIR}/hsluv-c/hsluv.c
+	src/hsluv-c/hsluv.c
 )
 
-if (NOT ANDROID AND NOT IOS)
-	set (KAIDAN_SOURCES ${KAIDAN_SOURCES}
-		${CURDIR}/singleapp/singleapplication.cpp
-		${CURDIR}/singleapp/singleapplication_p.cpp
+if(NOT ANDROID AND NOT IOS)
+	set(KAIDAN_SOURCES ${KAIDAN_SOURCES}
+		src/singleapp/singleapplication.cpp
+		src/singleapp/singleapplication_p.cpp
 	)
 endif()

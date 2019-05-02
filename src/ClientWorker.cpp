@@ -42,6 +42,7 @@
 // Kaidan
 #include "Kaidan.h"
 #include "LogHandler.h"
+#include "RegistrationManager.h"
 #include "RosterManager.h"
 #include "MessageHandler.h"
 #include "DiscoveryManager.h"
@@ -57,6 +58,7 @@ ClientWorker::ClientWorker(Caches *caches, Kaidan *kaidan, bool enableLogging, Q
 	logger = new LogHandler(client, this);
 	logger->enableLogging(enableLogging);
 	vCardManager = new VCardManager(client, caches->avatarStorage, this);
+	registrationManager = new RegistrationManager(kaidan, caches->settings);
 	rosterManager = new RosterManager(kaidan, client,  caches->rosterModel,
 	                                  caches->avatarStorage, vCardManager, this);
 	msgHandler = new MessageHandler(kaidan, client, caches->msgModel, this);
@@ -65,6 +67,8 @@ ClientWorker::ClientWorker(Caches *caches, Kaidan *kaidan, bool enableLogging, Q
 	                                  caches->transferCache, this);
 	downloadManager = new DownloadManager(kaidan, caches->transferCache,
 	                                      caches->msgModel, this);
+
+	client->addExtension(registrationManager);
 
 	connect(client, &QXmppClient::presenceReceived,
 	        caches->presCache, &PresenceCache::updatePresenceRequested);
@@ -189,7 +193,7 @@ void ClientWorker::onConnectionError(QXmppClient::Error error)
 QString ClientWorker::generateRandomString(unsigned int length) const
 {
 	QString randomString;
-	for (int i = 0; i < length; ++i)
+	for (unsigned int i = 0; i < length; ++i)
 		randomString.append(KAIDAN_RESOURCE_RANDOM_CHARS.at(
 		                    qrand() % KAIDAN_RESOURCE_RANDOM_CHARS.length()));
 	return randomString;

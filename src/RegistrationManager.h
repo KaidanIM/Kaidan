@@ -28,28 +28,54 @@
  *  along with Kaidan.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef GLOBALS_H
-#define GLOBALS_H
+#ifndef REGISTRATIONMANAGER_H
+#define REGISTRATIONMANAGER_H
 
-// Application information
-#define APPLICATION_DESCRIPTION "A simple, user-friendly Jabber/XMPP client"
+#include <QXmppClientExtension.h>
+class Kaidan;
+class QSettings;
 
-// Kaidan settings
-#define KAIDAN_SETTINGS_AUTH_JID "auth/jid"
-#define KAIDAN_SETTINGS_AUTH_RESOURCE "auth/resource"
-#define KAIDAN_SETTINGS_AUTH_PASSWD "auth/password"
+class RegistrationManager : public QXmppClientExtension
+{
+	Q_OBJECT
+	Q_PROPERTY(bool registrationSupported READ registrationSupported
+	                                      NOTIFY registrationSupportedChanged)
 
-const QString KAIDAN_RESOURCE_RANDOM_CHARS = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnop"
-                                             "qrstuvwxyz0123456789";
+public:
+	RegistrationManager(Kaidan *kaidan, QSettings *settings);
 
-// XML namespaces
-#define NS_SPOILERS "urn:xmpp:spoiler:0"
-#define NS_CARBONS "urn:xmpp:carbons:2"
-#define NS_REGISTER "jabber:iq:register"
+	QStringList discoveryFeatures() const override;
 
-/**
- * Map of JIDs to contact names
- */
-typedef QHash<QString, QString> ContactMap;
+	/**
+	 * @brief Changes the user's password
+	 * @param newPassword The requested new password
+	 */
+	void changePassword(const QString &newPassword);
 
-#endif // GLOBALS_H
+	bool registrationSupported() const;
+
+signals:
+	void passwordChanged(const QString &newPassword);
+	void passwordChangeFailed();
+	void registrationSupportedChanged();
+
+protected:
+	void setClient(QXmppClient *client) override;
+
+private slots:
+	void handleDiscoInfo(const QXmppDiscoveryIq &iq);
+
+private:
+	bool handleStanza(const QDomElement &stanza) override;
+	void setRegistrationSupported(bool registrationSupported);
+
+	Kaidan *kaidan;
+	QSettings *settings;
+	bool m_registrationSupported = false;
+
+	// caching
+	QString m_newPasswordIqId;
+	QString m_newPassword;
+};
+
+#endif // REGISTRATIONMANAGER_H

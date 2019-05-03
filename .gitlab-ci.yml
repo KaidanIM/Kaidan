@@ -72,6 +72,25 @@ windows-mxe:
       - "kaidan.exe"
     expire_in: 1 week
 
+android:
+  stage: deploy
+  image: kdeorg/android-sdk
+  script:
+    - sudo apt -y install inkscape optipng
+    - GIT_EXTRA="--branch ${KF5_VERSION}" /opt/helpers/build-kde-dependencies --withProject kirigami
+    - /opt/helpers/build-cmake qxmpp https://github.com/qxmpp-project/qxmpp.git -DBUILD_EXAMPLES=OFF -DBUILD_TESTS=OFF
+    - GIT_EXTRA="--branch ${CI_COMMIT_REF_NAME} --recursive" /opt/helpers/build-cmake Kaidan ${CI_REPOSITORY_URL} -DQTANDROID_EXPORTED_TARGET=kaidan -DANDROID_APK_DIR=${CI_PROJECT_DIR}/src/Kaidan/misc/android -DI18N=1
+    - ${CI_PROJECT_DIR}/src/Kaidan/utils/render-logos.sh
+    - /opt/helpers/create-apk Kaidan
+    - mv ${CI_PROJECT_DIR}/build/Kaidan/kaidan_build_apk/build/outputs/apk/kaidan_build_apk-debug.apk ${CI_PROJECT_DIR}
+  variables:
+    KF5_VERSION: master
+  artifacts:
+    paths:
+      - "kaidan_build_apk-debug.apk"
+    expire_in: 1 week
+
+
 variables:
   GIT_SUBMODULE_STRATEGY: recursive
   BUILD_SYSTEM: cmake

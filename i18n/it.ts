@@ -17,6 +17,49 @@
     </message>
 </context>
 <context>
+    <name>ChangePassword</name>
+    <message>
+        <source>Change password</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Current password:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>New password:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>New password (repeat):</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>New passwords do not match.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Current password is invalid.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>You need to be connected to change your password.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>After changing your password, you will need to reenter it on all your other devices.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cancel</source>
+        <translation type="unfinished">Annulla</translation>
+    </message>
+    <message>
+        <source>Change</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>ChatMessage</name>
     <message>
         <source>Copy Message</source>
@@ -128,6 +171,10 @@
         <source>Invitation link copied to clipboard</source>
         <translation>Collegamento dell&apos;invito copiato negli appunti</translation>
     </message>
+    <message>
+        <source>Settings</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>Kaidan</name>
@@ -217,6 +264,17 @@
     <message>
         <source>Spoiler</source>
         <translation>Spoiler</translation>
+    </message>
+</context>
+<context>
+    <name>RegistrationManager</name>
+    <message>
+        <source>Password changed successfully.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Failed to change password: %1</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -359,6 +417,21 @@
     <message>
         <source>Send</source>
         <translation>Invia</translation>
+    </message>
+</context>
+<context>
+    <name>SettingsPage</name>
+    <message>
+        <source>Settings</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Change password</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Changes your account&apos;s password. You will need to re-enter it on your other devices.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

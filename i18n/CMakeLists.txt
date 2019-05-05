@@ -6,6 +6,7 @@ file(GLOB FILES_TO_TRANSLATE
 	${CMAKE_SOURCE_DIR}/src/*.cpp
 	${CMAKE_SOURCE_DIR}/src/qml/*.qml
 	${CMAKE_SOURCE_DIR}/src/qml/elements/*.qml
+	${CMAKE_SOURCE_DIR}/src/qml/settings/*.qml
 )
 file(GLOB TS_FILES
 	${CMAKE_CURRENT_LIST_DIR}/*.ts

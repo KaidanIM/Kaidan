@@ -76,6 +76,7 @@ android:
   stage: deploy
   image: kdeorg/android-sdk
   script:
+    - sudo apt update
     - sudo apt -y install inkscape optipng
     - GIT_EXTRA="--branch ${KF5_VERSION}" /opt/helpers/build-kde-dependencies --withProject kirigami
     - /opt/helpers/build-cmake qxmpp https://github.com/qxmpp-project/qxmpp.git -DBUILD_EXAMPLES=OFF -DBUILD_TESTS=OFF

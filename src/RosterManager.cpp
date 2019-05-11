@@ -109,8 +109,8 @@ void RosterManager::populateRoster()
 void RosterManager::addContact(const QString jid, const QString name, const QString msg)
 {
 	if (client->state() == QXmppClient::ConnectedState) {
+		manager.addItem(jid, name);
 		manager.subscribe(jid, msg);
-		manager.renameItem(jid, name);
 	} else {
 		emit kaidan->passiveNotificationRequested(
 			tr("Could not add contact, as a result of not being connected.")

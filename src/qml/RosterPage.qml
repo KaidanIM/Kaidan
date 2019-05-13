@@ -28,7 +28,7 @@
  *  along with Kaidan.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-import QtQuick 2.0
+import QtQuick 2.7
 import QtQuick.Layouts 1.3
 import QtQuick.Controls 2.0 as Controls
 import org.kde.kirigami 2.0 as Kirigami
@@ -64,7 +64,6 @@ Kirigami.ScrollablePage {
 
 	ListView {
 		verticalLayoutDirection: ListView.TopToBottom
-		focus: true
 		model: kaidan.rosterModel
 		delegate: RosterListItem {
 			id: rosterItem
@@ -76,7 +75,7 @@ Kirigami.ScrollablePage {
 			unreadMessages: model.unreadMessages
 			avatarImagePath: kaidan.avatarStorage.getAvatarUrl(model.jid)
 			backgroundColor: {
-				if (!Kirigami.Settings.isMobile && kaidan.chatPartner == model.jid) {
+				if (!Kirigami.Settings.isMobile && kaidan.chatPartner === model.jid) {
 					Kirigami.Theme.highlightColor
 				} else {
 					Kirigami.Theme.backgroundColor

@@ -68,6 +68,7 @@ Kirigami.Page {
 				placeholderText: qsTr("user@example.org")
 				Layout.fillWidth: true
 				selectByMouse: true
+				inputMethodHints: Qt.ImhEmailCharactersOnly
 			}
 
 			// Password field

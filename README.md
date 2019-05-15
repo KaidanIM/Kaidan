@@ -47,8 +47,8 @@ Here are the general dependencies of Kaidan listed:
 ### Build instructions
 
 There are guides on how to build Kaidan for each supported platform (currently there are still pages missing):
- * [Linux Desktop](https://git.kaidan.im/kaidan/kaidan/wikis/building/linux-debian-based)
- * [Ubuntu Touch (click package)](https://git.kaidan.im/kaidan/kaidan/wikis/building/ubuntu-touch)
+ * [Linux Desktop](https://invent.kde.org/kde/kaidan/wikis/building/linux-debian-based)
+ * [Ubuntu Touch (click package)](https://invent.kde.org/kde/kaidan/wikis/building/ubuntu-touch)
 
 
 [kg]: https://kde.org/products/kirigami/

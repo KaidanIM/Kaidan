@@ -27,7 +27,7 @@
         <file alias="password-show-on.svg">3rdparty/breeze-icons/icons/actions/22/password-show-on.svg</file>
         <file alias="password-show-off.svg">3rdparty/breeze-icons/icons/actions/22/password-show-off.svg</file>
         <file alias="settings-configure.svg">3rdparty/breeze-icons/icons/actions/22/settings-configure.svg</file>
-        <file alias="settings-configure.svg">3rdparty/breeze-icons/icons/actions/22/lock.svg</file>
+        <file alias="lock.svg">3rdparty/breeze-icons/icons/actions/22/lock.svg</file>
     </qresource>
     
     <qresource prefix="/icons/breeze/actions/16">

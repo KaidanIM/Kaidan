@@ -57,6 +57,7 @@ Kirigami.GlobalDrawer {
 			text: qsTr("Log out")
 			iconName: "system-shutdown"
 			onTriggered: {
+				closeAdditionalLayers()
 				// disconnect (open log in page)
 				kaidan.mainDisconnect(true)
 			}
@@ -66,19 +67,27 @@ Kirigami.GlobalDrawer {
 			iconName: "settings-configure"
 			onTriggered: {
 				// open settings page
-				if (Kirigami.Settings.isMobile)
-				    pageStack.layers.push(settingsPage)
-				else
+				if (Kirigami.Settings.isMobile) {
+					if (pageStack.layers.depth < 2)
+					    pageStack.layers.push(settingsPage)
+				} else {
 				    settingsSheet.open()
+				}
 			}
 		},
 		Kirigami.Action {
 			text: qsTr("About")
 			iconName: "help-about"
 			onTriggered: {
+				closeAdditionalLayers()
 				// open about sheet
 				aboutDialog.open()
 			}
 		}
 	]
+
+	function closeAdditionalLayers() {
+		while (pageStack.layers.depth > 1)
+			pageStack.layers.pop()
+	}
 }

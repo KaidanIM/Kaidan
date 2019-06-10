@@ -25,7 +25,7 @@ option(STATIC_BUILD "Build Kaidan statically")
 option(UBUNTU_TOUCH "Building a Ubuntu Touch click (internal use only!)" FALSE)
 option(CLICK_ARCH "Architecture that will be used in the click's manifest")
 option(CLICK_DATE "Date used in the version number in the click's manifest")
-option(QUICK_COMPILER "Use QtQuick compiler to improve performance" TRUE)
+option(QUICK_COMPILER "Use QtQuick compiler to improve performance" FALSE)
 
 # Find includes in corresponding build directories
 set(CMAKE_INCLUDE_CURRENT_DIR ON)

@@ -91,6 +91,16 @@ android:
       - "kaidan_build_apk-debug.apk"
     expire_in: 1 week
 
+mac-osxcross:
+  stage: deploy
+  image: kaidan/mac-osxcross
+  script:
+    - utils/build-mac-osxcross.sh
+    - tar -cf kaidan.tar -C build/bin/ kaidan.app
+  artifacts:
+    paths:
+      - "kaidan.tar"
+    expire_in: 1 week
 
 variables:
   GIT_SUBMODULE_STRATEGY: recursive

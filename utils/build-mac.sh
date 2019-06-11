@@ -118,7 +118,8 @@ echo "*****************************************"
         -DECM_DIR=/usr/local/share/ECM/cmake \
         -DCMAKE_PREFIX_PATH=$QT_MACOS\;$KIRIGAMI_BUILD\;$QXMPP_BUILD \
         -DKF5Kirigami2_DIR=$KIRIGAMI_BUILD/lib/cmake/KF5Kirigami2 -DI18N=1 \
-        -DCMAKE_BUILD_TYPE=$BUILD_TYPE
+        -DCMAKE_BUILD_TYPE=$BUILD_TYPE \
+        -DQUICK_COMPILER=1
 
     make -j$(sysctl -n hw.logicalcpu)
 }

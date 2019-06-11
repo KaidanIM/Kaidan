@@ -135,7 +135,8 @@ echo "*****************************************"
     $MXE_TARGET-cmake .. \
         -DECM_DIR=/usr/share/ECM/cmake -DI18N=1 \
         -DSTATIC_BUILD=1 \
-        -DCMAKE_BUILD_TYPE=$BUILD_TYPE
+        -DCMAKE_BUILD_TYPE=$BUILD_TYPE \
+        -DQUICK_COMPILER=1
 
     make -j$(nproc)
 }

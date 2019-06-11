@@ -46,17 +46,30 @@ Kirigami.SwipeListItem {
 	property int presenceType
 	property string statusMsg
 
-	topPadding: Kirigami.Units.smallSpacing * 1.5
+	topPadding: 0
+	leftPadding: 0
+	bottomPadding: 0
 	height: Kirigami.Units.gridUnit * 3.5
 
 	RowLayout {
 		spacing: Kirigami.Units.gridUnit * 0.5
 
-		// left side: Avatar
+		// left border: presence
+		Rectangle {
+			id: presenceIndicator
+			visible: presenceType !== Enums.PresInvisible
+
+			width: Kirigami.Units.gridUnit * 0.2
+			height: parent.height
+
+			color: presenceTypeToColor(presenceType)
+		}
+
+		// left: avatar
 		Item {
 			id: avatarSpace
-			Layout.preferredHeight: parent.height
-			Layout.preferredWidth: parent.height
+			Layout.preferredHeight: parent.height - Kirigami.Units.gridUnit * 0.8
+			Layout.preferredWidth: parent.height - Kirigami.Units.gridUnit * 0.8
 
 			Controls.ToolTip {
 				visible: hovered && !Kirigami.Settings.isMobile
@@ -81,28 +94,6 @@ Kirigami.SwipeListItem {
 				width: height
 				id: textAvatar
 				name: listItem.name
-			}
-
-			Rectangle {
-				id: presenceIndicator
-				visible: presenceType !== 8 // invisible when presence is invalid
-				anchors.right: avatarSpace.right
-				anchors.bottom: avatarSpace.bottom
-
-				width: Kirigami.Units.gridUnit
-				height: Kirigami.Units.gridUnit
-
-				color: presenceTypeToColor(presenceType)
-				radius: Math.min(width, height) * 0.5
-				// shadow
-				layer.enabled: presenceIndicator.visible
-				layer.effect: DropShadow {
-					verticalOffset: Kirigami.Units.gridUnit * 0.08
-					horizontalOffset: Kirigami.Units.gridUnit * 0.08
-					color: Kirigami.Theme.disabledTextColor
-					samples: 10
-					spread: 0.1
-				}
 			}
 		}
 
@@ -138,15 +129,15 @@ Kirigami.SwipeListItem {
 					font.pixelSize: Kirigami.Units.gridUnit * 0.8
 				}
 			}
-		}
 
-		// unread message counter
-		MessageCounter {
-			visible: unreadMessages > 0
-			counter: unreadMessages
+			// unread message counter
+			MessageCounter {
+				visible: unreadMessages > 0
+				counter: unreadMessages
 
-			Layout.preferredHeight: Kirigami.Units.gridUnit * 1.25
-			Layout.preferredWidth: Kirigami.Units.gridUnit * 1.25
+				Layout.preferredHeight: Kirigami.Units.gridUnit * 1.25
+				Layout.preferredWidth: Kirigami.Units.gridUnit * 1.25
+			}
 		}
 	}
 

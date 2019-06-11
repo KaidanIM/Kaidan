@@ -64,7 +64,6 @@ Popup {
                     verticalAlignment: Text.AlignVCenter
 
                     font.pointSize: 20
-                    font.family: "NotoColorEmoji"
                     text: modelData.unicode
                 }
 
@@ -107,7 +106,6 @@ Popup {
                         verticalAlignment: Text.AlignVCenter
 
                         font.pointSize: 20
-                        font.family: "NotoColorEmoji"
                         text: label
                     }
 

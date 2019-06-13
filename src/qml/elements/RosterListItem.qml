@@ -59,7 +59,7 @@ Kirigami.SwipeListItem {
 			id: presenceIndicator
 			visible: presenceType !== Enums.PresInvisible
 
-			width: Kirigami.Units.gridUnit * 0.2
+			width: Kirigami.Units.gridUnit * 0.3
 			height: parent.height
 
 			color: presenceTypeToColor(presenceType)
@@ -142,7 +142,7 @@ Kirigami.SwipeListItem {
 	}
 
 	/**
-	 * Returns the colour beloning to the given presence status type
+	 * Returns the color beloning to the given presence status type
 	 */
 	function presenceTypeToColor(type) {
 		return type === Enums.PresOnline ? "green" :
@@ -151,7 +151,7 @@ Kirigami.SwipeListItem {
 			type === Enums.PresDND ? "orange" :
 			type === Enums.PresXA ? "orange" :
 			type === Enums.PresError ? "red" :
-			"lightgrey" // unavailable (offline)
+			"silver" // unavailable (offline)
 	}
 
 	/**

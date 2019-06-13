@@ -129,15 +129,15 @@ Kirigami.SwipeListItem {
 					font.pixelSize: Kirigami.Units.gridUnit * 0.8
 				}
 			}
+		}
 
-			// unread message counter
-			MessageCounter {
-				visible: unreadMessages > 0
-				counter: unreadMessages
+		// unread message counter
+		MessageCounter {
+			visible: unreadMessages > 0
+			counter: unreadMessages
 
-				Layout.preferredHeight: Kirigami.Units.gridUnit * 1.25
-				Layout.preferredWidth: Kirigami.Units.gridUnit * 1.25
-			}
+			Layout.preferredHeight: Kirigami.Units.gridUnit * 1.25
+			Layout.preferredWidth: Kirigami.Units.gridUnit * 1.25
 		}
 	}
 

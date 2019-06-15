@@ -22,7 +22,7 @@ set(ANDROID_VERSION_CODE 3)
 # CMake options
 option(I18N "Enable i18n support" FALSE)
 option(STATIC_BUILD "Build Kaidan statically")
-option(UBUNTU_TOUCH "Building a Ubuntu Touch click (internal use only!)" FALSE)
+option(UBUNTU_TOUCH "Building an Ubuntu Touch click (internal use only!)" FALSE)
 option(CLICK_ARCH "Architecture that will be used in the click's manifest")
 option(CLICK_DATE "Date used in the version number in the click's manifest")
 option(QUICK_COMPILER "Use QtQuick compiler to improve performance" FALSE)

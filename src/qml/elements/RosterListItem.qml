@@ -142,7 +142,7 @@ Kirigami.SwipeListItem {
 	}
 
 	/**
-	 * Returns the color beloning to the given presence status type
+	 * Returns the color belonging to the given presence status type
 	 */
 	function presenceTypeToColor(type) {
 		return type === Enums.PresOnline ? "green" :

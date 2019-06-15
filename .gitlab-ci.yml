@@ -54,6 +54,7 @@ click-xenial:
   stage: deploy
   image: kaidan/ubuntu-touch-xenial
   script: utils/travis/build.sh
+  allow_failure: true
   variables:
     PLATFORM: ubuntu-touch
   artifacts:
@@ -67,6 +68,7 @@ windows-mxe:
   script:
     - utils/build-windows-mxe.sh
     - mv build/bin/kaidan.exe kaidan.exe
+  allow_failure: true
   artifacts:
     paths:
       - "kaidan.exe"
@@ -86,6 +88,7 @@ android:
     - mv ${CI_PROJECT_DIR}/build/${CI_PROJECT_NAME}/kaidan_build_apk/build/outputs/apk/kaidan_build_apk-debug.apk ${CI_PROJECT_DIR}
   variables:
     KF5_VERSION: master
+  allow_failure: true
   artifacts:
     paths:
       - "kaidan_build_apk-debug.apk"
@@ -97,6 +100,7 @@ mac-osxcross:
   script:
     - utils/build-mac-osxcross.sh
     - tar -cf kaidan.tar -C build/bin/ kaidan.app
+  allow_failure: true
   artifacts:
     paths:
       - "kaidan.tar"

@@ -43,7 +43,7 @@
 class QGuiApplication;
 class Database;
 class QXmppClient;
-class Utils;
+class QmlUtils;
 
 using namespace Enums;
 
@@ -60,7 +60,7 @@ class Kaidan : public QObject
 {
 	Q_OBJECT
 
-	Q_PROPERTY(Utils* utils READ getUtils CONSTANT)
+	Q_PROPERTY(QmlUtils* utils READ getUtils CONSTANT)
 	Q_PROPERTY(RosterModel* rosterModel READ getRosterModel CONSTANT)
 	Q_PROPERTY(MessageModel* messageModel READ getMessageModel CONSTANT)
 	Q_PROPERTY(AvatarFileStorage* avatarStorage READ getAvatarStorage NOTIFY avatarStorageChanged)
@@ -203,9 +203,9 @@ public:
 		return caches->settings;
 	}
 
-	Utils* getUtils() const
+	QmlUtils* getUtils() const
 	{
-		return utils;
+		return m_utils;
 	}
 
 	/**
@@ -406,7 +406,7 @@ public slots:
 private:
 	void connectDatabases();
 
-	Utils *utils;
+	QmlUtils *m_utils;
 	Database *database;
 	ClientWorker::Caches *caches;
 	ClientThread *cltThrd;

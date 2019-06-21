@@ -55,7 +55,7 @@
 #include "Enums.h"
 #include "StatusBar.h"
 #include "EmojiModel.h"
-#include "Utils.h"
+#include "QmlUtils.h"
 
 #ifdef STATIC_BUILD
 #include "static_plugins.h"
@@ -169,7 +169,7 @@ Q_DECL_EXPORT int main(int argc, char *argv[])
 	qRegisterMetaType<MessageType>("MessageType");
 	qRegisterMetaType<DisconnectionReason>("DisconnectionReason");
 	qRegisterMetaType<TransferJob*>("TransferJob*");
-	qRegisterMetaType<Utils*>("Utils*");
+	qRegisterMetaType<QmlUtils*>("QmlUtils*");
 
 	// Qt-Translator
 	QTranslator qtTranslator;

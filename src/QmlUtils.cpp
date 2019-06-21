@@ -28,7 +28,7 @@
  *  along with Kaidan.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include "Utils.h"
+#include "QmlUtils.h"
 #include <QColor>
 #include <QClipboard>
 #include <QDebug>
@@ -41,12 +41,12 @@
 #include <QStandardPaths>
 #include "qxmpp-exts/QXmppColorGenerator.h"
 
-Utils::Utils(QObject *parent)
+QmlUtils::QmlUtils(QObject *parent)
         : QObject(parent)
 {
 }
 
-QString Utils::getResourcePath(const QString &name) const
+QString QmlUtils::getResourcePath(const QString &name) const
 {
 	// We generally prefer to first search for files in application resources
 	if (QFile::exists(":/" + name))
@@ -84,23 +84,23 @@ QString Utils::getResourcePath(const QString &name) const
 	return "";
 }
 
-bool Utils::isImageFile(const QUrl &fileUrl) const
+bool QmlUtils::isImageFile(const QUrl &fileUrl) const
 {
 	QMimeType type = QMimeDatabase().mimeTypeForUrl(fileUrl);
 	return type.inherits("image/jpeg") || type.inherits("image/png");
 }
 
-void Utils::copyToClipboard(const QString &text) const
+void QmlUtils::copyToClipboard(const QString &text) const
 {
 	QGuiApplication::clipboard()->setText(text);
 }
 
-QString Utils::fileNameFromUrl(const QUrl &url) const
+QString QmlUtils::fileNameFromUrl(const QUrl &url) const
 {
 	return QUrl(url).fileName();
 }
 
-QString Utils::fileSizeFromUrl(const QUrl &url) const
+QString QmlUtils::fileSizeFromUrl(const QUrl &url) const
 {
 #if QT_VERSION >= QT_VERSION_CHECK(5, 10, 0) // Qt 5.10 or later
 	return QLocale::system().formattedDataSize(QFileInfo(QUrl(url).toLocalFile())
@@ -113,20 +113,20 @@ QString Utils::fileSizeFromUrl(const QUrl &url) const
 #endif
 }
 
-QString Utils::formatMessage(const QString &message) const
+QString QmlUtils::formatMessage(const QString &message) const
 {
 	// escape all special XML chars (like '<' and '>')
 	// and spilt into words for processing
 	return processMsgFormatting(message.toHtmlEscaped().split(" "));
 }
 
-QColor Utils::getUserColor(const QString &nickName) const
+QColor QmlUtils::getUserColor(const QString &nickName) const
 {
 	QXmppColorGenerator::RGBColor color = QXmppColorGenerator::generateColor(nickName);
 	return QColor(color.red, color.green, color.blue);
 }
 
-QString Utils::processMsgFormatting(const QStringList &list, bool isFirst) const
+QString QmlUtils::processMsgFormatting(const QStringList &list, bool isFirst) const
 {
 	if (list.isEmpty())
 		return "";

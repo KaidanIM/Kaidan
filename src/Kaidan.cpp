@@ -43,12 +43,12 @@
 #include "RosterModel.h"
 #include "MessageModel.h"
 #include "PresenceCache.h"
-#include "Utils.h"
+#include "QmlUtils.h"
 
 Kaidan *Kaidan::s_instance = nullptr;
 
 Kaidan::Kaidan(QGuiApplication *app, bool enableLogging, QObject *parent)
-        : QObject(parent), utils(new Utils(this)), database(new Database())
+        : QObject(parent), m_utils(new QmlUtils(this)), database(new Database())
 {
 	Q_ASSERT(!Kaidan::s_instance);
 	Kaidan::s_instance = this;

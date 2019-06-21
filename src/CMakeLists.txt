@@ -20,7 +20,7 @@ set(KAIDAN_SOURCES
 	src/EmojiModel.cpp
 	src/TransferCache.cpp
 	src/DownloadManager.cpp
-	src/Utils.cpp
+	src/QmlUtils.cpp
 
 	# needed to trigger moc generation
 	src/Enums.h

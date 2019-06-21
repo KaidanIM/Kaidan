@@ -40,12 +40,12 @@
  * The methods are not static, because they need to be used from QML and registered in
  * Qt.
  */
-class Utils : public QObject
+class QmlUtils : public QObject
 {
 	Q_OBJECT
 
 public:
-	Utils(QObject *parent = nullptr);
+	QmlUtils(QObject *parent = nullptr);
 
 public slots:
 	/**

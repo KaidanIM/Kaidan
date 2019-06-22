@@ -97,6 +97,7 @@ Popup {
 					ListElement { label: "💡"; group: Emoji.Group.Objects }
 					ListElement { label: "🔣"; group: Emoji.Group.Symbols }
 					ListElement { label: "🏁"; group: Emoji.Group.Flags }
+					ListElement { label: "🔍"; group: Emoji.Group.Invalid }
 				}
 
 				delegate: ItemDelegate {
@@ -130,6 +131,8 @@ Popup {
 							return qsTr('Symbols');
 						case Emoji.Group.Flags:
 							return qsTr('Flags');
+						case Emoji.Group.Invalid:
+							return qsTr('Search');
 						}
 					}
 					ToolTip.visible: hovered
@@ -138,6 +141,45 @@ Popup {
 					onClicked: root.model.group = model.group
 				}
 			}
+		}
+
+		TextField {
+			id: searchField
+
+			Timer {
+				id: searchTimer
+
+				interval: 500
+
+				onTriggered: root.model.filter = searchField.text
+			}
+
+			Layout.fillWidth: true
+			Layout.alignment: Qt.AlignVCenter
+			visible: root.model.group === Emoji.Group.Invalid
+			placeholderText: qsTr("Search emoji")
+			selectByMouse: true
+			background: Item {}
+			rightPadding: clearButton.width
+
+			ToolButton {
+				id: clearButton
+
+				visible: searchField.text !== ''
+				icon.name: 'edit-clear'
+				focusPolicy: Qt.NoFocus
+
+				anchors {
+					verticalCenter: parent.verticalCenter
+					right: parent.right
+				}
+
+				onClicked: searchField.clear()
+			}
+
+			onTextChanged: searchTimer.restart()
+
+			onVisibleChanged: if (visible) forceActiveFocus()
 		}
 	}
 }

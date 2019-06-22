@@ -67,6 +67,7 @@ class EmojiProxyModel : public QSortFilterProxyModel
 	Q_OBJECT
 
 	Q_PROPERTY(Emoji::Group group READ group WRITE setGroup NOTIFY groupChanged)
+	Q_PROPERTY(QString filter READ filter WRITE setFilter NOTIFY filterChanged)
 
 public:
 	using QSortFilterProxyModel::QSortFilterProxyModel;
@@ -74,8 +75,12 @@ public:
 	Emoji::Group group() const;
 	void setGroup(Emoji::Group group);
 
+	QString filter() const;
+	void setFilter(const QString &filter);
+
 signals:
 	void groupChanged();
+	void filterChanged();
 
 protected:
 	bool filterAcceptsRow(int sourceRow, const QModelIndex &sourceParent) const override;

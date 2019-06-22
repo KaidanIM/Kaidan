@@ -1509,6 +1509,21 @@ void EmojiProxyModel::setGroup(Emoji::Group group)
 	invalidateFilter();
 }
 
+QString EmojiProxyModel::filter() const
+{
+	return filterRegExp().pattern();
+}
+
+void EmojiProxyModel::setFilter(const QString &filter)
+{
+	if (filterRegExp().pattern() == filter) {
+		return;
+	}
+
+	setFilterWildcard(filter);
+	emit filterChanged();
+}
+
 bool EmojiProxyModel::filterAcceptsRow(int sourceRow, const QModelIndex &sourceParent) const
 {
 	const QModelIndex index = sourceModel()->index(sourceRow, 0, sourceParent);

@@ -168,7 +168,6 @@ Q_DECL_EXPORT int main(int argc, char *argv[])
 	qRegisterMetaType<QXmppClient::State>("QXmppClient::State");
 	qRegisterMetaType<MessageType>("MessageType");
 	qRegisterMetaType<DisconnectionReason>("DisconnectionReason");
-	qRegisterMetaType<EmojiModel*>("EmojiModel");
 	qRegisterMetaType<TransferJob*>("TransferJob*");
 	qRegisterMetaType<Utils*>("Utils*");
 
@@ -262,6 +261,11 @@ Q_DECL_EXPORT int main(int argc, char *argv[])
 #endif
 	qmlRegisterType<StatusBar>("StatusBar", 0, 1, "StatusBar");
 	qmlRegisterType<EmojiModel>("EmojiModel", 0, 1, "EmojiModel");
+	qmlRegisterType<EmojiProxyModel>("EmojiModel", 0, 1, "EmojiProxyModel");
+
+	qmlRegisterUncreatableType<QAbstractItemModel>("EmojiModel", 0, 1, "QAbstractItemModel", "Used by proxy models");
+	qmlRegisterUncreatableType<Emoji>("EmojiModel", 0, 1, "Emoji", "Used by emoji models");
+
 	qmlRegisterUncreatableMetaObject(Enums::staticMetaObject, APPLICATION_ID,
 		1, 0, "Enums", "Can't create object; only enums defined!");
 

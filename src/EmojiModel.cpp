@@ -15,2767 +15,1508 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include <QByteArray>
-#include <QDebug>
-
 #include "EmojiModel.h"
 
-QVariantMap EmojiModel::getModel() {
-  QVariantMap map;
+static const QVector<Emoji> s_emojis {
+	// People
+	{ QString::fromUtf8("\xf0\x9f\x98\x80"), QStringLiteral(":grinning:"), Emoji::Group::People },
+	{ QString::fromUtf8("\xf0\x9f\x98\x81"), QStringLiteral(":grin:"), Emoji::Group::People },
+	{ QString::fromUtf8("\xf0\x9f\x98\x82"), QStringLiteral(":joy:"), Emoji::Group::People },
+	{ QString::fromUtf8("\xf0\x9f\xa4\xa3"), QStringLiteral(":rofl:"), Emoji::Group::People },
+	{ QString::fromUtf8("\xf0\x9f\x98\x83"), QStringLiteral(":smiley:"), Emoji::Group::People },
+	{ QString::fromUtf8("\xf0\x9f\x98\x84"), QStringLiteral(":smile:"), Emoji::Group::People },
+	{ QString::fromUtf8("\xf0\x9f\x98\x85"), QStringLiteral(":sweat_smile:"), Emoji::Group::People },
+	{ QString::fromUtf8("\xf0\x9f\x98\x86"), QStringLiteral(":laughing:"), Emoji::Group::People },
+	{ QString::fromUtf8("\xf0\x9f\x98\x89"), QStringLiteral(":wink:"), Emoji::Group::People },
+	{ QString::fromUtf8("\xf0\x9f\x98\x8a"), QStringLiteral(":blush:"), Emoji::Group::People },
+	{ QString::fromUtf8("\xf0\x9f\x98\x8b"), QStringLiteral(":yum:"), Emoji::Group::People },
+	{ QString::fromUtf8("\xf0\x9f\x98\x8e"), QStringLiteral(":sunglasses:"), Emoji::Group::People },
+	{ QString::fromUtf8("\xf0\x9f\x98\x8d"), QStringLiteral(":heart_eyes:"), Emoji::Group::People },
+	{ QString::fromUtf8("\xf0\x9f\x98\x98"), QStringLiteral(":kissing_heart:"), Emoji::Group::People },
+	{ QString::fromUtf8("\xf0\x9f\x98\x97"), QStringLiteral(":kissing:"), Emoji::Group::People },
+	{ QString::fromUtf8("\xf0\x9f\x98\x99"), QStringLiteral(":kissing_smiling_eyes:"), Emoji::Group::People },
+	{ QString::fromUtf8("\xf0\x9f\x98\x9a"), QStringLiteral(":kissing_closed_eyes:"), Emoji::Group::People },
+	{ QString::fromUtf8("\xe2\x98\xba"), QStringLiteral(":relaxed:"), Emoji::Group::People },
+	{ QString::fromUtf8("\xf0\x9f\x99\x82"), QStringLiteral(":slight_smile:"), Emoji::Group::People },
+	{ QString::fromUtf8("\xf0\x9f\xa4\x97"), QStringLiteral(":hugging:"), Emoji::Group::People },
+	{ QString::fromUtf8("\xf0\x9f\xa4\x94"), QStringLiteral(":thinking:"), Emoji::Group::People },
+	{ QString::fromUtf8("\xf0\x9f\x98\x90"), QStringLiteral(":neutral_face:"), Emoji::Group::People },
+	{ QString::fromUtf8("\xf0\x9f\x98\x91"), QStringLiteral(":expressionless:"), Emoji::Group::People },
+	{ QString::fromUtf8("\xf0\x9f\x98\xb6"), QStringLiteral(":no_mouth:"), Emoji::Group::People },
+	{ QString::fromUtf8("\xf0\x9f\x99\x84"), QStringLiteral(":rolling_eyes:"), Emoji::Group::People },
+	{ QString::fromUtf8("\xf0\x9f\x98\x8f"), QStringLiteral(":smirk:"), Emoji::Group::People },
+	{ QString::fromUtf8("\xf0\x9f\x98\xa3"), QStringLiteral(":persevere:"), Emoji::Group::People },
+	{ QString::fromUtf8("\xf0\x9f\x98\xa5"), QStringLiteral(":disappointed_relieved:"), Emoji::Group::People },
+	{ QString::fromUtf8("\xf0\x9f\x98\xae"), QStringLiteral(":open_mouth:"), Emoji::Group::People },
+	{ QString::fromUtf8("\xf0\x9f\xa4\x90"), QStringLiteral(":zipper_mouth:"), Emoji::Group::People },
+	{ QString::fromUtf8("\xf0\x9f\x98\xaf"), QStringLiteral(":hushed:"), Emoji::Group::People },
+	{ QString::fromUtf8("\xf0\x9f\x98\xaa"), QStringLiteral(":sleepy:"), Emoji::Group::People },
+	{ QString::fromUtf8("\xf0\x9f\x98\xab"), QStringLiteral(":tired_face:"), Emoji::Group::People },
+	{ QString::fromUtf8("\xf0\x9f\x98\xb4"), QStringLiteral(":sleeping:"), Emoji::Group::People },
+	{ QString::fromUtf8("\xf0\x9f\x98\x8c"), QStringLiteral(":relieved:"), Emoji::Group::People },
+	{ QString::fromUtf8("\xf0\x9f\xa4\x93"), QStringLiteral(":nerd:"), Emoji::Group::People },
+	{ QString::fromUtf8("\xf0\x9f\x98\x9b"), QStringLiteral(":stuck_out_tongue:"), Emoji::Group::People },
+	{ QString::fromUtf8("\xf0\x9f\x98\x9c"), QStringLiteral(":stuck_out_tongue_winking_eye:"), Emoji::Group::People },
+	{ QString::fromUtf8("\xf0\x9f\x98\x9d"), QStringLiteral(":stuck_out_tongue_closed_eyes:"), Emoji::Group::People },
+	{ QString::fromUtf8("\xf0\x9f\xa4\xa4"), QStringLiteral(":drooling_face:"), Emoji::Group::People },
+	{ QString::fromUtf8("\xf0\x9f\x98\x92"), QStringLiteral(":unamused:"), Emoji::Group::People },
+	{ QString::fromUtf8("\xf0\x9f\x98\x93"), QStringLiteral(":sweat:"), Emoji::Group::People },
+	{ QString::fromUtf8("\xf0\x9f\x98\x94"), QStringLiteral(":pensive:"), Emoji::Group::People },
+	{ QString::fromUtf8("\xf0\x9f\x98\x95"), QStringLiteral(":confused:"), Emoji::Group::People },
+	{ QString::fromUtf8("\xf0\x9f\x99\x83"), QStringLiteral(":upside_down:"), Emoji::Group::People },
+	{ QString::fromUtf8("\xf0\x9f\xa4\x91"), QStringLiteral(":money_mouth:"), Emoji::Group::People },
+	{ QString::fromUtf8("\xf0\x9f\x98\xb2"), QStringLiteral(":astonished:"), Emoji::Group::People },
+	{ QString::fromUtf8("\xe2\x98\xb9"), QStringLiteral(":frowning2:"), Emoji::Group::People },
+	{ QString::fromUtf8("\xf0\x9f\x99\x81"), QStringLiteral(":slight_frown:"), Emoji::Group::People },
+	{ QString::fromUtf8("\xf0\x9f\x98\x96"), QStringLiteral(":confounded:"), Emoji::Group::People },
+	{ QString::fromUtf8("\xf0\x9f\x98\x9e"), QStringLiteral(":disappointed:"), Emoji::Group::People },
+	{ QString::fromUtf8("\xf0\x9f\x98\x9f"), QStringLiteral(":worried:"), Emoji::Group::People },
+	{ QString::fromUtf8("\xf0\x9f\x98\xa4"), QStringLiteral(":triumph:"), Emoji::Group::People },
+	{ QString::fromUtf8("\xf0\x9f\x98\xa2"), QStringLiteral(":cry:"), Emoji::Group::People },
+	{ QString::fromUtf8("\xf0\x9f\x98\xad"), QStringLiteral(":sob:"), Emoji::Group::People },
+	{ QString::fromUtf8("\xf0\x9f\x98\xa6"), QStringLiteral(":frowning:"), Emoji::Group::People },
+	{ QString::fromUtf8("\xf0\x9f\x98\xa7"), QStringLiteral(":anguished:"), Emoji::Group::People },
+	{ QString::fromUtf8("\xf0\x9f\x98\xa8"), QStringLiteral(":fearful:"), Emoji::Group::People },
+	{ QString::fromUtf8("\xf0\x9f\x98\xa9"), QStringLiteral(":weary:"), Emoji::Group::People },
+	{ QString::fromUtf8("\xf0\x9f\x98\xac"), QStringLiteral(":grimacing:"), Emoji::Group::People },
+	{ QString::fromUtf8("\xf0\x9f\x98\xb0"), QStringLiteral(":cold_sweat:"), Emoji::Group::People },
+	{ QString::fromUtf8("\xf0\x9f\x98\xb1"), QStringLiteral(":scream:"), Emoji::Group::People },
+	{ QString::fromUtf8("\xf0\x9f\x98\xb3"), QStringLiteral(":flushed:"), Emoji::Group::People },
+	{ QString::fromUtf8("\xf0\x9f\x98\xb5"), QStringLiteral(":dizzy_face:"), Emoji::Group::People },
+	{ QString::fromUtf8("\xf0\x9f\x98\xa1"), QStringLiteral(":rage:"), Emoji::Group::People },
+	{ QString::fromUtf8("\xf0\x9f\x98\xa0"), QStringLiteral(":angry:"), Emoji::Group::People },
+	{ QString::fromUtf8("\xf0\x9f\x98\x87"), QStringLiteral(":innocent:"), Emoji::Group::People },
+	{ QString::fromUtf8("\xf0\x9f\xa4\xa0"), QStringLiteral(":cowboy:"), Emoji::Group::People },
+	{ QString::fromUtf8("\xf0\x9f\xa4\xa1"), QStringLiteral(":clown:"), Emoji::Group::People },
+	{ QString::fromUtf8("\xf0\x9f\xa4\xa5"), QStringLiteral(":lying_face:"), Emoji::Group::People },
+	{ QString::fromUtf8("\xf0\x9f\x98\xb7"), QStringLiteral(":mask:"), Emoji::Group::People },
+	{ QString::fromUtf8("\xf0\x9f\xa4\x92"), QStringLiteral(":thermometer_face:"), Emoji::Group::People },
+	{ QString::fromUtf8("\xf0\x9f\xa4\x95"), QStringLiteral(":head_bandage:"), Emoji::Group::People },
+	{ QString::fromUtf8("\xf0\x9f\xa4\xa2"), QStringLiteral(":nauseated_face:"), Emoji::Group::People },
+	{ QString::fromUtf8("\xf0\x9f\xa4\xa7"), QStringLiteral(":sneezing_face:"), Emoji::Group::People },
+	{ QString::fromUtf8("\xf0\x9f\x98\x88"), QStringLiteral(":smiling_imp:"), Emoji::Group::People },
+	{ QString::fromUtf8("\xf0\x9f\x91\xbf"), QStringLiteral(":imp:"), Emoji::Group::People },
+	{ QString::fromUtf8("\xf0\x9f\x91\xb9"), QStringLiteral(":japanese_ogre:"), Emoji::Group::People },
+	{ QString::fromUtf8("\xf0\x9f\x91\xba"), QStringLiteral(":japanese_goblin:"), Emoji::Group::People },
+	{ QString::fromUtf8("\xf0\x9f\x92\x80"), QStringLiteral(":skull:"), Emoji::Group::People },
+	{ QString::fromUtf8("\xf0\x9f\x91\xbb"), QStringLiteral(":ghost:"), Emoji::Group::People },
+	{ QString::fromUtf8("\xf0\x9f\x91\xbd"), QStringLiteral(":alien:"), Emoji::Group::People },
+	{ QString::fromUtf8("\xf0\x9f\xa4\x96"), QStringLiteral(":robot:"), Emoji::Group::People },
+	{ QString::fromUtf8("\xf0\x9f\x92\xa9"), QStringLiteral(":poop:"), Emoji::Group::People },
+	{ QString::fromUtf8("\xf0\x9f\x98\xba"), QStringLiteral(":smiley_cat:"), Emoji::Group::People },
+	{ QString::fromUtf8("\xf0\x9f\x98\xb8"), QStringLiteral(":smile_cat:"), Emoji::Group::People },
+	{ QString::fromUtf8("\xf0\x9f\x98\xb9"), QStringLiteral(":joy_cat:"), Emoji::Group::People },
+	{ QString::fromUtf8("\xf0\x9f\x98\xbb"), QStringLiteral(":heart_eyes_cat:"), Emoji::Group::People },
+	{ QString::fromUtf8("\xf0\x9f\x98\xbc"), QStringLiteral(":smirk_cat:"), Emoji::Group::People },
+	{ QString::fromUtf8("\xf0\x9f\x98\xbd"), QStringLiteral(":kissing_cat:"), Emoji::Group::People },
+	{ QString::fromUtf8("\xf0\x9f\x99\x80"), QStringLiteral(":scream_cat:"), Emoji::Group::People },
+	{ QString::fromUtf8("\xf0\x9f\x98\xbf"), QStringLiteral(":crying_cat_face:"), Emoji::Group::People },
+	{ QString::fromUtf8("\xf0\x9f\x98\xbe"), QStringLiteral(":pouting_cat:"), Emoji::Group::People },
+	{ QString::fromUtf8("\xf0\x9f\x91\xa6"), QStringLiteral(":boy:"), Emoji::Group::People },
+	{ QString::fromUtf8("\xf0\x9f\x91\xa7"), QStringLiteral(":girl:"), Emoji::Group::People },
+	{ QString::fromUtf8("\xf0\x9f\x91\xa8"), QStringLiteral(":man:"), Emoji::Group::People },
+	{ QString::fromUtf8("\xf0\x9f\x91\xa9"), QStringLiteral(":woman:"), Emoji::Group::People },
+	{ QString::fromUtf8("\xf0\x9f\x91\xb4"), QStringLiteral(":older_man:"), Emoji::Group::People },
+	{ QString::fromUtf8("\xf0\x9f\x91\xb5"), QStringLiteral(":older_woman:"), Emoji::Group::People },
+	{ QString::fromUtf8("\xf0\x9f\x91\xb6"), QStringLiteral(":baby:"), Emoji::Group::People },
+	{ QString::fromUtf8("\xf0\x9f\x91\xbc"), QStringLiteral(":angel:"), Emoji::Group::People },
+	{ QString::fromUtf8("\xf0\x9f\x91\xae"), QStringLiteral(":cop:"), Emoji::Group::People },
+	{ QString::fromUtf8("\xf0\x9f\x95\xb5"), QStringLiteral(":spy:"), Emoji::Group::People },
+	{ QString::fromUtf8("\xf0\x9f\x92\x82"), QStringLiteral(":guardsman:"), Emoji::Group::People },
+	{ QString::fromUtf8("\xf0\x9f\x91\xb7"), QStringLiteral(":construction_worker:"), Emoji::Group::People },
+	{ QString::fromUtf8("\xf0\x9f\x91\xb3"), QStringLiteral(":man_with_turban:"), Emoji::Group::People },
+	{ QString::fromUtf8("\xf0\x9f\x91\xb1"), QStringLiteral(":person_with_blond_hair:"), Emoji::Group::People },
+	{ QString::fromUtf8("\xf0\x9f\x8e\x85"), QStringLiteral(":santa:"), Emoji::Group::People },
+	{ QString::fromUtf8("\xf0\x9f\xa4\xb6"), QStringLiteral(":mrs_claus:"), Emoji::Group::People },
+	{ QString::fromUtf8("\xf0\x9f\x91\xb8"), QStringLiteral(":princess:"), Emoji::Group::People },
+	{ QString::fromUtf8("\xf0\x9f\xa4\xb4"), QStringLiteral(":prince:"), Emoji::Group::People },
+	{ QString::fromUtf8("\xf0\x9f\x91\xb0"), QStringLiteral(":bride_with_veil:"), Emoji::Group::People },
+	{ QString::fromUtf8("\xf0\x9f\xa4\xb5"), QStringLiteral(":man_in_tuxedo:"), Emoji::Group::People },
+	{ QString::fromUtf8("\xf0\x9f\xa4\xb0"), QStringLiteral(":pregnant_woman:"), Emoji::Group::People },
+	{ QString::fromUtf8("\xf0\x9f\x91\xb2"), QStringLiteral(":man_with_gua_pi_mao:"), Emoji::Group::People },
+	{ QString::fromUtf8("\xf0\x9f\x99\x8d"), QStringLiteral(":person_frowning:"), Emoji::Group::People },
+	{ QString::fromUtf8("\xf0\x9f\x99\x8e"), QStringLiteral(":person_with_pouting_face:"), Emoji::Group::People },
+	{ QString::fromUtf8("\xf0\x9f\x99\x85"), QStringLiteral(":no_good:"), Emoji::Group::People },
+	{ QString::fromUtf8("\xf0\x9f\x99\x86"), QStringLiteral(":ok_woman:"), Emoji::Group::People },
+	{ QString::fromUtf8("\xf0\x9f\x92\x81"), QStringLiteral(":information_desk_person:"), Emoji::Group::People },
+	{ QString::fromUtf8("\xf0\x9f\x99\x8b"), QStringLiteral(":raising_hand:"), Emoji::Group::People },
+	{ QString::fromUtf8("\xf0\x9f\x99\x87"), QStringLiteral(":bow:"), Emoji::Group::People },
+	{ QString::fromUtf8("\xf0\x9f\xa4\xa6"), QStringLiteral(":face_palm:"), Emoji::Group::People },
+	{ QString::fromUtf8("\xf0\x9f\xa4\xb7"), QStringLiteral(":shrug:"), Emoji::Group::People },
+	{ QString::fromUtf8("\xf0\x9f\x92\x86"), QStringLiteral(":massage:"), Emoji::Group::People },
+	{ QString::fromUtf8("\xf0\x9f\x92\x87"), QStringLiteral(":haircut:"), Emoji::Group::People },
+	{ QString::fromUtf8("\xf0\x9f\x9a\xb6"), QStringLiteral(":walking:"), Emoji::Group::People },
+	{ QString::fromUtf8("\xf0\x9f\x8f\x83"), QStringLiteral(":runner:"), Emoji::Group::People },
+	{ QString::fromUtf8("\xf0\x9f\x92\x83"), QStringLiteral(":dancer:"), Emoji::Group::People },
+	{ QString::fromUtf8("\xf0\x9f\x95\xba"), QStringLiteral(":man_dancing:"), Emoji::Group::People },
+	{ QString::fromUtf8("\xf0\x9f\x91\xaf"), QStringLiteral(":dancers:"), Emoji::Group::People },
+	{ QString::fromUtf8("\xf0\x9f\x97\xa3"), QStringLiteral(":speaking_head:"), Emoji::Group::People },
+	{ QString::fromUtf8("\xf0\x9f\x91\xa4"), QStringLiteral(":bust_in_silhouette:"), Emoji::Group::People },
+	{ QString::fromUtf8("\xf0\x9f\x91\xa5"), QStringLiteral(":busts_in_silhouette:"), Emoji::Group::People },
+	{ QString::fromUtf8("\xf0\x9f\x91\xab"), QStringLiteral(":couple:"), Emoji::Group::People },
+	{ QString::fromUtf8("\xf0\x9f\x91\xac"), QStringLiteral(":two_men_holding_hands:"), Emoji::Group::People },
+	{ QString::fromUtf8("\xf0\x9f\x91\xad"), QStringLiteral(":two_women_holding_hands:"), Emoji::Group::People },
+	{ QString::fromUtf8("\xf0\x9f\x92\x8f"), QStringLiteral(":couplekiss:"), Emoji::Group::People },
+	{ QString::fromUtf8("\xf0\x9f\x92\x91"), QStringLiteral(":couple_with_heart:"), Emoji::Group::People },
+	{ QString::fromUtf8("\xf0\x9f\x91\xaa"), QStringLiteral(":family:"), Emoji::Group::People },
+	{ QString::fromUtf8("\xf0\x9f\x92\xaa"), QStringLiteral(":muscle:"), Emoji::Group::People },
+	{ QString::fromUtf8("\xf0\x9f\xa4\xb3"), QStringLiteral(":selfie:"), Emoji::Group::People },
+	{ QString::fromUtf8("\xf0\x9f\x91\x88"), QStringLiteral(":point_left:"), Emoji::Group::People },
+	{ QString::fromUtf8("\xf0\x9f\x91\x89"), QStringLiteral(":point_right:"), Emoji::Group::People },
+	{ QString::fromUtf8("\xe2\x98\x9d"), QStringLiteral(":point_up:"), Emoji::Group::People },
+	{ QString::fromUtf8("\xf0\x9f\x91\x86"), QStringLiteral(":point_up_2:"), Emoji::Group::People },
+	{ QString::fromUtf8("\xf0\x9f\x96\x95"), QStringLiteral(":middle_finger:"), Emoji::Group::People },
+	{ QString::fromUtf8("\xf0\x9f\x91\x87"), QStringLiteral(":point_down:"), Emoji::Group::People },
+	{ QString::fromUtf8("\xe2\x9c\x8c"), QStringLiteral(":v:"), Emoji::Group::People },
+	{ QString::fromUtf8("\xf0\x9f\xa4\x9e"), QStringLiteral(":fingers_crossed:"), Emoji::Group::People },
+	{ QString::fromUtf8("\xf0\x9f\x96\x96"), QStringLiteral(":vulcan:"), Emoji::Group::People },
+	{ QString::fromUtf8("\xf0\x9f\xa4\x98"), QStringLiteral(":metal:"), Emoji::Group::People },
+	{ QString::fromUtf8("\xf0\x9f\xa4\x99"), QStringLiteral(":call_me:"), Emoji::Group::People },
+	{ QString::fromUtf8("\xf0\x9f\x96\x90"), QStringLiteral(":hand_splayed:"), Emoji::Group::People },
+	{ QString::fromUtf8("\xe2\x9c\x8b"), QStringLiteral(":raised_hand:"), Emoji::Group::People },
+	{ QString::fromUtf8("\xf0\x9f\x91\x8c"), QStringLiteral(":ok_hand:"), Emoji::Group::People },
+	{ QString::fromUtf8("\xf0\x9f\x91\x8d"), QStringLiteral(":thumbsup:"), Emoji::Group::People },
+	{ QString::fromUtf8("\xf0\x9f\x91\x8e"), QStringLiteral(":thumbsdown:"), Emoji::Group::People },
+	{ QString::fromUtf8("\xe2\x9c\x8a"), QStringLiteral(":fist:"), Emoji::Group::People },
+	{ QString::fromUtf8("\xf0\x9f\x91\x8a"), QStringLiteral(":punch:"), Emoji::Group::People },
+	{ QString::fromUtf8("\xf0\x9f\xa4\x9b"), QStringLiteral(":left_facing_fist:"), Emoji::Group::People },
+	{ QString::fromUtf8("\xf0\x9f\xa4\x9c"), QStringLiteral(":right_facing_fist:"), Emoji::Group::People },
+	{ QString::fromUtf8("\xf0\x9f\xa4\x9a"), QStringLiteral(":raised_back_of_hand:"), Emoji::Group::People },
+	{ QString::fromUtf8("\xf0\x9f\x91\x8b"), QStringLiteral(":wave:"), Emoji::Group::People },
+	{ QString::fromUtf8("\xf0\x9f\x91\x8f"), QStringLiteral(":clap:"), Emoji::Group::People },
+	{ QString::fromUtf8("\xe2\x9c\x8d"), QStringLiteral(":writing_hand:"), Emoji::Group::People },
+	{ QString::fromUtf8("\xf0\x9f\x91\x90"), QStringLiteral(":open_hands:"), Emoji::Group::People },
+	{ QString::fromUtf8("\xf0\x9f\x99\x8c"), QStringLiteral(":raised_hands:"), Emoji::Group::People },
+	{ QString::fromUtf8("\xf0\x9f\x99\x8f"), QStringLiteral(":pray:"), Emoji::Group::People },
+	{ QString::fromUtf8("\xf0\x9f\xa4\x9d"), QStringLiteral(":handshake:"), Emoji::Group::People },
+	{ QString::fromUtf8("\xf0\x9f\x92\x85"), QStringLiteral(":nail_care:"), Emoji::Group::People },
+	{ QString::fromUtf8("\xf0\x9f\x91\x82"), QStringLiteral(":ear:"), Emoji::Group::People },
+	{ QString::fromUtf8("\xf0\x9f\x91\x83"), QStringLiteral(":nose:"), Emoji::Group::People },
+	{ QString::fromUtf8("\xf0\x9f\x91\xa3"), QStringLiteral(":footprints:"), Emoji::Group::People },
+	{ QString::fromUtf8("\xf0\x9f\x91\x80"), QStringLiteral(":eyes:"), Emoji::Group::People },
+	{ QString::fromUtf8("\xf0\x9f\x91\x81"), QStringLiteral(":eye:"), Emoji::Group::People },
+	{ QString::fromUtf8("\xf0\x9f\x91\x85"), QStringLiteral(":tongue:"), Emoji::Group::People },
+	{ QString::fromUtf8("\xf0\x9f\x91\x84"), QStringLiteral(":lips:"), Emoji::Group::People },
+	{ QString::fromUtf8("\xf0\x9f\x92\x8b"), QStringLiteral(":kiss:"), Emoji::Group::People },
+	{ QString::fromUtf8("\xf0\x9f\x92\xa4"), QStringLiteral(":zzz:"), Emoji::Group::People },
+	{ QString::fromUtf8("\xf0\x9f\x91\x93"), QStringLiteral(":eyeglasses:"), Emoji::Group::People },
+	{ QString::fromUtf8("\xf0\x9f\x95\xb6"), QStringLiteral(":dark_sunglasses:"), Emoji::Group::People },
+	{ QString::fromUtf8("\xf0\x9f\x91\x94"), QStringLiteral(":necktie:"), Emoji::Group::People },
+	{ QString::fromUtf8("\xf0\x9f\x91\x95"), QStringLiteral(":shirt:"), Emoji::Group::People },
+	{ QString::fromUtf8("\xf0\x9f\x91\x96"), QStringLiteral(":jeans:"), Emoji::Group::People },
+	{ QString::fromUtf8("\xf0\x9f\x91\x97"), QStringLiteral(":dress:"), Emoji::Group::People },
+	{ QString::fromUtf8("\xf0\x9f\x91\x98"), QStringLiteral(":kimono:"), Emoji::Group::People },
+	{ QString::fromUtf8("\xf0\x9f\x91\x99"), QStringLiteral(":bikini:"), Emoji::Group::People },
+	{ QString::fromUtf8("\xf0\x9f\x91\x9a"), QStringLiteral(":womans_clothes:"), Emoji::Group::People },
+	{ QString::fromUtf8("\xf0\x9f\x91\x9b"), QStringLiteral(":purse:"), Emoji::Group::People },
+	{ QString::fromUtf8("\xf0\x9f\x91\x9c"), QStringLiteral(":handbag:"), Emoji::Group::People },
+	{ QString::fromUtf8("\xf0\x9f\x91\x9d"), QStringLiteral(":pouch:"), Emoji::Group::People },
+	{ QString::fromUtf8("\xf0\x9f\x8e\x92"), QStringLiteral(":school_satchel:"), Emoji::Group::People },
+	{ QString::fromUtf8("\xf0\x9f\x91\x9e"), QStringLiteral(":mans_shoe:"), Emoji::Group::People },
+	{ QString::fromUtf8("\xf0\x9f\x91\x9f"), QStringLiteral(":athletic_shoe:"), Emoji::Group::People },
+	{ QString::fromUtf8("\xf0\x9f\x91\xa0"), QStringLiteral(":high_heel:"), Emoji::Group::People },
+	{ QString::fromUtf8("\xf0\x9f\x91\xa1"), QStringLiteral(":sandal:"), Emoji::Group::People },
+	{ QString::fromUtf8("\xf0\x9f\x91\xa2"), QStringLiteral(":boot:"), Emoji::Group::People },
+	{ QString::fromUtf8("\xf0\x9f\x91\x91"), QStringLiteral(":crown:"), Emoji::Group::People },
+	{ QString::fromUtf8("\xf0\x9f\x91\x92"), QStringLiteral(":womans_hat:"), Emoji::Group::People },
+	{ QString::fromUtf8("\xf0\x9f\x8e\xa9"), QStringLiteral(":tophat:"), Emoji::Group::People },
+	{ QString::fromUtf8("\xf0\x9f\x8e\x93"), QStringLiteral(":mortar_board:"), Emoji::Group::People },
+	{ QString::fromUtf8("\xe2\x9b\x91"), QStringLiteral(":helmet_with_cross:"), Emoji::Group::People },
+	{ QString::fromUtf8("\xf0\x9f\x92\x84"), QStringLiteral(":lipstick:"), Emoji::Group::People },
+	{ QString::fromUtf8("\xf0\x9f\x92\x8d"), QStringLiteral(":ring:"), Emoji::Group::People },
+	{ QString::fromUtf8("\xf0\x9f\x8c\x82"), QStringLiteral(":closed_umbrella:"), Emoji::Group::People },
+	{ QString::fromUtf8("\xf0\x9f\x92\xbc"), QStringLiteral(":briefcase:"), Emoji::Group::People },
+	// Nature
+	{ QString::fromUtf8("\xf0\x9f\x99\x88"), QStringLiteral(":see_no_evil:"), Emoji::Group::Nature },
+	{ QString::fromUtf8("\xf0\x9f\x99\x89"), QStringLiteral(":hear_no_evil:"), Emoji::Group::Nature },
+	{ QString::fromUtf8("\xf0\x9f\x99\x8a"), QStringLiteral(":speak_no_evil:"), Emoji::Group::Nature },
+	{ QString::fromUtf8("\xf0\x9f\x92\xa6"), QStringLiteral(":sweat_drops:"), Emoji::Group::Nature },
+	{ QString::fromUtf8("\xf0\x9f\x92\xa8"), QStringLiteral(":dash:"), Emoji::Group::Nature },
+	{ QString::fromUtf8("\xf0\x9f\x90\xb5"), QStringLiteral(":monkey_face:"), Emoji::Group::Nature },
+	{ QString::fromUtf8("\xf0\x9f\x90\x92"), QStringLiteral(":monkey:"), Emoji::Group::Nature },
+	{ QString::fromUtf8("\xf0\x9f\xa6\x8d"), QStringLiteral(":gorilla:"), Emoji::Group::Nature },
+	{ QString::fromUtf8("\xf0\x9f\x90\xb6"), QStringLiteral(":dog:"), Emoji::Group::Nature },
+	{ QString::fromUtf8("\xf0\x9f\x90\x95"), QStringLiteral(":dog2:"), Emoji::Group::Nature },
+	{ QString::fromUtf8("\xf0\x9f\x90\xa9"), QStringLiteral(":poodle:"), Emoji::Group::Nature },
+	{ QString::fromUtf8("\xf0\x9f\x90\xba"), QStringLiteral(":wolf:"), Emoji::Group::Nature },
+	{ QString::fromUtf8("\xf0\x9f\xa6\x8a"), QStringLiteral(":fox:"), Emoji::Group::Nature },
+	{ QString::fromUtf8("\xf0\x9f\x90\xb1"), QStringLiteral(":cat:"), Emoji::Group::Nature },
+	{ QString::fromUtf8("\xf0\x9f\x90\x88"), QStringLiteral(":cat2:"), Emoji::Group::Nature },
+	{ QString::fromUtf8("\xf0\x9f\xa6\x81"), QStringLiteral(":lion_face:"), Emoji::Group::Nature },
+	{ QString::fromUtf8("\xf0\x9f\x90\xaf"), QStringLiteral(":tiger:"), Emoji::Group::Nature },
+	{ QString::fromUtf8("\xf0\x9f\x90\x85"), QStringLiteral(":tiger2:"), Emoji::Group::Nature },
+	{ QString::fromUtf8("\xf0\x9f\x90\x86"), QStringLiteral(":leopard:"), Emoji::Group::Nature },
+	{ QString::fromUtf8("\xf0\x9f\x90\xb4"), QStringLiteral(":horse:"), Emoji::Group::Nature },
+	{ QString::fromUtf8("\xf0\x9f\x90\x8e"), QStringLiteral(":racehorse:"), Emoji::Group::Nature },
+	{ QString::fromUtf8("\xf0\x9f\xa6\x8c"), QStringLiteral(":deer:"), Emoji::Group::Nature },
+	{ QString::fromUtf8("\xf0\x9f\xa6\x84"), QStringLiteral(":unicorn:"), Emoji::Group::Nature },
+	{ QString::fromUtf8("\xf0\x9f\x90\xae"), QStringLiteral(":cow:"), Emoji::Group::Nature },
+	{ QString::fromUtf8("\xf0\x9f\x90\x82"), QStringLiteral(":ox:"), Emoji::Group::Nature },
+	{ QString::fromUtf8("\xf0\x9f\x90\x83"), QStringLiteral(":water_buffalo:"), Emoji::Group::Nature },
+	{ QString::fromUtf8("\xf0\x9f\x90\x84"), QStringLiteral(":cow2:"), Emoji::Group::Nature },
+	{ QString::fromUtf8("\xf0\x9f\x90\xb7"), QStringLiteral(":pig:"), Emoji::Group::Nature },
+	{ QString::fromUtf8("\xf0\x9f\x90\x96"), QStringLiteral(":pig2:"), Emoji::Group::Nature },
+	{ QString::fromUtf8("\xf0\x9f\x90\x97"), QStringLiteral(":boar:"), Emoji::Group::Nature },
+	{ QString::fromUtf8("\xf0\x9f\x90\xbd"), QStringLiteral(":pig_nose:"), Emoji::Group::Nature },
+	{ QString::fromUtf8("\xf0\x9f\x90\x8f"), QStringLiteral(":ram:"), Emoji::Group::Nature },
+	{ QString::fromUtf8("\xf0\x9f\x90\x91"), QStringLiteral(":sheep:"), Emoji::Group::Nature },
+	{ QString::fromUtf8("\xf0\x9f\x90\x90"), QStringLiteral(":goat:"), Emoji::Group::Nature },
+	{ QString::fromUtf8("\xf0\x9f\x90\xaa"), QStringLiteral(":dromedary_camel:"), Emoji::Group::Nature },
+	{ QString::fromUtf8("\xf0\x9f\x90\xab"), QStringLiteral(":camel:"), Emoji::Group::Nature },
+	{ QString::fromUtf8("\xf0\x9f\x90\x98"), QStringLiteral(":elephant:"), Emoji::Group::Nature },
+	{ QString::fromUtf8("\xf0\x9f\xa6\x8f"), QStringLiteral(":rhino:"), Emoji::Group::Nature },
+	{ QString::fromUtf8("\xf0\x9f\x90\xad"), QStringLiteral(":mouse:"), Emoji::Group::Nature },
+	{ QString::fromUtf8("\xf0\x9f\x90\x81"), QStringLiteral(":mouse2:"), Emoji::Group::Nature },
+	{ QString::fromUtf8("\xf0\x9f\x90\x80"), QStringLiteral(":rat:"), Emoji::Group::Nature },
+	{ QString::fromUtf8("\xf0\x9f\x90\xb9"), QStringLiteral(":hamster:"), Emoji::Group::Nature },
+	{ QString::fromUtf8("\xf0\x9f\x90\xb0"), QStringLiteral(":rabbit:"), Emoji::Group::Nature },
+	{ QString::fromUtf8("\xf0\x9f\x90\x87"), QStringLiteral(":rabbit2:"), Emoji::Group::Nature },
+	{ QString::fromUtf8("\xf0\x9f\x90\xbf"), QStringLiteral(":chipmunk:"), Emoji::Group::Nature },
+	{ QString::fromUtf8("\xf0\x9f\xa6\x87"), QStringLiteral(":bat:"), Emoji::Group::Nature },
+	{ QString::fromUtf8("\xf0\x9f\x90\xbb"), QStringLiteral(":bear:"), Emoji::Group::Nature },
+	{ QString::fromUtf8("\xf0\x9f\x90\xa8"), QStringLiteral(":koala:"), Emoji::Group::Nature },
+	{ QString::fromUtf8("\xf0\x9f\x90\xbc"), QStringLiteral(":panda_face:"), Emoji::Group::Nature },
+	{ QString::fromUtf8("\xf0\x9f\x90\xbe"), QStringLiteral(":feet:"), Emoji::Group::Nature },
+	{ QString::fromUtf8("\xf0\x9f\xa6\x83"), QStringLiteral(":turkey:"), Emoji::Group::Nature },
+	{ QString::fromUtf8("\xf0\x9f\x90\x94"), QStringLiteral(":chicken:"), Emoji::Group::Nature },
+	{ QString::fromUtf8("\xf0\x9f\x90\x93"), QStringLiteral(":rooster:"), Emoji::Group::Nature },
+	{ QString::fromUtf8("\xf0\x9f\x90\xa3"), QStringLiteral(":hatching_chick:"), Emoji::Group::Nature },
+	{ QString::fromUtf8("\xf0\x9f\x90\xa4"), QStringLiteral(":baby_chick:"), Emoji::Group::Nature },
+	{ QString::fromUtf8("\xf0\x9f\x90\xa5"), QStringLiteral(":hatched_chick:"), Emoji::Group::Nature },
+	{ QString::fromUtf8("\xf0\x9f\x90\xa6"), QStringLiteral(":bird:"), Emoji::Group::Nature },
+	{ QString::fromUtf8("\xf0\x9f\x90\xa7"), QStringLiteral(":penguin:"), Emoji::Group::Nature },
+	{ QString::fromUtf8("\xf0\x9f\x95\x8a"), QStringLiteral(":dove:"), Emoji::Group::Nature },
+	{ QString::fromUtf8("\xf0\x9f\xa6\x85"), QStringLiteral(":eagle:"), Emoji::Group::Nature },
+	{ QString::fromUtf8("\xf0\x9f\xa6\x86"), QStringLiteral(":duck:"), Emoji::Group::Nature },
+	{ QString::fromUtf8("\xf0\x9f\xa6\x89"), QStringLiteral(":owl:"), Emoji::Group::Nature },
+	{ QString::fromUtf8("\xf0\x9f\x90\xb8"), QStringLiteral(":frog:"), Emoji::Group::Nature },
+	{ QString::fromUtf8("\xf0\x9f\x90\x8a"), QStringLiteral(":crocodile:"), Emoji::Group::Nature },
+	{ QString::fromUtf8("\xf0\x9f\x90\xa2"), QStringLiteral(":turtle:"), Emoji::Group::Nature },
+	{ QString::fromUtf8("\xf0\x9f\xa6\x8e"), QStringLiteral(":lizard:"), Emoji::Group::Nature },
+	{ QString::fromUtf8("\xf0\x9f\x90\x8d"), QStringLiteral(":snake:"), Emoji::Group::Nature },
+	{ QString::fromUtf8("\xf0\x9f\x90\xb2"), QStringLiteral(":dragon_face:"), Emoji::Group::Nature },
+	{ QString::fromUtf8("\xf0\x9f\x90\x89"), QStringLiteral(":dragon:"), Emoji::Group::Nature },
+	{ QString::fromUtf8("\xf0\x9f\x90\xb3"), QStringLiteral(":whale:"), Emoji::Group::Nature },
+	{ QString::fromUtf8("\xf0\x9f\x90\x8b"), QStringLiteral(":whale2:"), Emoji::Group::Nature },
+	{ QString::fromUtf8("\xf0\x9f\x90\xac"), QStringLiteral(":dolphin:"), Emoji::Group::Nature },
+	{ QString::fromUtf8("\xf0\x9f\x90\x9f"), QStringLiteral(":fish:"), Emoji::Group::Nature },
+	{ QString::fromUtf8("\xf0\x9f\x90\xa0"), QStringLiteral(":tropical_fish:"), Emoji::Group::Nature },
+	{ QString::fromUtf8("\xf0\x9f\x90\xa1"), QStringLiteral(":blowfish:"), Emoji::Group::Nature },
+	{ QString::fromUtf8("\xf0\x9f\xa6\x88"), QStringLiteral(":shark:"), Emoji::Group::Nature },
+	{ QString::fromUtf8("\xf0\x9f\x90\x99"), QStringLiteral(":octopus:"), Emoji::Group::Nature },
+	{ QString::fromUtf8("\xf0\x9f\x90\x9a"), QStringLiteral(":shell:"), Emoji::Group::Nature },
+	{ QString::fromUtf8("\xf0\x9f\xa6\x80"), QStringLiteral(":crab:"), Emoji::Group::Nature },
+	{ QString::fromUtf8("\xf0\x9f\xa6\x90"), QStringLiteral(":shrimp:"), Emoji::Group::Nature },
+	{ QString::fromUtf8("\xf0\x9f\xa6\x91"), QStringLiteral(":squid:"), Emoji::Group::Nature },
+	{ QString::fromUtf8("\xf0\x9f\xa6\x8b"), QStringLiteral(":butterfly:"), Emoji::Group::Nature },
+	{ QString::fromUtf8("\xf0\x9f\x90\x8c"), QStringLiteral(":snail:"), Emoji::Group::Nature },
+	{ QString::fromUtf8("\xf0\x9f\x90\x9b"), QStringLiteral(":bug:"), Emoji::Group::Nature },
+	{ QString::fromUtf8("\xf0\x9f\x90\x9c"), QStringLiteral(":ant:"), Emoji::Group::Nature },
+	{ QString::fromUtf8("\xf0\x9f\x90\x9d"), QStringLiteral(":bee:"), Emoji::Group::Nature },
+	{ QString::fromUtf8("\xf0\x9f\x90\x9e"), QStringLiteral(":beetle:"), Emoji::Group::Nature },
+	{ QString::fromUtf8("\xf0\x9f\x95\xb7"), QStringLiteral(":spider:"), Emoji::Group::Nature },
+	{ QString::fromUtf8("\xf0\x9f\x95\xb8"), QStringLiteral(":spider_web:"), Emoji::Group::Nature },
+	{ QString::fromUtf8("\xf0\x9f\xa6\x82"), QStringLiteral(":scorpion:"), Emoji::Group::Nature },
+	{ QString::fromUtf8("\xf0\x9f\x92\x90"), QStringLiteral(":bouquet:"), Emoji::Group::Nature },
+	{ QString::fromUtf8("\xf0\x9f\x8c\xb8"), QStringLiteral(":cherry_blossom:"), Emoji::Group::Nature },
+	{ QString::fromUtf8("\xf0\x9f\x8f\xb5"), QStringLiteral(":rosette:"), Emoji::Group::Nature },
+	{ QString::fromUtf8("\xf0\x9f\x8c\xb9"), QStringLiteral(":rose:"), Emoji::Group::Nature },
+	{ QString::fromUtf8("\xf0\x9f\xa5\x80"), QStringLiteral(":wilted_rose:"), Emoji::Group::Nature },
+	{ QString::fromUtf8("\xf0\x9f\x8c\xba"), QStringLiteral(":hibiscus:"), Emoji::Group::Nature },
+	{ QString::fromUtf8("\xf0\x9f\x8c\xbb"), QStringLiteral(":sunflower:"), Emoji::Group::Nature },
+	{ QString::fromUtf8("\xf0\x9f\x8c\xbc"), QStringLiteral(":blossom:"), Emoji::Group::Nature },
+	{ QString::fromUtf8("\xf0\x9f\x8c\xb7"), QStringLiteral(":tulip:"), Emoji::Group::Nature },
+	{ QString::fromUtf8("\xf0\x9f\x8c\xb1"), QStringLiteral(":seedling:"), Emoji::Group::Nature },
+	{ QString::fromUtf8("\xf0\x9f\x8c\xb2"), QStringLiteral(":evergreen_tree:"), Emoji::Group::Nature },
+	{ QString::fromUtf8("\xf0\x9f\x8c\xb3"), QStringLiteral(":deciduous_tree:"), Emoji::Group::Nature },
+	{ QString::fromUtf8("\xf0\x9f\x8c\xb4"), QStringLiteral(":palm_tree:"), Emoji::Group::Nature },
+	{ QString::fromUtf8("\xf0\x9f\x8c\xb5"), QStringLiteral(":cactus:"), Emoji::Group::Nature },
+	{ QString::fromUtf8("\xf0\x9f\x8c\xbe"), QStringLiteral(":ear_of_rice:"), Emoji::Group::Nature },
+	{ QString::fromUtf8("\xf0\x9f\x8c\xbf"), QStringLiteral(":herb:"), Emoji::Group::Nature },
+	{ QString::fromUtf8("\xe2\x98\x98"), QStringLiteral(":shamrock:"), Emoji::Group::Nature },
+	{ QString::fromUtf8("\xf0\x9f\x8d\x80"), QStringLiteral(":four_leaf_clover:"), Emoji::Group::Nature },
+	{ QString::fromUtf8("\xf0\x9f\x8d\x81"), QStringLiteral(":maple_leaf:"), Emoji::Group::Nature },
+	{ QString::fromUtf8("\xf0\x9f\x8d\x82"), QStringLiteral(":fallen_leaf:"), Emoji::Group::Nature },
+	{ QString::fromUtf8("\xf0\x9f\x8d\x83"), QStringLiteral(":leaves:"), Emoji::Group::Nature },
+	{ QString::fromUtf8("\xf0\x9f\x8d\x84"), QStringLiteral(":mushroom:"), Emoji::Group::Nature },
+	{ QString::fromUtf8("\xf0\x9f\x8c\xb0"), QStringLiteral(":chestnut:"), Emoji::Group::Nature },
+	{ QString::fromUtf8("\xf0\x9f\x8c\x8d"), QStringLiteral(":earth_africa:"), Emoji::Group::Nature },
+	{ QString::fromUtf8("\xf0\x9f\x8c\x8e"), QStringLiteral(":earth_americas:"), Emoji::Group::Nature },
+	{ QString::fromUtf8("\xf0\x9f\x8c\x8f"), QStringLiteral(":earth_asia:"), Emoji::Group::Nature },
+	{ QString::fromUtf8("\xf0\x9f\x8c\x91"), QStringLiteral(":new_moon:"), Emoji::Group::Nature },
+	{ QString::fromUtf8("\xf0\x9f\x8c\x92"), QStringLiteral(":waxing_crescent_moon:"), Emoji::Group::Nature },
+	{ QString::fromUtf8("\xf0\x9f\x8c\x93"), QStringLiteral(":first_quarter_moon:"), Emoji::Group::Nature },
+	{ QString::fromUtf8("\xf0\x9f\x8c\x94"), QStringLiteral(":waxing_gibbous_moon:"), Emoji::Group::Nature },
+	{ QString::fromUtf8("\xf0\x9f\x8c\x95"), QStringLiteral(":full_moon:"), Emoji::Group::Nature },
+	{ QString::fromUtf8("\xf0\x9f\x8c\x96"), QStringLiteral(":waning_gibbous_moon:"), Emoji::Group::Nature },
+	{ QString::fromUtf8("\xf0\x9f\x8c\x97"), QStringLiteral(":last_quarter_moon:"), Emoji::Group::Nature },
+	{ QString::fromUtf8("\xf0\x9f\x8c\x98"), QStringLiteral(":waning_crescent_moon:"), Emoji::Group::Nature },
+	{ QString::fromUtf8("\xf0\x9f\x8c\x99"), QStringLiteral(":crescent_moon:"), Emoji::Group::Nature },
+	{ QString::fromUtf8("\xf0\x9f\x8c\x9a"), QStringLiteral(":new_moon_with_face:"), Emoji::Group::Nature },
+	{ QString::fromUtf8("\xf0\x9f\x8c\x9b"), QStringLiteral(":first_quarter_moon_with_face:"), Emoji::Group::Nature },
+	{ QString::fromUtf8("\xf0\x9f\x8c\x9c"), QStringLiteral(":last_quarter_moon_with_face:"), Emoji::Group::Nature },
+	{ QString::fromUtf8("\xe2\x98\x80"), QStringLiteral(":sunny:"), Emoji::Group::Nature },
+	{ QString::fromUtf8("\xf0\x9f\x8c\x9d"), QStringLiteral(":full_moon_with_face:"), Emoji::Group::Nature },
+	{ QString::fromUtf8("\xf0\x9f\x8c\x9e"), QStringLiteral(":sun_with_face:"), Emoji::Group::Nature },
+	{ QString::fromUtf8("\xe2\xad\x90"), QStringLiteral(":star:"), Emoji::Group::Nature },
+	{ QString::fromUtf8("\xf0\x9f\x8c\x9f"), QStringLiteral(":star2:"), Emoji::Group::Nature },
+	{ QString::fromUtf8("\xe2\x98\x81"), QStringLiteral(":cloud:"), Emoji::Group::Nature },
+	{ QString::fromUtf8("\xe2\x9b\x85"), QStringLiteral(":partly_sunny:"), Emoji::Group::Nature },
+	{ QString::fromUtf8("\xe2\x9b\x88"), QStringLiteral(":thunder_cloud_rain:"), Emoji::Group::Nature },
+	{ QString::fromUtf8("\xf0\x9f\x8c\xa4"), QStringLiteral(":white_sun_small_cloud:"), Emoji::Group::Nature },
+	{ QString::fromUtf8("\xf0\x9f\x8c\xa5"), QStringLiteral(":white_sun_cloud:"), Emoji::Group::Nature },
+	{ QString::fromUtf8("\xf0\x9f\x8c\xa6"), QStringLiteral(":white_sun_rain_cloud:"), Emoji::Group::Nature },
+	{ QString::fromUtf8("\xf0\x9f\x8c\xa7"), QStringLiteral(":cloud_rain:"), Emoji::Group::Nature },
+	{ QString::fromUtf8("\xf0\x9f\x8c\xa8"), QStringLiteral(":cloud_snow:"), Emoji::Group::Nature },
+	{ QString::fromUtf8("\xf0\x9f\x8c\xa9"), QStringLiteral(":cloud_lightning:"), Emoji::Group::Nature },
+	{ QString::fromUtf8("\xf0\x9f\x8c\xaa"), QStringLiteral(":cloud_tornado:"), Emoji::Group::Nature },
+	{ QString::fromUtf8("\xf0\x9f\x8c\xab"), QStringLiteral(":fog:"), Emoji::Group::Nature },
+	{ QString::fromUtf8("\xf0\x9f\x8c\xac"), QStringLiteral(":wind_blowing_face:"), Emoji::Group::Nature },
+	{ QString::fromUtf8("\xe2\x98\x82"), QStringLiteral(":umbrella2:"), Emoji::Group::Nature },
+	{ QString::fromUtf8("\xe2\x98\x94"), QStringLiteral(":umbrella:"), Emoji::Group::Nature },
+	{ QString::fromUtf8("\xe2\x9a\xa1"), QStringLiteral(":zap:"), Emoji::Group::Nature },
+	{ QString::fromUtf8("\xe2\x9d\x84"), QStringLiteral(":snowflake:"), Emoji::Group::Nature },
+	{ QString::fromUtf8("\xe2\x98\x83"), QStringLiteral(":snowman2:"), Emoji::Group::Nature },
+	{ QString::fromUtf8("\xe2\x9b\x84"), QStringLiteral(":snowman:"), Emoji::Group::Nature },
+	{ QString::fromUtf8("\xe2\x98\x84"), QStringLiteral(":comet:"), Emoji::Group::Nature },
+	{ QString::fromUtf8("\xf0\x9f\x94\xa5"), QStringLiteral(":fire:"), Emoji::Group::Nature },
+	{ QString::fromUtf8("\xf0\x9f\x92\xa7"), QStringLiteral(":droplet:"), Emoji::Group::Nature },
+	{ QString::fromUtf8("\xf0\x9f\x8c\x8a"), QStringLiteral(":ocean:"), Emoji::Group::Nature },
+	{ QString::fromUtf8("\xf0\x9f\x8e\x83"), QStringLiteral(":jack_o_lantern:"), Emoji::Group::Nature },
+	{ QString::fromUtf8("\xf0\x9f\x8e\x84"), QStringLiteral(":christmas_tree:"), Emoji::Group::Nature },
+	{ QString::fromUtf8("\xe2\x9c\xa8"), QStringLiteral(":sparkles:"), Emoji::Group::Nature },
+	{ QString::fromUtf8("\xf0\x9f\x8e\x8b"), QStringLiteral(":tanabata_tree:"), Emoji::Group::Nature },
+	{ QString::fromUtf8("\xf0\x9f\x8e\x8d"), QStringLiteral(":bamboo:"), Emoji::Group::Nature },
+	// Food
+	{ QString::fromUtf8("\xf0\x9f\x8d\x87"), QStringLiteral(":grapes:"), Emoji::Group::Food },
+	{ QString::fromUtf8("\xf0\x9f\x8d\x88"), QStringLiteral(":melon:"), Emoji::Group::Food },
+	{ QString::fromUtf8("\xf0\x9f\x8d\x89"), QStringLiteral(":watermelon:"), Emoji::Group::Food },
+	{ QString::fromUtf8("\xf0\x9f\x8d\x8a"), QStringLiteral(":tangerine:"), Emoji::Group::Food },
+	{ QString::fromUtf8("\xf0\x9f\x8d\x8b"), QStringLiteral(":lemon:"), Emoji::Group::Food },
+	{ QString::fromUtf8("\xf0\x9f\x8d\x8c"), QStringLiteral(":banana:"), Emoji::Group::Food },
+	{ QString::fromUtf8("\xf0\x9f\x8d\x8d"), QStringLiteral(":pineapple:"), Emoji::Group::Food },
+	{ QString::fromUtf8("\xf0\x9f\x8d\x8e"), QStringLiteral(":apple:"), Emoji::Group::Food },
+	{ QString::fromUtf8("\xf0\x9f\x8d\x8f"), QStringLiteral(":green_apple:"), Emoji::Group::Food },
+	{ QString::fromUtf8("\xf0\x9f\x8d\x90"), QStringLiteral(":pear:"), Emoji::Group::Food },
+	{ QString::fromUtf8("\xf0\x9f\x8d\x91"), QStringLiteral(":peach:"), Emoji::Group::Food },
+	{ QString::fromUtf8("\xf0\x9f\x8d\x92"), QStringLiteral(":cherries:"), Emoji::Group::Food },
+	{ QString::fromUtf8("\xf0\x9f\x8d\x93"), QStringLiteral(":strawberry:"), Emoji::Group::Food },
+	{ QString::fromUtf8("\xf0\x9f\xa5\x9d"), QStringLiteral(":kiwi:"), Emoji::Group::Food },
+	{ QString::fromUtf8("\xf0\x9f\x8d\x85"), QStringLiteral(":tomato:"), Emoji::Group::Food },
+	{ QString::fromUtf8("\xf0\x9f\xa5\x91"), QStringLiteral(":avocado:"), Emoji::Group::Food },
+	{ QString::fromUtf8("\xf0\x9f\x8d\x86"), QStringLiteral(":eggplant:"), Emoji::Group::Food },
+	{ QString::fromUtf8("\xf0\x9f\xa5\x94"), QStringLiteral(":potato:"), Emoji::Group::Food },
+	{ QString::fromUtf8("\xf0\x9f\xa5\x95"), QStringLiteral(":carrot:"), Emoji::Group::Food },
+	{ QString::fromUtf8("\xf0\x9f\x8c\xbd"), QStringLiteral(":corn:"), Emoji::Group::Food },
+	{ QString::fromUtf8("\xf0\x9f\x8c\xb6"), QStringLiteral(":hot_pepper:"), Emoji::Group::Food },
+	{ QString::fromUtf8("\xf0\x9f\xa5\x92"), QStringLiteral(":cucumber:"), Emoji::Group::Food },
+	{ QString::fromUtf8("\xf0\x9f\xa5\x9c"), QStringLiteral(":peanuts:"), Emoji::Group::Food },
+	{ QString::fromUtf8("\xf0\x9f\x8d\x9e"), QStringLiteral(":bread:"), Emoji::Group::Food },
+	{ QString::fromUtf8("\xf0\x9f\xa5\x90"), QStringLiteral(":croissant:"), Emoji::Group::Food },
+	{ QString::fromUtf8("\xf0\x9f\xa5\x96"), QStringLiteral(":french_bread:"), Emoji::Group::Food },
+	{ QString::fromUtf8("\xf0\x9f\xa5\x9e"), QStringLiteral(":pancakes:"), Emoji::Group::Food },
+	{ QString::fromUtf8("\xf0\x9f\xa7\x80"), QStringLiteral(":cheese:"), Emoji::Group::Food },
+	{ QString::fromUtf8("\xf0\x9f\x8d\x96"), QStringLiteral(":meat_on_bone:"), Emoji::Group::Food },
+	{ QString::fromUtf8("\xf0\x9f\x8d\x97"), QStringLiteral(":poultry_leg:"), Emoji::Group::Food },
+	{ QString::fromUtf8("\xf0\x9f\xa5\x93"), QStringLiteral(":bacon:"), Emoji::Group::Food },
+	{ QString::fromUtf8("\xf0\x9f\x8d\x94"), QStringLiteral(":hamburger:"), Emoji::Group::Food },
+	{ QString::fromUtf8("\xf0\x9f\x8d\x9f"), QStringLiteral(":fries:"), Emoji::Group::Food },
+	{ QString::fromUtf8("\xf0\x9f\x8d\x95"), QStringLiteral(":pizza:"), Emoji::Group::Food },
+	{ QString::fromUtf8("\xf0\x9f\x8c\xad"), QStringLiteral(":hotdog:"), Emoji::Group::Food },
+	{ QString::fromUtf8("\xf0\x9f\x8c\xae"), QStringLiteral(":taco:"), Emoji::Group::Food },
+	{ QString::fromUtf8("\xf0\x9f\x8c\xaf"), QStringLiteral(":burrito:"), Emoji::Group::Food },
+	{ QString::fromUtf8("\xf0\x9f\xa5\x99"), QStringLiteral(":stuffed_flatbread:"), Emoji::Group::Food },
+	{ QString::fromUtf8("\xf0\x9f\xa5\x9a"), QStringLiteral(":egg:"), Emoji::Group::Food },
+	{ QString::fromUtf8("\xf0\x9f\x8d\xb3"), QStringLiteral(":cooking:"), Emoji::Group::Food },
+	{ QString::fromUtf8("\xf0\x9f\xa5\x98"), QStringLiteral(":shallow_pan_of_food:"), Emoji::Group::Food },
+	{ QString::fromUtf8("\xf0\x9f\x8d\xb2"), QStringLiteral(":stew:"), Emoji::Group::Food },
+	{ QString::fromUtf8("\xf0\x9f\xa5\x97"), QStringLiteral(":salad:"), Emoji::Group::Food },
+	{ QString::fromUtf8("\xf0\x9f\x8d\xbf"), QStringLiteral(":popcorn:"), Emoji::Group::Food },
+	{ QString::fromUtf8("\xf0\x9f\x8d\xb1"), QStringLiteral(":bento:"), Emoji::Group::Food },
+	{ QString::fromUtf8("\xf0\x9f\x8d\x98"), QStringLiteral(":rice_cracker:"), Emoji::Group::Food },
+	{ QString::fromUtf8("\xf0\x9f\x8d\x99"), QStringLiteral(":rice_ball:"), Emoji::Group::Food },
+	{ QString::fromUtf8("\xf0\x9f\x8d\x9a"), QStringLiteral(":rice:"), Emoji::Group::Food },
+	{ QString::fromUtf8("\xf0\x9f\x8d\x9b"), QStringLiteral(":curry:"), Emoji::Group::Food },
+	{ QString::fromUtf8("\xf0\x9f\x8d\x9c"), QStringLiteral(":ramen:"), Emoji::Group::Food },
+	{ QString::fromUtf8("\xf0\x9f\x8d\x9d"), QStringLiteral(":spaghetti:"), Emoji::Group::Food },
+	{ QString::fromUtf8("\xf0\x9f\x8d\xa0"), QStringLiteral(":sweet_potato:"), Emoji::Group::Food },
+	{ QString::fromUtf8("\xf0\x9f\x8d\xa2"), QStringLiteral(":oden:"), Emoji::Group::Food },
+	{ QString::fromUtf8("\xf0\x9f\x8d\xa3"), QStringLiteral(":sushi:"), Emoji::Group::Food },
+	{ QString::fromUtf8("\xf0\x9f\x8d\xa4"), QStringLiteral(":fried_shrimp:"), Emoji::Group::Food },
+	{ QString::fromUtf8("\xf0\x9f\x8d\xa5"), QStringLiteral(":fish_cake:"), Emoji::Group::Food },
+	{ QString::fromUtf8("\xf0\x9f\x8d\xa1"), QStringLiteral(":dango:"), Emoji::Group::Food },
+	{ QString::fromUtf8("\xf0\x9f\x8d\xa6"), QStringLiteral(":icecream:"), Emoji::Group::Food },
+	{ QString::fromUtf8("\xf0\x9f\x8d\xa7"), QStringLiteral(":shaved_ice:"), Emoji::Group::Food },
+	{ QString::fromUtf8("\xf0\x9f\x8d\xa8"), QStringLiteral(":ice_cream:"), Emoji::Group::Food },
+	{ QString::fromUtf8("\xf0\x9f\x8d\xa9"), QStringLiteral(":doughnut:"), Emoji::Group::Food },
+	{ QString::fromUtf8("\xf0\x9f\x8d\xaa"), QStringLiteral(":cookie:"), Emoji::Group::Food },
+	{ QString::fromUtf8("\xf0\x9f\x8e\x82"), QStringLiteral(":birthday:"), Emoji::Group::Food },
+	{ QString::fromUtf8("\xf0\x9f\x8d\xb0"), QStringLiteral(":cake:"), Emoji::Group::Food },
+	{ QString::fromUtf8("\xf0\x9f\x8d\xab"), QStringLiteral(":chocolate_bar:"), Emoji::Group::Food },
+	{ QString::fromUtf8("\xf0\x9f\x8d\xac"), QStringLiteral(":candy:"), Emoji::Group::Food },
+	{ QString::fromUtf8("\xf0\x9f\x8d\xad"), QStringLiteral(":lollipop:"), Emoji::Group::Food },
+	{ QString::fromUtf8("\xf0\x9f\x8d\xae"), QStringLiteral(":custard:"), Emoji::Group::Food },
+	{ QString::fromUtf8("\xf0\x9f\x8d\xaf"), QStringLiteral(":honey_pot:"), Emoji::Group::Food },
+	{ QString::fromUtf8("\xf0\x9f\x8d\xbc"), QStringLiteral(":baby_bottle:"), Emoji::Group::Food },
+	{ QString::fromUtf8("\xf0\x9f\xa5\x9b"), QStringLiteral(":milk:"), Emoji::Group::Food },
+	{ QString::fromUtf8("\xe2\x98\x95"), QStringLiteral(":coffee:"), Emoji::Group::Food },
+	{ QString::fromUtf8("\xf0\x9f\x8d\xb5"), QStringLiteral(":tea:"), Emoji::Group::Food },
+	{ QString::fromUtf8("\xf0\x9f\x8d\xb6"), QStringLiteral(":sake:"), Emoji::Group::Food },
+	{ QString::fromUtf8("\xf0\x9f\x8d\xbe"), QStringLiteral(":champagne:"), Emoji::Group::Food },
+	{ QString::fromUtf8("\xf0\x9f\x8d\xb7"), QStringLiteral(":wine_glass:"), Emoji::Group::Food },
+	{ QString::fromUtf8("\xf0\x9f\x8d\xb8"), QStringLiteral(":cocktail:"), Emoji::Group::Food },
+	{ QString::fromUtf8("\xf0\x9f\x8d\xb9"), QStringLiteral(":tropical_drink:"), Emoji::Group::Food },
+	{ QString::fromUtf8("\xf0\x9f\x8d\xba"), QStringLiteral(":beer:"), Emoji::Group::Food },
+	{ QString::fromUtf8("\xf0\x9f\x8d\xbb"), QStringLiteral(":beers:"), Emoji::Group::Food },
+	{ QString::fromUtf8("\xf0\x9f\xa5\x82"), QStringLiteral(":champagne_glass:"), Emoji::Group::Food },
+	{ QString::fromUtf8("\xf0\x9f\xa5\x83"), QStringLiteral(":tumbler_glass:"), Emoji::Group::Food },
+	{ QString::fromUtf8("\xf0\x9f\x8d\xbd"), QStringLiteral(":fork_knife_plate:"), Emoji::Group::Food },
+	{ QString::fromUtf8("\xf0\x9f\x8d\xb4"), QStringLiteral(":fork_and_knife:"), Emoji::Group::Food },
+	{ QString::fromUtf8("\xf0\x9f\xa5\x84"), QStringLiteral(":spoon:"), Emoji::Group::Food },
+	// Activity
+	{ QString::fromUtf8("\xf0\x9f\x91\xbe"), QStringLiteral(":space_invader:"), Emoji::Group::Activity },
+	{ QString::fromUtf8("\xf0\x9f\x95\xb4"), QStringLiteral(":levitate:"), Emoji::Group::Activity },
+	{ QString::fromUtf8("\xf0\x9f\xa4\xba"), QStringLiteral(":fencer:"), Emoji::Group::Activity },
+	{ QString::fromUtf8("\xf0\x9f\x8f\x87"), QStringLiteral(":horse_racing:"), Emoji::Group::Activity },
+	{ QString::fromUtf8("\xf0\x9f\x8f\x87\xf0\x9f\x8f\xbb"), QStringLiteral(":horse_racing_tone1:"), Emoji::Group::Activity },
+	{ QString::fromUtf8("\xf0\x9f\x8f\x87\xf0\x9f\x8f\xbc"), QStringLiteral(":horse_racing_tone2:"), Emoji::Group::Activity },
+	{ QString::fromUtf8("\xf0\x9f\x8f\x87\xf0\x9f\x8f\xbd"), QStringLiteral(":horse_racing_tone3:"), Emoji::Group::Activity },
+	{ QString::fromUtf8("\xf0\x9f\x8f\x87\xf0\x9f\x8f\xbe"), QStringLiteral(":horse_racing_tone4:"), Emoji::Group::Activity },
+	{ QString::fromUtf8("\xf0\x9f\x8f\x87\xf0\x9f\x8f\xbf"), QStringLiteral(":horse_racing_tone5:"), Emoji::Group::Activity },
+	{ QString::fromUtf8("\xe2\x9b\xb7"), QStringLiteral(":skier:"), Emoji::Group::Activity },
+	{ QString::fromUtf8("\xf0\x9f\x8f\x82"), QStringLiteral(":snowboarder:"), Emoji::Group::Activity },
+	{ QString::fromUtf8("\xf0\x9f\x8f\x8c"), QStringLiteral(":golfer:"), Emoji::Group::Activity },
+	{ QString::fromUtf8("\xf0\x9f\x8f\x84"), QStringLiteral(":surfer:"), Emoji::Group::Activity },
+	{ QString::fromUtf8("\xf0\x9f\x8f\x84\xf0\x9f\x8f\xbb"), QStringLiteral(":surfer_tone1:"), Emoji::Group::Activity },
+	{ QString::fromUtf8("\xf0\x9f\x8f\x84\xf0\x9f\x8f\xbc"), QStringLiteral(":surfer_tone2:"), Emoji::Group::Activity },
+	{ QString::fromUtf8("\xf0\x9f\x8f\x84\xf0\x9f\x8f\xbd"), QStringLiteral(":surfer_tone3:"), Emoji::Group::Activity },
+	{ QString::fromUtf8("\xf0\x9f\x8f\x84\xf0\x9f\x8f\xbe"), QStringLiteral(":surfer_tone4:"), Emoji::Group::Activity },
+	{ QString::fromUtf8("\xf0\x9f\x8f\x84\xf0\x9f\x8f\xbf"), QStringLiteral(":surfer_tone5:"), Emoji::Group::Activity },
+	{ QString::fromUtf8("\xf0\x9f\x9a\xa3"), QStringLiteral(":rowboat:"), Emoji::Group::Activity },
+	{ QString::fromUtf8("\xf0\x9f\x9a\xa3\xf0\x9f\x8f\xbb"), QStringLiteral(":rowboat_tone1:"), Emoji::Group::Activity },
+	{ QString::fromUtf8("\xf0\x9f\x9a\xa3\xf0\x9f\x8f\xbc"), QStringLiteral(":rowboat_tone2:"), Emoji::Group::Activity },
+	{ QString::fromUtf8("\xf0\x9f\x9a\xa3\xf0\x9f\x8f\xbd"), QStringLiteral(":rowboat_tone3:"), Emoji::Group::Activity },
+	{ QString::fromUtf8("\xf0\x9f\x9a\xa3\xf0\x9f\x8f\xbe"), QStringLiteral(":rowboat_tone4:"), Emoji::Group::Activity },
+	{ QString::fromUtf8("\xf0\x9f\x9a\xa3\xf0\x9f\x8f\xbf"), QStringLiteral(":rowboat_tone5:"), Emoji::Group::Activity },
+	{ QString::fromUtf8("\xf0\x9f\x8f\x8a"), QStringLiteral(":swimmer:"), Emoji::Group::Activity },
+	{ QString::fromUtf8("\xf0\x9f\x8f\x8a\xf0\x9f\x8f\xbb"), QStringLiteral(":swimmer_tone1:"), Emoji::Group::Activity },
+	{ QString::fromUtf8("\xf0\x9f\x8f\x8a\xf0\x9f\x8f\xbc"), QStringLiteral(":swimmer_tone2:"), Emoji::Group::Activity },
+	{ QString::fromUtf8("\xf0\x9f\x8f\x8a\xf0\x9f\x8f\xbd"), QStringLiteral(":swimmer_tone3:"), Emoji::Group::Activity },
+	{ QString::fromUtf8("\xf0\x9f\x8f\x8a\xf0\x9f\x8f\xbe"), QStringLiteral(":swimmer_tone4:"), Emoji::Group::Activity },
+	{ QString::fromUtf8("\xf0\x9f\x8f\x8a\xf0\x9f\x8f\xbf"), QStringLiteral(":swimmer_tone5:"), Emoji::Group::Activity },
+	{ QString::fromUtf8("\xe2\x9b\xb9"), QStringLiteral(":basketball_player:"), Emoji::Group::Activity },
+	{ QString::fromUtf8("\xe2\x9b\xb9\xf0\x9f\x8f\xbb"), QStringLiteral(":basketball_player_tone1:"), Emoji::Group::Activity },
+	{ QString::fromUtf8("\xe2\x9b\xb9\xf0\x9f\x8f\xbc"), QStringLiteral(":basketball_player_tone2:"), Emoji::Group::Activity },
+	{ QString::fromUtf8("\xe2\x9b\xb9\xf0\x9f\x8f\xbd"), QStringLiteral(":basketball_player_tone3:"), Emoji::Group::Activity },
+	{ QString::fromUtf8("\xe2\x9b\xb9\xf0\x9f\x8f\xbe"), QStringLiteral(":basketball_player_tone4:"), Emoji::Group::Activity },
+	{ QString::fromUtf8("\xe2\x9b\xb9\xf0\x9f\x8f\xbf"), QStringLiteral(":basketball_player_tone5:"), Emoji::Group::Activity },
+	{ QString::fromUtf8("\xf0\x9f\x8f\x8b"), QStringLiteral(":lifter:"), Emoji::Group::Activity },
+	{ QString::fromUtf8("\xf0\x9f\x8f\x8b\xf0\x9f\x8f\xbb"), QStringLiteral(":lifter_tone1:"), Emoji::Group::Activity },
+	{ QString::fromUtf8("\xf0\x9f\x8f\x8b\xf0\x9f\x8f\xbc"), QStringLiteral(":lifter_tone2:"), Emoji::Group::Activity },
+	{ QString::fromUtf8("\xf0\x9f\x8f\x8b\xf0\x9f\x8f\xbd"), QStringLiteral(":lifter_tone3:"), Emoji::Group::Activity },
+	{ QString::fromUtf8("\xf0\x9f\x8f\x8b\xf0\x9f\x8f\xbe"), QStringLiteral(":lifter_tone4:"), Emoji::Group::Activity },
+	{ QString::fromUtf8("\xf0\x9f\x8f\x8b\xf0\x9f\x8f\xbf"), QStringLiteral(":lifter_tone5:"), Emoji::Group::Activity },
+	{ QString::fromUtf8("\xf0\x9f\x9a\xb4"), QStringLiteral(":bicyclist:"), Emoji::Group::Activity },
+	{ QString::fromUtf8("\xf0\x9f\x9a\xb4\xf0\x9f\x8f\xbb"), QStringLiteral(":bicyclist_tone1:"), Emoji::Group::Activity },
+	{ QString::fromUtf8("\xf0\x9f\x9a\xb4\xf0\x9f\x8f\xbc"), QStringLiteral(":bicyclist_tone2:"), Emoji::Group::Activity },
+	{ QString::fromUtf8("\xf0\x9f\x9a\xb4\xf0\x9f\x8f\xbd"), QStringLiteral(":bicyclist_tone3:"), Emoji::Group::Activity },
+	{ QString::fromUtf8("\xf0\x9f\x9a\xb4\xf0\x9f\x8f\xbe"), QStringLiteral(":bicyclist_tone4:"), Emoji::Group::Activity },
+	{ QString::fromUtf8("\xf0\x9f\x9a\xb4\xf0\x9f\x8f\xbf"), QStringLiteral(":bicyclist_tone5:"), Emoji::Group::Activity },
+	{ QString::fromUtf8("\xf0\x9f\x9a\xb5"), QStringLiteral(":mountain_bicyclist:"), Emoji::Group::Activity },
+	{ QString::fromUtf8("\xf0\x9f\x9a\xb5\xf0\x9f\x8f\xbb"), QStringLiteral(":mountain_bicyclist_tone1:"), Emoji::Group::Activity },
+	{ QString::fromUtf8("\xf0\x9f\x9a\xb5\xf0\x9f\x8f\xbc"), QStringLiteral(":mountain_bicyclist_tone2:"), Emoji::Group::Activity },
+	{ QString::fromUtf8("\xf0\x9f\x9a\xb5\xf0\x9f\x8f\xbd"), QStringLiteral(":mountain_bicyclist_tone3:"), Emoji::Group::Activity },
+	{ QString::fromUtf8("\xf0\x9f\x9a\xb5\xf0\x9f\x8f\xbe"), QStringLiteral(":mountain_bicyclist_tone4:"), Emoji::Group::Activity },
+	{ QString::fromUtf8("\xf0\x9f\x9a\xb5\xf0\x9f\x8f\xbf"), QStringLiteral(":mountain_bicyclist_tone5:"), Emoji::Group::Activity },
+	{ QString::fromUtf8("\xf0\x9f\xa4\xb8"), QStringLiteral(":cartwheel:"), Emoji::Group::Activity },
+	{ QString::fromUtf8("\xf0\x9f\xa4\xb8\xf0\x9f\x8f\xbb"), QStringLiteral(":cartwheel_tone1:"), Emoji::Group::Activity },
+	{ QString::fromUtf8("\xf0\x9f\xa4\xb8\xf0\x9f\x8f\xbc"), QStringLiteral(":cartwheel_tone2:"), Emoji::Group::Activity },
+	{ QString::fromUtf8("\xf0\x9f\xa4\xb8\xf0\x9f\x8f\xbd"), QStringLiteral(":cartwheel_tone3:"), Emoji::Group::Activity },
+	{ QString::fromUtf8("\xf0\x9f\xa4\xb8\xf0\x9f\x8f\xbe"), QStringLiteral(":cartwheel_tone4:"), Emoji::Group::Activity },
+	{ QString::fromUtf8("\xf0\x9f\xa4\xb8\xf0\x9f\x8f\xbf"), QStringLiteral(":cartwheel_tone5:"), Emoji::Group::Activity },
+	{ QString::fromUtf8("\xf0\x9f\xa4\xbc"), QStringLiteral(":wrestlers:"), Emoji::Group::Activity },
+	{ QString::fromUtf8("\xf0\x9f\xa4\xbc\xf0\x9f\x8f\xbb"), QStringLiteral(":wrestlers_tone1:"), Emoji::Group::Activity },
+	{ QString::fromUtf8("\xf0\x9f\xa4\xbc\xf0\x9f\x8f\xbc"), QStringLiteral(":wrestlers_tone2:"), Emoji::Group::Activity },
+	{ QString::fromUtf8("\xf0\x9f\xa4\xbc\xf0\x9f\x8f\xbd"), QStringLiteral(":wrestlers_tone3:"), Emoji::Group::Activity },
+	{ QString::fromUtf8("\xf0\x9f\xa4\xbc\xf0\x9f\x8f\xbe"), QStringLiteral(":wrestlers_tone4:"), Emoji::Group::Activity },
+	{ QString::fromUtf8("\xf0\x9f\xa4\xbc\xf0\x9f\x8f\xbf"), QStringLiteral(":wrestlers_tone5:"), Emoji::Group::Activity },
+	{ QString::fromUtf8("\xf0\x9f\xa4\xbd"), QStringLiteral(":water_polo:"), Emoji::Group::Activity },
+	{ QString::fromUtf8("\xf0\x9f\xa4\xbd\xf0\x9f\x8f\xbb"), QStringLiteral(":water_polo_tone1:"), Emoji::Group::Activity },
+	{ QString::fromUtf8("\xf0\x9f\xa4\xbd\xf0\x9f\x8f\xbc"), QStringLiteral(":water_polo_tone2:"), Emoji::Group::Activity },
+	{ QString::fromUtf8("\xf0\x9f\xa4\xbd\xf0\x9f\x8f\xbd"), QStringLiteral(":water_polo_tone3:"), Emoji::Group::Activity },
+	{ QString::fromUtf8("\xf0\x9f\xa4\xbd\xf0\x9f\x8f\xbe"), QStringLiteral(":water_polo_tone4:"), Emoji::Group::Activity },
+	{ QString::fromUtf8("\xf0\x9f\xa4\xbd\xf0\x9f\x8f\xbf"), QStringLiteral(":water_polo_tone5:"), Emoji::Group::Activity },
+	{ QString::fromUtf8("\xf0\x9f\xa4\xbe"), QStringLiteral(":handball:"), Emoji::Group::Activity },
+	{ QString::fromUtf8("\xf0\x9f\xa4\xbe\xf0\x9f\x8f\xbb"), QStringLiteral(":handball_tone1:"), Emoji::Group::Activity },
+	{ QString::fromUtf8("\xf0\x9f\xa4\xbe\xf0\x9f\x8f\xbc"), QStringLiteral(":handball_tone2:"), Emoji::Group::Activity },
+	{ QString::fromUtf8("\xf0\x9f\xa4\xbe\xf0\x9f\x8f\xbd"), QStringLiteral(":handball_tone3:"), Emoji::Group::Activity },
+	{ QString::fromUtf8("\xf0\x9f\xa4\xbe\xf0\x9f\x8f\xbe"), QStringLiteral(":handball_tone4:"), Emoji::Group::Activity },
+	{ QString::fromUtf8("\xf0\x9f\xa4\xbe\xf0\x9f\x8f\xbf"), QStringLiteral(":handball_tone5:"), Emoji::Group::Activity },
+	{ QString::fromUtf8("\xf0\x9f\xa4\xb9"), QStringLiteral(":juggling:"), Emoji::Group::Activity },
+	{ QString::fromUtf8("\xf0\x9f\xa4\xb9\xf0\x9f\x8f\xbb"), QStringLiteral(":juggling_tone1:"), Emoji::Group::Activity },
+	{ QString::fromUtf8("\xf0\x9f\xa4\xb9\xf0\x9f\x8f\xbc"), QStringLiteral(":juggling_tone2:"), Emoji::Group::Activity },
+	{ QString::fromUtf8("\xf0\x9f\xa4\xb9\xf0\x9f\x8f\xbd"), QStringLiteral(":juggling_tone3:"), Emoji::Group::Activity },
+	{ QString::fromUtf8("\xf0\x9f\xa4\xb9\xf0\x9f\x8f\xbe"), QStringLiteral(":juggling_tone4:"), Emoji::Group::Activity },
+	{ QString::fromUtf8("\xf0\x9f\xa4\xb9\xf0\x9f\x8f\xbf"), QStringLiteral(":juggling_tone5:"), Emoji::Group::Activity },
+	{ QString::fromUtf8("\xf0\x9f\x8e\xaa"), QStringLiteral(":circus_tent:"), Emoji::Group::Activity },
+	{ QString::fromUtf8("\xf0\x9f\x8e\xad"), QStringLiteral(":performing_arts:"), Emoji::Group::Activity },
+	{ QString::fromUtf8("\xf0\x9f\x8e\xa8"), QStringLiteral(":art:"), Emoji::Group::Activity },
+	{ QString::fromUtf8("\xf0\x9f\x8e\xb0"), QStringLiteral(":slot_machine:"), Emoji::Group::Activity },
+	{ QString::fromUtf8("\xf0\x9f\x9b\x80"), QStringLiteral(":bath:"), Emoji::Group::Activity },
+	{ QString::fromUtf8("\xf0\x9f\x9b\x80\xf0\x9f\x8f\xbb"), QStringLiteral(":bath_tone1:"), Emoji::Group::Activity },
+	{ QString::fromUtf8("\xf0\x9f\x9b\x80\xf0\x9f\x8f\xbc"), QStringLiteral(":bath_tone2:"), Emoji::Group::Activity },
+	{ QString::fromUtf8("\xf0\x9f\x9b\x80\xf0\x9f\x8f\xbd"), QStringLiteral(":bath_tone3:"), Emoji::Group::Activity },
+	{ QString::fromUtf8("\xf0\x9f\x9b\x80\xf0\x9f\x8f\xbe"), QStringLiteral(":bath_tone4:"), Emoji::Group::Activity },
+	{ QString::fromUtf8("\xf0\x9f\x9b\x80\xf0\x9f\x8f\xbf"), QStringLiteral(":bath_tone5:"), Emoji::Group::Activity },
+	{ QString::fromUtf8("\xf0\x9f\x8e\x97"), QStringLiteral(":reminder_ribbon:"), Emoji::Group::Activity },
+	{ QString::fromUtf8("\xf0\x9f\x8e\x9f"), QStringLiteral(":tickets:"), Emoji::Group::Activity },
+	{ QString::fromUtf8("\xf0\x9f\x8e\xab"), QStringLiteral(":ticket:"), Emoji::Group::Activity },
+	{ QString::fromUtf8("\xf0\x9f\x8e\x96"), QStringLiteral(":military_medal:"), Emoji::Group::Activity },
+	{ QString::fromUtf8("\xf0\x9f\x8f\x86"), QStringLiteral(":trophy:"), Emoji::Group::Activity },
+	{ QString::fromUtf8("\xf0\x9f\x8f\x85"), QStringLiteral(":medal:"), Emoji::Group::Activity },
+	{ QString::fromUtf8("\xf0\x9f\xa5\x87"), QStringLiteral(":first_place:"), Emoji::Group::Activity },
+	{ QString::fromUtf8("\xf0\x9f\xa5\x88"), QStringLiteral(":second_place:"), Emoji::Group::Activity },
+	{ QString::fromUtf8("\xf0\x9f\xa5\x89"), QStringLiteral(":third_place:"), Emoji::Group::Activity },
+	{ QString::fromUtf8("\xe2\x9a\xbd"), QStringLiteral(":soccer:"), Emoji::Group::Activity },
+	{ QString::fromUtf8("\xe2\x9a\xbe"), QStringLiteral(":baseball:"), Emoji::Group::Activity },
+	{ QString::fromUtf8("\xf0\x9f\x8f\x80"), QStringLiteral(":basketball:"), Emoji::Group::Activity },
+	{ QString::fromUtf8("\xf0\x9f\x8f\x90"), QStringLiteral(":volleyball:"), Emoji::Group::Activity },
+	{ QString::fromUtf8("\xf0\x9f\x8f\x88"), QStringLiteral(":football:"), Emoji::Group::Activity },
+	{ QString::fromUtf8("\xf0\x9f\x8f\x89"), QStringLiteral(":rugby_football:"), Emoji::Group::Activity },
+	{ QString::fromUtf8("\xf0\x9f\x8e\xbe"), QStringLiteral(":tennis:"), Emoji::Group::Activity },
+	{ QString::fromUtf8("\xf0\x9f\x8e\xb1"), QStringLiteral(":8ball:"), Emoji::Group::Activity },
+	{ QString::fromUtf8("\xf0\x9f\x8e\xb3"), QStringLiteral(":bowling:"), Emoji::Group::Activity },
+	{ QString::fromUtf8("\xf0\x9f\x8f\x8f"), QStringLiteral(":cricket:"), Emoji::Group::Activity },
+	{ QString::fromUtf8("\xf0\x9f\x8f\x91"), QStringLiteral(":field_hockey:"), Emoji::Group::Activity },
+	{ QString::fromUtf8("\xf0\x9f\x8f\x92"), QStringLiteral(":hockey:"), Emoji::Group::Activity },
+	{ QString::fromUtf8("\xf0\x9f\x8f\x93"), QStringLiteral(":ping_pong:"), Emoji::Group::Activity },
+	{ QString::fromUtf8("\xf0\x9f\x8f\xb8"), QStringLiteral(":badminton:"), Emoji::Group::Activity },
+	{ QString::fromUtf8("\xf0\x9f\xa5\x8a"), QStringLiteral(":boxing_glove:"), Emoji::Group::Activity },
+	{ QString::fromUtf8("\xf0\x9f\xa5\x8b"), QStringLiteral(":martial_arts_uniform:"), Emoji::Group::Activity },
+	{ QString::fromUtf8("\xf0\x9f\xa5\x85"), QStringLiteral(":goal:"), Emoji::Group::Activity },
+	{ QString::fromUtf8("\xf0\x9f\x8e\xaf"), QStringLiteral(":dart:"), Emoji::Group::Activity },
+	{ QString::fromUtf8("\xe2\x9b\xb3"), QStringLiteral(":golf:"), Emoji::Group::Activity },
+	{ QString::fromUtf8("\xe2\x9b\xb8"), QStringLiteral(":ice_skate:"), Emoji::Group::Activity },
+	{ QString::fromUtf8("\xf0\x9f\x8e\xa3"), QStringLiteral(":fishing_pole_and_fish:"), Emoji::Group::Activity },
+	{ QString::fromUtf8("\xf0\x9f\x8e\xbd"), QStringLiteral(":running_shirt_with_sash:"), Emoji::Group::Activity },
+	{ QString::fromUtf8("\xf0\x9f\x8e\xbf"), QStringLiteral(":ski:"), Emoji::Group::Activity },
+	{ QString::fromUtf8("\xf0\x9f\x8e\xae"), QStringLiteral(":video_game:"), Emoji::Group::Activity },
+	{ QString::fromUtf8("\xf0\x9f\x8e\xb2"), QStringLiteral(":game_die:"), Emoji::Group::Activity },
+	{ QString::fromUtf8("\xf0\x9f\x8e\xbc"), QStringLiteral(":musical_score:"), Emoji::Group::Activity },
+	{ QString::fromUtf8("\xf0\x9f\x8e\xa4"), QStringLiteral(":microphone:"), Emoji::Group::Activity },
+	{ QString::fromUtf8("\xf0\x9f\x8e\xa7"), QStringLiteral(":headphones:"), Emoji::Group::Activity },
+	{ QString::fromUtf8("\xf0\x9f\x8e\xb7"), QStringLiteral(":saxophone:"), Emoji::Group::Activity },
+	{ QString::fromUtf8("\xf0\x9f\x8e\xb8"), QStringLiteral(":guitar:"), Emoji::Group::Activity },
+	{ QString::fromUtf8("\xf0\x9f\x8e\xb9"), QStringLiteral(":musical_keyboard:"), Emoji::Group::Activity },
+	{ QString::fromUtf8("\xf0\x9f\x8e\xba"), QStringLiteral(":trumpet:"), Emoji::Group::Activity },
+	{ QString::fromUtf8("\xf0\x9f\x8e\xbb"), QStringLiteral(":violin:"), Emoji::Group::Activity },
+	{ QString::fromUtf8("\xf0\x9f\xa5\x81"), QStringLiteral(":drum:"), Emoji::Group::Activity },
+	{ QString::fromUtf8("\xf0\x9f\x8e\xac"), QStringLiteral(":clapper:"), Emoji::Group::Activity },
+	{ QString::fromUtf8("\xf0\x9f\x8f\xb9"), QStringLiteral(":bow_and_arrow:"), Emoji::Group::Activity },
+	// Travel
+	{ QString::fromUtf8("\xf0\x9f\x8f\x8e"), QStringLiteral(":race_car:"), Emoji::Group::Travel },
+	{ QString::fromUtf8("\xf0\x9f\x8f\x8d"), QStringLiteral(":motorcycle:"), Emoji::Group::Travel },
+	{ QString::fromUtf8("\xf0\x9f\x97\xbe"), QStringLiteral(":japan:"), Emoji::Group::Travel },
+	{ QString::fromUtf8("\xf0\x9f\x8f\x94"), QStringLiteral(":mountain_snow:"), Emoji::Group::Travel },
+	{ QString::fromUtf8("\xe2\x9b\xb0"), QStringLiteral(":mountain:"), Emoji::Group::Travel },
+	{ QString::fromUtf8("\xf0\x9f\x8c\x8b"), QStringLiteral(":volcano:"), Emoji::Group::Travel },
+	{ QString::fromUtf8("\xf0\x9f\x97\xbb"), QStringLiteral(":mount_fuji:"), Emoji::Group::Travel },
+	{ QString::fromUtf8("\xf0\x9f\x8f\x95"), QStringLiteral(":camping:"), Emoji::Group::Travel },
+	{ QString::fromUtf8("\xf0\x9f\x8f\x96"), QStringLiteral(":beach:"), Emoji::Group::Travel },
+	{ QString::fromUtf8("\xf0\x9f\x8f\x9c"), QStringLiteral(":desert:"), Emoji::Group::Travel },
+	{ QString::fromUtf8("\xf0\x9f\x8f\x9d"), QStringLiteral(":island:"), Emoji::Group::Travel },
+	{ QString::fromUtf8("\xf0\x9f\x8f\x9e"), QStringLiteral(":park:"), Emoji::Group::Travel },
+	{ QString::fromUtf8("\xf0\x9f\x8f\x9f"), QStringLiteral(":stadium:"), Emoji::Group::Travel },
+	{ QString::fromUtf8("\xf0\x9f\x8f\x9b"), QStringLiteral(":classical_building:"), Emoji::Group::Travel },
+	{ QString::fromUtf8("\xf0\x9f\x8f\x97"), QStringLiteral(":construction_site:"), Emoji::Group::Travel },
+	{ QString::fromUtf8("\xf0\x9f\x8f\x98"), QStringLiteral(":homes:"), Emoji::Group::Travel },
+	{ QString::fromUtf8("\xf0\x9f\x8f\x99"), QStringLiteral(":cityscape:"), Emoji::Group::Travel },
+	{ QString::fromUtf8("\xf0\x9f\x8f\x9a"), QStringLiteral(":house_abandoned:"), Emoji::Group::Travel },
+	{ QString::fromUtf8("\xf0\x9f\x8f\xa0"), QStringLiteral(":house:"), Emoji::Group::Travel },
+	{ QString::fromUtf8("\xf0\x9f\x8f\xa1"), QStringLiteral(":house_with_garden:"), Emoji::Group::Travel },
+	{ QString::fromUtf8("\xf0\x9f\x8f\xa2"), QStringLiteral(":office:"), Emoji::Group::Travel },
+	{ QString::fromUtf8("\xf0\x9f\x8f\xa3"), QStringLiteral(":post_office:"), Emoji::Group::Travel },
+	{ QString::fromUtf8("\xf0\x9f\x8f\xa4"), QStringLiteral(":european_post_office:"), Emoji::Group::Travel },
+	{ QString::fromUtf8("\xf0\x9f\x8f\xa5"), QStringLiteral(":hospital:"), Emoji::Group::Travel },
+	{ QString::fromUtf8("\xf0\x9f\x8f\xa6"), QStringLiteral(":bank:"), Emoji::Group::Travel },
+	{ QString::fromUtf8("\xf0\x9f\x8f\xa8"), QStringLiteral(":hotel:"), Emoji::Group::Travel },
+	{ QString::fromUtf8("\xf0\x9f\x8f\xa9"), QStringLiteral(":love_hotel:"), Emoji::Group::Travel },
+	{ QString::fromUtf8("\xf0\x9f\x8f\xaa"), QStringLiteral(":convenience_store:"), Emoji::Group::Travel },
+	{ QString::fromUtf8("\xf0\x9f\x8f\xab"), QStringLiteral(":school:"), Emoji::Group::Travel },
+	{ QString::fromUtf8("\xf0\x9f\x8f\xac"), QStringLiteral(":department_store:"), Emoji::Group::Travel },
+	{ QString::fromUtf8("\xf0\x9f\x8f\xad"), QStringLiteral(":factory:"), Emoji::Group::Travel },
+	{ QString::fromUtf8("\xf0\x9f\x8f\xaf"), QStringLiteral(":japanese_castle:"), Emoji::Group::Travel },
+	{ QString::fromUtf8("\xf0\x9f\x8f\xb0"), QStringLiteral(":european_castle:"), Emoji::Group::Travel },
+	{ QString::fromUtf8("\xf0\x9f\x92\x92"), QStringLiteral(":wedding:"), Emoji::Group::Travel },
+	{ QString::fromUtf8("\xf0\x9f\x97\xbc"), QStringLiteral(":tokyo_tower:"), Emoji::Group::Travel },
+	{ QString::fromUtf8("\xf0\x9f\x97\xbd"), QStringLiteral(":statue_of_liberty:"), Emoji::Group::Travel },
+	{ QString::fromUtf8("\xe2\x9b\xaa"), QStringLiteral(":church:"), Emoji::Group::Travel },
+	{ QString::fromUtf8("\xf0\x9f\x95\x8c"), QStringLiteral(":mosque:"), Emoji::Group::Travel },
+	{ QString::fromUtf8("\xf0\x9f\x95\x8d"), QStringLiteral(":synagogue:"), Emoji::Group::Travel },
+	{ QString::fromUtf8("\xe2\x9b\xa9"), QStringLiteral(":shinto_shrine:"), Emoji::Group::Travel },
+	{ QString::fromUtf8("\xf0\x9f\x95\x8b"), QStringLiteral(":kaaba:"), Emoji::Group::Travel },
+	{ QString::fromUtf8("\xe2\x9b\xb2"), QStringLiteral(":fountain:"), Emoji::Group::Travel },
+	{ QString::fromUtf8("\xe2\x9b\xba"), QStringLiteral(":tent:"), Emoji::Group::Travel },
+	{ QString::fromUtf8("\xf0\x9f\x8c\x81"), QStringLiteral(":foggy:"), Emoji::Group::Travel },
+	{ QString::fromUtf8("\xf0\x9f\x8c\x83"), QStringLiteral(":night_with_stars:"), Emoji::Group::Travel },
+	{ QString::fromUtf8("\xf0\x9f\x8c\x84"), QStringLiteral(":sunrise_over_mountains:"), Emoji::Group::Travel },
+	{ QString::fromUtf8("\xf0\x9f\x8c\x85"), QStringLiteral(":sunrise:"), Emoji::Group::Travel },
+	{ QString::fromUtf8("\xf0\x9f\x8c\x86"), QStringLiteral(":city_dusk:"), Emoji::Group::Travel },
+	{ QString::fromUtf8("\xf0\x9f\x8c\x87"), QStringLiteral(":city_sunset:"), Emoji::Group::Travel },
+	{ QString::fromUtf8("\xf0\x9f\x8c\x89"), QStringLiteral(":bridge_at_night:"), Emoji::Group::Travel },
+	{ QString::fromUtf8("\xf0\x9f\x8c\x8c"), QStringLiteral(":milky_way:"), Emoji::Group::Travel },
+	{ QString::fromUtf8("\xf0\x9f\x8e\xa0"), QStringLiteral(":carousel_horse:"), Emoji::Group::Travel },
+	{ QString::fromUtf8("\xf0\x9f\x8e\xa1"), QStringLiteral(":ferris_wheel:"), Emoji::Group::Travel },
+	{ QString::fromUtf8("\xf0\x9f\x8e\xa2"), QStringLiteral(":roller_coaster:"), Emoji::Group::Travel },
+	{ QString::fromUtf8("\xf0\x9f\x9a\x82"), QStringLiteral(":steam_locomotive:"), Emoji::Group::Travel },
+	{ QString::fromUtf8("\xf0\x9f\x9a\x83"), QStringLiteral(":railway_car:"), Emoji::Group::Travel },
+	{ QString::fromUtf8("\xf0\x9f\x9a\x84"), QStringLiteral(":bullettrain_side:"), Emoji::Group::Travel },
+	{ QString::fromUtf8("\xf0\x9f\x9a\x85"), QStringLiteral(":bullettrain_front:"), Emoji::Group::Travel },
+	{ QString::fromUtf8("\xf0\x9f\x9a\x86"), QStringLiteral(":train2:"), Emoji::Group::Travel },
+	{ QString::fromUtf8("\xf0\x9f\x9a\x87"), QStringLiteral(":metro:"), Emoji::Group::Travel },
+	{ QString::fromUtf8("\xf0\x9f\x9a\x88"), QStringLiteral(":light_rail:"), Emoji::Group::Travel },
+	{ QString::fromUtf8("\xf0\x9f\x9a\x89"), QStringLiteral(":station:"), Emoji::Group::Travel },
+	{ QString::fromUtf8("\xf0\x9f\x9a\x8a"), QStringLiteral(":tram:"), Emoji::Group::Travel },
+	{ QString::fromUtf8("\xf0\x9f\x9a\x9d"), QStringLiteral(":monorail:"), Emoji::Group::Travel },
+	{ QString::fromUtf8("\xf0\x9f\x9a\x9e"), QStringLiteral(":mountain_railway:"), Emoji::Group::Travel },
+	{ QString::fromUtf8("\xf0\x9f\x9a\x8b"), QStringLiteral(":train:"), Emoji::Group::Travel },
+	{ QString::fromUtf8("\xf0\x9f\x9a\x8c"), QStringLiteral(":bus:"), Emoji::Group::Travel },
+	{ QString::fromUtf8("\xf0\x9f\x9a\x8d"), QStringLiteral(":oncoming_bus:"), Emoji::Group::Travel },
+	{ QString::fromUtf8("\xf0\x9f\x9a\x8e"), QStringLiteral(":trolleybus:"), Emoji::Group::Travel },
+	{ QString::fromUtf8("\xf0\x9f\x9a\x90"), QStringLiteral(":minibus:"), Emoji::Group::Travel },
+	{ QString::fromUtf8("\xf0\x9f\x9a\x91"), QStringLiteral(":ambulance:"), Emoji::Group::Travel },
+	{ QString::fromUtf8("\xf0\x9f\x9a\x92"), QStringLiteral(":fire_engine:"), Emoji::Group::Travel },
+	{ QString::fromUtf8("\xf0\x9f\x9a\x93"), QStringLiteral(":police_car:"), Emoji::Group::Travel },
+	{ QString::fromUtf8("\xf0\x9f\x9a\x94"), QStringLiteral(":oncoming_police_car:"), Emoji::Group::Travel },
+	{ QString::fromUtf8("\xf0\x9f\x9a\x95"), QStringLiteral(":taxi:"), Emoji::Group::Travel },
+	{ QString::fromUtf8("\xf0\x9f\x9a\x96"), QStringLiteral(":oncoming_taxi:"), Emoji::Group::Travel },
+	{ QString::fromUtf8("\xf0\x9f\x9a\x97"), QStringLiteral(":red_car:"), Emoji::Group::Travel },
+	{ QString::fromUtf8("\xf0\x9f\x9a\x98"), QStringLiteral(":oncoming_automobile:"), Emoji::Group::Travel },
+	{ QString::fromUtf8("\xf0\x9f\x9a\x99"), QStringLiteral(":blue_car:"), Emoji::Group::Travel },
+	{ QString::fromUtf8("\xf0\x9f\x9a\x9a"), QStringLiteral(":truck:"), Emoji::Group::Travel },
+	{ QString::fromUtf8("\xf0\x9f\x9a\x9b"), QStringLiteral(":articulated_lorry:"), Emoji::Group::Travel },
+	{ QString::fromUtf8("\xf0\x9f\x9a\x9c"), QStringLiteral(":tractor:"), Emoji::Group::Travel },
+	{ QString::fromUtf8("\xf0\x9f\x9a\xb2"), QStringLiteral(":bike:"), Emoji::Group::Travel },
+	{ QString::fromUtf8("\xf0\x9f\x9b\xb4"), QStringLiteral(":scooter:"), Emoji::Group::Travel },
+	{ QString::fromUtf8("\xf0\x9f\x9b\xb5"), QStringLiteral(":motor_scooter:"), Emoji::Group::Travel },
+	{ QString::fromUtf8("\xf0\x9f\x9a\x8f"), QStringLiteral(":busstop:"), Emoji::Group::Travel },
+	{ QString::fromUtf8("\xf0\x9f\x9b\xa3"), QStringLiteral(":motorway:"), Emoji::Group::Travel },
+	{ QString::fromUtf8("\xf0\x9f\x9b\xa4"), QStringLiteral(":railway_track:"), Emoji::Group::Travel },
+	{ QString::fromUtf8("\xe2\x9b\xbd"), QStringLiteral(":fuelpump:"), Emoji::Group::Travel },
+	{ QString::fromUtf8("\xf0\x9f\x9a\xa8"), QStringLiteral(":rotating_light:"), Emoji::Group::Travel },
+	{ QString::fromUtf8("\xf0\x9f\x9a\xa5"), QStringLiteral(":traffic_light:"), Emoji::Group::Travel },
+	{ QString::fromUtf8("\xf0\x9f\x9a\xa6"), QStringLiteral(":vertical_traffic_light:"), Emoji::Group::Travel },
+	{ QString::fromUtf8("\xf0\x9f\x9a\xa7"), QStringLiteral(":construction:"), Emoji::Group::Travel },
+	{ QString::fromUtf8("\xe2\x9a\x93"), QStringLiteral(":anchor:"), Emoji::Group::Travel },
+	{ QString::fromUtf8("\xe2\x9b\xb5"), QStringLiteral(":sailboat:"), Emoji::Group::Travel },
+	{ QString::fromUtf8("\xf0\x9f\x9b\xb6"), QStringLiteral(":canoe:"), Emoji::Group::Travel },
+	{ QString::fromUtf8("\xf0\x9f\x9a\xa4"), QStringLiteral(":speedboat:"), Emoji::Group::Travel },
+	{ QString::fromUtf8("\xf0\x9f\x9b\xb3"), QStringLiteral(":cruise_ship:"), Emoji::Group::Travel },
+	{ QString::fromUtf8("\xe2\x9b\xb4"), QStringLiteral(":ferry:"), Emoji::Group::Travel },
+	{ QString::fromUtf8("\xf0\x9f\x9b\xa5"), QStringLiteral(":motorboat:"), Emoji::Group::Travel },
+	{ QString::fromUtf8("\xf0\x9f\x9a\xa2"), QStringLiteral(":ship:"), Emoji::Group::Travel },
+	{ QString::fromUtf8("\xe2\x9c\x88"), QStringLiteral(":airplane:"), Emoji::Group::Travel },
+	{ QString::fromUtf8("\xf0\x9f\x9b\xa9"), QStringLiteral(":airplane_small:"), Emoji::Group::Travel },
+	{ QString::fromUtf8("\xf0\x9f\x9b\xab"), QStringLiteral(":airplane_departure:"), Emoji::Group::Travel },
+	{ QString::fromUtf8("\xf0\x9f\x9b\xac"), QStringLiteral(":airplane_arriving:"), Emoji::Group::Travel },
+	{ QString::fromUtf8("\xf0\x9f\x92\xba"), QStringLiteral(":seat:"), Emoji::Group::Travel },
+	{ QString::fromUtf8("\xf0\x9f\x9a\x81"), QStringLiteral(":helicopter:"), Emoji::Group::Travel },
+	{ QString::fromUtf8("\xf0\x9f\x9a\x9f"), QStringLiteral(":suspension_railway:"), Emoji::Group::Travel },
+	{ QString::fromUtf8("\xf0\x9f\x9a\xa0"), QStringLiteral(":mountain_cableway:"), Emoji::Group::Travel },
+	{ QString::fromUtf8("\xf0\x9f\x9a\xa1"), QStringLiteral(":aerial_tramway:"), Emoji::Group::Travel },
+	{ QString::fromUtf8("\xf0\x9f\x9a\x80"), QStringLiteral(":rocket:"), Emoji::Group::Travel },
+	{ QString::fromUtf8("\xf0\x9f\x9b\xb0"), QStringLiteral(":satellite_orbital:"), Emoji::Group::Travel },
+	{ QString::fromUtf8("\xf0\x9f\x8c\xa0"), QStringLiteral(":stars:"), Emoji::Group::Travel },
+	{ QString::fromUtf8("\xf0\x9f\x8c\x88"), QStringLiteral(":rainbow:"), Emoji::Group::Travel },
+	{ QString::fromUtf8("\xf0\x9f\x8e\x86"), QStringLiteral(":fireworks:"), Emoji::Group::Travel },
+	{ QString::fromUtf8("\xf0\x9f\x8e\x87"), QStringLiteral(":sparkler:"), Emoji::Group::Travel },
+	{ QString::fromUtf8("\xf0\x9f\x8e\x91"), QStringLiteral(":rice_scene:"), Emoji::Group::Travel },
+	{ QString::fromUtf8("\xf0\x9f\x8f\x81"), QStringLiteral(":checkered_flag:"), Emoji::Group::Travel },
+	// Objects
+	{ QString::fromUtf8("\xe2\x98\xa0"), QStringLiteral(":skull_crossbones:"), Emoji::Group::Objects },
+	{ QString::fromUtf8("\xf0\x9f\x92\x8c"), QStringLiteral(":love_letter:"), Emoji::Group::Objects },
+	{ QString::fromUtf8("\xf0\x9f\x92\xa3"), QStringLiteral(":bomb:"), Emoji::Group::Objects },
+	{ QString::fromUtf8("\xf0\x9f\x95\xb3"), QStringLiteral(":hole:"), Emoji::Group::Objects },
+	{ QString::fromUtf8("\xf0\x9f\x9b\x8d"), QStringLiteral(":shopping_bags:"), Emoji::Group::Objects },
+	{ QString::fromUtf8("\xf0\x9f\x93\xbf"), QStringLiteral(":prayer_beads:"), Emoji::Group::Objects },
+	{ QString::fromUtf8("\xf0\x9f\x92\x8e"), QStringLiteral(":gem:"), Emoji::Group::Objects },
+	{ QString::fromUtf8("\xf0\x9f\x94\xaa"), QStringLiteral(":knife:"), Emoji::Group::Objects },
+	{ QString::fromUtf8("\xf0\x9f\x8f\xba"), QStringLiteral(":amphora:"), Emoji::Group::Objects },
+	{ QString::fromUtf8("\xf0\x9f\x97\xba"), QStringLiteral(":map:"), Emoji::Group::Objects },
+	{ QString::fromUtf8("\xf0\x9f\x92\x88"), QStringLiteral(":barber:"), Emoji::Group::Objects },
+	{ QString::fromUtf8("\xf0\x9f\x96\xbc"), QStringLiteral(":frame_photo:"), Emoji::Group::Objects },
+	{ QString::fromUtf8("\xf0\x9f\x9b\x8e"), QStringLiteral(":bellhop:"), Emoji::Group::Objects },
+	{ QString::fromUtf8("\xf0\x9f\x9a\xaa"), QStringLiteral(":door:"), Emoji::Group::Objects },
+	{ QString::fromUtf8("\xf0\x9f\x9b\x8c"), QStringLiteral(":sleeping_accommodation:"), Emoji::Group::Objects },
+	{ QString::fromUtf8("\xf0\x9f\x9b\x8f"), QStringLiteral(":bed:"), Emoji::Group::Objects },
+	{ QString::fromUtf8("\xf0\x9f\x9b\x8b"), QStringLiteral(":couch:"), Emoji::Group::Objects },
+	{ QString::fromUtf8("\xf0\x9f\x9a\xbd"), QStringLiteral(":toilet:"), Emoji::Group::Objects },
+	{ QString::fromUtf8("\xf0\x9f\x9a\xbf"), QStringLiteral(":shower:"), Emoji::Group::Objects },
+	{ QString::fromUtf8("\xf0\x9f\x9b\x81"), QStringLiteral(":bathtub:"), Emoji::Group::Objects },
+	{ QString::fromUtf8("\xe2\x8c\x9b"), QStringLiteral(":hourglass:"), Emoji::Group::Objects },
+	{ QString::fromUtf8("\xe2\x8f\xb3"), QStringLiteral(":hourglass_flowing_sand:"), Emoji::Group::Objects },
+	{ QString::fromUtf8("\xe2\x8c\x9a"), QStringLiteral(":watch:"), Emoji::Group::Objects },
+	{ QString::fromUtf8("\xe2\x8f\xb0"), QStringLiteral(":alarm_clock:"), Emoji::Group::Objects },
+	{ QString::fromUtf8("\xe2\x8f\xb1"), QStringLiteral(":stopwatch:"), Emoji::Group::Objects },
+	{ QString::fromUtf8("\xe2\x8f\xb2"), QStringLiteral(":timer:"), Emoji::Group::Objects },
+	{ QString::fromUtf8("\xf0\x9f\x95\xb0"), QStringLiteral(":clock:"), Emoji::Group::Objects },
+	{ QString::fromUtf8("\xf0\x9f\x8c\xa1"), QStringLiteral(":thermometer:"), Emoji::Group::Objects },
+	{ QString::fromUtf8("\xe2\x9b\xb1"), QStringLiteral(":beach_umbrella:"), Emoji::Group::Objects },
+	{ QString::fromUtf8("\xf0\x9f\x8e\x88"), QStringLiteral(":balloon:"), Emoji::Group::Objects },
+	{ QString::fromUtf8("\xf0\x9f\x8e\x89"), QStringLiteral(":tada:"), Emoji::Group::Objects },
+	{ QString::fromUtf8("\xf0\x9f\x8e\x8a"), QStringLiteral(":confetti_ball:"), Emoji::Group::Objects },
+	{ QString::fromUtf8("\xf0\x9f\x8e\x8e"), QStringLiteral(":dolls:"), Emoji::Group::Objects },
+	{ QString::fromUtf8("\xf0\x9f\x8e\x8f"), QStringLiteral(":flags:"), Emoji::Group::Objects },
+	{ QString::fromUtf8("\xf0\x9f\x8e\x90"), QStringLiteral(":wind_chime:"), Emoji::Group::Objects },
+	{ QString::fromUtf8("\xf0\x9f\x8e\x80"), QStringLiteral(":ribbon:"), Emoji::Group::Objects },
+	{ QString::fromUtf8("\xf0\x9f\x8e\x81"), QStringLiteral(":gift:"), Emoji::Group::Objects },
+	{ QString::fromUtf8("\xf0\x9f\x95\xb9"), QStringLiteral(":joystick:"), Emoji::Group::Objects },
+	{ QString::fromUtf8("\xf0\x9f\x93\xaf"), QStringLiteral(":postal_horn:"), Emoji::Group::Objects },
+	{ QString::fromUtf8("\xf0\x9f\x8e\x99"), QStringLiteral(":microphone2:"), Emoji::Group::Objects },
+	{ QString::fromUtf8("\xf0\x9f\x8e\x9a"), QStringLiteral(":level_slider:"), Emoji::Group::Objects },
+	{ QString::fromUtf8("\xf0\x9f\x8e\x9b"), QStringLiteral(":control_knobs:"), Emoji::Group::Objects },
+	{ QString::fromUtf8("\xf0\x9f\x93\xbb"), QStringLiteral(":radio:"), Emoji::Group::Objects },
+	{ QString::fromUtf8("\xf0\x9f\x93\xb1"), QStringLiteral(":iphone:"), Emoji::Group::Objects },
+	{ QString::fromUtf8("\xf0\x9f\x93\xb2"), QStringLiteral(":calling:"), Emoji::Group::Objects },
+	{ QString::fromUtf8("\xe2\x98\x8e"), QStringLiteral(":telephone:"), Emoji::Group::Objects },
+	{ QString::fromUtf8("\xf0\x9f\x93\x9e"), QStringLiteral(":telephone_receiver:"), Emoji::Group::Objects },
+	{ QString::fromUtf8("\xf0\x9f\x93\x9f"), QStringLiteral(":pager:"), Emoji::Group::Objects },
+	{ QString::fromUtf8("\xf0\x9f\x93\xa0"), QStringLiteral(":fax:"), Emoji::Group::Objects },
+	{ QString::fromUtf8("\xf0\x9f\x94\x8b"), QStringLiteral(":battery:"), Emoji::Group::Objects },
+	{ QString::fromUtf8("\xf0\x9f\x94\x8c"), QStringLiteral(":electric_plug:"), Emoji::Group::Objects },
+	{ QString::fromUtf8("\xf0\x9f\x92\xbb"), QStringLiteral(":computer:"), Emoji::Group::Objects },
+	{ QString::fromUtf8("\xf0\x9f\x96\xa5"), QStringLiteral(":desktop:"), Emoji::Group::Objects },
+	{ QString::fromUtf8("\xf0\x9f\x96\xa8"), QStringLiteral(":printer:"), Emoji::Group::Objects },
+	{ QString::fromUtf8("\xe2\x8c\xa8"), QStringLiteral(":keyboard:"), Emoji::Group::Objects },
+	{ QString::fromUtf8("\xf0\x9f\x96\xb1"), QStringLiteral(":mouse_three_button:"), Emoji::Group::Objects },
+	{ QString::fromUtf8("\xf0\x9f\x96\xb2"), QStringLiteral(":trackball:"), Emoji::Group::Objects },
+	{ QString::fromUtf8("\xf0\x9f\x92\xbd"), QStringLiteral(":minidisc:"), Emoji::Group::Objects },
+	{ QString::fromUtf8("\xf0\x9f\x92\xbe"), QStringLiteral(":floppy_disk:"), Emoji::Group::Objects },
+	{ QString::fromUtf8("\xf0\x9f\x92\xbf"), QStringLiteral(":cd:"), Emoji::Group::Objects },
+	{ QString::fromUtf8("\xf0\x9f\x93\x80"), QStringLiteral(":dvd:"), Emoji::Group::Objects },
+	{ QString::fromUtf8("\xf0\x9f\x8e\xa5"), QStringLiteral(":movie_camera:"), Emoji::Group::Objects },
+	{ QString::fromUtf8("\xf0\x9f\x8e\x9e"), QStringLiteral(":film_frames:"), Emoji::Group::Objects },
+	{ QString::fromUtf8("\xf0\x9f\x93\xbd"), QStringLiteral(":projector:"), Emoji::Group::Objects },
+	{ QString::fromUtf8("\xf0\x9f\x93\xba"), QStringLiteral(":tv:"), Emoji::Group::Objects },
+	{ QString::fromUtf8("\xf0\x9f\x93\xb7"), QStringLiteral(":camera:"), Emoji::Group::Objects },
+	{ QString::fromUtf8("\xf0\x9f\x93\xb8"), QStringLiteral(":camera_with_flash:"), Emoji::Group::Objects },
+	{ QString::fromUtf8("\xf0\x9f\x93\xb9"), QStringLiteral(":video_camera:"), Emoji::Group::Objects },
+	{ QString::fromUtf8("\xf0\x9f\x93\xbc"), QStringLiteral(":vhs:"), Emoji::Group::Objects },
+	{ QString::fromUtf8("\xf0\x9f\x94\x8d"), QStringLiteral(":mag:"), Emoji::Group::Objects },
+	{ QString::fromUtf8("\xf0\x9f\x94\x8e"), QStringLiteral(":mag_right:"), Emoji::Group::Objects },
+	{ QString::fromUtf8("\xf0\x9f\x94\xac"), QStringLiteral(":microscope:"), Emoji::Group::Objects },
+	{ QString::fromUtf8("\xf0\x9f\x94\xad"), QStringLiteral(":telescope:"), Emoji::Group::Objects },
+	{ QString::fromUtf8("\xf0\x9f\x93\xa1"), QStringLiteral(":satellite:"), Emoji::Group::Objects },
+	{ QString::fromUtf8("\xf0\x9f\x95\xaf"), QStringLiteral(":candle:"), Emoji::Group::Objects },
+	{ QString::fromUtf8("\xf0\x9f\x92\xa1"), QStringLiteral(":bulb:"), Emoji::Group::Objects },
+	{ QString::fromUtf8("\xf0\x9f\x94\xa6"), QStringLiteral(":flashlight:"), Emoji::Group::Objects },
+	{ QString::fromUtf8("\xf0\x9f\x8f\xae"), QStringLiteral(":izakaya_lantern:"), Emoji::Group::Objects },
+	{ QString::fromUtf8("\xf0\x9f\x93\x94"), QStringLiteral(":notebook_with_decorative_cover:"), Emoji::Group::Objects },
+	{ QString::fromUtf8("\xf0\x9f\x93\x95"), QStringLiteral(":closed_book:"), Emoji::Group::Objects },
+	{ QString::fromUtf8("\xf0\x9f\x93\x96"), QStringLiteral(":book:"), Emoji::Group::Objects },
+	{ QString::fromUtf8("\xf0\x9f\x93\x97"), QStringLiteral(":green_book:"), Emoji::Group::Objects },
+	{ QString::fromUtf8("\xf0\x9f\x93\x98"), QStringLiteral(":blue_book:"), Emoji::Group::Objects },
+	{ QString::fromUtf8("\xf0\x9f\x93\x99"), QStringLiteral(":orange_book:"), Emoji::Group::Objects },
+	{ QString::fromUtf8("\xf0\x9f\x93\x9a"), QStringLiteral(":books:"), Emoji::Group::Objects },
+	{ QString::fromUtf8("\xf0\x9f\x93\x93"), QStringLiteral(":notebook:"), Emoji::Group::Objects },
+	{ QString::fromUtf8("\xf0\x9f\x93\x92"), QStringLiteral(":ledger:"), Emoji::Group::Objects },
+	{ QString::fromUtf8("\xf0\x9f\x93\x83"), QStringLiteral(":page_with_curl:"), Emoji::Group::Objects },
+	{ QString::fromUtf8("\xf0\x9f\x93\x9c"), QStringLiteral(":scroll:"), Emoji::Group::Objects },
+	{ QString::fromUtf8("\xf0\x9f\x93\x84"), QStringLiteral(":page_facing_up:"), Emoji::Group::Objects },
+	{ QString::fromUtf8("\xf0\x9f\x93\xb0"), QStringLiteral(":newspaper:"), Emoji::Group::Objects },
+	{ QString::fromUtf8("\xf0\x9f\x97\x9e"), QStringLiteral(":newspaper2:"), Emoji::Group::Objects },
+	{ QString::fromUtf8("\xf0\x9f\x93\x91"), QStringLiteral(":bookmark_tabs:"), Emoji::Group::Objects },
+	{ QString::fromUtf8("\xf0\x9f\x94\x96"), QStringLiteral(":bookmark:"), Emoji::Group::Objects },
+	{ QString::fromUtf8("\xf0\x9f\x8f\xb7"), QStringLiteral(":label:"), Emoji::Group::Objects },
+	{ QString::fromUtf8("\xf0\x9f\x92\xb0"), QStringLiteral(":moneybag:"), Emoji::Group::Objects },
+	{ QString::fromUtf8("\xf0\x9f\x92\xb4"), QStringLiteral(":yen:"), Emoji::Group::Objects },
+	{ QString::fromUtf8("\xf0\x9f\x92\xb5"), QStringLiteral(":dollar:"), Emoji::Group::Objects },
+	{ QString::fromUtf8("\xf0\x9f\x92\xb6"), QStringLiteral(":euro:"), Emoji::Group::Objects },
+	{ QString::fromUtf8("\xf0\x9f\x92\xb7"), QStringLiteral(":pound:"), Emoji::Group::Objects },
+	{ QString::fromUtf8("\xf0\x9f\x92\xb8"), QStringLiteral(":money_with_wings:"), Emoji::Group::Objects },
+	{ QString::fromUtf8("\xf0\x9f\x92\xb3"), QStringLiteral(":credit_card:"), Emoji::Group::Objects },
+	{ QString::fromUtf8("\xe2\x9c\x89"), QStringLiteral(":envelope:"), Emoji::Group::Objects },
+	{ QString::fromUtf8("\xf0\x9f\x93\xa7"), QStringLiteral(":e-mail:"), Emoji::Group::Objects },
+	{ QString::fromUtf8("\xf0\x9f\x93\xa8"), QStringLiteral(":incoming_envelope:"), Emoji::Group::Objects },
+	{ QString::fromUtf8("\xf0\x9f\x93\xa9"), QStringLiteral(":envelope_with_arrow:"), Emoji::Group::Objects },
+	{ QString::fromUtf8("\xf0\x9f\x93\xa4"), QStringLiteral(":outbox_tray:"), Emoji::Group::Objects },
+	{ QString::fromUtf8("\xf0\x9f\x93\xa5"), QStringLiteral(":inbox_tray:"), Emoji::Group::Objects },
+	{ QString::fromUtf8("\xf0\x9f\x93\xa6"), QStringLiteral(":package:"), Emoji::Group::Objects },
+	{ QString::fromUtf8("\xf0\x9f\x93\xab"), QStringLiteral(":mailbox:"), Emoji::Group::Objects },
+	{ QString::fromUtf8("\xf0\x9f\x93\xaa"), QStringLiteral(":mailbox_closed:"), Emoji::Group::Objects },
+	{ QString::fromUtf8("\xf0\x9f\x93\xac"), QStringLiteral(":mailbox_with_mail:"), Emoji::Group::Objects },
+	{ QString::fromUtf8("\xf0\x9f\x93\xad"), QStringLiteral(":mailbox_with_no_mail:"), Emoji::Group::Objects },
+	{ QString::fromUtf8("\xf0\x9f\x93\xae"), QStringLiteral(":postbox:"), Emoji::Group::Objects },
+	{ QString::fromUtf8("\xf0\x9f\x97\xb3"), QStringLiteral(":ballot_box:"), Emoji::Group::Objects },
+	{ QString::fromUtf8("\xe2\x9c\x8f"), QStringLiteral(":pencil2:"), Emoji::Group::Objects },
+	{ QString::fromUtf8("\xe2\x9c\x92"), QStringLiteral(":black_nib:"), Emoji::Group::Objects },
+	{ QString::fromUtf8("\xf0\x9f\x96\x8b"), QStringLiteral(":pen_fountain:"), Emoji::Group::Objects },
+	{ QString::fromUtf8("\xf0\x9f\x96\x8a"), QStringLiteral(":pen_ballpoint:"), Emoji::Group::Objects },
+	{ QString::fromUtf8("\xf0\x9f\x96\x8c"), QStringLiteral(":paintbrush:"), Emoji::Group::Objects },
+	{ QString::fromUtf8("\xf0\x9f\x96\x8d"), QStringLiteral(":crayon:"), Emoji::Group::Objects },
+	{ QString::fromUtf8("\xf0\x9f\x93\x9d"), QStringLiteral(":pencil:"), Emoji::Group::Objects },
+	{ QString::fromUtf8("\xf0\x9f\x93\x81"), QStringLiteral(":file_folder:"), Emoji::Group::Objects },
+	{ QString::fromUtf8("\xf0\x9f\x93\x82"), QStringLiteral(":open_file_folder:"), Emoji::Group::Objects },
+	{ QString::fromUtf8("\xf0\x9f\x97\x82"), QStringLiteral(":dividers:"), Emoji::Group::Objects },
+	{ QString::fromUtf8("\xf0\x9f\x93\x85"), QStringLiteral(":date:"), Emoji::Group::Objects },
+	{ QString::fromUtf8("\xf0\x9f\x93\x86"), QStringLiteral(":calendar:"), Emoji::Group::Objects },
+	{ QString::fromUtf8("\xf0\x9f\x97\x92"), QStringLiteral(":notepad_spiral:"), Emoji::Group::Objects },
+	{ QString::fromUtf8("\xf0\x9f\x97\x93"), QStringLiteral(":calendar_spiral:"), Emoji::Group::Objects },
+	{ QString::fromUtf8("\xf0\x9f\x93\x87"), QStringLiteral(":card_index:"), Emoji::Group::Objects },
+	{ QString::fromUtf8("\xf0\x9f\x93\x88"), QStringLiteral(":chart_with_upwards_trend:"), Emoji::Group::Objects },
+	{ QString::fromUtf8("\xf0\x9f\x93\x89"), QStringLiteral(":chart_with_downwards_trend:"), Emoji::Group::Objects },
+	{ QString::fromUtf8("\xf0\x9f\x93\x8a"), QStringLiteral(":bar_chart:"), Emoji::Group::Objects },
+	{ QString::fromUtf8("\xf0\x9f\x93\x8b"), QStringLiteral(":clipboard:"), Emoji::Group::Objects },
+	{ QString::fromUtf8("\xf0\x9f\x93\x8c"), QStringLiteral(":pushpin:"), Emoji::Group::Objects },
+	{ QString::fromUtf8("\xf0\x9f\x93\x8d"), QStringLiteral(":round_pushpin:"), Emoji::Group::Objects },
+	{ QString::fromUtf8("\xf0\x9f\x93\x8e"), QStringLiteral(":paperclip:"), Emoji::Group::Objects },
+	{ QString::fromUtf8("\xf0\x9f\x96\x87"), QStringLiteral(":paperclips:"), Emoji::Group::Objects },
+	{ QString::fromUtf8("\xf0\x9f\x93\x8f"), QStringLiteral(":straight_ruler:"), Emoji::Group::Objects },
+	{ QString::fromUtf8("\xf0\x9f\x93\x90"), QStringLiteral(":triangular_ruler:"), Emoji::Group::Objects },
+	{ QString::fromUtf8("\xe2\x9c\x82"), QStringLiteral(":scissors:"), Emoji::Group::Objects },
+	{ QString::fromUtf8("\xf0\x9f\x97\x83"), QStringLiteral(":card_box:"), Emoji::Group::Objects },
+	{ QString::fromUtf8("\xf0\x9f\x97\x84"), QStringLiteral(":file_cabinet:"), Emoji::Group::Objects },
+	{ QString::fromUtf8("\xf0\x9f\x97\x91"), QStringLiteral(":wastebasket:"), Emoji::Group::Objects },
+	{ QString::fromUtf8("\xf0\x9f\x94\x92"), QStringLiteral(":lock:"), Emoji::Group::Objects },
+	{ QString::fromUtf8("\xf0\x9f\x94\x93"), QStringLiteral(":unlock:"), Emoji::Group::Objects },
+	{ QString::fromUtf8("\xf0\x9f\x94\x8f"), QStringLiteral(":lock_with_ink_pen:"), Emoji::Group::Objects },
+	{ QString::fromUtf8("\xf0\x9f\x94\x90"), QStringLiteral(":closed_lock_with_key:"), Emoji::Group::Objects },
+	{ QString::fromUtf8("\xf0\x9f\x94\x91"), QStringLiteral(":key:"), Emoji::Group::Objects },
+	{ QString::fromUtf8("\xf0\x9f\x97\x9d"), QStringLiteral(":key2:"), Emoji::Group::Objects },
+	{ QString::fromUtf8("\xf0\x9f\x94\xa8"), QStringLiteral(":hammer:"), Emoji::Group::Objects },
+	{ QString::fromUtf8("\xe2\x9b\x8f"), QStringLiteral(":pick:"), Emoji::Group::Objects },
+	{ QString::fromUtf8("\xe2\x9a\x92"), QStringLiteral(":hammer_pick:"), Emoji::Group::Objects },
+	{ QString::fromUtf8("\xf0\x9f\x9b\xa0"), QStringLiteral(":tools:"), Emoji::Group::Objects },
+	{ QString::fromUtf8("\xf0\x9f\x97\xa1"), QStringLiteral(":dagger:"), Emoji::Group::Objects },
+	{ QString::fromUtf8("\xe2\x9a\x94"), QStringLiteral(":crossed_swords:"), Emoji::Group::Objects },
+	{ QString::fromUtf8("\xf0\x9f\x94\xab"), QStringLiteral(":gun:"), Emoji::Group::Objects },
+	{ QString::fromUtf8("\xf0\x9f\x9b\xa1"), QStringLiteral(":shield:"), Emoji::Group::Objects },
+	{ QString::fromUtf8("\xf0\x9f\x94\xa7"), QStringLiteral(":wrench:"), Emoji::Group::Objects },
+	{ QString::fromUtf8("\xf0\x9f\x94\xa9"), QStringLiteral(":nut_and_bolt:"), Emoji::Group::Objects },
+	{ QString::fromUtf8("\xe2\x9a\x99"), QStringLiteral(":gear:"), Emoji::Group::Objects },
+	{ QString::fromUtf8("\xf0\x9f\x97\x9c"), QStringLiteral(":compression:"), Emoji::Group::Objects },
+	{ QString::fromUtf8("\xe2\x9a\x97"), QStringLiteral(":alembic:"), Emoji::Group::Objects },
+	{ QString::fromUtf8("\xe2\x9a\x96"), QStringLiteral(":scales:"), Emoji::Group::Objects },
+	{ QString::fromUtf8("\xf0\x9f\x94\x97"), QStringLiteral(":link:"), Emoji::Group::Objects },
+	{ QString::fromUtf8("\xe2\x9b\x93"), QStringLiteral(":chains:"), Emoji::Group::Objects },
+	{ QString::fromUtf8("\xf0\x9f\x92\x89"), QStringLiteral(":syringe:"), Emoji::Group::Objects },
+	{ QString::fromUtf8("\xf0\x9f\x92\x8a"), QStringLiteral(":pill:"), Emoji::Group::Objects },
+	{ QString::fromUtf8("\xf0\x9f\x9a\xac"), QStringLiteral(":smoking:"), Emoji::Group::Objects },
+	{ QString::fromUtf8("\xe2\x9a\xb0"), QStringLiteral(":coffin:"), Emoji::Group::Objects },
+	{ QString::fromUtf8("\xe2\x9a\xb1"), QStringLiteral(":urn:"), Emoji::Group::Objects },
+	{ QString::fromUtf8("\xf0\x9f\x97\xbf"), QStringLiteral(":moyai:"), Emoji::Group::Objects },
+	{ QString::fromUtf8("\xf0\x9f\x9b\xa2"), QStringLiteral(":oil:"), Emoji::Group::Objects },
+	{ QString::fromUtf8("\xf0\x9f\x94\xae"), QStringLiteral(":crystal_ball:"), Emoji::Group::Objects },
+	{ QString::fromUtf8("\xf0\x9f\x9b\x92"), QStringLiteral(":shopping_cart:"), Emoji::Group::Objects },
+	{ QString::fromUtf8("\xf0\x9f\x9a\xa9"), QStringLiteral(":triangular_flag_on_post:"), Emoji::Group::Objects },
+	{ QString::fromUtf8("\xf0\x9f\x8e\x8c"), QStringLiteral(":crossed_flags:"), Emoji::Group::Objects },
+	{ QString::fromUtf8("\xf0\x9f\x8f\xb4"), QStringLiteral(":flag_black:"), Emoji::Group::Objects },
+	{ QString::fromUtf8("\xf0\x9f\x8f\xb3"), QStringLiteral(":flag_white:"), Emoji::Group::Objects },
+	{ QString::fromUtf8("\xf0\x9f\x8f\xb3\xf0\x9f\x8c\x88"), QStringLiteral(":rainbow_flag:"), Emoji::Group::Objects },
+	// Symbols
+	{ QString::fromUtf8("\xf0\x9f\x91\x81\xf0\x9f\x97\xa8"), QStringLiteral(":eye_in_speech_bubble:"), Emoji::Group::Symbols },
+	{ QString::fromUtf8("\xf0\x9f\x92\x98"), QStringLiteral(":cupid:"), Emoji::Group::Symbols },
+	{ QString::fromUtf8("\xe2\x9d\xa4"), QStringLiteral(":heart:"), Emoji::Group::Symbols },
+	{ QString::fromUtf8("\xf0\x9f\x92\x93"), QStringLiteral(":heartbeat:"), Emoji::Group::Symbols },
+	{ QString::fromUtf8("\xf0\x9f\x92\x94"), QStringLiteral(":broken_heart:"), Emoji::Group::Symbols },
+	{ QString::fromUtf8("\xf0\x9f\x92\x95"), QStringLiteral(":two_hearts:"), Emoji::Group::Symbols },
+	{ QString::fromUtf8("\xf0\x9f\x92\x96"), QStringLiteral(":sparkling_heart:"), Emoji::Group::Symbols },
+	{ QString::fromUtf8("\xf0\x9f\x92\x97"), QStringLiteral(":heartpulse:"), Emoji::Group::Symbols },
+	{ QString::fromUtf8("\xf0\x9f\x92\x99"), QStringLiteral(":blue_heart:"), Emoji::Group::Symbols },
+	{ QString::fromUtf8("\xf0\x9f\x92\x9a"), QStringLiteral(":green_heart:"), Emoji::Group::Symbols },
+	{ QString::fromUtf8("\xf0\x9f\x92\x9b"), QStringLiteral(":yellow_heart:"), Emoji::Group::Symbols },
+	{ QString::fromUtf8("\xf0\x9f\x92\x9c"), QStringLiteral(":purple_heart:"), Emoji::Group::Symbols },
+	{ QString::fromUtf8("\xf0\x9f\x96\xa4"), QStringLiteral(":black_heart:"), Emoji::Group::Symbols },
+	{ QString::fromUtf8("\xf0\x9f\x92\x9d"), QStringLiteral(":gift_heart:"), Emoji::Group::Symbols },
+	{ QString::fromUtf8("\xf0\x9f\x92\x9e"), QStringLiteral(":revolving_hearts:"), Emoji::Group::Symbols },
+	{ QString::fromUtf8("\xf0\x9f\x92\x9f"), QStringLiteral(":heart_decoration:"), Emoji::Group::Symbols },
+	{ QString::fromUtf8("\xe2\x9d\xa3"), QStringLiteral(":heart_exclamation:"), Emoji::Group::Symbols },
+	{ QString::fromUtf8("\xf0\x9f\x92\xa2"), QStringLiteral(":anger:"), Emoji::Group::Symbols },
+	{ QString::fromUtf8("\xf0\x9f\x92\xa5"), QStringLiteral(":boom:"), Emoji::Group::Symbols },
+	{ QString::fromUtf8("\xf0\x9f\x92\xab"), QStringLiteral(":dizzy:"), Emoji::Group::Symbols },
+	{ QString::fromUtf8("\xf0\x9f\x92\xac"), QStringLiteral(":speech_balloon:"), Emoji::Group::Symbols },
+	{ QString::fromUtf8("\xf0\x9f\x97\xa8"), QStringLiteral(":speech_left:"), Emoji::Group::Symbols },
+	{ QString::fromUtf8("\xf0\x9f\x97\xaf"), QStringLiteral(":anger_right:"), Emoji::Group::Symbols },
+	{ QString::fromUtf8("\xf0\x9f\x92\xad"), QStringLiteral(":thought_balloon:"), Emoji::Group::Symbols },
+	{ QString::fromUtf8("\xf0\x9f\x92\xae"), QStringLiteral(":white_flower:"), Emoji::Group::Symbols },
+	{ QString::fromUtf8("\xf0\x9f\x8c\x90"), QStringLiteral(":globe_with_meridians:"), Emoji::Group::Symbols },
+	{ QString::fromUtf8("\xe2\x99\xa8"), QStringLiteral(":hotsprings:"), Emoji::Group::Symbols },
+	{ QString::fromUtf8("\xf0\x9f\x9b\x91"), QStringLiteral(":octagonal_sign:"), Emoji::Group::Symbols },
+	{ QString::fromUtf8("\xf0\x9f\x95\x9b"), QStringLiteral(":clock12:"), Emoji::Group::Symbols },
+	{ QString::fromUtf8("\xf0\x9f\x95\xa7"), QStringLiteral(":clock1230:"), Emoji::Group::Symbols },
+	{ QString::fromUtf8("\xf0\x9f\x95\x90"), QStringLiteral(":clock1:"), Emoji::Group::Symbols },
+	{ QString::fromUtf8("\xf0\x9f\x95\x9c"), QStringLiteral(":clock130:"), Emoji::Group::Symbols },
+	{ QString::fromUtf8("\xf0\x9f\x95\x91"), QStringLiteral(":clock2:"), Emoji::Group::Symbols },
+	{ QString::fromUtf8("\xf0\x9f\x95\x9d"), QStringLiteral(":clock230:"), Emoji::Group::Symbols },
+	{ QString::fromUtf8("\xf0\x9f\x95\x92"), QStringLiteral(":clock3:"), Emoji::Group::Symbols },
+	{ QString::fromUtf8("\xf0\x9f\x95\x9e"), QStringLiteral(":clock330:"), Emoji::Group::Symbols },
+	{ QString::fromUtf8("\xf0\x9f\x95\x93"), QStringLiteral(":clock4:"), Emoji::Group::Symbols },
+	{ QString::fromUtf8("\xf0\x9f\x95\x9f"), QStringLiteral(":clock430:"), Emoji::Group::Symbols },
+	{ QString::fromUtf8("\xf0\x9f\x95\x94"), QStringLiteral(":clock5:"), Emoji::Group::Symbols },
+	{ QString::fromUtf8("\xf0\x9f\x95\xa0"), QStringLiteral(":clock530:"), Emoji::Group::Symbols },
+	{ QString::fromUtf8("\xf0\x9f\x95\x95"), QStringLiteral(":clock6:"), Emoji::Group::Symbols },
+	{ QString::fromUtf8("\xf0\x9f\x95\xa1"), QStringLiteral(":clock630:"), Emoji::Group::Symbols },
+	{ QString::fromUtf8("\xf0\x9f\x95\x96"), QStringLiteral(":clock7:"), Emoji::Group::Symbols },
+	{ QString::fromUtf8("\xf0\x9f\x95\xa2"), QStringLiteral(":clock730:"), Emoji::Group::Symbols },
+	{ QString::fromUtf8("\xf0\x9f\x95\x97"), QStringLiteral(":clock8:"), Emoji::Group::Symbols },
+	{ QString::fromUtf8("\xf0\x9f\x95\xa3"), QStringLiteral(":clock830:"), Emoji::Group::Symbols },
+	{ QString::fromUtf8("\xf0\x9f\x95\x98"), QStringLiteral(":clock9:"), Emoji::Group::Symbols },
+	{ QString::fromUtf8("\xf0\x9f\x95\xa4"), QStringLiteral(":clock930:"), Emoji::Group::Symbols },
+	{ QString::fromUtf8("\xf0\x9f\x95\x99"), QStringLiteral(":clock10:"), Emoji::Group::Symbols },
+	{ QString::fromUtf8("\xf0\x9f\x95\xa5"), QStringLiteral(":clock1030:"), Emoji::Group::Symbols },
+	{ QString::fromUtf8("\xf0\x9f\x95\x9a"), QStringLiteral(":clock11:"), Emoji::Group::Symbols },
+	{ QString::fromUtf8("\xf0\x9f\x95\xa6"), QStringLiteral(":clock1130:"), Emoji::Group::Symbols },
+	{ QString::fromUtf8("\xf0\x9f\x8c\x80"), QStringLiteral(":cyclone:"), Emoji::Group::Symbols },
+	{ QString::fromUtf8("\xe2\x99\xa0"), QStringLiteral(":spades:"), Emoji::Group::Symbols },
+	{ QString::fromUtf8("\xe2\x99\xa5"), QStringLiteral(":hearts:"), Emoji::Group::Symbols },
+	{ QString::fromUtf8("\xe2\x99\xa6"), QStringLiteral(":diamonds:"), Emoji::Group::Symbols },
+	{ QString::fromUtf8("\xe2\x99\xa3"), QStringLiteral(":clubs:"), Emoji::Group::Symbols },
+	{ QString::fromUtf8("\xf0\x9f\x83\x8f"), QStringLiteral(":black_joker:"), Emoji::Group::Symbols },
+	{ QString::fromUtf8("\xf0\x9f\x80\x84"), QStringLiteral(":mahjong:"), Emoji::Group::Symbols },
+	{ QString::fromUtf8("\xf0\x9f\x8e\xb4"), QStringLiteral(":flower_playing_cards:"), Emoji::Group::Symbols },
+	{ QString::fromUtf8("\xf0\x9f\x94\x87"), QStringLiteral(":mute:"), Emoji::Group::Symbols },
+	{ QString::fromUtf8("\xf0\x9f\x94\x88"), QStringLiteral(":speaker:"), Emoji::Group::Symbols },
+	{ QString::fromUtf8("\xf0\x9f\x94\x89"), QStringLiteral(":sound:"), Emoji::Group::Symbols },
+	{ QString::fromUtf8("\xf0\x9f\x94\x8a"), QStringLiteral(":loud_sound:"), Emoji::Group::Symbols },
+	{ QString::fromUtf8("\xf0\x9f\x93\xa2"), QStringLiteral(":loudspeaker:"), Emoji::Group::Symbols },
+	{ QString::fromUtf8("\xf0\x9f\x93\xa3"), QStringLiteral(":mega:"), Emoji::Group::Symbols },
+	{ QString::fromUtf8("\xf0\x9f\x94\x94"), QStringLiteral(":bell:"), Emoji::Group::Symbols },
+	{ QString::fromUtf8("\xf0\x9f\x94\x95"), QStringLiteral(":no_bell:"), Emoji::Group::Symbols },
+	{ QString::fromUtf8("\xf0\x9f\x8e\xb5"), QStringLiteral(":musical_note:"), Emoji::Group::Symbols },
+	{ QString::fromUtf8("\xf0\x9f\x8e\xb6"), QStringLiteral(":notes:"), Emoji::Group::Symbols },
+	{ QString::fromUtf8("\xf0\x9f\x92\xb9"), QStringLiteral(":chart:"), Emoji::Group::Symbols },
+	{ QString::fromUtf8("\xf0\x9f\x92\xb1"), QStringLiteral(":currency_exchange:"), Emoji::Group::Symbols },
+	{ QString::fromUtf8("\xf0\x9f\x92\xb2"), QStringLiteral(":heavy_dollar_sign:"), Emoji::Group::Symbols },
+	{ QString::fromUtf8("\xf0\x9f\x8f\xa7"), QStringLiteral(":atm:"), Emoji::Group::Symbols },
+	{ QString::fromUtf8("\xf0\x9f\x9a\xae"), QStringLiteral(":put_litter_in_its_place:"), Emoji::Group::Symbols },
+	{ QString::fromUtf8("\xf0\x9f\x9a\xb0"), QStringLiteral(":potable_water:"), Emoji::Group::Symbols },
+	{ QString::fromUtf8("\xe2\x99\xbf"), QStringLiteral(":wheelchair:"), Emoji::Group::Symbols },
+	{ QString::fromUtf8("\xf0\x9f\x9a\xb9"), QStringLiteral(":mens:"), Emoji::Group::Symbols },
+	{ QString::fromUtf8("\xf0\x9f\x9a\xba"), QStringLiteral(":womens:"), Emoji::Group::Symbols },
+	{ QString::fromUtf8("\xf0\x9f\x9a\xbb"), QStringLiteral(":restroom:"), Emoji::Group::Symbols },
+	{ QString::fromUtf8("\xf0\x9f\x9a\xbc"), QStringLiteral(":baby_symbol:"), Emoji::Group::Symbols },
+	{ QString::fromUtf8("\xf0\x9f\x9a\xbe"), QStringLiteral(":wc:"), Emoji::Group::Symbols },
+	{ QString::fromUtf8("\xf0\x9f\x9b\x82"), QStringLiteral(":passport_control:"), Emoji::Group::Symbols },
+	{ QString::fromUtf8("\xf0\x9f\x9b\x83"), QStringLiteral(":customs:"), Emoji::Group::Symbols },
+	{ QString::fromUtf8("\xf0\x9f\x9b\x84"), QStringLiteral(":baggage_claim:"), Emoji::Group::Symbols },
+	{ QString::fromUtf8("\xf0\x9f\x9b\x85"), QStringLiteral(":left_luggage:"), Emoji::Group::Symbols },
+	{ QString::fromUtf8("\xe2\x9a\xa0"), QStringLiteral(":warning:"), Emoji::Group::Symbols },
+	{ QString::fromUtf8("\xf0\x9f\x9a\xb8"), QStringLiteral(":children_crossing:"), Emoji::Group::Symbols },
+	{ QString::fromUtf8("\xe2\x9b\x94"), QStringLiteral(":no_entry:"), Emoji::Group::Symbols },
+	{ QString::fromUtf8("\xf0\x9f\x9a\xab"), QStringLiteral(":no_entry_sign:"), Emoji::Group::Symbols },
+	{ QString::fromUtf8("\xf0\x9f\x9a\xb3"), QStringLiteral(":no_bicycles:"), Emoji::Group::Symbols },
+	{ QString::fromUtf8("\xf0\x9f\x9a\xad"), QStringLiteral(":no_smoking:"), Emoji::Group::Symbols },
+	{ QString::fromUtf8("\xf0\x9f\x9a\xaf"), QStringLiteral(":do_not_litter:"), Emoji::Group::Symbols },
+	{ QString::fromUtf8("\xf0\x9f\x9a\xb1"), QStringLiteral(":non-potable_water:"), Emoji::Group::Symbols },
+	{ QString::fromUtf8("\xf0\x9f\x9a\xb7"), QStringLiteral(":no_pedestrians:"), Emoji::Group::Symbols },
+	{ QString::fromUtf8("\xf0\x9f\x93\xb5"), QStringLiteral(":no_mobile_phones:"), Emoji::Group::Symbols },
+	{ QString::fromUtf8("\xf0\x9f\x94\x9e"), QStringLiteral(":underage:"), Emoji::Group::Symbols },
+	{ QString::fromUtf8("\xe2\x98\xa2"), QStringLiteral(":radioactive:"), Emoji::Group::Symbols },
+	{ QString::fromUtf8("\xe2\x98\xa3"), QStringLiteral(":biohazard:"), Emoji::Group::Symbols },
+	{ QString::fromUtf8("\xe2\xac\x86"), QStringLiteral(":arrow_up:"), Emoji::Group::Symbols },
+	{ QString::fromUtf8("\xe2\x86\x97"), QStringLiteral(":arrow_upper_right:"), Emoji::Group::Symbols },
+	{ QString::fromUtf8("\xe2\x9e\xa1"), QStringLiteral(":arrow_right:"), Emoji::Group::Symbols },
+	{ QString::fromUtf8("\xe2\x86\x98"), QStringLiteral(":arrow_lower_right:"), Emoji::Group::Symbols },
+	{ QString::fromUtf8("\xe2\xac\x87"), QStringLiteral(":arrow_down:"), Emoji::Group::Symbols },
+	{ QString::fromUtf8("\xe2\x86\x99"), QStringLiteral(":arrow_lower_left:"), Emoji::Group::Symbols },
+	{ QString::fromUtf8("\xe2\xac\x85"), QStringLiteral(":arrow_left:"), Emoji::Group::Symbols },
+	{ QString::fromUtf8("\xe2\x86\x96"), QStringLiteral(":arrow_upper_left:"), Emoji::Group::Symbols },
+	{ QString::fromUtf8("\xe2\x86\x95"), QStringLiteral(":arrow_up_down:"), Emoji::Group::Symbols },
+	{ QString::fromUtf8("\xe2\x86\x94"), QStringLiteral(":left_right_arrow:"), Emoji::Group::Symbols },
+	{ QString::fromUtf8("\xe2\x86\xa9"), QStringLiteral(":leftwards_arrow_with_hook:"), Emoji::Group::Symbols },
+	{ QString::fromUtf8("\xe2\x86\xaa"), QStringLiteral(":arrow_right_hook:"), Emoji::Group::Symbols },
+	{ QString::fromUtf8("\xe2\xa4\xb4"), QStringLiteral(":arrow_heading_up:"), Emoji::Group::Symbols },
+	{ QString::fromUtf8("\xe2\xa4\xb5"), QStringLiteral(":arrow_heading_down:"), Emoji::Group::Symbols },
+	{ QString::fromUtf8("\xf0\x9f\x94\x83"), QStringLiteral(":arrows_clockwise:"), Emoji::Group::Symbols },
+	{ QString::fromUtf8("\xf0\x9f\x94\x84"), QStringLiteral(":arrows_counterclockwise:"), Emoji::Group::Symbols },
+	{ QString::fromUtf8("\xf0\x9f\x94\x99"), QStringLiteral(":back:"), Emoji::Group::Symbols },
+	{ QString::fromUtf8("\xf0\x9f\x94\x9a"), QStringLiteral(":end:"), Emoji::Group::Symbols },
+	{ QString::fromUtf8("\xf0\x9f\x94\x9b"), QStringLiteral(":on:"), Emoji::Group::Symbols },
+	{ QString::fromUtf8("\xf0\x9f\x94\x9c"), QStringLiteral(":soon:"), Emoji::Group::Symbols },
+	{ QString::fromUtf8("\xf0\x9f\x94\x9d"), QStringLiteral(":top:"), Emoji::Group::Symbols },
+	{ QString::fromUtf8("\xf0\x9f\x9b\x90"), QStringLiteral(":place_of_worship:"), Emoji::Group::Symbols },
+	{ QString::fromUtf8("\xe2\x9a\x9b"), QStringLiteral(":atom:"), Emoji::Group::Symbols },
+	{ QString::fromUtf8("\xf0\x9f\x95\x89"), QStringLiteral(":om_symbol:"), Emoji::Group::Symbols },
+	{ QString::fromUtf8("\xe2\x9c\xa1"), QStringLiteral(":star_of_david:"), Emoji::Group::Symbols },
+	{ QString::fromUtf8("\xe2\x98\xb8"), QStringLiteral(":wheel_of_dharma:"), Emoji::Group::Symbols },
+	{ QString::fromUtf8("\xe2\x98\xaf"), QStringLiteral(":yin_yang:"), Emoji::Group::Symbols },
+	{ QString::fromUtf8("\xe2\x9c\x9d"), QStringLiteral(":cross:"), Emoji::Group::Symbols },
+	{ QString::fromUtf8("\xe2\x98\xa6"), QStringLiteral(":orthodox_cross:"), Emoji::Group::Symbols },
+	{ QString::fromUtf8("\xe2\x98\xaa"), QStringLiteral(":star_and_crescent:"), Emoji::Group::Symbols },
+	{ QString::fromUtf8("\xe2\x98\xae"), QStringLiteral(":peace:"), Emoji::Group::Symbols },
+	{ QString::fromUtf8("\xf0\x9f\x95\x8e"), QStringLiteral(":menorah:"), Emoji::Group::Symbols },
+	{ QString::fromUtf8("\xf0\x9f\x94\xaf"), QStringLiteral(":six_pointed_star:"), Emoji::Group::Symbols },
+	{ QString::fromUtf8("\xe2\x99\x88"), QStringLiteral(":aries:"), Emoji::Group::Symbols },
+	{ QString::fromUtf8("\xe2\x99\x89"), QStringLiteral(":taurus:"), Emoji::Group::Symbols },
+	{ QString::fromUtf8("\xe2\x99\x8a"), QStringLiteral(":gemini:"), Emoji::Group::Symbols },
+	{ QString::fromUtf8("\xe2\x99\x8b"), QStringLiteral(":cancer:"), Emoji::Group::Symbols },
+	{ QString::fromUtf8("\xe2\x99\x8c"), QStringLiteral(":leo:"), Emoji::Group::Symbols },
+	{ QString::fromUtf8("\xe2\x99\x8d"), QStringLiteral(":virgo:"), Emoji::Group::Symbols },
+	{ QString::fromUtf8("\xe2\x99\x8e"), QStringLiteral(":libra:"), Emoji::Group::Symbols },
+	{ QString::fromUtf8("\xe2\x99\x8f"), QStringLiteral(":scorpius:"), Emoji::Group::Symbols },
+	{ QString::fromUtf8("\xe2\x99\x90"), QStringLiteral(":sagittarius:"), Emoji::Group::Symbols },
+	{ QString::fromUtf8("\xe2\x99\x91"), QStringLiteral(":capricorn:"), Emoji::Group::Symbols },
+	{ QString::fromUtf8("\xe2\x99\x92"), QStringLiteral(":aquarius:"), Emoji::Group::Symbols },
+	{ QString::fromUtf8("\xe2\x99\x93"), QStringLiteral(":pisces:"), Emoji::Group::Symbols },
+	{ QString::fromUtf8("\xe2\x9b\x8e"), QStringLiteral(":ophiuchus:"), Emoji::Group::Symbols },
+	{ QString::fromUtf8("\xf0\x9f\x94\x80"), QStringLiteral(":twisted_rightwards_arrows:"), Emoji::Group::Symbols },
+	{ QString::fromUtf8("\xf0\x9f\x94\x81"), QStringLiteral(":repeat:"), Emoji::Group::Symbols },
+	{ QString::fromUtf8("\xf0\x9f\x94\x82"), QStringLiteral(":repeat_one:"), Emoji::Group::Symbols },
+	{ QString::fromUtf8("\xe2\x96\xb6"), QStringLiteral(":arrow_forward:"), Emoji::Group::Symbols },
+	{ QString::fromUtf8("\xe2\x8f\xa9"), QStringLiteral(":fast_forward:"), Emoji::Group::Symbols },
+	{ QString::fromUtf8("\xe2\x8f\xad"), QStringLiteral(":track_next:"), Emoji::Group::Symbols },
+	{ QString::fromUtf8("\xe2\x8f\xaf"), QStringLiteral(":play_pause:"), Emoji::Group::Symbols },
+	{ QString::fromUtf8("\xe2\x97\x80"), QStringLiteral(":arrow_backward:"), Emoji::Group::Symbols },
+	{ QString::fromUtf8("\xe2\x8f\xaa"), QStringLiteral(":rewind:"), Emoji::Group::Symbols },
+	{ QString::fromUtf8("\xe2\x8f\xae"), QStringLiteral(":track_previous:"), Emoji::Group::Symbols },
+	{ QString::fromUtf8("\xf0\x9f\x94\xbc"), QStringLiteral(":arrow_up_small:"), Emoji::Group::Symbols },
+	{ QString::fromUtf8("\xe2\x8f\xab"), QStringLiteral(":arrow_double_up:"), Emoji::Group::Symbols },
+	{ QString::fromUtf8("\xf0\x9f\x94\xbd"), QStringLiteral(":arrow_down_small:"), Emoji::Group::Symbols },
+	{ QString::fromUtf8("\xe2\x8f\xac"), QStringLiteral(":arrow_double_down:"), Emoji::Group::Symbols },
+	{ QString::fromUtf8("\xe2\x8f\xb8"), QStringLiteral(":pause_button:"), Emoji::Group::Symbols },
+	{ QString::fromUtf8("\xe2\x8f\xb9"), QStringLiteral(":stop_button:"), Emoji::Group::Symbols },
+	{ QString::fromUtf8("\xe2\x8f\xba"), QStringLiteral(":record_button:"), Emoji::Group::Symbols },
+	{ QString::fromUtf8("\xe2\x8f\x8f"), QStringLiteral(":eject:"), Emoji::Group::Symbols },
+	{ QString::fromUtf8("\xf0\x9f\x8e\xa6"), QStringLiteral(":cinema:"), Emoji::Group::Symbols },
+	{ QString::fromUtf8("\xf0\x9f\x94\x85"), QStringLiteral(":low_brightness:"), Emoji::Group::Symbols },
+	{ QString::fromUtf8("\xf0\x9f\x94\x86"), QStringLiteral(":high_brightness:"), Emoji::Group::Symbols },
+	{ QString::fromUtf8("\xf0\x9f\x93\xb6"), QStringLiteral(":signal_strength:"), Emoji::Group::Symbols },
+	{ QString::fromUtf8("\xf0\x9f\x93\xb3"), QStringLiteral(":vibration_mode:"), Emoji::Group::Symbols },
+	{ QString::fromUtf8("\xf0\x9f\x93\xb4"), QStringLiteral(":mobile_phone_off:"), Emoji::Group::Symbols },
+	{ QString::fromUtf8("\xe2\x99\xbb"), QStringLiteral(":recycle:"), Emoji::Group::Symbols },
+	{ QString::fromUtf8("\xf0\x9f\x93\x9b"), QStringLiteral(":name_badge:"), Emoji::Group::Symbols },
+	{ QString::fromUtf8("\xe2\x9a\x9c"), QStringLiteral(":fleur-de-lis:"), Emoji::Group::Symbols },
+	{ QString::fromUtf8("\xf0\x9f\x94\xb0"), QStringLiteral(":beginner:"), Emoji::Group::Symbols },
+	{ QString::fromUtf8("\xf0\x9f\x94\xb1"), QStringLiteral(":trident:"), Emoji::Group::Symbols },
+	{ QString::fromUtf8("\xe2\xad\x95"), QStringLiteral(":o:"), Emoji::Group::Symbols },
+	{ QString::fromUtf8("\xe2\x9c\x85"), QStringLiteral(":white_check_mark:"), Emoji::Group::Symbols },
+	{ QString::fromUtf8("\xe2\x98\x91"), QStringLiteral(":ballot_box_with_check:"), Emoji::Group::Symbols },
+	{ QString::fromUtf8("\xe2\x9c\x94"), QStringLiteral(":heavy_check_mark:"), Emoji::Group::Symbols },
+	{ QString::fromUtf8("\xe2\x9c\x96"), QStringLiteral(":heavy_multiplication_x:"), Emoji::Group::Symbols },
+	{ QString::fromUtf8("\xe2\x9d\x8c"), QStringLiteral(":x:"), Emoji::Group::Symbols },
+	{ QString::fromUtf8("\xe2\x9d\x8e"), QStringLiteral(":negative_squared_cross_mark:"), Emoji::Group::Symbols },
+	{ QString::fromUtf8("\xe2\x9e\x95"), QStringLiteral(":heavy_plus_sign:"), Emoji::Group::Symbols },
+	{ QString::fromUtf8("\xe2\x9e\x96"), QStringLiteral(":heavy_minus_sign:"), Emoji::Group::Symbols },
+	{ QString::fromUtf8("\xe2\x9e\x97"), QStringLiteral(":heavy_division_sign:"), Emoji::Group::Symbols },
+	{ QString::fromUtf8("\xe2\x9e\xb0"), QStringLiteral(":curly_loop:"), Emoji::Group::Symbols },
+	{ QString::fromUtf8("\xe2\x9e\xbf"), QStringLiteral(":loop:"), Emoji::Group::Symbols },
+	{ QString::fromUtf8("\xe3\x80\xbd"), QStringLiteral(":part_alternation_mark:"), Emoji::Group::Symbols },
+	{ QString::fromUtf8("\xe2\x9c\xb3"), QStringLiteral(":eight_spoked_asterisk:"), Emoji::Group::Symbols },
+	{ QString::fromUtf8("\xe2\x9c\xb4"), QStringLiteral(":eight_pointed_black_star:"), Emoji::Group::Symbols },
+	{ QString::fromUtf8("\xe2\x9d\x87"), QStringLiteral(":sparkle:"), Emoji::Group::Symbols },
+	{ QString::fromUtf8("\xe2\x80\xbc"), QStringLiteral(":bangbang:"), Emoji::Group::Symbols },
+	{ QString::fromUtf8("\xe2\x81\x89"), QStringLiteral(":interrobang:"), Emoji::Group::Symbols },
+	{ QString::fromUtf8("\xe2\x9d\x93"), QStringLiteral(":question:"), Emoji::Group::Symbols },
+	{ QString::fromUtf8("\xe2\x9d\x94"), QStringLiteral(":grey_question:"), Emoji::Group::Symbols },
+	{ QString::fromUtf8("\xe2\x9d\x95"), QStringLiteral(":grey_exclamation:"), Emoji::Group::Symbols },
+	{ QString::fromUtf8("\xe2\x9d\x97"), QStringLiteral(":exclamation:"), Emoji::Group::Symbols },
+	{ QString::fromUtf8("\xe3\x80\xb0"), QStringLiteral(":wavy_dash:"), Emoji::Group::Symbols },
+	{ QString::fromUtf8("\xc2\xa9"), QStringLiteral(":copyright:"), Emoji::Group::Symbols },
+	{ QString::fromUtf8("\xc2\xae"), QStringLiteral(":registered:"), Emoji::Group::Symbols },
+	{ QString::fromUtf8("\xe2\x84\xa2"), QStringLiteral(":tm:"), Emoji::Group::Symbols },
+	{ QString::fromUtf8("#\xe2\x83\xa3"), QStringLiteral(":hash:"), Emoji::Group::Symbols },
+	{ QString::fromUtf8("*\xe2\x83\xa3"), QStringLiteral(":asterisk:"), Emoji::Group::Symbols },
+	{ QString::fromUtf8("0\xe2\x83\xa3"), QStringLiteral(":zero:"), Emoji::Group::Symbols },
+	{ QString::fromUtf8("1\xe2\x83\xa3"), QStringLiteral(":one:"), Emoji::Group::Symbols },
+	{ QString::fromUtf8("2\xe2\x83\xa3"), QStringLiteral(":two:"), Emoji::Group::Symbols },
+	{ QString::fromUtf8("3\xe2\x83\xa3"), QStringLiteral(":three:"), Emoji::Group::Symbols },
+	{ QString::fromUtf8("4\xe2\x83\xa3"), QStringLiteral(":four:"), Emoji::Group::Symbols },
+	{ QString::fromUtf8("5\xe2\x83\xa3"), QStringLiteral(":five:"), Emoji::Group::Symbols },
+	{ QString::fromUtf8("6\xe2\x83\xa3"), QStringLiteral(":six:"), Emoji::Group::Symbols },
+	{ QString::fromUtf8("7\xe2\x83\xa3"), QStringLiteral(":seven:"), Emoji::Group::Symbols },
+	{ QString::fromUtf8("8\xe2\x83\xa3"), QStringLiteral(":eight:"), Emoji::Group::Symbols },
+	{ QString::fromUtf8("9\xe2\x83\xa3"), QStringLiteral(":nine:"), Emoji::Group::Symbols },
+	{ QString::fromUtf8("\xf0\x9f\x94\x9f"), QStringLiteral(":keycap_ten:"), Emoji::Group::Symbols },
+	{ QString::fromUtf8("\xf0\x9f\x92\xaf"), QStringLiteral(":100:"), Emoji::Group::Symbols },
+	{ QString::fromUtf8("\xf0\x9f\x94\xa0"), QStringLiteral(":capital_abcd:"), Emoji::Group::Symbols },
+	{ QString::fromUtf8("\xf0\x9f\x94\xa1"), QStringLiteral(":abcd:"), Emoji::Group::Symbols },
+	{ QString::fromUtf8("\xf0\x9f\x94\xa2"), QStringLiteral(":1234:"), Emoji::Group::Symbols },
+	{ QString::fromUtf8("\xf0\x9f\x94\xa3"), QStringLiteral(":symbols:"), Emoji::Group::Symbols },
+	{ QString::fromUtf8("\xf0\x9f\x94\xa4"), QStringLiteral(":abc:"), Emoji::Group::Symbols },
+	{ QString::fromUtf8("\xf0\x9f\x85\xb0"), QStringLiteral(":a:"), Emoji::Group::Symbols },
+	{ QString::fromUtf8("\xf0\x9f\x86\x8e"), QStringLiteral(":ab:"), Emoji::Group::Symbols },
+	{ QString::fromUtf8("\xf0\x9f\x85\xb1"), QStringLiteral(":b:"), Emoji::Group::Symbols },
+	{ QString::fromUtf8("\xf0\x9f\x86\x91"), QStringLiteral(":cl:"), Emoji::Group::Symbols },
+	{ QString::fromUtf8("\xf0\x9f\x86\x92"), QStringLiteral(":cool:"), Emoji::Group::Symbols },
+	{ QString::fromUtf8("\xf0\x9f\x86\x93"), QStringLiteral(":free:"), Emoji::Group::Symbols },
+	{ QString::fromUtf8("\xe2\x84\xb9"), QStringLiteral(":information_source:"), Emoji::Group::Symbols },
+	{ QString::fromUtf8("\xf0\x9f\x86\x94"), QStringLiteral(":id:"), Emoji::Group::Symbols },
+	{ QString::fromUtf8("\xe2\x93\x82"), QStringLiteral(":m:"), Emoji::Group::Symbols },
+	{ QString::fromUtf8("\xf0\x9f\x86\x95"), QStringLiteral(":new:"), Emoji::Group::Symbols },
+	{ QString::fromUtf8("\xf0\x9f\x86\x96"), QStringLiteral(":ng:"), Emoji::Group::Symbols },
+	{ QString::fromUtf8("\xf0\x9f\x85\xbe"), QStringLiteral(":o2:"), Emoji::Group::Symbols },
+	{ QString::fromUtf8("\xf0\x9f\x86\x97"), QStringLiteral(":ok:"), Emoji::Group::Symbols },
+	{ QString::fromUtf8("\xf0\x9f\x85\xbf"), QStringLiteral(":parking:"), Emoji::Group::Symbols },
+	{ QString::fromUtf8("\xf0\x9f\x86\x98"), QStringLiteral(":sos:"), Emoji::Group::Symbols },
+	{ QString::fromUtf8("\xf0\x9f\x86\x99"), QStringLiteral(":up:"), Emoji::Group::Symbols },
+	{ QString::fromUtf8("\xf0\x9f\x86\x9a"), QStringLiteral(":vs:"), Emoji::Group::Symbols },
+	{ QString::fromUtf8("\xf0\x9f\x88\x81"), QStringLiteral(":koko:"), Emoji::Group::Symbols },
+	{ QString::fromUtf8("\xf0\x9f\x88\x82"), QStringLiteral(":sa:"), Emoji::Group::Symbols },
+	{ QString::fromUtf8("\xf0\x9f\x88\xb7"), QStringLiteral(":u6708:"), Emoji::Group::Symbols },
+	{ QString::fromUtf8("\xf0\x9f\x88\xb6"), QStringLiteral(":u6709:"), Emoji::Group::Symbols },
+	{ QString::fromUtf8("\xf0\x9f\x88\xaf"), QStringLiteral(":u6307:"), Emoji::Group::Symbols },
+	{ QString::fromUtf8("\xf0\x9f\x89\x90"), QStringLiteral(":ideograph_advantage:"), Emoji::Group::Symbols },
+	{ QString::fromUtf8("\xf0\x9f\x88\xb9"), QStringLiteral(":u5272:"), Emoji::Group::Symbols },
+	{ QString::fromUtf8("\xf0\x9f\x88\x9a"), QStringLiteral(":u7121:"), Emoji::Group::Symbols },
+	{ QString::fromUtf8("\xf0\x9f\x88\xb2"), QStringLiteral(":u7981:"), Emoji::Group::Symbols },
+	{ QString::fromUtf8("\xf0\x9f\x89\x91"), QStringLiteral(":accept:"), Emoji::Group::Symbols },
+	{ QString::fromUtf8("\xf0\x9f\x88\xb8"), QStringLiteral(":u7533:"), Emoji::Group::Symbols },
+	{ QString::fromUtf8("\xf0\x9f\x88\xb4"), QStringLiteral(":u5408:"), Emoji::Group::Symbols },
+	{ QString::fromUtf8("\xf0\x9f\x88\xb3"), QStringLiteral(":u7a7a:"), Emoji::Group::Symbols },
+	{ QString::fromUtf8("\xe3\x8a\x97"), QStringLiteral(":congratulations:"), Emoji::Group::Symbols },
+	{ QString::fromUtf8("\xe3\x8a\x99"), QStringLiteral(":secret:"), Emoji::Group::Symbols },
+	{ QString::fromUtf8("\xf0\x9f\x88\xba"), QStringLiteral(":u55b6:"), Emoji::Group::Symbols },
+	{ QString::fromUtf8("\xf0\x9f\x88\xb5"), QStringLiteral(":u6e80:"), Emoji::Group::Symbols },
+	{ QString::fromUtf8("\xe2\x96\xaa"), QStringLiteral(":black_small_square:"), Emoji::Group::Symbols },
+	{ QString::fromUtf8("\xe2\x96\xab"), QStringLiteral(":white_small_square:"), Emoji::Group::Symbols },
+	{ QString::fromUtf8("\xe2\x97\xbb"), QStringLiteral(":white_medium_square:"), Emoji::Group::Symbols },
+	{ QString::fromUtf8("\xe2\x97\xbc"), QStringLiteral(":black_medium_square:"), Emoji::Group::Symbols },
+	{ QString::fromUtf8("\xe2\x97\xbd"), QStringLiteral(":white_medium_small_square:"), Emoji::Group::Symbols },
+	{ QString::fromUtf8("\xe2\x97\xbe"), QStringLiteral(":black_medium_small_square:"), Emoji::Group::Symbols },
+	{ QString::fromUtf8("\xe2\xac\x9b"), QStringLiteral(":black_large_square:"), Emoji::Group::Symbols },
+	{ QString::fromUtf8("\xe2\xac\x9c"), QStringLiteral(":white_large_square:"), Emoji::Group::Symbols },
+	{ QString::fromUtf8("\xf0\x9f\x94\xb6"), QStringLiteral(":large_orange_diamond:"), Emoji::Group::Symbols },
+	{ QString::fromUtf8("\xf0\x9f\x94\xb7"), QStringLiteral(":large_blue_diamond:"), Emoji::Group::Symbols },
+	{ QString::fromUtf8("\xf0\x9f\x94\xb8"), QStringLiteral(":small_orange_diamond:"), Emoji::Group::Symbols },
+	{ QString::fromUtf8("\xf0\x9f\x94\xb9"), QStringLiteral(":small_blue_diamond:"), Emoji::Group::Symbols },
+	{ QString::fromUtf8("\xf0\x9f\x94\xba"), QStringLiteral(":small_red_triangle:"), Emoji::Group::Symbols },
+	{ QString::fromUtf8("\xf0\x9f\x94\xbb"), QStringLiteral(":small_red_triangle_down:"), Emoji::Group::Symbols },
+	{ QString::fromUtf8("\xf0\x9f\x92\xa0"), QStringLiteral(":diamond_shape_with_a_dot_inside:"), Emoji::Group::Symbols },
+	{ QString::fromUtf8("\xf0\x9f\x94\x98"), QStringLiteral(":radio_button:"), Emoji::Group::Symbols },
+	{ QString::fromUtf8("\xf0\x9f\x94\xb2"), QStringLiteral(":black_square_button:"), Emoji::Group::Symbols },
+	{ QString::fromUtf8("\xf0\x9f\x94\xb3"), QStringLiteral(":white_square_button:"), Emoji::Group::Symbols },
+	{ QString::fromUtf8("\xe2\x9a\xaa"), QStringLiteral(":white_circle:"), Emoji::Group::Symbols },
+	{ QString::fromUtf8("\xe2\x9a\xab"), QStringLiteral(":black_circle:"), Emoji::Group::Symbols },
+	{ QString::fromUtf8("\xf0\x9f\x94\xb4"), QStringLiteral(":red_circle:"), Emoji::Group::Symbols },
+	{ QString::fromUtf8("\xf0\x9f\x94\xb5"), QStringLiteral(":blue_circle:"), Emoji::Group::Symbols },
+	// Flags
+	{ QString::fromUtf8("\xf0\x9f\x87\xa6\xf0\x9f\x87\xa8"), QStringLiteral(":flag_ac:"), Emoji::Group::Flags },
+	{ QString::fromUtf8("\xf0\x9f\x87\xa6\xf0\x9f\x87\xa9"), QStringLiteral(":flag_ad:"), Emoji::Group::Flags },
+	{ QString::fromUtf8("\xf0\x9f\x87\xa6\xf0\x9f\x87\xaa"), QStringLiteral(":flag_ae:"), Emoji::Group::Flags },
+	{ QString::fromUtf8("\xf0\x9f\x87\xa6\xf0\x9f\x87\xab"), QStringLiteral(":flag_af:"), Emoji::Group::Flags },
+	{ QString::fromUtf8("\xf0\x9f\x87\xa6\xf0\x9f\x87\xac"), QStringLiteral(":flag_ag:"), Emoji::Group::Flags },
+	{ QString::fromUtf8("\xf0\x9f\x87\xa6\xf0\x9f\x87\xae"), QStringLiteral(":flag_ai:"), Emoji::Group::Flags },
+	{ QString::fromUtf8("\xf0\x9f\x87\xa6\xf0\x9f\x87\xb1"), QStringLiteral(":flag_al:"), Emoji::Group::Flags },
+	{ QString::fromUtf8("\xf0\x9f\x87\xa6\xf0\x9f\x87\xb2"), QStringLiteral(":flag_am:"), Emoji::Group::Flags },
+	{ QString::fromUtf8("\xf0\x9f\x87\xa6\xf0\x9f\x87\xb4"), QStringLiteral(":flag_ao:"), Emoji::Group::Flags },
+	{ QString::fromUtf8("\xf0\x9f\x87\xa6\xf0\x9f\x87\xb6"), QStringLiteral(":flag_aq:"), Emoji::Group::Flags },
+	{ QString::fromUtf8("\xf0\x9f\x87\xa6\xf0\x9f\x87\xb7"), QStringLiteral(":flag_ar:"), Emoji::Group::Flags },
+	{ QString::fromUtf8("\xf0\x9f\x87\xa6\xf0\x9f\x87\xb8"), QStringLiteral(":flag_as:"), Emoji::Group::Flags },
+	{ QString::fromUtf8("\xf0\x9f\x87\xa6\xf0\x9f\x87\xb9"), QStringLiteral(":flag_at:"), Emoji::Group::Flags },
+	{ QString::fromUtf8("\xf0\x9f\x87\xa6\xf0\x9f\x87\xba"), QStringLiteral(":flag_au:"), Emoji::Group::Flags },
+	{ QString::fromUtf8("\xf0\x9f\x87\xa6\xf0\x9f\x87\xbc"), QStringLiteral(":flag_aw:"), Emoji::Group::Flags },
+	{ QString::fromUtf8("\xf0\x9f\x87\xa6\xf0\x9f\x87\xbd"), QStringLiteral(":flag_ax:"), Emoji::Group::Flags },
+	{ QString::fromUtf8("\xf0\x9f\x87\xa6\xf0\x9f\x87\xbf"), QStringLiteral(":flag_az:"), Emoji::Group::Flags },
+	{ QString::fromUtf8("\xf0\x9f\x87\xa7\xf0\x9f\x87\xa6"), QStringLiteral(":flag_ba:"), Emoji::Group::Flags },
+	{ QString::fromUtf8("\xf0\x9f\x87\xa7\xf0\x9f\x87\xa7"), QStringLiteral(":flag_bb:"), Emoji::Group::Flags },
+	{ QString::fromUtf8("\xf0\x9f\x87\xa7\xf0\x9f\x87\xa9"), QStringLiteral(":flag_bd:"), Emoji::Group::Flags },
+	{ QString::fromUtf8("\xf0\x9f\x87\xa7\xf0\x9f\x87\xaa"), QStringLiteral(":flag_be:"), Emoji::Group::Flags },
+	{ QString::fromUtf8("\xf0\x9f\x87\xa7\xf0\x9f\x87\xab"), QStringLiteral(":flag_bf:"), Emoji::Group::Flags },
+	{ QString::fromUtf8("\xf0\x9f\x87\xa7\xf0\x9f\x87\xac"), QStringLiteral(":flag_bg:"), Emoji::Group::Flags },
+	{ QString::fromUtf8("\xf0\x9f\x87\xa7\xf0\x9f\x87\xad"), QStringLiteral(":flag_bh:"), Emoji::Group::Flags },
+	{ QString::fromUtf8("\xf0\x9f\x87\xa7\xf0\x9f\x87\xae"), QStringLiteral(":flag_bi:"), Emoji::Group::Flags },
+	{ QString::fromUtf8("\xf0\x9f\x87\xa7\xf0\x9f\x87\xaf"), QStringLiteral(":flag_bj:"), Emoji::Group::Flags },
+	{ QString::fromUtf8("\xf0\x9f\x87\xa7\xf0\x9f\x87\xb1"), QStringLiteral(":flag_bl:"), Emoji::Group::Flags },
+	{ QString::fromUtf8("\xf0\x9f\x87\xa7\xf0\x9f\x87\xb2"), QStringLiteral(":flag_bm:"), Emoji::Group::Flags },
+	{ QString::fromUtf8("\xf0\x9f\x87\xa7\xf0\x9f\x87\xb3"), QStringLiteral(":flag_bn:"), Emoji::Group::Flags },
+	{ QString::fromUtf8("\xf0\x9f\x87\xa7\xf0\x9f\x87\xb4"), QStringLiteral(":flag_bo:"), Emoji::Group::Flags },
+	{ QString::fromUtf8("\xf0\x9f\x87\xa7\xf0\x9f\x87\xb6"), QStringLiteral(":flag_bq:"), Emoji::Group::Flags },
+	{ QString::fromUtf8("\xf0\x9f\x87\xa7\xf0\x9f\x87\xb7"), QStringLiteral(":flag_br:"), Emoji::Group::Flags },
+	{ QString::fromUtf8("\xf0\x9f\x87\xa7\xf0\x9f\x87\xb8"), QStringLiteral(":flag_bs:"), Emoji::Group::Flags },
+	{ QString::fromUtf8("\xf0\x9f\x87\xa7\xf0\x9f\x87\xb9"), QStringLiteral(":flag_bt:"), Emoji::Group::Flags },
+	{ QString::fromUtf8("\xf0\x9f\x87\xa7\xf0\x9f\x87\xbb"), QStringLiteral(":flag_bv:"), Emoji::Group::Flags },
+	{ QString::fromUtf8("\xf0\x9f\x87\xa7\xf0\x9f\x87\xbc"), QStringLiteral(":flag_bw:"), Emoji::Group::Flags },
+	{ QString::fromUtf8("\xf0\x9f\x87\xa7\xf0\x9f\x87\xbe"), QStringLiteral(":flag_by:"), Emoji::Group::Flags },
+	{ QString::fromUtf8("\xf0\x9f\x87\xa7\xf0\x9f\x87\xbf"), QStringLiteral(":flag_bz:"), Emoji::Group::Flags },
+	{ QString::fromUtf8("\xf0\x9f\x87\xa8\xf0\x9f\x87\xa6"), QStringLiteral(":flag_ca:"), Emoji::Group::Flags },
+	{ QString::fromUtf8("\xf0\x9f\x87\xa8\xf0\x9f\x87\xa8"), QStringLiteral(":flag_cc:"), Emoji::Group::Flags },
+	{ QString::fromUtf8("\xf0\x9f\x87\xa8\xf0\x9f\x87\xa9"), QStringLiteral(":flag_cd:"), Emoji::Group::Flags },
+	{ QString::fromUtf8("\xf0\x9f\x87\xa8\xf0\x9f\x87\xab"), QStringLiteral(":flag_cf:"), Emoji::Group::Flags },
+	{ QString::fromUtf8("\xf0\x9f\x87\xa8\xf0\x9f\x87\xac"), QStringLiteral(":flag_cg:"), Emoji::Group::Flags },
+	{ QString::fromUtf8("\xf0\x9f\x87\xa8\xf0\x9f\x87\xad"), QStringLiteral(":flag_ch:"), Emoji::Group::Flags },
+	{ QString::fromUtf8("\xf0\x9f\x87\xa8\xf0\x9f\x87\xae"), QStringLiteral(":flag_ci:"), Emoji::Group::Flags },
+	{ QString::fromUtf8("\xf0\x9f\x87\xa8\xf0\x9f\x87\xb0"), QStringLiteral(":flag_ck:"), Emoji::Group::Flags },
+	{ QString::fromUtf8("\xf0\x9f\x87\xa8\xf0\x9f\x87\xb1"), QStringLiteral(":flag_cl:"), Emoji::Group::Flags },
+	{ QString::fromUtf8("\xf0\x9f\x87\xa8\xf0\x9f\x87\xb2"), QStringLiteral(":flag_cm:"), Emoji::Group::Flags },
+	{ QString::fromUtf8("\xf0\x9f\x87\xa8\xf0\x9f\x87\xb3"), QStringLiteral(":flag_cn:"), Emoji::Group::Flags },
+	{ QString::fromUtf8("\xf0\x9f\x87\xa8\xf0\x9f\x87\xb4"), QStringLiteral(":flag_co:"), Emoji::Group::Flags },
+	{ QString::fromUtf8("\xf0\x9f\x87\xa8\xf0\x9f\x87\xb5"), QStringLiteral(":flag_cp:"), Emoji::Group::Flags },
+	{ QString::fromUtf8("\xf0\x9f\x87\xa8\xf0\x9f\x87\xb7"), QStringLiteral(":flag_cr:"), Emoji::Group::Flags },
+	{ QString::fromUtf8("\xf0\x9f\x87\xa8\xf0\x9f\x87\xba"), QStringLiteral(":flag_cu:"), Emoji::Group::Flags },
+	{ QString::fromUtf8("\xf0\x9f\x87\xa8\xf0\x9f\x87\xbb"), QStringLiteral(":flag_cv:"), Emoji::Group::Flags },
+	{ QString::fromUtf8("\xf0\x9f\x87\xa8\xf0\x9f\x87\xbc"), QStringLiteral(":flag_cw:"), Emoji::Group::Flags },
+	{ QString::fromUtf8("\xf0\x9f\x87\xa8\xf0\x9f\x87\xbd"), QStringLiteral(":flag_cx:"), Emoji::Group::Flags },
+	{ QString::fromUtf8("\xf0\x9f\x87\xa8\xf0\x9f\x87\xbe"), QStringLiteral(":flag_cy:"), Emoji::Group::Flags },
+	{ QString::fromUtf8("\xf0\x9f\x87\xa8\xf0\x9f\x87\xbf"), QStringLiteral(":flag_cz:"), Emoji::Group::Flags },
+	{ QString::fromUtf8("\xf0\x9f\x87\xa9\xf0\x9f\x87\xaa"), QStringLiteral(":flag_de:"), Emoji::Group::Flags },
+	{ QString::fromUtf8("\xf0\x9f\x87\xa9\xf0\x9f\x87\xac"), QStringLiteral(":flag_dg:"), Emoji::Group::Flags },
+	{ QString::fromUtf8("\xf0\x9f\x87\xa9\xf0\x9f\x87\xaf"), QStringLiteral(":flag_dj:"), Emoji::Group::Flags },
+	{ QString::fromUtf8("\xf0\x9f\x87\xa9\xf0\x9f\x87\xb0"), QStringLiteral(":flag_dk:"), Emoji::Group::Flags },
+	{ QString::fromUtf8("\xf0\x9f\x87\xa9\xf0\x9f\x87\xb2"), QStringLiteral(":flag_dm:"), Emoji::Group::Flags },
+	{ QString::fromUtf8("\xf0\x9f\x87\xa9\xf0\x9f\x87\xb4"), QStringLiteral(":flag_do:"), Emoji::Group::Flags },
+	{ QString::fromUtf8("\xf0\x9f\x87\xa9\xf0\x9f\x87\xbf"), QStringLiteral(":flag_dz:"), Emoji::Group::Flags },
+	{ QString::fromUtf8("\xf0\x9f\x87\xaa\xf0\x9f\x87\xa6"), QStringLiteral(":flag_ea:"), Emoji::Group::Flags },
+	{ QString::fromUtf8("\xf0\x9f\x87\xaa\xf0\x9f\x87\xa8"), QStringLiteral(":flag_ec:"), Emoji::Group::Flags },
+	{ QString::fromUtf8("\xf0\x9f\x87\xaa\xf0\x9f\x87\xaa"), QStringLiteral(":flag_ee:"), Emoji::Group::Flags },
+	{ QString::fromUtf8("\xf0\x9f\x87\xaa\xf0\x9f\x87\xac"), QStringLiteral(":flag_eg:"), Emoji::Group::Flags },
+	{ QString::fromUtf8("\xf0\x9f\x87\xaa\xf0\x9f\x87\xad"), QStringLiteral(":flag_eh:"), Emoji::Group::Flags },
+	{ QString::fromUtf8("\xf0\x9f\x87\xaa\xf0\x9f\x87\xb7"), QStringLiteral(":flag_er:"), Emoji::Group::Flags },
+	{ QString::fromUtf8("\xf0\x9f\x87\xaa\xf0\x9f\x87\xb8"), QStringLiteral(":flag_es:"), Emoji::Group::Flags },
+	{ QString::fromUtf8("\xf0\x9f\x87\xaa\xf0\x9f\x87\xb9"), QStringLiteral(":flag_et:"), Emoji::Group::Flags },
+	{ QString::fromUtf8("\xf0\x9f\x87\xaa\xf0\x9f\x87\xba"), QStringLiteral(":flag_eu:"), Emoji::Group::Flags },
+	{ QString::fromUtf8("\xf0\x9f\x87\xab\xf0\x9f\x87\xae"), QStringLiteral(":flag_fi:"), Emoji::Group::Flags },
+	{ QString::fromUtf8("\xf0\x9f\x87\xab\xf0\x9f\x87\xaf"), QStringLiteral(":flag_fj:"), Emoji::Group::Flags },
+	{ QString::fromUtf8("\xf0\x9f\x87\xab\xf0\x9f\x87\xb0"), QStringLiteral(":flag_fk:"), Emoji::Group::Flags },
+	{ QString::fromUtf8("\xf0\x9f\x87\xab\xf0\x9f\x87\xb2"), QStringLiteral(":flag_fm:"), Emoji::Group::Flags },
+	{ QString::fromUtf8("\xf0\x9f\x87\xab\xf0\x9f\x87\xb4"), QStringLiteral(":flag_fo:"), Emoji::Group::Flags },
+	{ QString::fromUtf8("\xf0\x9f\x87\xab\xf0\x9f\x87\xb7"), QStringLiteral(":flag_fr:"), Emoji::Group::Flags },
+	{ QString::fromUtf8("\xf0\x9f\x87\xac\xf0\x9f\x87\xa6"), QStringLiteral(":flag_ga:"), Emoji::Group::Flags },
+	{ QString::fromUtf8("\xf0\x9f\x87\xac\xf0\x9f\x87\xa7"), QStringLiteral(":flag_gb:"), Emoji::Group::Flags },
+	{ QString::fromUtf8("\xf0\x9f\x87\xac\xf0\x9f\x87\xa9"), QStringLiteral(":flag_gd:"), Emoji::Group::Flags },
+	{ QString::fromUtf8("\xf0\x9f\x87\xac\xf0\x9f\x87\xaa"), QStringLiteral(":flag_ge:"), Emoji::Group::Flags },
+	{ QString::fromUtf8("\xf0\x9f\x87\xac\xf0\x9f\x87\xab"), QStringLiteral(":flag_gf:"), Emoji::Group::Flags },
+	{ QString::fromUtf8("\xf0\x9f\x87\xac\xf0\x9f\x87\xac"), QStringLiteral(":flag_gg:"), Emoji::Group::Flags },
+	{ QString::fromUtf8("\xf0\x9f\x87\xac\xf0\x9f\x87\xad"), QStringLiteral(":flag_gh:"), Emoji::Group::Flags },
+	{ QString::fromUtf8("\xf0\x9f\x87\xac\xf0\x9f\x87\xae"), QStringLiteral(":flag_gi:"), Emoji::Group::Flags },
+	{ QString::fromUtf8("\xf0\x9f\x87\xac\xf0\x9f\x87\xb1"), QStringLiteral(":flag_gl:"), Emoji::Group::Flags },
+	{ QString::fromUtf8("\xf0\x9f\x87\xac\xf0\x9f\x87\xb2"), QStringLiteral(":flag_gm:"), Emoji::Group::Flags },
+	{ QString::fromUtf8("\xf0\x9f\x87\xac\xf0\x9f\x87\xb3"), QStringLiteral(":flag_gn:"), Emoji::Group::Flags },
+	{ QString::fromUtf8("\xf0\x9f\x87\xac\xf0\x9f\x87\xb5"), QStringLiteral(":flag_gp:"), Emoji::Group::Flags },
+	{ QString::fromUtf8("\xf0\x9f\x87\xac\xf0\x9f\x87\xb6"), QStringLiteral(":flag_gq:"), Emoji::Group::Flags },
+	{ QString::fromUtf8("\xf0\x9f\x87\xac\xf0\x9f\x87\xb7"), QStringLiteral(":flag_gr:"), Emoji::Group::Flags },
+	{ QString::fromUtf8("\xf0\x9f\x87\xac\xf0\x9f\x87\xb8"), QStringLiteral(":flag_gs:"), Emoji::Group::Flags },
+	{ QString::fromUtf8("\xf0\x9f\x87\xac\xf0\x9f\x87\xb9"), QStringLiteral(":flag_gt:"), Emoji::Group::Flags },
+	{ QString::fromUtf8("\xf0\x9f\x87\xac\xf0\x9f\x87\xba"), QStringLiteral(":flag_gu:"), Emoji::Group::Flags },
+	{ QString::fromUtf8("\xf0\x9f\x87\xac\xf0\x9f\x87\xbc"), QStringLiteral(":flag_gw:"), Emoji::Group::Flags },
+	{ QString::fromUtf8("\xf0\x9f\x87\xac\xf0\x9f\x87\xbe"), QStringLiteral(":flag_gy:"), Emoji::Group::Flags },
+	{ QString::fromUtf8("\xf0\x9f\x87\xad\xf0\x9f\x87\xb0"), QStringLiteral(":flag_hk:"), Emoji::Group::Flags },
+	{ QString::fromUtf8("\xf0\x9f\x87\xad\xf0\x9f\x87\xb2"), QStringLiteral(":flag_hm:"), Emoji::Group::Flags },
+	{ QString::fromUtf8("\xf0\x9f\x87\xad\xf0\x9f\x87\xb3"), QStringLiteral(":flag_hn:"), Emoji::Group::Flags },
+	{ QString::fromUtf8("\xf0\x9f\x87\xad\xf0\x9f\x87\xb7"), QStringLiteral(":flag_hr:"), Emoji::Group::Flags },
+	{ QString::fromUtf8("\xf0\x9f\x87\xad\xf0\x9f\x87\xb9"), QStringLiteral(":flag_ht:"), Emoji::Group::Flags },
+	{ QString::fromUtf8("\xf0\x9f\x87\xad\xf0\x9f\x87\xba"), QStringLiteral(":flag_hu:"), Emoji::Group::Flags },
+	{ QString::fromUtf8("\xf0\x9f\x87\xae\xf0\x9f\x87\xa8"), QStringLiteral(":flag_ic:"), Emoji::Group::Flags },
+	{ QString::fromUtf8("\xf0\x9f\x87\xae\xf0\x9f\x87\xa9"), QStringLiteral(":flag_id:"), Emoji::Group::Flags },
+	{ QString::fromUtf8("\xf0\x9f\x87\xae\xf0\x9f\x87\xaa"), QStringLiteral(":flag_ie:"), Emoji::Group::Flags },
+	{ QString::fromUtf8("\xf0\x9f\x87\xae\xf0\x9f\x87\xb1"), QStringLiteral(":flag_il:"), Emoji::Group::Flags },
+	{ QString::fromUtf8("\xf0\x9f\x87\xae\xf0\x9f\x87\xb2"), QStringLiteral(":flag_im:"), Emoji::Group::Flags },
+	{ QString::fromUtf8("\xf0\x9f\x87\xae\xf0\x9f\x87\xb3"), QStringLiteral(":flag_in:"), Emoji::Group::Flags },
+	{ QString::fromUtf8("\xf0\x9f\x87\xae\xf0\x9f\x87\xb4"), QStringLiteral(":flag_io:"), Emoji::Group::Flags },
+	{ QString::fromUtf8("\xf0\x9f\x87\xae\xf0\x9f\x87\xb6"), QStringLiteral(":flag_iq:"), Emoji::Group::Flags },
+	{ QString::fromUtf8("\xf0\x9f\x87\xae\xf0\x9f\x87\xb7"), QStringLiteral(":flag_ir:"), Emoji::Group::Flags },
+	{ QString::fromUtf8("\xf0\x9f\x87\xae\xf0\x9f\x87\xb8"), QStringLiteral(":flag_is:"), Emoji::Group::Flags },
+	{ QString::fromUtf8("\xf0\x9f\x87\xae\xf0\x9f\x87\xb9"), QStringLiteral(":flag_it:"), Emoji::Group::Flags },
+	{ QString::fromUtf8("\xf0\x9f\x87\xaf\xf0\x9f\x87\xaa"), QStringLiteral(":flag_je:"), Emoji::Group::Flags },
+	{ QString::fromUtf8("\xf0\x9f\x87\xaf\xf0\x9f\x87\xb2"), QStringLiteral(":flag_jm:"), Emoji::Group::Flags },
+	{ QString::fromUtf8("\xf0\x9f\x87\xaf\xf0\x9f\x87\xb4"), QStringLiteral(":flag_jo:"), Emoji::Group::Flags },
+	{ QString::fromUtf8("\xf0\x9f\x87\xaf\xf0\x9f\x87\xb5"), QStringLiteral(":flag_jp:"), Emoji::Group::Flags },
+	{ QString::fromUtf8("\xf0\x9f\x87\xb0\xf0\x9f\x87\xaa"), QStringLiteral(":flag_ke:"), Emoji::Group::Flags },
+	{ QString::fromUtf8("\xf0\x9f\x87\xb0\xf0\x9f\x87\xac"), QStringLiteral(":flag_kg:"), Emoji::Group::Flags },
+	{ QString::fromUtf8("\xf0\x9f\x87\xb0\xf0\x9f\x87\xad"), QStringLiteral(":flag_kh:"), Emoji::Group::Flags },
+	{ QString::fromUtf8("\xf0\x9f\x87\xb0\xf0\x9f\x87\xae"), QStringLiteral(":flag_ki:"), Emoji::Group::Flags },
+	{ QString::fromUtf8("\xf0\x9f\x87\xb0\xf0\x9f\x87\xb2"), QStringLiteral(":flag_km:"), Emoji::Group::Flags },
+	{ QString::fromUtf8("\xf0\x9f\x87\xb0\xf0\x9f\x87\xb3"), QStringLiteral(":flag_kn:"), Emoji::Group::Flags },
+	{ QString::fromUtf8("\xf0\x9f\x87\xb0\xf0\x9f\x87\xb5"), QStringLiteral(":flag_kp:"), Emoji::Group::Flags },
+	{ QString::fromUtf8("\xf0\x9f\x87\xb0\xf0\x9f\x87\xb7"), QStringLiteral(":flag_kr:"), Emoji::Group::Flags },
+	{ QString::fromUtf8("\xf0\x9f\x87\xb0\xf0\x9f\x87\xbc"), QStringLiteral(":flag_kw:"), Emoji::Group::Flags },
+	{ QString::fromUtf8("\xf0\x9f\x87\xb0\xf0\x9f\x87\xbe"), QStringLiteral(":flag_ky:"), Emoji::Group::Flags },
+	{ QString::fromUtf8("\xf0\x9f\x87\xb0\xf0\x9f\x87\xbf"), QStringLiteral(":flag_kz:"), Emoji::Group::Flags },
+	{ QString::fromUtf8("\xf0\x9f\x87\xb1\xf0\x9f\x87\xa6"), QStringLiteral(":flag_la:"), Emoji::Group::Flags },
+	{ QString::fromUtf8("\xf0\x9f\x87\xb1\xf0\x9f\x87\xa7"), QStringLiteral(":flag_lb:"), Emoji::Group::Flags },
+	{ QString::fromUtf8("\xf0\x9f\x87\xb1\xf0\x9f\x87\xa8"), QStringLiteral(":flag_lc:"), Emoji::Group::Flags },
+	{ QString::fromUtf8("\xf0\x9f\x87\xb1\xf0\x9f\x87\xae"), QStringLiteral(":flag_li:"), Emoji::Group::Flags },
+	{ QString::fromUtf8("\xf0\x9f\x87\xb1\xf0\x9f\x87\xb0"), QStringLiteral(":flag_lk:"), Emoji::Group::Flags },
+	{ QString::fromUtf8("\xf0\x9f\x87\xb1\xf0\x9f\x87\xb7"), QStringLiteral(":flag_lr:"), Emoji::Group::Flags },
+	{ QString::fromUtf8("\xf0\x9f\x87\xb1\xf0\x9f\x87\xb8"), QStringLiteral(":flag_ls:"), Emoji::Group::Flags },
+	{ QString::fromUtf8("\xf0\x9f\x87\xb1\xf0\x9f\x87\xb9"), QStringLiteral(":flag_lt:"), Emoji::Group::Flags },
+	{ QString::fromUtf8("\xf0\x9f\x87\xb1\xf0\x9f\x87\xba"), QStringLiteral(":flag_lu:"), Emoji::Group::Flags },
+	{ QString::fromUtf8("\xf0\x9f\x87\xb1\xf0\x9f\x87\xbb"), QStringLiteral(":flag_lv:"), Emoji::Group::Flags },
+	{ QString::fromUtf8("\xf0\x9f\x87\xb1\xf0\x9f\x87\xbe"), QStringLiteral(":flag_ly:"), Emoji::Group::Flags },
+	{ QString::fromUtf8("\xf0\x9f\x87\xb2\xf0\x9f\x87\xa6"), QStringLiteral(":flag_ma:"), Emoji::Group::Flags },
+	{ QString::fromUtf8("\xf0\x9f\x87\xb2\xf0\x9f\x87\xa8"), QStringLiteral(":flag_mc:"), Emoji::Group::Flags },
+	{ QString::fromUtf8("\xf0\x9f\x87\xb2\xf0\x9f\x87\xa9"), QStringLiteral(":flag_md:"), Emoji::Group::Flags },
+	{ QString::fromUtf8("\xf0\x9f\x87\xb2\xf0\x9f\x87\xaa"), QStringLiteral(":flag_me:"), Emoji::Group::Flags },
+	{ QString::fromUtf8("\xf0\x9f\x87\xb2\xf0\x9f\x87\xab"), QStringLiteral(":flag_mf:"), Emoji::Group::Flags },
+	{ QString::fromUtf8("\xf0\x9f\x87\xb2\xf0\x9f\x87\xac"), QStringLiteral(":flag_mg:"), Emoji::Group::Flags },
+	{ QString::fromUtf8("\xf0\x9f\x87\xb2\xf0\x9f\x87\xad"), QStringLiteral(":flag_mh:"), Emoji::Group::Flags },
+	{ QString::fromUtf8("\xf0\x9f\x87\xb2\xf0\x9f\x87\xb0"), QStringLiteral(":flag_mk:"), Emoji::Group::Flags },
+	{ QString::fromUtf8("\xf0\x9f\x87\xb2\xf0\x9f\x87\xb1"), QStringLiteral(":flag_ml:"), Emoji::Group::Flags },
+	{ QString::fromUtf8("\xf0\x9f\x87\xb2\xf0\x9f\x87\xb2"), QStringLiteral(":flag_mm:"), Emoji::Group::Flags },
+	{ QString::fromUtf8("\xf0\x9f\x87\xb2\xf0\x9f\x87\xb3"), QStringLiteral(":flag_mn:"), Emoji::Group::Flags },
+	{ QString::fromUtf8("\xf0\x9f\x87\xb2\xf0\x9f\x87\xb4"), QStringLiteral(":flag_mo:"), Emoji::Group::Flags },
+	{ QString::fromUtf8("\xf0\x9f\x87\xb2\xf0\x9f\x87\xb5"), QStringLiteral(":flag_mp:"), Emoji::Group::Flags },
+	{ QString::fromUtf8("\xf0\x9f\x87\xb2\xf0\x9f\x87\xb6"), QStringLiteral(":flag_mq:"), Emoji::Group::Flags },
+	{ QString::fromUtf8("\xf0\x9f\x87\xb2\xf0\x9f\x87\xb7"), QStringLiteral(":flag_mr:"), Emoji::Group::Flags },
+	{ QString::fromUtf8("\xf0\x9f\x87\xb2\xf0\x9f\x87\xb8"), QStringLiteral(":flag_ms:"), Emoji::Group::Flags },
+	{ QString::fromUtf8("\xf0\x9f\x87\xb2\xf0\x9f\x87\xb9"), QStringLiteral(":flag_mt:"), Emoji::Group::Flags },
+	{ QString::fromUtf8("\xf0\x9f\x87\xb2\xf0\x9f\x87\xba"), QStringLiteral(":flag_mu:"), Emoji::Group::Flags },
+	{ QString::fromUtf8("\xf0\x9f\x87\xb2\xf0\x9f\x87\xbb"), QStringLiteral(":flag_mv:"), Emoji::Group::Flags },
+	{ QString::fromUtf8("\xf0\x9f\x87\xb2\xf0\x9f\x87\xbc"), QStringLiteral(":flag_mw:"), Emoji::Group::Flags },
+	{ QString::fromUtf8("\xf0\x9f\x87\xb2\xf0\x9f\x87\xbd"), QStringLiteral(":flag_mx:"), Emoji::Group::Flags },
+	{ QString::fromUtf8("\xf0\x9f\x87\xb2\xf0\x9f\x87\xbe"), QStringLiteral(":flag_my:"), Emoji::Group::Flags },
+	{ QString::fromUtf8("\xf0\x9f\x87\xb2\xf0\x9f\x87\xbf"), QStringLiteral(":flag_mz:"), Emoji::Group::Flags },
+	{ QString::fromUtf8("\xf0\x9f\x87\xb3\xf0\x9f\x87\xa6"), QStringLiteral(":flag_na:"), Emoji::Group::Flags },
+	{ QString::fromUtf8("\xf0\x9f\x87\xb3\xf0\x9f\x87\xa8"), QStringLiteral(":flag_nc:"), Emoji::Group::Flags },
+	{ QString::fromUtf8("\xf0\x9f\x87\xb3\xf0\x9f\x87\xaa"), QStringLiteral(":flag_ne:"), Emoji::Group::Flags },
+	{ QString::fromUtf8("\xf0\x9f\x87\xb3\xf0\x9f\x87\xab"), QStringLiteral(":flag_nf:"), Emoji::Group::Flags },
+	{ QString::fromUtf8("\xf0\x9f\x87\xb3\xf0\x9f\x87\xac"), QStringLiteral(":flag_ng:"), Emoji::Group::Flags },
+	{ QString::fromUtf8("\xf0\x9f\x87\xb3\xf0\x9f\x87\xae"), QStringLiteral(":flag_ni:"), Emoji::Group::Flags },
+	{ QString::fromUtf8("\xf0\x9f\x87\xb3\xf0\x9f\x87\xb1"), QStringLiteral(":flag_nl:"), Emoji::Group::Flags },
+	{ QString::fromUtf8("\xf0\x9f\x87\xb3\xf0\x9f\x87\xb4"), QStringLiteral(":flag_no:"), Emoji::Group::Flags },
+	{ QString::fromUtf8("\xf0\x9f\x87\xb3\xf0\x9f\x87\xb5"), QStringLiteral(":flag_np:"), Emoji::Group::Flags },
+	{ QString::fromUtf8("\xf0\x9f\x87\xb3\xf0\x9f\x87\xb7"), QStringLiteral(":flag_nr:"), Emoji::Group::Flags },
+	{ QString::fromUtf8("\xf0\x9f\x87\xb3\xf0\x9f\x87\xba"), QStringLiteral(":flag_nu:"), Emoji::Group::Flags },
+	{ QString::fromUtf8("\xf0\x9f\x87\xb3\xf0\x9f\x87\xbf"), QStringLiteral(":flag_nz:"), Emoji::Group::Flags },
+	{ QString::fromUtf8("\xf0\x9f\x87\xb4\xf0\x9f\x87\xb2"), QStringLiteral(":flag_om:"), Emoji::Group::Flags },
+	{ QString::fromUtf8("\xf0\x9f\x87\xb5\xf0\x9f\x87\xa6"), QStringLiteral(":flag_pa:"), Emoji::Group::Flags },
+	{ QString::fromUtf8("\xf0\x9f\x87\xb5\xf0\x9f\x87\xaa"), QStringLiteral(":flag_pe:"), Emoji::Group::Flags },
+	{ QString::fromUtf8("\xf0\x9f\x87\xb5\xf0\x9f\x87\xab"), QStringLiteral(":flag_pf:"), Emoji::Group::Flags },
+	{ QString::fromUtf8("\xf0\x9f\x87\xb5\xf0\x9f\x87\xac"), QStringLiteral(":flag_pg:"), Emoji::Group::Flags },
+	{ QString::fromUtf8("\xf0\x9f\x87\xb5\xf0\x9f\x87\xad"), QStringLiteral(":flag_ph:"), Emoji::Group::Flags },
+	{ QString::fromUtf8("\xf0\x9f\x87\xb5\xf0\x9f\x87\xb0"), QStringLiteral(":flag_pk:"), Emoji::Group::Flags },
+	{ QString::fromUtf8("\xf0\x9f\x87\xb5\xf0\x9f\x87\xb1"), QStringLiteral(":flag_pl:"), Emoji::Group::Flags },
+	{ QString::fromUtf8("\xf0\x9f\x87\xb5\xf0\x9f\x87\xb2"), QStringLiteral(":flag_pm:"), Emoji::Group::Flags },
+	{ QString::fromUtf8("\xf0\x9f\x87\xb5\xf0\x9f\x87\xb3"), QStringLiteral(":flag_pn:"), Emoji::Group::Flags },
+	{ QString::fromUtf8("\xf0\x9f\x87\xb5\xf0\x9f\x87\xb7"), QStringLiteral(":flag_pr:"), Emoji::Group::Flags },
+	{ QString::fromUtf8("\xf0\x9f\x87\xb5\xf0\x9f\x87\xb8"), QStringLiteral(":flag_ps:"), Emoji::Group::Flags },
+	{ QString::fromUtf8("\xf0\x9f\x87\xb5\xf0\x9f\x87\xb9"), QStringLiteral(":flag_pt:"), Emoji::Group::Flags },
+	{ QString::fromUtf8("\xf0\x9f\x87\xb5\xf0\x9f\x87\xbc"), QStringLiteral(":flag_pw:"), Emoji::Group::Flags },
+	{ QString::fromUtf8("\xf0\x9f\x87\xb5\xf0\x9f\x87\xbe"), QStringLiteral(":flag_py:"), Emoji::Group::Flags },
+	{ QString::fromUtf8("\xf0\x9f\x87\xb6\xf0\x9f\x87\xa6"), QStringLiteral(":flag_qa:"), Emoji::Group::Flags },
+	{ QString::fromUtf8("\xf0\x9f\x87\xb7\xf0\x9f\x87\xaa"), QStringLiteral(":flag_re:"), Emoji::Group::Flags },
+	{ QString::fromUtf8("\xf0\x9f\x87\xb7\xf0\x9f\x87\xb4"), QStringLiteral(":flag_ro:"), Emoji::Group::Flags },
+	{ QString::fromUtf8("\xf0\x9f\x87\xb7\xf0\x9f\x87\xb8"), QStringLiteral(":flag_rs:"), Emoji::Group::Flags },
+	{ QString::fromUtf8("\xf0\x9f\x87\xb7\xf0\x9f\x87\xba"), QStringLiteral(":flag_ru:"), Emoji::Group::Flags },
+	{ QString::fromUtf8("\xf0\x9f\x87\xb7\xf0\x9f\x87\xbc"), QStringLiteral(":flag_rw:"), Emoji::Group::Flags },
+	{ QString::fromUtf8("\xf0\x9f\x87\xb8\xf0\x9f\x87\xa6"), QStringLiteral(":flag_sa:"), Emoji::Group::Flags },
+	{ QString::fromUtf8("\xf0\x9f\x87\xb8\xf0\x9f\x87\xa7"), QStringLiteral(":flag_sb:"), Emoji::Group::Flags },
+	{ QString::fromUtf8("\xf0\x9f\x87\xb8\xf0\x9f\x87\xa8"), QStringLiteral(":flag_sc:"), Emoji::Group::Flags },
+	{ QString::fromUtf8("\xf0\x9f\x87\xb8\xf0\x9f\x87\xa9"), QStringLiteral(":flag_sd:"), Emoji::Group::Flags },
+	{ QString::fromUtf8("\xf0\x9f\x87\xb8\xf0\x9f\x87\xaa"), QStringLiteral(":flag_se:"), Emoji::Group::Flags },
+	{ QString::fromUtf8("\xf0\x9f\x87\xb8\xf0\x9f\x87\xac"), QStringLiteral(":flag_sg:"), Emoji::Group::Flags },
+	{ QString::fromUtf8("\xf0\x9f\x87\xb8\xf0\x9f\x87\xad"), QStringLiteral(":flag_sh:"), Emoji::Group::Flags },
+	{ QString::fromUtf8("\xf0\x9f\x87\xb8\xf0\x9f\x87\xae"), QStringLiteral(":flag_si:"), Emoji::Group::Flags },
+	{ QString::fromUtf8("\xf0\x9f\x87\xb8\xf0\x9f\x87\xaf"), QStringLiteral(":flag_sj:"), Emoji::Group::Flags },
+	{ QString::fromUtf8("\xf0\x9f\x87\xb8\xf0\x9f\x87\xb0"), QStringLiteral(":flag_sk:"), Emoji::Group::Flags },
+	{ QString::fromUtf8("\xf0\x9f\x87\xb8\xf0\x9f\x87\xb1"), QStringLiteral(":flag_sl:"), Emoji::Group::Flags },
+	{ QString::fromUtf8("\xf0\x9f\x87\xb8\xf0\x9f\x87\xb2"), QStringLiteral(":flag_sm:"), Emoji::Group::Flags },
+	{ QString::fromUtf8("\xf0\x9f\x87\xb8\xf0\x9f\x87\xb3"), QStringLiteral(":flag_sn:"), Emoji::Group::Flags },
+	{ QString::fromUtf8("\xf0\x9f\x87\xb8\xf0\x9f\x87\xb4"), QStringLiteral(":flag_so:"), Emoji::Group::Flags },
+	{ QString::fromUtf8("\xf0\x9f\x87\xb8\xf0\x9f\x87\xb7"), QStringLiteral(":flag_sr:"), Emoji::Group::Flags },
+	{ QString::fromUtf8("\xf0\x9f\x87\xb8\xf0\x9f\x87\xb8"), QStringLiteral(":flag_ss:"), Emoji::Group::Flags },
+	{ QString::fromUtf8("\xf0\x9f\x87\xb8\xf0\x9f\x87\xb9"), QStringLiteral(":flag_st:"), Emoji::Group::Flags },
+	{ QString::fromUtf8("\xf0\x9f\x87\xb8\xf0\x9f\x87\xbb"), QStringLiteral(":flag_sv:"), Emoji::Group::Flags },
+	{ QString::fromUtf8("\xf0\x9f\x87\xb8\xf0\x9f\x87\xbd"), QStringLiteral(":flag_sx:"), Emoji::Group::Flags },
+	{ QString::fromUtf8("\xf0\x9f\x87\xb8\xf0\x9f\x87\xbe"), QStringLiteral(":flag_sy:"), Emoji::Group::Flags },
+	{ QString::fromUtf8("\xf0\x9f\x87\xb8\xf0\x9f\x87\xbf"), QStringLiteral(":flag_sz:"), Emoji::Group::Flags },
+	{ QString::fromUtf8("\xf0\x9f\x87\xb9\xf0\x9f\x87\xa6"), QStringLiteral(":flag_ta:"), Emoji::Group::Flags },
+	{ QString::fromUtf8("\xf0\x9f\x87\xb9\xf0\x9f\x87\xa8"), QStringLiteral(":flag_tc:"), Emoji::Group::Flags },
+	{ QString::fromUtf8("\xf0\x9f\x87\xb9\xf0\x9f\x87\xa9"), QStringLiteral(":flag_td:"), Emoji::Group::Flags },
+	{ QString::fromUtf8("\xf0\x9f\x87\xb9\xf0\x9f\x87\xab"), QStringLiteral(":flag_tf:"), Emoji::Group::Flags },
+	{ QString::fromUtf8("\xf0\x9f\x87\xb9\xf0\x9f\x87\xac"), QStringLiteral(":flag_tg:"), Emoji::Group::Flags },
+	{ QString::fromUtf8("\xf0\x9f\x87\xb9\xf0\x9f\x87\xad"), QStringLiteral(":flag_th:"), Emoji::Group::Flags },
+	{ QString::fromUtf8("\xf0\x9f\x87\xb9\xf0\x9f\x87\xaf"), QStringLiteral(":flag_tj:"), Emoji::Group::Flags },
+	{ QString::fromUtf8("\xf0\x9f\x87\xb9\xf0\x9f\x87\xb0"), QStringLiteral(":flag_tk:"), Emoji::Group::Flags },
+	{ QString::fromUtf8("\xf0\x9f\x87\xb9\xf0\x9f\x87\xb1"), QStringLiteral(":flag_tl:"), Emoji::Group::Flags },
+	{ QString::fromUtf8("\xf0\x9f\x87\xb9\xf0\x9f\x87\xb2"), QStringLiteral(":flag_tm:"), Emoji::Group::Flags },
+	{ QString::fromUtf8("\xf0\x9f\x87\xb9\xf0\x9f\x87\xb3"), QStringLiteral(":flag_tn:"), Emoji::Group::Flags },
+	{ QString::fromUtf8("\xf0\x9f\x87\xb9\xf0\x9f\x87\xb4"), QStringLiteral(":flag_to:"), Emoji::Group::Flags },
+	{ QString::fromUtf8("\xf0\x9f\x87\xb9\xf0\x9f\x87\xb7"), QStringLiteral(":flag_tr:"), Emoji::Group::Flags },
+	{ QString::fromUtf8("\xf0\x9f\x87\xb9\xf0\x9f\x87\xb9"), QStringLiteral(":flag_tt:"), Emoji::Group::Flags },
+	{ QString::fromUtf8("\xf0\x9f\x87\xb9\xf0\x9f\x87\xbb"), QStringLiteral(":flag_tv:"), Emoji::Group::Flags },
+	{ QString::fromUtf8("\xf0\x9f\x87\xb9\xf0\x9f\x87\xbc"), QStringLiteral(":flag_tw:"), Emoji::Group::Flags },
+	{ QString::fromUtf8("\xf0\x9f\x87\xb9\xf0\x9f\x87\xbf"), QStringLiteral(":flag_tz:"), Emoji::Group::Flags },
+	{ QString::fromUtf8("\xf0\x9f\x87\xba\xf0\x9f\x87\xa6"), QStringLiteral(":flag_ua:"), Emoji::Group::Flags },
+	{ QString::fromUtf8("\xf0\x9f\x87\xba\xf0\x9f\x87\xac"), QStringLiteral(":flag_ug:"), Emoji::Group::Flags },
+	{ QString::fromUtf8("\xf0\x9f\x87\xba\xf0\x9f\x87\xb2"), QStringLiteral(":flag_um:"), Emoji::Group::Flags },
+	{ QString::fromUtf8("\xf0\x9f\x87\xba\xf0\x9f\x87\xb8"), QStringLiteral(":flag_us:"), Emoji::Group::Flags },
+	{ QString::fromUtf8("\xf0\x9f\x87\xba\xf0\x9f\x87\xbe"), QStringLiteral(":flag_uy:"), Emoji::Group::Flags },
+	{ QString::fromUtf8("\xf0\x9f\x87\xba\xf0\x9f\x87\xbf"), QStringLiteral(":flag_uz:"), Emoji::Group::Flags },
+	{ QString::fromUtf8("\xf0\x9f\x87\xbb\xf0\x9f\x87\xa6"), QStringLiteral(":flag_va:"), Emoji::Group::Flags },
+	{ QString::fromUtf8("\xf0\x9f\x87\xbb\xf0\x9f\x87\xa8"), QStringLiteral(":flag_vc:"), Emoji::Group::Flags },
+	{ QString::fromUtf8("\xf0\x9f\x87\xbb\xf0\x9f\x87\xaa"), QStringLiteral(":flag_ve:"), Emoji::Group::Flags },
+	{ QString::fromUtf8("\xf0\x9f\x87\xbb\xf0\x9f\x87\xac"), QStringLiteral(":flag_vg:"), Emoji::Group::Flags },
+	{ QString::fromUtf8("\xf0\x9f\x87\xbb\xf0\x9f\x87\xae"), QStringLiteral(":flag_vi:"), Emoji::Group::Flags },
+	{ QString::fromUtf8("\xf0\x9f\x87\xbb\xf0\x9f\x87\xb3"), QStringLiteral(":flag_vn:"), Emoji::Group::Flags },
+	{ QString::fromUtf8("\xf0\x9f\x87\xbb\xf0\x9f\x87\xba"), QStringLiteral(":flag_vu:"), Emoji::Group::Flags },
+	{ QString::fromUtf8("\xf0\x9f\x87\xbc\xf0\x9f\x87\xab"), QStringLiteral(":flag_wf:"), Emoji::Group::Flags },
+	{ QString::fromUtf8("\xf0\x9f\x87\xbc\xf0\x9f\x87\xb8"), QStringLiteral(":flag_ws:"), Emoji::Group::Flags },
+	{ QString::fromUtf8("\xf0\x9f\x87\xbd\xf0\x9f\x87\xb0"), QStringLiteral(":flag_xk:"), Emoji::Group::Flags },
+	{ QString::fromUtf8("\xf0\x9f\x87\xbe\xf0\x9f\x87\xaa"), QStringLiteral(":flag_ye:"), Emoji::Group::Flags },
+	{ QString::fromUtf8("\xf0\x9f\x87\xbe\xf0\x9f\x87\xb9"), QStringLiteral(":flag_yt:"), Emoji::Group::Flags },
+	{ QString::fromUtf8("\xf0\x9f\x87\xbf\xf0\x9f\x87\xa6"), QStringLiteral(":flag_za:"), Emoji::Group::Flags },
+	{ QString::fromUtf8("\xf0\x9f\x87\xbf\xf0\x9f\x87\xb2"), QStringLiteral(":flag_zm:"), Emoji::Group::Flags },
+	{ QString::fromUtf8("\xf0\x9f\x87\xbf\xf0\x9f\x87\xbc"), QStringLiteral(":flag_zw:"), Emoji::Group::Flags }
+};
 
-  map.insert("people", people);
-  map.insert("nature", nature);
-  map.insert("food", food);
-  map.insert("activity", activity);
-  map.insert("travel", travel);
-  map.insert("objects", objects);
-  map.insert("symbols", symbols);
-  map.insert("flags", flags);
-
-  return map;
+int EmojiModel::rowCount(const QModelIndex &parent) const
+{
+	return parent == QModelIndex() ? s_emojis.count() : 0;
 }
 
-QVariantList EmojiModel::filterModel(const QString& filter) {
-  QVariantList result;
+QVariant EmojiModel::data(const QModelIndex &index, int role) const
+{
+	if (hasIndex(index.row(), index.column(), index.parent())) {
+		switch (role) {
+		case Qt::DisplayRole:
+		case static_cast<int>(EmojiModel::Roles::Unicode):
+			return s_emojis[index.row()].unicode();
 
-  for (const QVariant &e : people) {
-    Emoji emoji = qvariant_cast<Emoji>(e);
-    if (emoji.shortname.startsWith(filter)) {
-      result.append(e);
-    }
-  }
-  for (const QVariant &e : nature) {
-    Emoji emoji = qvariant_cast<Emoji>(e);
-    if (emoji.shortname.startsWith(filter)) {
-      result.append(e);
-    }
-  }
-  for (const QVariant &e : food) {
-    Emoji emoji = qvariant_cast<Emoji>(e);
-    if (emoji.shortname.startsWith(filter)) {
-      result.append(e);
-    }
-  }
-  for (const QVariant &e : activity) {
-    Emoji emoji = qvariant_cast<Emoji>(e);
-    if (emoji.shortname.startsWith(filter)) {
-      result.append(e);
-    }
-  }
-  for (const QVariant &e : travel) {
-    Emoji emoji = qvariant_cast<Emoji>(e);
-    if (emoji.shortname.startsWith(filter)) {
-      result.append(e);
-    }
-  }
-  for (const QVariant &e : objects) {
-    Emoji emoji = qvariant_cast<Emoji>(e);
-    if (emoji.shortname.startsWith(filter)) {
-      result.append(e);
-    }
-  }
-  for (const QVariant &e : symbols) {
-    Emoji emoji = qvariant_cast<Emoji>(e);
-    if (emoji.shortname.startsWith(filter)) {
-      result.append(e);
-    }
-  }
-  for (const QVariant &e : flags) {
-    Emoji emoji = qvariant_cast<Emoji>(e);
-    if (emoji.shortname.startsWith(filter)) {
-      result.append(e);
-    }
-  }
+		case Qt::ToolTipRole:
+		case static_cast<int>(EmojiModel::Roles::ShortName):
+			return s_emojis[index.row()].shortName();
 
-  return result;
+		case static_cast<int>(EmojiModel::Roles::Group):
+			return QVariant::fromValue(s_emojis[index.row()].group());
+
+		case static_cast<int>(EmojiModel::Roles::Emoji):
+			return QVariant::fromValue(s_emojis[index.row()]);
+		}
+	}
+
+	return {};
 }
 
-const QVariantList EmojiModel::people = {
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x98\x80"), ":grinning:"}),
-    QVariant::fromValue(Emoji{QString::fromUtf8("\xf0\x9f\x98\x81"), ":grin:"}),
-    QVariant::fromValue(Emoji{QString::fromUtf8("\xf0\x9f\x98\x82"), ":joy:"}),
-    QVariant::fromValue(Emoji{QString::fromUtf8("\xf0\x9f\xa4\xa3"), ":rofl:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x98\x83"), ":smiley:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x98\x84"), ":smile:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x98\x85"), ":sweat_smile:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x98\x86"), ":laughing:"}),
-    QVariant::fromValue(Emoji{QString::fromUtf8("\xf0\x9f\x98\x89"), ":wink:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x98\x8a"), ":blush:"}),
-    QVariant::fromValue(Emoji{QString::fromUtf8("\xf0\x9f\x98\x8b"), ":yum:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x98\x8e"), ":sunglasses:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x98\x8d"), ":heart_eyes:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x98\x98"), ":kissing_heart:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x98\x97"), ":kissing:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x98\x99"), ":kissing_smiling_eyes:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x98\x9a"), ":kissing_closed_eyes:"}),
-    QVariant::fromValue(Emoji{QString::fromUtf8("\xe2\x98\xba"), ":relaxed:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x99\x82"), ":slight_smile:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\xa4\x97"), ":hugging:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\xa4\x94"), ":thinking:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x98\x90"), ":neutral_face:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x98\x91"), ":expressionless:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x98\xb6"), ":no_mouth:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x99\x84"), ":rolling_eyes:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x98\x8f"), ":smirk:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x98\xa3"), ":persevere:"}),
-    QVariant::fromValue(Emoji{QString::fromUtf8("\xf0\x9f\x98\xa5"),
-                              ":disappointed_relieved:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x98\xae"), ":open_mouth:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\xa4\x90"), ":zipper_mouth:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x98\xaf"), ":hushed:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x98\xaa"), ":sleepy:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x98\xab"), ":tired_face:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x98\xb4"), ":sleeping:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x98\x8c"), ":relieved:"}),
-    QVariant::fromValue(Emoji{QString::fromUtf8("\xf0\x9f\xa4\x93"), ":nerd:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x98\x9b"), ":stuck_out_tongue:"}),
-    QVariant::fromValue(Emoji{QString::fromUtf8("\xf0\x9f\x98\x9c"),
-                              ":stuck_out_tongue_winking_eye:"}),
-    QVariant::fromValue(Emoji{QString::fromUtf8("\xf0\x9f\x98\x9d"),
-                              ":stuck_out_tongue_closed_eyes:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\xa4\xa4"), ":drooling_face:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x98\x92"), ":unamused:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x98\x93"), ":sweat:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x98\x94"), ":pensive:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x98\x95"), ":confused:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x99\x83"), ":upside_down:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\xa4\x91"), ":money_mouth:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x98\xb2"), ":astonished:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xe2\x98\xb9"), ":frowning2:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x99\x81"), ":slight_frown:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x98\x96"), ":confounded:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x98\x9e"), ":disappointed:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x98\x9f"), ":worried:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x98\xa4"), ":triumph:"}),
-    QVariant::fromValue(Emoji{QString::fromUtf8("\xf0\x9f\x98\xa2"), ":cry:"}),
-    QVariant::fromValue(Emoji{QString::fromUtf8("\xf0\x9f\x98\xad"), ":sob:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x98\xa6"), ":frowning:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x98\xa7"), ":anguished:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x98\xa8"), ":fearful:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x98\xa9"), ":weary:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x98\xac"), ":grimacing:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x98\xb0"), ":cold_sweat:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x98\xb1"), ":scream:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x98\xb3"), ":flushed:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x98\xb5"), ":dizzy_face:"}),
-    QVariant::fromValue(Emoji{QString::fromUtf8("\xf0\x9f\x98\xa1"), ":rage:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x98\xa0"), ":angry:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x98\x87"), ":innocent:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\xa4\xa0"), ":cowboy:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\xa4\xa1"), ":clown:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\xa4\xa5"), ":lying_face:"}),
-    QVariant::fromValue(Emoji{QString::fromUtf8("\xf0\x9f\x98\xb7"), ":mask:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\xa4\x92"), ":thermometer_face:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\xa4\x95"), ":head_bandage:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\xa4\xa2"), ":nauseated_face:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\xa4\xa7"), ":sneezing_face:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x98\x88"), ":smiling_imp:"}),
-    QVariant::fromValue(Emoji{QString::fromUtf8("\xf0\x9f\x91\xbf"), ":imp:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x91\xb9"), ":japanese_ogre:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x91\xba"), ":japanese_goblin:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x92\x80"), ":skull:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x91\xbb"), ":ghost:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x91\xbd"), ":alien:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\xa4\x96"), ":robot:"}),
-    QVariant::fromValue(Emoji{QString::fromUtf8("\xf0\x9f\x92\xa9"), ":poop:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x98\xba"), ":smiley_cat:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x98\xb8"), ":smile_cat:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x98\xb9"), ":joy_cat:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x98\xbb"), ":heart_eyes_cat:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x98\xbc"), ":smirk_cat:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x98\xbd"), ":kissing_cat:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x99\x80"), ":scream_cat:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x98\xbf"), ":crying_cat_face:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x98\xbe"), ":pouting_cat:"}),
-    QVariant::fromValue(Emoji{QString::fromUtf8("\xf0\x9f\x91\xa6"), ":boy:"}),
-    QVariant::fromValue(Emoji{QString::fromUtf8("\xf0\x9f\x91\xa7"), ":girl:"}),
-    QVariant::fromValue(Emoji{QString::fromUtf8("\xf0\x9f\x91\xa8"), ":man:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x91\xa9"), ":woman:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x91\xb4"), ":older_man:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x91\xb5"), ":older_woman:"}),
-    QVariant::fromValue(Emoji{QString::fromUtf8("\xf0\x9f\x91\xb6"), ":baby:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x91\xbc"), ":angel:"}),
-    QVariant::fromValue(Emoji{QString::fromUtf8("\xf0\x9f\x91\xae"), ":cop:"}),
-    QVariant::fromValue(Emoji{QString::fromUtf8("\xf0\x9f\x95\xb5"), ":spy:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x92\x82"), ":guardsman:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x91\xb7"), ":construction_worker:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x91\xb3"), ":man_with_turban:"}),
-    QVariant::fromValue(Emoji{QString::fromUtf8("\xf0\x9f\x91\xb1"),
-                              ":person_with_blond_hair:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x8e\x85"), ":santa:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\xa4\xb6"), ":mrs_claus:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x91\xb8"), ":princess:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\xa4\xb4"), ":prince:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x91\xb0"), ":bride_with_veil:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\xa4\xb5"), ":man_in_tuxedo:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\xa4\xb0"), ":pregnant_woman:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x91\xb2"), ":man_with_gua_pi_mao:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x99\x8d"), ":person_frowning:"}),
-    QVariant::fromValue(Emoji{QString::fromUtf8("\xf0\x9f\x99\x8e"),
-                              ":person_with_pouting_face:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x99\x85"), ":no_good:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x99\x86"), ":ok_woman:"}),
-    QVariant::fromValue(Emoji{QString::fromUtf8("\xf0\x9f\x92\x81"),
-                              ":information_desk_person:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x99\x8b"), ":raising_hand:"}),
-    QVariant::fromValue(Emoji{QString::fromUtf8("\xf0\x9f\x99\x87"), ":bow:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\xa4\xa6"), ":face_palm:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\xa4\xb7"), ":shrug:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x92\x86"), ":massage:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x92\x87"), ":haircut:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x9a\xb6"), ":walking:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x8f\x83"), ":runner:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x92\x83"), ":dancer:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x95\xba"), ":man_dancing:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x91\xaf"), ":dancers:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x97\xa3"), ":speaking_head:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x91\xa4"), ":bust_in_silhouette:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x91\xa5"), ":busts_in_silhouette:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x91\xab"), ":couple:"}),
-    QVariant::fromValue(Emoji{QString::fromUtf8("\xf0\x9f\x91\xac"),
-                              ":two_men_holding_hands:"}),
-    QVariant::fromValue(Emoji{QString::fromUtf8("\xf0\x9f\x91\xad"),
-                              ":two_women_holding_hands:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x92\x8f"), ":couplekiss:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x92\x91"), ":couple_with_heart:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x91\xaa"), ":family:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x92\xaa"), ":muscle:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\xa4\xb3"), ":selfie:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x91\x88"), ":point_left:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x91\x89"), ":point_right:"}),
-    QVariant::fromValue(Emoji{QString::fromUtf8("\xe2\x98\x9d"), ":point_up:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x91\x86"), ":point_up_2:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x96\x95"), ":middle_finger:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x91\x87"), ":point_down:"}),
-    QVariant::fromValue(Emoji{QString::fromUtf8("\xe2\x9c\x8c"), ":v:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\xa4\x9e"), ":fingers_crossed:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x96\x96"), ":vulcan:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\xa4\x98"), ":metal:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\xa4\x99"), ":call_me:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x96\x90"), ":hand_splayed:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xe2\x9c\x8b"), ":raised_hand:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x91\x8c"), ":ok_hand:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x91\x8d"), ":thumbsup:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x91\x8e"), ":thumbsdown:"}),
-    QVariant::fromValue(Emoji{QString::fromUtf8("\xe2\x9c\x8a"), ":fist:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x91\x8a"), ":punch:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\xa4\x9b"), ":left_facing_fist:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\xa4\x9c"), ":right_facing_fist:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\xa4\x9a"), ":raised_back_of_hand:"}),
-    QVariant::fromValue(Emoji{QString::fromUtf8("\xf0\x9f\x91\x8b"), ":wave:"}),
-    QVariant::fromValue(Emoji{QString::fromUtf8("\xf0\x9f\x91\x8f"), ":clap:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xe2\x9c\x8d"), ":writing_hand:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x91\x90"), ":open_hands:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x99\x8c"), ":raised_hands:"}),
-    QVariant::fromValue(Emoji{QString::fromUtf8("\xf0\x9f\x99\x8f"), ":pray:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\xa4\x9d"), ":handshake:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x92\x85"), ":nail_care:"}),
-    QVariant::fromValue(Emoji{QString::fromUtf8("\xf0\x9f\x91\x82"), ":ear:"}),
-    QVariant::fromValue(Emoji{QString::fromUtf8("\xf0\x9f\x91\x83"), ":nose:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x91\xa3"), ":footprints:"}),
-    QVariant::fromValue(Emoji{QString::fromUtf8("\xf0\x9f\x91\x80"), ":eyes:"}),
-    QVariant::fromValue(Emoji{QString::fromUtf8("\xf0\x9f\x91\x81"), ":eye:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x91\x85"), ":tongue:"}),
-    QVariant::fromValue(Emoji{QString::fromUtf8("\xf0\x9f\x91\x84"), ":lips:"}),
-    QVariant::fromValue(Emoji{QString::fromUtf8("\xf0\x9f\x92\x8b"), ":kiss:"}),
-    QVariant::fromValue(Emoji{QString::fromUtf8("\xf0\x9f\x92\xa4"), ":zzz:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x91\x93"), ":eyeglasses:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x95\xb6"), ":dark_sunglasses:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x91\x94"), ":necktie:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x91\x95"), ":shirt:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x91\x96"), ":jeans:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x91\x97"), ":dress:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x91\x98"), ":kimono:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x91\x99"), ":bikini:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x91\x9a"), ":womans_clothes:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x91\x9b"), ":purse:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x91\x9c"), ":handbag:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x91\x9d"), ":pouch:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x8e\x92"), ":school_satchel:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x91\x9e"), ":mans_shoe:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x91\x9f"), ":athletic_shoe:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x91\xa0"), ":high_heel:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x91\xa1"), ":sandal:"}),
-    QVariant::fromValue(Emoji{QString::fromUtf8("\xf0\x9f\x91\xa2"), ":boot:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x91\x91"), ":crown:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x91\x92"), ":womans_hat:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x8e\xa9"), ":tophat:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x8e\x93"), ":mortar_board:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xe2\x9b\x91"), ":helmet_with_cross:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x92\x84"), ":lipstick:"}),
-    QVariant::fromValue(Emoji{QString::fromUtf8("\xf0\x9f\x92\x8d"), ":ring:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x8c\x82"), ":closed_umbrella:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x92\xbc"), ":briefcase:"}),
-};
+QHash<int, QByteArray> EmojiModel::roleNames() const
+{
+	static QHash<int, QByteArray> roles;
 
-const QVariantList EmojiModel::nature = {
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x99\x88"), ":see_no_evil:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x99\x89"), ":hear_no_evil:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x99\x8a"), ":speak_no_evil:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x92\xa6"), ":sweat_drops:"}),
-    QVariant::fromValue(Emoji{QString::fromUtf8("\xf0\x9f\x92\xa8"), ":dash:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x90\xb5"), ":monkey_face:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x90\x92"), ":monkey:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\xa6\x8d"), ":gorilla:"}),
-    QVariant::fromValue(Emoji{QString::fromUtf8("\xf0\x9f\x90\xb6"), ":dog:"}),
-    QVariant::fromValue(Emoji{QString::fromUtf8("\xf0\x9f\x90\x95"), ":dog2:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x90\xa9"), ":poodle:"}),
-    QVariant::fromValue(Emoji{QString::fromUtf8("\xf0\x9f\x90\xba"), ":wolf:"}),
-    QVariant::fromValue(Emoji{QString::fromUtf8("\xf0\x9f\xa6\x8a"), ":fox:"}),
-    QVariant::fromValue(Emoji{QString::fromUtf8("\xf0\x9f\x90\xb1"), ":cat:"}),
-    QVariant::fromValue(Emoji{QString::fromUtf8("\xf0\x9f\x90\x88"), ":cat2:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\xa6\x81"), ":lion_face:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x90\xaf"), ":tiger:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x90\x85"), ":tiger2:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x90\x86"), ":leopard:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x90\xb4"), ":horse:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x90\x8e"), ":racehorse:"}),
-    QVariant::fromValue(Emoji{QString::fromUtf8("\xf0\x9f\xa6\x8c"), ":deer:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\xa6\x84"), ":unicorn:"}),
-    QVariant::fromValue(Emoji{QString::fromUtf8("\xf0\x9f\x90\xae"), ":cow:"}),
-    QVariant::fromValue(Emoji{QString::fromUtf8("\xf0\x9f\x90\x82"), ":ox:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x90\x83"), ":water_buffalo:"}),
-    QVariant::fromValue(Emoji{QString::fromUtf8("\xf0\x9f\x90\x84"), ":cow2:"}),
-    QVariant::fromValue(Emoji{QString::fromUtf8("\xf0\x9f\x90\xb7"), ":pig:"}),
-    QVariant::fromValue(Emoji{QString::fromUtf8("\xf0\x9f\x90\x96"), ":pig2:"}),
-    QVariant::fromValue(Emoji{QString::fromUtf8("\xf0\x9f\x90\x97"), ":boar:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x90\xbd"), ":pig_nose:"}),
-    QVariant::fromValue(Emoji{QString::fromUtf8("\xf0\x9f\x90\x8f"), ":ram:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x90\x91"), ":sheep:"}),
-    QVariant::fromValue(Emoji{QString::fromUtf8("\xf0\x9f\x90\x90"), ":goat:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x90\xaa"), ":dromedary_camel:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x90\xab"), ":camel:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x90\x98"), ":elephant:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\xa6\x8f"), ":rhino:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x90\xad"), ":mouse:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x90\x81"), ":mouse2:"}),
-    QVariant::fromValue(Emoji{QString::fromUtf8("\xf0\x9f\x90\x80"), ":rat:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x90\xb9"), ":hamster:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x90\xb0"), ":rabbit:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x90\x87"), ":rabbit2:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x90\xbf"), ":chipmunk:"}),
-    QVariant::fromValue(Emoji{QString::fromUtf8("\xf0\x9f\xa6\x87"), ":bat:"}),
-    QVariant::fromValue(Emoji{QString::fromUtf8("\xf0\x9f\x90\xbb"), ":bear:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x90\xa8"), ":koala:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x90\xbc"), ":panda_face:"}),
-    QVariant::fromValue(Emoji{QString::fromUtf8("\xf0\x9f\x90\xbe"), ":feet:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\xa6\x83"), ":turkey:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x90\x94"), ":chicken:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x90\x93"), ":rooster:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x90\xa3"), ":hatching_chick:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x90\xa4"), ":baby_chick:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x90\xa5"), ":hatched_chick:"}),
-    QVariant::fromValue(Emoji{QString::fromUtf8("\xf0\x9f\x90\xa6"), ":bird:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x90\xa7"), ":penguin:"}),
-    QVariant::fromValue(Emoji{QString::fromUtf8("\xf0\x9f\x95\x8a"), ":dove:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\xa6\x85"), ":eagle:"}),
-    QVariant::fromValue(Emoji{QString::fromUtf8("\xf0\x9f\xa6\x86"), ":duck:"}),
-    QVariant::fromValue(Emoji{QString::fromUtf8("\xf0\x9f\xa6\x89"), ":owl:"}),
-    QVariant::fromValue(Emoji{QString::fromUtf8("\xf0\x9f\x90\xb8"), ":frog:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x90\x8a"), ":crocodile:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x90\xa2"), ":turtle:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\xa6\x8e"), ":lizard:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x90\x8d"), ":snake:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x90\xb2"), ":dragon_face:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x90\x89"), ":dragon:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x90\xb3"), ":whale:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x90\x8b"), ":whale2:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x90\xac"), ":dolphin:"}),
-    QVariant::fromValue(Emoji{QString::fromUtf8("\xf0\x9f\x90\x9f"), ":fish:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x90\xa0"), ":tropical_fish:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x90\xa1"), ":blowfish:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\xa6\x88"), ":shark:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x90\x99"), ":octopus:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x90\x9a"), ":shell:"}),
-    QVariant::fromValue(Emoji{QString::fromUtf8("\xf0\x9f\xa6\x80"), ":crab:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\xa6\x90"), ":shrimp:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\xa6\x91"), ":squid:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\xa6\x8b"), ":butterfly:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x90\x8c"), ":snail:"}),
-    QVariant::fromValue(Emoji{QString::fromUtf8("\xf0\x9f\x90\x9b"), ":bug:"}),
-    QVariant::fromValue(Emoji{QString::fromUtf8("\xf0\x9f\x90\x9c"), ":ant:"}),
-    QVariant::fromValue(Emoji{QString::fromUtf8("\xf0\x9f\x90\x9d"), ":bee:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x90\x9e"), ":beetle:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x95\xb7"), ":spider:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x95\xb8"), ":spider_web:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\xa6\x82"), ":scorpion:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x92\x90"), ":bouquet:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x8c\xb8"), ":cherry_blossom:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x8f\xb5"), ":rosette:"}),
-    QVariant::fromValue(Emoji{QString::fromUtf8("\xf0\x9f\x8c\xb9"), ":rose:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\xa5\x80"), ":wilted_rose:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x8c\xba"), ":hibiscus:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x8c\xbb"), ":sunflower:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x8c\xbc"), ":blossom:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x8c\xb7"), ":tulip:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x8c\xb1"), ":seedling:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x8c\xb2"), ":evergreen_tree:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x8c\xb3"), ":deciduous_tree:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x8c\xb4"), ":palm_tree:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x8c\xb5"), ":cactus:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x8c\xbe"), ":ear_of_rice:"}),
-    QVariant::fromValue(Emoji{QString::fromUtf8("\xf0\x9f\x8c\xbf"), ":herb:"}),
-    QVariant::fromValue(Emoji{QString::fromUtf8("\xe2\x98\x98"), ":shamrock:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x8d\x80"), ":four_leaf_clover:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x8d\x81"), ":maple_leaf:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x8d\x82"), ":fallen_leaf:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x8d\x83"), ":leaves:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x8d\x84"), ":mushroom:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x8c\xb0"), ":chestnut:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x8c\x8d"), ":earth_africa:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x8c\x8e"), ":earth_americas:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x8c\x8f"), ":earth_asia:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x8c\x91"), ":new_moon:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x8c\x92"), ":waxing_crescent_moon:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x8c\x93"), ":first_quarter_moon:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x8c\x94"), ":waxing_gibbous_moon:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x8c\x95"), ":full_moon:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x8c\x96"), ":waning_gibbous_moon:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x8c\x97"), ":last_quarter_moon:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x8c\x98"), ":waning_crescent_moon:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x8c\x99"), ":crescent_moon:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x8c\x9a"), ":new_moon_with_face:"}),
-    QVariant::fromValue(Emoji{QString::fromUtf8("\xf0\x9f\x8c\x9b"),
-                              ":first_quarter_moon_with_face:"}),
-    QVariant::fromValue(Emoji{QString::fromUtf8("\xf0\x9f\x8c\x9c"),
-                              ":last_quarter_moon_with_face:"}),
-    QVariant::fromValue(Emoji{QString::fromUtf8("\xe2\x98\x80"), ":sunny:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x8c\x9d"), ":full_moon_with_face:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x8c\x9e"), ":sun_with_face:"}),
-    QVariant::fromValue(Emoji{QString::fromUtf8("\xe2\xad\x90"), ":star:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x8c\x9f"), ":star2:"}),
-    QVariant::fromValue(Emoji{QString::fromUtf8("\xe2\x98\x81"), ":cloud:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xe2\x9b\x85"), ":partly_sunny:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xe2\x9b\x88"), ":thunder_cloud_rain:"}),
-    QVariant::fromValue(Emoji{QString::fromUtf8("\xf0\x9f\x8c\xa4"),
-                              ":white_sun_small_cloud:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x8c\xa5"), ":white_sun_cloud:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x8c\xa6"), ":white_sun_rain_cloud:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x8c\xa7"), ":cloud_rain:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x8c\xa8"), ":cloud_snow:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x8c\xa9"), ":cloud_lightning:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x8c\xaa"), ":cloud_tornado:"}),
-    QVariant::fromValue(Emoji{QString::fromUtf8("\xf0\x9f\x8c\xab"), ":fog:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x8c\xac"), ":wind_blowing_face:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xe2\x98\x82"), ":umbrella2:"}),
-    QVariant::fromValue(Emoji{QString::fromUtf8("\xe2\x98\x94"), ":umbrella:"}),
-    QVariant::fromValue(Emoji{QString::fromUtf8("\xe2\x9a\xa1"), ":zap:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xe2\x9d\x84"), ":snowflake:"}),
-    QVariant::fromValue(Emoji{QString::fromUtf8("\xe2\x98\x83"), ":snowman2:"}),
-    QVariant::fromValue(Emoji{QString::fromUtf8("\xe2\x9b\x84"), ":snowman:"}),
-    QVariant::fromValue(Emoji{QString::fromUtf8("\xe2\x98\x84"), ":comet:"}),
-    QVariant::fromValue(Emoji{QString::fromUtf8("\xf0\x9f\x94\xa5"), ":fire:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x92\xa7"), ":droplet:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x8c\x8a"), ":ocean:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x8e\x83"), ":jack_o_lantern:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x8e\x84"), ":christmas_tree:"}),
-    QVariant::fromValue(Emoji{QString::fromUtf8("\xe2\x9c\xa8"), ":sparkles:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x8e\x8b"), ":tanabata_tree:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x8e\x8d"), ":bamboo:"}),
-};
+	if (roles.isEmpty()) {
+		roles = QAbstractListModel::roleNames();
+		roles[static_cast<int>(EmojiModel::Roles::Unicode)] = QByteArrayLiteral("unicode");
+		roles[static_cast<int>(EmojiModel::Roles::ShortName)] = QByteArrayLiteral("shortName");
+		roles[static_cast<int>(EmojiModel::Roles::Group)] = QByteArrayLiteral("group");
+		roles[static_cast<int>(EmojiModel::Roles::Emoji)] = QByteArrayLiteral("emoji");
+	}
 
-const QVariantList EmojiModel::food = {
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x8d\x87"), ":grapes:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x8d\x88"), ":melon:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x8d\x89"), ":watermelon:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x8d\x8a"), ":tangerine:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x8d\x8b"), ":lemon:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x8d\x8c"), ":banana:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x8d\x8d"), ":pineapple:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x8d\x8e"), ":apple:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x8d\x8f"), ":green_apple:"}),
-    QVariant::fromValue(Emoji{QString::fromUtf8("\xf0\x9f\x8d\x90"), ":pear:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x8d\x91"), ":peach:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x8d\x92"), ":cherries:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x8d\x93"), ":strawberry:"}),
-    QVariant::fromValue(Emoji{QString::fromUtf8("\xf0\x9f\xa5\x9d"), ":kiwi:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x8d\x85"), ":tomato:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\xa5\x91"), ":avocado:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x8d\x86"), ":eggplant:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\xa5\x94"), ":potato:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\xa5\x95"), ":carrot:"}),
-    QVariant::fromValue(Emoji{QString::fromUtf8("\xf0\x9f\x8c\xbd"), ":corn:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x8c\xb6"), ":hot_pepper:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\xa5\x92"), ":cucumber:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\xa5\x9c"), ":peanuts:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x8d\x9e"), ":bread:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\xa5\x90"), ":croissant:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\xa5\x96"), ":french_bread:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\xa5\x9e"), ":pancakes:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\xa7\x80"), ":cheese:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x8d\x96"), ":meat_on_bone:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x8d\x97"), ":poultry_leg:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\xa5\x93"), ":bacon:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x8d\x94"), ":hamburger:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x8d\x9f"), ":fries:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x8d\x95"), ":pizza:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x8c\xad"), ":hotdog:"}),
-    QVariant::fromValue(Emoji{QString::fromUtf8("\xf0\x9f\x8c\xae"), ":taco:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x8c\xaf"), ":burrito:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\xa5\x99"), ":stuffed_flatbread:"}),
-    QVariant::fromValue(Emoji{QString::fromUtf8("\xf0\x9f\xa5\x9a"), ":egg:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x8d\xb3"), ":cooking:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\xa5\x98"), ":shallow_pan_of_food:"}),
-    QVariant::fromValue(Emoji{QString::fromUtf8("\xf0\x9f\x8d\xb2"), ":stew:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\xa5\x97"), ":salad:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x8d\xbf"), ":popcorn:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x8d\xb1"), ":bento:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x8d\x98"), ":rice_cracker:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x8d\x99"), ":rice_ball:"}),
-    QVariant::fromValue(Emoji{QString::fromUtf8("\xf0\x9f\x8d\x9a"), ":rice:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x8d\x9b"), ":curry:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x8d\x9c"), ":ramen:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x8d\x9d"), ":spaghetti:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x8d\xa0"), ":sweet_potato:"}),
-    QVariant::fromValue(Emoji{QString::fromUtf8("\xf0\x9f\x8d\xa2"), ":oden:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x8d\xa3"), ":sushi:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x8d\xa4"), ":fried_shrimp:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x8d\xa5"), ":fish_cake:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x8d\xa1"), ":dango:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x8d\xa6"), ":icecream:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x8d\xa7"), ":shaved_ice:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x8d\xa8"), ":ice_cream:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x8d\xa9"), ":doughnut:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x8d\xaa"), ":cookie:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x8e\x82"), ":birthday:"}),
-    QVariant::fromValue(Emoji{QString::fromUtf8("\xf0\x9f\x8d\xb0"), ":cake:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x8d\xab"), ":chocolate_bar:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x8d\xac"), ":candy:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x8d\xad"), ":lollipop:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x8d\xae"), ":custard:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x8d\xaf"), ":honey_pot:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x8d\xbc"), ":baby_bottle:"}),
-    QVariant::fromValue(Emoji{QString::fromUtf8("\xf0\x9f\xa5\x9b"), ":milk:"}),
-    QVariant::fromValue(Emoji{QString::fromUtf8("\xe2\x98\x95"), ":coffee:"}),
-    QVariant::fromValue(Emoji{QString::fromUtf8("\xf0\x9f\x8d\xb5"), ":tea:"}),
-    QVariant::fromValue(Emoji{QString::fromUtf8("\xf0\x9f\x8d\xb6"), ":sake:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x8d\xbe"), ":champagne:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x8d\xb7"), ":wine_glass:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x8d\xb8"), ":cocktail:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x8d\xb9"), ":tropical_drink:"}),
-    QVariant::fromValue(Emoji{QString::fromUtf8("\xf0\x9f\x8d\xba"), ":beer:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x8d\xbb"), ":beers:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\xa5\x82"), ":champagne_glass:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\xa5\x83"), ":tumbler_glass:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x8d\xbd"), ":fork_knife_plate:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x8d\xb4"), ":fork_and_knife:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\xa5\x84"), ":spoon:"}),
-};
+	return roles;
+}
 
-const QVariantList EmojiModel::activity = {
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x91\xbe"), ":space_invader:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x95\xb4"), ":levitate:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\xa4\xba"), ":fencer:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x8f\x87"), ":horse_racing:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x8f\x87\xf0\x9f\x8f\xbb"),
-              ":horse_racing_tone1:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x8f\x87\xf0\x9f\x8f\xbc"),
-              ":horse_racing_tone2:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x8f\x87\xf0\x9f\x8f\xbd"),
-              ":horse_racing_tone3:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x8f\x87\xf0\x9f\x8f\xbe"),
-              ":horse_racing_tone4:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x8f\x87\xf0\x9f\x8f\xbf"),
-              ":horse_racing_tone5:"}),
-    QVariant::fromValue(Emoji{QString::fromUtf8("\xe2\x9b\xb7"), ":skier:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x8f\x82"), ":snowboarder:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x8f\x8c"), ":golfer:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x8f\x84"), ":surfer:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x8f\x84\xf0\x9f\x8f\xbb"),
-              ":surfer_tone1:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x8f\x84\xf0\x9f\x8f\xbc"),
-              ":surfer_tone2:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x8f\x84\xf0\x9f\x8f\xbd"),
-              ":surfer_tone3:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x8f\x84\xf0\x9f\x8f\xbe"),
-              ":surfer_tone4:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x8f\x84\xf0\x9f\x8f\xbf"),
-              ":surfer_tone5:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x9a\xa3"), ":rowboat:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x9a\xa3\xf0\x9f\x8f\xbb"),
-              ":rowboat_tone1:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x9a\xa3\xf0\x9f\x8f\xbc"),
-              ":rowboat_tone2:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x9a\xa3\xf0\x9f\x8f\xbd"),
-              ":rowboat_tone3:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x9a\xa3\xf0\x9f\x8f\xbe"),
-              ":rowboat_tone4:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x9a\xa3\xf0\x9f\x8f\xbf"),
-              ":rowboat_tone5:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x8f\x8a"), ":swimmer:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x8f\x8a\xf0\x9f\x8f\xbb"),
-              ":swimmer_tone1:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x8f\x8a\xf0\x9f\x8f\xbc"),
-              ":swimmer_tone2:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x8f\x8a\xf0\x9f\x8f\xbd"),
-              ":swimmer_tone3:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x8f\x8a\xf0\x9f\x8f\xbe"),
-              ":swimmer_tone4:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x8f\x8a\xf0\x9f\x8f\xbf"),
-              ":swimmer_tone5:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xe2\x9b\xb9"), ":basketball_player:"}),
-    QVariant::fromValue(Emoji{QString::fromUtf8("\xe2\x9b\xb9\xf0\x9f\x8f\xbb"),
-                              ":basketball_player_tone1:"}),
-    QVariant::fromValue(Emoji{QString::fromUtf8("\xe2\x9b\xb9\xf0\x9f\x8f\xbc"),
-                              ":basketball_player_tone2:"}),
-    QVariant::fromValue(Emoji{QString::fromUtf8("\xe2\x9b\xb9\xf0\x9f\x8f\xbd"),
-                              ":basketball_player_tone3:"}),
-    QVariant::fromValue(Emoji{QString::fromUtf8("\xe2\x9b\xb9\xf0\x9f\x8f\xbe"),
-                              ":basketball_player_tone4:"}),
-    QVariant::fromValue(Emoji{QString::fromUtf8("\xe2\x9b\xb9\xf0\x9f\x8f\xbf"),
-                              ":basketball_player_tone5:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x8f\x8b"), ":lifter:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x8f\x8b\xf0\x9f\x8f\xbb"),
-              ":lifter_tone1:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x8f\x8b\xf0\x9f\x8f\xbc"),
-              ":lifter_tone2:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x8f\x8b\xf0\x9f\x8f\xbd"),
-              ":lifter_tone3:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x8f\x8b\xf0\x9f\x8f\xbe"),
-              ":lifter_tone4:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x8f\x8b\xf0\x9f\x8f\xbf"),
-              ":lifter_tone5:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x9a\xb4"), ":bicyclist:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x9a\xb4\xf0\x9f\x8f\xbb"),
-              ":bicyclist_tone1:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x9a\xb4\xf0\x9f\x8f\xbc"),
-              ":bicyclist_tone2:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x9a\xb4\xf0\x9f\x8f\xbd"),
-              ":bicyclist_tone3:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x9a\xb4\xf0\x9f\x8f\xbe"),
-              ":bicyclist_tone4:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x9a\xb4\xf0\x9f\x8f\xbf"),
-              ":bicyclist_tone5:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x9a\xb5"), ":mountain_bicyclist:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x9a\xb5\xf0\x9f\x8f\xbb"),
-              ":mountain_bicyclist_tone1:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x9a\xb5\xf0\x9f\x8f\xbc"),
-              ":mountain_bicyclist_tone2:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x9a\xb5\xf0\x9f\x8f\xbd"),
-              ":mountain_bicyclist_tone3:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x9a\xb5\xf0\x9f\x8f\xbe"),
-              ":mountain_bicyclist_tone4:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x9a\xb5\xf0\x9f\x8f\xbf"),
-              ":mountain_bicyclist_tone5:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\xa4\xb8"), ":cartwheel:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\xa4\xb8\xf0\x9f\x8f\xbb"),
-              ":cartwheel_tone1:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\xa4\xb8\xf0\x9f\x8f\xbc"),
-              ":cartwheel_tone2:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\xa4\xb8\xf0\x9f\x8f\xbd"),
-              ":cartwheel_tone3:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\xa4\xb8\xf0\x9f\x8f\xbe"),
-              ":cartwheel_tone4:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\xa4\xb8\xf0\x9f\x8f\xbf"),
-              ":cartwheel_tone5:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\xa4\xbc"), ":wrestlers:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\xa4\xbc\xf0\x9f\x8f\xbb"),
-              ":wrestlers_tone1:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\xa4\xbc\xf0\x9f\x8f\xbc"),
-              ":wrestlers_tone2:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\xa4\xbc\xf0\x9f\x8f\xbd"),
-              ":wrestlers_tone3:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\xa4\xbc\xf0\x9f\x8f\xbe"),
-              ":wrestlers_tone4:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\xa4\xbc\xf0\x9f\x8f\xbf"),
-              ":wrestlers_tone5:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\xa4\xbd"), ":water_polo:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\xa4\xbd\xf0\x9f\x8f\xbb"),
-              ":water_polo_tone1:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\xa4\xbd\xf0\x9f\x8f\xbc"),
-              ":water_polo_tone2:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\xa4\xbd\xf0\x9f\x8f\xbd"),
-              ":water_polo_tone3:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\xa4\xbd\xf0\x9f\x8f\xbe"),
-              ":water_polo_tone4:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\xa4\xbd\xf0\x9f\x8f\xbf"),
-              ":water_polo_tone5:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\xa4\xbe"), ":handball:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\xa4\xbe\xf0\x9f\x8f\xbb"),
-              ":handball_tone1:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\xa4\xbe\xf0\x9f\x8f\xbc"),
-              ":handball_tone2:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\xa4\xbe\xf0\x9f\x8f\xbd"),
-              ":handball_tone3:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\xa4\xbe\xf0\x9f\x8f\xbe"),
-              ":handball_tone4:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\xa4\xbe\xf0\x9f\x8f\xbf"),
-              ":handball_tone5:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\xa4\xb9"), ":juggling:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\xa4\xb9\xf0\x9f\x8f\xbb"),
-              ":juggling_tone1:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\xa4\xb9\xf0\x9f\x8f\xbc"),
-              ":juggling_tone2:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\xa4\xb9\xf0\x9f\x8f\xbd"),
-              ":juggling_tone3:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\xa4\xb9\xf0\x9f\x8f\xbe"),
-              ":juggling_tone4:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\xa4\xb9\xf0\x9f\x8f\xbf"),
-              ":juggling_tone5:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x8e\xaa"), ":circus_tent:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x8e\xad"), ":performing_arts:"}),
-    QVariant::fromValue(Emoji{QString::fromUtf8("\xf0\x9f\x8e\xa8"), ":art:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x8e\xb0"), ":slot_machine:"}),
-    QVariant::fromValue(Emoji{QString::fromUtf8("\xf0\x9f\x9b\x80"), ":bath:"}),
-    QVariant::fromValue(Emoji{
-        QString::fromUtf8("\xf0\x9f\x9b\x80\xf0\x9f\x8f\xbb"), ":bath_tone1:"}),
-    QVariant::fromValue(Emoji{
-        QString::fromUtf8("\xf0\x9f\x9b\x80\xf0\x9f\x8f\xbc"), ":bath_tone2:"}),
-    QVariant::fromValue(Emoji{
-        QString::fromUtf8("\xf0\x9f\x9b\x80\xf0\x9f\x8f\xbd"), ":bath_tone3:"}),
-    QVariant::fromValue(Emoji{
-        QString::fromUtf8("\xf0\x9f\x9b\x80\xf0\x9f\x8f\xbe"), ":bath_tone4:"}),
-    QVariant::fromValue(Emoji{
-        QString::fromUtf8("\xf0\x9f\x9b\x80\xf0\x9f\x8f\xbf"), ":bath_tone5:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x8e\x97"), ":reminder_ribbon:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x8e\x9f"), ":tickets:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x8e\xab"), ":ticket:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x8e\x96"), ":military_medal:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x8f\x86"), ":trophy:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x8f\x85"), ":medal:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\xa5\x87"), ":first_place:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\xa5\x88"), ":second_place:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\xa5\x89"), ":third_place:"}),
-    QVariant::fromValue(Emoji{QString::fromUtf8("\xe2\x9a\xbd"), ":soccer:"}),
-    QVariant::fromValue(Emoji{QString::fromUtf8("\xe2\x9a\xbe"), ":baseball:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x8f\x80"), ":basketball:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x8f\x90"), ":volleyball:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x8f\x88"), ":football:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x8f\x89"), ":rugby_football:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x8e\xbe"), ":tennis:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x8e\xb1"), ":8ball:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x8e\xb3"), ":bowling:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x8f\x8f"), ":cricket:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x8f\x91"), ":field_hockey:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x8f\x92"), ":hockey:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x8f\x93"), ":ping_pong:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x8f\xb8"), ":badminton:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\xa5\x8a"), ":boxing_glove:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\xa5\x8b"), ":martial_arts_uniform:"}),
-    QVariant::fromValue(Emoji{QString::fromUtf8("\xf0\x9f\xa5\x85"), ":goal:"}),
-    QVariant::fromValue(Emoji{QString::fromUtf8("\xf0\x9f\x8e\xaf"), ":dart:"}),
-    QVariant::fromValue(Emoji{QString::fromUtf8("\xe2\x9b\xb3"), ":golf:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xe2\x9b\xb8"), ":ice_skate:"}),
-    QVariant::fromValue(Emoji{QString::fromUtf8("\xf0\x9f\x8e\xa3"),
-                              ":fishing_pole_and_fish:"}),
-    QVariant::fromValue(Emoji{QString::fromUtf8("\xf0\x9f\x8e\xbd"),
-                              ":running_shirt_with_sash:"}),
-    QVariant::fromValue(Emoji{QString::fromUtf8("\xf0\x9f\x8e\xbf"), ":ski:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x8e\xae"), ":video_game:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x8e\xb2"), ":game_die:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x8e\xbc"), ":musical_score:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x8e\xa4"), ":microphone:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x8e\xa7"), ":headphones:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x8e\xb7"), ":saxophone:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x8e\xb8"), ":guitar:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x8e\xb9"), ":musical_keyboard:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x8e\xba"), ":trumpet:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x8e\xbb"), ":violin:"}),
-    QVariant::fromValue(Emoji{QString::fromUtf8("\xf0\x9f\xa5\x81"), ":drum:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x8e\xac"), ":clapper:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x8f\xb9"), ":bow_and_arrow:"}),
-};
+Emoji::Group EmojiProxyModel::group() const
+{
+	return m_group;
+}
 
-const QVariantList EmojiModel::travel = {
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x8f\x8e"), ":race_car:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x8f\x8d"), ":motorcycle:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x97\xbe"), ":japan:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x8f\x94"), ":mountain_snow:"}),
-    QVariant::fromValue(Emoji{QString::fromUtf8("\xe2\x9b\xb0"), ":mountain:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x8c\x8b"), ":volcano:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x97\xbb"), ":mount_fuji:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x8f\x95"), ":camping:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x8f\x96"), ":beach:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x8f\x9c"), ":desert:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x8f\x9d"), ":island:"}),
-    QVariant::fromValue(Emoji{QString::fromUtf8("\xf0\x9f\x8f\x9e"), ":park:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x8f\x9f"), ":stadium:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x8f\x9b"), ":classical_building:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x8f\x97"), ":construction_site:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x8f\x98"), ":homes:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x8f\x99"), ":cityscape:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x8f\x9a"), ":house_abandoned:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x8f\xa0"), ":house:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x8f\xa1"), ":house_with_garden:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x8f\xa2"), ":office:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x8f\xa3"), ":post_office:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x8f\xa4"), ":european_post_office:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x8f\xa5"), ":hospital:"}),
-    QVariant::fromValue(Emoji{QString::fromUtf8("\xf0\x9f\x8f\xa6"), ":bank:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x8f\xa8"), ":hotel:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x8f\xa9"), ":love_hotel:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x8f\xaa"), ":convenience_store:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x8f\xab"), ":school:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x8f\xac"), ":department_store:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x8f\xad"), ":factory:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x8f\xaf"), ":japanese_castle:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x8f\xb0"), ":european_castle:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x92\x92"), ":wedding:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x97\xbc"), ":tokyo_tower:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x97\xbd"), ":statue_of_liberty:"}),
-    QVariant::fromValue(Emoji{QString::fromUtf8("\xe2\x9b\xaa"), ":church:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x95\x8c"), ":mosque:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x95\x8d"), ":synagogue:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xe2\x9b\xa9"), ":shinto_shrine:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x95\x8b"), ":kaaba:"}),
-    QVariant::fromValue(Emoji{QString::fromUtf8("\xe2\x9b\xb2"), ":fountain:"}),
-    QVariant::fromValue(Emoji{QString::fromUtf8("\xe2\x9b\xba"), ":tent:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x8c\x81"), ":foggy:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x8c\x83"), ":night_with_stars:"}),
-    QVariant::fromValue(Emoji{QString::fromUtf8("\xf0\x9f\x8c\x84"),
-                              ":sunrise_over_mountains:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x8c\x85"), ":sunrise:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x8c\x86"), ":city_dusk:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x8c\x87"), ":city_sunset:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x8c\x89"), ":bridge_at_night:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x8c\x8c"), ":milky_way:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x8e\xa0"), ":carousel_horse:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x8e\xa1"), ":ferris_wheel:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x8e\xa2"), ":roller_coaster:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x9a\x82"), ":steam_locomotive:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x9a\x83"), ":railway_car:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x9a\x84"), ":bullettrain_side:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x9a\x85"), ":bullettrain_front:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x9a\x86"), ":train2:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x9a\x87"), ":metro:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x9a\x88"), ":light_rail:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x9a\x89"), ":station:"}),
-    QVariant::fromValue(Emoji{QString::fromUtf8("\xf0\x9f\x9a\x8a"), ":tram:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x9a\x9d"), ":monorail:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x9a\x9e"), ":mountain_railway:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x9a\x8b"), ":train:"}),
-    QVariant::fromValue(Emoji{QString::fromUtf8("\xf0\x9f\x9a\x8c"), ":bus:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x9a\x8d"), ":oncoming_bus:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x9a\x8e"), ":trolleybus:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x9a\x90"), ":minibus:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x9a\x91"), ":ambulance:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x9a\x92"), ":fire_engine:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x9a\x93"), ":police_car:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x9a\x94"), ":oncoming_police_car:"}),
-    QVariant::fromValue(Emoji{QString::fromUtf8("\xf0\x9f\x9a\x95"), ":taxi:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x9a\x96"), ":oncoming_taxi:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x9a\x97"), ":red_car:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x9a\x98"), ":oncoming_automobile:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x9a\x99"), ":blue_car:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x9a\x9a"), ":truck:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x9a\x9b"), ":articulated_lorry:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x9a\x9c"), ":tractor:"}),
-    QVariant::fromValue(Emoji{QString::fromUtf8("\xf0\x9f\x9a\xb2"), ":bike:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x9b\xb4"), ":scooter:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x9b\xb5"), ":motor_scooter:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x9a\x8f"), ":busstop:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x9b\xa3"), ":motorway:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x9b\xa4"), ":railway_track:"}),
-    QVariant::fromValue(Emoji{QString::fromUtf8("\xe2\x9b\xbd"), ":fuelpump:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x9a\xa8"), ":rotating_light:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x9a\xa5"), ":traffic_light:"}),
-    QVariant::fromValue(Emoji{QString::fromUtf8("\xf0\x9f\x9a\xa6"),
-                              ":vertical_traffic_light:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x9a\xa7"), ":construction:"}),
-    QVariant::fromValue(Emoji{QString::fromUtf8("\xe2\x9a\x93"), ":anchor:"}),
-    QVariant::fromValue(Emoji{QString::fromUtf8("\xe2\x9b\xb5"), ":sailboat:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x9b\xb6"), ":canoe:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x9a\xa4"), ":speedboat:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x9b\xb3"), ":cruise_ship:"}),
-    QVariant::fromValue(Emoji{QString::fromUtf8("\xe2\x9b\xb4"), ":ferry:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x9b\xa5"), ":motorboat:"}),
-    QVariant::fromValue(Emoji{QString::fromUtf8("\xf0\x9f\x9a\xa2"), ":ship:"}),
-    QVariant::fromValue(Emoji{QString::fromUtf8("\xe2\x9c\x88"), ":airplane:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x9b\xa9"), ":airplane_small:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x9b\xab"), ":airplane_departure:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x9b\xac"), ":airplane_arriving:"}),
-    QVariant::fromValue(Emoji{QString::fromUtf8("\xf0\x9f\x92\xba"), ":seat:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x9a\x81"), ":helicopter:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x9a\x9f"), ":suspension_railway:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x9a\xa0"), ":mountain_cableway:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x9a\xa1"), ":aerial_tramway:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x9a\x80"), ":rocket:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x9b\xb0"), ":satellite_orbital:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x8c\xa0"), ":stars:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x8c\x88"), ":rainbow:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x8e\x86"), ":fireworks:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x8e\x87"), ":sparkler:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x8e\x91"), ":rice_scene:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x8f\x81"), ":checkered_flag:"}),
-};
+void EmojiProxyModel::setGroup(Emoji::Group group)
+{
+	if (m_group == group) {
+		return;
+	}
 
-const QVariantList EmojiModel::objects = {
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xe2\x98\xa0"), ":skull_crossbones:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x92\x8c"), ":love_letter:"}),
-    QVariant::fromValue(Emoji{QString::fromUtf8("\xf0\x9f\x92\xa3"), ":bomb:"}),
-    QVariant::fromValue(Emoji{QString::fromUtf8("\xf0\x9f\x95\xb3"), ":hole:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x9b\x8d"), ":shopping_bags:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x93\xbf"), ":prayer_beads:"}),
-    QVariant::fromValue(Emoji{QString::fromUtf8("\xf0\x9f\x92\x8e"), ":gem:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x94\xaa"), ":knife:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x8f\xba"), ":amphora:"}),
-    QVariant::fromValue(Emoji{QString::fromUtf8("\xf0\x9f\x97\xba"), ":map:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x92\x88"), ":barber:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x96\xbc"), ":frame_photo:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x9b\x8e"), ":bellhop:"}),
-    QVariant::fromValue(Emoji{QString::fromUtf8("\xf0\x9f\x9a\xaa"), ":door:"}),
-    QVariant::fromValue(Emoji{QString::fromUtf8("\xf0\x9f\x9b\x8c"),
-                              ":sleeping_accommodation:"}),
-    QVariant::fromValue(Emoji{QString::fromUtf8("\xf0\x9f\x9b\x8f"), ":bed:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x9b\x8b"), ":couch:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x9a\xbd"), ":toilet:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x9a\xbf"), ":shower:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x9b\x81"), ":bathtub:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xe2\x8c\x9b"), ":hourglass:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xe2\x8f\xb3"), ":hourglass_flowing_sand:"}),
-    QVariant::fromValue(Emoji{QString::fromUtf8("\xe2\x8c\x9a"), ":watch:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xe2\x8f\xb0"), ":alarm_clock:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xe2\x8f\xb1"), ":stopwatch:"}),
-    QVariant::fromValue(Emoji{QString::fromUtf8("\xe2\x8f\xb2"), ":timer:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x95\xb0"), ":clock:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x8c\xa1"), ":thermometer:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xe2\x9b\xb1"), ":beach_umbrella:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x8e\x88"), ":balloon:"}),
-    QVariant::fromValue(Emoji{QString::fromUtf8("\xf0\x9f\x8e\x89"), ":tada:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x8e\x8a"), ":confetti_ball:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x8e\x8e"), ":dolls:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x8e\x8f"), ":flags:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x8e\x90"), ":wind_chime:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x8e\x80"), ":ribbon:"}),
-    QVariant::fromValue(Emoji{QString::fromUtf8("\xf0\x9f\x8e\x81"), ":gift:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x95\xb9"), ":joystick:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x93\xaf"), ":postal_horn:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x8e\x99"), ":microphone2:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x8e\x9a"), ":level_slider:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x8e\x9b"), ":control_knobs:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x93\xbb"), ":radio:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x93\xb1"), ":iphone:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x93\xb2"), ":calling:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xe2\x98\x8e"), ":telephone:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x93\x9e"), ":telephone_receiver:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x93\x9f"), ":pager:"}),
-    QVariant::fromValue(Emoji{QString::fromUtf8("\xf0\x9f\x93\xa0"), ":fax:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x94\x8b"), ":battery:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x94\x8c"), ":electric_plug:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x92\xbb"), ":computer:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x96\xa5"), ":desktop:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x96\xa8"), ":printer:"}),
-    QVariant::fromValue(Emoji{QString::fromUtf8("\xe2\x8c\xa8"), ":keyboard:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x96\xb1"), ":mouse_three_button:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x96\xb2"), ":trackball:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x92\xbd"), ":minidisc:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x92\xbe"), ":floppy_disk:"}),
-    QVariant::fromValue(Emoji{QString::fromUtf8("\xf0\x9f\x92\xbf"), ":cd:"}),
-    QVariant::fromValue(Emoji{QString::fromUtf8("\xf0\x9f\x93\x80"), ":dvd:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x8e\xa5"), ":movie_camera:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x8e\x9e"), ":film_frames:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x93\xbd"), ":projector:"}),
-    QVariant::fromValue(Emoji{QString::fromUtf8("\xf0\x9f\x93\xba"), ":tv:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x93\xb7"), ":camera:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x93\xb8"), ":camera_with_flash:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x93\xb9"), ":video_camera:"}),
-    QVariant::fromValue(Emoji{QString::fromUtf8("\xf0\x9f\x93\xbc"), ":vhs:"}),
-    QVariant::fromValue(Emoji{QString::fromUtf8("\xf0\x9f\x94\x8d"), ":mag:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x94\x8e"), ":mag_right:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x94\xac"), ":microscope:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x94\xad"), ":telescope:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x93\xa1"), ":satellite:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x95\xaf"), ":candle:"}),
-    QVariant::fromValue(Emoji{QString::fromUtf8("\xf0\x9f\x92\xa1"), ":bulb:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x94\xa6"), ":flashlight:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x8f\xae"), ":izakaya_lantern:"}),
-    QVariant::fromValue(Emoji{QString::fromUtf8("\xf0\x9f\x93\x94"),
-                              ":notebook_with_decorative_cover:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x93\x95"), ":closed_book:"}),
-    QVariant::fromValue(Emoji{QString::fromUtf8("\xf0\x9f\x93\x96"), ":book:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x93\x97"), ":green_book:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x93\x98"), ":blue_book:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x93\x99"), ":orange_book:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x93\x9a"), ":books:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x93\x93"), ":notebook:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x93\x92"), ":ledger:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x93\x83"), ":page_with_curl:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x93\x9c"), ":scroll:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x93\x84"), ":page_facing_up:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x93\xb0"), ":newspaper:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x97\x9e"), ":newspaper2:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x93\x91"), ":bookmark_tabs:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x94\x96"), ":bookmark:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x8f\xb7"), ":label:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x92\xb0"), ":moneybag:"}),
-    QVariant::fromValue(Emoji{QString::fromUtf8("\xf0\x9f\x92\xb4"), ":yen:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x92\xb5"), ":dollar:"}),
-    QVariant::fromValue(Emoji{QString::fromUtf8("\xf0\x9f\x92\xb6"), ":euro:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x92\xb7"), ":pound:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x92\xb8"), ":money_with_wings:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x92\xb3"), ":credit_card:"}),
-    QVariant::fromValue(Emoji{QString::fromUtf8("\xe2\x9c\x89"), ":envelope:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x93\xa7"), ":e-mail:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x93\xa8"), ":incoming_envelope:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x93\xa9"), ":envelope_with_arrow:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x93\xa4"), ":outbox_tray:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x93\xa5"), ":inbox_tray:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x93\xa6"), ":package:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x93\xab"), ":mailbox:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x93\xaa"), ":mailbox_closed:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x93\xac"), ":mailbox_with_mail:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x93\xad"), ":mailbox_with_no_mail:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x93\xae"), ":postbox:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x97\xb3"), ":ballot_box:"}),
-    QVariant::fromValue(Emoji{QString::fromUtf8("\xe2\x9c\x8f"), ":pencil2:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xe2\x9c\x92"), ":black_nib:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x96\x8b"), ":pen_fountain:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x96\x8a"), ":pen_ballpoint:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x96\x8c"), ":paintbrush:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x96\x8d"), ":crayon:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x93\x9d"), ":pencil:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x93\x81"), ":file_folder:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x93\x82"), ":open_file_folder:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x97\x82"), ":dividers:"}),
-    QVariant::fromValue(Emoji{QString::fromUtf8("\xf0\x9f\x93\x85"), ":date:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x93\x86"), ":calendar:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x97\x92"), ":notepad_spiral:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x97\x93"), ":calendar_spiral:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x93\x87"), ":card_index:"}),
-    QVariant::fromValue(Emoji{QString::fromUtf8("\xf0\x9f\x93\x88"),
-                              ":chart_with_upwards_trend:"}),
-    QVariant::fromValue(Emoji{QString::fromUtf8("\xf0\x9f\x93\x89"),
-                              ":chart_with_downwards_trend:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x93\x8a"), ":bar_chart:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x93\x8b"), ":clipboard:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x93\x8c"), ":pushpin:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x93\x8d"), ":round_pushpin:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x93\x8e"), ":paperclip:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x96\x87"), ":paperclips:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x93\x8f"), ":straight_ruler:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x93\x90"), ":triangular_ruler:"}),
-    QVariant::fromValue(Emoji{QString::fromUtf8("\xe2\x9c\x82"), ":scissors:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x97\x83"), ":card_box:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x97\x84"), ":file_cabinet:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x97\x91"), ":wastebasket:"}),
-    QVariant::fromValue(Emoji{QString::fromUtf8("\xf0\x9f\x94\x92"), ":lock:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x94\x93"), ":unlock:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x94\x8f"), ":lock_with_ink_pen:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x94\x90"), ":closed_lock_with_key:"}),
-    QVariant::fromValue(Emoji{QString::fromUtf8("\xf0\x9f\x94\x91"), ":key:"}),
-    QVariant::fromValue(Emoji{QString::fromUtf8("\xf0\x9f\x97\x9d"), ":key2:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x94\xa8"), ":hammer:"}),
-    QVariant::fromValue(Emoji{QString::fromUtf8("\xe2\x9b\x8f"), ":pick:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xe2\x9a\x92"), ":hammer_pick:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x9b\xa0"), ":tools:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x97\xa1"), ":dagger:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xe2\x9a\x94"), ":crossed_swords:"}),
-    QVariant::fromValue(Emoji{QString::fromUtf8("\xf0\x9f\x94\xab"), ":gun:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x9b\xa1"), ":shield:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x94\xa7"), ":wrench:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x94\xa9"), ":nut_and_bolt:"}),
-    QVariant::fromValue(Emoji{QString::fromUtf8("\xe2\x9a\x99"), ":gear:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x97\x9c"), ":compression:"}),
-    QVariant::fromValue(Emoji{QString::fromUtf8("\xe2\x9a\x97"), ":alembic:"}),
-    QVariant::fromValue(Emoji{QString::fromUtf8("\xe2\x9a\x96"), ":scales:"}),
-    QVariant::fromValue(Emoji{QString::fromUtf8("\xf0\x9f\x94\x97"), ":link:"}),
-    QVariant::fromValue(Emoji{QString::fromUtf8("\xe2\x9b\x93"), ":chains:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x92\x89"), ":syringe:"}),
-    QVariant::fromValue(Emoji{QString::fromUtf8("\xf0\x9f\x92\x8a"), ":pill:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x9a\xac"), ":smoking:"}),
-    QVariant::fromValue(Emoji{QString::fromUtf8("\xe2\x9a\xb0"), ":coffin:"}),
-    QVariant::fromValue(Emoji{QString::fromUtf8("\xe2\x9a\xb1"), ":urn:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x97\xbf"), ":moyai:"}),
-    QVariant::fromValue(Emoji{QString::fromUtf8("\xf0\x9f\x9b\xa2"), ":oil:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x94\xae"), ":crystal_ball:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x9b\x92"), ":shopping_cart:"}),
-    QVariant::fromValue(Emoji{QString::fromUtf8("\xf0\x9f\x9a\xa9"),
-                              ":triangular_flag_on_post:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x8e\x8c"), ":crossed_flags:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x8f\xb4"), ":flag_black:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x8f\xb3"), ":flag_white:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x8f\xb3\xf0\x9f\x8c\x88"),
-              ":rainbow_flag:"}),
-};
+	m_group = group;
+	emit groupChanged();
 
-const QVariantList EmojiModel::symbols = {
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x91\x81\xf0\x9f\x97\xa8"),
-              ":eye_in_speech_bubble:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x92\x98"), ":cupid:"}),
-    QVariant::fromValue(Emoji{QString::fromUtf8("\xe2\x9d\xa4"), ":heart:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x92\x93"), ":heartbeat:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x92\x94"), ":broken_heart:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x92\x95"), ":two_hearts:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x92\x96"), ":sparkling_heart:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x92\x97"), ":heartpulse:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x92\x99"), ":blue_heart:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x92\x9a"), ":green_heart:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x92\x9b"), ":yellow_heart:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x92\x9c"), ":purple_heart:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x96\xa4"), ":black_heart:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x92\x9d"), ":gift_heart:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x92\x9e"), ":revolving_hearts:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x92\x9f"), ":heart_decoration:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xe2\x9d\xa3"), ":heart_exclamation:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x92\xa2"), ":anger:"}),
-    QVariant::fromValue(Emoji{QString::fromUtf8("\xf0\x9f\x92\xa5"), ":boom:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x92\xab"), ":dizzy:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x92\xac"), ":speech_balloon:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x97\xa8"), ":speech_left:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x97\xaf"), ":anger_right:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x92\xad"), ":thought_balloon:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x92\xae"), ":white_flower:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x8c\x90"), ":globe_with_meridians:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xe2\x99\xa8"), ":hotsprings:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x9b\x91"), ":octagonal_sign:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x95\x9b"), ":clock12:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x95\xa7"), ":clock1230:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x95\x90"), ":clock1:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x95\x9c"), ":clock130:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x95\x91"), ":clock2:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x95\x9d"), ":clock230:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x95\x92"), ":clock3:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x95\x9e"), ":clock330:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x95\x93"), ":clock4:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x95\x9f"), ":clock430:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x95\x94"), ":clock5:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x95\xa0"), ":clock530:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x95\x95"), ":clock6:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x95\xa1"), ":clock630:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x95\x96"), ":clock7:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x95\xa2"), ":clock730:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x95\x97"), ":clock8:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x95\xa3"), ":clock830:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x95\x98"), ":clock9:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x95\xa4"), ":clock930:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x95\x99"), ":clock10:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x95\xa5"), ":clock1030:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x95\x9a"), ":clock11:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x95\xa6"), ":clock1130:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x8c\x80"), ":cyclone:"}),
-    QVariant::fromValue(Emoji{QString::fromUtf8("\xe2\x99\xa0"), ":spades:"}),
-    QVariant::fromValue(Emoji{QString::fromUtf8("\xe2\x99\xa5"), ":hearts:"}),
-    QVariant::fromValue(Emoji{QString::fromUtf8("\xe2\x99\xa6"), ":diamonds:"}),
-    QVariant::fromValue(Emoji{QString::fromUtf8("\xe2\x99\xa3"), ":clubs:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x83\x8f"), ":black_joker:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x80\x84"), ":mahjong:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x8e\xb4"), ":flower_playing_cards:"}),
-    QVariant::fromValue(Emoji{QString::fromUtf8("\xf0\x9f\x94\x87"), ":mute:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x94\x88"), ":speaker:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x94\x89"), ":sound:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x94\x8a"), ":loud_sound:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x93\xa2"), ":loudspeaker:"}),
-    QVariant::fromValue(Emoji{QString::fromUtf8("\xf0\x9f\x93\xa3"), ":mega:"}),
-    QVariant::fromValue(Emoji{QString::fromUtf8("\xf0\x9f\x94\x94"), ":bell:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x94\x95"), ":no_bell:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x8e\xb5"), ":musical_note:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x8e\xb6"), ":notes:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x92\xb9"), ":chart:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x92\xb1"), ":currency_exchange:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x92\xb2"), ":heavy_dollar_sign:"}),
-    QVariant::fromValue(Emoji{QString::fromUtf8("\xf0\x9f\x8f\xa7"), ":atm:"}),
-    QVariant::fromValue(Emoji{QString::fromUtf8("\xf0\x9f\x9a\xae"),
-                              ":put_litter_in_its_place:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x9a\xb0"), ":potable_water:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xe2\x99\xbf"), ":wheelchair:"}),
-    QVariant::fromValue(Emoji{QString::fromUtf8("\xf0\x9f\x9a\xb9"), ":mens:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x9a\xba"), ":womens:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x9a\xbb"), ":restroom:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x9a\xbc"), ":baby_symbol:"}),
-    QVariant::fromValue(Emoji{QString::fromUtf8("\xf0\x9f\x9a\xbe"), ":wc:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x9b\x82"), ":passport_control:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x9b\x83"), ":customs:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x9b\x84"), ":baggage_claim:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x9b\x85"), ":left_luggage:"}),
-    QVariant::fromValue(Emoji{QString::fromUtf8("\xe2\x9a\xa0"), ":warning:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x9a\xb8"), ":children_crossing:"}),
-    QVariant::fromValue(Emoji{QString::fromUtf8("\xe2\x9b\x94"), ":no_entry:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x9a\xab"), ":no_entry_sign:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x9a\xb3"), ":no_bicycles:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x9a\xad"), ":no_smoking:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x9a\xaf"), ":do_not_litter:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x9a\xb1"), ":non-potable_water:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x9a\xb7"), ":no_pedestrians:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x93\xb5"), ":no_mobile_phones:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x94\x9e"), ":underage:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xe2\x98\xa2"), ":radioactive:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xe2\x98\xa3"), ":biohazard:"}),
-    QVariant::fromValue(Emoji{QString::fromUtf8("\xe2\xac\x86"), ":arrow_up:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xe2\x86\x97"), ":arrow_upper_right:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xe2\x9e\xa1"), ":arrow_right:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xe2\x86\x98"), ":arrow_lower_right:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xe2\xac\x87"), ":arrow_down:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xe2\x86\x99"), ":arrow_lower_left:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xe2\xac\x85"), ":arrow_left:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xe2\x86\x96"), ":arrow_upper_left:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xe2\x86\x95"), ":arrow_up_down:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xe2\x86\x94"), ":left_right_arrow:"}),
-    QVariant::fromValue(Emoji{QString::fromUtf8("\xe2\x86\xa9"),
-                              ":leftwards_arrow_with_hook:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xe2\x86\xaa"), ":arrow_right_hook:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xe2\xa4\xb4"), ":arrow_heading_up:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xe2\xa4\xb5"), ":arrow_heading_down:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x94\x83"), ":arrows_clockwise:"}),
-    QVariant::fromValue(Emoji{QString::fromUtf8("\xf0\x9f\x94\x84"),
-                              ":arrows_counterclockwise:"}),
-    QVariant::fromValue(Emoji{QString::fromUtf8("\xf0\x9f\x94\x99"), ":back:"}),
-    QVariant::fromValue(Emoji{QString::fromUtf8("\xf0\x9f\x94\x9a"), ":end:"}),
-    QVariant::fromValue(Emoji{QString::fromUtf8("\xf0\x9f\x94\x9b"), ":on:"}),
-    QVariant::fromValue(Emoji{QString::fromUtf8("\xf0\x9f\x94\x9c"), ":soon:"}),
-    QVariant::fromValue(Emoji{QString::fromUtf8("\xf0\x9f\x94\x9d"), ":top:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x9b\x90"), ":place_of_worship:"}),
-    QVariant::fromValue(Emoji{QString::fromUtf8("\xe2\x9a\x9b"), ":atom:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x95\x89"), ":om_symbol:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xe2\x9c\xa1"), ":star_of_david:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xe2\x98\xb8"), ":wheel_of_dharma:"}),
-    QVariant::fromValue(Emoji{QString::fromUtf8("\xe2\x98\xaf"), ":yin_yang:"}),
-    QVariant::fromValue(Emoji{QString::fromUtf8("\xe2\x9c\x9d"), ":cross:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xe2\x98\xa6"), ":orthodox_cross:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xe2\x98\xaa"), ":star_and_crescent:"}),
-    QVariant::fromValue(Emoji{QString::fromUtf8("\xe2\x98\xae"), ":peace:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x95\x8e"), ":menorah:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x94\xaf"), ":six_pointed_star:"}),
-    QVariant::fromValue(Emoji{QString::fromUtf8("\xe2\x99\x88"), ":aries:"}),
-    QVariant::fromValue(Emoji{QString::fromUtf8("\xe2\x99\x89"), ":taurus:"}),
-    QVariant::fromValue(Emoji{QString::fromUtf8("\xe2\x99\x8a"), ":gemini:"}),
-    QVariant::fromValue(Emoji{QString::fromUtf8("\xe2\x99\x8b"), ":cancer:"}),
-    QVariant::fromValue(Emoji{QString::fromUtf8("\xe2\x99\x8c"), ":leo:"}),
-    QVariant::fromValue(Emoji{QString::fromUtf8("\xe2\x99\x8d"), ":virgo:"}),
-    QVariant::fromValue(Emoji{QString::fromUtf8("\xe2\x99\x8e"), ":libra:"}),
-    QVariant::fromValue(Emoji{QString::fromUtf8("\xe2\x99\x8f"), ":scorpius:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xe2\x99\x90"), ":sagittarius:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xe2\x99\x91"), ":capricorn:"}),
-    QVariant::fromValue(Emoji{QString::fromUtf8("\xe2\x99\x92"), ":aquarius:"}),
-    QVariant::fromValue(Emoji{QString::fromUtf8("\xe2\x99\x93"), ":pisces:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xe2\x9b\x8e"), ":ophiuchus:"}),
-    QVariant::fromValue(Emoji{QString::fromUtf8("\xf0\x9f\x94\x80"),
-                              ":twisted_rightwards_arrows:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x94\x81"), ":repeat:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x94\x82"), ":repeat_one:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xe2\x96\xb6"), ":arrow_forward:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xe2\x8f\xa9"), ":fast_forward:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xe2\x8f\xad"), ":track_next:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xe2\x8f\xaf"), ":play_pause:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xe2\x97\x80"), ":arrow_backward:"}),
-    QVariant::fromValue(Emoji{QString::fromUtf8("\xe2\x8f\xaa"), ":rewind:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xe2\x8f\xae"), ":track_previous:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x94\xbc"), ":arrow_up_small:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xe2\x8f\xab"), ":arrow_double_up:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x94\xbd"), ":arrow_down_small:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xe2\x8f\xac"), ":arrow_double_down:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xe2\x8f\xb8"), ":pause_button:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xe2\x8f\xb9"), ":stop_button:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xe2\x8f\xba"), ":record_button:"}),
-    QVariant::fromValue(Emoji{QString::fromUtf8("\xe2\x8f\x8f"), ":eject:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x8e\xa6"), ":cinema:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x94\x85"), ":low_brightness:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x94\x86"), ":high_brightness:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x93\xb6"), ":signal_strength:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x93\xb3"), ":vibration_mode:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x93\xb4"), ":mobile_phone_off:"}),
-    QVariant::fromValue(Emoji{QString::fromUtf8("\xe2\x99\xbb"), ":recycle:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x93\x9b"), ":name_badge:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xe2\x9a\x9c"), ":fleur-de-lis:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x94\xb0"), ":beginner:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x94\xb1"), ":trident:"}),
-    QVariant::fromValue(Emoji{QString::fromUtf8("\xe2\xad\x95"), ":o:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xe2\x9c\x85"), ":white_check_mark:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xe2\x98\x91"), ":ballot_box_with_check:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xe2\x9c\x94"), ":heavy_check_mark:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xe2\x9c\x96"), ":heavy_multiplication_x:"}),
-    QVariant::fromValue(Emoji{QString::fromUtf8("\xe2\x9d\x8c"), ":x:"}),
-    QVariant::fromValue(Emoji{QString::fromUtf8("\xe2\x9d\x8e"),
-                              ":negative_squared_cross_mark:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xe2\x9e\x95"), ":heavy_plus_sign:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xe2\x9e\x96"), ":heavy_minus_sign:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xe2\x9e\x97"), ":heavy_division_sign:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xe2\x9e\xb0"), ":curly_loop:"}),
-    QVariant::fromValue(Emoji{QString::fromUtf8("\xe2\x9e\xbf"), ":loop:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xe3\x80\xbd"), ":part_alternation_mark:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xe2\x9c\xb3"), ":eight_spoked_asterisk:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xe2\x9c\xb4"), ":eight_pointed_black_star:"}),
-    QVariant::fromValue(Emoji{QString::fromUtf8("\xe2\x9d\x87"), ":sparkle:"}),
-    QVariant::fromValue(Emoji{QString::fromUtf8("\xe2\x80\xbc"), ":bangbang:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xe2\x81\x89"), ":interrobang:"}),
-    QVariant::fromValue(Emoji{QString::fromUtf8("\xe2\x9d\x93"), ":question:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xe2\x9d\x94"), ":grey_question:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xe2\x9d\x95"), ":grey_exclamation:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xe2\x9d\x97"), ":exclamation:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xe3\x80\xb0"), ":wavy_dash:"}),
-    QVariant::fromValue(Emoji{QString::fromUtf8("\xc2\xa9"), ":copyright:"}),
-    QVariant::fromValue(Emoji{QString::fromUtf8("\xc2\xae"), ":registered:"}),
-    QVariant::fromValue(Emoji{QString::fromUtf8("\xe2\x84\xa2"), ":tm:"}),
-    QVariant::fromValue(Emoji{QString::fromUtf8("#\xe2\x83\xa3"), ":hash:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("*\xe2\x83\xa3"), ":asterisk:"}),
-    QVariant::fromValue(Emoji{QString::fromUtf8("0\xe2\x83\xa3"), ":zero:"}),
-    QVariant::fromValue(Emoji{QString::fromUtf8("1\xe2\x83\xa3"), ":one:"}),
-    QVariant::fromValue(Emoji{QString::fromUtf8("2\xe2\x83\xa3"), ":two:"}),
-    QVariant::fromValue(Emoji{QString::fromUtf8("3\xe2\x83\xa3"), ":three:"}),
-    QVariant::fromValue(Emoji{QString::fromUtf8("4\xe2\x83\xa3"), ":four:"}),
-    QVariant::fromValue(Emoji{QString::fromUtf8("5\xe2\x83\xa3"), ":five:"}),
-    QVariant::fromValue(Emoji{QString::fromUtf8("6\xe2\x83\xa3"), ":six:"}),
-    QVariant::fromValue(Emoji{QString::fromUtf8("7\xe2\x83\xa3"), ":seven:"}),
-    QVariant::fromValue(Emoji{QString::fromUtf8("8\xe2\x83\xa3"), ":eight:"}),
-    QVariant::fromValue(Emoji{QString::fromUtf8("9\xe2\x83\xa3"), ":nine:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x94\x9f"), ":keycap_ten:"}),
-    QVariant::fromValue(Emoji{QString::fromUtf8("\xf0\x9f\x92\xaf"), ":100:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x94\xa0"), ":capital_abcd:"}),
-    QVariant::fromValue(Emoji{QString::fromUtf8("\xf0\x9f\x94\xa1"), ":abcd:"}),
-    QVariant::fromValue(Emoji{QString::fromUtf8("\xf0\x9f\x94\xa2"), ":1234:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x94\xa3"), ":symbols:"}),
-    QVariant::fromValue(Emoji{QString::fromUtf8("\xf0\x9f\x94\xa4"), ":abc:"}),
-    QVariant::fromValue(Emoji{QString::fromUtf8("\xf0\x9f\x85\xb0"), ":a:"}),
-    QVariant::fromValue(Emoji{QString::fromUtf8("\xf0\x9f\x86\x8e"), ":ab:"}),
-    QVariant::fromValue(Emoji{QString::fromUtf8("\xf0\x9f\x85\xb1"), ":b:"}),
-    QVariant::fromValue(Emoji{QString::fromUtf8("\xf0\x9f\x86\x91"), ":cl:"}),
-    QVariant::fromValue(Emoji{QString::fromUtf8("\xf0\x9f\x86\x92"), ":cool:"}),
-    QVariant::fromValue(Emoji{QString::fromUtf8("\xf0\x9f\x86\x93"), ":free:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xe2\x84\xb9"), ":information_source:"}),
-    QVariant::fromValue(Emoji{QString::fromUtf8("\xf0\x9f\x86\x94"), ":id:"}),
-    QVariant::fromValue(Emoji{QString::fromUtf8("\xe2\x93\x82"), ":m:"}),
-    QVariant::fromValue(Emoji{QString::fromUtf8("\xf0\x9f\x86\x95"), ":new:"}),
-    QVariant::fromValue(Emoji{QString::fromUtf8("\xf0\x9f\x86\x96"), ":ng:"}),
-    QVariant::fromValue(Emoji{QString::fromUtf8("\xf0\x9f\x85\xbe"), ":o2:"}),
-    QVariant::fromValue(Emoji{QString::fromUtf8("\xf0\x9f\x86\x97"), ":ok:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x85\xbf"), ":parking:"}),
-    QVariant::fromValue(Emoji{QString::fromUtf8("\xf0\x9f\x86\x98"), ":sos:"}),
-    QVariant::fromValue(Emoji{QString::fromUtf8("\xf0\x9f\x86\x99"), ":up:"}),
-    QVariant::fromValue(Emoji{QString::fromUtf8("\xf0\x9f\x86\x9a"), ":vs:"}),
-    QVariant::fromValue(Emoji{QString::fromUtf8("\xf0\x9f\x88\x81"), ":koko:"}),
-    QVariant::fromValue(Emoji{QString::fromUtf8("\xf0\x9f\x88\x82"), ":sa:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x88\xb7"), ":u6708:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x88\xb6"), ":u6709:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x88\xaf"), ":u6307:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x89\x90"), ":ideograph_advantage:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x88\xb9"), ":u5272:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x88\x9a"), ":u7121:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x88\xb2"), ":u7981:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x89\x91"), ":accept:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x88\xb8"), ":u7533:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x88\xb4"), ":u5408:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x88\xb3"), ":u7a7a:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xe3\x8a\x97"), ":congratulations:"}),
-    QVariant::fromValue(Emoji{QString::fromUtf8("\xe3\x8a\x99"), ":secret:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x88\xba"), ":u55b6:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x88\xb5"), ":u6e80:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xe2\x96\xaa"), ":black_small_square:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xe2\x96\xab"), ":white_small_square:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xe2\x97\xbb"), ":white_medium_square:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xe2\x97\xbc"), ":black_medium_square:"}),
-    QVariant::fromValue(Emoji{QString::fromUtf8("\xe2\x97\xbd"),
-                              ":white_medium_small_square:"}),
-    QVariant::fromValue(Emoji{QString::fromUtf8("\xe2\x97\xbe"),
-                              ":black_medium_small_square:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xe2\xac\x9b"), ":black_large_square:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xe2\xac\x9c"), ":white_large_square:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x94\xb6"), ":large_orange_diamond:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x94\xb7"), ":large_blue_diamond:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x94\xb8"), ":small_orange_diamond:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x94\xb9"), ":small_blue_diamond:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x94\xba"), ":small_red_triangle:"}),
-    QVariant::fromValue(Emoji{QString::fromUtf8("\xf0\x9f\x94\xbb"),
-                              ":small_red_triangle_down:"}),
-    QVariant::fromValue(Emoji{QString::fromUtf8("\xf0\x9f\x92\xa0"),
-                              ":diamond_shape_with_a_dot_inside:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x94\x98"), ":radio_button:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x94\xb2"), ":black_square_button:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x94\xb3"), ":white_square_button:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xe2\x9a\xaa"), ":white_circle:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xe2\x9a\xab"), ":black_circle:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x94\xb4"), ":red_circle:"}),
-    QVariant::fromValue(
-        Emoji{QString::fromUtf8("\xf0\x9f\x94\xb5"), ":blue_circle:"}),
-};
+	invalidateFilter();
+}
 
-const QVariantList EmojiModel::flags = {
-    QVariant::fromValue(Emoji{
-        QString::fromUtf8("\xf0\x9f\x87\xa6\xf0\x9f\x87\xa8"), ":flag_ac:"}),
-    QVariant::fromValue(Emoji{
-        QString::fromUtf8("\xf0\x9f\x87\xa6\xf0\x9f\x87\xa9"), ":flag_ad:"}),
-    QVariant::fromValue(Emoji{
-        QString::fromUtf8("\xf0\x9f\x87\xa6\xf0\x9f\x87\xaa"), ":flag_ae:"}),
-    QVariant::fromValue(Emoji{
-        QString::fromUtf8("\xf0\x9f\x87\xa6\xf0\x9f\x87\xab"), ":flag_af:"}),
-    QVariant::fromValue(Emoji{
-        QString::fromUtf8("\xf0\x9f\x87\xa6\xf0\x9f\x87\xac"), ":flag_ag:"}),
-    QVariant::fromValue(Emoji{
-        QString::fromUtf8("\xf0\x9f\x87\xa6\xf0\x9f\x87\xae"), ":flag_ai:"}),
-    QVariant::fromValue(Emoji{
-        QString::fromUtf8("\xf0\x9f\x87\xa6\xf0\x9f\x87\xb1"), ":flag_al:"}),
-    QVariant::fromValue(Emoji{
-        QString::fromUtf8("\xf0\x9f\x87\xa6\xf0\x9f\x87\xb2"), ":flag_am:"}),
-    QVariant::fromValue(Emoji{
-        QString::fromUtf8("\xf0\x9f\x87\xa6\xf0\x9f\x87\xb4"), ":flag_ao:"}),
-    QVariant::fromValue(Emoji{
-        QString::fromUtf8("\xf0\x9f\x87\xa6\xf0\x9f\x87\xb6"), ":flag_aq:"}),
-    QVariant::fromValue(Emoji{
-        QString::fromUtf8("\xf0\x9f\x87\xa6\xf0\x9f\x87\xb7"), ":flag_ar:"}),
-    QVariant::fromValue(Emoji{
-        QString::fromUtf8("\xf0\x9f\x87\xa6\xf0\x9f\x87\xb8"), ":flag_as:"}),
-    QVariant::fromValue(Emoji{
-        QString::fromUtf8("\xf0\x9f\x87\xa6\xf0\x9f\x87\xb9"), ":flag_at:"}),
-    QVariant::fromValue(Emoji{
-        QString::fromUtf8("\xf0\x9f\x87\xa6\xf0\x9f\x87\xba"), ":flag_au:"}),
-    QVariant::fromValue(Emoji{
-        QString::fromUtf8("\xf0\x9f\x87\xa6\xf0\x9f\x87\xbc"), ":flag_aw:"}),
-    QVariant::fromValue(Emoji{
-        QString::fromUtf8("\xf0\x9f\x87\xa6\xf0\x9f\x87\xbd"), ":flag_ax:"}),
-    QVariant::fromValue(Emoji{
-        QString::fromUtf8("\xf0\x9f\x87\xa6\xf0\x9f\x87\xbf"), ":flag_az:"}),
-    QVariant::fromValue(Emoji{
-        QString::fromUtf8("\xf0\x9f\x87\xa7\xf0\x9f\x87\xa6"), ":flag_ba:"}),
-    QVariant::fromValue(Emoji{
-        QString::fromUtf8("\xf0\x9f\x87\xa7\xf0\x9f\x87\xa7"), ":flag_bb:"}),
-    QVariant::fromValue(Emoji{
-        QString::fromUtf8("\xf0\x9f\x87\xa7\xf0\x9f\x87\xa9"), ":flag_bd:"}),
-    QVariant::fromValue(Emoji{
-        QString::fromUtf8("\xf0\x9f\x87\xa7\xf0\x9f\x87\xaa"), ":flag_be:"}),
-    QVariant::fromValue(Emoji{
-        QString::fromUtf8("\xf0\x9f\x87\xa7\xf0\x9f\x87\xab"), ":flag_bf:"}),
-    QVariant::fromValue(Emoji{
-        QString::fromUtf8("\xf0\x9f\x87\xa7\xf0\x9f\x87\xac"), ":flag_bg:"}),
-    QVariant::fromValue(Emoji{
-        QString::fromUtf8("\xf0\x9f\x87\xa7\xf0\x9f\x87\xad"), ":flag_bh:"}),
-    QVariant::fromValue(Emoji{
-        QString::fromUtf8("\xf0\x9f\x87\xa7\xf0\x9f\x87\xae"), ":flag_bi:"}),
-    QVariant::fromValue(Emoji{
-        QString::fromUtf8("\xf0\x9f\x87\xa7\xf0\x9f\x87\xaf"), ":flag_bj:"}),
-    QVariant::fromValue(Emoji{
-        QString::fromUtf8("\xf0\x9f\x87\xa7\xf0\x9f\x87\xb1"), ":flag_bl:"}),
-    QVariant::fromValue(Emoji{
-        QString::fromUtf8("\xf0\x9f\x87\xa7\xf0\x9f\x87\xb2"), ":flag_bm:"}),
-    QVariant::fromValue(Emoji{
-        QString::fromUtf8("\xf0\x9f\x87\xa7\xf0\x9f\x87\xb3"), ":flag_bn:"}),
-    QVariant::fromValue(Emoji{
-        QString::fromUtf8("\xf0\x9f\x87\xa7\xf0\x9f\x87\xb4"), ":flag_bo:"}),
-    QVariant::fromValue(Emoji{
-        QString::fromUtf8("\xf0\x9f\x87\xa7\xf0\x9f\x87\xb6"), ":flag_bq:"}),
-    QVariant::fromValue(Emoji{
-        QString::fromUtf8("\xf0\x9f\x87\xa7\xf0\x9f\x87\xb7"), ":flag_br:"}),
-    QVariant::fromValue(Emoji{
-        QString::fromUtf8("\xf0\x9f\x87\xa7\xf0\x9f\x87\xb8"), ":flag_bs:"}),
-    QVariant::fromValue(Emoji{
-        QString::fromUtf8("\xf0\x9f\x87\xa7\xf0\x9f\x87\xb9"), ":flag_bt:"}),
-    QVariant::fromValue(Emoji{
-        QString::fromUtf8("\xf0\x9f\x87\xa7\xf0\x9f\x87\xbb"), ":flag_bv:"}),
-    QVariant::fromValue(Emoji{
-        QString::fromUtf8("\xf0\x9f\x87\xa7\xf0\x9f\x87\xbc"), ":flag_bw:"}),
-    QVariant::fromValue(Emoji{
-        QString::fromUtf8("\xf0\x9f\x87\xa7\xf0\x9f\x87\xbe"), ":flag_by:"}),
-    QVariant::fromValue(Emoji{
-        QString::fromUtf8("\xf0\x9f\x87\xa7\xf0\x9f\x87\xbf"), ":flag_bz:"}),
-    QVariant::fromValue(Emoji{
-        QString::fromUtf8("\xf0\x9f\x87\xa8\xf0\x9f\x87\xa6"), ":flag_ca:"}),
-    QVariant::fromValue(Emoji{
-        QString::fromUtf8("\xf0\x9f\x87\xa8\xf0\x9f\x87\xa8"), ":flag_cc:"}),
-    QVariant::fromValue(Emoji{
-        QString::fromUtf8("\xf0\x9f\x87\xa8\xf0\x9f\x87\xa9"), ":flag_cd:"}),
-    QVariant::fromValue(Emoji{
-        QString::fromUtf8("\xf0\x9f\x87\xa8\xf0\x9f\x87\xab"), ":flag_cf:"}),
-    QVariant::fromValue(Emoji{
-        QString::fromUtf8("\xf0\x9f\x87\xa8\xf0\x9f\x87\xac"), ":flag_cg:"}),
-    QVariant::fromValue(Emoji{
-        QString::fromUtf8("\xf0\x9f\x87\xa8\xf0\x9f\x87\xad"), ":flag_ch:"}),
-    QVariant::fromValue(Emoji{
-        QString::fromUtf8("\xf0\x9f\x87\xa8\xf0\x9f\x87\xae"), ":flag_ci:"}),
-    QVariant::fromValue(Emoji{
-        QString::fromUtf8("\xf0\x9f\x87\xa8\xf0\x9f\x87\xb0"), ":flag_ck:"}),
-    QVariant::fromValue(Emoji{
-        QString::fromUtf8("\xf0\x9f\x87\xa8\xf0\x9f\x87\xb1"), ":flag_cl:"}),
-    QVariant::fromValue(Emoji{
-        QString::fromUtf8("\xf0\x9f\x87\xa8\xf0\x9f\x87\xb2"), ":flag_cm:"}),
-    QVariant::fromValue(Emoji{
-        QString::fromUtf8("\xf0\x9f\x87\xa8\xf0\x9f\x87\xb3"), ":flag_cn:"}),
-    QVariant::fromValue(Emoji{
-        QString::fromUtf8("\xf0\x9f\x87\xa8\xf0\x9f\x87\xb4"), ":flag_co:"}),
-    QVariant::fromValue(Emoji{
-        QString::fromUtf8("\xf0\x9f\x87\xa8\xf0\x9f\x87\xb5"), ":flag_cp:"}),
-    QVariant::fromValue(Emoji{
-        QString::fromUtf8("\xf0\x9f\x87\xa8\xf0\x9f\x87\xb7"), ":flag_cr:"}),
-    QVariant::fromValue(Emoji{
-        QString::fromUtf8("\xf0\x9f\x87\xa8\xf0\x9f\x87\xba"), ":flag_cu:"}),
-    QVariant::fromValue(Emoji{
-        QString::fromUtf8("\xf0\x9f\x87\xa8\xf0\x9f\x87\xbb"), ":flag_cv:"}),
-    QVariant::fromValue(Emoji{
-        QString::fromUtf8("\xf0\x9f\x87\xa8\xf0\x9f\x87\xbc"), ":flag_cw:"}),
-    QVariant::fromValue(Emoji{
-        QString::fromUtf8("\xf0\x9f\x87\xa8\xf0\x9f\x87\xbd"), ":flag_cx:"}),
-    QVariant::fromValue(Emoji{
-        QString::fromUtf8("\xf0\x9f\x87\xa8\xf0\x9f\x87\xbe"), ":flag_cy:"}),
-    QVariant::fromValue(Emoji{
-        QString::fromUtf8("\xf0\x9f\x87\xa8\xf0\x9f\x87\xbf"), ":flag_cz:"}),
-    QVariant::fromValue(Emoji{
-        QString::fromUtf8("\xf0\x9f\x87\xa9\xf0\x9f\x87\xaa"), ":flag_de:"}),
-    QVariant::fromValue(Emoji{
-        QString::fromUtf8("\xf0\x9f\x87\xa9\xf0\x9f\x87\xac"), ":flag_dg:"}),
-    QVariant::fromValue(Emoji{
-        QString::fromUtf8("\xf0\x9f\x87\xa9\xf0\x9f\x87\xaf"), ":flag_dj:"}),
-    QVariant::fromValue(Emoji{
-        QString::fromUtf8("\xf0\x9f\x87\xa9\xf0\x9f\x87\xb0"), ":flag_dk:"}),
-    QVariant::fromValue(Emoji{
-        QString::fromUtf8("\xf0\x9f\x87\xa9\xf0\x9f\x87\xb2"), ":flag_dm:"}),
-    QVariant::fromValue(Emoji{
-        QString::fromUtf8("\xf0\x9f\x87\xa9\xf0\x9f\x87\xb4"), ":flag_do:"}),
-    QVariant::fromValue(Emoji{
-        QString::fromUtf8("\xf0\x9f\x87\xa9\xf0\x9f\x87\xbf"), ":flag_dz:"}),
-    QVariant::fromValue(Emoji{
-        QString::fromUtf8("\xf0\x9f\x87\xaa\xf0\x9f\x87\xa6"), ":flag_ea:"}),
-    QVariant::fromValue(Emoji{
-        QString::fromUtf8("\xf0\x9f\x87\xaa\xf0\x9f\x87\xa8"), ":flag_ec:"}),
-    QVariant::fromValue(Emoji{
-        QString::fromUtf8("\xf0\x9f\x87\xaa\xf0\x9f\x87\xaa"), ":flag_ee:"}),
-    QVariant::fromValue(Emoji{
-        QString::fromUtf8("\xf0\x9f\x87\xaa\xf0\x9f\x87\xac"), ":flag_eg:"}),
-    QVariant::fromValue(Emoji{
-        QString::fromUtf8("\xf0\x9f\x87\xaa\xf0\x9f\x87\xad"), ":flag_eh:"}),
-    QVariant::fromValue(Emoji{
-        QString::fromUtf8("\xf0\x9f\x87\xaa\xf0\x9f\x87\xb7"), ":flag_er:"}),
-    QVariant::fromValue(Emoji{
-        QString::fromUtf8("\xf0\x9f\x87\xaa\xf0\x9f\x87\xb8"), ":flag_es:"}),
-    QVariant::fromValue(Emoji{
-        QString::fromUtf8("\xf0\x9f\x87\xaa\xf0\x9f\x87\xb9"), ":flag_et:"}),
-    QVariant::fromValue(Emoji{
-        QString::fromUtf8("\xf0\x9f\x87\xaa\xf0\x9f\x87\xba"), ":flag_eu:"}),
-    QVariant::fromValue(Emoji{
-        QString::fromUtf8("\xf0\x9f\x87\xab\xf0\x9f\x87\xae"), ":flag_fi:"}),
-    QVariant::fromValue(Emoji{
-        QString::fromUtf8("\xf0\x9f\x87\xab\xf0\x9f\x87\xaf"), ":flag_fj:"}),
-    QVariant::fromValue(Emoji{
-        QString::fromUtf8("\xf0\x9f\x87\xab\xf0\x9f\x87\xb0"), ":flag_fk:"}),
-    QVariant::fromValue(Emoji{
-        QString::fromUtf8("\xf0\x9f\x87\xab\xf0\x9f\x87\xb2"), ":flag_fm:"}),
-    QVariant::fromValue(Emoji{
-        QString::fromUtf8("\xf0\x9f\x87\xab\xf0\x9f\x87\xb4"), ":flag_fo:"}),
-    QVariant::fromValue(Emoji{
-        QString::fromUtf8("\xf0\x9f\x87\xab\xf0\x9f\x87\xb7"), ":flag_fr:"}),
-    QVariant::fromValue(Emoji{
-        QString::fromUtf8("\xf0\x9f\x87\xac\xf0\x9f\x87\xa6"), ":flag_ga:"}),
-    QVariant::fromValue(Emoji{
-        QString::fromUtf8("\xf0\x9f\x87\xac\xf0\x9f\x87\xa7"), ":flag_gb:"}),
-    QVariant::fromValue(Emoji{
-        QString::fromUtf8("\xf0\x9f\x87\xac\xf0\x9f\x87\xa9"), ":flag_gd:"}),
-    QVariant::fromValue(Emoji{
-        QString::fromUtf8("\xf0\x9f\x87\xac\xf0\x9f\x87\xaa"), ":flag_ge:"}),
-    QVariant::fromValue(Emoji{
-        QString::fromUtf8("\xf0\x9f\x87\xac\xf0\x9f\x87\xab"), ":flag_gf:"}),
-    QVariant::fromValue(Emoji{
-        QString::fromUtf8("\xf0\x9f\x87\xac\xf0\x9f\x87\xac"), ":flag_gg:"}),
-    QVariant::fromValue(Emoji{
-        QString::fromUtf8("\xf0\x9f\x87\xac\xf0\x9f\x87\xad"), ":flag_gh:"}),
-    QVariant::fromValue(Emoji{
-        QString::fromUtf8("\xf0\x9f\x87\xac\xf0\x9f\x87\xae"), ":flag_gi:"}),
-    QVariant::fromValue(Emoji{
-        QString::fromUtf8("\xf0\x9f\x87\xac\xf0\x9f\x87\xb1"), ":flag_gl:"}),
-    QVariant::fromValue(Emoji{
-        QString::fromUtf8("\xf0\x9f\x87\xac\xf0\x9f\x87\xb2"), ":flag_gm:"}),
-    QVariant::fromValue(Emoji{
-        QString::fromUtf8("\xf0\x9f\x87\xac\xf0\x9f\x87\xb3"), ":flag_gn:"}),
-    QVariant::fromValue(Emoji{
-        QString::fromUtf8("\xf0\x9f\x87\xac\xf0\x9f\x87\xb5"), ":flag_gp:"}),
-    QVariant::fromValue(Emoji{
-        QString::fromUtf8("\xf0\x9f\x87\xac\xf0\x9f\x87\xb6"), ":flag_gq:"}),
-    QVariant::fromValue(Emoji{
-        QString::fromUtf8("\xf0\x9f\x87\xac\xf0\x9f\x87\xb7"), ":flag_gr:"}),
-    QVariant::fromValue(Emoji{
-        QString::fromUtf8("\xf0\x9f\x87\xac\xf0\x9f\x87\xb8"), ":flag_gs:"}),
-    QVariant::fromValue(Emoji{
-        QString::fromUtf8("\xf0\x9f\x87\xac\xf0\x9f\x87\xb9"), ":flag_gt:"}),
-    QVariant::fromValue(Emoji{
-        QString::fromUtf8("\xf0\x9f\x87\xac\xf0\x9f\x87\xba"), ":flag_gu:"}),
-    QVariant::fromValue(Emoji{
-        QString::fromUtf8("\xf0\x9f\x87\xac\xf0\x9f\x87\xbc"), ":flag_gw:"}),
-    QVariant::fromValue(Emoji{
-        QString::fromUtf8("\xf0\x9f\x87\xac\xf0\x9f\x87\xbe"), ":flag_gy:"}),
-    QVariant::fromValue(Emoji{
-        QString::fromUtf8("\xf0\x9f\x87\xad\xf0\x9f\x87\xb0"), ":flag_hk:"}),
-    QVariant::fromValue(Emoji{
-        QString::fromUtf8("\xf0\x9f\x87\xad\xf0\x9f\x87\xb2"), ":flag_hm:"}),
-    QVariant::fromValue(Emoji{
-        QString::fromUtf8("\xf0\x9f\x87\xad\xf0\x9f\x87\xb3"), ":flag_hn:"}),
-    QVariant::fromValue(Emoji{
-        QString::fromUtf8("\xf0\x9f\x87\xad\xf0\x9f\x87\xb7"), ":flag_hr:"}),
-    QVariant::fromValue(Emoji{
-        QString::fromUtf8("\xf0\x9f\x87\xad\xf0\x9f\x87\xb9"), ":flag_ht:"}),
-    QVariant::fromValue(Emoji{
-        QString::fromUtf8("\xf0\x9f\x87\xad\xf0\x9f\x87\xba"), ":flag_hu:"}),
-    QVariant::fromValue(Emoji{
-        QString::fromUtf8("\xf0\x9f\x87\xae\xf0\x9f\x87\xa8"), ":flag_ic:"}),
-    QVariant::fromValue(Emoji{
-        QString::fromUtf8("\xf0\x9f\x87\xae\xf0\x9f\x87\xa9"), ":flag_id:"}),
-    QVariant::fromValue(Emoji{
-        QString::fromUtf8("\xf0\x9f\x87\xae\xf0\x9f\x87\xaa"), ":flag_ie:"}),
-    QVariant::fromValue(Emoji{
-        QString::fromUtf8("\xf0\x9f\x87\xae\xf0\x9f\x87\xb1"), ":flag_il:"}),
-    QVariant::fromValue(Emoji{
-        QString::fromUtf8("\xf0\x9f\x87\xae\xf0\x9f\x87\xb2"), ":flag_im:"}),
-    QVariant::fromValue(Emoji{
-        QString::fromUtf8("\xf0\x9f\x87\xae\xf0\x9f\x87\xb3"), ":flag_in:"}),
-    QVariant::fromValue(Emoji{
-        QString::fromUtf8("\xf0\x9f\x87\xae\xf0\x9f\x87\xb4"), ":flag_io:"}),
-    QVariant::fromValue(Emoji{
-        QString::fromUtf8("\xf0\x9f\x87\xae\xf0\x9f\x87\xb6"), ":flag_iq:"}),
-    QVariant::fromValue(Emoji{
-        QString::fromUtf8("\xf0\x9f\x87\xae\xf0\x9f\x87\xb7"), ":flag_ir:"}),
-    QVariant::fromValue(Emoji{
-        QString::fromUtf8("\xf0\x9f\x87\xae\xf0\x9f\x87\xb8"), ":flag_is:"}),
-    QVariant::fromValue(Emoji{
-        QString::fromUtf8("\xf0\x9f\x87\xae\xf0\x9f\x87\xb9"), ":flag_it:"}),
-    QVariant::fromValue(Emoji{
-        QString::fromUtf8("\xf0\x9f\x87\xaf\xf0\x9f\x87\xaa"), ":flag_je:"}),
-    QVariant::fromValue(Emoji{
-        QString::fromUtf8("\xf0\x9f\x87\xaf\xf0\x9f\x87\xb2"), ":flag_jm:"}),
-    QVariant::fromValue(Emoji{
-        QString::fromUtf8("\xf0\x9f\x87\xaf\xf0\x9f\x87\xb4"), ":flag_jo:"}),
-    QVariant::fromValue(Emoji{
-        QString::fromUtf8("\xf0\x9f\x87\xaf\xf0\x9f\x87\xb5"), ":flag_jp:"}),
-    QVariant::fromValue(Emoji{
-        QString::fromUtf8("\xf0\x9f\x87\xb0\xf0\x9f\x87\xaa"), ":flag_ke:"}),
-    QVariant::fromValue(Emoji{
-        QString::fromUtf8("\xf0\x9f\x87\xb0\xf0\x9f\x87\xac"), ":flag_kg:"}),
-    QVariant::fromValue(Emoji{
-        QString::fromUtf8("\xf0\x9f\x87\xb0\xf0\x9f\x87\xad"), ":flag_kh:"}),
-    QVariant::fromValue(Emoji{
-        QString::fromUtf8("\xf0\x9f\x87\xb0\xf0\x9f\x87\xae"), ":flag_ki:"}),
-    QVariant::fromValue(Emoji{
-        QString::fromUtf8("\xf0\x9f\x87\xb0\xf0\x9f\x87\xb2"), ":flag_km:"}),
-    QVariant::fromValue(Emoji{
-        QString::fromUtf8("\xf0\x9f\x87\xb0\xf0\x9f\x87\xb3"), ":flag_kn:"}),
-    QVariant::fromValue(Emoji{
-        QString::fromUtf8("\xf0\x9f\x87\xb0\xf0\x9f\x87\xb5"), ":flag_kp:"}),
-    QVariant::fromValue(Emoji{
-        QString::fromUtf8("\xf0\x9f\x87\xb0\xf0\x9f\x87\xb7"), ":flag_kr:"}),
-    QVariant::fromValue(Emoji{
-        QString::fromUtf8("\xf0\x9f\x87\xb0\xf0\x9f\x87\xbc"), ":flag_kw:"}),
-    QVariant::fromValue(Emoji{
-        QString::fromUtf8("\xf0\x9f\x87\xb0\xf0\x9f\x87\xbe"), ":flag_ky:"}),
-    QVariant::fromValue(Emoji{
-        QString::fromUtf8("\xf0\x9f\x87\xb0\xf0\x9f\x87\xbf"), ":flag_kz:"}),
-    QVariant::fromValue(Emoji{
-        QString::fromUtf8("\xf0\x9f\x87\xb1\xf0\x9f\x87\xa6"), ":flag_la:"}),
-    QVariant::fromValue(Emoji{
-        QString::fromUtf8("\xf0\x9f\x87\xb1\xf0\x9f\x87\xa7"), ":flag_lb:"}),
-    QVariant::fromValue(Emoji{
-        QString::fromUtf8("\xf0\x9f\x87\xb1\xf0\x9f\x87\xa8"), ":flag_lc:"}),
-    QVariant::fromValue(Emoji{
-        QString::fromUtf8("\xf0\x9f\x87\xb1\xf0\x9f\x87\xae"), ":flag_li:"}),
-    QVariant::fromValue(Emoji{
-        QString::fromUtf8("\xf0\x9f\x87\xb1\xf0\x9f\x87\xb0"), ":flag_lk:"}),
-    QVariant::fromValue(Emoji{
-        QString::fromUtf8("\xf0\x9f\x87\xb1\xf0\x9f\x87\xb7"), ":flag_lr:"}),
-    QVariant::fromValue(Emoji{
-        QString::fromUtf8("\xf0\x9f\x87\xb1\xf0\x9f\x87\xb8"), ":flag_ls:"}),
-    QVariant::fromValue(Emoji{
-        QString::fromUtf8("\xf0\x9f\x87\xb1\xf0\x9f\x87\xb9"), ":flag_lt:"}),
-    QVariant::fromValue(Emoji{
-        QString::fromUtf8("\xf0\x9f\x87\xb1\xf0\x9f\x87\xba"), ":flag_lu:"}),
-    QVariant::fromValue(Emoji{
-        QString::fromUtf8("\xf0\x9f\x87\xb1\xf0\x9f\x87\xbb"), ":flag_lv:"}),
-    QVariant::fromValue(Emoji{
-        QString::fromUtf8("\xf0\x9f\x87\xb1\xf0\x9f\x87\xbe"), ":flag_ly:"}),
-    QVariant::fromValue(Emoji{
-        QString::fromUtf8("\xf0\x9f\x87\xb2\xf0\x9f\x87\xa6"), ":flag_ma:"}),
-    QVariant::fromValue(Emoji{
-        QString::fromUtf8("\xf0\x9f\x87\xb2\xf0\x9f\x87\xa8"), ":flag_mc:"}),
-    QVariant::fromValue(Emoji{
-        QString::fromUtf8("\xf0\x9f\x87\xb2\xf0\x9f\x87\xa9"), ":flag_md:"}),
-    QVariant::fromValue(Emoji{
-        QString::fromUtf8("\xf0\x9f\x87\xb2\xf0\x9f\x87\xaa"), ":flag_me:"}),
-    QVariant::fromValue(Emoji{
-        QString::fromUtf8("\xf0\x9f\x87\xb2\xf0\x9f\x87\xab"), ":flag_mf:"}),
-    QVariant::fromValue(Emoji{
-        QString::fromUtf8("\xf0\x9f\x87\xb2\xf0\x9f\x87\xac"), ":flag_mg:"}),
-    QVariant::fromValue(Emoji{
-        QString::fromUtf8("\xf0\x9f\x87\xb2\xf0\x9f\x87\xad"), ":flag_mh:"}),
-    QVariant::fromValue(Emoji{
-        QString::fromUtf8("\xf0\x9f\x87\xb2\xf0\x9f\x87\xb0"), ":flag_mk:"}),
-    QVariant::fromValue(Emoji{
-        QString::fromUtf8("\xf0\x9f\x87\xb2\xf0\x9f\x87\xb1"), ":flag_ml:"}),
-    QVariant::fromValue(Emoji{
-        QString::fromUtf8("\xf0\x9f\x87\xb2\xf0\x9f\x87\xb2"), ":flag_mm:"}),
-    QVariant::fromValue(Emoji{
-        QString::fromUtf8("\xf0\x9f\x87\xb2\xf0\x9f\x87\xb3"), ":flag_mn:"}),
-    QVariant::fromValue(Emoji{
-        QString::fromUtf8("\xf0\x9f\x87\xb2\xf0\x9f\x87\xb4"), ":flag_mo:"}),
-    QVariant::fromValue(Emoji{
-        QString::fromUtf8("\xf0\x9f\x87\xb2\xf0\x9f\x87\xb5"), ":flag_mp:"}),
-    QVariant::fromValue(Emoji{
-        QString::fromUtf8("\xf0\x9f\x87\xb2\xf0\x9f\x87\xb6"), ":flag_mq:"}),
-    QVariant::fromValue(Emoji{
-        QString::fromUtf8("\xf0\x9f\x87\xb2\xf0\x9f\x87\xb7"), ":flag_mr:"}),
-    QVariant::fromValue(Emoji{
-        QString::fromUtf8("\xf0\x9f\x87\xb2\xf0\x9f\x87\xb8"), ":flag_ms:"}),
-    QVariant::fromValue(Emoji{
-        QString::fromUtf8("\xf0\x9f\x87\xb2\xf0\x9f\x87\xb9"), ":flag_mt:"}),
-    QVariant::fromValue(Emoji{
-        QString::fromUtf8("\xf0\x9f\x87\xb2\xf0\x9f\x87\xba"), ":flag_mu:"}),
-    QVariant::fromValue(Emoji{
-        QString::fromUtf8("\xf0\x9f\x87\xb2\xf0\x9f\x87\xbb"), ":flag_mv:"}),
-    QVariant::fromValue(Emoji{
-        QString::fromUtf8("\xf0\x9f\x87\xb2\xf0\x9f\x87\xbc"), ":flag_mw:"}),
-    QVariant::fromValue(Emoji{
-        QString::fromUtf8("\xf0\x9f\x87\xb2\xf0\x9f\x87\xbd"), ":flag_mx:"}),
-    QVariant::fromValue(Emoji{
-        QString::fromUtf8("\xf0\x9f\x87\xb2\xf0\x9f\x87\xbe"), ":flag_my:"}),
-    QVariant::fromValue(Emoji{
-        QString::fromUtf8("\xf0\x9f\x87\xb2\xf0\x9f\x87\xbf"), ":flag_mz:"}),
-    QVariant::fromValue(Emoji{
-        QString::fromUtf8("\xf0\x9f\x87\xb3\xf0\x9f\x87\xa6"), ":flag_na:"}),
-    QVariant::fromValue(Emoji{
-        QString::fromUtf8("\xf0\x9f\x87\xb3\xf0\x9f\x87\xa8"), ":flag_nc:"}),
-    QVariant::fromValue(Emoji{
-        QString::fromUtf8("\xf0\x9f\x87\xb3\xf0\x9f\x87\xaa"), ":flag_ne:"}),
-    QVariant::fromValue(Emoji{
-        QString::fromUtf8("\xf0\x9f\x87\xb3\xf0\x9f\x87\xab"), ":flag_nf:"}),
-    QVariant::fromValue(Emoji{
-        QString::fromUtf8("\xf0\x9f\x87\xb3\xf0\x9f\x87\xac"), ":flag_ng:"}),
-    QVariant::fromValue(Emoji{
-        QString::fromUtf8("\xf0\x9f\x87\xb3\xf0\x9f\x87\xae"), ":flag_ni:"}),
-    QVariant::fromValue(Emoji{
-        QString::fromUtf8("\xf0\x9f\x87\xb3\xf0\x9f\x87\xb1"), ":flag_nl:"}),
-    QVariant::fromValue(Emoji{
-        QString::fromUtf8("\xf0\x9f\x87\xb3\xf0\x9f\x87\xb4"), ":flag_no:"}),
-    QVariant::fromValue(Emoji{
-        QString::fromUtf8("\xf0\x9f\x87\xb3\xf0\x9f\x87\xb5"), ":flag_np:"}),
-    QVariant::fromValue(Emoji{
-        QString::fromUtf8("\xf0\x9f\x87\xb3\xf0\x9f\x87\xb7"), ":flag_nr:"}),
-    QVariant::fromValue(Emoji{
-        QString::fromUtf8("\xf0\x9f\x87\xb3\xf0\x9f\x87\xba"), ":flag_nu:"}),
-    QVariant::fromValue(Emoji{
-        QString::fromUtf8("\xf0\x9f\x87\xb3\xf0\x9f\x87\xbf"), ":flag_nz:"}),
-    QVariant::fromValue(Emoji{
-        QString::fromUtf8("\xf0\x9f\x87\xb4\xf0\x9f\x87\xb2"), ":flag_om:"}),
-    QVariant::fromValue(Emoji{
-        QString::fromUtf8("\xf0\x9f\x87\xb5\xf0\x9f\x87\xa6"), ":flag_pa:"}),
-    QVariant::fromValue(Emoji{
-        QString::fromUtf8("\xf0\x9f\x87\xb5\xf0\x9f\x87\xaa"), ":flag_pe:"}),
-    QVariant::fromValue(Emoji{
-        QString::fromUtf8("\xf0\x9f\x87\xb5\xf0\x9f\x87\xab"), ":flag_pf:"}),
-    QVariant::fromValue(Emoji{
-        QString::fromUtf8("\xf0\x9f\x87\xb5\xf0\x9f\x87\xac"), ":flag_pg:"}),
-    QVariant::fromValue(Emoji{
-        QString::fromUtf8("\xf0\x9f\x87\xb5\xf0\x9f\x87\xad"), ":flag_ph:"}),
-    QVariant::fromValue(Emoji{
-        QString::fromUtf8("\xf0\x9f\x87\xb5\xf0\x9f\x87\xb0"), ":flag_pk:"}),
-    QVariant::fromValue(Emoji{
-        QString::fromUtf8("\xf0\x9f\x87\xb5\xf0\x9f\x87\xb1"), ":flag_pl:"}),
-    QVariant::fromValue(Emoji{
-        QString::fromUtf8("\xf0\x9f\x87\xb5\xf0\x9f\x87\xb2"), ":flag_pm:"}),
-    QVariant::fromValue(Emoji{
-        QString::fromUtf8("\xf0\x9f\x87\xb5\xf0\x9f\x87\xb3"), ":flag_pn:"}),
-    QVariant::fromValue(Emoji{
-        QString::fromUtf8("\xf0\x9f\x87\xb5\xf0\x9f\x87\xb7"), ":flag_pr:"}),
-    QVariant::fromValue(Emoji{
-        QString::fromUtf8("\xf0\x9f\x87\xb5\xf0\x9f\x87\xb8"), ":flag_ps:"}),
-    QVariant::fromValue(Emoji{
-        QString::fromUtf8("\xf0\x9f\x87\xb5\xf0\x9f\x87\xb9"), ":flag_pt:"}),
-    QVariant::fromValue(Emoji{
-        QString::fromUtf8("\xf0\x9f\x87\xb5\xf0\x9f\x87\xbc"), ":flag_pw:"}),
-    QVariant::fromValue(Emoji{
-        QString::fromUtf8("\xf0\x9f\x87\xb5\xf0\x9f\x87\xbe"), ":flag_py:"}),
-    QVariant::fromValue(Emoji{
-        QString::fromUtf8("\xf0\x9f\x87\xb6\xf0\x9f\x87\xa6"), ":flag_qa:"}),
-    QVariant::fromValue(Emoji{
-        QString::fromUtf8("\xf0\x9f\x87\xb7\xf0\x9f\x87\xaa"), ":flag_re:"}),
-    QVariant::fromValue(Emoji{
-        QString::fromUtf8("\xf0\x9f\x87\xb7\xf0\x9f\x87\xb4"), ":flag_ro:"}),
-    QVariant::fromValue(Emoji{
-        QString::fromUtf8("\xf0\x9f\x87\xb7\xf0\x9f\x87\xb8"), ":flag_rs:"}),
-    QVariant::fromValue(Emoji{
-        QString::fromUtf8("\xf0\x9f\x87\xb7\xf0\x9f\x87\xba"), ":flag_ru:"}),
-    QVariant::fromValue(Emoji{
-        QString::fromUtf8("\xf0\x9f\x87\xb7\xf0\x9f\x87\xbc"), ":flag_rw:"}),
-    QVariant::fromValue(Emoji{
-        QString::fromUtf8("\xf0\x9f\x87\xb8\xf0\x9f\x87\xa6"), ":flag_sa:"}),
-    QVariant::fromValue(Emoji{
-        QString::fromUtf8("\xf0\x9f\x87\xb8\xf0\x9f\x87\xa7"), ":flag_sb:"}),
-    QVariant::fromValue(Emoji{
-        QString::fromUtf8("\xf0\x9f\x87\xb8\xf0\x9f\x87\xa8"), ":flag_sc:"}),
-    QVariant::fromValue(Emoji{
-        QString::fromUtf8("\xf0\x9f\x87\xb8\xf0\x9f\x87\xa9"), ":flag_sd:"}),
-    QVariant::fromValue(Emoji{
-        QString::fromUtf8("\xf0\x9f\x87\xb8\xf0\x9f\x87\xaa"), ":flag_se:"}),
-    QVariant::fromValue(Emoji{
-        QString::fromUtf8("\xf0\x9f\x87\xb8\xf0\x9f\x87\xac"), ":flag_sg:"}),
-    QVariant::fromValue(Emoji{
-        QString::fromUtf8("\xf0\x9f\x87\xb8\xf0\x9f\x87\xad"), ":flag_sh:"}),
-    QVariant::fromValue(Emoji{
-        QString::fromUtf8("\xf0\x9f\x87\xb8\xf0\x9f\x87\xae"), ":flag_si:"}),
-    QVariant::fromValue(Emoji{
-        QString::fromUtf8("\xf0\x9f\x87\xb8\xf0\x9f\x87\xaf"), ":flag_sj:"}),
-    QVariant::fromValue(Emoji{
-        QString::fromUtf8("\xf0\x9f\x87\xb8\xf0\x9f\x87\xb0"), ":flag_sk:"}),
-    QVariant::fromValue(Emoji{
-        QString::fromUtf8("\xf0\x9f\x87\xb8\xf0\x9f\x87\xb1"), ":flag_sl:"}),
-    QVariant::fromValue(Emoji{
-        QString::fromUtf8("\xf0\x9f\x87\xb8\xf0\x9f\x87\xb2"), ":flag_sm:"}),
-    QVariant::fromValue(Emoji{
-        QString::fromUtf8("\xf0\x9f\x87\xb8\xf0\x9f\x87\xb3"), ":flag_sn:"}),
-    QVariant::fromValue(Emoji{
-        QString::fromUtf8("\xf0\x9f\x87\xb8\xf0\x9f\x87\xb4"), ":flag_so:"}),
-    QVariant::fromValue(Emoji{
-        QString::fromUtf8("\xf0\x9f\x87\xb8\xf0\x9f\x87\xb7"), ":flag_sr:"}),
-    QVariant::fromValue(Emoji{
-        QString::fromUtf8("\xf0\x9f\x87\xb8\xf0\x9f\x87\xb8"), ":flag_ss:"}),
-    QVariant::fromValue(Emoji{
-        QString::fromUtf8("\xf0\x9f\x87\xb8\xf0\x9f\x87\xb9"), ":flag_st:"}),
-    QVariant::fromValue(Emoji{
-        QString::fromUtf8("\xf0\x9f\x87\xb8\xf0\x9f\x87\xbb"), ":flag_sv:"}),
-    QVariant::fromValue(Emoji{
-        QString::fromUtf8("\xf0\x9f\x87\xb8\xf0\x9f\x87\xbd"), ":flag_sx:"}),
-    QVariant::fromValue(Emoji{
-        QString::fromUtf8("\xf0\x9f\x87\xb8\xf0\x9f\x87\xbe"), ":flag_sy:"}),
-    QVariant::fromValue(Emoji{
-        QString::fromUtf8("\xf0\x9f\x87\xb8\xf0\x9f\x87\xbf"), ":flag_sz:"}),
-    QVariant::fromValue(Emoji{
-        QString::fromUtf8("\xf0\x9f\x87\xb9\xf0\x9f\x87\xa6"), ":flag_ta:"}),
-    QVariant::fromValue(Emoji{
-        QString::fromUtf8("\xf0\x9f\x87\xb9\xf0\x9f\x87\xa8"), ":flag_tc:"}),
-    QVariant::fromValue(Emoji{
-        QString::fromUtf8("\xf0\x9f\x87\xb9\xf0\x9f\x87\xa9"), ":flag_td:"}),
-    QVariant::fromValue(Emoji{
-        QString::fromUtf8("\xf0\x9f\x87\xb9\xf0\x9f\x87\xab"), ":flag_tf:"}),
-    QVariant::fromValue(Emoji{
-        QString::fromUtf8("\xf0\x9f\x87\xb9\xf0\x9f\x87\xac"), ":flag_tg:"}),
-    QVariant::fromValue(Emoji{
-        QString::fromUtf8("\xf0\x9f\x87\xb9\xf0\x9f\x87\xad"), ":flag_th:"}),
-    QVariant::fromValue(Emoji{
-        QString::fromUtf8("\xf0\x9f\x87\xb9\xf0\x9f\x87\xaf"), ":flag_tj:"}),
-    QVariant::fromValue(Emoji{
-        QString::fromUtf8("\xf0\x9f\x87\xb9\xf0\x9f\x87\xb0"), ":flag_tk:"}),
-    QVariant::fromValue(Emoji{
-        QString::fromUtf8("\xf0\x9f\x87\xb9\xf0\x9f\x87\xb1"), ":flag_tl:"}),
-    QVariant::fromValue(Emoji{
-        QString::fromUtf8("\xf0\x9f\x87\xb9\xf0\x9f\x87\xb2"), ":flag_tm:"}),
-    QVariant::fromValue(Emoji{
-        QString::fromUtf8("\xf0\x9f\x87\xb9\xf0\x9f\x87\xb3"), ":flag_tn:"}),
-    QVariant::fromValue(Emoji{
-        QString::fromUtf8("\xf0\x9f\x87\xb9\xf0\x9f\x87\xb4"), ":flag_to:"}),
-    QVariant::fromValue(Emoji{
-        QString::fromUtf8("\xf0\x9f\x87\xb9\xf0\x9f\x87\xb7"), ":flag_tr:"}),
-    QVariant::fromValue(Emoji{
-        QString::fromUtf8("\xf0\x9f\x87\xb9\xf0\x9f\x87\xb9"), ":flag_tt:"}),
-    QVariant::fromValue(Emoji{
-        QString::fromUtf8("\xf0\x9f\x87\xb9\xf0\x9f\x87\xbb"), ":flag_tv:"}),
-    QVariant::fromValue(Emoji{
-        QString::fromUtf8("\xf0\x9f\x87\xb9\xf0\x9f\x87\xbc"), ":flag_tw:"}),
-    QVariant::fromValue(Emoji{
-        QString::fromUtf8("\xf0\x9f\x87\xb9\xf0\x9f\x87\xbf"), ":flag_tz:"}),
-    QVariant::fromValue(Emoji{
-        QString::fromUtf8("\xf0\x9f\x87\xba\xf0\x9f\x87\xa6"), ":flag_ua:"}),
-    QVariant::fromValue(Emoji{
-        QString::fromUtf8("\xf0\x9f\x87\xba\xf0\x9f\x87\xac"), ":flag_ug:"}),
-    QVariant::fromValue(Emoji{
-        QString::fromUtf8("\xf0\x9f\x87\xba\xf0\x9f\x87\xb2"), ":flag_um:"}),
-    QVariant::fromValue(Emoji{
-        QString::fromUtf8("\xf0\x9f\x87\xba\xf0\x9f\x87\xb8"), ":flag_us:"}),
-    QVariant::fromValue(Emoji{
-        QString::fromUtf8("\xf0\x9f\x87\xba\xf0\x9f\x87\xbe"), ":flag_uy:"}),
-    QVariant::fromValue(Emoji{
-        QString::fromUtf8("\xf0\x9f\x87\xba\xf0\x9f\x87\xbf"), ":flag_uz:"}),
-    QVariant::fromValue(Emoji{
-        QString::fromUtf8("\xf0\x9f\x87\xbb\xf0\x9f\x87\xa6"), ":flag_va:"}),
-    QVariant::fromValue(Emoji{
-        QString::fromUtf8("\xf0\x9f\x87\xbb\xf0\x9f\x87\xa8"), ":flag_vc:"}),
-    QVariant::fromValue(Emoji{
-        QString::fromUtf8("\xf0\x9f\x87\xbb\xf0\x9f\x87\xaa"), ":flag_ve:"}),
-    QVariant::fromValue(Emoji{
-        QString::fromUtf8("\xf0\x9f\x87\xbb\xf0\x9f\x87\xac"), ":flag_vg:"}),
-    QVariant::fromValue(Emoji{
-        QString::fromUtf8("\xf0\x9f\x87\xbb\xf0\x9f\x87\xae"), ":flag_vi:"}),
-    QVariant::fromValue(Emoji{
-        QString::fromUtf8("\xf0\x9f\x87\xbb\xf0\x9f\x87\xb3"), ":flag_vn:"}),
-    QVariant::fromValue(Emoji{
-        QString::fromUtf8("\xf0\x9f\x87\xbb\xf0\x9f\x87\xba"), ":flag_vu:"}),
-    QVariant::fromValue(Emoji{
-        QString::fromUtf8("\xf0\x9f\x87\xbc\xf0\x9f\x87\xab"), ":flag_wf:"}),
-    QVariant::fromValue(Emoji{
-        QString::fromUtf8("\xf0\x9f\x87\xbc\xf0\x9f\x87\xb8"), ":flag_ws:"}),
-    QVariant::fromValue(Emoji{
-        QString::fromUtf8("\xf0\x9f\x87\xbd\xf0\x9f\x87\xb0"), ":flag_xk:"}),
-    QVariant::fromValue(Emoji{
-        QString::fromUtf8("\xf0\x9f\x87\xbe\xf0\x9f\x87\xaa"), ":flag_ye:"}),
-    QVariant::fromValue(Emoji{
-        QString::fromUtf8("\xf0\x9f\x87\xbe\xf0\x9f\x87\xb9"), ":flag_yt:"}),
-    QVariant::fromValue(Emoji{
-        QString::fromUtf8("\xf0\x9f\x87\xbf\xf0\x9f\x87\xa6"), ":flag_za:"}),
-    QVariant::fromValue(Emoji{
-        QString::fromUtf8("\xf0\x9f\x87\xbf\xf0\x9f\x87\xb2"), ":flag_zm:"}),
-    QVariant::fromValue(Emoji{
-        QString::fromUtf8("\xf0\x9f\x87\xbf\xf0\x9f\x87\xbc"), ":flag_zw:"}),
-};
+bool EmojiProxyModel::filterAcceptsRow(int sourceRow, const QModelIndex &sourceParent) const
+{
+	const QModelIndex index = sourceModel()->index(sourceRow, 0, sourceParent);
+	const Emoji emoji = index.data(static_cast<int>(EmojiModel::Roles::Emoji)).value<Emoji>();
+
+	if (m_group != Emoji::Group::Invalid) {
+		return emoji.group() == m_group;
+	}
+
+	return filterRegExp().isEmpty() ? true : filterRegExp().indexIn(emoji.shortName()) != -1;
+}

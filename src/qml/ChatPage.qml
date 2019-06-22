@@ -278,8 +278,9 @@ Kirigami.ScrollablePage {
 
 				id: emojiPicker
 
-				emojiModel: EmojiModel {
-					id: emojiModel
+				model: EmojiProxyModel {
+					group: Emoji.Group.People
+					sourceModel: EmojiModel {}
 				}
 
 				textArea: messageField

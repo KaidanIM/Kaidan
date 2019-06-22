@@ -33,89 +33,111 @@ import QtQuick.Controls 2.2
 import QtQuick.Layouts 1.3
 
 import org.kde.kirigami 2.0 as Kirigami
+import EmojiModel 0.1
 
 Popup {
-    property var emojiModel
-    property var textArea
-    property string emojiCategory: "people"
+	id: root
 
-    ColumnLayout {
-        anchors.fill: parent
+	property TextArea textArea
+	property alias model: view.model
 
-        GridView {
-            Layout.fillWidth: true
-            Layout.fillHeight: true
+	ColumnLayout {
+		anchors.fill: parent
 
-            cellWidth: Kirigami.Units.gridUnit * 2.5
-            cellHeight: Kirigami.Units.gridUnit * 2.5
+		GridView {
+			id: view
 
-            boundsBehavior: Flickable.DragOverBounds
+			Layout.fillWidth: true
+			Layout.fillHeight: true
 
-            clip: true
+			cellWidth: Kirigami.Units.gridUnit * 2.5
+			cellHeight: Kirigami.Units.gridUnit * 2.5
 
-            model: emojiModel.model[emojiCategory]
+			boundsBehavior: Flickable.DragOverBounds
 
-            delegate: ItemDelegate {
-                width: Kirigami.Units.gridUnit * 2
-                height: Kirigami.Units.gridUnit * 2
+			clip: true
 
-                contentItem: Text {
-                    horizontalAlignment: Text.AlignHCenter
-                    verticalAlignment: Text.AlignVCenter
+			delegate: ItemDelegate {
+				width: Kirigami.Units.gridUnit * 2
+				height: Kirigami.Units.gridUnit * 2
 
-                    font.pointSize: 20
-                    text: modelData.unicode
-                }
+				contentItem: Text {
+					horizontalAlignment: Text.AlignHCenter
+					verticalAlignment: Text.AlignVCenter
 
-                hoverEnabled: true
-                ToolTip.text: modelData.shortname
-                ToolTip.visible: hovered
+					font.pointSize: 20
+					text: model.unicode
+				}
 
-                onClicked: textArea.insert(textArea.cursorPosition, modelData.unicode)
-            }
+				hoverEnabled: true
+				ToolTip.text: model.shortName
+				ToolTip.visible: hovered
 
-            ScrollBar.vertical: ScrollBar {}
-        }
+				onClicked: textArea.insert(textArea.cursorPosition, model.unicode)
+			}
 
-        Rectangle {
-            Layout.fillWidth: true
-            Layout.preferredHeight: 2
+			ScrollBar.vertical: ScrollBar {}
+		}
 
-            color: Kirigami.Theme.highlightColor
-        }
+		Rectangle {
+			Layout.fillWidth: true
+			Layout.preferredHeight: 2
 
-        Row {
-            Repeater {
-                model: ListModel {
-                    ListElement { label: "😏"; category: "people" }
-                    ListElement { label: "🌲"; category: "nature" }
-                    ListElement { label: "🍛"; category: "food"}
-                    ListElement { label: "🚁"; category: "activity" }
-                    ListElement { label: "🚅"; category: "travel" }
-                    ListElement { label: "💡"; category: "objects" }
-                    ListElement { label: "🔣"; category: "symbols" }
-                    ListElement { label: "🏁"; category: "flags" }
-                }
+			color: Kirigami.Theme.highlightColor
+		}
 
-                delegate: ItemDelegate {
-                    width: Kirigami.Units.gridUnit * 2
-                    height: Kirigami.Units.gridUnit * 2
+		Row {
+			Repeater {
+				model: ListModel {
+					ListElement { label: "😏"; group: Emoji.Group.People }
+					ListElement { label: "🌲"; group: Emoji.Group.Nature }
+					ListElement { label: "🍛"; group: Emoji.Group.Food }
+					ListElement { label: "🚁"; group: Emoji.Group.Activity }
+					ListElement { label: "🚅"; group: Emoji.Group.Travel }
+					ListElement { label: "💡"; group: Emoji.Group.Objects }
+					ListElement { label: "🔣"; group: Emoji.Group.Symbols }
+					ListElement { label: "🏁"; group: Emoji.Group.Flags }
+				}
 
-                    contentItem: Text {
-                        horizontalAlignment: Text.AlignHCenter
-                        verticalAlignment: Text.AlignVCenter
+				delegate: ItemDelegate {
+					width: Kirigami.Units.gridUnit * 2
+					height: Kirigami.Units.gridUnit * 2
 
-                        font.pointSize: 20
-                        text: label
-                    }
+					contentItem: Text {
+						horizontalAlignment: Text.AlignHCenter
+						verticalAlignment: Text.AlignVCenter
 
-                    hoverEnabled: true
-                    ToolTip.text: category
-                    ToolTip.visible: hovered
+						font.pointSize: 20
+						text: model.label
+					}
 
-                    onClicked: emojiCategory = category
-                }
-            }
-        }
-    }
+					hoverEnabled: true
+					ToolTip.text: {
+						switch (model.group) {
+						case Emoji.Group.People:
+							return qsTr('People');
+						case Emoji.Group.Nature:
+							return qsTr('Nature');
+						case Emoji.Group.Food:
+							return qsTr('Food');
+						case Emoji.Group.Activity:
+							return qsTr('Activity');
+						case Emoji.Group.Travel:
+							return qsTr('Travel');
+						case Emoji.Group.Objects:
+							return qsTr('Objects');
+						case Emoji.Group.Symbols:
+							return qsTr('Symbols');
+						case Emoji.Group.Flags:
+							return qsTr('Flags');
+						}
+					}
+					ToolTip.visible: hovered
+					highlighted: root.model.group === model.group
+
+					onClicked: root.model.group = model.group
+				}
+			}
+		}
+	}
 }

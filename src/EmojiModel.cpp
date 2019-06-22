@@ -1,5 +1,6 @@
 /*
  * nheko Copyright (C) 2017  Konstantinos Sideris <siderisk@auth.gr>
+ * Copyright (C) 2019  Filipe Azevedo <pasnox@gmail.com>
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -16,6 +17,11 @@
  */
 
 #include "EmojiModel.h"
+#include "Kaidan.h"
+
+#include <QSettings>
+
+#define FAVORITES_EMOJIS_SETTINGS_PATH "Emojis/Favorites"
 
 static const QVector<Emoji> s_emojis {
 	// People
@@ -1492,6 +1498,19 @@ QHash<int, QByteArray> EmojiModel::roleNames() const
 	return roles;
 }
 
+EmojiProxyModel::EmojiProxyModel(QObject *parent)
+	: QSortFilterProxyModel(parent)
+{
+	QSettings *settings = Kaidan::instance()->getSettings();
+	m_favoriteEmojis = settings->value(QLatin1String(FAVORITES_EMOJIS_SETTINGS_PATH)).toStringList().toSet();
+}
+
+EmojiProxyModel::~EmojiProxyModel()
+{
+	QSettings *settings = Kaidan::instance()->getSettings();
+	settings->setValue(QLatin1String(FAVORITES_EMOJIS_SETTINGS_PATH), QStringList(m_favoriteEmojis.toList()));
+}
+
 Emoji::Group EmojiProxyModel::group() const
 {
 	return m_group;
@@ -1524,12 +1543,27 @@ void EmojiProxyModel::setFilter(const QString &filter)
 	emit filterChanged();
 }
 
+void EmojiProxyModel::addFavoriteEmoji(int proxyRow)
+{
+	const Emoji emoji = index(proxyRow, 0).data(static_cast<int>(EmojiModel::Roles::Emoji)).value<Emoji>();
+
+	if (!m_favoriteEmojis.contains(emoji.unicode())) {
+		m_favoriteEmojis << emoji.unicode();
+
+		if (m_group == Emoji::Group::Favorites) {
+			invalidateFilter();
+		}
+	}
+}
+
 bool EmojiProxyModel::filterAcceptsRow(int sourceRow, const QModelIndex &sourceParent) const
 {
 	const QModelIndex index = sourceModel()->index(sourceRow, 0, sourceParent);
 	const Emoji emoji = index.data(static_cast<int>(EmojiModel::Roles::Emoji)).value<Emoji>();
 
-	if (m_group != Emoji::Group::Invalid) {
+	if (m_group == Emoji::Group::Favorites) {
+		return m_favoriteEmojis.contains(emoji.unicode());
+	} else if (m_group != Emoji::Group::Invalid) {
 		return emoji.group() == m_group;
 	}
 

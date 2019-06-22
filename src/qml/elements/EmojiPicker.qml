@@ -73,7 +73,10 @@ Popup {
 				ToolTip.text: model.shortName
 				ToolTip.visible: hovered
 
-				onClicked: textArea.insert(textArea.cursorPosition, model.unicode)
+				onClicked: {
+					GridView.view.model.addFavoriteEmoji(model.index);
+					textArea.insert(textArea.cursorPosition, model.unicode)
+				}
 			}
 
 			ScrollBar.vertical: ScrollBar {}
@@ -89,6 +92,7 @@ Popup {
 		Row {
 			Repeater {
 				model: ListModel {
+					ListElement { label: "🔖"; group: Emoji.Group.Favorites }
 					ListElement { label: "😏"; group: Emoji.Group.People }
 					ListElement { label: "🌲"; group: Emoji.Group.Nature }
 					ListElement { label: "🍛"; group: Emoji.Group.Food }
@@ -101,8 +105,8 @@ Popup {
 				}
 
 				delegate: ItemDelegate {
-					width: Kirigami.Units.gridUnit * 2
-					height: Kirigami.Units.gridUnit * 2
+					width: Kirigami.Units.gridUnit * 1.85
+					height: Kirigami.Units.gridUnit * 1.85
 
 					contentItem: Text {
 						horizontalAlignment: Text.AlignHCenter
@@ -115,6 +119,8 @@ Popup {
 					hoverEnabled: true
 					ToolTip.text: {
 						switch (model.group) {
+						case Emoji.Group.Favorites:
+							return qsTr('Favorites');
 						case Emoji.Group.People:
 							return qsTr('People');
 						case Emoji.Group.Nature:

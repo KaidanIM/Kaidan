@@ -66,6 +66,7 @@ class Kaidan : public QObject
 	Q_PROPERTY(AvatarFileStorage* avatarStorage READ getAvatarStorage NOTIFY avatarStorageChanged)
 	Q_PROPERTY(PresenceCache* presenceCache READ getPresenceCache CONSTANT)
 	Q_PROPERTY(TransferCache* transferCache READ getTransferCache CONSTANT)
+	Q_PROPERTY(QSettings* settings READ getSettings CONSTANT)
 	Q_PROPERTY(quint8 connectionState READ getConnectionState NOTIFY connectionStateChanged)
 	Q_PROPERTY(quint8 disconnReason READ getDisconnReason NOTIFY disconnReasonChanged)
 	Q_PROPERTY(QString jid READ getJid WRITE setJid NOTIFY jidChanged)
@@ -197,6 +198,11 @@ public:
 		return caches->transferCache;
 	}
 
+	QSettings* getSettings() const
+	{
+		return caches->settings;
+	}
+
 	Utils* getUtils() const
 	{
 		return utils;
@@ -214,6 +220,8 @@ public:
 	{
 		return uploadServiceFound;
 	}
+
+	static Kaidan *instance();
 
 signals:
 	void avatarStorageChanged();
@@ -410,6 +418,8 @@ private:
 	bool uploadServiceFound = false;
 	ConnectionState connectionState = ConnectionState::StateDisconnected;
 	DisconnReason disconnReason = DisconnReason::ConnNoError;
+
+	static Kaidan *s_instance;
 };
 
 #endif

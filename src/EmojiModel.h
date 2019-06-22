@@ -4,6 +4,7 @@
 #include <QAbstractListModel>
 #include <QSortFilterProxyModel>
 #include <QVector>
+#include <QSet>
 
 class Emoji
 {
@@ -16,6 +17,7 @@ class Emoji
 public:
 	enum class Group {
 		Invalid = -1,
+		Favorites,
 		People,
 		Nature,
 		Food,
@@ -70,13 +72,17 @@ class EmojiProxyModel : public QSortFilterProxyModel
 	Q_PROPERTY(QString filter READ filter WRITE setFilter NOTIFY filterChanged)
 
 public:
-	using QSortFilterProxyModel::QSortFilterProxyModel;
+	explicit EmojiProxyModel(QObject *parent = nullptr);
+	~EmojiProxyModel() override;
 
 	Emoji::Group group() const;
 	void setGroup(Emoji::Group group);
 
 	QString filter() const;
 	void setFilter(const QString &filter);
+
+public slots:
+	void addFavoriteEmoji(int proxyRow);
 
 signals:
 	void groupChanged();
@@ -87,6 +93,7 @@ protected:
 
 private:
 	Emoji::Group m_group = Emoji::Group::Invalid;
+	QSet<QString> m_favoriteEmojis;
 };
 
 Q_DECLARE_METATYPE(Emoji)

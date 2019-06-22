@@ -45,9 +45,14 @@
 #include "PresenceCache.h"
 #include "Utils.h"
 
+Kaidan *Kaidan::s_instance = nullptr;
+
 Kaidan::Kaidan(QGuiApplication *app, bool enableLogging, QObject *parent)
         : QObject(parent), utils(new Utils(this)), database(new Database())
 {
+	Q_ASSERT(!Kaidan::s_instance);
+	Kaidan::s_instance = this;
+
 	// Database setup
 	database->openDatabase();
 	if (database->needToConvert())
@@ -92,6 +97,7 @@ Kaidan::~Kaidan()
 {
 	delete caches;
 	delete database;
+	Kaidan::s_instance = nullptr;
 }
 
 void Kaidan::start()
@@ -207,4 +213,9 @@ void Kaidan::addOpenUri(const QByteArray &uri)
 		emit passiveNotificationRequested(tr("The link will be opened after you have connected."));
 		openUriCache = QString::fromUtf8(uri);
 	}
+}
+
+Kaidan *Kaidan::instance()
+{
+	return s_instance;
 }

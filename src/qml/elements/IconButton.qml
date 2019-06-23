@@ -43,7 +43,7 @@ Controls.ToolButton {
 	Layout.preferredHeight: Kirigami.Units.gridUnit * (scaleFactor + 2)
 	Layout.preferredWidth: Kirigami.Units.gridUnit * scaleFactor + Kirigami.Units.smallSpacing * 2
 
-	ColumnLayout {
+	contentItem: ColumnLayout {
 		Kirigami.Icon {
 			id: icon
 			Layout.fillHeight: true

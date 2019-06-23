@@ -148,6 +148,7 @@ Q_DECL_EXPORT int main(int argc, char *argv[])
 	QGuiApplication::setApplicationVersion(VERSION_STRING);
 	// attributes
 	QGuiApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
+	QGuiApplication::setAttribute(Qt::AA_UseHighDpiPixmaps);
 
 	// create a qt app
 #if defined(Q_OS_IOS) || defined(Q_OS_ANDROID)

@@ -177,6 +177,11 @@ Q_DECL_EXPORT int main(int argc, char *argv[])
 	qRegisterMetaType<QHash<QString,RosterItem>>("QHash<QString,RosterItem>");
 	qRegisterMetaType<std::function<void(RosterItem&)>>("std::function<void(RosterItem&)>");
 	qRegisterMetaType<std::function<void(Message&)>>("std::function<void(Message&)>");
+	// Enums for c++ member calls using enums
+	qRegisterMetaType<Enums::ConnectionState>();
+	qRegisterMetaType<Enums::DisconnectionReason>();
+	qRegisterMetaType<Enums::MessageType>();
+	qRegisterMetaType<Enums::AvailabilityTypes>();
 
 	// Qt-Translator
 	QTranslator qtTranslator;

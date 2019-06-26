@@ -440,7 +440,7 @@ Prosím zkontrolujte své připojení k internetu.</translation>
     </message>
     <message>
         <source>Changes your account&apos;s password. You will need to re-enter it on your other devices.</source>
-        <translation type="unfinished"></translation>
+        <translation>Změní heslo k vašemu účtu. Bude třeba ho zadat na všech vašich zařízeních.</translation>
     </message>
 </context>
 <context>

@@ -101,7 +101,7 @@
     </message>
     <message>
         <source>Spoiler</source>
-        <translation type="unfinished"></translation>
+        <translation>Avsløring</translation>
     </message>
     <message>
         <source>Download</source>
@@ -144,11 +144,11 @@
     </message>
     <message>
         <source>Send a spoiler message</source>
-        <translation type="unfinished"></translation>
+        <translation>Send en avsløringsmelding</translation>
     </message>
     <message>
         <source>Spoiler hint</source>
-        <translation type="unfinished"></translation>
+        <translation>Avsløringshint</translation>
     </message>
 </context>
 <context>
@@ -195,7 +195,7 @@
     </message>
     <message>
         <source>Go to parent folder</source>
-        <translation type="unfinished"></translation>
+        <translation>Gå til ovennevnt mappe</translation>
     </message>
 </context>
 <context>
@@ -343,7 +343,7 @@
     </message>
     <message>
         <source>Spoiler</source>
-        <translation type="unfinished"></translation>
+        <translation>Avsløring</translation>
     </message>
 </context>
 <context>
@@ -447,7 +447,7 @@
     </message>
     <message>
         <source>Spoiler</source>
-        <translation type="unfinished"></translation>
+        <translation>Avsløring</translation>
     </message>
 </context>
 <context>
@@ -508,7 +508,7 @@
     </message>
     <message>
         <source>Caption</source>
-        <translation type="unfinished"></translation>
+        <translation>Bildetekst</translation>
     </message>
 </context>
 <context>

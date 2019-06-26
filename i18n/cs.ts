@@ -20,43 +20,43 @@
     <name>ChangePassword</name>
     <message>
         <source>Change password</source>
-        <translation type="unfinished"></translation>
+        <translation>Změna hesla</translation>
     </message>
     <message>
         <source>Current password:</source>
-        <translation type="unfinished"></translation>
+        <translation>Stávající heslo:</translation>
     </message>
     <message>
         <source>New password:</source>
-        <translation type="unfinished"></translation>
+        <translation>Nové heslo:</translation>
     </message>
     <message>
         <source>New password (repeat):</source>
-        <translation type="unfinished"></translation>
+        <translation>Nové heslo (opakovat):</translation>
     </message>
     <message>
         <source>New passwords do not match.</source>
-        <translation type="unfinished"></translation>
+        <translation>Nová hesla se neshodují.</translation>
     </message>
     <message>
         <source>Current password is invalid.</source>
-        <translation type="unfinished"></translation>
+        <translation>Stávající heslo je neplatné.</translation>
     </message>
     <message>
         <source>You need to be connected to change your password.</source>
-        <translation type="unfinished"></translation>
+        <translation>Pro změnu hesla je nutné být připojen.</translation>
     </message>
     <message>
         <source>After changing your password, you will need to reenter it on all your other devices.</source>
-        <translation type="unfinished"></translation>
+        <translation>Po změně hesla bude třeba zadat nové heslo na všech vašich ostatních zařízeních.</translation>
     </message>
     <message>
         <source>Cancel</source>
-        <translation type="unfinished">Zrušit</translation>
+        <translation>Zrušit</translation>
     </message>
     <message>
         <source>Change</source>
-        <translation type="unfinished"></translation>
+        <translation>Změnit</translation>
     </message>
 </context>
 <context>
@@ -177,7 +177,7 @@
     </message>
     <message>
         <source>Settings</source>
-        <translation type="unfinished"></translation>
+        <translation>Nastavení</translation>
     </message>
 </context>
 <context>
@@ -279,11 +279,11 @@ Prosím zkontrolujte své připojení k internetu.</translation>
     <name>RegistrationManager</name>
     <message>
         <source>Password changed successfully.</source>
-        <translation type="unfinished"></translation>
+        <translation>Změna hesla byla úspěšná.</translation>
     </message>
     <message>
         <source>Failed to change password: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Změna hesla se nezdařila: %1</translation>
     </message>
 </context>
 <context>
@@ -432,11 +432,11 @@ Prosím zkontrolujte své připojení k internetu.</translation>
     <name>SettingsPage</name>
     <message>
         <source>Settings</source>
-        <translation type="unfinished"></translation>
+        <translation>Nastavení</translation>
     </message>
     <message>
         <source>Change password</source>
-        <translation type="unfinished"></translation>
+        <translation>Změna hesla</translation>
     </message>
     <message>
         <source>Changes your account&apos;s password. You will need to re-enter it on your other devices.</source>

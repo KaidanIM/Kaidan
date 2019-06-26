@@ -371,7 +371,7 @@
     </message>
     <message>
         <source>Could not connect to the server.</source>
-        <translation>Konnte nicht zum Server verbinden.</translation>
+        <translation>Konnte nicht mit dem Server verbinden.</translation>
     </message>
     <message>
         <source>Authentification protocol not supported by the server.</source>

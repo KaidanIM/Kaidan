@@ -83,6 +83,8 @@ QHash<int, QByteArray> MessageModel::roleNames() const
 	QHash<int, QByteArray> roles;
 	roles[Timestamp] = "timestamp";
 	roles[Id] = "id";
+	roles[Sender] = "sender";
+	roles[Recipient] = "recipient";
 	roles[Body] = "body";
 	roles[SentByMe] = "sentByMe";
 	roles[MediaType] = "mediaType";
@@ -113,6 +115,10 @@ QVariant MessageModel::data(const QModelIndex &index, int role) const
 		return msg.stamp();
 	case Id:
 		return msg.id();
+	case Sender:
+		return msg.from();
+	case Recipient:
+		return msg.to();
 	case Body:
 		return msg.body();
 	case SentByMe:

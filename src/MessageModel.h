@@ -48,6 +48,8 @@ public:
 	enum MessageRoles {
 		Timestamp = Qt::UserRole + 1,
 		Id,
+		Sender,
+		Recipient,
 		Body,
 		SentByMe,
 		MediaType,

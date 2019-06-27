@@ -136,11 +136,11 @@ Kirigami.ScrollablePage {
 
 		delegate: ChatMessage {
 			msgId: model.id
+			sender: model.sender
 			sentByMe: model.sentByMe
 			messageBody: model.body
 			dateTime: new Date(model.timestamp)
 			isRead: model.isDelivered
-			recipientAvatarUrl: kaidan.avatarStorage.getAvatarUrl(model.author)
 			name: chatName
 			mediaType: model.mediaType
 			mediaGetUrl: model.mediaUrl

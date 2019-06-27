@@ -39,11 +39,11 @@ RowLayout {
 	id: root
 
 	property string msgId
+	property string sender
 	property bool sentByMe: true
 	property string messageBody
 	property date dateTime
 	property bool isRead: false
-	property string recipientAvatarUrl
 	property int mediaType
 	property string mediaGetUrl
 	property string mediaLocation
@@ -59,6 +59,7 @@ RowLayout {
 	property bool isSpoiler
 	property string spoilerHint
 	property bool isShowingSpoiler: false
+	property string avatarUrl: kaidan.avatarStorage.getAvatarUrl(sender)
 
 	signal messageEditRequested(string id, string body)
 
@@ -74,8 +75,8 @@ RowLayout {
 
 	RoundImage {
 		id: avatar
-		visible: !sentByMe && recipientAvatarUrl !== ""
-		source: recipientAvatarUrl
+		visible: !sentByMe && avatarUrl
+		source: avatarUrl
 		fillMode: Image.PreserveAspectFit
 		mipmap: true
 		height: width
@@ -88,7 +89,7 @@ RowLayout {
 
 	TextAvatar {
 		id: textAvatar
-		visible: !sentByMe && recipientAvatarUrl == ""
+		visible: !sentByMe && !avatar.visible
 		name: root.name
 		Layout.alignment: Qt.AlignHCenter | Qt.AlignTop
 		Layout.preferredHeight: Kirigami.Units.gridUnit * 2.2

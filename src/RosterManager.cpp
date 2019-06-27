@@ -162,7 +162,7 @@ void RosterManager::handleSendMessage(const QString &jid, const QString &message
 
 void RosterManager::handleMessage(const QXmppMessage &msg)
 {
-	if (msg.body().isEmpty())
+    if (msg.body().isEmpty() || msg.type() == QXmppMessage::Error)
 		return;
 
 	// msg.from() can be our JID, if it's a carbon/forward from another client

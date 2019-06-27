@@ -91,7 +91,7 @@ MessageHandler::~MessageHandler()
 
 void MessageHandler::handleMessage(const QXmppMessage &msg)
 {
-	if (msg.body().isEmpty())
+    if (msg.body().isEmpty() || msg.type() == QXmppMessage::Error)
 		return;
 
 	Message message;

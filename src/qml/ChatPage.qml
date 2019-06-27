@@ -39,7 +39,6 @@ import "elements"
 
 Kirigami.ScrollablePage {
 	property string chatName
-	property string recipientJid
 	property bool isWritingSpoiler
 	property string messageToCorrect
 
@@ -62,7 +61,7 @@ Kirigami.ScrollablePage {
 		id: fileChooser
 		title: qsTr("Select a file")
 		onAccepted: {
-			sendMediaSheet.jid = recipientJid
+			sendMediaSheet.jid = kaidan.messageModel.chatPartner
 			sendMediaSheet.fileUrl = fileUrl
 			sendMediaSheet.open()
 		}
@@ -333,11 +332,18 @@ Kirigami.ScrollablePage {
 
 					// send the message
 					if (messageField.state == "compose") {
-						kaidan.sendMessage(recipientJid, messageField.text,
-										   isWritingSpoiler, spoilerHintField.text)
+						kaidan.sendMessage(
+							kaidan.messageModel.chatPartner,
+							messageField.text,
+							isWritingSpoiler,
+							spoilerHintField.text
+						)
 					} else if (messageField.state == "edit") {
-						kaidan.correctMessage(recipientJid, messageToCorrect,
-											  messageField.text)
+						kaidan.correctMessage(
+							kaidan.messageModel.chatPartner,
+							messageToCorrect,
+							messageField.text
+						)
 					}
 
 					// clean up the text fields

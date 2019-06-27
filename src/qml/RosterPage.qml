@@ -75,17 +75,22 @@ Kirigami.ScrollablePage {
 			unreadMessages: model.unreadMessages
 			avatarImagePath: kaidan.avatarStorage.getAvatarUrl(model.jid)
 			backgroundColor: {
-				if (!Kirigami.Settings.isMobile && kaidan.chatPartner === model.jid) {
+				if (!Kirigami.Settings.isMobile &&
+						kaidan.messageModel.chatPartner === model.jid) {
 					Kirigami.Theme.highlightColor
 				} else {
 					Kirigami.Theme.backgroundColor
 				}
 			}
 			onClicked: {
+				// We need to cache the chatName, because changing the chatPartner in the
+				// message model will in some cases also update the roster model. That
+				// will then remove this item and readd an updated version of it, so
+				// model.* won't work anymore after this.
+				var chatName = model.name ? model.name : model.jid
 				kaidan.messageModel.chatPartner = model.jid
 				pageStack.push(chatPage, {
-					"chatName": (model.name ? model.name : model.jid),
-					"recipientJid": model.jid
+					"chatName": chatName
 				})
 			}
 			actions: [

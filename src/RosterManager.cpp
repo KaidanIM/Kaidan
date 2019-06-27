@@ -86,6 +86,13 @@ RosterManager::RosterManager(Kaidan *kaidan,
 			manager.refuseSubscription(jid);
 	});
 
+	// update local copy of chat partner
+	connect(kaidan->getMessageModel(), &MessageModel::chatPartnerChanged,
+	        this, [=] (const QString &jid) {
+		        m_chatPartner = jid;
+	        }
+	);
+
 	// user actions
 	connect(kaidan, &Kaidan::addContact, this, &RosterManager::addContact);
 	connect(kaidan, &Kaidan::removeContact, this, &RosterManager::removeContact);

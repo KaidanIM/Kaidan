@@ -27,6 +27,7 @@ option(CLICK_ARCH "Architecture that will be used in the click's manifest")
 option(CLICK_DATE "Date used in the version number in the click's manifest")
 option(QUICK_COMPILER "Use QtQuick compiler to improve performance" FALSE)
 option(USE_KNOTIFICATIONS "Use KNotifications for displaying notifications" TRUE)
+option(BUNDLE_ICONS "Bundle breeze icons" FALSE)
 
 # Find includes in corresponding build directories
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
@@ -118,7 +119,7 @@ endif()
 #
 
 # Include bundled icons on Ubuntu Touch, Android, Windows, macOS and iOS
-if(UBUNTU_TOUCH OR ANDROID OR WIN32 OR APPLE)
+if(BUNDLE_ICONS OR UBUNTU_TOUCH OR ANDROID OR WIN32 OR APPLE)
 	set(KAIDAN_ICONS_QRC kirigami-icons.qrc)
 endif()
 

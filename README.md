@@ -43,6 +43,7 @@ Here are the general dependencies of Kaidan listed:
  * [QXmpp][qxmpp] (>= 0.9.0)
  * [Kirigami 2](https://phabricator.kde.org/source/kirigami/) (>= 5.42.0)
  * [ECM (extra-cmake-modules)](https://api.kde.org/ecm/manual/ecm.7.html)
+ * [KNotifications][knotif] (`-DUSE_KNOTIFICATIONS=OFF` to disable)
 
 ### Build instructions
 
@@ -58,3 +59,4 @@ There are guides on how to build Kaidan for each supported platform (currently t
 [openstore]: https://open-store.io/app/im.kaidan.kaidan
 [android]: https://www.kaidan.im/download/#android
 [supp-xeps]: https://invent.kde.org/kde/kaidan/wikis/Supported-XEPs
+[knotif]: https://api.kde.org/frameworks/knotifications/html/index.html

@@ -26,6 +26,7 @@ option(UBUNTU_TOUCH "Building an Ubuntu Touch click (internal use only!)" FALSE)
 option(CLICK_ARCH "Architecture that will be used in the click's manifest")
 option(CLICK_DATE "Date used in the version number in the click's manifest")
 option(QUICK_COMPILER "Use QtQuick compiler to improve performance" FALSE)
+option(USE_KNOTIFICATIONS "Use KNotifications for displaying notifications" TRUE)
 
 # Find includes in corresponding build directories
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
@@ -64,6 +65,12 @@ if(QUICK_COMPILER)
 		DESCRIPTION "Compile QML at build time"
 		TYPE OPTIONAL
 	)
+endif()
+
+if(USE_KNOTIFICATIONS)
+	find_package(KF5Notifications REQUIRED)
+	set(__KF5Notifications_LIBRARIES KF5::Notifications)
+	add_definitions(-DHAVE_KNOTIFICATIONS)
 endif()
 
 # Optional QWidget style integration (not on mobile)
@@ -160,6 +167,7 @@ target_link_libraries(${PROJECT_NAME}
 	Qt5::Network
 	Qt5::Xml
 	${__Qt5Widgets_LIBRARIES}
+	${__KF5Notifications_LIBRARIES}
 	# currently needs to be hardcoded for windows builds
 	qxmpp
 )
@@ -396,5 +404,9 @@ elseif(UNIX AND NOT APPLE)
 	)
 endif()
 
+# KNotifications
+if(USE_KNOTIFICATIONS)
+	install(FILES misc/kaidan.notifyrc DESTINATION ${KNOTIFYRC_INSTALL_DIR})
+endif()
 
 feature_summary(WHAT ALL FATAL_ON_MISSING_REQUIRED_PACKAGES)

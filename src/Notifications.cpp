@@ -30,11 +30,20 @@
 
 // Kaidan
 #include "Notifications.h"
-
-void Notifications::sendMessageNotification(std::string fromName, std::string message)
-{
-#ifdef NOTIFICATIONS_LIBNOTIFY
-	std::string command = "notify-send \"" + fromName + ": " + message + "\" -a kaidan -i kaidan -t 7000";
-	system(command.c_str());
+// KNotifications
+#ifdef HAVE_KNOTIFICATIONS
+#include <KNotification>
 #endif
+
+#ifdef HAVE_KNOTIFICATIONS
+void Notifications::sendMessageNotification(const QString& fromName, const QString& message)
+{
+	KNotification *notif = new KNotification("new-message");
+	notif->setText(QString("<b>%1</b>: %2").arg(fromName, message));
+	notif->sendEvent();
 }
+#else
+void Notifications::sendMessageNotification(const QString&, const QString&)
+{
+}
+#endif

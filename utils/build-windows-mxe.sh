@@ -136,7 +136,8 @@ echo "*****************************************"
         -DECM_DIR=/usr/share/ECM/cmake -DI18N=1 \
         -DSTATIC_BUILD=1 \
         -DCMAKE_BUILD_TYPE=$BUILD_TYPE \
-        -DQUICK_COMPILER=1
+        -DQUICK_COMPILER=1 \
+        -DUSE_KNOTIFICATIONS=OFF
 
     make -j$(nproc)
 }

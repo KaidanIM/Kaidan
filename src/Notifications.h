@@ -28,9 +28,10 @@
  *  along with Kaidan.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include <string>
+#include <QString>
 
-namespace Notifications
+class Notifications
 {
-	void sendMessageNotification(std::string fromName, std::string message);
-}
+public:
+	static void sendMessageNotification(const QString &fromName, const QString &message);
+};

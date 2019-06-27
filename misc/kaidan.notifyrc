@@ -1,0 +1,10 @@
+[Global]
+IconName=kaidan
+Comment=A user-friendly XMPP client for every device
+Name=Kaidan
+
+[Event/new-message]
+Name=New message
+Comment=You have received a new message
+Action=Sound|Popup
+

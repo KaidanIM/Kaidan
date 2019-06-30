@@ -186,7 +186,7 @@ void MessageDb::addMessage(const Message &msg)
 	record.setValue("id", msg.id().isEmpty() ? " " : msg.id());
 	record.setValue("isSent", msg.isSent());
 	record.setValue("isDelivered", msg.isDelivered());
-	record.setValue("type", int(msg.type()));
+	record.setValue("type", int(msg.mediaType()));
 	record.setValue("edited", msg.isEdited());
 	record.setValue("isSpoiler", msg.isSpoiler());
 	record.setValue("spoilerHint", msg.spoilerHint());
@@ -217,7 +217,7 @@ void MessageDb::removeMessage(const QString &id)
 void MessageDb::updateMessage(const QString &id,
                               const std::function<void (Message &)> &updateMsg)
 {
-	// load current roster item from db
+	// load current message item from db
 	QSqlDatabase db = QSqlDatabase::database(DB_CONNECTION);
 
 	QSqlQuery query(db);

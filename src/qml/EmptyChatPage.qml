@@ -61,6 +61,7 @@ Kirigami.Page {
 			bottomPadding: Kirigami.Units.gridUnit * 0.4
 
 			text: qsTr("Please select a chat to start messaging")
+			color: "black"
 		}
 	}
 }

@@ -69,7 +69,9 @@ Kirigami.GlobalDrawer {
 				// open settings page
 				if (Kirigami.Settings.isMobile) {
 					if (pageStack.layers.depth < 2)
-					    pageStack.layers.push(settingsPage)
+						pageStack.layers.push(settingsPage)
+					else
+						pageStack.layers.pop()
 				} else {
 				    settingsSheet.open()
 				}

@@ -25,6 +25,9 @@
 		<file alias="qml/elements/MediaPreviewOther.qml">src/qml/elements/MediaPreviewOther.qml</file>
 		<file alias="qml/elements/EmojiPicker.qml">src/qml/elements/EmojiPicker.qml</file>
 		<file alias="qml/elements/TextAvatar.qml">src/qml/elements/TextAvatar.qml</file>
+		<file alias="qml/elements/kirigami/templates/private/IconPropertiesGroup.qml">src/qml/elements/kirigami/templates/private/IconPropertiesGroup.qml</file>
+		<file alias="qml/elements/kirigami/templates/InlineMessage.qml">src/qml/elements/kirigami/templates/InlineMessage.qml</file>
+		<file alias="qml/elements/kirigami/InlineMessage.qml">src/qml/elements/kirigami/InlineMessage.qml</file>
 
 		<file alias="qml/settings/SettingsItem.qml">src/qml/settings/SettingsItem.qml</file>
 		<file alias="qml/settings/SettingsPage.qml">src/qml/settings/SettingsPage.qml</file>

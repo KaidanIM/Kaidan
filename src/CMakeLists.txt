@@ -36,6 +36,7 @@ set(KAIDAN_SOURCES
 	src/qxmpp-exts/QXmppUploadRequestManager.cpp
 	src/qxmpp-exts/QXmppUploadManager.cpp
 	src/qxmpp-exts/QXmppColorGenerator.cpp
+	src/qxmpp-exts/QXmppUri.cpp
 
 	# hsluv-c required for color generation
 	src/hsluv-c/hsluv.c

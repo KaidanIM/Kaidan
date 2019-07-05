@@ -57,6 +57,9 @@
 #include "RosterModel.h"
 #include "StatusBar.h"
 #include "UploadManager.h"
+#include "EmojiModel.h"
+#include "Utils.h"
+#include "QrCodeScannerFilter.h"
 
 #ifdef STATIC_BUILD
 #include "static_plugins.h"
@@ -177,6 +180,7 @@ Q_DECL_EXPORT int main(int argc, char *argv[])
 	qRegisterMetaType<QHash<QString,RosterItem>>("QHash<QString,RosterItem>");
 	qRegisterMetaType<std::function<void(RosterItem&)>>("std::function<void(RosterItem&)>");
 	qRegisterMetaType<std::function<void(Message&)>>("std::function<void(Message&)>");
+	qRegisterMetaType<ClientWorker::Credentials>("ClientWorker::Credentials");
 	// Enums for c++ member calls using enums
 	qRegisterMetaType<Enums::ConnectionState>();
 	qRegisterMetaType<Enums::DisconnectionReason>();
@@ -246,7 +250,7 @@ Q_DECL_EXPORT int main(int argc, char *argv[])
 
 	// open the XMPP-URI/link (if given)
 	if (!parser.positionalArguments().isEmpty())
-		kaidan.addOpenUri(parser.positionalArguments().first().toUtf8());
+		kaidan.addOpenUri(parser.positionalArguments().first());
 
 	//
 	// QML-GUI
@@ -274,6 +278,7 @@ Q_DECL_EXPORT int main(int argc, char *argv[])
 	qmlRegisterType<StatusBar>("StatusBar", 0, 1, "StatusBar");
 	qmlRegisterType<EmojiModel>("EmojiModel", 0, 1, "EmojiModel");
 	qmlRegisterType<EmojiProxyModel>("EmojiModel", 0, 1, "EmojiProxyModel");
+	qmlRegisterType<QrCodeScannerFilter>(APPLICATION_ID, 1, 0, "QrCodeScannerFilter");
 
 	qmlRegisterUncreatableType<QAbstractItemModel>("EmojiModel", 0, 1, "QAbstractItemModel", "Used by proxy models");
 	qmlRegisterUncreatableType<Emoji>("EmojiModel", 0, 1, "Emoji", "Used by emoji models");

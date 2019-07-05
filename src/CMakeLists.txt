@@ -26,6 +26,9 @@ set(KAIDAN_SOURCES
 	src/DownloadManager.cpp
 	src/QmlUtils.cpp
 	src/Utils.cpp
+	src/QrCodeDecoder
+	src/QrCodeScannerFilter.cpp
+	src/QrCodeVideoFrame.cpp
 
 	# needed to trigger moc generation / to be displayed in IDEs
 	src/Enums.h

@@ -37,7 +37,7 @@
 #include <QThread>
 // QXmpp
 #include "qxmpp-exts/QXmppColorGenerator.h"
-#include <QXmppClient.h>
+#include "qxmpp-exts/QXmppUri.h"
 // Kaidan
 #include "AvatarFileStorage.h"
 #include "Database.h"
@@ -152,17 +152,19 @@ void Kaidan::mainDisconnect(bool openLogInPage)
 
 void Kaidan::setConnectionState(QXmppClient::State state)
 {
-	this->connectionState = static_cast<ConnectionState>(state);
-	emit connectionStateChanged();
+	if (this->connectionState != static_cast<ConnectionState>(state)) {
+		this->connectionState = static_cast<ConnectionState>(state);
+		emit connectionStateChanged();
 
-	// Open the possibly cached URI when connected.
-	// This is needed because the XMPP URIs can't be opened when Kaidan is not connected.
-	if (connectionState == ConnectionState::StateConnected && !openUriCache.isEmpty()) {
-		// delay is needed because sometimes the RosterPage needs to be loaded first
-		QTimer::singleShot(300, [=] () {
-			emit xmppUriReceived(openUriCache);
-			openUriCache = "";
-		});
+		// Open the possibly cached URI when connected.
+		// This is needed because the XMPP URIs can't be opened when Kaidan is not connected.
+		if (connectionState == ConnectionState::StateConnected && !openUriCache.isEmpty()) {
+			// delay is needed because sometimes the RosterPage needs to be loaded first
+			QTimer::singleShot(300, [=] () {
+				emit xmppUriReceived(openUriCache);
+				openUriCache = "";
+			});
+		}
 	}
 }
 
@@ -177,6 +179,7 @@ void Kaidan::setJid(const QString &jid)
 	creds.jid = jid;
 	// credentials were modified -> first try
 	creds.isFirstTry = true;
+	emit jidChanged();
 }
 
 void Kaidan::setJidResource(const QString &jidResource)
@@ -186,6 +189,7 @@ void Kaidan::setJidResource(const QString &jidResource)
 	creds.jidResource = jidResource;
 
 	m_caches->settings->setValue(KAIDAN_SETTINGS_AUTH_RESOURCE, jidResource);
+	emit jidResourceChanged();
 }
 
 void Kaidan::setPassword(const QString &password)
@@ -193,6 +197,7 @@ void Kaidan::setPassword(const QString &password)
 	creds.password = password;
 	// credentials were modified -> first try
 	creds.isFirstTry = true;
+	emit passwordChanged();
 }
 
 quint8 Kaidan::getDisconnReason() const
@@ -200,20 +205,57 @@ quint8 Kaidan::getDisconnReason() const
 	return static_cast<quint8>(disconnReason);
 }
 
-void Kaidan::addOpenUri(const QByteArray &uri)
+void Kaidan::addOpenUri(const QString &uri)
 {
-	qDebug() << "[main]" << uri;
-
-	if (!uri.startsWith("xmpp:") || !uri.contains("@"))
+	if (!QXmppUri::isXmppUri(uri))
 		return;
 
 	if (connectionState == ConnectionState::StateConnected) {
-		emit xmppUriReceived(QString::fromUtf8(uri));
+		emit xmppUriReceived(uri);
 	} else {
 		//: The link is an XMPP-URI (i.e. 'xmpp:kaidan@muc.kaidan.im?join' for joining a chat)
 		emit passiveNotificationRequested(tr("The link will be opened after you have connected."));
-		openUriCache = QString::fromUtf8(uri);
+		openUriCache = uri;
 	}
+}
+
+void Kaidan::loginByUri(const QString &uri)
+{
+	// input does not start with 'xmpp:'
+	if (!QXmppUri::isXmppUri(uri)) {
+        notifyLoginUriNotFound();
+		return;
+	}
+
+	// parse
+	QXmppUri parsedUri(uri);
+
+	// no JID provided
+	if (parsedUri.jid().isEmpty()) {
+        notifyLoginUriNotFound();
+		return;
+	}
+
+	setJid(parsedUri.jid());
+
+	// URI has no login action or no password
+	if (!parsedUri.hasAction(QXmppUri::Action::Login) || parsedUri.password().isEmpty()) {
+		// reset password
+		setPassword(QString());
+		emit passiveNotificationRequested(tr("No password found. Please enter it."));
+		return;
+	}
+
+	setPassword(parsedUri.password());
+
+	// try to connect
+	mainConnect();
+}
+
+void Kaidan::notifyLoginUriNotFound()
+{
+    qWarning() << "[main]" << "No valid login URI found.";
+    emit passiveNotificationRequested(tr("No valid login QR code found."));
 }
 
 Kaidan *Kaidan::instance()

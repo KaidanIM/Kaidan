@@ -20,6 +20,19 @@
         "-DCMAKE_INSTALL_PREFIX=../../../bin/ubuntu-touch/tmp"
       ],
       "postbuild": "make install"
+    },
+    "zxing-cpp": {
+      "template": "cmake",
+      "src_dir": "3rdparty/zxing-cpp",
+      "make_jobs": 2,
+      "build_args": [
+        "-DCMAKE_BUILD_TYPE=Release",
+        "-DBUILD_SHARED_LIBRARY=ON",
+        "-DLINK_CPP_STATICALLY=OFF",
+        "-DCMAKE_PREFIX_PATH=../../../bin/ubuntu-touch/tmp",
+        "-DCMAKE_INSTALL_PREFIX=../../../bin/ubuntu-touch/tmp"
+      ],
+      "postbuild": "make install"
     }
   }
 }

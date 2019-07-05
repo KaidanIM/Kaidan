@@ -195,7 +195,14 @@ public:
 	/**
 	 * Adds XMPP URI to open as soon as possible
 	 */
-	void addOpenUri(const QByteArray &uri);
+	void addOpenUri(const QString &uri);
+
+    /**
+     * Connects to the server by the parsed credentials (bare JID and password)
+     * from a given XMPP URI (e.g. from scanning a QR code)
+     * like "xmpp:user@example.org?login;password=abc"
+     */
+    Q_INVOKABLE void loginByUri(const QString &uri);
 
 	/**
 	 * Returns whether an HTTP File Upload service has been found
@@ -384,6 +391,11 @@ public slots:
 
 private:
 	void connectDatabases();
+
+    /**
+     * Notifies if no login URI was found
+     */
+    void notifyLoginUriNotFound();
 
 	QmlUtils *m_utils;
 	Database *m_database;

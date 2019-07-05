@@ -55,8 +55,9 @@ kde_enable_exceptions()
 
 # Find packages
 find_package(PkgConfig REQUIRED)
-find_package(Qt5 ${QT_MIN_VERSION} REQUIRED NO_MODULE COMPONENTS Core Qml Quick Svg Sql QuickControls2 Xml)
+find_package(Qt5 ${QT_MIN_VERSION} REQUIRED NO_MODULE COMPONENTS Core Qml Quick Svg Sql QuickControls2 Xml Multimedia)
 find_package(KF5Kirigami2 REQUIRED)
+find_package(ZXing REQUIRED COMPONENTS Core)
 pkg_search_module(QXmpp REQUIRED qxmpp>=1.0)
 
 # Optional QtQuickCompiler
@@ -167,6 +168,8 @@ target_link_libraries(${PROJECT_NAME}
 	Qt5::Svg
 	Qt5::Network
 	Qt5::Xml
+	Qt5::Multimedia
+	ZXing::Core
 	${__Qt5Widgets_LIBRARIES}
 	${__KF5Notifications_LIBRARIES}
 	# currently needs to be hardcoded for windows builds

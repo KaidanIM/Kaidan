@@ -31,7 +31,7 @@
 #include "QXmppUri.h"
 #include <QUrlQuery>
 
-/// actions, e.g. "join" in "group@example.org?join" for joining a groupchat
+/// actions, e.g. "join" in "xmpp:group@example.org?join" for joining a group chat
 
 const QStringList ACTION_STRINGS = QStringList()
         << ""

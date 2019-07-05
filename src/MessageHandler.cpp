@@ -106,10 +106,8 @@ void MessageHandler::handleMessage(const QXmppMessage &msg)
 	message.setSpoilerHint(msg.spoilerHint());
 #else
 	for (const QXmppElement &extension : msg.extensions()) {
-		qDebug() << extension.tagName();
 		if (extension.tagName() == "spoiler" &&
 		    extension.attribute("xmlns") == NS_SPOILERS) {
-			qDebug() << "SPOILER MESSAGE";
 			message.setIsSpoiler(true);
 			message.setSpoilerHint(extension.value());
 			break;

@@ -7,7 +7,7 @@
 		<file alias="qml/AboutDialog.qml">src/qml/AboutDialog.qml</file>
 		<file alias="qml/GlobalDrawer.qml">src/qml/GlobalDrawer.qml</file>
 		<file alias="qml/EmptyChatPage.qml">src/qml/EmptyChatPage.qml</file>
-
+	<file alias="qml/QrCodeScannerPage.qml">src/qml/QrCodeScannerPage.qml</file>
 		<file alias="qml/elements/SubRequestAcceptSheet.qml">src/qml/elements/SubRequestAcceptSheet.qml</file>
 		<file alias="qml/elements/RosterAddContactSheet.qml">src/qml/elements/RosterAddContactSheet.qml</file>
 		<file alias="qml/elements/RosterRemoveContactSheet.qml">src/qml/elements/RosterRemoveContactSheet.qml</file>
@@ -25,12 +25,10 @@
 		<file alias="qml/elements/MediaPreviewOther.qml">src/qml/elements/MediaPreviewOther.qml</file>
 		<file alias="qml/elements/EmojiPicker.qml">src/qml/elements/EmojiPicker.qml</file>
 		<file alias="qml/elements/TextAvatar.qml">src/qml/elements/TextAvatar.qml</file>
-
 		<file alias="qml/settings/SettingsItem.qml">src/qml/settings/SettingsItem.qml</file>
 		<file alias="qml/settings/SettingsPage.qml">src/qml/settings/SettingsPage.qml</file>
 		<file alias="qml/settings/SettingsSheet.qml">src/qml/settings/SettingsSheet.qml</file>
 		<file alias="qml/settings/ChangePassword.qml">src/qml/settings/ChangePassword.qml</file>
-
 		<file alias="qtquickcontrols2.conf">misc/qtquickcontrols2.conf</file>
 	</qresource>
 </RCC>

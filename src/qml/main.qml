@@ -71,6 +71,7 @@ Kirigami.ApplicationWindow {
 	Component {id: rosterPage; RosterPage {}}
 	Component {id: emptyChatPage; EmptyChatPage {}}
 	Component {id: settingsPage; SettingsPage {}}
+	Component {id: qrCodeScannerPage; QrCodeScannerPage {}}
 
 	function passiveNotification(text) {
 		showPassiveNotification(text, "long")

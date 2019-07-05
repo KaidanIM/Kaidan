@@ -38,6 +38,14 @@ import im.kaidan.kaidan 1.0
 Kirigami.Page {
 	title: qsTr("Log in")
 
+	actions.contextualActions: [
+		Kirigami.Action {
+			text: qsTr("Log in using a QR-Code")
+			icon.name: "view-barcode"
+			onTriggered: pageStack.layers.push(qrCodeScannerPage)
+		}
+	]
+
 	ColumnLayout {
 		anchors.fill: parent
 
@@ -87,25 +95,38 @@ Kirigami.Page {
 			Controls.Button {
 				id: connectButton
 				Layout.fillWidth: true
+				highlighted: true
 				Kirigami.Theme.backgroundColor: Material.accent
-				text: qsTr("Connect")
 
+				state: kaidan.connectionState !== Enums.StateDisconnected ? "connecting" : ""
 				states: [
 					State {
 						name: "connecting"
 						PropertyChanges {
 							target: connectButton
 							enabled: false
+						}
+						PropertyChanges {
+							target: connectLabel
 							text: "<i>" + qsTr("Connecting…") + "</i>"
+							color: "black"
 						}
 					}
 				]
 
 				onClicked: {
 					// connect to given account data
-					kaidan.jid = jidField.text.toLowerCase()
+					kaidan.jid = jidField.text
 					kaidan.password = passField.text
 					kaidan.mainConnect()
+				}
+
+				Controls.Label {
+					id: connectLabel
+					anchors.centerIn: connectButton
+					text: qsTr("Connect")
+					color: Kirigami.Theme.highlightedTextColor
+					textFormat: Text.StyledText
 				}
 			}
 
@@ -120,14 +141,6 @@ Kirigami.Page {
 		// placeholder
 		Item {
 			Layout.preferredHeight: Kirigami.Units.gridUnit * 3
-		}
-	}
-
-	function handleConnectionState(state) {
-		if (state === Enums.StateConnecting) {
-			connectButton.state = "connecting"
-		} else {
-			connectButton.state = ""
 		}
 	}
 
@@ -153,12 +166,10 @@ Kirigami.Page {
 	}
 
 	Component.onCompleted: {
-		kaidan.connectionStateChanged.connect(handleConnectionState)
 		kaidan.disconnReasonChanged.connect(handleConnectionError)
 	}
 
 	Component.onDestruction: {
-		kaidan.connectionStateChanged.disconnect(handleConnectionState)
 		kaidan.disconnReasonChanged.disconnect(handleConnectionError)
 	}
 }

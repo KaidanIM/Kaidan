@@ -1,0 +1,16 @@
+#
+# This list is used by git-shortlog to fix a few botched name translations
+# in the git archive, either because the author's full name was messed up
+# and/or not always written the same way, making contributions from the
+# same person appearing not to be so.
+#
+
+Linus Jahn <lnj@kaidan.im> <git@lnj.li>
+Linus Jahn <lnj@kaidan.im> <linus.jahn@searchmetrics.com>
+Jonah Brüchert <jbb@kaidan.im> <jbb.prv@gmx.de>
+Jonah Brüchert <jbb@kaidan.im> <jbb.mail@gmx.de>
+Jonah Brüchert <jbb@kaidan.im> <jbbgameich@gmail.com>
+Jonah Brüchert <jbb@kaidan.im> <jbbgameich@outlook.com>
+geobra <s.g.b@gmx.de>
+Muhammad Nur Hidayat Yasuyoshi <mnh48mail@gmail.com>
+

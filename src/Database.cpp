@@ -173,6 +173,7 @@ void Database::convertDatabase()
 		// TODO: the next time we change the messages table, we need to do:
 		//        * rename author to sender, edited to isEdited
 		//        * delete author_resource, recipient_resource
+		//        * remove 'NOT NULL' from id
 	}
 
 	QSqlRecord updateRecord;

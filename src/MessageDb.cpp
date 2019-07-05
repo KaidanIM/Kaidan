@@ -183,7 +183,7 @@ void MessageDb::addMessage(const Message &msg)
 	record.setValue("recipient", msg.to());
 	record.setValue("timestamp", msg.stamp().toString(Qt::ISODate));
 	record.setValue("message", msg.body());
-	record.setValue("id", msg.id());
+	record.setValue("id", msg.id().isEmpty() ? " " : msg.id());
 	record.setValue("isSent", msg.isSent());
 	record.setValue("isDelivered", msg.isDelivered());
 	record.setValue("type", int(msg.type()));

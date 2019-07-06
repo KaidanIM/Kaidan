@@ -277,7 +277,7 @@ Kirigami.ScrollablePage {
 				id: emojiPicker
 
 				model: EmojiProxyModel {
-					group: Emoji.Group.People
+					group: Emoji.People
 					sourceModel: EmojiModel {}
 				}
 

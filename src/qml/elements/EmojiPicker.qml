@@ -92,16 +92,16 @@ Popup {
 		Row {
 			Repeater {
 				model: ListModel {
-					ListElement { label: "🔖"; group: Emoji.Group.Favorites }
-					ListElement { label: "😏"; group: Emoji.Group.People }
-					ListElement { label: "🌲"; group: Emoji.Group.Nature }
-					ListElement { label: "🍛"; group: Emoji.Group.Food }
-					ListElement { label: "🚁"; group: Emoji.Group.Activity }
-					ListElement { label: "🚅"; group: Emoji.Group.Travel }
-					ListElement { label: "💡"; group: Emoji.Group.Objects }
-					ListElement { label: "🔣"; group: Emoji.Group.Symbols }
-					ListElement { label: "🏁"; group: Emoji.Group.Flags }
-					ListElement { label: "🔍"; group: Emoji.Group.Invalid }
+					ListElement { label: "🔖"; group: Emoji.Favorites }
+					ListElement { label: "😏"; group: Emoji.People }
+					ListElement { label: "🌲"; group: Emoji.Nature }
+					ListElement { label: "🍛"; group: Emoji.Food }
+					ListElement { label: "🚁"; group: Emoji.Activity }
+					ListElement { label: "🚅"; group: Emoji.Travel }
+					ListElement { label: "💡"; group: Emoji.Objects }
+					ListElement { label: "🔣"; group: Emoji.Symbols }
+					ListElement { label: "🏁"; group: Emoji.Flags }
+					ListElement { label: "🔍"; group: Emoji.Invalid }
 				}
 
 				delegate: ItemDelegate {
@@ -119,25 +119,25 @@ Popup {
 					hoverEnabled: true
 					ToolTip.text: {
 						switch (model.group) {
-						case Emoji.Group.Favorites:
+						case Emoji.Favorites:
 							return qsTr('Favorites');
-						case Emoji.Group.People:
+						case Emoji.People:
 							return qsTr('People');
-						case Emoji.Group.Nature:
+						case Emoji.Nature:
 							return qsTr('Nature');
-						case Emoji.Group.Food:
+						case Emoji.Food:
 							return qsTr('Food');
-						case Emoji.Group.Activity:
+						case Emoji.Activity:
 							return qsTr('Activity');
-						case Emoji.Group.Travel:
+						case Emoji.Travel:
 							return qsTr('Travel');
-						case Emoji.Group.Objects:
+						case Emoji.Objects:
 							return qsTr('Objects');
-						case Emoji.Group.Symbols:
+						case Emoji.Symbols:
 							return qsTr('Symbols');
-						case Emoji.Group.Flags:
+						case Emoji.Flags:
 							return qsTr('Flags');
-						case Emoji.Group.Invalid:
+						case Emoji.Invalid:
 							return qsTr('Search');
 						}
 					}
@@ -162,7 +162,7 @@ Popup {
 
 			Layout.fillWidth: true
 			Layout.alignment: Qt.AlignVCenter
-			visible: root.model.group === Emoji.Group.Invalid
+			visible: root.model.group === Emoji.Invalid
 			placeholderText: qsTr("Search emoji")
 			selectByMouse: true
 			background: Item {}
@@ -172,12 +172,21 @@ Popup {
 				id: clearButton
 
 				visible: searchField.text !== ''
-				icon.name: 'edit-clear'
 				focusPolicy: Qt.NoFocus
 
 				anchors {
 					verticalCenter: parent.verticalCenter
 					right: parent.right
+				}
+
+				Kirigami.Icon {
+					source: 'edit-clear'
+					height: 24
+					width: height
+
+					anchors {
+						centerIn: parent
+					}
 				}
 
 				onClicked: searchField.clear()

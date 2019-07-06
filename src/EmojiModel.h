@@ -15,7 +15,7 @@ class Emoji
 	Q_PROPERTY(Emoji::Group group READ group CONSTANT)
 
 public:
-	enum class Group {
+	enum Group {
 		Invalid = -1,
 		Favorites,
 		People,

@@ -97,12 +97,10 @@ Controls.Dialog {
 
 			Controls.ToolButton {
 				text: qsTr("View source code online")
-				onClicked: Qt.openUrlExternally("https://git.kaidan.im/kaidan/kaidan")
+				onClicked: Qt.openUrlExternally("https://invent.kde.org/kde/kaidan")
 				Layout.fillWidth: true
 				Layout.alignment: Qt.AlignHCenter
 			}
 		}
 	}
-
-
 }

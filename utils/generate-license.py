@@ -341,7 +341,7 @@ def main():
 	];
 
 	print("Upstream-Name: kaidan")
-	print("Source: https://git.kaidan.im/kaidan/kaidan/")
+	print("Source: https://invent.kde.org/kde/kaidan/")
 	print("Format: https://www.debian.org/doc/packaging-manuals/copyright-format/1.0/")
 	print()
 

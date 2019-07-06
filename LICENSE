@@ -1,5 +1,5 @@
 Upstream-Name: kaidan
-Source: https://git.kaidan.im/kaidan/kaidan/
+Source: https://invent.kde.org/kde/kaidan/
 Format: https://www.debian.org/doc/packaging-manuals/copyright-format/1.0/
 
 Files: src/*

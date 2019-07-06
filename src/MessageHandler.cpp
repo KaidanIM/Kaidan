@@ -38,7 +38,7 @@
 #include <QXmppDiscoveryManager.h>
 #include <QXmppRosterManager.h>
 #include <QXmppUtils.h>
-#if QXMPP_VERSION >= QT_VERSION_CHECK(1, 0, 0)
+#if (QXMPP_VERSION) >= QT_VERSION_CHECK(1, 0, 0)
 #include <QXmppCarbonManager.h>
 #endif
 // Kaidan
@@ -61,7 +61,7 @@ MessageHandler::MessageHandler(Kaidan *kaidan, QXmppClient *client, MessageModel
 		emit model->setMessageAsDeliveredRequested(id);
 	});
 
-#if QXMPP_VERSION >= QT_VERSION_CHECK(1, 0, 0)
+#if (QXMPP_VERSION) >= QT_VERSION_CHECK(1, 0, 0)
 	carbonManager = new QXmppCarbonManager();
 	client->addExtension(carbonManager);
 
@@ -84,7 +84,7 @@ MessageHandler::MessageHandler(Kaidan *kaidan, QXmppClient *client, MessageModel
 
 MessageHandler::~MessageHandler()
 {
-#if QXMPP_VERSION >= QT_VERSION_CHECK(1, 0, 0)
+#if (QXMPP_VERSION) >= QT_VERSION_CHECK(1, 0, 0)
 	delete carbonManager;
 #endif
 }
@@ -101,7 +101,7 @@ void MessageHandler::handleMessage(const QXmppMessage &msg)
 	message.setId(msg.id());
 	message.setBody(msg.body());
 	message.setMediaType(MessageType::MessageText); // default to text message without media
-#if QXMPP_VERSION >= QT_VERSION_CHECK(1, 0, 1)
+#if (QXMPP_VERSION) >= QT_VERSION_CHECK(1, 0, 1)
 	message.setIsSpoiler(msg.isSpoiler());
 	message.setSpoilerHint(msg.spoilerHint());
 #else
@@ -152,7 +152,7 @@ void MessageHandler::handleMessage(const QXmppMessage &msg)
 	                 : msg.stamp().toUTC());
 
 	// save the message to the database
-#if QXMPP_VERSION >= QT_VERSION_CHECK(1, 0, 0)
+#if (QXMPP_VERSION) >= QT_VERSION_CHECK(1, 0, 0)
 	// in case of message correction, replace old message
 	if (msg.replaceId().isEmpty()) {
 		emit model->addMessageRequested(message);
@@ -269,7 +269,7 @@ void MessageHandler::correctMessage(const QString& toJid,
 	msg.setSentByMe(true);
 	msg.setMediaType(MessageType::MessageText); // text message without media
 	msg.setIsEdited(true);
-#if QXMPP_VERSION >= QT_VERSION_CHECK(1, 0, 0)
+#if (QXMPP_VERSION) >= QT_VERSION_CHECK(1, 0, 0)
 	msg.setReplaceId(msgId);
 #endif
 
@@ -285,7 +285,7 @@ void MessageHandler::correctMessage(const QString& toJid,
 
 void MessageHandler::handleDiscoInfo(const QXmppDiscoveryIq &info)
 {
-#if QXMPP_VERSION >= QT_VERSION_CHECK(1, 0, 0)
+#if (QXMPP_VERSION) >= QT_VERSION_CHECK(1, 0, 0)
 	if (info.from() != client->configuration().domain())
 		return;
 	// enable carbons, if feature found

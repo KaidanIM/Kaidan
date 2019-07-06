@@ -129,7 +129,7 @@ void UploadManager::handleUploadSucceeded(const QXmppHttpUpload *upload)
 	                     : originalMsg->body() + "\n" + oobUrl;
 
 	emit msgModel->updateMessageRequested(originalMsg->id(), [=] (Message &msg) {
-#if QXMPP_VERSION >= QT_VERSION_CHECK(1, 0, 0)
+#if (QXMPP_VERSION) >= QT_VERSION_CHECK(1, 0, 0)
 		msg.setOutOfBandUrl(oobUrl);
 #endif
 		msg.setBody(body);
@@ -140,7 +140,7 @@ void UploadManager::handleUploadSucceeded(const QXmppHttpUpload *upload)
 	m.setId(originalMsg->id());
 	m.setReceiptRequested(true);
 	m.setStamp(originalMsg->stamp());
-#if QXMPP_VERSION >= QT_VERSION_CHECK(1, 0, 0)
+#if (QXMPP_VERSION) >= QT_VERSION_CHECK(1, 0, 0)
 	m.setOutOfBandUrl(upload->slot().getUrl().toEncoded());
 #endif
 

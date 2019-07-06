@@ -80,10 +80,13 @@ RosterManager::RosterManager(Kaidan *kaidan,
 	});
 	connect(kaidan, &Kaidan::subscriptionRequestAnswered,
 	        this, [=] (QString jid, bool accepted) {
-		if (accepted)
+		if (accepted) {
 			manager.acceptSubscription(jid);
-		else
+			if (manager.getRosterEntry(jid).subscriptionType() != QXmppRosterIq::Item::Both)
+				manager.subscribe(jid);
+		} else {
 			manager.refuseSubscription(jid);
+		}
 	});
 
 	// update local copy of chat partner

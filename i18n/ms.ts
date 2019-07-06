@@ -61,43 +61,43 @@
     <name>ChangePassword</name>
     <message>
         <source>Change password</source>
-        <translation type="unfinished"></translation>
+        <translation>Tukar kata laluan</translation>
     </message>
     <message>
         <source>Current password:</source>
-        <translation type="unfinished"></translation>
+        <translation>Kata laluan semasa:</translation>
     </message>
     <message>
         <source>New password:</source>
-        <translation type="unfinished"></translation>
+        <translation>Kata laluan baru:</translation>
     </message>
     <message>
         <source>New password (repeat):</source>
-        <translation type="unfinished"></translation>
+        <translation>Kata laluan baru (ulang semula):</translation>
     </message>
     <message>
         <source>New passwords do not match.</source>
-        <translation type="unfinished"></translation>
+        <translation>Kata laluan baru yang diulang tidak sepadan.</translation>
     </message>
     <message>
         <source>Current password is invalid.</source>
-        <translation type="unfinished"></translation>
+        <translation>Kata laluan semasa tidak sah.</translation>
     </message>
     <message>
         <source>You need to be connected to change your password.</source>
-        <translation type="unfinished"></translation>
+        <translation>Anda mesti sambung ke internet untuk menukar kata laluan anda.</translation>
     </message>
     <message>
         <source>After changing your password, you will need to reenter it on all your other devices.</source>
-        <translation type="unfinished"></translation>
+        <translation>Selepas anda menukar kata laluan, anda perlu log masuk semula di kesemua peranti anda yang lain.</translation>
     </message>
     <message>
         <source>Cancel</source>
-        <translation type="unfinished">Batal</translation>
+        <translation>Batal</translation>
     </message>
     <message>
         <source>Change</source>
-        <translation type="unfinished"></translation>
+        <translation>Tukar</translation>
     </message>
 </context>
 <context>
@@ -291,7 +291,7 @@
     </message>
     <message>
         <source>Settings</source>
-        <translation type="unfinished"></translation>
+        <translation>Tetapan</translation>
     </message>
 </context>
 <context>
@@ -424,11 +424,11 @@
     <name>RegistrationManager</name>
     <message>
         <source>Password changed successfully.</source>
-        <translation type="unfinished"></translation>
+        <translation>Kata laluan berjaya ditukar.</translation>
     </message>
     <message>
         <source>Failed to change password: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Gagal menukar kata laluan: %1</translation>
     </message>
 </context>
 <context>
@@ -585,15 +585,15 @@
     <name>SettingsPage</name>
     <message>
         <source>Settings</source>
-        <translation type="unfinished"></translation>
+        <translation>Tetapan</translation>
     </message>
     <message>
         <source>Change password</source>
-        <translation type="unfinished"></translation>
+        <translation>Tukar kata laluan</translation>
     </message>
     <message>
         <source>Changes your account&apos;s password. You will need to re-enter it on your other devices.</source>
-        <translation type="unfinished"></translation>
+        <translation>Tukar kata laluan akaun anda. Anda perlu log masuk semula di kesemua peranti anda yang lain.</translation>
     </message>
 </context>
 <context>

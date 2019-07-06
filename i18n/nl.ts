@@ -112,7 +112,7 @@
     </message>
     <message>
         <source>Send</source>
-        <translation>Versturen</translation>
+        <translation type="vanished">Versturen</translation>
     </message>
     <message>
         <source>Image</source>
@@ -163,6 +163,53 @@
     <message>
         <source>Download failed: %1</source>
         <translation>Downloaden mislukt: %1</translation>
+    </message>
+</context>
+<context>
+    <name>EmojiPicker</name>
+    <message>
+        <source>Favorites</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>People</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Nature</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Food</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Activity</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Travel</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Objects</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Symbols</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Flags</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Search</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Search emoji</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -325,6 +372,14 @@
         <source>Spoiler</source>
         <translation type="unfinished">Spoiler</translation>
     </message>
+    <message>
+        <source>Message could not be sent.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Message correction was not successful.</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>RegistrationManager</name>
@@ -449,7 +504,7 @@
     <name>RosterRemoveContactSheet</name>
     <message>
         <source>Do you really want to delete the contact &quot;%1&quot; from your roster?</source>
-        <translation>Wil je echt contact &quot;%1&quot; uit je contactenlijst verwijderen?</translation>
+        <translation type="vanished">Wil je echt contact &quot;%1&quot; uit je contactenlijst verwijderen?</translation>
     </message>
     <message>
         <source>Delete contact</source>

@@ -133,6 +133,53 @@
     </message>
 </context>
 <context>
+    <name>EmojiPicker</name>
+    <message>
+        <source>Favorites</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>People</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Nature</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Food</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Activity</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Travel</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Objects</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Symbols</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Flags</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Search</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Search emoji</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>EmptyChatPage</name>
     <message>
         <source>Please select a chat to start messaging</source>
@@ -273,6 +320,14 @@ Prosím zkontrolujte své připojení k internetu.</translation>
     <message>
         <source>Spoiler</source>
         <translation>«Spoiler»</translation>
+    </message>
+    <message>
+        <source>Message could not be sent.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Message correction was not successful.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

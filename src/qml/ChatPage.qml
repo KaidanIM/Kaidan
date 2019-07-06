@@ -290,7 +290,7 @@ Kirigami.ScrollablePage {
 				Layout.preferredHeight: Kirigami.Units.gridUnit * 3
 				padding: 0
 				Kirigami.Icon {
-					source: "preferences-desktop-emoticons"
+					source: "face-smile"
 					enabled: sendButton.enabled
 					isMask: false
 					smooth: true

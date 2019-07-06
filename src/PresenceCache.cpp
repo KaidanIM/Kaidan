@@ -34,18 +34,13 @@
 
 using namespace Enums;
 
-PresenceCache::PresenceCache(QObject *parent) : QObject(parent)
+PresenceCache::PresenceCache(QObject *parent)
+    : QObject(parent)
 {
-	connect(this, &PresenceCache::updatePresenceRequested, this, &PresenceCache::updatePresence);
 }
 
 void PresenceCache::updatePresence(QXmppPresence presence)
 {
-	if (presence.type() != QXmppPresence::Available &&
-	    presence.type() != QXmppPresence::Unavailable/* &&
-	    presence.type() != QXmppPresence::Error*/)
-		return;
-
 	QString jid = QXmppUtils::jidToBareJid(presence.from());
 	QString resource = QXmppUtils::jidToResource(presence.from());
 
@@ -55,6 +50,11 @@ void PresenceCache::updatePresence(QXmppPresence presence)
 	presences[jid][resource] = presence;
 
 	emit presenceChanged(jid);
+}
+
+void PresenceCache::clear()
+{
+	presences.clear();
 }
 
 quint8 PresenceCache::getPresenceType(QString bareJid)

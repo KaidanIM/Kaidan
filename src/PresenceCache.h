@@ -56,22 +56,22 @@ public:
 	 */
 	Q_INVOKABLE quint8 getPresenceType(QString bareJid);
 
+public slots:
+	/**
+	 * Updates the presence cache, it will ignore subscribe presences
+	 */
+	void updatePresence(QXmppPresence presence);
+
+	/**
+	 * Clears all cached presences.
+	 */
+	void clear();
+
 signals:
 	/**
 	 * Notifies about changed presences
 	 */
 	void presenceChanged(QString jid);
-
-	/**
-	 * Is connected to updatePresence
-	 */
-	void updatePresenceRequested(QXmppPresence presence);
-
-private slots:
-	/**
-	 * @brief Updates the presence cache, it will ignore subscribe presences
-	 */
-	void updatePresence(QXmppPresence presence);
 
 private:
 	QMap<QString, QMap<QString, QXmppPresence>> presences;

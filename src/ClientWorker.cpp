@@ -71,7 +71,9 @@ ClientWorker::ClientWorker(Caches *caches, Kaidan *kaidan, bool enableLogging, Q
 	client->addExtension(registrationManager);
 
 	connect(client, &QXmppClient::presenceReceived,
-	        caches->presCache, &PresenceCache::updatePresenceRequested);
+	        caches->presCache, &PresenceCache::updatePresence);
+	connect(client, &QXmppClient::disconnected,
+	        caches->presCache, &PresenceCache::clear);
 
 	connect(this, &ClientWorker::credentialsUpdated, this, &ClientWorker::setCredentials);
 

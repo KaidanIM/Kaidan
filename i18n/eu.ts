@@ -27,43 +27,43 @@
     <name>ChangePassword</name>
     <message>
         <source>Change password</source>
-        <translation type="unfinished"></translation>
+        <translation>Pasahitza aldatu</translation>
     </message>
     <message>
         <source>Current password:</source>
-        <translation type="unfinished"></translation>
+        <translation>Egungo pasahitza:</translation>
     </message>
     <message>
         <source>New password:</source>
-        <translation type="unfinished"></translation>
+        <translation>Pasahitz berria:</translation>
     </message>
     <message>
         <source>New password (repeat):</source>
-        <translation type="unfinished"></translation>
+        <translation>Pasahitz berria (errepikatu):</translation>
     </message>
     <message>
         <source>New passwords do not match.</source>
-        <translation type="unfinished"></translation>
+        <translation>Pasahitz berriak ez datoz bat.</translation>
     </message>
     <message>
         <source>Current password is invalid.</source>
-        <translation type="unfinished"></translation>
+        <translation>Egungo pasahitza ez da balekoa.</translation>
     </message>
     <message>
         <source>You need to be connected to change your password.</source>
-        <translation type="unfinished"></translation>
+        <translation>Pasahitza aldatzeko konektaturik egon behar duzu.</translation>
     </message>
     <message>
         <source>After changing your password, you will need to reenter it on all your other devices.</source>
-        <translation type="unfinished"></translation>
+        <translation>Pasahitza aldatu ostean, zure gainontzeko gailuetan berriro sartu beharko duzu.</translation>
     </message>
     <message>
         <source>Cancel</source>
-        <translation type="unfinished">Utzi</translation>
+        <translation>Utzi</translation>
     </message>
     <message>
         <source>Change</source>
-        <translation type="unfinished"></translation>
+        <translation>Aldatu</translation>
     </message>
 </context>
 <context>
@@ -82,7 +82,7 @@
     </message>
     <message>
         <source>Spoiler</source>
-        <translation type="unfinished"></translation>
+        <translation>«Spoiler»</translation>
     </message>
     <message>
         <source>Download</source>
@@ -121,11 +121,11 @@
     </message>
     <message>
         <source>Send a spoiler message</source>
-        <translation type="unfinished"></translation>
+        <translation>«Spoiler» mezu bat bidali</translation>
     </message>
     <message>
         <source>Spoiler hint</source>
-        <translation type="unfinished"></translation>
+        <translation>«Spoiler» keinua</translation>
     </message>
 </context>
 <context>
@@ -253,7 +253,7 @@
     </message>
     <message>
         <source>Settings</source>
-        <translation type="unfinished"></translation>
+        <translation>Ezarpenak</translation>
     </message>
 </context>
 <context>
@@ -363,7 +363,7 @@
     </message>
     <message>
         <source>Spoiler</source>
-        <translation type="unfinished"></translation>
+        <translation>«Spoiler»</translation>
     </message>
     <message>
         <source>Message could not be sent.</source>
@@ -378,11 +378,11 @@
     <name>RegistrationManager</name>
     <message>
         <source>Password changed successfully.</source>
-        <translation type="unfinished"></translation>
+        <translation>Pasahitza behar bezala aldatu da.</translation>
     </message>
     <message>
         <source>Failed to change password: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Akatsa pasahitza aldatzean: %1</translation>
     </message>
 </context>
 <context>
@@ -475,7 +475,7 @@
     </message>
     <message>
         <source>Spoiler</source>
-        <translation type="unfinished"></translation>
+        <translation>«Spoiler»</translation>
     </message>
 </context>
 <context>
@@ -535,15 +535,15 @@
     <name>SettingsPage</name>
     <message>
         <source>Settings</source>
-        <translation type="unfinished"></translation>
+        <translation>Ezarpenak</translation>
     </message>
     <message>
         <source>Change password</source>
-        <translation type="unfinished"></translation>
+        <translation>Pasahitza aldatu</translation>
     </message>
     <message>
         <source>Changes your account&apos;s password. You will need to re-enter it on your other devices.</source>
-        <translation type="unfinished"></translation>
+        <translation>Zure kontuaren pasahitza aldatzen du. Zure gainontzeko gailuetan berriro sartu beharko duzu.</translation>
     </message>
 </context>
 <context>
@@ -573,7 +573,7 @@
     </message>
     <message>
         <source>File</source>
-        <translation type="unfinished"></translation>
+        <translation>Artxiboa</translation>
     </message>
 </context>
 </TS>

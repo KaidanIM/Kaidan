@@ -13,9 +13,11 @@ Build system:
  * Improve Linux AppImage build script (ilyabizyaev)
  * Add additional image formats in AppImage (jbb)
 
-Back-end:
+Features:
+ * Show proper notifications using KNotifications (lnj)
+ * Add settings page for changing passwords (jbb, lnj)
  * Add XEP-0352: Client State Indication (gloox/QXmpp) (lnj)
- * Add media/file sharing (lnj)
+ * Add media/file (including GIFs) sharing (lnj, jbb)
  * Full back-end rewrite to QXmpp (lnj)
  * Implement XEP-0363: HTTP File Upload and UploadManager for QXmpp (lnj)
  * Use XEP-0280: Message Carbons from QXmpp (lnj)
@@ -26,11 +28,9 @@ Back-end:
  * Implement XEP-0382: Spoiler messages (xavi)
  * Kaidan is now offline usable (lnj)
  * Kaidan is able to open xmpp: URIs (lnj)
-
-User interface:
  * New logo (ilyabizyaev)
- * Show presence information of contacts (lnj)
- * Add EmojiPicker from Spectral (jbb)
+ * Show presence information of contacts (lnj, melvo)
+ * Add EmojiPicker from Spectral with search and favorites functionality (jbb, fazevedo)
  * Highlight links in chat and make links clickable (lnj)
  * New about dialog instead of the about page (ilyabizyaev)
  * Add image preview in chat and before sending (lnj)
@@ -70,12 +70,13 @@ Misc:
  * Add GitLab CI integration (jbb)
 
 Fixes:
+ * Fix blocking of GUI thread while database interaction (lnj)
  * Fix TLS connection bug (lnj)
  * Don't send notifications when receiving own messages via. carbons (lnj)
  * Fix timezone bug of message timestamps (lnj)
  * Fix several message editing bugs (lnj)
  * Fix black icons (jbb)
- * Fix richt text labels in Plasma Mobile (lnj)
+ * Fix rich text labels in Plasma Mobile (lnj)
  * Small Plasma Mobile fixes (jbb)
 
 ### Version 0.3.2 (released on 25.11.2017)

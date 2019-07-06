@@ -46,35 +46,35 @@
     <name>ChangePassword</name>
     <message>
         <source>Change password</source>
-        <translation type="unfinished"></translation>
+        <translation>Endre passord</translation>
     </message>
     <message>
         <source>Current password:</source>
-        <translation type="unfinished"></translation>
+        <translation>Nåværende passord:</translation>
     </message>
     <message>
         <source>New password:</source>
-        <translation type="unfinished"></translation>
+        <translation>Nytt passord:</translation>
     </message>
     <message>
         <source>New password (repeat):</source>
-        <translation type="unfinished"></translation>
+        <translation>Nytt passord (gjenta:</translation>
     </message>
     <message>
         <source>New passwords do not match.</source>
-        <translation type="unfinished"></translation>
+        <translation>De nye passordene samsvarer ikke.</translation>
     </message>
     <message>
         <source>Current password is invalid.</source>
-        <translation type="unfinished"></translation>
+        <translation>Det nåværende passordet er ugyldig.</translation>
     </message>
     <message>
         <source>You need to be connected to change your password.</source>
-        <translation type="unfinished"></translation>
+        <translation>Du må være tilkoblet for å endre passordet ditt.</translation>
     </message>
     <message>
         <source>After changing your password, you will need to reenter it on all your other devices.</source>
-        <translation type="unfinished"></translation>
+        <translation>Etter å ha endret passordet ditt, vil du måtte skrive det inn igjen på dine andre enheter.</translation>
     </message>
     <message>
         <source>Cancel</source>
@@ -82,7 +82,7 @@
     </message>
     <message>
         <source>Change</source>
-        <translation type="unfinished"></translation>
+        <translation>Endre</translation>
     </message>
 </context>
 <context>
@@ -276,7 +276,7 @@
     </message>
     <message>
         <source>Settings</source>
-        <translation type="unfinished"></translation>
+        <translation>Innstillinger</translation>
     </message>
 </context>
 <context>
@@ -405,11 +405,11 @@
     <name>RegistrationManager</name>
     <message>
         <source>Password changed successfully.</source>
-        <translation type="unfinished"></translation>
+        <translation>Passord endret</translation>
     </message>
     <message>
         <source>Failed to change password: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Klarte ikke å endre passord: %1</translation>
     </message>
 </context>
 <context>
@@ -570,15 +570,15 @@
     <name>SettingsPage</name>
     <message>
         <source>Settings</source>
-        <translation type="unfinished"></translation>
+        <translation>Innstillinger</translation>
     </message>
     <message>
         <source>Change password</source>
-        <translation type="unfinished"></translation>
+        <translation>Endre passord</translation>
     </message>
     <message>
         <source>Changes your account&apos;s password. You will need to re-enter it on your other devices.</source>
-        <translation type="unfinished"></translation>
+        <translation>Endrer passord på kontoen din. Du vil måtte skrive det inn igjen på dine andre enheter.</translation>
     </message>
 </context>
 <context>

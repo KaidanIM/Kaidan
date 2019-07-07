@@ -30,18 +30,18 @@
 
 // Kaidan
 #include "DownloadManager.h"
-#include "Kaidan.h"
-#include "TransferCache.h"
-#include "MessageModel.h"
 #include "Globals.h"
+#include "Kaidan.h"
+#include "MessageModel.h"
+#include "TransferCache.h"
 // C++
 #include <utility>
 // Qt
-#include "QDir"
-#include "QStandardPaths"
-#include "QNetworkRequest"
-#include "QNetworkReply"
-#include "QNetworkAccessManager"
+#include <QDir>
+#include <QNetworkAccessManager>
+#include <QNetworkReply>
+#include <QNetworkRequest>
+#include <QStandardPaths>
 
 DownloadManager::DownloadManager(Kaidan *kaidan, TransferCache *transferCache,
                                  MessageModel *model, QObject *parent)
@@ -69,7 +69,7 @@ DownloadManager::~DownloadManager()
 void DownloadManager::startDownload(const QString &msgId, const QString &url)
 {
 	// don't download the same file twice and in parallel
-	if (downloads.keys().contains(msgId)) {
+	if (downloads.contains(msgId)) {
 		qWarning() << "Tried to download a file that is currently being "
 		              "downloaded.";
 		return;

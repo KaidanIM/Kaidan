@@ -57,7 +57,7 @@ RosterManager::RosterManager(Kaidan *kaidan,
 	        this, &RosterManager::populateRoster);
 
 	connect(&manager, &QXmppRosterManager::itemAdded,
-	        [this, vCardManager, model] (const QString &jid) {
+		this, [this, vCardManager, model] (const QString &jid) {
 		emit model->addItemRequested(RosterItem(manager.getRosterEntry(jid)));
 
 		vCardManager->fetchVCard(jid);
@@ -111,7 +111,8 @@ void RosterManager::populateRoster()
 	qDebug() << "[client] [RosterManager] Populating roster";
 	// create a new list of contacts
 	QHash<QString, RosterItem> items;
-	for (const auto &jid : manager.getRosterBareJids()) {
+	const QStringList bareJids = manager.getRosterBareJids();
+	for (const auto &jid : bareJids) {
 		items[jid] = RosterItem(manager.getRosterEntry(jid));
 
 		if (avatarStorage->getHashOfJid(jid).isEmpty())

@@ -33,19 +33,19 @@
 
 // Qt
 #include <QObject>
-#include <QTimer>
 #include <QSettings>
+#include <QTimer>
 class QGuiApplication;
 // QXmpp
 #include <QXmppClient.h>
 // Kaidan
-#include "Globals.h"
-#include "Enums.h"
-#include "Database.h"
-#include "MessageModel.h"
-#include "RosterModel.h"
 #include "AvatarFileStorage.h"
+#include "Database.h"
+#include "Enums.h"
+#include "Globals.h"
+#include "MessageModel.h"
 #include "PresenceCache.h"
+#include "RosterModel.h"
 #include "TransferCache.h"
 class LogHandler;
 class Kaidan;
@@ -128,7 +128,7 @@ public slots:
 	 *
 	 * @param creds The new credentials for the next connect
 	 */
-	void setCredentials(Credentials creds)
+	void setCredentials(ClientWorker::Credentials creds)
 	{
 		this->creds = creds;
 	}
@@ -142,11 +142,11 @@ signals:
 	// emitted by 'Kaidan' to us:
 	void connectRequested();
 	void disconnectRequested();
-	void credentialsUpdated(Credentials creds);
+	void credentialsUpdated(ClientWorker::Credentials creds);
 
 	// emitted by us:
 	// connection state is directly connected (client -> kaidan) without this step
-	void disconnReasonChanged(DisconnectionReason reason);
+	void disconnReasonChanged(Enums::DisconnectionReason reason);
 
 private slots:
 	/**

@@ -31,8 +31,8 @@
 #include "ClientWorker.h"
 // Qt
 #include <QDebug>
-#include <QSettings>
 #include <QGuiApplication>
+#include <QSettings>
 #include <QSysInfo>
 // QXmpp
 #include <QXmppClient.h>
@@ -40,15 +40,15 @@
 #include <QXmppPresence.h>
 #include <QXmppVersionManager.h>
 // Kaidan
+#include "DiscoveryManager.h"
+#include "DownloadManager.h"
 #include "Kaidan.h"
 #include "LogHandler.h"
+#include "MessageHandler.h"
 #include "RegistrationManager.h"
 #include "RosterManager.h"
-#include "MessageHandler.h"
-#include "DiscoveryManager.h"
-#include "VCardManager.h"
 #include "UploadManager.h"
-#include "DownloadManager.h"
+#include "VCardManager.h"
 
 ClientWorker::ClientWorker(Caches *caches, Kaidan *kaidan, bool enableLogging, QGuiApplication *app,
                            QObject* parent)
@@ -182,10 +182,11 @@ void ClientWorker::onConnectionError(QXmppClient::Error error)
 
 QString ClientWorker::generateRandomString(unsigned int length) const
 {
+	const QString resourceChars(KAIDAN_RESOURCE_RANDOM_CHARS);
+
 	QString randomString;
 	for (unsigned int i = 0; i < length; ++i)
-		randomString.append(KAIDAN_RESOURCE_RANDOM_CHARS.at(
-		                    qrand() % KAIDAN_RESOURCE_RANDOM_CHARS.length()));
+		randomString.append(resourceChars.at(qrand() % resourceChars.length()));
 	return randomString;
 }
 

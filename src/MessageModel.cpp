@@ -229,7 +229,7 @@ void MessageModel::addMessage(const Message &msg)
 	    || QXmppUtils::jidToBareJid(msg.to()) == m_chatPartner) {
 		// index where to add the new message
 		int i = 0;
-		for (const auto &message : m_messages) {
+		for (const auto &message : qAsConst(m_messages)) {
 			if (msg.stamp() > message.stamp()) {
 				insertMessage(i, msg);
 				return;

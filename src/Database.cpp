@@ -318,8 +318,10 @@ void Database::convertDatabaseToV5()
 void Database::convertDatabaseToV6()
 {
 	QSqlQuery query(m_database);
-	for (QString column : {"'mediaSize' INTEGER", "'mediaContentType' TEXT",
-	                       "'mediaLastModified' INTEGER", "'mediaLocation' TEXT"}) {
+	for (const QString &column : {"'mediaSize' INTEGER",
+		     "'mediaContentType' TEXT",
+		     "'mediaLastModified' INTEGER",
+		     "'mediaLocation' TEXT"}) {
 		Utils::execQuery(query, QString("ALTER TABLE 'Messages' ADD ").append(column));
 	}
 }

@@ -32,13 +32,13 @@
 #define KAIDAN_H
 
 // Qt
+#include <QColor>
 #include <QObject>
 #include <QString>
-#include <QColor>
 // Kaidan
 #include "ClientWorker.h"
-#include "Globals.h"
 #include "Enums.h"
+#include "Globals.h"
 
 class QGuiApplication;
 class Database;
@@ -284,7 +284,7 @@ signals:
 	/**
 	 * The upload progress of a file upload has changed
 	 */
-	void uploadProgressMade(QString msgId, unsigned long sent, unsigned long total);
+	void uploadProgressMade(QString msgId, quint64 sent, quint64 total);
 
 	/**
 	 * An HTTP File Upload service was discovered
@@ -362,12 +362,12 @@ public slots:
 	/**
 	 * Sets the disconnection error/reason
 	 */
-	void setDisconnReason(DisconnectionReason reason);
+	void setDisconnReason(Enums::DisconnectionReason reason);
 
 	/**
 	 * Receives messages from another instance of the application
 	 */
-	void receiveMessage(quint32, QByteArray msg)
+	void receiveMessage(quint32, const QByteArray &msg)
 	{
 		// currently we only send XMPP URIs
 		addOpenUri(msg);

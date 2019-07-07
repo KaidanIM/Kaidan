@@ -140,7 +140,7 @@ void RosterModel::addItem(const RosterItem &item)
 
 	// index where to add the new contact
 	int i = 0;
-	for (const auto &itrItem : m_items) {
+	for (const auto &itrItem : qAsConst(m_items)) {
 		if (item.lastExchanged().toMSecsSinceEpoch() >= itrItem.lastExchanged().toMSecsSinceEpoch()) {
 			insertContact(i, item);
 			return;
@@ -205,7 +205,7 @@ void RosterModel::updateItem(const QString &jid,
 void RosterModel::replaceItems(const QHash<QString, RosterItem> &items)
 {
 	QVector<RosterItem> newItems;
-	for (auto item : items.values()) {
+	for (auto item : items) {
 		// find old item
 		auto oldItem = std::find_if(
 			m_items.begin(),

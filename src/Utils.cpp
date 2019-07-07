@@ -80,7 +80,8 @@ void Utils::execQuery(QSqlQuery &query,
 {
 	prepareQuery(query, sql);
 
-	for (const auto &key : bindValues.keys())
+	const QStringList bindKeys = bindValues.keys();
+	for (const auto &key : bindKeys)
 		query.bindValue(key, bindValues.value(key));
 
 	execQuery(query);

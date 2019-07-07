@@ -29,12 +29,12 @@
  */
 
 #include "AvatarFileStorage.h"
-
-#include <QDir>
-#include <QUrl>
-#include <QStandardPaths>
+// Qt
 #include <QCryptographicHash>
 #include <QDebug>
+#include <QDir>
+#include <QStandardPaths>
+#include <QUrl>
 
 AvatarFileStorage::AvatarFileStorage(QObject *parent) : QObject(parent)
 {
@@ -64,11 +64,9 @@ AvatarFileStorage::AvatarFileStorage(QObject *parent) : QObject(parent)
 			while (!line.isNull()) {
 				// get hash and jid from line (seperated by a blank)
 				QStringList list = line.split(' ', QString::SkipEmptyParts);
-				QString hash = list.at(0);
-				QString jid = list.at(1);
 
 				// set the hash for the jid
-				jidAvatarMap[jid] = hash;
+				jidAvatarMap[list.at(1)] = list.at(0);
 
 				// read the next line
 				line = stream.readLine();
@@ -108,7 +106,7 @@ AvatarFileStorage::AddAvatarResult AvatarFileStorage::addAvatar(const QString &j
 	// write the avatar to disk:
 	// get the writable cache location for writing
 	QFile file(QStandardPaths::writableLocation(QStandardPaths::CacheLocation) +
-		QDir::separator() + QString("avatars") + QDir::separator() + result.hash);
+		   QDir::separator() + QString("avatars") + QDir::separator() + result.hash);
 	if (!file.open(QIODevice::WriteOnly))
 		return result;
 
@@ -131,14 +129,13 @@ void AvatarFileStorage::clearAvatar(QString &jid)
 		oldHash = jidAvatarMap[jid];
 
 	// if user had no avatar before, just return
-	if (oldHash.isEmpty()) {
+	if (oldHash.isEmpty())
 		return;
-	} else {
-		jidAvatarMap.remove(jid);
-		saveAvatarsFile();
-		cleanUp(oldHash);
-		emit avatarIdsChanged();
-	}
+
+	jidAvatarMap.remove(jid);
+	saveAvatarsFile();
+	cleanUp(oldHash);
+	emit avatarIdsChanged();
 }
 
 void AvatarFileStorage::cleanUp(QString &oldHash)
@@ -147,12 +144,12 @@ void AvatarFileStorage::cleanUp(QString &oldHash)
 		return;
 
 	// check if the same avatar is still used by another account
-	if (jidAvatarMap.values().contains(oldHash))
+	if (std::find(jidAvatarMap.cbegin(), jidAvatarMap.cend(), oldHash) != jidAvatarMap.cend())
 		return;
 
 	// delete the old avatar locally
 	QString path = QStandardPaths::writableLocation(QStandardPaths::CacheLocation) +
-	               QDir::separator() + QString("avatars");
+		       QDir::separator() + QString("avatars");
 	QDir dir(path);
 	if (dir.exists(oldHash))
 		dir.remove(oldHash);
@@ -194,7 +191,8 @@ void AvatarFileStorage::saveAvatarsFile()
 		return;
 
 	QTextStream out(&file);
-	for (const auto jid : jidAvatarMap.keys())
+	const QStringList jidAvatarKeys = jidAvatarMap.keys();
+	for (const auto &jid : jidAvatarKeys)
 		/*     < HASH >            < JID >  */
 		out << jidAvatarMap[jid] << " " << jid << "\n";
 }

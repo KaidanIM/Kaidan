@@ -115,7 +115,8 @@ void QXmppUploadRequestManager::handleDiscoInfo(const QXmppDiscoveryIq &iq)
     if (!iq.features().contains(ns_httpupload))
         return;
 
-    for (const QXmppDiscoveryIq::Identity &identity : iq.identities()) {
+    const QList<QXmppDiscoveryIq::Identity> identities = iq.identities();
+    for (const auto &identity : identities) {
         if (identity.category() == "store" && identity.type() == "file")
             goto addService;
     }
@@ -127,7 +128,7 @@ addService:
 
     // get size limit
     bool isFormNsCorrect = false;
-    for (const QXmppDataForm::Field &field : iq.form().fields()) {
+    for (const QXmppDataForm::Field &field : qAsConst(iq.form().fields())) {
         if (field.key() == "FORM_TYPE") {
             isFormNsCorrect = field.value() == ns_httpupload;
         } else if (isFormNsCorrect && field.key() == "max-file-size") {
@@ -153,7 +154,7 @@ void QXmppUploadRequestManager::setClient(QXmppClient *client)
                 this, &QXmppUploadRequestManager::handleDiscoInfo);
 
         // on client disconnect remove all upload services
-        connect(client, &QXmppClient::disconnected, [this] () {
+        connect(client, &QXmppClient::disconnected, this, [=] () {
             m_uploadServices.clear();
             emit serviceFoundChanged();
         });

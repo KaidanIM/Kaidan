@@ -47,7 +47,7 @@ DiscoveryManager::DiscoveryManager(QXmppClient *client, QObject *parent)
 #else
 	// Plasma Mobile packages won't differ from desktop builds, so we need to check the mobile
 	// variable on runtime.
-	if (!qgetenv("QT_QUICK_CONTROLS_MOBILE").isEmpty())
+	if (!qEnvironmentVariableIsEmpty("QT_QUICK_CONTROLS_MOBILE"))
 		manager->setClientType("phone");
 	else
 		manager->setClientType("pc");
@@ -79,7 +79,8 @@ void DiscoveryManager::handleInfo(const QXmppDiscoveryIq&)
 void DiscoveryManager::handleItems(const QXmppDiscoveryIq &iq)
 {
 	// request info from all items
-	for (const QXmppDiscoveryIq::Item &item : iq.items()) {
+	const QList<QXmppDiscoveryIq::Item> items = iq.items();
+	for (const QXmppDiscoveryIq::Item &item : items) {
 		if (item.jid() == client->configuration().domain())
 			continue;
 		manager->requestInfo(item.jid());

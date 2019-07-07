@@ -226,7 +226,7 @@ Q_DECL_EXPORT int main(int argc, char *argv[])
 
 		// send a possible link to the primary instance
 		if (!parser.positionalArguments().isEmpty())
-			app.sendMessage(parser.positionalArguments()[0].toUtf8());
+			app.sendMessage(parser.positionalArguments().first().toUtf8());
 		return 0;
 	}
 #endif
@@ -246,7 +246,7 @@ Q_DECL_EXPORT int main(int argc, char *argv[])
 
 	// open the XMPP-URI/link (if given)
 	if (!parser.positionalArguments().isEmpty())
-		kaidan.addOpenUri(parser.positionalArguments()[0].toUtf8());
+		kaidan.addOpenUri(parser.positionalArguments().first().toUtf8());
 
 	//
 	// QML-GUI
@@ -258,11 +258,11 @@ Q_DECL_EXPORT int main(int argc, char *argv[])
 
 	QQmlApplicationEngine engine;
 	// QtQuickControls2 Style
-	if (qgetenv("QT_QUICK_CONTROLS_STYLE").isEmpty()) {
+	if (qEnvironmentVariableIsEmpty("QT_QUICK_CONTROLS_STYLE")) {
 #ifdef Q_OS_WIN
-		QString defaultStyle = "Universal";
+		const QString defaultStyle = QStringLiteral("Universal");
 #else
-		QString defaultStyle = "Material";
+		const QString defaultStyle = QStringLiteral("Material");
 #endif
 		qDebug() << "QT_QUICK_CONTROLS_STYLE not set, setting to" << defaultStyle;
 		qputenv("QT_QUICK_CONTROLS_STYLE", defaultStyle.toLatin1());

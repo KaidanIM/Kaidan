@@ -135,7 +135,7 @@ void RegistrationManager::setClient(QXmppClient *client)
 		connect(disco, &QXmppDiscoveryManager::infoReceived,
 		        this, &RegistrationManager::handleDiscoInfo);
 
-		connect(client, &QXmppClient::disconnected, [this] () {
+		connect(client, &QXmppClient::disconnected, this, [=] () {
 			setRegistrationSupported(false);
 		});
 	}

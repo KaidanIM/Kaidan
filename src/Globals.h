@@ -31,8 +31,6 @@
 #ifndef GLOBALS_H
 #define GLOBALS_H
 
-#include <QString>
-
 // Application information
 #define APPLICATION_DESCRIPTION "A simple, user-friendly Jabber/XMPP client"
 
@@ -41,8 +39,8 @@
 #define KAIDAN_SETTINGS_AUTH_RESOURCE "auth/resource"
 #define KAIDAN_SETTINGS_AUTH_PASSWD "auth/password"
 
-const QString KAIDAN_RESOURCE_RANDOM_CHARS = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnop"
-                                             "qrstuvwxyz0123456789";
+#define KAIDAN_RESOURCE_RANDOM_CHARS \
+	"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789"
 
 // XML namespaces
 #define NS_SPOILERS "urn:xmpp:spoiler:0"

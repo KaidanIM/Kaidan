@@ -186,7 +186,8 @@ void QXmppHttpUpload::startUpload()
 
     // other header fields
     const QMap<QString, QString> &headers = m_slot.headerFields();
-    for (const QString &name : headers.keys())
+    const QStringList headerKeys = headers.keys();
+    for (const QString &name : headerKeys)
         request.setRawHeader(name.toUtf8(), headers.value(name).toUtf8());
 
     // open file
@@ -204,12 +205,12 @@ void QXmppHttpUpload::startUpload()
             this, &QXmppHttpUpload::uploadFailed);
 
     // delete file object after upload
-    connect(m_putReply, &QNetworkReply::finished, [this, file] () {
+    connect(m_putReply, &QNetworkReply::finished, this, [=] () {
         file->deleteLater();
         m_started = false;
     });
     connect(m_putReply, QOverload<QNetworkReply::NetworkError>::of(&QNetworkReply::error),
-            [this, file] () {
+            this, [=] () {
         file->deleteLater();
         m_started = false;
     });
@@ -235,9 +236,8 @@ QXmppUploadManager::QXmppUploadManager()
 
 QXmppUploadManager::~QXmppUploadManager()
 {
-    for (QXmppHttpUpload *upload : m_uploads) {
+    for (QXmppHttpUpload *upload : qAsConst(m_uploads))
         upload->abort();
-    }
 }
 
 /// Requests an upload slot and starts uploading the file
@@ -299,7 +299,7 @@ void QXmppUploadManager::startNextUpload()
 
 void QXmppUploadManager::handleSlot(const QXmppHttpUploadSlotIq &slot)
 {
-    for (QXmppHttpUpload *upload : m_uploads) {
+    for (QXmppHttpUpload *upload : qAsConst(m_uploads)) {
         if (upload->requestId() != slot.id())
             continue;
 
@@ -321,7 +321,7 @@ void QXmppUploadManager::handleSlot(const QXmppHttpUploadSlotIq &slot)
 
 void QXmppUploadManager::handleRequestError(const QXmppHttpUploadRequestIq &request)
 {
-    for (QXmppHttpUpload *upload : m_uploads) {
+    for (QXmppHttpUpload *upload : qAsConst(m_uploads)) {
         if (upload->requestId() == request.id()) {
             m_runningJobs--;
             m_uploads.removeAll(upload);

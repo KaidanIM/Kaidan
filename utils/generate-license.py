@@ -40,16 +40,20 @@ REPLACE_USER_IDS = [
 	("JBBgameich <jbb.prv@gmx.de>", "Jonah Brüchert <jbb@kaidan.im>"),
 	("JBB <jbb.prv@gmx.de>", "Jonah Brüchert <jbb@kaidan.im>"),
 	("Jonah Brüchert <jbb.prv@gmx.de>", "Jonah Brüchert <jbb@kaidan.im>"),
+	("Jonah Brüchert <jbb.mail@gmx.de>", "Jonah Brüchert <jbb@kaidan.im>"),
 	("Georg <s.g.b@gmx.de>", "geobra <s.g.b@gmx.de>"),
 	("Muhammad Nur Hidayat Yasuyoshi (MNH48.com) <muhdnurhidayat96@yahoo.com>",
-	 "Muhammad Nur Hidayat Yasuyoshi <mnh48mail@gmail.com>")
+	 "Muhammad Nur Hidayat Yasuyoshi <mnh48mail@gmail.com>"),
+	("X advocatux <advocatux@airpost.net>", "advocatux <advocatux@airpost.net>")
 ]
 
 # These user ids will be excluded from any targets
 EXCLUDE_USER_IDS = [
 	"Weblate <noreply@weblate.org>",
 	"anonymous <> <None>",
-	"Kaidan Translations <translations@kaidan.im>"
+	"Kaidan Translations <translations@kaidan.im>",
+	"Kaidan translations <translations@kaidan.im>",
+	"Hosted Weblate <hosted@weblate.org>"
 ]
 
 GPL3_OPENSSL_LICENSE = """This program is free software; you can redistribute it and/or modify it under

@@ -177,47 +177,47 @@
     <name>EmojiPicker</name>
     <message>
         <source>Favorites</source>
-        <translation type="unfinished"></translation>
+        <translation>Favoritos</translation>
     </message>
     <message>
         <source>People</source>
-        <translation type="unfinished"></translation>
+        <translation>Gente</translation>
     </message>
     <message>
         <source>Nature</source>
-        <translation type="unfinished"></translation>
+        <translation>Naturaleza</translation>
     </message>
     <message>
         <source>Food</source>
-        <translation type="unfinished"></translation>
+        <translation>Comida</translation>
     </message>
     <message>
         <source>Activity</source>
-        <translation type="unfinished"></translation>
+        <translation>Actividad</translation>
     </message>
     <message>
         <source>Travel</source>
-        <translation type="unfinished"></translation>
+        <translation>Viajes</translation>
     </message>
     <message>
         <source>Objects</source>
-        <translation type="unfinished"></translation>
+        <translation>Objetos</translation>
     </message>
     <message>
         <source>Symbols</source>
-        <translation type="unfinished"></translation>
+        <translation>Símbolos</translation>
     </message>
     <message>
         <source>Flags</source>
-        <translation type="unfinished"></translation>
+        <translation>Banderas</translation>
     </message>
     <message>
         <source>Search</source>
-        <translation type="unfinished"></translation>
+        <translation>Buscar</translation>
     </message>
     <message>
         <source>Search emoji</source>
-        <translation type="unfinished"></translation>
+        <translation>Buscar «emoji»</translation>
     </message>
 </context>
 <context>
@@ -410,11 +410,11 @@
     </message>
     <message>
         <source>Message could not be sent.</source>
-        <translation type="unfinished"></translation>
+        <translation>No se pudo enviar el mensaje.</translation>
     </message>
     <message>
         <source>Message correction was not successful.</source>
-        <translation type="unfinished"></translation>
+        <translation>Falló la corrección del mensaje.</translation>
     </message>
 </context>
 <context>

@@ -1,6 +1,6 @@
 # Changelog
 
-### Version 0.4.0 (UNRELEASED)
+### Version 0.4.0 (released on Jul 08, 2019)
 
 Build system:
  * Support for Android (ilyabizyaev)

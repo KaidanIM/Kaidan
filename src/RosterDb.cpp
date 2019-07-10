@@ -82,13 +82,13 @@ QSqlRecord RosterDb::createUpdateRecord(const RosterItem &oldItem, const RosterI
 		rec.append(Utils::createSqlField("lastMessage", newItem.lastMessage()));
 	if (oldItem.lastExchanged() != newItem.lastExchanged())
 		rec.append(Utils::createSqlField(
-		        "lastExchanged",
-		        oldItem.lastExchanged().toString(Qt::ISODateWithMs)
+			"lastExchanged",
+			newItem.lastExchanged().toString(Qt::ISODateWithMs)
 		));
 	if (oldItem.unreadMessages() != newItem.unreadMessages())
 		rec.append(Utils::createSqlField(
-		        "unreadMessages",
-		        newItem.unreadMessages()
+			"unreadMessages",
+			newItem.unreadMessages()
 		));
 	return rec;
 }
@@ -247,7 +247,7 @@ void RosterDb::fetchItems()
 {
 	QSqlQuery query(QSqlDatabase::database(DB_CONNECTION));
 	query.setForwardOnly(true);
-	Utils::execQuery(query, "SELECT * FROM Roster ORDER BY lastExchanged");
+	Utils::execQuery(query, "SELECT * FROM Roster");
 
 	QVector<RosterItem> items;
 	parseItemsFromQuery(query, items);

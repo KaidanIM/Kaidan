@@ -108,8 +108,13 @@ QSqlRecord MessageDb::createUpdateRecord(const Message &oldMsg, const Message &n
 		        "timestamp",
 		        newMsg.stamp().toString(Qt::ISODate)
 		));
-	if (oldMsg.id() != newMsg.id())
-		rec.append(Utils::createSqlField("id", newMsg.id()));
+	if (oldMsg.id() != newMsg.id()) {
+		// TODO: remove as soon as 'NOT NULL' was removed from id column
+		if (newMsg.id().isEmpty())
+			rec.append(Utils::createSqlField("id", QStringLiteral(" ")));
+		else
+			rec.append(Utils::createSqlField("id", newMsg.id()));
+	}
 	if (oldMsg.body() != newMsg.body())
 		rec.append(Utils::createSqlField("message", newMsg.body()));
 	if (oldMsg.isSent() != newMsg.isSent())

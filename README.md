@@ -39,7 +39,7 @@ how to do that:
 ### Dependencies
 
 Here are the general dependencies of Kaidan listed:
- * [Qt](https://doc.qt.io/qt-5/build-sources.html) (Core Qml Quick Svg Sql QuickControls2) (>= 5.8.0)
+ * [Qt](https://doc.qt.io/qt-5/build-sources.html) (Core Qml Quick Svg Sql QuickControls2) (>= 5.10.0)
  * [QXmpp][qxmpp] (>= 1.0.0)
  * [Kirigami 2](https://phabricator.kde.org/source/kirigami/) (>= 5.42.0)
  * [ECM (extra-cmake-modules)](https://api.kde.org/ecm/manual/ecm.7.html)

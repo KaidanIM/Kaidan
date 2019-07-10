@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.3)
 find_package(ECM 5.40.0 REQUIRED NO_MODULE)
 set(CMAKE_CXX_STANDARD 14)
-set(QT_MIN_VERSION "5.8.0")
+set(QT_MIN_VERSION "5.10.0")
 
 if(POLICY CMP0071)
 	cmake_policy(SET CMP0071 NEW)

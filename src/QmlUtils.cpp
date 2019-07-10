@@ -104,15 +104,8 @@ QString QmlUtils::fileNameFromUrl(const QUrl &url) const
 
 QString QmlUtils::fileSizeFromUrl(const QUrl &url) const
 {
-#if QT_VERSION >= QT_VERSION_CHECK(5, 10, 0) // Qt 5.10 or later
-	return QLocale::system().formattedDataSize(QFileInfo(QUrl(url).toLocalFile())
-	                                           .size());
-#else
-	// before Qt 5.10 there was no formattedDataSize() method:
-	// sizes will always be in MiB
-	double size = QFileInfo(QUrl(url).toLocalFile()).size();
-	return QString::number(qRound(size / 1024.0 / 10.24) / 100.0).append(" MiB");
-#endif
+	return QLocale::system().formattedDataSize(
+	            QFileInfo(QUrl(url).toLocalFile()).size());
 }
 
 QString QmlUtils::formatMessage(const QString &message) const

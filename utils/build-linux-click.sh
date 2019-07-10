@@ -22,7 +22,6 @@ build_kaidan() {
 	      -DCMAKE_PREFIX_PATH="${CLICK_TARGET_DIR}" \
 	      -DCMAKE_INSTALL_PREFIX="${CLICK_TARGET_DIR}" \
 	      -DCMAKE_CXX_FLAGS=-isystem\ ${CLICK_TARGET_DIR}/include/qxmpp \
-	      -DCMAKE_EXE_LINKER_FLAGS="$LDFLAGS" \
 	      -DI18N=1 \
 	      -DUBUNTU_TOUCH=1 \
 	      -DCLICK_ARCH="${ARCH}" \

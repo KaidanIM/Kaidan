@@ -29,12 +29,10 @@
  */
 
 import QtQuick 2.7
-import QtQuick.Controls 2.2 as Controls
+import QtQuick.Controls 2.3 as Controls
 import QtQuick.Layouts 1.3
-import org.kde.kirigami 2.3 as Kirigami
+import org.kde.kirigami 2.4 as Kirigami
 import im.kaidan.kaidan 1.0
-
-import "../elements/kirigami" as KirigamiStaging // TODO switch back to Kirigami once all supported platforms support a recent enough version
 
 Kirigami.Page {
 	topPadding: 0
@@ -80,16 +78,16 @@ Kirigami.Page {
 			}
 		}
 
-		KirigamiStaging.InlineMessage {
-			visible: password1.text !== password2.text
+		Kirigami.InlineMessage {
 			type: Kirigami.MessageType.Warning
+			visible: password1.text !== password2.text
 			text: qsTr("New passwords do not match.")
 			anchors.left: parent.left
 			anchors.right: parent.right
 			showCloseButton: true
 		}
 
-		KirigamiStaging.InlineMessage {
+		Kirigami.InlineMessage {
 			id: currentPasswordInvalidMessage
 			visible: false
 			type: Kirigami.MessageType.Warning
@@ -99,7 +97,7 @@ Kirigami.Page {
 			showCloseButton: true
 		}
 
-		KirigamiStaging.InlineMessage {
+		Kirigami.InlineMessage {
 			visible: kaidan.connectionState !== Enums.StateConnected
 			type: Kirigami.MessageType.Error
 			text: qsTr("You need to be connected to change your password.")

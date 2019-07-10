@@ -11,7 +11,7 @@
     "qxmpp": {
       "template": "cmake",
       "src_dir": "3rdparty/qxmpp",
-      "make_jobs": 4,
+      "make_jobs": 2,
       "build_args": [
         "-DCMAKE_BUILD_TYPE=Release",
         "-DBUILD_TESTS=OFF",
@@ -19,7 +19,7 @@
         "-DCMAKE_PREFIX_PATH=../../../bin/ubuntu-touch/tmp",
         "-DCMAKE_INSTALL_PREFIX=../../../bin/ubuntu-touch/tmp"
       ],
-      "make_args": "install"
+      "postbuild": "make install"
     }
   }
 }

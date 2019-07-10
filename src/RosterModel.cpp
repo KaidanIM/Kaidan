@@ -127,6 +127,13 @@ void RosterModel::handleItemsFetched(const QVector<RosterItem> &items)
 {
 	beginResetModel();
 	m_items = items;
+	std::sort(
+		m_items.begin(),
+		m_items.end(),
+		[] (const RosterItem &a, const RosterItem &b) {
+			return a.lastExchanged() > b.lastExchanged();
+		}
+	);
 	endResetModel();
 }
 

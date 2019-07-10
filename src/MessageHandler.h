@@ -42,9 +42,7 @@ class MessageModel;
 class QMimeType;
 class QXmppMessage;
 class QXmppDiscoveryIq;
-#if (QXMPP_VERSION) >= QT_VERSION_CHECK(1, 0, 0)
 class QXmppCarbonManager;
-#endif
 
 /**
  * @class MessageHandler Handler for incoming and outgoing messages.
@@ -85,9 +83,7 @@ private:
 	QXmppClient *client;
 	QXmppMessageReceiptManager receiptManager;
 	MessageModel *model;
-#if (QXMPP_VERSION) >= QT_VERSION_CHECK(1, 0, 0)
 	QXmppCarbonManager *carbonManager;
-#endif
 	QString chatPartner;
 };
 

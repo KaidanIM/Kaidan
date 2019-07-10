@@ -34,13 +34,11 @@
 #include <QMimeDatabase>
 #include <QUrl>
 // QXmpp
+#include <QXmppCarbonManager.h>
 #include <QXmppClient.h>
 #include <QXmppDiscoveryManager.h>
 #include <QXmppRosterManager.h>
 #include <QXmppUtils.h>
-#if (QXMPP_VERSION) >= QT_VERSION_CHECK(1, 0, 0)
-#include <QXmppCarbonManager.h>
-#endif
 // Kaidan
 #include "Kaidan.h"
 #include "Message.h"
@@ -61,7 +59,6 @@ MessageHandler::MessageHandler(Kaidan *kaidan, QXmppClient *client, MessageModel
 		emit model->setMessageAsDeliveredRequested(id);
 	});
 
-#if (QXMPP_VERSION) >= QT_VERSION_CHECK(1, 0, 0)
 	carbonManager = new QXmppCarbonManager();
 	client->addExtension(carbonManager);
 
@@ -79,14 +76,11 @@ MessageHandler::MessageHandler(Kaidan *kaidan, QXmppClient *client, MessageModel
 
 	connect(discoManager, &QXmppDiscoveryManager::infoReceived,
 	        this, &MessageHandler::handleDiscoInfo);
-#endif
 }
 
 MessageHandler::~MessageHandler()
 {
-#if (QXMPP_VERSION) >= QT_VERSION_CHECK(1, 0, 0)
 	delete carbonManager;
-#endif
 }
 
 void MessageHandler::handleMessage(const QXmppMessage &msg)
@@ -117,9 +111,7 @@ void MessageHandler::handleMessage(const QXmppMessage &msg)
 
 	// check if message contains a link and also check out of band url
 	QStringList bodyWords = message.body().split(" ");
-#if QXMPP_VERSION >= QT_VERSION_CHECK(1, 0, 0)
 	bodyWords.prepend(msg.outOfBandUrl());
-#endif
 	for (const QString &word : bodyWords) {
 		if (!word.startsWith("https://") && !word.startsWith("http://"))
 			continue;
@@ -152,7 +144,6 @@ void MessageHandler::handleMessage(const QXmppMessage &msg)
 	                 : msg.stamp().toUTC());
 
 	// save the message to the database
-#if (QXMPP_VERSION) >= QT_VERSION_CHECK(1, 0, 0)
 	// in case of message correction, replace old message
 	if (msg.replaceId().isEmpty()) {
 		emit model->addMessageRequested(message);
@@ -164,10 +155,6 @@ void MessageHandler::handleMessage(const QXmppMessage &msg)
 			m = message;
 		});
 	}
-#else
-	// no message correction with old QXmpp
-	emit model->addMessageRequested(message);
-#endif
 
 	// Send a message notification
 
@@ -269,9 +256,7 @@ void MessageHandler::correctMessage(const QString& toJid,
 	msg.setSentByMe(true);
 	msg.setMediaType(MessageType::MessageText); // text message without media
 	msg.setIsEdited(true);
-#if (QXMPP_VERSION) >= QT_VERSION_CHECK(1, 0, 0)
 	msg.setReplaceId(msgId);
-#endif
 
 	emit model->updateMessageRequested(msgId, [=] (Message &msg) {
 		msg.setBody(body);
@@ -285,11 +270,9 @@ void MessageHandler::correctMessage(const QString& toJid,
 
 void MessageHandler::handleDiscoInfo(const QXmppDiscoveryIq &info)
 {
-#if (QXMPP_VERSION) >= QT_VERSION_CHECK(1, 0, 0)
 	if (info.from() != client->configuration().domain())
 		return;
 	// enable carbons, if feature found
 	if (info.features().contains(NS_CARBONS))
 		carbonManager->setCarbonsEnabled(true);
-#endif
 }

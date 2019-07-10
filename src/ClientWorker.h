@@ -159,12 +159,10 @@ private slots:
 	 */
 	void onConnectionError(QXmppClient::Error error);
 
-#if (QXMPP_VERSION) >= QT_VERSION_CHECK(1, 0, 0)
 	/**
 	 * Uses the QGuiApplication state to reduce network traffic when window is minimized
 	 */
 	void setCsiState(Qt::ApplicationState state);
-#endif
 
 private:
 	/**

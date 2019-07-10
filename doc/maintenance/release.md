@@ -11,6 +11,7 @@
 		1. Mention important changes and their authors
 		1. `git add changelog.md`
 		1. `git commit -m "Prepare changelog for vX.Y.Z"`
+	1. Check correct functionality of all release builds
 	1. [Update license information](license.md)
 	1. In *CMakeLists.txt*:
 		1. Change `set(VERSION_STRING "X.Y.Z-dev")` to `set(VERSION_STRING "X.Y.Z")`
@@ -56,6 +57,8 @@
 	1. Publish blog post:
 		1. Create *_posts/YEAR-MONTH-DAY-kaidan-X.Y.Z.md*
 		1. Add header as in other posts of that directory
+		1. Copy *images/screenshot.png* to *images/screenshots/screenshot-X.Y*
+		1. Include *images/screenshots/screenshot-X.Y* into blog post
 		1. Add changelog part for vX.Y.Z
 1. On Mastodon via **https://fosstodon.org/@kaidan**:
 	1. Create a toot like https://fosstodon.org/@kaidan/101929341888805925

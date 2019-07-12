@@ -30,20 +30,25 @@
 
 // Kaidan
 #include "Notifications.h"
+#include "Kaidan.h"
+// Qt
+#include <QVariant>
 // KNotifications
 #ifdef HAVE_KNOTIFICATIONS
 #include <KNotification>
 #endif
 
 #ifdef HAVE_KNOTIFICATIONS
-void Notifications::sendMessageNotification(const QString& fromName, const QString& message)
+void Notifications::sendMessageNotification(const QString& jid, const QString& fromName, const QString& message)
 {
-	KNotification *notif = new KNotification("new-message");
-	notif->setText(QString("<b>%1</b>: %2").arg(fromName, message));
-	notif->sendEvent();
+	if (!Kaidan::instance()->notificationsMuted(jid)) {
+		KNotification *notif = new KNotification("new-message");
+		notif->setText(QString("<b>%1</b>: %2").arg(fromName, message));
+		notif->sendEvent();
+	}
 }
 #else
-void Notifications::sendMessageNotification(const QString&, const QString&)
+void Notifications::sendMessageNotification(const QString&, const QString&, const QString&)
 {
 }
 #endif

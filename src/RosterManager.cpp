@@ -82,6 +82,7 @@ RosterManager::RosterManager(Kaidan *kaidan,
 	        this, [=] (QString jid, bool accepted) {
 		if (accepted) {
 			manager.acceptSubscription(jid);
+
 			// do not send a subscription request if both users have already subscribed
 			// each others presence
 			if (manager.getRosterEntry(jid).subscriptionType() != QXmppRosterIq::Item::Both)

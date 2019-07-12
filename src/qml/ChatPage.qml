@@ -47,9 +47,44 @@ Kirigami.ScrollablePage {
 	actions.contextualActions: [
 		Kirigami.Action {
 			visible: !isWritingSpoiler
-			iconSource: "password-show-off"
+			icon.name: "password-show-off"
 			text: qsTr("Send a spoiler message")
 			onTriggered: isWritingSpoiler = true
+		},
+		Kirigami.Action {
+			visible: true
+			icon.name: {
+				kaidan.notificationsMuted(kaidan.messageModel.chatPartner)
+					? "player-volume"
+					: "audio-volume-muted-symbolic"
+			}
+			text: {
+				kaidan.notificationsMuted(kaidan.messageModel.chatPartner)
+					? qsTr("Unmute notifications")
+					: qsTr("Mute notifications")
+			}
+			onTriggered: {
+				kaidan.setNotificationsMuted(
+					kaidan.messageModel.chatPartner,
+					!kaidan.notificationsMuted(kaidan.messageModel.chatPartner)
+				)
+			}
+
+			function handleNotificationsMuted(jid) {
+				text = kaidan.notificationsMuted(kaidan.messageModel.chatPartner)
+						? qsTr("Unmute notifications")
+						: qsTr("Mute notifications")
+				icon.name = kaidan.notificationsMuted(kaidan.messageModel.chatPartner)
+							? "player-volume"
+							: "audio-volume-muted-symbolic"
+			}
+
+			Component.onCompleted: {
+				kaidan.notificationsMutedChanged.connect(handleNotificationsMuted)
+			}
+			Component.onDestruction: {
+				kaidan.notificationsMutedChanged.disconnect(handleNotificationsMuted)
+			}
 		}
 	]
 

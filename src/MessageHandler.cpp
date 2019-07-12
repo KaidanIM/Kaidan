@@ -167,7 +167,7 @@ void MessageHandler::handleMessage(const QXmppMessage &msg)
 		contactName = contactJid;
 
 	if (!message.sentByMe())
-		Notifications::sendMessageNotification(contactName, msg.body());
+		Notifications::sendMessageNotification(contactJid, contactName, msg.body());
 
 	// TODO: Move back following call to RosterManager::handleMessage when spoiler
 	// messages are implemented in QXmpp

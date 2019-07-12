@@ -33,5 +33,5 @@
 class Notifications
 {
 public:
-	static void sendMessageNotification(const QString &fromName, const QString &message);
+    static void sendMessageNotification(const QString &jid, const QString &fromName, const QString &message);
 };

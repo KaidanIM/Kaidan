@@ -174,6 +174,17 @@ void Kaidan::setDisconnReason(DisconnectionReason reason)
 	emit disconnReasonChanged();
 }
 
+bool Kaidan::notificationsMuted(const QString &jid)
+{
+	return m_caches->settings->value(QString("muted/") + jid, false).toBool();
+}
+
+void Kaidan::setNotificationsMuted(const QString &jid, bool muted)
+{
+	m_caches->settings->setValue(QString("muted/") + jid, muted);
+	emit notificationsMutedChanged(jid);
+}
+
 void Kaidan::setJid(const QString &jid)
 {
 	creds.jid = jid;

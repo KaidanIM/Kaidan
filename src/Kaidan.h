@@ -360,6 +360,11 @@ signals:
 	 */
 	void passwordChangeFailed();
 
+	/**
+	 * Emitted, when a contact was muted/unmuted.
+	 */
+	void notificationsMutedChanged(const QString& jid);
+
 public slots:
 	/**
 	 * Set current connection state
@@ -388,6 +393,19 @@ public slots:
 		uploadServiceFound = enabled;
 		emit uploadServiceFoundChanged();
 	}
+
+	/**
+	 * Returns whether notifications are enabled for the given contact.
+	 */
+	bool notificationsMuted(const QString& jid);
+
+	/**
+	 * Sets the notifications to muted/unmuted.
+	 *
+	 * @param muted true if notifications should be muted.
+	 * @param jid contains the current chatpartner's jid.
+	 */
+	void setNotificationsMuted(const QString& jid, bool muted);
 
 private:
 	void connectDatabases();

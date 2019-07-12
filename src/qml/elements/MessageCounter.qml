@@ -32,10 +32,11 @@ import QtQuick 2.0
 
 Rectangle {
 	property int counter: 0
+	property bool muted: false
 
 	id: counterCircle
 	radius: counterCircle.height * 0.5
-	color: "#4CAF50"
+	color: muted ? "grey" : "#4CAF50"
 
 	Text {
 		id: msgCounter

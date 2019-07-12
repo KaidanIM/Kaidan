@@ -36,6 +36,7 @@
     
     <qresource prefix="/icons/breeze/actions/16">
         <file alias="document-send.svg">3rdparty/breeze-icons/icons/actions/16/document-send.svg</file>
+        <file alias="search.svg">3rdparty/breeze-icons/icons/actions/16/search.svg</file>
     </qresource>
     
     <qresource prefix="/icons/breeze/actions/symbolic">

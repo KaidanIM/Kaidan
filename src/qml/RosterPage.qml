@@ -30,7 +30,7 @@
 
 import QtQuick 2.7
 import QtQuick.Layouts 1.3
-import QtQuick.Controls 2.0 as Controls
+import QtQuick.Controls 2.3 as Controls
 import org.kde.kirigami 2.0 as Kirigami
 import im.kaidan.kaidan 1.0
 import "elements"
@@ -41,6 +41,10 @@ Kirigami.ScrollablePage {
 		kaidan.connectionState === Enums.StateDisconnected ? qsTr("Offline") :
 		qsTr("Contacts")
 	}
+	leftPadding: 0
+	topPadding: 0
+	rightPadding: 0
+	bottomPadding: 0
 
 	RosterAddContactSheet {
 		id: addContactSheet
@@ -62,11 +66,40 @@ Kirigami.ScrollablePage {
 		}
 	}
 
+	rightAction: Kirigami.Action {
+		text: qsTr("Search contacts")
+		iconName: "search"
+		onTriggered: {
+			if (searchField.visible) {
+				searchField.visible = false
+			} else {
+				searchField.visible = true
+			}
+		}
+	}
+
+	header: Item {
+		height: searchField.visible ? searchField.height : 0
+		Controls.TextField {
+			id: searchField
+			width: parent.width
+			visible: false
+			focus: visible
+			placeholderText: qsTr("Search…")
+			onVisibleChanged: text = ""
+		}
+	}
+
 	ListView {
 		verticalLayoutDirection: ListView.TopToBottom
 		model: kaidan.rosterModel
 		delegate: RosterListItem {
 			id: rosterItem
+			visible: {
+				model.jid.toLowerCase().includes(searchField.displayText.toLowerCase()) ||
+						model.name.toLowerCase().includes(searchField.displayText.toLowerCase())
+			}
+			height: visible ? 65 : 0
 			name: model.name ? model.name : model.jid
 			jid: model.jid
 			lastMessage: model.lastMessage
@@ -83,6 +116,7 @@ Kirigami.ScrollablePage {
 				}
 			}
 			onClicked: {
+				searchField.visible = false
 				// We need to cache the chatName, because changing the chatPartner in the
 				// message model will in some cases also update the roster model. That
 				// will then remove this item and readd an updated version of it, so
@@ -105,10 +139,8 @@ Kirigami.ScrollablePage {
 
 			function newPresenceArrived(jid) {
 				if (jid === model.jid) {
-					rosterItem.presenceType = kaidan.presenceCache.
-					                          getPresenceType(model.jid)
-					rosterItem.statusMsg = kaidan.presenceCache.
-					                       getStatusText(model.jid)
+					rosterItem.presenceType = kaidan.presenceCache.getPresenceType(model.jid)
+					rosterItem.statusMsg = kaidan.presenceCache.getStatusText(model.jid)
 				}
 			}
 

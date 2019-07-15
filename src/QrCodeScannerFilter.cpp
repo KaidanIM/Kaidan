@@ -100,7 +100,7 @@ void QrCodeScannerFilterRunnable::processVideoFrameProbed(QrCodeVideoFrame &vide
 	// Create an image from the frame.
 	const QImage *image = videoFrame.toGrayscaleImage();
 
-	// Return if no conversion from the frame to the image failed.
+	// Return if conversion from the frame to the image failed.
 	if (image->isNull()) {
 		qDebug() << "QrCodeScannerFilterRunnable error: Cannot create image file to process.";
 		qDebug() << "Maybe it was a format conversion problem.";

@@ -186,35 +186,47 @@ QImage *QrCodeVideoFrame::toGrayscaleImage()
 
 	QImage *image;
 	switch (m_pixelFormat) {
-	case QVideoFrame::Format_RGB32:
-		image = rgbDataToGrayscale(data, captureRect, 0, 1, 2, 3);
-		break;
 	case QVideoFrame::Format_ARGB32:
 		image = rgbDataToGrayscale(data, captureRect, 0, 1, 2, 3);
-	break;
+		break;
 	case QVideoFrame::Format_ARGB32_Premultiplied:
 		image = rgbDataToGrayscale(data, captureRect, 0, 1, 2, 3, true);
 		break;
+	case QVideoFrame::Format_RGB32:
+		image = rgbDataToGrayscale(data, captureRect, 0, 1, 2, 3);
+		break;
+	case QVideoFrame::Format_RGB24:
+		image = rgbDataToGrayscale(data, captureRect, -1, 0, 1, 2);
+		break;
+	// TODO: QVideoFrame::Format_RGB565
+	// TODO: QVideoFrame::Format_RGB555
+	// TODO: QVideoFrame::Format_ARGB8565_Premultiplied
 	case QVideoFrame::Format_BGRA32:
 		image = rgbDataToGrayscale(data, captureRect, 3, 2, 1, 0);
 		break;
 	case QVideoFrame::Format_BGRA32_Premultiplied:
 		image = rgbDataToGrayscale(data, captureRect, 3, 2, 1, 0, true);
 		break;
+#if QT_VERSION >= QT_VERSION_CHECK(5, 13, 0)
+	case QVideoFrame::Format_ABGR32:
+		image = rgbDataToGrayscale(data, captureRect, 0, 3, 2, 1);
+		break;
+#endif
 	case QVideoFrame::Format_BGR32:
 		image = rgbDataToGrayscale(data, captureRect, 3, 2, 1, 0);
 		break;
 	case QVideoFrame::Format_BGR24:
 		image = rgbDataToGrayscale(data, captureRect, -1, 2, 1, 0);
 		break;
-	case QVideoFrame::Format_BGR555:
-		/// This is a forced "conversion", colors end up swapped.
-		image = new QImage(data, m_size.width(), m_size.height(), QImage::Format_RGB555);
-		break;
 	case QVideoFrame::Format_BGR565:
 		/// This is a forced "conversion", colors end up swapped.
 		image = new QImage(data, m_size.width(), m_size.height(), QImage::Format_RGB16);
 		break;
+	case QVideoFrame::Format_BGR555:
+		/// This is a forced "conversion", colors end up swapped.
+		image = new QImage(data, m_size.width(), m_size.height(), QImage::Format_RGB555);
+		break;
+	// TODO: QVideoFrame::Format_BGRA5658_Premultiplied
 	case QVideoFrame::Format_YUV420P:
 	case QVideoFrame::Format_NV12:
 		/// nv12 format, encountered on macOS
@@ -261,13 +273,16 @@ QImage *QrCodeVideoFrame::toGrayscaleImage()
 		}
 
 		break;
-		/// TODO: Handle (create QImages from) YUV formats.
+	// TODO: QVideoFrame::Format_IMC*
+	// TODO: QVideoFrame::Format_*YUV*
+	// TODO: QVideoFrame::Format_Y*
+	// TODO: QVideoFrame::Format_Jpeg (needed?)
 	default:
 		image = new QImage(
-				data,
-				m_size.width(),
-				m_size.height(),
-				QVideoFrame::imageFormatFromPixelFormat(m_pixelFormat)
+			data,
+			m_size.width(),
+			m_size.height(),
+			QVideoFrame::imageFormatFromPixelFormat(m_pixelFormat)
 		);
 		break;
 	}

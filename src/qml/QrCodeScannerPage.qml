@@ -82,6 +82,10 @@ Kirigami.Page {
 			// login by the data from the decoded QR code
 			kaidan.loginByUri(result)
 		}
+		onUnsupportedFormatReceived: {
+			pageStack.layers.pop()
+			passiveNotification(qsTr("The camera format '%1' is not supported.").arg(format))
+		}
 	}
 
 	// camera with continuous focus in the center of the video

@@ -86,13 +86,16 @@ QVideoFrame QrCodeScannerFilterRunnable::run(
 	m_filter->m_processThread = QtConcurrent::run(
 			this,
 			&QrCodeScannerFilterRunnable::processVideoFrameProbed,
-			m_filter->m_frame
+			m_filter->m_frame,
+			m_filter
 	);
 	return *input;
 }
 
-void QrCodeScannerFilterRunnable::processVideoFrameProbed(QrCodeVideoFrame &videoFrame)
-{
+void QrCodeScannerFilterRunnable::processVideoFrameProbed(
+		QrCodeVideoFrame videoFrame,
+		QrCodeScannerFilter *filter
+) {
 	// Return if the frame is empty.
 	if (videoFrame.data().length() < 1)
 		return;
@@ -102,11 +105,18 @@ void QrCodeScannerFilterRunnable::processVideoFrameProbed(QrCodeVideoFrame &vide
 
 	// Return if conversion from the frame to the image failed.
 	if (image->isNull()) {
+		// dirty hack: write QVideoFrame::PixelFormat as string to format using QDebug
+		//             QMetaEnum::valueToKey() did not work
+		QString format;
+		QDebug(&format) << videoFrame.pixelFormat();
+
 		qDebug() << "QrCodeScannerFilterRunnable error: Cannot create image file to process.";
 		qDebug() << "Maybe it was a format conversion problem.";
-		qDebug() << "VideoFrame format:" << videoFrame.pixelFormat();
+		qDebug() << "VideoFrame format:" << format;
 		qDebug() << "Image corresponding format:"
-				<< QVideoFrame::imageFormatFromPixelFormat(videoFrame.pixelFormat());
+		         << QVideoFrame::imageFormatFromPixelFormat(videoFrame.pixelFormat());
+
+		emit filter->unsupportedFormatReceived(format);
 		return;
 	}
 

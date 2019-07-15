@@ -28,6 +28,7 @@
         <file alias="password-show-off.svg">3rdparty/breeze-icons/icons/actions/22/password-show-off.svg</file>
         <file alias="settings-configure.svg">3rdparty/breeze-icons/icons/actions/22/settings-configure.svg</file>
         <file alias="lock.svg">3rdparty/breeze-icons/icons/actions/22/lock.svg</file>
+        <file alias="view-barcode.svg">3rdparty/breeze-icons/icons/actions/22/view-barcode.svg</file>
     </qresource>
 
     <qresource prefix="/icons/breeze/emotes/22">

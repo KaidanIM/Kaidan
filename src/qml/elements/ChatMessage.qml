@@ -50,11 +50,12 @@ RowLayout {
 	property bool edited
 	property bool isLoading: kaidan.transferCache.hasUpload(msgId)
 	property string name
-	property var upload: {
-		if (mediaType !== Enums.MessageText &&
-			kaidan.transferCache.hasUpload(msgId)) {
-			kaidan.transferCache.jobByMessageId(model.id)
+	property TransferJob upload: {
+		if (mediaType !== Enums.MessageType.MessageText && isLoading) {
+			return kaidan.transferCache.jobByMessageId(model.id)
 		}
+
+		return null
 	}
 	property bool isSpoiler
 	property string spoilerHint
@@ -266,7 +267,7 @@ RowLayout {
 				// progress bar for upload/download status
 				Controls.ProgressBar {
 					visible: isLoading
-					value: isLoading ? upload.progress : 0
+					value: upload ? upload.progress : 0
 				}
 
 				Controls.Label {

@@ -351,6 +351,7 @@ Kirigami.ScrollablePage {
 					messageField.state = "compose"
 					spoilerHintField.text = ""
 					isWritingSpoiler = false
+					messageToCorrect = ''
 
 					// reenable the button
 					sendButton.enabled = true

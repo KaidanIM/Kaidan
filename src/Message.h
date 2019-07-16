@@ -131,7 +131,7 @@ private:
 	/**
 	 * Size of the file in bytes.
 	 */
-	qint64 m_mediaSize;
+	qint64 m_mediaSize = 0;
 
 	/**
 	 * Timestamp of the last modification date of the file locally on disk.

@@ -29,7 +29,68 @@
  */
 
 #include "Message.h"
+
+#include <QDomElement>
 #include <QMimeType>
+
+static bool operator==(const QXmppStanza::Error &left, const QXmppStanza::Error &right) {
+	return left.code() == right.code()
+	       && left.text() == right.text()
+	       && left.condition() == right.condition()
+	       && left.type() == right.type();
+}
+
+static bool operator==(const QXmppElement &left, const QXmppElement &right) {
+	return left.sourceDomElement() == right.sourceDomElement()
+	       && left.attributeNames() == right.attributeNames()
+	       && left.tagName() == right.tagName()
+	       && left.value() == right.value();
+}
+
+static bool operator==(const QXmppExtendedAddress &left, const QXmppExtendedAddress &right) {
+	return left.description() == right.description()
+	       && left.jid() == right.jid()
+	       && left.type() == right.type()
+	       && left.isDelivered() == right.isDelivered();
+}
+
+static bool operator==(const QXmppStanza &left, const QXmppStanza &right) {
+	return left.to() == right.to()
+	       && left.from() == right.from()
+	       && left.id() == right.id()
+	       && left.lang() == right.lang()
+	       && left.error() == right.error()
+	       && left.extensions() == right.extensions()
+	       && left.extendedAddresses() == right.extendedAddresses()
+	       && left.isXmppStanza() == right.isXmppStanza();
+}
+
+static bool operator==(const QXmppMessage &left, const QXmppMessage &right) {
+	return operator==(static_cast<const QXmppStanza &>(left), static_cast<const QXmppStanza &>(right))
+	       && left.body() == right.body()
+	       && left.isAttentionRequested() == right.isAttentionRequested()
+	       && left.isReceiptRequested() == right.isReceiptRequested()
+	       && left.mucInvitationJid() == right.mucInvitationJid()
+	       && left.mucInvitationPassword() == right.mucInvitationPassword()
+	       && left.mucInvitationReason() == right.mucInvitationReason()
+	       && left.receiptId() == right.receiptId()
+	       && left.stamp() == right.stamp()
+	       && left.state() == right.state()
+	       && left.subject() == right.subject()
+	       && left.thread() == right.thread()
+	       && left.type() == right.type()
+	       && left.xhtml() == right.xhtml()
+	       && left.isMarkable() == right.isMarkable()
+	       && left.markedId() == right.markedId()
+	       && left.markedThread() == right.markedThread()
+	       && left.marker() == right.marker()
+	       && left.isPrivate() == right.isPrivate()
+	       && left.isXmppStanza() == right.isXmppStanza()
+#if (QXMPP_VERSION) >= QT_VERSION_CHECK(1, 0, 0)
+	       && left.outOfBandUrl() == right.outOfBandUrl()
+#endif
+	       && left.replaceId() == right.replaceId();
+}
 
 MessageType Message::mediaTypeFromMimeType(const QMimeType &type)
 {
@@ -51,23 +112,21 @@ MessageType Message::mediaTypeFromMimeType(const QMimeType &type)
 
 bool Message::operator==(const Message &m) const
 {
-	return m.id() == id() &&
-	       m.body() == body() &&
-	       m.from() == from() &&
-	       m.to() == to() &&
-	       m.type() == type() &&
-	       m.stamp() == stamp() &&
-#if (QXMPP_VERSION) >= QT_VERSION_CHECK(1, 0, 0)
-	       m.outOfBandUrl() == outOfBandUrl() &&
+	return ::operator==(static_cast<const QXmppMessage &>(m), static_cast<const QXmppMessage &>(*this))
+	       && m.mediaType() == mediaType()
+	       && m.sentByMe() == sentByMe()
+	       && m.isEdited() == isEdited()
+	       && m.isSent() == isSent()
+	       && m.isDelivered() == isDelivered()
+#if (QXMPP_VERSION) < QT_VERSION_CHECK(1, 0, 0)
+	       && m.outOfBandUrl() == outOfBandUrl()
 #endif
-	       m.isSent() == isSent() &&
-	       m.isDelivered() == isDelivered() &&
-	       m.mediaType() == mediaType() &&
-	       m.mediaContentType() == mediaContentType() &&
-	       m.mediaLocation() == mediaLocation() &&
-	       m.isEdited() == isEdited() &&
-	       m.spoilerHint() == spoilerHint() &&
-	       m.isSpoiler() == isSpoiler();
+	       && m.mediaLocation() == mediaLocation()
+	       && m.mediaContentType() == mediaContentType()
+	       && m.mediaLastModified() == mediaLastModified()
+	       && m.mediaSize() == mediaSize()
+	       && m.isSpoiler() == isSpoiler()
+	       && m.spoilerHint() == spoilerHint();
 }
 
 bool Message::operator!=(const Message &m) const

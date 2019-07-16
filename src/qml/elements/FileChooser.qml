@@ -58,12 +58,11 @@ Item {
 			})
 		}
 		else if (!Kirigami.Settings.isMobile) {
-			var selectedNameFilter = filterName + " (" + filter + ")"
 			fileChooserLoader.setSource("FileChooserDesktop.qml",
 			{
-				"selectedNameFilter": selectedNameFilter,
+				"selectedNameFilter": Qt.binding(function() { return filterName + " (" + filter + ")" }),
 				"selectFolder": selectFolder,
-				"title": title
+				"title": Qt.binding(function() { return title })
 			})
 		}
 		else {

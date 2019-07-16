@@ -83,7 +83,6 @@ Item {
 					reserveSpaceForIcon: true
 
 					icon: (fileIsDir ? "folder" : "text-x-plain")
-					iconColor: "transparent"
 					label: fileName + (fileIsDir ? "/" : "")
 
 					onClicked: {

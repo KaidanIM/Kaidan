@@ -29,8 +29,8 @@
  */
 
 import QtQuick 2.6
-import QtQuick.Controls 2.0 as Controls
 import QtQuick.Layouts 1.3
+import QtQuick.Controls 2.0 as Controls
 import org.kde.kirigami 2.0 as Kirigami
 
 Kirigami.OverlaySheet {
@@ -104,5 +104,11 @@ Kirigami.OverlaySheet {
 				sendButton.clicked()
 			}
 		}
+	}
+
+	function sendFile(jid, url) {
+		fileUrl = url
+		root.jid = jid
+		open()
 	}
 }

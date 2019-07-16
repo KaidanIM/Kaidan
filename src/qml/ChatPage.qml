@@ -29,12 +29,15 @@
  */
 
 import QtQuick 2.6
-import QtQuick.Controls 2.0 as Controls
 import QtQuick.Layouts 1.3
-import org.kde.kirigami 2.2 as Kirigami
 import QtGraphicalEffects 1.0
+import QtQuick.Controls 2.0 as Controls
+import org.kde.kirigami 2.2 as Kirigami
+
 import im.kaidan.kaidan 1.0
 import EmojiModel 0.1
+import MediaUtils 0.1
+
 import "elements"
 
 Kirigami.ScrollablePage {
@@ -101,60 +104,64 @@ Kirigami.ScrollablePage {
 	FileChooser {
 		id: fileChooser
 		title: qsTr("Select a file")
-		onAccepted: {
-			sendMediaSheet.jid = kaidan.messageModel.chatPartner
-			sendMediaSheet.fileUrl = fileUrl
-			sendMediaSheet.open()
-		}
+		onAccepted: sendMediaSheet.sendFile(kaidan.messageModel.chatPartner, fileUrl)
 	}
 
-	function openFileDialog(filterName, filter) {
+	function openFileDialog(filterName, filter, title) {
 		fileChooser.filterName = filterName
 		fileChooser.filter = filter
+		if (title !== undefined)
+			fileChooser.title = title
 		fileChooser.open()
 		mediaDrawer.close()
 	}
 
 	Kirigami.OverlayDrawer {
 		id: mediaDrawer
+
 		edge: Qt.BottomEdge
 		height: Kirigami.Units.gridUnit * 8
-		contentItem: RowLayout {
+
+		contentItem: ListView {
 			id: content
-			Layout.alignment: Qt.AlignHCenter
+
+			orientation: Qt.Horizontal
+
 			Layout.fillHeight: true
+			Layout.fillWidth: true
 
-			IconButton {
-				buttonText: qsTr("Image")
-				iconSource: "image-jpeg"
-				onClicked: openFileDialog("Images", "*.jpg *.jpeg *.png *.gif")
-				Layout.alignment: Qt.AlignHCenter
-			}
-			IconButton {
-				buttonText: qsTr("Video")
-				iconSource: "video-mp4"
-				onClicked: openFileDialog("Videos", "*.mp4 *.mkv *.avi *.webm")
-				Layout.alignment: Qt.AlignHCenter
-			}
-			IconButton {
-				buttonText: qsTr("Audio")
-				iconSource: "audio-mp3"
-				onClicked: openFileDialog("Audio files", "*.mp3 *.wav *.flac *.ogg *.m4a *.mka")
-				Layout.alignment: Qt.AlignHCenter
-			}
-			IconButton {
-				buttonText: qsTr("Document")
-				iconSource: "x-office-document"
-				onClicked: openFileDialog("Documents", "*.doc *.docx *.odt")
-				Layout.alignment: Qt.AlignHCenter
-			}
-			IconButton {
-				buttonText: qsTr("Other file")
-				iconSource: "text-x-plain"
-				onClicked: openFileDialog("All files", "*")
-				Layout.alignment: Qt.AlignHCenter
-			}
+			model: [
+				Enums.MessageType.MessageFile,
+				Enums.MessageType.MessageImage,
+				Enums.MessageType.MessageAudio,
+				Enums.MessageType.MessageVideo,
+				Enums.MessageType.MessageDocument
+			]
 
+			delegate: IconButton {
+				height: ListView.view.height
+				width: height
+				buttonText: MediaUtilsInstance.label(model.modelData)
+				iconSource: MediaUtilsInstance.iconName(model.modelData)
+
+				onClicked: {
+					switch (model.modelData) {
+					case Enums.MessageType.MessageFile:
+					case Enums.MessageType.MessageImage:
+					case Enums.MessageType.MessageAudio:
+					case Enums.MessageType.MessageVideo:
+					case Enums.MessageType.MessageDocument:
+						openFileDialog(MediaUtilsInstance.filterName(model.modelData),
+									   MediaUtilsInstance.filter(model.modelData),
+									   MediaUtilsInstance.label(model.modelData))
+						break
+					case Enums.MessageType.MessageText:
+					case Enums.MessageType.MessageGeoLocation:
+					case Enums.MessageType.MessageUnknown:
+						break
+					}
+				}
+			}
 		}
 	}
 
@@ -238,7 +245,7 @@ Kirigami.ScrollablePage {
 					if (Kirigami.Settings.isMobile)
 						mediaDrawer.open()
 					else
-						openFileDialog("All files", "(*)")
+						openFileDialog(qsTr("All files"), "*", MediaUtilsInstance.label(Enums.MessageType.MessageFile))
 				}
 			}
 

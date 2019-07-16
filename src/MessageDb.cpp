@@ -190,6 +190,7 @@ void MessageDb::addMessage(const Message &msg)
 	record.setValue("edited", msg.isEdited());
 	record.setValue("isSpoiler", msg.isSpoiler());
 	record.setValue("spoilerHint", msg.spoilerHint());
+	record.setValue("mediaUrl", msg.outOfBandUrl());
 	record.setValue("mediaContentType", msg.mediaContentType());
 	record.setValue("mediaLocation", msg.mediaLocation());
 	record.setValue("mediaSize", msg.mediaSize());

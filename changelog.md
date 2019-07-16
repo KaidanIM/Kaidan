@@ -1,5 +1,11 @@
 # Changelog
 
+### Version 0.4.1 (UNRELEASED)
+
+* Fix SSL problems for AppImage (lnj)
+* Fix connection problems (lnj)
+* Keep QXmpp v0.8.3 compatibility (lnj)
+
 ### Version 0.4.0 (released on Jul 08, 2019)
 
 Build system:

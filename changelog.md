@@ -1,6 +1,6 @@
 # Changelog
 
-### Version 0.4.1 (UNRELEASED)
+### Version 0.4.1 (released on Jul 16, 2019)
 
 * Fix SSL problems for AppImage (lnj)
 * Fix connection problems (lnj)

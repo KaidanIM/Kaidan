@@ -28,7 +28,7 @@
  *  along with Kaidan.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-import QtQuick 2.10
+import QtQuick 2.6
 import QtQuick.Controls 2.4 as Controls
 import QtQuick.Layouts 1.3
 import QtQml 2.2

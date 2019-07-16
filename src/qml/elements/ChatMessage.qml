@@ -199,8 +199,21 @@ RowLayout {
 
 				Controls.ToolButton {
 					visible: {
-						(mediaType !== Enums.MessageType.MessageText && !isLoading && mediaGetUrl !== ""
-						 && (mediaLocation === "" || !MediaUtilsInstance.localFileAvailable(media.mediaSource)))
+						switch (root.mediaType) {
+						case Enums.MessageType.MessageUnknown:
+						case Enums.MessageType.MessageText:
+						case Enums.MessageType.MessageGeoLocation:
+							break
+						case Enums.MessageType.MessageImage:
+						case Enums.MessageType.MessageAudio:
+						case Enums.MessageType.MessageVideo:
+						case Enums.MessageType.MessageFile:
+						case Enums.MessageType.MessageDocument:
+							return !root.isLoading && root.mediaGetUrl !== ""
+									&& (root.mediaLocation === "" || !MediaUtilsInstance.localFileAvailable(media.mediaSource))
+						}
+
+						return false
 					}
 					text: qsTr("Download")
 					onClicked: {
@@ -213,9 +226,24 @@ RowLayout {
 					id: media
 
 					mediaSource: {
-						return root.mediaLocation !== ''
-								? MediaUtilsInstance.fromLocalFile(root.mediaLocation)
-								: root.mediaGetUrl
+						switch (root.mediaType) {
+						case Enums.MessageType.MessageUnknown:
+						case Enums.MessageType.MessageText:
+							break
+						case Enums.MessageType.MessageGeoLocation:
+							return root.mediaLocation
+						case Enums.MessageType.MessageImage:
+						case Enums.MessageType.MessageAudio:
+						case Enums.MessageType.MessageVideo:
+						case Enums.MessageType.MessageFile:
+						case Enums.MessageType.MessageDocument:
+							const localFile = root.mediaLocation !== ''
+											? MediaUtilsInstance.fromLocalFile(root.mediaLocation)
+											: ''
+							return MediaUtilsInstance.localFileAvailable(localFile) ? localFile : root.mediaGetUrl
+						}
+
+						return ''
 					}
 					mediaSourceType: root.mediaType
 					showOpenButton: true
@@ -225,7 +253,7 @@ RowLayout {
 				// message body
 				Controls.Label {
 					id: bodyLabel
-					visible: messageBody !== "" && messageBody !== mediaGetUrl
+					visible: (root.mediaType === Enums.MessageType.MessageText || messageBody !== mediaGetUrl) && messageBody !== ""
 					text: kaidan.utils.formatMessage(messageBody)
 					textFormat: Text.StyledText
 					wrapMode: Text.Wrap

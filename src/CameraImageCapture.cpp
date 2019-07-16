@@ -28,36 +28,34 @@
  *  along with Kaidan.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-/**
- * This element is used in the @see SendMediaSheet to display information about a selected file to
- * the user. It shows the file name, file size and a little file icon.
- */
+#include "CameraImageCapture.h"
 
-import QtQuick 2.6
-import QtQuick.Layouts 1.3
-import QtQuick.Controls 2.0 as Controls
-import org.kde.kirigami 2.0 as Kirigami
+CameraImageCapture::CameraImageCapture(QMediaObject *mediaObject, QObject *parent)
+	: QCameraImageCapture(mediaObject, parent)
+{
+	connect(this, &QCameraImageCapture::imageSaved,
+		this, [this](int id, const QString &filePath) {
+			Q_UNUSED(id);
+			m_actualLocation = QUrl::fromLocalFile(filePath);
+			emit actualLocationChanged(m_actualLocation);
+		});
+}
 
-import im.kaidan.kaidan 1.0
+QUrl CameraImageCapture::actualLocation() const
+{
+	return m_actualLocation;
+}
 
-Rectangle {
-	id: root
+bool CameraImageCapture::setMediaObject(QMediaObject *mediaObject)
+{
+	const QMultimedia::AvailabilityStatus previousAvailability = availability();
+	const bool result = QCameraImageCapture::setMediaObject(mediaObject);
 
-	property url mediaSource
-	property int mediaSourceType: Enums.MessageType.MessageUnknown
-	property bool showOpenButton: false
-	property int messageSize: Kirigami.Units.gridUnit * 14
-	property QtObject message
-	property QtObject mediaSheet
+	if (previousAvailability != availability()) {
+		QMetaObject::invokeMethod(this, [this]() {
+				emit availabilityChanged(availability());
+			}, Qt::QueuedConnection);
+	}
 
-	color: message ? 'transparent' : Kirigami.Theme.backgroundColor
-
-	Layout.fillHeight: false
-	Layout.fillWidth: message ? false : true
-	Layout.alignment: Qt.AlignCenter
-	Layout.margins: 0
-	Layout.leftMargin: undefined
-	Layout.topMargin: undefined
-	Layout.rightMargin: undefined
-	Layout.bottomMargin: undefined
+	return result;
 }

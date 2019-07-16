@@ -123,13 +123,8 @@ static QString prettyFormat(int durationMsecs, QTime *outTime = nullptr) {
 		format.append(QStringLiteral("H"));
 	}
 
-	if (time.minute() > 0 || !format.isEmpty()) {
-		format.append(format.isEmpty() ? QStringLiteral("m") : QStringLiteral(":mm"));
-	}
-
-	if (time.second() > 0 || !format.isEmpty()) {
-		format.append(format.isEmpty() ? QStringLiteral("s") : QStringLiteral(":ss"));
-	}
+	format.append(format.isEmpty() ? QStringLiteral("m") : QStringLiteral(":mm"));
+	format.append(format.isEmpty() ? QStringLiteral("s") : QStringLiteral(":ss"));
 
 	if (outTime) {
 		*outTime = time;
@@ -269,6 +264,7 @@ QString MediaUtils::newMediaLabel(Enums::MessageType hint)
 	}
 
 	Q_UNREACHABLE();
+	return { };
 }
 
 QString MediaUtils::newMediaIconName(Enums::MessageType hint)
@@ -284,14 +280,13 @@ QString MediaUtils::newMediaIconName(Enums::MessageType hint)
 		return QStringLiteral("gps");
 	case Enums::MessageType::MessageText:
 	case Enums::MessageType::MessageFile:
-//		return QStringLiteral("file-search-symbolic");
 	case Enums::MessageType::MessageDocument:
-//		return QStringLiteral("document-open");
 	case Enums::MessageType::MessageUnknown:
 		break;
 	}
 
 	Q_UNREACHABLE();
+	return { };
 }
 
 QString MediaUtils::label(Enums::MessageType hint)
@@ -314,6 +309,7 @@ QString MediaUtils::label(Enums::MessageType hint)
 	}
 
 	Q_UNREACHABLE();
+	return { };
 }
 
 QString MediaUtils::iconName(Enums::MessageType hint)
@@ -342,6 +338,7 @@ QString MediaUtils::filterName(Enums::MessageType hint)
 	}
 
 	Q_UNREACHABLE();
+	return { };
 }
 
 QString MediaUtils::filter(Enums::MessageType hint)
@@ -366,6 +363,7 @@ QString MediaUtils::namedFilter(Enums::MessageType hint)
 	}
 
 	Q_UNREACHABLE();
+	return { };
 }
 
 QList<QMimeType> MediaUtils::mimeTypes(Enums::MessageType hint)
@@ -389,6 +387,7 @@ QList<QMimeType> MediaUtils::mimeTypes(Enums::MessageType hint)
 	}
 
 	Q_UNREACHABLE();
+	return { };
 }
 
 Enums::MessageType MediaUtils::messageType(const QString &filePath)

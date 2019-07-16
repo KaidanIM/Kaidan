@@ -42,17 +42,55 @@ Kirigami.OverlaySheet {
 	property string targetJid
 	property url source
 	property int sourceType
+	property bool newMedia: false
+
+	signal rejected()
+	signal accepted()
 
 	showCloseButton: false
 
 	contentItem: ColumnLayout {
 		// message type preview
-		MediaPreviewLoader {
-			id: mediaLoader
+		Loader {
+			id: loader
 
-			mediaSheet: root
-			mediaSource: root.source
-			mediaSourceType: root.sourceType
+			enabled: (root.newMedia || root.source != '') && sourceComponent !== null
+			visible: enabled
+			sourceComponent: root.newMedia ? newMediaComponent : mediaPreviewComponent
+
+			Layout.fillHeight: item ? item.Layout.fillHeight : false
+			Layout.fillWidth: item ? item.Layout.fillWidth : false
+			Layout.preferredHeight: item ? item.Layout.preferredHeight : -1
+			Layout.preferredWidth: item ? item.Layout.preferredWidth : -1
+			Layout.minimumHeight: item ? item.Layout.minimumHeight : -1
+			Layout.minimumWidth: item ? item.Layout.minimumWidth : -1
+			Layout.maximumHeight: item ? item.Layout.maximumHeight : -1
+			Layout.maximumWidth: item ? item.Layout.maximumWidth : -1
+			Layout.alignment: item ? item.Layout.alignment : Qt.AlignCenter
+			Layout.margins: item ? item.Layout.margins : 0
+			Layout.leftMargin: item ? item.Layout.leftMargin : 0
+			Layout.topMargin: item ? item.Layout.topMargin : 0
+			Layout.rightMargin: item ? item.Layout.rightMargin : 0
+			Layout.bottomMargin: item ? item.Layout.bottomMargin : 0
+
+			Component {
+				id: newMediaComponent
+
+				NewMediaLoader {
+					mediaSourceType: root.sourceType
+					mediaSheet: root
+				}
+			}
+
+			Component {
+				id: mediaPreviewComponent
+
+				MediaPreviewLoader {
+					mediaSource: root.source
+					mediaSourceType: root.sourceType
+					mediaSheet: root
+				}
+			}
 		}
 
 		// TODO: - Maybe add option to change file name
@@ -81,12 +119,16 @@ Kirigami.OverlaySheet {
 
 				Layout.fillWidth: true
 
-				onClicked: close()
+				onClicked: {
+					close()
+					root.rejected()
+				}
 			}
 
 			Controls.Button {
 				id: sendButton
 
+				enabled: root.source != ''
 				text: qsTr("Send")
 
 				Layout.fillWidth: true
@@ -95,7 +137,6 @@ Kirigami.OverlaySheet {
 					switch (root.sourceType) {
 					case Enums.MessageType.MessageUnknown:
 					case Enums.MessageType.MessageText:
-					case Enums.MessageType.MessageGeoLocation:
 						break
 					case Enums.MessageType.MessageImage:
 					case Enums.MessageType.MessageAudio:
@@ -104,9 +145,13 @@ Kirigami.OverlaySheet {
 					case Enums.MessageType.MessageDocument:
 						kaidan.sendFile(root.targetJid, root.source, descField.text)
 						break
+					case Enums.MessageType.MessageGeoLocation:
+						kaidan.sendMessage(root.targetJid, root.source, false, '')
+						break
 					}
 
 					close()
+					root.accepted()
 				}
 			}
 		}
@@ -123,6 +168,7 @@ Kirigami.OverlaySheet {
 			targetJid = ''
 			source = ''
 			sourceType = Enums.MessageType.MessageUnknown
+			newMedia = false
 			descField.clear()
 		}
 	}
@@ -131,6 +177,11 @@ Kirigami.OverlaySheet {
 		targetJid = jid
 		sourceType = type
 		open()
+	}
+
+	function sendNewMessageType(jid, type) {
+		newMedia = true
+		sendMessageType(jid, type)
 	}
 
 	function sendFile(jid, url) {

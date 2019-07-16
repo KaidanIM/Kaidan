@@ -28,36 +28,33 @@
  *  along with Kaidan.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-/**
- * This element is used in the @see SendMediaSheet to display information about a selected file to
- * the user. It shows the file name, file size and a little file icon.
- */
+#pragma once
 
-import QtQuick 2.6
-import QtQuick.Layouts 1.3
-import QtQuick.Controls 2.0 as Controls
-import org.kde.kirigami 2.0 as Kirigami
+#include <QCameraImageCapture>
+#include <QUrl>
 
-import im.kaidan.kaidan 1.0
+// A QCameraImageCapture that mimic api of QMediaRecorder
 
-Rectangle {
-	id: root
+class CameraImageCapture : public QCameraImageCapture
+{
+	Q_OBJECT
 
-	property url mediaSource
-	property int mediaSourceType: Enums.MessageType.MessageUnknown
-	property bool showOpenButton: false
-	property int messageSize: Kirigami.Units.gridUnit * 14
-	property QtObject message
-	property QtObject mediaSheet
+	Q_PROPERTY(QUrl actualLocation READ actualLocation NOTIFY actualLocationChanged)
+	Q_PROPERTY(QMultimedia::AvailabilityStatus availability READ availability NOTIFY availabilityChanged)
+	Q_PROPERTY(bool isAvailable READ isAvailable NOTIFY availabilityChanged)
 
-	color: message ? 'transparent' : Kirigami.Theme.backgroundColor
+public:
+	CameraImageCapture(QMediaObject *mediaObject, QObject *parent = nullptr);
 
-	Layout.fillHeight: false
-	Layout.fillWidth: message ? false : true
-	Layout.alignment: Qt.AlignCenter
-	Layout.margins: 0
-	Layout.leftMargin: undefined
-	Layout.topMargin: undefined
-	Layout.rightMargin: undefined
-	Layout.bottomMargin: undefined
-}
+	QUrl actualLocation() const;
+
+signals:
+	void availabilityChanged(QMultimedia::AvailabilityStatus availability);
+	void actualLocationChanged(const QUrl &location);
+
+protected:
+	bool setMediaObject(QMediaObject *mediaObject) override;
+
+private:
+	QUrl m_actualLocation;
+};

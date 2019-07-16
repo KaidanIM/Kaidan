@@ -115,7 +115,7 @@ void MessageHandler::handleMessage(const QXmppMessage &msg)
 	bodyWords.prepend(msg.outOfBandUrl());
 
 	for (const QString &word : qAsConst(bodyWords)) {
-		if (!MediaUtils::isHttp(word)) {
+		if (!MediaUtils::isHttp(word) && !MediaUtils::isGeoLocation(word)) {
 			continue;
 		}
 
@@ -132,12 +132,15 @@ void MessageHandler::handleMessage(const QXmppMessage &msg)
 		case MessageType::MessageVideo:
 		case MessageType::MessageDocument:
 		case MessageType::MessageFile:
+		case MessageType::MessageGeoLocation:
 			message.setMediaType(messageType);
+			if (messageType == MessageType::MessageGeoLocation) {
+				message.setMediaLocation(url.toEncoded());
+			}
 			message.setMediaContentType(mimeType.name());
 			message.setOutOfBandUrl(url.toEncoded());
 			break;
 		case MessageType::MessageText:
-		case MessageType::MessageGeoLocation:
 		case MessageType::MessageUnknown:
 			continue;
 		}
@@ -226,6 +229,14 @@ void MessageHandler::sendMessage(const QString& toJid,
 		spoiler.setAttribute("xmlns", NS_SPOILERS);
 		extensions.append(spoiler);
 		msg.setExtensions(extensions);
+	} else if (MediaUtils::isGeoLocation(msg.body())) {
+		const QUrl url(msg.body());
+		const QMimeType mimeType = MediaUtils::mimeType(url);
+		const MessageType messageType = MediaUtils::messageType(mimeType);
+		msg.setMediaType(messageType);
+		msg.setMediaLocation(msg.body());
+		msg.setMediaContentType(mimeType.name());
+		msg.setOutOfBandUrl(msg.body());
 	}
 
 	emit model->addMessageRequested(msg);

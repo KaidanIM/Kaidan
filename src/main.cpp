@@ -62,7 +62,11 @@
 #include "Utils.h"
 #include "QrCodeScannerFilter.h"
 #include "VCardModel.h"
+#include "CameraModel.h"
+#include "AudioDeviceModel.h"
+#include "MediaSettingModel.h"
 #include "MediaUtils.h"
+#include "MediaRecorder.h"
 
 #ifdef STATIC_BUILD
 #include "static_plugins.h"
@@ -190,11 +194,26 @@ Q_DECL_EXPORT int main(int argc, char *argv[])
 	qRegisterMetaType<ClientWorker::Credentials>("ClientWorker::Credentials");
 	qRegisterMetaType<QXmppVCardIq>("QXmppVCardIq");
 	qRegisterMetaType<QMimeType>();
+	qRegisterMetaType<CameraInfo>();
+	qRegisterMetaType<AudioDeviceInfo>();
+	qRegisterMetaType<MediaSettings>();
+//	qRegisterMetaType<CommonEncoderSettings>();
+	qRegisterMetaType<ImageEncoderSettings>();
+	qRegisterMetaType<AudioEncoderSettings>();
+	qRegisterMetaType<VideoEncoderSettings>();
 	// Enums for c++ member calls using enums
 	qRegisterMetaType<Enums::ConnectionState>();
 	qRegisterMetaType<Enums::DisconnectionReason>();
 	qRegisterMetaType<Enums::MessageType>();
 	qRegisterMetaType<Enums::AvailabilityTypes>();
+	qRegisterMetaType<CommonEncoderSettings::EncodingQuality>();
+	qRegisterMetaType<CommonEncoderSettings::EncodingMode>();
+	qRegisterMetaType<AudioDeviceModel::Mode>();
+	qRegisterMetaType<MediaRecorder::Type>();
+	qRegisterMetaType<MediaRecorder::AvailabilityStatus>();
+	qRegisterMetaType<MediaRecorder::State>();
+	qRegisterMetaType<MediaRecorder::Status>();
+	qRegisterMetaType<MediaRecorder::Error>();
 
 	// Qt-Translator
 	QTranslator qtTranslator;
@@ -290,11 +309,29 @@ Q_DECL_EXPORT int main(int argc, char *argv[])
 	qmlRegisterType<QrCodeScannerFilter>(APPLICATION_ID, 1, 0, "QrCodeScannerFilter");
 	qmlRegisterType<VCardModel>(APPLICATION_ID, 1, 0, "VCardModel");
 	qmlRegisterType<RosterFilterProxyModel>(APPLICATION_ID, 1, 0, "RosterFilterProxyModel");
+	qmlRegisterType<CameraModel>(APPLICATION_ID, 1, 0, "CameraModel");
+	qmlRegisterType<AudioDeviceModel>(APPLICATION_ID, 1, 0, "AudioDeviceModel");
+	qmlRegisterType<MediaSettingsContainerModel>(APPLICATION_ID, 1, 0, "MediaSettingsContainerModel");
+	qmlRegisterType<MediaSettingsResolutionModel>(APPLICATION_ID, 1, 0, "MediaSettingsResolutionModel");
+	qmlRegisterType<MediaSettingsQualityModel>(APPLICATION_ID, 1, 0, "MediaSettingsQualityModel");
+	qmlRegisterType<MediaSettingsImageCodecModel>(APPLICATION_ID, 1, 0, "MediaSettingsImageCodecModel");
+	qmlRegisterType<MediaSettingsAudioCodecModel>(APPLICATION_ID, 1, 0, "MediaSettingsAudioCodecModel");
+	qmlRegisterType<MediaSettingsAudioSampleRateModel>(APPLICATION_ID, 1, 0, "MediaSettingsAudioSampleRateModel");
+	qmlRegisterType<MediaSettingsVideoCodecModel>(APPLICATION_ID, 1, 0, "MediaSettingsVideoCodecModel");
+	qmlRegisterType<MediaSettingsVideoFrameRateModel>(APPLICATION_ID, 1, 0, "MediaSettingsVideoFrameRateModel");
+	qmlRegisterType<MediaRecorder>(APPLICATION_ID, 1, 0, "MediaRecorder");
 
 	qmlRegisterUncreatableType<QAbstractItemModel>("EmojiModel", 0, 1, "QAbstractItemModel", "Used by proxy models");
 	qmlRegisterUncreatableType<Emoji>("EmojiModel", 0, 1, "Emoji", "Used by emoji models");
 	qmlRegisterUncreatableType<TransferJob>(APPLICATION_ID, 1, 0, "TransferJob", "TransferJob type usable");
 	qmlRegisterUncreatableType<QMimeType>(APPLICATION_ID, 1, 0, "QMimeType", "QMimeType type usable");
+	qmlRegisterUncreatableType<CameraInfo>(APPLICATION_ID, 1, 0, "CameraInfo", "CameraInfo type usable");
+	qmlRegisterUncreatableType<AudioDeviceInfo>(APPLICATION_ID, 1, 0, "AudioDeviceInfo", "AudioDeviceInfo type usable");
+	qmlRegisterUncreatableType<MediaSettings>(APPLICATION_ID, 1, 0, "MediaSettings", "MediaSettings type usable");
+	qmlRegisterUncreatableType<CommonEncoderSettings>(APPLICATION_ID, 1, 0, "CommonEncoderSettings", "CommonEncoderSettings type usable");
+	qmlRegisterUncreatableType<ImageEncoderSettings>(APPLICATION_ID, 1, 0, "ImageEncoderSettings", "ImageEncoderSettings type usable");
+	qmlRegisterUncreatableType<AudioEncoderSettings>(APPLICATION_ID, 1, 0, "AudioEncoderSettings", "AudioEncoderSettings type usable");
+	qmlRegisterUncreatableType<VideoEncoderSettings>(APPLICATION_ID, 1, 0, "VideoEncoderSettings", "VideoEncoderSettings type usable");
 
 	qmlRegisterUncreatableMetaObject(Enums::staticMetaObject, APPLICATION_ID,
 		1, 0, "Enums", "Can't create object; only enums defined!");

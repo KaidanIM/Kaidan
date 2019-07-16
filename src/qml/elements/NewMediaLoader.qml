@@ -49,33 +49,31 @@ Loader {
 		switch (mediaSourceType) {
 		case Enums.MessageType.MessageUnknown:
 		case Enums.MessageType.MessageText:
-			return false
+		case Enums.MessageType.MessageFile:
+		case Enums.MessageType.MessageDocument:
+			return false;
 		case Enums.MessageType.MessageImage:
 		case Enums.MessageType.MessageAudio:
 		case Enums.MessageType.MessageVideo:
-		case Enums.MessageType.MessageFile:
-		case Enums.MessageType.MessageDocument:
 		case Enums.MessageType.MessageGeoLocation:
-			return mediaSource != '' && sourceComponent !== null
+			return mediaSheet
 		}
+
 	}
 	visible: enabled
 	sourceComponent: {
 		switch (mediaSourceType) {
 		case Enums.MessageType.MessageUnknown:
 		case Enums.MessageType.MessageText:
-			return null
-		case Enums.MessageType.MessageImage:
-			return imagePreview
-		case Enums.MessageType.MessageAudio:
-			return audioPreview
-		case Enums.MessageType.MessageVideo:
-			return videoPreview
 		case Enums.MessageType.MessageFile:
 		case Enums.MessageType.MessageDocument:
-			return otherPreview
+			return null
+		case Enums.MessageType.MessageImage:
+		case Enums.MessageType.MessageAudio:
+		case Enums.MessageType.MessageVideo:
+			return newMedia
 		case Enums.MessageType.MessageGeoLocation:
-			return locationPreview
+			return newMediaLocation
 		}
 	}
 
@@ -95,62 +93,32 @@ Loader {
 	Layout.bottomMargin: item ? item.Layout.bottomMargin : 0
 
 	Component {
-		id: imagePreview
+		id: newMedia
 
-		MediaPreviewImage {
-			mediaSource: root.mediaSource
+		NewMedia {
 			mediaSourceType: root.mediaSourceType
 			showOpenButton: root.showOpenButton
 			message: root.message
 			mediaSheet: root.mediaSheet
+
+			onMediaSourceChanged: {
+				root.mediaSheet.source = mediaSource
+			}
 		}
 	}
 
 	Component {
-		id: audioPreview
+		id: newMediaLocation
 
-		MediaPreviewAudio {
-			mediaSource: root.mediaSource
+		NewMediaLocation {
 			mediaSourceType: root.mediaSourceType
 			showOpenButton: root.showOpenButton
 			message: root.message
 			mediaSheet: root.mediaSheet
-		}
-	}
 
-	Component {
-		id: videoPreview
-
-		MediaPreviewVideo {
-			mediaSource: root.mediaSource
-			mediaSourceType: root.mediaSourceType
-			showOpenButton: root.showOpenButton
-			message: root.message
-			mediaSheet: root.mediaSheet
-		}
-	}
-
-	Component {
-		id: otherPreview
-
-		MediaPreviewOther {
-			mediaSource: root.mediaSource
-			mediaSourceType: root.mediaSourceType
-			showOpenButton: root.showOpenButton
-			message: root.message
-			mediaSheet: root.mediaSheet
-		}
-	}
-
-	Component {
-		id: locationPreview
-
-		MediaPreviewLocation {
-			mediaSource: root.mediaSource
-			mediaSourceType: root.mediaSourceType
-			showOpenButton: root.showOpenButton
-			message: root.message
-			mediaSheet: root.mediaSheet
+			onMediaSourceChanged: {
+				root.mediaSheet.source = mediaSource
+			}
 		}
 	}
 }

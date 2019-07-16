@@ -32,6 +32,7 @@ import QtQuick 2.6
 import QtQuick.Layouts 1.3
 import QtGraphicalEffects 1.0
 import QtQuick.Controls 2.0 as Controls
+import QtMultimedia 5.10 as Multimedia
 import org.kde.kirigami 2.2 as Kirigami
 
 import im.kaidan.kaidan 1.0
@@ -41,9 +42,13 @@ import MediaUtils 0.1
 import "elements"
 
 Kirigami.ScrollablePage {
+	id: root
+
 	property string chatName
 	property bool isWritingSpoiler
 	property string messageToCorrect
+
+	readonly property bool cameraAvailable: Multimedia.QtMultimedia.availableCameras.length > 0
 
 	title: chatName
 	keyboardNavigationEnabled: true
@@ -94,6 +99,71 @@ Kirigami.ScrollablePage {
 			icon.name: "user-identity"
 			text: qsTr("View profile")
 			onTriggered: pageStack.push(userProfilePage, {jid: kaidan.messageModel.chatPartner, name: chatName})
+		},
+		Kirigami.Action {
+			text: qsTr("Multimedia settings")
+
+			icon {
+				name: "settings-configure"
+			}
+
+			onTriggered: {
+				pageStack.push(multimediaSettingsPage, {jid: kaidan.messageModel.chatPartner, name: chatName})
+			}
+		},
+		Kirigami.Action {
+			readonly property int type: Enums.MessageType.MessageImage
+
+			text: MediaUtilsInstance.newMediaLabel(type)
+			enabled: root.cameraAvailable
+
+			icon {
+				name: MediaUtilsInstance.newMediaIconName(type)
+			}
+
+			onTriggered: {
+				sendMediaSheet.sendNewMessageType(kaidan.messageModel.chatPartner, type)
+			}
+		},
+		Kirigami.Action {
+			readonly property int type: Enums.MessageType.MessageAudio
+
+			text: MediaUtilsInstance.newMediaLabel(type)
+
+			icon {
+				name: MediaUtilsInstance.newMediaIconName(type)
+			}
+
+			onTriggered: {
+				sendMediaSheet.sendNewMessageType(kaidan.messageModel.chatPartner, type)
+			}
+		},
+		Kirigami.Action {
+			readonly property int type: Enums.MessageType.MessageVideo
+
+			text: MediaUtilsInstance.newMediaLabel(type)
+			enabled: root.cameraAvailable
+
+			icon {
+				name: MediaUtilsInstance.newMediaIconName(type)
+			}
+
+			onTriggered: {
+				sendMediaSheet.sendNewMessageType(kaidan.messageModel.chatPartner, type)
+			}
+		},
+		Kirigami.Action {
+			readonly property int type: Enums.MessageType.MessageGeoLocation
+
+			text: MediaUtilsInstance.newMediaLabel(type)
+
+			icon {
+				name: MediaUtilsInstance.newMediaIconName(type)
+			}
+
+			onTriggered: {
+				sendMediaSheet.sendNewMessageType(kaidan.messageModel.chatPartner, type)
+			}
 		}
 	]
 

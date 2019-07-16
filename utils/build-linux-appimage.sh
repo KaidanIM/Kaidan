@@ -36,6 +36,12 @@ cdnew() {
     cd $1
 }
 
+join_by() {
+    local IFS="$1"
+    shift
+    echo "$*"
+}
+
 if [ ! -f "$KAIDAN_SOURCES/3rdparty/linuxdeployqt/squashfs-root/AppRun" ]; then
     echo "Downloading linuxdeployqt"
     wget --continue -P $KAIDAN_SOURCES/3rdparty/ https://github.com/probonopd/linuxdeployqt/releases/download/continuous/linuxdeployqt-continuous-x86_64.AppImage
@@ -91,12 +97,40 @@ echo "*****************************************"
     fi
 
     export VERSION="continuous"
+    extra_plugins=(
+        # Image formats
+        imageformats/libqsvg.so
+        imageformats/libqjpeg.so
+        imageformats/libqgif.so
+        imageformats/libqwebp.so
+        # Icon formats
+        iconengines/libqsvgicon.so
+        # QtMultimedia
+        audio/libqtaudio_alsa.so
+        audio/libqtmedia_pulse.so
+        playlistformats/libqtmultimedia_m3u.so
+        mediaservice/libgstaudiodecoder.so
+        mediaservice/libgstcamerabin.so
+        mediaservice/libgstmediacapture.so
+        mediaservice/libgstmediaplayer.so
+        # QtLocation
+        geoservices/libqtgeoservices_esri.so
+        geoservices/libqtgeoservices_itemsoverlay.so
+        geoservices/libqtgeoservices_mapbox.so
+        geoservices/libqtgeoservices_mapboxgl.so
+        geoservices/libqtgeoservices_nokia.so
+        geoservices/libqtgeoservices_osm.so
+        # QtPositioning
+        position/libqtposition_geoclue.so
+        position/libqtposition_positionpoll.so
+        position/libqtposition_serialnmea.so
+    )
 
     $KAIDAN_SOURCES/3rdparty/linuxdeployqt/squashfs-root/AppRun \
         $KAIDAN_SOURCES/AppDir/usr/share/applications/kaidan.desktop \
         -qmldir=$KAIDAN_SOURCES/src/qml/ \
         -qmlimport=/opt/kf5/lib/x86_64-linux-gnu/qml \
-        -extra-plugins="imageformats/libqsvg.so,imageformats/libqjpeg.so,iconengines/libqsvgicon.so" \
+        -extra-plugins="$(join_by , "${extra_plugins[@]}")" \
         -appimage -no-copy-copyright-files \
         $QMAKE_BINARY
 }

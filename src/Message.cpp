@@ -57,7 +57,9 @@ bool Message::operator==(const Message &m) const
 	       m.to() == to() &&
 	       m.type() == type() &&
 	       m.stamp() == stamp() &&
+#if (QXMPP_VERSION) >= QT_VERSION_CHECK(1, 0, 0)
 	       m.outOfBandUrl() == outOfBandUrl() &&
+#endif
 	       m.isSent() == isSent() &&
 	       m.isDelivered() == isDelivered() &&
 	       m.mediaType() == mediaType() &&
@@ -182,3 +184,15 @@ void Message::setSpoilerHint(const QString &spoilerHint)
 {
 	m_spoilerHint = spoilerHint;
 }
+
+#if (QXMPP_VERSION) < QT_VERSION_CHECK(1, 0, 0)
+QString Message::outOfBandUrl() const
+{
+	return m_outOfBandUrl;
+}
+
+void Message::setOutOfBandUrl(const QString &outOfBandUrl)
+{
+	m_outOfBandUrl = outOfBandUrl;
+}
+#endif

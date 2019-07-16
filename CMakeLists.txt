@@ -17,11 +17,12 @@ if(UBUNTU_TOUCH)
 endif()
 set(VERSION_STRING "0.5.0-dev")
 set(DEVELOPMENT_BUILD TRUE)
-set(ANDROID_VERSION_CODE 5)
+set(ANDROID_VERSION_CODE 6)
 
 # CMake options
 option(I18N "Enable i18n support" FALSE)
 option(STATIC_BUILD "Build Kaidan statically")
+option(APPIMAGE "Build Kaidan as AppImage (will only work in the appimage script)" FALSE)
 option(UBUNTU_TOUCH "Building an Ubuntu Touch click (internal use only!)" FALSE)
 option(CLICK_ARCH "Architecture that will be used in the click's manifest")
 option(CLICK_DATE "Date used in the version number in the click's manifest")
@@ -57,8 +58,12 @@ kde_enable_exceptions()
 find_package(PkgConfig REQUIRED)
 find_package(Qt5 ${QT_MIN_VERSION} REQUIRED NO_MODULE COMPONENTS Core Qml Quick Svg Sql QuickControls2 Xml Multimedia)
 find_package(KF5Kirigami2 REQUIRED)
+<<<<<<< HEAD
 find_package(ZXing REQUIRED COMPONENTS Core)
 pkg_search_module(QXmpp REQUIRED qxmpp>=1.0)
+=======
+pkg_search_module(QXmpp REQUIRED qxmpp>=0.8.3)
+>>>>>>> stable
 
 # Optional QtQuickCompiler
 if(QUICK_COMPILER)
@@ -326,8 +331,8 @@ endif()
 
 if(UBUNTU_TOUCH)
 	set(KAIDAN_COMPILE_DEFINITIONS UBUNTU_TOUCH=True)
-elseif(NOT ANDROID AND NOT IOS AND NOT WIN32 AND NOT APPLE)
-	set(KAIDAN_COMPILE_DEFINITIONS NOTIFICATIONS_LIBNOTIFY=True)
+elseif(APPIMAGE)
+	set(KAIDAN_COMPILE_DEFINITIONS APPIMAGE=True)
 endif()
 
 if(STATIC_BUILD)

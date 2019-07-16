@@ -145,6 +145,10 @@ Q_DECL_EXPORT int main(int argc, char *argv[])
 	qputenv("QT_QUICK_CONTROLS_MOBILE", "true");
 #endif
 
+#ifdef APPIMAGE
+	qputenv("OPENSSL_CONF", "");
+#endif
+
 	// name, display name, description
 	QGuiApplication::setApplicationName(APPLICATION_NAME);
 	QGuiApplication::setApplicationDisplayName(APPLICATION_DISPLAY_NAME);

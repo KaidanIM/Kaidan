@@ -28,62 +28,35 @@
  *  along with Kaidan.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef MESSAGEHANDLER_H
-#define MESSAGEHANDLER_H
-
-// Qt
-#include <QObject>
-// QXmpp
-#include <QXmppGlobal.h>
-#include <QXmppMessageReceiptManager.h>
-
-class Kaidan;
-class MessageModel;
-class QXmppMessage;
-class QXmppDiscoveryIq;
-class QXmppCarbonManager;
-
 /**
- * @class MessageHandler Handler for incoming and outgoing messages.
+ * This element is used in the @see SendMediaSheet to display information about a selected file to
+ * the user. It shows the file name, file size and a little file icon.
  */
-class MessageHandler : public QObject
-{
-	Q_OBJECT
 
-public:
-	MessageHandler(Kaidan *kaidan, QXmppClient *client, MessageModel *model,
-	               QObject *parent = nullptr);
+import QtQuick 2.6
+import QtQuick.Layouts 1.3
+import QtQuick.Controls 2.0 as Controls
+import org.kde.kirigami 2.0 as Kirigami
 
-	~MessageHandler();
+import im.kaidan.kaidan 1.0
 
-public slots:
-	/**
-	 * Handles incoming messages from the server.
-	 */
-	void handleMessage(const QXmppMessage &msg);
+Rectangle {
+	id: root
 
-	/**
-	 * Sends a new message to the server and inserts it into the database.
-	 */
-	void sendMessage(const QString& toJid, const QString& body, bool isSpoiler, const QString& spoilerHint);
+	property url mediaSource
+	property int mediaSourceType: Enums.MessageType.MessageUnknown
+	property bool showOpenButton: false
+	property Item message: null
+	property int messageSize: Kirigami.Units.gridUnit * 14
 
-	/**
-	 * Sends the corrected version of a message.
-	 */
-	void correctMessage(const QString& toJid, const QString& msgId, const QString& newBody);
+	color: message ? 'transparent' : Kirigami.Theme.backgroundColor
 
-	/**
-	 * Handles service discovery info and enables carbons if feature was found.
-	 */
-	void handleDiscoInfo(const QXmppDiscoveryIq &);
-
-private:
-	Kaidan *kaidan;
-	QXmppClient *client;
-	QXmppMessageReceiptManager receiptManager;
-	MessageModel *model;
-	QXmppCarbonManager *carbonManager;
-	QString chatPartner;
-};
-
-#endif // MESSAGEHANDLER_H
+	Layout.fillHeight: false
+	Layout.fillWidth: message ? false : true
+	Layout.alignment: Qt.AlignCenter
+	Layout.margins: 0
+	Layout.leftMargin: undefined
+	Layout.topMargin: undefined
+	Layout.rightMargin: undefined
+	Layout.bottomMargin: undefined
+}

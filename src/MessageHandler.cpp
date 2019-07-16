@@ -44,6 +44,7 @@
 #include "Message.h"
 #include "MessageModel.h"
 #include "Notifications.h"
+#include "MediaUtils.h"
 
 MessageHandler::MessageHandler(Kaidan *kaidan, QXmppClient *client, MessageModel *model,
                                QObject *parent)
@@ -112,29 +113,35 @@ void MessageHandler::handleMessage(const QXmppMessage &msg)
 	// check if message contains a link and also check out of band url
 	QStringList bodyWords = message.body().split(" ");
 	bodyWords.prepend(msg.outOfBandUrl());
-	for (const QString &word : bodyWords) {
-		if (!word.startsWith("https://") && !word.startsWith("http://"))
+
+	for (const QString &word : qAsConst(bodyWords)) {
+		if (!MediaUtils::isHttp(word)) {
 			continue;
+		}
 
 		// check message type by file name in link
 		// This is hacky, but needed without SIMS or an additional HTTP request.
 		// Also, this can be useful when a user manually posts an HTTP url.
-		QUrl url(word);
-		const QList<QMimeType> mediaTypes =
-		                QMimeDatabase().mimeTypesForFileName(url.fileName());
-		for (const QMimeType &type : mediaTypes) {
-			MessageType mType = Message::mediaTypeFromMimeType(type);
-			if (mType == MessageType::MessageImage ||
-			    mType == MessageType::MessageAudio ||
-			    mType == MessageType::MessageVideo ||
-			    mType == MessageType::MessageDocument ||
-			    mType == MessageType::MessageFile) {
-				message.setMediaType(mType);
-				message.setMediaContentType(type.name());
-				message.setOutOfBandUrl(url.toEncoded());
-				break;
-			}
+		const QUrl url(word);
+		const QMimeType mimeType = MediaUtils::mimeType(url);
+		const MessageType messageType = MediaUtils::messageType(mimeType);
+
+		switch (messageType) {
+		case MessageType::MessageImage:
+		case MessageType::MessageAudio:
+		case MessageType::MessageVideo:
+		case MessageType::MessageDocument:
+		case MessageType::MessageFile:
+			message.setMediaType(messageType);
+			message.setMediaContentType(mimeType.name());
+			message.setOutOfBandUrl(url.toEncoded());
+			break;
+		case MessageType::MessageText:
+		case MessageType::MessageGeoLocation:
+		case MessageType::MessageUnknown:
+			continue;
 		}
+
 		break; // we can only handle one link
 	}
 

@@ -33,7 +33,9 @@ import QtGraphicalEffects 1.0
 import QtQuick.Layouts 1.3
 import QtQuick.Controls 2.2 as Controls
 import org.kde.kirigami 2.0 as Kirigami
+
 import im.kaidan.kaidan 1.0
+import MediaUtils 0.1
 
 RowLayout {
 	id: root
@@ -197,10 +199,8 @@ RowLayout {
 
 				Controls.ToolButton {
 					visible: {
-						mediaType !== Enums.MessageText &&
-								!isLoading &&
-								mediaLocation === "" &&
-								mediaGetUrl !== ""
+						(mediaType !== Enums.MessageType.MessageText && !isLoading && mediaGetUrl !== ""
+						 && (mediaLocation === "" || !MediaUtilsInstance.localFileAvailable(media.mediaSource)))
 					}
 					text: qsTr("Download")
 					onClicked: {
@@ -209,21 +209,18 @@ RowLayout {
 					}
 				}
 
-				// media loader
-				Loader {
+				MediaPreviewLoader {
 					id: media
-					source: {
-						if (mediaType === Enums.MessageImage &&
-							mediaLocation !== "")
-							"ChatMessageImage.qml"
-						else
-							""
-					}
-					property string sourceUrl: "file://" + mediaLocation
-					Layout.maximumWidth: root.width - Kirigami.Units.gridUnit * 6
-					Layout.preferredHeight: item ? item.paintedHeight : 0
-				}
 
+					mediaSource: {
+						return root.mediaLocation !== ''
+								? MediaUtilsInstance.fromLocalFile(root.mediaLocation)
+								: root.mediaGetUrl
+					}
+					mediaSourceType: root.mediaType
+					showOpenButton: true
+					message: root
+				}
 
 				// message body
 				Controls.Label {
@@ -236,7 +233,7 @@ RowLayout {
 					                : Kirigami.Theme.complementaryTextColor
 					onLinkActivated: Qt.openUrlExternally(link)
 
-					Layout.maximumWidth: mediaType === Enums.MessageImage && media.width !== 0
+					Layout.maximumWidth: media.enabled
 										? media.width
 										: root.width - Kirigami.Units.gridUnit * 6
 				}
@@ -252,12 +249,6 @@ RowLayout {
 			}
 			// message meta: date, isDelivered
 			RowLayout {
-				// progress bar for upload/download status
-				Controls.ProgressBar {
-					visible: isLoading
-					value: upload ? upload.progress : 0
-				}
-
 				Controls.Label {
 					id: dateLabel
 					text: Qt.formatDateTime(dateTime, "dd. MMM yyyy, hh:mm")
@@ -281,6 +272,15 @@ RowLayout {
 					Layout.preferredHeight: Kirigami.Units.gridUnit * 0.65
 					Layout.preferredWidth: Kirigami.Units.gridUnit * 0.65
 				}
+			}
+
+			// progress bar for upload/download status
+			Controls.ProgressBar {
+				visible: isLoading
+				value: upload ? upload.progress : 0
+
+				Layout.fillWidth: true
+				Layout.maximumWidth: Kirigami.Units.gridUnit * 14
 			}
 		}
 	}

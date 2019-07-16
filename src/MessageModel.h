@@ -34,7 +34,6 @@
 #include <QAbstractListModel>
 #include "Message.h"
 
-class QMimeType;
 class MessageDb;
 class Kaidan;
 

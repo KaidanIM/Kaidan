@@ -34,22 +34,37 @@
  */
 
 import QtQuick 2.6
-import QtQuick.Controls 2.0 as Controls
 import QtQuick.Layouts 1.3
+import QtQuick.Controls 2.0 as Controls
 import org.kde.kirigami 2.0 as Kirigami
 
-Rectangle {
-	color: Kirigami.Theme.backgroundColor
+MediaPreview {
+	id: root
 
+	Layout.preferredHeight: message ? messageSize : Kirigami.Units.gridUnit * 18
 	Layout.preferredWidth: Kirigami.Units.gridUnit * 32
-	Layout.preferredHeight: Kirigami.Units.gridUnit * 18
-	Layout.alignment: Qt.AlignHCenter
+	Layout.maximumWidth: message ? messageSize : -1
 
-	Image {
-		anchors.fill: parent
-		source: sourceUrl
+	AnimatedImage {
+		id: image
+
 		fillMode: Image.PreserveAspectFit
 		asynchronous: true // image might be very large
 		mipmap: true
+		source: root.mediaSource
+
+		anchors {
+			fill: parent
+		}
+
+		MouseArea {
+			enabled: root.showOpenButton
+
+			anchors {
+				fill: parent
+			}
+
+			onClicked: Qt.openUrlExternally(root.mediaSource)
+		}
 	}
 }

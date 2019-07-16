@@ -28,16 +28,49 @@
  *  along with Kaidan.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+/**
+ * This element is used in the @see SendMediaSheet to display information about a selected video to
+ * the user. It just displays the video in a rectangle.
+ */
+
 import QtQuick 2.6
+import QtQuick.Layouts 1.3
+import QtMultimedia 5.9 as Multimedia
+import org.kde.kirigami 2.0 as Kirigami
 
-AnimatedImage {
-	id: image
+MediaPreviewAudio {
+	id: root
 
-	source: sourceUrl
-	fillMode: Image.PreserveAspectFit
+	Layout.preferredHeight: message ? messageSize : Kirigami.Units.gridUnit * 18
+	Layout.preferredWidth: Kirigami.Units.gridUnit * 32
+	Layout.maximumWidth: message ? messageSize : -1
 
-	MouseArea {
-		anchors.fill: parent
-		onClicked: Qt.openUrlExternally(sourceUrl)
+	placeHolder: Multimedia.VideoOutput {
+		source: root.player
+		fillMode: Image.PreserveAspectFit
+
+		anchors {
+			fill: parent
+		}
+
+		Kirigami.Icon {
+			source: "video-x-generic"
+			visible: root.player.playbackState === Multimedia.MediaPlayer.StoppedState
+
+			width: parent.width
+			height: parent.height
+
+			anchors {
+				centerIn: parent
+			}
+		}
+
+		MouseArea {
+			anchors {
+				fill: parent
+			}
+
+			onPressed: root.playPauseButton.clicked()
+		}
 	}
 }

@@ -33,7 +33,6 @@
 #include "Kaidan.h"
 #include "MessageDb.h"
 // Qt 5
-#include <QMimeType>
 // QXmpp
 #include <QXmppUtils.h>
 

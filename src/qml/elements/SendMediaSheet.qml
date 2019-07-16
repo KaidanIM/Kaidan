@@ -33,29 +33,26 @@ import QtQuick.Layouts 1.3
 import QtQuick.Controls 2.0 as Controls
 import org.kde.kirigami 2.0 as Kirigami
 
+import im.kaidan.kaidan 1.0
+import MediaUtils 0.1
+
 Kirigami.OverlaySheet {
 	id: root
 
-	property string jid
-	property string fileUrl
-	property bool isImage: kaidan.utils.isImageFile(fileUrl)
+	property string targetJid
+	property url source
+	property int sourceType
 
 	showCloseButton: false
 
-	ColumnLayout {
-		// isImage ? image preview inside a grey box
-		//         : fallback file info
-		Loader {
-			Layout.preferredWidth: isImage ? Kirigami.Units.gridUnit * 32
-			                               : Kirigami.Units.gridUnit * 20
-			Layout.preferredHeight: isImage ? Kirigami.Units.gridUnit * 18
-			                                : Kirigami.Units.gridUnit * 3.85
-			Layout.fillWidth: true
-			Layout.alignment: Qt.AlignHCenter
+	contentItem: ColumnLayout {
+		// message type preview
+		MediaPreviewLoader {
+			id: mediaLoader
 
-			property string sourceUrl: fileUrl
-
-			source: isImage ? "MediaPreviewImage.qml" : "MediaPreviewOther.qml"
+			mediaSheet: root
+			mediaSource: root.source
+			mediaSourceType: root.sourceType
 		}
 
 		// TODO: - Maybe add option to change file name
@@ -65,10 +62,11 @@ Kirigami.OverlaySheet {
 		// disabled for now; most other clients (currently) don't support this
 		Controls.TextField {
 			id: descField
+
 			visible: false
-			text: ""
 			placeholderText: qsTr("Caption")
 			selectByMouse: true
+
 			Layout.fillWidth: true
 			Layout.topMargin: Kirigami.Units.largeSpacing
 		}
@@ -80,22 +78,36 @@ Kirigami.OverlaySheet {
 
 			Controls.Button {
 				text: qsTr("Cancel")
-				onClicked: {
-					close()
-					descField.text = ""
-				}
+
 				Layout.fillWidth: true
+
+				onClicked: close()
 			}
 
 			Controls.Button {
 				id: sendButton
+
 				text: qsTr("Send")
-				onClicked: {
-					kaidan.sendFile(jid, fileUrl, descField.text)
-					close()
-					descField.text = ""
-				}
+
 				Layout.fillWidth: true
+
+				onClicked: {
+					switch (root.sourceType) {
+					case Enums.MessageType.MessageUnknown:
+					case Enums.MessageType.MessageText:
+					case Enums.MessageType.MessageGeoLocation:
+						break
+					case Enums.MessageType.MessageImage:
+					case Enums.MessageType.MessageAudio:
+					case Enums.MessageType.MessageVideo:
+					case Enums.MessageType.MessageFile:
+					case Enums.MessageType.MessageDocument:
+						kaidan.sendFile(root.targetJid, root.source, descField.text)
+						break
+					}
+
+					close()
+				}
 			}
 		}
 
@@ -106,9 +118,23 @@ Kirigami.OverlaySheet {
 		}
 	}
 
-	function sendFile(jid, url) {
-		fileUrl = url
-		root.jid = jid
+	onSheetOpenChanged: {
+		if (!sheetOpen) {
+			targetJid = ''
+			source = ''
+			sourceType = Enums.MessageType.MessageUnknown
+			descField.clear()
+		}
+	}
+
+	function sendMessageType(jid, type) {
+		targetJid = jid
+		sourceType = type
 		open()
+	}
+
+	function sendFile(jid, url) {
+		source = url
+		sendMessageType(jid, MediaUtilsInstance.messageType(url))
 	}
 }

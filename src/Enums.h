@@ -41,7 +41,7 @@ namespace Enums {
 	/**
 	 * Enumeration of possible connection states.
 	 */
-	enum class ConnectionState : quint8 {
+	enum class ConnectionState {
 		StateDisconnected = QXmppClient::DisconnectedState,
 		StateConnecting = QXmppClient::ConnectingState,
 		StateConnected = QXmppClient::ConnectedState
@@ -51,7 +51,7 @@ namespace Enums {
 	/**
 	 * Enumeration of possible disconnection reasons
 	 */
-	enum class DisconnectionReason : quint8 {
+	enum class DisconnectionReason {
 		ConnNoError,
 		ConnUserDisconnected,
 		ConnAuthenticationFailed,
@@ -73,20 +73,22 @@ namespace Enums {
 	/**
 	 * Enumeration of different media/message types
 	 */
-	enum class MessageType : quint8 {
+	enum class MessageType {
+		MessageUnknown = -1,
 		MessageText,
 		MessageFile,
 		MessageImage,
 		MessageVideo,
 		MessageAudio,
-		MessageDocument
+		MessageDocument,
+		MessageGeoLocation
 	};
 	Q_ENUM_NS(MessageType)
 
 	/**
 	 * Enumeration of contact availability states
 	 */
-	enum class AvailabilityTypes : quint8 {
+	enum class AvailabilityTypes {
 		PresError,
 		PresUnavailable,
 		PresOnline,

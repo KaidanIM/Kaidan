@@ -62,6 +62,7 @@
 #include "Utils.h"
 #include "QrCodeScannerFilter.h"
 #include "VCardModel.h"
+#include "MediaUtils.h"
 
 #ifdef STATIC_BUILD
 #include "static_plugins.h"
@@ -188,6 +189,7 @@ Q_DECL_EXPORT int main(int argc, char *argv[])
 	qRegisterMetaType<std::function<void(Message&)>>("std::function<void(Message&)>");
 	qRegisterMetaType<ClientWorker::Credentials>("ClientWorker::Credentials");
 	qRegisterMetaType<QXmppVCardIq>("QXmppVCardIq");
+	qRegisterMetaType<QMimeType>();
 	// Enums for c++ member calls using enums
 	qRegisterMetaType<Enums::ConnectionState>();
 	qRegisterMetaType<Enums::DisconnectionReason>();
@@ -292,9 +294,15 @@ Q_DECL_EXPORT int main(int argc, char *argv[])
 	qmlRegisterUncreatableType<QAbstractItemModel>("EmojiModel", 0, 1, "QAbstractItemModel", "Used by proxy models");
 	qmlRegisterUncreatableType<Emoji>("EmojiModel", 0, 1, "Emoji", "Used by emoji models");
 	qmlRegisterUncreatableType<TransferJob>(APPLICATION_ID, 1, 0, "TransferJob", "TransferJob type usable");
+	qmlRegisterUncreatableType<QMimeType>(APPLICATION_ID, 1, 0, "QMimeType", "QMimeType type usable");
 
 	qmlRegisterUncreatableMetaObject(Enums::staticMetaObject, APPLICATION_ID,
 		1, 0, "Enums", "Can't create object; only enums defined!");
+
+	qmlRegisterSingletonType<MediaUtils>("MediaUtils", 0, 1, "MediaUtilsInstance", [](QQmlEngine *, QJSEngine *) {
+		QObject *instance = new MediaUtils(qApp);
+		return instance;
+	});
 
 	engine.rootContext()->setContextProperty("kaidan", &kaidan);
 	engine.load(QUrl("qrc:/qml/main.qml"));

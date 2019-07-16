@@ -101,7 +101,7 @@ echo "*****************************************"
         -DCMAKE_PREFIX_PATH=$QT_LINUX\;$KIRIGAMI_BUILD\;$QXMPP_BUILD \
         -DI18N=1 \
         -DCMAKE_BUILD_TYPE=$BUILD_TYPE -DCMAKE_INSTALL_PREFIX=/usr \
-        -DQUICK_COMPILER=1
+        -DQUICK_COMPILER=ON -DAPPIMAGE=ON
 
     make -j$(nproc)
 }

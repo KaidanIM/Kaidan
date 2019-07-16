@@ -22,6 +22,7 @@ set(ANDROID_VERSION_CODE 4)
 # CMake options
 option(I18N "Enable i18n support" FALSE)
 option(STATIC_BUILD "Build Kaidan statically")
+option(APPIMAGE "Build Kaidan as AppImage (will only work in the appimage script)" FALSE)
 option(UBUNTU_TOUCH "Building an Ubuntu Touch click (internal use only!)" FALSE)
 option(CLICK_ARCH "Architecture that will be used in the click's manifest")
 option(CLICK_DATE "Date used in the version number in the click's manifest")
@@ -323,8 +324,8 @@ endif()
 
 if(UBUNTU_TOUCH)
 	set(KAIDAN_COMPILE_DEFINITIONS UBUNTU_TOUCH=True)
-elseif(NOT ANDROID AND NOT IOS AND NOT WIN32 AND NOT APPLE)
-	set(KAIDAN_COMPILE_DEFINITIONS NOTIFICATIONS_LIBNOTIFY=True)
+elseif(APPIMAGE)
+	set(KAIDAN_COMPILE_DEFINITIONS APPIMAGE=True)
 endif()
 
 if(STATIC_BUILD)

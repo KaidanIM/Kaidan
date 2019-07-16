@@ -58,12 +58,8 @@ kde_enable_exceptions()
 find_package(PkgConfig REQUIRED)
 find_package(Qt5 ${QT_MIN_VERSION} REQUIRED NO_MODULE COMPONENTS Core Qml Quick Svg Sql QuickControls2 Xml Multimedia)
 find_package(KF5Kirigami2 REQUIRED)
-<<<<<<< HEAD
 find_package(ZXing REQUIRED COMPONENTS Core)
 pkg_search_module(QXmpp REQUIRED qxmpp>=1.0)
-=======
-pkg_search_module(QXmpp REQUIRED qxmpp>=0.8.3)
->>>>>>> stable
 
 # Optional QtQuickCompiler
 if(QUICK_COMPILER)

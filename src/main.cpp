@@ -286,6 +286,7 @@ Q_DECL_EXPORT int main(int argc, char *argv[])
 
 	qmlRegisterUncreatableType<QAbstractItemModel>("EmojiModel", 0, 1, "QAbstractItemModel", "Used by proxy models");
 	qmlRegisterUncreatableType<Emoji>("EmojiModel", 0, 1, "Emoji", "Used by emoji models");
+	qmlRegisterUncreatableType<TransferJob>(APPLICATION_ID, 1, 0, "TransferJob", "TransferJob type usable");
 
 	qmlRegisterUncreatableMetaObject(Enums::staticMetaObject, APPLICATION_ID,
 		1, 0, "Enums", "Can't create object; only enums defined!");

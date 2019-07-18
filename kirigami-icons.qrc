@@ -29,6 +29,7 @@
         <file alias="settings-configure.svg">3rdparty/breeze-icons/icons/actions/22/settings-configure.svg</file>
         <file alias="lock.svg">3rdparty/breeze-icons/icons/actions/22/lock.svg</file>
         <file alias="view-barcode.svg">3rdparty/breeze-icons/icons/actions/22/view-barcode.svg</file>
+        <file alias="player-volume.svg">3rdparty/breeze-icons/icons/actions/22/player-volume.svg</file>
     </qresource>
 
     <qresource prefix="/icons/breeze/emotes/22">
@@ -56,5 +57,9 @@
     
     <qresource prefix="/icons/breeze/mimetypes/22">
         <file alias="text-x-plain.svg">3rdparty/breeze-icons/icons/mimetypes/22/text-x-plain.svg</file>
+    </qresource>
+
+    <qresource prefix="/icons/status/symbolic">
+        <file alias="audio-volume-muted-symbolic.svg">3rdparty/breeze-icons/icons/status/symbolic/audio-volume-muted-symbolic.svg</file>
     </qresource>
 </RCC>

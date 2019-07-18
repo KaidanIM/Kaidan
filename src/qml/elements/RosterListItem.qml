@@ -120,8 +120,6 @@ Kirigami.SwipeListItem {
 					width: 16
 					height: 16
 					visible: kaidan.notificationsMuted(jid)
-
-
 				}
 				Item {
 					Layout.fillWidth: true

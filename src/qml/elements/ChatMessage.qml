@@ -140,6 +140,12 @@ RowLayout {
 					enabled: kaidan.messageModel.canCorrectMessage(msgId)
 					onTriggered: root.messageEditRequested(msgId, messageBody)
 				}
+
+				Controls.MenuItem {
+					text: qsTr("Copy download URL")
+					enabled: mediaGetUrl
+					onTriggered: kaidan.utils.copyToClipboard(mediaGetUrl)
+				}
 			}
 		}
 
@@ -226,8 +232,7 @@ RowLayout {
 
 				// message body
 				Controls.Label {
-					id: messageLabel
-					visible: messageBody !== ""
+					visible: messageBody !== "" && messageBody !== mediaGetUrl
 					text: kaidan.utils.formatMessage(messageBody)
 					textFormat: Text.StyledText
 					wrapMode: Text.Wrap

@@ -66,11 +66,11 @@ RowLayout {
 	// own messages are on the right, others on the left
 	layoutDirection: sentByMe ? Qt.RightToLeft : Qt.LeftToRight
 	spacing: 8
-	width: parent.width
+	width: ListView.view.width
 
 	// placeholder
 	Item {
-		Layout.preferredWidth: 5
+		Layout.preferredWidth: root.layoutDirection === Qt.LeftToRight ? 5 : 10
 	}
 
 	RoundImage {

@@ -119,10 +119,8 @@ void RosterManager::populateRoster()
 			vCardManager->fetchVCard(jid);
 	}
 
-	if (!items.isEmpty()) {
-		// replace current contacts with new ones from server
-		emit model->replaceItemsRequested(items);
-	}
+	// replace current contacts with new ones from server
+	emit model->replaceItemsRequested(items);
 }
 
 void RosterManager::addContact(const QString &jid, const QString &name, const QString &msg)

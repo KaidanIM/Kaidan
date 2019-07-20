@@ -132,7 +132,13 @@ RowLayout {
 				id: contextMenu
 				Controls.MenuItem {
 					text: qsTr("Copy Message")
-					onTriggered: isShowingSpoiler ? kaidan.utils.copyToClipboard(messageBody) : kaidan.copyToClipboard(spoilerHint)
+					enabled: bodyLabel.visible
+					onTriggered: {
+						if (!isSpoiler || isShowingSpoiler)
+							kaidan.utils.copyToClipboard(messageBody);
+						else
+							kaidan.utils.copyToClipboard(spoilerHint);
+					}
 				}
 
 				Controls.MenuItem {
@@ -232,12 +238,13 @@ RowLayout {
 
 				// message body
 				Controls.Label {
+					id: bodyLabel
 					visible: messageBody !== "" && messageBody !== mediaGetUrl
 					text: kaidan.utils.formatMessage(messageBody)
 					textFormat: Text.StyledText
 					wrapMode: Text.Wrap
 					color: sentByMe ? Kirigami.Theme.buttonTextColor
-									: Kirigami.Theme.complementaryTextColor
+					                : Kirigami.Theme.complementaryTextColor
 					onLinkActivated: Qt.openUrlExternally(link)
 
 					Layout.maximumWidth: mediaType === Enums.MessageImage && media.width !== 0

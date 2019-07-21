@@ -10,6 +10,7 @@
 	<file alias="qml/QrCodeScannerPage.qml">src/qml/QrCodeScannerPage.qml</file>
 		<file alias="qml/elements/SubRequestAcceptSheet.qml">src/qml/elements/SubRequestAcceptSheet.qml</file>
 		<file alias="qml/elements/RosterAddContactSheet.qml">src/qml/elements/RosterAddContactSheet.qml</file>
+		<file alias="qml/elements/RosterRenameContactSheet.qml">src/qml/elements/RosterRenameContactSheet.qml</file>
 		<file alias="qml/elements/RosterRemoveContactSheet.qml">src/qml/elements/RosterRemoveContactSheet.qml</file>
 		<file alias="qml/elements/RosterListItem.qml">src/qml/elements/RosterListItem.qml</file>
 		<file alias="qml/elements/MessageCounter.qml">src/qml/elements/MessageCounter.qml</file>

@@ -50,10 +50,6 @@ Kirigami.ScrollablePage {
 		id: addContactSheet
 		jid: ""
 	}
-	RosterRemoveContactSheet {
-		id: removeContactSheet
-		jid: ""
-	}
 
 	mainAction: Kirigami.Action {
 		text: qsTr("Add new contact")
@@ -127,15 +123,6 @@ Kirigami.ScrollablePage {
 					"chatName": chatName
 				})
 			}
-			actions: [
-				Kirigami.Action {
-					iconName: "bookmark-remove"
-					onTriggered: {
-						removeContactSheet.jid = model.jid;
-						removeContactSheet.open();
-					}
-				}
-			]
 
 			function newPresenceArrived(jid) {
 				if (jid === model.jid) {

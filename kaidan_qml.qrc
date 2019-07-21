@@ -7,7 +7,9 @@
 		<file alias="qml/AboutDialog.qml">src/qml/AboutDialog.qml</file>
 		<file alias="qml/GlobalDrawer.qml">src/qml/GlobalDrawer.qml</file>
 		<file alias="qml/EmptyChatPage.qml">src/qml/EmptyChatPage.qml</file>
-	<file alias="qml/QrCodeScannerPage.qml">src/qml/QrCodeScannerPage.qml</file>
+		<file alias="qml/QrCodeScannerPage.qml">src/qml/QrCodeScannerPage.qml</file>
+		<file alias="qml/UserProfilePage.qml">src/qml/UserProfilePage.qml</file>
+
 		<file alias="qml/elements/SubRequestAcceptSheet.qml">src/qml/elements/SubRequestAcceptSheet.qml</file>
 		<file alias="qml/elements/RosterAddContactSheet.qml">src/qml/elements/RosterAddContactSheet.qml</file>
 		<file alias="qml/elements/RosterRenameContactSheet.qml">src/qml/elements/RosterRenameContactSheet.qml</file>

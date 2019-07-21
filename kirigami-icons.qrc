@@ -30,6 +30,15 @@
         <file alias="lock.svg">3rdparty/breeze-icons/icons/actions/22/lock.svg</file>
         <file alias="view-barcode.svg">3rdparty/breeze-icons/icons/actions/22/view-barcode.svg</file>
         <file alias="player-volume.svg">3rdparty/breeze-icons/icons/actions/22/player-volume.svg</file>
+        <file alias="im-user-online.svg">3rdparty/breeze-icons/icons/actions/22/im-user-online.svg</file>
+        <file alias="im-user-away.svg">3rdparty/breeze-icons/icons/actions/22/im-user-away.svg</file>
+        <file alias="im-kick-user.svg">3rdparty/breeze-icons/icons/actions/22/im-kick-user.svg</file>
+        <file alias="im-ban-kick-user.svg">3rdparty/breeze-icons/icons/actions/22/im-ban-kick-user.svg</file>
+        <file alias="im-user-offline.svg">3rdparty/breeze-icons/icons/actions/22/im-user-offline.svg</file>
+        <file alias="im-invisible-user.svg">3rdparty/breeze-icons/icons/actions/22/im-invisible-user.svg</file>
+        <file alias="user-identity.svg">3rdparty/breeze-icons/icons/actions/22/user-identity.svg</file>
+        <file alias="edit-rename.svg">3rdparty/breeze-icons/icons/actions/22/edit-rename.svg</file>
+        <file alias="delete.svg">3rdparty/breeze-icons/icons/actions/22/delete.svg</file>
     </qresource>
 
     <qresource prefix="/icons/breeze/emotes/22">

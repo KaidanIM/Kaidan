@@ -85,6 +85,12 @@ Kirigami.ScrollablePage {
 			Component.onDestruction: {
 				kaidan.notificationsMutedChanged.disconnect(handleNotificationsMuted)
 			}
+		},
+		Kirigami.Action {
+			visible: true
+			icon.name: "user-identity"
+			text: qsTr("View profile")
+			onTriggered: pageStack.push(userProfilePage, {jid: kaidan.messageModel.chatPartner, name: chatName})
 		}
 	]
 

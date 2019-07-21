@@ -26,10 +26,13 @@
 		<file alias="qml/elements/MediaPreviewOther.qml">src/qml/elements/MediaPreviewOther.qml</file>
 		<file alias="qml/elements/EmojiPicker.qml">src/qml/elements/EmojiPicker.qml</file>
 		<file alias="qml/elements/TextAvatar.qml">src/qml/elements/TextAvatar.qml</file>
+		<file alias="qml/elements/Avatar.qml">src/qml/elements/Avatar.qml</file>
+
 		<file alias="qml/settings/SettingsItem.qml">src/qml/settings/SettingsItem.qml</file>
 		<file alias="qml/settings/SettingsPage.qml">src/qml/settings/SettingsPage.qml</file>
 		<file alias="qml/settings/SettingsSheet.qml">src/qml/settings/SettingsSheet.qml</file>
 		<file alias="qml/settings/ChangePassword.qml">src/qml/settings/ChangePassword.qml</file>
+
 		<file alias="qtquickcontrols2.conf">misc/qtquickcontrols2.conf</file>
 	</qresource>
 </RCC>

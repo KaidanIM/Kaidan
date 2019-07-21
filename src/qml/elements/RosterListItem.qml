@@ -78,22 +78,12 @@ Kirigami.SwipeListItem {
 				                          listItem.presenceType, listItem.statusMsg)
 			}
 
-			RoundImage {
+			Avatar {
 				id: avatar
-				visible: avatarImagePath !== ""
 				anchors.fill: parent
-				source: avatarImagePath
-				width: height
-				fillMode: Image.PreserveAspectFit
-				mipmap: true
-			}
-
-			TextAvatar {
-				visible: avatarImagePath == ""
-				anchors.fill: parent
-				width: height
-				id: textAvatar
+				avatarUrl: avatarImagePath
 				name: listItem.name
+				width: height
 			}
 		}
 

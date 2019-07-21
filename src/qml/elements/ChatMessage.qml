@@ -74,25 +74,12 @@ RowLayout {
 		Layout.preferredWidth: root.layoutDirection === Qt.LeftToRight ? 5 : 10
 	}
 
-	RoundImage {
+	Avatar {
 		id: avatar
-		visible: !sentByMe && avatarUrl
-		source: avatarUrl
-		fillMode: Image.PreserveAspectFit
-		mipmap: true
-		height: width
+		visible: !sentByMe
+		avatarUrl: root.avatarUrl
 		Layout.alignment: Qt.AlignHCenter | Qt.AlignTop
-		Layout.preferredHeight: Kirigami.Units.gridUnit * 2.2
-		Layout.preferredWidth: Kirigami.Units.gridUnit * 2.2
-		sourceSize.height: Kirigami.Units.gridUnit * 2.2
-		sourceSize.width: Kirigami.Units.gridUnit * 2.2
-	}
-
-	TextAvatar {
-		id: textAvatar
-		visible: !sentByMe && !avatar.visible
 		name: root.name
-		Layout.alignment: Qt.AlignHCenter | Qt.AlignTop
 		Layout.preferredHeight: Kirigami.Units.gridUnit * 2.2
 		Layout.preferredWidth: Kirigami.Units.gridUnit * 2.2
 	}

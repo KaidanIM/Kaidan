@@ -64,9 +64,8 @@ RosterManager::RosterManager(Kaidan *kaidan,
 	});
 
 	connect(&manager, &QXmppRosterManager::itemChanged,
-	        this, [this, model] (QString jid) {
-		emit model->updateItemRequested(m_chatPartner,
-		                                [this, &jid] (RosterItem &item) {
+		this, [this, model] (const QString &jid) {
+		emit model->updateItemRequested(m_chatPartner, [=] (RosterItem &item) {
 			item.setName(manager.getRosterEntry(jid).name());
 		});
 	});
@@ -102,6 +101,7 @@ RosterManager::RosterManager(Kaidan *kaidan,
 	// user actions
 	connect(kaidan, &Kaidan::addContact, this, &RosterManager::addContact);
 	connect(kaidan, &Kaidan::removeContact, this, &RosterManager::removeContact);
+	connect(kaidan, &Kaidan::renameContact, this, &RosterManager::renameContact);
 	connect(kaidan, &Kaidan::sendMessage, this, &RosterManager::handleSendMessage);
 
 	connect(client, &QXmppClient::messageReceived, this, &RosterManager::handleMessage);
@@ -148,6 +148,19 @@ void RosterManager::removeContact(const QString &jid)
 			tr("Could not remove contact, as a result of not being connected.")
 		);
 		qWarning() << "[client] [RosterManager] Could not remove contact, as a result of "
+		              "not being connected.";
+	}
+}
+
+void RosterManager::renameContact(const QString &jid, const QString &newContactName)
+{
+	if (client->state() == QXmppClient::ConnectedState) {
+		manager.renameItem(jid, newContactName);
+	} else {
+		emit kaidan->passiveNotificationRequested(
+			tr("Could not rename contact, as a result of not being connected.")
+		);
+		qWarning() << "[client] [RosterManager] Could not rename contact, as a result of "
 		              "not being connected.";
 	}
 }

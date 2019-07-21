@@ -336,6 +336,11 @@ signals:
 	void removeContact(QString jid);
 
 	/**
+	 * Change a contact's name
+	 */
+	void renameContact(const QString &jid, const QString &newContactName);
+
+	/**
 	 * Downloads an attached media file of a message
 	 *
 	 * @param msgId The message

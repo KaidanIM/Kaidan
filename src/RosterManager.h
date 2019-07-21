@@ -55,6 +55,7 @@ public:
 public slots:
 	void addContact(const QString &jid, const QString &name, const QString &msg);
 	void removeContact(const QString &jid);
+	void renameContact(const QString &jid, const QString &newContactName);
 	void handleSendMessage(const QString &jid, const QString &message,
 	                       bool isSpoiler = false, const QString &spoilerHint = QString());
 

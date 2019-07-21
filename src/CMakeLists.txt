@@ -18,6 +18,7 @@ set(KAIDAN_SOURCES
 	src/PresenceCache.cpp
 	src/DiscoveryManager.cpp
 	src/VCardManager.cpp
+	src/VCardModel.cpp
 	src/LogHandler.cpp
 	src/StatusBar.cpp
 	src/UploadManager.cpp

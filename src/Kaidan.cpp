@@ -269,6 +269,11 @@ void Kaidan::notifyLoginUriNotFound()
     emit passiveNotificationRequested(tr("No valid login QR code found."));
 }
 
+ClientWorker *Kaidan::getClient() const
+{
+	return m_client;
+}
+
 Kaidan *Kaidan::instance()
 {
 	return s_instance;

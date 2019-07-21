@@ -117,6 +117,8 @@ public:
 	ClientWorker(Caches *caches, Kaidan *kaidan, bool enableLogging, QGuiApplication *app,
 	             QObject *parent = nullptr);
 
+	VCardManager *getVCardManager() const;
+
 public slots:
 	/**
 	 * Main function of the client thread

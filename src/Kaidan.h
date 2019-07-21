@@ -75,6 +75,8 @@ class Kaidan : public QObject
 	Q_PROPERTY(bool uploadServiceFound READ getUploadServiceFound NOTIFY uploadServiceFoundChanged)
 
 public:
+	static Kaidan *instance();
+
 	Kaidan(QGuiApplication *app, bool enableLogging = true, QObject *parent = nullptr);
 	~Kaidan();
 
@@ -192,6 +194,8 @@ public:
 		return m_utils;
 	}
 
+	ClientWorker *getClient() const;
+
 	/**
 	 * Adds XMPP URI to open as soon as possible
 	 */
@@ -211,8 +215,6 @@ public:
 	{
 		return uploadServiceFound;
 	}
-
-	static Kaidan *instance();
 
 signals:
 	void avatarStorageChanged();
@@ -279,7 +281,7 @@ signals:
 	 * Is required when the avatar (or other information) of a JID are
 	 * requested and the JID is not in the roster.
 	 */
-	void vCardRequested(QString jid);
+	void vCardRequested(const QString &jid);
 
 	/**
 	 * XMPP URI received

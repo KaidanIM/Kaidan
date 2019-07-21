@@ -188,6 +188,11 @@ QString ClientWorker::generateRandomString(unsigned int length) const
 	return randomString;
 }
 
+VCardManager *ClientWorker::getVCardManager() const
+{
+	return vCardManager;
+}
+
 void ClientWorker::setCsiState(Qt::ApplicationState state)
 {
 	if (state == Qt::ApplicationActive)

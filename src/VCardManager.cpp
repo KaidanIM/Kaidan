@@ -30,6 +30,7 @@
 
 #include "VCardManager.h"
 #include "AvatarFileStorage.h"
+#include "Kaidan.h"
 #include <QXmppClient.h>
 #include <QXmppUtils.h>
 #include <QXmppVCardIq.h>
@@ -39,6 +40,7 @@ VCardManager::VCardManager(QXmppClient *client, AvatarFileStorage *avatars, QObj
 {
 	connect(&manager, &QXmppVCardManager::vCardReceived, this, &VCardManager::handleVCard);
 	connect(client, &QXmppClient::presenceReceived, this, &VCardManager::handlePresence);
+	connect(Kaidan::instance(), &Kaidan::vCardRequested, this, &VCardManager::fetchVCard);
 
 	// Currently we're not requesting the own VCard on every connection because it is probably
 	// way too resource intensive on mobile connections with many reconnects.
@@ -49,15 +51,20 @@ VCardManager::VCardManager(QXmppClient *client, AvatarFileStorage *avatars, QObj
 	//                         User Avatar to vCard-Based Avatars Conversion)
 }
 
-void VCardManager::fetchVCard(QString jid)
+void VCardManager::fetchVCard(const QString& jid)
 {
-	client->vCardManager().requestVCard(jid);
+	if (client->state() == QXmppClient::ConnectedState)
+		client->vCardManager().requestVCard(jid);
+	else
+		qWarning() << "[VCardManager] Could not fetch VCard: Not connected to a server";
 }
 
 void VCardManager::handleVCard(const QXmppVCardIq &iq)
 {
 	if (!iq.photo().isEmpty())
 		avatarStorage->addAvatar(QXmppUtils::jidToBareJid(iq.from()), iq.photo());
+
+	emit vCardReceived(iq);
 }
 
 void VCardManager::handlePresence(const QXmppPresence &presence)

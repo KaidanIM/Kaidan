@@ -28,45 +28,60 @@
  *  along with Kaidan.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef VCARDMANAGER_H
-#define VCARDMANAGER_H
+#ifndef VCARDMODEL_H
+#define VCARDMODEL_H
 
-#include <QObject>
-#include <QXmppVCardManager.h>
-#include <QXmppPresence.h>
+#include <QAbstractListModel>
+#include <QXmppVCardIq.h>
 
-class AvatarFileStorage;
-class QXmppClient;
-
-class VCardManager : public QObject
+class VCardModel : public QAbstractListModel
 {
 	Q_OBJECT
+	Q_PROPERTY(QString jid READ jid WRITE setJid NOTIFY jidChanged)
 
 public:
-	VCardManager(QXmppClient *client, AvatarFileStorage *avatars, QObject *parent = nullptr);
+	enum Roles {
+		Key,
+		Value
+	};
 
-	/**
-	 * Will request the VCard from the server
-	 */
-	void fetchVCard(const QString& jid);
+	class Item
+	{
+	public:
+		Item() = default;
+		Item(const QString &key, const QString &value);
 
-	/**
-	 * Handles incoming VCards and processes them (save avatar, etc.)
-	 */
-	void handleVCard(const QXmppVCardIq &iq);
+		QString key() const;
+		void setKey(const QString &key);
 
-	/**
-	 * Handles incoming presences and checks if the avatar needs to be refreshed
-	 */
-	void handlePresence(const QXmppPresence &presence);
+		QString value() const;
+		void setValue(const QString &value);
+
+	private:
+		QString m_key;
+		QString m_value;
+
+	};
+
+	explicit VCardModel(QObject *parent = nullptr);
+
+	QHash<int, QByteArray> roleNames() const override;
+	int rowCount(const QModelIndex &parent = QModelIndex()) const override;
+
+	QVariant data(const QModelIndex &index, int role = Qt::DisplayRole) const override;
+
+	QString jid() const;
+	void setJid(const QString &jid);
 
 signals:
-	void vCardReceived(const QXmppVCardIq &vCard);
+	void jidChanged();
+
+private slots:
+	void handleVCardReceived(const QXmppVCardIq &vCard);
 
 private:
-	QXmppClient *client;
-	QXmppVCardManager &manager;
-	AvatarFileStorage *avatarStorage;
+	QVector<Item> m_vCard;
+	QString m_jid;
 };
 
-#endif // VCARDMANAGER_H
+#endif // VCARDMODEL_H

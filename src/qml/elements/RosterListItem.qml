@@ -62,7 +62,7 @@ Kirigami.SwipeListItem {
 			width: Kirigami.Units.gridUnit * 0.3
 			height: parent.height
 
-			color: presenceTypeToColor(presenceType)
+			color: kaidan.utils.presenceTypeToColor(presenceType)
 		}
 
 		// left: avatar
@@ -157,19 +157,6 @@ Kirigami.SwipeListItem {
 	}
 
 	/**
-	 * Returns the color belonging to the given presence status type
-	 */
-	function presenceTypeToColor(type) {
-		return type === Enums.PresOnline ? "green" :
-			type === Enums.PresChat ? "darkgreen" :
-			type === Enums.PresAway ? "orange" :
-			type === Enums.PresDND ? "orange" :
-			type === Enums.PresXA ? "orange" :
-			type === Enums.PresError ? "red" :
-			"silver" // unavailable (offline)
-	}
-
-	/**
 	 * Generates a styled text telling some basic information about the contact,
 	 * is used for a tooltip
 	 */
@@ -182,15 +169,8 @@ Kirigami.SwipeListItem {
 		}
 
 		// presence status type
-		string += "<font color='" + presenceTypeToColor(statusType) + "'>"
-		string += statusType === Enums.PresOnline ? qsTr("Available") :
-		          statusType === Enums.PresChat ? qsTr("Free for chat") :
-		          statusType === Enums.PresAway ? qsTr("Away") :
-		          statusType === Enums.PresDND ? qsTr("Do not disturb") :
-		          statusType === Enums.PresXA ? qsTr("Away for longer") :
-		          statusType === Enums.PresUnavailable ? qsTr("Offline") :
-		          statusType === Enums.PresError ? qsTr("Error") :
-		          "Invalid" // should never be displayed
+		string += "<font color='" + kaidan.utils.presenceTypeToColor(statusType) + "'>"
+		string += kaidan.utils.presenceTypeToText(statusType)
 		string += "</font>"
 
 		// presence status message

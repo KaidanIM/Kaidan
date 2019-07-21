@@ -33,6 +33,9 @@
 
 #include <QObject>
 #include "Globals.h"
+#include "Enums.h"
+
+using namespace Enums;
 
 /**
  * @brief C++ utitlities to be used in QML
@@ -46,6 +49,21 @@ class QmlUtils : public QObject
 
 public:
 	QmlUtils(QObject *parent = nullptr);
+
+	/**
+	 * Returns the icon belonging to the given presence status type
+	 */
+	Q_INVOKABLE static QString presenceTypeToIcon(Enums::AvailabilityTypes type);
+
+	/**
+	 * Returns the text belonging to the given presence status type
+	 */
+	Q_INVOKABLE static QString presenceTypeToText(Enums::AvailabilityTypes type);
+
+	/**
+	 * Returns the color belonging to the given presence status type
+	 */
+	Q_INVOKABLE static QColor presenceTypeToColor(Enums::AvailabilityTypes type);
 
 public slots:
 	/**

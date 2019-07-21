@@ -48,6 +48,75 @@ QmlUtils::QmlUtils(QObject *parent)
 {
 }
 
+QString QmlUtils::presenceTypeToIcon(Enums::AvailabilityTypes type)
+{
+	switch (type) {
+	case AvailabilityTypes::PresOnline:
+		return "im-user-online";
+	case AvailabilityTypes::PresChat:
+		return "im-user-online";
+	case AvailabilityTypes::PresAway:
+		return "im-user-away";
+	case AvailabilityTypes::PresDND:
+		return "im-kick-user";
+	case AvailabilityTypes::PresXA:
+		return "im-user-away";
+	case AvailabilityTypes::PresUnavailable:
+		return "im-user-offline";
+	case AvailabilityTypes::PresError:
+		return "im-ban-kick-user";
+	case AvailabilityTypes::PresInvisible:
+		return "im-invisible-user";
+	}
+	Q_UNREACHABLE();
+}
+
+QString QmlUtils::presenceTypeToText(AvailabilityTypes type)
+{
+	switch (type) {
+	case AvailabilityTypes::PresOnline:
+		return tr("Available");
+	case AvailabilityTypes::PresChat:
+		return tr("Free for chat");
+	case AvailabilityTypes::PresAway:
+		return tr("Away");
+	case AvailabilityTypes::PresDND:
+		return tr("Do not disturb");
+	case AvailabilityTypes::PresXA:
+		return tr("Away for longer");
+	case AvailabilityTypes::PresUnavailable:
+		return tr("Offline");
+	case AvailabilityTypes::PresError:
+		return tr("Error");
+	case AvailabilityTypes::PresInvisible:
+		return tr("Invisible");
+	}
+	Q_UNREACHABLE();
+}
+
+QColor QmlUtils::presenceTypeToColor(AvailabilityTypes type)
+{
+	switch (type) {
+	case AvailabilityTypes::PresOnline:
+		return {"green"};
+	case AvailabilityTypes::PresChat:
+		return {"darkgreen"};
+	case AvailabilityTypes::PresAway:
+		return {"orange"};
+	case AvailabilityTypes::PresDND:
+		return QColor::fromRgb(218, 68, 83);
+	case AvailabilityTypes::PresXA:
+		return {"orange"};
+	case AvailabilityTypes::PresError:
+		return {"red"};
+	case AvailabilityTypes::PresUnavailable:
+		return {"silver"};
+	case AvailabilityTypes::PresInvisible:
+		return {"grey"};
+	}
+	Q_UNREACHABLE();
+}
+
 QString QmlUtils::getResourcePath(const QString &name) const
 {
 	// We generally prefer to first search for files in application resources

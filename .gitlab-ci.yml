@@ -50,18 +50,6 @@ linux-appimage:
       - "*.AppImage.zsync"
     expire_in: 1 week
 
-click-xenial:
-  stage: deploy
-  image: kaidan/ubuntu-touch-xenial
-  script: utils/travis/build.sh
-  allow_failure: true
-  variables:
-    PLATFORM: ubuntu-touch
-  artifacts:
-    paths:
-      - "*.click"
-    expire_in: 1 week
-
 windows-mxe:
   stage: deploy
   image: kaidan/windows-mxe

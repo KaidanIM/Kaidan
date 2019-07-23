@@ -43,7 +43,7 @@ RowLayout {
 	property bool sentByMe: true
 	property string messageBody
 	property date dateTime
-	property bool isRead: false
+	property bool isDelivered: false
 	property int mediaType
 	property string mediaGetUrl
 	property string mediaLocation
@@ -249,7 +249,7 @@ RowLayout {
 					}
 				}
 			}
-			// message meta: date, isRead
+			// message meta: date, isDelivered
 			RowLayout {
 				// progress bar for upload/download status
 				Controls.ProgressBar {
@@ -267,7 +267,7 @@ RowLayout {
 
 				Image {
 					id: checkmark
-					visible: (sentByMe && isRead)
+					visible: (sentByMe && isDelivered)
 					source: kaidan.utils.getResourcePath("images/message_checkmark.svg")
 					Layout.preferredHeight: Kirigami.Units.gridUnit * 0.65
 					Layout.preferredWidth: Kirigami.Units.gridUnit * 0.65

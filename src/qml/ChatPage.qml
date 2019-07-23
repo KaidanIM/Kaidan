@@ -181,7 +181,7 @@ Kirigami.ScrollablePage {
 			sentByMe: model.sentByMe
 			messageBody: model.body
 			dateTime: new Date(model.timestamp)
-			isRead: model.isDelivered
+			isDelivered: model.isDelivered
 			name: chatName
 			mediaType: model.mediaType
 			mediaGetUrl: model.mediaUrl

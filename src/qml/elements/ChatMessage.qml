@@ -163,7 +163,7 @@ RowLayout {
 				Controls.Label {
 					id: dateLabeltest
 					text: spoilerHint == "" ? qsTr("Spoiler") : spoilerHint
-					color: sentByMe ? Kirigami.Theme.buttonTextColor
+					color: sentByMe ? Kirigami.Theme.textColor
 								: Kirigami.Theme.complementaryTextColor
 					font.pixelSize: Kirigami.Units.gridUnit * 0.8
 				}
@@ -177,7 +177,7 @@ RowLayout {
 					height: 28
 					width: 28
 					source: isShowingSpoiler ? "password-show-off" : "password-show-on"
-					color: sentByMe ? Kirigami.Theme.buttonTextColor : Kirigami.Theme.complementaryTextColor
+					color: sentByMe ? Kirigami.Theme.textColor : Kirigami.Theme.complementaryTextColor
 				}
 			}
 			Kirigami.Separator {
@@ -185,7 +185,7 @@ RowLayout {
 				Layout.fillWidth: true
 				color: {
 					var bgColor = sentByMe ? Kirigami.Theme.backgroundColor : Kirigami.Theme.highlightColor
-					var textColor = sentByMe ? Kirigami.Theme.textColor : Kirigami.Theme.buttonTextColor
+					var textColor = sentByMe ? Kirigami.Theme.textColor : Kirigami.Theme.highlightedTextColor
 					return Qt.tint(textColor, Qt.rgba(bgColor.r, bgColor.g, bgColor.b, 0.7))
 				}
 			}
@@ -231,7 +231,7 @@ RowLayout {
 					text: kaidan.utils.formatMessage(messageBody)
 					textFormat: Text.StyledText
 					wrapMode: Text.Wrap
-					color: sentByMe ? Kirigami.Theme.buttonTextColor
+					color: sentByMe ? Kirigami.Theme.textColor
 					                : Kirigami.Theme.complementaryTextColor
 					onLinkActivated: Qt.openUrlExternally(link)
 
@@ -244,7 +244,7 @@ RowLayout {
 					Layout.fillWidth: true
 					color: {
 						var bgColor = sentByMe ? Kirigami.Theme.backgroundColor : Kirigami.Theme.highlightColor
-						var textColor = sentByMe ? Kirigami.Theme.textColor : Kirigami.Theme.buttonTextColor
+						var textColor = sentByMe ? Kirigami.Theme.textColor : Kirigami.Theme.highlightedTextColor
 						return Qt.tint(textColor, Qt.rgba(bgColor.r, bgColor.g, bgColor.b, 0.7))
 					}
 				}

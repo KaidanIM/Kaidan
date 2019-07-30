@@ -83,19 +83,19 @@ Kirigami.ScrollablePage {
 			focus: visible
 			placeholderText: qsTr("Search…")
 			onVisibleChanged: text = ""
+			onTextChanged: filterModel.setFilterFixedString(text.toLowerCase())
 		}
 	}
 
 	ListView {
 		verticalLayoutDirection: ListView.TopToBottom
-		model: kaidan.rosterModel
+		model: RosterFilterProxyModel {
+			id: filterModel
+			sourceModel: kaidan.rosterModel
+		}
 		delegate: RosterListItem {
 			id: rosterItem
-			visible: {
-				model.jid.toLowerCase().includes(searchField.displayText.toLowerCase()) ||
-						model.name.toLowerCase().includes(searchField.displayText.toLowerCase())
-			}
-			height: visible ? 65 : 0
+			height: 65
 			name: model.name ? model.name : model.jid
 			jid: model.jid
 			lastMessage: model.lastMessage

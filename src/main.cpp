@@ -55,6 +55,7 @@
 #include "PresenceCache.h"
 #include "QmlUtils.h"
 #include "RosterModel.h"
+#include "RosterFilterProxyModel.h"
 #include "StatusBar.h"
 #include "UploadManager.h"
 #include "EmojiModel.h"
@@ -286,6 +287,7 @@ Q_DECL_EXPORT int main(int argc, char *argv[])
 	qmlRegisterType<EmojiProxyModel>("EmojiModel", 0, 1, "EmojiProxyModel");
 	qmlRegisterType<QrCodeScannerFilter>(APPLICATION_ID, 1, 0, "QrCodeScannerFilter");
 	qmlRegisterType<VCardModel>(APPLICATION_ID, 1, 0, "VCardModel");
+	qmlRegisterType<RosterFilterProxyModel>(APPLICATION_ID, 1, 0, "RosterFilterProxyModel");
 
 	qmlRegisterUncreatableType<QAbstractItemModel>("EmojiModel", 0, 1, "QAbstractItemModel", "Used by proxy models");
 	qmlRegisterUncreatableType<Emoji>("EmojiModel", 0, 1, "Emoji", "Used by emoji models");

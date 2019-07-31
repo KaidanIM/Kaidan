@@ -9,6 +9,7 @@
 * [ ] Update license information
 * [ ] Update version in *CMakeLists.txt*
 * [ ] Update changelog release date
+* [ ] Update appstream metadata
 * [ ] Archive release on *stable* branch
 * [ ] Add tag on *stable* branch
 * [ ] Publish release builds
@@ -51,6 +52,9 @@
 1. Update changelog (*changelog.md*):
 	1. Set release date
 	1. `git add changelog.md`
+1. Update appstream metadata:
+	1. Add a new release tag in misc/metadata.xml above the previous release
+	1. `git add misc/metadata.xml`
 1. `git commit -m "Release Kaidan vX.Y.Z"`
 1. `git push --set-upstream origin release/vX.Y.Z`
 1. Archive release on *stable* branch:

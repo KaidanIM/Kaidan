@@ -191,7 +191,7 @@ void QXmppHttpUpload::startUpload()
         request.setRawHeader(name.toUtf8(), headers.value(name).toUtf8());
 
     // open file
-    QFile *file = new QFile(m_fileInfo.absoluteFilePath());
+    QFile *file = new QFile(m_fileInfo.filePath());
     if (!file->open(QIODevice::ReadOnly)) {
         emit uploadFailed(QNetworkReply::NoError);
         return;

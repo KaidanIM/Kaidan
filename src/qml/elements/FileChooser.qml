@@ -28,54 +28,19 @@
  *  along with Kaidan.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-import QtQuick 2.12
-import org.kde.kirigami 2.8 as Kirigami
+import QtQuick.Dialogs 1.12
 
-Item {
-	id: root
-
-	property string filter: "*"
-	property string filterName: "All files"
-	property string fileUrl
-	property bool selectFolder: false
-	property string title: qsTr("Select a file")
-	signal accepted
-
-	Loader {
-		id: fileChooserLoader
-	}
-
-	function open() {
-		fileChooserLoader.item.open()
-	}
-
-	Component.onCompleted: {
-		if (Kirigami.Settings.isMobile) {
-			fileChooserLoader.setSource("FileChooserMobile.qml",
-			{
-				"nameFilter": filter,
-				"title": title
-			})
-		}
-		else if (!Kirigami.Settings.isMobile) {
-			fileChooserLoader.setSource("FileChooserDesktop.qml",
-			{
-				"selectedNameFilter": Qt.binding(function() { return filterName + " (" + filter + ")" }),
-				"selectFolder": selectFolder,
-				"title": Qt.binding(function() { return title })
-			})
-		}
-		else {
-			fileChooserLoader.setSource("FileChooserDesktop.qml")
-		}
-	}
-
-	Connections {
-		target: fileChooserLoader.item
-		onAccepted: {
-			fileUrl = fileChooserLoader.item.fileUrl
-			root.accepted()
-			console.log("Child file dialog accepted. URL: " + fileUrl)
-		}
-	}
+FileDialog {
+	id: fileDialog
+	folder: shortcuts.home
+	nameFilters: [
+		"Images (*.jpg *.jpeg *.png *.gif)",
+		"Videos (*.mp4 *.mkv *.avi *.webm)",
+		"Audio files (*.mp3 *.wav *.flac *.ogg *.m4a *.mka)",
+		"Documents (*.doc *.docx *.odt)",
+		"All files (*)",
+		selectedNameFilter
+	]
+	// TODO: support multiple files
+	// Currently the problem is that the fileUrls list isn't cleared
 }

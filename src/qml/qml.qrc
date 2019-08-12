@@ -25,8 +25,6 @@
 		<file>elements/CenteredAdaptiveHighlightedButton.qml</file>
 		<file>elements/IconButton.qml</file>
 		<file>elements/FileChooser.qml</file>
-		<file>elements/FileChooserDesktop.qml</file>
-		<file>elements/FileChooserMobile.qml</file>
 		<file>elements/SendMediaSheet.qml</file>
 
 		<file>elements/MediaPreview.qml</file>

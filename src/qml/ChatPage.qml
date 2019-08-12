@@ -322,8 +322,7 @@ ChatPageBase {
 	}
 
 	function openFileDialog(filterName, filter, title) {
-		fileChooser.filterName = filterName
-		fileChooser.filter = filter
+		fileChooser.selectedNameFilter = filterName
 		if (title !== undefined)
 			fileChooser.title = title
 		fileChooser.open()

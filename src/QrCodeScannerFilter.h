@@ -63,7 +63,7 @@ public:
 	 * @return decoder for decoding a video frame
 	 */
 	QrCodeDecoder *decoder();
-	QVideoFilterRunnable *createFilterRunnable();
+	QVideoFilterRunnable *createFilterRunnable() override;
 
 signals:
 	/**
@@ -108,7 +108,7 @@ public:
 	/**
 	 * Runs the decoding in a new thread whenever a new frame is taken by the camera.
 	 */
-	QVideoFrame run(QVideoFrame *input, const QVideoSurfaceFormat &surfaceFormat, RunFlags flags);
+	QVideoFrame run(QVideoFrame *input, const QVideoSurfaceFormat &surfaceFormat, RunFlags flags) override;
 
 	/**
 	 * Converts a given frame, which may contain a QR code, to an image and then tries to decode it.

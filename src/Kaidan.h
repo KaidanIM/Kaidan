@@ -320,7 +320,7 @@ signals:
 	/**
 	 * Upload and send file
 	 */
-	void sendFile(QString jid, QString filePath, QString message);
+	void sendFile(const QString &jid, const QUrl &fileUrl, const QString &body);
 
 	/**
 	 * Add a contact to your roster

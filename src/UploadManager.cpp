@@ -66,7 +66,7 @@ UploadManager::UploadManager(Kaidan *kaidan, QXmppClient *client, MessageModel *
 	        this, &UploadManager::handleUploadFailed);
 }
 
-void UploadManager::sendFile(QString jid, QString fileUrl, QString body)
+void UploadManager::sendFile(const QString &jid, const QUrl &fileUrl, const QString &body)
 {
 	// TODO: Add offline media message cache and send when connnected again
 	if (client->state() != QXmppClient::ConnectedState) {
@@ -80,7 +80,13 @@ void UploadManager::sendFile(QString jid, QString fileUrl, QString body)
 
 	qDebug() << "[client] [UploadManager] Adding upload for file:" << fileUrl;
 
-	QFileInfo file(QUrl(fileUrl).toLocalFile());
+	QFileInfo file;
+	if (fileUrl.isLocalFile())
+		file = QFileInfo(fileUrl.toLocalFile());
+	else
+		// this is used for android's content:/image:-URLs
+		file = QFileInfo(fileUrl.toString());
+
 	const QXmppHttpUpload* upload = manager.uploadFile(file);
 
 	QMimeType mimeType = QMimeDatabase().mimeTypeForFile(file);

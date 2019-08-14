@@ -72,7 +72,7 @@ public slots:
 	/**
 	 * Starts uploading a file
 	 */
-	void sendFile(QString jid, QString filePath, QString message);
+	void sendFile(const QString &jid, const QUrl &fileUrl, const QString &body);
 
 	void handleUploadFailed(const QXmppHttpUpload *upload);
 	void handleUploadSucceeded(const QXmppHttpUpload *upload);

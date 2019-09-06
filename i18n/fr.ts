@@ -319,7 +319,7 @@
     <message>
         <source>The link will be opened after you have connected.</source>
         <extracomment>The link is an XMPP-URI (i.e. &apos;xmpp:kaidan@muc.kaidan.im?join&apos; for joining a chat)</extracomment>
-        <translation>Le lien s&apos;ouvrira une fois que vous serez connecté(e).</translation>
+        <translation>Le lien s&apos;ouvrira une fois que vous serez connecté</translation>
     </message>
     <message>
         <source>Could not send file, as a result of not being connected.</source>

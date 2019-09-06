@@ -65,43 +65,43 @@
     <name>ChangePassword</name>
     <message>
         <source>Change password</source>
-        <translation type="unfinished"></translation>
+        <translation>Modifier le mot de passe</translation>
     </message>
     <message>
         <source>Current password:</source>
-        <translation type="unfinished"></translation>
+        <translation>Mot de passe actuel :</translation>
     </message>
     <message>
         <source>New password:</source>
-        <translation type="unfinished"></translation>
+        <translation>Nouveau mot de passe :</translation>
     </message>
     <message>
         <source>New password (repeat):</source>
-        <translation type="unfinished"></translation>
+        <translation>Nouveau mot de passe (répétez) :</translation>
     </message>
     <message>
         <source>New passwords do not match.</source>
-        <translation type="unfinished"></translation>
+        <translation>Les nouveaux mots de passe ne sont pas identiques.</translation>
     </message>
     <message>
         <source>Current password is invalid.</source>
-        <translation type="unfinished"></translation>
+        <translation>Le mot de passe actuel est invalide.</translation>
     </message>
     <message>
         <source>You need to be connected to change your password.</source>
-        <translation type="unfinished"></translation>
+        <translation>Vous devez être connecté(e) pour modifier votre mot de passe.</translation>
     </message>
     <message>
         <source>After changing your password, you will need to reenter it on all your other devices.</source>
-        <translation type="unfinished"></translation>
+        <translation>Après modification de votre mot de passe, vous devrez le ressaisir sur tous vos autres appareils.</translation>
     </message>
     <message>
         <source>Cancel</source>
-        <translation type="unfinished">Annuler</translation>
+        <translation>Annuler</translation>
     </message>
     <message>
         <source>Change</source>
-        <translation type="unfinished"></translation>
+        <translation>Modifier</translation>
     </message>
 </context>
 <context>
@@ -181,7 +181,7 @@
     <name>DownloadJob</name>
     <message>
         <source>Could not save file: %1</source>
-        <translation>Impossible d&apos;enregistrer : %1</translation>
+        <translation>Impossible d&apos;enregistrer le fichier : %1</translation>
     </message>
     <message>
         <source>Download failed: %1</source>
@@ -192,54 +192,54 @@
     <name>EmojiPicker</name>
     <message>
         <source>Favorites</source>
-        <translation type="unfinished"></translation>
+        <translation>Favoris</translation>
     </message>
     <message>
         <source>People</source>
-        <translation type="unfinished"></translation>
+        <translation>Personnes</translation>
     </message>
     <message>
         <source>Nature</source>
-        <translation type="unfinished"></translation>
+        <translation>Nature</translation>
     </message>
     <message>
         <source>Food</source>
-        <translation type="unfinished"></translation>
+        <translation>Aliments</translation>
     </message>
     <message>
         <source>Activity</source>
-        <translation type="unfinished"></translation>
+        <translation>Activités</translation>
     </message>
     <message>
         <source>Travel</source>
-        <translation type="unfinished"></translation>
+        <translation>Voyage</translation>
     </message>
     <message>
         <source>Objects</source>
-        <translation type="unfinished"></translation>
+        <translation>Objets</translation>
     </message>
     <message>
         <source>Symbols</source>
-        <translation type="unfinished"></translation>
+        <translation>Symboles</translation>
     </message>
     <message>
         <source>Flags</source>
-        <translation type="unfinished"></translation>
+        <translation>Drapeaux</translation>
     </message>
     <message>
         <source>Search</source>
-        <translation type="unfinished"></translation>
+        <translation>Rechercher</translation>
     </message>
     <message>
         <source>Search emoji</source>
-        <translation type="unfinished"></translation>
+        <translation>Rechercher un émoji</translation>
     </message>
 </context>
 <context>
     <name>EmptyChatPage</name>
     <message>
         <source>Please select a chat to start messaging</source>
-        <translation>Sélectionnez une discussion pour commencer</translation>
+        <translation>Sélectionnez une discussion pour commencer à échanger</translation>
     </message>
 </context>
 <context>
@@ -275,7 +275,7 @@
     <name>GlobalDrawer</name>
     <message>
         <source>Log out</source>
-        <translation>Déconnexion</translation>
+        <translation>Se déconnecter</translation>
     </message>
     <message>
         <source>About</source>
@@ -299,7 +299,7 @@
     </message>
     <message>
         <source>Settings</source>
-        <translation type="unfinished"></translation>
+        <translation>Paramètres</translation>
     </message>
 </context>
 <context>
@@ -334,7 +334,7 @@
     </message>
     <message>
         <source>user@example.org</source>
-        <translation>utilisateur@exemple.org</translation>
+        <translation>identifiant@exemple.org</translation>
     </message>
     <message>
         <source>Your Password:</source>
@@ -354,7 +354,7 @@
     </message>
     <message>
         <source>Log in</source>
-        <translation>Connexion</translation>
+        <translation>Se connecter</translation>
     </message>
     <message>
         <source>Log in to your XMPP account</source>
@@ -370,15 +370,15 @@
     </message>
     <message>
         <source>Invalid username or password.</source>
-        <translation>Nom d&apos;utilisateur/trice ou mot de passe invalide.</translation>
+        <translation>Identifiant ou mot de passe invalide.</translation>
     </message>
     <message>
         <source>Cannot connect to the server. Please check your internet connection.</source>
-        <translation>Impossible de se connecter au server. Veuillez tester votre connexion à internet.</translation>
+        <translation>Impossible de se connecter au serveur. Veuillez tester votre connexion à internet.</translation>
     </message>
     <message>
         <source>The server doesn&apos;t support secure connections.</source>
-        <translation>Le server ne permet pas les connexions securisées</translation>
+        <translation>Le serveur ne permet pas les connexions sécurisées.</translation>
     </message>
     <message>
         <source>Error while trying to connect securely.</source>
@@ -394,7 +394,7 @@
     </message>
     <message>
         <source>Authentification protocol not supported by the server.</source>
-        <translation>Protocol d&apos;autentification non supporté par le serveur.</translation>
+        <translation>Protocole d&apos;authentification non supporté par le serveur.</translation>
     </message>
     <message>
         <source>An unknown error occured; see log for details.</source>
@@ -417,22 +417,22 @@
     </message>
     <message>
         <source>Message could not be sent.</source>
-        <translation type="unfinished"></translation>
+        <translation>Le message n&apos;a pas pu être envoyé.</translation>
     </message>
     <message>
         <source>Message correction was not successful.</source>
-        <translation type="unfinished"></translation>
+        <translation>La correction du message a échoué.</translation>
     </message>
 </context>
 <context>
     <name>RegistrationManager</name>
     <message>
         <source>Password changed successfully.</source>
-        <translation type="unfinished"></translation>
+        <translation>Le mot de passe a été changé avec succès.</translation>
     </message>
     <message>
         <source>Failed to change password: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Échec lors de la modification du mot de passe : %1</translation>
     </message>
 </context>
 <context>
@@ -447,7 +447,7 @@
     </message>
     <message>
         <source>user@example.org</source>
-        <translation>utilisateur@exemple.org</translation>
+        <translation>identifiant@exemple.org</translation>
     </message>
     <message>
         <source>Cancel</source>
@@ -567,7 +567,7 @@
     </message>
     <message>
         <source>Delete contact</source>
-        <translation>Supprimer contact</translation>
+        <translation>Supprimer le contact</translation>
     </message>
     <message>
         <source>Cancel</source>
@@ -613,15 +613,15 @@
     <name>SettingsPage</name>
     <message>
         <source>Settings</source>
-        <translation type="unfinished"></translation>
+        <translation>Paramètres</translation>
     </message>
     <message>
         <source>Change password</source>
-        <translation type="unfinished"></translation>
+        <translation>Modifier le mot de passe</translation>
     </message>
     <message>
         <source>Changes your account&apos;s password. You will need to re-enter it on your other devices.</source>
-        <translation type="unfinished"></translation>
+        <translation>Modifie le mot de passe du compte. Vous devrez le ressaisir sur tous vos autres appareils.</translation>
     </message>
 </context>
 <context>

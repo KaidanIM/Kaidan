@@ -441,7 +441,7 @@
     </message>
     <message>
         <source>Spoiler</source>
-        <translation>Spoiler</translation>
+        <translation>Versteckt</translation>
     </message>
     <message>
         <source>Message could not be sent.</source>

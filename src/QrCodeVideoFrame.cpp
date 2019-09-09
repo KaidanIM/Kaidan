@@ -251,6 +251,11 @@ QImage *QrCodeVideoFrame::toGrayscaleImage()
 			}
 		}
 		break;
+	case QVideoFrame::Format_NV21:
+		/// nv21 format, default on android
+		/// image starts with a complete Y image, which we can use directly
+		image = new QImage(data, captureRect.targetWidth, captureRect.targetHeight, QImage::Format_Grayscale8);
+		break;
 	case QVideoFrame::Format_YUYV:
 		image = new QImage(captureRect.targetWidth, captureRect.targetHeight, QImage::Format_Grayscale8);
 		pixel = image->bits();

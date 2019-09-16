@@ -64,7 +64,7 @@ windows-mxe:
 
 android:
   stage: deploy
-  image: kdeorg/android-sdk
+  image: kdeorg/android-arm-sdk
   script:
     - sudo apt update
     - sudo apt -y install inkscape optipng

@@ -11,8 +11,6 @@ echo Using Qt installation from $QT_LINUX
 BUILD_TYPE="${BUILD_TYPE:-Debug}"
 
 KAIDAN_SOURCES=$(dirname "$(readlink -f "${0}")")/..
-KIRIGAMI_BUILD=/tmp/kirigami-linux-build
-QXMPP_BUILD=${QXMPP_BUILD:-/tmp/qxmpp-linux-build}
 
 echo "-- Starting $BUILD_TYPE build of Kaidan --"
 
@@ -51,44 +49,6 @@ fi
 
 export QT_SELECT=qt5
 
-if ! $(find $QXMPP_BUILD -name libqxmpp.so >/dev/null); then
-echo "*****************************************"
-echo "Building QXmpp"
-echo "*****************************************"
-{
-    cdnew $KAIDAN_SOURCES/3rdparty/qxmpp/build
-    cmake .. \
-        -DCMAKE_PREFIX_PATH=$QT_LINUX \
-        -DBUILD_EXAMPLES=OFF -DBUILD_TESTS=OFF \
-        -DCMAKE_BUILD_TYPE=$BUILD_TYPE -DCMAKE_INSTALL_PREFIX=$QXMPP_BUILD \
-        -DCMAKE_INSTALL_LIBDIR=$QXMPP_BUILD/lib
-
-    make -j$(nproc)
-    make install
-    rm -rf $KAIDAN_SOURCES/3rdparty/qxmpp/build
-}
-fi
-
-if [ ! -f "$KIRIGAMI_BUILD/lib/libKF5Kirigami2.so" ]; then
-echo "*****************************************"
-echo "Building Kirigami"
-echo "*****************************************"
-{
-    cdnew $KAIDAN_SOURCES/3rdparty/kirigami/build
-    cmake .. \
-        -DECM_DIR=/usr/share/ECM/cmake \
-        -DCMAKE_PREFIX_PATH=$QT_LINUX \
-        -DCMAKE_BUILD_TYPE=$BUILD_TYPE -DCMAKE_INSTALL_PREFIX=$KIRIGAMI_BUILD \
-        -DCMAKE_INSTALL_LIBDIR=$KIRIGAMI_BUILD/lib
-
-    make -j$(nproc)
-    make install
-    rm -rf $KAIDAN_SOURCES/3rdparty/kirigami/build
-}
-fi
-
-export PKG_CONFIG_PATH=$QXMPP_BUILD/lib/pkgconfig
-
 if [ ! -f "$KAIDAN_SOURCES/build/bin/kaidan" ]; then
 echo "*****************************************"
 echo "Building Kaidan"
@@ -98,10 +58,10 @@ echo "*****************************************"
 
     cmake .. \
         -DECM_DIR=/usr/share/ECM/cmake \
-        -DCMAKE_PREFIX_PATH=$QT_LINUX\;$KIRIGAMI_BUILD\;$QXMPP_BUILD \
+        -DCMAKE_PREFIX_PATH=$QT_LINUX\; \
         -DI18N=1 \
         -DCMAKE_BUILD_TYPE=$BUILD_TYPE -DCMAKE_INSTALL_PREFIX=/usr \
-        -DQUICK_COMPILER=ON -DAPPIMAGE=ON
+        -DQUICK_COMPILER=ON -DAPPIMAGE=ON -DBUNDLE_ICONS=ON
 
     make -j$(nproc)
 }
@@ -122,7 +82,7 @@ echo "Packing into AppImage"
 echo "*****************************************"
 {
     cd $KAIDAN_SOURCES
-    export LD_LIBRARY_PATH=$QT_LINUX/lib/:$KIRIGAMI_BUILD/lib:$LD_LIBRARY_PATH
+    export LD_LIBRARY_PATH=$QT_LINUX/lib/:$LD_LIBRARY_PATH
     export PATH=$QT_LINUX/bin/:$PATH
     # set qmake binary when using portable Qt; linuxdeployqt will find it on its
     # own on global installs
@@ -135,7 +95,7 @@ echo "*****************************************"
     $KAIDAN_SOURCES/3rdparty/linuxdeployqt/squashfs-root/AppRun \
         $KAIDAN_SOURCES/AppDir/usr/share/applications/kaidan.desktop \
         -qmldir=$KAIDAN_SOURCES/src/qml/ \
-        -qmlimport=$KIRIGAMI_BUILD/lib/qml/ \
+        -qmlimport=/opt/kf5/lib/x86_64-linux-gnu/qml \
         -extra-plugins="imageformats/libqsvg.so,imageformats/libqjpeg.so,iconengines/libqsvgicon.so" \
         -appimage -no-copy-copyright-files \
         $QMAKE_BINARY

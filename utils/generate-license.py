@@ -44,7 +44,11 @@ REPLACE_USER_IDS = [
 	("Georg <s.g.b@gmx.de>", "geobra <s.g.b@gmx.de>"),
 	("Muhammad Nur Hidayat Yasuyoshi (MNH48.com) <muhdnurhidayat96@yahoo.com>",
 	 "Muhammad Nur Hidayat Yasuyoshi <mnh48mail@gmail.com>"),
-	("X advocatux <advocatux@airpost.net>", "advocatux <advocatux@airpost.net>")
+	("X advocatux <advocatux@airpost.net>", "advocatux <advocatux@airpost.net>"),
+	("ZatroxDE <zatroxde@outlook.com>", "Robert Maerkisch <zatroxde@protonmail.ch>"),
+	("X oiseauroch <tobias.ollive@mailoo.org>", "oiseauroch <tobias.ollive@mailoo.org>"),
+	("X ssantos <ssantos@web.de>", "ssantos <ssantos@web.de>"),
+	("X Txaume <txaumevw@gmail.com>", "Txaume <txaumevw@gmail.com>")
 ]
 
 # These user ids will be excluded from any targets

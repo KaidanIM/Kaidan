@@ -30,8 +30,8 @@
 
 #include "RosterItem.h"
 
-RosterItem::RosterItem(const QXmppRosterIq::Item &item)
-    : m_jid(item.bareJid()), m_name(item.name())
+RosterItem::RosterItem(const QXmppRosterIq::Item &item, const QDateTime &dateTime)
+	: m_jid(item.bareJid()), m_name(item.name()), m_lastExchanged(dateTime)
 {
 }
 
@@ -97,4 +97,30 @@ bool RosterItem::operator==(const RosterItem &other) const
 bool RosterItem::operator!=(const RosterItem &other) const
 {
 	return !operator==(other);
+}
+
+bool RosterItem::operator<(const RosterItem &other) const
+{
+	if (lastExchanged() != other.lastExchanged())
+		return lastExchanged() > other.lastExchanged();
+	return (name().isEmpty() ? jid().toUpper() : name().toUpper()) <
+			(other.name().isEmpty() ? other.jid().toUpper() : other.name().toUpper());
+}
+
+bool RosterItem::operator>(const RosterItem &other) const
+{
+	if (lastExchanged() != other.lastExchanged())
+		return lastExchanged() < other.lastExchanged();
+	return (name().isEmpty() ? jid().toUpper() : name().toUpper()) >
+			(other.name().isEmpty() ? other.jid().toUpper() : other.name().toUpper());
+}
+
+bool RosterItem::operator<=(const RosterItem &other) const
+{
+	return operator<(other) || operator==(other);
+}
+
+bool RosterItem::operator>=(const RosterItem &other) const
+{
+	return operator>(other) || operator==(other);
 }

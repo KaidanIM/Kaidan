@@ -41,7 +41,7 @@ class RosterItem
 {
 public:
 	RosterItem() = default;
-	RosterItem(const QXmppRosterIq::Item &item);
+	RosterItem(const QXmppRosterIq::Item &item, const QDateTime &dateTime = QDateTime::currentDateTimeUtc());
 
 	QString jid() const;
 	void setJid(const QString &jid);
@@ -60,6 +60,11 @@ public:
 
 	bool operator==(const RosterItem &other) const;
 	bool operator!=(const RosterItem &other) const;
+
+	bool operator<(const RosterItem &other) const;
+	bool operator>(const RosterItem &other) const;
+	bool operator<=(const RosterItem &other) const;
+	bool operator>=(const RosterItem &other) const;
 
 private:
 	/**

@@ -113,8 +113,9 @@ void RosterManager::populateRoster()
 	// create a new list of contacts
 	QHash<QString, RosterItem> items;
 	const QStringList bareJids = manager.getRosterBareJids();
+	const auto currentTime = QDateTime::currentDateTimeUtc();
 	for (const auto &jid : bareJids) {
-		items[jid] = RosterItem(manager.getRosterEntry(jid));
+		items[jid] = RosterItem(manager.getRosterEntry(jid), currentTime);
 
 		if (avatarStorage->getHashOfJid(jid).isEmpty())
 			vCardManager->fetchVCard(jid);

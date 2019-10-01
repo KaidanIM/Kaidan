@@ -131,7 +131,7 @@ void RosterModel::handleItemsFetched(const QVector<RosterItem> &items)
 		m_items.begin(),
 		m_items.end(),
 		[] (const RosterItem &a, const RosterItem &b) {
-			return a.lastExchanged() > b.lastExchanged();
+			return a < b;
 		}
 	);
 	endResetModel();
@@ -148,7 +148,7 @@ void RosterModel::addItem(const RosterItem &item)
 	// index where to add the new contact
 	int i = 0;
 	for (const auto &itrItem : qAsConst(m_items)) {
-		if (item.lastExchanged().toMSecsSinceEpoch() >= itrItem.lastExchanged().toMSecsSinceEpoch()) {
+		if (item > itrItem) {
 			insertContact(i, item);
 			return;
 		}

@@ -77,6 +77,10 @@
         <source>Download</source>
         <translation>Stahnout</translation>
     </message>
+    <message>
+        <source>Copy download URL</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>ChatPage</name>
@@ -115,6 +119,18 @@
     <message>
         <source>Spoiler hint</source>
         <translation>«Spoiler» tip</translation>
+    </message>
+    <message>
+        <source>Unmute notifications</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Mute notifications</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View profile</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -234,6 +250,14 @@
         <extracomment>The link is an XMPP-URI (i.e. &apos;xmpp:kaidan@muc.kaidan.im?join&apos; for joining a chat)</extracomment>
         <translation>Odkaz se  otevře jakmile se připojíte.</translation>
     </message>
+    <message>
+        <source>No password found. Please enter it.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>No valid login QR code found.</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>LoginPage</name>
@@ -306,6 +330,10 @@ Prosím zkontrolujte své připojení k internetu.</translation>
         <source>An unknown error occured; see log for details.</source>
         <translation>Došlo k neznámmé chybě; pro více informací zkontrolujte seznam logů.</translation>
     </message>
+    <message>
+        <source>Log in using a QR-Code</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>MessageHandler</name>
@@ -328,6 +356,61 @@ Prosím zkontrolujte své připojení k internetu.</translation>
     <message>
         <source>Message correction was not successful.</source>
         <translation>Oprava zprávy se nezdařila.</translation>
+    </message>
+</context>
+<context>
+    <name>QmlUtils</name>
+    <message>
+        <source>Available</source>
+        <translation type="unfinished">Dostupný</translation>
+    </message>
+    <message>
+        <source>Free for chat</source>
+        <translation type="unfinished">Dostupný k chatování</translation>
+    </message>
+    <message>
+        <source>Away</source>
+        <translation type="unfinished">Nepřítomný</translation>
+    </message>
+    <message>
+        <source>Do not disturb</source>
+        <translation type="unfinished">Nerušit</translation>
+    </message>
+    <message>
+        <source>Away for longer</source>
+        <translation type="unfinished">Dlouhodobě nepřítomný</translation>
+    </message>
+    <message>
+        <source>Offline</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Error</source>
+        <translation type="unfinished">Chyba</translation>
+    </message>
+    <message>
+        <source>Invisible</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>QrCodeScannerPage</name>
+    <message>
+        <source>Scan QR code</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>There is no camera available.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Your camera is busy.
+Try to close other applications using the camera.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The camera format &apos;%1&apos; is not supported.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -388,31 +471,31 @@ Prosím zkontrolujte své připojení k internetu.</translation>
     </message>
     <message>
         <source>Available</source>
-        <translation>Dostupný</translation>
+        <translation type="vanished">Dostupný</translation>
     </message>
     <message>
         <source>Free for chat</source>
-        <translation>Dostupný k chatování</translation>
+        <translation type="vanished">Dostupný k chatování</translation>
     </message>
     <message>
         <source>Away</source>
-        <translation>Nepřítomný</translation>
+        <translation type="vanished">Nepřítomný</translation>
     </message>
     <message>
         <source>Do not disturb</source>
-        <translation>Nerušit</translation>
+        <translation type="vanished">Nerušit</translation>
     </message>
     <message>
         <source>Away for longer</source>
-        <translation>Dlouhodobě nepřítomný</translation>
+        <translation type="vanished">Dlouhodobě nepřítomný</translation>
     </message>
     <message>
         <source>Offline</source>
-        <translation>Nepřipojen</translation>
+        <translation type="vanished">Nepřipojen</translation>
     </message>
     <message>
         <source>Error</source>
-        <translation>Chyba</translation>
+        <translation type="vanished">Chyba</translation>
     </message>
 </context>
 <context>
@@ -428,6 +511,10 @@ Prosím zkontrolujte své připojení k internetu.</translation>
     <message>
         <source>Spoiler</source>
         <translation>«Spoiler»</translation>
+    </message>
+    <message>
+        <source>Could not rename contact, as a result of not being connected.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -448,6 +535,14 @@ Prosím zkontrolujte své připojení k internetu.</translation>
         <source>Offline</source>
         <translation>Odpojen</translation>
     </message>
+    <message>
+        <source>Search contacts</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Search…</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>RosterRemoveContactSheet</name>
@@ -466,6 +561,25 @@ Prosím zkontrolujte své připojení k internetu.</translation>
     <message>
         <source>Delete</source>
         <translation>Smazat</translation>
+    </message>
+</context>
+<context>
+    <name>RosterRenameContactSheet</name>
+    <message>
+        <source>Rename contact</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit name:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cancel</source>
+        <translation type="unfinished">Zrušit</translation>
+    </message>
+    <message>
+        <source>Rename</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -526,6 +640,40 @@ Prosím zkontrolujte své připojení k internetu.</translation>
     <message>
         <source>File</source>
         <translation>Soubor</translation>
+    </message>
+</context>
+<context>
+    <name>UserProfilePage</name>
+    <message>
+        <source>Profile</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>VCardModel</name>
+    <message>
+        <source>Name</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Nickname</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>About</source>
+        <translation type="unfinished">O aplikaci</translation>
+    </message>
+    <message>
+        <source>Email</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Birthday</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Website</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 </TS>

@@ -77,6 +77,10 @@
         <source>Download</source>
         <translation>تنزيل</translation>
     </message>
+    <message>
+        <source>Copy download URL</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>ChatPage</name>
@@ -114,6 +118,18 @@
     </message>
     <message>
         <source>Spoiler hint</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Unmute notifications</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Mute notifications</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View profile</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -230,6 +246,14 @@
         <extracomment>The link is an XMPP-URI (i.e. &apos;xmpp:kaidan@muc.kaidan.im?join&apos; for joining a chat)</extracomment>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>No password found. Please enter it.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>No valid login QR code found.</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>LoginPage</name>
@@ -293,6 +317,10 @@
         <source>An unknown error occured; see log for details.</source>
         <translation>حدث خطأ مجهول ؛ اطلع على التفاصيل في السجل.</translation>
     </message>
+    <message>
+        <source>Log in using a QR-Code</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>MessageHandler</name>
@@ -314,6 +342,61 @@
     </message>
     <message>
         <source>Message correction was not successful.</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>QmlUtils</name>
+    <message>
+        <source>Available</source>
+        <translation type="unfinished">متوفر</translation>
+    </message>
+    <message>
+        <source>Free for chat</source>
+        <translation type="unfinished">متوفر للدردشة</translation>
+    </message>
+    <message>
+        <source>Away</source>
+        <translation type="unfinished">غائب</translation>
+    </message>
+    <message>
+        <source>Do not disturb</source>
+        <translation type="unfinished">لا تزعجني</translation>
+    </message>
+    <message>
+        <source>Away for longer</source>
+        <translation type="unfinished">غائب لفترة قد تطول</translation>
+    </message>
+    <message>
+        <source>Offline</source>
+        <translation type="unfinished">غير متصل</translation>
+    </message>
+    <message>
+        <source>Error</source>
+        <translation type="unfinished">خطأ</translation>
+    </message>
+    <message>
+        <source>Invisible</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>QrCodeScannerPage</name>
+    <message>
+        <source>Scan QR code</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>There is no camera available.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Your camera is busy.
+Try to close other applications using the camera.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The camera format &apos;%1&apos; is not supported.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -375,31 +458,31 @@
     </message>
     <message>
         <source>Available</source>
-        <translation>متوفر</translation>
+        <translation type="vanished">متوفر</translation>
     </message>
     <message>
         <source>Free for chat</source>
-        <translation>متوفر للدردشة</translation>
+        <translation type="vanished">متوفر للدردشة</translation>
     </message>
     <message>
         <source>Away</source>
-        <translation>غائب</translation>
+        <translation type="vanished">غائب</translation>
     </message>
     <message>
         <source>Do not disturb</source>
-        <translation>لا تزعجني</translation>
+        <translation type="vanished">لا تزعجني</translation>
     </message>
     <message>
         <source>Away for longer</source>
-        <translation>غائب لفترة قد تطول</translation>
+        <translation type="vanished">غائب لفترة قد تطول</translation>
     </message>
     <message>
         <source>Offline</source>
-        <translation>غير متصل</translation>
+        <translation type="vanished">غير متصل</translation>
     </message>
     <message>
         <source>Error</source>
-        <translation>خطأ</translation>
+        <translation type="vanished">خطأ</translation>
     </message>
 </context>
 <context>
@@ -414,6 +497,10 @@
     </message>
     <message>
         <source>Spoiler</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Could not rename contact, as a result of not being connected.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -435,6 +522,14 @@
         <source>Offline</source>
         <translation>غير متصل</translation>
     </message>
+    <message>
+        <source>Search contacts</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Search…</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>RosterRemoveContactSheet</name>
@@ -453,6 +548,25 @@
     <message>
         <source>Delete</source>
         <translation>حذف</translation>
+    </message>
+</context>
+<context>
+    <name>RosterRenameContactSheet</name>
+    <message>
+        <source>Rename contact</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit name:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cancel</source>
+        <translation type="unfinished">إلغاء</translation>
+    </message>
+    <message>
+        <source>Rename</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -513,6 +627,40 @@
     <message>
         <source>File</source>
         <translation>الملف</translation>
+    </message>
+</context>
+<context>
+    <name>UserProfilePage</name>
+    <message>
+        <source>Profile</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>VCardModel</name>
+    <message>
+        <source>Name</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Nickname</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>About</source>
+        <translation type="unfinished">عن</translation>
+    </message>
+    <message>
+        <source>Email</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Birthday</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Website</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 </TS>

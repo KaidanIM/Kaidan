@@ -103,6 +103,10 @@
         <source>Download</source>
         <translation>Downloaden</translation>
     </message>
+    <message>
+        <source>Copy download URL</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>ChatPage</name>
@@ -145,6 +149,18 @@
     <message>
         <source>Spoiler hint</source>
         <translation type="unfinished">Spoilerhint</translation>
+    </message>
+    <message>
+        <source>Unmute notifications</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Mute notifications</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View profile</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -278,6 +294,14 @@
         <extracomment>The link is an XMPP-URI (i.e. &apos;xmpp:kaidan@muc.kaidan.im?join&apos; for joining a chat)</extracomment>
         <translation>De link wordt geopend nadat u verbinding hebt gemaakt.</translation>
     </message>
+    <message>
+        <source>No password found. Please enter it.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>No valid login QR code found.</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>LoginPage</name>
@@ -357,6 +381,10 @@
         <source>An unknown error occured; see log for details.</source>
         <translation>Er is een onbekende fout opgetreden; zie logboek voor details.</translation>
     </message>
+    <message>
+        <source>Log in using a QR-Code</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>MessageHandler</name>
@@ -378,6 +406,61 @@
     </message>
     <message>
         <source>Message correction was not successful.</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>QmlUtils</name>
+    <message>
+        <source>Available</source>
+        <translation type="unfinished">Beschikbaar</translation>
+    </message>
+    <message>
+        <source>Free for chat</source>
+        <translation type="unfinished">Beschikbaar voor gesprek</translation>
+    </message>
+    <message>
+        <source>Away</source>
+        <translation type="unfinished">Afwezig</translation>
+    </message>
+    <message>
+        <source>Do not disturb</source>
+        <translation type="unfinished">Niet storen</translation>
+    </message>
+    <message>
+        <source>Away for longer</source>
+        <translation type="unfinished">Langere tijd afwezig</translation>
+    </message>
+    <message>
+        <source>Offline</source>
+        <translation type="unfinished">Offline</translation>
+    </message>
+    <message>
+        <source>Error</source>
+        <translation type="unfinished">Fout</translation>
+    </message>
+    <message>
+        <source>Invisible</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>QrCodeScannerPage</name>
+    <message>
+        <source>Scan QR code</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>There is no camera available.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Your camera is busy.
+Try to close other applications using the camera.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The camera format &apos;%1&apos; is not supported.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -435,7 +518,7 @@
     <name>RosterListItem</name>
     <message>
         <source>Offline</source>
-        <translation type="unfinished">Offline</translation>
+        <translation type="obsolete">Offline</translation>
     </message>
     <message>
         <source>Error: Please check the JID.</source>
@@ -443,27 +526,27 @@
     </message>
     <message>
         <source>Available</source>
-        <translation>Beschikbaar</translation>
+        <translation type="vanished">Beschikbaar</translation>
     </message>
     <message>
         <source>Free for chat</source>
-        <translation>Beschikbaar voor gesprek</translation>
+        <translation type="vanished">Beschikbaar voor gesprek</translation>
     </message>
     <message>
         <source>Away</source>
-        <translation>Afwezig</translation>
+        <translation type="vanished">Afwezig</translation>
     </message>
     <message>
         <source>Do not disturb</source>
-        <translation>Niet storen</translation>
+        <translation type="vanished">Niet storen</translation>
     </message>
     <message>
         <source>Away for longer</source>
-        <translation>Langere tijd afwezig</translation>
+        <translation type="vanished">Langere tijd afwezig</translation>
     </message>
     <message>
         <source>Error</source>
-        <translation>Fout</translation>
+        <translation type="vanished">Fout</translation>
     </message>
 </context>
 <context>
@@ -479,6 +562,10 @@
     <message>
         <source>Spoiler</source>
         <translation type="unfinished">Spoiler</translation>
+    </message>
+    <message>
+        <source>Could not rename contact, as a result of not being connected.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -498,6 +585,14 @@
     <message>
         <source>Offline</source>
         <translation>Offline</translation>
+    </message>
+    <message>
+        <source>Search contacts</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Search…</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -521,6 +616,25 @@
     <message>
         <source>Do you really want to delete the contact &lt;b&gt;%1&lt;/b&gt; from your roster?</source>
         <translation>Wil je echt het contact &lt;b&gt;%1&lt;/b&gt; uit je contactenlijst verwijderen?</translation>
+    </message>
+</context>
+<context>
+    <name>RosterRenameContactSheet</name>
+    <message>
+        <source>Rename contact</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit name:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cancel</source>
+        <translation type="unfinished">Annuleer</translation>
+    </message>
+    <message>
+        <source>Rename</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -581,6 +695,40 @@
     <message>
         <source>File</source>
         <translation>Bestand</translation>
+    </message>
+</context>
+<context>
+    <name>UserProfilePage</name>
+    <message>
+        <source>Profile</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>VCardModel</name>
+    <message>
+        <source>Name</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Nickname</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>About</source>
+        <translation type="unfinished">Over</translation>
+    </message>
+    <message>
+        <source>Email</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Birthday</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Website</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 </TS>

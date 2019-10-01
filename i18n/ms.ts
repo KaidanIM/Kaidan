@@ -122,6 +122,10 @@
         <source>Download</source>
         <translation>Muat Turun</translation>
     </message>
+    <message>
+        <source>Copy download URL</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>ChatPage</name>
@@ -164,6 +168,18 @@
     <message>
         <source>Spoiler hint</source>
         <translation>Tip spoiler</translation>
+    </message>
+    <message>
+        <source>Unmute notifications</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Mute notifications</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View profile</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -317,6 +333,14 @@
         <source>Could not send file, as a result of not being connected.</source>
         <translation type="vanished">Tidak dapat menghantar fail, kerana anda tidak disambung ke internet.</translation>
     </message>
+    <message>
+        <source>No password found. Please enter it.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>No valid login QR code found.</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>LoginPage</name>
@@ -396,6 +420,10 @@
         <source>An unknown error occured; see log for details.</source>
         <translation>Telah berlaku ralat tidak diketahui; lihat log untuk maklumat lanjut.</translation>
     </message>
+    <message>
+        <source>Log in using a QR-Code</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>MessageHandler</name>
@@ -418,6 +446,61 @@
     <message>
         <source>Message correction was not successful.</source>
         <translation>Pembetulan mesej tidak berjaya.</translation>
+    </message>
+</context>
+<context>
+    <name>QmlUtils</name>
+    <message>
+        <source>Available</source>
+        <translation type="unfinished">Sedang lapang</translation>
+    </message>
+    <message>
+        <source>Free for chat</source>
+        <translation type="unfinished">Boleh sembang</translation>
+    </message>
+    <message>
+        <source>Away</source>
+        <translation type="unfinished">Tidak lapang</translation>
+    </message>
+    <message>
+        <source>Do not disturb</source>
+        <translation type="unfinished">Jangan ganggu</translation>
+    </message>
+    <message>
+        <source>Away for longer</source>
+        <translation type="unfinished">Tidak lapang lebih lama</translation>
+    </message>
+    <message>
+        <source>Offline</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Error</source>
+        <translation type="unfinished">Ralat</translation>
+    </message>
+    <message>
+        <source>Invisible</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>QrCodeScannerPage</name>
+    <message>
+        <source>Scan QR code</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>There is no camera available.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Your camera is busy.
+Try to close other applications using the camera.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The camera format &apos;%1&apos; is not supported.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -478,31 +561,31 @@
     </message>
     <message>
         <source>Available</source>
-        <translation>Sedang lapang</translation>
+        <translation type="vanished">Sedang lapang</translation>
     </message>
     <message>
         <source>Free for chat</source>
-        <translation>Boleh sembang</translation>
+        <translation type="vanished">Boleh sembang</translation>
     </message>
     <message>
         <source>Away</source>
-        <translation>Tidak lapang</translation>
+        <translation type="vanished">Tidak lapang</translation>
     </message>
     <message>
         <source>Do not disturb</source>
-        <translation>Jangan ganggu</translation>
+        <translation type="vanished">Jangan ganggu</translation>
     </message>
     <message>
         <source>Away for longer</source>
-        <translation>Tidak lapang lebih lama</translation>
+        <translation type="vanished">Tidak lapang lebih lama</translation>
     </message>
     <message>
         <source>Offline</source>
-        <translation>Tiada dalam talian</translation>
+        <translation type="vanished">Tiada dalam talian</translation>
     </message>
     <message>
         <source>Error</source>
-        <translation>Ralat</translation>
+        <translation type="vanished">Ralat</translation>
     </message>
     <message>
         <source>Invalid</source>
@@ -523,6 +606,10 @@
         <source>Spoiler</source>
         <translation>Spoiler</translation>
     </message>
+    <message>
+        <source>Could not rename contact, as a result of not being connected.</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>RosterPage</name>
@@ -541,6 +628,14 @@
     <message>
         <source>Offline</source>
         <translation>Luar talian</translation>
+    </message>
+    <message>
+        <source>Search contacts</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Search…</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -564,6 +659,25 @@
     <message>
         <source>Do you really want to delete the contact &lt;b&gt;%1&lt;/b&gt; from your roster?</source>
         <translation>Adakah anda ingin memadam kenalan &lt;b&gt;%1&lt;/b&gt; daripada roster anda?</translation>
+    </message>
+</context>
+<context>
+    <name>RosterRenameContactSheet</name>
+    <message>
+        <source>Rename contact</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit name:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cancel</source>
+        <translation type="unfinished">Batal</translation>
+    </message>
+    <message>
+        <source>Rename</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -638,6 +752,40 @@
     <message>
         <source>File</source>
         <translation>Fail</translation>
+    </message>
+</context>
+<context>
+    <name>UserProfilePage</name>
+    <message>
+        <source>Profile</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>VCardModel</name>
+    <message>
+        <source>Name</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Nickname</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>About</source>
+        <translation type="unfinished">Latar Belakang</translation>
+    </message>
+    <message>
+        <source>Email</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Birthday</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Website</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 </TS>

@@ -77,6 +77,10 @@
         <source>Download</source>
         <translation>Descargar</translation>
     </message>
+    <message>
+        <source>Copy download URL</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>ChatPage</name>
@@ -115,6 +119,18 @@
     <message>
         <source>Spoiler hint</source>
         <translation>Aviso Spoiler</translation>
+    </message>
+    <message>
+        <source>Unmute notifications</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Mute notifications</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View profile</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -230,6 +246,14 @@
         <extracomment>The link is an XMPP-URI (i.e. &apos;xmpp:kaidan@muc.kaidan.im?join&apos; for joining a chat)</extracomment>
         <translation>Abrirase a ligazón despois de conectarse.</translation>
     </message>
+    <message>
+        <source>No password found. Please enter it.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>No valid login QR code found.</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>LoginPage</name>
@@ -293,6 +317,10 @@
         <source>An unknown error occured; see log for details.</source>
         <translation>Aconteceu un fallo descoñecido; vexa máis detalles no rexistro.</translation>
     </message>
+    <message>
+        <source>Log in using a QR-Code</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>MessageHandler</name>
@@ -315,6 +343,61 @@
     <message>
         <source>Message correction was not successful.</source>
         <translation>Non se puido correxir a mensaxe.</translation>
+    </message>
+</context>
+<context>
+    <name>QmlUtils</name>
+    <message>
+        <source>Available</source>
+        <translation type="unfinished">Dispoñible</translation>
+    </message>
+    <message>
+        <source>Free for chat</source>
+        <translation type="unfinished">Libre para conversar</translation>
+    </message>
+    <message>
+        <source>Away</source>
+        <translation type="unfinished">Fóra</translation>
+    </message>
+    <message>
+        <source>Do not disturb</source>
+        <translation type="unfinished">Non molestar</translation>
+    </message>
+    <message>
+        <source>Away for longer</source>
+        <translation type="unfinished">Fóra para longo</translation>
+    </message>
+    <message>
+        <source>Offline</source>
+        <translation type="unfinished">Desconectada</translation>
+    </message>
+    <message>
+        <source>Error</source>
+        <translation type="unfinished">Fallo</translation>
+    </message>
+    <message>
+        <source>Invisible</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>QrCodeScannerPage</name>
+    <message>
+        <source>Scan QR code</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>There is no camera available.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Your camera is busy.
+Try to close other applications using the camera.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The camera format &apos;%1&apos; is not supported.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -375,31 +458,31 @@
     </message>
     <message>
         <source>Available</source>
-        <translation>Dispoñible</translation>
+        <translation type="vanished">Dispoñible</translation>
     </message>
     <message>
         <source>Free for chat</source>
-        <translation>Libre para conversar</translation>
+        <translation type="vanished">Libre para conversar</translation>
     </message>
     <message>
         <source>Away</source>
-        <translation>Fóra</translation>
+        <translation type="vanished">Fóra</translation>
     </message>
     <message>
         <source>Do not disturb</source>
-        <translation>Non molestar</translation>
+        <translation type="vanished">Non molestar</translation>
     </message>
     <message>
         <source>Away for longer</source>
-        <translation>Fóra para longo</translation>
+        <translation type="vanished">Fóra para longo</translation>
     </message>
     <message>
         <source>Offline</source>
-        <translation>Desconectada</translation>
+        <translation type="vanished">Desconectada</translation>
     </message>
     <message>
         <source>Error</source>
-        <translation>Fallo</translation>
+        <translation type="vanished">Fallo</translation>
     </message>
 </context>
 <context>
@@ -415,6 +498,10 @@
     <message>
         <source>Spoiler</source>
         <translation>Spoiler</translation>
+    </message>
+    <message>
+        <source>Could not rename contact, as a result of not being connected.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -435,6 +522,14 @@
         <source>Offline</source>
         <translation>Desconectada</translation>
     </message>
+    <message>
+        <source>Search contacts</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Search…</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>RosterRemoveContactSheet</name>
@@ -453,6 +548,25 @@
     <message>
         <source>Delete</source>
         <translation>Eliminar</translation>
+    </message>
+</context>
+<context>
+    <name>RosterRenameContactSheet</name>
+    <message>
+        <source>Rename contact</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit name:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cancel</source>
+        <translation type="unfinished">Cancelar</translation>
+    </message>
+    <message>
+        <source>Rename</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -513,6 +627,40 @@
     <message>
         <source>File</source>
         <translation>Ficheiro</translation>
+    </message>
+</context>
+<context>
+    <name>UserProfilePage</name>
+    <message>
+        <source>Profile</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>VCardModel</name>
+    <message>
+        <source>Name</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Nickname</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>About</source>
+        <translation type="unfinished">Acerca de</translation>
+    </message>
+    <message>
+        <source>Email</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Birthday</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Website</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 </TS>

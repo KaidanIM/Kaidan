@@ -28,8 +28,8 @@
  *  along with Kaidan.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-import QtQuick 2.6
-import org.kde.kirigami 2.0 as Kirigami
+import QtQuick 2.7
+import org.kde.kirigami 2.8 as Kirigami
 
 Item {
 	id: root

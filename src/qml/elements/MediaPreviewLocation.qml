@@ -33,10 +33,10 @@
  * the user. It just displays the map in a rectangle.
  */
 
-import QtQuick 2.6
+import QtQuick 2.7
 import QtQuick.Layouts 1.3
-import QtLocation 5.9 as Location
-import org.kde.kirigami 2.0 as Kirigami
+import QtLocation 5.3 as Location
+import org.kde.kirigami 2.8 as Kirigami
 
 import im.kaidan.kaidan 1.0
 import MediaUtils 0.1

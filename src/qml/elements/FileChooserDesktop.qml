@@ -28,8 +28,8 @@
  *  along with Kaidan.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-import QtQuick 2.6
-import QtQuick.Dialogs 1.2
+import QtQuick 2.7
+import QtQuick.Dialogs 1.3
 
 import im.kaidan.kaidan 1.0
 import MediaUtils 0.1

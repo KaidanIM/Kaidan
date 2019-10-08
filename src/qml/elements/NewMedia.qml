@@ -35,9 +35,9 @@
 
 import QtQuick 2.7
 import QtQuick.Layouts 1.3
-import QtQuick.Controls 2.4 as Controls
-import QtMultimedia 5.10 as Multimedia
-import org.kde.kirigami 2.2 as Kirigami
+import QtQuick.Controls 2.3 as Controls
+import QtMultimedia 5.8 as Multimedia
+import org.kde.kirigami 2.8 as Kirigami
 
 import im.kaidan.kaidan 1.0
 import MediaUtils 0.1

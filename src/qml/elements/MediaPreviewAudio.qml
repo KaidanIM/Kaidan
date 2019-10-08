@@ -33,13 +33,11 @@
  * the user. It just displays the audio in a rectangle.
  */
 
-import QtQuick 2.6
-
-import QtQuick 2.6
+import QtQuick 2.7
 import QtQuick.Layouts 1.3
-import QtQuick.Controls 2.0 as Controls
-import QtMultimedia 5.9 as Multimedia
-import org.kde.kirigami 2.0 as Kirigami
+import QtQuick.Controls 2.3 as Controls
+import QtMultimedia 5.8 as Multimedia
+import org.kde.kirigami 2.8 as Kirigami
 
 import MediaUtils 0.1
 

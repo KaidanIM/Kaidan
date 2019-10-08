@@ -29,8 +29,8 @@
  */
 
 import QtQuick 2.7
-import QtQuick.Controls.Material 2.0
-import org.kde.kirigami 2.3 as Kirigami
+import QtQuick.Controls.Material 2.3
+import org.kde.kirigami 2.8 as Kirigami
 import StatusBar 0.1
 import im.kaidan.kaidan 1.0
 import "elements"

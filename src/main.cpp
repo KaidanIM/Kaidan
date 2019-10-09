@@ -32,12 +32,14 @@
 #include <QCommandLineOption>
 #include <QCommandLineParser>
 #include <QDebug>
+#include <QDir>
 #include <QIcon>
 #include <QLibraryInfo>
 #include <QLocale>
 #include <QQmlApplicationEngine>
 #include <QQmlContext>
 #include <QTranslator>
+#include <QStandardPaths>
 #include <qqml.h>
 
 // QXmpp
@@ -169,6 +171,35 @@ Q_DECL_EXPORT int main(int argc, char *argv[])
 	QGuiApplication app(argc, argv);
 #else
 	SingleApplication app(argc, argv, true);
+#endif
+
+#ifdef APPIMAGE
+	QFileInfo executable(QCoreApplication::applicationFilePath());
+
+	if (executable.isSymLink()) {
+		executable.setFile(executable.symLinkTarget());
+	}
+
+	QString gstreamerPluginsPath;
+
+	// Try to use deployed plugins if any...
+#if defined(TARGET_GSTREAMER_PLUGINS)
+	gstreamerPluginsPath = QString::fromLocal8Bit(TARGET_GSTREAMER_PLUGINS);
+
+	if (!gstreamerPluginsPath.isEmpty()) {
+		gstreamerPluginsPath = QDir::cleanPath(QString::fromLatin1("%1/../..%2")
+							.arg(executable.absolutePath(), gstreamerPluginsPath));
+	}
+#else
+	qFatal("Please provide the unified directory containing the gstreamer plugins and gst-plugin-scanner.");
+#endif
+
+#if defined(QT_DEBUG)
+	qputenv("GST_DEBUG", "ERROR:5,WARNING:5,INFO:5,DEBUG:5,LOG:5");
+#endif
+	qputenv("GST_PLUGIN_PATH_1_0", QByteArray());
+	qputenv("GST_PLUGIN_SYSTEM_PATH_1_0", gstreamerPluginsPath.toLocal8Bit());
+	qputenv("GST_PLUGIN_SCANNER_1_0", QString::fromLatin1("%1/gst-plugin-scanner").arg(gstreamerPluginsPath).toLocal8Bit());
 #endif
 
 	// register qMetaTypes

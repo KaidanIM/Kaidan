@@ -10,6 +10,8 @@ echo Using Qt installation from $QT_LINUX
 # Debug, Release, RelWithDebInfo and MinSizeRel
 BUILD_TYPE="${BUILD_TYPE:-Debug}"
 
+MAKEFLAGS="-j$(nproc)"
+
 KAIDAN_SOURCES=$(dirname "$(readlink -f "${0}")")/..
 
 echo "-- Starting $BUILD_TYPE build of Kaidan --"
@@ -55,6 +57,16 @@ fi
 
 export QT_SELECT=qt5
 
+SOURCE_GSTREAMER_PLUGINS=$(find /usr/lib -name libgstcoreelements.so -exec dirname {} \;)
+SOURCE_GSTREAMER_PLUGINS_SCANNER=$(find /usr/lib -name gst-plugin-scanner)
+TARGET_GSTREAMER_PLUGINS="/usr/lib/$(basename "${SOURCE_GSTREAMER_PLUGINS}")"
+
+echo "*****************************************"
+echo "Found GStreamer plugins in: ${SOURCE_GSTREAMER_PLUGINS}"
+echo "Found GStreamer plugins scanner in: ${SOURCE_GSTREAMER_PLUGINS_SCANNER}"
+echo "Target GStreamer plugins in: ${TARGET_GSTREAMER_PLUGINS}"
+echo "*****************************************"
+
 if [ ! -f "$KAIDAN_SOURCES/build/bin/kaidan" ]; then
 echo "*****************************************"
 echo "Building Kaidan"
@@ -67,9 +79,10 @@ echo "*****************************************"
         -DCMAKE_PREFIX_PATH=$QT_LINUX\; \
         -DI18N=1 \
         -DCMAKE_BUILD_TYPE=$BUILD_TYPE -DCMAKE_INSTALL_PREFIX=/usr \
-        -DQUICK_COMPILER=ON -DAPPIMAGE=ON -DBUNDLE_ICONS=ON
+        -DQUICK_COMPILER=ON -DAPPIMAGE=ON -DBUNDLE_ICONS=ON \
+        -DTARGET_GSTREAMER_PLUGINS="${TARGET_GSTREAMER_PLUGINS}"
 
-    make -j$(nproc)
+    cmake --build .
 }
 fi
 
@@ -126,11 +139,46 @@ echo "*****************************************"
         position/libqtposition_serialnmea.so
     )
 
-    $KAIDAN_SOURCES/3rdparty/linuxdeployqt/squashfs-root/AppRun \
-        $KAIDAN_SOURCES/AppDir/usr/share/applications/kaidan.desktop \
-        -qmldir=$KAIDAN_SOURCES/src/qml/ \
-        -qmlimport=/opt/kf5/lib/x86_64-linux-gnu/qml \
-        -extra-plugins="$(join_by , "${extra_plugins[@]}")" \
-        -appimage -no-copy-copyright-files \
-        $QMAKE_BINARY
+    # We need gstreamer plugins copied first so that their dependencies get deployed as well.
+    APPDIR=${KAIDAN_SOURCES}/AppDir
+    COPY_GSTREAMER_SCANNER=0
+
+    if [ "$(dirname "${SOURCE_GSTREAMER_PLUGINS_SCANNER}")" != "${TARGET_GSTREAMER_PLUGINS}" ]; then
+        COPY_GSTREAMER_SCANNER=1
+    fi
+
+    TARGET_GSTREAMER_PLUGINS="${APPDIR}${TARGET_GSTREAMER_PLUGINS}"
+
+    if [ -d "${SOURCE_GSTREAMER_PLUGINS}" ]; then
+        echo "Copying ${SOURCE_GSTREAMER_PLUGINS}/libgst* to ${TARGET_GSTREAMER_PLUGINS}..."
+        mkdir -p "${TARGET_GSTREAMER_PLUGINS}"
+        cp -fr "${SOURCE_GSTREAMER_PLUGINS}/libgst"* "${TARGET_GSTREAMER_PLUGINS}"
+
+        if [ ${COPY_GSTREAMER_SCANNER} -eq 1 ]; then
+            echo "Copying ${SOURCE_GSTREAMER_PLUGINS_SCANNER} to ${TARGET_GSTREAMER_PLUGINS}..."
+            cp -f "${SOURCE_GSTREAMER_PLUGINS_SCANNER}" "${TARGET_GSTREAMER_PLUGINS}"
+        fi
+    else
+        echo "*****************************************"
+        echo "GStreamer plugins not found!!!"
+        echo "*****************************************"
+        exit 42
+    fi
+
+    # linuxdeployqt would only deploy existing binaries in AppDir if they are located in AppDir/usr/lib
+    # We do not want to put gstreamer plugins in this location, so they are not deployed.
+    # We then do need one -executable=file entry per plugin...
+    GSTREAMER_PLUGINS=
+    while IFS= read -r gstreamer_plugin; do
+        GSTREAMER_PLUGINS="${GSTREAMER_PLUGINS} -executable=\"${gstreamer_plugin}\""
+    done < <( find "${TARGET_GSTREAMER_PLUGINS}" -type f )
+
+    eval $KAIDAN_SOURCES/3rdparty/linuxdeployqt/squashfs-root/AppRun \
+            $APPDIR/usr/share/applications/kaidan.desktop \
+            -qmldir=$KAIDAN_SOURCES/src/qml/ \
+            -qmlimport=/opt/kf5/lib/x86_64-linux-gnu/qml \
+            -extra-plugins="$(join_by , "${extra_plugins[@]}")" \
+            ${GSTREAMER_PLUGINS} \
+            -appimage -no-copy-copyright-files \
+            $QMAKE_BINARY
 }

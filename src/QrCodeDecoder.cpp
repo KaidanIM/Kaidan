@@ -55,7 +55,7 @@ void QrCodeDecoder::decodeImage(const QImage &image)
 	DecodeHints decodeHints;
 
 	// Advise the decoder to also decode rotated QR codes.
-	decodeHints.setShouldTryRotate(true);
+	decodeHints.setTryRotate(true);
 
 	// Advise the decoder to only decode QR codes.
 	std::vector<BarcodeFormat> allowedFormats;

@@ -9,6 +9,7 @@ clazy:
   variables:
     CMAKE_CXX_COMPILER: clazy
   script: utils/travis/build.sh
+  allow_failure: true
 
 qmllint:
   stage: test

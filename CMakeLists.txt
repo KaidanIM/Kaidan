@@ -55,11 +55,10 @@ include(FeatureSummary)
 kde_enable_exceptions()
 
 # Find packages
-find_package(PkgConfig REQUIRED)
 find_package(Qt5 ${QT_MIN_VERSION} REQUIRED NO_MODULE COMPONENTS Core Qml Quick Svg Sql QuickControls2 Xml Multimedia)
 find_package(KF5Kirigami2 REQUIRED)
 find_package(ZXing REQUIRED COMPONENTS Core)
-pkg_search_module(QXmpp REQUIRED qxmpp>=1.0)
+find_package(QXmpp 1.0.0 REQUIRED)
 
 # Optional QtQuickCompiler
 if(QUICK_COMPILER)
@@ -98,6 +97,7 @@ if(ANDROID)
 endif()
 
 if(ANDROID OR WIN32)
+	find_package(PkgConfig REQUIRED)
 	pkg_search_module(OPENSSL REQUIRED openssl IMPORTED_TARGET)
 	message(STATUS "Using OpenSSL ${OPENSSL_VERSION}")
 endif()
@@ -142,8 +142,6 @@ elseif(WIN32)
 	message(STATUS ${KAIDAN_ICNS})
 endif()
 
-link_directories(${QXmpp_LIBDIR})
-
 if(QUICK_COMPILER)
 	qtquick_compiler_add_resources(KAIDAN_QML_QRC kaidan_qml.qrc)
 else()
@@ -171,18 +169,9 @@ target_link_libraries(${PROJECT_NAME}
 	Qt5::Xml
 	Qt5::Multimedia
 	ZXing::Core
+	QXmpp::QXmpp
 	${__Qt5Widgets_LIBRARIES}
 	${__KF5Notifications_LIBRARIES}
-	# currently needs to be hardcoded for windows builds
-	qxmpp
-)
-
-target_include_directories(${PROJECT_NAME} PUBLIC
-	${QXmpp_INCLUDE_DIRS}
-)
-
-target_compile_options(${PROJECT_NAME} PUBLIC
-	${QXmpp_CFLAGS_OTHER}
 )
 
 if(ANDROID OR WIN32 OR IOS)

@@ -44,7 +44,7 @@ Kirigami.ScrollablePage {
 
 	title: chatName
 	keyboardNavigationEnabled: true
-	actions.contextualActions: [
+	contextualActions: [
 		Kirigami.Action {
 			visible: !isWritingSpoiler
 			icon.name: "password-show-off"

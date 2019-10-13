@@ -38,7 +38,7 @@ import im.kaidan.kaidan 1.0
 Kirigami.Page {
 	title: qsTr("Log in")
 
-	actions.contextualActions: [
+	contextualActions: [
 		Kirigami.Action {
 			text: qsTr("Log in using a QR-Code")
 			icon.name: "view-barcode"

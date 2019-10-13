@@ -31,7 +31,7 @@
 import QtQuick 2.7
 import QtQuick.Layouts 1.3
 import QtQuick.Controls 2.3 as Controls
-import org.kde.kirigami 2.0 as Kirigami
+import org.kde.kirigami 2.8 as Kirigami
 import im.kaidan.kaidan 1.0
 import "elements"
 
@@ -76,12 +76,11 @@ Kirigami.ScrollablePage {
 
 	header: Item {
 		height: searchField.visible ? searchField.height : 0
-		Controls.TextField {
+		Kirigami.SearchField {
 			id: searchField
 			width: parent.width
 			visible: false
 			focus: visible
-			placeholderText: qsTr("Search…")
 			onVisibleChanged: text = ""
 			onTextChanged: filterModel.setFilterFixedString(text.toLowerCase())
 		}

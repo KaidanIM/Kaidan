@@ -63,15 +63,17 @@ Kirigami.ScrollablePage {
 	}
 
 	rightAction: Kirigami.Action {
+		id: searchAction
 		text: qsTr("Search contacts")
-		iconName: "search"
+		checkable: true
+		icon.name: "search"
 		onTriggered: {
-			if (searchField.visible) {
-				searchField.visible = false
-			} else {
-				searchField.visible = true
+			if (checked) {
+				searchField.forceActiveFocus()
+				searchField.selectAll()
 			}
 		}
+		Keys.onEscapePressed: checked = false
 	}
 
 	header: Item {
@@ -79,10 +81,14 @@ Kirigami.ScrollablePage {
 		Kirigami.SearchField {
 			id: searchField
 			width: parent.width
-			visible: false
-			focus: visible
+			visible: searchAction.checked
 			onVisibleChanged: text = ""
 			onTextChanged: filterModel.setFilterFixedString(text.toLowerCase())
+			onActiveFocusChanged: {
+				if (activeFocus) {
+					searchAction.checked = true
+				}
+			}
 		}
 	}
 
@@ -111,7 +117,7 @@ Kirigami.ScrollablePage {
 				}
 			}
 			onClicked: {
-				searchField.visible = false
+				searchAction.checked = false
 				// We need to cache the chatName, because changing the chatPartner in the
 				// message model will in some cases also update the roster model. That
 				// will then remove this item and readd an updated version of it, so

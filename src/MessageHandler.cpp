@@ -95,7 +95,7 @@ void MessageHandler::handleMessage(const QXmppMessage &msg)
 	message.setId(msg.id());
 	message.setBody(msg.body());
 	message.setMediaType(MessageType::MessageText); // default to text message without media
-#if (QXMPP_VERSION) >= QT_VERSION_CHECK(1, 0, 1)
+#if (QXMPP_VERSION) >= QT_VERSION_CHECK(1, 1, 0)
 	message.setIsSpoiler(msg.isSpoiler());
 	message.setSpoilerHint(msg.spoilerHint());
 #else

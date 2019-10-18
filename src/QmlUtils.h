@@ -65,7 +65,6 @@ public:
 	 */
 	Q_INVOKABLE static QColor presenceTypeToColor(Enums::AvailabilityTypes type);
 
-public slots:
 	/**
 	 * Returns a URL to a given resource file name
 	 *
@@ -73,12 +72,12 @@ public slots:
 	 * If the file was found, it'll return a `file://` or a `qrc:/` url to
 	 * the file.
 	 */
-	QString getResourcePath(const QString &resourceName) const;
+	Q_INVOKABLE static QString getResourcePath(const QString &resourceName);
 
 	/**
 	 * Returns a string of this build's Kaidan version
 	 */
-	QString getVersionString() const
+	Q_INVOKABLE static QString getVersionString()
 	{
 		return VERSION_STRING;
 	}
@@ -88,7 +87,7 @@ public slots:
 	 *
 	 * See QString::simplified for more information.
 	 */
-	QString removeNewLinesFromString(const QString &input) const
+	Q_INVOKABLE static QString removeNewLinesFromString(const QString &input)
 	{
 		return input.simplified();
 	}
@@ -97,40 +96,40 @@ public slots:
 	 * Checks whether a file is an image and could be displayed as such.
 	 * @param fileUrl URL to the possible image file
 	 */
-	bool isImageFile(const QUrl &fileUrl) const;
+	Q_INVOKABLE static bool isImageFile(const QUrl &fileUrl);
 
 	/**
 	 * Copy text to the clipboard
 	 */
-	void copyToClipboard(const QString &text) const;
+	Q_INVOKABLE static void copyToClipboard(const QString &text);
 
 	/**
 	 * Returns the file name from a URL
 	 */
-	QString fileNameFromUrl(const QUrl &url) const;
+	Q_INVOKABLE static QString fileNameFromUrl(const QUrl &url);
 
 	/**
 	 * Returns the file size from a URL
 	 */
-	QString fileSizeFromUrl(const QUrl &url) const;
+	Q_INVOKABLE static QString fileSizeFromUrl(const QUrl &url);
 
 	/**
 	 * Styles/formats a message for displaying
 	 *
 	 * This currently only adds some link highlighting
 	 */
-	QString formatMessage(const QString &message) const;
+	Q_INVOKABLE static QString formatMessage(const QString &message);
 
 	/**
 	 * Returns a consistent user color generated from the nickname.
 	 */
-	QColor getUserColor(const QString &nickName) const;
+	Q_INVOKABLE static QColor getUserColor(const QString &nickName);
 
 private:
 	/**
 	 * Highlights links in a list of words
 	 */
-	QString processMsgFormatting(const QStringList &words, bool isFirst = true) const;
+	static QString processMsgFormatting(const QStringList &words, bool isFirst = true);
 };
 
 #endif // UTILS_H

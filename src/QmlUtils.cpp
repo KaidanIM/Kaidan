@@ -117,7 +117,7 @@ QColor QmlUtils::presenceTypeToColor(AvailabilityTypes type)
 	Q_UNREACHABLE();
 }
 
-QString QmlUtils::getResourcePath(const QString &name) const
+QString QmlUtils::getResourcePath(const QString &name)
 {
 	// We generally prefer to first search for files in application resources
 	if (QFile::exists(":/" + name))
@@ -155,42 +155,42 @@ QString QmlUtils::getResourcePath(const QString &name) const
 	return QString();
 }
 
-bool QmlUtils::isImageFile(const QUrl &fileUrl) const
+bool QmlUtils::isImageFile(const QUrl &fileUrl)
 {
 	QMimeType type = QMimeDatabase().mimeTypeForUrl(fileUrl);
 	return type.inherits("image/jpeg") || type.inherits("image/png");
 }
 
-void QmlUtils::copyToClipboard(const QString &text) const
+void QmlUtils::copyToClipboard(const QString &text)
 {
 	QGuiApplication::clipboard()->setText(text);
 }
 
-QString QmlUtils::fileNameFromUrl(const QUrl &url) const
+QString QmlUtils::fileNameFromUrl(const QUrl &url)
 {
 	return QUrl(url).fileName();
 }
 
-QString QmlUtils::fileSizeFromUrl(const QUrl &url) const
+QString QmlUtils::fileSizeFromUrl(const QUrl &url)
 {
 	return QLocale::system().formattedDataSize(
 	            QFileInfo(QUrl(url).toLocalFile()).size());
 }
 
-QString QmlUtils::formatMessage(const QString &message) const
+QString QmlUtils::formatMessage(const QString &message)
 {
 	// escape all special XML chars (like '<' and '>')
 	// and spilt into words for processing
 	return processMsgFormatting(message.toHtmlEscaped().split(" "));
 }
 
-QColor QmlUtils::getUserColor(const QString &nickName) const
+QColor QmlUtils::getUserColor(const QString &nickName)
 {
 	QXmppColorGenerator::RGBColor color = QXmppColorGenerator::generateColor(nickName);
 	return {color.red, color.green, color.blue};
 }
 
-QString QmlUtils::processMsgFormatting(const QStringList &list, bool isFirst) const
+QString QmlUtils::processMsgFormatting(const QStringList &list, bool isFirst)
 {
 	if (list.isEmpty())
 		return QString();

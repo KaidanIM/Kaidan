@@ -151,21 +151,22 @@ RowLayout {
 			RowLayout {
 				id: spoilerHintRow
 				visible: isSpoiler
-				MouseArea {
-					anchors.fill: parent
-					acceptedButtons: Qt.LeftButton | Qt.RightButton
-					onClicked: {
-						if (mouse.button === Qt.LeftButton) {
-							isShowingSpoiler = !isShowingSpoiler
-						}
-					}
-				}
+
 				Controls.Label {
 					id: dateLabeltest
 					text: spoilerHint == "" ? qsTr("Spoiler") : spoilerHint
 					color: sentByMe ? Kirigami.Theme.textColor
 								: Kirigami.Theme.complementaryTextColor
 					font.pixelSize: Kirigami.Units.gridUnit * 0.8
+					MouseArea {
+						anchors.fill: parent
+						acceptedButtons: Qt.LeftButton | Qt.RightButton
+						onClicked: {
+							if (mouse.button === Qt.LeftButton) {
+								isShowingSpoiler = !isShowingSpoiler
+							}
+						}
+					}
 				}
 
 				Item {
@@ -220,7 +221,7 @@ RowLayout {
 					}
 					property string sourceUrl: "file://" + mediaLocation
 					Layout.maximumWidth: root.width - Kirigami.Units.gridUnit * 6
-					Layout.preferredHeight: loaded ? item.paintedHeight : 0
+					Layout.preferredHeight: item ? item.paintedHeight : 0
 				}
 
 

@@ -67,15 +67,7 @@ android:
   stage: deploy
   image: kdeorg/android-arm-sdk
   script:
-    - sudo apt update
-    - sudo apt -y install inkscape optipng
-    - GIT_EXTRA="--branch ${KF5_VERSION}" /opt/helpers/build-kde-dependencies --withProject kirigami
-    - /opt/helpers/build-cmake qxmpp https://github.com/qxmpp-project/qxmpp.git -DBUILD_EXAMPLES=OFF -DBUILD_TESTS=OFF
-    - /opt/helpers/build-cmake zxing-cpp https://github.com/nu-book/zxing-cpp.git
-    - GIT_EXTRA="--branch ${CI_COMMIT_REF_NAME} --recursive" /opt/helpers/build-cmake ${CI_PROJECT_NAME} ${CI_REPOSITORY_URL} -DQTANDROID_EXPORTED_TARGET=kaidan -DANDROID_APK_DIR=${CI_PROJECT_DIR}/src/${CI_PROJECT_NAME}/misc/android -DI18N=1 -DUSE_KNOTIFICATIONS=OFF
-    - ${CI_PROJECT_DIR}/src/${CI_PROJECT_NAME}/utils/render-logos.sh
-    - /opt/helpers/create-apk ${CI_PROJECT_NAME}
-    - mv ${CI_PROJECT_DIR}/build/${CI_PROJECT_NAME}/kaidan_build_apk/build/outputs/apk/kaidan_build_apk-debug.apk ${CI_PROJECT_DIR}
+    - utils/build-android-docker.sh
   variables:
     KF5_VERSION: master
   allow_failure: true

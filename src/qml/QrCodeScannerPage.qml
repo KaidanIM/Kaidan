@@ -95,5 +95,9 @@ Kirigami.Page {
 			focusMode: Camera.FocusContinuous
 			focusPointMode: Camera.FocusPointCenter
 		}
+
+		Component.onCompleted: {
+			scannerFilter.setCameraDefaultVideoFormat(camera);
+		}
 	}
 }

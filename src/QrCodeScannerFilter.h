@@ -48,7 +48,6 @@ class QrCodeScannerFilter : public QAbstractVideoFilter
 	friend class QrCodeScannerFilterRunnable;
 
 	Q_OBJECT
-	Q_PROPERTY(QrCodeDecoder* decoder READ decoder)
 
 public:
 	/**
@@ -64,6 +63,13 @@ public:
 	 */
 	QrCodeDecoder *decoder();
 	QVideoFilterRunnable *createFilterRunnable() override;
+
+	/**
+	 * Sets the video frame format of the QML Camera object to our default format
+	 *
+	 * @param qmlCamera Camera object from QML
+	 */
+	Q_INVOKABLE void setCameraDefaultVideoFormat(QObject *qmlCamera);
 
 signals:
 	/**

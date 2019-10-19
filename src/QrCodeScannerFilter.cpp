@@ -31,6 +31,8 @@
 #include "QrCodeScannerFilter.h"
 
 #include <QDebug>
+#include <QCamera>
+#include <QCameraViewfinderSettings>
 #include <QtConcurrent/QtConcurrent>
 
 QrCodeScannerFilter::QrCodeScannerFilter(QObject *parent)

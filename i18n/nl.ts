@@ -46,43 +46,43 @@
     <name>ChangePassword</name>
     <message>
         <source>Change password</source>
-        <translation type="unfinished"></translation>
+        <translation>Wachtwoord veranderen</translation>
     </message>
     <message>
         <source>Current password:</source>
-        <translation type="unfinished"></translation>
+        <translation>Huidig wachtwoord:</translation>
     </message>
     <message>
         <source>New password:</source>
-        <translation type="unfinished"></translation>
+        <translation>Nieuw wachtwoord:</translation>
     </message>
     <message>
         <source>New password (repeat):</source>
-        <translation type="unfinished"></translation>
+        <translation>Nieuw wachtwoord (opnieuw):</translation>
     </message>
     <message>
         <source>New passwords do not match.</source>
-        <translation type="unfinished"></translation>
+        <translation>De ingevulde wachtwoorden komen niet overeen.</translation>
     </message>
     <message>
         <source>Current password is invalid.</source>
-        <translation type="unfinished"></translation>
+        <translation>Het huidige wachtwoord is ongeldig.</translation>
     </message>
     <message>
         <source>You need to be connected to change your password.</source>
-        <translation type="unfinished"></translation>
+        <translation>Uw moet verbonden zijn om uw wachtwoord te kunnen veranderen.</translation>
     </message>
     <message>
         <source>After changing your password, you will need to reenter it on all your other devices.</source>
-        <translation type="unfinished"></translation>
+        <translation>Nadat u uw wachtwoord heeft veranderd, zult u het opnieuw in moeten voeren op andere apparaten waarop u bent ingelogd.</translation>
     </message>
     <message>
         <source>Cancel</source>
-        <translation type="unfinished">Annuleer</translation>
+        <translation>Annuleren</translation>
     </message>
     <message>
         <source>Change</source>
-        <translation type="unfinished"></translation>
+        <translation>Veranderen</translation>
     </message>
 </context>
 <context>
@@ -97,7 +97,7 @@
     </message>
     <message>
         <source>Spoiler</source>
-        <translation type="unfinished">Spoiler</translation>
+        <translation>Spoiler</translation>
     </message>
     <message>
         <source>Download</source>
@@ -105,7 +105,7 @@
     </message>
     <message>
         <source>Copy download URL</source>
-        <translation type="unfinished"></translation>
+        <translation>Kopiëer downloadlink</translation>
     </message>
 </context>
 <context>
@@ -120,7 +120,7 @@
     </message>
     <message>
         <source>Image</source>
-        <translation>Beeld</translation>
+        <translation>Afbeelding</translation>
     </message>
     <message>
         <source>Video</source>
@@ -128,7 +128,7 @@
     </message>
     <message>
         <source>Audio</source>
-        <translation>Audio</translation>
+        <translation>Geluid</translation>
     </message>
     <message>
         <source>Document</source>
@@ -148,19 +148,19 @@
     </message>
     <message>
         <source>Spoiler hint</source>
-        <translation type="unfinished">Spoilerhint</translation>
+        <translation>Spoilerhint</translation>
     </message>
     <message>
         <source>Unmute notifications</source>
-        <translation type="unfinished"></translation>
+        <translation>Meldingen inschakelen</translation>
     </message>
     <message>
         <source>Mute notifications</source>
-        <translation type="unfinished"></translation>
+        <translation>Meldingen uitschakelen</translation>
     </message>
     <message>
         <source>View profile</source>
-        <translation type="unfinished"></translation>
+        <translation>Profiel bekijken</translation>
     </message>
 </context>
 <context>
@@ -185,54 +185,54 @@
     <name>EmojiPicker</name>
     <message>
         <source>Favorites</source>
-        <translation type="unfinished"></translation>
+        <translation>Favorieten</translation>
     </message>
     <message>
         <source>People</source>
-        <translation type="unfinished"></translation>
+        <translation>Mensen</translation>
     </message>
     <message>
         <source>Nature</source>
-        <translation type="unfinished"></translation>
+        <translation>Natuur</translation>
     </message>
     <message>
         <source>Food</source>
-        <translation type="unfinished"></translation>
+        <translation>Eten</translation>
     </message>
     <message>
         <source>Activity</source>
-        <translation type="unfinished"></translation>
+        <translation>Activiteiten</translation>
     </message>
     <message>
         <source>Travel</source>
-        <translation type="unfinished"></translation>
+        <translation>Reizigen</translation>
     </message>
     <message>
         <source>Objects</source>
-        <translation type="unfinished"></translation>
+        <translation>Voorwerpen</translation>
     </message>
     <message>
         <source>Symbols</source>
-        <translation type="unfinished"></translation>
+        <translation>Symbolen</translation>
     </message>
     <message>
         <source>Flags</source>
-        <translation type="unfinished"></translation>
+        <translation>Vlaggen</translation>
     </message>
     <message>
         <source>Search</source>
-        <translation type="unfinished"></translation>
+        <translation>Zoeken</translation>
     </message>
     <message>
         <source>Search emoji</source>
-        <translation type="unfinished"></translation>
+        <translation>Emoji&apos;s zoeken</translation>
     </message>
 </context>
 <context>
     <name>EmptyChatPage</name>
     <message>
         <source>Please select a chat to start messaging</source>
-        <translation type="unfinished">Selecteer een chat om een gesprek te beginnen.</translation>
+        <translation>Selecteer een chat om een gesprek te beginnen</translation>
     </message>
 </context>
 <context>
@@ -250,7 +250,7 @@
     </message>
     <message>
         <source>Close</source>
-        <translation type="unfinished">Sluit</translation>
+        <translation>Sluiten</translation>
     </message>
 </context>
 <context>
@@ -284,7 +284,7 @@
     </message>
     <message>
         <source>Settings</source>
-        <translation type="unfinished"></translation>
+        <translation>Instellingen</translation>
     </message>
 </context>
 <context>
@@ -296,11 +296,11 @@
     </message>
     <message>
         <source>No password found. Please enter it.</source>
-        <translation type="unfinished"></translation>
+        <translation>Er is geen wachtwoord gevonden. Voor alstublieft een wachtwoord in.</translation>
     </message>
     <message>
         <source>No valid login QR code found.</source>
-        <translation type="unfinished"></translation>
+        <translation>Geen geldige login-QR-code gevonden.</translation>
     </message>
 </context>
 <context>
@@ -383,7 +383,7 @@
     </message>
     <message>
         <source>Log in using a QR-Code</source>
-        <translation type="unfinished"></translation>
+        <translation>Log in met behulp van een QR-code</translation>
     </message>
 </context>
 <context>
@@ -398,81 +398,82 @@
     </message>
     <message>
         <source>Spoiler</source>
-        <translation type="unfinished">Spoiler</translation>
+        <translation>Spoiler</translation>
     </message>
     <message>
         <source>Message could not be sent.</source>
-        <translation type="unfinished"></translation>
+        <translation>Het bericht kon niet worden verzonden.</translation>
     </message>
     <message>
         <source>Message correction was not successful.</source>
-        <translation type="unfinished"></translation>
+        <translation>Het corrigeren van het bericht is mislukt.</translation>
     </message>
 </context>
 <context>
     <name>QmlUtils</name>
     <message>
         <source>Available</source>
-        <translation type="unfinished">Beschikbaar</translation>
+        <translation>Beschikbaar</translation>
     </message>
     <message>
         <source>Free for chat</source>
-        <translation type="unfinished">Beschikbaar voor gesprek</translation>
+        <translation>Beschikbaar voor gesprek</translation>
     </message>
     <message>
         <source>Away</source>
-        <translation type="unfinished">Afwezig</translation>
+        <translation>Afwezig</translation>
     </message>
     <message>
         <source>Do not disturb</source>
-        <translation type="unfinished">Niet storen</translation>
+        <translation>Niet storen</translation>
     </message>
     <message>
         <source>Away for longer</source>
-        <translation type="unfinished">Langere tijd afwezig</translation>
+        <translation>Langere tijd afwezig</translation>
     </message>
     <message>
         <source>Offline</source>
-        <translation type="unfinished">Offline</translation>
+        <translation>Offline</translation>
     </message>
     <message>
         <source>Error</source>
-        <translation type="unfinished">Fout</translation>
+        <translation>Fout</translation>
     </message>
     <message>
         <source>Invisible</source>
-        <translation type="unfinished"></translation>
+        <translation>Niet zichtbaar</translation>
     </message>
 </context>
 <context>
     <name>QrCodeScannerPage</name>
     <message>
         <source>Scan QR code</source>
-        <translation type="unfinished"></translation>
+        <translation>Scan een QR-code</translation>
     </message>
     <message>
         <source>There is no camera available.</source>
-        <translation type="unfinished"></translation>
+        <translation>Er is geen camera beschikbaar.</translation>
     </message>
     <message>
         <source>Your camera is busy.
 Try to close other applications using the camera.</source>
-        <translation type="unfinished"></translation>
+        <translation>Uw camera is bezig.
+Probeer andere applicaties die de camera gebruiken te sluiten.</translation>
     </message>
     <message>
         <source>The camera format &apos;%1&apos; is not supported.</source>
-        <translation type="unfinished"></translation>
+        <translation>Het cameraformaat &apos;%1&apos; wordt niet ondersteund.</translation>
     </message>
 </context>
 <context>
     <name>RegistrationManager</name>
     <message>
         <source>Password changed successfully.</source>
-        <translation type="unfinished"></translation>
+        <translation>Uw wachtwoord is veranderd.</translation>
     </message>
     <message>
         <source>Failed to change password: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Fout bij het wijzigen van wachtwoord: %1</translation>
     </message>
 </context>
 <context>
@@ -561,11 +562,11 @@ Try to close other applications using the camera.</source>
     </message>
     <message>
         <source>Spoiler</source>
-        <translation type="unfinished">Spoiler</translation>
+        <translation>Spoiler</translation>
     </message>
     <message>
         <source>Could not rename contact, as a result of not being connected.</source>
-        <translation type="unfinished"></translation>
+        <translation>De naam van het contact kon niet worden veranderd, doordat er geen verbinding beschikbaar is.</translation>
     </message>
 </context>
 <context>
@@ -588,11 +589,11 @@ Try to close other applications using the camera.</source>
     </message>
     <message>
         <source>Search contacts</source>
-        <translation type="unfinished"></translation>
+        <translation>Door contacten zoeken</translation>
     </message>
     <message>
         <source>Search…</source>
-        <translation type="unfinished"></translation>
+        <translation>Zoeken...</translation>
     </message>
 </context>
 <context>
@@ -622,30 +623,30 @@ Try to close other applications using the camera.</source>
     <name>RosterRenameContactSheet</name>
     <message>
         <source>Rename contact</source>
-        <translation type="unfinished"></translation>
+        <translation>Naam van contact veranderen</translation>
     </message>
     <message>
         <source>Edit name:</source>
-        <translation type="unfinished"></translation>
+        <translation>Naam wijzigen:</translation>
     </message>
     <message>
         <source>Cancel</source>
-        <translation type="unfinished">Annuleer</translation>
+        <translation>Annuleren</translation>
     </message>
     <message>
         <source>Rename</source>
-        <translation type="unfinished"></translation>
+        <translation>Naam wijzigen</translation>
     </message>
 </context>
 <context>
     <name>SendMediaSheet</name>
     <message>
         <source>Cancel</source>
-        <translation type="unfinished">Annuleer</translation>
+        <translation>Annuleer</translation>
     </message>
     <message>
         <source>Send</source>
-        <translation type="unfinished">Verstuur</translation>
+        <translation>Verstuur</translation>
     </message>
     <message>
         <source>Caption</source>
@@ -656,22 +657,22 @@ Try to close other applications using the camera.</source>
     <name>SettingsPage</name>
     <message>
         <source>Settings</source>
-        <translation type="unfinished"></translation>
+        <translation>Instellingen</translation>
     </message>
     <message>
         <source>Change password</source>
-        <translation type="unfinished"></translation>
+        <translation>Wachtwoord wijzigen</translation>
     </message>
     <message>
         <source>Changes your account&apos;s password. You will need to re-enter it on your other devices.</source>
-        <translation type="unfinished"></translation>
+        <translation>Deze instelling verandert het wachtwoord van uw account. Als u ingelogd bent op andere apparaten zult u het daar opnieuw in moeten voeren.</translation>
     </message>
 </context>
 <context>
     <name>SubRequestAcceptSheet</name>
     <message>
         <source>Subscription Request</source>
-        <translation type="unfinished">Abonneringsverzoek</translation>
+        <translation>Abonneerverzoek</translation>
     </message>
     <message>
         <source>You received a subscription request by &lt;b&gt;%1&lt;/b&gt;. If you accept it, the account will have access to your presence status.</source>
@@ -701,34 +702,34 @@ Try to close other applications using the camera.</source>
     <name>UserProfilePage</name>
     <message>
         <source>Profile</source>
-        <translation type="unfinished"></translation>
+        <translation>Profiel</translation>
     </message>
 </context>
 <context>
     <name>VCardModel</name>
     <message>
         <source>Name</source>
-        <translation type="unfinished"></translation>
+        <translation>Naam</translation>
     </message>
     <message>
         <source>Nickname</source>
-        <translation type="unfinished"></translation>
+        <translation>Bijnaam</translation>
     </message>
     <message>
         <source>About</source>
-        <translation type="unfinished">Over</translation>
+        <translation>Over</translation>
     </message>
     <message>
         <source>Email</source>
-        <translation type="unfinished"></translation>
+        <translation>E-mail</translation>
     </message>
     <message>
         <source>Birthday</source>
-        <translation type="unfinished"></translation>
+        <translation>Verjaardag</translation>
     </message>
     <message>
         <source>Website</source>
-        <translation type="unfinished"></translation>
+        <translation>Website</translation>
     </message>
 </context>
 </TS>

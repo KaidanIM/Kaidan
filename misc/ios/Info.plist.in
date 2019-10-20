@@ -11,17 +11,17 @@
 	<key>CFBundleIconFile</key>
 	<string>kaidan.icns</string>
 	<key>CFBundleIdentifier</key>
-	<string>im.kaidan.kaidan</string>
+	<string>@APPLICATION_ID@</string>
 	<key>CFBundleName</key>
-	<string>Kaidan</string>
+	<string>@APPLICATION_NAME@</string>
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
-	<string>${QMAKE_SHORT_VERSION}</string>
+	<string>@VERSION_CODE@</string>
 	<key>CFBundleSignature</key>
-	<string>${QMAKE_PKGINFO_TYPEINFO}</string>
+	<string></string>
 	<key>CFBundleVersion</key>
-	<string>${QMAKE_FULL_VERSION}</string>
+	<string>@VERSION_STRING@</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>MinimumOSVersion</key>

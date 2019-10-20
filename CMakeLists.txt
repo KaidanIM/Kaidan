@@ -377,6 +377,9 @@ target_compile_definitions(${PROJECT_NAME} PRIVATE
 if(ANDROID)
 	configure_file(${CMAKE_SOURCE_DIR}/misc/android/AndroidManifest.xml.in
 	               ${CMAKE_SOURCE_DIR}/misc/android/AndroidManifest.xml)
+elseif(IOS)
+	configure_file(${CMAKE_SOURCE_DIR}/misc/ios/Info.plist.in
+	               ${CMAKE_SOURCE_DIR}/misc/ios/Info.plist)
 endif()
 
 if(UBUNTU_TOUCH AND CLICK_ARCH)

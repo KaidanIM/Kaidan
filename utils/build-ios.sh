@@ -9,7 +9,7 @@ fi
 # Build type is one of:
 # Debug, Release, RelWithDebInfo and MinSizeRel
 BUILD_TYPE="${BUILD_TYPE:-Debug}"
-PLATFORM="${PLATFORM:-SIMULATOR64}"
+PLATFORM="${PLATFORM:-OS64}"
 
 KAIDAN_SOURCES=$(dirname "$(greadlink -f "${0}")")/..
 BUILD_FOLDER=$KAIDAN_SOURCES/build-$PLATFORM
@@ -168,7 +168,8 @@ echo "*****************************************"
         -DPKG_CONFIG_EXECUTABLE=/usr/local/bin/pkg-config \
         -DPLATFORM=$PLATFORM \
         -DARCH="arm64" \
-        -DUSE_KNOTIFICATIONS=0
+        -DUSE_KNOTIFICATIONS=0 \
+        -DQUICK_COMPILER=1
 
 xcodebuild CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO ENABLE_BITCODE=OFF
 }

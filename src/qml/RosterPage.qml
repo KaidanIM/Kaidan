@@ -73,22 +73,19 @@ Kirigami.ScrollablePage {
 				searchField.selectAll()
 			}
 		}
-		Keys.onEscapePressed: checked = false
+		shortcut: "Ctrl+F"
 	}
 
 	header: Item {
 		height: searchField.visible ? searchField.height : 0
 		Kirigami.SearchField {
 			id: searchField
+			focusSequence: ""
 			width: parent.width
+			height: Kirigami.Units.gridUnit * 2
 			visible: searchAction.checked
 			onVisibleChanged: text = ""
 			onTextChanged: filterModel.setFilterFixedString(text.toLowerCase())
-			onActiveFocusChanged: {
-				if (activeFocus) {
-					searchAction.checked = true
-				}
-			}
 		}
 	}
 

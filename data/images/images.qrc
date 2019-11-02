@@ -5,7 +5,8 @@
         <file>check-mark.svg</file>
         <file>kaidan.svg</file>
     </qresource>
-    <qresource prefix="/org/kde/kirigami/icons/">
+    <qresource prefix="/icons/breeze/apps/48/">
         <file>kaidan.svg</file>
+        <file>kaidan-bw.svg</file>
     </qresource>
 </RCC>

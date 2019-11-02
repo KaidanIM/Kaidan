@@ -328,12 +328,13 @@ def main():
 		CopyrightTarget(
 			files = [
 				"misc/kaidan.svg", "misc/kaidan-small-margin.svg", "misc/kaidan-128x128.png",
-				"data/images/banner.png"
+				"data/images/banner.png", "data/images/kaidan-bw.svg"
 			],
 			licenseName = "CC-BY-SA-4.0",
 			authorList = {
 				"Ilya Bizyaev <bizyaev@zoho.com>": CopyrightAuthor(years = "2016-2017"),
 				"MBB <mbb-mail@gmx.de>": CopyrightAuthor(years = "2016"),
+				"Melvin Keskin <melvo@olomono.de": CopyrightAuthor(years = "2019")
 			}
 		),
 		CopyrightTarget(

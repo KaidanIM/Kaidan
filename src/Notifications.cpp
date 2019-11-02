@@ -42,9 +42,14 @@
 void Notifications::sendMessageNotification(const QString& jid, const QString& fromName, const QString& message)
 {
 	if (!Kaidan::instance()->notificationsMuted(jid)) {
-		KNotification *notif = new KNotification("new-message");
-		notif->setText(QString("<b>%1</b>: %2").arg(fromName, message));
-		notif->sendEvent();
+		KNotification *notification = new KNotification("new-message");
+		notification->setText(message);
+		notification->setTitle(fromName);
+#ifdef Q_OS_ANDROID
+		notification->setIconName("kaidan-bw");
+#endif
+		notification->setFlags(KNotification::Persistent);
+		notification->sendEvent();
 	}
 }
 #else

@@ -142,6 +142,11 @@ if(BUNDLE_ICONS OR UBUNTU_TOUCH OR ANDROID OR WIN32 OR APPLE)
 	set(KAIDAN_ICONS_QRC kirigami-icons.qrc)
 endif()
 
+# Bundled knotifications configuration files on platforms that require it
+if(ANDROID)
+	set(KAIDAN_NOTIFICATIONS_QRC "misc/notifications.qrc")
+endif()
+
 # Bundle images on Android, Windows, macOS and iOS
 if(ANDROID OR WIN32 OR APPLE)
 	set(KAIDAN_IMAGES_QRC "data/images/images.qrc")
@@ -175,9 +180,10 @@ add_executable(${PROJECT_NAME}
 	${KAIDAN_SOURCES}
 	${KAIDAN_QML_QRC}
 	${KAIDAN_MISC_QRC}
-	${KAIDAN_ICONS_QRC}  # only set if enabled
-	${KAIDAN_IMAGES_QRC} #
-	${I18N_QRC_CPP}      #
+	${KAIDAN_ICONS_QRC}          # only set if enabled
+	${KAIDAN_IMAGES_QRC}         #
+	${I18N_QRC_CPP}              #
+	${KAIDAN_NOTIFICATIONS_QRC}  #
 )
 
 target_link_libraries(${PROJECT_NAME}

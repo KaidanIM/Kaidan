@@ -33,36 +33,38 @@ import QtQuick.Controls 2.3 as Controls
 import QtGraphicalEffects 1.0
 import org.kde.kirigami 2.8 as Kirigami
 
-ChatPageBase {
-	verticalScrollBarPolicy: Qt.ScrollBarAlwaysOff
+import im.kaidan.kaidan 1.0
 
-	Item {
-		height: root.height * 0.8
+/**
+ * This is the base for a chat page.
+ */
+Kirigami.ScrollablePage {
+	// color of the the message bubbles on the left side
+	readonly property color leftMessageBubbleColor: {
+		Kirigami.Theme.colorSet = Kirigami.Theme.View
+		var accentColor = Kirigami.Theme.highlightColor
+		return Qt.tint(Kirigami.Theme.backgroundColor, Qt.rgba(accentColor.r, accentColor.g, accentColor.b, 0.1))
+	}
 
-		// glow effect around the message bubble
-		RectangularGlow {
-			anchors.fill: messageBubble
-			glowRadius: 0.8
-			spread: 0.3
-			cornerRadius: messageBubble.radius + glowRadius
-			color: Qt.darker(messageBubble.color, 1.2)
+	// color of the the message bubbles on the right side
+	readonly property color rightMessageBubbleColor: {
+		Kirigami.Theme.colorSet = Kirigami.Theme.View
+		return Kirigami.Theme.backgroundColor
+	}
+
+	// background of the chat page
+	background: Rectangle {
+		color: {
+			Kirigami.Theme.colorSet = Kirigami.Theme.Window
+			return Kirigami.Theme.backgroundColor
 		}
 
-		// message bubble
-		Rectangle {
-			id: messageBubble
-			anchors.centerIn: parent
-			width: label.width
-			height: label.height
-			radius: roundedCornersRadius
-			color: rightMessageBubbleColor
-
-			Controls.Label {
-				id: label
-				text: qsTr("Please select a chat to start messaging")
-				anchors.centerIn: parent
-				padding: Kirigami.Units.gridUnit * 0.4
-			}
+		Image {
+			source: kaidan.utils.getResourcePath("images/chat-page-background.svg")
+			anchors.fill: parent
+			fillMode: Image.Tile
+			horizontalAlignment: Image.AlignLeft
+			verticalAlignment: Image.AlignTop
 		}
 	}
 }

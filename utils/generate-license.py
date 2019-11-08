@@ -338,12 +338,13 @@ def main():
 			}
 		),
 		CopyrightTarget(
-			files = ["data/images/chat.png"],
-			licenseName = "CC-BY-SA-3.0",
+			files = ["data/images/chat-page-background.svg"],
+			licenseName = "CC-BY-SA-4.0",
 			authorList = {
-				"Subtle Patterns, Toptal Designers": CopyrightAuthor(years = "2013")
+				"Mathis Brüchert <mbblp@protonmail.ch>": CopyrightAuthor(years = "2019"),
+				"Melvin Keskin <melvo@olomono.de>": CopyrightAuthor(years = "2019")
 			},
-			comment = "data/images/chat.png: From <https://www.toptal.com/designers/subtlepatterns/inspiration-geometry/>"
+			comment = "Inspired by graphic from https://www.toptal.com/designers/subtlepatterns/"
 		),
 		CopyrightTarget(
 			files = ["utils/convert-prl-libs-to-cmake.pl"],

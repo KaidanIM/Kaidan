@@ -29,9 +29,9 @@
  */
 
 import QtQuick 2.7
-import QtGraphicalEffects 1.0
 import QtQuick.Layouts 1.3
 import QtQuick.Controls 2.3 as Controls
+import QtGraphicalEffects 1.0
 import org.kde.kirigami 2.0 as Kirigami
 
 import im.kaidan.kaidan 1.0
@@ -66,7 +66,7 @@ RowLayout {
 
 	signal messageEditRequested(string id, string body)
 
-	// own messages are on the right, others on the left
+	// Own messages are on the right, others on the left side.
 	layoutDirection: sentByMe ? Qt.RightToLeft : Qt.LeftToRight
 	spacing: 8
 	width: ListView.view.width
@@ -86,25 +86,26 @@ RowLayout {
 		Layout.preferredWidth: Kirigami.Units.gridUnit * 2.2
 	}
 
-	// message bubble/box
+	// message bubble
 	Item {
-		Layout.preferredWidth: content.width + 13
-		Layout.preferredHeight: content.height + 8
+		Layout.preferredWidth: content.width + 16
+		Layout.preferredHeight: content.height + 16
 
+		// glow effect around the inner area of the message bubble
+		RectangularGlow {
+			anchors.fill: messageBubble
+			glowRadius: 0.8
+			spread: 0.3
+			cornerRadius: messageBubble.radius + glowRadius
+			color: Qt.darker(messageBubble.color, 1.2)
+		}
+
+		// inner area of the message bubble
 		Rectangle {
-			id: box
+			id: messageBubble
 			anchors.fill: parent
-			color: sentByMe ? Kirigami.Theme.complementaryTextColor
-							: Kirigami.Theme.highlightColor
-			radius: Kirigami.Units.smallSpacing * 2
-			layer.enabled: box.visible
-			layer.effect: DropShadow {
-				verticalOffset: Kirigami.Units.gridUnit * 0.08
-				horizontalOffset: Kirigami.Units.gridUnit * 0.08
-				color: Kirigami.Theme.disabledTextColor
-				samples: 10
-				spread: 0.1
-			}
+			radius: roundedCornersRadius
+			color: sentByMe ? rightMessageBubbleColor : leftMessageBubbleColor
 
 			MouseArea {
 				anchors.fill: parent
@@ -147,18 +148,16 @@ RowLayout {
 
 		ColumnLayout {
 			id: content
-			spacing: 0
+			spacing: 5
 			anchors.centerIn: parent
-			anchors.margins: 4
+
 			RowLayout {
 				id: spoilerHintRow
 				visible: isSpoiler
 
 				Controls.Label {
-					id: dateLabeltest
 					text: spoilerHint == "" ? qsTr("Spoiler") : spoilerHint
-					color: sentByMe ? Kirigami.Theme.textColor
-								: Kirigami.Theme.complementaryTextColor
+					color: Kirigami.Theme.textColor
 					font.pixelSize: Kirigami.Units.gridUnit * 0.8
 					MouseArea {
 						anchors.fill: parent
@@ -180,22 +179,21 @@ RowLayout {
 					height: 28
 					width: 28
 					source: isShowingSpoiler ? "password-show-off" : "password-show-on"
-					color: sentByMe ? Kirigami.Theme.textColor : Kirigami.Theme.complementaryTextColor
+					color: Kirigami.Theme.textColor
 				}
 			}
 			Kirigami.Separator {
 				visible: isSpoiler
 				Layout.fillWidth: true
 				color: {
-					var bgColor = sentByMe ? Kirigami.Theme.backgroundColor : Kirigami.Theme.highlightColor
-					var textColor = sentByMe ? Kirigami.Theme.textColor : Kirigami.Theme.highlightedTextColor
+					var bgColor = Kirigami.Theme.backgroundColor
+					var textColor = Kirigami.Theme.textColor
 					return Qt.tint(textColor, Qt.rgba(bgColor.r, bgColor.g, bgColor.b, 0.7))
 				}
 			}
 
 			ColumnLayout {
 				visible: isSpoiler && isShowingSpoiler || !isSpoiler
-
 
 				Controls.ToolButton {
 					visible: {
@@ -257,8 +255,7 @@ RowLayout {
 					text: Utils.formatMessage(messageBody)
 					textFormat: Text.StyledText
 					wrapMode: Text.Wrap
-					color: sentByMe ? Kirigami.Theme.textColor
-					                : Kirigami.Theme.complementaryTextColor
+					color: Kirigami.Theme.textColor
 					onLinkActivated: Qt.openUrlExternally(link)
 
 					Layout.maximumWidth: media.enabled
@@ -269,19 +266,21 @@ RowLayout {
 					visible: isSpoiler && isShowingSpoiler
 					Layout.fillWidth: true
 					color: {
-						var bgColor = sentByMe ? Kirigami.Theme.backgroundColor : Kirigami.Theme.highlightColor
-						var textColor = sentByMe ? Kirigami.Theme.textColor : Kirigami.Theme.highlightedTextColor
+						var bgColor = Kirigami.Theme.backgroundColor
+						var textColor = Kirigami.Theme.textColor
 						return Qt.tint(textColor, Qt.rgba(bgColor.r, bgColor.g, bgColor.b, 0.7))
 					}
 				}
 			}
-			// message meta: date, isDelivered
+
+			// message meta data: date, isDelivered
 			RowLayout {
+				Layout.bottomMargin: -4
+
 				Controls.Label {
 					id: dateLabel
 					text: Qt.formatDateTime(dateTime, "dd. MMM yyyy, hh:mm")
-					color: sentByMe ? Kirigami.Theme.disabledTextColor
-					                : Qt.darker(Kirigami.Theme.disabledTextColor, 1.3)
+					color: Kirigami.Theme.disabledTextColor
 					font.pixelSize: Kirigami.Units.gridUnit * 0.8
 				}
 

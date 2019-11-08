@@ -42,6 +42,9 @@ Kirigami.ApplicationWindow {
 	minimumHeight: 300
 	minimumWidth: 280
 
+	// radius for using rounded corners
+	readonly property int roundedCornersRadius: Kirigami.Units.smallSpacing * 1.5
+
 	StatusBar {
 		color: Material.color(Material.Green, Material.Shade700)
 	}

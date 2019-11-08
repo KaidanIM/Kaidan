@@ -8,6 +8,7 @@ Files: src/*
 Copyright: 2016-2019, Linus Jahn <lnj@kaidan.im>
            2016-2019, Jonah Brüchert <jbb@kaidan.im>
            2017-2019, Ilya Bizyaev <bizyaev@zoho.com>
+           2018-2019, Nicolas Fella <nicolas.fella@gmx.de>
            2019, Melvin Keskin <melvo@olomono.de>
            2019, Filipe Azevedo <pasnox@gmail.com>
            2018, Allan Nordhøy <epost@anotheragency.no>
@@ -19,7 +20,6 @@ Copyright: 2016-2019, Linus Jahn <lnj@kaidan.im>
            2019, Nick Richards <nick@nedrichards.com>
            2019, Simon Redman <simon@ergotech.com>
            2019, Xavier <xavi@delape.net>
-           2018, Nicolas Fella <nicolas.fella@gmx.de>
            2018, Bjarne Roß <ross.b@freenet.de>
            2018, SohnyBohny <sohny.bean@streber24.de>
            2018, Marco Martin <notmart@gmail.com>
@@ -93,11 +93,12 @@ Copyright: 2016-2017, Ilya Bizyaev <bizyaev@zoho.com>
            2016, MBB <mbb-mail@gmx.de>
 License: CC-BY-SA-4.0
 
-Files: data/images/chat.png
-Copyright: 2013, Subtle Patterns, Toptal Designers
-License: CC-BY-SA-3.0
+Files: data/images/chat-page-background.svg
+Copyright: 2019, Mathis Brüchert <mbblp@protonmail.ch>
+           2019, Melvin Keskin <melvo@olomono.de>
+License: CC-BY-SA-4.0
 Comment: 
- data/images/chat.png: From <https://www.toptal.com/designers/subtlepatterns/inspiration-geometry/>
+ Inspired by graphic from https://www.toptal.com/designers/subtlepatterns/
 
 Files: utils/convert-prl-libs-to-cmake.pl
 Copyright: 2016, Konstantin Tokarev <annulen@yandex.ru>

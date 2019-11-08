@@ -30,8 +30,8 @@
 
 import QtQuick 2.7
 import QtQuick.Layouts 1.3
-import QtGraphicalEffects 1.0
 import QtQuick.Controls 2.3 as Controls
+import QtGraphicalEffects 1.0
 import QtMultimedia 5.8 as Multimedia
 import org.kde.kirigami 2.8 as Kirigami
 
@@ -41,7 +41,7 @@ import MediaUtils 0.1
 
 import "elements"
 
-Kirigami.ScrollablePage {
+ChatPageBase {
 	id: root
 
 	property string chatName
@@ -390,20 +390,11 @@ Kirigami.ScrollablePage {
 		}
 	}
 
-	background: Image {
-		id: bgimage
-		source: Utils.getResourcePath("images/chat.png")
-		anchors.fill: parent
-		fillMode: Image.Tile
-		horizontalAlignment: Image.AlignLeft
-		verticalAlignment: Image.AlignTop
-	}
-
 	// View containing the messages
 	ListView {
 		id: messageListView
 		verticalLayoutDirection: ListView.BottomToTop
-		spacing: Kirigami.Units.smallSpacing * 2
+		spacing: Kirigami.Units.smallSpacing * 1.5
 
 		// Highlighting of the message containing a searched string.
 		highlight: Component {

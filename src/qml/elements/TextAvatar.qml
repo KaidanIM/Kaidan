@@ -51,11 +51,9 @@ Rectangle {
 		property var model
 
 		renderType: Text.QtRendering
-		color: Kirigami.Theme.textColor
+		color: "white"
 
-		font.weight: Font.Bold
-		font.pointSize: 100
-		minimumPointSize: Kirigami.Theme.defaultFont.pointSize
+		font.pixelSize: parent.width * 0.45
 		fontSizeMode: Text.Fit
 
 		horizontalAlignment: Text.AlignHCenter

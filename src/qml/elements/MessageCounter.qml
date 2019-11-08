@@ -29,6 +29,7 @@
  */
 
 import QtQuick 2.7
+import org.kde.kirigami 2.8 as Kirigami
 
 Rectangle {
 	property int counter: 0
@@ -36,12 +37,12 @@ Rectangle {
 
 	id: counterCircle
 	radius: counterCircle.height * 0.5
-	color: muted ? "grey" : "#4CAF50"
+	color: muted ? "lightgray" : Kirigami.Theme.positiveTextColor
 
 	Text {
 		id: msgCounter
 		text: counter
-		color: "white"
+		color: Kirigami.Theme.backgroundColor
 		anchors.centerIn: parent
 	}
 }

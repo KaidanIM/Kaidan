@@ -72,13 +72,6 @@ Kirigami.SwipeListItem {
 			Layout.preferredHeight: parent.height - Kirigami.Units.gridUnit * 0.8
 			Layout.preferredWidth: parent.height - Kirigami.Units.gridUnit * 0.8
 
-			Controls.ToolTip {
-				visible: hovered && !Kirigami.Settings.isMobile
-				delay: Qt.styleHints.mousePressAndHoldInterval
-				text: generateToolTipText(listItem.name, listItem.jid,
-				                          listItem.presenceType, listItem.statusMsg)
-			}
-
 			Avatar {
 				id: avatar
 				anchors.fill: parent
@@ -145,30 +138,6 @@ Kirigami.SwipeListItem {
 			Layout.preferredHeight: Kirigami.Units.gridUnit * 1.25
 			Layout.preferredWidth: Kirigami.Units.gridUnit * 1.25
 		}
-	}
-
-	/**
-	 * Generates a styled text telling some basic information about the contact,
-	 * is used for a tooltip
-	 */
-	function generateToolTipText(name, jid, statusType, statusMsg) {
-		// header (contact name)
-		var string = "<h3>" + name + "</h3>"
-		// in small: JID (only if differs name)
-		if (name !== jid) {
-			string += "<h5><i>" + jid + "</i></h5>"
-		}
-
-		// presence status type
-		string += "<font color='" + Utils.presenceTypeToColor(statusType) + "'>"
-		string += Utils.presenceTypeToText(statusType)
-		string += "</font>"
-
-		// presence status message
-		if (statusMsg !== "") {
-			string += ": " + statusMsg
-		}
-		return string
 	}
 
 	function handleNotificationsMuted(mutedContact) {

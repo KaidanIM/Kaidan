@@ -86,9 +86,7 @@ static bool operator==(const QXmppMessage &left, const QXmppMessage &right) {
 	       && left.marker() == right.marker()
 	       && left.isPrivate() == right.isPrivate()
 	       && left.isXmppStanza() == right.isXmppStanza()
-#if (QXMPP_VERSION) >= QT_VERSION_CHECK(1, 0, 0)
 	       && left.outOfBandUrl() == right.outOfBandUrl()
-#endif
 	       && left.replaceId() == right.replaceId();
 }
 
@@ -118,9 +116,6 @@ bool Message::operator==(const Message &m) const
 	       && m.isEdited() == isEdited()
 	       && m.isSent() == isSent()
 	       && m.isDelivered() == isDelivered()
-#if (QXMPP_VERSION) < QT_VERSION_CHECK(1, 0, 0)
-	       && m.outOfBandUrl() == outOfBandUrl()
-#endif
 	       && m.mediaLocation() == mediaLocation()
 	       && m.mediaContentType() == mediaContentType()
 	       && m.mediaLastModified() == mediaLastModified()
@@ -243,15 +238,3 @@ void Message::setSpoilerHint(const QString &spoilerHint)
 {
 	m_spoilerHint = spoilerHint;
 }
-
-#if (QXMPP_VERSION) < QT_VERSION_CHECK(1, 0, 0)
-QString Message::outOfBandUrl() const
-{
-	return m_outOfBandUrl;
-}
-
-void Message::setOutOfBandUrl(const QString &outOfBandUrl)
-{
-	m_outOfBandUrl = outOfBandUrl;
-}
-#endif

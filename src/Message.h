@@ -87,11 +87,6 @@ public:
 	QString spoilerHint() const;
 	void setSpoilerHint(const QString &spoilerHint);
 
-#if (QXMPP_VERSION) < QT_VERSION_CHECK(1, 0, 0)
-	QString outOfBandUrl() const;
-	void setOutOfBandUrl(const QString &outOfBandUrl);
-#endif
-
 private:
 	/**
 	 * Media type of the message, e.g. a text or image.
@@ -147,10 +142,6 @@ private:
 	 * Hint of the spoiler message.
 	 */
 	QString m_spoilerHint;
-
-#if (QXMPP_VERSION) < QT_VERSION_CHECK(1, 0, 0)
-	QString m_outOfBandUrl;
-#endif
 };
 
 #endif // MESSAGE_H

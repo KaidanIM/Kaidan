@@ -12,6 +12,7 @@
         <file alias="go-next.svg">3rdparty/breeze-icons/icons/actions/22/go-next.svg</file>
         <file alias="go-previous.svg">3rdparty/breeze-icons/icons/actions/22/go-previous.svg</file>
         <file alias="go-up.svg">3rdparty/breeze-icons/icons/actions/22/go-up.svg</file>
+        <file alias="go-down.svg">3rdparty/breeze-icons/icons/actions/22/go-down.svg</file>
         <file alias="handle-left.svg">3rdparty/breeze-icons/icons/actions/22/handle-left.svg</file>
         <file alias="handle-right.svg">3rdparty/breeze-icons/icons/actions/22/handle-right.svg</file>
         <file alias="help-about.svg">3rdparty/breeze-icons/icons/actions/22/help-about.svg</file>

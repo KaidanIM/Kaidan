@@ -288,3 +288,33 @@ void MessageModel::setMessageAsDelivered(const QString &msgId)
 		msg.setIsDelivered(true);
 	});
 }
+
+int MessageModel::searchForMessageFromNewToOld(const QString &searchString, const int startIndex) const
+{
+	int indexOfFoundMessage = startIndex;
+
+	if (indexOfFoundMessage >= m_messages.size())
+		indexOfFoundMessage = 0;
+
+	for (; indexOfFoundMessage < m_messages.size(); indexOfFoundMessage++) {
+		if (m_messages.at(indexOfFoundMessage).body().contains(searchString, Qt::CaseInsensitive))
+			return indexOfFoundMessage;
+	}
+
+	return -1;
+}
+
+int MessageModel::searchForMessageFromOldToNew(const QString &searchString, const int startIndex) const
+{
+	int indexOfFoundMessage = startIndex;
+
+	if (indexOfFoundMessage < 0)
+		indexOfFoundMessage = m_messages.size() - 1;
+
+	for (; indexOfFoundMessage >= 0; indexOfFoundMessage--) {
+		if (m_messages.at(indexOfFoundMessage).body().contains(searchString, Qt::CaseInsensitive))
+			break;
+	}
+
+	return indexOfFoundMessage;
+}

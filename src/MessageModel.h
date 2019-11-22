@@ -82,6 +82,30 @@ public:
 
 	Q_INVOKABLE bool canCorrectMessage(const QString &msgId) const;
 
+	/**
+	 * Searches from the most recent to the oldest message to find a given substring (case insensitive).
+	 *
+	 * If no index is passed, the search begins from the most recent message.
+	 *
+	 * @param searchString substring to search for
+	 * @param startIndex index of the first message to search for the given string
+	 *
+	 * @return index of the first found message containing the given string or -1 if no message containing the given string could be found
+	 */
+	Q_INVOKABLE int searchForMessageFromNewToOld(const QString &searchString, const int startIndex = 0) const;
+
+	/**
+	 * Searches from the oldest to the most recent message to find a given substring (case insensitive).
+	 *
+	 * If no index is passed, the search begins from the oldest message.
+	 *
+	 * @param searchString substring to search for
+	 * @param startIndex index of the first message to search for the given string
+	 *
+	 * @return index of the first found message containing the given string or -1 if no message containing the given string could be found
+	 */
+	Q_INVOKABLE int searchForMessageFromOldToNew(const QString &searchString, const int startIndex = -1) const;
+
 signals:
 	void chatPartnerChanged(const QString &chatPartner);
 

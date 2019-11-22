@@ -164,8 +164,164 @@ Kirigami.ScrollablePage {
 			onTriggered: {
 				sendMediaSheet.sendNewMessageType(kaidan.messageModel.chatPartner, type)
 			}
+		},
+
+		// Action to toggle the message search bar
+		Kirigami.Action {
+			id: searchAction
+			text: qsTr("Search")
+			icon.name: "search"
+
+			onTriggered: {
+				if (searchBar.active)
+					searchBar.close()
+				else
+					searchBar.open()
+			}
 		}
 	]
+
+	// Message search bar
+	header: Item {
+		id: searchBar
+		height: active ? searchField.height + 2 * Kirigami.Units.largeSpacing : 0
+		clip: true
+		visible: height != 0
+		property bool active: false
+
+		Behavior on height {
+			SmoothedAnimation {
+				velocity: 200
+			}
+		}
+
+		// Background of the message search bar
+		Rectangle {
+			anchors.fill: parent
+			color: Kirigami.Theme.backgroundColor
+		}
+
+		/**
+		 * Searches for a message containing the entered text in the search field.
+		 *
+		 * If a message is found for the entered text, that message is highlighted.
+		 * If the upwards search reaches the top of the message list view, the search is restarted at the bottom to search for messages which were not included in the search yet because they were below the message at the start index.
+		 * That behavior is not applied to an upwards search starting from the index of the most recent message (0) to avoid searching twice.
+		 * If the downwards search reaches the bottom of the message list view, the search is restarted at the top to search for messages which were not included in the search yet because they were above the message at the start index.
+		 *
+		 * @param searchUpwards true for searching upwards or false for searching downwards
+		 * @param startIndex index index of the first message to search for the entered text
+		 */
+		function search(searchUpwards, startIndex) {
+			let newIndex = -1
+			if (searchBar.active && searchField.text.length > 0) {
+				if (searchUpwards) {
+					if (startIndex === 0) {
+						newIndex = kaidan.messageModel.searchForMessageFromNewToOld(searchField.text)
+					} else {
+						newIndex = kaidan.messageModel.searchForMessageFromNewToOld(searchField.text, startIndex)
+						if (newIndex === -1)
+							newIndex = kaidan.messageModel.searchForMessageFromNewToOld(searchField.text, 0)
+					}
+				} else {
+					newIndex = kaidan.messageModel.searchForMessageFromOldToNew(searchField.text, startIndex)
+					if (newIndex === -1)
+						newIndex = kaidan.messageModel.searchForMessageFromOldToNew(searchField.text)
+				}
+			}
+			messageListView.currentIndex = newIndex
+		}
+
+		/**
+		 * Hides the search bar and resets the last search result.
+		 */
+		function close() {
+			messageListView.currentIndex = -1
+			searchBar.active = false
+		}
+
+		/**
+		 * Shows the search bar and focuses the search field.
+		 */
+		function open() {
+			searchField.forceActiveFocus()
+			searchBar.active = true
+		}
+
+		/**
+		 * Searches upwards for a message containing the entered text in the search field starting from the current index of the message list view.
+		 */
+		function searchUpwardsFromBottom() {
+			searchBar.search(true, 0)
+		}
+
+		/**
+		 * Searches upwards for a message containing the entered text in the search field starting from the current index of the message list view.
+		 */
+		function searchUpwardsFromCurrentIndex() {
+			searchBar.search(true, messageListView.currentIndex + 1)
+		}
+
+		/**
+		 * Searches downwards for a message containing the entered text in the search field starting from the current index of the message list view.
+		 */
+		function searchDownwardsFromCurrentIndex() {
+			searchBar.search(false, messageListView.currentIndex - 1)
+		}
+
+		// Search field and ist corresponding buttons
+		RowLayout {
+			// Anchoring like this binds it to the top of the chat page.
+			// It makes it look like the search bar slides down from behind of the upper element.
+			anchors.left: parent.left
+			anchors.right: parent.right
+			anchors.bottom: parent.bottom
+			anchors.margins: Kirigami.Units.largeSpacing
+
+			Controls.Button {
+				text: qsTr("Close")
+				icon.name: "dialog-close"
+				onClicked: searchBar.close()
+				display: Controls.Button.IconOnly
+				flat: true
+			}
+
+			Kirigami.SearchField {
+				id: searchField
+				Layout.fillWidth: true
+				focusSequence: ""
+				onVisibleChanged: text = ""
+
+				onTextChanged: searchBar.searchUpwardsFromBottom()
+				onAccepted: searchBar.searchUpwardsFromCurrentIndex()
+				Keys.onUpPressed: searchBar.searchUpwardsFromCurrentIndex()
+				Keys.onDownPressed: searchBar.searchDownwardsFromCurrentIndex()
+				Keys.onEscapePressed: searchBar.close()
+			}
+
+			Controls.Button {
+				text: qsTr("Search up")
+				icon.name: "go-up"
+				display: Controls.Button.IconOnly
+				flat: true
+				onClicked: {
+					searchBar.searchUpwardsFromCurrentIndex()
+					searchField.forceActiveFocus()
+				}
+			}
+
+			Controls.Button {
+				text: qsTr("Search down")
+				icon.name: "go-down"
+				display: Controls.Button.IconOnly
+				flat: true
+				onClicked: {
+					searchBar.searchDownwardsFromCurrentIndex()
+					searchField.forceActiveFocus()
+				}
+			}
+		}
+	}
 
 	SendMediaSheet {
 		id: sendMediaSheet
@@ -244,12 +400,46 @@ Kirigami.ScrollablePage {
 		verticalAlignment: Image.AlignTop
 	}
 
-	// Chat
+	// View containing the messages
 	ListView {
+		id: messageListView
 		verticalLayoutDirection: ListView.BottomToTop
 		spacing: Kirigami.Units.smallSpacing * 2
 
-		// connect the database
+		// Highlighting of the message containing a searched string.
+		highlight: Component {
+			id: highlightBar
+			Rectangle {
+				height: messageListView.currentIndex === -1 ? 0 : messageListView.currentItem.height + Kirigami.Units.smallSpacing * 2
+				width: messageListView.currentIndex === -1 ? 0 : messageListView.currentItem.width + Kirigami.Units.smallSpacing * 2
+				color: Kirigami.Theme.hoverColor
+
+				// This is used to make the highlight bar a little bit bigger than the highlighted message.
+				// It works only together with "messageListView.highlightFollowsCurrentItem: false".
+				y: messageListView.currentIndex === -1 ? 0 : messageListView.currentItem.y - Kirigami.Units.smallSpacing
+				x: messageListView.currentIndex === -1 ? 0 : messageListView.currentItem.x
+				Behavior on y {
+					SmoothedAnimation {
+						velocity: 1000
+						duration: 500
+					}
+				}
+
+				Behavior on height {
+					SmoothedAnimation {
+						velocity: 1000
+						duration: 500
+					}
+				}
+			}
+		}
+		// This is used to make the highlight bar a little bit bigger than the highlighted message.
+		highlightFollowsCurrentItem: false
+
+		// Initially highlighted value
+		currentIndex: -1
+
+		// Connect to the database,
 		model: kaidan.messageModel
 
 		delegate: ChatMessage {

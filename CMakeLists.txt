@@ -55,7 +55,7 @@ include(FeatureSummary)
 kde_enable_exceptions()
 
 # Find packages
-find_package(Qt5 ${QT_MIN_VERSION} REQUIRED NO_MODULE COMPONENTS Core Qml Quick Svg Sql QuickControls2 Xml Multimedia)
+find_package(Qt5 ${QT_MIN_VERSION} REQUIRED NO_MODULE COMPONENTS Core Qml Quick Svg Sql QuickControls2 Xml Multimedia Positioning Location)
 find_package(KF5Kirigami2 REQUIRED)
 find_package(ZXing REQUIRED COMPONENTS Core)
 find_package(QXmpp 1.0.0 REQUIRED)
@@ -168,6 +168,8 @@ target_link_libraries(${PROJECT_NAME}
 	Qt5::Network
 	Qt5::Xml
 	Qt5::Multimedia
+	Qt5::Positioning
+	Qt5::Location
 	ZXing::Core
 	QXmpp::QXmpp
 	${__Qt5Widgets_LIBRARIES}
@@ -317,7 +319,10 @@ endif()
 if(UBUNTU_TOUCH)
 	set(KAIDAN_COMPILE_DEFINITIONS UBUNTU_TOUCH=True)
 elseif(APPIMAGE)
-	set(KAIDAN_COMPILE_DEFINITIONS APPIMAGE=True)
+	set(KAIDAN_COMPILE_DEFINITIONS
+		APPIMAGE=True
+		TARGET_GSTREAMER_PLUGINS="${TARGET_GSTREAMER_PLUGINS}"
+	)
 endif()
 
 if(STATIC_BUILD)

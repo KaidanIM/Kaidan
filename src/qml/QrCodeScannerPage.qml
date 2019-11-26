@@ -28,10 +28,10 @@
  *  along with Kaidan.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-import QtQuick 2.0
+import QtQuick 2.7
 import QtQuick.Controls 2.3 as Controls
-import QtMultimedia 5.9
-import org.kde.kirigami 2.4 as Kirigami
+import QtMultimedia 5.8
+import org.kde.kirigami 2.8 as Kirigami
 import im.kaidan.kaidan 1.0
 
 // QR code scanner output and decoding for logging in by a decoded XMPP URI

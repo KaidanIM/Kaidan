@@ -39,7 +39,6 @@
 
 class Kaidan;
 class MessageModel;
-class QMimeType;
 class QXmppMessage;
 class QXmppDiscoveryIq;
 class QXmppCarbonManager;

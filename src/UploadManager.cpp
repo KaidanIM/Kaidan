@@ -33,11 +33,11 @@
 #include "MessageHandler.h"
 #include "RosterManager.h"
 #include "TransferCache.h"
+#include "MediaUtils.h"
 // QXmpp
 #include <QXmppUtils.h>
 // Qt
 #include <QMimeDatabase>
-#include <QMimeType>
 #include <QMutexLocker>
 #include <QDateTime>
 #include <QBuffer>
@@ -80,16 +80,11 @@ void UploadManager::sendFile(const QString &jid, const QUrl &fileUrl, const QStr
 
 	qDebug() << "[client] [UploadManager] Adding upload for file:" << fileUrl;
 
-	QFileInfo file;
-	if (fileUrl.isLocalFile())
-		file = QFileInfo(fileUrl.toLocalFile());
-	else
-		// this is used for android's content:/image:-URLs
-		file = QFileInfo(fileUrl.toString());
-
+	// toString() is used for android's content:/image:-URLs
+	QFileInfo file(fileUrl.isLocalFile() ? fileUrl.toLocalFile() : fileUrl.toString());
 	const QXmppHttpUpload* upload = manager.uploadFile(file);
-
-	QMimeType mimeType = QMimeDatabase().mimeTypeForFile(file);
+	const QMimeType mimeType = MediaUtils::mimeType(fileUrl);
+	const MessageType messageType = MediaUtils::messageType(mimeType);
 	const QString msgId = QXmppUtils::generateStanzaHash(48);
 
 	auto *msg = new Message;
@@ -98,7 +93,7 @@ void UploadManager::sendFile(const QString &jid, const QUrl &fileUrl, const QStr
 	msg->setId(msgId);
 	msg->setSentByMe(true);
 	msg->setBody(body);
-	msg->setMediaType(Message::mediaTypeFromMimeType(mimeType));
+	msg->setMediaType(messageType);
 	msg->setStamp(QDateTime::currentDateTimeUtc());
 	msg->setMediaSize(file.size());
 	msg->setMediaContentType(mimeType.name());

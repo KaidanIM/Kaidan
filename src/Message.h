@@ -45,8 +45,6 @@ using namespace Enums;
 class Message : public QXmppMessage
 {
 public:
-	static MessageType mediaTypeFromMimeType(const QMimeType&);
-
 	/**
 	 * Compares another @c Message with this. Only attributes that are saved in the
 	 * database are checked.

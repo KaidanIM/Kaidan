@@ -90,24 +90,6 @@ static bool operator==(const QXmppMessage &left, const QXmppMessage &right) {
 	       && left.replaceId() == right.replaceId();
 }
 
-MessageType Message::mediaTypeFromMimeType(const QMimeType &type)
-{
-	if (type.inherits("image/jpeg") || type.inherits("image/png") ||
-	    type.inherits("image/gif"))
-		return MessageType::MessageImage;
-	if (type.inherits("audio/flac") || type.inherits("audio/mp4") ||
-	         type.inherits("audio/ogg") || type.inherits("audio/wav") ||
-	         type.inherits("audio/mpeg") || type.inherits("audio/webm"))
-		return MessageType::MessageAudio;
-	if (type.inherits("video/mpeg") || type.inherits("video/x-msvideo") ||
-	         type.inherits("video/quicktime") || type.inherits("video/mp4") ||
-	         type.inherits("video/x-matroska"))
-		return MessageType::MessageVideo;
-	if (type.inherits("text/plain"))
-		return MessageType::MessageDocument;
-	return MessageType::MessageFile;
-}
-
 bool Message::operator==(const Message &m) const
 {
 	return ::operator==(static_cast<const QXmppMessage &>(m), static_cast<const QXmppMessage &>(*this))

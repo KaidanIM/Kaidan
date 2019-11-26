@@ -33,76 +33,145 @@
  * the user. It shows the file name, file size and a little file icon.
  */
 
-import QtQuick 2.6
-import QtGraphicalEffects 1.0
-import QtQuick.Controls 2.0 as Controls
+import QtQuick 2.7
 import QtQuick.Layouts 1.3
-import org.kde.kirigami 2.0 as Kirigami
+import QtGraphicalEffects 1.0
+import QtQuick.Controls 2.3 as Controls
+import org.kde.kirigami 2.8 as Kirigami
 
-Item {
-	id: fileInfo
+import im.kaidan.kaidan 1.0
+import MediaUtils 0.1
+
+MediaPreview {
+	id: root
+
+	color: 'transparent'
+
+	Layout.preferredHeight: Kirigami.Units.gridUnit * 3.85
+	Layout.preferredWidth: layout.implicitWidth + layout.anchors.margins * 2
+	Layout.maximumWidth: message ? messageSize : -1
 
 	// rounded box
 	Rectangle {
 		id: box
-		anchors.fill: fileInfo
 
-		color: Kirigami.Theme.highlightColor
+		visible: false
+		color: root.message ? Qt.darker(Kirigami.Theme.buttonBackgroundColor, 1.2) : Kirigami.Theme.highlightColor
 		radius: Kirigami.Units.smallSpacing * 2
 
-		layer.enabled: box.visible
-		layer.effect: DropShadow {
-			anchors.fill: box
-			verticalOffset: Kirigami.Units.gridUnit * 0.08
-			horizontalOffset: Kirigami.Units.gridUnit * 0.08
-			color: Kirigami.Theme.disabledTextColor
-			samples: 10
-			spread: 0.1
+		anchors {
+			fill: parent
+		}
+
+		// content
+		RowLayout {
+			id: layout
+
+			spacing: Kirigami.Units.gridUnit * 0.4
+
+			anchors {
+				fill: parent
+				margins: layout.spacing
+			}
+
+			// left: file icon
+			Rectangle {
+				Layout.fillHeight: true
+				Layout.preferredWidth: height
+
+				radius: height * 0.5
+				color: Kirigami.Theme.backgroundColor
+
+				Kirigami.Icon {
+					source: MediaUtilsInstance.iconName(root.mediaSource)
+					isMask: root.showOpenButton
+							? !(openButton.pressed || openButton.containsMouse)
+							: true
+					smooth: true
+					height: 24 // we always want the 24x24 icon
+					width: height
+
+					anchors {
+						centerIn: parent
+					}
+				}
+			}
+
+			// right: file description
+			ColumnLayout {
+				spacing: 0
+
+				Layout.fillHeight: true
+				Layout.fillWidth: true
+
+				// file name
+				Controls.Label {
+					id: fileNameLabel
+					Layout.fillWidth: true
+					text: kaidan.utils.fileNameFromUrl(root.mediaSource)
+					textFormat: Text.PlainText
+					elide: Text.ElideRight
+					maximumLineCount: 1
+				}
+
+				// mime type
+				Controls.Label {
+					id: fileMimeTypeLabel
+
+					Layout.fillWidth: true
+					text: MediaUtilsInstance.mimeTypeName(root.mediaSource)
+					textFormat: Text.PlainText
+					elide: Text.ElideRight
+					maximumLineCount: 1
+				}
+
+				// file size
+				Controls.Label {
+					id: fileSizeLabel
+
+					Layout.fillWidth: true
+					text: kaidan.utils.fileSizeFromUrl(root.mediaSource)
+					textFormat: Text.PlainText
+					elide: Text.ElideRight
+					maximumLineCount: 1
+				}
+			}
 		}
 	}
 
-	// content
-	RowLayout {
-		// left: file icon
-		Rectangle {
-			Layout.preferredWidth: Kirigami.Units.gridUnit * 2.8
-			Layout.preferredHeight: Kirigami.Units.gridUnit * 2.8
-			Layout.margins: Kirigami.Units.gridUnit * 0.5
+	DropShadow {
+		source: box
+		verticalOffset: Kirigami.Units.gridUnit * 0.08
+		horizontalOffset: Kirigami.Units.gridUnit * 0.08
+		color: Kirigami.Theme.disabledTextColor
+		samples: 10
+		spread: 0.1
 
-			radius: height * 0.5
-			color: Kirigami.Theme.backgroundColor
-
-			Kirigami.Icon {
-				source: "text-x-plain"
-				isMask: true
-				smooth: true
-				anchors.centerIn: parent
-				width: 24 // we always want the 24x24 icon
-				height: 24
-			}
+		anchors {
+			fill: box
 		}
 
-		// right: file description
-		ColumnLayout {
-			Layout.preferredWidth: Kirigami.Units.gridUnit * 13.5
+		MouseArea {
+			id: openButton
 
-			// file name
-			Controls.Label {
-				Layout.fillWidth: true
-				text: kaidan.utils.fileNameFromUrl(sourceUrl)
-				textFormat: Text.PlainText
-				elide: Text.ElideRight
-				maximumLineCount: 1
+			enabled: root.showOpenButton
+			hoverEnabled: true
+
+			anchors {
+				fill: parent
 			}
 
-			// file size
-			Controls.Label {
-				Layout.fillWidth: true
-				text: kaidan.utils.fileSizeFromUrl(sourceUrl)
-				textFormat: Text.PlainText
-				elide: Text.ElideRight
-				maximumLineCount: 1
-			}
+			onClicked: Qt.openUrlExternally(root.mediaSource)
+		}
+
+		Controls.ToolTip {
+			delay: Kirigami.Units.longDuration
+			parent: openButton
+			text: '%1\n%2\n%3\n%4'
+			      .arg(fileNameLabel.text)
+			      .arg(fileMimeTypeLabel.text)
+			      .arg(fileSizeLabel.text)
+			      .arg(root.mediaSource)
 		}
 	}
 }

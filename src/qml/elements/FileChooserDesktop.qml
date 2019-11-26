@@ -28,20 +28,24 @@
  *  along with Kaidan.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-import QtQuick 2.6
-import QtQuick.Dialogs 1.2
+import QtQuick 2.7
+import QtQuick.Dialogs 1.3
+
+import im.kaidan.kaidan 1.0
+import MediaUtils 0.1
 
 FileDialog {
 	id: fileDialog
 	folder: shortcuts.home
-	nameFilters: [
-		"Images (*.jpg *.jpeg *.png *.gif)",
-		"Videos (*.mp4 *.mkv *.avi *.webm)",
-		"Audio files (*.mp3 *.wav *.flac *.ogg *.m4a *.mka)",
-		"Documents (*.doc *.docx *.odt)",
-		"All files (*)",
-		selectedNameFilter
-	]
+	nameFilters: {
+		var filters = []
+		filters = filters.concat(MediaUtilsInstance.namedFilter(Enums.MessageType.MessageImage).split(";;"))
+		filters = filters.concat(MediaUtilsInstance.namedFilter(Enums.MessageType.MessageAudio).split(";;"))
+		filters = filters.concat(MediaUtilsInstance.namedFilter(Enums.MessageType.MessageVideo).split(";;"))
+		filters = filters.concat(MediaUtilsInstance.namedFilter(Enums.MessageType.MessageDocument).split(";;"))
+		filters = filters.concat(MediaUtilsInstance.namedFilter(Enums.MessageType.MessageFile).split(";;"))
+		return filters
+	}
 	// TODO: support multiple files
 	// Currently the problem is that the fileUrls list isn't cleared
 }

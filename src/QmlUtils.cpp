@@ -69,6 +69,7 @@ QString QmlUtils::presenceTypeToIcon(Enums::AvailabilityTypes type)
 		return "im-invisible-user";
 	}
 	Q_UNREACHABLE();
+	return { };
 }
 
 QString QmlUtils::presenceTypeToText(AvailabilityTypes type)
@@ -92,6 +93,7 @@ QString QmlUtils::presenceTypeToText(AvailabilityTypes type)
 		return tr("Invisible");
 	}
 	Q_UNREACHABLE();
+	return { };
 }
 
 QColor QmlUtils::presenceTypeToColor(AvailabilityTypes type)
@@ -115,6 +117,7 @@ QColor QmlUtils::presenceTypeToColor(AvailabilityTypes type)
 		return {"grey"};
 	}
 	Q_UNREACHABLE();
+	return { };
 }
 
 QString QmlUtils::getResourcePath(const QString &name)

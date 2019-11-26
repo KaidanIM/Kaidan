@@ -28,16 +28,34 @@
  *  along with Kaidan.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-import QtQuick 2.6
+#include "CameraImageCapture.h"
 
-AnimatedImage {
-	id: image
+CameraImageCapture::CameraImageCapture(QMediaObject *mediaObject, QObject *parent)
+	: QCameraImageCapture(mediaObject, parent)
+{
+	connect(this, &QCameraImageCapture::imageSaved,
+		this, [this](int id, const QString &filePath) {
+			Q_UNUSED(id);
+			m_actualLocation = QUrl::fromLocalFile(filePath);
+			emit actualLocationChanged(m_actualLocation);
+		});
+}
 
-	source: sourceUrl
-	fillMode: Image.PreserveAspectFit
+QUrl CameraImageCapture::actualLocation() const
+{
+	return m_actualLocation;
+}
 
-	MouseArea {
-		anchors.fill: parent
-		onClicked: Qt.openUrlExternally(sourceUrl)
+bool CameraImageCapture::setMediaObject(QMediaObject *mediaObject)
+{
+	const QMultimedia::AvailabilityStatus previousAvailability = availability();
+	const bool result = QCameraImageCapture::setMediaObject(mediaObject);
+
+	if (previousAvailability != availability()) {
+		QMetaObject::invokeMethod(this, [this]() {
+				emit availabilityChanged(availability());
+			}, Qt::QueuedConnection);
 	}
+
+	return result;
 }

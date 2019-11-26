@@ -29,8 +29,8 @@
  */
 
 import QtQuick 2.7
-import QtQuick.Layouts 1.1
-import org.kde.kirigami 2.0 as Kirigami
+import QtQuick.Layouts 1.3
+import org.kde.kirigami 2.8 as Kirigami
 import Qt.labs.folderlistmodel 2.1
 
 Item {
@@ -83,7 +83,6 @@ Item {
 					reserveSpaceForIcon: true
 
 					icon: (fileIsDir ? "folder" : "text-x-plain")
-					iconColor: "transparent"
 					label: fileName + (fileIsDir ? "/" : "")
 
 					onClicked: {

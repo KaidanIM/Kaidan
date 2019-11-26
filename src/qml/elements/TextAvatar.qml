@@ -28,9 +28,9 @@
  *  along with Kaidan.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-import org.kde.kirigami 2.2 as Kirigami
+import org.kde.kirigami 2.8 as Kirigami
 import QtQuick 2.7
-import QtQuick.Layouts 1.2
+import QtQuick.Layouts 1.3
 
 Rectangle {
 	id: avatar

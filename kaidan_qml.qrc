@@ -9,6 +9,7 @@
 		<file alias="qml/EmptyChatPage.qml">src/qml/EmptyChatPage.qml</file>
 		<file alias="qml/QrCodeScannerPage.qml">src/qml/QrCodeScannerPage.qml</file>
 		<file alias="qml/UserProfilePage.qml">src/qml/UserProfilePage.qml</file>
+		<file alias="qml/MultimediaSettingsPage.qml">src/qml/MultimediaSettingsPage.qml</file>
 
 		<file alias="qml/elements/SubRequestAcceptSheet.qml">src/qml/elements/SubRequestAcceptSheet.qml</file>
 		<file alias="qml/elements/RosterAddContactSheet.qml">src/qml/elements/RosterAddContactSheet.qml</file>
@@ -17,15 +18,25 @@
 		<file alias="qml/elements/RosterListItem.qml">src/qml/elements/RosterListItem.qml</file>
 		<file alias="qml/elements/MessageCounter.qml">src/qml/elements/MessageCounter.qml</file>
 		<file alias="qml/elements/ChatMessage.qml">src/qml/elements/ChatMessage.qml</file>
-		<file alias="qml/elements/ChatMessageImage.qml">src/qml/elements/ChatMessageImage.qml</file>
 		<file alias="qml/elements/RoundImage.qml">src/qml/elements/RoundImage.qml</file>
 		<file alias="qml/elements/IconButton.qml">src/qml/elements/IconButton.qml</file>
 		<file alias="qml/elements/FileChooser.qml">src/qml/elements/FileChooser.qml</file>
 		<file alias="qml/elements/FileChooserDesktop.qml">src/qml/elements/FileChooserDesktop.qml</file>
 		<file alias="qml/elements/FileChooserMobile.qml">src/qml/elements/FileChooserMobile.qml</file>
 		<file alias="qml/elements/SendMediaSheet.qml">src/qml/elements/SendMediaSheet.qml</file>
+
+		<file alias="qml/elements/MediaPreview.qml">src/qml/elements/MediaPreview.qml</file>
 		<file alias="qml/elements/MediaPreviewImage.qml">src/qml/elements/MediaPreviewImage.qml</file>
+		<file alias="qml/elements/MediaPreviewAudio.qml">src/qml/elements/MediaPreviewAudio.qml</file>
+		<file alias="qml/elements/MediaPreviewVideo.qml">src/qml/elements/MediaPreviewVideo.qml</file>
 		<file alias="qml/elements/MediaPreviewOther.qml">src/qml/elements/MediaPreviewOther.qml</file>
+		<file alias="qml/elements/MediaPreviewLocation.qml">src/qml/elements/MediaPreviewLocation.qml</file>
+		<file alias="qml/elements/MediaPreviewLoader.qml">src/qml/elements/MediaPreviewLoader.qml</file>
+
+		<file alias="qml/elements/NewMedia.qml">src/qml/elements/NewMedia.qml</file>
+		<file alias="qml/elements/NewMediaLocation.qml">src/qml/elements/NewMediaLocation.qml</file>
+		<file alias="qml/elements/NewMediaLoader.qml">src/qml/elements/NewMediaLoader.qml</file>
+
 		<file alias="qml/elements/EmojiPicker.qml">src/qml/elements/EmojiPicker.qml</file>
 		<file alias="qml/elements/TextAvatar.qml">src/qml/elements/TextAvatar.qml</file>
 		<file alias="qml/elements/Avatar.qml">src/qml/elements/Avatar.qml</file>

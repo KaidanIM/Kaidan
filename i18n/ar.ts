@@ -86,7 +86,7 @@
     <name>ChatPage</name>
     <message>
         <source>Compose message</source>
-        <translation>تحرير  رسالة</translation>
+        <translation>تحرير رسالة</translation>
     </message>
     <message>
         <source>Image</source>
@@ -244,7 +244,7 @@
     <message>
         <source>The link will be opened after you have connected.</source>
         <extracomment>The link is an XMPP-URI (i.e. &apos;xmpp:kaidan@muc.kaidan.im?join&apos; for joining a chat)</extracomment>
-        <translation>الرابط هو رابط XMPP (مثال: &apos;xmpp:kaidan@muc.kaidan.im?join&apos;  للإنضمام إلى محادثة)
+        <translation>الرابط هو رابط XMPP (مثال: &apos;xmpp:kaidan@muc.kaidan.im?join&apos; للإنضمام إلى محادثة)
 سيتم فتح هذا الرابط عندما تتصل بالإنترنت.</translation>
     </message>
     <message>

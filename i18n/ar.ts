@@ -20,35 +20,35 @@
     <name>ChangePassword</name>
     <message>
         <source>Change password</source>
-        <translation type="unfinished"></translation>
+        <translation>تغيير كلمة المرور</translation>
     </message>
     <message>
         <source>Current password:</source>
-        <translation type="unfinished"></translation>
+        <translation>كلمة المرور الحالية:</translation>
     </message>
     <message>
         <source>New password:</source>
-        <translation type="unfinished"></translation>
+        <translation>كلمة المرور الجديدة:</translation>
     </message>
     <message>
         <source>New password (repeat):</source>
-        <translation type="unfinished"></translation>
+        <translation>كلمة المرور الجديدة (إعادة):</translation>
     </message>
     <message>
         <source>New passwords do not match.</source>
-        <translation type="unfinished"></translation>
+        <translation>كلمات المرور الجديدة غير متطابقة.</translation>
     </message>
     <message>
         <source>Current password is invalid.</source>
-        <translation type="unfinished"></translation>
+        <translation>كلمة المرور الحالية غير صالحة.</translation>
     </message>
     <message>
         <source>You need to be connected to change your password.</source>
-        <translation type="unfinished"></translation>
+        <translation>يجب ان تكون متصل بالانترنيت لتغيير كلمة المرور</translation>
     </message>
     <message>
         <source>After changing your password, you will need to reenter it on all your other devices.</source>
-        <translation type="unfinished"></translation>
+        <translation>بعد تغيير كلمة المرور, يجب أن تعيد إدخالها في جميع الأجهزة المتصلة الأخرى.</translation>
     </message>
     <message>
         <source>Cancel</source>
@@ -56,18 +56,18 @@
     </message>
     <message>
         <source>Change</source>
-        <translation type="unfinished"></translation>
+        <translation>تغيير</translation>
     </message>
 </context>
 <context>
     <name>ChatMessage</name>
     <message>
         <source>Copy Message</source>
-        <translation>انسخ الرسالة</translation>
+        <translation>نسخ الرسالة</translation>
     </message>
     <message>
         <source>Edit Message</source>
-        <translation>عدّل الرسالة</translation>
+        <translation>تعديل الرسالة</translation>
     </message>
     <message>
         <source>Spoiler</source>
@@ -86,7 +86,7 @@
     <name>ChatPage</name>
     <message>
         <source>Compose message</source>
-        <translation>اكتب رسالة</translation>
+        <translation>تحرير  رسالة</translation>
     </message>
     <message>
         <source>Image</source>
@@ -102,7 +102,7 @@
     </message>
     <message>
         <source>Document</source>
-        <translation>وثيقة</translation>
+        <translation>مستند</translation>
     </message>
     <message>
         <source>Other file</source>
@@ -148,47 +148,47 @@
     <name>EmojiPicker</name>
     <message>
         <source>Favorites</source>
-        <translation type="unfinished"></translation>
+        <translation>المفضلة</translation>
     </message>
     <message>
         <source>People</source>
-        <translation type="unfinished"></translation>
+        <translation>أناس</translation>
     </message>
     <message>
         <source>Nature</source>
-        <translation type="unfinished"></translation>
+        <translation>طبيعة</translation>
     </message>
     <message>
         <source>Food</source>
-        <translation type="unfinished"></translation>
+        <translation>طعام</translation>
     </message>
     <message>
         <source>Activity</source>
-        <translation type="unfinished"></translation>
+        <translation>نشاط</translation>
     </message>
     <message>
         <source>Travel</source>
-        <translation type="unfinished"></translation>
+        <translation>سفر</translation>
     </message>
     <message>
         <source>Objects</source>
-        <translation type="unfinished"></translation>
+        <translation>أشياء</translation>
     </message>
     <message>
         <source>Symbols</source>
-        <translation type="unfinished"></translation>
+        <translation>رموز</translation>
     </message>
     <message>
         <source>Flags</source>
-        <translation type="unfinished"></translation>
+        <translation>أعلام</translation>
     </message>
     <message>
         <source>Search</source>
-        <translation type="unfinished"></translation>
+        <translation>بحث</translation>
     </message>
     <message>
         <source>Search emoji</source>
-        <translation type="unfinished"></translation>
+        <translation>بحث عن رمز تعبيري</translation>
     </message>
 </context>
 <context>
@@ -220,7 +220,7 @@
     <name>GlobalDrawer</name>
     <message>
         <source>Log out</source>
-        <translation>الخروج</translation>
+        <translation>تسجيل الخروج</translation>
     </message>
     <message>
         <source>About</source>
@@ -236,7 +236,7 @@
     </message>
     <message>
         <source>Settings</source>
-        <translation type="unfinished"></translation>
+        <translation>الإعدادات</translation>
     </message>
 </context>
 <context>
@@ -244,7 +244,8 @@
     <message>
         <source>The link will be opened after you have connected.</source>
         <extracomment>The link is an XMPP-URI (i.e. &apos;xmpp:kaidan@muc.kaidan.im?join&apos; for joining a chat)</extracomment>
-        <translation type="unfinished"></translation>
+        <translation>الرابط هو رابط XMPP (مثال: &apos;xmpp:kaidan@muc.kaidan.im?join&apos;  للإنضمام إلى محادثة)
+سيتم فتح هذا الرابط عندما تتصل بالإنترنت.</translation>
     </message>
     <message>
         <source>No password found. Please enter it.</source>
@@ -259,11 +260,11 @@
     <name>LoginPage</name>
     <message>
         <source>Log in</source>
-        <translation>لِج</translation>
+        <translation>تسجيل الدخول</translation>
     </message>
     <message>
         <source>Log in to your XMPP account</source>
-        <translation>لِج إلى حسابك XMPP</translation>
+        <translation>تسجيل الدخول إلى حسابك XMPP</translation>
     </message>
     <message>
         <source>Your Jabber-ID:</source>
@@ -275,7 +276,7 @@
     </message>
     <message>
         <source>Your Password:</source>
-        <translation>كلمتك السرية:</translation>
+        <translation>كلمة مرورك:</translation>
     </message>
     <message>
         <source>Connecting…</source>
@@ -287,7 +288,7 @@
     </message>
     <message>
         <source>Invalid username or password.</source>
-        <translation>اسم المستخدم أو كلمة السر غير صحيحة.</translation>
+        <translation>اسم المستخدم أو كلمة المرور غير صالحة.</translation>
     </message>
     <message>
         <source>Cannot connect to the server. Please check your internet connection.</source>
@@ -311,7 +312,7 @@
     </message>
     <message>
         <source>Authentification protocol not supported by the server.</source>
-        <translation type="unfinished"></translation>
+        <translation>بروتوكول المصادقة غير مدعوم من الخادم.</translation>
     </message>
     <message>
         <source>An unknown error occured; see log for details.</source>
@@ -326,11 +327,11 @@
     <name>MessageHandler</name>
     <message>
         <source>Could not send message, as a result of not being connected.</source>
-        <translation type="unfinished"></translation>
+        <translation>تعذر ارسال الرسالة بسبب عدم توفر الاتصال.</translation>
     </message>
     <message>
         <source>Could not correct message, as a result of not being connected.</source>
-        <translation type="unfinished"></translation>
+        <translation>تعذر تعديل الرسالة بسبب عدم توفر الاتصال.</translation>
     </message>
     <message>
         <source>Spoiler</source>
@@ -338,11 +339,11 @@
     </message>
     <message>
         <source>Message could not be sent.</source>
-        <translation type="unfinished"></translation>
+        <translation>تعذر ارسال الرسالة.</translation>
     </message>
     <message>
         <source>Message correction was not successful.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">تعديل الرسالة لم يتم بنجاح.</translation>
     </message>
 </context>
 <context>
@@ -404,18 +405,18 @@ Try to close other applications using the camera.</source>
     <name>RegistrationManager</name>
     <message>
         <source>Password changed successfully.</source>
-        <translation type="unfinished"></translation>
+        <translation>تم تغيير كلمة المرور بنجاح.</translation>
     </message>
     <message>
         <source>Failed to change password: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>تعذر تغيير كلمة المرور: 1%</translation>
     </message>
 </context>
 <context>
     <name>RosterAddContactSheet</name>
     <message>
         <source>Add new contact</source>
-        <translation>أضف مُراسلا جديدا</translation>
+        <translation>أضف جهة اتصال جديدة</translation>
     </message>
     <message>
         <source>This will also send a request to access the presence of the contact.</source>
@@ -423,7 +424,7 @@ Try to close other applications using the camera.</source>
     </message>
     <message>
         <source>Jabber-ID:</source>
-        <translation>معرف جابر:</translation>
+        <translation>هوية جابر:</translation>
     </message>
     <message>
         <source>user@example.org</source>
@@ -439,7 +440,7 @@ Try to close other applications using the camera.</source>
     </message>
     <message>
         <source>Tell your chat partner who you are.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">عرف شريكك في المحادثة عن نفسك.</translation>
     </message>
     <message>
         <source>Cancel</source>
@@ -454,7 +455,7 @@ Try to close other applications using the camera.</source>
     <name>RosterListItem</name>
     <message>
         <source>Error: Please check the JID.</source>
-        <translation type="unfinished"></translation>
+        <translation>خطأ: الرجاء التحقق من هوية جابر.</translation>
     </message>
     <message>
         <source>Available</source>
@@ -489,11 +490,11 @@ Try to close other applications using the camera.</source>
     <name>RosterManager</name>
     <message>
         <source>Could not add contact, as a result of not being connected.</source>
-        <translation type="unfinished"></translation>
+        <translation>تعذر إضافة جهة اتصال جديدة بسبب عدم توفر الاتصال.</translation>
     </message>
     <message>
         <source>Could not remove contact, as a result of not being connected.</source>
-        <translation type="unfinished"></translation>
+        <translation>تعذر إزالة جهة الاتصال بسبب عدم توفر الاتصال.</translation>
     </message>
     <message>
         <source>Spoiler</source>
@@ -516,7 +517,7 @@ Try to close other applications using the camera.</source>
     </message>
     <message>
         <source>Add new contact</source>
-        <translation>أضف مُراسلا جديدا</translation>
+        <translation>أضف جهة اتصال جديدة</translation>
     </message>
     <message>
         <source>Offline</source>
@@ -539,7 +540,7 @@ Try to close other applications using the camera.</source>
     </message>
     <message>
         <source>Delete contact</source>
-        <translation>احذف المُراسِل</translation>
+        <translation>إزالة جهة اتصال</translation>
     </message>
     <message>
         <source>Cancel</source>
@@ -573,7 +574,7 @@ Try to close other applications using the camera.</source>
     <name>SendMediaSheet</name>
     <message>
         <source>Caption</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">شرح</translation>
     </message>
     <message>
         <source>Cancel</source>
@@ -588,15 +589,15 @@ Try to close other applications using the camera.</source>
     <name>SettingsPage</name>
     <message>
         <source>Settings</source>
-        <translation type="unfinished"></translation>
+        <translation>الإعدادات</translation>
     </message>
     <message>
         <source>Change password</source>
-        <translation type="unfinished"></translation>
+        <translation>تغيير كلمة المرور</translation>
     </message>
     <message>
         <source>Changes your account&apos;s password. You will need to re-enter it on your other devices.</source>
-        <translation type="unfinished"></translation>
+        <translation>تغيير كلمة مرور حساباتك. يجب عليك إعادة إدخال كلمة المرور إلى جميع الأجهزة الأخرى.</translation>
     </message>
 </context>
 <context>
@@ -622,11 +623,11 @@ Try to close other applications using the camera.</source>
     <name>UploadManager</name>
     <message>
         <source>Could not send file, as a result of not being connected.</source>
-        <translation type="unfinished"></translation>
+        <translation>تعذر ارسال الملف بسبب عدم توفر الاتصال.</translation>
     </message>
     <message>
         <source>File</source>
-        <translation>الملف</translation>
+        <translation>ملف</translation>
     </message>
 </context>
 <context>

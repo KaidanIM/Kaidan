@@ -40,7 +40,7 @@ archlinux:
 
 linux-appimage:
   stage: deploy
-  image: kaidan/ubuntu-trusty
+  image: kaidan/ubuntu-xenial
   script: utils/build-linux-appimage.sh
   variables:
     QXMPP_BUILD: /usr

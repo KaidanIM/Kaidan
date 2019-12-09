@@ -57,9 +57,9 @@ fi
 
 export QT_SELECT=qt5
 
-SOURCE_GSTREAMER_PLUGINS=$(find /usr/lib -name libgstcoreelements.so -exec dirname {} \;)
-SOURCE_GSTREAMER_PLUGINS_SCANNER=$(find /usr/lib -name gst-plugin-scanner)
-TARGET_GSTREAMER_PLUGINS="/usr/lib/$(basename "${SOURCE_GSTREAMER_PLUGINS}")"
+SOURCE_GSTREAMER_PLUGINS=$(find /opt/kf5/lib -name libgstcoreelements.so -exec dirname {} \;)
+SOURCE_GSTREAMER_PLUGINS_SCANNER=$(find /opt/kf5/libexec -name gst-plugin-scanner)
+TARGET_GSTREAMER_PLUGINS="find/kf5/lib/$(basename "${SOURCE_GSTREAMER_PLUGINS}")"
 
 echo "*****************************************"
 echo "Found GStreamer plugins in: ${SOURCE_GSTREAMER_PLUGINS}"

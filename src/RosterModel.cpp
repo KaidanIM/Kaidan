@@ -148,7 +148,7 @@ void RosterModel::addItem(const RosterItem &item)
 	// index where to add the new contact
 	int i = 0;
 	for (const auto &itrItem : qAsConst(m_items)) {
-		if (item > itrItem) {
+		if (item < itrItem) {
 			insertContact(i, item);
 			return;
 		}

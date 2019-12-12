@@ -1,5 +1,6 @@
 <RCC>
 	<qresource prefix="/i18n">
+		<file>ar.qm</file>
 		<file>ca.qm</file>
 		<file>cs.qm</file>
 		<file>de.qm</file>
@@ -7,6 +8,7 @@
 		<file>es.qm</file>
 		<file>eu.qm</file>
 		<file>fr.qm</file>
+		<file>gl.qm</file>
 		<file>it.qm</file>
 		<file>ja.qm</file>
 		<file>ms.qm</file>
@@ -15,5 +17,6 @@
 		<file>pl.qm</file>
 		<file>pt.qm</file>
 		<file>ru.qm</file>
+		<file>uk.qm</file>
 	</qresource>
 </RCC>

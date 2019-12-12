@@ -77,6 +77,10 @@
         <source>Download</source>
         <translation>Отримати</translation>
     </message>
+    <message>
+        <source>Copy download URL</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>ChatPage</name>
@@ -86,23 +90,23 @@
     </message>
     <message>
         <source>Image</source>
-        <translation>Зображення</translation>
+        <translation type="vanished">Зображення</translation>
     </message>
     <message>
         <source>Video</source>
-        <translation>Відео</translation>
+        <translation type="vanished">Відео</translation>
     </message>
     <message>
         <source>Audio</source>
-        <translation>Звук</translation>
+        <translation type="vanished">Звук</translation>
     </message>
     <message>
         <source>Document</source>
-        <translation>Документ</translation>
+        <translation type="vanished">Документ</translation>
     </message>
     <message>
         <source>Other file</source>
-        <translation>Інший файл</translation>
+        <translation type="vanished">Інший файл</translation>
     </message>
     <message>
         <source>Select a file</source>
@@ -115,6 +119,81 @@
     <message>
         <source>Spoiler hint</source>
         <translation>Підказка до спойлера</translation>
+    </message>
+    <message>
+        <source>Unmute notifications</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Mute notifications</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View profile</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Multimedia settings</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Search</source>
+        <translation type="unfinished">Пошук</translation>
+    </message>
+    <message>
+        <source>Close</source>
+        <translation type="unfinished">Закрити</translation>
+    </message>
+    <message>
+        <source>Search up</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Search down</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>All files</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>CommonEncoderSettings</name>
+    <message>
+        <source>Very low</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Low</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Normal</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>High</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Very high</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Constant quality</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Constant bit rate</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Average bit rate</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Two pass</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -230,6 +309,14 @@
         <extracomment>The link is an XMPP-URI (i.e. &apos;xmpp:kaidan@muc.kaidan.im?join&apos; for joining a chat)</extracomment>
         <translation>Посилання буде відкрито після встановлення з&apos;єднання.</translation>
     </message>
+    <message>
+        <source>No password found. Please enter it.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>No valid login QR code found.</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>LoginPage</name>
@@ -293,6 +380,80 @@
         <source>An unknown error occured; see log for details.</source>
         <translation>Сталася невідома помилка. Будь ласка, ознайомтеся із журналом.</translation>
     </message>
+    <message>
+        <source>Log in using a QR-Code</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>MediaRecorder</name>
+    <message>
+        <source>Default</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>MediaUtils</name>
+    <message>
+        <source>Take picture</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Record video</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Record voice</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Send location</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Choose file</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Choose image</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Choose video</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Choose audio file</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Choose document</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>All files</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Images</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Videos</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Audio files</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Documents</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>%1 (%2)</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>MessageHandler</name>
@@ -315,6 +476,171 @@
     <message>
         <source>Message correction was not successful.</source>
         <translation>Спроба виправити повідомлення зазнала невдачі.</translation>
+    </message>
+</context>
+<context>
+    <name>MultimediaSettingsPage</name>
+    <message>
+        <source>Multimedia Settings</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Configure</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Image Capture</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Audio Recording</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Video Recording</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Camera</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Audio input</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Container</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Image</source>
+        <translation type="unfinished">Зображення</translation>
+    </message>
+    <message>
+        <source>Audio</source>
+        <translation type="unfinished">Звук</translation>
+    </message>
+    <message>
+        <source>Video</source>
+        <translation type="unfinished">Відео</translation>
+    </message>
+    <message>
+        <source>Codec</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Resolution</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Quality</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Sample Rate</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Frame Rate</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Ready</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Initializing...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Unavailable</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Recording...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Paused</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>NewMedia</name>
+    <message>
+        <source>Ready</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Initializing...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Unavailable</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Recording... %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Paused %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>QmlUtils</name>
+    <message>
+        <source>Available</source>
+        <translation type="unfinished">Доступний</translation>
+    </message>
+    <message>
+        <source>Free for chat</source>
+        <translation type="unfinished">Вільний для спілкування</translation>
+    </message>
+    <message>
+        <source>Away</source>
+        <translation type="unfinished">Відсутність</translation>
+    </message>
+    <message>
+        <source>Do not disturb</source>
+        <translation type="unfinished">Не турбувати</translation>
+    </message>
+    <message>
+        <source>Away for longer</source>
+        <translation type="unfinished">Довга відсутність</translation>
+    </message>
+    <message>
+        <source>Offline</source>
+        <translation type="unfinished">Поза мережею</translation>
+    </message>
+    <message>
+        <source>Error</source>
+        <translation type="unfinished">Помилка</translation>
+    </message>
+    <message>
+        <source>Invisible</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>QrCodeScannerPage</name>
+    <message>
+        <source>Scan QR code</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>There is no camera available.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Your camera is busy.
+Try to close other applications using the camera.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The camera format &apos;%1&apos; is not supported.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -375,31 +701,31 @@
     </message>
     <message>
         <source>Available</source>
-        <translation>Доступний</translation>
+        <translation type="vanished">Доступний</translation>
     </message>
     <message>
         <source>Free for chat</source>
-        <translation>Вільний для спілкування</translation>
+        <translation type="vanished">Вільний для спілкування</translation>
     </message>
     <message>
         <source>Away</source>
-        <translation>Відсутність</translation>
+        <translation type="vanished">Відсутність</translation>
     </message>
     <message>
         <source>Do not disturb</source>
-        <translation>Не турбувати</translation>
+        <translation type="vanished">Не турбувати</translation>
     </message>
     <message>
         <source>Away for longer</source>
-        <translation>Довга відсутність</translation>
+        <translation type="vanished">Довга відсутність</translation>
     </message>
     <message>
         <source>Offline</source>
-        <translation>Поза мережею</translation>
+        <translation type="vanished">Поза мережею</translation>
     </message>
     <message>
         <source>Error</source>
-        <translation>Помилка</translation>
+        <translation type="vanished">Помилка</translation>
     </message>
 </context>
 <context>
@@ -415,6 +741,10 @@
     <message>
         <source>Spoiler</source>
         <translation>Спойлер</translation>
+    </message>
+    <message>
+        <source>Could not rename contact, as a result of not being connected.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -435,6 +765,10 @@
         <source>Offline</source>
         <translation>Поза мережею</translation>
     </message>
+    <message>
+        <source>Search contacts</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>RosterRemoveContactSheet</name>
@@ -453,6 +787,25 @@
     <message>
         <source>Delete</source>
         <translation>Вилучити</translation>
+    </message>
+</context>
+<context>
+    <name>RosterRenameContactSheet</name>
+    <message>
+        <source>Rename contact</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit name:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cancel</source>
+        <translation type="unfinished">Скасувати</translation>
+    </message>
+    <message>
+        <source>Rename</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -513,6 +866,40 @@
     <message>
         <source>File</source>
         <translation>Файл</translation>
+    </message>
+</context>
+<context>
+    <name>UserProfilePage</name>
+    <message>
+        <source>Profile</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>VCardModel</name>
+    <message>
+        <source>Name</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Nickname</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>About</source>
+        <translation type="unfinished">Про програму</translation>
+    </message>
+    <message>
+        <source>Email</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Birthday</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Website</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 </TS>

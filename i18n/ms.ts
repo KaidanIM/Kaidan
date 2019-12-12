@@ -139,23 +139,23 @@
     </message>
     <message>
         <source>Image</source>
-        <translation>Imej</translation>
+        <translation type="vanished">Imej</translation>
     </message>
     <message>
         <source>Video</source>
-        <translation>Video</translation>
+        <translation type="vanished">Video</translation>
     </message>
     <message>
         <source>Audio</source>
-        <translation>Audio</translation>
+        <translation type="vanished">Audio</translation>
     </message>
     <message>
         <source>Document</source>
-        <translation>Dokumen</translation>
+        <translation type="vanished">Dokumen</translation>
     </message>
     <message>
         <source>Other file</source>
-        <translation>Fail lain</translation>
+        <translation type="vanished">Fail lain</translation>
     </message>
     <message>
         <source>Select a file</source>
@@ -179,6 +179,69 @@
     </message>
     <message>
         <source>View profile</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Multimedia settings</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Search</source>
+        <translation type="unfinished">Cari</translation>
+    </message>
+    <message>
+        <source>Close</source>
+        <translation type="unfinished">Tutup</translation>
+    </message>
+    <message>
+        <source>Search up</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Search down</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>All files</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>CommonEncoderSettings</name>
+    <message>
+        <source>Very low</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Low</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Normal</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>High</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Very high</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Constant quality</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Constant bit rate</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Average bit rate</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Two pass</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -426,6 +489,76 @@
     </message>
 </context>
 <context>
+    <name>MediaRecorder</name>
+    <message>
+        <source>Default</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>MediaUtils</name>
+    <message>
+        <source>Take picture</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Record video</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Record voice</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Send location</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Choose file</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Choose image</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Choose video</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Choose audio file</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Choose document</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>All files</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Images</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Videos</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Audio files</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Documents</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>%1 (%2)</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>MessageHandler</name>
     <message>
         <source>Could not send message, as a result of not being connected.</source>
@@ -446,6 +579,116 @@
     <message>
         <source>Message correction was not successful.</source>
         <translation>Pembetulan mesej tidak berjaya.</translation>
+    </message>
+</context>
+<context>
+    <name>MultimediaSettingsPage</name>
+    <message>
+        <source>Multimedia Settings</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Configure</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Image Capture</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Audio Recording</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Video Recording</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Camera</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Audio input</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Container</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Image</source>
+        <translation type="unfinished">Imej</translation>
+    </message>
+    <message>
+        <source>Audio</source>
+        <translation type="unfinished">Audio</translation>
+    </message>
+    <message>
+        <source>Video</source>
+        <translation type="unfinished">Video</translation>
+    </message>
+    <message>
+        <source>Codec</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Resolution</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Quality</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Sample Rate</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Frame Rate</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Ready</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Initializing...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Unavailable</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Recording...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Paused</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>NewMedia</name>
+    <message>
+        <source>Ready</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Initializing...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Unavailable</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Recording... %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Paused %1</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -631,10 +874,6 @@ Try to close other applications using the camera.</source>
     </message>
     <message>
         <source>Search contacts</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Search…</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

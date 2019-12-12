@@ -90,23 +90,23 @@
     </message>
     <message>
         <source>Image</source>
-        <translation>Obraz</translation>
+        <translation type="vanished">Obraz</translation>
     </message>
     <message>
         <source>Video</source>
-        <translation>Wideo</translation>
+        <translation type="vanished">Wideo</translation>
     </message>
     <message>
         <source>Audio</source>
-        <translation>Dźwięk</translation>
+        <translation type="vanished">Dźwięk</translation>
     </message>
     <message>
         <source>Document</source>
-        <translation>Dokument</translation>
+        <translation type="vanished">Dokument</translation>
     </message>
     <message>
         <source>Other file</source>
-        <translation>Inny plik</translation>
+        <translation type="vanished">Inny plik</translation>
     </message>
     <message>
         <source>Select a file</source>
@@ -130,6 +130,69 @@
     </message>
     <message>
         <source>View profile</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Multimedia settings</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Search</source>
+        <translation type="unfinished">Szukaj</translation>
+    </message>
+    <message>
+        <source>Close</source>
+        <translation type="unfinished">Zamknij</translation>
+    </message>
+    <message>
+        <source>Search up</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Search down</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>All files</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>CommonEncoderSettings</name>
+    <message>
+        <source>Very low</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Low</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Normal</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>High</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Very high</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Constant quality</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Constant bit rate</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Average bit rate</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Two pass</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -331,6 +394,76 @@
     </message>
 </context>
 <context>
+    <name>MediaRecorder</name>
+    <message>
+        <source>Default</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>MediaUtils</name>
+    <message>
+        <source>Take picture</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Record video</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Record voice</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Send location</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Choose file</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Choose image</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Choose video</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Choose audio file</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Choose document</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>All files</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Images</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Videos</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Audio files</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Documents</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>%1 (%2)</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>MessageHandler</name>
     <message>
         <source>Could not send message, as a result of not being connected.</source>
@@ -351,6 +484,116 @@
     <message>
         <source>Message correction was not successful.</source>
         <translation>Poprawienie wiadomości nie powiodło się.</translation>
+    </message>
+</context>
+<context>
+    <name>MultimediaSettingsPage</name>
+    <message>
+        <source>Multimedia Settings</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Configure</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Image Capture</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Audio Recording</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Video Recording</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Camera</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Audio input</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Container</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Image</source>
+        <translation type="unfinished">Obraz</translation>
+    </message>
+    <message>
+        <source>Audio</source>
+        <translation type="unfinished">Dźwięk</translation>
+    </message>
+    <message>
+        <source>Video</source>
+        <translation type="unfinished">Wideo</translation>
+    </message>
+    <message>
+        <source>Codec</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Resolution</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Quality</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Sample Rate</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Frame Rate</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Ready</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Initializing...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Unavailable</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Recording...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Paused</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>NewMedia</name>
+    <message>
+        <source>Ready</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Initializing...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Unavailable</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Recording... %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Paused %1</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -451,7 +694,7 @@ Try to close other applications using the camera.</source>
     </message>
     <message>
         <source>Cancel</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Anuluj</translation>
     </message>
     <message>
         <source>Add</source>
@@ -481,7 +724,7 @@ Try to close other applications using the camera.</source>
     </message>
     <message>
         <source>Spoiler</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Ukryta wiadomość</translation>
     </message>
     <message>
         <source>Could not rename contact, as a result of not being connected.</source>
@@ -510,10 +753,6 @@ Try to close other applications using the camera.</source>
         <source>Search contacts</source>
         <translation type="unfinished"></translation>
     </message>
-    <message>
-        <source>Search…</source>
-        <translation type="unfinished"></translation>
-    </message>
 </context>
 <context>
     <name>RosterRemoveContactSheet</name>
@@ -527,7 +766,7 @@ Try to close other applications using the camera.</source>
     </message>
     <message>
         <source>Cancel</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Anuluj</translation>
     </message>
     <message>
         <source>Delete</source>
@@ -546,7 +785,7 @@ Try to close other applications using the camera.</source>
     </message>
     <message>
         <source>Cancel</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Anuluj</translation>
     </message>
     <message>
         <source>Rename</source>
@@ -561,7 +800,7 @@ Try to close other applications using the camera.</source>
     </message>
     <message>
         <source>Cancel</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Anuluj</translation>
     </message>
     <message>
         <source>Send</source>
@@ -572,11 +811,11 @@ Try to close other applications using the camera.</source>
     <name>SettingsPage</name>
     <message>
         <source>Settings</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Ustawienia</translation>
     </message>
     <message>
         <source>Change password</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Zmień hasło</translation>
     </message>
     <message>
         <source>Changes your account&apos;s password. You will need to re-enter it on your other devices.</source>

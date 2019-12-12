@@ -55,7 +55,7 @@ There are guides on how to build Kaidan for each supported platform (currently t
 
 [kg]: https://kde.org/products/kirigami/
 [qquick]: https://wiki.qt.io/Qt_Quick
-[qxmpp]: http://qxmpp.org
+[qxmpp]: https://github.com/qxmpp-project/qxmpp
 [qt]: https://www.qt.io/
 [openstore]: https://open-store.io/app/im.kaidan.kaidan
 [android]: https://www.kaidan.im/download/#android

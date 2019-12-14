@@ -46,7 +46,7 @@
 1. In *CMakeLists.txt*:
 	1. Change `set(VERSION_STRING "X.Y.Z-dev")` to `set(VERSION_STRING "X.Y.Z")`
 	1. Change `set(DEVELOPMENT_BUILD TRUE)` to `set(DEVELOPMENT_BUILD FALSE)`
-	1. Change `set(ANDROID_VERSION_CODE N)` to `set(ANDROID_VERSION_CODE N+1)`
+	1. Change `set(APPLICATION_VERSION_CODE N)` to `set(APPLICATION_VERSION_CODE N+1)`
 1. `git add CMakeLists.txt`
 1. Update changelog (*changelog.md*):
 	1. Set release date

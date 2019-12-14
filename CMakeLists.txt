@@ -17,7 +17,7 @@ if(UBUNTU_TOUCH)
 endif()
 set(VERSION_STRING "0.5.0-dev")
 set(DEVELOPMENT_BUILD TRUE)
-set(ANDROID_VERSION_CODE 6)
+set(APPLICATION_VERSION_CODE 6)
 
 # CMake options
 option(I18N "Enable i18n support" FALSE)

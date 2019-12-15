@@ -1,0 +1,53 @@
+<RCC>
+	<qresource prefix="/qml/">
+		<file>main.qml</file>
+		<file>RosterPage.qml</file>
+		<file>LoginPage.qml</file>
+		<file>ChatPage.qml</file>
+		<file>AboutDialog.qml</file>
+		<file>GlobalDrawer.qml</file>
+		<file>EmptyChatPage.qml</file>
+		<file>QrCodeScannerPage.qml</file>
+		<file>UserProfilePage.qml</file>
+		<file>MultimediaSettingsPage.qml</file>
+
+		<file>elements/SubRequestAcceptSheet.qml</file>
+		<file>elements/RosterAddContactSheet.qml</file>
+		<file>elements/RosterRenameContactSheet.qml</file>
+		<file>elements/RosterRemoveContactSheet.qml</file>
+		<file>elements/RosterListItem.qml</file>
+		<file>elements/MessageCounter.qml</file>
+		<file>elements/ChatMessage.qml</file>
+		<file>elements/RoundImage.qml</file>
+		<file>elements/IconButton.qml</file>
+		<file>elements/FileChooser.qml</file>
+		<file>elements/FileChooserDesktop.qml</file>
+		<file>elements/FileChooserMobile.qml</file>
+		<file>elements/SendMediaSheet.qml</file>
+
+		<file>elements/MediaPreview.qml</file>
+		<file>elements/MediaPreviewImage.qml</file>
+		<file>elements/MediaPreviewAudio.qml</file>
+		<file>elements/MediaPreviewVideo.qml</file>
+		<file>elements/MediaPreviewOther.qml</file>
+		<file>elements/MediaPreviewLocation.qml</file>
+		<file>elements/MediaPreviewLoader.qml</file>
+
+		<file>elements/NewMedia.qml</file>
+		<file>elements/NewMediaLocation.qml</file>
+		<file>elements/NewMediaLoader.qml</file>
+
+		<file>elements/EmojiPicker.qml</file>
+		<file>elements/TextAvatar.qml</file>
+		<file>elements/Avatar.qml</file>
+
+		<file>settings/SettingsItem.qml</file>
+		<file>settings/SettingsPage.qml</file>
+		<file>settings/SettingsSheet.qml</file>
+		<file>settings/ChangePassword.qml</file>
+	</qresource>
+
+	<qresource prefix="/">
+		<file alias="qtquickcontrols2.conf">../../misc/qtquickcontrols2.conf</file>
+	</qresource>
+</RCC>

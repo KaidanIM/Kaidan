@@ -143,9 +143,9 @@ elseif(WIN32)
 endif()
 
 if(QUICK_COMPILER)
-	qtquick_compiler_add_resources(KAIDAN_QML_QRC kaidan_qml.qrc)
+	qtquick_compiler_add_resources(KAIDAN_QML_QRC src/qml/qml.qrc)
 else()
-	qt5_add_resources(KAIDAN_QML_QRC kaidan_qml.qrc)
+	qt5_add_resources(KAIDAN_QML_QRC src/qml/qml.qrc)
 endif()
 
 add_executable(${PROJECT_NAME}

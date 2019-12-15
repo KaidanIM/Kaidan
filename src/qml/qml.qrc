@@ -46,8 +46,4 @@
 		<file>settings/SettingsSheet.qml</file>
 		<file>settings/ChangePassword.qml</file>
 	</qresource>
-
-	<qresource prefix="/">
-		<file alias="qtquickcontrols2.conf">../../misc/qtquickcontrols2.conf</file>
-	</qresource>
 </RCC>

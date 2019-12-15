@@ -148,12 +148,16 @@ else()
 	qt5_add_resources(KAIDAN_QML_QRC src/qml/qml.qrc)
 endif()
 
+# misc resources (e.g. qtquickcontrols2.conf)
+qt5_add_resources(KAIDAN_MISC_QRC misc/misc.qrc)
+
 add_executable(${PROJECT_NAME}
 	MACOSX_BUNDLE
 	WIN32
 	${KAIDAN_ICNS}
 	${KAIDAN_SOURCES}
 	${KAIDAN_QML_QRC}
+	${KAIDAN_MISC_QRC}
 	${KAIDAN_ICONS_QRC}  # only set if enabled
 	${KAIDAN_IMAGES_QRC} #
 	${I18N_QRC_CPP}      #

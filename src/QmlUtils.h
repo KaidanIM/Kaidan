@@ -28,8 +28,8 @@
  *  along with Kaidan.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef UTILS_H
-#define UTILS_H
+#ifndef QMLUTILS_H
+#define QMLUTILS_H
 
 #include <QObject>
 #include "Globals.h"
@@ -132,4 +132,4 @@ private:
 	static QString processMsgFormatting(const QStringList &words, bool isFirst = true);
 };
 
-#endif // UTILS_H
+#endif // QMLUTILS_H

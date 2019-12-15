@@ -146,15 +146,15 @@ Kirigami.Page {
 						spacing: Kirigami.Units.smallSpacing
 
 						Kirigami.Icon {
-							source: kaidan.utils.presenceTypeToIcon(presenceType)
+							source: Utils.presenceTypeToIcon(presenceType)
 							width: 26
 							height: 26
 						}
 
 						Controls.Label {
 							Layout.alignment: Qt.AlignVCenter
-							text: kaidan.utils.presenceTypeToText(presenceType)
-							color: kaidan.utils.presenceTypeToColor(presenceType)
+							text: Utils.presenceTypeToText(presenceType)
+							color: Utils.presenceTypeToColor(presenceType)
 							textFormat: Text.PlainText
 						}
 
@@ -174,7 +174,7 @@ Kirigami.Page {
 					Layout.fillWidth: true
 
 					Controls.Label {
-						text: kaidan.utils.formatMessage(model.value)
+						text: Utils.formatMessage(model.value)
 						onLinkActivated: Qt.openUrlExternally(link)
 						textFormat: Text.StyledText
 					}

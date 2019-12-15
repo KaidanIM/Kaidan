@@ -108,7 +108,7 @@ MediaPreview {
 				Controls.Label {
 					id: fileNameLabel
 					Layout.fillWidth: true
-					text: kaidan.utils.fileNameFromUrl(root.mediaSource)
+					text: Utils.fileNameFromUrl(root.mediaSource)
 					textFormat: Text.PlainText
 					elide: Text.ElideRight
 					maximumLineCount: 1
@@ -130,7 +130,7 @@ MediaPreview {
 					id: fileSizeLabel
 
 					Layout.fillWidth: true
-					text: kaidan.utils.fileSizeFromUrl(root.mediaSource)
+					text: Utils.fileSizeFromUrl(root.mediaSource)
 					textFormat: Text.PlainText
 					elide: Text.ElideRight
 					maximumLineCount: 1

@@ -33,6 +33,7 @@ import QtQuick.Layouts 1.3
 import QtQuick.Controls 2.3 as Controls
 import QtGraphicalEffects 1.0
 import org.kde.kirigami 2.8 as Kirigami
+
 import im.kaidan.kaidan 1.0
 
 Kirigami.SwipeListItem {
@@ -62,7 +63,7 @@ Kirigami.SwipeListItem {
 			width: Kirigami.Units.gridUnit * 0.3
 			height: parent.height
 
-			color: kaidan.utils.presenceTypeToColor(presenceType)
+			color: Utils.presenceTypeToColor(presenceType)
 		}
 
 		// left: avatar
@@ -126,7 +127,7 @@ Kirigami.SwipeListItem {
 					text: {
 						presenceType === Enums.PresError ? // error presence type
 						qsTr("Error: Please check the JID.") :
-						kaidan.utils.removeNewLinesFromString(lastMessage)
+						Utils.removeNewLinesFromString(lastMessage)
 					}
 					textFormat: Text.PlainText
 					font.pixelSize: Kirigami.Units.gridUnit * 0.8
@@ -159,8 +160,8 @@ Kirigami.SwipeListItem {
 		}
 
 		// presence status type
-		string += "<font color='" + kaidan.utils.presenceTypeToColor(statusType) + "'>"
-		string += kaidan.utils.presenceTypeToText(statusType)
+		string += "<font color='" + Utils.presenceTypeToColor(statusType) + "'>"
+		string += Utils.presenceTypeToText(statusType)
 		string += "</font>"
 
 		// presence status message

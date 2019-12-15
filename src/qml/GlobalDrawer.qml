@@ -35,8 +35,8 @@ import "settings"
 Kirigami.GlobalDrawer {
 	id: globalDrawer
 	title: "Kaidan"
-	titleIcon: kaidan.utils.getResourcePath("images/kaidan.svg")
-	bannerImageSource: kaidan.utils.getResourcePath("images/banner.png")
+	titleIcon: Utils.getResourcePath("images/kaidan.svg")
+	bannerImageSource: Utils.getResourcePath("images/banner.png")
 
 	SettingsSheet {
 		id: settingsSheet
@@ -47,7 +47,7 @@ Kirigami.GlobalDrawer {
 			text: qsTr("Invite friends")
 			iconName: "mail-invitation"
 			onTriggered: {
-				kaidan.utils.copyToClipboard(
+				Utils.copyToClipboard(
 					"https://i.kaidan.im/#" + kaidan.jid)
 				passiveNotification(
 					qsTr("Invitation link copied to clipboard"))

@@ -199,7 +199,7 @@ Q_DECL_EXPORT int main(int argc, char *argv[])
 	qputenv("GST_PLUGIN_PATH_1_0", QByteArray());
 	qputenv("GST_PLUGIN_SYSTEM_PATH_1_0", gstreamerPluginsPath.toLocal8Bit());
 	qputenv("GST_PLUGIN_SCANNER_1_0", QString::fromLatin1("%1/gst-plugin-scanner").arg(gstreamerPluginsPath).toLocal8Bit());
-#endif
+#endif // APPIMAGE
 
 	// register qMetaTypes
 	qRegisterMetaType<RosterItem>("RosterItem");
@@ -227,7 +227,6 @@ Q_DECL_EXPORT int main(int argc, char *argv[])
 	qRegisterMetaType<CameraInfo>();
 	qRegisterMetaType<AudioDeviceInfo>();
 	qRegisterMetaType<MediaSettings>();
-//	qRegisterMetaType<CommonEncoderSettings>();
 	qRegisterMetaType<ImageEncoderSettings>();
 	qRegisterMetaType<AudioEncoderSettings>();
 	qRegisterMetaType<VideoEncoderSettings>();
@@ -369,6 +368,9 @@ Q_DECL_EXPORT int main(int argc, char *argv[])
 	qmlRegisterSingletonType<MediaUtils>("MediaUtils", 0, 1, "MediaUtilsInstance", [](QQmlEngine *, QJSEngine *) {
 		QObject *instance = new MediaUtils(qApp);
 		return instance;
+	});
+	qmlRegisterSingletonType<QmlUtils>(APPLICATION_ID, 1, 0, "Utils", [](QQmlEngine *, QJSEngine *) {
+		return static_cast<QObject*>(QmlUtils::instance());
 	});
 
 	engine.rootContext()->setContextProperty("kaidan", &kaidan);

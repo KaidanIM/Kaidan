@@ -33,6 +33,8 @@ import QtQuick.Layouts 1.3
 import QtQuick.Controls 2.3 as Controls
 import org.kde.kirigami 2.8 as Kirigami
 
+import im.kaidan.kaidan 1.0
+
 Controls.Dialog {
 	id: aboutDialog
 	modal: true
@@ -46,7 +48,7 @@ Controls.Dialog {
 		rowSpacing: 20
 
 		Image {
-			source: kaidan.utils.getResourcePath("images/kaidan.svg")
+			source: Utils.getResourcePath("images/kaidan.svg")
 			Layout.preferredWidth: Kirigami.Units.gridUnit * 9
 			Layout.preferredHeight: Kirigami.Units.gridUnit * 9
 			Layout.fillWidth: true
@@ -63,7 +65,7 @@ Controls.Dialog {
 			spacing: Kirigami.gridUnit * 0.6
 
 			Kirigami.Heading {
-				text: "Kaidan " + kaidan.utils.getVersionString()
+				text: "Kaidan " + Utils.getVersionString()
 				textFormat: Text.PlainText
 				wrapMode: Text.WordWrap
 				Layout.fillWidth: true

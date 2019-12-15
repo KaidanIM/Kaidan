@@ -32,10 +32,12 @@ import QtQuick.Controls 2.3 as Controls
 import org.kde.kirigami 2.8 as Kirigami
 import QtQuick 2.7
 
+import im.kaidan.kaidan 1.0
+
 Kirigami.Page {
 	background: Image {
 		id: bgimage
-		source: kaidan.utils.getResourcePath("images/chat.png")
+		source: Utils.getResourcePath("images/chat.png")
 		anchors.fill: parent
 		fillMode: Image.Tile
 		horizontalAlignment: Image.AlignLeft

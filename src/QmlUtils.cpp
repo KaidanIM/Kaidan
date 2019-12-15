@@ -43,9 +43,26 @@
 // QXmpp
 #include "qxmpp-exts/QXmppColorGenerator.h"
 
-QmlUtils::QmlUtils(QObject *parent)
-        : QObject(parent)
+static QmlUtils *s_instance;
+
+QmlUtils *QmlUtils::instance()
 {
+	if (!s_instance)
+		return new QmlUtils(QGuiApplication::instance());
+
+	return s_instance;
+}
+
+QmlUtils::QmlUtils(QObject *parent)
+	: QObject(parent)
+{
+	Q_ASSERT(!s_instance);
+	s_instance = this;
+}
+
+QmlUtils::~QmlUtils()
+{
+	s_instance = nullptr;
 }
 
 QString QmlUtils::presenceTypeToIcon(Enums::AvailabilityTypes type)

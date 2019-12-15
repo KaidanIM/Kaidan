@@ -52,7 +52,6 @@ Kaidan *Kaidan::s_instance = nullptr;
 
 Kaidan::Kaidan(QGuiApplication *app, bool enableLogging, QObject *parent)
         : QObject(parent),
-          m_utils(new QmlUtils(this)),
           m_database(new Database()),
           m_dbThrd(new QThread()),
           m_msgDb(new MessageDb()),

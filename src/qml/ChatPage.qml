@@ -393,7 +393,7 @@ Kirigami.ScrollablePage {
 
 	background: Image {
 		id: bgimage
-		source: kaidan.utils.getResourcePath("images/chat.png")
+		source: Utils.getResourcePath("images/chat.png")
 		anchors.fill: parent
 		fillMode: Image.Tile
 		horizontalAlignment: Image.AlignLeft

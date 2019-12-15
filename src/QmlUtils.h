@@ -48,7 +48,10 @@ class QmlUtils : public QObject
 	Q_OBJECT
 
 public:
+	static QmlUtils *instance();
+
 	QmlUtils(QObject *parent = nullptr);
+	~QmlUtils();
 
 	/**
 	 * Returns the icon belonging to the given presence status type
@@ -79,7 +82,7 @@ public:
 	 */
 	Q_INVOKABLE static QString getVersionString()
 	{
-		return VERSION_STRING;
+		return QStringLiteral(VERSION_STRING);
 	}
 
 	/**

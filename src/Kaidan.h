@@ -43,7 +43,6 @@
 class QGuiApplication;
 class Database;
 class QXmppClient;
-class QmlUtils;
 
 using namespace Enums;
 
@@ -60,7 +59,6 @@ class Kaidan : public QObject
 {
 	Q_OBJECT
 
-	Q_PROPERTY(QmlUtils* utils READ getUtils CONSTANT)
 	Q_PROPERTY(RosterModel* rosterModel READ getRosterModel CONSTANT)
 	Q_PROPERTY(MessageModel* messageModel READ getMessageModel CONSTANT)
 	Q_PROPERTY(AvatarFileStorage* avatarStorage READ getAvatarStorage NOTIFY avatarStorageChanged)
@@ -187,11 +185,6 @@ public:
 	QSettings* getSettings() const
 	{
 		return m_caches->settings;
-	}
-
-	QmlUtils* getUtils() const
-	{
-		return m_utils;
 	}
 
 	ClientWorker *getClient() const;
@@ -422,7 +415,6 @@ private:
      */
     void notifyLoginUriNotFound();
 
-	QmlUtils *m_utils;
 	Database *m_database;
 	QThread *m_dbThrd;
 	MessageDb *m_msgDb;

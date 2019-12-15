@@ -28,16 +28,18 @@
  *  along with Kaidan.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-import org.kde.kirigami 2.8 as Kirigami
 import QtQuick 2.7
 import QtQuick.Layouts 1.3
+import org.kde.kirigami 2.8 as Kirigami
+
+import im.kaidan.kaidan 1.0
 
 Rectangle {
 	id: avatar
 
 	property string name
 
-	color: Qt.lighter(kaidan.utils.getUserColor(name))
+	color: Qt.lighter(Utils.getUserColor(name))
 	radius: width * 0.5
 
 	Text {

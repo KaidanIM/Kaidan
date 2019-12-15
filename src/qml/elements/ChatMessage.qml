@@ -125,9 +125,9 @@ RowLayout {
 					enabled: bodyLabel.visible
 					onTriggered: {
 						if (!isSpoiler || isShowingSpoiler)
-							kaidan.utils.copyToClipboard(messageBody);
+							Utils.copyToClipboard(messageBody);
 						else
-							kaidan.utils.copyToClipboard(spoilerHint);
+							Utils.copyToClipboard(spoilerHint);
 					}
 				}
 
@@ -140,7 +140,7 @@ RowLayout {
 				Controls.MenuItem {
 					text: qsTr("Copy download URL")
 					enabled: mediaGetUrl
-					onTriggered: kaidan.utils.copyToClipboard(mediaGetUrl)
+					onTriggered: Utils.copyToClipboard(mediaGetUrl)
 				}
 			}
 		}
@@ -254,7 +254,7 @@ RowLayout {
 				Controls.Label {
 					id: bodyLabel
 					visible: (root.mediaType === Enums.MessageType.MessageText || messageBody !== mediaGetUrl) && messageBody !== ""
-					text: kaidan.utils.formatMessage(messageBody)
+					text: Utils.formatMessage(messageBody)
 					textFormat: Text.StyledText
 					wrapMode: Text.Wrap
 					color: sentByMe ? Kirigami.Theme.textColor
@@ -288,7 +288,7 @@ RowLayout {
 				Image {
 					id: checkmark
 					visible: (sentByMe && isDelivered)
-					source: kaidan.utils.getResourcePath("images/message_checkmark.svg")
+					source: Utils.getResourcePath("images/message_checkmark.svg")
 					Layout.preferredHeight: Kirigami.Units.gridUnit * 0.65
 					Layout.preferredWidth: Kirigami.Units.gridUnit * 0.65
 					sourceSize.height: Kirigami.Units.gridUnit * 0.65

@@ -32,6 +32,8 @@
 #define QMLUTILS_H
 
 #include <QObject>
+#include <QUrl>
+
 #include "Globals.h"
 #include "Enums.h"
 
@@ -80,9 +82,33 @@ public:
 	/**
 	 * Returns a string of this build's Kaidan version
 	 */
-	Q_INVOKABLE static QString getVersionString()
+	Q_INVOKABLE static QString versionString()
 	{
 		return QStringLiteral(VERSION_STRING);
+	}
+
+	/**
+	 * Returns the name of this application as it should be displayed to the user
+	 */
+	Q_INVOKABLE static QString applicationDisplayName()
+	{
+		return QStringLiteral(APPLICATION_DISPLAY_NAME);
+	}
+
+	/**
+	 * Returns the URL where the source code of this application can be found
+	 */
+	Q_INVOKABLE static QUrl applicationSourceCodeUrl()
+	{
+		return {QStringLiteral(APPLICATION_SOURCE_CODE_URL)};
+	}
+
+	/**
+	 * Returns an invitation URL to the given JID
+	 */
+	Q_INVOKABLE static QUrl invitationUrl(const QString &jid)
+	{
+		return {QStringLiteral(INVITATION_URL) + jid};
 	}
 
 	/**

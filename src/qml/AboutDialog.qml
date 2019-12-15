@@ -65,7 +65,7 @@ Controls.Dialog {
 			spacing: Kirigami.gridUnit * 0.6
 
 			Kirigami.Heading {
-				text: "Kaidan " + Utils.getVersionString()
+				text: Utils.applicationDisplayName() + " " + Utils.versionString()
 				textFormat: Text.PlainText
 				wrapMode: Text.WordWrap
 				Layout.fillWidth: true
@@ -99,7 +99,7 @@ Controls.Dialog {
 
 			Controls.ToolButton {
 				text: qsTr("View source code online")
-				onClicked: Qt.openUrlExternally("https://invent.kde.org/kde/kaidan")
+				onClicked: Qt.openUrlExternally(Utils.applicationSourceCodeUrl())
 				Layout.fillWidth: true
 				Layout.alignment: Qt.AlignHCenter
 			}

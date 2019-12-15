@@ -1,8 +1,8 @@
 {
-    "name": "im.kaidan.kaidan",
-    "description": "A simple and user-friendly Jabber/XMPP client for every device",
+    "name": "@APPLICATION_ID@",
+    "description": "@APPLICATION_DESCRIPTION@",
     "architecture": "@CLICK_ARCH@",
-    "title": "Kaidan",
+    "title": "@APPLICATION_DISPLAY_NAME@",
     "framework": "ubuntu-sdk-16.04",
     "hooks": {
         "kaidan": {

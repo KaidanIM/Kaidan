@@ -45,9 +45,8 @@
 1. Check correct functionality of all release builds
 1. [Update license information](license.md)
 1. In *CMakeLists.txt*:
-	1. Change `set(VERSION_STRING "X.Y.Z-dev")` to `set(VERSION_STRING "X.Y.Z")`
-	1. Change `set(DEVELOPMENT_BUILD TRUE)` to `set(DEVELOPMENT_BUILD FALSE)`
-	1. Change `set(APPLICATION_VERSION_CODE N)` to `set(APPLICATION_VERSION_CODE N+1)`
+	1. Set `DEVELOPMENT_BUILD` to `FALSE`
+	1. Increase `VERSION_CODE` by one
 1. `git add CMakeLists.txt`
 1. Update changelog (*changelog.md*):
 	1. Set release date
@@ -75,13 +74,13 @@
 	1. `git checkout master`
 	1. `git merge stable`
 1. Start new development version:
-	* **X.Y.Z, X.Y+1 and N+1 must be adjusted to correspond to the actual version.**
+	* **X.Y.Z must be adjusted to correspond to the actual version.**
 	1. In *CMakeLists.txt*:
-		1. Change `set(VERSION_STRING "X.Y.Z")` to `set(VERSION_STRING "X.Y+1.0-dev")`
-		1. Change `set(DEVELOPMENT_BUILD FALSE)` to `set(DEVELOPMENT_BUILD TRUE)`
-		1. Change `set(ANDROID_VERSION_CODE N)` to `set(ANDROID_VERSION_CODE N+1)`
+		1. Increase `VERSION_MINOR` by one and reset `VERSION_PATCH` to 0
+		1. Set `DEVELOPMENT_BUILD` to `TRUE` again
+		1. Increase `VERSION_CODE` by one
 	1. `git add CMakeLists.txt`
-	1. `git commit -m "Continue with Kaidan vX.Y+1.0-dev"`
+	1. `git commit -m "Continue with Kaidan vX.Y.Z-dev"`
 	1. `git push origin master`
 
 ### In Repository **https://invent.kde.org/websites/kaidan-im.git**

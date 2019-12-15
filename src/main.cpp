@@ -50,7 +50,6 @@
 #include "AvatarFileStorage.h"
 #include "EmojiModel.h"
 #include "Enums.h"
-#include "Globals.h"
 #include "Kaidan.h"
 #include "Message.h"
 #include "MessageModel.h"

@@ -1,5 +1,4 @@
 cmake_minimum_required(VERSION 3.3)
-find_package(ECM 5.40.0 REQUIRED NO_MODULE)
 set(CMAKE_CXX_STANDARD 14)
 set(QT_MIN_VERSION "5.10.0")
 
@@ -9,15 +8,31 @@ endif()
 
 project(kaidan)
 
+# application information
 set(APPLICATION_ID "im.kaidan.kaidan")
 set(APPLICATION_NAME "kaidan")
 set(APPLICATION_DISPLAY_NAME "Kaidan")
+set(APPLICATION_DESCRIPTION "A simple, user-friendly Jabber/XMPP client for every device!")
 if(UBUNTU_TOUCH)
 	set(APPLICATION_NAME "${APPLICATION_ID}")
 endif()
-set(VERSION_STRING "0.5.0-dev")
+
+# Version
+set(VERSION_MAJOR 0)
+set(VERSION_MINOR 5)
+set(VERSION_PATCH 0)
+set(VERSION_CODE 6)
+set(VERSION_EXTRA "" CACHE STRING "Stuff to append to version string")
+
 set(DEVELOPMENT_BUILD TRUE)
-set(APPLICATION_VERSION_CODE 6)
+if(DEVELOPMENT_BUILD)
+	set(VERSION_EXTRA "${VERSION_EXTRA}-dev")
+endif()
+
+set(VERSION_STRING "${VERSION_MAJOR}.${VERSION_MINOR}.${VERSION_PATCH}")
+if(VERSION_EXTRA)
+	set(VERSION_STRING ${VERSION_STRING}${VERSION_EXTRA})
+endif()
 
 # CMake options
 option(I18N "Enable i18n support" FALSE)
@@ -42,6 +57,8 @@ set(AUTOMOC_MOC_OPTIONS -Muri=${APPLICATION_ID})
 #
 # Dependecies
 #
+
+find_package(ECM 5.40.0 REQUIRED NO_MODULE)
 
 # CMake module path
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${ECM_MODULE_PATH} ${ECM_KDE_MODULE_DIR})
@@ -311,14 +328,14 @@ if(APPLE)
 	endif()
 endif()
 
-#
-# Global C++ variables
-#
-
 # iOS-specific linker flags
 if(IOS)
 	set(CMAKE_EXE_LINKER_FLAGS ${CMAKE_EXE_LINKER_FLAGS} "-Wl,-e,_qt_main_wrapper -u _qt_registerPlatformPlugin")
 endif()
+
+#
+# Global C++ variables
+#
 
 if(UBUNTU_TOUCH)
 	set(KAIDAN_COMPILE_DEFINITIONS UBUNTU_TOUCH=True)
@@ -342,6 +359,8 @@ target_compile_definitions(${PROJECT_NAME} PRIVATE
 	APPLICATION_ID="${APPLICATION_ID}"
 	APPLICATION_NAME="${APPLICATION_NAME}"
 	APPLICATION_DISPLAY_NAME="${APPLICATION_DISPLAY_NAME}"
+	APPLICATION_DESCRIPTION="${APPLICATION_DESCRIPTION}"
+
 	${KAIDAN_COMPILE_DEFINITIONS}
 )
 
@@ -405,7 +424,7 @@ elseif(UNIX AND NOT APPLE)
 	# install metainfo
 	install(FILES "misc/metadata.xml"
 		DESTINATION "${KDE_INSTALL_METAINFODIR}"
-		RENAME "im.kaidan.kaidan.appdata.xml"
+		RENAME "${APPLICATION_ID}.appdata.xml"
 	)
 endif()
 

@@ -31,9 +31,6 @@
 #ifndef GLOBALS_H
 #define GLOBALS_H
 
-// Application information
-#define APPLICATION_DESCRIPTION "A simple, user-friendly Jabber/XMPP client"
-
 // Kaidan settings
 #define KAIDAN_SETTINGS_AUTH_JID "auth/jid"
 #define KAIDAN_SETTINGS_AUTH_RESOURCE "auth/resource"

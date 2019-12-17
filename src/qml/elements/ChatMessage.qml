@@ -287,7 +287,6 @@ RowLayout {
 				Image {
 					id: checkmark
 					visible: (sentByMe && isDelivered)
-					source: Utils.getResourcePath("images/message_checkmark.svg")
 					Layout.preferredHeight: Kirigami.Units.gridUnit * 0.65
 					Layout.preferredWidth: Kirigami.Units.gridUnit * 0.65
 					sourceSize.height: Kirigami.Units.gridUnit * 0.65

@@ -319,12 +319,11 @@ def main():
 			},
 		),
 		CopyrightTarget(
-			files = ["data/images/message_checkmark.svg"],
-			licenseName = "GPL-3+",
+			files = ["data/images/check-mark.svg"],
+			licenseName = "CC-BY-SA-4.0",
 			authorList = {
-				"Michael Kurz <betheg@bitcloner.org>": CopyrightAuthor(years = "2014"),
+				"Melvin Keskin <melvo@olomono.de>": CopyrightAuthor(years = "2019"),
 			},
-			comment = "message_checkmark.svg: Originally from conversations, optimized using SVGO by LNJ <git@lnj.li>"
 		),
 		CopyrightTarget(
 			files = [

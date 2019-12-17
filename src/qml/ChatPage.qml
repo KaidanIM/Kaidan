@@ -456,21 +456,24 @@ ChatPageBase {
 		}
 	}
 
-	// Message Writing
+	// area for writing and sending a message
 	footer: Controls.Pane {
 		id: sendingArea
+		padding: 0
+		wheelEnabled: true
+
+		background: Rectangle {
+			id: sendingAreaBackground
+			color: Kirigami.Theme.backgroundColor
+		}
+
 		layer.enabled: sendingArea.enabled
 		layer.effect: DropShadow {
 			verticalOffset: 1
-			color: Kirigami.Theme.disabledTextColor
+			color: Qt.darker(sendingAreaBackground.color, 1.2)
 			samples: 20
 			spread: 0.3
 			cached: true // element is static
-		}
-		padding: 0
-		wheelEnabled: true
-		background: Rectangle {
-			color: Kirigami.Theme.backgroundColor
 		}
 
 		RowLayout {

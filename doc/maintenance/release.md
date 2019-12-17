@@ -20,6 +20,7 @@
 * [ ] Update screenshot
 * [ ] Update version and date in *index.html*
 * [ ] Publish blog post
+* [ ] Update supported features in *supported-xeps.md*
 
 ### Mastodon
 
@@ -104,6 +105,7 @@
 	1. Copy *images/screenshot.png* to *images/screenshots/screenshot-X.Y*
 	1. Include *images/screenshots/screenshot-X.Y* into blog post
 	1. Add changelog part for vX.Y.Z
+1. Update supported features in *supported-xeps.md*
 
 ### On Mastodon via **https://fosstodon.org/@kaidan**
 

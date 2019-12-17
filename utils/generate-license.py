@@ -44,6 +44,7 @@ REPLACE_USER_IDS = [
 	("Georg <s.g.b@gmx.de>", "geobra <s.g.b@gmx.de>"),
 	("Muhammad Nur Hidayat Yasuyoshi (MNH48.com) <muhdnurhidayat96@yahoo.com>",
 	 "Muhammad Nur Hidayat Yasuyoshi <mnh48mail@gmail.com>"),
+	("Joeke de Graaf <mappack@null.net>", "Joeke de Graaf <joeke.de.graaf@student.nhlstenden.com>"),
 	("X advocatux <advocatux@airpost.net>", "advocatux <advocatux@airpost.net>"),
 	("ZatroxDE <zatroxde@outlook.com>", "Robert Maerkisch <zatroxde@protonmail.ch>"),
 	("X oiseauroch <tobias.ollive@mailoo.org>", "oiseauroch <tobias.ollive@mailoo.org>"),
@@ -55,6 +56,7 @@ REPLACE_USER_IDS = [
 EXCLUDE_USER_IDS = [
 	"Weblate <noreply@weblate.org>",
 	"Hosted Weblate <hosted@weblate.org>",
+	"anonymous <>",
 	"anonymous <> <None>",
 	"Kaidan Translations <translations@kaidan.im>",
 	"Kaidan translations <translations@kaidan.im>",

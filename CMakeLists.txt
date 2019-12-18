@@ -371,6 +371,7 @@ if(UBUNTU_TOUCH AND CLICK_ARCH)
 	# install kaidan media
 	install(DIRECTORY "data/images"
 	        DESTINATION "${CMAKE_INSTALL_FULL_DATADIR}/${APPLICATION_ID}"
+		PATTERN "*.qrc" EXCLUDE
 	)
 	# install icon
 	install(FILES "misc/kaidan.svg" "misc/ubuntu-touch/apparmor.json"
@@ -386,6 +387,7 @@ elseif(UNIX AND NOT APPLE)
 	# install kaidan media
 	install(DIRECTORY "data/images"
 	        DESTINATION "${CMAKE_INSTALL_FULL_DATADIR}/${PROJECT_NAME}"
+		PATTERN "*.qrc" EXCLUDE
 	)
 
 	# install icon (scalable + 128x)

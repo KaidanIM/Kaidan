@@ -35,8 +35,8 @@
 
 import QtQuick 2.7
 import QtQuick.Layouts 1.3
-import QtGraphicalEffects 1.0
 import QtQuick.Controls 2.3 as Controls
+import QtGraphicalEffects 1.0
 import org.kde.kirigami 2.8 as Kirigami
 
 import im.kaidan.kaidan 1.0
@@ -44,20 +44,29 @@ import MediaUtils 0.1
 
 MediaPreview {
 	id: root
-
-	color: 'transparent'
-
 	Layout.preferredHeight: Kirigami.Units.gridUnit * 3.85
 	Layout.preferredWidth: layout.implicitWidth + layout.anchors.margins * 2
 	Layout.maximumWidth: message ? messageSize : -1
+	color: "transparent"
 
 	// rounded box
 	Rectangle {
 		id: box
+		color: {
+			if(openButton.containsMouse) {
+				if (messageBubble)
+					Qt.darker(messageBubble.color, 1.08)
+				else
+					Qt.darker(rightMessageBubbleColor, 1.08)
+			} else {
+				if (messageBubble)
+					Qt.darker(messageBubble.color, 1.05)
+				else
+					Qt.darker(rightMessageBubbleColor, 1.05)
+			}
+		}
 
-		visible: false
-		color: root.message ? Qt.darker(Kirigami.Theme.buttonBackgroundColor, 1.2) : Kirigami.Theme.highlightColor
-		radius: Kirigami.Units.smallSpacing * 2
+		radius: roundedCornersRadius
 
 		anchors {
 			fill: parent
@@ -66,7 +75,6 @@ MediaPreview {
 		// content
 		RowLayout {
 			id: layout
-
 			spacing: Kirigami.Units.gridUnit * 0.4
 
 			anchors {
@@ -75,12 +83,9 @@ MediaPreview {
 			}
 
 			// left: file icon
-			Rectangle {
+			Item {
 				Layout.fillHeight: true
 				Layout.preferredWidth: height
-
-				radius: height * 0.5
-				color: Kirigami.Theme.backgroundColor
 
 				Kirigami.Icon {
 					source: MediaUtilsInstance.iconName(root.mediaSource)
@@ -99,10 +104,9 @@ MediaPreview {
 
 			// right: file description
 			ColumnLayout {
-				spacing: 0
-
 				Layout.fillHeight: true
 				Layout.fillWidth: true
+				spacing: 0
 
 				// file name
 				Controls.Label {
@@ -117,7 +121,6 @@ MediaPreview {
 				// mime type
 				Controls.Label {
 					id: fileMimeTypeLabel
-
 					Layout.fillWidth: true
 					text: MediaUtilsInstance.mimeTypeName(root.mediaSource)
 					textFormat: Text.PlainText
@@ -128,7 +131,6 @@ MediaPreview {
 				// file size
 				Controls.Label {
 					id: fileSizeLabel
-
 					Layout.fillWidth: true
 					text: Utils.fileSizeFromUrl(root.mediaSource)
 					textFormat: Text.PlainText
@@ -139,39 +141,21 @@ MediaPreview {
 		}
 	}
 
-	DropShadow {
-		source: box
-		verticalOffset: Kirigami.Units.gridUnit * 0.08
-		horizontalOffset: Kirigami.Units.gridUnit * 0.08
-		color: Kirigami.Theme.disabledTextColor
-		samples: 10
-		spread: 0.1
+	MouseArea {
+		id: openButton
+		enabled: root.showOpenButton
+		hoverEnabled: true
 
 		anchors {
-			fill: box
+			fill: parent
 		}
 
-		MouseArea {
-			id: openButton
+		onClicked: Qt.openUrlExternally(root.mediaSource)
+	}
 
-			enabled: root.showOpenButton
-			hoverEnabled: true
-
-			anchors {
-				fill: parent
-			}
-
-			onClicked: Qt.openUrlExternally(root.mediaSource)
-		}
-
-		Controls.ToolTip {
-			delay: Kirigami.Units.longDuration
-			parent: openButton
-			text: '%1\n%2\n%3\n%4'
-			      .arg(fileNameLabel.text)
-			      .arg(fileMimeTypeLabel.text)
-			      .arg(fileSizeLabel.text)
-			      .arg(root.mediaSource)
-		}
+	Controls.ToolTip {
+		delay: Kirigami.Units.longDuration
+		parent: openButton
+		text: root.mediaSource
 	}
 }

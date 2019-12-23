@@ -55,9 +55,7 @@ Rectangle {
 	Layout.fillHeight: false
 	Layout.fillWidth: message ? false : true
 	Layout.alignment: Qt.AlignCenter
-	Layout.margins: 0
-	Layout.leftMargin: undefined
-	Layout.topMargin: undefined
-	Layout.rightMargin: undefined
-	Layout.bottomMargin: undefined
+	Layout.topMargin: -6
+	Layout.leftMargin: Layout.topMargin
+	Layout.rightMargin: Layout.topMargin
 }

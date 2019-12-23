@@ -19,6 +19,7 @@
 		<file>elements/RosterListItem.qml</file>
 		<file>elements/MessageCounter.qml</file>
 		<file>elements/ChatMessage.qml</file>
+		<file>elements/RoundedImage.qml</file>
 		<file>elements/RoundImage.qml</file>
 		<file>elements/IconButton.qml</file>
 		<file>elements/FileChooser.qml</file>

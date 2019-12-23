@@ -45,7 +45,7 @@ MediaPreview {
 	Layout.preferredWidth: Kirigami.Units.gridUnit * 32
 	Layout.maximumWidth: message ? messageSize : -1
 
-	AnimatedImage {
+	RoundedImage {
 		id: image
 
 		fillMode: Image.PreserveAspectFit

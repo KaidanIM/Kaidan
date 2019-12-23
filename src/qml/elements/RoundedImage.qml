@@ -28,27 +28,25 @@
  *  along with Kaidan.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-import QtQuick 2.7
+import QtQuick 2.6
+import QtGraphicalEffects 1.0
 
-Item {
-	id: avatar
-	property string avatarUrl
-	property string name
+AnimatedImage {
+	id: img
+	property int radius: roundedCornersRadius
 
-	RoundImage {
-		id: imageAvatar
-		visible: avatarUrl
-		source: avatarUrl
-		fillMode: Image.PreserveAspectFit
-		mipmap: true
-		height: width
-		anchors.fill: parent
-	}
+	layer.enabled: true
+	layer.effect: OpacityMask {
+		maskSource: Item {
+			width: img.paintedWidth
+			height: img.paintedHeight
 
-	TextAvatar {
-		id: textAvatar
-		visible: !avatarUrl
-		name: avatar.name
-		anchors.fill: parent
+			Rectangle {
+				anchors.centerIn: parent
+				width: Math.min(img.width, img.height)
+				height: width
+				radius: img.radius
+			}
+		}
 	}
 }

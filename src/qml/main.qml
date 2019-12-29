@@ -39,6 +39,9 @@ import "settings"
 Kirigami.ApplicationWindow {
 	id: root
 
+	minimumHeight: 300
+	minimumWidth: 280
+
 	StatusBar {
 		color: Material.color(Material.Green, Material.Shade700)
 	}

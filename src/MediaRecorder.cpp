@@ -1033,7 +1033,10 @@ void MediaRecorder::resetSettings(const CameraInfo &camera, const AudioDeviceInf
 
 void MediaRecorder::setupCamera()
 {
-	Q_ASSERT(!m_mediaSettings.camera.isNull());
+	// If there is no camera, there is no need to work any further
+	if (m_mediaSettings.camera.isNull())
+		return;
+
 	m_camera = new QCamera(m_mediaSettings.camera, this);
 
 	switch (m_type) {
@@ -1062,8 +1065,11 @@ void MediaRecorder::setupCamera()
 
 void MediaRecorder::setupCapturer()
 {
-	Q_ASSERT(m_camera);
-	m_imageCapturer = new CameraImageCapture(m_camera, this);
+	if (m_camera)
+		m_imageCapturer = new CameraImageCapture(m_camera, this);
+	else
+		m_imageCapturer = new CameraImageCapture({});
+
 	m_imageCapturer->setEncodingSettings(m_imageEncoderSettings.toQImageEncoderSettings());
 
 	connectImageCapturer(m_imageCapturer, this);
@@ -1082,8 +1088,11 @@ void MediaRecorder::setupAudioRecorder()
 
 void MediaRecorder::setupVideoRecorder()
 {
-	Q_ASSERT(m_camera);
-	m_videoRecorder = new QMediaRecorder(m_camera, this);
+	if (m_camera)
+		m_videoRecorder = new QMediaRecorder(m_camera, this);
+	else
+		m_videoRecorder = new QMediaRecorder({}, this);
+
 	m_videoRecorder->setContainerFormat(m_mediaSettings.container);
 	m_videoRecorder->setAudioSettings(m_audioEncoderSettings.toQAudioEncoderSettings());
 	m_videoRecorder->setVideoSettings(m_videoEncoderSettings.toQVideoEncoderSettings());

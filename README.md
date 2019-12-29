@@ -52,6 +52,9 @@ There are guides on how to build Kaidan for each supported platform (currently t
  * [Linux Desktop](https://invent.kde.org/kde/kaidan/wikis/building/linux-debian-based)
  * [Ubuntu Touch (click package)](https://invent.kde.org/kde/kaidan/wikis/building/ubuntu-touch)
 
+## Contributing
+
+If you are interested in contributing to Kaidan, please have a look at our [contribution guidelines](CONTRIBUTING.md).
 
 [kg]: https://kde.org/products/kirigami/
 [qquick]: https://wiki.qt.io/Qt_Quick

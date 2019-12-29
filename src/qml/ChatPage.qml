@@ -53,11 +53,18 @@ Kirigami.ScrollablePage {
 	title: chatName
 	keyboardNavigationEnabled: true
 	contextualActions: [
+		// Action to toggle the message search bar
 		Kirigami.Action {
-			visible: !isWritingSpoiler
-			icon.name: "password-show-off"
-			text: qsTr("Send a spoiler message")
-			onTriggered: isWritingSpoiler = true
+			id: searchAction
+			text: qsTr("Search")
+			icon.name: "search"
+
+			onTriggered: {
+				if (searchBar.active)
+					searchBar.close()
+				else
+					searchBar.open()
+			}
 		},
 		Kirigami.Action {
 			visible: true
@@ -165,19 +172,11 @@ Kirigami.ScrollablePage {
 				sendMediaSheet.sendNewMessageType(kaidan.messageModel.chatPartner, type)
 			}
 		},
-
-		// Action to toggle the message search bar
 		Kirigami.Action {
-			id: searchAction
-			text: qsTr("Search")
-			icon.name: "search"
-
-			onTriggered: {
-				if (searchBar.active)
-					searchBar.close()
-				else
-					searchBar.open()
-			}
+			visible: !isWritingSpoiler
+			icon.name: "password-show-off"
+			text: qsTr("Send a spoiler message")
+			onTriggered: isWritingSpoiler = true
 		}
 	]
 

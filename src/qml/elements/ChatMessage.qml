@@ -65,6 +65,7 @@ RowLayout {
 	property string avatarUrl: kaidan.avatarStorage.getAvatarUrl(sender)
 
 	signal messageEditRequested(string id, string body)
+	signal quoteRequested(string body)
 
 	// Own messages are on the right, others on the left side.
 	layoutDirection: sentByMe ? Qt.RightToLeft : Qt.LeftToRight
@@ -142,6 +143,13 @@ RowLayout {
 					text: qsTr("Copy download URL")
 					enabled: mediaGetUrl
 					onTriggered: Utils.copyToClipboard(mediaGetUrl)
+				}
+
+				Controls.MenuItem {
+					text: qsTr("Quote")
+					onTriggered: {
+						root.quoteRequested(messageBody)
+					}
 				}
 			}
 		}

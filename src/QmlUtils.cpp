@@ -245,5 +245,10 @@ QString QmlUtils::processMsgFormatting(const QStringList &list, bool isFirst)
 		return (isFirst ? QString() : " ") + QString("<a href='%1'>%1</a>").arg(list.first())
 		       + processMsgFormatting(list.mid(1), false);
 
+	// preserve newlines
+	if (list.first().contains("\n"))
+		return (isFirst ? QString() : " ") + QString(list.first()).replace("\n", "<br>")
+		       + processMsgFormatting(list.mid(1), false);
+
 	return (isFirst ? QString() : " ") + list.first() + processMsgFormatting(list.mid(1), false);
 }

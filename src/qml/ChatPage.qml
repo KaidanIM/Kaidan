@@ -453,6 +453,16 @@ ChatPageBase {
 				messageField.text = body
 				messageField.state = "edit"
 			}
+			onQuoteRequested: {
+				var quotedText = ""
+				var lines = body.split("\n")
+
+				for (var line in lines) {
+					quotedText += "> " + lines[line] + "\n"
+				}
+
+				messageField.insert(0, quotedText)
+			}
 		}
 	}
 

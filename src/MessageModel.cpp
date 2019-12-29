@@ -198,6 +198,7 @@ void MessageModel::handleMessagesFetched(const QVector<Message> &msgs)
 	beginInsertRows(QModelIndex(), rowCount(), rowCount() + msgs.length() - 1);
 	for (auto msg : msgs) {
 		msg.setSentByMe(kaidan->getJid() == msg.from());
+		processMessage(msg);
 		m_messages << msg;
 	}
 	endInsertRows();
@@ -222,10 +223,13 @@ void MessageModel::insertMessage(int idx, const Message &msg)
 	endInsertRows();
 }
 
-void MessageModel::addMessage(const Message &msg)
+void MessageModel::addMessage(Message msg)
 {
 	if (QXmppUtils::jidToBareJid(msg.from()) == m_chatPartner
 	    || QXmppUtils::jidToBareJid(msg.to()) == m_chatPartner) {
+
+		processMessage(msg);
+
 		// index where to add the new message
 		int i = 0;
 		for (const auto &message : qAsConst(m_messages)) {
@@ -317,4 +321,13 @@ int MessageModel::searchForMessageFromOldToNew(const QString &searchString, cons
 	}
 
 	return indexOfFoundMessage;
+}
+
+void MessageModel::processMessage(Message &msg)
+{
+	if (msg.body().size() > MESSAGE_MAX_CHARS) {
+		auto body = msg.body();
+		body.truncate(MESSAGE_MAX_CHARS);
+		msg.setBody(body);
+	}
 }

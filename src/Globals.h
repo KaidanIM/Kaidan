@@ -42,6 +42,8 @@
 #define INVITATION_URL "https://i.kaidan.im/#"
 #define APPLICATION_SOURCE_CODE_URL "https://invent.kde.org/kde/kaidan"
 
+#define MESSAGE_MAX_CHARS 1e4
+
 // XML namespaces
 #define NS_SPOILERS "urn:xmpp:spoiler:0"
 #define NS_CARBONS "urn:xmpp:carbons:2"

@@ -118,7 +118,7 @@ signals:
 private slots:
 	void handleMessagesFetched(const QVector<Message> &m_messages);
 
-	void addMessage(const Message &msg);
+	void addMessage(Message msg);
 	void updateMessage(const QString &id,
 	                   const std::function<void (Message &)> &updateMsg);
 	void setMessageAsSent(const QString &msgId);
@@ -127,6 +127,12 @@ private slots:
 private:
 	void clearAll();
 	void insertMessage(int i, const Message &msg);
+
+	/**
+	 * Shortens messages to 10000 if longer to prevent DoS
+	 * @param message to process
+	 */
+	void processMessage(Message &msg);
 
 	Kaidan *kaidan;
 	MessageDb *msgDb;

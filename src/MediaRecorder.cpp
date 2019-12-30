@@ -1077,7 +1077,6 @@ void MediaRecorder::setupCapturer()
 
 void MediaRecorder::setupAudioRecorder()
 {
-	Q_ASSERT(!m_mediaSettings.audioInputDevice.isNull());
 	m_audioRecorder = new QAudioRecorder(this);
 	m_audioRecorder->setAudioInput(m_mediaSettings.audioInputDevice.deviceName());
 	m_audioRecorder->setContainerFormat(m_mediaSettings.container);

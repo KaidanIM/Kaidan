@@ -1,10 +1,30 @@
 [Global]
 IconName=kaidan
 Comment=A user-friendly XMPP client for every device
+Comment[ca]=Un client d'XMPP fàcil d'emprar per a cada dispositiu
+Comment[nl]=Een gebruikersvriendelijke XMPP-client voor elk apparaat
+Comment[pt]=Um cliente de XMPP amigável para todos os dispositivos
+Comment[uk]=Зручний у користуванні клієнт XMPP для пристроїв будь-яких типів
+Comment[x-test]=xxA user-friendly XMPP client for every devicexx
 Name=Kaidan
+Name[ca]=Kaidan
+Name[nl]=Kaidan
+Name[pt]=Kaidan
+Name[uk]=Kaidan
+Name[x-test]=xxKaidanxx
 
 [Event/new-message]
 Name=New message
+Name[ca]=Missatge nou
+Name[nl]=Nieuw bericht
+Name[pt]=Nova mensagem
+Name[uk]=Нове повідомлення
+Name[x-test]=xxNew messagexx
 Comment=You have received a new message
+Comment[ca]=Heu rebut un missatge privat nou
+Comment[nl]=U hebt een nieuw bericht ontvangen
+Comment[pt]=Recebeu uma mensagem nova
+Comment[uk]=Вами отримано нове повідомлення
+Comment[x-test]=xxYou have received a new messagexx
 Action=Sound|Popup
 

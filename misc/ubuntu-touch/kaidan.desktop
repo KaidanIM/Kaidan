@@ -2,6 +2,11 @@
 Type=Application
 Version=1.0
 Name=Kaidan
+Name[ca]=Kaidan
+Name[nl]=Kaidan
+Name[pt]=Kaidan
+Name[uk]=Kaidan
+Name[x-test]=xxKaidanxx
 Exec=kaidan
 Icon=kaidan.svg
 Terminal=false

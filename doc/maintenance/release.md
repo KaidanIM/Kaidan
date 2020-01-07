@@ -89,7 +89,7 @@
 1. `git pull origin master`
 1. Update screenshot (which will update the screenshot on the website and in the README):
 	1. Create one screenshot for desktop and one for mobile version
-	1. Put those two screenshots into one image like *images/screenshot.png* and overwrite that by that by the new one
+	1. Put those two screenshots into one image like *images/screenshot.png* and overwrite that by the new one
 	1. `optipng -o7 images/screenshot.png`
 	1. `advpng -z4 images/screenshot.png`
 	1. `git add images/screenshot.png`
@@ -99,12 +99,19 @@
 	1. `<h3>Current version: X.Y.Z</h3>`
 	1. `<h4>(released MONTH DAY, YEAR)</h4>`
 1. Publish blog post:
-	1. Create *_posts/YEAR-MONTH-DAY-kaidan-X.Y.Z.md*
+	1. Create *_posts/YYYY-MM-DD-kaidan-X.Y.Z.md*
 	1. Add header as in other posts of that directory
 	1. Copy *images/screenshot.png* to *images/screenshots/screenshot-X.Y*
 	1. Include *images/screenshots/screenshot-X.Y* into blog post
 	1. Add changelog part for vX.Y.Z
-1. Update supported features in *supported-xeps.md*
+	1. `git add _posts/YYYY-MM-DD-kaidan-X.Y.Z.md`
+	1. `git commit -m "Add post about Kaidan X.Y.Z"`
+	1. `git push origin master`
+1. Update supported features
+	1. Modify *supported-xeps.md*
+	1. `git add supported-xeps.md`
+	1. `git commit -m "Update supported features"`
+	1. `git push origin master`
 
 ### On Mastodon via **https://fosstodon.org/@kaidan**
 

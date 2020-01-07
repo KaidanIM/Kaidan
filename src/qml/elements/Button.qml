@@ -1,7 +1,7 @@
 /*
  *  Kaidan - A user-friendly XMPP client for every device!
  *
- *  Copyright (C) 2016-2020 Kaidan developers and contributors
+ *  Copyright (C) 2016-2019 Kaidan developers and contributors
  *  (see the LICENSE file for a full list of copyright authors)
  *
  *  Kaidan is free software: you can redistribute it and/or modify
@@ -28,53 +28,12 @@
  *  along with Kaidan.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-import QtQuick 2.7
-import QtQuick.Controls 2.3 as Controls
-import QtQuick.Layouts 1.3
+import QtQuick.Controls 2.4 as Controls
 import org.kde.kirigami 2.8 as Kirigami
 
-Kirigami.OverlaySheet {
-	property string jid
-
-	onSheetOpenChanged: {
-		infoLabel.text = qsTr("Do you really want to delete the contact "
-							  + "<b>%1</b> from your roster?").arg(jid)
-	}
-
-	ColumnLayout {
-		Kirigami.Heading {
-			text: qsTr("Delete contact")
-
-			Layout.fillWidth: true
-		}
-
-		Controls.Label {
-			id: infoLabel
-			text: ""
-			textFormat: Text.StyledText
-			wrapMode: Text.WordWrap
-
-			Layout.fillWidth: true
-		}
-
-		RowLayout {
-			Layout.topMargin: 10
-			Layout.fillWidth: true
-
-			Button {
-				text: qsTr("Cancel")
-				onClicked: close()
-				Layout.fillWidth: true
-			}
-
-			Button {
-				text: qsTr("Delete")
-				onClicked: {
-					kaidan.removeContact(jid)
-					close()
-				}
-				Layout.fillWidth: true
-			}
-		}
-	}
+/**
+ * This is a button fitting mobile and desktop user interfaces.
+ */
+Controls.Button {
+	flat: Kirigami.Settings.isMobile
 }

@@ -35,6 +35,8 @@ import QtQuick.Layouts 1.3
 import org.kde.kirigami 2.8 as Kirigami
 import im.kaidan.kaidan 1.0
 
+import "elements"
+
 Kirigami.Page {
 	title: qsTr("Log in")
 
@@ -92,7 +94,7 @@ Kirigami.Page {
 			}
 
 			// Connect button
-			Controls.Button {
+			Button {
 				id: connectButton
 				Layout.fillWidth: true
 				highlighted: true

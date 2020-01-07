@@ -91,7 +91,7 @@ Kirigami.OverlaySheet {
 		RowLayout {
 			Layout.topMargin: 10
 
-			Controls.Button {
+			Button {
 				text: qsTr("Cancel")
 				onClicked: {
 					clearInput()
@@ -100,7 +100,7 @@ Kirigami.OverlaySheet {
 				Layout.fillWidth: true
 			}
 
-			Controls.Button {
+			Button {
 				id: addButton
 				text: qsTr("Add")
 				enabled: {

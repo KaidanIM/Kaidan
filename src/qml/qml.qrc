@@ -21,6 +21,7 @@
 		<file>elements/ChatMessage.qml</file>
 		<file>elements/RoundedImage.qml</file>
 		<file>elements/RoundImage.qml</file>
+		<file>elements/Button.qml</file>
 		<file>elements/IconButton.qml</file>
 		<file>elements/FileChooser.qml</file>
 		<file>elements/FileChooserDesktop.qml</file>

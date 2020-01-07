@@ -57,13 +57,13 @@ Kirigami.OverlaySheet {
 		RowLayout {
 			Layout.topMargin: 10
 
-			Controls.Button {
+			Button {
 				text: qsTr("Cancel")
 				onClicked: close()
 				Layout.fillWidth: true
 			}
 
-			Controls.Button {
+			Button {
 				id: addButton
 				text: qsTr("Rename")
 				onClicked: {

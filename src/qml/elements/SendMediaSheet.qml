@@ -114,7 +114,7 @@ Kirigami.OverlaySheet {
 			Layout.topMargin: Kirigami.Units.largeSpacing
 			Layout.fillWidth: true
 
-			Controls.Button {
+			Button {
 				text: qsTr("Cancel")
 
 				Layout.fillWidth: true
@@ -125,7 +125,7 @@ Kirigami.OverlaySheet {
 				}
 			}
 
-			Controls.Button {
+			Button {
 				id: sendButton
 
 				enabled: root.source != ''

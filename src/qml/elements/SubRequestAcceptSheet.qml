@@ -56,7 +56,7 @@ Kirigami.OverlaySheet {
 		RowLayout {
 			Layout.topMargin: 10
 
-			Controls.Button {
+			Button {
 				Layout.fillWidth: true
 				text: qsTr("Decline")
 				onClicked: {
@@ -65,7 +65,7 @@ Kirigami.OverlaySheet {
 				}
 			}
 
-			Controls.Button {
+			Button {
 				Layout.fillWidth: true
 				text: qsTr("Accept")
 				onClicked: {

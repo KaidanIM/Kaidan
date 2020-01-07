@@ -34,6 +34,8 @@ import QtQuick.Layouts 1.3
 import org.kde.kirigami 2.8 as Kirigami
 import im.kaidan.kaidan 1.0
 
+import "../elements"
+
 Kirigami.Page {
 	topPadding: 0
 
@@ -117,13 +119,13 @@ Kirigami.Page {
 			Layout.fillWidth: true
 			Layout.alignment: Qt.AlignBottom
 
-			Controls.Button {
+			Button {
 				text: qsTr("Cancel")
 				onClicked: stack.pop()
 				Layout.fillWidth: true
 			}
 
-			Controls.Button {
+			Button {
 				text: qsTr("Change")
 				Layout.fillWidth: true
 				enabled: {

@@ -79,7 +79,7 @@
     </message>
     <message>
         <source>Copy download URL</source>
-        <translation type="unfinished"></translation>
+        <translation>Copiar URL de descarga</translation>
     </message>
 </context>
 <context>
@@ -122,78 +122,78 @@
     </message>
     <message>
         <source>Unmute notifications</source>
-        <translation type="unfinished"></translation>
+        <translation>Restaurar notificacións</translation>
     </message>
     <message>
         <source>Mute notifications</source>
-        <translation type="unfinished"></translation>
+        <translation>Acalar notificacións</translation>
     </message>
     <message>
         <source>View profile</source>
-        <translation type="unfinished"></translation>
+        <translation>Ver perfil</translation>
     </message>
     <message>
         <source>Multimedia settings</source>
-        <translation type="unfinished"></translation>
+        <translation>Axustes multimedia</translation>
     </message>
     <message>
         <source>Search</source>
-        <translation type="unfinished">Buscar</translation>
+        <translation>Buscar</translation>
     </message>
     <message>
         <source>Close</source>
-        <translation type="unfinished">Pechar</translation>
+        <translation>Pechar</translation>
     </message>
     <message>
         <source>Search up</source>
-        <translation type="unfinished"></translation>
+        <translation>Buscar arriba</translation>
     </message>
     <message>
         <source>Search down</source>
-        <translation type="unfinished"></translation>
+        <translation>Buscar abaixo</translation>
     </message>
     <message>
         <source>All files</source>
-        <translation type="unfinished"></translation>
+        <translation>Todos os ficheiros</translation>
     </message>
 </context>
 <context>
     <name>CommonEncoderSettings</name>
     <message>
         <source>Very low</source>
-        <translation type="unfinished"></translation>
+        <translation>Moi baixo</translation>
     </message>
     <message>
         <source>Low</source>
-        <translation type="unfinished"></translation>
+        <translation>Baixo</translation>
     </message>
     <message>
         <source>Normal</source>
-        <translation type="unfinished"></translation>
+        <translation>Normal</translation>
     </message>
     <message>
         <source>High</source>
-        <translation type="unfinished"></translation>
+        <translation>Alto</translation>
     </message>
     <message>
         <source>Very high</source>
-        <translation type="unfinished"></translation>
+        <translation>Moi alto</translation>
     </message>
     <message>
         <source>Constant quality</source>
-        <translation type="unfinished"></translation>
+        <translation>Calidade constante</translation>
     </message>
     <message>
         <source>Constant bit rate</source>
-        <translation type="unfinished"></translation>
+        <translation>Taxa de bits constante</translation>
     </message>
     <message>
         <source>Average bit rate</source>
-        <translation type="unfinished"></translation>
+        <translation>Taxa de bits medio</translation>
     </message>
     <message>
         <source>Two pass</source>
-        <translation type="unfinished"></translation>
+        <translation>Dúas pasadas</translation>
     </message>
 </context>
 <context>
@@ -311,11 +311,11 @@
     </message>
     <message>
         <source>No password found. Please enter it.</source>
-        <translation type="unfinished"></translation>
+        <translation>Non hai contrasinal. Por favor escríbea.</translation>
     </message>
     <message>
         <source>No valid login QR code found.</source>
-        <translation type="unfinished"></translation>
+        <translation>Non te atopou código QR de conexión válido.</translation>
     </message>
 </context>
 <context>
@@ -382,77 +382,77 @@
     </message>
     <message>
         <source>Log in using a QR-Code</source>
-        <translation type="unfinished"></translation>
+        <translation>Conectar usando código QR</translation>
     </message>
 </context>
 <context>
     <name>MediaRecorder</name>
     <message>
         <source>Default</source>
-        <translation type="unfinished"></translation>
+        <translation>Por omsión</translation>
     </message>
 </context>
 <context>
     <name>MediaUtils</name>
     <message>
         <source>Take picture</source>
-        <translation type="unfinished"></translation>
+        <translation>Tomar foto</translation>
     </message>
     <message>
         <source>Record video</source>
-        <translation type="unfinished"></translation>
+        <translation>Gravar vídeo</translation>
     </message>
     <message>
         <source>Record voice</source>
-        <translation type="unfinished"></translation>
+        <translation>Gravar voz</translation>
     </message>
     <message>
         <source>Send location</source>
-        <translation type="unfinished"></translation>
+        <translation>Enviar localización</translation>
     </message>
     <message>
         <source>Choose file</source>
-        <translation type="unfinished"></translation>
+        <translation>Escoller ficheiro</translation>
     </message>
     <message>
         <source>Choose image</source>
-        <translation type="unfinished"></translation>
+        <translation>Escoller imaxe</translation>
     </message>
     <message>
         <source>Choose video</source>
-        <translation type="unfinished"></translation>
+        <translation>Escoller vídeo</translation>
     </message>
     <message>
         <source>Choose audio file</source>
-        <translation type="unfinished"></translation>
+        <translation>Escoller ficheiro de audio</translation>
     </message>
     <message>
         <source>Choose document</source>
-        <translation type="unfinished"></translation>
+        <translation>Escoller documento</translation>
     </message>
     <message>
         <source>All files</source>
-        <translation type="unfinished"></translation>
+        <translation>Todos os ficheiros</translation>
     </message>
     <message>
         <source>Images</source>
-        <translation type="unfinished"></translation>
+        <translation>Imaxes</translation>
     </message>
     <message>
         <source>Videos</source>
-        <translation type="unfinished"></translation>
+        <translation>Vídeos</translation>
     </message>
     <message>
         <source>Audio files</source>
-        <translation type="unfinished"></translation>
+        <translation>Ficheiros de audio</translation>
     </message>
     <message>
         <source>Documents</source>
-        <translation type="unfinished"></translation>
+        <translation>Documentos</translation>
     </message>
     <message>
         <source>%1 (%2)</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 (%2)</translation>
     </message>
 </context>
 <context>
@@ -482,165 +482,166 @@
     <name>MultimediaSettingsPage</name>
     <message>
         <source>Multimedia Settings</source>
-        <translation type="unfinished"></translation>
+        <translation>Axustes Multimedia</translation>
     </message>
     <message>
         <source>Configure</source>
-        <translation type="unfinished"></translation>
+        <translation>Configurar</translation>
     </message>
     <message>
         <source>Image Capture</source>
-        <translation type="unfinished"></translation>
+        <translation>Capturar imaxe</translation>
     </message>
     <message>
         <source>Audio Recording</source>
-        <translation type="unfinished"></translation>
+        <translation>Gravando audio</translation>
     </message>
     <message>
         <source>Video Recording</source>
-        <translation type="unfinished"></translation>
+        <translation>Gravando vídeo</translation>
     </message>
     <message>
         <source>Camera</source>
-        <translation type="unfinished"></translation>
+        <translation>Cámara</translation>
     </message>
     <message>
         <source>Audio input</source>
-        <translation type="unfinished"></translation>
+        <translation>Entrada de audio</translation>
     </message>
     <message>
         <source>Container</source>
-        <translation type="unfinished"></translation>
+        <translation>Contedor</translation>
     </message>
     <message>
         <source>Image</source>
-        <translation type="unfinished">Imaxe</translation>
+        <translation>Imaxe</translation>
     </message>
     <message>
         <source>Audio</source>
-        <translation type="unfinished">Son</translation>
+        <translation>Audio</translation>
     </message>
     <message>
         <source>Video</source>
-        <translation type="unfinished">Vídeo</translation>
+        <translation>Vídeo</translation>
     </message>
     <message>
         <source>Codec</source>
-        <translation type="unfinished"></translation>
+        <translation>Códec</translation>
     </message>
     <message>
         <source>Resolution</source>
-        <translation type="unfinished"></translation>
+        <translation>Resolución</translation>
     </message>
     <message>
         <source>Quality</source>
-        <translation type="unfinished"></translation>
+        <translation>Calidade</translation>
     </message>
     <message>
         <source>Sample Rate</source>
-        <translation type="unfinished"></translation>
+        <translation>Taxa de mostreo</translation>
     </message>
     <message>
         <source>Frame Rate</source>
-        <translation type="unfinished"></translation>
+        <translation>Taxa de marcos</translation>
     </message>
     <message>
         <source>Ready</source>
-        <translation type="unfinished"></translation>
+        <translation>Listo</translation>
     </message>
     <message>
         <source>Initializing...</source>
-        <translation type="unfinished"></translation>
+        <translation>Inicializando...</translation>
     </message>
     <message>
         <source>Unavailable</source>
-        <translation type="unfinished"></translation>
+        <translation>Non dispoñible</translation>
     </message>
     <message>
         <source>Recording...</source>
-        <translation type="unfinished"></translation>
+        <translation>Gravando...</translation>
     </message>
     <message>
         <source>Paused</source>
-        <translation type="unfinished"></translation>
+        <translation>En pausa</translation>
     </message>
 </context>
 <context>
     <name>NewMedia</name>
     <message>
         <source>Ready</source>
-        <translation type="unfinished"></translation>
+        <translation>Preparado</translation>
     </message>
     <message>
         <source>Initializing...</source>
-        <translation type="unfinished"></translation>
+        <translation>Inicializando...</translation>
     </message>
     <message>
         <source>Unavailable</source>
-        <translation type="unfinished"></translation>
+        <translation>Non dispoñible</translation>
     </message>
     <message>
         <source>Recording... %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Gravando... %1</translation>
     </message>
     <message>
         <source>Paused %1</source>
-        <translation type="unfinished"></translation>
+        <translation>En pausa %1</translation>
     </message>
 </context>
 <context>
     <name>QmlUtils</name>
     <message>
         <source>Available</source>
-        <translation type="unfinished">Dispoñible</translation>
+        <translation>Dispoñible</translation>
     </message>
     <message>
         <source>Free for chat</source>
-        <translation type="unfinished">Libre para conversar</translation>
+        <translation>Libre para conversar</translation>
     </message>
     <message>
         <source>Away</source>
-        <translation type="unfinished">Fóra</translation>
+        <translation>Fóra</translation>
     </message>
     <message>
         <source>Do not disturb</source>
-        <translation type="unfinished">Non molestar</translation>
+        <translation>Non molestar</translation>
     </message>
     <message>
         <source>Away for longer</source>
-        <translation type="unfinished">Fóra para longo</translation>
+        <translation>Fóra para longo</translation>
     </message>
     <message>
         <source>Offline</source>
-        <translation type="unfinished">Desconectada</translation>
+        <translation>Desconectada</translation>
     </message>
     <message>
         <source>Error</source>
-        <translation type="unfinished">Fallo</translation>
+        <translation>Fallo</translation>
     </message>
     <message>
         <source>Invisible</source>
-        <translation type="unfinished"></translation>
+        <translation>Invisible</translation>
     </message>
 </context>
 <context>
     <name>QrCodeScannerPage</name>
     <message>
         <source>Scan QR code</source>
-        <translation type="unfinished"></translation>
+        <translation>Escanear código QR</translation>
     </message>
     <message>
         <source>There is no camera available.</source>
-        <translation type="unfinished"></translation>
+        <translation>Non hai cámara dispoñible.</translation>
     </message>
     <message>
         <source>Your camera is busy.
 Try to close other applications using the camera.</source>
-        <translation type="unfinished"></translation>
+        <translation>A cámara está ocupada.
+Pecha outras aplicacións que a estén utilizando.</translation>
     </message>
     <message>
         <source>The camera format &apos;%1&apos; is not supported.</source>
-        <translation type="unfinished"></translation>
+        <translation>O formato de cámara &apos;%1&apos; non está soportado.</translation>
     </message>
 </context>
 <context>
@@ -744,7 +745,7 @@ Try to close other applications using the camera.</source>
     </message>
     <message>
         <source>Could not rename contact, as a result of not being connected.</source>
-        <translation type="unfinished"></translation>
+        <translation>Non se cambiou o nome do contacto, porque non está conectado.</translation>
     </message>
 </context>
 <context>
@@ -767,7 +768,7 @@ Try to close other applications using the camera.</source>
     </message>
     <message>
         <source>Search contacts</source>
-        <translation type="unfinished"></translation>
+        <translation>Buscar contactos</translation>
     </message>
 </context>
 <context>
@@ -793,19 +794,19 @@ Try to close other applications using the camera.</source>
     <name>RosterRenameContactSheet</name>
     <message>
         <source>Rename contact</source>
-        <translation type="unfinished"></translation>
+        <translation>Cambiar nome ao contacto</translation>
     </message>
     <message>
         <source>Edit name:</source>
-        <translation type="unfinished"></translation>
+        <translation>Editar nome:</translation>
     </message>
     <message>
         <source>Cancel</source>
-        <translation type="unfinished">Cancelar</translation>
+        <translation>Cancelar</translation>
     </message>
     <message>
         <source>Rename</source>
-        <translation type="unfinished"></translation>
+        <translation>Cambiar nome</translation>
     </message>
 </context>
 <context>
@@ -872,34 +873,34 @@ Try to close other applications using the camera.</source>
     <name>UserProfilePage</name>
     <message>
         <source>Profile</source>
-        <translation type="unfinished"></translation>
+        <translation>Perfil</translation>
     </message>
 </context>
 <context>
     <name>VCardModel</name>
     <message>
         <source>Name</source>
-        <translation type="unfinished"></translation>
+        <translation>Nome</translation>
     </message>
     <message>
         <source>Nickname</source>
-        <translation type="unfinished"></translation>
+        <translation>Alcume</translation>
     </message>
     <message>
         <source>About</source>
-        <translation type="unfinished">Acerca de</translation>
+        <translation>Acerca de</translation>
     </message>
     <message>
         <source>Email</source>
-        <translation type="unfinished"></translation>
+        <translation>Correo-e</translation>
     </message>
     <message>
         <source>Birthday</source>
-        <translation type="unfinished"></translation>
+        <translation>Aniversario</translation>
     </message>
     <message>
         <source>Website</source>
-        <translation type="unfinished"></translation>
+        <translation>Sitio web</translation>
     </message>
 </context>
 </TS>

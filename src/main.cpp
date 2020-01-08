@@ -68,6 +68,7 @@
 #include "MediaSettingModel.h"
 #include "MediaUtils.h"
 #include "MediaRecorder.h"
+#include "CredentialsValidator.h"
 
 #ifdef STATIC_BUILD
 #include "static_plugins.h"
@@ -229,6 +230,7 @@ Q_DECL_EXPORT int main(int argc, char *argv[])
 	qRegisterMetaType<ImageEncoderSettings>();
 	qRegisterMetaType<AudioEncoderSettings>();
 	qRegisterMetaType<VideoEncoderSettings>();
+	qRegisterMetaType<CredentialsValidator*>();
 
 	// Enums for c++ member calls using enums
 	qRegisterMetaType<Enums::ConnectionState>();
@@ -349,6 +351,7 @@ Q_DECL_EXPORT int main(int argc, char *argv[])
 	qmlRegisterType<MediaSettingsVideoCodecModel>(APPLICATION_ID, 1, 0, "MediaSettingsVideoCodecModel");
 	qmlRegisterType<MediaSettingsVideoFrameRateModel>(APPLICATION_ID, 1, 0, "MediaSettingsVideoFrameRateModel");
 	qmlRegisterType<MediaRecorder>(APPLICATION_ID, 1, 0, "MediaRecorder");
+	qmlRegisterType<CredentialsValidator>(APPLICATION_ID, 1, 0, "CredentialsValidator");
 
 	qmlRegisterUncreatableType<QAbstractItemModel>("EmojiModel", 0, 1, "QAbstractItemModel", "Used by proxy models");
 	qmlRegisterUncreatableType<Emoji>("EmojiModel", 0, 1, "Emoji", "Used by emoji models");

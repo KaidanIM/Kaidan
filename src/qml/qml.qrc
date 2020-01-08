@@ -46,6 +46,11 @@
 		<file>elements/TextAvatar.qml</file>
 		<file>elements/Avatar.qml</file>
 
+		<file>elements/fields/Field.qml</file>
+		<file>elements/fields/CredentialsField.qml</file>
+		<file>elements/fields/JidField.qml</file>
+		<file>elements/fields/PasswordField.qml</file>
+
 		<file>settings/SettingsItem.qml</file>
 		<file>settings/SettingsPage.qml</file>
 		<file>settings/SettingsSheet.qml</file>

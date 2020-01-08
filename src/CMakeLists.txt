@@ -37,6 +37,7 @@ set(KAIDAN_SOURCES
 	src/CameraImageCapture.cpp
 	src/MediaUtils.cpp
 	src/MediaRecorder.cpp
+	src/CredentialsValidator.cpp
 
 	# needed to trigger moc generation / to be displayed in IDEs
 	src/Enums.h

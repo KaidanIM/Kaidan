@@ -36,6 +36,7 @@ import org.kde.kirigami 2.8 as Kirigami
 import im.kaidan.kaidan 1.0
 
 import "elements"
+import "elements/fields"
 
 Kirigami.Page {
 	title: qsTr("Log in")
@@ -66,31 +67,24 @@ Kirigami.Page {
 			Layout.alignment: Qt.AlignCenter
 			Layout.maximumWidth: Kirigami.Units.gridUnit * 25
 
-
 			// JID field
-			Controls.Label {
-				id: jidLabel
-				text: qsTr("Your Jabber-ID:")
-			}
-			Controls.TextField {
+			JidField {
 				id: jidField
-				text: kaidan.jid
-				placeholderText: qsTr("user@example.org")
-				Layout.fillWidth: true
-				selectByMouse: true
-				inputMethodHints: Qt.ImhEmailCharactersOnly
+
+				// Simulate the pressing of the connect button.
+				inputField {
+					onAccepted: connectButton.clicked()
+				}
 			}
 
-			// Password field
-			Controls.Label {
-				text: qsTr("Your Password:")
-			}
-			Controls.TextField {
-				id: passField
-				text: kaidan.password
-				echoMode: TextInput.Password
-				selectByMouse: true
-				Layout.fillWidth: true
+			// password field
+			PasswordField {
+				id: passwordField
+
+				// Simulate the pressing of the connect button.
+				inputField {
+					onAccepted: connectButton.clicked()
+				}
 			}
 
 			// Connect button
@@ -112,21 +106,20 @@ Kirigami.Page {
 					}
 				]
 
+				// Connect to the server and authenticate by the entered credentials if the JID is valid and a password entered.
 				onClicked: {
-					// connect to given account data
-					kaidan.jid = jidField.text
-					kaidan.password = passField.text
-					kaidan.mainConnect()
-				}
-			}
-
-			// connect when return was pressed
-			Keys.onPressed: {
-				if (event.key === Qt.Key_Return || event.key === Qt.Key_Enter) {
-					if (jidField.activeFocus)
-						passField.forceActiveFocus()
-					else
-						connectButton.clicked()
+					// If the JID is invalid, focus its field.
+					if (!jidField.valid) {
+						jidField.forceFocus()
+					// If the password is invalid, focus its field.
+					// This also implies that if the JID field is focused and the password invalid, the password field will be focused instead of immediately trying to connect.
+					} else if (!passwordField.valid) {
+						passwordField.forceFocus()
+					} else {
+						kaidan.jid = jidField.text
+						kaidan.password = passwordField.text
+						kaidan.mainConnect()
+					}
 				}
 			}
 		}
@@ -135,6 +128,10 @@ Kirigami.Page {
 		Item {
 			Layout.preferredHeight: Kirigami.Units.gridUnit * 3
 		}
+	}
+
+	Component.onCompleted: {
+		jidField.forceFocus()
 	}
 
 	Connections {

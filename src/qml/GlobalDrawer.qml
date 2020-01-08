@@ -28,8 +28,13 @@
  *  along with Kaidan.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+import QtQuick 2.7
+import QtQuick.Layouts 1.3
+import QtQuick.Controls 2.3 as Controls
 import org.kde.kirigami 2.8 as Kirigami
+
 import im.kaidan.kaidan 1.0
+
 import "settings"
 
 Kirigami.GlobalDrawer {
@@ -41,6 +46,40 @@ Kirigami.GlobalDrawer {
 	SettingsSheet {
 		id: settingsSheet
 	}
+
+	topContent: [
+		// This item is used to disable an account temporarily.
+		RowLayout {
+			spacing: -4
+
+			property bool disconnected: kaidan.connectionState === Enums.StateDisconnected
+			property bool connected: kaidan.connectionState === Enums.StateConnected
+
+			Controls.Switch {
+				checked: !parent.disconnected
+				onClicked: parent.disconnected ? kaidan.mainConnect() : kaidan.mainDisconnect()
+			}
+
+			Text {
+				text: {
+					var jidAndStatus = kaidan.jid + " ("
+
+					if (parent.disconnected)
+						jidAndStatus += qsTr("Offline");
+					else if (parent.connected)
+						jidAndStatus += qsTr("Online");
+					else
+						jidAndStatus += qsTr("Connecting...");
+
+					jidAndStatus += ")"
+
+					return jidAndStatus
+				}
+
+				color: parent.connected ? Utils.presenceTypeToColor(Enums.PresOnline) : Utils.presenceTypeToColor(Enums.PresUnavailable)
+			}
+		}
+	]
 
 	actions: [
 		Kirigami.Action {
@@ -55,7 +94,7 @@ Kirigami.GlobalDrawer {
 			text: qsTr("Log out")
 			icon.name: "system-shutdown"
 			onTriggered: {
-				closeAdditionalLayers()
+				popLayersAboveLowest()
 				// disconnect (open log in page)
 				kaidan.mainDisconnect(true)
 			}
@@ -67,9 +106,9 @@ Kirigami.GlobalDrawer {
 				// open settings page
 				if (Kirigami.Settings.isMobile) {
 					if (pageStack.layers.depth < 2)
-					    pageStack.layers.push(settingsPage)
+						pageStack.layers.push(settingsPage)
 				} else {
-				    settingsSheet.open()
+					settingsSheet.open()
 				}
 			}
 		},
@@ -77,15 +116,10 @@ Kirigami.GlobalDrawer {
 			text: qsTr("About")
 			icon.name: "help-about"
 			onTriggered: {
-				closeAdditionalLayers()
+				popLayersAboveLowest()
 				// open about sheet
 				aboutDialog.open()
 			}
 		}
 	]
-
-	function closeAdditionalLayers() {
-		while (pageStack.layers.depth > 1)
-			pageStack.layers.pop()
-	}
 }

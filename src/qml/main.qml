@@ -32,7 +32,9 @@ import QtQuick 2.7
 import QtQuick.Controls.Material 2.3
 import org.kde.kirigami 2.8 as Kirigami
 import StatusBar 0.1
+
 import im.kaidan.kaidan 1.0
+
 import "elements"
 import "settings"
 
@@ -92,27 +94,41 @@ Kirigami.ApplicationWindow {
 		passiveNotification(Utils.connectionErrorMessage(kaidan.connectionError))
 	}
 
-	function openLogInPage() {
-		// close all pages (we don't know on which page we're on,
-		// thus we don't use replace)
-		while (pageStack.depth > 0)
-			pageStack.pop()
-
-		// toggle global drawer
+	function openLoginPage() {
 		globalDrawer.enabled = false
 		globalDrawer.visible = false
-		// push new page
+
+		popLayersAboveLowest()
+		popAllPages()
 		pageStack.push(loginPage)
 	}
 
-	function closeLogInPage() {
-		// toggle global drawer
+	/**
+	 * Opens the view with the roster and chat page.
+	 */
+	function openChatView() {
 		globalDrawer.enabled = true
 
-		// replace page with roster page
-		pageStack.replace(rosterPage)
+		popAllPages()
+		pageStack.push(rosterPage)
 		if (!Kirigami.Settings.isMobile)
 			pageStack.push(emptyChatPage)
+	}
+
+	/**
+	 * Pops all layers except the layer with index 0 from the page stack.
+	 */
+	function popLayersAboveLowest() {
+		while (pageStack.layers.depth > 1)
+			pageStack.layers.pop()
+	}
+
+	/**
+	 * Pops all pages from the page stack.
+	 */
+	function popAllPages() {
+		while (pageStack.depth > 0)
+			pageStack.pop()
 	}
 
 	function handleSubRequest(from, message) {
@@ -126,22 +142,20 @@ Kirigami.ApplicationWindow {
 
 	Component.onCompleted: {
 		kaidan.passiveNotificationRequested.connect(passiveNotification)
-		kaidan.newCredentialsNeeded.connect(openLogInPage)
-		kaidan.logInWorked.connect(closeLogInPage)
+		kaidan.newCredentialsNeeded.connect(openLoginPage)
+		kaidan.logInWorked.connect(openChatView)
 		kaidan.subscriptionRequestReceived.connect(handleSubRequest)
 
-		// push roster page (trying normal start up)
-		pageStack.push(rosterPage)
-		if (!Kirigami.Settings.isMobile)
-			pageStack.push(emptyChatPage)
-		// Annouce that we're ready and the back-end can start with connecting
+		openChatView()
+
+		// Announce that the user interface is ready and the application can start connecting.
 		kaidan.start()
 	}
 
 	Component.onDestruction: {
 		kaidan.passiveNotificationRequested.disconnect(passiveNotification)
-		kaidan.newCredentialsNeeded.disconnect(openLogInPage)
-		kaidan.logInWorked.disconnect(closeLogInPage)
+		kaidan.newCredentialsNeeded.disconnect(openLoginPage)
+		kaidan.logInWorked.disconnect(openChatView)
 		kaidan.subscriptionRequestReceived.disconnect(handleSubRequest)
 	}
 }

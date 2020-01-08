@@ -138,11 +138,11 @@
     </message>
     <message>
         <source>Search</source>
-        <translation type="unfinished">Cerca</translation>
+        <translation>Cerca</translation>
     </message>
     <message>
         <source>Close</source>
-        <translation type="unfinished">Chiudi</translation>
+        <translation>Chiudi</translation>
     </message>
     <message>
         <source>Search up</source>
@@ -518,15 +518,15 @@
     </message>
     <message>
         <source>Image</source>
-        <translation type="unfinished">Immagine</translation>
+        <translation>Immagine</translation>
     </message>
     <message>
         <source>Audio</source>
-        <translation type="unfinished">Audio</translation>
+        <translation>Audio</translation>
     </message>
     <message>
         <source>Video</source>
-        <translation type="unfinished">Video</translation>
+        <translation>Video</translation>
     </message>
     <message>
         <source>Codec</source>
@@ -596,31 +596,31 @@
     <name>QmlUtils</name>
     <message>
         <source>Available</source>
-        <translation type="unfinished">Disponibile</translation>
+        <translation>Disponibile</translation>
     </message>
     <message>
         <source>Free for chat</source>
-        <translation type="unfinished">Disponibile a conversare</translation>
+        <translation>Disponibile a conversare</translation>
     </message>
     <message>
         <source>Away</source>
-        <translation type="unfinished">Lontano dal dispositivo</translation>
+        <translation>Lontano dal dispositivo</translation>
     </message>
     <message>
         <source>Do not disturb</source>
-        <translation type="unfinished">Non disturbare</translation>
+        <translation>Non disturbare</translation>
     </message>
     <message>
         <source>Away for longer</source>
-        <translation type="unfinished">Lontano per tanto tempo</translation>
+        <translation>Lontano per tanto tempo</translation>
     </message>
     <message>
         <source>Offline</source>
-        <translation type="unfinished">Non in linea</translation>
+        <translation>Non in linea</translation>
     </message>
     <message>
         <source>Error</source>
-        <translation type="unfinished">Errore</translation>
+        <translation>Errore</translation>
     </message>
     <message>
         <source>Invisible</source>
@@ -805,7 +805,7 @@ Try to close other applications using the camera.</source>
     </message>
     <message>
         <source>Cancel</source>
-        <translation type="unfinished">Annulla</translation>
+        <translation>Annulla</translation>
     </message>
     <message>
         <source>Rename</source>
@@ -891,7 +891,7 @@ Try to close other applications using the camera.</source>
     </message>
     <message>
         <source>About</source>
-        <translation type="unfinished">Più Informazioni</translation>
+        <translation>Più Informazioni</translation>
     </message>
     <message>
         <source>Email</source>

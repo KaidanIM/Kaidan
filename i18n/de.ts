@@ -132,7 +132,7 @@
     </message>
     <message>
         <source>Copy download URL</source>
-        <translation type="unfinished"></translation>
+        <translation>Download-Link kopieren</translation>
     </message>
 </context>
 <context>
@@ -183,78 +183,78 @@
     </message>
     <message>
         <source>Unmute notifications</source>
-        <translation type="unfinished"></translation>
+        <translation>Benachrichtigungen aktivieren</translation>
     </message>
     <message>
         <source>Mute notifications</source>
-        <translation type="unfinished"></translation>
+        <translation>Benachrichtigungen stummschalten</translation>
     </message>
     <message>
         <source>View profile</source>
-        <translation type="unfinished"></translation>
+        <translation>Profil anzeigen</translation>
     </message>
     <message>
         <source>Multimedia settings</source>
-        <translation type="unfinished"></translation>
+        <translation>Multimedia Einstellungen</translation>
     </message>
     <message>
         <source>Search</source>
-        <translation type="unfinished">Suche</translation>
+        <translation>Suche</translation>
     </message>
     <message>
         <source>Close</source>
-        <translation type="unfinished">Schließen</translation>
+        <translation>Schließen</translation>
     </message>
     <message>
         <source>Search up</source>
-        <translation type="unfinished"></translation>
+        <translation>Weiter oben suchen</translation>
     </message>
     <message>
         <source>Search down</source>
-        <translation type="unfinished"></translation>
+        <translation>Weiter unten suchen</translation>
     </message>
     <message>
         <source>All files</source>
-        <translation type="unfinished"></translation>
+        <translation>Alle Dateien</translation>
     </message>
 </context>
 <context>
     <name>CommonEncoderSettings</name>
     <message>
         <source>Very low</source>
-        <translation type="unfinished"></translation>
+        <translation>Sehr niedrig</translation>
     </message>
     <message>
         <source>Low</source>
-        <translation type="unfinished"></translation>
+        <translation>Niedrig</translation>
     </message>
     <message>
         <source>Normal</source>
-        <translation type="unfinished"></translation>
+        <translation>Normal</translation>
     </message>
     <message>
         <source>High</source>
-        <translation type="unfinished"></translation>
+        <translation>Hoch</translation>
     </message>
     <message>
         <source>Very high</source>
-        <translation type="unfinished"></translation>
+        <translation>Sehr hoch</translation>
     </message>
     <message>
         <source>Constant quality</source>
-        <translation type="unfinished"></translation>
+        <translation>Feste Qualität</translation>
     </message>
     <message>
         <source>Constant bit rate</source>
-        <translation type="unfinished"></translation>
+        <translation>Feste Bitrate</translation>
     </message>
     <message>
         <source>Average bit rate</source>
-        <translation type="unfinished"></translation>
+        <translation>Durchschnittliche Bitrate</translation>
     </message>
     <message>
         <source>Two pass</source>
-        <translation type="unfinished"></translation>
+        <translation>Zwei Durchgänge</translation>
     </message>
 </context>
 <context>
@@ -430,11 +430,11 @@
     </message>
     <message>
         <source>No password found. Please enter it.</source>
-        <translation type="unfinished"></translation>
+        <translation>Kein Password gefunden. Bitte gib es ein.</translation>
     </message>
     <message>
         <source>No valid login QR code found.</source>
-        <translation type="unfinished"></translation>
+        <translation>Kein gültiger QR-Code zum Anmelden gefunden.</translation>
     </message>
 </context>
 <context>
@@ -517,77 +517,77 @@
     </message>
     <message>
         <source>Log in using a QR-Code</source>
-        <translation type="unfinished"></translation>
+        <translation>Mit einem QR-Code anmelden</translation>
     </message>
 </context>
 <context>
     <name>MediaRecorder</name>
     <message>
         <source>Default</source>
-        <translation type="unfinished"></translation>
+        <translation>Standard</translation>
     </message>
 </context>
 <context>
     <name>MediaUtils</name>
     <message>
         <source>Take picture</source>
-        <translation type="unfinished"></translation>
+        <translation>Bild aufnehmen</translation>
     </message>
     <message>
         <source>Record video</source>
-        <translation type="unfinished"></translation>
+        <translation>Video aufnehmen</translation>
     </message>
     <message>
         <source>Record voice</source>
-        <translation type="unfinished"></translation>
+        <translation>Sprache aufnehmen</translation>
     </message>
     <message>
         <source>Send location</source>
-        <translation type="unfinished"></translation>
+        <translation>Standort senden</translation>
     </message>
     <message>
         <source>Choose file</source>
-        <translation type="unfinished"></translation>
+        <translation>Datei auswählen</translation>
     </message>
     <message>
         <source>Choose image</source>
-        <translation type="unfinished"></translation>
+        <translation>Bild auswählen</translation>
     </message>
     <message>
         <source>Choose video</source>
-        <translation type="unfinished"></translation>
+        <translation>Video auswählen</translation>
     </message>
     <message>
         <source>Choose audio file</source>
-        <translation type="unfinished"></translation>
+        <translation>Audio-Datei auswählen</translation>
     </message>
     <message>
         <source>Choose document</source>
-        <translation type="unfinished"></translation>
+        <translation>Dokument auswählen</translation>
     </message>
     <message>
         <source>All files</source>
-        <translation type="unfinished"></translation>
+        <translation>Alle Dateien</translation>
     </message>
     <message>
         <source>Images</source>
-        <translation type="unfinished"></translation>
+        <translation>Bilder</translation>
     </message>
     <message>
         <source>Videos</source>
-        <translation type="unfinished"></translation>
+        <translation>Videos</translation>
     </message>
     <message>
         <source>Audio files</source>
-        <translation type="unfinished"></translation>
+        <translation>Audio Dateien</translation>
     </message>
     <message>
         <source>Documents</source>
-        <translation type="unfinished"></translation>
+        <translation>Dokumente</translation>
     </message>
     <message>
         <source>%1 (%2)</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 (%2)</translation>
     </message>
 </context>
 <context>
@@ -617,165 +617,166 @@
     <name>MultimediaSettingsPage</name>
     <message>
         <source>Multimedia Settings</source>
-        <translation type="unfinished"></translation>
+        <translation>Multimedia-Einstellungen</translation>
     </message>
     <message>
         <source>Configure</source>
-        <translation type="unfinished"></translation>
+        <translation>Konfigurieren</translation>
     </message>
     <message>
         <source>Image Capture</source>
-        <translation type="unfinished"></translation>
+        <translation>Bild Aufnahme</translation>
     </message>
     <message>
         <source>Audio Recording</source>
-        <translation type="unfinished"></translation>
+        <translation>Audio Aufnahme</translation>
     </message>
     <message>
         <source>Video Recording</source>
-        <translation type="unfinished"></translation>
+        <translation>Video Aufnahme</translation>
     </message>
     <message>
         <source>Camera</source>
-        <translation type="unfinished"></translation>
+        <translation>Kamera</translation>
     </message>
     <message>
         <source>Audio input</source>
-        <translation type="unfinished"></translation>
+        <translation>Audio Eingabe</translation>
     </message>
     <message>
         <source>Container</source>
-        <translation type="unfinished"></translation>
+        <translation>Container</translation>
     </message>
     <message>
         <source>Image</source>
-        <translation type="unfinished">Bild</translation>
+        <translation>Bild</translation>
     </message>
     <message>
         <source>Audio</source>
-        <translation type="unfinished">Ton</translation>
+        <translation>Ton</translation>
     </message>
     <message>
         <source>Video</source>
-        <translation type="unfinished">Video</translation>
+        <translation>Video</translation>
     </message>
     <message>
         <source>Codec</source>
-        <translation type="unfinished"></translation>
+        <translation>Codec</translation>
     </message>
     <message>
         <source>Resolution</source>
-        <translation type="unfinished"></translation>
+        <translation>Auflösung</translation>
     </message>
     <message>
         <source>Quality</source>
-        <translation type="unfinished"></translation>
+        <translation>Qualität</translation>
     </message>
     <message>
         <source>Sample Rate</source>
-        <translation type="unfinished"></translation>
+        <translation>Abtastrate</translation>
     </message>
     <message>
         <source>Frame Rate</source>
-        <translation type="unfinished"></translation>
+        <translation>Bildrate</translation>
     </message>
     <message>
         <source>Ready</source>
-        <translation type="unfinished"></translation>
+        <translation>Bereit</translation>
     </message>
     <message>
         <source>Initializing...</source>
-        <translation type="unfinished"></translation>
+        <translation>Initialisieren...</translation>
     </message>
     <message>
         <source>Unavailable</source>
-        <translation type="unfinished"></translation>
+        <translation>Nicht verfügbar</translation>
     </message>
     <message>
         <source>Recording...</source>
-        <translation type="unfinished"></translation>
+        <translation>Aufnahme...</translation>
     </message>
     <message>
         <source>Paused</source>
-        <translation type="unfinished"></translation>
+        <translation>Pausiert</translation>
     </message>
 </context>
 <context>
     <name>NewMedia</name>
     <message>
         <source>Ready</source>
-        <translation type="unfinished"></translation>
+        <translation>Bereit</translation>
     </message>
     <message>
         <source>Initializing...</source>
-        <translation type="unfinished"></translation>
+        <translation>Initializieren...</translation>
     </message>
     <message>
         <source>Unavailable</source>
-        <translation type="unfinished"></translation>
+        <translation>Nicht verfügbar</translation>
     </message>
     <message>
         <source>Recording... %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Zeichne auf... %1</translation>
     </message>
     <message>
         <source>Paused %1</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 pausiert</translation>
     </message>
 </context>
 <context>
     <name>QmlUtils</name>
     <message>
         <source>Available</source>
-        <translation type="unfinished">Verfügbar</translation>
+        <translation>Verfügbar</translation>
     </message>
     <message>
         <source>Free for chat</source>
-        <translation type="unfinished">Frei zum Chatten</translation>
+        <translation>Frei zum Chatten</translation>
     </message>
     <message>
         <source>Away</source>
-        <translation type="unfinished">Abwesend</translation>
+        <translation>Abwesend</translation>
     </message>
     <message>
         <source>Do not disturb</source>
-        <translation type="unfinished">DnD (Nicht stören)</translation>
+        <translation>Nicht stören</translation>
     </message>
     <message>
         <source>Away for longer</source>
-        <translation type="unfinished">Für längere Zeit abwesend</translation>
+        <translation>Für längere Zeit abwesend</translation>
     </message>
     <message>
         <source>Offline</source>
-        <translation type="unfinished">Offline</translation>
+        <translation>Offline</translation>
     </message>
     <message>
         <source>Error</source>
-        <translation type="unfinished">Fehler</translation>
+        <translation>Fehler</translation>
     </message>
     <message>
         <source>Invisible</source>
-        <translation type="unfinished"></translation>
+        <translation>Unsichtbar</translation>
     </message>
 </context>
 <context>
     <name>QrCodeScannerPage</name>
     <message>
         <source>Scan QR code</source>
-        <translation type="unfinished"></translation>
+        <translation>QR-Code scannen</translation>
     </message>
     <message>
         <source>There is no camera available.</source>
-        <translation type="unfinished"></translation>
+        <translation>Keine Kamera verfügbar.</translation>
     </message>
     <message>
         <source>Your camera is busy.
 Try to close other applications using the camera.</source>
-        <translation type="unfinished"></translation>
+        <translation>Deine Kamera ist beschäftigt.
+Versuche andere Programme, welche die Kamera verwenden, zu schließen.</translation>
     </message>
     <message>
         <source>The camera format &apos;%1&apos; is not supported.</source>
-        <translation type="unfinished"></translation>
+        <translation>Das Kamera-Format &apos;%1&apos; wird nicht unterstüzt.</translation>
     </message>
 </context>
 <context>
@@ -887,7 +888,7 @@ Try to close other applications using the camera.</source>
     </message>
     <message>
         <source>Could not rename contact, as a result of not being connected.</source>
-        <translation type="unfinished"></translation>
+        <translation>Konnte den Kontakt nicht umbenennen, da du nicht verbunden bist.</translation>
     </message>
 </context>
 <context>
@@ -910,7 +911,7 @@ Try to close other applications using the camera.</source>
     </message>
     <message>
         <source>Search contacts</source>
-        <translation type="unfinished"></translation>
+        <translation>Kontakte durchsuchen</translation>
     </message>
 </context>
 <context>
@@ -940,19 +941,19 @@ Try to close other applications using the camera.</source>
     <name>RosterRenameContactSheet</name>
     <message>
         <source>Rename contact</source>
-        <translation type="unfinished"></translation>
+        <translation>Kontakt umbenennen</translation>
     </message>
     <message>
         <source>Edit name:</source>
-        <translation type="unfinished"></translation>
+        <translation>Namen bearbeiten:</translation>
     </message>
     <message>
         <source>Cancel</source>
-        <translation type="unfinished">Abbrechen</translation>
+        <translation>Abbrechen</translation>
     </message>
     <message>
         <source>Rename</source>
-        <translation type="unfinished"></translation>
+        <translation>Umbenennen</translation>
     </message>
 </context>
 <context>
@@ -1033,34 +1034,34 @@ Try to close other applications using the camera.</source>
     <name>UserProfilePage</name>
     <message>
         <source>Profile</source>
-        <translation type="unfinished"></translation>
+        <translation>Profil</translation>
     </message>
 </context>
 <context>
     <name>VCardModel</name>
     <message>
         <source>Name</source>
-        <translation type="unfinished"></translation>
+        <translation>Name</translation>
     </message>
     <message>
         <source>Nickname</source>
-        <translation type="unfinished"></translation>
+        <translation>Spitzname</translation>
     </message>
     <message>
         <source>About</source>
-        <translation type="unfinished">Über</translation>
+        <translation>Über</translation>
     </message>
     <message>
         <source>Email</source>
-        <translation type="unfinished"></translation>
+        <translation>E-Mail</translation>
     </message>
     <message>
         <source>Birthday</source>
-        <translation type="unfinished"></translation>
+        <translation>Geburtstag</translation>
     </message>
     <message>
         <source>Website</source>
-        <translation type="unfinished"></translation>
+        <translation>Webseite</translation>
     </message>
 </context>
 <context>

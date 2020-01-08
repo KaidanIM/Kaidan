@@ -29,10 +29,10 @@
  */
 
 import QtQuick 2.7
-import QtQuick.Controls 2.3 as Controls
-import QtQuick.Controls.Material 2.3
 import QtQuick.Layouts 1.3
+import QtQuick.Controls 2.3 as Controls
 import org.kde.kirigami 2.8 as Kirigami
+
 import im.kaidan.kaidan 1.0
 
 import "elements"
@@ -94,11 +94,9 @@ Kirigami.Page {
 			}
 
 			// Connect button
-			Button {
+			CenteredAdaptiveHighlightedButton {
 				id: connectButton
-				Layout.fillWidth: true
-				highlighted: true
-				Kirigami.Theme.backgroundColor: Material.accent
+				label.text: qsTr("Connect")
 
 				state: kaidan.connectionState !== Enums.StateDisconnected ? "connecting" : ""
 				states: [
@@ -106,12 +104,10 @@ Kirigami.Page {
 						name: "connecting"
 						PropertyChanges {
 							target: connectButton
+							label.text: "<i>" + qsTr("Connecting…") + "</i>"
+							label.color: "black"
+							label.textFormat: Text.StyledText
 							enabled: false
-						}
-						PropertyChanges {
-							target: connectLabel
-							text: "<i>" + qsTr("Connecting…") + "</i>"
-							color: "black"
 						}
 					}
 				]
@@ -121,14 +117,6 @@ Kirigami.Page {
 					kaidan.jid = jidField.text
 					kaidan.password = passField.text
 					kaidan.mainConnect()
-				}
-
-				Controls.Label {
-					id: connectLabel
-					anchors.centerIn: connectButton
-					text: qsTr("Connect")
-					color: Kirigami.Theme.highlightedTextColor
-					textFormat: Text.StyledText
 				}
 			}
 

@@ -35,6 +35,8 @@ import org.kde.kirigami 2.8 as Kirigami
 
 import im.kaidan.kaidan 1.0
 
+import "elements"
+
 Controls.Dialog {
 	id: aboutDialog
 	modal: true
@@ -97,11 +99,9 @@ Controls.Dialog {
 				horizontalAlignment: Qt.AlignHCenter
 			}
 
-			Controls.ToolButton {
-				text: qsTr("View source code online")
+			CenteredAdaptiveButton {
+				label.text: qsTr("View source code online")
 				onClicked: Qt.openUrlExternally(Utils.applicationSourceCodeUrl())
-				Layout.fillWidth: true
-				Layout.alignment: Qt.AlignHCenter
 			}
 		}
 	}

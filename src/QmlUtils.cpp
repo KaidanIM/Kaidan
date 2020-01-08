@@ -137,6 +137,31 @@ QColor QmlUtils::presenceTypeToColor(AvailabilityTypes type)
 	return { };
 }
 
+QString QmlUtils::connectionErrorMessage(ClientWorker::ConnectionError error)
+{
+	switch (error) {
+	case ClientWorker::AuthenticationFailed:
+		return tr("Invalid username or password.");
+	case ClientWorker::NotConnected:
+		return tr("Cannot connect to the server. Please check your internet connection.");
+	case ClientWorker::TlsNotAvailable:
+		return tr("The server doesn't support secure connections.");
+	case ClientWorker::TlsFailed:
+		return tr("Error while trying to connect securely.");
+	case ClientWorker::DnsError:
+		return tr("Could not resolve the server's address. Please check your server name.");
+	case ClientWorker::ConnectionRefused:
+		return tr("Could not connect to the server.");
+	case ClientWorker::NoSupportedAuth:
+		return tr("Authentification protocol not supported by the server.");
+	case ClientWorker::RegistrationUnsupported:
+		return tr("This server does not support registration.");
+	default:
+		return tr("An unknown error occured.");
+	}
+	Q_UNREACHABLE();
+}
+
 QString QmlUtils::getResourcePath(const QString &name)
 {
 	// We generally prefer to first search for files in application resources

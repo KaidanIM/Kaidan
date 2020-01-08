@@ -34,6 +34,7 @@
 #include <QObject>
 #include <QUrl>
 
+#include "ClientWorker.h"
 #include "Globals.h"
 #include "Enums.h"
 
@@ -69,6 +70,13 @@ public:
 	 * Returns the color belonging to the given presence status type
 	 */
 	Q_INVOKABLE static QColor presenceTypeToColor(Enums::AvailabilityTypes type);
+
+	/**
+	 * Returns an error message for a connection error.
+	 *
+	 * @param error error for which an error message should be returned
+	 */
+	Q_INVOKABLE static QString connectionErrorMessage(ClientWorker::ConnectionError error);
 
 	/**
 	 * Returns a URL to a given resource file name

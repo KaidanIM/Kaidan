@@ -81,8 +81,15 @@ Kirigami.ApplicationWindow {
 	Component {id: userProfilePage; UserProfilePage {}}
 	Component {id: multimediaSettingsPage; MultimediaSettingsPage {}}
 
+	/**
+	 * Shows a passive notification for a long period.
+	 */
 	function passiveNotification(text) {
 		showPassiveNotification(text, "long")
+	}
+
+	function showPassiveNotificationForConnectionError() {
+		passiveNotification(Utils.connectionErrorMessage(kaidan.connectionError))
 	}
 
 	function openLogInPage() {

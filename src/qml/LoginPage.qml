@@ -137,32 +137,9 @@ Kirigami.Page {
 		}
 	}
 
-	function handleConnectionError() {
-		var error = kaidan.connectionError
-		if (error === ClientWorker.AuthenticationFailed) {
-			passiveNotification(qsTr("Invalid username or password."))
-		} else if (error === ClientWorker.NotConnected) {
-			passiveNotification(qsTr("Cannot connect to the server. Please check your internet connection."))
-		} else if (error === ClientWorker.TlsNotAvailable) {
-			passiveNotification(qsTr("The server doesn't support secure connections."))
-		} else if (error === ClientWorker.TlsFailed) {
-			passiveNotification(qsTr("Error while trying to connect securely."))
-		} else if (error === ClientWorker.DnsError) {
-			passiveNotification(qsTr("Could not resolve the server's address. Please check your JID again."))
-		} else if (error === ClientWorker.ConnectionRefused) {
-			passiveNotification(qsTr("Could not connect to the server."))
-		} else if (error === ClientWorker.NoSupportedAuth) {
-			passiveNotification(qsTr("Authentification protocol not supported by the server."))
-		} else {
-			passiveNotification(qsTr("An unknown error occured; see log for details."))
-		}
-	}
+	Connections {
+		target: kaidan
 
-	Component.onCompleted: {
-		kaidan.connectionErrorChanged.connect(handleConnectionError)
-	}
-
-	Component.onDestruction: {
-		kaidan.connectionErrorChanged.disconnect(handleConnectionError)
+		onConnectionErrorChanged: showPassiveNotificationForConnectionError()
 	}
 }

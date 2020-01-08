@@ -79,7 +79,7 @@
     </message>
     <message>
         <source>Copy download URL</source>
-        <translation type="unfinished"></translation>
+        <translation>Kopírovat stažitelnou URL</translation>
     </message>
 </context>
 <context>
@@ -122,78 +122,78 @@
     </message>
     <message>
         <source>Unmute notifications</source>
-        <translation type="unfinished"></translation>
+        <translation>Zapnout notifikace</translation>
     </message>
     <message>
         <source>Mute notifications</source>
-        <translation type="unfinished"></translation>
+        <translation>Vypnout notifikace</translation>
     </message>
     <message>
         <source>View profile</source>
-        <translation type="unfinished"></translation>
+        <translation>Prohlédnout profil</translation>
     </message>
     <message>
         <source>Multimedia settings</source>
-        <translation type="unfinished"></translation>
+        <translation>Nastavení multimédií</translation>
     </message>
     <message>
         <source>Search</source>
-        <translation type="unfinished">Hledat</translation>
+        <translation>Hledat</translation>
     </message>
     <message>
         <source>Close</source>
-        <translation type="unfinished">Zavřít</translation>
+        <translation>Zavřít</translation>
     </message>
     <message>
         <source>Search up</source>
-        <translation type="unfinished"></translation>
+        <translation>Hledat výše</translation>
     </message>
     <message>
         <source>Search down</source>
-        <translation type="unfinished"></translation>
+        <translation>Hledat níže</translation>
     </message>
     <message>
         <source>All files</source>
-        <translation type="unfinished"></translation>
+        <translation>Všechny soubory</translation>
     </message>
 </context>
 <context>
     <name>CommonEncoderSettings</name>
     <message>
         <source>Very low</source>
-        <translation type="unfinished"></translation>
+        <translation>Velmi nízká</translation>
     </message>
     <message>
         <source>Low</source>
-        <translation type="unfinished"></translation>
+        <translation>Nízká</translation>
     </message>
     <message>
         <source>Normal</source>
-        <translation type="unfinished"></translation>
+        <translation>Normální</translation>
     </message>
     <message>
         <source>High</source>
-        <translation type="unfinished"></translation>
+        <translation>Vysoká</translation>
     </message>
     <message>
         <source>Very high</source>
-        <translation type="unfinished"></translation>
+        <translation>Velmi vysoká</translation>
     </message>
     <message>
         <source>Constant quality</source>
-        <translation type="unfinished"></translation>
+        <translation>Stálá kvalita</translation>
     </message>
     <message>
         <source>Constant bit rate</source>
-        <translation type="unfinished"></translation>
+        <translation>Stálý datový tok</translation>
     </message>
     <message>
         <source>Average bit rate</source>
-        <translation type="unfinished"></translation>
+        <translation>Průměrný datový tok</translation>
     </message>
     <message>
         <source>Two pass</source>
-        <translation type="unfinished"></translation>
+        <translation>Dvouproudový</translation>
     </message>
 </context>
 <context>
@@ -315,11 +315,11 @@
     </message>
     <message>
         <source>No password found. Please enter it.</source>
-        <translation type="unfinished"></translation>
+        <translation>Heslo nenalezeno. Prosím zadejte heslo.</translation>
     </message>
     <message>
         <source>No valid login QR code found.</source>
-        <translation type="unfinished"></translation>
+        <translation>Nebyl nalezen žádný platný přihlašovací kód QR.</translation>
     </message>
 </context>
 <context>
@@ -371,11 +371,11 @@ Prosím zkontrolujte své připojení k internetu.</translation>
     </message>
     <message>
         <source>The server doesn&apos;t support secure connections.</source>
-        <translation>Server nepodporuje bezpečná připojení.</translation>
+        <translation>Server nepodporuje zabezpečená připojení.</translation>
     </message>
     <message>
         <source>Error while trying to connect securely.</source>
-        <translation>Hlášení o chybě při pokusu o bezpečné připojení.</translation>
+        <translation>Hlášení o chybě při pokusu o zabezpečené připojení.</translation>
     </message>
     <message>
         <source>Could not resolve the server&apos;s address. Please check your JID again.</source>
@@ -391,88 +391,88 @@ Prosím zkontrolujte své připojení k internetu.</translation>
     </message>
     <message>
         <source>An unknown error occured; see log for details.</source>
-        <translation>Došlo k neznámmé chybě; pro více informací zkontrolujte seznam logů.</translation>
+        <translation>Došlo k neznámé chybě; pro více informací zkontrolujte seznam logů.</translation>
     </message>
     <message>
         <source>Log in using a QR-Code</source>
-        <translation type="unfinished"></translation>
+        <translation>Přihlaste se pomocí QR kódu</translation>
     </message>
 </context>
 <context>
     <name>MediaRecorder</name>
     <message>
         <source>Default</source>
-        <translation type="unfinished"></translation>
+        <translation>Výchozí</translation>
     </message>
 </context>
 <context>
     <name>MediaUtils</name>
     <message>
         <source>Take picture</source>
-        <translation type="unfinished"></translation>
+        <translation>Vyfotit</translation>
     </message>
     <message>
         <source>Record video</source>
-        <translation type="unfinished"></translation>
+        <translation>Nahrát video</translation>
     </message>
     <message>
         <source>Record voice</source>
-        <translation type="unfinished"></translation>
+        <translation>Nahrát hlas</translation>
     </message>
     <message>
         <source>Send location</source>
-        <translation type="unfinished"></translation>
+        <translation>Zaslat polohu</translation>
     </message>
     <message>
         <source>Choose file</source>
-        <translation type="unfinished"></translation>
+        <translation>Vybrat soubor</translation>
     </message>
     <message>
         <source>Choose image</source>
-        <translation type="unfinished"></translation>
+        <translation>Vybrat obrázek</translation>
     </message>
     <message>
         <source>Choose video</source>
-        <translation type="unfinished"></translation>
+        <translation>Vybrat video</translation>
     </message>
     <message>
         <source>Choose audio file</source>
-        <translation type="unfinished"></translation>
+        <translation>Vybrat audio soubor</translation>
     </message>
     <message>
         <source>Choose document</source>
-        <translation type="unfinished"></translation>
+        <translation>Vybrat dokument</translation>
     </message>
     <message>
         <source>All files</source>
-        <translation type="unfinished"></translation>
+        <translation>Všechny soubory</translation>
     </message>
     <message>
         <source>Images</source>
-        <translation type="unfinished"></translation>
+        <translation>Obrázky</translation>
     </message>
     <message>
         <source>Videos</source>
-        <translation type="unfinished"></translation>
+        <translation>Videa</translation>
     </message>
     <message>
         <source>Audio files</source>
-        <translation type="unfinished"></translation>
+        <translation>Audio soubory</translation>
     </message>
     <message>
         <source>Documents</source>
-        <translation type="unfinished"></translation>
+        <translation>Dokumenty</translation>
     </message>
     <message>
         <source>%1 (%2)</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 (%2)</translation>
     </message>
 </context>
 <context>
     <name>MessageHandler</name>
     <message>
         <source>Could not send message, as a result of not being connected.</source>
-        <translation>Nelze odeslat zprávu, nejste připojeni.</translation>
+        <translation>Nelze odeslat zprávu, neboť nejste připojeni.</translation>
     </message>
     <message>
         <source>Could not correct message, as a result of not being connected.</source>
@@ -495,165 +495,166 @@ Prosím zkontrolujte své připojení k internetu.</translation>
     <name>MultimediaSettingsPage</name>
     <message>
         <source>Multimedia Settings</source>
-        <translation type="unfinished"></translation>
+        <translation>Nastavení multimédií</translation>
     </message>
     <message>
         <source>Configure</source>
-        <translation type="unfinished"></translation>
+        <translation>Nastavit</translation>
     </message>
     <message>
         <source>Image Capture</source>
-        <translation type="unfinished"></translation>
+        <translation>Zachycení obrazu</translation>
     </message>
     <message>
         <source>Audio Recording</source>
-        <translation type="unfinished"></translation>
+        <translation>Audio nahrávání</translation>
     </message>
     <message>
         <source>Video Recording</source>
-        <translation type="unfinished"></translation>
+        <translation>Video nahrávání</translation>
     </message>
     <message>
         <source>Camera</source>
-        <translation type="unfinished"></translation>
+        <translation>Kamera</translation>
     </message>
     <message>
         <source>Audio input</source>
-        <translation type="unfinished"></translation>
+        <translation>Audio vstup</translation>
     </message>
     <message>
         <source>Container</source>
-        <translation type="unfinished"></translation>
+        <translation>Kontejner</translation>
     </message>
     <message>
         <source>Image</source>
-        <translation type="unfinished">Obrázek</translation>
+        <translation>Obrázek</translation>
     </message>
     <message>
         <source>Audio</source>
-        <translation type="unfinished">Audio</translation>
+        <translation>Audio</translation>
     </message>
     <message>
         <source>Video</source>
-        <translation type="unfinished">Video</translation>
+        <translation>Video</translation>
     </message>
     <message>
         <source>Codec</source>
-        <translation type="unfinished"></translation>
+        <translation>Kodek</translation>
     </message>
     <message>
         <source>Resolution</source>
-        <translation type="unfinished"></translation>
+        <translation>Rozlišení</translation>
     </message>
     <message>
         <source>Quality</source>
-        <translation type="unfinished"></translation>
+        <translation>Kvalita</translation>
     </message>
     <message>
         <source>Sample Rate</source>
-        <translation type="unfinished"></translation>
+        <translation>Vzorkovací frekvence</translation>
     </message>
     <message>
         <source>Frame Rate</source>
-        <translation type="unfinished"></translation>
+        <translation>Snímková frekvence</translation>
     </message>
     <message>
         <source>Ready</source>
-        <translation type="unfinished"></translation>
+        <translation>Připravený</translation>
     </message>
     <message>
         <source>Initializing...</source>
-        <translation type="unfinished"></translation>
+        <translation>Zahajuji...</translation>
     </message>
     <message>
         <source>Unavailable</source>
-        <translation type="unfinished"></translation>
+        <translation>Nedostupný</translation>
     </message>
     <message>
         <source>Recording...</source>
-        <translation type="unfinished"></translation>
+        <translation>Nahrávám...</translation>
     </message>
     <message>
         <source>Paused</source>
-        <translation type="unfinished"></translation>
+        <translation>Pozastaven</translation>
     </message>
 </context>
 <context>
     <name>NewMedia</name>
     <message>
         <source>Ready</source>
-        <translation type="unfinished"></translation>
+        <translation>Připravený</translation>
     </message>
     <message>
         <source>Initializing...</source>
-        <translation type="unfinished"></translation>
+        <translation>Zahajuji...</translation>
     </message>
     <message>
         <source>Unavailable</source>
-        <translation type="unfinished"></translation>
+        <translation>Nedostupný</translation>
     </message>
     <message>
         <source>Recording... %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Nahrávání... %1</translation>
     </message>
     <message>
         <source>Paused %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Pozastaveno %1</translation>
     </message>
 </context>
 <context>
     <name>QmlUtils</name>
     <message>
         <source>Available</source>
-        <translation type="unfinished">Dostupný</translation>
+        <translation>Dostupný</translation>
     </message>
     <message>
         <source>Free for chat</source>
-        <translation type="unfinished">Dostupný k chatování</translation>
+        <translation>Dostupný k chatování</translation>
     </message>
     <message>
         <source>Away</source>
-        <translation type="unfinished">Nepřítomný</translation>
+        <translation>Nepřítomný</translation>
     </message>
     <message>
         <source>Do not disturb</source>
-        <translation type="unfinished">Nerušit</translation>
+        <translation>Nerušit</translation>
     </message>
     <message>
         <source>Away for longer</source>
-        <translation type="unfinished">Dlouhodobě nepřítomný</translation>
+        <translation>Dlouhodobě nepřítomný</translation>
     </message>
     <message>
         <source>Offline</source>
-        <translation type="unfinished"></translation>
+        <translation>Nepřipojený</translation>
     </message>
     <message>
         <source>Error</source>
-        <translation type="unfinished">Chyba</translation>
+        <translation>Chyba</translation>
     </message>
     <message>
         <source>Invisible</source>
-        <translation type="unfinished"></translation>
+        <translation>Neviditelný</translation>
     </message>
 </context>
 <context>
     <name>QrCodeScannerPage</name>
     <message>
         <source>Scan QR code</source>
-        <translation type="unfinished"></translation>
+        <translation>Naskenujte QR kód</translation>
     </message>
     <message>
         <source>There is no camera available.</source>
-        <translation type="unfinished"></translation>
+        <translation>Není k dispozici žádná kamera.</translation>
     </message>
     <message>
         <source>Your camera is busy.
 Try to close other applications using the camera.</source>
-        <translation type="unfinished"></translation>
+        <translation>Váš fotoaparát je zaneprázdněn.
+Zkuste zavřít jiné aplikace, které používají fotoaparát.</translation>
     </message>
     <message>
         <source>The camera format &apos;%1&apos; is not supported.</source>
-        <translation type="unfinished"></translation>
+        <translation>Formát fotoaparátu &apos;% 1&apos; není podporován.</translation>
     </message>
 </context>
 <context>
@@ -675,7 +676,7 @@ Try to close other applications using the camera.</source>
     </message>
     <message>
         <source>This will also send a request to access the presence of the contact.</source>
-        <translation>Zároveň odešle požkontakt přístupu k informaci o přítomnosti kontaktu.</translation>
+        <translation>Zároveň odešle žádost o přístup k přítomnosti kontaktu.</translation>
     </message>
     <message>
         <source>Jabber-ID:</source>
@@ -757,7 +758,7 @@ Try to close other applications using the camera.</source>
     </message>
     <message>
         <source>Could not rename contact, as a result of not being connected.</source>
-        <translation type="unfinished"></translation>
+        <translation>Nepodařilo se kontakt přejmenovat, neboť nejste připojení.</translation>
     </message>
 </context>
 <context>
@@ -780,7 +781,7 @@ Try to close other applications using the camera.</source>
     </message>
     <message>
         <source>Search contacts</source>
-        <translation type="unfinished"></translation>
+        <translation>Prohledat kontakty</translation>
     </message>
 </context>
 <context>
@@ -806,19 +807,19 @@ Try to close other applications using the camera.</source>
     <name>RosterRenameContactSheet</name>
     <message>
         <source>Rename contact</source>
-        <translation type="unfinished"></translation>
+        <translation>Přejmenovat kontakt</translation>
     </message>
     <message>
         <source>Edit name:</source>
-        <translation type="unfinished"></translation>
+        <translation>Editovat jméno:</translation>
     </message>
     <message>
         <source>Cancel</source>
-        <translation type="unfinished">Zrušit</translation>
+        <translation>Zrušit</translation>
     </message>
     <message>
         <source>Rename</source>
-        <translation type="unfinished"></translation>
+        <translation>Přejmenovat</translation>
     </message>
 </context>
 <context>
@@ -859,7 +860,7 @@ Try to close other applications using the camera.</source>
     </message>
     <message>
         <source>You received a subscription request by &lt;b&gt;%1&lt;/b&gt;. If you accept it, the account will have access to your presence status.</source>
-        <translation>Obdržena žádost o přihlášení od &lt;b&gt;%1&lt;/b&gt;. Pokud přijmete, daný účet bude mít přístup k vašemu statusu.</translation>
+        <translation>Obdržena žádost o přihlášení od &lt;b&gt;%1&lt;/b&gt;. Pokud přijmete, daný účet bude mít přístup k informaci o vašem připojení.</translation>
     </message>
     <message>
         <source>Decline</source>
@@ -885,34 +886,34 @@ Try to close other applications using the camera.</source>
     <name>UserProfilePage</name>
     <message>
         <source>Profile</source>
-        <translation type="unfinished"></translation>
+        <translation>Profil</translation>
     </message>
 </context>
 <context>
     <name>VCardModel</name>
     <message>
         <source>Name</source>
-        <translation type="unfinished"></translation>
+        <translation>Jméno</translation>
     </message>
     <message>
         <source>Nickname</source>
-        <translation type="unfinished"></translation>
+        <translation>Alias</translation>
     </message>
     <message>
         <source>About</source>
-        <translation type="unfinished">O aplikaci</translation>
+        <translation>O aplikaci</translation>
     </message>
     <message>
         <source>Email</source>
-        <translation type="unfinished"></translation>
+        <translation>Email</translation>
     </message>
     <message>
         <source>Birthday</source>
-        <translation type="unfinished"></translation>
+        <translation>Datum narození</translation>
     </message>
     <message>
         <source>Website</source>
-        <translation type="unfinished"></translation>
+        <translation>Webová stránka</translation>
     </message>
 </context>
 </TS>

@@ -61,8 +61,9 @@ void VCardManager::fetchVCard(const QString& jid)
 
 void VCardManager::handleVCard(const QXmppVCardIq &iq)
 {
-	if (!iq.photo().isEmpty())
-		avatarStorage->addAvatar(QXmppUtils::jidToBareJid(iq.from()), iq.photo());
+	if (!iq.photo().isEmpty()) {
+		avatarStorage->addAvatar(QXmppUtils::jidToBareJid(iq.from().isEmpty() ? client->configuration().jid() : iq.from()), iq.photo());
+	}
 
 	emit vCardReceived(iq);
 }

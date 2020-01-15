@@ -159,6 +159,8 @@ void ClientWorker::onConnectionError(QXmppClient::Error error)
 			emit disconnReasonChanged(DisconnReason::ConnNotConnected);
 		}
 	} else if (error == QXmppClient::SocketError) {
+		qDebug() << "[client] Socket Error:" << client->socketErrorString();
+
 		QAbstractSocket::SocketError sError = client->socketError();
 		if (sError == QAbstractSocket::ConnectionRefusedError ||
 		    sError == QAbstractSocket::RemoteHostClosedError) {

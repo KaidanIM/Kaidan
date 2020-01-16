@@ -28,69 +28,57 @@
  *  along with Kaidan.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef QXMPPURI_H
-#define QXMPPURI_H
+#ifndef QRCODEGENERATOR_H
+#define QRCODEGENERATOR_H
 
-#include <QXmppMessage.h>
+#include <QObject>
 
-class QXmppUri
+#include <ZXing/BarcodeFormat.h>
+#include <ZXing/MultiFormatWriter.h>
+#include <ZXing/BitMatrix.h>
+
+class QImage;
+
+class QrCodeGenerator : public QObject
 {
+	Q_OBJECT
+
 public:
-	enum Action {
-		None,
-		Command,
-		Disco,
-		Invite,
-		Join,
-		Login,
-		Message,
-		PubSub,
-		RecvFile,
-		Register,
-		Remove,
-		Roster,
-		SendFile,
-		Subscribe,
-		Unregister,
-		Unsubscribe,
-		VCard,
-	};
+	/**
+	 * Instantiates a QR code generator.
+	 *
+	 * @param parent parent object
+	 */
+	explicit QrCodeGenerator(QObject *parent = nullptr);
 
-	QXmppUri() = default;
-	QXmppUri(QString uri);
+	/**
+	 * Gerenates a QR code encoding the credentials of the currently used account to log into it with another client.
+	 *
+	 * @param edgePixelCount number of pixels as the width and height of the QR code
+	 */
+	Q_INVOKABLE static QImage generateLoginUriQrCode(int edgePixelCount);
 
-	QString toString();
-
-	QString jid() const;
-	void setJid(const QString &jid);
-
-	Action action() const;
-	void setAction(const Action &action);
-	bool hasAction(const Action &action);
-
-	// login
-	QString password() const;
-	void setPassword(const QString &password);
-
-	// 'message' query
-	QXmppMessage message() const;
-	void setMessage(const QXmppMessage&);
-
-	bool hasMessageType() const;
-	void setHasMessageType(bool hasMessageType);
-
-	static bool isXmppUri(const QString &uri);
+	/**
+	 * Gerenates a QR code.
+	 *
+	 * @param text string to be encoded as a QR code
+	 * @param edgePixelCount number of pixels as the width and height of the QR code
+	 */
+	Q_INVOKABLE static QImage generateQrCode(const QString &text, int edgePixelCount);
 
 private:
-	QString m_jid;
-	Action m_action = None;
+	/**
+	 * Generates an image with black and white pixels from a given matrix of bits representing a QR code.
+	 *
+	 * @param bitMatrix matrix of bits representing the two colors black and white
+	 */
+	static QImage toImage(const ZXing::BitMatrix &bitMatrix);
 
-	// login
-	QString m_password;
-
-	// message
-	QXmppMessage m_message;
-	bool m_hasMessageType = false;
+	/**
+	 * Sets up a color image for a given monochrome image consisting only of black and white pixels.
+	 * @param blackAndWhiteImage image for which a color table with the colors black and white is created
+	 */
+	static void createColorTable(QImage &blackAndWhiteImage);
 };
 
-#endif // QXMPPURI_H
+#endif // QRCODEGENERATOR_H

@@ -91,6 +91,14 @@ Kirigami.GlobalDrawer {
 			}
 		},
 		Kirigami.Action {
+			text: qsTr("Transfer account")
+			icon.name: "send-to-symbolic"
+
+			onTriggered: {
+				pageStack.layers.push(accountTransferPage)
+			}
+		},
+		Kirigami.Action {
 			text: qsTr("Delete account")
 			icon.name: "delete"
 			onTriggered: pageStack.layers.push(accountDeletionPage)

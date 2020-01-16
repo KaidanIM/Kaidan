@@ -29,6 +29,7 @@ set(KAIDAN_SOURCES
 	src/QmlUtils.cpp
 	src/Utils.cpp
 	src/QrCodeDecoder.cpp
+	src/QrCodeGenerator.cpp
 	src/QrCodeScannerFilter.cpp
 	src/QrCodeVideoFrame.cpp
 	src/CameraModel.cpp

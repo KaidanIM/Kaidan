@@ -83,6 +83,7 @@ Kirigami.ApplicationWindow {
 	Component {id: settingsPage; SettingsPage {}}
 	Component {id: qrCodeScannerPage; QrCodeScannerPage {}}
 	Component {id: userProfilePage; UserProfilePage {}}
+	Component {id: accountTransferPage; AccountTransferPage {}}
 	Component {id: accountDeletionPage; AccountDeletionPage {}}
 	Component {id: accountDeletionFromClientConfirmationPage; AccountDeletionFromClientConfirmationPage {}}
 	Component {id: accountDeletionFromClientAndServerConfirmationPage; AccountDeletionFromClientAndServerConfirmationPage {}}

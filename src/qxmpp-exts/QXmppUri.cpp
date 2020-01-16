@@ -31,6 +31,11 @@
 #include "QXmppUri.h"
 #include <QUrlQuery>
 
+const QString URI_SCHEME = QStringLiteral("xmpp");
+const QChar URI_QUERY_SEPARATOR = '?';
+const QChar URI_QUERY_VALUE_DELIMITER = '=';
+const QChar URI_QUERY_PAIR_DELIMITER = ';';
+
 /// actions, e.g. "join" in "xmpp:group@example.org?join" for joining a group chat
 
 const QStringList ACTION_STRINGS = QStringList()
@@ -76,11 +81,10 @@ const QStringList MESSAGE_ATTRIBUTES = QStringList()
 /// @param key key of the given value
 /// @param val value of given key
 
-void helperToAddPair(QList<QPair<QString, QString>> &pairs, const QString &key,
-                     const QString &val)
+void helperToAddPair(QUrlQuery &query, const QString &key, const QString &val)
 {
 	if (!val.isEmpty())
-		pairs << qMakePair(key, val);
+		query.addQueryItem(key, val);
 }
 
 /// @return value of a given key in a given query
@@ -93,29 +97,30 @@ QString helperToGetQueryItemValue(const QUrlQuery &query, const QString &key)
 }
 
 /// Parses the URI from a string.
+///
 /// @param input string which may present an XMPP URI
 
 QXmppUri::QXmppUri(QString input)
 {
-	// We're replacing ';' with '&', so we can reuse the QUrlQuery.
-	QUrl url(input.replace(";", "&"));
-	if (!url.isValid() || url.scheme() != "xmpp")
+	QUrl url(input);
+	if (!url.isValid() || url.scheme() != URI_SCHEME)
 		return;
 
 	// set JID
 	setJid(url.path());
 
-	if (!input.contains("?"))
+	if (!url.hasQuery())
 		return;
 
-	QUrlQuery query(url.query());
+	QUrlQuery query;
+	query.setQueryDelimiters(URI_QUERY_VALUE_DELIMITER, URI_QUERY_PAIR_DELIMITER);
+	query.setQuery(url.query(QUrl::FullyEncoded));
+
 	// check that there are query items (key-value pairs)
 	if (!query.queryItems().size())
 		return;
 
-	m_action = static_cast<Action>(
-	        ACTION_STRINGS.indexOf(query.queryItems().first().first)
-	);
+	m_action = Action(ACTION_STRINGS.indexOf(query.queryItems().first().first));
 
 	switch (m_action) {
 	case Message:
@@ -125,8 +130,8 @@ QXmppUri::QXmppUri(QString input)
 		m_message.setId(helperToGetQueryItemValue(query, "id"));
 		m_message.setFrom(helperToGetQueryItemValue(query, "from"));
 		if (!helperToGetQueryItemValue(query, "type").isEmpty())
-			m_message.setType(static_cast<QXmppMessage::Type>(
-			        MESSAGE_TYPE_STRINGS.indexOf(helperToGetQueryItemValue(query, "type"))
+			m_message.setType(QXmppMessage::Type(
+					MESSAGE_TYPE_STRINGS.indexOf(helperToGetQueryItemValue(query, "type"))
 			));
 		else
 			m_hasMessageType = false;
@@ -141,49 +146,48 @@ QXmppUri::QXmppUri(QString input)
 
 /// Decodes the URI to a string.
 ///
-/// \returns Full XMPP URI
+/// @return full XMPP URI
 
 QString QXmppUri::toString()
 {
 	QUrl url;
-	url.setScheme("xmpp");
+	url.setScheme(URI_SCHEME);
 	url.setPath(m_jid);
 
 	// Create query items (parameters)
 	QUrlQuery query;
-	QList<QPair<QString, QString>> queryItems;
+	query.setQueryDelimiters(URI_QUERY_VALUE_DELIMITER, URI_QUERY_PAIR_DELIMITER);
 
 	switch (m_action) {
 	case Message:
-        helperToAddPair(queryItems, "body", m_message.body());
-        helperToAddPair(queryItems, "from", m_message.from());
-        helperToAddPair(queryItems, "id", m_message.id());
-        helperToAddPair(queryItems, "thread", m_message.thread());
-        if (m_hasMessageType)
-            helperToAddPair(queryItems, "type", MESSAGE_TYPE_STRINGS.at(
-                    int(m_message.type())));
-        helperToAddPair(queryItems, "subject", m_message.subject());
-        break;
-    case Login:
-        helperToAddPair(queryItems, "password", m_password);
-        break;
+		helperToAddPair(query, "body", m_message.body());
+		helperToAddPair(query, "from", m_message.from());
+		helperToAddPair(query, "id", m_message.id());
+		helperToAddPair(query, "thread", m_message.thread());
+		if (m_hasMessageType)
+			helperToAddPair(query, "type", MESSAGE_TYPE_STRINGS.at(
+					int(m_message.type())));
+		helperToAddPair(query, "subject", m_message.subject());
+		break;
+	case Login:
+		helperToAddPair(query, "password", m_password);
+		break;
 	default:
-        break;
+		break;
 	}
-	query.setQueryItems(queryItems);
 
 	QString output = url.toEncoded();
 	if (m_action != None) {
-	// add action
-	output += "?";
-	output += ACTION_STRINGS.at(int(m_action));
+		// add action
+		output += URI_QUERY_SEPARATOR;
+		output += ACTION_STRINGS.at(int(m_action));
 
-	// add parameters
-	QString queryStr = QUrl::toPercentEncoding(query.toString().replace("&", ";"), ";=");
-	if (!query.isEmpty()) {
-		output += ";";
-		output += queryStr;
-	}
+		// add parameters
+		QString queryStr = query.toString(QUrl::FullyEncoded);
+		if (!query.isEmpty()) {
+			output += URI_QUERY_PAIR_DELIMITER;
+			output += queryStr;
+		}
 	}
 
 	return output;
@@ -235,9 +239,20 @@ bool QXmppUri::hasAction(const Action &action)
 	return m_action == action;
 }
 
+/// Returns the password of a login action
+
 QString QXmppUri::password() const
 {
 	return m_password;
+}
+
+/// Sets the password of a login action
+///
+/// @param password
+
+void QXmppUri::setPassword(const QString &password)
+{
+	m_password = password;
 }
 
 /// In case the URI has a message query, this can be used to get the attached

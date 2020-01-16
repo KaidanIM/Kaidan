@@ -58,8 +58,6 @@ class VCardManager;
 class UploadManager;
 class DownloadManager;
 
-using namespace Enums;
-
 /**
  * The ClientWorker is used as a QObject-based worker on the ClientThread.
  */
@@ -68,6 +66,25 @@ class ClientWorker : public QObject
 	Q_OBJECT
 
 public:
+	/**
+	 * enumeration of possible connection errors
+	 */
+	enum ConnectionError {
+		NoError,
+		UserDisconnected,
+		AuthenticationFailed,
+		NotConnected,
+		TlsFailed,
+		TlsNotAvailable,
+		DnsError,
+		ConnectionRefused,
+		NoSupportedAuth,
+		KeepAliveError,
+		NoNetworkPermission,
+		RegistrationUnsupported
+	};
+	Q_ENUM(ConnectionError)
+
 	struct Caches {
 		Caches(Kaidan *kaidan, RosterDb *rosterDb, MessageDb *msgDb,
 		       QObject *parent = nullptr)
@@ -146,9 +163,12 @@ signals:
 	void disconnectRequested();
 	void credentialsUpdated(ClientWorker::Credentials creds);
 
-	// emitted by us:
-	// connection state is directly connected (client -> kaidan) without this step
-	void disconnReasonChanged(Enums::DisconnectionReason reason);
+	/**
+	 * Emitted when the client failed to connect to the server.
+	 *
+	 * @param error new connection error
+	 */
+	void connectionErrorChanged(ClientWorker::ConnectionError error);
 
 private slots:
 	/**
@@ -157,7 +177,7 @@ private slots:
 	void onConnect();
 
 	/**
-	 * Shows error reason
+	 * Sets a new connection error.
 	 */
 	void onConnectionError(QXmppClient::Error error);
 

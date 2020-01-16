@@ -146,38 +146,50 @@ void ClientWorker::onConnectionError(QXmppClient::Error error)
 		emit kaidan->newCredentialsNeeded();
 	}
 
-	if (error == QXmppClient::NoError) {
-		emit disconnReasonChanged(DisconnReason::ConnUserDisconnected);
-	} else if (error == QXmppClient::KeepAliveError) {
-		emit disconnReasonChanged(DisconnReason::ConnKeepAliveError);
-	} else if (error == QXmppClient::XmppStreamError) {
-		QXmppStanza::Error::Condition xError = client->xmppStreamError();
-		qDebug() << xError;
-		if (xError == QXmppStanza::Error::NotAuthorized) {
-			emit disconnReasonChanged(DisconnReason::ConnAuthenticationFailed);
-		} else {
-			emit disconnReasonChanged(DisconnReason::ConnNotConnected);
-		}
-	} else if (error == QXmppClient::SocketError) {
-		qDebug() << "[client] Socket Error:" << client->socketErrorString();
+	QXmppStanza::Error::Condition xmppStreamError;
+	    QAbstractSocket::SocketError socketError;
 
-		QAbstractSocket::SocketError sError = client->socketError();
-		if (sError == QAbstractSocket::ConnectionRefusedError ||
-		    sError == QAbstractSocket::RemoteHostClosedError) {
-			emit disconnReasonChanged(DisconnReason::ConnConnectionRefused);
-		} else if (sError == QAbstractSocket::HostNotFoundError) {
-			emit disconnReasonChanged(DisconnReason::ConnDnsError);
-		} else if (sError == QAbstractSocket::SocketAccessError) {
-			emit disconnReasonChanged(DisconnReason::ConnNoNetworkPermission);
-		} else if (sError == QAbstractSocket::SocketTimeoutError) {
-			emit disconnReasonChanged(DisconnReason::ConnKeepAliveError);
-		} else if (sError == QAbstractSocket::SslHandshakeFailedError ||
-		           sError == QAbstractSocket::SslInternalError) {
-			emit disconnReasonChanged(DisconnReason::ConnTlsFailed);
-		} else {
-			emit disconnReasonChanged(DisconnReason::ConnNotConnected);
+		switch (error) {
+		case QXmppClient::NoError:
+			emit connectionErrorChanged(ClientWorker::UserDisconnected);
+			break;
+		case QXmppClient::KeepAliveError:
+			emit connectionErrorChanged(ClientWorker::KeepAliveError);
+			break;
+		case QXmppClient::XmppStreamError:
+			xmppStreamError = client->xmppStreamError();
+			qDebug() << xmppStreamError;
+			if (xmppStreamError == QXmppStanza::Error::NotAuthorized) {
+				emit connectionErrorChanged(ClientWorker::AuthenticationFailed);
+			} else {
+				emit connectionErrorChanged(ClientWorker::NotConnected);
+			}
+			break;
+		case QXmppClient::SocketError:
+			socketError = client->socketError();
+			switch (socketError) {
+			case QAbstractSocket::ConnectionRefusedError:
+			case QAbstractSocket::RemoteHostClosedError:
+				emit connectionErrorChanged(ClientWorker::ConnectionRefused);
+				break;
+			case QAbstractSocket::HostNotFoundError:
+				emit connectionErrorChanged(ClientWorker::DnsError);
+				break;
+			case QAbstractSocket::SocketAccessError:
+				emit connectionErrorChanged(ClientWorker::NoNetworkPermission);
+				break;
+			case QAbstractSocket::SocketTimeoutError:
+				emit connectionErrorChanged(ClientWorker::KeepAliveError);
+				break;
+			case QAbstractSocket::SslHandshakeFailedError:
+			case QAbstractSocket::SslInternalError:
+				emit connectionErrorChanged(ClientWorker::TlsFailed);
+				break;
+			default:
+				emit connectionErrorChanged(ClientWorker::NotConnected);
+			}
+			break;
 		}
-	}
 }
 
 QString ClientWorker::generateRandomString(unsigned int length) const

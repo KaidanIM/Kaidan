@@ -100,7 +100,7 @@ Kaidan::Kaidan(QGuiApplication *app, bool enableLogging, QObject *parent)
 	m_client->setCredentials(creds);
 	m_client->moveToThread(m_cltThrd);
 
-	connect(m_client, &ClientWorker::disconnReasonChanged, this, &Kaidan::setDisconnReason);
+	connect(m_client, &ClientWorker::connectionErrorChanged, this, &Kaidan::setConnectionError);
 	connect(m_cltThrd, &QThread::started, m_client, &ClientWorker::main);
 
 	m_client->setObjectName("XmppClient");
@@ -167,10 +167,10 @@ void Kaidan::setConnectionState(QXmppClient::State state)
 	}
 }
 
-void Kaidan::setDisconnReason(DisconnectionReason reason)
+void Kaidan::setConnectionError(ClientWorker::ConnectionError error)
 {
-	disconnReason = reason;
-	emit disconnReasonChanged();
+	connectionError = error;
+	emit connectionErrorChanged();
 }
 
 bool Kaidan::notificationsMuted(const QString &jid)
@@ -210,9 +210,9 @@ void Kaidan::setPassword(const QString &password)
 	emit passwordChanged();
 }
 
-quint8 Kaidan::getDisconnReason() const
+quint8 Kaidan::getConnectionError() const
 {
-	return static_cast<quint8>(disconnReason);
+	return static_cast<quint8>(connectionError);
 }
 
 void Kaidan::addOpenUri(const QString &uri)

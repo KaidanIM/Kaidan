@@ -63,28 +63,6 @@ namespace Enums {
 	Q_ENUM_NS(ConnectionState)
 
 	/**
-	 * Enumeration of possible disconnection reasons
-	 */
-	enum class DisconnectionReason {
-		ConnNoError,
-		ConnUserDisconnected,
-		ConnAuthenticationFailed,
-		ConnNotConnected,
-		ConnTlsFailed,
-		ConnTlsNotAvailable,
-		ConnDnsError,
-		ConnConnectionRefused,
-		ConnNoSupportedAuth,
-		ConnKeepAliveError,
-		ConnNoNetworkPermission
-	};
-	Q_ENUM_NS(DisconnectionReason)
-
-	// Alias, so that qDebug outputs the full name, but it can be
-	// abrieviated in the code
-	using DisconnReason = DisconnectionReason;
-
-	/**
 	 * Enumeration of different media/message types
 	 */
 	enum class MessageType {

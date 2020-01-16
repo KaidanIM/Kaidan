@@ -213,7 +213,6 @@ Q_DECL_EXPORT int main(int argc, char *argv[])
 	qRegisterMetaType<Qt::ApplicationState>("Qt::ApplicationState");
 	qRegisterMetaType<QXmppClient::State>("QXmppClient::State");
 	qRegisterMetaType<MessageType>("MessageType");
-	qRegisterMetaType<DisconnectionReason>("DisconnectionReason");
 	qRegisterMetaType<TransferJob*>("TransferJob*");
 	qRegisterMetaType<QmlUtils*>("QmlUtils*");
 	qRegisterMetaType<QVector<Message>>("QVector<Message>");
@@ -230,9 +229,10 @@ Q_DECL_EXPORT int main(int argc, char *argv[])
 	qRegisterMetaType<ImageEncoderSettings>();
 	qRegisterMetaType<AudioEncoderSettings>();
 	qRegisterMetaType<VideoEncoderSettings>();
+
 	// Enums for c++ member calls using enums
 	qRegisterMetaType<Enums::ConnectionState>();
-	qRegisterMetaType<Enums::DisconnectionReason>();
+	qRegisterMetaType<ClientWorker::ConnectionError>();
 	qRegisterMetaType<Enums::MessageType>();
 	qRegisterMetaType<Enums::AvailabilityTypes>();
 	qRegisterMetaType<CommonEncoderSettings::EncodingQuality>();
@@ -361,6 +361,8 @@ Q_DECL_EXPORT int main(int argc, char *argv[])
 	qmlRegisterUncreatableType<ImageEncoderSettings>(APPLICATION_ID, 1, 0, "ImageEncoderSettings", "ImageEncoderSettings type usable");
 	qmlRegisterUncreatableType<AudioEncoderSettings>(APPLICATION_ID, 1, 0, "AudioEncoderSettings", "AudioEncoderSettings type usable");
 	qmlRegisterUncreatableType<VideoEncoderSettings>(APPLICATION_ID, 1, 0, "VideoEncoderSettings", "VideoEncoderSettings type usable");
+	qmlRegisterUncreatableType<ClientWorker>(APPLICATION_ID, 1, 0, "ClientWorker", "Cannot create object; only enums defined!");
+
 
 	qmlRegisterUncreatableMetaObject(Enums::staticMetaObject, APPLICATION_ID,
 		1, 0, "Enums", "Can't create object; only enums defined!");
@@ -375,7 +377,7 @@ Q_DECL_EXPORT int main(int argc, char *argv[])
 
 	engine.rootContext()->setContextProperty("kaidan", &kaidan);
 	engine.load(QUrl("qrc:/qml/main.qml"));
-	if(engine.rootObjects().isEmpty())
+	if (engine.rootObjects().isEmpty())
 		return -1;
 
 #ifdef Q_OS_ANDROID

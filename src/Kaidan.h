@@ -37,14 +37,11 @@
 #include <QString>
 // Kaidan
 #include "ClientWorker.h"
-#include "Enums.h"
 #include "Globals.h"
 
 class QGuiApplication;
 class Database;
 class QXmppClient;
-
-using namespace Enums;
 
 /**
  * @class Kaidan Kaidan's Back-End Class
@@ -66,7 +63,7 @@ class Kaidan : public QObject
 	Q_PROPERTY(TransferCache* transferCache READ getTransferCache CONSTANT)
 	Q_PROPERTY(QSettings* settings READ getSettings CONSTANT)
 	Q_PROPERTY(quint8 connectionState READ getConnectionState NOTIFY connectionStateChanged)
-	Q_PROPERTY(quint8 disconnReason READ getDisconnReason NOTIFY disconnReasonChanged)
+	Q_PROPERTY(quint8 connectionError READ getConnectionError NOTIFY connectionErrorChanged)
 	Q_PROPERTY(QString jid READ getJid WRITE setJid NOTIFY jidChanged)
 	Q_PROPERTY(QString jidResource READ getJidResource WRITE setJidResource NOTIFY jidResourceChanged)
 	Q_PROPERTY(QString password READ getPassword WRITE setPassword NOTIFY passwordChanged)
@@ -111,9 +108,9 @@ public:
 	}
 
 	/**
-	 * Returns the last disconnection reason
+	 * Returns the last connection error.
 	 */
-	Q_INVOKABLE quint8 getDisconnReason() const;
+	Q_INVOKABLE quint8 getConnectionError() const;
 
 	/**
 	 * Set own JID used for connection
@@ -219,10 +216,9 @@ signals:
 	void connectionStateChanged();
 
 	/**
-	 * Emitted, when the client failed to connect and gives the reason in
-	 * a DisconnectionReason enumatrion.
+	 * Emitted when the client failed to connect.
 	 */
-	void disconnReasonChanged();
+	void connectionErrorChanged();
 
 	/**
 	 * Emitted when the JID was changed
@@ -372,9 +368,9 @@ public slots:
 	void setConnectionState(QXmppClient::State state);
 
 	/**
-	 * Sets the disconnection error/reason
+	 * Sets a new connection error.
 	 */
-	void setDisconnReason(Enums::DisconnectionReason reason);
+	void setConnectionError(ClientWorker::ConnectionError error);
 
 	/**
 	 * Receives messages from another instance of the application
@@ -427,7 +423,7 @@ private:
 	QString openUriCache;
 	bool uploadServiceFound = false;
 	ConnectionState connectionState = ConnectionState::StateDisconnected;
-	DisconnReason disconnReason = DisconnReason::ConnNoError;
+	ClientWorker::ConnectionError connectionError = ClientWorker::NoError;
 
 	static Kaidan *s_instance;
 };

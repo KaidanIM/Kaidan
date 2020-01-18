@@ -5,7 +5,7 @@ stages:
 
 clazy:
   stage: test
-  image: kaidan/neon-bionic
+  image: kaidan/debian-unstable
   variables:
     CMAKE_CXX_COMPILER: clazy
   script: utils/travis/build.sh

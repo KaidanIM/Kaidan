@@ -18,11 +18,6 @@ qmllint:
   variables:
     QT_SELECT: 5
 
-ubuntu-trusty:
-  stage: build
-  image: kaidan/ubuntu-trusty
-  script: utils/travis/build.sh
-
 neon-bionic:
   stage: build
   image: kaidan/neon-bionic

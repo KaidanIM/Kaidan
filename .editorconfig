@@ -51,8 +51,7 @@ indent_style = space
 indent_size = 2
 
 [*.qrc]
-indent_style = space
-indent_size = 4
+indent_style = tab
 
 [*.pl]
 indent_style = space

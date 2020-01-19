@@ -147,49 +147,49 @@ void ClientWorker::onConnectionError(QXmppClient::Error error)
 	}
 
 	QXmppStanza::Error::Condition xmppStreamError;
-	    QAbstractSocket::SocketError socketError;
+	QAbstractSocket::SocketError socketError;
 
-		switch (error) {
-		case QXmppClient::NoError:
-			emit connectionErrorChanged(ClientWorker::UserDisconnected);
+	switch (error) {
+	case QXmppClient::NoError:
+		emit connectionErrorChanged(ClientWorker::UserDisconnected);
+		break;
+	case QXmppClient::KeepAliveError:
+		emit connectionErrorChanged(ClientWorker::KeepAliveError);
+		break;
+	case QXmppClient::XmppStreamError:
+		xmppStreamError = client->xmppStreamError();
+		qDebug() << xmppStreamError;
+		if (xmppStreamError == QXmppStanza::Error::NotAuthorized) {
+			emit connectionErrorChanged(ClientWorker::AuthenticationFailed);
+		} else {
+			emit connectionErrorChanged(ClientWorker::NotConnected);
+		}
+		break;
+	case QXmppClient::SocketError:
+		socketError = client->socketError();
+		switch (socketError) {
+		case QAbstractSocket::ConnectionRefusedError:
+		case QAbstractSocket::RemoteHostClosedError:
+			emit connectionErrorChanged(ClientWorker::ConnectionRefused);
 			break;
-		case QXmppClient::KeepAliveError:
+		case QAbstractSocket::HostNotFoundError:
+			emit connectionErrorChanged(ClientWorker::DnsError);
+			break;
+		case QAbstractSocket::SocketAccessError:
+			emit connectionErrorChanged(ClientWorker::NoNetworkPermission);
+			break;
+		case QAbstractSocket::SocketTimeoutError:
 			emit connectionErrorChanged(ClientWorker::KeepAliveError);
 			break;
-		case QXmppClient::XmppStreamError:
-			xmppStreamError = client->xmppStreamError();
-			qDebug() << xmppStreamError;
-			if (xmppStreamError == QXmppStanza::Error::NotAuthorized) {
-				emit connectionErrorChanged(ClientWorker::AuthenticationFailed);
-			} else {
-				emit connectionErrorChanged(ClientWorker::NotConnected);
-			}
+		case QAbstractSocket::SslHandshakeFailedError:
+		case QAbstractSocket::SslInternalError:
+			emit connectionErrorChanged(ClientWorker::TlsFailed);
 			break;
-		case QXmppClient::SocketError:
-			socketError = client->socketError();
-			switch (socketError) {
-			case QAbstractSocket::ConnectionRefusedError:
-			case QAbstractSocket::RemoteHostClosedError:
-				emit connectionErrorChanged(ClientWorker::ConnectionRefused);
-				break;
-			case QAbstractSocket::HostNotFoundError:
-				emit connectionErrorChanged(ClientWorker::DnsError);
-				break;
-			case QAbstractSocket::SocketAccessError:
-				emit connectionErrorChanged(ClientWorker::NoNetworkPermission);
-				break;
-			case QAbstractSocket::SocketTimeoutError:
-				emit connectionErrorChanged(ClientWorker::KeepAliveError);
-				break;
-			case QAbstractSocket::SslHandshakeFailedError:
-			case QAbstractSocket::SslInternalError:
-				emit connectionErrorChanged(ClientWorker::TlsFailed);
-				break;
-			default:
-				emit connectionErrorChanged(ClientWorker::NotConnected);
-			}
-			break;
+		default:
+			emit connectionErrorChanged(ClientWorker::NotConnected);
 		}
+		break;
+	}
 }
 
 QString ClientWorker::generateRandomString(unsigned int length) const

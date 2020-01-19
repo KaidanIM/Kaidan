@@ -53,7 +53,7 @@ Kirigami.ScrollablePage {
 
 	mainAction: Kirigami.Action {
 		text: qsTr("Add new contact")
-		iconName: "contact-new"
+		icon.name: "contact-new"
 		onTriggered: {
 			if (addContactSheet.sheetOpen)
 				addContactSheet.close()

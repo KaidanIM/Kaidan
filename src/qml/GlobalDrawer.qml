@@ -45,7 +45,7 @@ Kirigami.GlobalDrawer {
 	actions: [
 		Kirigami.Action {
 			text: qsTr("Invite friends")
-			iconName: "mail-invitation"
+			icon.name: "mail-invitation"
 			onTriggered: {
 				Utils.copyToClipboard(Utils.invitationUrl(kaidan.jid))
 				passiveNotification(qsTr("Invitation link copied to clipboard"))
@@ -53,7 +53,7 @@ Kirigami.GlobalDrawer {
 		},
 		Kirigami.Action {
 			text: qsTr("Log out")
-			iconName: "system-shutdown"
+			icon.name: "system-shutdown"
 			onTriggered: {
 				closeAdditionalLayers()
 				// disconnect (open log in page)
@@ -62,7 +62,7 @@ Kirigami.GlobalDrawer {
 		},
 		Kirigami.Action {
 			text: qsTr("Settings")
-			iconName: "settings-configure"
+			icon.name: "settings-configure"
 			onTriggered: {
 				// open settings page
 				if (Kirigami.Settings.isMobile) {
@@ -75,7 +75,7 @@ Kirigami.GlobalDrawer {
 		},
 		Kirigami.Action {
 			text: qsTr("About")
-			iconName: "help-about"
+			icon.name: "help-about"
 			onTriggered: {
 				closeAdditionalLayers()
 				// open about sheet

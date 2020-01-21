@@ -33,3 +33,8 @@ Please stick to the following steps for opening and reviewing MRs.
 1. Try to provide a review to the author.
 1. Try to give the author concrete proposals for improving the code via the *insert suggestion* feature while commenting.
 1. If the proposals are too complicated, create and push a commit with your proposal to your own fork of Kaidan and open a MR with the author's MR branch as its target.
+
+## Graphics
+
+The preferred format for graphics in Kaidan is *SVG*.
+A new SVG must be [optimized](https://invent.kde.org/kde/kaidan/-/wikis/svg-optimization) before adding it to a commit.

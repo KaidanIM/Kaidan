@@ -100,6 +100,11 @@ Controls.Dialog {
 			}
 
 			CenteredAdaptiveButton {
+				label.text: qsTr("Report problems")
+				onClicked: Qt.openUrlExternally(Utils.issueTrackingUrl)
+			}
+
+			CenteredAdaptiveButton {
 				label.text: qsTr("View source code online")
 				onClicked: Qt.openUrlExternally(Utils.applicationSourceCodeUrl())
 			}

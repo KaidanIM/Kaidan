@@ -41,6 +41,7 @@
 
 #define INVITATION_URL "https://i.kaidan.im/#"
 #define APPLICATION_SOURCE_CODE_URL "https://invent.kde.org/kde/kaidan"
+#define ISSUE_TRACKING_URL "https://invent.kde.org/kde/kaidan/issues"
 
 #define MESSAGE_MAX_CHARS 1e4
 

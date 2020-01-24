@@ -200,6 +200,11 @@ QString QmlUtils::getResourcePath(const QString &name)
 	return QString();
 }
 
+QUrl QmlUtils::issueTrackingUrl()
+{
+	return {QStringLiteral(ISSUE_TRACKING_URL)};
+}
+
 bool QmlUtils::isImageFile(const QUrl &fileUrl)
 {
 	QMimeType type = QMimeDatabase().mimeTypeForUrl(fileUrl);

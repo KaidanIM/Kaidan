@@ -49,6 +49,7 @@ using namespace Enums;
 class QmlUtils : public QObject
 {
 	Q_OBJECT
+	Q_PROPERTY(QUrl issueTrackingUrl READ issueTrackingUrl CONSTANT)
 
 public:
 	static QmlUtils *instance();
@@ -110,6 +111,11 @@ public:
 	{
 		return {QStringLiteral(APPLICATION_SOURCE_CODE_URL)};
 	}
+
+	/**
+	 * Returns the URL to view and report issues.
+	 */
+	static QUrl issueTrackingUrl();
 
 	/**
 	 * Returns an invitation URL to the given JID

@@ -81,7 +81,6 @@ Kirigami.ApplicationWindow {
 	Component {id: settingsPage; SettingsPage {}}
 	Component {id: qrCodeScannerPage; QrCodeScannerPage {}}
 	Component {id: userProfilePage; UserProfilePage {}}
-	Component {id: multimediaSettingsPage; MultimediaSettingsPage {}}
 
 	/**
 	 * Shows a passive notification for a long period.

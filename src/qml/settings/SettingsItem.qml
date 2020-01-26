@@ -37,27 +37,25 @@ Kirigami.BasicListItem {
 	property string name
 	property string description
 
-	reserveSpaceForIcon: false
+	reserveSpaceForIcon: icon
 
-	RowLayout {
-		ColumnLayout {
-			Kirigami.Heading {
-				text: name
-				textFormat: Text.PlainText
-				elide: Text.ElideRight
-				maximumLineCount: 1
-				level: 2
-				Layout.fillWidth: true
-				Layout.maximumHeight: Kirigami.Units.gridUnit * 1.5
-			}
+	ColumnLayout {
+		Layout.fillHeight: true
+		Kirigami.Heading {
+			text: name
+			textFormat: Text.PlainText
+			elide: Text.ElideRight
+			maximumLineCount: 1
+			level: 2
+			Layout.fillWidth: true
+			Layout.maximumHeight: Kirigami.Units.gridUnit * 1.5
+		}
 
-			Controls.Label {
-				Layout.fillWidth: true
-				text: description
-				wrapMode: Text.WordWrap
-				textFormat: Text.PlainText
-				font.pixelSize: 14
-			}
+		Controls.Label {
+			Layout.fillWidth: true
+			text: description
+			wrapMode: Text.WordWrap
+			textFormat: Text.PlainText
 		}
 	}
 }

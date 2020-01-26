@@ -10,7 +10,6 @@
 		<file>GlobalDrawer.qml</file>
 		<file>QrCodeScannerPage.qml</file>
 		<file>UserProfilePage.qml</file>
-		<file>MultimediaSettingsPage.qml</file>
 
 		<file>elements/SubRequestAcceptSheet.qml</file>
 		<file>elements/RosterAddContactSheet.qml</file>
@@ -55,5 +54,6 @@
 		<file>settings/SettingsPage.qml</file>
 		<file>settings/SettingsSheet.qml</file>
 		<file>settings/ChangePassword.qml</file>
+		<file>settings/MultimediaSettings.qml</file>
 	</qresource>
 </RCC>

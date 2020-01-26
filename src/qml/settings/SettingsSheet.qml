@@ -38,15 +38,15 @@ import org.kde.kirigami 2.8 as Kirigami
  * fill the complete width, so it looks a bit nicer on large screens.
  */
 Kirigami.OverlaySheet {
-	ColumnLayout {
-		Kirigami.Heading {
-			Layout.fillWidth: true
-			text: settingsPage.title
-		}
-
+	header: Kirigami.Heading {
+		text: settingsPage.title
+	}
+	contentItem: ColumnLayout {
 		SettingsPage {
 			Layout.preferredHeight: root.height * 0.9
-			Layout.maximumHeight: 500
+			Layout.preferredWidth: Layout.maximumWidth
+			Layout.maximumWidth: 600
+			Layout.maximumHeight: 600
 			id: settingsPage
 		}
 	}

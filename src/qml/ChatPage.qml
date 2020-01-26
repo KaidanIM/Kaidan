@@ -108,17 +108,6 @@ ChatPageBase {
 			onTriggered: pageStack.push(userProfilePage, {jid: kaidan.messageModel.chatPartner, name: chatName})
 		},
 		Kirigami.Action {
-			text: qsTr("Multimedia settings")
-
-			icon {
-				name: "settings-configure"
-			}
-
-			onTriggered: {
-				pageStack.push(multimediaSettingsPage, {jid: kaidan.messageModel.chatPartner, name: chatName})
-			}
-		},
-		Kirigami.Action {
 			readonly property int type: Enums.MessageType.MessageImage
 
 			text: MediaUtilsInstance.newMediaLabel(type)

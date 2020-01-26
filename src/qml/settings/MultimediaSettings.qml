@@ -46,30 +46,6 @@ Kirigami.Page {
 	bottomPadding: 0
 	leftPadding: 0
 
-	Timer {
-		id: pageTimer
-		interval: 10
-
-		onTriggered: {
-			if (!root.isCurrentPage) {
-				// Close the current page if it's not the current one after 10ms
-				pageStack.pop()
-			}
-
-			// Stop the timer regardless of whether the page was closed or not
-			pageTimer.stop()
-		}
-	}
-
-	onIsCurrentPageChanged: {
-		/*
-		 * Start the timer if we are getting or loosing focus.
-		 * Probably due to some kind of animation, isCurrentPage changes a few ms after
-		 * this has been triggered.
-		 */
-		pageTimer.start()
-	}
-
 	MediaRecorder {
 		id: recorder
 	}
@@ -637,6 +613,7 @@ Kirigami.Page {
 					} else if (button === standardButton(Controls.DialogButtonBox.Reset)) {
 						recorder.resetUserSettings()
 					} else if (button === standardButton(Controls.DialogButtonBox.Save)) {
+						stack.pop()
 						recorder.saveUserSettings()
 					}
 				}

@@ -55,17 +55,20 @@ Kirigami.Page {
 
 	Component {
 		id: settingsContent
-		ColumnLayout {
+		Column {
 			spacing: 0
 			SettingsItem {
-				Layout.alignment: Qt.AlignTop
 				name: qsTr("Change password")
 				description: qsTr("Changes your account's password. You will need to re-enter it on your other devices.")
-				onClicked: stack.push(changePassword)
+				onClicked: stack.push("ChangePassword.qml")
 				icon: "lock"
-				reserveSpaceForIcon: true
+			}
+			SettingsItem {
+				name: qsTr("Multimedia Settings")
+				description: qsTr("Configure photo, video and audio recording settings")
+				onClicked: stack.push("MultimediaSettings.qml")
+				icon: "settings-configure"
 			}
 		}
 	}
-	Component {id: changePassword; ChangePassword {}}
 }

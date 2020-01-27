@@ -69,7 +69,7 @@ Kirigami.GlobalDrawer {
 					else if (parent.connected)
 						jidAndStatus += qsTr("Online");
 					else
-						jidAndStatus += qsTr("Connecting...");
+						jidAndStatus += qsTr("Connecting…");
 
 					jidAndStatus += ")"
 

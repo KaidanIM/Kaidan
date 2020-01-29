@@ -779,10 +779,12 @@ void MediaRecorder::saveUserSettings()
 		settings.setValue(SETTING_DEFAULT_CAMERA_DEVICE_NAME, m_mediaSettings.camera.deviceName());
 		settings.endGroup();
 
-		settings.beginGroup(currentSettingsKey());
-		m_mediaSettings.saveSettings(&settings);
-		m_imageEncoderSettings.saveSettings(&settings);
-		settings.endGroup();
+		if (!m_mediaSettings.camera.isNull() || !m_mediaSettings.audioInputDevice.isNull()) {
+			settings.beginGroup(currentSettingsKey());
+			m_mediaSettings.saveSettings(&settings);
+			m_imageEncoderSettings.saveSettings(&settings);
+			settings.endGroup();
+		}
 		break;
 	}
 	case MediaRecorder::Type::Audio: {

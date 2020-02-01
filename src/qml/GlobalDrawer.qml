@@ -40,7 +40,7 @@ import "settings"
 Kirigami.GlobalDrawer {
 	id: globalDrawer
 	title: Utils.applicationDisplayName()
-	titleIcon: Utils.getResourcePath("images/kaidan.svg")
+	titleIcon: Utils.getResourcePath("images/Kaidan.svg")
 	bannerImageSource: Utils.getResourcePath("images/banner.png")
 
 	SettingsSheet {
@@ -52,17 +52,17 @@ Kirigami.GlobalDrawer {
 		RowLayout {
 			spacing: -4
 
-			property bool disconnected: kaidan.connectionState === Enums.StateDisconnected
-			property bool connected: kaidan.connectionState === Enums.StateConnected
+			property bool disconnected: Kaidan.connectionState === Enums.StateDisconnected
+			property bool connected: Kaidan.connectionState === Enums.StateConnected
 
 			Controls.Switch {
 				checked: !parent.disconnected
-				onClicked: parent.disconnected ? kaidan.mainConnect() : kaidan.mainDisconnect()
+				onClicked: parent.disconnected ? Kaidan.mainConnect() : Kaidan.mainDisconnect()
 			}
 
 			Text {
 				text: {
-					var jidAndStatus = kaidan.jid + " ("
+					var jidAndStatus = Kaidan.jid + " ("
 
 					if (parent.disconnected)
 						jidAndStatus += qsTr("Offline");
@@ -86,7 +86,7 @@ Kirigami.GlobalDrawer {
 			text: qsTr("Invite friends")
 			icon.name: "mail-invitation"
 			onTriggered: {
-				Utils.copyToClipboard(Utils.invitationUrl(kaidan.jid))
+				Utils.copyToClipboard(Utils.invitationUrl(Kaidan.jid))
 				passiveNotification(qsTr("Invitation link copied to clipboard"))
 			}
 		},
@@ -96,7 +96,7 @@ Kirigami.GlobalDrawer {
 			onTriggered: {
 				popLayersAboveLowest()
 				// disconnect (open log in page)
-				kaidan.mainDisconnect(true)
+				Kaidan.mainDisconnect(true)
 			}
 		},
 		Kirigami.Action {

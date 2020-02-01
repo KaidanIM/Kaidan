@@ -80,7 +80,7 @@ Kirigami.Page {
 		onScanningSucceeded: {
 			pageStack.layers.pop()
 			// login by the data from the decoded QR code
-			kaidan.loginByUri(result)
+			Kaidan.loginByUri(result)
 		}
 		onUnsupportedFormatReceived: {
 			pageStack.layers.pop()

@@ -377,8 +377,10 @@ Q_DECL_EXPORT int main(int argc, char *argv[])
 	qmlRegisterSingletonType<QmlUtils>(APPLICATION_ID, 1, 0, "Utils", [](QQmlEngine *, QJSEngine *) {
 		return static_cast<QObject*>(QmlUtils::instance());
 	});
+	qmlRegisterSingletonType<Kaidan>(APPLICATION_ID, 1, 0, "Kaidan", [](QQmlEngine *, QJSEngine *) {
+		return static_cast<QObject*>(Kaidan::instance());
+	});
 
-	engine.rootContext()->setContextProperty("kaidan", &kaidan);
 	engine.load(QUrl("qrc:/qml/main.qml"));
 	if (engine.rootObjects().isEmpty())
 		return -1;

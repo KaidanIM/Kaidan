@@ -47,8 +47,8 @@ Kirigami.Page {
 
 	property string jid
 	property string name
-	property int presenceType: kaidan.presenceCache.getPresenceType(jid)
-	property string statusMessage: kaidan.presenceCache.getStatusText(jid)
+	property int presenceType: Kaidan.presenceCache.getPresenceType(jid)
+	property string statusMessage: Kaidan.presenceCache.getStatusText(jid)
 
 	Timer {
 		id: pageTimer
@@ -124,7 +124,7 @@ Kirigami.Page {
 					Layout.preferredHeight: Kirigami.Units.gridUnit * 10
 					Layout.preferredWidth: Kirigami.Units.gridUnit * 10
 					name: root.name
-					avatarUrl: kaidan.avatarStorage.getAvatarUrl(jid)
+					avatarUrl: Kaidan.avatarStorage.getAvatarUrl(jid)
 				}
 
 				ColumnLayout {
@@ -201,15 +201,15 @@ Kirigami.Page {
 
 	function newPresenceArrived(jid) {
 		if (jid === root.jid) {
-			presenceType = kaidan.presenceCache.getPresenceType(root.jid);
-			statusMessage = kaidan.presenceCache.getStatusText(root.jid);
+			presenceType = Kaidan.presenceCache.getPresenceType(root.jid);
+			statusMessage = Kaidan.presenceCache.getStatusText(root.jid);
 		}
 	}
 
 	Component.onCompleted: {
-		kaidan.presenceCache.presenceChanged.connect(newPresenceArrived);
+		Kaidan.presenceCache.presenceChanged.connect(newPresenceArrived);
 	}
 	Component.onDestruction: {
-		kaidan.presenceCache.presenceChanged.disconnect(newPresenceArrived);
+		Kaidan.presenceCache.presenceChanged.disconnect(newPresenceArrived);
 	}
 }

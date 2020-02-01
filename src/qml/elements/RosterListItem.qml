@@ -103,7 +103,7 @@ Kirigami.SwipeListItem {
 					source: "audio-volume-muted-symbolic"
 					width: 16
 					height: 16
-					visible: kaidan.notificationsMuted(jid)
+					visible: Kaidan.notificationsMuted(jid)
 				}
 				Item {
 					Layout.fillWidth: true
@@ -133,7 +133,7 @@ Kirigami.SwipeListItem {
 			id: counter
 			visible: unreadMessages > 0
 			counter: unreadMessages
-			muted: kaidan.notificationsMuted(jid)
+			muted: Kaidan.notificationsMuted(jid)
 
 			Layout.preferredHeight: Kirigami.Units.gridUnit * 1.25
 			Layout.preferredWidth: Kirigami.Units.gridUnit * 1.25
@@ -141,14 +141,14 @@ Kirigami.SwipeListItem {
 	}
 
 	function handleNotificationsMuted(mutedContact) {
-		counter.muted = kaidan.notificationsMuted(jid)
-		muteIcon.visible = kaidan.notificationsMuted(jid)
+		counter.muted = Kaidan.notificationsMuted(jid)
+		muteIcon.visible = Kaidan.notificationsMuted(jid)
 	}
 
 	Component.onCompleted: {
-		kaidan.notificationsMutedChanged.connect(handleNotificationsMuted)
+		Kaidan.notificationsMutedChanged.connect(handleNotificationsMuted)
 	}
 	Component.onDestruction: {
-		kaidan.notificationsMutedChanged.disconnect(handleNotificationsMuted)
+		Kaidan.notificationsMutedChanged.disconnect(handleNotificationsMuted)
 	}
 }

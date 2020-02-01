@@ -70,7 +70,7 @@ Kirigami.ApplicationWindow {
 
 	// when the window was closed, disconnect from jabber server
 	onClosing: {
-		kaidan.mainDisconnect()
+		Kaidan.mainDisconnect()
 	}
 
 	// load all pages
@@ -90,7 +90,7 @@ Kirigami.ApplicationWindow {
 	}
 
 	function showPassiveNotificationForConnectionError() {
-		passiveNotification(Utils.connectionErrorMessage(kaidan.connectionError))
+		passiveNotification(Utils.connectionErrorMessage(Kaidan.connectionError))
 	}
 
 	function openLoginPage() {
@@ -131,7 +131,7 @@ Kirigami.ApplicationWindow {
 	}
 
 	function handleSubRequest(from, message) {
-		kaidan.vCardRequested(from)
+		Kaidan.vCardRequested(from)
 
 		subReqAcceptSheet.from = from
 		subReqAcceptSheet.message = message
@@ -140,21 +140,21 @@ Kirigami.ApplicationWindow {
 	}
 
 	Component.onCompleted: {
-		kaidan.passiveNotificationRequested.connect(passiveNotification)
-		kaidan.newCredentialsNeeded.connect(openLoginPage)
-		kaidan.logInWorked.connect(openChatView)
-		kaidan.subscriptionRequestReceived.connect(handleSubRequest)
+		Kaidan.passiveNotificationRequested.connect(passiveNotification)
+		Kaidan.newCredentialsNeeded.connect(openLoginPage)
+		Kaidan.logInWorked.connect(openChatView)
+		Kaidan.subscriptionRequestReceived.connect(handleSubRequest)
 
 		openChatView()
 
 		// Announce that the user interface is ready and the application can start connecting.
-		kaidan.start()
+		Kaidan.start()
 	}
 
 	Component.onDestruction: {
-		kaidan.passiveNotificationRequested.disconnect(passiveNotification)
-		kaidan.newCredentialsNeeded.disconnect(openLoginPage)
-		kaidan.logInWorked.disconnect(openChatView)
-		kaidan.subscriptionRequestReceived.disconnect(handleSubRequest)
+		Kaidan.passiveNotificationRequested.disconnect(passiveNotification)
+		Kaidan.newCredentialsNeeded.disconnect(openLoginPage)
+		Kaidan.logInWorked.disconnect(openChatView)
+		Kaidan.subscriptionRequestReceived.disconnect(handleSubRequest)
 	}
 }

@@ -100,7 +100,7 @@ Kirigami.Page {
 		}
 
 		Kirigami.InlineMessage {
-			visible: kaidan.connectionState !== Enums.StateConnected
+			visible: Kaidan.connectionState !== Enums.StateConnected
 			type: Kirigami.MessageType.Error
 			text: qsTr("You need to be connected to change your password.")
 			anchors.left: parent.left
@@ -130,15 +130,15 @@ Kirigami.Page {
 				Layout.fillWidth: true
 				enabled: {
 					password1.text === password2.text && password1.text !== ""
-							&& kaidan.connectionState === Enums.StateConnected
+							&& Kaidan.connectionState === Enums.StateConnected
 				}
 				onClicked: {
-					if (oldPassword.text !== kaidan.password) {
+					if (oldPassword.text !== Kaidan.password) {
 						currentPasswordInvalidMessage.visible = true
 						return
 					}
 
-					kaidan.changePassword(password1.text)
+					Kaidan.changePassword(password1.text)
 					content.visible = false
 					busyIndicator.visible = true
 				}
@@ -152,11 +152,11 @@ Kirigami.Page {
 	}
 
 	Component.onCompleted: {
-		kaidan.passwordChangeSucceeded.connect(handleChangeResult)
-		kaidan.passwordChangeFailed.connect(handleChangeResult)
+		Kaidan.passwordChangeSucceeded.connect(handleChangeResult)
+		Kaidan.passwordChangeFailed.connect(handleChangeResult)
 	}
 	Component.onDestruction: {
-		kaidan.passwordChangeSucceeded.disconnect(handleChangeResult)
-		kaidan.passwordChangeFailed.disconnect(handleChangeResult)
+		Kaidan.passwordChangeSucceeded.disconnect(handleChangeResult)
+		Kaidan.passwordChangeFailed.disconnect(handleChangeResult)
 	}
 }

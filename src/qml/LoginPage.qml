@@ -92,7 +92,7 @@ Kirigami.Page {
 				id: connectButton
 				label.text: qsTr("Connect")
 
-				state: kaidan.connectionState !== Enums.StateDisconnected ? "connecting" : ""
+				state: Kaidan.connectionState !== Enums.StateDisconnected ? "connecting" : ""
 				states: [
 					State {
 						name: "connecting"
@@ -116,9 +116,9 @@ Kirigami.Page {
 					} else if (!passwordField.valid) {
 						passwordField.forceFocus()
 					} else {
-						kaidan.jid = jidField.text
-						kaidan.password = passwordField.text
-						kaidan.mainConnect()
+						Kaidan.jid = jidField.text
+						Kaidan.password = passwordField.text
+						Kaidan.mainConnect()
 					}
 				}
 			}
@@ -135,7 +135,7 @@ Kirigami.Page {
 	}
 
 	Connections {
-		target: kaidan
+		target: Kaidan
 
 		onConnectionErrorChanged: showPassiveNotificationForConnectionError()
 	}

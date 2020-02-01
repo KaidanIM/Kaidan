@@ -69,43 +69,43 @@ ChatPageBase {
 		Kirigami.Action {
 			visible: true
 			icon.name: {
-				kaidan.notificationsMuted(kaidan.messageModel.chatPartner)
+				Kaidan.notificationsMuted(Kaidan.messageModel.chatPartner)
 					? "player-volume"
 					: "audio-volume-muted-symbolic"
 			}
 			text: {
-				kaidan.notificationsMuted(kaidan.messageModel.chatPartner)
+				Kaidan.notificationsMuted(Kaidan.messageModel.chatPartner)
 					? qsTr("Unmute notifications")
 					: qsTr("Mute notifications")
 			}
 			onTriggered: {
-				kaidan.setNotificationsMuted(
-					kaidan.messageModel.chatPartner,
-					!kaidan.notificationsMuted(kaidan.messageModel.chatPartner)
+				Kaidan.setNotificationsMuted(
+					Kaidan.messageModel.chatPartner,
+					!Kaidan.notificationsMuted(Kaidan.messageModel.chatPartner)
 				)
 			}
 
 			function handleNotificationsMuted(jid) {
-				text = kaidan.notificationsMuted(kaidan.messageModel.chatPartner)
+				text = Kaidan.notificationsMuted(Kaidan.messageModel.chatPartner)
 						? qsTr("Unmute notifications")
 						: qsTr("Mute notifications")
-				icon.name = kaidan.notificationsMuted(kaidan.messageModel.chatPartner)
+				icon.name = Kaidan.notificationsMuted(Kaidan.messageModel.chatPartner)
 							? "player-volume"
 							: "audio-volume-muted-symbolic"
 			}
 
 			Component.onCompleted: {
-				kaidan.notificationsMutedChanged.connect(handleNotificationsMuted)
+				Kaidan.notificationsMutedChanged.connect(handleNotificationsMuted)
 			}
 			Component.onDestruction: {
-				kaidan.notificationsMutedChanged.disconnect(handleNotificationsMuted)
+				Kaidan.notificationsMutedChanged.disconnect(handleNotificationsMuted)
 			}
 		},
 		Kirigami.Action {
 			visible: true
 			icon.name: "user-identity"
 			text: qsTr("View profile")
-			onTriggered: pageStack.push(userProfilePage, {jid: kaidan.messageModel.chatPartner, name: chatName})
+			onTriggered: pageStack.push(userProfilePage, {jid: Kaidan.messageModel.chatPartner, name: chatName})
 		},
 		Kirigami.Action {
 			readonly property int type: Enums.MessageType.MessageImage
@@ -118,7 +118,7 @@ ChatPageBase {
 			}
 
 			onTriggered: {
-				sendMediaSheet.sendNewMessageType(kaidan.messageModel.chatPartner, type)
+				sendMediaSheet.sendNewMessageType(Kaidan.messageModel.chatPartner, type)
 			}
 		},
 		Kirigami.Action {
@@ -131,7 +131,7 @@ ChatPageBase {
 			}
 
 			onTriggered: {
-				sendMediaSheet.sendNewMessageType(kaidan.messageModel.chatPartner, type)
+				sendMediaSheet.sendNewMessageType(Kaidan.messageModel.chatPartner, type)
 			}
 		},
 		Kirigami.Action {
@@ -145,7 +145,7 @@ ChatPageBase {
 			}
 
 			onTriggered: {
-				sendMediaSheet.sendNewMessageType(kaidan.messageModel.chatPartner, type)
+				sendMediaSheet.sendNewMessageType(Kaidan.messageModel.chatPartner, type)
 			}
 		},
 		Kirigami.Action {
@@ -158,7 +158,7 @@ ChatPageBase {
 			}
 
 			onTriggered: {
-				sendMediaSheet.sendNewMessageType(kaidan.messageModel.chatPartner, type)
+				sendMediaSheet.sendNewMessageType(Kaidan.messageModel.chatPartner, type)
 			}
 		},
 		Kirigami.Action {
@@ -205,16 +205,16 @@ ChatPageBase {
 			if (searchBar.active && searchField.text.length > 0) {
 				if (searchUpwards) {
 					if (startIndex === 0) {
-						newIndex = kaidan.messageModel.searchForMessageFromNewToOld(searchField.text)
+						newIndex = Kaidan.messageModel.searchForMessageFromNewToOld(searchField.text)
 					} else {
-						newIndex = kaidan.messageModel.searchForMessageFromNewToOld(searchField.text, startIndex)
+						newIndex = Kaidan.messageModel.searchForMessageFromNewToOld(searchField.text, startIndex)
 						if (newIndex === -1)
-							newIndex = kaidan.messageModel.searchForMessageFromNewToOld(searchField.text, 0)
+							newIndex = Kaidan.messageModel.searchForMessageFromNewToOld(searchField.text, 0)
 					}
 				} else {
-					newIndex = kaidan.messageModel.searchForMessageFromOldToNew(searchField.text, startIndex)
+					newIndex = Kaidan.messageModel.searchForMessageFromOldToNew(searchField.text, startIndex)
 					if (newIndex === -1)
-						newIndex = kaidan.messageModel.searchForMessageFromOldToNew(searchField.text)
+						newIndex = Kaidan.messageModel.searchForMessageFromOldToNew(searchField.text)
 				}
 			}
 			messageListView.currentIndex = newIndex
@@ -318,7 +318,7 @@ ChatPageBase {
 	FileChooser {
 		id: fileChooser
 		title: qsTr("Select a file")
-		onAccepted: sendMediaSheet.sendFile(kaidan.messageModel.chatPartner, fileUrl)
+		onAccepted: sendMediaSheet.sendFile(Kaidan.messageModel.chatPartner, fileUrl)
 	}
 
 	function openFileDialog(filterName, filter, title) {
@@ -419,7 +419,7 @@ ChatPageBase {
 		currentIndex: -1
 
 		// Connect to the database,
-		model: kaidan.messageModel
+		model: Kaidan.messageModel
 
 		delegate: ChatMessage {
 			msgId: model.id
@@ -481,7 +481,7 @@ ChatPageBase {
 
 			Controls.ToolButton {
 				id: attachButton
-				visible: kaidan.uploadServiceFound
+				visible: Kaidan.uploadServiceFound
 				Layout.preferredWidth: Kirigami.Units.gridUnit * 3
 				Layout.preferredHeight: Kirigami.Units.gridUnit * 3
 				padding: 0
@@ -632,15 +632,15 @@ ChatPageBase {
 
 					// send the message
 					if (messageField.state == "compose") {
-						kaidan.sendMessage(
-							kaidan.messageModel.chatPartner,
+						Kaidan.sendMessage(
+							Kaidan.messageModel.chatPartner,
 							messageField.text,
 							isWritingSpoiler,
 							spoilerHintField.text
 						)
 					} else if (messageField.state == "edit") {
-						kaidan.correctMessage(
-							kaidan.messageModel.chatPartner,
+						Kaidan.correctMessage(
+							Kaidan.messageModel.chatPartner,
 							messageToCorrect,
 							messageField.text
 						)

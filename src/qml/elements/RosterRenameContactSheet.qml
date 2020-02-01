@@ -67,7 +67,7 @@ Kirigami.OverlaySheet {
 				id: addButton
 				text: qsTr("Rename")
 				onClicked: {
-					kaidan.renameContact(jid, nickField.text);
+					Kaidan.renameContact(jid, nickField.text);
 					close();
 				}
 				Layout.fillWidth: true

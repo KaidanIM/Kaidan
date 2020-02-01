@@ -50,11 +50,11 @@ RowLayout {
 	property string mediaGetUrl
 	property string mediaLocation
 	property bool edited
-	property bool isLoading: kaidan.transferCache.hasUpload(msgId)
+	property bool isLoading: Kaidan.transferCache.hasUpload(msgId)
 	property string name
 	property TransferJob upload: {
 		if (mediaType !== Enums.MessageType.MessageText && isLoading) {
-			return kaidan.transferCache.jobByMessageId(model.id)
+			return Kaidan.transferCache.jobByMessageId(model.id)
 		}
 
 		return null
@@ -62,7 +62,7 @@ RowLayout {
 	property bool isSpoiler
 	property string spoilerHint
 	property bool isShowingSpoiler: false
-	property string avatarUrl: kaidan.avatarStorage.getAvatarUrl(sender)
+	property string avatarUrl: Kaidan.avatarStorage.getAvatarUrl(sender)
 
 	signal messageEditRequested(string id, string body)
 	signal quoteRequested(string body)
@@ -135,7 +135,7 @@ RowLayout {
 
 				Controls.MenuItem {
 					text: qsTr("Edit Message")
-					enabled: kaidan.messageModel.canCorrectMessage(msgId)
+					enabled: Kaidan.messageModel.canCorrectMessage(msgId)
 					onTriggered: root.messageEditRequested(msgId, messageBody)
 				}
 
@@ -224,7 +224,7 @@ RowLayout {
 					text: qsTr("Download")
 					onClicked: {
 						print("Downloading " + mediaGetUrl + "...")
-						kaidan.downloadMedia(msgId, mediaGetUrl)
+						Kaidan.downloadMedia(msgId, mediaGetUrl)
 					}
 				}
 
@@ -325,13 +325,13 @@ RowLayout {
 	}
 
 	function updateIsLoading() {
-		isLoading = kaidan.transferCache.hasUpload(msgId)
+		isLoading = Kaidan.transferCache.hasUpload(msgId)
 	}
 
 	Component.onCompleted: {
-		kaidan.transferCache.jobsChanged.connect(updateIsLoading)
+		Kaidan.transferCache.jobsChanged.connect(updateIsLoading)
 	}
 	Component.onDestruction: {
-		kaidan.transferCache.jobsChanged.disconnect(updateIsLoading)
+		Kaidan.transferCache.jobsChanged.disconnect(updateIsLoading)
 	}
 }

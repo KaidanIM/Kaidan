@@ -37,8 +37,8 @@ import "elements"
 
 Kirigami.ScrollablePage {
 	title: {
-		kaidan.connectionState === Enums.StateConnecting ? qsTr("Connecting…") :
-		kaidan.connectionState === Enums.StateDisconnected ? qsTr("Offline") :
+		Kaidan.connectionState === Enums.StateConnecting ? qsTr("Connecting…") :
+		Kaidan.connectionState === Enums.StateDisconnected ? qsTr("Offline") :
 		qsTr("Contacts")
 	}
 	leftPadding: 0
@@ -93,7 +93,7 @@ Kirigami.ScrollablePage {
 		verticalLayoutDirection: ListView.TopToBottom
 		model: RosterFilterProxyModel {
 			id: filterModel
-			sourceModel: kaidan.rosterModel
+			sourceModel: Kaidan.rosterModel
 		}
 		delegate: RosterListItem {
 			id: rosterItem
@@ -101,13 +101,13 @@ Kirigami.ScrollablePage {
 			name: model.name ? model.name : model.jid
 			jid: model.jid
 			lastMessage: model.lastMessage
-			presenceType: kaidan.presenceCache.getPresenceType(model.jid)
-			statusMsg: kaidan.presenceCache.getStatusText(model.jid)
+			presenceType: Kaidan.presenceCache.getPresenceType(model.jid)
+			statusMsg: Kaidan.presenceCache.getStatusText(model.jid)
 			unreadMessages: model.unreadMessages
-			avatarImagePath: kaidan.avatarStorage.getAvatarUrl(model.jid)
+			avatarImagePath: Kaidan.avatarStorage.getAvatarUrl(model.jid)
 			backgroundColor: {
 				if (!Kirigami.Settings.isMobile &&
-						kaidan.messageModel.chatPartner === model.jid) {
+						Kaidan.messageModel.chatPartner === model.jid) {
 					Kirigami.Theme.highlightColor
 				} else {
 					Kirigami.Theme.backgroundColor
@@ -120,7 +120,7 @@ Kirigami.ScrollablePage {
 				// will then remove this item and readd an updated version of it, so
 				// model.* won't work anymore after this.
 				var chatName = model.name ? model.name : model.jid
-				kaidan.messageModel.chatPartner = model.jid
+				Kaidan.messageModel.chatPartner = model.jid
 				pageStack.push(chatPage, {
 					"chatName": chatName
 				})
@@ -128,8 +128,8 @@ Kirigami.ScrollablePage {
 
 			function newPresenceArrived(jid) {
 				if (jid === model.jid) {
-					rosterItem.presenceType = kaidan.presenceCache.getPresenceType(model.jid)
-					rosterItem.statusMsg = kaidan.presenceCache.getStatusText(model.jid)
+					rosterItem.presenceType = Kaidan.presenceCache.getPresenceType(model.jid)
+					rosterItem.statusMsg = Kaidan.presenceCache.getStatusText(model.jid)
 				}
 			}
 
@@ -140,12 +140,12 @@ Kirigami.ScrollablePage {
 			}
 
 			Component.onCompleted: {
-				kaidan.presenceCache.presenceChanged.connect(newPresenceArrived)
-				kaidan.xmppUriReceived.connect(xmppUriReceived)
+				Kaidan.presenceCache.presenceChanged.connect(newPresenceArrived)
+				Kaidan.xmppUriReceived.connect(xmppUriReceived)
 			}
 			Component.onDestruction: {
-				kaidan.presenceCache.presenceChanged.disconnect(newPresenceArrived)
-				kaidan.xmppUriReceived.disconnect(xmppUriReceived)
+				Kaidan.presenceCache.presenceChanged.disconnect(newPresenceArrived)
+				Kaidan.xmppUriReceived.disconnect(xmppUriReceived)
 			}
 		}
 	}

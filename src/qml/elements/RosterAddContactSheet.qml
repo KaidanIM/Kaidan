@@ -109,7 +109,7 @@ Kirigami.OverlaySheet {
 					jidField.text.slice(-1) !== "@" // last character is no '@'
 				}
 				onClicked: {
-					kaidan.addContact(jidField.text.toLowerCase(),
+					Kaidan.addContact(jidField.text.toLowerCase(),
 					                  nickField.text, msgField.text)
 					clearInput()
 					close()

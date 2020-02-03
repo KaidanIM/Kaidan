@@ -111,6 +111,10 @@
         <source>Copy download URL</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Quote</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>ChatPage</name>
@@ -164,10 +168,6 @@
     </message>
     <message>
         <source>View profile</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Multimedia settings</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -357,6 +357,18 @@
         <source>Settings</source>
         <translation>Innstillinger</translation>
     </message>
+    <message>
+        <source>Offline</source>
+        <translation type="unfinished">Frakoblet</translation>
+    </message>
+    <message>
+        <source>Online</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Connecting…</source>
+        <translation type="unfinished">Kobler til…</translation>
+    </message>
 </context>
 <context>
     <name>Kaidan</name>
@@ -402,7 +414,7 @@
     </message>
     <message>
         <source>Your Jabber-ID:</source>
-        <translation>Din Jabber-ID:</translation>
+        <translation type="vanished">Din Jabber-ID:</translation>
     </message>
     <message>
         <source>Your diaspora*-ID:</source>
@@ -410,7 +422,7 @@
     </message>
     <message>
         <source>user@example.org</source>
-        <translation>bruker@eksempel.no</translation>
+        <translation type="vanished">bruker@eksempel.no</translation>
     </message>
     <message>
         <source>user@diaspora.pod</source>
@@ -418,7 +430,7 @@
     </message>
     <message>
         <source>Your Password:</source>
-        <translation>Ditt passord:</translation>
+        <translation type="vanished">Ditt passord:</translation>
     </message>
     <message>
         <source>Retry</source>
@@ -434,35 +446,35 @@
     </message>
     <message>
         <source>Invalid username or password.</source>
-        <translation>Ugyldig brukernavn eller passord.</translation>
+        <translation type="vanished">Ugyldig brukernavn eller passord.</translation>
     </message>
     <message>
         <source>Cannot connect to the server. Please check your internet connection.</source>
-        <translation>Kan ikke koble til tjeneren. Sjekk din internettilknytning.</translation>
+        <translation type="vanished">Kan ikke koble til tjeneren. Sjekk din internettilknytning.</translation>
     </message>
     <message>
         <source>The server doesn&apos;t support secure connections.</source>
-        <translation>Tjeneren støtter ikke sikre tilkoblinger.</translation>
+        <translation type="vanished">Tjeneren støtter ikke sikre tilkoblinger.</translation>
     </message>
     <message>
         <source>Error while trying to connect securely.</source>
-        <translation>Feil under forsøk på sikker tilkobling.</translation>
+        <translation type="vanished">Feil under forsøk på sikker tilkobling.</translation>
     </message>
     <message>
         <source>Could not resolve the server&apos;s address. Please check your JID again.</source>
-        <translation>Kunne ikke fortolke tjenerens adresse. Sjekk din JID igjen.</translation>
+        <translation type="vanished">Kunne ikke fortolke tjenerens adresse. Sjekk din JID igjen.</translation>
     </message>
     <message>
         <source>Could not connect to the server.</source>
-        <translation>Kunne ikke koble til tjeneren.</translation>
+        <translation type="vanished">Kunne ikke koble til tjeneren.</translation>
     </message>
     <message>
         <source>Authentification protocol not supported by the server.</source>
-        <translation>Identitetsbekreftelsesprotokollen støttes ikke av tjeneren.</translation>
+        <translation type="vanished">Identitetsbekreftelsesprotokollen støttes ikke av tjeneren.</translation>
     </message>
     <message>
         <source>An unknown error occured; see log for details.</source>
-        <translation>En ukjent feil inntraff; sjekk loggen for detaljer.</translation>
+        <translation type="vanished">En ukjent feil inntraff; sjekk loggen for detaljer.</translation>
     </message>
     <message>
         <source>Log in using a QR-Code</source>
@@ -563,7 +575,7 @@
     </message>
 </context>
 <context>
-    <name>MultimediaSettingsPage</name>
+    <name>MultimediaSettings</name>
     <message>
         <source>Multimedia Settings</source>
         <translation type="unfinished"></translation>
@@ -650,6 +662,21 @@
     </message>
 </context>
 <context>
+    <name>MultimediaSettingsPage</name>
+    <message>
+        <source>Image</source>
+        <translation type="obsolete">Bilde</translation>
+    </message>
+    <message>
+        <source>Audio</source>
+        <translation type="obsolete">Lyd</translation>
+    </message>
+    <message>
+        <source>Video</source>
+        <translation type="obsolete">Video</translation>
+    </message>
+</context>
+<context>
     <name>NewMedia</name>
     <message>
         <source>Ready</source>
@@ -704,6 +731,42 @@
     </message>
     <message>
         <source>Invisible</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Invalid username or password.</source>
+        <translation type="unfinished">Ugyldig brukernavn eller passord.</translation>
+    </message>
+    <message>
+        <source>Cannot connect to the server. Please check your internet connection.</source>
+        <translation type="unfinished">Kan ikke koble til tjeneren. Sjekk din internettilknytning.</translation>
+    </message>
+    <message>
+        <source>The server doesn&apos;t support secure connections.</source>
+        <translation type="unfinished">Tjeneren støtter ikke sikre tilkoblinger.</translation>
+    </message>
+    <message>
+        <source>Error while trying to connect securely.</source>
+        <translation type="unfinished">Feil under forsøk på sikker tilkobling.</translation>
+    </message>
+    <message>
+        <source>Could not resolve the server&apos;s address. Please check your server name.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Could not connect to the server.</source>
+        <translation type="unfinished">Kunne ikke koble til tjeneren.</translation>
+    </message>
+    <message>
+        <source>Authentification protocol not supported by the server.</source>
+        <translation type="unfinished">Identitetsbekreftelsesprotokollen støttes ikke av tjeneren.</translation>
+    </message>
+    <message>
+        <source>This server does not support registration.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>An unknown error occured.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -932,6 +995,14 @@ Try to close other applications using the camera.</source>
     <message>
         <source>Changes your account&apos;s password. You will need to re-enter it on your other devices.</source>
         <translation>Endrer passord på kontoen din. Du vil måtte skrive det inn igjen på dine andre enheter.</translation>
+    </message>
+    <message>
+        <source>Multimedia Settings</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Configure photo, video and audio recording settings</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

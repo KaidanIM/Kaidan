@@ -81,6 +81,10 @@
         <source>Copy download URL</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Quote</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>ChatPage</name>
@@ -130,10 +134,6 @@
     </message>
     <message>
         <source>View profile</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Multimedia settings</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -301,6 +301,18 @@
         <source>Settings</source>
         <translation>Einstellungen</translation>
     </message>
+    <message>
+        <source>Offline</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Online</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Connecting…</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>Kaidan</name>
@@ -330,15 +342,11 @@
     </message>
     <message>
         <source>Your Jabber-ID:</source>
-        <translation>Deine Jabber-ID:</translation>
-    </message>
-    <message>
-        <source>user@example.org</source>
-        <translation></translation>
+        <translation type="vanished">Deine Jabber-ID:</translation>
     </message>
     <message>
         <source>Your Password:</source>
-        <translation>Dein Passwort:</translation>
+        <translation type="vanished">Dein Passwort:</translation>
     </message>
     <message>
         <source>Connecting…</source>
@@ -350,35 +358,35 @@
     </message>
     <message>
         <source>Invalid username or password.</source>
-        <translation>Falsche Zugangsdaten.</translation>
+        <translation type="vanished">Falsche Zugangsdaten.</translation>
     </message>
     <message>
         <source>Cannot connect to the server. Please check your internet connection.</source>
-        <translation>Server nicht erreichbar. Überprüfen sie ihrer Internetverbindung.</translation>
+        <translation type="vanished">Server nicht erreichbar. Überprüfen sie ihrer Internetverbindung.</translation>
     </message>
     <message>
         <source>The server doesn&apos;t support secure connections.</source>
-        <translation>Dieser Server unterstützt keine sicheren Verbindungen.</translation>
+        <translation type="vanished">Dieser Server unterstützt keine sicheren Verbindungen.</translation>
     </message>
     <message>
         <source>Error while trying to connect securely.</source>
-        <translation>Fehler bei der Herstellung einer sicheren Verbindung.</translation>
+        <translation type="vanished">Fehler bei der Herstellung einer sicheren Verbindung.</translation>
     </message>
     <message>
         <source>Could not resolve the server&apos;s address. Please check your JID again.</source>
-        <translation>Konnte den Servernamen nicht auflösen. Bitte überprüfen sie Ihre Jabber-ID.</translation>
+        <translation type="vanished">Konnte den Servernamen nicht auflösen. Bitte überprüfen sie Ihre Jabber-ID.</translation>
     </message>
     <message>
         <source>Could not connect to the server.</source>
-        <translation>Konnte nicht mit dem Server verbinden.</translation>
+        <translation type="vanished">Konnte nicht mit dem Server verbinden.</translation>
     </message>
     <message>
         <source>Authentification protocol not supported by the server.</source>
-        <translation>Authentifizierungsprotokolle nicht vom Server unterstützt.</translation>
+        <translation type="vanished">Authentifizierungsprotokolle nicht vom Server unterstützt.</translation>
     </message>
     <message>
         <source>An unknown error occured; see log for details.</source>
-        <translation>Ein unbekannter Fehler ist aufgetreten: Sehen Sie die Logdatei für mehr Details ein.</translation>
+        <translation type="vanished">Ein unbekannter Fehler ist aufgetreten: Sehen Sie die Logdatei für mehr Details ein.</translation>
     </message>
     <message>
         <source>Log in using a QR-Code</source>
@@ -479,7 +487,7 @@
     </message>
 </context>
 <context>
-    <name>MultimediaSettingsPage</name>
+    <name>MultimediaSettings</name>
     <message>
         <source>Multimedia Settings</source>
         <translation type="unfinished"></translation>
@@ -566,6 +574,21 @@
     </message>
 </context>
 <context>
+    <name>MultimediaSettingsPage</name>
+    <message>
+        <source>Image</source>
+        <translation type="obsolete">Bild</translation>
+    </message>
+    <message>
+        <source>Audio</source>
+        <translation type="obsolete">Audio</translation>
+    </message>
+    <message>
+        <source>Video</source>
+        <translation type="obsolete">Video</translation>
+    </message>
+</context>
+<context>
     <name>NewMedia</name>
     <message>
         <source>Ready</source>
@@ -620,6 +643,42 @@
     </message>
     <message>
         <source>Invisible</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Invalid username or password.</source>
+        <translation type="unfinished">Falsche Zugangsdaten.</translation>
+    </message>
+    <message>
+        <source>Cannot connect to the server. Please check your internet connection.</source>
+        <translation type="unfinished">Server nicht erreichbar. Überprüfen sie ihrer Internetverbindung.</translation>
+    </message>
+    <message>
+        <source>The server doesn&apos;t support secure connections.</source>
+        <translation type="unfinished">Dieser Server unterstützt keine sicheren Verbindungen.</translation>
+    </message>
+    <message>
+        <source>Error while trying to connect securely.</source>
+        <translation type="unfinished">Fehler bei der Herstellung einer sicheren Verbindung.</translation>
+    </message>
+    <message>
+        <source>Could not resolve the server&apos;s address. Please check your server name.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Could not connect to the server.</source>
+        <translation type="unfinished">Konnte nicht mit dem Server verbinden.</translation>
+    </message>
+    <message>
+        <source>Authentification protocol not supported by the server.</source>
+        <translation type="unfinished">Authentifizierungsprotokolle nicht vom Server unterstützt.</translation>
+    </message>
+    <message>
+        <source>This server does not support registration.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>An unknown error occured.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -807,6 +866,14 @@ Try to close other applications using the camera.</source>
     </message>
     <message>
         <source>Changes your account&apos;s password. You will need to re-enter it on your other devices.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Multimedia Settings</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Configure photo, video and audio recording settings</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

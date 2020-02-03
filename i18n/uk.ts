@@ -81,6 +81,10 @@
         <source>Copy download URL</source>
         <translation>Копіювати адресу даних</translation>
     </message>
+    <message>
+        <source>Quote</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>ChatPage</name>
@@ -134,7 +138,7 @@
     </message>
     <message>
         <source>Multimedia settings</source>
-        <translation>Параметри мультимедійних даних</translation>
+        <translation type="vanished">Параметри мультимедійних даних</translation>
     </message>
     <message>
         <source>Search</source>
@@ -301,6 +305,18 @@
         <source>Settings</source>
         <translation>Параметри</translation>
     </message>
+    <message>
+        <source>Offline</source>
+        <translation type="unfinished">Поза мережею</translation>
+    </message>
+    <message>
+        <source>Online</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Connecting…</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>Kaidan</name>
@@ -330,15 +346,15 @@
     </message>
     <message>
         <source>Your Jabber-ID:</source>
-        <translation>Ваш ідентифікатор Jabber:</translation>
+        <translation type="vanished">Ваш ідентифікатор Jabber:</translation>
     </message>
     <message>
         <source>user@example.org</source>
-        <translation>користувач@example.org</translation>
+        <translation type="vanished">користувач@example.org</translation>
     </message>
     <message>
         <source>Your Password:</source>
-        <translation>Ваш пароль:</translation>
+        <translation type="vanished">Ваш пароль:</translation>
     </message>
     <message>
         <source>Connecting…</source>
@@ -350,35 +366,35 @@
     </message>
     <message>
         <source>Invalid username or password.</source>
-        <translation>Некоректне ім’я користувача або пароль.</translation>
+        <translation type="vanished">Некоректне ім’я користувача або пароль.</translation>
     </message>
     <message>
         <source>Cannot connect to the server. Please check your internet connection.</source>
-        <translation>Не вдалося встановити з&apos;єднання із сервером. Будь ласка, перевірте, чи маєте ви з&apos;єднання із інтернетом.</translation>
+        <translation type="vanished">Не вдалося встановити з&apos;єднання із сервером. Будь ласка, перевірте, чи маєте ви з&apos;єднання із інтернетом.</translation>
     </message>
     <message>
         <source>The server doesn&apos;t support secure connections.</source>
-        <translation>На сервері не передбачено можливості захищених з&apos;єднань.</translation>
+        <translation type="vanished">На сервері не передбачено можливості захищених з&apos;єднань.</translation>
     </message>
     <message>
         <source>Error while trying to connect securely.</source>
-        <translation>Помилка під час спроби встановлення захищеного з&apos;єднання.</translation>
+        <translation type="vanished">Помилка під час спроби встановлення захищеного з&apos;єднання.</translation>
     </message>
     <message>
         <source>Could not resolve the server&apos;s address. Please check your JID again.</source>
-        <translation>Не вдалося визначити адресу сервера. Будь ласка, перевірте, чи правильно вказано ідентифікатор Jabber.</translation>
+        <translation type="vanished">Не вдалося визначити адресу сервера. Будь ласка, перевірте, чи правильно вказано ідентифікатор Jabber.</translation>
     </message>
     <message>
         <source>Could not connect to the server.</source>
-        <translation>Не вдалося встановити з’єднання із віддаленим сервером.</translation>
+        <translation type="vanished">Не вдалося встановити з’єднання із віддаленим сервером.</translation>
     </message>
     <message>
         <source>Authentification protocol not supported by the server.</source>
-        <translation>На сервері не передбачено підтримки протоколу розпізнавання.</translation>
+        <translation type="vanished">На сервері не передбачено підтримки протоколу розпізнавання.</translation>
     </message>
     <message>
         <source>An unknown error occured; see log for details.</source>
-        <translation>Сталася невідома помилка. Будь ласка, ознайомтеся із журналом.</translation>
+        <translation type="vanished">Сталася невідома помилка. Будь ласка, ознайомтеся із журналом.</translation>
     </message>
     <message>
         <source>Log in using a QR-Code</source>
@@ -479,90 +495,177 @@
     </message>
 </context>
 <context>
-    <name>MultimediaSettingsPage</name>
+    <name>MultimediaSettings</name>
     <message>
         <source>Multimedia Settings</source>
-        <translation>Параметри мультимедійних даних</translation>
+        <translation type="unfinished">Параметри мультимедійних даних</translation>
     </message>
     <message>
         <source>Configure</source>
-        <translation>Налаштувати</translation>
+        <translation type="unfinished">Налаштувати</translation>
     </message>
     <message>
         <source>Image Capture</source>
-        <translation>Захоплення зображень</translation>
+        <translation type="unfinished">Захоплення зображень</translation>
     </message>
     <message>
         <source>Audio Recording</source>
-        <translation>Запис звуку</translation>
+        <translation type="unfinished">Запис звуку</translation>
     </message>
     <message>
         <source>Video Recording</source>
-        <translation>Запис відео</translation>
+        <translation type="unfinished">Запис відео</translation>
     </message>
     <message>
         <source>Camera</source>
-        <translation>Відеокамера</translation>
+        <translation type="unfinished">Відеокамера</translation>
     </message>
     <message>
         <source>Audio input</source>
-        <translation>Звуковий вхід</translation>
+        <translation type="unfinished">Звуковий вхід</translation>
     </message>
     <message>
         <source>Container</source>
-        <translation>Контейнер</translation>
+        <translation type="unfinished">Контейнер</translation>
     </message>
     <message>
         <source>Image</source>
-        <translation>Зображення</translation>
+        <translation type="unfinished">Зображення</translation>
     </message>
     <message>
         <source>Audio</source>
-        <translation>Звук</translation>
+        <translation type="unfinished">Звук</translation>
     </message>
     <message>
         <source>Video</source>
-        <translation>Відео</translation>
+        <translation type="unfinished">Відео</translation>
     </message>
     <message>
         <source>Codec</source>
-        <translation>Кодек</translation>
+        <translation type="unfinished">Кодек</translation>
     </message>
     <message>
         <source>Resolution</source>
-        <translation>Роздільність</translation>
+        <translation type="unfinished">Роздільність</translation>
     </message>
     <message>
         <source>Quality</source>
-        <translation>Якість</translation>
+        <translation type="unfinished">Якість</translation>
     </message>
     <message>
         <source>Sample Rate</source>
-        <translation>Частота дискретизації</translation>
+        <translation type="unfinished">Частота дискретизації</translation>
     </message>
     <message>
         <source>Frame Rate</source>
-        <translation>Частота кадрів</translation>
+        <translation type="unfinished">Частота кадрів</translation>
     </message>
     <message>
         <source>Ready</source>
-        <translation>Готово</translation>
+        <translation type="unfinished">Готово</translation>
     </message>
     <message>
         <source>Initializing...</source>
-        <translation>Ініціалізація…</translation>
+        <translation type="unfinished">Ініціалізація…</translation>
     </message>
     <message>
         <source>Unavailable</source>
-        <translation>Немає даних</translation>
+        <translation type="unfinished">Немає даних</translation>
     </message>
     <message>
         <source>Recording...</source>
-        <translation>Запис…</translation>
+        <translation type="unfinished">Запис…</translation>
     </message>
     <message>
         <source>Paused</source>
-        <translation>Призупинено</translation>
+        <translation type="unfinished">Призупинено</translation>
+    </message>
+</context>
+<context>
+    <name>MultimediaSettingsPage</name>
+    <message>
+        <source>Multimedia Settings</source>
+        <translation type="vanished">Параметри мультимедійних даних</translation>
+    </message>
+    <message>
+        <source>Configure</source>
+        <translation type="vanished">Налаштувати</translation>
+    </message>
+    <message>
+        <source>Image Capture</source>
+        <translation type="vanished">Захоплення зображень</translation>
+    </message>
+    <message>
+        <source>Audio Recording</source>
+        <translation type="vanished">Запис звуку</translation>
+    </message>
+    <message>
+        <source>Video Recording</source>
+        <translation type="vanished">Запис відео</translation>
+    </message>
+    <message>
+        <source>Camera</source>
+        <translation type="vanished">Відеокамера</translation>
+    </message>
+    <message>
+        <source>Audio input</source>
+        <translation type="vanished">Звуковий вхід</translation>
+    </message>
+    <message>
+        <source>Container</source>
+        <translation type="vanished">Контейнер</translation>
+    </message>
+    <message>
+        <source>Image</source>
+        <translation type="vanished">Зображення</translation>
+    </message>
+    <message>
+        <source>Audio</source>
+        <translation type="vanished">Звук</translation>
+    </message>
+    <message>
+        <source>Video</source>
+        <translation type="vanished">Відео</translation>
+    </message>
+    <message>
+        <source>Codec</source>
+        <translation type="vanished">Кодек</translation>
+    </message>
+    <message>
+        <source>Resolution</source>
+        <translation type="vanished">Роздільність</translation>
+    </message>
+    <message>
+        <source>Quality</source>
+        <translation type="vanished">Якість</translation>
+    </message>
+    <message>
+        <source>Sample Rate</source>
+        <translation type="vanished">Частота дискретизації</translation>
+    </message>
+    <message>
+        <source>Frame Rate</source>
+        <translation type="vanished">Частота кадрів</translation>
+    </message>
+    <message>
+        <source>Ready</source>
+        <translation type="vanished">Готово</translation>
+    </message>
+    <message>
+        <source>Initializing...</source>
+        <translation type="vanished">Ініціалізація…</translation>
+    </message>
+    <message>
+        <source>Unavailable</source>
+        <translation type="vanished">Немає даних</translation>
+    </message>
+    <message>
+        <source>Recording...</source>
+        <translation type="vanished">Запис…</translation>
+    </message>
+    <message>
+        <source>Paused</source>
+        <translation type="vanished">Призупинено</translation>
     </message>
 </context>
 <context>
@@ -621,6 +724,42 @@
     <message>
         <source>Invisible</source>
         <translation>Невидимий</translation>
+    </message>
+    <message>
+        <source>Invalid username or password.</source>
+        <translation type="unfinished">Некоректне ім’я користувача або пароль.</translation>
+    </message>
+    <message>
+        <source>Cannot connect to the server. Please check your internet connection.</source>
+        <translation type="unfinished">Не вдалося встановити з&apos;єднання із сервером. Будь ласка, перевірте, чи маєте ви з&apos;єднання із інтернетом.</translation>
+    </message>
+    <message>
+        <source>The server doesn&apos;t support secure connections.</source>
+        <translation type="unfinished">На сервері не передбачено можливості захищених з&apos;єднань.</translation>
+    </message>
+    <message>
+        <source>Error while trying to connect securely.</source>
+        <translation type="unfinished">Помилка під час спроби встановлення захищеного з&apos;єднання.</translation>
+    </message>
+    <message>
+        <source>Could not resolve the server&apos;s address. Please check your server name.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Could not connect to the server.</source>
+        <translation type="unfinished">Не вдалося встановити з’єднання із віддаленим сервером.</translation>
+    </message>
+    <message>
+        <source>Authentification protocol not supported by the server.</source>
+        <translation type="unfinished">На сервері не передбачено підтримки протоколу розпізнавання.</translation>
+    </message>
+    <message>
+        <source>This server does not support registration.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>An unknown error occured.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -837,6 +976,14 @@ Try to close other applications using the camera.</source>
     <message>
         <source>Changes your account&apos;s password. You will need to re-enter it on your other devices.</source>
         <translation>Змінити пароль до вашого облікового запису. Вам доведеться повторно ввести цей пароль на усіх інших ваших пристроях для спілкування.</translation>
+    </message>
+    <message>
+        <source>Multimedia Settings</source>
+        <translation type="unfinished">Параметри мультимедійних даних</translation>
+    </message>
+    <message>
+        <source>Configure photo, video and audio recording settings</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

@@ -107,6 +107,10 @@
         <source>Copy download URL</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Quote</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>ChatPage</name>
@@ -160,10 +164,6 @@
     </message>
     <message>
         <source>View profile</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Multimedia settings</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -349,6 +349,18 @@
         <source>Settings</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Offline</source>
+        <translation type="unfinished">Offline</translation>
+    </message>
+    <message>
+        <source>Online</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Connecting…</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>Kaidan</name>
@@ -378,7 +390,7 @@
     </message>
     <message>
         <source>Your Jabber-ID:</source>
-        <translation>O teu Jabber-ID:</translation>
+        <translation type="vanished">O teu Jabber-ID:</translation>
     </message>
     <message>
         <source>Your diaspora*-ID:</source>
@@ -386,7 +398,7 @@
     </message>
     <message>
         <source>user@example.org</source>
-        <translation>user@example.org</translation>
+        <translation type="vanished">user@example.org</translation>
     </message>
     <message>
         <source>user@diaspora.pod</source>
@@ -394,7 +406,7 @@
     </message>
     <message>
         <source>Your Password:</source>
-        <translation>Sua Senha:</translation>
+        <translation type="vanished">Sua Senha:</translation>
     </message>
     <message>
         <source>Connect</source>
@@ -406,35 +418,35 @@
     </message>
     <message>
         <source>Invalid username or password.</source>
-        <translation>Nome de usuário ou senha inválidos.</translation>
+        <translation type="vanished">Nome de usuário ou senha inválidos.</translation>
     </message>
     <message>
         <source>Cannot connect to the server. Please check your internet connection.</source>
-        <translation>Não é possível conectar ao servidor. Por favor, verifique a sua ligação à Internet.</translation>
+        <translation type="vanished">Não é possível conectar ao servidor. Por favor, verifique a sua ligação à Internet.</translation>
     </message>
     <message>
         <source>The server doesn&apos;t support secure connections.</source>
-        <translation>O servidor não suporta conexões seguras.</translation>
+        <translation type="vanished">O servidor não suporta conexões seguras.</translation>
     </message>
     <message>
         <source>Error while trying to connect securely.</source>
-        <translation>Erro ao tentar conectar com segurança.</translation>
+        <translation type="vanished">Erro ao tentar conectar com segurança.</translation>
     </message>
     <message>
         <source>Could not resolve the server&apos;s address. Please check your JID again.</source>
-        <translation>Não foi possível resolver o endereço do servidor. Por favor, verifique o seu JID novamente.</translation>
+        <translation type="vanished">Não foi possível resolver o endereço do servidor. Por favor, verifique o seu JID novamente.</translation>
     </message>
     <message>
         <source>Could not connect to the server.</source>
-        <translation>Não consegui ligar-me ao servidor.</translation>
+        <translation type="vanished">Não consegui ligar-me ao servidor.</translation>
     </message>
     <message>
         <source>Authentification protocol not supported by the server.</source>
-        <translation>Protocolo de autenticação não suportado pelo servidor.</translation>
+        <translation type="vanished">Protocolo de autenticação não suportado pelo servidor.</translation>
     </message>
     <message>
         <source>An unknown error occured; see log for details.</source>
-        <translation>Ocorreu um erro desconhecido; consulte o registo para mais detalhes.</translation>
+        <translation type="vanished">Ocorreu um erro desconhecido; consulte o registo para mais detalhes.</translation>
     </message>
     <message>
         <source>Log in using a QR-Code</source>
@@ -535,7 +547,7 @@
     </message>
 </context>
 <context>
-    <name>MultimediaSettingsPage</name>
+    <name>MultimediaSettings</name>
     <message>
         <source>Multimedia Settings</source>
         <translation type="unfinished"></translation>
@@ -622,6 +634,21 @@
     </message>
 </context>
 <context>
+    <name>MultimediaSettingsPage</name>
+    <message>
+        <source>Image</source>
+        <translation type="obsolete">Imagem</translation>
+    </message>
+    <message>
+        <source>Audio</source>
+        <translation type="obsolete">Áudio</translation>
+    </message>
+    <message>
+        <source>Video</source>
+        <translation type="obsolete">Vídeo</translation>
+    </message>
+</context>
+<context>
     <name>NewMedia</name>
     <message>
         <source>Ready</source>
@@ -676,6 +703,42 @@
     </message>
     <message>
         <source>Invisible</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Invalid username or password.</source>
+        <translation type="unfinished">Nome de usuário ou senha inválidos.</translation>
+    </message>
+    <message>
+        <source>Cannot connect to the server. Please check your internet connection.</source>
+        <translation type="unfinished">Não é possível conectar ao servidor. Por favor, verifique a sua ligação à Internet.</translation>
+    </message>
+    <message>
+        <source>The server doesn&apos;t support secure connections.</source>
+        <translation type="unfinished">O servidor não suporta conexões seguras.</translation>
+    </message>
+    <message>
+        <source>Error while trying to connect securely.</source>
+        <translation type="unfinished">Erro ao tentar conectar com segurança.</translation>
+    </message>
+    <message>
+        <source>Could not resolve the server&apos;s address. Please check your server name.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Could not connect to the server.</source>
+        <translation type="unfinished">Não consegui ligar-me ao servidor.</translation>
+    </message>
+    <message>
+        <source>Authentification protocol not supported by the server.</source>
+        <translation type="unfinished">Protocolo de autenticação não suportado pelo servidor.</translation>
+    </message>
+    <message>
+        <source>This server does not support registration.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>An unknown error occured.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -867,6 +930,14 @@ Try to close other applications using the camera.</source>
     </message>
     <message>
         <source>Changes your account&apos;s password. You will need to re-enter it on your other devices.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Multimedia Settings</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Configure photo, video and audio recording settings</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

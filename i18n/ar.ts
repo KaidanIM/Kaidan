@@ -81,6 +81,10 @@
         <source>Copy download URL</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Quote</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>ChatPage</name>
@@ -130,10 +134,6 @@
     </message>
     <message>
         <source>View profile</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Multimedia settings</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -301,6 +301,18 @@
         <source>Settings</source>
         <translation>الإعدادات</translation>
     </message>
+    <message>
+        <source>Offline</source>
+        <translation type="unfinished">غير متصل</translation>
+    </message>
+    <message>
+        <source>Online</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Connecting…</source>
+        <translation type="unfinished">جارٍ الاتصال…</translation>
+    </message>
 </context>
 <context>
     <name>Kaidan</name>
@@ -331,15 +343,15 @@
     </message>
     <message>
         <source>Your Jabber-ID:</source>
-        <translation>هويتك على جابر:</translation>
+        <translation type="vanished">هويتك على جابر:</translation>
     </message>
     <message>
         <source>user@example.org</source>
-        <translation>user@example.org</translation>
+        <translation type="vanished">user@example.org</translation>
     </message>
     <message>
         <source>Your Password:</source>
-        <translation>كلمة مرورك:</translation>
+        <translation type="vanished">كلمة مرورك:</translation>
     </message>
     <message>
         <source>Connecting…</source>
@@ -351,35 +363,31 @@
     </message>
     <message>
         <source>Invalid username or password.</source>
-        <translation>اسم المستخدم أو كلمة المرور غير صالحة.</translation>
+        <translation type="vanished">اسم المستخدم أو كلمة المرور غير صالحة.</translation>
     </message>
     <message>
         <source>Cannot connect to the server. Please check your internet connection.</source>
-        <translation>لا يمكن الاتصال بالخادم. يرجى التحقق من اتصالك بالإنترنت.</translation>
+        <translation type="vanished">لا يمكن الاتصال بالخادم. يرجى التحقق من اتصالك بالإنترنت.</translation>
     </message>
     <message>
         <source>The server doesn&apos;t support secure connections.</source>
-        <translation>الخادم لا يدعم الاتصالات الآمنة.</translation>
+        <translation type="vanished">الخادم لا يدعم الاتصالات الآمنة.</translation>
     </message>
     <message>
         <source>Error while trying to connect securely.</source>
-        <translation>خطأ أثناء محاولة الاتصال الآمن.</translation>
-    </message>
-    <message>
-        <source>Could not resolve the server&apos;s address. Please check your JID again.</source>
-        <translation type="unfinished"></translation>
+        <translation type="vanished">خطأ أثناء محاولة الاتصال الآمن.</translation>
     </message>
     <message>
         <source>Could not connect to the server.</source>
-        <translation>تعذر الإتصال بالخادم.</translation>
+        <translation type="vanished">تعذر الإتصال بالخادم.</translation>
     </message>
     <message>
         <source>Authentification protocol not supported by the server.</source>
-        <translation>بروتوكول المصادقة غير مدعوم من الخادم.</translation>
+        <translation type="vanished">بروتوكول المصادقة غير مدعوم من الخادم.</translation>
     </message>
     <message>
         <source>An unknown error occured; see log for details.</source>
-        <translation>حدث خطأ مجهول ؛ اطلع على التفاصيل في السجل.</translation>
+        <translation type="vanished">حدث خطأ مجهول ؛ اطلع على التفاصيل في السجل.</translation>
     </message>
     <message>
         <source>Log in using a QR-Code</source>
@@ -480,7 +488,7 @@
     </message>
 </context>
 <context>
-    <name>MultimediaSettingsPage</name>
+    <name>MultimediaSettings</name>
     <message>
         <source>Multimedia Settings</source>
         <translation type="unfinished"></translation>
@@ -567,6 +575,21 @@
     </message>
 </context>
 <context>
+    <name>MultimediaSettingsPage</name>
+    <message>
+        <source>Image</source>
+        <translation type="obsolete">صورة</translation>
+    </message>
+    <message>
+        <source>Audio</source>
+        <translation type="obsolete">صوت</translation>
+    </message>
+    <message>
+        <source>Video</source>
+        <translation type="obsolete">فيديو</translation>
+    </message>
+</context>
+<context>
     <name>NewMedia</name>
     <message>
         <source>Ready</source>
@@ -621,6 +644,42 @@
     </message>
     <message>
         <source>Invisible</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Invalid username or password.</source>
+        <translation type="unfinished">اسم المستخدم أو كلمة المرور غير صالحة.</translation>
+    </message>
+    <message>
+        <source>Cannot connect to the server. Please check your internet connection.</source>
+        <translation type="unfinished">لا يمكن الاتصال بالخادم. يرجى التحقق من اتصالك بالإنترنت.</translation>
+    </message>
+    <message>
+        <source>The server doesn&apos;t support secure connections.</source>
+        <translation type="unfinished">الخادم لا يدعم الاتصالات الآمنة.</translation>
+    </message>
+    <message>
+        <source>Error while trying to connect securely.</source>
+        <translation type="unfinished">خطأ أثناء محاولة الاتصال الآمن.</translation>
+    </message>
+    <message>
+        <source>Could not resolve the server&apos;s address. Please check your server name.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Could not connect to the server.</source>
+        <translation type="unfinished">تعذر الإتصال بالخادم.</translation>
+    </message>
+    <message>
+        <source>Authentification protocol not supported by the server.</source>
+        <translation type="unfinished">بروتوكول المصادقة غير مدعوم من الخادم.</translation>
+    </message>
+    <message>
+        <source>This server does not support registration.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>An unknown error occured.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -837,6 +896,14 @@ Try to close other applications using the camera.</source>
     <message>
         <source>Changes your account&apos;s password. You will need to re-enter it on your other devices.</source>
         <translation>تغيير كلمة مرور حساباتك. يجب عليك إعادة إدخال كلمة المرور إلى جميع الأجهزة الأخرى.</translation>
+    </message>
+    <message>
+        <source>Multimedia Settings</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Configure photo, video and audio recording settings</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

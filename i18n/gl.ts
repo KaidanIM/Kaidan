@@ -81,6 +81,10 @@
         <source>Copy download URL</source>
         <translation>Copiar URL de descarga</translation>
     </message>
+    <message>
+        <source>Quote</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>ChatPage</name>
@@ -134,7 +138,7 @@
     </message>
     <message>
         <source>Multimedia settings</source>
-        <translation>Axustes multimedia</translation>
+        <translation type="vanished">Axustes multimedia</translation>
     </message>
     <message>
         <source>Search</source>
@@ -301,6 +305,18 @@
         <source>Settings</source>
         <translation>Axustes</translation>
     </message>
+    <message>
+        <source>Offline</source>
+        <translation type="unfinished">Desconectada</translation>
+    </message>
+    <message>
+        <source>Online</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Connecting…</source>
+        <translation type="unfinished">Conectando…</translation>
+    </message>
 </context>
 <context>
     <name>Kaidan</name>
@@ -330,15 +346,15 @@
     </message>
     <message>
         <source>Your Jabber-ID:</source>
-        <translation>O seu ID-Jabber:</translation>
+        <translation type="vanished">O seu ID-Jabber:</translation>
     </message>
     <message>
         <source>user@example.org</source>
-        <translation>usuaria@exemplo.org</translation>
+        <translation type="vanished">usuaria@exemplo.org</translation>
     </message>
     <message>
         <source>Your Password:</source>
-        <translation>Contrasinal:</translation>
+        <translation type="vanished">Contrasinal:</translation>
     </message>
     <message>
         <source>Connecting…</source>
@@ -350,35 +366,35 @@
     </message>
     <message>
         <source>Invalid username or password.</source>
-        <translation>Usuario ou contrasinal non válidos.</translation>
+        <translation type="vanished">Usuario ou contrasinal non válidos.</translation>
     </message>
     <message>
         <source>Cannot connect to the server. Please check your internet connection.</source>
-        <translation>Non puido conectar co servidor. Por favor, comprobe a conexión a internet.</translation>
+        <translation type="vanished">Non puido conectar co servidor. Por favor, comprobe a conexión a internet.</translation>
     </message>
     <message>
         <source>The server doesn&apos;t support secure connections.</source>
-        <translation>O servidor non soporta conexións seguras.</translation>
+        <translation type="vanished">O servidor non soporta conexións seguras.</translation>
     </message>
     <message>
         <source>Error while trying to connect securely.</source>
-        <translation>Fallo ao intentar conectar de xeito seguro.</translation>
+        <translation type="vanished">Fallo ao intentar conectar de xeito seguro.</translation>
     </message>
     <message>
         <source>Could not resolve the server&apos;s address. Please check your JID again.</source>
-        <translation>Non se atopou o enderezo do servidor. Comprobe o seu JID de novo.</translation>
+        <translation type="vanished">Non se atopou o enderezo do servidor. Comprobe o seu JID de novo.</translation>
     </message>
     <message>
         <source>Could not connect to the server.</source>
-        <translation>Non puido conectar co servidor.</translation>
+        <translation type="vanished">Non puido conectar co servidor.</translation>
     </message>
     <message>
         <source>Authentification protocol not supported by the server.</source>
-        <translation>Protocolo de autenticación non soportado polo servidor.</translation>
+        <translation type="vanished">Protocolo de autenticación non soportado polo servidor.</translation>
     </message>
     <message>
         <source>An unknown error occured; see log for details.</source>
-        <translation>Aconteceu un fallo descoñecido; vexa máis detalles no rexistro.</translation>
+        <translation type="vanished">Aconteceu un fallo descoñecido; vexa máis detalles no rexistro.</translation>
     </message>
     <message>
         <source>Log in using a QR-Code</source>
@@ -479,90 +495,177 @@
     </message>
 </context>
 <context>
-    <name>MultimediaSettingsPage</name>
+    <name>MultimediaSettings</name>
     <message>
         <source>Multimedia Settings</source>
-        <translation>Axustes Multimedia</translation>
+        <translation type="unfinished">Axustes Multimedia</translation>
     </message>
     <message>
         <source>Configure</source>
-        <translation>Configurar</translation>
+        <translation type="unfinished">Configurar</translation>
     </message>
     <message>
         <source>Image Capture</source>
-        <translation>Capturar imaxe</translation>
+        <translation type="unfinished">Capturar imaxe</translation>
     </message>
     <message>
         <source>Audio Recording</source>
-        <translation>Gravando audio</translation>
+        <translation type="unfinished">Gravando audio</translation>
     </message>
     <message>
         <source>Video Recording</source>
-        <translation>Gravando vídeo</translation>
+        <translation type="unfinished">Gravando vídeo</translation>
     </message>
     <message>
         <source>Camera</source>
-        <translation>Cámara</translation>
+        <translation type="unfinished">Cámara</translation>
     </message>
     <message>
         <source>Audio input</source>
-        <translation>Entrada de audio</translation>
+        <translation type="unfinished">Entrada de audio</translation>
     </message>
     <message>
         <source>Container</source>
-        <translation>Contedor</translation>
+        <translation type="unfinished">Contedor</translation>
     </message>
     <message>
         <source>Image</source>
-        <translation>Imaxe</translation>
+        <translation type="unfinished">Imaxe</translation>
     </message>
     <message>
         <source>Audio</source>
-        <translation>Audio</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Video</source>
-        <translation>Vídeo</translation>
+        <translation type="unfinished">Vídeo</translation>
     </message>
     <message>
         <source>Codec</source>
-        <translation>Códec</translation>
+        <translation type="unfinished">Códec</translation>
     </message>
     <message>
         <source>Resolution</source>
-        <translation>Resolución</translation>
+        <translation type="unfinished">Resolución</translation>
     </message>
     <message>
         <source>Quality</source>
-        <translation>Calidade</translation>
+        <translation type="unfinished">Calidade</translation>
     </message>
     <message>
         <source>Sample Rate</source>
-        <translation>Taxa de mostreo</translation>
+        <translation type="unfinished">Taxa de mostreo</translation>
     </message>
     <message>
         <source>Frame Rate</source>
-        <translation>Taxa de marcos</translation>
+        <translation type="unfinished">Taxa de marcos</translation>
     </message>
     <message>
         <source>Ready</source>
-        <translation>Listo</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Initializing...</source>
-        <translation>Inicializando...</translation>
+        <translation type="unfinished">Inicializando...</translation>
     </message>
     <message>
         <source>Unavailable</source>
-        <translation>Non dispoñible</translation>
+        <translation type="unfinished">Non dispoñible</translation>
     </message>
     <message>
         <source>Recording...</source>
-        <translation>Gravando...</translation>
+        <translation type="unfinished">Gravando...</translation>
     </message>
     <message>
         <source>Paused</source>
-        <translation>En pausa</translation>
+        <translation type="unfinished">En pausa</translation>
+    </message>
+</context>
+<context>
+    <name>MultimediaSettingsPage</name>
+    <message>
+        <source>Multimedia Settings</source>
+        <translation type="vanished">Axustes Multimedia</translation>
+    </message>
+    <message>
+        <source>Configure</source>
+        <translation type="vanished">Configurar</translation>
+    </message>
+    <message>
+        <source>Image Capture</source>
+        <translation type="vanished">Capturar imaxe</translation>
+    </message>
+    <message>
+        <source>Audio Recording</source>
+        <translation type="vanished">Gravando audio</translation>
+    </message>
+    <message>
+        <source>Video Recording</source>
+        <translation type="vanished">Gravando vídeo</translation>
+    </message>
+    <message>
+        <source>Camera</source>
+        <translation type="vanished">Cámara</translation>
+    </message>
+    <message>
+        <source>Audio input</source>
+        <translation type="vanished">Entrada de audio</translation>
+    </message>
+    <message>
+        <source>Container</source>
+        <translation type="vanished">Contedor</translation>
+    </message>
+    <message>
+        <source>Image</source>
+        <translation type="vanished">Imaxe</translation>
+    </message>
+    <message>
+        <source>Audio</source>
+        <translation type="vanished">Audio</translation>
+    </message>
+    <message>
+        <source>Video</source>
+        <translation type="vanished">Vídeo</translation>
+    </message>
+    <message>
+        <source>Codec</source>
+        <translation type="vanished">Códec</translation>
+    </message>
+    <message>
+        <source>Resolution</source>
+        <translation type="vanished">Resolución</translation>
+    </message>
+    <message>
+        <source>Quality</source>
+        <translation type="vanished">Calidade</translation>
+    </message>
+    <message>
+        <source>Sample Rate</source>
+        <translation type="vanished">Taxa de mostreo</translation>
+    </message>
+    <message>
+        <source>Frame Rate</source>
+        <translation type="vanished">Taxa de marcos</translation>
+    </message>
+    <message>
+        <source>Ready</source>
+        <translation type="vanished">Listo</translation>
+    </message>
+    <message>
+        <source>Initializing...</source>
+        <translation type="vanished">Inicializando...</translation>
+    </message>
+    <message>
+        <source>Unavailable</source>
+        <translation type="vanished">Non dispoñible</translation>
+    </message>
+    <message>
+        <source>Recording...</source>
+        <translation type="vanished">Gravando...</translation>
+    </message>
+    <message>
+        <source>Paused</source>
+        <translation type="vanished">En pausa</translation>
     </message>
 </context>
 <context>
@@ -621,6 +724,42 @@
     <message>
         <source>Invisible</source>
         <translation>Invisible</translation>
+    </message>
+    <message>
+        <source>Invalid username or password.</source>
+        <translation type="unfinished">Usuario ou contrasinal non válidos.</translation>
+    </message>
+    <message>
+        <source>Cannot connect to the server. Please check your internet connection.</source>
+        <translation type="unfinished">Non puido conectar co servidor. Por favor, comprobe a conexión a internet.</translation>
+    </message>
+    <message>
+        <source>The server doesn&apos;t support secure connections.</source>
+        <translation type="unfinished">O servidor non soporta conexións seguras.</translation>
+    </message>
+    <message>
+        <source>Error while trying to connect securely.</source>
+        <translation type="unfinished">Fallo ao intentar conectar de xeito seguro.</translation>
+    </message>
+    <message>
+        <source>Could not resolve the server&apos;s address. Please check your server name.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Could not connect to the server.</source>
+        <translation type="unfinished">Non puido conectar co servidor.</translation>
+    </message>
+    <message>
+        <source>Authentification protocol not supported by the server.</source>
+        <translation type="unfinished">Protocolo de autenticación non soportado polo servidor.</translation>
+    </message>
+    <message>
+        <source>This server does not support registration.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>An unknown error occured.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -837,6 +976,14 @@ Pecha outras aplicacións que a estén utilizando.</translation>
     <message>
         <source>Changes your account&apos;s password. You will need to re-enter it on your other devices.</source>
         <translation>Cambio no contrasinal da conta. Deberá voltar a introducilo nos outros dispositivos.</translation>
+    </message>
+    <message>
+        <source>Multimedia Settings</source>
+        <translation type="unfinished">Axustes Multimedia</translation>
+    </message>
+    <message>
+        <source>Configure photo, video and audio recording settings</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

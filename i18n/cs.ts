@@ -81,6 +81,10 @@
         <source>Copy download URL</source>
         <translation>Kopírovat stažitelnou URL</translation>
     </message>
+    <message>
+        <source>Quote</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>ChatPage</name>
@@ -134,7 +138,7 @@
     </message>
     <message>
         <source>Multimedia settings</source>
-        <translation>Nastavení multimédií</translation>
+        <translation type="vanished">Nastavení multimédií</translation>
     </message>
     <message>
         <source>Search</source>
@@ -305,6 +309,18 @@
         <source>Settings</source>
         <translation>Nastavení</translation>
     </message>
+    <message>
+        <source>Offline</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Online</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Connecting…</source>
+        <translation type="unfinished">Připojování…</translation>
+    </message>
 </context>
 <context>
     <name>Kaidan</name>
@@ -334,7 +350,7 @@
     </message>
     <message>
         <source>Your Jabber-ID:</source>
-        <translation>Vaše Jabber-ID:</translation>
+        <translation type="vanished">Vaše Jabber-ID:</translation>
     </message>
     <message>
         <source>Your diaspora*-ID:</source>
@@ -342,7 +358,7 @@
     </message>
     <message>
         <source>user@example.org</source>
-        <translation>uživatel@example.org</translation>
+        <translation type="vanished">uživatel@example.org</translation>
     </message>
     <message>
         <source>user@diaspora.pod</source>
@@ -350,7 +366,7 @@
     </message>
     <message>
         <source>Your Password:</source>
-        <translation>Vaše heslo:</translation>
+        <translation type="vanished">Vaše heslo:</translation>
     </message>
     <message>
         <source>Connecting…</source>
@@ -362,36 +378,36 @@
     </message>
     <message>
         <source>Invalid username or password.</source>
-        <translation>Neplatný uživatel nebo heslo.</translation>
+        <translation type="vanished">Neplatný uživatel nebo heslo.</translation>
     </message>
     <message>
         <source>Cannot connect to the server. Please check your internet connection.</source>
-        <translation>Nelze se připojit k serveru.
+        <translation type="vanished">Nelze se připojit k serveru.
 Prosím zkontrolujte své připojení k internetu.</translation>
     </message>
     <message>
         <source>The server doesn&apos;t support secure connections.</source>
-        <translation>Server nepodporuje zabezpečená připojení.</translation>
+        <translation type="vanished">Server nepodporuje zabezpečená připojení.</translation>
     </message>
     <message>
         <source>Error while trying to connect securely.</source>
-        <translation>Hlášení o chybě při pokusu o zabezpečené připojení.</translation>
+        <translation type="vanished">Hlášení o chybě při pokusu o zabezpečené připojení.</translation>
     </message>
     <message>
         <source>Could not resolve the server&apos;s address. Please check your JID again.</source>
-        <translation>Neznámá adresa serveru. Zkontrolujte znovu vaše JID.</translation>
+        <translation type="vanished">Neznámá adresa serveru. Zkontrolujte znovu vaše JID.</translation>
     </message>
     <message>
         <source>Could not connect to the server.</source>
-        <translation>Nebylo možné se připojit k serveru.</translation>
+        <translation type="vanished">Nebylo možné se připojit k serveru.</translation>
     </message>
     <message>
         <source>Authentification protocol not supported by the server.</source>
-        <translation>Ověřovací protokol není kompatibilní se serverem.</translation>
+        <translation type="vanished">Ověřovací protokol není kompatibilní se serverem.</translation>
     </message>
     <message>
         <source>An unknown error occured; see log for details.</source>
-        <translation>Došlo k neznámé chybě; pro více informací zkontrolujte seznam logů.</translation>
+        <translation type="vanished">Došlo k neznámé chybě; pro více informací zkontrolujte seznam logů.</translation>
     </message>
     <message>
         <source>Log in using a QR-Code</source>
@@ -492,90 +508,177 @@ Prosím zkontrolujte své připojení k internetu.</translation>
     </message>
 </context>
 <context>
-    <name>MultimediaSettingsPage</name>
+    <name>MultimediaSettings</name>
     <message>
         <source>Multimedia Settings</source>
-        <translation>Nastavení multimédií</translation>
+        <translation type="unfinished">Nastavení multimédií</translation>
     </message>
     <message>
         <source>Configure</source>
-        <translation>Nastavit</translation>
+        <translation type="unfinished">Nastavit</translation>
     </message>
     <message>
         <source>Image Capture</source>
-        <translation>Zachycení obrazu</translation>
+        <translation type="unfinished">Zachycení obrazu</translation>
     </message>
     <message>
         <source>Audio Recording</source>
-        <translation>Audio nahrávání</translation>
+        <translation type="unfinished">Audio nahrávání</translation>
     </message>
     <message>
         <source>Video Recording</source>
-        <translation>Video nahrávání</translation>
+        <translation type="unfinished">Video nahrávání</translation>
     </message>
     <message>
         <source>Camera</source>
-        <translation>Kamera</translation>
+        <translation type="unfinished">Kamera</translation>
     </message>
     <message>
         <source>Audio input</source>
-        <translation>Audio vstup</translation>
+        <translation type="unfinished">Audio vstup</translation>
     </message>
     <message>
         <source>Container</source>
-        <translation>Kontejner</translation>
+        <translation type="unfinished">Kontejner</translation>
     </message>
     <message>
         <source>Image</source>
-        <translation>Obrázek</translation>
+        <translation type="unfinished">Obrázek</translation>
     </message>
     <message>
         <source>Audio</source>
-        <translation>Audio</translation>
+        <translation type="unfinished">Audio</translation>
     </message>
     <message>
         <source>Video</source>
-        <translation>Video</translation>
+        <translation type="unfinished">Video</translation>
     </message>
     <message>
         <source>Codec</source>
-        <translation>Kodek</translation>
+        <translation type="unfinished">Kodek</translation>
     </message>
     <message>
         <source>Resolution</source>
-        <translation>Rozlišení</translation>
+        <translation type="unfinished">Rozlišení</translation>
     </message>
     <message>
         <source>Quality</source>
-        <translation>Kvalita</translation>
+        <translation type="unfinished">Kvalita</translation>
     </message>
     <message>
         <source>Sample Rate</source>
-        <translation>Vzorkovací frekvence</translation>
+        <translation type="unfinished">Vzorkovací frekvence</translation>
     </message>
     <message>
         <source>Frame Rate</source>
-        <translation>Snímková frekvence</translation>
+        <translation type="unfinished">Snímková frekvence</translation>
     </message>
     <message>
         <source>Ready</source>
-        <translation>Připravený</translation>
+        <translation type="unfinished">Připravený</translation>
     </message>
     <message>
         <source>Initializing...</source>
-        <translation>Zahajuji...</translation>
+        <translation type="unfinished">Zahajuji...</translation>
     </message>
     <message>
         <source>Unavailable</source>
-        <translation>Nedostupný</translation>
+        <translation type="unfinished">Nedostupný</translation>
     </message>
     <message>
         <source>Recording...</source>
-        <translation>Nahrávám...</translation>
+        <translation type="unfinished">Nahrávám...</translation>
     </message>
     <message>
         <source>Paused</source>
-        <translation>Pozastaven</translation>
+        <translation type="unfinished">Pozastaven</translation>
+    </message>
+</context>
+<context>
+    <name>MultimediaSettingsPage</name>
+    <message>
+        <source>Multimedia Settings</source>
+        <translation type="vanished">Nastavení multimédií</translation>
+    </message>
+    <message>
+        <source>Configure</source>
+        <translation type="vanished">Nastavit</translation>
+    </message>
+    <message>
+        <source>Image Capture</source>
+        <translation type="vanished">Zachycení obrazu</translation>
+    </message>
+    <message>
+        <source>Audio Recording</source>
+        <translation type="vanished">Audio nahrávání</translation>
+    </message>
+    <message>
+        <source>Video Recording</source>
+        <translation type="vanished">Video nahrávání</translation>
+    </message>
+    <message>
+        <source>Camera</source>
+        <translation type="vanished">Kamera</translation>
+    </message>
+    <message>
+        <source>Audio input</source>
+        <translation type="vanished">Audio vstup</translation>
+    </message>
+    <message>
+        <source>Container</source>
+        <translation type="vanished">Kontejner</translation>
+    </message>
+    <message>
+        <source>Image</source>
+        <translation type="vanished">Obrázek</translation>
+    </message>
+    <message>
+        <source>Audio</source>
+        <translation type="vanished">Audio</translation>
+    </message>
+    <message>
+        <source>Video</source>
+        <translation type="vanished">Video</translation>
+    </message>
+    <message>
+        <source>Codec</source>
+        <translation type="vanished">Kodek</translation>
+    </message>
+    <message>
+        <source>Resolution</source>
+        <translation type="vanished">Rozlišení</translation>
+    </message>
+    <message>
+        <source>Quality</source>
+        <translation type="vanished">Kvalita</translation>
+    </message>
+    <message>
+        <source>Sample Rate</source>
+        <translation type="vanished">Vzorkovací frekvence</translation>
+    </message>
+    <message>
+        <source>Frame Rate</source>
+        <translation type="vanished">Snímková frekvence</translation>
+    </message>
+    <message>
+        <source>Ready</source>
+        <translation type="vanished">Připravený</translation>
+    </message>
+    <message>
+        <source>Initializing...</source>
+        <translation type="vanished">Zahajuji...</translation>
+    </message>
+    <message>
+        <source>Unavailable</source>
+        <translation type="vanished">Nedostupný</translation>
+    </message>
+    <message>
+        <source>Recording...</source>
+        <translation type="vanished">Nahrávám...</translation>
+    </message>
+    <message>
+        <source>Paused</source>
+        <translation type="vanished">Pozastaven</translation>
     </message>
 </context>
 <context>
@@ -634,6 +737,43 @@ Prosím zkontrolujte své připojení k internetu.</translation>
     <message>
         <source>Invisible</source>
         <translation>Neviditelný</translation>
+    </message>
+    <message>
+        <source>Invalid username or password.</source>
+        <translation type="unfinished">Neplatný uživatel nebo heslo.</translation>
+    </message>
+    <message>
+        <source>Cannot connect to the server. Please check your internet connection.</source>
+        <translation type="unfinished">Nelze se připojit k serveru.
+Prosím zkontrolujte své připojení k internetu.</translation>
+    </message>
+    <message>
+        <source>The server doesn&apos;t support secure connections.</source>
+        <translation type="unfinished">Server nepodporuje zabezpečená připojení.</translation>
+    </message>
+    <message>
+        <source>Error while trying to connect securely.</source>
+        <translation type="unfinished">Hlášení o chybě při pokusu o zabezpečené připojení.</translation>
+    </message>
+    <message>
+        <source>Could not resolve the server&apos;s address. Please check your server name.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Could not connect to the server.</source>
+        <translation type="unfinished">Nebylo možné se připojit k serveru.</translation>
+    </message>
+    <message>
+        <source>Authentification protocol not supported by the server.</source>
+        <translation type="unfinished">Ověřovací protokol není kompatibilní se serverem.</translation>
+    </message>
+    <message>
+        <source>This server does not support registration.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>An unknown error occured.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -850,6 +990,14 @@ Zkuste zavřít jiné aplikace, které používají fotoaparát.</translation>
     <message>
         <source>Changes your account&apos;s password. You will need to re-enter it on your other devices.</source>
         <translation>Změní heslo k vašemu účtu. Bude třeba ho zadat na všech vašich zařízeních.</translation>
+    </message>
+    <message>
+        <source>Multimedia Settings</source>
+        <translation type="unfinished">Nastavení multimédií</translation>
+    </message>
+    <message>
+        <source>Configure photo, video and audio recording settings</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

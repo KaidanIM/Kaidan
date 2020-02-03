@@ -130,6 +130,10 @@
         <source>Copy download URL</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Quote</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>ChatPage</name>
@@ -183,10 +187,6 @@
     </message>
     <message>
         <source>View profile</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Multimedia settings</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -376,6 +376,18 @@
         <source>Settings</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Offline</source>
+        <translation type="unfinished">Не в сети</translation>
+    </message>
+    <message>
+        <source>Online</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Connecting…</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>Kaidan</name>
@@ -397,15 +409,15 @@
     <name>LoginPage</name>
     <message>
         <source>Your Jabber-ID:</source>
-        <translation>Ваш Jabber-ID:</translation>
+        <translation type="vanished">Ваш Jabber-ID:</translation>
     </message>
     <message>
         <source>user@example.org</source>
-        <translation>ivanov@example.ru</translation>
+        <translation type="vanished">ivanov@example.ru</translation>
     </message>
     <message>
         <source>Your Password:</source>
-        <translation>Ваш пароль:</translation>
+        <translation type="vanished">Ваш пароль:</translation>
     </message>
     <message>
         <source>Password</source>
@@ -441,35 +453,35 @@
     </message>
     <message>
         <source>Invalid username or password.</source>
-        <translation>Неверное имя пользователя или пароль.</translation>
+        <translation type="vanished">Неверное имя пользователя или пароль.</translation>
     </message>
     <message>
         <source>Cannot connect to the server. Please check your internet connection.</source>
-        <translation>Не удается подключиться к серверу. Пожалуйста, проверьте подключение к Интернету.</translation>
+        <translation type="vanished">Не удается подключиться к серверу. Пожалуйста, проверьте подключение к Интернету.</translation>
     </message>
     <message>
         <source>The server doesn&apos;t support secure connections.</source>
-        <translation>Сервер не поддерживает безопасные соединения.</translation>
+        <translation type="vanished">Сервер не поддерживает безопасные соединения.</translation>
     </message>
     <message>
         <source>Error while trying to connect securely.</source>
-        <translation>Ошибка при попытке надежного подключения.</translation>
+        <translation type="vanished">Ошибка при попытке надежного подключения.</translation>
     </message>
     <message>
         <source>Could not resolve the server&apos;s address. Please check your JID again.</source>
-        <translation>Не смог определить адрес сервера. Пожалуйста, проверьте ваш JID еще раз.</translation>
+        <translation type="vanished">Не смог определить адрес сервера. Пожалуйста, проверьте ваш JID еще раз.</translation>
     </message>
     <message>
         <source>Could not connect to the server.</source>
-        <translation>Не смог подключиться к серверу.</translation>
+        <translation type="vanished">Не смог подключиться к серверу.</translation>
     </message>
     <message>
         <source>Authentification protocol not supported by the server.</source>
-        <translation>Протокол аутентификации не поддерживается сервером.</translation>
+        <translation type="vanished">Протокол аутентификации не поддерживается сервером.</translation>
     </message>
     <message>
         <source>An unknown error occured; see log for details.</source>
-        <translation>Произошла неизвестная ошибка; подробности см. в журнале.</translation>
+        <translation type="vanished">Произошла неизвестная ошибка; подробности см. в журнале.</translation>
     </message>
     <message>
         <source>Log in using a QR-Code</source>
@@ -570,7 +582,7 @@
     </message>
 </context>
 <context>
-    <name>MultimediaSettingsPage</name>
+    <name>MultimediaSettings</name>
     <message>
         <source>Multimedia Settings</source>
         <translation type="unfinished"></translation>
@@ -657,6 +669,21 @@
     </message>
 </context>
 <context>
+    <name>MultimediaSettingsPage</name>
+    <message>
+        <source>Image</source>
+        <translation type="obsolete">Изображение</translation>
+    </message>
+    <message>
+        <source>Audio</source>
+        <translation type="obsolete">Звук</translation>
+    </message>
+    <message>
+        <source>Video</source>
+        <translation type="obsolete">Видео</translation>
+    </message>
+</context>
+<context>
     <name>NewMedia</name>
     <message>
         <source>Ready</source>
@@ -711,6 +738,42 @@
     </message>
     <message>
         <source>Invisible</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Invalid username or password.</source>
+        <translation type="unfinished">Неверное имя пользователя или пароль.</translation>
+    </message>
+    <message>
+        <source>Cannot connect to the server. Please check your internet connection.</source>
+        <translation type="unfinished">Не удается подключиться к серверу. Пожалуйста, проверьте подключение к Интернету.</translation>
+    </message>
+    <message>
+        <source>The server doesn&apos;t support secure connections.</source>
+        <translation type="unfinished">Сервер не поддерживает безопасные соединения.</translation>
+    </message>
+    <message>
+        <source>Error while trying to connect securely.</source>
+        <translation type="unfinished">Ошибка при попытке надежного подключения.</translation>
+    </message>
+    <message>
+        <source>Could not resolve the server&apos;s address. Please check your server name.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Could not connect to the server.</source>
+        <translation type="unfinished">Не смог подключиться к серверу.</translation>
+    </message>
+    <message>
+        <source>Authentification protocol not supported by the server.</source>
+        <translation type="unfinished">Протокол аутентификации не поддерживается сервером.</translation>
+    </message>
+    <message>
+        <source>This server does not support registration.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>An unknown error occured.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -906,6 +969,14 @@ Try to close other applications using the camera.</source>
     </message>
     <message>
         <source>Changes your account&apos;s password. You will need to re-enter it on your other devices.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Multimedia Settings</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Configure photo, video and audio recording settings</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

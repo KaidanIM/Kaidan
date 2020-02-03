@@ -126,6 +126,10 @@
         <source>Copy download URL</source>
         <translation>Salin URL muat turun</translation>
     </message>
+    <message>
+        <source>Quote</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>ChatPage</name>
@@ -183,7 +187,7 @@
     </message>
     <message>
         <source>Multimedia settings</source>
-        <translation>Tetapan multimedia</translation>
+        <translation type="vanished">Tetapan multimedia</translation>
     </message>
     <message>
         <source>Search</source>
@@ -372,6 +376,18 @@
         <source>Settings</source>
         <translation>Tetapan</translation>
     </message>
+    <message>
+        <source>Offline</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Online</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Connecting…</source>
+        <translation type="unfinished">Menyambung…</translation>
+    </message>
 </context>
 <context>
     <name>Kaidan</name>
@@ -409,15 +425,15 @@
     <name>LoginPage</name>
     <message>
         <source>Your Jabber-ID:</source>
-        <translation>Jabber-ID anda：</translation>
+        <translation type="vanished">Jabber-ID anda：</translation>
     </message>
     <message>
         <source>user@example.org</source>
-        <translation>contoh＠emel.com</translation>
+        <translation type="vanished">contoh＠emel.com</translation>
     </message>
     <message>
         <source>Your Password:</source>
-        <translation>Kata Laluan Anda：</translation>
+        <translation type="vanished">Kata Laluan Anda：</translation>
     </message>
     <message>
         <source>Password</source>
@@ -453,35 +469,35 @@
     </message>
     <message>
         <source>Invalid username or password.</source>
-        <translation>Nama pengguna atau kata laluan tidak sah.</translation>
+        <translation type="vanished">Nama pengguna atau kata laluan tidak sah.</translation>
     </message>
     <message>
         <source>Cannot connect to the server. Please check your internet connection.</source>
-        <translation>Tidak dapat menghubungi pelayan. Sila periksa sambungan internet anda.</translation>
+        <translation type="vanished">Tidak dapat menghubungi pelayan. Sila periksa sambungan internet anda.</translation>
     </message>
     <message>
         <source>The server doesn&apos;t support secure connections.</source>
-        <translation>Pelayan tidak menyokong sambungan selamat.</translation>
+        <translation type="vanished">Pelayan tidak menyokong sambungan selamat.</translation>
     </message>
     <message>
         <source>Error while trying to connect securely.</source>
-        <translation>Ralat ketika cuba untuk menyambung secara selamat.</translation>
+        <translation type="vanished">Ralat ketika cuba untuk menyambung secara selamat.</translation>
     </message>
     <message>
         <source>Could not resolve the server&apos;s address. Please check your JID again.</source>
-        <translation>Tidak dapat menetapkan alamat pelayan. Sila periksa semula JID anda.</translation>
+        <translation type="vanished">Tidak dapat menetapkan alamat pelayan. Sila periksa semula JID anda.</translation>
     </message>
     <message>
         <source>Could not connect to the server.</source>
-        <translation>Tidak dapat menghubungi pelayan.</translation>
+        <translation type="vanished">Tidak dapat menghubungi pelayan.</translation>
     </message>
     <message>
         <source>Authentification protocol not supported by the server.</source>
-        <translation>Protokol pengesahan tidak disokong oleh pelayan.</translation>
+        <translation type="vanished">Protokol pengesahan tidak disokong oleh pelayan.</translation>
     </message>
     <message>
         <source>An unknown error occured; see log for details.</source>
-        <translation>Telah berlaku ralat tidak diketahui; lihat log untuk maklumat lanjut.</translation>
+        <translation type="vanished">Telah berlaku ralat tidak diketahui; lihat log untuk maklumat lanjut.</translation>
     </message>
     <message>
         <source>Log in using a QR-Code</source>
@@ -582,90 +598,177 @@
     </message>
 </context>
 <context>
-    <name>MultimediaSettingsPage</name>
+    <name>MultimediaSettings</name>
     <message>
         <source>Multimedia Settings</source>
-        <translation>Tetapan Multimedia</translation>
+        <translation type="unfinished">Tetapan Multimedia</translation>
     </message>
     <message>
         <source>Configure</source>
-        <translation>Tetapkan</translation>
+        <translation type="unfinished">Tetapkan</translation>
     </message>
     <message>
         <source>Image Capture</source>
-        <translation>Tangkapan Imej</translation>
+        <translation type="unfinished">Tangkapan Imej</translation>
     </message>
     <message>
         <source>Audio Recording</source>
-        <translation>Rakaman Audio</translation>
+        <translation type="unfinished">Rakaman Audio</translation>
     </message>
     <message>
         <source>Video Recording</source>
-        <translation>Rakaman Video</translation>
+        <translation type="unfinished">Rakaman Video</translation>
     </message>
     <message>
         <source>Camera</source>
-        <translation>Kamera</translation>
+        <translation type="unfinished">Kamera</translation>
     </message>
     <message>
         <source>Audio input</source>
-        <translation>Kemasukan audio</translation>
+        <translation type="unfinished">Kemasukan audio</translation>
     </message>
     <message>
         <source>Container</source>
-        <translation>Bekas</translation>
+        <translation type="unfinished">Bekas</translation>
     </message>
     <message>
         <source>Image</source>
-        <translation>Imej</translation>
+        <translation type="unfinished">Imej</translation>
     </message>
     <message>
         <source>Audio</source>
-        <translation>Audio</translation>
+        <translation type="unfinished">Audio</translation>
     </message>
     <message>
         <source>Video</source>
-        <translation>Video</translation>
+        <translation type="unfinished">Video</translation>
     </message>
     <message>
         <source>Codec</source>
-        <translation>Kodek</translation>
+        <translation type="unfinished">Kodek</translation>
     </message>
     <message>
         <source>Resolution</source>
-        <translation>Resolusi</translation>
+        <translation type="unfinished">Resolusi</translation>
     </message>
     <message>
         <source>Quality</source>
-        <translation>Kualiti</translation>
+        <translation type="unfinished">Kualiti</translation>
     </message>
     <message>
         <source>Sample Rate</source>
-        <translation>Kadar Sampel</translation>
+        <translation type="unfinished">Kadar Sampel</translation>
     </message>
     <message>
         <source>Frame Rate</source>
-        <translation>Kadar Bingkai</translation>
+        <translation type="unfinished">Kadar Bingkai</translation>
     </message>
     <message>
         <source>Ready</source>
-        <translation>Sedia</translation>
+        <translation type="unfinished">Sedia</translation>
     </message>
     <message>
         <source>Initializing...</source>
-        <translation>Mengasalkan...</translation>
+        <translation type="unfinished">Mengasalkan...</translation>
     </message>
     <message>
         <source>Unavailable</source>
-        <translation>Tidak tersedia</translation>
+        <translation type="unfinished">Tidak tersedia</translation>
     </message>
     <message>
         <source>Recording...</source>
-        <translation>Merakam...</translation>
+        <translation type="unfinished">Merakam...</translation>
     </message>
     <message>
         <source>Paused</source>
-        <translation>Dijedakan</translation>
+        <translation type="unfinished">Dijedakan</translation>
+    </message>
+</context>
+<context>
+    <name>MultimediaSettingsPage</name>
+    <message>
+        <source>Multimedia Settings</source>
+        <translation type="vanished">Tetapan Multimedia</translation>
+    </message>
+    <message>
+        <source>Configure</source>
+        <translation type="vanished">Tetapkan</translation>
+    </message>
+    <message>
+        <source>Image Capture</source>
+        <translation type="vanished">Tangkapan Imej</translation>
+    </message>
+    <message>
+        <source>Audio Recording</source>
+        <translation type="vanished">Rakaman Audio</translation>
+    </message>
+    <message>
+        <source>Video Recording</source>
+        <translation type="vanished">Rakaman Video</translation>
+    </message>
+    <message>
+        <source>Camera</source>
+        <translation type="vanished">Kamera</translation>
+    </message>
+    <message>
+        <source>Audio input</source>
+        <translation type="vanished">Kemasukan audio</translation>
+    </message>
+    <message>
+        <source>Container</source>
+        <translation type="vanished">Bekas</translation>
+    </message>
+    <message>
+        <source>Image</source>
+        <translation type="vanished">Imej</translation>
+    </message>
+    <message>
+        <source>Audio</source>
+        <translation type="vanished">Audio</translation>
+    </message>
+    <message>
+        <source>Video</source>
+        <translation type="vanished">Video</translation>
+    </message>
+    <message>
+        <source>Codec</source>
+        <translation type="vanished">Kodek</translation>
+    </message>
+    <message>
+        <source>Resolution</source>
+        <translation type="vanished">Resolusi</translation>
+    </message>
+    <message>
+        <source>Quality</source>
+        <translation type="vanished">Kualiti</translation>
+    </message>
+    <message>
+        <source>Sample Rate</source>
+        <translation type="vanished">Kadar Sampel</translation>
+    </message>
+    <message>
+        <source>Frame Rate</source>
+        <translation type="vanished">Kadar Bingkai</translation>
+    </message>
+    <message>
+        <source>Ready</source>
+        <translation type="vanished">Sedia</translation>
+    </message>
+    <message>
+        <source>Initializing...</source>
+        <translation type="vanished">Mengasalkan...</translation>
+    </message>
+    <message>
+        <source>Unavailable</source>
+        <translation type="vanished">Tidak tersedia</translation>
+    </message>
+    <message>
+        <source>Recording...</source>
+        <translation type="vanished">Merakam...</translation>
+    </message>
+    <message>
+        <source>Paused</source>
+        <translation type="vanished">Dijedakan</translation>
     </message>
 </context>
 <context>
@@ -724,6 +827,42 @@
     <message>
         <source>Invisible</source>
         <translation>Tidak kelihatan</translation>
+    </message>
+    <message>
+        <source>Invalid username or password.</source>
+        <translation type="unfinished">Nama pengguna atau kata laluan tidak sah.</translation>
+    </message>
+    <message>
+        <source>Cannot connect to the server. Please check your internet connection.</source>
+        <translation type="unfinished">Tidak dapat menghubungi pelayan. Sila periksa sambungan internet anda.</translation>
+    </message>
+    <message>
+        <source>The server doesn&apos;t support secure connections.</source>
+        <translation type="unfinished">Pelayan tidak menyokong sambungan selamat.</translation>
+    </message>
+    <message>
+        <source>Error while trying to connect securely.</source>
+        <translation type="unfinished">Ralat ketika cuba untuk menyambung secara selamat.</translation>
+    </message>
+    <message>
+        <source>Could not resolve the server&apos;s address. Please check your server name.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Could not connect to the server.</source>
+        <translation type="unfinished">Tidak dapat menghubungi pelayan.</translation>
+    </message>
+    <message>
+        <source>Authentification protocol not supported by the server.</source>
+        <translation type="unfinished">Protokol pengesahan tidak disokong oleh pelayan.</translation>
+    </message>
+    <message>
+        <source>This server does not support registration.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>An unknown error occured.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -948,6 +1087,14 @@ Cuba tutup aplikasi lain yang menggunakan kamera.</translation>
     <message>
         <source>Changes your account&apos;s password. You will need to re-enter it on your other devices.</source>
         <translation>Tukar kata laluan akaun anda. Anda perlu log masuk semula di kesemua peranti anda yang lain.</translation>
+    </message>
+    <message>
+        <source>Multimedia Settings</source>
+        <translation type="unfinished">Tetapan Multimedia</translation>
+    </message>
+    <message>
+        <source>Configure photo, video and audio recording settings</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

@@ -92,6 +92,10 @@
         <source>Copy download URL</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Quote</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>ChatPage</name>
@@ -141,10 +145,6 @@
     </message>
     <message>
         <source>View profile</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Multimedia settings</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -334,6 +334,18 @@
         <source>Settings</source>
         <translation>Ezarpenak</translation>
     </message>
+    <message>
+        <source>Offline</source>
+        <translation type="unfinished">Lineaz kanpo</translation>
+    </message>
+    <message>
+        <source>Online</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Connecting…</source>
+        <translation type="unfinished">Konektatzen…</translation>
+    </message>
 </context>
 <context>
     <name>Kaidan</name>
@@ -379,7 +391,7 @@
     </message>
     <message>
         <source>Your Jabber-ID:</source>
-        <translation>Zure Jabber-IDa:</translation>
+        <translation type="vanished">Zure Jabber-IDa:</translation>
     </message>
     <message>
         <source>Your diaspora*-ID:</source>
@@ -387,7 +399,7 @@
     </message>
     <message>
         <source>user@example.org</source>
-        <translation>erabiltzailea@example.org</translation>
+        <translation type="vanished">erabiltzailea@example.org</translation>
     </message>
     <message>
         <source>user@diaspora.pod</source>
@@ -395,7 +407,7 @@
     </message>
     <message>
         <source>Your Password:</source>
-        <translation>Zure Pasahitza:</translation>
+        <translation type="vanished">Zure Pasahitza:</translation>
     </message>
     <message>
         <source>Connecting…</source>
@@ -407,35 +419,35 @@
     </message>
     <message>
         <source>Invalid username or password.</source>
-        <translation>Erabiltzaile edo pasahitz okerra.</translation>
+        <translation type="vanished">Erabiltzaile edo pasahitz okerra.</translation>
     </message>
     <message>
         <source>Cannot connect to the server. Please check your internet connection.</source>
-        <translation>Ezin da zerbitzarira konektatu. Mesedez egiaztatu zure internet konexioa.</translation>
+        <translation type="vanished">Ezin da zerbitzarira konektatu. Mesedez egiaztatu zure internet konexioa.</translation>
     </message>
     <message>
         <source>The server doesn&apos;t support secure connections.</source>
-        <translation>Zerbitzariak ez du konexio segururik onartzen.</translation>
+        <translation type="vanished">Zerbitzariak ez du konexio segururik onartzen.</translation>
     </message>
     <message>
         <source>Error while trying to connect securely.</source>
-        <translation>Akatsa segurtasunez konektatzerakoan.</translation>
+        <translation type="vanished">Akatsa segurtasunez konektatzerakoan.</translation>
     </message>
     <message>
         <source>Could not resolve the server&apos;s address. Please check your JID again.</source>
-        <translation>Ezin izan da zerbitzariaren helbidea ebatzi. Mesedez egiazta ezazu zure JIDa berriz.</translation>
+        <translation type="vanished">Ezin izan da zerbitzariaren helbidea ebatzi. Mesedez egiazta ezazu zure JIDa berriz.</translation>
     </message>
     <message>
         <source>Could not connect to the server.</source>
-        <translation>Ezin izan da zerbitzarira konektatu.</translation>
+        <translation type="vanished">Ezin izan da zerbitzarira konektatu.</translation>
     </message>
     <message>
         <source>Authentification protocol not supported by the server.</source>
-        <translation>Autentifikazio protokoloa ez da zerbitzariarekin bateragarria.</translation>
+        <translation type="vanished">Autentifikazio protokoloa ez da zerbitzariarekin bateragarria.</translation>
     </message>
     <message>
         <source>An unknown error occured; see log for details.</source>
-        <translation>Akats ezezagun bat gertatu da; ikusi xehetasunak log edo erregistroetan.</translation>
+        <translation type="vanished">Akats ezezagun bat gertatu da; ikusi xehetasunak log edo erregistroetan.</translation>
     </message>
     <message>
         <source>Log in using a QR-Code</source>
@@ -536,7 +548,7 @@
     </message>
 </context>
 <context>
-    <name>MultimediaSettingsPage</name>
+    <name>MultimediaSettings</name>
     <message>
         <source>Multimedia Settings</source>
         <translation type="unfinished"></translation>
@@ -623,6 +635,21 @@
     </message>
 </context>
 <context>
+    <name>MultimediaSettingsPage</name>
+    <message>
+        <source>Image</source>
+        <translation type="obsolete">Irudia</translation>
+    </message>
+    <message>
+        <source>Audio</source>
+        <translation type="obsolete">Audioa</translation>
+    </message>
+    <message>
+        <source>Video</source>
+        <translation type="obsolete">Bideoa</translation>
+    </message>
+</context>
+<context>
     <name>NewMedia</name>
     <message>
         <source>Ready</source>
@@ -677,6 +704,42 @@
     </message>
     <message>
         <source>Invisible</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Invalid username or password.</source>
+        <translation type="unfinished">Erabiltzaile edo pasahitz okerra.</translation>
+    </message>
+    <message>
+        <source>Cannot connect to the server. Please check your internet connection.</source>
+        <translation type="unfinished">Ezin da zerbitzarira konektatu. Mesedez egiaztatu zure internet konexioa.</translation>
+    </message>
+    <message>
+        <source>The server doesn&apos;t support secure connections.</source>
+        <translation type="unfinished">Zerbitzariak ez du konexio segururik onartzen.</translation>
+    </message>
+    <message>
+        <source>Error while trying to connect securely.</source>
+        <translation type="unfinished">Akatsa segurtasunez konektatzerakoan.</translation>
+    </message>
+    <message>
+        <source>Could not resolve the server&apos;s address. Please check your server name.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Could not connect to the server.</source>
+        <translation type="unfinished">Ezin izan da zerbitzarira konektatu.</translation>
+    </message>
+    <message>
+        <source>Authentification protocol not supported by the server.</source>
+        <translation type="unfinished">Autentifikazio protokoloa ez da zerbitzariarekin bateragarria.</translation>
+    </message>
+    <message>
+        <source>This server does not support registration.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>An unknown error occured.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -897,6 +960,14 @@ Try to close other applications using the camera.</source>
     <message>
         <source>Changes your account&apos;s password. You will need to re-enter it on your other devices.</source>
         <translation>Zure kontuaren pasahitza aldatzen du. Zure gainontzeko gailuetan berriro sartu beharko duzu.</translation>
+    </message>
+    <message>
+        <source>Multimedia Settings</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Configure photo, video and audio recording settings</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

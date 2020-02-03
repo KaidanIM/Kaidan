@@ -81,6 +81,10 @@
         <source>Copy download URL</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Quote</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>ChatPage</name>
@@ -130,10 +134,6 @@
     </message>
     <message>
         <source>View profile</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Multimedia settings</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -301,6 +301,18 @@
         <source>Settings</source>
         <translation>Configuració</translation>
     </message>
+    <message>
+        <source>Offline</source>
+        <translation type="unfinished">Fora de línia</translation>
+    </message>
+    <message>
+        <source>Online</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Connecting…</source>
+        <translation type="unfinished">Connectant…</translation>
+    </message>
 </context>
 <context>
     <name>Kaidan</name>
@@ -330,15 +342,15 @@
     </message>
     <message>
         <source>Your Jabber-ID:</source>
-        <translation>El vostre ID de Jabber:</translation>
+        <translation type="vanished">El vostre ID de Jabber:</translation>
     </message>
     <message>
         <source>user@example.org</source>
-        <translation>usuari@exemple.org</translation>
+        <translation type="vanished">usuari@exemple.org</translation>
     </message>
     <message>
         <source>Your Password:</source>
-        <translation>La vostra contrasenya:</translation>
+        <translation type="vanished">La vostra contrasenya:</translation>
     </message>
     <message>
         <source>Connecting…</source>
@@ -350,35 +362,35 @@
     </message>
     <message>
         <source>Invalid username or password.</source>
-        <translation>Usuari o contrasenya invàlids.</translation>
+        <translation type="vanished">Usuari o contrasenya invàlids.</translation>
     </message>
     <message>
         <source>Cannot connect to the server. Please check your internet connection.</source>
-        <translation>No s&apos;ha pogut connectar al servidor. Comproveu la vostra connexió a internet.</translation>
+        <translation type="vanished">No s&apos;ha pogut connectar al servidor. Comproveu la vostra connexió a internet.</translation>
     </message>
     <message>
         <source>The server doesn&apos;t support secure connections.</source>
-        <translation>El servidor no és compatible amb connexions segures.</translation>
+        <translation type="vanished">El servidor no és compatible amb connexions segures.</translation>
     </message>
     <message>
         <source>Error while trying to connect securely.</source>
-        <translation>S&apos;ha produït un error provant de connectar de forma segura.</translation>
+        <translation type="vanished">S&apos;ha produït un error provant de connectar de forma segura.</translation>
     </message>
     <message>
         <source>Could not resolve the server&apos;s address. Please check your JID again.</source>
-        <translation>No s&apos;ha pogut resoldre l&apos;adreça del servidor. Torneu a comprovar el vostre IDJ.</translation>
+        <translation type="vanished">No s&apos;ha pogut resoldre l&apos;adreça del servidor. Torneu a comprovar el vostre IDJ.</translation>
     </message>
     <message>
         <source>Could not connect to the server.</source>
-        <translation>No s&apos;ha pogut connectar al servidor.</translation>
+        <translation type="vanished">No s&apos;ha pogut connectar al servidor.</translation>
     </message>
     <message>
         <source>Authentification protocol not supported by the server.</source>
-        <translation>Protocol d&apos;autenticació no compatible amb el servidor.</translation>
+        <translation type="vanished">Protocol d&apos;autenticació no compatible amb el servidor.</translation>
     </message>
     <message>
         <source>An unknown error occured; see log for details.</source>
-        <translation>S&apos;ha produït un error desconegut. Vegeu el registre per més detalls.</translation>
+        <translation type="vanished">S&apos;ha produït un error desconegut. Vegeu el registre per més detalls.</translation>
     </message>
     <message>
         <source>Log in using a QR-Code</source>
@@ -479,7 +491,7 @@
     </message>
 </context>
 <context>
-    <name>MultimediaSettingsPage</name>
+    <name>MultimediaSettings</name>
     <message>
         <source>Multimedia Settings</source>
         <translation type="unfinished"></translation>
@@ -566,6 +578,21 @@
     </message>
 </context>
 <context>
+    <name>MultimediaSettingsPage</name>
+    <message>
+        <source>Image</source>
+        <translation type="obsolete">Imatge</translation>
+    </message>
+    <message>
+        <source>Audio</source>
+        <translation type="obsolete">Àudio</translation>
+    </message>
+    <message>
+        <source>Video</source>
+        <translation type="obsolete">Vídeo</translation>
+    </message>
+</context>
+<context>
     <name>NewMedia</name>
     <message>
         <source>Ready</source>
@@ -620,6 +647,42 @@
     </message>
     <message>
         <source>Invisible</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Invalid username or password.</source>
+        <translation type="unfinished">Usuari o contrasenya invàlids.</translation>
+    </message>
+    <message>
+        <source>Cannot connect to the server. Please check your internet connection.</source>
+        <translation type="unfinished">No s&apos;ha pogut connectar al servidor. Comproveu la vostra connexió a internet.</translation>
+    </message>
+    <message>
+        <source>The server doesn&apos;t support secure connections.</source>
+        <translation type="unfinished">El servidor no és compatible amb connexions segures.</translation>
+    </message>
+    <message>
+        <source>Error while trying to connect securely.</source>
+        <translation type="unfinished">S&apos;ha produït un error provant de connectar de forma segura.</translation>
+    </message>
+    <message>
+        <source>Could not resolve the server&apos;s address. Please check your server name.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Could not connect to the server.</source>
+        <translation type="unfinished">No s&apos;ha pogut connectar al servidor.</translation>
+    </message>
+    <message>
+        <source>Authentification protocol not supported by the server.</source>
+        <translation type="unfinished">Protocol d&apos;autenticació no compatible amb el servidor.</translation>
+    </message>
+    <message>
+        <source>This server does not support registration.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>An unknown error occured.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -836,6 +899,14 @@ Try to close other applications using the camera.</source>
     <message>
         <source>Changes your account&apos;s password. You will need to re-enter it on your other devices.</source>
         <translation>Canvia la contrasenya del vostre compte. Haureu de tornar a introduir-la als altres dispositius.</translation>
+    </message>
+    <message>
+        <source>Multimedia Settings</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Configure photo, video and audio recording settings</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

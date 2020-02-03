@@ -81,6 +81,10 @@
         <source>Copy download URL</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Quote</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>ChatPage</name>
@@ -130,10 +134,6 @@
     </message>
     <message>
         <source>View profile</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Multimedia settings</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -301,6 +301,18 @@
         <source>Settings</source>
         <translation>Impostazioni</translation>
     </message>
+    <message>
+        <source>Offline</source>
+        <translation type="unfinished">Non in linea</translation>
+    </message>
+    <message>
+        <source>Online</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Connecting…</source>
+        <translation type="unfinished">Connessione…</translation>
+    </message>
 </context>
 <context>
     <name>Kaidan</name>
@@ -330,7 +342,7 @@
     </message>
     <message>
         <source>Your Jabber-ID:</source>
-        <translation>Il tuo Jabber-ID:</translation>
+        <translation type="vanished">Il tuo Jabber-ID:</translation>
     </message>
     <message>
         <source>Your diaspora*-ID:</source>
@@ -338,11 +350,11 @@
     </message>
     <message>
         <source>user@example.org</source>
-        <translation>nome@esempio.org</translation>
+        <translation type="vanished">nome@esempio.org</translation>
     </message>
     <message>
         <source>Your Password:</source>
-        <translation>La tua password:</translation>
+        <translation type="vanished">La tua password:</translation>
     </message>
     <message>
         <source>Connecting…</source>
@@ -354,35 +366,35 @@
     </message>
     <message>
         <source>Invalid username or password.</source>
-        <translation>Nome utente o password non validi.</translation>
+        <translation type="vanished">Nome utente o password non validi.</translation>
     </message>
     <message>
         <source>Cannot connect to the server. Please check your internet connection.</source>
-        <translation>Impossibile connettersi al server. Per favore controlla la tua connessione a internet.</translation>
+        <translation type="vanished">Impossibile connettersi al server. Per favore controlla la tua connessione a internet.</translation>
     </message>
     <message>
         <source>The server doesn&apos;t support secure connections.</source>
-        <translation>Il server non supporta connessioni sicure.</translation>
+        <translation type="vanished">Il server non supporta connessioni sicure.</translation>
     </message>
     <message>
         <source>Error while trying to connect securely.</source>
-        <translation>Errore durante il tentativo di connessione sicura.</translation>
+        <translation type="vanished">Errore durante il tentativo di connessione sicura.</translation>
     </message>
     <message>
         <source>Could not resolve the server&apos;s address. Please check your JID again.</source>
-        <translation>Impossibile risolvere l&apos;indirizzo del server. Per favore, controlla di nuovo il tuo JID.</translation>
+        <translation type="vanished">Impossibile risolvere l&apos;indirizzo del server. Per favore, controlla di nuovo il tuo JID.</translation>
     </message>
     <message>
         <source>Could not connect to the server.</source>
-        <translation>Non posso connettermi al server.</translation>
+        <translation type="vanished">Non posso connettermi al server.</translation>
     </message>
     <message>
         <source>Authentification protocol not supported by the server.</source>
-        <translation>Protocollo di autenticazione non supportato dal server.</translation>
+        <translation type="vanished">Protocollo di autenticazione non supportato dal server.</translation>
     </message>
     <message>
         <source>An unknown error occured; see log for details.</source>
-        <translation>Si è verificato un errore sconosciuto; per i dettagli guarda il registro.</translation>
+        <translation type="vanished">Si è verificato un errore sconosciuto; per i dettagli guarda il registro.</translation>
     </message>
     <message>
         <source>Log in using a QR-Code</source>
@@ -483,7 +495,7 @@
     </message>
 </context>
 <context>
-    <name>MultimediaSettingsPage</name>
+    <name>MultimediaSettings</name>
     <message>
         <source>Multimedia Settings</source>
         <translation type="unfinished"></translation>
@@ -518,15 +530,15 @@
     </message>
     <message>
         <source>Image</source>
-        <translation>Immagine</translation>
+        <translation type="unfinished">Immagine</translation>
     </message>
     <message>
         <source>Audio</source>
-        <translation>Audio</translation>
+        <translation type="unfinished">Audio</translation>
     </message>
     <message>
         <source>Video</source>
-        <translation>Video</translation>
+        <translation type="unfinished">Video</translation>
     </message>
     <message>
         <source>Codec</source>
@@ -567,6 +579,21 @@
     <message>
         <source>Paused</source>
         <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>MultimediaSettingsPage</name>
+    <message>
+        <source>Image</source>
+        <translation type="vanished">Immagine</translation>
+    </message>
+    <message>
+        <source>Audio</source>
+        <translation type="vanished">Audio</translation>
+    </message>
+    <message>
+        <source>Video</source>
+        <translation type="vanished">Video</translation>
     </message>
 </context>
 <context>
@@ -624,6 +651,42 @@
     </message>
     <message>
         <source>Invisible</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Invalid username or password.</source>
+        <translation type="unfinished">Nome utente o password non validi.</translation>
+    </message>
+    <message>
+        <source>Cannot connect to the server. Please check your internet connection.</source>
+        <translation type="unfinished">Impossibile connettersi al server. Per favore controlla la tua connessione a internet.</translation>
+    </message>
+    <message>
+        <source>The server doesn&apos;t support secure connections.</source>
+        <translation type="unfinished">Il server non supporta connessioni sicure.</translation>
+    </message>
+    <message>
+        <source>Error while trying to connect securely.</source>
+        <translation type="unfinished">Errore durante il tentativo di connessione sicura.</translation>
+    </message>
+    <message>
+        <source>Could not resolve the server&apos;s address. Please check your server name.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Could not connect to the server.</source>
+        <translation type="unfinished">Non posso connettermi al server.</translation>
+    </message>
+    <message>
+        <source>Authentification protocol not supported by the server.</source>
+        <translation type="unfinished">Protocollo di autenticazione non supportato dal server.</translation>
+    </message>
+    <message>
+        <source>This server does not support registration.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>An unknown error occured.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -840,6 +903,14 @@ Try to close other applications using the camera.</source>
     <message>
         <source>Changes your account&apos;s password. You will need to re-enter it on your other devices.</source>
         <translation>Cambia la password del tuo account. Dovrai reinserirla negli altri tuoi dispositivi.</translation>
+    </message>
+    <message>
+        <source>Multimedia Settings</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Configure photo, video and audio recording settings</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

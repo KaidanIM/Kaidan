@@ -107,6 +107,10 @@
         <source>Copy download URL</source>
         <translation>Kopiëer downloadlink</translation>
     </message>
+    <message>
+        <source>Quote</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>ChatPage</name>
@@ -161,10 +165,6 @@
     <message>
         <source>View profile</source>
         <translation>Profiel bekijken</translation>
-    </message>
-    <message>
-        <source>Multimedia settings</source>
-        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Search</source>
@@ -349,6 +349,18 @@
         <source>Settings</source>
         <translation>Instellingen</translation>
     </message>
+    <message>
+        <source>Offline</source>
+        <translation type="unfinished">Offline</translation>
+    </message>
+    <message>
+        <source>Online</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Connecting…</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>Kaidan</name>
@@ -378,7 +390,7 @@
     </message>
     <message>
         <source>Your Jabber-ID:</source>
-        <translation>Uw Jabber-ID:</translation>
+        <translation type="vanished">Uw Jabber-ID:</translation>
     </message>
     <message>
         <source>Your diaspora*-ID:</source>
@@ -386,7 +398,7 @@
     </message>
     <message>
         <source>user@example.org</source>
-        <translation>gebruiker@voorbeeld.nl</translation>
+        <translation type="vanished">gebruiker@voorbeeld.nl</translation>
     </message>
     <message>
         <source>user@diaspora.pod</source>
@@ -394,7 +406,7 @@
     </message>
     <message>
         <source>Your Password:</source>
-        <translation>Uw Wachtwoord:</translation>
+        <translation type="vanished">Uw Wachtwoord:</translation>
     </message>
     <message>
         <source>Retry</source>
@@ -414,35 +426,35 @@
     </message>
     <message>
         <source>Invalid username or password.</source>
-        <translation>Ongeldige gebruikersnaam of wachtwoord.</translation>
+        <translation type="vanished">Ongeldige gebruikersnaam of wachtwoord.</translation>
     </message>
     <message>
         <source>Cannot connect to the server. Please check your internet connection.</source>
-        <translation>Kan geen verbinding maken met de server. Controleer uw internetverbinding.</translation>
+        <translation type="vanished">Kan geen verbinding maken met de server. Controleer uw internetverbinding.</translation>
     </message>
     <message>
         <source>The server doesn&apos;t support secure connections.</source>
-        <translation>De server ondersteunt geen beveiligde verbindingen.</translation>
+        <translation type="vanished">De server ondersteunt geen beveiligde verbindingen.</translation>
     </message>
     <message>
         <source>Error while trying to connect securely.</source>
-        <translation>Fout bij het maken van een beveiligde verbinding.</translation>
+        <translation type="vanished">Fout bij het maken van een beveiligde verbinding.</translation>
     </message>
     <message>
         <source>Could not resolve the server&apos;s address. Please check your JID again.</source>
-        <translation>Kan het adres van de server niet oplossen. Controleer uw JID opnieuw.</translation>
+        <translation type="vanished">Kan het adres van de server niet oplossen. Controleer uw JID opnieuw.</translation>
     </message>
     <message>
         <source>Could not connect to the server.</source>
-        <translation>Kan geen verbinding maken met de server.</translation>
+        <translation type="vanished">Kan geen verbinding maken met de server.</translation>
     </message>
     <message>
         <source>Authentification protocol not supported by the server.</source>
-        <translation>Authenticatieprotocol niet ondersteund door de server.</translation>
+        <translation type="vanished">Authenticatieprotocol niet ondersteund door de server.</translation>
     </message>
     <message>
         <source>An unknown error occured; see log for details.</source>
-        <translation>Er is een onbekende fout opgetreden; zie logboek voor details.</translation>
+        <translation type="vanished">Er is een onbekende fout opgetreden; zie logboek voor details.</translation>
     </message>
     <message>
         <source>Log in using a QR-Code</source>
@@ -543,7 +555,7 @@
     </message>
 </context>
 <context>
-    <name>MultimediaSettingsPage</name>
+    <name>MultimediaSettings</name>
     <message>
         <source>Multimedia Settings</source>
         <translation type="unfinished"></translation>
@@ -630,6 +642,21 @@
     </message>
 </context>
 <context>
+    <name>MultimediaSettingsPage</name>
+    <message>
+        <source>Image</source>
+        <translation type="obsolete">Afbeelding</translation>
+    </message>
+    <message>
+        <source>Audio</source>
+        <translation type="obsolete">Geluid</translation>
+    </message>
+    <message>
+        <source>Video</source>
+        <translation type="obsolete">Video</translation>
+    </message>
+</context>
+<context>
     <name>NewMedia</name>
     <message>
         <source>Ready</source>
@@ -685,6 +712,42 @@
     <message>
         <source>Invisible</source>
         <translation>Niet zichtbaar</translation>
+    </message>
+    <message>
+        <source>Invalid username or password.</source>
+        <translation type="unfinished">Ongeldige gebruikersnaam of wachtwoord.</translation>
+    </message>
+    <message>
+        <source>Cannot connect to the server. Please check your internet connection.</source>
+        <translation type="unfinished">Kan geen verbinding maken met de server. Controleer uw internetverbinding.</translation>
+    </message>
+    <message>
+        <source>The server doesn&apos;t support secure connections.</source>
+        <translation type="unfinished">De server ondersteunt geen beveiligde verbindingen.</translation>
+    </message>
+    <message>
+        <source>Error while trying to connect securely.</source>
+        <translation type="unfinished">Fout bij het maken van een beveiligde verbinding.</translation>
+    </message>
+    <message>
+        <source>Could not resolve the server&apos;s address. Please check your server name.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Could not connect to the server.</source>
+        <translation type="unfinished">Kan geen verbinding maken met de server.</translation>
+    </message>
+    <message>
+        <source>Authentification protocol not supported by the server.</source>
+        <translation type="unfinished">Authenticatieprotocol niet ondersteund door de server.</translation>
+    </message>
+    <message>
+        <source>This server does not support registration.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>An unknown error occured.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -909,6 +972,14 @@ Probeer andere applicaties die de camera gebruiken te sluiten.</translation>
     <message>
         <source>Changes your account&apos;s password. You will need to re-enter it on your other devices.</source>
         <translation>Deze instelling verandert het wachtwoord van uw account. Als u ingelogd bent op andere apparaten zult u het daar opnieuw in moeten voeren.</translation>
+    </message>
+    <message>
+        <source>Multimedia Settings</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Configure photo, video and audio recording settings</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

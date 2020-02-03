@@ -134,6 +134,10 @@
         <source>Copy download URL</source>
         <translation>Download-Link kopieren</translation>
     </message>
+    <message>
+        <source>Quote</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>ChatPage</name>
@@ -195,7 +199,7 @@
     </message>
     <message>
         <source>Multimedia settings</source>
-        <translation>Multimedia Einstellungen</translation>
+        <translation type="vanished">Multimedia Einstellungen</translation>
     </message>
     <message>
         <source>Search</source>
@@ -392,6 +396,18 @@
         <source>Settings</source>
         <translation>Einstellungen</translation>
     </message>
+    <message>
+        <source>Offline</source>
+        <translation type="unfinished">Offline</translation>
+    </message>
+    <message>
+        <source>Online</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Connecting…</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>Kaidan</name>
@@ -441,15 +457,15 @@
     <name>LoginPage</name>
     <message>
         <source>Your Jabber-ID:</source>
-        <translation>Deine Jabber-ID:</translation>
+        <translation type="vanished">Deine Jabber-ID:</translation>
     </message>
     <message>
         <source>user@example.org</source>
-        <translation>user@beispiel.org</translation>
+        <translation type="vanished">user@beispiel.org</translation>
     </message>
     <message>
         <source>Your Password:</source>
-        <translation>Dein Passwort:</translation>
+        <translation type="vanished">Dein Passwort:</translation>
     </message>
     <message>
         <source>Password</source>
@@ -485,35 +501,35 @@
     </message>
     <message>
         <source>Invalid username or password.</source>
-        <translation>Falscher Benutzername oder falsches Passwort.</translation>
+        <translation type="vanished">Falscher Benutzername oder falsches Passwort.</translation>
     </message>
     <message>
         <source>Cannot connect to the server. Please check your internet connection.</source>
-        <translation>Konnte nicht zum Server verbinden. Überprüfen Sie Ihre Internetverbindung.</translation>
+        <translation type="vanished">Konnte nicht zum Server verbinden. Überprüfen Sie Ihre Internetverbindung.</translation>
     </message>
     <message>
         <source>The server doesn&apos;t support secure connections.</source>
-        <translation>Dieser Server unterstützt keine sicheren Verbindungen.</translation>
+        <translation type="vanished">Dieser Server unterstützt keine sicheren Verbindungen.</translation>
     </message>
     <message>
         <source>Error while trying to connect securely.</source>
-        <translation>Fehler bei der Herstellung einer sicheren Verbindung.</translation>
+        <translation type="vanished">Fehler bei der Herstellung einer sicheren Verbindung.</translation>
     </message>
     <message>
         <source>Could not resolve the server&apos;s address. Please check your JID again.</source>
-        <translation>Konnte den Servernamen nicht auflösen. Bitte überprüfen sie Ihre JID.</translation>
+        <translation type="vanished">Konnte den Servernamen nicht auflösen. Bitte überprüfen sie Ihre JID.</translation>
     </message>
     <message>
         <source>Could not connect to the server.</source>
-        <translation>Konnte nicht mit dem Server verbinden.</translation>
+        <translation type="vanished">Konnte nicht mit dem Server verbinden.</translation>
     </message>
     <message>
         <source>Authentification protocol not supported by the server.</source>
-        <translation>Authentifizierungsprotokolle nicht vom Server unterstützt.</translation>
+        <translation type="vanished">Authentifizierungsprotokolle nicht vom Server unterstützt.</translation>
     </message>
     <message>
         <source>An unknown error occured; see log for details.</source>
-        <translation>Ein unbekannter Fehler ist aufgetreten: Sehen Sie die Logdatei für mehr Details ein.</translation>
+        <translation type="vanished">Ein unbekannter Fehler ist aufgetreten: Sehen Sie die Logdatei für mehr Details ein.</translation>
     </message>
     <message>
         <source>Log in using a QR-Code</source>
@@ -614,90 +630,177 @@
     </message>
 </context>
 <context>
-    <name>MultimediaSettingsPage</name>
+    <name>MultimediaSettings</name>
     <message>
         <source>Multimedia Settings</source>
-        <translation>Multimedia-Einstellungen</translation>
+        <translation type="unfinished">Multimedia-Einstellungen</translation>
     </message>
     <message>
         <source>Configure</source>
-        <translation>Konfigurieren</translation>
+        <translation type="unfinished">Konfigurieren</translation>
     </message>
     <message>
         <source>Image Capture</source>
-        <translation>Bild Aufnahme</translation>
+        <translation type="unfinished">Bild Aufnahme</translation>
     </message>
     <message>
         <source>Audio Recording</source>
-        <translation>Audio Aufnahme</translation>
+        <translation type="unfinished">Audio Aufnahme</translation>
     </message>
     <message>
         <source>Video Recording</source>
-        <translation>Video Aufnahme</translation>
+        <translation type="unfinished">Video Aufnahme</translation>
     </message>
     <message>
         <source>Camera</source>
-        <translation>Kamera</translation>
+        <translation type="unfinished">Kamera</translation>
     </message>
     <message>
         <source>Audio input</source>
-        <translation>Audio Eingabe</translation>
+        <translation type="unfinished">Audio Eingabe</translation>
     </message>
     <message>
         <source>Container</source>
-        <translation>Container</translation>
+        <translation type="unfinished">Container</translation>
     </message>
     <message>
         <source>Image</source>
-        <translation>Bild</translation>
+        <translation type="unfinished">Bild</translation>
     </message>
     <message>
         <source>Audio</source>
-        <translation>Ton</translation>
+        <translation type="unfinished">Ton</translation>
     </message>
     <message>
         <source>Video</source>
-        <translation>Video</translation>
+        <translation type="unfinished">Video</translation>
     </message>
     <message>
         <source>Codec</source>
-        <translation>Codec</translation>
+        <translation type="unfinished">Codec</translation>
     </message>
     <message>
         <source>Resolution</source>
-        <translation>Auflösung</translation>
+        <translation type="unfinished">Auflösung</translation>
     </message>
     <message>
         <source>Quality</source>
-        <translation>Qualität</translation>
+        <translation type="unfinished">Qualität</translation>
     </message>
     <message>
         <source>Sample Rate</source>
-        <translation>Abtastrate</translation>
+        <translation type="unfinished">Abtastrate</translation>
     </message>
     <message>
         <source>Frame Rate</source>
-        <translation>Bildrate</translation>
+        <translation type="unfinished">Bildrate</translation>
     </message>
     <message>
         <source>Ready</source>
-        <translation>Bereit</translation>
+        <translation type="unfinished">Bereit</translation>
     </message>
     <message>
         <source>Initializing...</source>
-        <translation>Initialisieren...</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Unavailable</source>
-        <translation>Nicht verfügbar</translation>
+        <translation type="unfinished">Nicht verfügbar</translation>
     </message>
     <message>
         <source>Recording...</source>
-        <translation>Aufnahme...</translation>
+        <translation type="unfinished">Aufnahme...</translation>
     </message>
     <message>
         <source>Paused</source>
-        <translation>Pausiert</translation>
+        <translation type="unfinished">Pausiert</translation>
+    </message>
+</context>
+<context>
+    <name>MultimediaSettingsPage</name>
+    <message>
+        <source>Multimedia Settings</source>
+        <translation type="vanished">Multimedia-Einstellungen</translation>
+    </message>
+    <message>
+        <source>Configure</source>
+        <translation type="vanished">Konfigurieren</translation>
+    </message>
+    <message>
+        <source>Image Capture</source>
+        <translation type="vanished">Bild Aufnahme</translation>
+    </message>
+    <message>
+        <source>Audio Recording</source>
+        <translation type="vanished">Audio Aufnahme</translation>
+    </message>
+    <message>
+        <source>Video Recording</source>
+        <translation type="vanished">Video Aufnahme</translation>
+    </message>
+    <message>
+        <source>Camera</source>
+        <translation type="vanished">Kamera</translation>
+    </message>
+    <message>
+        <source>Audio input</source>
+        <translation type="vanished">Audio Eingabe</translation>
+    </message>
+    <message>
+        <source>Container</source>
+        <translation type="vanished">Container</translation>
+    </message>
+    <message>
+        <source>Image</source>
+        <translation type="vanished">Bild</translation>
+    </message>
+    <message>
+        <source>Audio</source>
+        <translation type="vanished">Ton</translation>
+    </message>
+    <message>
+        <source>Video</source>
+        <translation type="vanished">Video</translation>
+    </message>
+    <message>
+        <source>Codec</source>
+        <translation type="vanished">Codec</translation>
+    </message>
+    <message>
+        <source>Resolution</source>
+        <translation type="vanished">Auflösung</translation>
+    </message>
+    <message>
+        <source>Quality</source>
+        <translation type="vanished">Qualität</translation>
+    </message>
+    <message>
+        <source>Sample Rate</source>
+        <translation type="vanished">Abtastrate</translation>
+    </message>
+    <message>
+        <source>Frame Rate</source>
+        <translation type="vanished">Bildrate</translation>
+    </message>
+    <message>
+        <source>Ready</source>
+        <translation type="vanished">Bereit</translation>
+    </message>
+    <message>
+        <source>Initializing...</source>
+        <translation type="vanished">Initialisieren...</translation>
+    </message>
+    <message>
+        <source>Unavailable</source>
+        <translation type="vanished">Nicht verfügbar</translation>
+    </message>
+    <message>
+        <source>Recording...</source>
+        <translation type="vanished">Aufnahme...</translation>
+    </message>
+    <message>
+        <source>Paused</source>
+        <translation type="vanished">Pausiert</translation>
     </message>
 </context>
 <context>
@@ -756,6 +859,42 @@
     <message>
         <source>Invisible</source>
         <translation>Unsichtbar</translation>
+    </message>
+    <message>
+        <source>Invalid username or password.</source>
+        <translation type="unfinished">Falscher Benutzername oder falsches Passwort.</translation>
+    </message>
+    <message>
+        <source>Cannot connect to the server. Please check your internet connection.</source>
+        <translation type="unfinished">Konnte nicht zum Server verbinden. Überprüfen Sie Ihre Internetverbindung.</translation>
+    </message>
+    <message>
+        <source>The server doesn&apos;t support secure connections.</source>
+        <translation type="unfinished">Dieser Server unterstützt keine sicheren Verbindungen.</translation>
+    </message>
+    <message>
+        <source>Error while trying to connect securely.</source>
+        <translation type="unfinished">Fehler bei der Herstellung einer sicheren Verbindung.</translation>
+    </message>
+    <message>
+        <source>Could not resolve the server&apos;s address. Please check your server name.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Could not connect to the server.</source>
+        <translation type="unfinished">Konnte nicht mit dem Server verbinden.</translation>
+    </message>
+    <message>
+        <source>Authentification protocol not supported by the server.</source>
+        <translation type="unfinished">Authentifizierungsprotokolle nicht vom Server unterstützt.</translation>
+    </message>
+    <message>
+        <source>This server does not support registration.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>An unknown error occured.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -984,6 +1123,14 @@ Versuche andere Programme, welche die Kamera verwenden, zu schließen.</translat
     <message>
         <source>Changes your account&apos;s password. You will need to re-enter it on your other devices.</source>
         <translation>Das Passwort Ihres Kontos ändern. Sie werden das neue Passwort auf allen anderen Geräten neu eingeben müssen.</translation>
+    </message>
+    <message>
+        <source>Multimedia Settings</source>
+        <translation type="unfinished">Multimedia-Einstellungen</translation>
+    </message>
+    <message>
+        <source>Configure photo, video and audio recording settings</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

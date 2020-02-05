@@ -40,7 +40,7 @@ import "settings"
 Kirigami.GlobalDrawer {
 	id: globalDrawer
 	title: Utils.applicationDisplayName()
-	titleIcon: Utils.getResourcePath("images/Kaidan.svg")
+	titleIcon: Utils.getResourcePath("images/kaidan.svg")
 	bannerImageSource: Utils.getResourcePath("images/banner.png")
 
 	SettingsSheet {

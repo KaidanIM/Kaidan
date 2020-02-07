@@ -4,7 +4,6 @@ kaidan_automoc.cpp
 misc/ubuntu-touch/manifest.json
 misc/windows/*-kaidan.png
 misc/macos/kaidan.iconset
-misc/android/res/mipmap-*
 
 3rdparty/openssl
 3rdparty/qxmpp

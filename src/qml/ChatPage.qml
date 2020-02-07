@@ -659,4 +659,11 @@ ChatPageBase {
 			}
 		}
 	}
+
+	Component.onCompleted: {
+		// This makes it possible on desktop devices to directly enter a message after opening the chat page.
+		// It is not used on mobile devices because the soft keyboard would otherwise always pop up after opening the chat page.
+		if (!Kirigami.Settings.isMobile)
+			messageField.forceActiveFocus()
+	}
 }

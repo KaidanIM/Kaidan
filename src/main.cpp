@@ -294,22 +294,20 @@ Q_DECL_EXPORT int main(int argc, char *argv[])
 	}
 #endif
 
-
 	//
 	// Kaidan back-end
 	//
-
-	Kaidan kaidan(&app, !parser.isSet("disable-xml-log"));
+	auto *kaidan = new Kaidan(&app, !parser.isSet("disable-xml-log"));
 
 #if !defined(Q_OS_IOS) && !defined(Q_OS_ANDROID)
 	// receive messages from other instances of Kaidan
 	Kaidan::connect(&app, &SingleApplication::receivedMessage,
-			&kaidan, &Kaidan::receiveMessage);
+	                kaidan, &Kaidan::receiveMessage);
 #endif
 
 	// open the XMPP-URI/link (if given)
 	if (!parser.positionalArguments().isEmpty())
-		kaidan.addOpenUri(parser.positionalArguments().first());
+		kaidan->addOpenUri(parser.positionalArguments().first());
 
 	//
 	// QML-GUI

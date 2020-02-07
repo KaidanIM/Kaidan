@@ -142,7 +142,7 @@ Kirigami.ApplicationWindow {
 	Component.onCompleted: {
 		Kaidan.passiveNotificationRequested.connect(passiveNotification)
 		Kaidan.newCredentialsNeeded.connect(openLoginPage)
-		Kaidan.logInWorked.connect(openChatView)
+		Kaidan.loggedInWithNewCredentials.connect(openChatView)
 		Kaidan.subscriptionRequestReceived.connect(handleSubRequest)
 
 		openChatView()
@@ -154,7 +154,7 @@ Kirigami.ApplicationWindow {
 	Component.onDestruction: {
 		Kaidan.passiveNotificationRequested.disconnect(passiveNotification)
 		Kaidan.newCredentialsNeeded.disconnect(openLoginPage)
-		Kaidan.logInWorked.disconnect(openChatView)
+		Kaidan.loggedInWithNewCredentials.disconnect(openChatView)
 		Kaidan.subscriptionRequestReceived.disconnect(handleSubRequest)
 	}
 }

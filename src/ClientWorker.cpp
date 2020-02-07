@@ -123,7 +123,7 @@ void ClientWorker::onConnect()
 
 	// Emit signal, that logging in with these credentials has worked for the first time
 	if (creds.isFirstTry)
-		emit kaidan->logInWorked();
+		emit kaidan->loggedInWithNewCredentials();
 
 	// accept credentials and save them
 	creds.isFirstTry = false;

@@ -243,11 +243,11 @@ signals:
 	void newCredentialsNeeded();
 
 	/**
-	 * Emitted when log in worked with new credentials
+	 * Emitted when an authenticated connection to the server is established with new credentials for the first time.
 	 *
 	 * The client will be in connected state, when this is emitted.
 	 */
-	void logInWorked();
+	void loggedInWithNewCredentials();
 
 	/**
 	 * Show passive notification

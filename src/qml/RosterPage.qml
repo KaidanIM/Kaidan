@@ -89,15 +89,14 @@ Kirigami.ScrollablePage {
 		}
 	}
 
-	ListView {
-		verticalLayoutDirection: ListView.TopToBottom
+	TableView {
 		model: RosterFilterProxyModel {
 			id: filterModel
 			sourceModel: Kaidan.rosterModel
 		}
+		columnWidthProvider: function (column) { return root.width }
 		delegate: RosterListItem {
 			id: rosterItem
-			height: 65
 			name: model.name ? model.name : model.jid
 			jid: model.jid
 			lastMessage: model.lastMessage

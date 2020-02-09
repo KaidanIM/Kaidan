@@ -25,7 +25,7 @@ Kaidan is *not* finished yet, so don't expect it working as well as a finished
 client will do -- Many features are still missing, many things still need to be
 fixed and improved.
 
-For a list of supported XEPs, have a look at the [Wiki][supp-xeps].
+For a list of supported XEPs, have a look at the [Website][supp-xeps].
 
 ## Installing Kaidan
 
@@ -62,5 +62,5 @@ If you are interested in contributing to Kaidan, please have a look at our [cont
 [qt]: https://www.qt.io/
 [openstore]: https://open-store.io/app/im.kaidan.kaidan
 [android]: https://www.kaidan.im/download/#android
-[supp-xeps]: https://invent.kde.org/kde/kaidan/wikis/Supported-XEPs
+[supp-xeps]: https://www.kaidan.im/features/
 [knotif]: https://api.kde.org/frameworks/knotifications/html/index.html

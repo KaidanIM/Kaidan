@@ -31,6 +31,8 @@
 // This file imports static plugin classes for static plugins
 #include <QtPlugin>
 
+#define QT_STATICPLUGIN
+
 #ifdef Q_OS_IOS
 Q_IMPORT_PLUGIN(QIOSIntegrationPlugin)
 Q_IMPORT_PLUGIN(QMacHeifPlugin)

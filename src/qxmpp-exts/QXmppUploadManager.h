@@ -98,16 +98,16 @@ private:
     QString m_customFileName;
     QFileInfo m_fileInfo;
 
-    int m_id;
+    int m_id = -1;
     QString m_requestId;
 
     QXmppHttpUploadRequestIq m_requestError;
     QXmppHttpUploadSlotIq m_slot;
 
     bool m_started = false;
-    qint64 m_bytesSent;
-    qint64 m_bytesTotal;
-    QNetworkReply::NetworkError m_uploadError;
+    qint64 m_bytesSent = -1;
+    qint64 m_bytesTotal = -1;
+    QNetworkReply::NetworkError m_uploadError = QNetworkReply::NoError;
     QNetworkAccessManager *m_netManager;
     QNetworkReply *m_putReply;
 };

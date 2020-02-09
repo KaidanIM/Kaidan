@@ -28,25 +28,36 @@
  *  along with Kaidan.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+#include "QXmppUploadManager.h"
+
 #include <QMimeDatabase>
 #include <QMimeType>
 #include <QMutexLocker>
 #include <QNetworkAccessManager>
-#include <QNetworkRequest>
 #include <QNetworkReply>
-#include "QXmppUploadManager.h"
+#include <QNetworkRequest>
 
 QXmppHttpUpload::QXmppHttpUpload(QXmppUploadManager *manager)
-    : QXmppLoggable(), m_manager(manager), m_netManager(new QNetworkAccessManager())
+    : QXmppLoggable(manager),
+      m_manager(manager),
+      m_netManager(new QNetworkAccessManager(this)),
+      m_putReply(nullptr)
 {
 }
 
 QXmppHttpUpload::QXmppHttpUpload(const QXmppHttpUpload &upload)
-    : QXmppLoggable(), m_manager(upload.m_manager), m_customFileName(upload.m_customFileName),
-    m_fileInfo(upload.m_fileInfo), m_requestId(upload.m_requestId),
-    m_requestError(upload.m_requestError), m_slot(upload.m_slot),
-    m_bytesSent(upload.m_bytesSent), m_bytesTotal(upload.m_bytesTotal),
-    m_uploadError(upload.m_uploadError), m_netManager(new QNetworkAccessManager())
+    : QXmppLoggable(upload.m_manager),
+      m_manager(upload.m_manager),
+      m_customFileName(upload.m_customFileName),
+      m_fileInfo(upload.m_fileInfo),
+      m_requestId(upload.m_requestId),
+      m_requestError(upload.m_requestError),
+      m_slot(upload.m_slot),
+      m_bytesSent(upload.m_bytesSent),
+      m_bytesTotal(upload.m_bytesTotal),
+      m_uploadError(upload.m_uploadError),
+      m_netManager(new QNetworkAccessManager(this)),
+      m_putReply(nullptr)
 {
 }
 

@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.3)
 set(CMAKE_CXX_STANDARD 14)
-set(QT_MIN_VERSION "5.10.0")
+set(QT_MIN_VERSION "5.12.0")
 
 if(POLICY CMP0071)
 	cmake_policy(SET CMP0071 NEW)
@@ -73,7 +73,7 @@ kde_enable_exceptions()
 
 # Find packages
 find_package(Qt5 ${QT_MIN_VERSION} REQUIRED NO_MODULE COMPONENTS Core Qml Quick Svg Sql QuickControls2 Xml Multimedia Positioning Location)
-find_package(KF5Kirigami2 REQUIRED)
+find_package(KF5Kirigami2 5.58.0 REQUIRED)
 find_package(ZXing REQUIRED COMPONENTS Core)
 find_package(QXmpp 1.0.0 REQUIRED)
 

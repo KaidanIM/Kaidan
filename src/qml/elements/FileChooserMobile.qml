@@ -28,8 +28,8 @@
  *  along with Kaidan.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-import QtQuick 2.7
-import QtQuick.Layouts 1.3
+import QtQuick 2.12
+import QtQuick.Layouts 1.12
 import org.kde.kirigami 2.8 as Kirigami
 import Qt.labs.folderlistmodel 2.1
 

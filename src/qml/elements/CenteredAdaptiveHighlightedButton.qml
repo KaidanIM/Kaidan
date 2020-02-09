@@ -28,7 +28,7 @@
  *  along with Kaidan.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-import QtQuick.Controls.Material 2.2 as Material
+import QtQuick.Controls.Material 2.12 as Material
 import org.kde.kirigami 2.8 as Kirigami
 
 /**

@@ -33,9 +33,9 @@
  * the user. It just displays the map in a rectangle.
  */
 
-import QtQuick 2.7
-import QtQuick.Layouts 1.3
-import QtLocation 5.3 as Location
+import QtQuick 2.12
+import QtQuick.Layouts 1.12
+import QtLocation 5.12 as Location
 import org.kde.kirigami 2.8 as Kirigami
 
 import im.kaidan.kaidan 1.0

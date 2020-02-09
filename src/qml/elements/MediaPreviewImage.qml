@@ -33,9 +33,9 @@
  * the user. It just displays the image in a rectangle.
  */
 
-import QtQuick 2.7
-import QtQuick.Layouts 1.3
-import QtQuick.Controls 2.3 as Controls
+import QtQuick 2.12
+import QtQuick.Layouts 1.12
+import QtQuick.Controls 2.12 as Controls
 import org.kde.kirigami 2.8 as Kirigami
 
 MediaPreview {

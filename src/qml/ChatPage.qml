@@ -28,11 +28,11 @@
  *  along with Kaidan.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-import QtQuick 2.7
-import QtQuick.Layouts 1.3
-import QtQuick.Controls 2.3 as Controls
-import QtGraphicalEffects 1.0
-import QtMultimedia 5.8 as Multimedia
+import QtQuick 2.12
+import QtQuick.Layouts 1.12
+import QtQuick.Controls 2.12 as Controls
+import QtGraphicalEffects 1.12
+import QtMultimedia 5.12 as Multimedia
 import org.kde.kirigami 2.8 as Kirigami
 
 import im.kaidan.kaidan 1.0

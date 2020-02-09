@@ -13,55 +13,21 @@ set -e
 # Force debug traces of executed commands
 #set -o xtrace
 
+# To see current imports:
 # find "${SOURCE_DIR}" -iname '*.qml' -exec grep 'import ' {} \; | sort -u
-# import "elements"
-# import EmojiModel 0.1
-# import im.kaidan.kaidan 1.0
-# import MediaUtils 0.1
-# import org.kde.kirigami 2.0 as Kirigami
-# import org.kde.kirigami 2.2 as Kirigami
-# import org.kde.kirigami 2.3 as Kirigami
-# import org.kde.kirigami 2.4 as Kirigami
-# import org.kde.kirigami 2.5 as Kirigami
-# import QtGraphicalEffects 1.0
-# import Qt.labs.folderlistmodel 2.1
-# import QtLocation 5.9 as Location
-# import QtMultimedia 5.10 as Multimedia
-# import QtMultimedia 5.9
-# import QtMultimedia 5.9 as Multimedia
-# import QtPositioning 5.9 as Positioning
-# import QtQml 2.2
-# import QtQuick 2.0
-# import QtQuick 2.3
-# import QtQuick 2.6
-# import QtQuick 2.7
-# import QtQuick 2.9
-# import QtQuick.Controls 2.0 as Controls
-# import QtQuick.Controls 2.1 as Controls
-# import QtQuick.Controls 2.2
-# import QtQuick.Controls 2.2 as Controls
-# import QtQuick.Controls 2.3 as Controls
-# import QtQuick.Controls 2.4 as Controls
-# import QtQuick.Controls.Material 2.0
-# import QtQuick.Dialogs 1.2
-# import QtQuick.Layouts 1.1
-# import QtQuick.Layouts 1.2
-# import QtQuick.Layouts 1.3
-# import "settings"
-# import StatusBar 0.1
 
-declare -A QT # 5.10
-QT["QtGraphicalEffects"]="1.0"
+declare -A QT
+QT["QtGraphicalEffects"]="1.12"
 QT["Qt.labs.folderlistmodel"]="2.1"
-QT["QtLocation"]="5.3"
-QT["QtMultimedia"]="5.8"
-QT["QtPositioning"]="5.2"
-QT["QtQml"]="2.2"
-QT["QtQuick"]="2.7"
-QT["QtQuick.Controls"]="2.3"
-QT["QtQuick.Controls.Material"]="2.3"
-QT["QtQuick.Dialogs"]="1.3"
-QT["QtQuick.Layouts"]="1.3"
+QT["QtLocation"]="5.12"
+QT["QtMultimedia"]="5.12"
+QT["QtPositioning"]="5.12"
+QT["QtQml"]="2.12"
+QT["QtQuick"]="2.12"
+QT["QtQuick.Controls"]="2.12"
+QT["QtQuick.Controls.Material"]="2.12"
+QT["QtQuick.Dialogs"]="1.12"
+QT["QtQuick.Layouts"]="1.12"
 
 declare -A KIRIGAMI
 KIRIGAMI["org.kde.kirigami"]="2.8"

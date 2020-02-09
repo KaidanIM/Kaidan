@@ -28,7 +28,7 @@
  *  along with Kaidan.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-import QtQuick.Controls 2.4 as Controls
+import QtQuick.Controls 2.12 as Controls
 import org.kde.kirigami 2.8 as Kirigami
 
 /**

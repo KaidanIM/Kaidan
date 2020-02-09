@@ -78,6 +78,14 @@ Kirigami.ScrollablePage {
 
 	header: Item {
 		height: searchField.visible ? searchField.height : 0
+		clip: true
+
+		Behavior on height {
+			SmoothedAnimation {
+				velocity: 200
+			}
+		}
+
 		Kirigami.SearchField {
 			id: searchField
 			focusSequence: ""

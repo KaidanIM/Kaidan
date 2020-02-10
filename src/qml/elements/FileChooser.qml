@@ -28,7 +28,7 @@
  *  along with Kaidan.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-import QtQuick.Dialogs 1.12
+import QtQuick.Dialogs 1.3
 
 FileDialog {
 	id: fileDialog

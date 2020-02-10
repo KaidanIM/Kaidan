@@ -26,7 +26,7 @@ QT["QtQml"]="2.12"
 QT["QtQuick"]="2.12"
 QT["QtQuick.Controls"]="2.12"
 QT["QtQuick.Controls.Material"]="2.12"
-QT["QtQuick.Dialogs"]="1.12"
+QT["QtQuick.Dialogs"]="1.3"
 QT["QtQuick.Layouts"]="1.12"
 
 declare -A KIRIGAMI

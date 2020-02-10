@@ -36,6 +36,7 @@ import im.kaidan.kaidan 1.0
 import "elements"
 
 Kirigami.ScrollablePage {
+	id: root
 	title: {
 		Kaidan.connectionState === Enums.StateConnecting ? qsTr("Connecting…") :
 		Kaidan.connectionState === Enums.StateDisconnected ? qsTr("Offline") :
@@ -98,6 +99,7 @@ Kirigami.ScrollablePage {
 	}
 
 	TableView {
+		width: root.width
 		model: RosterFilterProxyModel {
 			id: filterModel
 			sourceModel: Kaidan.rosterModel
@@ -105,6 +107,7 @@ Kirigami.ScrollablePage {
 		columnWidthProvider: function (column) { return root.width }
 		delegate: RosterListItem {
 			id: rosterItem
+			width: root.width
 			name: model.name ? model.name : model.jid
 			jid: model.jid
 			lastMessage: model.lastMessage

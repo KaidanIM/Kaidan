@@ -71,7 +71,6 @@ public:
 	 */
 	enum ConnectionError {
 		NoError,
-		UserDisconnected,
 		AuthenticationFailed,
 		NotConnected,
 		TlsFailed,

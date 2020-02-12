@@ -151,14 +151,13 @@ void ClientWorker::onConnectionError(QXmppClient::Error error)
 
 	switch (error) {
 	case QXmppClient::NoError:
-		emit connectionErrorChanged(ClientWorker::UserDisconnected);
+		emit connectionErrorChanged(ClientWorker::NoError);
 		break;
 	case QXmppClient::KeepAliveError:
 		emit connectionErrorChanged(ClientWorker::KeepAliveError);
 		break;
 	case QXmppClient::XmppStreamError:
 		xmppStreamError = client->xmppStreamError();
-		qDebug() << xmppStreamError;
 		if (xmppStreamError == QXmppStanza::Error::NotAuthorized) {
 			emit connectionErrorChanged(ClientWorker::AuthenticationFailed);
 		} else {

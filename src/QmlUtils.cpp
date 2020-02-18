@@ -140,6 +140,8 @@ QColor QmlUtils::presenceTypeToColor(AvailabilityTypes type)
 QString QmlUtils::connectionErrorMessage(ClientWorker::ConnectionError error)
 {
 	switch (error) {
+	case ClientWorker::NoError:
+		Q_UNREACHABLE();
 	case ClientWorker::AuthenticationFailed:
 		return tr("Invalid username or password.");
 	case ClientWorker::NotConnected:

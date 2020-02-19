@@ -28,6 +28,7 @@
  *  along with Kaidan.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+#include "ClientWorker.h"
 #include "RegistrationManager.h"
 #include "Globals.h"
 #include "Kaidan.h"
@@ -36,19 +37,29 @@
 #include <QXmppClient.h>
 #include <QXmppUtils.h>
 #include <QXmppDiscoveryManager.h>
+#if (QXMPP_VERSION) >= QT_VERSION_CHECK(1, 2, 0)
+#include <QXmppRegistrationManager.h>
+#endif
 
 #include <QSettings>
 #include <QDomElement>
 
-RegistrationManager::RegistrationManager(Kaidan *kaidan, QSettings *settings)
-        : kaidan(kaidan), settings(settings)
+RegistrationManager::RegistrationManager(Kaidan *kaidan, ClientWorker *clientWorker, QXmppClient *client, QSettings *settings)
+        : kaidan(kaidan), clientWorker(clientWorker), settings(settings), m_client(client)
+#if (QXMPP_VERSION) >= QT_VERSION_CHECK(1, 2, 0)
+          , m_manager(new QXmppRegistrationManager)
+#endif
 {
+#if (QXMPP_VERSION) >= QT_VERSION_CHECK(1, 2, 0)
+	m_client->addExtension(m_manager);
+
+	connect(m_manager, &QXmppRegistrationManager::accountDeletionFailed, clientWorker, &ClientWorker::onAccountDeletionFromServerFailed);
+	connect(m_manager, &QXmppRegistrationManager::accountDeleted, clientWorker, &ClientWorker::onAccountDeletedFromServer);
+#endif
 	connect(kaidan, &Kaidan::changePassword, this, &RegistrationManager::changePassword);
 	connect(this, &RegistrationManager::passwordChanged, kaidan, &Kaidan::setPassword);
-	connect(this, &RegistrationManager::passwordChanged,
-	        kaidan, &Kaidan::passwordChangeSucceeded);
-	connect(this, &RegistrationManager::passwordChangeFailed,
-	        kaidan, &Kaidan::passwordChangeFailed);
+	connect(this, &RegistrationManager::passwordChanged, kaidan, &Kaidan::passwordChangeSucceeded);
+	connect(this, &RegistrationManager::passwordChangeFailed, kaidan, &Kaidan::passwordChangeFailed);
 }
 
 QStringList RegistrationManager::discoveryFeatures() const
@@ -116,6 +127,15 @@ void RegistrationManager::handleDiscoInfo(const QXmppDiscoveryIq &iq)
 bool RegistrationManager::registrationSupported() const
 {
 	return m_registrationSupported;
+}
+
+void RegistrationManager::deleteAccount()
+{
+#if (QXMPP_VERSION) >= QT_VERSION_CHECK(1, 2, 0)
+	m_manager->deleteAccount();
+#else
+	emit kaidan->passiveNotificationRequested("Account deletion is not supported. If an update doesn't help, contact your distribution maintainers: QXmpp version >= 1.2 is required.");
+#endif
 }
 
 void RegistrationManager::setRegistrationSupported(bool registrationSupported)

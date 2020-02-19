@@ -10,6 +10,9 @@
 		<file>GlobalDrawer.qml</file>
 		<file>QrCodeScannerPage.qml</file>
 		<file>UserProfilePage.qml</file>
+		<file>AccountDeletionPage.qml</file>
+		<file>AccountDeletionFromClientConfirmationPage.qml</file>
+		<file>AccountDeletionFromClientAndServerConfirmationPage.qml</file>
 
 		<file>elements/SubRequestAcceptSheet.qml</file>
 		<file>elements/RosterAddContactSheet.qml</file>
@@ -26,6 +29,9 @@
 		<file>elements/IconButton.qml</file>
 		<file>elements/FileChooser.qml</file>
 		<file>elements/SendMediaSheet.qml</file>
+		<file>elements/BinaryDecisionPage.qml</file>
+		<file>elements/ConfirmationPage.qml</file>
+		<file>elements/CenteredAdaptiveText.qml</file>
 
 		<file>elements/MediaPreview.qml</file>
 		<file>elements/MediaPreviewImage.qml</file>

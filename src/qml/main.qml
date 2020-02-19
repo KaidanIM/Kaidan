@@ -47,6 +47,8 @@ Kirigami.ApplicationWindow {
 	// radius for using rounded corners
 	readonly property int roundedCornersRadius: Kirigami.Units.smallSpacing * 1.5
 
+	readonly property int largeButtonWidth: Kirigami.Units.gridUnit * 25
+
 	StatusBar {
 		color: Material.color(Material.Green, Material.Shade700)
 	}
@@ -81,6 +83,9 @@ Kirigami.ApplicationWindow {
 	Component {id: settingsPage; SettingsPage {}}
 	Component {id: qrCodeScannerPage; QrCodeScannerPage {}}
 	Component {id: userProfilePage; UserProfilePage {}}
+	Component {id: accountDeletionPage; AccountDeletionPage {}}
+	Component {id: accountDeletionFromClientConfirmationPage; AccountDeletionFromClientConfirmationPage {}}
+	Component {id: accountDeletionFromClientAndServerConfirmationPage; AccountDeletionFromClientAndServerConfirmationPage {}}
 
 	/**
 	 * Shows a passive notification for a long period.

@@ -36,6 +36,7 @@
 #include <QSettings>
 #include <QThread>
 // QXmpp
+#include <QXmppStanza.h>
 #include "qxmpp-exts/QXmppColorGenerator.h"
 #include "qxmpp-exts/QXmppUri.h"
 // Kaidan
@@ -105,6 +106,10 @@ Kaidan::Kaidan(QGuiApplication *app, bool enableLogging, QObject *parent)
 
 	m_client->setObjectName("XmppClient");
 	m_cltThrd->start();
+
+	// account deletion
+	connect(this, &Kaidan::deleteAccountFromClient, m_client, &ClientWorker::deleteAccountFromClient);
+	connect(this, &Kaidan::deleteAccountFromClientAndServer, m_client, &ClientWorker::deleteAccountFromClientAndServer);
 }
 
 Kaidan::~Kaidan()
@@ -124,29 +129,15 @@ void Kaidan::start()
 
 void Kaidan::mainConnect()
 {
-	if (connectionState != ConnectionState::StateDisconnected) {
-		qWarning() << "[main] Tried to connect, even if still connected!"
-		           << "Requesting disconnect.";
-		emit m_client->disconnectRequested();
-	}
-
 	emit m_client->credentialsUpdated(creds);
 	emit m_client->connectRequested();
 }
 
-void Kaidan::mainDisconnect(bool openLogInPage)
+void Kaidan::mainDisconnect()
 {
 	// disconnect the client if connected or connecting
 	if (connectionState != ConnectionState::StateDisconnected)
 		emit m_client->disconnectRequested();
-
-	if (openLogInPage) {
-		// clear password
-		m_caches->settings->remove(KAIDAN_SETTINGS_AUTH_PASSWD);
-		setPassword(QString());
-		// trigger log in page
-		emit newCredentialsNeeded();
-	}
 }
 
 void Kaidan::setConnectionState(QXmppClient::State state)
@@ -171,6 +162,20 @@ void Kaidan::setConnectionError(ClientWorker::ConnectionError error)
 {
 	connectionError = error;
 	emit connectionErrorChanged();
+}
+
+void Kaidan::deleteCredentials()
+{
+	// Delete the JID.
+	m_caches->settings->remove(KAIDAN_SETTINGS_AUTH_JID);
+	setJid(QString());
+
+	// Delete the password.
+	m_caches->settings->remove(KAIDAN_SETTINGS_AUTH_PASSWD);
+	setPassword(QString());
+
+	// Trigger the opening of the login page.
+	emit newCredentialsNeeded();
 }
 
 bool Kaidan::notificationsMuted(const QString &jid)
@@ -271,6 +276,16 @@ void Kaidan::notifyLoginUriNotFound()
 ClientWorker *Kaidan::getClient() const
 {
 	return m_client;
+}
+
+RosterDb *Kaidan::rosterDb() const
+{
+	return m_rosterDb;
+}
+
+MessageDb *Kaidan::messageDb() const
+{
+	return m_msgDb;
 }
 
 Kaidan *Kaidan::instance()

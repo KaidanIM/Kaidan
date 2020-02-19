@@ -1,12 +1,14 @@
 <RCC>
-    <qresource prefix="/images/">
-        <file>banner.png</file>
-        <file>chat-page-background.svg</file>
-        <file>check-mark.svg</file>
-        <file>kaidan.svg</file>
-    </qresource>
-    <qresource prefix="/icons/breeze/apps/48/">
-        <file>kaidan.svg</file>
-        <file>kaidan-bw.svg</file>
-    </qresource>
+	<qresource prefix="/images/">
+		<file>account-deletion-from-client.svg</file>
+		<file>account-deletion-from-client-and-server.svg</file>
+		<file>banner.png</file>
+		<file>chat-page-background.svg</file>
+		<file>check-mark.svg</file>
+		<file>kaidan.svg</file>
+	</qresource>
+	<qresource prefix="/icons/breeze/apps/48/">
+		<file>kaidan.svg</file>
+		<file>kaidan-bw.svg</file>
+	</qresource>
 </RCC>

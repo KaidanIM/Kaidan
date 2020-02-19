@@ -32,8 +32,12 @@
 #define REGISTRATIONMANAGER_H
 
 #include <QXmppClientExtension.h>
+class ClientWorker;
 class Kaidan;
 class QSettings;
+#if (QXMPP_VERSION) >= QT_VERSION_CHECK(1, 2, 0)
+class QXmppRegistrationManager;
+#endif
 
 class RegistrationManager : public QXmppClientExtension
 {
@@ -42,7 +46,7 @@ class RegistrationManager : public QXmppClientExtension
 	                                      NOTIFY registrationSupportedChanged)
 
 public:
-	RegistrationManager(Kaidan *kaidan, QSettings *settings);
+	RegistrationManager(Kaidan *kaidan, ClientWorker *clientWorker, QXmppClient *client, QSettings *settings);
 
 	QStringList discoveryFeatures() const override;
 
@@ -53,6 +57,12 @@ public:
 	void changePassword(const QString &newPassword);
 
 	bool registrationSupported() const;
+
+public slots:
+	/**
+	 * Deletes the account from the server.
+	 */
+	void deleteAccount();
 
 signals:
 	void passwordChanged(const QString &newPassword);
@@ -70,7 +80,12 @@ private:
 	void setRegistrationSupported(bool registrationSupported);
 
 	Kaidan *kaidan;
+	ClientWorker *clientWorker;
 	QSettings *settings;
+	QXmppClient *m_client;
+#if (QXMPP_VERSION) >= QT_VERSION_CHECK(1, 2, 0)
+	QXmppRegistrationManager *m_manager;
+#endif
 	bool m_registrationSupported = false;
 
 	// caching

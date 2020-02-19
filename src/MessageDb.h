@@ -50,7 +50,7 @@ class MessageDb : public QObject
 	Q_OBJECT
 
 public:
-        explicit MessageDb(QObject *parent = nullptr);
+	explicit MessageDb(QObject *parent = nullptr);
 
 	/**
 	 * Parses a list of messages from a SELECT query.
@@ -101,6 +101,11 @@ public slots:
 	 * Deletes a message from the database.
 	 */
 	void removeMessage(const QString &id);
+
+	/**
+	 * Removes all messages from the database.
+	 */
+	void removeAllMessages();
 
 	/**
 	 * Loads a message, runs the update lambda and writes it to the DB again.

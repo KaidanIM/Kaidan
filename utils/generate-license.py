@@ -60,7 +60,8 @@ EXCLUDE_USER_IDS = [
 	"anonymous <> <None>",
 	"Kaidan Translations <translations@kaidan.im>",
 	"Kaidan translations <translations@kaidan.im>",
-	"Hosted Weblate <hosted@weblate.org>"
+	"Hosted Weblate <hosted@weblate.org>",
+	"l10n daemon script <scripty@kde.org>"
 ]
 
 GPL3_OPENSSL_LICENSE = """This program is free software; you can redistribute it and/or modify it under
@@ -345,6 +346,13 @@ def main():
 				"Melvin Keskin <melvo@olomono.de>": CopyrightAuthor(years = "2019")
 			},
 			comment = "Inspired by graphic from https://www.toptal.com/designers/subtlepatterns/"
+		),
+		CopyrightTarget(
+			files = ["data/images/account-deletion-from-client.svg", "data/images/account-deletion-from-client-and-server.svg"],
+			licenseName = "CC-BY-SA-4.0",
+			authorList = {
+				"Mathis Brüchert <mbblp@protonmail.ch>": CopyrightAuthor(years = "2020")
+			}
 		),
 		CopyrightTarget(
 			files = ["utils/convert-prl-libs-to-cmake.pl"],

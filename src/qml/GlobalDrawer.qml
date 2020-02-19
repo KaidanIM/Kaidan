@@ -91,13 +91,9 @@ Kirigami.GlobalDrawer {
 			}
 		},
 		Kirigami.Action {
-			text: qsTr("Log out")
-			icon.name: "system-shutdown"
-			onTriggered: {
-				popLayersAboveLowest()
-				// disconnect (open log in page)
-				Kaidan.mainDisconnect(true)
-			}
+			text: qsTr("Delete account")
+			icon.name: "delete"
+			onTriggered: pageStack.layers.push(accountDeletionPage)
 		},
 		Kirigami.Action {
 			text: qsTr("Settings")

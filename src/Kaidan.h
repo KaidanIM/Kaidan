@@ -42,6 +42,7 @@
 class QGuiApplication;
 class Database;
 class QXmppClient;
+class QXmppStanza;
 
 /**
  * @class Kaidan Kaidan's Back-End Class
@@ -76,28 +77,23 @@ public:
 	~Kaidan();
 
 	/**
-	 * Start connection (called from QML when ready)
+	 * Starts connecting (called from QML when ready).
 	 */
 	Q_INVOKABLE void start();
 
 	/**
-	 * Connect to the XMPP server
+	 * Connects to the XMPP server.
 	 *
-	 * If you haven't set a username and password, they are used from the
-	 * last successful login (the settings file).
+	 * The username and password are retrieved from the the settings file.
 	 */
 	Q_INVOKABLE void mainConnect();
 
 	/**
-	 * Disconnect from XMPP server
+	 * Disconnects from the XMPP server.
 	 *
-	 * This will disconnect the client from the server. When disconnected,
-	 * the connectionStateChanged signal will be emitted.
-	 *
-	 * @param openLogInPage If true, the newCredentialsNeeded signal will be
-	 * emitted.
+	 * When the client is disconnected from the server, the "connectionStateChanged" signal will be emitted.
 	 */
-	Q_INVOKABLE void mainDisconnect(bool openLogInPage = false);
+	Q_INVOKABLE void mainDisconnect();
 
 	/**
 	 * Returns the current ConnectionState
@@ -185,6 +181,10 @@ public:
 	}
 
 	ClientWorker *getClient() const;
+
+	RosterDb *rosterDb() const;
+
+	MessageDb *messageDb() const;
 
 	/**
 	 * Adds XMPP URI to open as soon as possible
@@ -361,6 +361,16 @@ signals:
 	 */
 	void notificationsMutedChanged(const QString& jid);
 
+	/**
+	 * Deletes the account data from the client and server.
+	 */
+	void deleteAccountFromClientAndServer();
+
+	/**
+	 * Deletes the account data from the configuration file and database.
+	 */
+	void deleteAccountFromClient();
+
 public slots:
 	/**
 	 * Set current connection state
@@ -371,6 +381,11 @@ public slots:
 	 * Sets a new connection error.
 	 */
 	void setConnectionError(ClientWorker::ConnectionError error);
+
+	/**
+	 * Deletes the username and password from the settings file.
+	 */
+	void deleteCredentials();
 
 	/**
 	 * Receives messages from another instance of the application

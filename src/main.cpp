@@ -231,6 +231,7 @@ Q_DECL_EXPORT int main(int argc, char *argv[])
 	qRegisterMetaType<AudioEncoderSettings>();
 	qRegisterMetaType<VideoEncoderSettings>();
 	qRegisterMetaType<CredentialsValidator*>();
+	qRegisterMetaType<QXmppStanza::Error>("QXmppStanza::Error");
 
 	// Enums for c++ member calls using enums
 	qRegisterMetaType<Enums::ConnectionState>();

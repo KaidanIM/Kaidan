@@ -220,6 +220,12 @@ void MessageDb::removeMessage(const QString &id)
 	);
 }
 
+void MessageDb::removeAllMessages()
+{
+	QSqlQuery query(QSqlDatabase::database(DB_CONNECTION));
+	Utils::execQuery(query, "DELETE FROM Messages");
+}
+
 void MessageDb::updateMessage(const QString &id,
                               const std::function<void (Message &)> &updateMsg)
 {

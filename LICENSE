@@ -5,15 +5,17 @@ Format: https://www.debian.org/doc/packaging-manuals/copyright-format/1.0/
 Files: src/*
        utils/*
        misc/*
-Copyright: 2016-2019, Linus Jahn <lnj@kaidan.im>
-           2016-2019, Jonah Brüchert <jbb@kaidan.im>
+Copyright: 2016-2020, Linus Jahn <lnj@kaidan.im>
+           2016-2020, Jonah Brüchert <jbb@kaidan.im>
            2017-2019, Ilya Bizyaev <bizyaev@zoho.com>
            2018-2019, Nicolas Fella <nicolas.fella@gmx.de>
-           2019, Melvin Keskin <melvo@olomono.de>
+           2019-2020, Melvin Keskin <melvo@olomono.de>
            2019, Filipe Azevedo <pasnox@gmail.com>
            2018, Allan Nordhøy <epost@anotheragency.no>
            2019, Robert Maerkisch <zatroxde@protonmail.ch>
+           2020, Andrea Scarpino <scarpino@kde.org>
            2019, caca hueto <cacahueto@olomono.de>
+           2019, Mauricio Torres Mejía <mauro@olomono.de>
            2019, Yury Gubich <blue@macaw.me>
            2019, Volker Krause <vkrause@kde.org>
            2019, Simon Schmeisser <s.schmeisser@gmx.net>
@@ -30,26 +32,27 @@ License: GPL-3+ with OpenSSL exception
 
 Files: i18n/*
 Copyright: 2017-2019, Linus Jahn <lnj@kaidan.im>
-           2017-2019, Jonah Brüchert <jbb@kaidan.im>
-           2017-2019, Muhammad Nur Hidayat Yasuyoshi <mnh48mail@gmail.com>
+           2017-2020, Jonah Brüchert <jbb@kaidan.im>
+           2017-2020, Muhammad Nur Hidayat Yasuyoshi <mnh48mail@gmail.com>
            2018-2019, Allan Nordhøy <epost@anotheragency.no>
            2017-2019, Joeke de Graaf <joeke.de.graaf@student.nhlstenden.com>
            2018-2019, advocatux <advocatux@airpost.net>
            2018-2019, oiseauroch <tobias.ollive@mailoo.org>
+           2019-2020, Milan Korecky <milan.korecky@gmail.com>
+           2019-2020, Sylke Vicious <silkevicious@gmail.com>
+           2019-2020, Anne Onyme 017 <anneonyme017@netcourrier.com>
            2018-2019, aitzol berasategi <aitzol@disroot.org>
            2019, ssantos <ssantos@web.de>
-           2019, Sylke Vicious <silkevicious@gmail.com>
-           2019, Anne Onyme 017 <anneonyme017@netcourrier.com>
-           2019, Milan Korecky <milan.korecky@gmail.com>
+           2019-2020, Xosé M <xosem@disroot.org>
+           2019-2020, Yuri Chornoivan <yurchor@ukr.net>
            2017, Ilya Bizyaev <bizyaev@zoho.com>
            2017, Robert Maerkisch <zatroxde@protonmail.ch>
            2019, Joan CiberSheep <cibersheep@gmail.com>
+           2020, Adolfo Jayme Barrientos <fitojb@ubuntu.com>
            2019, Eiad Rostom <eiado@olomono.de>
            2019, caca hueto <cacahueto@olomono.de>
-           2019, Yuri Chornoivan <yurchor@ukr.net>
            2019, Clemens Riese <weblate.org@clerie.de>
            2019, Txaume <txaumevw@gmail.com>
-           2019, Xosé M <xosem@disroot.org>
            2019, Melvin Keskin <melvo@olomono.de>
            2018, Andreas Kleinert <Andy.Kleinert@gmail.com>
            2017, Emmanuel Gil Peyrot <linkmauve@linkmauve.fr>
@@ -79,18 +82,18 @@ Files: src/QrCodeVideoFrame.h
 Copyright: 2017, QZXing authors
 License: apache-2.0
 
-Files: data/images/message_checkmark.svg
-Copyright: 2014, Michael Kurz <betheg@bitcloner.org>
-License: GPL-3+
-Comment: 
- message_checkmark.svg: Originally from conversations, optimized using SVGO by LNJ <git@lnj.li>
+Files: data/images/check-mark.svg
+Copyright: 2019, Melvin Keskin <melvo@olomono.de>
+License: CC-BY-SA-4.0
 
 Files: misc/kaidan.svg
        misc/kaidan-small-margin.svg
        misc/kaidan-128x128.png
        data/images/banner.png
+       data/images/kaidan-bw.svg
 Copyright: 2016-2017, Ilya Bizyaev <bizyaev@zoho.com>
            2016, MBB <mbb-mail@gmx.de>
+           2019, Melvin Keskin <melvo@olomono.de
 License: CC-BY-SA-4.0
 
 Files: data/images/chat-page-background.svg
@@ -99,6 +102,11 @@ Copyright: 2019, Mathis Brüchert <mbblp@protonmail.ch>
 License: CC-BY-SA-4.0
 Comment: 
  Inspired by graphic from https://www.toptal.com/designers/subtlepatterns/
+
+Files: data/images/account-deletion-from-client.svg
+       data/images/account-deletion-from-client-and-server.svg
+Copyright: 2020, Mathis Brüchert <mbblp@protonmail.ch>
+License: CC-BY-SA-4.0
 
 Files: utils/convert-prl-libs-to-cmake.pl
 Copyright: 2016, Konstantin Tokarev <annulen@yandex.ru>

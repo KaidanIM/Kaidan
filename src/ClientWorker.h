@@ -156,6 +156,28 @@ public slots:
 	 */
 	void xmppConnect();
 
+	/**
+	 * Deletes the account data from the client and server.
+	 */
+	void deleteAccountFromClientAndServer();
+
+	/**
+	 * Deletes the account data from the configuration file and database.
+	 */
+	void deleteAccountFromClient();
+
+	/**
+	 * Called when the account is deleted from the server.
+	 */
+	void onAccountDeletedFromServer();
+
+	/**
+	 * Called when the account could not be deleted from the server.
+	 *
+	 * @param error error of the failed account deletion
+	 */
+	void onAccountDeletionFromServerFailed(QXmppStanza::Error error);
+
 signals:
 	// emitted by 'Kaidan' to us:
 	void connectRequested();
@@ -169,11 +191,21 @@ signals:
 	 */
 	void connectionErrorChanged(ClientWorker::ConnectionError error);
 
+	/**
+	 * Deletes data related to the current account (messages, contacts etc.) from the database.
+	 */
+	void deleteAccountFromDatabase();
+
 private slots:
 	/**
-	 * Notifys via signal that the client has connected.
+	 * Called when an authenticated connection to the server is established.
 	 */
-	void onConnect();
+	void onConnected();
+
+	/**
+	 * Called when the connection to the server is closed.
+	 */
+	void onDisconnected();
 
 	/**
 	 * Sets a new connection error.
@@ -208,6 +240,12 @@ private:
 	VCardManager *vCardManager;
 	UploadManager *uploadManager;
 	DownloadManager *downloadManager;
+
+	// These variables are used for checking the state of an ongoing account deletion.
+	bool m_isAccountToBeDeletedFromClient = false;
+	bool m_isAccountToBeDeletedFromClientAndServer = false;
+	bool m_isAccountDeletedFromServer = false;
+	bool m_isClientConnectedBeforeAccountDeletionFromServer = true;
 };
 
 #endif // CLIENTWORKER_H

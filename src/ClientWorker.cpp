@@ -92,6 +92,11 @@ ClientWorker::ClientWorker(Caches *caches, Kaidan *kaidan, bool enableLogging, Q
 	connect(this, &ClientWorker::deleteAccountFromDatabase, kaidan->messageDb(), &MessageDb::removeAllMessages);
 }
 
+VCardManager *ClientWorker::getVCardManager() const
+{
+	return vCardManager;
+}
+
 void ClientWorker::main()
 {
 	// initialize random generator
@@ -258,6 +263,14 @@ void ClientWorker::onConnectionError(QXmppClient::Error error)
 	}
 }
 
+void ClientWorker::setCsiState(Qt::ApplicationState state)
+{
+	if (state == Qt::ApplicationActive)
+		client->setActive(true);
+	else
+		client->setActive(false);
+}
+
 QString ClientWorker::generateRandomString(unsigned int length) const
 {
 	const QString resourceChars(KAIDAN_RESOURCE_RANDOM_CHARS);
@@ -266,17 +279,4 @@ QString ClientWorker::generateRandomString(unsigned int length) const
 	for (unsigned int i = 0; i < length; ++i)
 		randomString.append(resourceChars.at(qrand() % resourceChars.length()));
 	return randomString;
-}
-
-VCardManager *ClientWorker::getVCardManager() const
-{
-	return vCardManager;
-}
-
-void ClientWorker::setCsiState(Qt::ApplicationState state)
-{
-	if (state == Qt::ApplicationActive)
-		client->setActive(true);
-	else
-		client->setActive(false);
 }

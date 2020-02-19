@@ -32,6 +32,7 @@
 #define VCARDMANAGER_H
 
 #include <QObject>
+#include <QString>
 #include <QXmppVCardManager.h>
 #include <QXmppPresence.h>
 
@@ -56,17 +57,40 @@ public:
 	void handleVCard(const QXmppVCardIq &iq);
 
 	/**
+	 * Requests the user's vCard from the server.
+	 */
+	void fetchClientVCard();
+
+	/**
+	 * Handles the receiving of the user's vCard.
+	 */
+	void handleClientVCardReceived();
+
+	/**
 	 * Handles incoming presences and checks if the avatar needs to be refreshed
 	 */
 	void handlePresence(const QXmppPresence &presence);
+
+	/**
+	 * Updates the user's nickname.
+	 *
+	 * @param nickname name that is shown to contacts after the update
+	 */
+	void updateNickname(const QString &nickname);
 
 signals:
 	void vCardReceived(const QXmppVCardIq &vCard);
 
 private:
+	/**
+	 * Updates the nickname which was set to be updated after fetching the current vCard.
+	 */
+	void updateNicknameAfterFetchingCurrentVCard();
+
 	QXmppClient *client;
 	QXmppVCardManager *manager;
 	AvatarFileStorage *avatarStorage;
+	QString m_nicknameToBeSetAfterFetchingCurrentVCard;
 };
 
 #endif // VCARDMANAGER_H

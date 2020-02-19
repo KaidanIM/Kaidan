@@ -37,6 +37,22 @@ ServerFeaturesCache::ServerFeaturesCache(QObject *parent)
 {
 }
 
+bool ServerFeaturesCache::inBandRegistrationSupported()
+{
+	QMutexLocker locker(&m_mutex);
+	return m_inBandRegistrationSupported;
+}
+
+void ServerFeaturesCache::setInBandRegistrationSupported(bool supported)
+{
+	QMutexLocker locker(&m_mutex);
+	if (m_inBandRegistrationSupported != supported) {
+		m_inBandRegistrationSupported = supported;
+		locker.unlock();
+		emit inBandRegistrationSupportedChanged();
+	}
+}
+
 bool ServerFeaturesCache::httpUploadSupported()
 {
 	QMutexLocker locker(&m_mutex);

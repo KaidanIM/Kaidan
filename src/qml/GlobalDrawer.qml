@@ -101,7 +101,7 @@ Kirigami.GlobalDrawer {
 		Kirigami.Action {
 			text: qsTr("Delete account")
 			icon.name: "delete"
-			onTriggered: pageStack.layers.push(accountDeletionPage)
+			onTriggered: Kaidan.serverFeaturesCache.inBandRegistrationSupported ? pageStack.layers.push(accountDeletionPage) : pageStack.layers.push(accountDeletionFromClientConfirmationPage)
 		},
 		Kirigami.Action {
 			text: qsTr("Settings")

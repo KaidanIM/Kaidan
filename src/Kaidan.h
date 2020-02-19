@@ -37,6 +37,7 @@
 #include <QString>
 // Kaidan
 #include "ClientWorker.h"
+#include "RegistrationDataFormModel.h"
 #include "Globals.h"
 
 class QGuiApplication;
@@ -89,9 +90,15 @@ public:
 	Q_INVOKABLE void mainConnect();
 
 	/**
+	 * Connects to the server and requests a data form for account registration.
+	 */
+	Q_INVOKABLE void requestRegistrationForm();
+
+	/**
 	 * Disconnects from the XMPP server.
 	 *
-	 * When the client is disconnected from the server, the "connectionStateChanged" signal will be emitted.
+	 * This disconnects the client from the server.
+	 * When disconnected, the connectionStateChanged signal is emitted.
 	 */
 	Q_INVOKABLE void mainDisconnect();
 
@@ -198,12 +205,12 @@ public:
 	 */
 	void addOpenUri(const QString &uri);
 
-    /**
-     * Connects to the server by the parsed credentials (bare JID and password)
-     * from a given XMPP URI (e.g. from scanning a QR code)
-     * like "xmpp:user@example.org?login;password=abc"
-     */
-    Q_INVOKABLE void loginByUri(const QString &uri);
+	/**
+	 * Connects to the server by the parsed credentials (bare JID and password) from a given XMPP URI (e.g. from scanning a QR code) like "xmpp:user@example.org?login;password=abc"
+	 *
+	 * @return true if the login worked
+	 */
+	Q_INVOKABLE bool logInByUri(const QString &uri);
 
 signals:
 	void avatarStorageChanged();
@@ -217,7 +224,7 @@ signals:
 	/**
 	 * Emitted when the client failed to connect.
 	 */
-	void connectionErrorChanged();
+	void connectionErrorChanged(ClientWorker::ConnectionError error);
 
 	/**
 	 * Emitted when the JID was changed
@@ -334,6 +341,13 @@ signals:
 	void downloadMedia(QString msgId, QString url);
 
 	/**
+	 * Changes the user's display name.
+	 *
+	 * @param displayName new name that is shown to contacts
+	 */
+	void changeDisplayName(const QString &displayName);
+
+	/**
 	 * Changes the user's password on the server
 	 *
 	 * @param newPassword The new password
@@ -364,6 +378,13 @@ signals:
 	 * Deletes the account data from the configuration file and database.
 	 */
 	void deleteAccountFromClient();
+
+	void registrationFormReceived(DataFormModel *dataFormModel);
+
+	void sendRegistrationForm();
+
+	void registrationSucceeded();
+	void registrationFailed(quint8 error, const QString &errrorMessage);
 
 public slots:
 	/**
@@ -406,10 +427,10 @@ public slots:
 private:
 	void connectDatabases();
 
-    /**
-     * Notifies if no login URI was found
-     */
-    void notifyLoginUriNotFound();
+	/**
+	 * Notifies if no valid login URI was found.
+	 */
+	void notifyForInvalidLoginUri();
 
 	Database *m_database;
 	QThread *m_dbThrd;

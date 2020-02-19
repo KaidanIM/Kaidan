@@ -41,14 +41,6 @@ import "elements/fields"
 Kirigami.Page {
 	title: qsTr("Log in")
 
-	contextualActions: [
-		Kirigami.Action {
-			text: qsTr("Log in using a QR-Code")
-			icon.name: "view-barcode"
-			onTriggered: pageStack.layers.push(qrCodeScannerPage)
-		}
-	]
-
 	ColumnLayout {
 		anchors.fill: parent
 

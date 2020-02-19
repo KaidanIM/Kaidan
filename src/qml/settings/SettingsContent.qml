@@ -58,6 +58,7 @@ ColumnLayout {
 			SettingsItem {
 				name: qsTr("Change password")
 				description: qsTr("Changes your account's password. You will need to re-enter it on your other devices.")
+				visible: Kaidan.serverFeaturesCache.inBandRegistrationSupported
 				onClicked: stack.push("ChangePassword.qml")
 				icon: "lock"
 			}

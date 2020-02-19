@@ -43,10 +43,21 @@
 class ServerFeaturesCache : public QObject
 {
 	Q_OBJECT
+	Q_PROPERTY(bool inBandRegistrationSupported READ inBandRegistrationSupported NOTIFY inBandRegistrationSupportedChanged)
 	Q_PROPERTY(bool httpUploadSupported READ httpUploadSupported NOTIFY httpUploadSupportedChanged)
 
 public:
 	explicit ServerFeaturesCache(QObject *parent = nullptr);
+
+	/**
+	 * Returns whether In-Band Registration features after login on the server are supported by it.
+	 */
+	bool inBandRegistrationSupported();
+
+	/**
+	 * Sets whether In-Band Registration is supported.
+	 */
+	void setInBandRegistrationSupported(bool supported);
 
 	/**
 	 * Returns whether HTTP File Upload is available and can be currently be used.
@@ -55,10 +66,16 @@ public:
 	void setHttpUploadSupported(bool supported);
 
 signals:
+	/**
+	 * Emitted when In-Band Registration support changed.
+	 */
+	bool inBandRegistrationSupportedChanged();
+
 	void httpUploadSupportedChanged();
 
 private:
 	QMutex m_mutex;
+	bool m_inBandRegistrationSupported = false;
 	bool m_httpUploadSupported = false;
 };
 

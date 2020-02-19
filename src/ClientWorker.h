@@ -40,6 +40,7 @@ class QGuiApplication;
 #include <QXmppClient.h>
 // Kaidan
 #include "AvatarFileStorage.h"
+#include "BitsOfBinaryImageProvider.h"
 #include "Database.h"
 #include "Enums.h"
 #include "Globals.h"
@@ -86,26 +87,20 @@ public:
 	Q_ENUM(ConnectionError)
 
 	struct Caches {
-		Caches(Kaidan *kaidan, RosterDb *rosterDb, MessageDb *msgDb,
-		       QObject *parent = nullptr)
-			: msgModel(new MessageModel(kaidan, msgDb, parent)),
-			  rosterModel(new RosterModel(rosterDb, parent)),
-			  avatarStorage(new AvatarFileStorage(parent)),
-			  serverFeaturesCache(new ServerFeaturesCache(parent)),
-			  presCache(new PresenceCache(parent)),
-			  transferCache(new TransferCache(parent)),
-			  settings(new QSettings(APPLICATION_NAME, APPLICATION_NAME))
+		Caches(Kaidan *kaidan, RosterDb *rosterDb, MessageDb *msgDb, QObject *parent = nullptr)
+		        : msgModel(new MessageModel(kaidan, msgDb, parent)),
+		          rosterModel(new RosterModel(rosterDb, parent)),
+		          avatarStorage(new AvatarFileStorage(parent)),
+		          serverFeaturesCache(new ServerFeaturesCache(parent)),
+		          presCache(new PresenceCache(parent)),
+		          transferCache(new TransferCache(parent)),
+		          settings(new QSettings(APPLICATION_NAME, APPLICATION_NAME))
 		{
 			rosterModel->setMessageModel(msgModel);
 		}
 
 		~Caches()
 		{
-			delete msgModel;
-			delete rosterModel;
-			delete avatarStorage;
-			delete presCache;
-			delete transferCache;
 			delete settings;
 		}
 
@@ -133,10 +128,14 @@ public:
 	 * @param app The QGuiApplication to determine if the window is active.
 	 * @param parent Optional QObject-based parent.
 	 */
-	ClientWorker(Caches *caches, Kaidan *kaidan, bool enableLogging, QGuiApplication *app,
-	             QObject *parent = nullptr);
+	ClientWorker(Caches *caches, Kaidan *kaidan, bool enableLogging, QGuiApplication *app, QObject *parent = nullptr);
 
 	VCardManager *getVCardManager() const;
+
+	/**
+	 * Returns all models and caches.
+	 */
+	Caches *caches() const;
 
 public slots:
 	/**
@@ -155,9 +154,21 @@ public slots:
 	}
 
 	/**
-	 * Connects the client with the server.
+	 * Connects to the server and logs in with all needed configuration variables.
 	 */
 	void xmppConnect();
+
+	/**
+	 * Connects to the server with a minimal configuration and adds additional variables to it before connecting if a configuration is passed.
+	 *
+	 * @param config
+	 */
+	void connectToServer(QXmppConfiguration config = QXmppConfiguration());
+
+	/**
+	 * Connects to the server and requests a data form for account registration.
+	 */
+	void connectToRegister();
 
 	/**
 	 * Deletes the account data from the client and server.
@@ -172,20 +183,37 @@ public slots:
 	/**
 	 * Called when the account is deleted from the server.
 	 */
-	void onAccountDeletedFromServer();
+	void handleAccountDeletedFromServer();
 
 	/**
 	 * Called when the account could not be deleted from the server.
 	 *
 	 * @param error error of the failed account deletion
 	 */
-	void onAccountDeletionFromServerFailed(QXmppStanza::Error error);
+	void handleAccountDeletionFromServerFailed(QXmppStanza::Error error);
+
+	/**
+	 * Changes the user's password.
+	 *
+	 * @param newPassword new password to set
+	 */
+	void changePassword(const QString &newPassword);
+
+	/**
+	 * Changes the user's display name.
+	 *
+	 * If the user is not logged in during account registration, the display name is changed on the next login.
+	 *
+	 * @param displayName new name that is shown to contacts
+	 */
+	void changeDisplayName(const QString &displayName);
 
 signals:
-	// emitted by 'Kaidan' to us:
+	// Those signals are emitted by Kaidan.cpp and are used by this class.
 	void connectRequested();
 	void disconnectRequested();
 	void credentialsUpdated(ClientWorker::Credentials creds);
+	void registrationFormRequested();
 
 	/**
 	 * Emitted when the client failed to connect to the server.
@@ -228,7 +256,7 @@ private:
 	 */
 	QString generateJidResourceWithRandomSuffix(const QString jidResourcePrefix, unsigned int length = 4) const;
 
-	Caches *caches;
+	Caches *m_caches;
 	Kaidan *kaidan;
 	QXmppClient *client;
 	LogHandler *logger;
@@ -244,11 +272,17 @@ private:
 	UploadManager *uploadManager;
 	DownloadManager *downloadManager;
 
+	bool m_isReconnecting = false;
+	QXmppConfiguration m_configToBeUsedOnNextConnect;
+
 	// These variables are used for checking the state of an ongoing account deletion.
 	bool m_isAccountToBeDeletedFromClient = false;
 	bool m_isAccountToBeDeletedFromClientAndServer = false;
 	bool m_isAccountDeletedFromServer = false;
 	bool m_isClientConnectedBeforeAccountDeletionFromServer = true;
+
+	QString m_passwordToBeSetOnNextConnect;
+	QString m_displayNameToBeSetOnNextConnect;
 };
 
 #endif // CLIENTWORKER_H

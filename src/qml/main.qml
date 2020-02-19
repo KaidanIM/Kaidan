@@ -36,6 +36,7 @@ import StatusBar 0.1
 import im.kaidan.kaidan 1.0
 
 import "elements"
+import "registration"
 import "settings"
 
 Kirigami.ApplicationWindow {
@@ -75,10 +76,15 @@ Kirigami.ApplicationWindow {
 		Kaidan.mainDisconnect()
 	}
 
-	// load all pages
-	Component {id: chatPage; ChatPage {}}
+	// components for all main pages
+	Component {id: startPage; StartPage {}}
+	Component {id: registrationLoginDecisionPage; RegistrationLoginDecisionPage {}}
+	Component {id: registrationDecisionPage; RegistrationDecisionPage {}}
+	Component {id: automaticRegistrationPage; AutomaticRegistrationPage {}}
+	Component {id: manualRegistrationPage; ManualRegistrationPage {}}
 	Component {id: loginPage; LoginPage {}}
 	Component {id: rosterPage; RosterPage {}}
+	Component {id: chatPage; ChatPage {}}
 	Component {id: emptyChatPage; EmptyChatPage {}}
 	Component {id: settingsPage; SettingsPage {}}
 	Component {id: qrCodeScannerPage; QrCodeScannerPage {}}
@@ -99,13 +105,13 @@ Kirigami.ApplicationWindow {
 		passiveNotification(Utils.connectionErrorMessage(Kaidan.connectionError))
 	}
 
-	function openLoginPage() {
+	function openStartPage() {
 		globalDrawer.enabled = false
 		globalDrawer.visible = false
 
 		popLayersAboveLowest()
 		popAllPages()
-		pageStack.push(loginPage)
+		pageStack.push(startPage)
 	}
 
 	/**
@@ -114,6 +120,7 @@ Kirigami.ApplicationWindow {
 	function openChatView() {
 		globalDrawer.enabled = true
 
+		popLayersAboveLowest()
 		popAllPages()
 		pageStack.push(rosterPage)
 		if (!Kirigami.Settings.isMobile)
@@ -145,22 +152,19 @@ Kirigami.ApplicationWindow {
 		subReqAcceptSheet.open()
 	}
 
-	Component.onCompleted: {
-		Kaidan.passiveNotificationRequested.connect(passiveNotification)
-		Kaidan.newCredentialsNeeded.connect(openLoginPage)
-		Kaidan.loggedInWithNewCredentials.connect(openChatView)
-		Kaidan.subscriptionRequestReceived.connect(handleSubRequest)
+	Connections {
+		target: Kaidan
 
+		onPassiveNotificationRequested: passiveNotification(text)
+		onNewCredentialsNeeded: openStartPage()
+		onLoggedInWithNewCredentials: openChatView()
+		onSubscriptionRequestReceived: handleSubRequest(from, msg)
+	}
+
+	Component.onCompleted: {
 		openChatView()
 
 		// Announce that the user interface is ready and the application can start connecting.
 		Kaidan.start()
-	}
-
-	Component.onDestruction: {
-		Kaidan.passiveNotificationRequested.disconnect(passiveNotification)
-		Kaidan.newCredentialsNeeded.disconnect(openLoginPage)
-		Kaidan.loggedInWithNewCredentials.disconnect(openChatView)
-		Kaidan.subscriptionRequestReceived.disconnect(handleSubRequest)
 	}
 }

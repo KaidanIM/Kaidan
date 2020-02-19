@@ -1,6 +1,8 @@
 <RCC>
 	<qresource prefix="/qml/">
 		<file>main.qml</file>
+		<file>StartPage.qml</file>
+		<file>RegistrationLoginDecisionPage.qml</file>
 		<file>RosterPage.qml</file>
 		<file>LoginPage.qml</file>
 		<file>ChatPageBase.qml</file>
@@ -32,6 +34,7 @@
 		<file>elements/SendMediaSheet.qml</file>
 		<file>elements/BinaryDecisionPage.qml</file>
 		<file>elements/ConfirmationPage.qml</file>
+		<file>elements/DataForm.qml</file>
 
 		<file>elements/MediaPreview.qml</file>
 		<file>elements/MediaPreviewImage.qml</file>
@@ -53,6 +56,26 @@
 		<file>elements/fields/CredentialsField.qml</file>
 		<file>elements/fields/JidField.qml</file>
 		<file>elements/fields/PasswordField.qml</file>
+		<file>elements/fields/RegistrationPasswordField.qml</file>
+
+		<file>registration/AutomaticRegistrationPage.qml</file>
+		<file>registration/CustomFormView.qml</file>
+		<file>registration/CustomFormViewManualRegistration.qml</file>
+		<file>registration/CustomFormViewAutomaticRegistration.qml</file>
+		<file>registration/DisplayNameView.qml</file>
+		<file>registration/FieldView.qml</file>
+		<file>registration/LoadingView.qml</file>
+		<file>registration/ManualRegistrationPage.qml</file>
+		<file>registration/NavigationBar.qml</file>
+		<file>registration/PasswordView.qml</file>
+		<file>registration/RegistrationButton.qml</file>
+		<file>registration/RegistrationDecisionPage.qml</file>
+		<file>registration/RegistrationPage.qml</file>
+		<file>registration/ResultView.qml</file>
+		<file>registration/ServerView.qml</file>
+		<file>registration/UsernameView.qml</file>
+		<file>registration/View.qml</file>
+		<file>registration/WebRegistrationView.qml</file>
 
 		<file>settings/SettingsItem.qml</file>
 		<file>settings/SettingsPage.qml</file>

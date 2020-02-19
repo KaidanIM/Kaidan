@@ -106,7 +106,6 @@ QXmppUri::QXmppUri(QString input)
 	if (!url.isValid() || url.scheme() != URI_SCHEME)
 		return;
 
-	// set JID
 	setJid(url.path());
 
 	if (!url.hasQuery())

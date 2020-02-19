@@ -31,66 +31,128 @@
 #ifndef REGISTRATIONMANAGER_H
 #define REGISTRATIONMANAGER_H
 
-#include <QXmppClientExtension.h>
+// Kaidan
 class ClientWorker;
+#include "Globals.h"
 class Kaidan;
+class RegistrationDataFormModel;
+// Qt
+#include <QObject>
+#include <QVector>
 class QSettings;
-#if (QXMPP_VERSION) >= QT_VERSION_CHECK(1, 2, 0)
+// QXmpp
+#include <QXmppBitsOfBinaryContentId.h>
+class QXmppClient;
+class QXmppDataForm;
+class QXmppDiscoveryIq;
+class QXmppRegisterIq;
+#include <QXmppStanza.h>
 class QXmppRegistrationManager;
-#endif
 
-class RegistrationManager : public QXmppClientExtension
+class RegistrationManager : public QObject
 {
 	Q_OBJECT
-	Q_PROPERTY(bool registrationSupported READ registrationSupported
-	                                      NOTIFY registrationSupportedChanged)
 
 public:
+	enum RegistrationError {
+		UnknownError,
+		InBandRegistrationNotSupported,
+		UsernameConflict,
+		PasswordTooWeak,
+		CaptchaVerificationFailed,
+		RequiredInformationMissing,
+		TemporarilyBlocked
+	};
+	Q_ENUM(RegistrationError)
+
 	RegistrationManager(Kaidan *kaidan, ClientWorker *clientWorker, QXmppClient *client, QSettings *settings);
 
-	QStringList discoveryFeatures() const override;
-
 	/**
-	 * @brief Changes the user's password
-	 * @param newPassword The requested new password
+	 * Sets whether a registration is requested for the next time when the client connects to the server.
+	 *
+	 * @param registerOnConnect true for requesting a registration on connecting, false otherwise
 	 */
-	void changePassword(const QString &newPassword);
-
-	bool registrationSupported() const;
+	void setRegisterOnConnectEnabled(bool registerOnConnect);
 
 public slots:
+	/**
+	 * Sends the form containing information to register an account.
+	 */
+	void sendRegistrationForm();
+
 	/**
 	 * Deletes the account from the server.
 	 */
 	void deleteAccount();
 
-signals:
-	void passwordChanged(const QString &newPassword);
-	void passwordChangeFailed();
-	void registrationSupportedChanged();
-
-protected:
-	void setClient(QXmppClient *client) override;
-
-private slots:
-	void handleDiscoInfo(const QXmppDiscoveryIq &iq);
+	/**
+	 * Changes the user's password.
+	 *
+	 * @param newPassword new password to set
+	 */
+	void changePassword(const QString &newPassword);
 
 private:
-	bool handleStanza(const QDomElement &stanza) override;
-	void setRegistrationSupported(bool registrationSupported);
+	/**
+	 * Called when the In-Band Registration support changed.
+	 *
+	 * The server feature state for In-Band Registration is only changed when the server disables it, not on disconnect.
+	 * That way, the last known state can be cached while being offline and operations like deleting an account from the server can be offered to the user even if Kaidan is not connected to the user's server.
+	 */
+	void handleInBandRegistrationSupportedChanged();
+
+	void handlePasswordChangeSucceeded(const QString &newPassword);
+	void handlePasswordChangeFailed(const QXmppStanza::Error &error);
+
+	/**
+	 * Handles an incoming form used to register an account.
+	 *
+	 * @param iq IQ stanza to be handled
+	 */
+	void handleRegistrationFormReceived(const QXmppRegisterIq &iq);
+
+	/**
+	 * Handles a succeeded registration.
+	 */
+	void handleRegistrationSucceeded();
+
+	/**
+	 * Handles a failed registration.
+	 *
+	 * @param error error describing the reason for the failure
+	 */
+	void handleRegistrationFailed(const QXmppStanza::Error &error);
+
+	/**
+	 * Extracts a form from an IQ stanza for registration.
+	 *
+	 * @param iq IQ stanza containing the form
+	 * @param isFakeForm true if the form is used to TODO: what?
+	 *
+	 * @return data form with extracted key-value pairs
+	 */
+	QXmppDataForm extractFormFromRegisterIq(const QXmppRegisterIq &iq, bool &isFakeForm);
+
+	/**
+	 * Copies values set by the user to a new form.
+	 *
+	 * @param oldForm form with old values
+	 * @param newForm form with new values
+	 */
+	void copyUserDefinedValuesToNewForm(const QXmppDataForm &oldForm, QXmppDataForm &newForm);
+
+	/**
+	 * Cleans up the last form used for registration.
+	 */
+	void cleanUpLastForm();
 
 	Kaidan *kaidan;
-	ClientWorker *clientWorker;
-	QSettings *settings;
+	ClientWorker *m_clientWorker;
 	QXmppClient *m_client;
-#if (QXMPP_VERSION) >= QT_VERSION_CHECK(1, 2, 0)
+	QSettings *settings;
 	QXmppRegistrationManager *m_manager;
-#endif
-	bool m_registrationSupported = false;
-
-	// caching
-	QString m_newPasswordIqId;
-	QString m_newPassword;
+	RegistrationDataFormModel *m_dataFormModel;
+	QVector<QXmppBitsOfBinaryContentId> m_contentIdsToRemove;
 };
 
 #endif // REGISTRATIONMANAGER_H

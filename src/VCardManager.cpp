@@ -40,6 +40,7 @@ VCardManager::VCardManager(QXmppClient *client, AvatarFileStorage *avatars, QObj
 {
 	connect(manager, &QXmppVCardManager::vCardReceived, this, &VCardManager::handleVCard);
 	connect(client, &QXmppClient::presenceReceived, this, &VCardManager::handlePresence);
+	connect(manager, &QXmppVCardManager::clientVCardReceived, this, &VCardManager::handleClientVCardReceived);
 	connect(Kaidan::instance(), &Kaidan::vCardRequested, this, &VCardManager::fetchVCard);
 
 	// Currently we're not requesting the own VCard on every connection because it is probably
@@ -68,6 +69,17 @@ void VCardManager::handleVCard(const QXmppVCardIq &iq)
 	emit vCardReceived(iq);
 }
 
+void VCardManager::fetchClientVCard()
+{
+	manager->requestClientVCard();
+}
+
+void VCardManager::handleClientVCardReceived()
+{
+	if (!m_nicknameToBeSetAfterFetchingCurrentVCard.isEmpty())
+		updateNicknameAfterFetchingCurrentVCard();
+}
+
 void VCardManager::handlePresence(const QXmppPresence &presence)
 {
 	if (presence.vCardUpdateType() == QXmppPresence::VCardUpdateValidPhoto) {
@@ -83,4 +95,18 @@ void VCardManager::handlePresence(const QXmppPresence &presence)
 		avatarStorage->clearAvatar(bareJid);
 	}
 	// ignore VCardUpdateNone (protocol unsupported) and VCardUpdateNotReady
+}
+
+void VCardManager::updateNickname(const QString &nickname)
+{
+	m_nicknameToBeSetAfterFetchingCurrentVCard = nickname;
+	fetchClientVCard();
+}
+
+void VCardManager::updateNicknameAfterFetchingCurrentVCard()
+{
+	QXmppVCardIq vCardIq = manager->clientVCard();
+	vCardIq.setNickName(m_nicknameToBeSetAfterFetchingCurrentVCard);
+	manager->setClientVCard(vCardIq);
+	m_nicknameToBeSetAfterFetchingCurrentVCard = QString();
 }

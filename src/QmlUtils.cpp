@@ -29,6 +29,8 @@
  */
 
 #include "QmlUtils.h"
+// Kaidan
+#include "Globals.h"
 // Qt
 #include <QClipboard>
 #include <QColor>

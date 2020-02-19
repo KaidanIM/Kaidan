@@ -44,11 +44,11 @@ public:
 	CredentialsValidator(QObject *parent = nullptr);
 
 	/**
-	 * Returns true if the given string is a valid JID.
+	 * Returns true if the given string is a valid JID of an XMPP account.
 	 *
 	 * @param jid JID to be validated
 	 */
-	Q_INVOKABLE static bool isJidValid(const QString &jid);
+	Q_INVOKABLE static bool isAccountJidValid(const QString &jid);
 
 	/**
 	 * Returns true if the given string is a valid username.

@@ -29,6 +29,7 @@
  */
 
 // Qt
+#include <QAbstractSocket>
 #include <QCommandLineOption>
 #include <QCommandLineParser>
 #include <QDebug>
@@ -45,9 +46,14 @@
 // QXmpp
 #include "qxmpp-exts/QXmppUploadManager.h"
 #include <QXmppClient.h>
+#include <QXmppRegisterIq.h>
 
 // Kaidan
 #include "AvatarFileStorage.h"
+#include "BitsOfBinaryImageProvider.h"
+#include "CredentialsGenerator.h"
+#include "CredentialsValidator.h"
+#include "DataFormModel.h"
 #include "EmojiModel.h"
 #include "Enums.h"
 #include "Kaidan.h"
@@ -55,11 +61,13 @@
 #include "MessageModel.h"
 #include "PresenceCache.h"
 #include "QmlUtils.h"
+#include "RegistrationDataFormFilterModel.h"
+#include "RegistrationManager.h"
 #include "RosterModel.h"
 #include "RosterFilterProxyModel.h"
 #include "StatusBar.h"
+#include "ServerListModel.h"
 #include "UploadManager.h"
-#include "EmojiModel.h"
 #include "Utils.h"
 #include "QrCodeGenerator.h"
 #include "QrCodeScannerFilter.h"
@@ -69,7 +77,6 @@
 #include "MediaSettingModel.h"
 #include "MediaUtils.h"
 #include "MediaRecorder.h"
-#include "CredentialsValidator.h"
 
 #ifdef STATIC_BUILD
 #include "static_plugins.h"
@@ -246,6 +253,7 @@ Q_DECL_EXPORT int main(int argc, char *argv[])
 	qRegisterMetaType<MediaRecorder::State>();
 	qRegisterMetaType<MediaRecorder::Status>();
 	qRegisterMetaType<MediaRecorder::Error>();
+	qRegisterMetaType<ServerListModel::Role>();
 
 	// Qt-Translator
 	QTranslator qtTranslator;
@@ -319,6 +327,9 @@ Q_DECL_EXPORT int main(int argc, char *argv[])
 	}
 
 	QQmlApplicationEngine engine;
+
+	engine.addImageProvider(QLatin1String(BITS_OF_BINARY_IMAGE_PROVIDER_NAME), BitsOfBinaryImageProvider::instance());
+
 	// QtQuickControls2 Style
 	if (qEnvironmentVariableIsEmpty("QT_QUICK_CONTROLS_STYLE")) {
 #ifdef Q_OS_WIN
@@ -350,8 +361,11 @@ Q_DECL_EXPORT int main(int argc, char *argv[])
 	qmlRegisterType<MediaSettingsVideoCodecModel>(APPLICATION_ID, 1, 0, "MediaSettingsVideoCodecModel");
 	qmlRegisterType<MediaSettingsVideoFrameRateModel>(APPLICATION_ID, 1, 0, "MediaSettingsVideoFrameRateModel");
 	qmlRegisterType<MediaRecorder>(APPLICATION_ID, 1, 0, "MediaRecorder");
+	qmlRegisterType<CredentialsGenerator>(APPLICATION_ID, 1, 0, "CredentialsGenerator");
 	qmlRegisterType<CredentialsValidator>(APPLICATION_ID, 1, 0, "CredentialsValidator");
 	qmlRegisterType<QrCodeGenerator>(APPLICATION_ID, 1, 0, "QrCodeGenerator");
+	qmlRegisterType<RegistrationDataFormFilterModel>(APPLICATION_ID, 1, 0, "RegistrationDataFormFilterModel");
+	qmlRegisterType<ServerListModel>(APPLICATION_ID, 1, 0, "ServerListModel");
 
 	qmlRegisterUncreatableType<QAbstractItemModel>("EmojiModel", 0, 1, "QAbstractItemModel", "Used by proxy models");
 	qmlRegisterUncreatableType<Emoji>("EmojiModel", 0, 1, "Emoji", "Used by emoji models");
@@ -365,10 +379,10 @@ Q_DECL_EXPORT int main(int argc, char *argv[])
 	qmlRegisterUncreatableType<AudioEncoderSettings>(APPLICATION_ID, 1, 0, "AudioEncoderSettings", "AudioEncoderSettings type usable");
 	qmlRegisterUncreatableType<VideoEncoderSettings>(APPLICATION_ID, 1, 0, "VideoEncoderSettings", "VideoEncoderSettings type usable");
 	qmlRegisterUncreatableType<ClientWorker>(APPLICATION_ID, 1, 0, "ClientWorker", "Cannot create object; only enums defined!");
+	qmlRegisterUncreatableType<DataFormModel>(APPLICATION_ID, 1, 0, "DataFormModel", "Cannot create object; only enums defined!");
+	qmlRegisterUncreatableType<RegistrationManager>(APPLICATION_ID, 1, 0, "RegistrationManager", "Cannot create object; only enums defined!");
 
-
-	qmlRegisterUncreatableMetaObject(Enums::staticMetaObject, APPLICATION_ID,
-		1, 0, "Enums", "Can't create object; only enums defined!");
+	qmlRegisterUncreatableMetaObject(Enums::staticMetaObject, APPLICATION_ID, 1, 0, "Enums", "Can't create object; only enums defined!");
 
 	qmlRegisterSingletonType<MediaUtils>("MediaUtils", 0, 1, "MediaUtilsInstance", [](QQmlEngine *, QJSEngine *) {
 		QObject *instance = new MediaUtils(qApp);

@@ -1,7 +1,7 @@
 /*
  *  Kaidan - A user-friendly XMPP client for every device!
  *
- *  Copyright (C) 2016-2019 Kaidan developers and contributors
+ *  Copyright (C) 2016-2020 Kaidan developers and contributors
  *  (see the LICENSE file for a full list of copyright authors)
  *
  *  Kaidan is free software: you can redistribute it and/or modify
@@ -28,10 +28,10 @@
  *  along with Kaidan.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-import QtQuick 2.7
-import QtQuick.Controls 2.3 as Controls
-import QtQuick.Layouts 1.3
-import org.kde.kirigami 2.4 as Kirigami
+import QtQuick 2.12
+import QtQuick.Controls 2.12 as Controls
+import QtQuick.Layouts 1.12
+import org.kde.kirigami 2.8 as Kirigami
 
 import im.kaidan.kaidan 1.0
 

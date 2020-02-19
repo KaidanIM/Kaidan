@@ -34,6 +34,7 @@
 #include <QGuiApplication>
 #include <QSettings>
 #include <QStringBuilder>
+#include <QString>
 #include <QSysInfo>
 // QXmpp
 #include <QXmppClient.h>
@@ -54,9 +55,8 @@
 #include "UploadManager.h"
 #include "VCardManager.h"
 
-ClientWorker::ClientWorker(Caches *caches, Kaidan *kaidan, bool enableLogging, QGuiApplication *app,
-                           QObject* parent)
-        : QObject(parent), caches(caches), kaidan(kaidan), enableLogging(enableLogging), app(app)
+ClientWorker::ClientWorker(Caches *caches, Kaidan *kaidan, bool enableLogging, QGuiApplication *app, QObject* parent)
+	: QObject(parent), m_caches(caches), kaidan(kaidan), enableLogging(enableLogging), app(app)
 {
 	client = new QXmppClient(this);
 	logger = new LogHandler(client, this);
@@ -70,8 +70,6 @@ ClientWorker::ClientWorker(Caches *caches, Kaidan *kaidan, bool enableLogging, Q
 	uploadManager = new UploadManager(client, rosterManager, this);
 	downloadManager = new DownloadManager(kaidan, caches->transferCache,
 	                                      caches->msgModel, this);
-
-	client->addExtension(registrationManager);
 
 	connect(client, &QXmppClient::presenceReceived,
 	        caches->presCache, &PresenceCache::updatePresence);
@@ -90,13 +88,23 @@ ClientWorker::ClientWorker(Caches *caches, Kaidan *kaidan, bool enableLogging, Q
 	connect(app, &QGuiApplication::applicationStateChanged, this, &ClientWorker::setCsiState);
 
 	// account deletion
+	connect(kaidan, &Kaidan::deleteAccountFromClient, this, &ClientWorker::deleteAccountFromClient);
+	connect(kaidan, &Kaidan::deleteAccountFromClientAndServer, this, &ClientWorker::deleteAccountFromClientAndServer);
 	connect(this, &ClientWorker::deleteAccountFromDatabase, kaidan->rosterDb(), &RosterDb::clearAll);
 	connect(this, &ClientWorker::deleteAccountFromDatabase, kaidan->messageDb(), &MessageDb::removeAllMessages);
+
+	connect(kaidan, &Kaidan::changePassword, this, &ClientWorker::changePassword);
+	connect(kaidan, &Kaidan::changeDisplayName, this, &ClientWorker::changeDisplayName);
 }
 
 VCardManager *ClientWorker::getVCardManager() const
 {
 	return vCardManager;
+}
+
+ClientWorker::Caches *ClientWorker::caches() const
+{
+	return m_caches;
 }
 
 void ClientWorker::main()
@@ -113,6 +121,7 @@ void ClientWorker::main()
 	connect(client, &QXmppClient::error, this, &ClientWorker::onConnectionError);
 
 	connect(this, &ClientWorker::connectRequested, this, &ClientWorker::xmppConnect);
+	connect(this, &ClientWorker::registrationFormRequested, this, &ClientWorker::connectToRegister);
 	connect(this, &ClientWorker::disconnectRequested, client, &QXmppClient::disconnectFromServer);
 }
 
@@ -123,14 +132,39 @@ void ClientWorker::xmppConnect()
 	config.setResource(generateJidResourceWithRandomSuffix(creds.jidResourcePrefix));
 	config.setPassword(creds.password);
 	config.setAutoAcceptSubscriptions(false);
+
+	connectToServer(config);
+}
+
+void ClientWorker::connectToServer(QXmppConfiguration config)
+{
+	if (client->state() != QXmppClient::DisconnectedState) {
+		qWarning() << "[main] Tried to connect, even if still connected!" << "Requesting disconnect first and connecting then.";
+		m_isReconnecting = true;
+		m_configToBeUsedOnNextConnect = config;
+		client->disconnectFromServer();
+		return;
+	}
+
+	config.setJid(creds.jid);
 	config.setStreamSecurityMode(QXmppConfiguration::TLSRequired);
-	config.setAutoReconnectionEnabled(true); // will automatically reconnect
+
 	// on first try we must be sure that we connect successfully
 	// otherwise this could end in a reconnection loop
-	if (creds.isFirstTry)
-		config.setAutoReconnectionEnabled(false);
+	config.setAutoReconnectionEnabled(!creds.isFirstTry);
 
-	client->connectToServer(config, QXmppPresence(QXmppPresence::Available));
+	// Reset the attribute for In-Band Registration support.
+	// That is needed when the attribute was true after the last logout but the server disabled the support until the next login.
+	// Without that reset, the attribute would stay "true".
+	m_caches->serverFeaturesCache->setInBandRegistrationSupported(false);
+
+	client->connectToServer(config);
+}
+
+void ClientWorker::connectToRegister()
+{
+	registrationManager->setRegisterOnConnectEnabled(true);
+	connectToServer();
 }
 
 void ClientWorker::deleteAccountFromClientAndServer()
@@ -157,23 +191,48 @@ void ClientWorker::deleteAccountFromClient()
 		m_isAccountToBeDeletedFromClient = false;
 	} else {
 		m_isAccountToBeDeletedFromClient = true;
-		emit disconnectRequested();
+		client->disconnectFromServer();
 	}
 }
 
-void ClientWorker::onAccountDeletedFromServer()
+void ClientWorker::handleAccountDeletedFromServer()
 {
 	m_isAccountDeletedFromServer = true;
 }
 
-void ClientWorker::onAccountDeletionFromServerFailed(QXmppStanza::Error error)
+void ClientWorker::handleAccountDeletionFromServerFailed(QXmppStanza::Error error)
 {
 	emit kaidan->passiveNotificationRequested(tr("Your account could not be deleted from the server. Therefore, it was also not removed from this app: %1").arg(error.text()));
 
 	m_isAccountToBeDeletedFromClientAndServer = false;
 
 	if (!m_isClientConnectedBeforeAccountDeletionFromServer)
-		emit disconnectRequested();
+		client->disconnectFromServer();
+}
+
+void ClientWorker::changePassword(const QString &newPassword)
+{
+	if (client->isAuthenticated()) {
+		registrationManager->changePassword(newPassword);
+	} else {
+		m_passwordToBeSetOnNextConnect = newPassword;
+		xmppConnect();
+	}
+}
+
+void ClientWorker::changeDisplayName(const QString &displayName)
+{
+	if (client->isAuthenticated()) {
+		vCardManager->updateNickname(displayName);
+	} else {
+		m_displayNameToBeSetOnNextConnect = displayName;
+
+		// The check is needed when this method is called during account registration to avoid connecting to the server before the registration is finished.
+		// During registration, the display name is set first and the client connects to the server afterwards.
+		// The client should only connect to the server during normal usage.
+		if (!(creds.jid.isEmpty() || creds.password.isEmpty()))
+			xmppConnect();
+	}
 }
 
 void ClientWorker::onConnected()
@@ -187,20 +246,41 @@ void ClientWorker::onConnected()
 
 	// accept credentials and save them
 	creds.isFirstTry = false;
-	caches->settings->setValue(KAIDAN_SETTINGS_AUTH_JID, creds.jid);
-	caches->settings->setValue(KAIDAN_SETTINGS_AUTH_PASSWD,
-	                           QString::fromUtf8(creds.password.toUtf8().toBase64()));
-
-	// after first log in we always want to automatically reconnect
-	client->configuration().setAutoReconnectionEnabled(true);
+	m_caches->settings->setValue(KAIDAN_SETTINGS_AUTH_JID, creds.jid);
+	m_caches->settings->setValue(KAIDAN_SETTINGS_AUTH_PASSWD, QString::fromUtf8(creds.password.toUtf8().toBase64()));
 
 	// If the account could not be deleted from the server because the client was disconnected, delete it now.
 	if (m_isAccountToBeDeletedFromClientAndServer)
 		registrationManager->deleteAccount();
+	else
+		// After the first login, the client should always try to reconnect automatically in case of a connection outage.
+		client->configuration().setAutoReconnectionEnabled(true);
+
+	// If the display name could not be changed on the server because the client was disconnected, change it now and disconnect again.
+	if (!m_passwordToBeSetOnNextConnect.isEmpty()) {
+		registrationManager->changePassword(m_passwordToBeSetOnNextConnect);
+		m_passwordToBeSetOnNextConnect.clear();
+		client->disconnectFromServer();
+	}
+
+	// If the display name could not be changed from the server because the client was disconnected, change it now.
+	if (!m_displayNameToBeSetOnNextConnect.isEmpty()) {
+		vCardManager->updateNickname(m_displayNameToBeSetOnNextConnect);
+		m_displayNameToBeSetOnNextConnect.clear();
+	}
 }
 
 void ClientWorker::onDisconnected()
 {
+	if (m_isReconnecting) {
+		m_isReconnecting = false;
+		connectToServer(m_configToBeUsedOnNextConnect);
+		m_configToBeUsedOnNextConnect = {};
+		return;
+	}
+
+	registrationManager->setRegisterOnConnectEnabled(false);
+
 	// Delete the account from the client if the client was connected and had to disconnect first or if the account was deleted from the server.
 	if (m_isAccountToBeDeletedFromClient || (m_isAccountToBeDeletedFromClientAndServer && m_isAccountDeletedFromServer)) {
 		m_isAccountToBeDeletedFromClientAndServer = false;
@@ -215,12 +295,6 @@ void ClientWorker::onConnectionError(QXmppClient::Error error)
 	// no mutex needed, because this is called from updateClient()
 	qDebug() << "[client] Disconnected:" << error;
 
-	// Check if first time connecting with these credentials
-	if (creds.isFirstTry || error == QXmppClient::XmppStreamError) {
-		// always request new credentials, when failed to connect on first time
-		emit kaidan->newCredentialsNeeded();
-	}
-
 	QXmppStanza::Error::Condition xmppStreamError;
 	QAbstractSocket::SocketError socketError;
 
@@ -233,6 +307,7 @@ void ClientWorker::onConnectionError(QXmppClient::Error error)
 		break;
 	case QXmppClient::XmppStreamError:
 		xmppStreamError = client->xmppStreamError();
+		qDebug() << "[client] XMPP stream error:" << xmppStreamError;
 		if (xmppStreamError == QXmppStanza::Error::NotAuthorized) {
 			emit connectionErrorChanged(ClientWorker::AuthenticationFailed);
 		} else {

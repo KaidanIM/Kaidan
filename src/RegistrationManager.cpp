@@ -28,135 +28,253 @@
  *  along with Kaidan.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include "ClientWorker.h"
 #include "RegistrationManager.h"
+// Kaidan
+#include "BitsOfBinaryImageProvider.h"
+#include "ClientWorker.h"
 #include "Globals.h"
 #include "Kaidan.h"
-
-#include <QXmppRegisterIq.h>
-#include <QXmppClient.h>
-#include <QXmppUtils.h>
-#include <QXmppDiscoveryManager.h>
-#if (QXMPP_VERSION) >= QT_VERSION_CHECK(1, 2, 0)
-#include <QXmppRegistrationManager.h>
-#endif
-
-#include <QSettings>
+#include "RegistrationDataFormModel.h"
+// C++
+#include <memory>
+// Qt
 #include <QDomElement>
+#include <QList>
+#include <QObject>
+#include <QSettings>
+#include <QQmlEngine>
+// QXmpp
+#include <QXmppBitsOfBinaryDataList.h>
+#include <QXmppClient.h>
+#include <QXmppRegisterIq.h>
+#include <QXmppRegistrationManager.h>
 
 RegistrationManager::RegistrationManager(Kaidan *kaidan, ClientWorker *clientWorker, QXmppClient *client, QSettings *settings)
-        : kaidan(kaidan), clientWorker(clientWorker), settings(settings), m_client(client)
-#if (QXMPP_VERSION) >= QT_VERSION_CHECK(1, 2, 0)
-          , m_manager(new QXmppRegistrationManager)
-#endif
+        : QObject(clientWorker), kaidan(kaidan), m_clientWorker(clientWorker), m_client(client), settings(settings), m_manager(new QXmppRegistrationManager), m_dataFormModel(new RegistrationDataFormModel())
 {
-#if (QXMPP_VERSION) >= QT_VERSION_CHECK(1, 2, 0)
-	m_client->addExtension(m_manager);
+	client->addExtension(m_manager);
 
-	connect(m_manager, &QXmppRegistrationManager::accountDeletionFailed, clientWorker, &ClientWorker::onAccountDeletionFromServerFailed);
-	connect(m_manager, &QXmppRegistrationManager::accountDeleted, clientWorker, &ClientWorker::onAccountDeletedFromServer);
-#endif
-	connect(kaidan, &Kaidan::changePassword, this, &RegistrationManager::changePassword);
-	connect(this, &RegistrationManager::passwordChanged, kaidan, &Kaidan::setPassword);
-	connect(this, &RegistrationManager::passwordChanged, kaidan, &Kaidan::passwordChangeSucceeded);
-	connect(this, &RegistrationManager::passwordChangeFailed, kaidan, &Kaidan::passwordChangeFailed);
+	connect(m_manager, &QXmppRegistrationManager::supportedByServerChanged, this, &RegistrationManager::handleInBandRegistrationSupportedChanged);
+
+	connect(kaidan, &Kaidan::sendRegistrationForm, this, &RegistrationManager::sendRegistrationForm);
+
+	connect(m_manager, &QXmppRegistrationManager::registrationFormReceived, this, &RegistrationManager::handleRegistrationFormReceived);
+	connect(m_manager, &QXmppRegistrationManager::registrationSucceeded, this, &RegistrationManager::handleRegistrationSucceeded);
+	connect(m_manager, &QXmppRegistrationManager::registrationSucceeded, kaidan, &Kaidan::registrationSucceeded);
+	connect(m_manager, &QXmppRegistrationManager::registrationFailed, this, &RegistrationManager::handleRegistrationFailed);
+
+	connect(m_manager, &QXmppRegistrationManager::accountDeletionFailed, m_clientWorker, &ClientWorker::handleAccountDeletionFromServerFailed);
+	connect(m_manager, &QXmppRegistrationManager::accountDeleted, m_clientWorker, &ClientWorker::handleAccountDeletedFromServer);
+
+	connect(m_manager, &QXmppRegistrationManager::passwordChanged, kaidan, &Kaidan::setPassword);
+
+	connect(m_manager, &QXmppRegistrationManager::passwordChanged, kaidan, &Kaidan::passwordChangeSucceeded);
+	connect(m_manager, &QXmppRegistrationManager::passwordChanged, this, &RegistrationManager::handlePasswordChangeSucceeded);
+
+	connect(m_manager, &QXmppRegistrationManager::passwordChangeFailed, kaidan, &Kaidan::passwordChangeFailed);
+	connect(m_manager, &QXmppRegistrationManager::passwordChangeFailed, this, &RegistrationManager::handlePasswordChangeFailed);
 }
 
-QStringList RegistrationManager::discoveryFeatures() const
+void RegistrationManager::setRegisterOnConnectEnabled(bool registerOnConnect)
 {
-	return QStringList() << NS_REGISTER;
+	m_manager->setRegisterOnConnectEnabled(registerOnConnect);
 }
 
-void RegistrationManager::changePassword(const QString &newPassword)
+void RegistrationManager::sendRegistrationForm()
 {
-	m_newPasswordIqId = QXmppUtils::generateStanzaHash();
-	m_newPassword = newPassword;
+	if (m_dataFormModel->isFakeForm()) {
+		QXmppRegisterIq iq;
+		iq.setUsername(m_dataFormModel->extractUsername());
+		iq.setPassword(m_dataFormModel->extractPassword());
+		iq.setEmail(m_dataFormModel->extractEmail());
 
-	QXmppRegisterIq iq;
-	iq.setType(QXmppIq::Set);
-	iq.setTo(client()->configuration().domain());
-	iq.setFrom(client()->configuration().jid());
-	iq.setUsername(QXmppUtils::jidToUser(client()->configuration().jid()));
-	iq.setPassword(newPassword);
-	iq.setId(m_newPasswordIqId);
+		m_manager->setRegistrationFormToSend(iq);
+	} else {
+		m_manager->setRegistrationFormToSend(m_dataFormModel->form());
+	}
 
-	client()->sendPacket(iq);
-}
-
-bool RegistrationManager::registrationSupported() const
-{
-	return m_registrationSupported;
+	m_clientWorker->connectToRegister();
 }
 
 void RegistrationManager::deleteAccount()
 {
-#if (QXMPP_VERSION) >= QT_VERSION_CHECK(1, 2, 0)
 	m_manager->deleteAccount();
-#else
-	emit kaidan->passiveNotificationRequested("Account deletion is not supported. If an update doesn't help, contact your distribution maintainers: QXmpp version >= 1.2 is required.");
-#endif
 }
 
-void RegistrationManager::setClient(QXmppClient *client)
+void RegistrationManager::changePassword(const QString &newPassword)
 {
-	QXmppClientExtension::setClient(client);
-	// get service discovery manager
-	auto *disco = client->findExtension<QXmppDiscoveryManager>();
-	if (disco) {
-		connect(disco, &QXmppDiscoveryManager::infoReceived,
-		        this, &RegistrationManager::handleDiscoInfo);
+	m_manager->changePassword(newPassword);
+}
 
-		connect(client, &QXmppClient::disconnected, this, [=] () {
-			setRegistrationSupported(false);
-		});
+void RegistrationManager::handleInBandRegistrationSupportedChanged()
+{
+	if (m_client->isConnected()) {
+		m_clientWorker->caches()->serverFeaturesCache->setInBandRegistrationSupported(m_manager->supportedByServer());
 	}
 }
 
-void RegistrationManager::handleDiscoInfo(const QXmppDiscoveryIq &iq)
+void RegistrationManager::handlePasswordChangeSucceeded(const QString &newPassword)
 {
-	// check features of own server
-	if (iq.from().isEmpty() || iq.from() == client()->configuration().domain()) {
-		if (iq.features().contains(NS_REGISTER))
-			setRegistrationSupported(true);
-	}
+	settings->setValue(
+	    KAIDAN_SETTINGS_AUTH_PASSWD,
+	    QString::fromUtf8(newPassword.toUtf8().toBase64())
+	);
+
+	emit kaidan->passiveNotificationRequested(
+	    tr("Password changed successfully.")
+	);
 }
 
-bool RegistrationManager::handleStanza(const QDomElement &stanza)
+void RegistrationManager::handlePasswordChangeFailed(const QXmppStanza::Error &error)
 {
-	// result of change password:
-	if (!m_newPassword.isEmpty() && stanza.attribute("id") == m_newPasswordIqId) {
-		QXmppRegisterIq iq;
-		iq.parse(stanza);
+	emit kaidan->passiveNotificationRequested(
+	    tr("Failed to change password: %1").arg(error.text())
+	);
+}
 
-		if (iq.type() == QXmppIq::Result) {
-			// Success
-			client()->configuration().setPassword(m_newPassword);
-			settings->setValue(KAIDAN_SETTINGS_AUTH_PASSWD,
-			                   QString::fromUtf8(m_newPassword.toUtf8().toBase64()));
-			emit passwordChanged(m_newPassword);
-			emit kaidan->passiveNotificationRequested(
-			    tr("Password changed successfully.")
-			);
+void RegistrationManager::handleRegistrationFormReceived(const QXmppRegisterIq &iq)
+{
+	m_client->disconnectFromServer();
 
-		} else if (iq.type() == QXmppIq::Error) {
-			// Error
-			emit passwordChangeFailed();
-			emit kaidan->passiveNotificationRequested(
-			    tr("Failed to change password: %1").arg(iq.error().text())
-			);
-			qWarning() << QString("Failed to change password: %1").arg(iq.error().text());
+	bool isFakeForm;
+	QXmppDataForm newDataForm = extractFormFromRegisterIq(iq, isFakeForm);
+
+	// If the data form is not set, there is a problem with the server.
+	if (newDataForm.fields().isEmpty()) {
+		emit m_clientWorker->connectionErrorChanged(ClientWorker::RegistrationUnsupported);
+		return;
+	}
+
+	copyUserDefinedValuesToNewForm(m_dataFormModel->form(), newDataForm);
+	cleanUpLastForm();
+
+	m_dataFormModel = new RegistrationDataFormModel(newDataForm);
+	m_dataFormModel->setIsFakeForm(isFakeForm);
+	// Move to the main thread, so QML can connect signals to the model.
+	m_dataFormModel->moveToThread(kaidan->thread());
+
+	// Add the attached Bits of Binary data to the corresponding image provider.
+	const auto bobDataList = iq.bitsOfBinaryData();
+	for (const auto &bobData : bobDataList) {
+		BitsOfBinaryImageProvider::instance()->addImage(bobData);
+		m_contentIdsToRemove << bobData.cid();
+	}
+
+	emit kaidan->registrationFormReceived(m_dataFormModel);
+}
+
+void RegistrationManager::handleRegistrationSucceeded()
+{
+	kaidan->setJid(m_dataFormModel->extractUsername().append('@').append(m_client->configuration().domain()));
+	kaidan->setPassword(m_dataFormModel->extractPassword());
+
+	kaidan->mainDisconnect();
+	kaidan->mainConnect();
+
+	cleanUpLastForm();
+	m_dataFormModel = new RegistrationDataFormModel();
+}
+
+void RegistrationManager::handleRegistrationFailed(const QXmppStanza::Error &error)
+{
+	RegistrationError registrationError = RegistrationError::UnknownError;
+
+	switch(error.type()) {
+	case QXmppStanza::Error::Cancel:
+		if (error.condition() == QXmppStanza::Error::FeatureNotImplemented)
+			registrationError = RegistrationError::InBandRegistrationNotSupported;
+		else if (error.condition() == QXmppStanza::Error::Conflict)
+			registrationError = RegistrationError::UsernameConflict;
+		else if (error.condition() == QXmppStanza::Error::NotAllowed && error.text().contains("captcha", Qt::CaseInsensitive))
+			registrationError = RegistrationError::CaptchaVerificationFailed;
+		break;
+	case QXmppStanza::Error::Modify:
+		if (error.condition() == QXmppStanza::Error::NotAcceptable) {
+			// TODO: Check error text in English (needs QXmpp change)
+			if (error.text().contains("password", Qt::CaseInsensitive) && (error.text().contains("weak", Qt::CaseInsensitive) || error.text().contains("short", Qt::CaseInsensitive)))
+				registrationError = RegistrationError::PasswordTooWeak;
+			else if (error.text().contains("ip", Qt::CaseInsensitive) || error.text().contains("quickly", Qt::CaseInsensitive)
+)
+				registrationError = RegistrationError::TemporarilyBlocked;
+			else
+				registrationError = RegistrationError::RequiredInformationMissing;
+		} else if (error.condition() == QXmppStanza::Error::BadRequest && error.text().contains("captcha", Qt::CaseInsensitive)) {
+			registrationError = RegistrationError::CaptchaVerificationFailed;
 		}
-		m_newPassword = "";
-		m_newPasswordIqId = "";
-		return true;
+		break;
+	default:
+// Workaround: Catch an error which is wrongly emitted by older QXmpp versions although the registration was succesful.
+#if (QXMPP_VERSION) <= QT_VERSION_CHECK(1, 2, 0)
+		if (error.text().isEmpty())
+			return;
+#else
+		break;
+#endif
 	}
-	return false;
+
+	emit kaidan->registrationFailed(quint8(registrationError), error.text());
 }
 
-void RegistrationManager::setRegistrationSupported(bool registrationSupported)
+QXmppDataForm RegistrationManager::extractFormFromRegisterIq(const QXmppRegisterIq& iq, bool &isFakeForm)
 {
-	if (m_registrationSupported == registrationSupported) {
-		m_registrationSupported = registrationSupported;
-		emit registrationSupportedChanged();
+	QXmppDataForm newDataForm = iq.form();
+	if (newDataForm.fields().isEmpty()) {
+		// This is a hack, so we only need to implement one way of registering in QML.
+		// A 'fake' data form model is created with a username and password field.
+		isFakeForm = true;
+
+		if (!iq.username().isNull()) {
+			QXmppDataForm::Field field;
+			field.setKey(QStringLiteral("username"));
+			field.setRequired(true);
+			field.setType(QXmppDataForm::Field::TextSingleField);
+			newDataForm.fields().append(field);
+		}
+
+		if (!iq.password().isNull()) {
+			QXmppDataForm::Field field;
+			field.setKey(QStringLiteral("password"));
+			field.setRequired(true);
+			field.setType(QXmppDataForm::Field::TextPrivateField);
+			newDataForm.fields().append(field);
+		}
+
+		if (!iq.email().isNull()) {
+			QXmppDataForm::Field field;
+			field.setKey(QStringLiteral("email"));
+			field.setRequired(true);
+			field.setType(QXmppDataForm::Field::TextPrivateField);
+			newDataForm.fields().append(field);
+		}
+	} else {
+		isFakeForm = false;
 	}
+
+	return newDataForm;
+}
+
+void RegistrationManager::copyUserDefinedValuesToNewForm(const QXmppDataForm &oldForm, QXmppDataForm& newForm)
+{
+	// Copy values from the last form.
+	const QList<QXmppDataForm::Field> oldFields = oldForm.fields();
+	for (const auto &field : oldFields) {
+		// Only copy fields which are required, visible to the user and do not have a media element (e.g. CAPTCHA).
+		if (field.isRequired() && field.type() != QXmppDataForm::Field::HiddenField && field.media().isNull()) {
+			for (auto &fieldFromNewForm : newForm.fields()) {
+				if (fieldFromNewForm.key() == field.key()) {
+					fieldFromNewForm.setValue(field.value());
+					break;
+				}
+			}
+		}
+	}
+}
+
+void RegistrationManager::cleanUpLastForm()
+{
+	delete m_dataFormModel;
+
+	// Remove content IDs from the last form.
+	for (const auto &cid : qAsConst(m_contentIdsToRemove))
+		BitsOfBinaryImageProvider::instance()->removeImage(cid);
 }

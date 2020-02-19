@@ -39,7 +39,14 @@ set(KAIDAN_SOURCES
 	src/CameraImageCapture.cpp
 	src/MediaUtils.cpp
 	src/MediaRecorder.cpp
+	src/CredentialsGenerator.cpp
 	src/CredentialsValidator.cpp
+	src/BitsOfBinaryImageProvider.cpp
+	src/DataFormModel.cpp
+	src/RegistrationDataFormFilterModel.cpp
+	src/RegistrationDataFormModel.cpp
+	src/ServerListModel.cpp
+	src/ServerListItem.cpp
 
 	# needed to trigger moc generation / to be displayed in IDEs
 	src/Enums.h

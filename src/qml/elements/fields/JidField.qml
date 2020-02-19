@@ -43,7 +43,7 @@ CredentialsField {
 
 	// Validate the entered JID and show a hint if it is not valid.
 	onTextChanged: {
-		valid = credentialsValidator.isJidValid(text)
+		valid = credentialsValidator.isAccountJidValid(text)
 		toggleHintForInvalidText()
 	}
 }

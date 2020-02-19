@@ -41,6 +41,7 @@
 #include "qxmpp-exts/QXmppUri.h"
 // Kaidan
 #include "AvatarFileStorage.h"
+#include "CredentialsValidator.h"
 #include "Database.h"
 #include "MessageDb.h"
 #include "MessageModel.h"
@@ -106,10 +107,6 @@ Kaidan::Kaidan(QGuiApplication *app, bool enableLogging, QObject *parent)
 
 	m_client->setObjectName("XmppClient");
 	m_cltThrd->start();
-
-	// account deletion
-	connect(this, &Kaidan::deleteAccountFromClient, m_client, &ClientWorker::deleteAccountFromClient);
-	connect(this, &Kaidan::deleteAccountFromClientAndServer, m_client, &ClientWorker::deleteAccountFromClientAndServer);
 }
 
 Kaidan::~Kaidan()
@@ -131,6 +128,12 @@ void Kaidan::mainConnect()
 {
 	emit m_client->credentialsUpdated(creds);
 	emit m_client->connectRequested();
+}
+
+void Kaidan::requestRegistrationForm()
+{
+	emit m_client->credentialsUpdated(creds);
+	emit m_client->registrationFormRequested();
 }
 
 void Kaidan::mainDisconnect()
@@ -161,7 +164,7 @@ void Kaidan::setConnectionState(QXmppClient::State state)
 void Kaidan::setConnectionError(ClientWorker::ConnectionError error)
 {
 	connectionError = error;
-	emit connectionErrorChanged();
+	emit connectionErrorChanged(error);
 }
 
 void Kaidan::deleteCredentials()
@@ -174,7 +177,6 @@ void Kaidan::deleteCredentials()
 	m_caches->settings->remove(KAIDAN_SETTINGS_AUTH_PASSWD);
 	setPassword(QString());
 
-	// Trigger the opening of the login page.
 	emit newCredentialsNeeded();
 }
 
@@ -234,43 +236,33 @@ void Kaidan::addOpenUri(const QString &uri)
 	}
 }
 
-void Kaidan::loginByUri(const QString &uri)
+bool Kaidan::logInByUri(const QString &uri)
 {
-	// input does not start with 'xmpp:'
 	if (!QXmppUri::isXmppUri(uri)) {
-        notifyLoginUriNotFound();
-		return;
+		notifyForInvalidLoginUri();
+		return false;
 	}
 
-	// parse
 	QXmppUri parsedUri(uri);
 
-	// no JID provided
-	if (parsedUri.jid().isEmpty()) {
-        notifyLoginUriNotFound();
-		return;
+	if (!CredentialsValidator::isAccountJidValid(parsedUri.jid()) || !parsedUri.hasAction(QXmppUri::Action::Login) || !CredentialsValidator::isPasswordValid(parsedUri.password())) {
+		notifyForInvalidLoginUri();
+		return false;
 	}
 
 	setJid(parsedUri.jid());
-
-	// URI has no login action or no password
-	if (!parsedUri.hasAction(QXmppUri::Action::Login) || parsedUri.password().isEmpty()) {
-		// reset password
-		setPassword(QString());
-		emit passiveNotificationRequested(tr("No password found. Please enter it."));
-		return;
-	}
-
 	setPassword(parsedUri.password());
 
-	// try to connect
+	// Connect with the extracted credentials.
 	mainConnect();
+
+	return true;
 }
 
-void Kaidan::notifyLoginUriNotFound()
+void Kaidan::notifyForInvalidLoginUri()
 {
-    qWarning() << "[main]" << "No valid login URI found.";
-    emit passiveNotificationRequested(tr("No valid login QR code found."));
+	qWarning() << "[main]" << "No valid login URI found.";
+	emit passiveNotificationRequested(tr("No valid login QR code found."));
 }
 
 ClientWorker *Kaidan::getClient() const

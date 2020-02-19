@@ -184,6 +184,7 @@ add_executable(${PROJECT_NAME}
 	${KAIDAN_IMAGES_QRC}         #
 	${I18N_QRC_CPP}              #
 	${KAIDAN_NOTIFICATIONS_QRC}  #
+	"data/data.qrc"
 )
 
 target_link_libraries(${PROJECT_NAME}
@@ -397,7 +398,7 @@ if(UBUNTU_TOUCH AND CLICK_ARCH)
 	        DESTINATION ${CMAKE_INSTALL_PREFIX}
 	)
 	# install kaidan media
-	install(DIRECTORY "data/images"
+	install(DIRECTORY "data/"
 	        DESTINATION "${CMAKE_INSTALL_FULL_DATADIR}/${APPLICATION_ID}"
 		PATTERN "*.qrc" EXCLUDE
 	)
@@ -413,7 +414,7 @@ elseif(UNIX AND NOT APPLE)
 	)
 
 	# install kaidan media
-	install(DIRECTORY "data/images"
+	install(DIRECTORY "data/"
 	        DESTINATION "${CMAKE_INSTALL_FULL_DATADIR}/${PROJECT_NAME}"
 		PATTERN "*.qrc" EXCLUDE
 	)

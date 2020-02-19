@@ -142,6 +142,23 @@ void Database::loadDatabaseInfo()
 	}
 }
 
+void Database::saveDatabaseInfo()
+{
+	QSqlRecord updateRecord;
+	updateRecord.append(Utils::createSqlField("version", m_version));
+
+	QSqlQuery query(m_database);
+	Utils::execQuery(
+		query,
+		m_database.driver()->sqlStatement(
+			QSqlDriver::UpdateStatement,
+			DB_TABLE_INFO,
+			updateRecord,
+			false
+		)
+	);
+}
+
 bool Database::needToConvert()
 {
 	return m_version < DATABASE_LATEST_VERSION;
@@ -157,20 +174,7 @@ void Database::convertDatabase()
 	else
 		DATABASE_CONVERT_TO_LATEST_VERSION();
 
-	QSqlRecord updateRecord;
-	updateRecord.append(Utils::createSqlField("version", DATABASE_LATEST_VERSION));
-
-	QSqlQuery query(m_database);
-	Utils::execQuery(
-	        query,
-	        m_database.driver()->sqlStatement(
-	                QSqlDriver::UpdateStatement,
-	                DB_TABLE_INFO,
-	                updateRecord,
-	                false
-	        )
-	);
-
+	saveDatabaseInfo();
 	commit();
 }
 

@@ -82,6 +82,11 @@ private:
 	void loadDatabaseInfo();
 
 	/**
+	 * Saves the database information.
+	 */
+	void saveDatabaseInfo();
+
+	/**
 	 * Creates the database information table which contains the database version.
 	 */
 	void createDbInfoTable();

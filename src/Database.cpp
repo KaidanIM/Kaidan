@@ -45,10 +45,17 @@
 #include <QString>
 #include <QStringList>
 
-static const int DATABASE_LATEST_VERSION = 10;
+#define DATABASE_CONVERT_TO_VERSION(n) \
+	if (m_version < n) { \
+		convertDatabaseToV##n(); \
+	}
+
+// Both need to be updated on version bump:
+#define DATABASE_LATEST_VERSION 10
+#define DATABASE_CONVERT_TO_LATEST_VERSION() DATABASE_CONVERT_TO_VERSION(10)
 
 Database::Database(QObject *parent)
-    : QObject(parent)
+	: QObject(parent)
 {
 }
 
@@ -144,37 +151,11 @@ void Database::convertDatabase()
 {
 	qDebug() << "[database] Converting database to latest version from version" << m_version;
 	transaction();
-	while (m_version < DATABASE_LATEST_VERSION) {
-		switch (m_version) {
-		case 0:
-			createNewDatabase(); m_version = DATABASE_LATEST_VERSION; break;
-		case 1:
-			convertDatabaseToV2(); m_version = 2; break;
-		case 2:
-			convertDatabaseToV3(); m_version = 3; break;
-		case 3:
-			convertDatabaseToV4(); m_version = 4; break;
-		case 4:
-			convertDatabaseToV5(); m_version = 5; break;
-		case 5:
-			convertDatabaseToV6(); m_version = 6; break;
-		case 6:
-			convertDatabaseToV7(); m_version = 7; break;
-		case 7:
-			convertDatabaseToV8(); m_version = 8; break;
-		case 8:
-			convertDatabaseToV9(); m_version = 9; break;
-		case 9:
-			convertDatabaseToV10(); m_version = 10; break;
-		default:
-			break;
-		}
 
-		// TODO: the next time we change the messages table, we need to do:
-		//        * rename author to sender, edited to isEdited
-		//        * delete author_resource, recipient_resource
-		//        * remove 'NOT NULL' from id
-	}
+	if (m_version == 0)
+		createNewDatabase();
+	else
+		DATABASE_CONVERT_TO_LATEST_VERSION();
 
 	QSqlRecord updateRecord;
 	updateRecord.append(Utils::createSqlField("version", DATABASE_LATEST_VERSION));
@@ -191,7 +172,6 @@ void Database::convertDatabase()
 	);
 
 	commit();
-	m_version = DATABASE_LATEST_VERSION;
 }
 
 void Database::createNewDatabase()
@@ -222,6 +202,11 @@ void Database::createNewDatabase()
 	//
 	// Messages
 	//
+
+	// TODO: the next time we change the messages table, we need to do:
+	//  * rename author to sender, edited to isEdited
+	//  * delete author_resource, recipient_resource
+	//  * remove 'NOT NULL' from id
 
 	if (!query.exec("CREATE TABLE IF NOT EXISTS 'Messages' ("
 	    "'author' TEXT NOT NULL,"
@@ -280,16 +265,20 @@ void Database::convertDatabaseToV2()
 {
 	// create a new dbinfo table
 	createDbInfoTable();
+	m_version = 2;
 }
 
 void Database::convertDatabaseToV3()
 {
+	DATABASE_CONVERT_TO_VERSION(2);
 	QSqlQuery query(m_database);
 	Utils::execQuery(query, "ALTER TABLE Roster ADD avatarHash TEXT");
+	m_version = 3;
 }
 
 void Database::convertDatabaseToV4()
 {
+	DATABASE_CONVERT_TO_VERSION(3);
 	QSqlQuery query(m_database);
 	// SQLite doesn't support the ALTER TABLE drop columns feature, so we have to use a workaround.
 	// we copy all rows into a back-up table (but without `avatarHash`), and then delete the old table
@@ -305,18 +294,22 @@ void Database::convertDatabaseToV4()
 	Utils::execQuery(query, "INSERT INTO Roster SELECT jid,name,lastExchanged,unreadMessages,"
 	                        "lastMessage,lastOnline,activity,status,mood FROM Roster_backup;");
 	Utils::execQuery(query, "DROP TABLE Roster_backup;");
+	m_version = 4;
 }
 
 void Database::convertDatabaseToV5()
 {
+	DATABASE_CONVERT_TO_VERSION(4);
 	QSqlQuery query(m_database);
 	Utils::execQuery(query, "ALTER TABLE 'Messages' ADD 'type' INTEGER");
 	Utils::execQuery(query, "UPDATE Messages SET type = 0 WHERE type IS NULL");
 	Utils::execQuery(query, "ALTER TABLE 'Messages' ADD 'mediaUrl' TEXT");
+	m_version = 5;
 }
 
 void Database::convertDatabaseToV6()
 {
+	DATABASE_CONVERT_TO_VERSION(5);
 	QSqlQuery query(m_database);
 	for (const QString &column : {"'mediaSize' INTEGER",
 		     "'mediaContentType' TEXT",
@@ -324,17 +317,21 @@ void Database::convertDatabaseToV6()
 		     "'mediaLocation' TEXT"}) {
 		Utils::execQuery(query, QString("ALTER TABLE 'Messages' ADD ").append(column));
 	}
+	m_version = 6;
 }
 
 void Database::convertDatabaseToV7()
 {
+	DATABASE_CONVERT_TO_VERSION(6);
 	QSqlQuery query(m_database);
 	Utils::execQuery(query, "ALTER TABLE 'Messages' ADD 'mediaThumb' BLOB");
 	Utils::execQuery(query, "ALTER TABLE 'Messages' ADD 'mediaHashes' TEXT");
+	m_version = 7;
 }
 
 void Database::convertDatabaseToV8()
 {
+	DATABASE_CONVERT_TO_VERSION(7);
 	QSqlQuery query(m_database);
 	Utils::execQuery(query, "CREATE TEMPORARY TABLE roster_backup(jid, name, lastExchanged, "
 	                        "unreadMessages, lastMessage);");
@@ -347,17 +344,22 @@ void Database::convertDatabaseToV8()
 	Utils::execQuery(query, "INSERT INTO Roster SELECT jid, name, lastExchanged, unreadMessages, "
 	                        "lastMessage FROM Roster_backup;");
 	Utils::execQuery(query, "DROP TABLE roster_backup;");
+	m_version = 8;
 }
 
 void Database::convertDatabaseToV9()
 {
+	DATABASE_CONVERT_TO_VERSION(8);
 	QSqlQuery query(m_database);
 	Utils::execQuery(query, "ALTER TABLE 'Messages' ADD 'edited' BOOL");
+	m_version = 9;
 }
 
 void Database::convertDatabaseToV10()
 {
+	DATABASE_CONVERT_TO_VERSION(9);
 	QSqlQuery query(m_database);
 	Utils::execQuery(query, "ALTER TABLE 'Messages' ADD 'isSpoiler' BOOL");
 	Utils::execQuery(query, "ALTER TABLE 'Messages' ADD 'spoilerHint' TEXT");
+	m_version = 10;
 }

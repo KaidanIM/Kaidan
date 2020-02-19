@@ -42,7 +42,7 @@ class QSqlQuery;
  */
 class Database : public QObject
 {
-    Q_OBJECT
+	Q_OBJECT
 
 public:
 	Database(QObject *parent = nullptr);

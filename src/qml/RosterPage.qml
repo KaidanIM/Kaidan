@@ -105,9 +105,11 @@ Kirigami.ScrollablePage {
 			sourceModel: Kaidan.rosterModel
 		}
 		columnWidthProvider: function (column) { return root.width }
+		rowHeightProvider: function (row) { return Kirigami.Units.gridUnit * 3.5 }
 		delegate: RosterListItem {
 			id: rosterItem
 			width: root.width
+			height: Kirigami.Units.gridUnit * 3.5
 			name: model.name ? model.name : model.jid
 			jid: model.jid
 			lastMessage: model.lastMessage

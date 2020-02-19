@@ -50,7 +50,6 @@ Kirigami.SwipeListItem {
 	topPadding: 0
 	leftPadding: 0
 	bottomPadding: 0
-	height: Kirigami.Units.gridUnit * 3.5
 
 	RowLayout {
 		spacing: Kirigami.Units.gridUnit * 0.5

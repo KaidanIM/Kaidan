@@ -83,6 +83,44 @@ void RegistrationManager::changePassword(const QString &newPassword)
 	client()->sendPacket(iq);
 }
 
+bool RegistrationManager::registrationSupported() const
+{
+	return m_registrationSupported;
+}
+
+void RegistrationManager::deleteAccount()
+{
+#if (QXMPP_VERSION) >= QT_VERSION_CHECK(1, 2, 0)
+	m_manager->deleteAccount();
+#else
+	emit kaidan->passiveNotificationRequested("Account deletion is not supported. If an update doesn't help, contact your distribution maintainers: QXmpp version >= 1.2 is required.");
+#endif
+}
+
+void RegistrationManager::setClient(QXmppClient *client)
+{
+	QXmppClientExtension::setClient(client);
+	// get service discovery manager
+	auto *disco = client->findExtension<QXmppDiscoveryManager>();
+	if (disco) {
+		connect(disco, &QXmppDiscoveryManager::infoReceived,
+		        this, &RegistrationManager::handleDiscoInfo);
+
+		connect(client, &QXmppClient::disconnected, this, [=] () {
+			setRegistrationSupported(false);
+		});
+	}
+}
+
+void RegistrationManager::handleDiscoInfo(const QXmppDiscoveryIq &iq)
+{
+	// check features of own server
+	if (iq.from().isEmpty() || iq.from() == client()->configuration().domain()) {
+		if (iq.features().contains(NS_REGISTER))
+			setRegistrationSupported(true);
+	}
+}
+
 bool RegistrationManager::handleStanza(const QDomElement &stanza)
 {
 	// result of change password:
@@ -115,48 +153,10 @@ bool RegistrationManager::handleStanza(const QDomElement &stanza)
 	return false;
 }
 
-void RegistrationManager::handleDiscoInfo(const QXmppDiscoveryIq &iq)
-{
-	// check features of own server
-	if (iq.from().isEmpty() || iq.from() == client()->configuration().domain()) {
-		if (iq.features().contains(NS_REGISTER))
-			setRegistrationSupported(true);
-	}
-}
-
-bool RegistrationManager::registrationSupported() const
-{
-	return m_registrationSupported;
-}
-
-void RegistrationManager::deleteAccount()
-{
-#if (QXMPP_VERSION) >= QT_VERSION_CHECK(1, 2, 0)
-	m_manager->deleteAccount();
-#else
-	emit kaidan->passiveNotificationRequested("Account deletion is not supported. If an update doesn't help, contact your distribution maintainers: QXmpp version >= 1.2 is required.");
-#endif
-}
-
 void RegistrationManager::setRegistrationSupported(bool registrationSupported)
 {
 	if (m_registrationSupported == registrationSupported) {
 		m_registrationSupported = registrationSupported;
 		emit registrationSupportedChanged();
-	}
-}
-
-void RegistrationManager::setClient(QXmppClient *client)
-{
-	QXmppClientExtension::setClient(client);
-	// get service discovery manager
-	auto *disco = client->findExtension<QXmppDiscoveryManager>();
-	if (disco) {
-		connect(disco, &QXmppDiscoveryManager::infoReceived,
-		        this, &RegistrationManager::handleDiscoInfo);
-
-		connect(client, &QXmppClient::disconnected, this, [=] () {
-			setRegistrationSupported(false);
-		});
 	}
 }

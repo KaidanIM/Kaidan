@@ -54,6 +54,22 @@
 #define DATABASE_LATEST_VERSION 10
 #define DATABASE_CONVERT_TO_LATEST_VERSION() DATABASE_CONVERT_TO_VERSION(10)
 
+#define SQL_BOOL "BOOL"
+#define SQL_INTEGER "INTEGER"
+#define SQL_INTEGER_NOT_NULL "INTEGER NOT NULL"
+#define SQL_TEXT "TEXT"
+#define SQL_TEXT_NOT_NULL "TEXT NOT NULL"
+#define SQL_BLOB "BLOB"
+
+#define SQL_CREATE_TABLE(tableName, contents) \
+	"CREATE TABLE IF NOT EXISTS '" QT_STRINGIFY(tableName) "' (" contents ")"
+
+#define SQL_LAST_ATTRIBUTE(name, dataType) \
+	"'" QT_STRINGIFY(name) "' " dataType
+
+#define SQL_ATTRIBUTE(name, dataType) \
+	SQL_LAST_ATTRIBUTE(name, dataType) ","
+
 Database::Database(QObject *parent)
 	: QObject(parent)
 {
@@ -180,80 +196,24 @@ void Database::convertDatabase()
 
 void Database::createNewDatabase()
 {
-	QSqlQuery query(m_database);
-
-	//
-	// DB info
-	//
-
 	createDbInfoTable();
-
-	//
-	// Roster
-	//
-
-	if (!query.exec("CREATE TABLE IF NOT EXISTS 'Roster' ("
-	                "'jid' TEXT NOT NULL,"
-	                "'name' TEXT,"
-	                "'lastExchanged' TEXT NOT NULL,"
-	                "'unreadMessages' INTEGER,"
-	                "'lastMessage' TEXT"
-	                ")"))
-	{
-		qFatal("Error creating roster table: Failed to query database: %s", qPrintable(query.lastError().text()));
-	}
-
-	//
-	// Messages
-	//
-
-	// TODO: the next time we change the messages table, we need to do:
-	//  * rename author to sender, edited to isEdited
-	//  * delete author_resource, recipient_resource
-	//  * remove 'NOT NULL' from id
-
-	if (!query.exec("CREATE TABLE IF NOT EXISTS 'Messages' ("
-	    "'author' TEXT NOT NULL,"
-	    "'author_resource' TEXT,"
-	    "'recipient' TEXT NOT NULL,"
-	    "'recipient_resource' TEXT,"
-	    "'timestamp' TEXT NOT NULL,"
-	    "'message' TEXT NOT NULL,"
-	    "'id' TEXT NOT NULL,"
-	    "'isSent' BOOL,"      // is sent to server
-	    "'isDelivered' BOOL," // message has arrived at other client
-	    "'type' INTEGER,"     // type of message (text/image/video/...)
-	    "'mediaUrl' TEXT,"
-	    "'mediaSize' INTEGER,"
-	    "'mediaContentType' TEXT,"
-	    "'mediaLastModified' INTEGER,"
-	    "'mediaLocation' TEXT,"
-	    "'mediaThumb' BLOB,"
-	    "'mediaHashes' TEXT,"
-	    "'edited' BOOL," // whether the message has been edited
-	    "'spoilerHint' TEXT," //spoiler hint if isSpoiler
-	    "'isSpoiler' BOOL," // message is spoiler
-	    "FOREIGN KEY('author') REFERENCES Roster ('jid'),"
-	    "FOREIGN KEY('recipient') REFERENCES Roster ('jid')"
-	    ")"
-	   ))
-	{
-		qFatal("Error creating messages table: Failed to query database: %s", qPrintable(query.lastError().text()));
-	}
+	createRosterTable();
+	createMessagesTable();
 }
 
 void Database::createDbInfoTable()
 {
 	QSqlQuery query(m_database);
 	Utils::execQuery(
-	        query,
-	        "CREATE TABLE IF NOT EXISTS 'dbinfo' (version INTEGER NOT NULL)"
+		query,
+		SQL_CREATE_TABLE(
+			dbinfo,
+			SQL_LAST_ATTRIBUTE(version, SQL_INTEGER_NOT_NULL)
+		)
 	);
-
 
 	QSqlRecord insertRecord;
 	insertRecord.append(Utils::createSqlField("version", DATABASE_LATEST_VERSION));
-
 	Utils::execQuery(
 	        query,
 	        m_database.driver()->sqlStatement(
@@ -262,6 +222,60 @@ void Database::createDbInfoTable()
 	                insertRecord,
 	                false
 	        )
+	);
+}
+
+void Database::createRosterTable()
+{
+	QSqlQuery query(m_database);
+	Utils::execQuery(
+		query,
+		SQL_CREATE_TABLE(
+			Roster,
+			SQL_ATTRIBUTE(jid, SQL_TEXT_NOT_NULL)
+			SQL_ATTRIBUTE(name, SQL_TEXT)
+			SQL_ATTRIBUTE(lastExchanged, SQL_TEXT_NOT_NULL)
+			SQL_ATTRIBUTE(unreadMessages, SQL_INTEGER)
+			SQL_LAST_ATTRIBUTE(lastMessage, SQL_TEXT)
+		)
+	);
+}
+
+void Database::createMessagesTable()
+{
+	// TODO: the next time we change the messages table, we need to do:
+	//  * rename author to sender, edited to isEdited
+	//  * delete author_resource, recipient_resource
+	//  * remove 'NOT NULL' from id
+
+	QSqlQuery query(m_database);
+	Utils::execQuery(
+		query,
+		SQL_CREATE_TABLE(
+			Messages,
+			SQL_ATTRIBUTE(author, SQL_TEXT_NOT_NULL)
+			SQL_ATTRIBUTE(author_resource, SQL_TEXT)
+			SQL_ATTRIBUTE(recipient, SQL_TEXT_NOT_NULL)
+			SQL_ATTRIBUTE(recipient_resource, SQL_TEXT)
+			SQL_ATTRIBUTE(timestamp, SQL_TEXT)
+			SQL_ATTRIBUTE(message, SQL_TEXT)
+			SQL_ATTRIBUTE(id, SQL_TEXT_NOT_NULL)
+			SQL_ATTRIBUTE(isSent, SQL_BOOL)
+			SQL_ATTRIBUTE(isDelivered, SQL_BOOL)
+			SQL_ATTRIBUTE(type, SQL_INTEGER)
+			SQL_ATTRIBUTE(mediaUrl, SQL_TEXT)
+			SQL_ATTRIBUTE(mediaSize, SQL_INTEGER)
+			SQL_ATTRIBUTE(mediaContentType, SQL_TEXT)
+			SQL_ATTRIBUTE(mediaLastModified, SQL_INTEGER)
+			SQL_ATTRIBUTE(mediaLocation, SQL_TEXT)
+			SQL_ATTRIBUTE(mediaThumb, SQL_BLOB)
+			SQL_ATTRIBUTE(mediaHashes, SQL_TEXT)
+			SQL_ATTRIBUTE(edited, SQL_BOOL)
+			SQL_ATTRIBUTE(spoilerHint, SQL_TEXT)
+			SQL_ATTRIBUTE(isSpoiler, SQL_BOOL)
+			"FOREIGN KEY('author') REFERENCES Roster ('jid'),"
+			"FOREIGN KEY('recipient') REFERENCES Roster ('jid')"
+		)
 	);
 }
 

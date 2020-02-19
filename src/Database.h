@@ -86,10 +86,12 @@ private:
 	 */
 	void saveDatabaseInfo();
 
-	/**
-	 * Creates the database information table which contains the database version.
+	/*
+	 * These methods create new tables, they are used when creating a new database.
 	 */
 	void createDbInfoTable();
+	void createRosterTable();
+	void createMessagesTable();
 
 	/**
 	 * Creates a new database without content.

@@ -41,10 +41,6 @@ Kirigami.Page {
 	id: root
 
 	title: qsTr("Multimedia Settings")
-	topPadding: 0
-	rightPadding: 0
-	bottomPadding: 0
-	leftPadding: 0
 
 	MediaRecorder {
 		id: recorder
@@ -53,13 +49,7 @@ Kirigami.Page {
 	ColumnLayout {
 		id: mainLayout
 
-		anchors {
-			fill: parent
-			leftMargin: 20
-			topMargin: 5
-			rightMargin: 20
-			bottomMargin: 5
-		}
+		anchors.fill: parent
 
 		Controls.Label {
 			text: qsTr('Configure')

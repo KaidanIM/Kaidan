@@ -39,15 +39,11 @@ import org.kde.kirigami 2.8 as Kirigami
  */
 Kirigami.OverlaySheet {
 	header: Kirigami.Heading {
-		text: settingsPage.title
+		text: qsTr("Settings")
 	}
-	contentItem: ColumnLayout {
-		SettingsPage {
-			Layout.preferredHeight: root.height * 0.9
-			Layout.preferredWidth: Layout.maximumWidth
-			Layout.maximumWidth: 600
-			Layout.maximumHeight: 600
-			id: settingsPage
-		}
+	contentItem: SettingsContent {
+		Layout.preferredWidth: Layout.maximumWidth
+		Layout.maximumWidth: 600
+		id: settingsPage
 	}
 }

@@ -40,7 +40,6 @@ Kirigami.BasicListItem {
 	reserveSpaceForIcon: icon
 
 	ColumnLayout {
-		Layout.fillHeight: true
 		Kirigami.Heading {
 			text: name
 			textFormat: Text.PlainText

@@ -57,6 +57,7 @@
 		<file>settings/SettingsItem.qml</file>
 		<file>settings/SettingsPage.qml</file>
 		<file>settings/SettingsSheet.qml</file>
+		<file>settings/SettingsContent.qml</file>
 		<file>settings/ChangePassword.qml</file>
 		<file>settings/MultimediaSettings.qml</file>
 	</qresource>

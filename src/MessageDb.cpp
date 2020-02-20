@@ -40,11 +40,26 @@
 #include <QSqlQuery>
 #include <QSqlRecord>
 
+MessageDb *MessageDb::s_instance = nullptr;
+
 MessageDb::MessageDb(QObject *parent)
         : QObject(parent)
 {
+	Q_ASSERT(!MessageDb::s_instance);
+	s_instance = this;
+
 	connect(this, &MessageDb::fetchMessagesRequested,
 	        this, &MessageDb::fetchMessages);
+}
+
+MessageDb::~MessageDb()
+{
+	s_instance = nullptr;
+}
+
+MessageDb *MessageDb::instance()
+{
+	return s_instance;
 }
 
 void MessageDb::parseMessagesFromQuery(QSqlQuery &query, QVector<Message> &msgs)

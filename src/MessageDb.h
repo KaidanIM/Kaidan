@@ -51,6 +51,9 @@ class MessageDb : public QObject
 
 public:
 	explicit MessageDb(QObject *parent = nullptr);
+	~MessageDb();
+
+	static MessageDb *instance();
 
 	/**
 	 * Parses a list of messages from a SELECT query.
@@ -133,6 +136,9 @@ public slots:
 	 * Marks a message as delivered using an UPDATE query.
 	 */
 	void setMessageAsDelivered(const QString &msgId);
+
+private:
+	static MessageDb *s_instance;
 };
 
 #endif // MESSAGEDB_H

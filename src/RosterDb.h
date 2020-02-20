@@ -44,8 +44,12 @@ class Database;
 class RosterDb : public QObject
 {
 	Q_OBJECT
+
 public:
 	RosterDb(Database *db, QObject *parent = nullptr);
+	~RosterDb();
+
+	static RosterDb *instance();
 
 	static void parseItemsFromQuery(QSqlQuery &query, QVector<RosterItem> &items);
 
@@ -77,6 +81,8 @@ private slots:
 
 private:
 	Database *m_db;
+
+	static RosterDb *s_instance;
 };
 
 #endif // ROSTERDB_H

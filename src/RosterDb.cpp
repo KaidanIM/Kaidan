@@ -40,11 +40,26 @@
 #include <QSqlQuery>
 #include <QSqlRecord>
 
+RosterDb *RosterDb::s_instance = nullptr;
+
 RosterDb::RosterDb(Database *db, QObject *parent)
         : QObject(parent),
           m_db(db)
 {
+	Q_ASSERT(!RosterDb::s_instance);
+	s_instance = this;
+
 	connect(this, &RosterDb::fetchItemsRequested, this, &RosterDb::fetchItems);
+}
+
+RosterDb::~RosterDb()
+{
+	s_instance = nullptr;
+}
+
+RosterDb *RosterDb::instance()
+{
+	return s_instance;
 }
 
 void RosterDb::parseItemsFromQuery(QSqlQuery &query, QVector<RosterItem> &items)

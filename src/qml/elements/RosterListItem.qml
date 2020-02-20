@@ -122,7 +122,7 @@ Kirigami.SwipeListItem {
 						Utils.removeNewLinesFromString(lastMessage)
 					}
 					textFormat: Text.PlainText
-					font.pixelSize: Kirigami.Units.gridUnit * 0.8
+					font.pointSize: Kirigami.Units.gridUnit * 0.58
 				}
 			}
 		}

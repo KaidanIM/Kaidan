@@ -112,7 +112,7 @@ public:
 		Available = QMultimedia::Available,
 		ServiceMissing = QMultimedia::ServiceMissing,
 		Busy = QMultimedia::Busy,
-		ResourceError = QMultimedia::ResourceError
+		AvailabilityResourceError = QMultimedia::ResourceError
 	};
 	Q_ENUM(AvailabilityStatus)
 

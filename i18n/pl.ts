@@ -134,7 +134,7 @@
     </message>
     <message>
         <source>View profile</source>
-        <translation type="unfinished"></translation>
+        <translation>Zobacz profil</translation>
     </message>
     <message>
         <source>Search</source>

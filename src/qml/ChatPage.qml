@@ -322,6 +322,7 @@ ChatPageBase {
 	function openFileDialog(filterName, filter, title) {
 		fileChooserLoader.source = "qrc:/qml/elements/FileChooser.qml"
 		fileChooserLoader.item.selectedNameFilter = filterName
+		fileChooserLoader.item.accepted.connect(function() { sendMediaSheet.sendFile(Kaidan.messageModel.chatPartner, fileChooserLoader.item.fileUrl) })
 		if (title !== undefined)
 			fileChooserLoader.item.title = title
 		fileChooserLoader.item.open()

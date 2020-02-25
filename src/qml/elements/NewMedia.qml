@@ -205,7 +205,7 @@ MediaPreview {
 				}
 
 				Controls.ToolButton {
-					icon.name: 'dialog-ok-apply'
+					icon.name: 'dialog-ok'
 
 					onClicked: {
 						root.mediaSource = previewLoader.mediaSource

@@ -1,93 +1,93 @@
 <RCC>
-    <qresource prefix="/icons/breeze">
-        <file alias="index.theme">3rdparty/breeze-icons/icons/index.theme</file>
-    </qresource>
+	<qresource prefix="/icons/breeze">
+		<file alias="index.theme">3rdparty/breeze-icons/icons/index.theme</file>
+	</qresource>
 
-    <qresource prefix="/icons/breeze/actions/22">
-        <file alias="application-menu.svg">3rdparty/breeze-icons/icons/actions/22/application-menu.svg</file>
-        <file alias="document-decrypt.svg">3rdparty/breeze-icons/icons/actions/22/document-decrypt.svg</file>
-        <file alias="contact-new.svg">3rdparty/breeze-icons/icons/actions/22/contact-new.svg</file>
-        <file alias="dialog-close.svg">3rdparty/breeze-icons/icons/actions/22/dialog-close.svg</file>
-        <file alias="folder-sync.svg">3rdparty/breeze-icons/icons/actions/22/folder-sync.svg</file>
-        <file alias="go-next.svg">3rdparty/breeze-icons/icons/actions/22/go-next.svg</file>
-        <file alias="go-previous.svg">3rdparty/breeze-icons/icons/actions/22/go-previous.svg</file>
-        <file alias="go-up.svg">3rdparty/breeze-icons/icons/actions/22/go-up.svg</file>
-        <file alias="go-down.svg">3rdparty/breeze-icons/icons/actions/22/go-down.svg</file>
-        <file alias="handle-left.svg">3rdparty/breeze-icons/icons/actions/22/handle-left.svg</file>
-        <file alias="handle-right.svg">3rdparty/breeze-icons/icons/actions/22/handle-right.svg</file>
-        <file alias="help-about.svg">3rdparty/breeze-icons/icons/actions/22/help-about.svg</file>
-        <file alias="mail-invitation.svg">3rdparty/breeze-icons/icons/actions/22/mail-invitation.svg</file>
-        <file alias="overflow-menu.svg">3rdparty/breeze-icons/icons/actions/22/overflow-menu.svg</file>
-        <file alias="system-shutdown.svg">3rdparty/breeze-icons/icons/actions/22/system-shutdown.svg</file>
-        <file alias="view-list-icons.svg">3rdparty/breeze-icons/icons/actions/22/view-list-icons.svg</file>
-        <file alias="go-parent-folder.svg">3rdparty/breeze-icons/icons/actions/22/go-parent-folder.svg</file>
-        <file alias="folder.svg">3rdparty/breeze-icons/icons/places/22/folder.svg</file>
-        <file alias="text-x-plain.svg">3rdparty/breeze-icons/icons/mimetypes/22/text-x-plain.svg</file>
-        <file alias="tab-close.svg">3rdparty/breeze-icons/icons/actions/22/tab-close.svg</file>
-        <file alias="password-show-on.svg">3rdparty/breeze-icons/icons/actions/22/password-show-on.svg</file>
-        <file alias="password-show-off.svg">3rdparty/breeze-icons/icons/actions/22/password-show-off.svg</file>
-        <file alias="settings-configure.svg">3rdparty/breeze-icons/icons/actions/22/settings-configure.svg</file>
-        <file alias="lock.svg">3rdparty/breeze-icons/icons/actions/22/lock.svg</file>
-        <file alias="view-barcode.svg">3rdparty/breeze-icons/icons/actions/22/view-barcode.svg</file>
-        <file alias="player-volume.svg">3rdparty/breeze-icons/icons/actions/22/player-volume.svg</file>
-        <file alias="im-user-online.svg">3rdparty/breeze-icons/icons/actions/22/im-user-online.svg</file>
-        <file alias="im-user-away.svg">3rdparty/breeze-icons/icons/actions/22/im-user-away.svg</file>
-        <file alias="im-kick-user.svg">3rdparty/breeze-icons/icons/actions/22/im-kick-user.svg</file>
-        <file alias="im-ban-kick-user.svg">3rdparty/breeze-icons/icons/actions/22/im-ban-kick-user.svg</file>
-        <file alias="im-user-offline.svg">3rdparty/breeze-icons/icons/actions/22/im-user-offline.svg</file>
-        <file alias="im-invisible-user.svg">3rdparty/breeze-icons/icons/actions/22/im-invisible-user.svg</file>
-        <file alias="user-identity.svg">3rdparty/breeze-icons/icons/actions/22/user-identity.svg</file>
-        <file alias="edit-rename.svg">3rdparty/breeze-icons/icons/actions/22/edit-rename.svg</file>
-        <file alias="delete.svg">3rdparty/breeze-icons/icons/actions/22/delete.svg</file>
-        <file alias="dialog-cancel.svg">3rdparty/breeze-icons/icons/actions/22/dialog-cancel.svg</file>
-        <file alias="dialog-ok.svg">3rdparty/breeze-icons/icons/actions/22/dialog-ok.svg</file>
-        <file alias="media-record.svg">3rdparty/breeze-icons/icons/actions/22/media-record.svg</file>
-        <file alias="media-playback-stop.svg">3rdparty/breeze-icons/icons/actions/22/media-playback-stop.svg</file>
-        <file alias="error.svg">3rdparty/breeze-icons/icons/actions/22/error.svg</file>
-    </qresource>
+	<qresource prefix="/icons/breeze/actions/22">
+		<file alias="application-menu.svg">3rdparty/breeze-icons/icons/actions/22/application-menu.svg</file>
+		<file alias="document-decrypt.svg">3rdparty/breeze-icons/icons/actions/22/document-decrypt.svg</file>
+		<file alias="contact-new.svg">3rdparty/breeze-icons/icons/actions/22/contact-new.svg</file>
+		<file alias="dialog-close.svg">3rdparty/breeze-icons/icons/actions/22/dialog-close.svg</file>
+		<file alias="folder-sync.svg">3rdparty/breeze-icons/icons/actions/22/folder-sync.svg</file>
+		<file alias="go-next.svg">3rdparty/breeze-icons/icons/actions/22/go-next.svg</file>
+		<file alias="go-previous.svg">3rdparty/breeze-icons/icons/actions/22/go-previous.svg</file>
+		<file alias="go-up.svg">3rdparty/breeze-icons/icons/actions/22/go-up.svg</file>
+		<file alias="go-down.svg">3rdparty/breeze-icons/icons/actions/22/go-down.svg</file>
+		<file alias="handle-left.svg">3rdparty/breeze-icons/icons/actions/22/handle-left.svg</file>
+		<file alias="handle-right.svg">3rdparty/breeze-icons/icons/actions/22/handle-right.svg</file>
+		<file alias="help-about.svg">3rdparty/breeze-icons/icons/actions/22/help-about.svg</file>
+		<file alias="mail-invitation.svg">3rdparty/breeze-icons/icons/actions/22/mail-invitation.svg</file>
+		<file alias="overflow-menu.svg">3rdparty/breeze-icons/icons/actions/22/overflow-menu.svg</file>
+		<file alias="system-shutdown.svg">3rdparty/breeze-icons/icons/actions/22/system-shutdown.svg</file>
+		<file alias="view-list-icons.svg">3rdparty/breeze-icons/icons/actions/22/view-list-icons.svg</file>
+		<file alias="go-parent-folder.svg">3rdparty/breeze-icons/icons/actions/22/go-parent-folder.svg</file>
+		<file alias="folder.svg">3rdparty/breeze-icons/icons/places/22/folder.svg</file>
+		<file alias="text-x-plain.svg">3rdparty/breeze-icons/icons/mimetypes/22/text-x-plain.svg</file>
+		<file alias="tab-close.svg">3rdparty/breeze-icons/icons/actions/22/tab-close.svg</file>
+		<file alias="password-show-on.svg">3rdparty/breeze-icons/icons/actions/22/password-show-on.svg</file>
+		<file alias="password-show-off.svg">3rdparty/breeze-icons/icons/actions/22/password-show-off.svg</file>
+		<file alias="settings-configure.svg">3rdparty/breeze-icons/icons/actions/22/settings-configure.svg</file>
+		<file alias="lock.svg">3rdparty/breeze-icons/icons/actions/22/lock.svg</file>
+		<file alias="view-barcode.svg">3rdparty/breeze-icons/icons/actions/22/view-barcode.svg</file>
+		<file alias="player-volume.svg">3rdparty/breeze-icons/icons/actions/22/player-volume.svg</file>
+		<file alias="im-user-online.svg">3rdparty/breeze-icons/icons/actions/22/im-user-online.svg</file>
+		<file alias="im-user-away.svg">3rdparty/breeze-icons/icons/actions/22/im-user-away.svg</file>
+		<file alias="im-kick-user.svg">3rdparty/breeze-icons/icons/actions/22/im-kick-user.svg</file>
+		<file alias="im-ban-kick-user.svg">3rdparty/breeze-icons/icons/actions/22/im-ban-kick-user.svg</file>
+		<file alias="im-user-offline.svg">3rdparty/breeze-icons/icons/actions/22/im-user-offline.svg</file>
+		<file alias="im-invisible-user.svg">3rdparty/breeze-icons/icons/actions/22/im-invisible-user.svg</file>
+		<file alias="user-identity.svg">3rdparty/breeze-icons/icons/actions/22/user-identity.svg</file>
+		<file alias="edit-rename.svg">3rdparty/breeze-icons/icons/actions/22/edit-rename.svg</file>
+		<file alias="delete.svg">3rdparty/breeze-icons/icons/actions/22/delete.svg</file>
+		<file alias="dialog-cancel.svg">3rdparty/breeze-icons/icons/actions/22/dialog-cancel.svg</file>
+		<file alias="dialog-ok.svg">3rdparty/breeze-icons/icons/actions/22/dialog-ok.svg</file>
+		<file alias="media-record.svg">3rdparty/breeze-icons/icons/actions/22/media-record.svg</file>
+		<file alias="media-playback-stop.svg">3rdparty/breeze-icons/icons/actions/22/media-playback-stop.svg</file>
+		  <file alias="error.svg">3rdparty/breeze-icons/icons/actions/22/error.svg</file>
+	</qresource>
 
-    <qresource prefix="/icons/breeze/emotes/22">
-        <file alias="face-smile.svg">3rdparty/breeze-icons/icons/emotes/22/face-smile.svg</file>
-    </qresource>
+	<qresource prefix="/icons/breeze/emotes/22">
+		<file alias="face-smile.svg">3rdparty/breeze-icons/icons/emotes/22/face-smile.svg</file>
+	</qresource>
 
-    <qresource prefix="/icons/breeze/actions/16">
-        <file alias="document-send.svg">3rdparty/breeze-icons/icons/actions/16/document-send.svg</file>
-        <file alias="search.svg">3rdparty/breeze-icons/icons/actions/16/search.svg</file>
-        <file alias="gps.svg">3rdparty/breeze-icons/icons/actions/16/gps.svg</file>
-    </qresource>
+	<qresource prefix="/icons/breeze/actions/16">
+		<file alias="document-send.svg">3rdparty/breeze-icons/icons/actions/16/document-send.svg</file>
+		<file alias="search.svg">3rdparty/breeze-icons/icons/actions/16/search.svg</file>
+		<file alias="gps.svg">3rdparty/breeze-icons/icons/actions/16/gps.svg</file>
+	</qresource>
 
-    <qresource prefix="/icons/breeze/actions/symbolic">
-        <file alias="document-send-symbolic.svg">3rdparty/breeze-icons/icons/actions/symbolic/document-send-symbolic.svg</file>
-        <file alias="go-next-symbolic.svg">3rdparty/breeze-icons/icons/actions/symbolic/go-next-symbolic.svg</file>
-        <file alias="go-previous-symbolic.svg">3rdparty/breeze-icons/icons/actions/symbolic/go-previous-symbolic.svg</file>
-        <file alias="edit-symbolic.svg">3rdparty/breeze-icons/icons/actions/symbolic/edit-symbolic.svg</file>
-        <file alias="send-to-symbolic.svg">3rdparty/breeze-icons/icons/actions/symbolic/send-to-symbolic.svg</file>
-    </qresource>
+	<qresource prefix="/icons/breeze/actions/symbolic">
+		<file alias="document-send-symbolic.svg">3rdparty/breeze-icons/icons/actions/symbolic/document-send-symbolic.svg</file>
+		<file alias="go-next-symbolic.svg">3rdparty/breeze-icons/icons/actions/symbolic/go-next-symbolic.svg</file>
+		<file alias="go-previous-symbolic.svg">3rdparty/breeze-icons/icons/actions/symbolic/go-previous-symbolic.svg</file>
+		<file alias="edit-symbolic.svg">3rdparty/breeze-icons/icons/actions/symbolic/edit-symbolic.svg</file>
+		<file alias="send-to-symbolic.svg">3rdparty/breeze-icons/icons/actions/symbolic/send-to-symbolic.svg</file>
+	</qresource>
 
-    <qresource prefix="/icons/breeze/applets/22">
-        <file alias="microphone.svg">3rdparty/breeze-icons/icons/applets/22/microphone.svg</file>
-    </qresource>
+	<qresource prefix="/icons/breeze/applets/22">
+		<file alias="microphone.svg">3rdparty/breeze-icons/icons/applets/22/microphone.svg</file>
+	</qresource>
 
-    <qresource prefix="/icons/breeze/devices/symbolic">
-        <file alias="camera-photo-symbolic.svg">3rdparty/breeze-icons/icons/devices/symbolic/camera-photo-symbolic.svg</file>
-        <file alias="camera-video-symbolic.svg">3rdparty/breeze-icons/icons/devices/symbolic/camera-video-symbolic.svg</file>
-    </qresource>
+	<qresource prefix="/icons/breeze/devices/symbolic">
+		<file alias="camera-photo-symbolic.svg">3rdparty/breeze-icons/icons/devices/symbolic/camera-photo-symbolic.svg</file>
+		<file alias="camera-video-symbolic.svg">3rdparty/breeze-icons/icons/devices/symbolic/camera-video-symbolic.svg</file>
+	</qresource>
 
-    <qresource prefix="/icons/breeze/mimetypes/64">
-        <file alias="image-jpeg.svg">3rdparty/breeze-icons/icons/mimetypes/64/image-jpeg.svg</file>
-        <file alias="video-mp4.svg">3rdparty/breeze-icons/icons/mimetypes/64/video-mp4.svg</file>
-        <file alias="x-office-document.svg">3rdparty/breeze-icons/icons/mimetypes/64/x-office-document.svg</file>
-        <file alias="audio-mp3.svg">3rdparty/breeze-icons/icons/mimetypes/64/audio-mp3.svg</file>
-        <file alias="video-x-generic.svg">3rdparty/breeze-icons/icons/mimetypes/64/video-x-generic.svg</file>
-        <file alias="application-octet-stream.svg">3rdparty/breeze-icons/icons/mimetypes/64/application-octet-stream.svg</file>
-    </qresource>
+	<qresource prefix="/icons/breeze/mimetypes/64">
+		<file alias="image-jpeg.svg">3rdparty/breeze-icons/icons/mimetypes/64/image-jpeg.svg</file>
+		<file alias="video-mp4.svg">3rdparty/breeze-icons/icons/mimetypes/64/video-mp4.svg</file>
+		<file alias="x-office-document.svg">3rdparty/breeze-icons/icons/mimetypes/64/x-office-document.svg</file>
+		<file alias="audio-mp3.svg">3rdparty/breeze-icons/icons/mimetypes/64/audio-mp3.svg</file>
+		<file alias="video-x-generic.svg">3rdparty/breeze-icons/icons/mimetypes/64/video-x-generic.svg</file>
+		<file alias="application-octet-stream.svg">3rdparty/breeze-icons/icons/mimetypes/64/application-octet-stream.svg</file>
+	</qresource>
 
-    <qresource prefix="/icons/breeze/mimetypes/22">
-        <file alias="text-x-plain.svg">3rdparty/breeze-icons/icons/mimetypes/22/text-x-plain.svg</file>
-        <file alias="application-octet-stream.svg">3rdparty/breeze-icons/icons/mimetypes/22/application-octet-stream.svg</file>
-    </qresource>
+	<qresource prefix="/icons/breeze/mimetypes/22">
+		<file alias="text-x-plain.svg">3rdparty/breeze-icons/icons/mimetypes/22/text-x-plain.svg</file>
+		<file alias="application-octet-stream.svg">3rdparty/breeze-icons/icons/mimetypes/22/application-octet-stream.svg</file>
+	</qresource>
 
-    <qresource prefix="/icons/breeze/status/symbolic">
-        <file alias="audio-volume-muted-symbolic.svg">3rdparty/breeze-icons/icons/status/symbolic/audio-volume-muted-symbolic.svg</file>
-    </qresource>
+	<qresource prefix="/icons/breeze/status/symbolic">
+		<file alias="audio-volume-muted-symbolic.svg">3rdparty/breeze-icons/icons/status/symbolic/audio-volume-muted-symbolic.svg</file>
+	</qresource>
 </RCC>

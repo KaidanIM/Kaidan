@@ -43,6 +43,7 @@
         <file alias="dialog-ok.svg">3rdparty/breeze-icons/icons/actions/22/dialog-ok.svg</file>
         <file alias="media-record.svg">3rdparty/breeze-icons/icons/actions/22/media-record.svg</file>
         <file alias="media-playback-stop.svg">3rdparty/breeze-icons/icons/actions/22/media-playback-stop.svg</file>
+        <file alias="error.svg">3rdparty/breeze-icons/icons/actions/22/error.svg</file>
     </qresource>
 
     <qresource prefix="/icons/breeze/emotes/22">

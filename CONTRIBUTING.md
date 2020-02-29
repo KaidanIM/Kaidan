@@ -37,4 +37,8 @@ Please stick to the following steps for opening and reviewing MRs.
 ## Graphics
 
 The preferred format for graphics in Kaidan is *SVG*.
-A new SVG must be [optimized](https://invent.kde.org/kde/kaidan/-/wikis/svg-optimization) before adding it to a commit.
+If SVG is not applicable like for screenshots, the graphic should have the format *PNG*.
+
+### Optimization
+
+In any case, the new or modified graphic must be [optimized](https://invent.kde.org/kde/kaidan/-/wikis/optimizing-graphics) before adding it to a commit.

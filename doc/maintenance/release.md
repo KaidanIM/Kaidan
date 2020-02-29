@@ -90,8 +90,7 @@
 1. Update screenshot (which will update the screenshot on the website and in the README):
 	1. Create one screenshot for desktop and one for mobile version
 	1. Put those two screenshots into one image like *images/screenshot.png* and overwrite that by the new one
-	1. `optipng -o7 images/screenshot.png`
-	1. `advpng -z4 images/screenshot.png`
+	1. [Optimize](https://invent.kde.org/kde/kaidan/-/wikis/optimizing-graphics) *images/screenshot.png*
 	1. `git add images/screenshot.png`
 	1. `git commit -m "Update screenshot"`
 	1. `git push origin master`

@@ -5,8 +5,8 @@ Format: https://www.debian.org/doc/packaging-manuals/copyright-format/1.0/
 Files: src/*
        utils/*
        misc/*
-Copyright: 2016-2020, Linus Jahn <lnj@kaidan.im>
-           2016-2020, Jonah Brüchert <jbb@kaidan.im>
+Copyright: 2016-2020, Jonah Brüchert <jbb@kaidan.im>
+           2016-2020, Linus Jahn <lnj@kaidan.im>
            2017-2019, Ilya Bizyaev <bizyaev@zoho.com>
            2018-2019, Nicolas Fella <nicolas.fella@gmx.de>
            2019-2020, Melvin Keskin <melvo@olomono.de>
@@ -86,14 +86,13 @@ Files: data/images/check-mark.svg
 Copyright: 2019, Melvin Keskin <melvo@olomono.de>
 License: CC-BY-SA-4.0
 
-Files: misc/kaidan.svg
-       misc/kaidan-small-margin.svg
-       misc/kaidan-128x128.png
-       data/images/banner.png
+Files: misc/kaidan-128x128.png
+       data/images/kaidan.svg
        data/images/kaidan-bw.svg
+       data/images/banner.png
 Copyright: 2016-2017, Ilya Bizyaev <bizyaev@zoho.com>
-           2016, MBB <mbb-mail@gmx.de>
-           2019, Melvin Keskin <melvo@olomono.de
+           2016-2020, Mathis Brüchert <mbblp@protonmail.ch>
+           2020, Melvin Keskin <melvo@olomono.de
 License: CC-BY-SA-4.0
 
 Files: data/images/chat-page-background.svg

@@ -113,7 +113,7 @@ if [ ! -d "$KAIDAN_SOURCES/misc/windows" ]; then
     }
 
     winlogo() {
-        rendersvg $KAIDAN_SOURCES/misc/kaidan-small-margin.svg "$KAIDAN_SOURCES/misc/windows/$1-kaidan.png" $1
+        rendersvg $KAIDAN_SOURCES/data/images/kaidan.svg "$KAIDAN_SOURCES/misc/windows/$1-kaidan.png" $1
         optipng -o9 "$KAIDAN_SOURCES/misc/windows/$1-kaidan.png"
     }
 

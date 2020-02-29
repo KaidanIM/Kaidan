@@ -13,8 +13,8 @@ if [ ! -d "$KAIDAN_SOURCES/misc/android/res/mipmap-xxxhdpi" ]; then
 
     androidlogo() {
         mkdir $KAIDAN_SOURCES/misc/android/res/mipmap-$1
-        rendersvg $KAIDAN_SOURCES/misc/kaidan-small-margin.svg "$KAIDAN_SOURCES/misc/android/res/mipmap-$1/icon.png" $2
-        rendersvg $KAIDAN_SOURCES/misc/kaidan-small-margin.svg "$KAIDAN_SOURCES/misc/android/res/mipmap-$1/logo.png" $(( $2 * 4 ))
+        rendersvg $KAIDAN_SOURCES/data/images/kaidan.svg "$KAIDAN_SOURCES/misc/android/res/mipmap-$1/icon.png" $2
+        rendersvg $KAIDAN_SOURCES/data/images/kaidan.svg "$KAIDAN_SOURCES/misc/android/res/mipmap-$1/logo.png" $(( $2 * 4 ))
     }
 
     androidlogo ldpi 36

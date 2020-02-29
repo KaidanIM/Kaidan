@@ -402,7 +402,7 @@ if(UBUNTU_TOUCH AND CLICK_ARCH)
 		PATTERN "*.qrc" EXCLUDE
 	)
 	# install icon
-	install(FILES "misc/kaidan.svg" "misc/ubuntu-touch/apparmor.json"
+	install(FILES "data/images/kaidan.svg" "misc/ubuntu-touch/apparmor.json"
 	              "misc/ubuntu-touch/kaidan.desktop" "misc/ubuntu-touch/manifest.json"
 	        DESTINATION "${CMAKE_INSTALL_PREFIX}"
 	)
@@ -419,7 +419,7 @@ elseif(UNIX AND NOT APPLE)
 	)
 
 	# install icon (scalable + 128x)
-	install(FILES "misc/kaidan.svg"
+	install(FILES "data/images/kaidan.svg"
 	        DESTINATION "${CMAKE_INSTALL_FULL_DATADIR}/icons/hicolor/scalable/apps"
 	)
 	install(FILES "misc/kaidan-128x128.png"

@@ -116,7 +116,7 @@ rendersvg() {
 }
 
 macoslogo() {
-    rendersvg $KAIDAN_SOURCES/misc/kaidan-small-margin.svg "$KAIDAN_SOURCES/misc/macos/kaidan.iconset/icon_$1x$1.png" $1 72
+    rendersvg $KAIDAN_SOURCES/data/images/kaidan.svg "$KAIDAN_SOURCES/misc/macos/kaidan.iconset/icon_$1x$1.png" $1 72
 }
 
 mkdir -p $KAIDAN_SOURCES/misc/macos/kaidan.iconset

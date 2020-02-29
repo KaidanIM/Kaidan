@@ -42,3 +42,11 @@ If SVG is not applicable like for screenshots, the graphic should have the forma
 ### Optimization
 
 In any case, the new or modified graphic must be [optimized](https://invent.kde.org/kde/kaidan/-/wikis/optimizing-graphics) before adding it to a commit.
+
+### Copyright
+
+The *LICENSE* file must be updated if there are copyright changes:
+
+1. Add to *utils/generate-license.py* a new `CopyrightTarget` for a new graphic or change an existing one for a modification of an existing graphic.
+1. Execute `utils/generate-license.py > LICENSE` for updating the *LICENSE* file.
+1. Add those two file changes to the same commit which contains the new or modified graphic.

@@ -59,7 +59,7 @@ windows-mxe:
 
 android:
   stage: deploy
-  image: kdeorg/android-arm-sdk
+  image: kdeorg/android-sdk
   script:
     - utils/build-android-docker.sh
   variables:

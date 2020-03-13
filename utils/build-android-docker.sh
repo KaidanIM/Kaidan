@@ -31,4 +31,4 @@ fi
 ${CI_PROJECT_DIR}/src/${CI_PROJECT_NAME}/utils/render-logos.sh
 /opt/helpers/create-apk ${CI_PROJECT_NAME}
 
-mv ${CI_PROJECT_DIR}/build/${CI_PROJECT_NAME}/kaidan_build_apk/build/outputs/apk/debug/kaidan_build_apk-debug.apk ${CI_PROJECT_DIR}
+mv ${CI_PROJECT_DIR}/build-arm64/${CI_PROJECT_NAME}/kaidan_build_apk/build/outputs/apk/debug/kaidan_build_apk-debug.apk ${CI_PROJECT_DIR}

@@ -38,7 +38,7 @@
 class QSqlQuery;
 class QSqlRecord;
 // Kaidan
-#include "RosterItem.h"
+class RosterItem;
 class Database;
 
 class RosterDb : public QObject
@@ -63,7 +63,7 @@ public:
 	                                     const RosterItem &newItem);
 
 signals:
-	void fetchItemsRequested();
+	void fetchItemsRequested(const QString &accountId);
 	void itemsFetched(const QVector<RosterItem> &items);
 
 public slots:
@@ -77,7 +77,7 @@ public slots:
 	void clearAll();
 
 private slots:
-	void fetchItems();
+	void fetchItems(const QString &accountId);
 
 private:
 	Database *m_db;

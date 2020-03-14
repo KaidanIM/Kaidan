@@ -194,6 +194,34 @@ void MessageDb::fetchMessages(const QString &user1, const QString &user2, int in
 	emit messagesFetched(messages);
 }
 
+Message MessageDb::fetchLastMessage(const QString &user1, const QString &user2)
+{
+	QSqlQuery query(QSqlDatabase::database(DB_CONNECTION));
+	query.setForwardOnly(true);
+
+	QMap<QString, QVariant> bindValues = {
+		{ QStringLiteral(":user1"), user1 },
+		{ QStringLiteral(":user2"), user2 },
+	};
+
+	Utils::execQuery(
+		query,
+		"SELECT * FROM Messages "
+		"WHERE (author = :user1 AND recipient = :user2) OR "
+		      "(author = :user2 AND recipient = :user1) "
+		"ORDER BY timestamp DESC "
+		"LIMIT 1",
+		bindValues
+	);
+
+	QVector<Message> messages;
+	parseMessagesFromQuery(query, messages);
+
+	if (!messages.isEmpty())
+		return messages.first();
+	return {};
+}
+
 void MessageDb::addMessage(const Message &msg)
 {
 	QSqlDatabase db = QSqlDatabase::database(DB_CONNECTION);

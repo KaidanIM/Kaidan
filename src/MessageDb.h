@@ -96,6 +96,11 @@ public slots:
 	                   int index);
 
 	/**
+	 * Fetches the last message and returns it.
+	 */
+	Message fetchLastMessage(const QString &user1, const QString &user2);
+
+	/**
 	 * Adds a message to the database.
 	 */
 	void addMessage(const Message &msg);

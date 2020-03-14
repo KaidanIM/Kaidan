@@ -83,10 +83,11 @@ Kaidan::Kaidan(QGuiApplication *app, bool enableLogging, QObject *parent)
 	// Load settings
 	//
 
-	creds.jid = m_caches->settings->value(KAIDAN_SETTINGS_AUTH_JID).toString();
-	creds.jidResourcePrefix = m_caches->settings->value(KAIDAN_SETTINGS_AUTH_JID_RESOURCE_PREFIX).toString();
-	creds.password = QString(QByteArray::fromBase64(m_caches->settings->value(
-	                 KAIDAN_SETTINGS_AUTH_PASSWD).toString().toUtf8()));
+	setJid(m_caches->settings->value(KAIDAN_SETTINGS_AUTH_JID).toString());
+	setJidResourcePrefix(m_caches->settings->value(KAIDAN_SETTINGS_AUTH_JID_RESOURCE_PREFIX).toString());
+	setPassword(QByteArray::fromBase64(
+		m_caches->settings->value(KAIDAN_SETTINGS_AUTH_PASSWD).toString().toUtf8()
+	));
 	// Use a default prefix for the JID's resource part if no prefix is already set.
 	if (creds.jidResourcePrefix.isEmpty())
 		setJidResourcePrefix(KAIDAN_JID_RESOURCE_DEFAULT_PREFIX);

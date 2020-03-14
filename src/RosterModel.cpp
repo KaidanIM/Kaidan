@@ -32,6 +32,7 @@
 // Kaidan
 #include "RosterDb.h"
 #include "MessageModel.h"
+#include "Kaidan.h"
 // C++
 #include <functional>
 // Qt
@@ -65,7 +66,20 @@ RosterModel::RosterModel(RosterDb *rosterDb, QObject *parent)
 	connect(this, &RosterModel::replaceItemsRequested,
 	        rosterDb, &RosterDb::replaceItems);
 
-	emit rosterDb->fetchItemsRequested();
+	// This is only done in the model, the database is updated automatically by the new
+	// messages:
+	connect(this, &RosterModel::setLastMessageRequested,
+	        this, &RosterModel::setLastMessage);
+	connect(this, &RosterModel::setLastExchangedRequested,
+	        this, &RosterModel::setLastExchanged);
+
+	connect(Kaidan::instance(), &Kaidan::jidChanged, this, [=]() {
+		beginResetModel();
+		m_items.clear();
+		endResetModel();
+
+		emit rosterDb->fetchItemsRequested(Kaidan::instance()->getJid());
+	});
 }
 
 void RosterModel::setMessageModel(MessageModel *model)
@@ -127,36 +141,13 @@ void RosterModel::handleItemsFetched(const QVector<RosterItem> &items)
 {
 	beginResetModel();
 	m_items = items;
-	std::sort(
-		m_items.begin(),
-		m_items.end(),
-		[] (const RosterItem &a, const RosterItem &b) {
-			return a < b;
-		}
-	);
+	std::sort(m_items.begin(), m_items.end());
 	endResetModel();
 }
 
 void RosterModel::addItem(const RosterItem &item)
 {
-	// prepend the item, if no timestamp is set
-	if (item.lastExchanged().isNull()) {
-		insertContact(0, item);
-		return;
-	}
-
-	// index where to add the new contact
-	int i = 0;
-	for (const auto &itrItem : qAsConst(m_items)) {
-		if (item < itrItem) {
-			insertContact(i, item);
-			return;
-		}
-		i++;
-	}
-
-	// append the item to the end of the list
-	insertContact(i, item);
+	insertContact(positionToInsert(item), item);
 }
 
 void RosterModel::removeItem(const QString &jid)
@@ -188,23 +179,12 @@ void RosterModel::updateItem(const QString &jid,
 			if (m_items.at(i) == item)
 				return;
 
+			// item was changed: refresh all roles
+			emit dataChanged(index(i), index(i), {});
+
 			// check, if the position of the new item may be different
-			if (item.lastExchanged() == m_items.at(i).lastExchanged()) {
-				beginRemoveRows(QModelIndex(), i, i);
-				m_items.removeAt(i);
-				endRemoveRows();
-
-				// add the item at the same position
-				insertContact(i, item);
-			} else {
-				beginRemoveRows(QModelIndex(), i, i);
-				m_items.removeAt(i);
-				endRemoveRows();
-
-				// put to new position
-				addItem(item);
-			}
-			break;
+			updateItemPosition(i);
+			return;
 		}
 	}
 }
@@ -212,7 +192,7 @@ void RosterModel::updateItem(const QString &jid,
 void RosterModel::replaceItems(const QHash<QString, RosterItem> &items)
 {
 	QVector<RosterItem> newItems;
-	for (auto item : items) {
+	for (auto item : qAsConst(items)) {
 		// find old item
 		auto oldItem = std::find_if(
 			m_items.begin(),
@@ -236,9 +216,63 @@ void RosterModel::replaceItems(const QHash<QString, RosterItem> &items)
 	handleItemsFetched(newItems);
 }
 
+void RosterModel::setLastMessage(const QString &contactJid, const QString &newLastMessage)
+{
+	for (int i = 0; i < m_items.length(); i++) {
+		if (m_items.at(i).jid() == contactJid) {
+			m_items[i].setLastMessage(newLastMessage);
+			emit dataChanged(index(i), index(i), QVector<int>() << int(LastMessageRole));
+			return;
+		}
+	}
+}
+
+void RosterModel::setLastExchanged(const QString &contactJid, const QDateTime &newLastExchanged)
+{
+	for (int i = 0; i < m_items.length(); i++) {
+		if (m_items.at(i).jid() == contactJid) {
+			// update item
+			m_items[i].setLastExchanged(newLastExchanged);
+			emit dataChanged(index(i), index(i), QVector<int>() << int(LastExchangedRole));
+
+			// Move row to correct position
+			updateItemPosition(i);
+			return;
+		}
+	}
+}
+
 void RosterModel::insertContact(int i, const RosterItem &item)
 {
 	beginInsertRows(QModelIndex(), i, i);
 	m_items.insert(i, item);
 	endInsertRows();
+}
+
+int RosterModel::updateItemPosition(int currentPosition)
+{
+	const int newPosition = positionToInsert(m_items.at(currentPosition));
+	if (currentPosition == newPosition)
+		return currentPosition;
+
+	beginMoveRows(QModelIndex(), currentPosition, currentPosition, QModelIndex(), newPosition);
+	m_items.move(currentPosition, newPosition);
+	endMoveRows();
+
+	return newPosition;
+}
+
+int RosterModel::positionToInsert(const RosterItem &item)
+{
+	// prepend the item, if no timestamp is set
+	if (item.lastExchanged().isNull())
+		return 0;
+
+	for (int i = 0; i < m_items.size(); i++) {
+		if (item <= m_items.at(i))
+			return i;
+	}
+
+	// append
+	return m_items.size();
 }

@@ -227,6 +227,8 @@ void Database::createDbInfoTable()
 
 void Database::createRosterTable()
 {
+	// TODO: remove lastExchanged and lastMessage
+
 	QSqlQuery query(m_database);
 	Utils::execQuery(
 		query,

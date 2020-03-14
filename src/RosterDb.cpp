@@ -33,6 +33,9 @@
 #include "Database.h"
 #include "Globals.h"
 #include "Utils.h"
+#include "RosterItem.h"
+#include "Message.h"
+#include "MessageDb.h"
 // Qt
 #include <QDateTime>
 #include <QSqlDriver>
@@ -67,20 +70,13 @@ void RosterDb::parseItemsFromQuery(QSqlQuery &query, QVector<RosterItem> &items)
 	QSqlRecord rec = query.record();
 	int idxJid = rec.indexOf("jid");
 	int idxName = rec.indexOf("name");
-	int idxLastExchanged = rec.indexOf("lastExchanged");
 	int idxUnreadMessages = rec.indexOf("unreadMessages");
-	int idxLastMessage = rec.indexOf("lastMessage");
 
 	while (query.next()) {
 		RosterItem item;
 		item.setJid(query.value(idxJid).toString());
 		item.setName(query.value(idxName).toString());
-		item.setLastExchanged(QDateTime::fromString(
-			query.value(idxLastExchanged).toString(),
-			Qt::ISODateWithMs
-		));
 		item.setUnreadMessages(query.value(idxUnreadMessages).toInt());
-		item.setLastMessage(query.value(idxLastMessage).toString());
 
 		items << item;
 	}
@@ -93,13 +89,6 @@ QSqlRecord RosterDb::createUpdateRecord(const RosterItem &oldItem, const RosterI
 		rec.append(Utils::createSqlField("jid", newItem.jid()));
 	if (oldItem.name() != newItem.name())
 		rec.append(Utils::createSqlField("name", oldItem.name()));
-	if (oldItem.lastMessage() != newItem.lastMessage())
-		rec.append(Utils::createSqlField("lastMessage", newItem.lastMessage()));
-	if (oldItem.lastExchanged() != newItem.lastExchanged())
-		rec.append(Utils::createSqlField(
-			"lastExchanged",
-			newItem.lastExchanged().toString(Qt::ISODateWithMs)
-		));
 	if (oldItem.unreadMessages() != newItem.unreadMessages())
 		rec.append(Utils::createSqlField(
 			"unreadMessages",
@@ -129,9 +118,9 @@ void RosterDb::addItems(const QVector<RosterItem> &items)
 	for (const auto &item : items) {
 		query.addBindValue(item.jid());
 		query.addBindValue(item.name());
-		query.addBindValue(item.lastExchanged().toString(Qt::ISODateWithMs));
+		query.addBindValue(QStringLiteral("")); // lastExchanged (NOT NULL)
 		query.addBindValue(item.unreadMessages());
-		query.addBindValue(item.lastMessage());
+		query.addBindValue(QString()); // lastMessage
 		Utils::execQuery(query);
 	}
 
@@ -176,6 +165,9 @@ void RosterDb::updateItem(const QString &jid,
 		if (items.first() != item) {
 			// create an SQL record with only the differences
 			QSqlRecord rec = createUpdateRecord(items.first(), item);
+
+			if (rec.isEmpty())
+				return;
 
 			Utils::execQuery(
 			        query,
@@ -258,7 +250,7 @@ void RosterDb::clearAll()
 	Utils::execQuery(query, "DELETE FROM Roster");
 }
 
-void RosterDb::fetchItems()
+void RosterDb::fetchItems(const QString &accountId)
 {
 	QSqlQuery query(QSqlDatabase::database(DB_CONNECTION));
 	query.setForwardOnly(true);
@@ -266,6 +258,12 @@ void RosterDb::fetchItems()
 
 	QVector<RosterItem> items;
 	parseItemsFromQuery(query, items);
+
+	for (auto &item : items) {
+		Message lastMessage = MessageDb::instance()->fetchLastMessage(accountId, item.jid());
+		item.setLastExchanged(lastMessage.stamp());
+		item.setLastMessage(lastMessage.body());
+	}
 
 	emit itemsFetched(items);
 }

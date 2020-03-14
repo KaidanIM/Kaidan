@@ -176,19 +176,14 @@ void RosterManager::handleSendMessage(const QString &jid, const QString &message
 		                                          : spoilerHint
 		                  : message;
 		// sorting order in contact list
-		const QDateTime dateTime = QDateTime::currentDateTimeUtc();
-
-		emit model->updateItemRequested(jid,
-		                                [=] (RosterItem &item) {
-			item.setLastMessage(lastMessage);
-			item.setLastExchanged(dateTime);
-		});
+		emit model->setLastExchangedRequested(jid, QDateTime::currentDateTimeUtc());
+		emit model->setLastMessageRequested(jid, lastMessage);
 	}
 }
 
 void RosterManager::handleMessage(const QXmppMessage &msg)
 {
-    if (msg.body().isEmpty() || msg.type() == QXmppMessage::Error)
+	if (msg.body().isEmpty() || msg.type() == QXmppMessage::Error)
 		return;
 
 	// msg.from() can be our JID, if it's a carbon/forward from another client
@@ -198,20 +193,16 @@ void RosterManager::handleMessage(const QXmppMessage &msg)
 	                              : fromJid;
 
 	// update last exchanged datetime (sorting order in contact list)
-	const QDateTime dateTime = QDateTime::currentDateTimeUtc();
+	emit model->setLastExchangedRequested(contactJid, QDateTime::currentDateTimeUtc());
 
 	// update unread message counter, if chat is not active
 	if (sentByMe) {
 		// if we sent a message (with another device), reset counter
-		emit model->updateItemRequested(contactJid,
-		                                [dateTime] (RosterItem &item) {
-			item.setLastExchanged(dateTime);
+		emit model->updateItemRequested(contactJid, [](RosterItem &item) {
 			item.setUnreadMessages(0);
 		});
 	} else if (m_chatPartner != contactJid) {
-		emit model->updateItemRequested(contactJid,
-		                                [dateTime] (RosterItem &item) {
-			item.setLastExchanged(dateTime);
+		emit model->updateItemRequested(contactJid, [](RosterItem &item) {
 			item.setUnreadMessages(item.unreadMessages() + 1);
 		});
 	}

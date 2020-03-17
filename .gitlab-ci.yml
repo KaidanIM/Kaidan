@@ -67,7 +67,8 @@ android:
   allow_failure: true
   artifacts:
     paths:
-      - "kaidan_build_apk-debug.apk"
+      - "kaidan_arm.apk"
+      - "kaidan_arm64.apk"
     expire_in: 1 week
 
 mac-osxcross:

@@ -23,19 +23,9 @@ echo "*****************************************"
 echo "Fetching dependencies if required"
 echo "*****************************************"
 
-if [ ! -f "$KAIDAN_SOURCES/3rdparty/kirigami/.git" ] || [ ! -f "$KAIDAN_SOURCES/3rdparty/breeze-icons/.git" ]; then
-    echo "Cloning Kirigami and Breeze icons"
+if [ ! -f "$KAIDAN_SOURCES/3rdparty/breeze-icons/.git" ]; then
+    echo "Cloning Breeze icons"
     git submodule update --init
-fi
-
-if [ ! -e "$KAIDAN_SOURCES/3rdparty/qxmpp/" ]; then
-    echo "Cloning QXmpp"
-    git clone https://github.com/qxmpp-project/qxmpp.git 3rdparty/qxmpp
-fi
-
-if [ ! -e "$KAIDAN_SOURCES/3rdparty/zxing-cpp/" ]; then
-    echo "Cloning ZXing"
-    git clone https://github.com/nu-book/zxing-cpp.git 3rdparty/zxing-cpp
 fi
 
 cdnew() {
@@ -47,59 +37,6 @@ cdnew() {
 }
 
 export QT_SELECT=qt5
-
-if [ ! -f "$QXMPP_BUILD/lib/pkgconfig/qxmpp.pc" ]; then
-echo "*****************************************"
-echo "Building QXmpp"
-echo "*****************************************"
-{
-    cdnew $KAIDAN_SOURCES/3rdparty/qxmpp/build
-    ${OSXCROSS_TARGET}-cmake .. \
-        -DCMAKE_PREFIX_PATH=$QT_MACOS \
-        -DBUILD_EXAMPLES=OFF \
-        -DCMAKE_BUILD_TYPE=$BUILD_TYPE -DCMAKE_INSTALL_PREFIX=$QXMPP_BUILD \
-        -DBUILD_TESTS=OFF
-    make -j$(nproc)
-    make install
-    rm -rf $KAIDAN_SOURCES/3rdparty/qxmpp/build
-}
-fi
-
-if [ ! -f "$KIRIGAMI_BUILD/lib/libKF5Kirigami2.dylib" ]; then
-echo "*****************************************"
-echo "Building Kirigami"
-echo "*****************************************"
-{
-    cdnew $KAIDAN_SOURCES/3rdparty/kirigami/build
-    ${OSXCROSS_TARGET}-cmake .. \
-        -DECM_DIR=/usr/local/share/ECM/cmake \
-        -DCMAKE_PREFIX_PATH=$QT_MACOS \
-        -DECM_ADDITIONAL_FIND_ROOT_PATH=$QT_MACOS \
-        -DCMAKE_BUILD_TYPE=$BUILD_TYPE -DCMAKE_INSTALL_PREFIX=$KIRIGAMI_BUILD
-
-    make -j$(nproc)
-    make install
-    rm -rf $KAIDAN_SOURCES/3rdparty/kirigami/build
-}
-fi
-
-if [ ! -f "$ZXING_BUILD/lib/libZXingCore.dylib" ]; then
-echo "*****************************************"
-echo "Building ZXing"
-echo "*****************************************"
-{
-    cdnew $KAIDAN_SOURCES/3rdparty/zxing-cpp/build
-    ${OSXCROSS_TARGET}-cmake .. \
-        -DCMAKE_PREFIX_PATH=$QT_MACOS \
-	-DBUILD_SHARED_LIBRARY=ON \
-        -DCMAKE_BUILD_TYPE=$BUILD_TYPE -DCMAKE_INSTALL_PREFIX=$ZXING_BUILD
-
-    make -j$(nproc)
-    make install
-    rm -rf $KAIDAN_SOURCES/3rdparty/zxing-cpp/build
-}
-fi
-
 
 if [ ! -f "$KAIDAN_SOURCES/misc/macos/kaidan.icns" ]; then
 echo "*****************************************"
@@ -142,9 +79,7 @@ echo "*****************************************"
 
     ${OSXCROSS_TARGET}-cmake .. \
         -DECM_DIR=/usr/local/share/ECM/cmake \
-        -DCMAKE_PREFIX_PATH=$QT_MACOS\;$KIRIGAMI_BUILD\;$QXMPP_BUILD \
-        -DKF5Kirigami2_DIR=$KIRIGAMI_BUILD/lib/cmake/KF5Kirigami2 \
-        -DZXing_DIR=$ZXING_BUILD/lib/cmake/ZXing \
+        -DCMAKE_PREFIX_PATH=$QT_MACOS \
         -DI18N=1 \
         -DUSE_KNOTIFICATIONS=OFF \
         -DCMAKE_BUILD_TYPE=$BUILD_TYPE \
@@ -159,20 +94,20 @@ echo "Macdeployqt"
 echo "*****************************************"
 {
     cd $KAIDAN_SOURCES/build
-    export LD_LIBRARY_PATH=$QT_MACOS/lib/:$KIRIGAMI_BUILD/lib:$ZXING_BUILD/lib:$LD_LIBRARY_PATH
+    export LD_LIBRARY_PATH=$QT_MACOS/lib/:$LD_LIBRARY_PATH
     export PATH=$QT_MACOS/bin/:$PATH
 
     # FIXME: Use `macdeployqt -qmlimport` when QTBUG-70977 is fixed
     if [ ! -d "$QT_MACOS/qml/org/kde/kirigami.2" ]; then
         mkdir -p $QT_MACOS/qml/org/kde
-        ln -s $KIRIGAMI_BUILD/lib/qml/org/kde/kirigami.2 $QT_MACOS/qml/org/kde/kirigami.2
+        ln -s $QT_MACOS/lib/qml/org/kde/kirigami.2/ $QT_MACOS/qml/org/kde/kirigami.2
     fi
 
     # FIXME: Why does this assume /usr
     if [ ! -f /usr/lib/libZXingCore.1.dylib ]; then
-        ln -s $ZXING_BUILD/lib/libZXingCore.1.dylib /usr/lib/libZXingCore.1.dylib
+        ln -s $QT_MACOS/lib/libZXingCore.1.dylib /usr/lib/libZXingCore.1.dylib
     fi
 
-    macdeployqt bin/kaidan.app -qmlimport=$QT_MACOS/qml -qmlimport=$KIRIGAMI_BUILD/lib/qml/ -qmldir=$KAIDAN_SOURCES/src/qml/ -libpath=$KIRIGAMI_BUILD/lib/ -libpath=$QXMPP_BUILD/lib -libpath=$QT_MACOS/lib/ -appstore-compliant -verbose=1
+    macdeployqt bin/kaidan.app -qmlimport=$QT_MACOS/qml -qmlimport=$QT_MACOS/lib/qml -qmldir=$KAIDAN_SOURCES/src/qml/ -libpath=$QT_MACOS/lib/ -appstore-compliant -verbose=1
     ${OSXCROSS_TARGET}-install_name_tool -add_rpath @executable_path/../Frameworks bin/kaidan.app/Contents/MacOS/kaidan
 }

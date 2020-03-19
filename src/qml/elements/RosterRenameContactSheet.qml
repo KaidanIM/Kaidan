@@ -33,9 +33,11 @@ import QtQuick.Controls 2.12 as Controls
 import QtQuick.Layouts 1.12
 import org.kde.kirigami 2.8 as Kirigami
 
+import im.kaidan.kaidan 1.0
+
 Kirigami.OverlaySheet {
 	property string jid
-	property alias currentName: nickField.text
+	property alias enteredName: nameField.text
 
 	ColumnLayout {
 		width: 300
@@ -45,13 +47,11 @@ Kirigami.OverlaySheet {
 			Layout.fillWidth: true
 		}
 
-		Controls.Label {
-			text: qsTr("Edit name:")
-		}
 		Controls.TextField {
-			id: nickField
+			id: nameField
 			selectByMouse: true
 			Layout.fillWidth: true
+			onAccepted: renameButton.clicked()
 		}
 
 		RowLayout {
@@ -64,14 +64,19 @@ Kirigami.OverlaySheet {
 			}
 
 			Button {
-				id: addButton
+				id: renameButton
 				text: qsTr("Rename")
-				onClicked: {
-					Kaidan.renameContact(jid, nickField.text);
-					close();
-				}
 				Layout.fillWidth: true
+
+				onClicked: {
+					Kaidan.renameContact(jid, enteredName)
+					close()
+				}
 			}
 		}
+	}
+
+	function forceFocus() {
+		nameField.forceActiveFocus()
 	}
 }

@@ -81,7 +81,10 @@ Kirigami.Page {
 
 	rightAction: Kirigami.Action {
 		icon.name: "edit-rename"
-		onTriggered: renameSheet.open()
+		onTriggered: {
+			renameSheet.open()
+			renameSheet.forceFocus()
+		}
 	}
 
 	RosterRemoveContactSheet {
@@ -92,9 +95,9 @@ Kirigami.Page {
 	RosterRenameContactSheet {
 		id: renameSheet
 		jid: root.jid
-		currentName: {
+		enteredName: {
 			if (name === jid)
-				return null;
+				return "";
 			return name;
 		}
 	}

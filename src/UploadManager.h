@@ -58,8 +58,7 @@ public:
 	/**
 	 * Default constructor
 	 */
-	UploadManager(Kaidan* kaidan, QXmppClient* client, MessageModel* msgModel,
-	              RosterManager* rosterManager, TransferCache* transfers,
+	UploadManager(QXmppClient *client, RosterManager* rosterManager,
 	              QObject* parent = nullptr);
 
 signals:
@@ -78,12 +77,9 @@ public slots:
 	void handleUploadSucceeded(const QXmppHttpUpload *upload);
 
 private:
-	Kaidan *kaidan;
 	QXmppClient *client;
 	QXmppUploadManager manager;
-	MessageModel *msgModel;
 	RosterManager *rosterManager;
-	TransferCache* transfers;
 
 	QMap<int, Message*> messages;
 };

@@ -65,8 +65,7 @@ ClientWorker::ClientWorker(Caches *caches, Kaidan *kaidan, bool enableLogging, Q
 	                                  caches->avatarStorage, vCardManager, this);
 	msgHandler = new MessageHandler(kaidan, client, caches->msgModel, this);
 	discoManager = new DiscoveryManager(client, this);
-	uploadManager = new UploadManager(kaidan, client, caches->msgModel, rosterManager,
-	                                  caches->transferCache, this);
+	uploadManager = new UploadManager(client, rosterManager, this);
 	downloadManager = new DownloadManager(kaidan, caches->transferCache,
 	                                      caches->msgModel, this);
 

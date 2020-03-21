@@ -480,7 +480,7 @@ ChatPageBase {
 
 			Controls.ToolButton {
 				id: attachButton
-				visible: Kaidan.uploadServiceFound
+				visible: Kaidan.serverFeaturesCache.httpUploadSupported
 				Layout.preferredWidth: Kirigami.Units.gridUnit * 3
 				Layout.preferredHeight: Kirigami.Units.gridUnit * 3
 				padding: 0

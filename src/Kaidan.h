@@ -62,13 +62,13 @@ class Kaidan : public QObject
 	Q_PROPERTY(AvatarFileStorage* avatarStorage READ getAvatarStorage NOTIFY avatarStorageChanged)
 	Q_PROPERTY(PresenceCache* presenceCache READ getPresenceCache CONSTANT)
 	Q_PROPERTY(TransferCache* transferCache READ getTransferCache CONSTANT)
+	Q_PROPERTY(ServerFeaturesCache* serverFeaturesCache READ serverFeaturesCache CONSTANT)
 	Q_PROPERTY(QSettings* settings READ getSettings CONSTANT)
 	Q_PROPERTY(quint8 connectionState READ getConnectionState NOTIFY connectionStateChanged)
 	Q_PROPERTY(quint8 connectionError READ getConnectionError NOTIFY connectionErrorChanged)
 	Q_PROPERTY(QString jid READ getJid WRITE setJid NOTIFY jidChanged)
 	Q_PROPERTY(QString jidResource READ getJidResource WRITE setJidResource NOTIFY jidResourceChanged)
 	Q_PROPERTY(QString password READ getPassword WRITE setPassword NOTIFY passwordChanged)
-	Q_PROPERTY(bool uploadServiceFound READ getUploadServiceFound NOTIFY uploadServiceFoundChanged)
 
 public:
 	static Kaidan *instance();
@@ -175,6 +175,11 @@ public:
 		return m_caches->transferCache;
 	}
 
+	ServerFeaturesCache *serverFeaturesCache() const
+	{
+		return m_caches->serverFeaturesCache;
+	}
+
 	QSettings* getSettings() const
 	{
 		return m_caches->settings;
@@ -197,14 +202,6 @@ public:
      * like "xmpp:user@example.org?login;password=abc"
      */
     Q_INVOKABLE void loginByUri(const QString &uri);
-
-	/**
-	 * Returns whether an HTTP File Upload service has been found
-	 */
-	bool getUploadServiceFound() const
-	{
-		return uploadServiceFound;
-	}
 
 signals:
 	void avatarStorageChanged();
@@ -283,11 +280,6 @@ signals:
 	 * The upload progress of a file upload has changed
 	 */
 	void uploadProgressMade(QString msgId, quint64 sent, quint64 total);
-
-	/**
-	 * An HTTP File Upload service was discovered
-	 */
-	void uploadServiceFoundChanged();
 
 	/**
 	 * Send a text message to any JID
@@ -397,15 +389,6 @@ public slots:
 	}
 
 	/**
-	 * Enables HTTP File Upload to be used (will be called from UploadManager)
-	 */
-	void setUploadServiceFound(bool enabled)
-	{
-		uploadServiceFound = enabled;
-		emit uploadServiceFoundChanged();
-	}
-
-	/**
 	 * Returns whether notifications are enabled for the given contact.
 	 */
 	bool notificationsMuted(const QString& jid);
@@ -436,7 +419,6 @@ private:
 
 	ClientWorker::Credentials creds;
 	QString openUriCache;
-	bool uploadServiceFound = false;
 	ConnectionState connectionState = ConnectionState::StateDisconnected;
 	ClientWorker::ConnectionError connectionError = ClientWorker::NoError;
 

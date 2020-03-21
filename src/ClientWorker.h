@@ -46,6 +46,7 @@ class QGuiApplication;
 #include "MessageModel.h"
 #include "PresenceCache.h"
 #include "RosterModel.h"
+#include "ServerFeaturesCache.h"
 #include "TransferCache.h"
 class LogHandler;
 class Kaidan;
@@ -87,9 +88,10 @@ public:
 	struct Caches {
 		Caches(Kaidan *kaidan, RosterDb *rosterDb, MessageDb *msgDb,
 		       QObject *parent = nullptr)
-		        : msgModel(new MessageModel(kaidan, msgDb, parent)),
-		          rosterModel(new RosterModel(rosterDb, parent)),
+			: msgModel(new MessageModel(kaidan, msgDb, parent)),
+			  rosterModel(new RosterModel(rosterDb, parent)),
 			  avatarStorage(new AvatarFileStorage(parent)),
+			  serverFeaturesCache(new ServerFeaturesCache(parent)),
 			  presCache(new PresenceCache(parent)),
 			  transferCache(new TransferCache(parent)),
 			  settings(new QSettings(APPLICATION_NAME, APPLICATION_NAME))
@@ -110,6 +112,7 @@ public:
 		MessageModel *msgModel;
 		RosterModel *rosterModel;
 		AvatarFileStorage *avatarStorage;
+		ServerFeaturesCache *serverFeaturesCache;
 		PresenceCache *presCache;
 		TransferCache* transferCache;
 		QSettings *settings;

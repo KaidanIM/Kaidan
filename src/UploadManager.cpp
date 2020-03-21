@@ -55,10 +55,8 @@ UploadManager::UploadManager(QXmppClient *client, RosterManager* rosterManager,
 
 	connect(Kaidan::instance(), &Kaidan::sendFile, this, &UploadManager::sendFile);
 
-	connect(&manager, &QXmppUploadManager::serviceFoundChanged, [=]() {
-		// needed because kaidan is in main thread
-		QMetaObject::invokeMethod(Kaidan::instance(), "setUploadServiceFound", Qt::QueuedConnection,
-		                          Q_ARG(bool, manager.serviceFound()));
+	connect(&manager, &QXmppUploadManager::serviceFoundChanged, this, [=]() {
+		Kaidan::instance()->serverFeaturesCache()->setHttpUploadSupported(manager.serviceFound());
 	});
 	connect(&manager, &QXmppUploadManager::uploadSucceeded,
 	        this, &UploadManager::handleUploadSucceeded);

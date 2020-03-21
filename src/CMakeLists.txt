@@ -26,6 +26,7 @@ set(KAIDAN_SOURCES
 	src/EmojiModel.cpp
 	src/TransferCache.cpp
 	src/DownloadManager.cpp
+	src/ServerFeaturesCache.cpp
 	src/QmlUtils.cpp
 	src/Utils.cpp
 	src/QrCodeDecoder.cpp

@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- Copyright 2019 Kaidan developers and contributors -->
 <component type="desktop-application">
   <id>im.kaidan.kaidan</id>
   <name>Kaidan</name>
   <summary>Kaidan, a simple and user-friendly Jabber/XMPP client for every device and platform</summary>
-  <project_license>GPL-3.0+</project_license>
   <metadata_license>CC0-1.0</metadata_license>
+  <project_license>GPL-3.0+</project_license>
   <developer_name>Kaidan Developers &amp; Contributors</developer_name>
   <description>
     <p>Kaidan is a simple, user-friendly Jabber/XMPP client providing a modern user-interface using Kirigami and  QtQuick. The back-end of Kaidan is entirely written in C++ using the qxmpp XMPP client library and Qt 5.</p>
@@ -25,14 +24,196 @@
       <image type="source">https://www.kaidan.im/images/screenshot.png</image>
     </screenshot>
   </screenshots>
-  <content_rating type="oars-1.1">
-    <content_attribute id="social-chat">intense</content_attribute>
-    <content_attribute id="social-contacts">intense</content_attribute>
-  </content_rating>
   <releases>
-    <release type="stable" date="2019-07-16" version="0.4.1" />
+    <release type="stable" version="0.4.1" date="2019-07-16T00:00:00Z">
+      <description>
+        <p>This release fixes the following bugs:</p>
+        <ul>
+          <li>Fix SSL problems for AppImage</li>
+          <li>Fix connection problems</li>
+          <li>Keep QXmpp v0.8.3 compatibility</li>
+        </ul>
+      </description>
+    </release>
+    <release type="stable" version="0.4.0" date="2019-07-08T00:00:00Z">
+      <description>
+        <p>This release adds the following features:</p>
+        <ul>
+          <li>Show proper notifications using KNotifications</li>
+          <li>Add settings page for changing passwords</li>
+          <li>Add XEP-0352: Client State Indication (gloox/QXmpp)</li>
+          <li>Add media/file (including GIFs) sharing</li>
+          <li>Full back-end rewrite to QXmpp</li>
+          <li>Implement XEP-0363: HTTP File Upload and UploadManager for QXmpp</li>
+          <li>Use XEP-0280: Message Carbons from QXmpp</li>
+          <li>Use XEP-0352: Client State Indication from QXmpp</li>
+          <li>Check incoming messages for media links</li>
+          <li>Implement XEP-0308: Last Message Correction</li>
+          <li>Make attachments downloadable</li>
+          <li>Implement XEP-0382: Spoiler messages</li>
+          <li>Kaidan is now offline usable</li>
+          <li>Kaidan is able to open xmpp: URIs</li>
+          <li>New logo</li>
+          <li>Show presence information of contacts</li>
+          <li>Add EmojiPicker from Spectral with search and favorites functionality</li>
+          <li>Highlight links in chat and make links clickable</li>
+          <li>New about dialog instead of the about page</li>
+          <li>Add image preview in chat and before sending</li>
+          <li>Send messages on Enter, new line on Ctrl-Enter</li>
+          <li>'Add contact' is now the main action on the contacts page</li>
+          <li>Elide contact names and messages in roster</li>
+          <li>Chat page redesign</li>
+          <li>Display passive notifications when trying to use online actions while offline</li>
+          <li>Automatically reconnect on connection loss</li>
+          <li>Contacts page: Display whether online in title</li>
+          <li>Add different connection error messages</li>
+          <li>Use QApplication when building with QWidgets</li>
+          <li>Ask user to approve subscription requests</li>
+          <li>Remove contact action: Make JIDs bold</li>
+          <li>Add contact sheet: Ask for optional message to contact</li>
+          <li>Add empty chat page with help notice to be displayed on start up</li>
+          <li>Redesign log in page</li>
+          <li>Add Copy Invitaion URL action</li>
+          <li>Add 'press and hold' functionality for messages context menu</li>
+          <li>Add copy to clipboard function for messages</li>
+          <li>Add mobile file chooser</li>
+          <li>Highlight the currently opened chat on contacts page</li>
+          <li>Remove predefined window sizes</li>
+          <li>Use new Kirigami application header</li>
+          <li>Make images open externally when clicked</li>
+          <li>Use QtQuickCompiler</li>
+          <li>Display upload progress bar</li>
+          <li>Add text+color avatars as fallback</li>
+          <li>Remove diaspora log in option</li>
+          <li>Support for Android</li>
+          <li>Support for Ubuntu Touch</li>
+          <li>Support for MacOS</li>
+          <li>Support for Windows</li>
+          <li>Support for iOS</li>
+          <li>Add KDE Flatpak</li>
+          <li>Switch Android builds to CMake with ECM</li>
+          <li>Improve Linux AppImage build script</li>
+          <li>Add additional image formats in AppImage</li>
+          <li>Forget passwords on log out</li>
+          <li>Append four random chars to resource</li>
+          <li>Save passwords in base64 instead of clear text</li>
+          <li>Generate the LICENSE file automatically with all git authors</li>
+          <li>Store ubuntu touch builds as job artifacts</li>
+          <li>Add GitLab CI integration</li>
+        </ul>
+        <p>This release fixes the following bugs:</p>
+        <ul>
+          <li>Fix blocking of GUI thread while database interaction</li>
+          <li>Fix TLS connection bug</li>
+          <li>Don't send notifications when receiving own messages via. carbons</li>
+          <li>Fix timezone bug of message timestamps</li>
+          <li>Fix several message editing bugs</li>
+          <li>Fix black icons</li>
+          <li>Fix rich text labels in Plasma Mobile</li>
+          <li>Small Plasma Mobile fixes</li>
+        </ul>
+      </description>
+    </release>
+    <release type="stable" version="0.3.2" date="2017-11-25T00:00:00Z">
+      <description>
+        <p>This release adds the following features:</p>
+        <ul>
+          <li>Added AppImage build script (#138)</li>
+          <li>Use relative paths to find resource files (#143)</li>
+          <li>Source directory is only used for resource files in debug builds (#146)</li>
+        </ul>
+      </description>
+    </release>
+    <release type="stable" version="0.3.1" date="2017-11-20T00:00:00Z">
+      <description>
+        <p>This release fixes the following bugs:</p>
+        <ul>
+          <li>Fixed database creation errors (#135, #132)</li>
+          <li>ChatPage: Fixed recipient's instead of author's avatar displayed (#131, #137)</li>
+        </ul>
+        <p>This release adds the following features:</p>
+        <ul>
+          <li>Added Travis-CI integration (#133, #134, #136)</li>
+          <li>Added Malay translations (#129)</li>
+        </ul>
+      </description>
+    </release>
+    <release type="stable" version="0.3.0" date="2017-08-15T00:00:00Z">
+      <description>
+        <p>This release adds the following features:</p>
+        <ul>
+          <li>Added XEP-0280: Message Carbons (#117)</li>
+          <li>Added XEP-0054/XEP-0153: VCard-based avatars (#73, #105, #119)</li>
+          <li>Added file storage for simply caching all avatars</li>
+          <li>New roster design - showing round avatars and last message (#118)</li>
+          <li>New chat page design - showing time, delivery status and round avatars (#123)</li>
+          <li>Switched to XMPP client library "gloox" (#114)</li>
+          <li>Rewritten most of the back-end for gloox and partialy also restructured it (#114)</li>
+          <li>(Re)written new LogHandler for gloox (Swiften had this already included) (#114)</li>
+        </ul>
+      </description>
+    </release>
+    <release type="stable" version="0.2.3" date="2017-06-19T00:00:00Z">
+      <description>
+        <p>This release fixes the following bugs:</p>
+        <ul>
+          <li>LoginPage: Remove material shadow (#113)</li>
+          <li>Kaidan was crashing since v0.2.2 when inserting a new message to the DB</li>
+        </ul>
+      </description>
+    </release>
+    <release type="stable" version="0.2.2" date="2017-06-19T00:00:00Z">
+      <description>
+        <p>This release fixes the following bug:</p>
+        <ul>
+          <li>RosterPage: Clear TextFields after closing AddContactSheet (#106)</li>
+        </ul>
+        <p>This release adds the following features:</p>
+        <ul>
+          <li>RosterController: Save lastMessage for each contact (#108)</li>
+          <li>Add database versioning and conversion (#110)</li>
+          <li>Database: Add new roster row `avatarHash` (#112)</li>
+          <li>CMake: Add feature summary (#109)</li>
+        </ul>
+      </description>
+    </release>
+    <release type="stable" version="0.2.1" date="2017-06-08T00:00:00Z">
+      <description>
+        <p>This release fixes the following bug:</p>
+        <ul>
+          <li>Roster page: Fixed style: Now has contour lines and a cool material effect</li>
+        </ul>
+      </description>
+    </release>
+    <release type="stable" version="0.2.0" date="2017-06-06T00:00:00Z">
+      <description>
+        <p>This release adds the following features:</p>
+        <ul>
+          <li>Add Roster Editing (#84, #86)</li>
+          <li>Roster refreshes now automatically (#83)</li>
+          <li>Contacts are now sorted</li>
+          <li>Add unread message counters (#92, #101)</li>
+          <li>Add LibNotify-Linux notifications (#90)</li>
+          <li>Add custom JID resources (#82)</li>
+          <li>Add XEP-0184: Message Delivery Receipts</li>
+          <li>Disable stream compression by default (for HipChat/other server compatibility)</li>
+          <li>GUI: Port to Kirigami 2 (#81)</li>
+          <li>User Material/Green Theme per default</li>
+          <li>Login page: New design with diaspora* login option (#87)</li>
+          <li>Chat page: Slightly improved design</li>
+        </ul>
+        <p>This release fixes the following bugs:</p>
+        <ul>
+          <li>AboutPage: Fix possible closing of multiple pages</li>
+        </ul>
+      </description>
+    </release>
   </releases>
   <provides>
     <binary>kaidan</binary>
   </provides>
+  <content_rating type="oars-1.1">
+    <content_attribute id="social-chat">intense</content_attribute>
+    <content_attribute id="social-contacts">intense</content_attribute>
+  </content_rating>
 </component>

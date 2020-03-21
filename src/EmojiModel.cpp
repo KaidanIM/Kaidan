@@ -1507,8 +1507,6 @@ EmojiProxyModel::EmojiProxyModel(QObject *parent)
 
 EmojiProxyModel::~EmojiProxyModel()
 {
-	QSettings *settings = Kaidan::instance()->getSettings();
-	settings->setValue(QLatin1String(FAVORITES_EMOJIS_SETTINGS_PATH), QStringList(m_favoriteEmojis.toList()));
 }
 
 Emoji::Group EmojiProxyModel::group() const
@@ -1553,6 +1551,9 @@ void EmojiProxyModel::addFavoriteEmoji(int proxyRow)
 		if (m_group == Emoji::Group::Favorites) {
 			invalidateFilter();
 		}
+
+		QSettings *settings = Kaidan::instance()->getSettings();
+		settings->setValue(QLatin1String(FAVORITES_EMOJIS_SETTINGS_PATH), QStringList(m_favoriteEmojis.toList()));
 	}
 }
 

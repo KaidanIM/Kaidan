@@ -191,6 +191,7 @@ Q_DECL_EXPORT int main(int argc, char *argv[])
 		gstreamerPluginsPath = QDir::cleanPath(QString::fromLatin1("%1/../..%2")
 							.arg(executable.absolutePath(), gstreamerPluginsPath));
 	}
+	qDebug() << "Looking for gstreamer in " << gstreamerPluginsPath;
 #else
 	qFatal("Please provide the unified directory containing the gstreamer plugins and gst-plugin-scanner.");
 #endif

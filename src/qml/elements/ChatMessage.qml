@@ -66,6 +66,8 @@ RowLayout {
 	property bool isShowingSpoiler: false
 	property string avatarUrl: Kaidan.avatarStorage.getAvatarUrl(sender)
 
+	property alias bodyLabel: bodyLabel
+
 	signal messageEditRequested(string id, string body)
 	signal quoteRequested(string body)
 

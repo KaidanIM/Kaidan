@@ -427,34 +427,34 @@ ChatPageBase {
 
 		Controls.Menu {
 			id: contextMenu
-			property ChatMessage message
+			property ChatMessage message: null
 			Controls.MenuItem {
 				text: qsTr("Copy Message")
-				enabled: bodyLabel.visible
+				enabled: contextMenu.message && contextMenu.message.bodyLabel.visible
 				onTriggered: {
-					if (!contextMenu.message.isSpoiler || contextMenu.message.isShowingSpoiler)
-						Utils.copyToClipboard(contextMenu.message.messageBody);
+					if (contextMenu.message && !contextMenu.message.isSpoiler || message && contextMenu.message.isShowingSpoiler)
+						Utils.copyToClipboard(contextMenu.message && contextMenu.message.messageBody);
 					else
-						Utils.copyToClipboard(contextMenu.message.spoilerHint);
+						Utils.copyToClipboard(contextMenu.message && contextMenu.message.spoilerHint);
 				}
 			}
 
 			Controls.MenuItem {
 				text: qsTr("Edit Message")
-				enabled: Kaidan.messageModel.canCorrectMessage(contextMenu.message.msgId)
-				onTriggered: root.messageEditRequested(message.msgId, contextMenu.message.messageBody)
+				enabled: Kaidan.messageModel.canCorrectMessage(contextMenu.message && contextMenu.message.msgId)
+				onTriggered: contextMenu.message.messageEditRequested(contextMenu.message.msgId, contextMenu.message.messageBody)
 			}
 
 			Controls.MenuItem {
 				text: qsTr("Copy download URL")
-				enabled: mediaGetUrl
+				enabled: contextMenu.message && contextMenu.message.mediaGetUrl
 				onTriggered: Utils.copyToClipboard(contextMenu.message.mediaGetUrl)
 			}
 
 			Controls.MenuItem {
 				text: qsTr("Quote")
 				onTriggered: {
-					root.quoteRequested(contextMenu.message.messageBody)
+					contextMenu.message.quoteRequested(contextMenu.message.messageBody)
 				}
 			}
 		}

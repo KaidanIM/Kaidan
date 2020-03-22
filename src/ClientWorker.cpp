@@ -32,6 +32,7 @@
 // Qt
 #include <QDebug>
 #include <QGuiApplication>
+#include <QRandomGenerator>
 #include <QSettings>
 #include <QSysInfo>
 // QXmpp
@@ -98,9 +99,6 @@ VCardManager *ClientWorker::getVCardManager() const
 
 void ClientWorker::main()
 {
-	// initialize random generator
-	qsrand(time(nullptr));
-
 	connect(client, &QXmppClient::stateChanged, kaidan, &Kaidan::setConnectionState);
 
 	connect(client, &QXmppClient::connected, this, &ClientWorker::onConnected);
@@ -276,6 +274,6 @@ QString ClientWorker::generateRandomString(unsigned int length) const
 
 	QString randomString;
 	for (unsigned int i = 0; i < length; ++i)
-		randomString.append(resourceChars.at(qrand() % resourceChars.length()));
+		randomString.append(resourceChars.at(QRandomGenerator::global()->generate() % resourceChars.length()));
 	return randomString;
 }

@@ -32,7 +32,7 @@ import QtQuick 2.12
 import QtQuick.Layouts 1.12
 import QtQuick.Controls 2.12 as Controls
 import QtGraphicalEffects 1.12
-import org.kde.kirigami 2.8 as Kirigami
+import org.kde.kirigami 2.12 as Kirigami
 
 import im.kaidan.kaidan 1.0
 import MediaUtils 0.1
@@ -99,19 +99,12 @@ RowLayout {
 		Layout.preferredWidth: content.width + 16
 		Layout.preferredHeight: content.height + 16
 
-		// glow effect around the inner area of the message bubble
-		RectangularGlow {
-			anchors.fill: messageBubble
-			glowRadius: 0.8
-			spread: 0.3
-			cornerRadius: messageBubble.radius + glowRadius
-			color: Qt.darker(messageBubble.color, 1.2)
-		}
-
 		// inner area of the message bubble
-		Rectangle {
+		Kirigami.ShadowedRectangle {
 			id: messageBubble
 			anchors.fill: parent
+			shadow.color: Qt.darker(color, 1.2)
+			shadow.size: 4
 			radius: roundedCornersRadius
 			color: sentByMe ? rightMessageBubbleColor : leftMessageBubbleColor
 

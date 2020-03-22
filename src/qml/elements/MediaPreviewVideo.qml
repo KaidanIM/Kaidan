@@ -36,7 +36,7 @@
 import QtQuick 2.12
 import QtQuick.Layouts 1.12
 import QtMultimedia 5.12 as Multimedia
-import org.kde.kirigami 2.8 as Kirigami
+import org.kde.kirigami 2.12 as Kirigami
 
 MediaPreviewAudio {
 	id: root

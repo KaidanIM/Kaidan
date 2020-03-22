@@ -38,7 +38,7 @@ import QtQuick.Layouts 1.12
 import QtQuick.Controls 2.12 as Controls
 import QtPositioning 5.12 as Positioning
 import QtLocation 5.12 as Location
-import org.kde.kirigami 2.8 as Kirigami
+import org.kde.kirigami 2.12 as Kirigami
 
 import im.kaidan.kaidan 1.0
 import MediaUtils 0.1

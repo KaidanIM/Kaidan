@@ -29,7 +29,7 @@
  */
 
 import QtQuick.Controls.Material 2.12 as Material
-import org.kde.kirigami 2.8 as Kirigami
+import org.kde.kirigami 2.12 as Kirigami
 
 import im.kaidan.kaidan 1.0
 

@@ -31,7 +31,7 @@
 import QtQuick 2.12
 import QtQuick.Controls 2.12 as Controls
 import QtGraphicalEffects 1.12
-import org.kde.kirigami 2.8 as Kirigami
+import org.kde.kirigami 2.12 as Kirigami
 
 ChatPageBase {
 	verticalScrollBarPolicy: Qt.ScrollBarAlwaysOff
@@ -39,21 +39,13 @@ ChatPageBase {
 	Item {
 		height: root.height * 0.8
 
-		// glow effect around the message bubble
-		RectangularGlow {
-			anchors.fill: messageBubble
-			glowRadius: 0.8
-			spread: 0.3
-			cornerRadius: messageBubble.radius + glowRadius
-			color: Qt.darker(messageBubble.color, 1.2)
-		}
-
 		// message bubble
-		Rectangle {
-			id: messageBubble
+		Kirigami.ShadowedRectangle {
 			anchors.centerIn: parent
 			width: label.width
 			height: label.height
+			shadow.color: Qt.darker(color, 1.2)
+			shadow.size: 4
 			radius: roundedCornersRadius
 			color: rightMessageBubbleColor
 

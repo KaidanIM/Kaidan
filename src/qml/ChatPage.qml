@@ -351,11 +351,16 @@ ChatPageBase {
 				Enums.MessageType.MessageDocument
 			]
 
-			delegate: IconButton {
+			delegate: Controls.ToolButton {
 				height: ListView.view.height
 				width: height
-				buttonText: MediaUtilsInstance.label(model.modelData)
-				iconSource: MediaUtilsInstance.iconName(model.modelData)
+				text: MediaUtilsInstance.label(model.modelData)
+				icon {
+					name: MediaUtilsInstance.iconName(model.modelData)
+					height: Kirigami.Units.gridUnit * 5
+					width: icon.height
+				}
+				display: Controls.AbstractButton.TextUnderIcon
 
 				onClicked: {
 					switch (model.modelData) {

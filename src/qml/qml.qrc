@@ -28,7 +28,6 @@
 		<file>elements/CenteredAdaptiveButton.qml</file>
 		<file>elements/CenteredAdaptiveHighlightedButton.qml</file>
 		<file>elements/CenteredAdaptiveText.qml</file>
-		<file>elements/IconButton.qml</file>
 		<file>elements/FileChooser.qml</file>
 		<file>elements/SendMediaSheet.qml</file>
 		<file>elements/BinaryDecisionPage.qml</file>

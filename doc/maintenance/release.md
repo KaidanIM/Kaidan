@@ -37,11 +37,11 @@
 1. `git pull origin master`
 1. `git checkout -b release/vX.Y.Z` or if that branch already exists: `git checkout release/vX.Y.Z`
 1. [Update translations](translation.md)
-1. Update changelog (*changelog.md*):
+1. Update changelog (*NEWS*):
 	1. Set version *vX.Y.Z*
 	1. Set release date to *UNRELEASED*
-	1. Mention important changes and their authors. Please be aware that despite being named changelog.md, this file only supports a subset of markdown!
-	1. `git add changelog.md`
+	1. Mention important changes and their authors.
+	1. `git add NEWS`
 	1. `git commit -m "Prepare changelog for vX.Y.Z"`
 1. Check correct functionality of all release builds
 1. [Update license information](license.md)
@@ -49,9 +49,9 @@
 	1. Set `DEVELOPMENT_BUILD` to `FALSE`
 	1. Increase `VERSION_CODE` by one
 1. `git add CMakeLists.txt`
-1. Update changelog (*changelog.md*):
+1. Update changelog (*NEWS*):
 	1. Set release date
-	1. `git add changelog.md`
+	1. `git add NEWS`
 1. Update appstream metadata:
 	1. `appstreamcli news-to-metainfo NEWS misc/metadata.xml`
 	1. `git add misc/metadata.xml`

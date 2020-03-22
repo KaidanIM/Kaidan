@@ -50,3 +50,12 @@ The *LICENSE* file must be updated if there are copyright changes:
 1. Add to *utils/generate-license.py* a new `CopyrightTarget` for a new graphic or change an existing one for a modification of an existing graphic.
 1. Execute `utils/generate-license.py > LICENSE` for updating the *LICENSE* file.
 1. Add those two file changes to the same commit which contains the new or modified graphic.
+
+### Logo
+
+If the logo is changed, it has to be done in a separate commit.
+Furthermore, the logo has to be updated on multiple other places:
+
+1. For this GitLab project by creating a [sysadmin request](https://go.kde.org/systickets) and providing a link to a PNG version in its description.
+1. In the [repository of Kaidan's website](https://invent.kde.org/websites/kaidan-im) by updating all instances of `favicon*` and `logo*`.
+1. In [Kaidan's support chat](xmpp:kaidan@muc.kaidan.im?join) by uploading a new avatar.

@@ -40,6 +40,8 @@ import MediaUtils 0.1
 RowLayout {
 	id: root
 
+	property Controls.Menu menu
+
 	property string msgId
 	property string sender
 	property bool sentByMe: true
@@ -112,44 +114,14 @@ RowLayout {
 				anchors.fill: parent
 				acceptedButtons: Qt.LeftButton | Qt.RightButton
 				onClicked: {
-					if (mouse.button === Qt.RightButton)
-						contextMenu.popup()
+					if (mouse.button === Qt.RightButton) {
+						menu.message = root
+						menu.popup()
+					}
 				}
 				onPressAndHold: {
+					contextMenu.message = root
 					contextMenu.popup()
-				}
-			}
-
-			Controls.Menu {
-				id: contextMenu
-				Controls.MenuItem {
-					text: qsTr("Copy Message")
-					enabled: bodyLabel.visible
-					onTriggered: {
-						if (!isSpoiler || isShowingSpoiler)
-							Utils.copyToClipboard(messageBody);
-						else
-							Utils.copyToClipboard(spoilerHint);
-					}
-				}
-
-				Controls.MenuItem {
-					text: qsTr("Edit Message")
-					enabled: Kaidan.messageModel.canCorrectMessage(msgId)
-					onTriggered: root.messageEditRequested(msgId, messageBody)
-				}
-
-				Controls.MenuItem {
-					text: qsTr("Copy download URL")
-					enabled: mediaGetUrl
-					onTriggered: Utils.copyToClipboard(mediaGetUrl)
-				}
-
-				Controls.MenuItem {
-					text: qsTr("Quote")
-					onTriggered: {
-						root.quoteRequested(messageBody)
-					}
 				}
 			}
 		}

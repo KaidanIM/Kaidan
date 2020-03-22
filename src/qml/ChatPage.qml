@@ -425,6 +425,40 @@ ChatPageBase {
 		// Connect to the database,
 		model: Kaidan.messageModel
 
+		Controls.Menu {
+			id: contextMenu
+			property ChatMessage message
+			Controls.MenuItem {
+				text: qsTr("Copy Message")
+				enabled: bodyLabel.visible
+				onTriggered: {
+					if (!contextMenu.message.isSpoiler || contextMenu.message.isShowingSpoiler)
+						Utils.copyToClipboard(contextMenu.message.messageBody);
+					else
+						Utils.copyToClipboard(contextMenu.message.spoilerHint);
+				}
+			}
+
+			Controls.MenuItem {
+				text: qsTr("Edit Message")
+				enabled: Kaidan.messageModel.canCorrectMessage(contextMenu.message.msgId)
+				onTriggered: root.messageEditRequested(message.msgId, contextMenu.message.messageBody)
+			}
+
+			Controls.MenuItem {
+				text: qsTr("Copy download URL")
+				enabled: mediaGetUrl
+				onTriggered: Utils.copyToClipboard(contextMenu.message.mediaGetUrl)
+			}
+
+			Controls.MenuItem {
+				text: qsTr("Quote")
+				onTriggered: {
+					root.quoteRequested(contextMenu.message.messageBody)
+				}
+			}
+		}
+
 		delegate: ChatMessage {
 			msgId: model.id
 			sender: model.sender
@@ -440,6 +474,8 @@ ChatPageBase {
 			isSpoiler: model.isSpoiler
 			isShowingSpoiler: false
 			spoilerHint: model.spoilerHint
+
+			menu: contextMenu
 
 			onMessageEditRequested: {
 				messageToCorrect = id

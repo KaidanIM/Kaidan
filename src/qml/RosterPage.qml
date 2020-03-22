@@ -98,14 +98,12 @@ Kirigami.ScrollablePage {
 		}
 	}
 
-	TableView {
+	ListView {
 		width: root.width
 		model: RosterFilterProxyModel {
 			id: filterModel
 			sourceModel: Kaidan.rosterModel
 		}
-		columnWidthProvider: function (column) { return root.width }
-		rowHeightProvider: function (row) { return 65 }
 		delegate: RosterListItem {
 			id: rosterItem
 			width: root.width

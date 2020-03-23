@@ -429,7 +429,7 @@ ChatPageBase {
 			id: contextMenu
 			property ChatMessage message: null
 			Controls.MenuItem {
-				text: qsTr("Copy Message")
+				text: qsTr("Copy message")
 				enabled: contextMenu.message && contextMenu.message.bodyLabel.visible
 				onTriggered: {
 					if (contextMenu.message && !contextMenu.message.isSpoiler || message && contextMenu.message.isShowingSpoiler)
@@ -440,7 +440,7 @@ ChatPageBase {
 			}
 
 			Controls.MenuItem {
-				text: qsTr("Edit Message")
+				text: qsTr("Edit message")
 				enabled: Kaidan.messageModel.canCorrectMessage(contextMenu.message && contextMenu.message.msgId)
 				onTriggered: contextMenu.message.messageEditRequested(contextMenu.message.msgId, contextMenu.message.messageBody)
 			}
@@ -452,7 +452,7 @@ ChatPageBase {
 			}
 
 			Controls.MenuItem {
-				text: qsTr("Quote")
+				text: qsTr("Quote message")
 				onTriggered: {
 					contextMenu.message.quoteRequested(contextMenu.message.messageBody)
 				}

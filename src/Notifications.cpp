@@ -48,7 +48,6 @@ void Notifications::sendMessageNotification(const QString& jid, const QString& f
 #ifdef Q_OS_ANDROID
 		notification->setIconName("kaidan-bw");
 #endif
-		notification->setFlags(KNotification::Persistent);
 		notification->sendEvent();
 	}
 }

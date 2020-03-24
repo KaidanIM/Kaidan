@@ -41,6 +41,7 @@ REPLACE_USER_IDS = [
 	("JBB <jbb.prv@gmx.de>", "Jonah Brüchert <jbb@kaidan.im>"),
 	("Jonah Brüchert <jbb.prv@gmx.de>", "Jonah Brüchert <jbb@kaidan.im>"),
 	("Jonah Brüchert <jbb.mail@gmx.de>", "Jonah Brüchert <jbb@kaidan.im>"),
+	("Jonah Bruechert <jbb.mail@gmx.de>", "Jonah Brüchert <jbb@kaidan.im>"),
 	("Georg <s.g.b@gmx.de>", "geobra <s.g.b@gmx.de>"),
 	("Muhammad Nur Hidayat Yasuyoshi (MNH48.com) <muhdnurhidayat96@yahoo.com>",
 	 "Muhammad Nur Hidayat Yasuyoshi <mnh48mail@gmail.com>"),
@@ -329,12 +330,12 @@ def main():
 		CopyrightTarget(
 			files = [
 				"misc/kaidan-128x128.png",
-				"data/images/kaidan.svg", "data/images/kaidan-bw.svg", "data/images/banner.png"
+				"data/images/kaidan.svg", "data/images/kaidan-bw.svg"
 			],
 			licenseName = "CC-BY-SA-4.0",
 			authorList = {
 				"Ilya Bizyaev <bizyaev@zoho.com>": CopyrightAuthor(years = "2016-2017"),
-				"Mathis Brüchert <mbblp@protonmail.ch>": CopyrightAuthor(years = "2016-2020"),
+				"Mathis Brüchert <mbblp@protonmail.ch>": CopyrightAuthor(years = "2020"),
 				"Melvin Keskin <melvo@olomono.de": CopyrightAuthor(years = "2020"),
 			}
 		),
@@ -346,6 +347,13 @@ def main():
 				"Melvin Keskin <melvo@olomono.de>": CopyrightAuthor(years = "2019")
 			},
 			comment = "Inspired by graphic from https://www.toptal.com/designers/subtlepatterns/"
+		),
+		CopyrightTarget(
+			files = ["data/images/global-drawer-banner.svg"],
+			licenseName = "CC-BY-SA-4.0",
+			authorList = {
+				"Mathis Brüchert <mbblp@protonmail.ch>": CopyrightAuthor(years = "2020")
+			}
 		),
 		CopyrightTarget(
 			files = ["data/images/account-deletion-from-client.svg", "data/images/account-deletion-from-client-and-server.svg"],

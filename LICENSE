@@ -5,8 +5,8 @@ Format: https://www.debian.org/doc/packaging-manuals/copyright-format/1.0/
 Files: src/*
        utils/*
        misc/*
-Copyright: 2016-2020, Jonah Brüchert <jbb@kaidan.im>
-           2016-2020, Linus Jahn <lnj@kaidan.im>
+Copyright: 2016-2020, Linus Jahn <lnj@kaidan.im>
+           2016-2020, Jonah Brüchert <jbb@kaidan.im>
            2017-2019, Ilya Bizyaev <bizyaev@zoho.com>
            2018-2019, Nicolas Fella <nicolas.fella@gmx.de>
            2019-2020, Melvin Keskin <melvo@olomono.de>
@@ -89,7 +89,6 @@ License: CC-BY-SA-4.0
 Files: misc/kaidan-128x128.png
        data/images/kaidan.svg
        data/images/kaidan-bw.svg
-       data/images/banner.png
 Copyright: 2016-2017, Ilya Bizyaev <bizyaev@zoho.com>
            2016-2020, Mathis Brüchert <mbblp@protonmail.ch>
            2020, Melvin Keskin <melvo@olomono.de
@@ -101,6 +100,10 @@ Copyright: 2019, Mathis Brüchert <mbblp@protonmail.ch>
 License: CC-BY-SA-4.0
 Comment: 
  Inspired by graphic from https://www.toptal.com/designers/subtlepatterns/
+
+Files: data/images/global-drawer-banner.svg
+Copyright: 2020, Mathis Brüchert <mbblp@protonmail.ch>
+License: CC-BY-SA-4.0
 
 Files: data/images/account-deletion-from-client.svg
        data/images/account-deletion-from-client-and-server.svg

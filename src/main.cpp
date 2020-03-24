@@ -143,8 +143,6 @@ Q_DECL_EXPORT int main(int argc, char *argv[])
 		freopen("CONOUT$", "w", stderr);
 	}
 #endif
-	// initialize random generator
-	qsrand(time(nullptr));
 
 	//
 	// App

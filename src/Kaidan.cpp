@@ -59,8 +59,8 @@ Kaidan::Kaidan(QGuiApplication *app, bool enableLogging, QObject *parent)
           m_rosterDb(new RosterDb(m_database)),
           m_cltThrd(new QThread())
 {
-	Q_ASSERT(!Kaidan::s_instance);
-	Kaidan::s_instance = this;
+	Q_ASSERT(!s_instance);
+	s_instance = this;
 
 	// Database setup
 	m_database->moveToThread(m_dbThrd);
@@ -116,7 +116,7 @@ Kaidan::~Kaidan()
 {
 	delete m_caches;
 	delete m_database;
-	Kaidan::s_instance = nullptr;
+	s_instance = nullptr;
 }
 
 void Kaidan::start()

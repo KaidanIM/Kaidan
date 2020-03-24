@@ -49,7 +49,7 @@
 #include "RosterDb.h"
 #include "RosterModel.h"
 
-Kaidan *Kaidan::s_instance = nullptr;
+Kaidan *Kaidan::s_instance;
 
 Kaidan::Kaidan(QGuiApplication *app, bool enableLogging, QObject *parent)
         : QObject(parent),

@@ -120,7 +120,7 @@ public:
 
 	struct Credentials {
 		QString jid;
-		QString jidResource;
+		QString jidResourcePrefix;
 		QString password;
 		// if never connected successfully before with these credentials
 		bool isFirstTry;
@@ -222,11 +222,11 @@ private slots:
 
 private:
 	/**
-	 * Generates a random alphanumeric string
+	 * Generates the resource part of a JID with a suffix consisting of a dot followed by random alphanumeric characters.
 	 *
-	 * @param length The length of the generated string
+	 * @param length number of random alphanumeric characters the suffix should consist of after the dot
 	 */
-	QString generateRandomString(unsigned int length = 4) const;
+	QString generateJidResourceWithRandomSuffix(const QString jidResourcePrefix, unsigned int length = 4) const;
 
 	Caches *caches;
 	Kaidan *kaidan;

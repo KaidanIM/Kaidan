@@ -33,11 +33,10 @@
 
 // Kaidan settings
 #define KAIDAN_SETTINGS_AUTH_JID "auth/jid"
-#define KAIDAN_SETTINGS_AUTH_RESOURCE "auth/resource"
+#define KAIDAN_SETTINGS_AUTH_JID_RESOURCE_PREFIX "auth/jidResourcePrefix"
 #define KAIDAN_SETTINGS_AUTH_PASSWD "auth/password"
 
-#define KAIDAN_RESOURCE_RANDOM_CHARS \
-	"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789"
+#define KAIDAN_JID_RESOURCE_DEFAULT_PREFIX APPLICATION_DISPLAY_NAME
 
 #define INVITATION_URL "https://i.kaidan.im/#"
 #define APPLICATION_SOURCE_CODE_URL "https://invent.kde.org/kde/kaidan"

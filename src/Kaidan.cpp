@@ -84,13 +84,12 @@ Kaidan::Kaidan(QGuiApplication *app, bool enableLogging, QObject *parent)
 	//
 
 	creds.jid = m_caches->settings->value(KAIDAN_SETTINGS_AUTH_JID).toString();
-	creds.jidResource = m_caches->settings->value(KAIDAN_SETTINGS_AUTH_RESOURCE)
-	                    .toString();
+	creds.jidResourcePrefix = m_caches->settings->value(KAIDAN_SETTINGS_AUTH_JID_RESOURCE_PREFIX).toString();
 	creds.password = QString(QByteArray::fromBase64(m_caches->settings->value(
 	                 KAIDAN_SETTINGS_AUTH_PASSWD).toString().toUtf8()));
-	// use Kaidan as resource, if no set
-	if (creds.jidResource.isEmpty())
-		setJidResource(APPLICATION_DISPLAY_NAME);
+	// Use a default prefix for the JID's resource part if no prefix is already set.
+	if (creds.jidResourcePrefix.isEmpty())
+		setJidResourcePrefix(KAIDAN_JID_RESOURCE_DEFAULT_PREFIX);
 	creds.isFirstTry = false;
 
 	//
@@ -197,14 +196,14 @@ void Kaidan::setJid(const QString &jid)
 	emit jidChanged();
 }
 
-void Kaidan::setJidResource(const QString &jidResource)
+void Kaidan::setJidResourcePrefix(const QString &jidResourcePrefix)
 {
 	// JID resource won't influence the authentication, so we don't need
 	// to set the first try flag and can save it.
-	creds.jidResource = jidResource;
+	creds.jidResourcePrefix = jidResourcePrefix;
 
-	m_caches->settings->setValue(KAIDAN_SETTINGS_AUTH_RESOURCE, jidResource);
-	emit jidResourceChanged();
+	m_caches->settings->setValue(KAIDAN_SETTINGS_AUTH_JID_RESOURCE_PREFIX, jidResourcePrefix);
+	emit jidResourcePrefixChanged();
 }
 
 void Kaidan::setPassword(const QString &password)

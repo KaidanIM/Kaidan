@@ -32,13 +32,14 @@
 // Qt
 #include <QDebug>
 #include <QGuiApplication>
-#include <QRandomGenerator>
 #include <QSettings>
+#include <QStringBuilder>
 #include <QSysInfo>
 // QXmpp
 #include <QXmppClient.h>
 #include <QXmppConfiguration.h>
 #include <QXmppPresence.h>
+#include <QXmppUtils.h>
 #include <QXmppVersionManager.h>
 // Kaidan
 #include "DiscoveryManager.h"
@@ -118,7 +119,7 @@ void ClientWorker::xmppConnect()
 {
 	QXmppConfiguration config;
 	config.setJid(creds.jid);
-	config.setResource(creds.jidResource.append(".").append(generateRandomString()));
+	config.setResource(generateJidResourceWithRandomSuffix(creds.jidResourcePrefix));
 	config.setPassword(creds.password);
 	config.setAutoAcceptSubscriptions(false);
 	config.setStreamSecurityMode(QXmppConfiguration::TLSRequired);
@@ -272,12 +273,7 @@ void ClientWorker::setCsiState(Qt::ApplicationState state)
 		client->setActive(false);
 }
 
-QString ClientWorker::generateRandomString(unsigned int length) const
+QString ClientWorker::generateJidResourceWithRandomSuffix(const QString jidResourcePrefix , unsigned int length) const
 {
-	const QString resourceChars(KAIDAN_RESOURCE_RANDOM_CHARS);
-
-	QString randomString;
-	for (unsigned int i = 0; i < length; ++i)
-		randomString.append(resourceChars.at(QRandomGenerator::global()->generate() % resourceChars.length()));
-	return randomString;
+	return jidResourcePrefix % "." % QXmppUtils::generateStanzaHash(length);
 }

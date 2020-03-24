@@ -67,7 +67,7 @@ class Kaidan : public QObject
 	Q_PROPERTY(quint8 connectionState READ getConnectionState NOTIFY connectionStateChanged)
 	Q_PROPERTY(quint8 connectionError READ getConnectionError NOTIFY connectionErrorChanged)
 	Q_PROPERTY(QString jid READ getJid WRITE setJid NOTIFY jidChanged)
-	Q_PROPERTY(QString jidResource READ getJidResource WRITE setJidResource NOTIFY jidResourceChanged)
+	Q_PROPERTY(QString jidResourcePrefix READ getJidResourcePrefix WRITE setJidResourcePrefix NOTIFY jidResourcePrefixChanged)
 	Q_PROPERTY(QString password READ getPassword WRITE setPassword NOTIFY passwordChanged)
 
 public:
@@ -125,16 +125,18 @@ public:
 	}
 
 	/**
-	 * Set a optional custom JID resource (device name)
+	 * Sets the prefix of the JID's resource part.
+	 *
+	 * The remaining part of the resource is set randomly.
 	 */
-	void setJidResource(const QString &jidResource);
+	void setJidResourcePrefix(const QString &jidResourcePrefix);
 
 	/**
-	 * Get the JID resoruce
+	 * Provides the prefix of the JID's resource part.
 	 */
-	QString getJidResource() const
+	QString getJidResourcePrefix() const
 	{
-		return creds.jidResource;
+		return creds.jidResourcePrefix;
 	}
 
 	/**
@@ -223,9 +225,9 @@ signals:
 	void jidChanged();
 
 	/**
-	 * Emitted when the JID resouce (device name) has changed
+	 * Emitted when the prefix of the JID's resource part changed.
 	 */
-	void jidResourceChanged();
+	void jidResourcePrefixChanged();
 
 	/**
 	 * Emitted when the used password for logging in has changed

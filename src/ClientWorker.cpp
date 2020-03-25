@@ -99,6 +99,10 @@ VCardManager *ClientWorker::getVCardManager() const
 
 void ClientWorker::main()
 {
+	// Initialize the random number generator used by "qrand()" for QXmpp < 1.3.0 or QXmpp built with Qt < 5.10.
+	// Please do not use that deprecated method for Kaidan.
+	qsrand(time(nullptr));
+
 	connect(client, &QXmppClient::stateChanged, kaidan, &Kaidan::setConnectionState);
 
 	connect(client, &QXmppClient::connected, this, &ClientWorker::onConnected);

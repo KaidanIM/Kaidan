@@ -85,6 +85,11 @@ void RosterItem::setLastMessage(const QString &lastMessage)
 	m_lastMessage = lastMessage;
 }
 
+QString RosterItem::displayName() const
+{
+	return m_name.isEmpty() ? m_jid : m_name;
+}
+
 bool RosterItem::operator==(const RosterItem &other) const
 {
 	return m_jid == other.jid() &&
@@ -103,24 +108,26 @@ bool RosterItem::operator<(const RosterItem &other) const
 {
 	if (lastExchanged() != other.lastExchanged())
 		return lastExchanged() > other.lastExchanged();
-	return (name().isEmpty() ? jid().toUpper() : name().toUpper()) <
-			(other.name().isEmpty() ? other.jid().toUpper() : other.name().toUpper());
+	return displayName().toUpper() < other.displayName().toUpper();
 }
 
 bool RosterItem::operator>(const RosterItem &other) const
 {
 	if (lastExchanged() != other.lastExchanged())
 		return lastExchanged() < other.lastExchanged();
-	return (name().isEmpty() ? jid().toUpper() : name().toUpper()) >
-			(other.name().isEmpty() ? other.jid().toUpper() : other.name().toUpper());
+	return displayName().toUpper() > other.displayName().toUpper();
 }
 
 bool RosterItem::operator<=(const RosterItem &other) const
 {
-	return operator<(other) || operator==(other);
+	if (lastExchanged() != other.lastExchanged())
+		return lastExchanged() >= other.lastExchanged();
+	return displayName().toUpper() <= other.displayName().toUpper();
 }
 
 bool RosterItem::operator>=(const RosterItem &other) const
 {
-	return operator>(other) || operator==(other);
+	if (lastExchanged() != other.lastExchanged())
+		return lastExchanged() <= other.lastExchanged();
+	return displayName().toUpper() >= other.displayName().toUpper();
 }

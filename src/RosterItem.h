@@ -58,6 +58,8 @@ public:
 	QString lastMessage() const;
 	void setLastMessage(const QString &lastMessage);
 
+	QString displayName() const;
+
 	bool operator==(const RosterItem &other) const;
 	bool operator!=(const RosterItem &other) const;
 

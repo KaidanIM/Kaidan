@@ -47,7 +47,7 @@ RowLayout {
 	property bool sentByMe: true
 	property string messageBody
 	property date dateTime
-	property bool isDelivered: false
+	property int deliveryState: Enums.DeliveryState.Delivered
 	property int mediaType
 	property string mediaGetUrl
 	property string mediaLocation
@@ -65,8 +65,11 @@ RowLayout {
 	property string spoilerHint
 	property bool isShowingSpoiler: false
 	property string avatarUrl: Kaidan.avatarStorage.getAvatarUrl(sender)
+	property string errorText: ""
 
 	property alias bodyLabel: bodyLabel
+	property string deliveryStateName
+	property url deliveryStateIcon
 
 	signal messageEditRequested(string id, string body)
 	signal quoteRequested(string body)
@@ -255,7 +258,7 @@ RowLayout {
 				}
 			}
 
-			// message meta data: date, isDelivered
+			// message meta data: date, deliveryState
 			RowLayout {
 				Layout.bottomMargin: -4
 
@@ -267,19 +270,41 @@ RowLayout {
 				}
 
 				Image {
-					source: Utils.getResourcePath("images/check-mark.svg")
-					visible: (sentByMe && isDelivered)
+					id: checkmark
+					visible: sentByMe
+					source: deliveryStateIcon
 					Layout.preferredHeight: Kirigami.Units.gridUnit * 0.65
 					Layout.preferredWidth: Kirigami.Units.gridUnit * 0.65
 					sourceSize.height: Kirigami.Units.gridUnit * 0.65
 					sourceSize.width: Kirigami.Units.gridUnit * 0.65
+
+					MouseArea {
+						id: checkmarkMouseArea
+						anchors.fill: parent
+						hoverEnabled: true
+					}
+
+					Controls.ToolTip {
+						text: deliveryStateName
+						visible: checkmarkMouseArea.containsMouse
+						delay: 500
+					}
 				}
+
 				Kirigami.Icon {
 					source: "edit-symbolic"
 					visible: edited
 					Layout.preferredHeight: Kirigami.Units.gridUnit * 0.65
 					Layout.preferredWidth: Kirigami.Units.gridUnit * 0.65
 				}
+			}
+
+			Controls.Label {
+				visible: errorText
+				id: errorLabel
+				text: qsTr(errorText)
+				color: Kirigami.Theme.disabledTextColor
+				font.pixelSize: Kirigami.Units.gridUnit * 0.8
 			}
 
 			// progress bar for upload/download status

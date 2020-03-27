@@ -465,7 +465,7 @@ ChatPageBase {
 			sentByMe: model.sentByMe
 			messageBody: model.body
 			dateTime: new Date(model.timestamp)
-			isDelivered: model.isDelivered
+			deliveryState: model.deliveryState
 			name: chatName
 			mediaType: model.mediaType
 			mediaGetUrl: model.mediaUrl
@@ -474,6 +474,9 @@ ChatPageBase {
 			isSpoiler: model.isSpoiler
 			isShowingSpoiler: false
 			spoilerHint: model.spoilerHint
+			errorText: model.errorText
+			deliveryStateName: model.deliveryStateName
+			deliveryStateIcon: model.deliveryStateIcon
 
 			menu: contextMenu
 

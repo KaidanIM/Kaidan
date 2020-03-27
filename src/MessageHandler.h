@@ -36,6 +36,8 @@
 // QXmpp
 #include <QXmppGlobal.h>
 #include <QXmppMessageReceiptManager.h>
+// Kaidan
+#include "Message.h"
 
 class Kaidan;
 class MessageModel;
@@ -76,6 +78,14 @@ public slots:
 	 * Handles service discovery info and enables carbons if feature was found.
 	 */
 	void handleDiscoInfo(const QXmppDiscoveryIq &);
+
+private slots:
+	/**
+	 * Handles pending messages found in the database.
+	 */
+	void handlePendingMessages(const QVector<Message> &messages);
+
+	void sendPendingMessage(const Message& message);
 
 private:
 	Kaidan *kaidan;

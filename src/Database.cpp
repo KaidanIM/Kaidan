@@ -51,8 +51,8 @@
 	}
 
 // Both need to be updated on version bump:
-#define DATABASE_LATEST_VERSION 10
-#define DATABASE_CONVERT_TO_LATEST_VERSION() DATABASE_CONVERT_TO_VERSION(10)
+#define DATABASE_LATEST_VERSION 11
+#define DATABASE_CONVERT_TO_LATEST_VERSION() DATABASE_CONVERT_TO_VERSION(11)
 
 #define SQL_BOOL "BOOL"
 #define SQL_INTEGER "INTEGER"
@@ -249,6 +249,7 @@ void Database::createMessagesTable()
 	//  * rename author to sender, edited to isEdited
 	//  * delete author_resource, recipient_resource
 	//  * remove 'NOT NULL' from id
+	//  * remove columns isSent, isDelivered
 
 	QSqlQuery query(m_database);
 	Utils::execQuery(
@@ -264,6 +265,7 @@ void Database::createMessagesTable()
 			SQL_ATTRIBUTE(id, SQL_TEXT_NOT_NULL)
 			SQL_ATTRIBUTE(isSent, SQL_BOOL)
 			SQL_ATTRIBUTE(isDelivered, SQL_BOOL)
+			SQL_ATTRIBUTE(deliveryState, SQL_INTEGER)
 			SQL_ATTRIBUTE(type, SQL_INTEGER)
 			SQL_ATTRIBUTE(mediaUrl, SQL_TEXT)
 			SQL_ATTRIBUTE(mediaSize, SQL_INTEGER)
@@ -275,6 +277,7 @@ void Database::createMessagesTable()
 			SQL_ATTRIBUTE(edited, SQL_BOOL)
 			SQL_ATTRIBUTE(spoilerHint, SQL_TEXT)
 			SQL_ATTRIBUTE(isSpoiler, SQL_BOOL)
+			SQL_ATTRIBUTE(errorText, SQL_TEXT)
 			"FOREIGN KEY('author') REFERENCES Roster ('jid'),"
 			"FOREIGN KEY('recipient') REFERENCES Roster ('jid')"
 		)
@@ -382,4 +385,15 @@ void Database::convertDatabaseToV10()
 	Utils::execQuery(query, "ALTER TABLE 'Messages' ADD 'isSpoiler' BOOL");
 	Utils::execQuery(query, "ALTER TABLE 'Messages' ADD 'spoilerHint' TEXT");
 	m_version = 10;
+}
+
+void Database::convertDatabaseToV11()
+{
+	DATABASE_CONVERT_TO_VERSION(10);
+	QSqlQuery query(m_database);
+	Utils::execQuery(query, "ALTER TABLE '" DB_TABLE_MESSAGES "' ADD 'deliveryState' " SQL_INTEGER);
+	Utils::execQuery(query, "UPDATE " DB_TABLE_MESSAGES " SET deliveryState = 2 WHERE isDelivered = 1");
+	Utils::execQuery(query, "UPDATE " DB_TABLE_MESSAGES " SET deliveryState = 1 WHERE deliveryState IS NULL");
+	Utils::execQuery(query, "ALTER TABLE '" DB_TABLE_MESSAGES "' ADD 'errorText' " SQL_TEXT);
+	m_version = 11;
 }

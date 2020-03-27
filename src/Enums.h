@@ -92,6 +92,17 @@ namespace Enums {
 	};
 	Q_ENUM_NS(AvailabilityTypes)
 
+	/**
+	 * Enumeration of different message delivery states
+	 */
+	enum class DeliveryState {
+		Pending,
+		Sent,
+		Delivered,
+		Error
+	};
+	Q_ENUM_NS(DeliveryState)
+
 	template <typename T, ENABLE_IF(!has_enum_type<T>::value && std::is_enum<T>::value)>
 	QString toString(const T flag) {
 		static const QMetaEnum e = QMetaEnum::fromType<T>();

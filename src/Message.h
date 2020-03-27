@@ -61,11 +61,8 @@ public:
 	bool isEdited() const;
 	void setIsEdited(bool isEdited);
 
-	bool isSent() const;
-	void setIsSent(bool isSent);
-
-	bool isDelivered() const;
-	void setIsDelivered(bool isDelivered);
+	DeliveryState deliveryState() const;
+	void setDeliveryState(DeliveryState state);
 
 	QString mediaLocation() const;
 	void setMediaLocation(const QString &mediaLocation);
@@ -85,6 +82,9 @@ public:
 	QString spoilerHint() const;
 	void setSpoilerHint(const QString &spoilerHint);
 
+	QString errorText() const;
+	void setErrorText(const QString &errText);
+
 private:
 	/**
 	 * Media type of the message, e.g. a text or image.
@@ -102,14 +102,9 @@ private:
 	bool m_isEdited = false;
 
 	/**
-	 * True if the message was sent.
+	 * Delivery state of the message, like if it was sent successfully or if it was already delivered
 	 */
-	bool m_isSent = false;
-
-	/**
-	 * True if a sent message was delivered to the contact.
-	 */
-	bool m_isDelivered = false;
+	DeliveryState m_deliveryState = DeliveryState::Delivered;
 
 	/**
 	 * Location of the media on the local storage.
@@ -140,6 +135,11 @@ private:
 	 * Hint of the spoiler message.
 	 */
 	QString m_spoilerHint;
+
+	/**
+	 * Text description of an error if it ever happened to the message
+	 */
+	QString m_errorText;
 };
 
 #endif // MESSAGE_H

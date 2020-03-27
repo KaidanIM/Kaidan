@@ -4,7 +4,7 @@ These steps should only be followed while [releasing a new Kaidan version](relea
 
 1. `git checkout master`
 1. `git pull origin master`
-1. `utils/generate-license.py > LICENSE` (On Debian `sudo apt install python3-git` may be needed.)
+1. `utils/generate-license.py > LICENSE` (On Debian `sudo apt install python3-git` and on Arch based `sudo pacman -S python-gitpython` may be needed.)
 1. Add possible aliases:
 	1. `git diff`
 	1. If there are contributors with multiple email addresses:

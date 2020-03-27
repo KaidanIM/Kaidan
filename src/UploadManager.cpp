@@ -141,10 +141,13 @@ void UploadManager::handleUploadSucceeded(const QXmppHttpUpload *upload)
 	m.setOutOfBandUrl(upload->slot().getUrl().toEncoded());
 
 	bool success = client->sendPacket(m);
-	if (success)
-		emit Kaidan::instance()->getMessageModel()->setMessageAsSentRequested(
-				originalMsg->id());
-	// TODO: handle error
+	if (success) {
+		emit Kaidan::instance()->getMessageModel()->setMessageDeliveryStateRequested(
+			originalMsg->id(), Enums::DeliveryState::Sent);
+	} else {
+		emit Kaidan::instance()->passiveNotificationRequested(tr("Message could not be sent."));
+		emit Kaidan::instance()->getMessageModel()->setMessageDeliveryStateRequested(originalMsg->id(), Enums::DeliveryState::Error, "Message could not be sent.");
+	}
 
 	messages.remove(upload->id());
 	emit Kaidan::instance()->getTransferCache()->removeJobRequested(originalMsg->id());

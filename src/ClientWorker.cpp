@@ -250,17 +250,20 @@ void ClientWorker::onConnected()
 	m_caches->settings->setValue(KAIDAN_SETTINGS_AUTH_PASSWD, QString::fromUtf8(creds.password.toUtf8().toBase64()));
 
 	// If the account could not be deleted from the server because the client was disconnected, delete it now.
-	if (m_isAccountToBeDeletedFromClientAndServer)
+	if (m_isAccountToBeDeletedFromClientAndServer) {
 		registrationManager->deleteAccount();
-	else
-		// After the first login, the client should always try to reconnect automatically in case of a connection outage.
-		client->configuration().setAutoReconnectionEnabled(true);
+		return;
+	}
+
+	// After the first login, the client should always try to reconnect automatically in case of a connection outage.
+	client->configuration().setAutoReconnectionEnabled(true);
 
 	// If the display name could not be changed on the server because the client was disconnected, change it now and disconnect again.
 	if (!m_passwordToBeSetOnNextConnect.isEmpty()) {
 		registrationManager->changePassword(m_passwordToBeSetOnNextConnect);
 		m_passwordToBeSetOnNextConnect.clear();
 		client->disconnectFromServer();
+		return;
 	}
 
 	// If the display name could not be changed from the server because the client was disconnected, change it now.
@@ -268,6 +271,8 @@ void ClientWorker::onConnected()
 		vCardManager->updateNickname(m_displayNameToBeSetOnNextConnect);
 		m_displayNameToBeSetOnNextConnect.clear();
 	}
+
+	emit m_caches->msgModel->sendPendingMessages();
 }
 
 void ClientWorker::onDisconnected()

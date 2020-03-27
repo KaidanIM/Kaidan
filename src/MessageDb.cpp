@@ -31,7 +31,6 @@
 #include "MessageDb.h"
 // Kaidan
 #include "Globals.h"
-#include "Message.h"
 #include "Utils.h"
 // Qt
 #include <QSqlDatabase>
@@ -50,6 +49,9 @@ MessageDb::MessageDb(QObject *parent)
 
 	connect(this, &MessageDb::fetchMessagesRequested,
 	        this, &MessageDb::fetchMessages);
+
+	connect(this, &MessageDb::fetchPendingMessagesRequested,
+			this, &MessageDb::fetchPendingMessages);
 }
 
 MessageDb::~MessageDb()
@@ -71,8 +73,7 @@ void MessageDb::parseMessagesFromQuery(QSqlQuery &query, QVector<Message> &msgs)
 	int idxStamp = rec.indexOf("timestamp");
 	int idxId = rec.indexOf("id");
 	int idxBody = rec.indexOf("message");
-	int idxIsSent = rec.indexOf("isSent");
-	int idxIsDelivered = rec.indexOf("isDelivered");
+	int idxDeliveryState = rec.indexOf("deliveryState");
 	int idxMediaType = rec.indexOf("type");
 	int idxOutOfBandUrl = rec.indexOf("mediaUrl");
 	int idxMediaContentType = rec.indexOf("mediaContentType");
@@ -82,6 +83,7 @@ void MessageDb::parseMessagesFromQuery(QSqlQuery &query, QVector<Message> &msgs)
 	int idxIsEdited = rec.indexOf("edited");
 	int idxSpoilerHint = rec.indexOf("spoilerHint");
 	int idxIsSpoiler = rec.indexOf("isSpoiler");
+	int idxErrorText = rec.indexOf("errorText");
 
 	while (query.next()) {
 		Message msg;
@@ -93,8 +95,7 @@ void MessageDb::parseMessagesFromQuery(QSqlQuery &query, QVector<Message> &msgs)
 		));
 		msg.setId(query.value(idxId).toString());
 		msg.setBody(query.value(idxBody).toString());
-		msg.setIsSent(query.value(idxIsSent).toBool());
-		msg.setIsDelivered(query.value(idxIsDelivered).toBool());
+		msg.setDeliveryState(static_cast<Enums::DeliveryState>(query.value(idxDeliveryState).toInt()));
 		msg.setMediaType(static_cast<MessageType>(query.value(idxMediaType).toInt()));
 		msg.setOutOfBandUrl(query.value(idxOutOfBandUrl).toString());
 		msg.setMediaContentType(query.value(idxMediaContentType).toString());
@@ -105,7 +106,9 @@ void MessageDb::parseMessagesFromQuery(QSqlQuery &query, QVector<Message> &msgs)
 		));
 		msg.setIsEdited(query.value(idxIsEdited).toBool());
 		msg.setSpoilerHint(query.value(idxSpoilerHint).toString());
+		msg.setErrorText(query.value(idxErrorText).toString());
 		msg.setIsSpoiler(query.value(idxIsSpoiler).toBool());
+		msg.setReceiptRequested(true);	//this is useful with resending pending messages
 		msgs << msg;
 	}
 }
@@ -132,10 +135,10 @@ QSqlRecord MessageDb::createUpdateRecord(const Message &oldMsg, const Message &n
 	}
 	if (oldMsg.body() != newMsg.body())
 		rec.append(Utils::createSqlField("message", newMsg.body()));
-	if (oldMsg.isSent() != newMsg.isSent())
-		rec.append(Utils::createSqlField("isSent", newMsg.isSent()));
-	if (oldMsg.isDelivered() != newMsg.isDelivered())
-		rec.append(Utils::createSqlField("isDelivered", newMsg.isDelivered()));
+	if (oldMsg.deliveryState() != newMsg.deliveryState())
+		rec.append(Utils::createSqlField("deliveryState", int(newMsg.deliveryState())));
+	if (oldMsg.errorText() != newMsg.errorText())
+		rec.append(Utils::createSqlField("errorText", newMsg.errorText()));
 	if (oldMsg.mediaType() != newMsg.mediaType())
 		rec.append(Utils::createSqlField("type", int(newMsg.mediaType())));
 	if (oldMsg.outOfBandUrl() != newMsg.outOfBandUrl())
@@ -179,13 +182,13 @@ void MessageDb::fetchMessages(const QString &user1, const QString &user2, int in
 	bindValues[":limit"] = DB_MSG_QUERY_LIMIT;
 
 	Utils::execQuery(
-	        query,
-	        "SELECT * FROM Messages "
-	        "WHERE (author = :user1 AND recipient = :user2) OR "
-	              "(author = :user2 AND recipient = :user1) "
-	        "ORDER BY timestamp DESC "
-	        "LIMIT :index, :limit",
-	        bindValues
+		query,
+		"SELECT * FROM " DB_TABLE_MESSAGES " "
+		"WHERE (author = :user1 AND recipient = :user2) OR "
+			"(author = :user2 AND recipient = :user1) "
+		"ORDER BY timestamp DESC "
+		"LIMIT :index, :limit",
+		bindValues
 	);
 
 	QVector<Message> messages;
@@ -206,7 +209,7 @@ Message MessageDb::fetchLastMessage(const QString &user1, const QString &user2)
 
 	Utils::execQuery(
 		query,
-		"SELECT * FROM Messages "
+		"SELECT * FROM " DB_TABLE_MESSAGES " "
 		"WHERE (author = :user1 AND recipient = :user2) OR "
 		      "(author = :user2 AND recipient = :user1) "
 		"ORDER BY timestamp DESC "
@@ -232,8 +235,7 @@ void MessageDb::addMessage(const Message &msg)
 	record.setValue("timestamp", msg.stamp().toString(Qt::ISODate));
 	record.setValue("message", msg.body());
 	record.setValue("id", msg.id().isEmpty() ? " " : msg.id());
-	record.setValue("isSent", msg.isSent());
-	record.setValue("isDelivered", msg.isDelivered());
+	record.setValue("deliveryState", int(msg.deliveryState()));
 	record.setValue("type", int(msg.mediaType()));
 	record.setValue("edited", msg.isEdited());
 	record.setValue("isSpoiler", msg.isSpoiler());
@@ -243,6 +245,7 @@ void MessageDb::addMessage(const Message &msg)
 	record.setValue("mediaLocation", msg.mediaLocation());
 	record.setValue("mediaSize", msg.mediaSize());
 	record.setValue("mediaLastModified", msg.mediaLastModified().toMSecsSinceEpoch());
+	record.setValue("errorText", msg.errorText());
 
 	QSqlQuery query(db);
 	Utils::execQuery(query, db.driver()->sqlStatement(
@@ -257,16 +260,16 @@ void MessageDb::removeMessage(const QString &id)
 {
 	QSqlQuery query(QSqlDatabase::database(DB_CONNECTION));
 	Utils::execQuery(
-	        query,
-	        "DELETE FROM Messages WHERE id = ?",
-	        QVector<QVariant>() << id
+		query,
+		"DELETE FROM " DB_TABLE_MESSAGES " WHERE id = ?",
+		QVector<QVariant>() << id
 	);
 }
 
 void MessageDb::removeAllMessages()
 {
 	QSqlQuery query(QSqlDatabase::database(DB_CONNECTION));
-	Utils::execQuery(query, "DELETE FROM Messages");
+	Utils::execQuery(query, "DELETE FROM " DB_TABLE_MESSAGES);
 }
 
 void MessageDb::updateMessage(const QString &id,
@@ -278,9 +281,9 @@ void MessageDb::updateMessage(const QString &id,
 	QSqlQuery query(db);
 	query.setForwardOnly(true);
 	Utils::execQuery(
-	        query,
-	        "SELECT * FROM Messages WHERE id = ? LIMIT 1",
-	        QVector<QVariant>() << id
+		query,
+		"SELECT * FROM " DB_TABLE_MESSAGES " WHERE id = ? LIMIT 1",
+		QVector<QVariant>() << id
 	);
 
 	QVector<Message> msgs;
@@ -327,18 +330,35 @@ void MessageDb::updateMessageRecord(const QString &id,
 	);
 }
 
-void MessageDb::setMessageAsSent(const QString &msgId)
+void MessageDb::setMessageDeliveryState(const QString& msgId, Enums::DeliveryState state, const QString &errText)
 {
 	QSqlRecord rec;
-	rec.append(Utils::createSqlField("isSent", true));
+	rec.append(Utils::createSqlField("deliveryState", int(state)));
+	rec.append(Utils::createSqlField("errorText", errText));
 
 	updateMessageRecord(msgId, rec);
 }
 
-void MessageDb::setMessageAsDelivered(const QString &msgId)
+void MessageDb::fetchPendingMessages(const QString& userJid)
 {
-	QSqlRecord rec;
-	rec.append(Utils::createSqlField("isDelivered", true));
+	QSqlQuery query(QSqlDatabase::database(DB_CONNECTION));
+	query.setForwardOnly(true);
 
-	updateMessageRecord(msgId, rec);
+	QMap<QString, QVariant> bindValues;
+	bindValues[":user"] = userJid;
+	bindValues[":deliveryState"] = int(Enums::DeliveryState::Pending);
+
+	Utils::execQuery(
+		query,
+		"SELECT * FROM " DB_TABLE_MESSAGES " "
+		"WHERE (author = :user AND deliveryState = :deliveryState) "
+		"ORDER BY timestamp ASC",
+		bindValues
+	);
+
+	QVector<Message> messages;
+	parseMessagesFromQuery(query, messages);
+
+	emit pendingMessagesFetched(messages);
 }
+

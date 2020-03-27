@@ -130,7 +130,7 @@ public:
 
 public slots:
     const QXmppHttpUpload* uploadFile(const QFileInfo &file, bool allowParallel = false,
-                                      QString customFileName = "");
+                                      QString customFileName = QString());
 
 signals:
     void uploadSucceeded(const QXmppHttpUpload *upload);

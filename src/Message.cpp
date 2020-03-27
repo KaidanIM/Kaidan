@@ -35,75 +35,75 @@
 
 static bool operator==(const QXmppStanza::Error &left, const QXmppStanza::Error &right) {
 	return left.code() == right.code()
-	       && left.text() == right.text()
-	       && left.condition() == right.condition()
-	       && left.type() == right.type();
+		&& left.text() == right.text()
+		&& left.condition() == right.condition()
+		&& left.type() == right.type();
 }
 
 static bool operator==(const QXmppElement &left, const QXmppElement &right) {
 	return left.sourceDomElement() == right.sourceDomElement()
-	       && left.attributeNames() == right.attributeNames()
-	       && left.tagName() == right.tagName()
-	       && left.value() == right.value();
+		&& left.attributeNames() == right.attributeNames()
+		&& left.tagName() == right.tagName()
+		&& left.value() == right.value();
 }
 
 static bool operator==(const QXmppExtendedAddress &left, const QXmppExtendedAddress &right) {
 	return left.description() == right.description()
-	       && left.jid() == right.jid()
-	       && left.type() == right.type()
-	       && left.isDelivered() == right.isDelivered();
+		&& left.jid() == right.jid()
+		&& left.type() == right.type()
+		&& left.isDelivered() == right.isDelivered();
 }
 
 static bool operator==(const QXmppStanza &left, const QXmppStanza &right) {
 	return left.to() == right.to()
-	       && left.from() == right.from()
-	       && left.id() == right.id()
-	       && left.lang() == right.lang()
-	       && left.error() == right.error()
-	       && left.extensions() == right.extensions()
-	       && left.extendedAddresses() == right.extendedAddresses()
-	       && left.isXmppStanza() == right.isXmppStanza();
+		&& left.from() == right.from()
+		&& left.id() == right.id()
+		&& left.lang() == right.lang()
+		&& left.error() == right.error()
+		&& left.extensions() == right.extensions()
+		&& left.extendedAddresses() == right.extendedAddresses()
+		&& left.isXmppStanza() == right.isXmppStanza();
 }
 
 static bool operator==(const QXmppMessage &left, const QXmppMessage &right) {
 	return operator==(static_cast<const QXmppStanza &>(left), static_cast<const QXmppStanza &>(right))
-	       && left.body() == right.body()
-	       && left.isAttentionRequested() == right.isAttentionRequested()
-	       && left.isReceiptRequested() == right.isReceiptRequested()
-	       && left.mucInvitationJid() == right.mucInvitationJid()
-	       && left.mucInvitationPassword() == right.mucInvitationPassword()
-	       && left.mucInvitationReason() == right.mucInvitationReason()
-	       && left.receiptId() == right.receiptId()
-	       && left.stamp() == right.stamp()
-	       && left.state() == right.state()
-	       && left.subject() == right.subject()
-	       && left.thread() == right.thread()
-	       && left.type() == right.type()
-	       && left.xhtml() == right.xhtml()
-	       && left.isMarkable() == right.isMarkable()
-	       && left.markedId() == right.markedId()
-	       && left.markedThread() == right.markedThread()
-	       && left.marker() == right.marker()
-	       && left.isPrivate() == right.isPrivate()
-	       && left.isXmppStanza() == right.isXmppStanza()
-	       && left.outOfBandUrl() == right.outOfBandUrl()
-	       && left.replaceId() == right.replaceId();
+		&& left.body() == right.body()
+		&& left.isAttentionRequested() == right.isAttentionRequested()
+		&& left.isReceiptRequested() == right.isReceiptRequested()
+		&& left.mucInvitationJid() == right.mucInvitationJid()
+		&& left.mucInvitationPassword() == right.mucInvitationPassword()
+		&& left.mucInvitationReason() == right.mucInvitationReason()
+		&& left.receiptId() == right.receiptId()
+		&& left.stamp() == right.stamp()
+		&& left.state() == right.state()
+		&& left.subject() == right.subject()
+		&& left.thread() == right.thread()
+		&& left.type() == right.type()
+		&& left.xhtml() == right.xhtml()
+		&& left.isMarkable() == right.isMarkable()
+		&& left.markedId() == right.markedId()
+		&& left.markedThread() == right.markedThread()
+		&& left.marker() == right.marker()
+		&& left.isPrivate() == right.isPrivate()
+		&& left.isXmppStanza() == right.isXmppStanza()
+		&& left.outOfBandUrl() == right.outOfBandUrl()
+		&& left.replaceId() == right.replaceId();
 }
 
 bool Message::operator==(const Message &m) const
 {
 	return ::operator==(static_cast<const QXmppMessage &>(m), static_cast<const QXmppMessage &>(*this))
-	       && m.mediaType() == mediaType()
-	       && m.sentByMe() == sentByMe()
-	       && m.isEdited() == isEdited()
-	       && m.isSent() == isSent()
-	       && m.isDelivered() == isDelivered()
-	       && m.mediaLocation() == mediaLocation()
-	       && m.mediaContentType() == mediaContentType()
-	       && m.mediaLastModified() == mediaLastModified()
-	       && m.mediaSize() == mediaSize()
-	       && m.isSpoiler() == isSpoiler()
-	       && m.spoilerHint() == spoilerHint();
+		&& m.mediaType() == mediaType()
+		&& m.sentByMe() == sentByMe()
+		&& m.isEdited() == isEdited()
+		&& m.deliveryState() == deliveryState()
+		&& m.mediaLocation() == mediaLocation()
+		&& m.mediaContentType() == mediaContentType()
+		&& m.mediaLastModified() == mediaLastModified()
+		&& m.mediaSize() == mediaSize()
+		&& m.isSpoiler() == isSpoiler()
+		&& m.spoilerHint() == spoilerHint()
+		&& m.errorText() == errorText();
 }
 
 bool Message::operator!=(const Message &m) const
@@ -141,24 +141,14 @@ void Message::setIsEdited(bool isEdited)
 	m_isEdited = isEdited;
 }
 
-bool Message::isSent() const
+Enums::DeliveryState Message::deliveryState() const
 {
-	return m_isSent;
+	return m_deliveryState;
 }
 
-void Message::setIsSent(bool isSent)
+void Message::setDeliveryState(Enums::DeliveryState state)
 {
-	m_isSent = isSent;
-}
-
-bool Message::isDelivered() const
-{
-	return m_isDelivered;
-}
-
-void Message::setIsDelivered(bool isDelivered)
-{
-	m_isDelivered = isDelivered;
+	m_deliveryState = state;
 }
 
 QString Message::mediaLocation() const
@@ -219,4 +209,14 @@ QString Message::spoilerHint() const
 void Message::setSpoilerHint(const QString &spoilerHint)
 {
 	m_spoilerHint = spoilerHint;
+}
+
+QString Message::errorText() const
+{
+	return m_errorText;
+}
+
+void Message::setErrorText(const QString &errText)
+{
+	m_errorText = errText;
 }

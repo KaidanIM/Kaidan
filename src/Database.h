@@ -110,6 +110,7 @@ private:
 	void convertDatabaseToV8();
 	void convertDatabaseToV9();
 	void convertDatabaseToV10();
+	void convertDatabaseToV11();
 
 	QSqlDatabase m_database;
 

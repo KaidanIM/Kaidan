@@ -32,6 +32,7 @@
 // Kaidan
 #include "Kaidan.h"
 #include "MessageDb.h"
+#include "QmlUtils.h"
 // Qt 5
 // QXmpp
 #include <QXmppUtils.h>
@@ -43,6 +44,8 @@ MessageModel::MessageModel(Kaidan *kaidan, MessageDb *msgDb, QObject *parent)
 {
 	connect(msgDb, &MessageDb::messagesFetched,
 	        this, &MessageModel::handleMessagesFetched);
+	connect(msgDb, &MessageDb::pendingMessagesFetched,
+			this, &MessageModel::pendingMessagesFetched);
 
 	connect(this, &MessageModel::addMessageRequested,
 	        this, &MessageModel::addMessage);
@@ -54,15 +57,10 @@ MessageModel::MessageModel(Kaidan *kaidan, MessageDb *msgDb, QObject *parent)
 	connect(this, &MessageModel::updateMessageRequested,
 	        msgDb, &MessageDb::updateMessage);
 
-	connect(this, &MessageModel::setMessageAsSentRequested,
-	        this, &MessageModel::setMessageAsSent);
-	connect(this, &MessageModel::setMessageAsSentRequested,
-	        msgDb, &MessageDb::setMessageAsSent);
-
-	connect(this, &MessageModel::setMessageAsDeliveredRequested,
-	        this, &MessageModel::setMessageAsDelivered);
-	connect(this, &MessageModel::setMessageAsDeliveredRequested,
-	        msgDb, &MessageDb::setMessageAsDelivered);
+	connect(this, &MessageModel::setMessageDeliveryStateRequested,
+	        this, &MessageModel::setMessageDeliveryState);
+	connect(this, &MessageModel::setMessageDeliveryStateRequested,
+	        msgDb, &MessageDb::setMessageDeliveryState);
 }
 
 MessageModel::~MessageModel() = default;
@@ -88,8 +86,7 @@ QHash<int, QByteArray> MessageModel::roleNames() const
 	roles[SentByMe] = "sentByMe";
 	roles[MediaType] = "mediaType";
 	roles[IsEdited] = "isEdited";
-	roles[IsSent] = "isSent";
-	roles[IsDelivered] = "isDelivered";
+	roles[DeliveryState] = "deliveryState";
 	roles[MediaUrl] = "mediaUrl";
 	roles[MediaSize] = "mediaSize";
 	roles[MediaContentType] = "mediaContentType";
@@ -98,6 +95,9 @@ QHash<int, QByteArray> MessageModel::roleNames() const
 	roles[MediaThumb] = "mediaThumb";
 	roles[IsSpoiler] = "isSpoiler";
 	roles[SpoilerHint] = "spoilerHint";
+	roles[ErrorText] = "errorText";
+	roles[DeliveryStateIcon] = "deliveryStateIcon";
+	roles[DeliveryStateName] = "deliveryStateName";
 	return roles;
 }
 
@@ -123,13 +123,11 @@ QVariant MessageModel::data(const QModelIndex &index, int role) const
 	case SentByMe:
 		return msg.sentByMe();
 	case MediaType:
-		return int(msg.mediaType());
+		return QVariant::fromValue(msg.mediaType());
 	case IsEdited:
 		return msg.isEdited();
-	case IsSent:
-		return msg.isSent();
-	case IsDelivered:
-		return msg.isDelivered();
+	case DeliveryState:
+		return QVariant::fromValue(msg.deliveryState());
 	case MediaUrl:
 		return msg.outOfBandUrl();
 	case MediaLocation:
@@ -144,6 +142,32 @@ QVariant MessageModel::data(const QModelIndex &index, int role) const
 		return msg.isSpoiler();
 	case SpoilerHint:
 		return msg.spoilerHint();
+	case ErrorText:
+		return msg.errorText();
+	case DeliveryStateIcon:
+		switch (msg.deliveryState()) {
+			case DeliveryState::Pending:
+				return  QmlUtils::getResourcePath("images/dots.svg");
+			case DeliveryState::Sent:
+				return QmlUtils::getResourcePath("images/check-mark-pale.svg");
+			case DeliveryState::Delivered:
+				return QmlUtils::getResourcePath("images/check-mark.svg");
+			case DeliveryState::Error:
+				return QmlUtils::getResourcePath("images/cross.svg");
+		}
+		return {};
+	case DeliveryStateName:
+		switch (msg.deliveryState()) {
+			case DeliveryState::Pending:
+				return tr("Pending");
+			case DeliveryState::Sent:
+				return tr("Sent");
+			case DeliveryState::Delivered:
+				return tr("Delivered");
+			case DeliveryState::Error:
+				return tr("Error");
+		}
+		return {};
 
 	// TODO: add (only useful as soon as we have got SIMS)
 	case MediaThumb:
@@ -279,17 +303,11 @@ void MessageModel::updateMessage(const QString &id,
 	}
 }
 
-void MessageModel::setMessageAsSent(const QString &msgId)
+void MessageModel::setMessageDeliveryState(const QString &msgId, Enums::DeliveryState state, const QString &errText)
 {
-	updateMessage(msgId, [] (Message &msg) {
-		msg.setIsSent(true);
-	});
-}
-
-void MessageModel::setMessageAsDelivered(const QString &msgId)
-{
-	updateMessage(msgId, [] (Message &msg) {
-		msg.setIsDelivered(true);
+	updateMessage(msgId, [state, errText] (Message &msg) {
+		msg.setDeliveryState(state);
+		msg.setErrorText(errText);
 	});
 }
 
@@ -330,4 +348,9 @@ void MessageModel::processMessage(Message &msg)
 		body.truncate(MESSAGE_MAX_CHARS);
 		msg.setBody(body);
 	}
+}
+
+void MessageModel::sendPendingMessages()
+{
+	emit msgDb->fetchPendingMessagesRequested(kaidan->getJid());
 }

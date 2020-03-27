@@ -31,10 +31,12 @@
 #ifndef MESSAGEDB_H
 #define MESSAGEDB_H
 
+#include "Enums.h"
+#include "Message.h"
+
 #include <functional>
 #include <QObject>
 
-class Message;
 class QSqlQuery;
 class QSqlRecord;
 
@@ -78,9 +80,19 @@ signals:
 	                            int index);
 
 	/**
+	 *  Emitted to fetch pending messages.
+	 */
+	void fetchPendingMessagesRequested(const QString &userJid);
+
+	/**
 	 * Emitted, when new messages have been fetched
 	 */
 	void messagesFetched(const QVector<Message> &messages);
+
+	/**
+	 * Emitted when pending messages have been fetched
+	 */
+	void pendingMessagesFetched(const QVector<Message> &messages);
 
 public slots:
 	/**
@@ -94,6 +106,13 @@ public slots:
 	void fetchMessages(const QString &user1,
 	                   const QString &user2,
 	                   int index);
+
+	/**
+	 * @brief Fetches messages that are marked as pending.
+	 *
+	 * @param userJid JID of the user whose messages should be fetched
+	 */
+	void fetchPendingMessages(const QString &userJid);
 
 	/**
 	 * Fetches the last message and returns it.
@@ -133,14 +152,13 @@ public slots:
 	                         const QSqlRecord &updateRecord);
 
 	/**
-	 * Marks a message as sent using an UPDATE query.
+	 * @brief Sets the message delivery state using an UPDATE query.
+	 *
+	 * @param msgId Message ID
+	 * @param state Desired delivery state
 	 */
-	void setMessageAsSent(const QString &msgId);
 
-	/**
-	 * Marks a message as delivered using an UPDATE query.
-	 */
-	void setMessageAsDelivered(const QString &msgId);
+	void setMessageDeliveryState(const QString &msgId, Enums::DeliveryState state, const QString &errText = QString());
 
 private:
 	static MessageDb *s_instance;

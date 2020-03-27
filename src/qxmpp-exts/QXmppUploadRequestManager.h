@@ -61,7 +61,7 @@ class QXMPP_EXPORT QXmppUploadRequestManager : public QXmppClientExtension
     Q_PROPERTY(bool serviceFound READ serviceFound NOTIFY serviceFoundChanged)
 
 public:
-    QString requestUploadSlot(const QFileInfo &file, QString customFileName = "");
+    QString requestUploadSlot(const QFileInfo &file, QString customFileName = QString());
     bool serviceFound() const;
 
 signals:

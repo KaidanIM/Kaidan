@@ -53,8 +53,7 @@ public:
 		SentByMe,
 		MediaType,
 		IsEdited,
-		IsSent,
-		IsDelivered,
+		DeliveryState,
 		MediaUrl,
 		MediaSize,
 		MediaContentType,
@@ -62,7 +61,10 @@ public:
 		MediaLocation,
 		MediaThumb,
 		IsSpoiler,
-		SpoilerHint
+		SpoilerHint,
+		ErrorText,
+		DeliveryStateIcon,
+		DeliveryStateName
 	};
 	Q_ENUM(MessageRoles)
 
@@ -106,14 +108,19 @@ public:
 	 */
 	Q_INVOKABLE int searchForMessageFromOldToNew(const QString &searchString, const int startIndex = -1) const;
 
+	/**
+	 * Sends pending messages again after searching them in the database.
+	 */
+	Q_INVOKABLE void sendPendingMessages();
+
 signals:
 	void chatPartnerChanged(const QString &chatPartner);
 
 	void addMessageRequested(const Message &msg);
 	void updateMessageRequested(const QString &id,
 	                            const std::function<void (Message &)> &updateMsg);
-	void setMessageAsSentRequested(const QString &msgId);
-	void setMessageAsDeliveredRequested(const QString &msgId);
+	void setMessageDeliveryStateRequested(const QString &msgId, Enums::DeliveryState state, const QString &errText = QString());
+	void pendingMessagesFetched(const QVector<Message> &messages);
 
 private slots:
 	void handleMessagesFetched(const QVector<Message> &m_messages);
@@ -121,8 +128,8 @@ private slots:
 	void addMessage(Message msg);
 	void updateMessage(const QString &id,
 	                   const std::function<void (Message &)> &updateMsg);
-	void setMessageAsSent(const QString &msgId);
-	void setMessageAsDelivered(const QString &msgId);
+
+	void setMessageDeliveryState(const QString &msgId, Enums::DeliveryState state, const QString &errText = QString());
 
 private:
 	void clearAll();

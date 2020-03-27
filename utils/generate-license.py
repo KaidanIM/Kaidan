@@ -328,6 +328,21 @@ def main():
 			},
 		),
 		CopyrightTarget(
+			files = ["data/images/check-mark-pale.svg"],
+			licenseName = "CC-BY-SA-4.0",
+			authorList = {
+				"Melvin Keskin <melvo@olomono.de>": CopyrightAuthor(years = "2020"),
+				"Yury Gubich <blue@macaw.me>": CopyrightAuthor(years = "2020"),
+			},
+		),
+		CopyrightTarget(
+			files = ["data/images/cross.svg", "data/images/dots.svg"],
+			licenseName = "CC-BY-SA-4.0",
+			authorList = {
+				"Yury Gubich <blue@macaw.me>": CopyrightAuthor(years = "2020"),
+			},
+		),
+		CopyrightTarget(
 			files = [
 				"misc/kaidan-128x128.png",
 				"data/images/kaidan.svg", "data/images/kaidan-bw.svg"

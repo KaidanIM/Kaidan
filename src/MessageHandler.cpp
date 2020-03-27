@@ -41,7 +41,6 @@
 #include <QXmppUtils.h>
 // Kaidan
 #include "Kaidan.h"
-#include "Message.h"
 #include "MessageModel.h"
 #include "Notifications.h"
 #include "MediaUtils.h"
@@ -56,8 +55,8 @@ MessageHandler::MessageHandler(Kaidan *kaidan, QXmppClient *client, MessageModel
 
 	client->addExtension(&receiptManager);
 	connect(&receiptManager, &QXmppMessageReceiptManager::messageDelivered,
-	        this, [=] (const QString&, const QString &id) {
-		emit model->setMessageAsDeliveredRequested(id);
+		this, [=] (const QString&, const QString &id) {
+		emit model->setMessageDeliveryStateRequested(id, Enums::DeliveryState::Delivered);
 	});
 
 	carbonManager = new QXmppCarbonManager();
@@ -77,6 +76,9 @@ MessageHandler::MessageHandler(Kaidan *kaidan, QXmppClient *client, MessageModel
 
 	connect(discoManager, &QXmppDiscoveryManager::infoReceived,
 	        this, &MessageHandler::handleDiscoInfo);
+
+	connect(model, &MessageModel::pendingMessagesFetched,
+			this, &MessageHandler::handlePendingMessages);
 }
 
 MessageHandler::~MessageHandler()
@@ -86,7 +88,12 @@ MessageHandler::~MessageHandler()
 
 void MessageHandler::handleMessage(const QXmppMessage &msg)
 {
-    if (msg.body().isEmpty() || msg.type() == QXmppMessage::Error)
+	if (msg.type() == QXmppMessage::Error) {
+		emit model->setMessageDeliveryStateRequested(msg.id(), Enums::DeliveryState::Error, msg.error().text());
+		return;
+	}
+
+    if (msg.body().isEmpty())
 		return;
 
 	Message message;
@@ -194,16 +201,6 @@ void MessageHandler::sendMessage(const QString& toJid,
                                  bool isSpoiler,
                                  const QString& spoilerHint)
 {
-	// TODO: Add offline message cache and send when connnected again
-	if (client->state() != QXmppClient::ConnectedState) {
-		emit kaidan->passiveNotificationRequested(
-			tr("Could not send message, as a result of not being connected.")
-		);
-		qWarning() << "[client] [MessageHandler] Could not send message, as a result of "
-		              "not being connected.";
-		return;
-	}
-
 	Message msg;
 	msg.setFrom(client->configuration().jidBare());
 	msg.setTo(toJid);
@@ -212,6 +209,7 @@ void MessageHandler::sendMessage(const QString& toJid,
 	msg.setReceiptRequested(true);
 	msg.setSentByMe(true);
 	msg.setMediaType(MessageType::MessageText); // text message without media
+	msg.setDeliveryState(Enums::DeliveryState::Pending);
 	msg.setStamp(QDateTime::currentDateTimeUtc());
 	if (isSpoiler) {
 		msg.setIsSpoiler(isSpoiler);
@@ -236,12 +234,7 @@ void MessageHandler::sendMessage(const QString& toJid,
 	}
 
 	emit model->addMessageRequested(msg);
-
-	if (client->sendPacket(static_cast<QXmppMessage>(msg)))
-		emit model->setMessageAsSentRequested(msg.id());
-	else
-	        emit kaidan->passiveNotificationRequested(tr("Message could not be sent."));
-	// TODO: handle error
+	sendPendingMessage(msg);
 }
 
 void MessageHandler::correctMessage(const QString& toJid,
@@ -276,7 +269,7 @@ void MessageHandler::correctMessage(const QString& toJid,
 		msg.setBody(body);
 	});
 	if (client->sendPacket(msg))
-		emit model->setMessageAsSentRequested(msg.id());
+		emit model->setMessageDeliveryStateRequested(msg.id(), Enums::DeliveryState::Sent);
 	else
 		emit kaidan->passiveNotificationRequested(
 	                        tr("Message correction was not successful."));
@@ -290,3 +283,31 @@ void MessageHandler::handleDiscoInfo(const QXmppDiscoveryIq &info)
 	if (info.features().contains(NS_CARBONS))
 		carbonManager->setCarbonsEnabled(true);
 }
+
+void MessageHandler::sendPendingMessage(const Message& message)
+{
+	if (client->state() == QXmppClient::ConnectedState) {
+		if (client->sendPacket(static_cast<QXmppMessage>(message)))
+			emit model->setMessageDeliveryStateRequested(message.id(), Enums::DeliveryState::Sent);
+		// TODO this "true" from sendPacket doesn't yet mean the message was successfully sent
+
+		else {
+			qWarning() << "[client] [MessageHandler] Could not send message, as a result of"
+				<< "QXmppClient::sendPacket returned false.";
+
+			// The error message of the message is saved untranslated. To make
+			// translation work in the UI, the tr() call of the passive
+			// notification must contain exactly the same string.
+			emit kaidan->passiveNotificationRequested(tr("Message could not be sent."));
+			emit model->setMessageDeliveryStateRequested(message.id(), Enums::DeliveryState::Error, "Message could not be sent.");
+		}
+	}
+}
+
+void MessageHandler::handlePendingMessages(const QVector<Message> &messages)
+{
+	for (const Message &message : qAsConst(messages)) {
+		sendPendingMessage(message);
+	}
+}
+

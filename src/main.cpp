@@ -245,6 +245,7 @@ Q_DECL_EXPORT int main(int argc, char *argv[])
 	qRegisterMetaType<ClientWorker::ConnectionError>();
 	qRegisterMetaType<Enums::MessageType>();
 	qRegisterMetaType<Enums::AvailabilityTypes>();
+	qRegisterMetaType<Enums::DeliveryState>();
 	qRegisterMetaType<CommonEncoderSettings::EncodingQuality>();
 	qRegisterMetaType<CommonEncoderSettings::EncodingMode>();
 	qRegisterMetaType<AudioDeviceModel::Mode>();

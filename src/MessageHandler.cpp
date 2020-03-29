@@ -172,7 +172,7 @@ void MessageHandler::handleMessage(const QXmppMessage &msg)
 	// a forward of another of the user's clients.
 	QString contactJid = message.sentByMe() ? message.to() : message.from();
 	// resolve user-defined name of this JID
-	QString contactName = client->rosterManager().getRosterEntry(contactJid).name();
+	QString contactName = client->findExtension<QXmppRosterManager>()->getRosterEntry(contactJid).name();
 	if (contactName.isEmpty())
 		contactName = contactJid;
 

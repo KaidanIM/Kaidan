@@ -70,7 +70,7 @@ private:
 	AvatarFileStorage *avatarStorage;
 	VCardManager *vCardManager;
 
-	QXmppRosterManager &manager;
+	QXmppRosterManager *manager;
 	QString m_chatPartner;
 };
 

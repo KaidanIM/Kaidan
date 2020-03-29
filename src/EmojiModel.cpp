@@ -1502,7 +1502,12 @@ EmojiProxyModel::EmojiProxyModel(QObject *parent)
 	: QSortFilterProxyModel(parent)
 {
 	QSettings *settings = Kaidan::instance()->getSettings();
+#if QT_VERSION >= QT_VERSION_CHECK(5, 14, 0)
+	QStringList list = settings->value(QLatin1String(FAVORITES_EMOJIS_SETTINGS_PATH)).toStringList();
+	m_favoriteEmojis = QSet<QString>(list.begin(), list.end());
+#else
 	m_favoriteEmojis = settings->value(QLatin1String(FAVORITES_EMOJIS_SETTINGS_PATH)).toStringList().toSet();
+#endif
 }
 
 EmojiProxyModel::~EmojiProxyModel()
@@ -1553,7 +1558,7 @@ void EmojiProxyModel::addFavoriteEmoji(int proxyRow)
 		}
 
 		QSettings *settings = Kaidan::instance()->getSettings();
-		settings->setValue(QLatin1String(FAVORITES_EMOJIS_SETTINGS_PATH), QStringList(m_favoriteEmojis.toList()));
+		settings->setValue(QLatin1String(FAVORITES_EMOJIS_SETTINGS_PATH), QStringList(m_favoriteEmojis.values()));
 	}
 }
 

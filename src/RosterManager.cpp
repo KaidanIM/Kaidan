@@ -51,28 +51,28 @@ RosterManager::RosterManager(Kaidan *kaidan,
       model(model),
       avatarStorage(avatarStorage),
       vCardManager(vCardManager),
-      manager(client->rosterManager())
+      manager(client->findExtension<QXmppRosterManager>())
 {
-	connect(&manager, &QXmppRosterManager::rosterReceived,
+	connect(manager, &QXmppRosterManager::rosterReceived,
 	        this, &RosterManager::populateRoster);
 
-	connect(&manager, &QXmppRosterManager::itemAdded,
+	connect(manager, &QXmppRosterManager::itemAdded,
 		this, [this, vCardManager, model] (const QString &jid) {
-		emit model->addItemRequested(RosterItem(manager.getRosterEntry(jid)));
+		emit model->addItemRequested(RosterItem(manager->getRosterEntry(jid)));
 
 		vCardManager->fetchVCard(jid);
 	});
 
-	connect(&manager, &QXmppRosterManager::itemChanged,
+	connect(manager, &QXmppRosterManager::itemChanged,
 		this, [this, model] (const QString &jid) {
 		emit model->updateItemRequested(m_chatPartner, [=] (RosterItem &item) {
-			item.setName(manager.getRosterEntry(jid).name());
+			item.setName(manager->getRosterEntry(jid).name());
 		});
 	});
 
-	connect(&manager, &QXmppRosterManager::itemRemoved, model, &RosterModel::removeItemRequested);
+	connect(manager, &QXmppRosterManager::itemRemoved, model, &RosterModel::removeItemRequested);
 
-	connect(&manager, &QXmppRosterManager::subscriptionReceived,
+	connect(manager, &QXmppRosterManager::subscriptionReceived,
 	        this, [kaidan] (const QString &jid) {
 		// emit signal to ask user
 		emit kaidan->subscriptionRequestReceived(jid, QString());
@@ -80,14 +80,14 @@ RosterManager::RosterManager(Kaidan *kaidan,
 	connect(kaidan, &Kaidan::subscriptionRequestAnswered,
 	        this, [=] (QString jid, bool accepted) {
 		if (accepted) {
-			manager.acceptSubscription(jid);
+			manager->acceptSubscription(jid);
 
 			// do not send a subscription request if both users have already subscribed
 			// each others presence
-			if (manager.getRosterEntry(jid).subscriptionType() != QXmppRosterIq::Item::Both)
-				manager.subscribe(jid);
+			if (manager->getRosterEntry(jid).subscriptionType() != QXmppRosterIq::Item::Both)
+				manager->subscribe(jid);
 		} else {
-			manager.refuseSubscription(jid);
+			manager->refuseSubscription(jid);
 		}
 	});
 
@@ -112,10 +112,10 @@ void RosterManager::populateRoster()
 	qDebug() << "[client] [RosterManager] Populating roster";
 	// create a new list of contacts
 	QHash<QString, RosterItem> items;
-	const QStringList bareJids = manager.getRosterBareJids();
+	const QStringList bareJids = manager->getRosterBareJids();
 	const auto currentTime = QDateTime::currentDateTimeUtc();
 	for (const auto &jid : bareJids) {
-		items[jid] = RosterItem(manager.getRosterEntry(jid), currentTime);
+		items[jid] = RosterItem(manager->getRosterEntry(jid), currentTime);
 
 		if (avatarStorage->getHashOfJid(jid).isEmpty())
 			vCardManager->fetchVCard(jid);
@@ -128,8 +128,8 @@ void RosterManager::populateRoster()
 void RosterManager::addContact(const QString &jid, const QString &name, const QString &msg)
 {
 	if (client->state() == QXmppClient::ConnectedState) {
-		manager.addItem(jid, name);
-		manager.subscribe(jid, msg);
+		manager->addItem(jid, name);
+		manager->subscribe(jid, msg);
 	} else {
 		emit kaidan->passiveNotificationRequested(
 			tr("Could not add contact, as a result of not being connected.")
@@ -142,8 +142,8 @@ void RosterManager::addContact(const QString &jid, const QString &name, const QS
 void RosterManager::removeContact(const QString &jid)
 {
 	if (client->state() == QXmppClient::ConnectedState) {
-		manager.unsubscribe(jid);
-		manager.removeItem(jid);
+		manager->unsubscribe(jid);
+		manager->removeItem(jid);
 	} else {
 		emit kaidan->passiveNotificationRequested(
 			tr("Could not remove contact, as a result of not being connected.")
@@ -156,7 +156,7 @@ void RosterManager::removeContact(const QString &jid)
 void RosterManager::renameContact(const QString &jid, const QString &newContactName)
 {
 	if (client->state() == QXmppClient::ConnectedState) {
-		manager.renameItem(jid, newContactName);
+		manager->renameItem(jid, newContactName);
 	} else {
 		emit kaidan->passiveNotificationRequested(
 			tr("Could not rename contact, as a result of not being connected.")

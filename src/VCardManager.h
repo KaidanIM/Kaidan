@@ -65,7 +65,7 @@ signals:
 
 private:
 	QXmppClient *client;
-	QXmppVCardManager &manager;
+	QXmppVCardManager *manager;
 	AvatarFileStorage *avatarStorage;
 };
 

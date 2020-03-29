@@ -36,9 +36,9 @@
 #include <QXmppVCardIq.h>
 
 VCardManager::VCardManager(QXmppClient *client, AvatarFileStorage *avatars, QObject *parent)
-	: QObject(parent), client(client), manager(client->vCardManager()), avatarStorage(avatars)
+	: QObject(parent), client(client), manager(client->findExtension<QXmppVCardManager>()), avatarStorage(avatars)
 {
-	connect(&manager, &QXmppVCardManager::vCardReceived, this, &VCardManager::handleVCard);
+	connect(manager, &QXmppVCardManager::vCardReceived, this, &VCardManager::handleVCard);
 	connect(client, &QXmppClient::presenceReceived, this, &VCardManager::handlePresence);
 	connect(Kaidan::instance(), &Kaidan::vCardRequested, this, &VCardManager::fetchVCard);
 
@@ -54,7 +54,7 @@ VCardManager::VCardManager(QXmppClient *client, AvatarFileStorage *avatars, QObj
 void VCardManager::fetchVCard(const QString& jid)
 {
 	if (client->state() == QXmppClient::ConnectedState)
-		client->vCardManager().requestVCard(jid);
+		client->findExtension<QXmppVCardManager>()->requestVCard(jid);
 	else
 		qWarning() << "[VCardManager] Could not fetch VCard: Not connected to a server";
 }
@@ -76,7 +76,7 @@ void VCardManager::handlePresence(const QXmppPresence &presence)
 
 		// check if hash differs and we need to refetch the avatar
 		if (hash != newHash)
-			manager.requestVCard(QXmppUtils::jidToBareJid(presence.from()));
+			manager->requestVCard(QXmppUtils::jidToBareJid(presence.from()));
 
 	} else if (presence.vCardUpdateType() == QXmppPresence::VCardUpdateNoPhoto) {
 		QString bareJid = QXmppUtils::jidToBareJid(presence.from());

@@ -81,9 +81,10 @@ ClientWorker::ClientWorker(Caches *caches, Kaidan *kaidan, bool enableLogging, Q
 	connect(this, &ClientWorker::credentialsUpdated, this, &ClientWorker::setCredentials);
 
 	// publish kaidan version
-	client->versionManager().setClientName(APPLICATION_DISPLAY_NAME);
-	client->versionManager().setClientVersion(VERSION_STRING);
-	client->versionManager().setClientOs(QSysInfo::prettyProductName());
+	QXmppVersionManager* versionManager = client->findExtension<QXmppVersionManager>();
+	versionManager->setClientName(APPLICATION_DISPLAY_NAME);
+	versionManager->setClientVersion(VERSION_STRING);
+	versionManager->setClientOs(QSysInfo::prettyProductName());
 
 	// Client State Indication
 	connect(app, &QGuiApplication::applicationStateChanged, this, &ClientWorker::setCsiState);

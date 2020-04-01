@@ -723,7 +723,7 @@
     </message>
     <message>
         <source>Invisible</source>
-        <translation>Invisible</translation>
+        <translation>Non visible</translation>
     </message>
     <message>
         <source>Invalid username or password.</source>

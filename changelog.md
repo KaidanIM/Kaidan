@@ -1,5 +1,18 @@
 # Changelog
 
+### Version 0.4.2 (released on Apr 02, 2020)
+
+ * Fix roster not cleared when switching account (lnj)
+ * ChatMessage: Do not display media URLs (lnj)
+ * ChatMessage: Add media URL copy action (lnj)
+ * ChatMessage: Fix copy to clipboard function (lnj)
+ * Fix scroll indiciator not overlap message on the right edge (fazevedo)
+ * Fix upload issues (fazevedo)
+ * ChatPage: Clear message correction when sent (fazevedo)
+ * Fix roster sorting (lnj)
+ * Fix buttonTextColor deprecation warnings (sredman)
+ * Fix build with QXmpp >= 1.0.1 (lnj)
+
 ### Version 0.4.1 (released on Jul 16, 2019)
 
 * Fix SSL problems for AppImage (lnj)

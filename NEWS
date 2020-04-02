@@ -1,3 +1,43 @@
+Version 0.5.0
+~~~~~~~~~~~~~
+Released: 2020-04-03
+
+Features:
+ * Add parsing of XMPP URIs (lnj, melvo)
+ * Add QR code scanning and generation (lnj, jbb, melvo)
+ * Add contact search (zatrox, lnj)
+ * Add muting notifications for messages of contacts (zatrox)
+ * Add renaming contacts (lnj, zatrox, melvo)
+ * Show user profile information (lnj, jbb)
+ * Add extended multimedia support (fazevedo)
+ * Add message search (blue)
+ * Redesign contact list, text avatar, counter for unread messages, chat page, chat message bubble (melvo)
+ * Show notifications on Android (melvo, jbb, cacahueto)
+ * Add option for enabling or disabling an account temporarily (melvo)
+ * Refactor login screen with hints for invalid credentials and better usage of keyboard keys (melvo)
+ * Add message quoting (jbb)
+ * Truncate very long messages to avoid crashing Kaidan or using it to full capacity (jbb)
+ * Add button with link for issue tracking to about page (melvo)
+ * Improve messages for connection errors (melvo)
+ * Add account deletion (melvo, mbb)
+ * Redesign logo and global drawer banner (melvo, mbb)
+ * Add onboarding with registration, normal login and QR code login (melvo, lnj, jbb, mbb)
+ * Add OARS rating (nickrichards)
+ * Add secondary roster sorting by contact name (lnj)
+ * Add support for recording audio and video messages (fazevedo)
+ * Add Kaidan to KDE's F-Droid repository (nicolasfella)
+ * Improve build scripts for better cross-platform support (jbb, cacahueto, lnj, mauro)
+ * Refactor code for better performance and stability (lnj, jbb, melvo)
+ * Add documentation to achieve easier maintenance (melvo, lnj, jbb)
+
+Bugfixes:
+ * Fix AppImage build (jbb)
+ * Fix scrolling and item height problems in settings (jbb)
+
+Notes:
+ * Require Qt 5.12 and QXmpp 1.2
+ * Drop Ubuntu Touch support due to outdated Qt
+
 Version 0.4.2
 ~~~~~~~~~~~~~
 Released: 2020-04-02

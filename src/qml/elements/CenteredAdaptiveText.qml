@@ -44,4 +44,5 @@ Text {
 	wrapMode: Text.WordWrap
 	elide: Text.ElideRight
 	font.pointSize: Kirigami.Theme.defaultFont.pointSize * scaleFactor
+	color: Kirigami.Theme.textColor
 }

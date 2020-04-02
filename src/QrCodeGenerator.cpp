@@ -57,10 +57,18 @@ QImage QrCodeGenerator::generateLoginUriQrCode(int edgePixelCount)
 	if (Kaidan::instance()->passwordVisibility() != Kaidan::PasswordInvisible)
 		uri.setPassword(Kaidan::instance()->password());
 
-	return generateQrCode(uri.toString(), edgePixelCount);
+	return generateQrCode(edgePixelCount, uri.toString());
 }
 
-QImage QrCodeGenerator::generateQrCode(const QString &text, int edgePixelCount)
+QImage QrCodeGenerator::generateBareJidQrCode(int edgePixelCount, const QString &bareJid)
+{
+	QXmppUri uri;
+	uri.setJid(bareJid);
+
+	return generateQrCode(edgePixelCount, uri.toString());
+}
+
+QImage QrCodeGenerator::generateQrCode(int edgePixelCount, const QString &text)
 {
 	try {
 		ZXing::MultiFormatWriter writer(ZXing::BarcodeFormat::QR_CODE);

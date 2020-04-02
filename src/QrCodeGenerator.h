@@ -56,12 +56,20 @@ public:
 	Q_INVOKABLE static QImage generateLoginUriQrCode(int edgePixelCount);
 
 	/**
+	 * Gerenates a QR code encoding an XMPP URI containing a given bare JID.
+	 *
+	 * @param edgePixelCount number of pixels as the width and height of the QR code
+	 * @param bareJid bare JID being encoded in an XMPP URI
+	 */
+	Q_INVOKABLE static QImage generateBareJidQrCode(int edgePixelCount, const QString &bareJid);
+
+	/**
 	 * Gerenates a QR code.
 	 *
-	 * @param text string to be encoded as a QR code
 	 * @param edgePixelCount number of pixels as the width and height of the QR code
+	 * @param text string being encoded as a QR code
 	 */
-	Q_INVOKABLE static QImage generateQrCode(const QString &text, int edgePixelCount);
+	Q_INVOKABLE static QImage generateQrCode(int edgePixelCount, const QString &text);
 
 private:
 	/**

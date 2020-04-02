@@ -63,6 +63,10 @@ Kirigami.Page {
 		}
 	}
 
+	QrCodeGenerator {
+		id: qrCodeGenerator
+	}
+
 	onIsCurrentPageChanged: {
 		/*
 		 * Start the timer if we are getting or loosing focus.
@@ -72,26 +76,32 @@ Kirigami.Page {
 		pageTimer.start();
 	}
 
-	leftAction: Kirigami.Action {
-		icon.name: "edit-delete-symbolic"
-		onTriggered: removeSheet.open()
-	}
+	actions {
+		left: Kirigami.Action {
+			text: qsTr("Rename contact")
+			icon.name: "document-edit-symbolic"
 
-	rightAction: Kirigami.Action {
-		icon.name: "document-edit-symbolic"
-		onTriggered: {
-			renameSheet.open()
-			renameSheet.forceFocus()
+			onTriggered: {
+				renameSheet.open()
+				renameSheet.forceFocus()
+			}
+		}
+
+		main: Kirigami.Action {
+			text: qsTr("Show QR code")
+			icon.name: "view-barcode-qr"
+			onTriggered: qrCodeSheet.open()
+		}
+
+		right: Kirigami.Action {
+			text: qsTr("Remove contact")
+			icon.name: "edit-delete-symbolic"
+			onTriggered: removeSheet.open()
 		}
 	}
 
 	UserPresenceWatcher {
 		id: userPresence
-		jid: root.jid
-	}
-
-	RosterRemoveContactSheet {
-		id: removeSheet
 		jid: root.jid
 	}
 
@@ -103,6 +113,21 @@ Kirigami.Page {
 				return "";
 			return name;
 		}
+	}
+
+	Kirigami.OverlaySheet {
+		id: qrCodeSheet
+
+		Kirigami.Icon {
+			width: parent.width
+			height: width
+			source: width > 0 ? qrCodeGenerator.generateBareJidQrCode(width, jid) : ""
+		}
+	}
+
+	RosterRemoveContactSheet {
+		id: removeSheet
+		jid: root.jid
 	}
 
 	Controls.ScrollView {

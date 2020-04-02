@@ -65,7 +65,7 @@ Kirigami.Page {
 			text: qsTr("Scan the QR code or enter the credentials as text on another device to log in on it.\n\nAttention:\nNever show this QR code to anyone else. It would allow unlimited access to your account!")
 			width: parent.width
 			Layout.topMargin: 10
-			scaleFactor: 2
+			scaleFactor: 1.5
 		}
 
 		// placeholder

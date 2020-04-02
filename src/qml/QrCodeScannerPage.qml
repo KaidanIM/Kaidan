@@ -179,7 +179,7 @@ Kirigami.Page {
 			text: qsTr("Scan the QR code from your existing device to transfer your account.")
 			width: parent.width
 			Layout.topMargin: 10
-			scaleFactor: 2
+			scaleFactor: 1.5
 		}
 
 		Image {

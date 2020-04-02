@@ -52,7 +52,7 @@ View {
 
 		CenteredAdaptiveText {
 			text: jid
-			scaleFactor: 2
+			scaleFactor: 1.5
 		}
 
 		RegistrationButton {

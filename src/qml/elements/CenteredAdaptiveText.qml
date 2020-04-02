@@ -37,12 +37,12 @@ import org.kde.kirigami 2.8 as Kirigami
  */
 Text {
 	// factor to scale the text
-	property int scaleFactor: 1
+	property double scaleFactor: 1
 
 	Layout.fillWidth: true
 	horizontalAlignment: Text.AlignHCenter
 	wrapMode: Text.WordWrap
 	elide: Text.ElideRight
-	font.pointSize: Kirigami.Theme.defaultFont.pointSize * scaleFactor
+	font.pixelSize: Kirigami.Theme.defaultFont.pixelSize * scaleFactor
 	color: Kirigami.Theme.textColor
 }

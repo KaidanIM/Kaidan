@@ -25,6 +25,60 @@
     </screenshot>
   </screenshots>
   <releases>
+    <release type="stable" version="0.5.0" date="2020-04-03T00:00:00Z">
+      <description>
+        <p>This release adds the following features:</p>
+        <ul>
+          <li>Add parsing of XMPP URIs</li>
+          <li>Add QR code scanning and generation</li>
+          <li>Add contact search</li>
+          <li>Add muting notifications for messages of contacts</li>
+          <li>Add renaming contacts</li>
+          <li>Show user profile information</li>
+          <li>Add extended multimedia support</li>
+          <li>Add message search</li>
+          <li>Redesign contact list, text avatar, counter for unread messages, chat page, chat message bubble</li>
+          <li>Show notifications on Android</li>
+          <li>Add option for enabling or disabling an account temporarily</li>
+          <li>Refactor login screen with hints for invalid credentials and better usage of keyboard keys</li>
+          <li>Add message quoting</li>
+          <li>Truncate very long messages to avoid crashing Kaidan or using it to full capacity</li>
+          <li>Add button with link for issue tracking to about page</li>
+          <li>Improve messages for connection errors</li>
+          <li>Add account deletion</li>
+          <li>Redesign logo and global drawer banner</li>
+          <li>Add onboarding with registration, normal login and QR code login</li>
+          <li>Improve build scripts for better cross-platform support</li>
+          <li>Refactor code for better performance and stability</li>
+          <li>Add documentation to achieve easier maintenance</li>
+        </ul>
+        <p>This release fixes the following bugs:</p>
+        <ul>
+          <li>Fix AppImage build</li>
+          <li>Fix scrolling and item height problems in settings</li>
+        </ul>
+      </description>
+    </release>
+    <release type="stable" version="0.4.2" date="2020-04-02T00:00:00Z">
+      <description>
+        <p>This release adds the following features:</p>
+        <ul>
+          <li>ChatMessage: Do not display media URLs</li>
+          <li>ChatMessage: Add media URL copy action</li>
+        </ul>
+        <p>This release fixes the following bugs:</p>
+        <ul>
+          <li>Fix roster not cleared when switching account</li>
+          <li>ChatMessage: Fix copy to clipboard function</li>
+          <li>Fix scroll indiciator not overlap message on the right edge</li>
+          <li>Fix upload issues</li>
+          <li>ChatPage: Clear message correction when sent</li>
+          <li>Fix roster sorting</li>
+          <li>Fix buttonTextColor deprecation warnings</li>
+          <li>Fix build with QXmpp &gt;= 1.0.1</li>
+        </ul>
+      </description>
+    </release>
     <release type="stable" version="0.4.1" date="2019-07-16T00:00:00Z">
       <description>
         <p>This release fixes the following bugs:</p>

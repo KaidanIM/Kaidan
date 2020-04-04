@@ -189,11 +189,11 @@
     </message>
     <message>
         <source>Constant bit rate</source>
-        <translation>Velocità in bit costante</translation>
+        <translation>Bit rate costante</translation>
     </message>
     <message>
         <source>Average bit rate</source>
-        <translation>Velocità in bit media</translation>
+        <translation>Bit rate medio</translation>
     </message>
     <message>
         <source>Two pass</source>
@@ -208,7 +208,7 @@
     </message>
     <message>
         <source>Download failed: %1</source>
-        <translation>Scaricamento non riuscito: %1</translation>
+        <translation>Download fallito: %1</translation>
     </message>
 </context>
 <context>
@@ -299,7 +299,7 @@
     </message>
     <message>
         <source>Invitation link copied to clipboard</source>
-        <translation>Collegamento dell&apos;invito copiato negli appunti</translation>
+        <translation>Link dell&apos;invito copiato negli appunti</translation>
     </message>
     <message>
         <source>Settings</source>
@@ -483,7 +483,7 @@
     </message>
     <message>
         <source>Could not correct message, as a result of not being connected.</source>
-        <translation>Impossibile correggere messaggi, perchè non sei connesso.</translation>
+        <translation>Impossibile correggere il messaggio, perchè non sei connesso.</translation>
     </message>
     <message>
         <source>Spoiler</source>
@@ -734,7 +734,7 @@ Provare a chiudere altre applicazioni che stanno utilizzando la fotocamera.</tra
     </message>
     <message>
         <source>user@example.org</source>
-        <translation>nome@esempio.org</translation>
+        <translation>nome@example.org</translation>
     </message>
     <message>
         <source>This will also send a request to access the presence of the contact.</source>
@@ -746,7 +746,7 @@ Provare a chiudere altre applicazioni che stanno utilizzando la fotocamera.</tra
     </message>
     <message>
         <source>Nickname:</source>
-        <translation>Soprannome:</translation>
+        <translation>Nickname:</translation>
     </message>
     <message>
         <source>Optional message:</source>
@@ -804,7 +804,7 @@ Provare a chiudere altre applicazioni che stanno utilizzando la fotocamera.</tra
     <name>RosterManager</name>
     <message>
         <source>Could not add contact, as a result of not being connected.</source>
-        <translation>Non è possibile aggiungere il contatto, perchè non sei connesso.</translation>
+        <translation>Impossibile aggiungere il contatto, perchè non sei connesso.</translation>
     </message>
     <message>
         <source>Could not remove contact, as a result of not being connected.</source>
@@ -963,7 +963,7 @@ Provare a chiudere altre applicazioni che stanno utilizzando la fotocamera.</tra
     </message>
     <message>
         <source>Nickname</source>
-        <translation>Soprannome</translation>
+        <translation>Nickname</translation>
     </message>
     <message>
         <source>About</source>

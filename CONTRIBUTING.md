@@ -19,7 +19,7 @@ Please stick to the following steps for opening and reviewing MRs.
 ### For Authors
 
 1. Create a new branch to work on it from the *master* branch.
-1. Write short commit messages starting with an a upper case letter and using the present tense and imperative.
+1. Write short commit messages starting with an upper case letter and the imperative.
 1. Split your commits logically.
 1. Do not mix unrelated changes in the same MR.
 1. Create a MR with the *master* branch as its target.

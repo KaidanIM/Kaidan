@@ -10,57 +10,58 @@
 
 ## About
 
-Kaidan is a simple, user-friendly Jabber/XMPP client providing a modern user
-interface using [Kirigami][kg] and [QtQuick][qquick]. The back-end of Kaidan is
-written in C++ using the [QXmpp][qxmpp] XMPP client library and [Qt 5][qt].
+[Kaidan][kaidan-website] is a simple, user-friendly and modern chat client. It
+uses the open communication protocol [XMPP (Jabber)][xmpp]. The user interface
+makes use of [Kirigami][kirigami-website] and [QtQuick][qtquick], while the
+back-end of Kaidan is entirely written in C++ using [Qt][qt] and the Qt-based
+XMPP library [QXmpp][qxmpp].
 
-Kaidan runs on mobile and desktop Linux systems, including Plasma Mobile and
-[Ubuntu Touch][openstore]. There are static Windows builds and macOS is also
-supported, but we currently can't provide builds for it. The support for the
-legacy mobile systems Android and iOS is very experimental and we currently only
-provide test builds for [Android][android]. We might support SailfishOS in the
-future in case the Sailfish SDK gets an update for Qt.
+Kaidan runs on mobile and desktop systems including Linux, Windows, macOS,
+Android, Plasma Mobile and Ubuntu Touch.
+Unfortunately, we are not able to provide builds for all platforms atthe moment
+due to little developer resources.
 
-Kaidan is *not* finished yet, so don't expect it working as well as a finished
-client will do -- Many features are still missing, many things still need to be
-fixed and improved.
+Kaidan does *not* have all basic features yet and has still some stability
+issues. Do not expect it to be as good as the currently dominating instant
+messaging clients.
 
-For a list of supported XEPs, have a look at the [Website][supp-xeps].
+If you are interested in the technical features Kaidan supports, you can have a
+look at our [overview of XEPs and RFCs][xeps-rfcs].
 
-## Installing Kaidan
+## Using and Building Kaidan
 
-Instead of building Kaidan yourself, you can also just install ready-made builds. On these pages is explained
-how to do that:
- * [Install the Flatpak](https://invent.kde.org/network/kaidan/-/wikis/using/flatpak)
- * [Install from OpenStore (Ubuntu Touch)][openstore]
+Downloadable builds are available on [Kaidan's download page][downloads].
+Instructions for using ready-made (nightly / stable) builds and for building
+Kaidan yourself can be found in our [Wiki][wiki].
 
-## Building Kaidan
+## Dependencies
 
-### Dependencies
-
-Here are the general dependencies of Kaidan listed:
- * [Qt](https://doc.qt.io/qt-5/build-sources.html) (Core Qml Quick Svg Sql QuickControls2 Xml Multimedia Positioning Location) (>= 5.12.0)
+Here are the general dependencies of Kaidan:
+ * [Qt][qt-build-sources] (Core Qml Quick Svg Sql QuickControls2 Xml Multimedia Positioning Location) (>= 5.12.0)
  * [QXmpp][qxmpp] (>= 1.2.0)
- * [Kirigami 2](https://phabricator.kde.org/source/kirigami/) (>= 5.58.0)
- * [ECM (extra-cmake-modules)](https://api.kde.org/ecm/manual/ecm.7.html)
- * [ZXing-cpp](https://github.com/nu-book/zxing-cpp)
- * [KNotifications][knotif] (`-DUSE_KNOTIFICATIONS=OFF` to disable)
-
-### Build instructions
-
-There are guides on how to build Kaidan for each supported platform (currently there are still pages missing):
- * [Linux Desktop](https://invent.kde.org/network/kaidan/wikis/building/linux-debian-based)
- * [Ubuntu Touch (click package)](https://invent.kde.org/network/kaidan/wikis/building/ubuntu-touch)
+ * [Kirigami 2][kirigami-repo] (>= 5.58.0)
+ * [ECM (extra-cmake-modules)][ecm]
+ * [ZXing-cpp][zxing-cpp]
+ * [KNotifications][knotifications] (`-DUSE_KNOTIFICATIONS=OFF` to disable)
 
 ## Contributing
 
-If you are interested in contributing to Kaidan, please have a look at our [contribution guidelines](CONTRIBUTING.md).
+If you are interested in contributing to Kaidan, please have a look at our
+[contribution guidelines][CONTRIBUTING.md]. If you want to improve Kaidan's
+website, feel free to visit its [project site][kaidan-website-repo].
 
-[kg]: https://kde.org/products/kirigami/
-[qquick]: https://wiki.qt.io/Qt_Quick
-[qxmpp]: https://github.com/qxmpp-project/qxmpp
+[downloads]: https://www.kaidan.im/download/
+[ecm]: https://api.kde.org/ecm/manual/ecm.7.html
+[kaidan-website]: https://kaidan.im
+[kaidan-website-repo]: https://invent.kde.org/websites/kaidan-im
+[kirigami-repo]: https://invent.kde.org/frameworks/kirigami
+[kirigami-website]: https://kde.org/products/kirigami/
+[knotifications]: https://api.kde.org/frameworks/knotifications/html/index.html
 [qt]: https://www.qt.io/
-[openstore]: https://open-store.io/app/im.kaidan.kaidan
-[android]: https://www.kaidan.im/download/#android
-[supp-xeps]: https://www.kaidan.im/features/
-[knotif]: https://api.kde.org/frameworks/knotifications/html/index.html
+[qt-build-sources]: https://doc.qt.io/qt-5/build-sources.html
+[qtquick]: https://wiki.qt.io/Qt_Quick
+[qxmpp]: https://github.com/qxmpp-project/qxmpp
+[wiki]: https://invent.kde.org/network/kaidan/-/wikis/home
+[xeps-rfcs]: https://invent.kde.org/network/kaidan/-/wikis/xeps-rfcs
+[xmpp]: https://xmpp.org
+[zxing-cpp]: https://github.com/nu-book/zxing-cpp

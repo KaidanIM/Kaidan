@@ -31,7 +31,7 @@ For a list of supported XEPs, have a look at the [Website][supp-xeps].
 
 Instead of building Kaidan yourself, you can also just install ready-made builds. On these pages is explained
 how to do that:
- * [Install the Flatpak](https://invent.kde.org/kde/kaidan/wikis/install/flatpak)
+ * [Install the Flatpak](https://invent.kde.org/kde/kaidan/-/wikis/using/flatpak)
  * [Install from OpenStore (Ubuntu Touch)][openstore]
 
 ## Building Kaidan

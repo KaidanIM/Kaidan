@@ -15,6 +15,100 @@
         <source>View source code online</source>
         <translation>Prohlédnout zdrojový kód online</translation>
     </message>
+    <message>
+        <source>Report problems</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>AccountDeletionFromClientAndServerConfirmationPage</name>
+    <message>
+        <source>Delete account completely</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Your account will be deleted completely, which means from this app and from the server.
+You will not be able to use your account again!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Delete</source>
+        <translation type="unfinished">Smazat</translation>
+    </message>
+</context>
+<context>
+    <name>AccountDeletionFromClientConfirmationPage</name>
+    <message>
+        <source>Remove account from this app</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Your account will be removed from this app.
+You won&apos;t be able to get your credentials back!
+Make sure that you have backed up those if you want to use your account later.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Remove</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>AccountDeletionPage</name>
+    <message>
+        <source>Delete account</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>You can remove your account &lt;b&gt;%1&lt;/b&gt; only from this app or delete it completely. If you delete your account completely, you won&apos;t be able to use it with another app because it is also removed from the server.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Remove from this app</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Delete completely</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>AccountTransferPage</name>
+    <message>
+        <source>Transfer account to another device</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Scan the QR code or enter the credentials as text on another device to log in on it.
+
+Attention:
+Never show this QR code to anyone else. It would allow unlimited access to your account!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Chat address:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Password:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Hide QR code</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Show as QR code</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Hide text</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Show as text</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>ChangePassword</name>
@@ -63,11 +157,11 @@
     <name>ChatMessage</name>
     <message>
         <source>Copy Message</source>
-        <translation>Zkopírovat zprávu</translation>
+        <translation type="vanished">Zkopírovat zprávu</translation>
     </message>
     <message>
         <source>Edit Message</source>
-        <translation>Editovat zprávu</translation>
+        <translation type="vanished">Editovat zprávu</translation>
     </message>
     <message>
         <source>Spoiler</source>
@@ -79,11 +173,7 @@
     </message>
     <message>
         <source>Copy download URL</source>
-        <translation>Kopírovat stažitelnou URL</translation>
-    </message>
-    <message>
-        <source>Quote</source>
-        <translation type="unfinished"></translation>
+        <translation type="vanished">Kopírovat stažitelnou URL</translation>
     </message>
 </context>
 <context>
@@ -114,7 +204,7 @@
     </message>
     <message>
         <source>Select a file</source>
-        <translation>Vybrat soubor</translation>
+        <translation type="vanished">Vybrat soubor</translation>
     </message>
     <message>
         <source>Send a spoiler message</source>
@@ -160,6 +250,29 @@
         <source>All files</source>
         <translation>Všechny soubory</translation>
     </message>
+    <message>
+        <source>Copy message</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit message</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Copy download URL</source>
+        <translation type="unfinished">Kopírovat stažitelnou URL</translation>
+    </message>
+    <message>
+        <source>Quote message</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>ClientWorker</name>
+    <message>
+        <source>Your account could not be deleted from the server. Therefore, it was also not removed from this app: %1</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>CommonEncoderSettings</name>
@@ -198,6 +311,13 @@
     <message>
         <source>Two pass</source>
         <translation>Dvouproudový</translation>
+    </message>
+</context>
+<context>
+    <name>ConfirmationPage</name>
+    <message>
+        <source>Cancel</source>
+        <translation type="unfinished">Zrušit</translation>
     </message>
 </context>
 <context>
@@ -273,25 +393,25 @@
     <name>FileChooser</name>
     <message>
         <source>Select a file</source>
-        <translation>Vybrat soubor</translation>
+        <translation type="vanished">Vybrat soubor</translation>
     </message>
 </context>
 <context>
     <name>FileChooserMobile</name>
     <message>
         <source>Go to parent folder</source>
-        <translation>Přesun o adresář výše</translation>
+        <translation type="vanished">Přesun o adresář výše</translation>
     </message>
     <message>
         <source>Close</source>
-        <translation>Zavřít</translation>
+        <translation type="vanished">Zavřít</translation>
     </message>
 </context>
 <context>
     <name>GlobalDrawer</name>
     <message>
         <source>Log out</source>
-        <translation>Odhlásit se</translation>
+        <translation type="vanished">Odhlásit se</translation>
     </message>
     <message>
         <source>About</source>
@@ -321,6 +441,14 @@
         <source>Connecting…</source>
         <translation type="unfinished">Připojování…</translation>
     </message>
+    <message>
+        <source>Transfer account</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Delete account</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>Kaidan</name>
@@ -331,7 +459,7 @@
     </message>
     <message>
         <source>No password found. Please enter it.</source>
-        <translation>Heslo nenalezeno. Prosím zadejte heslo.</translation>
+        <translation type="vanished">Heslo nenalezeno. Prosím zadejte heslo.</translation>
     </message>
     <message>
         <source>No valid login QR code found.</source>
@@ -411,7 +539,7 @@ Prosím zkontrolujte své připojení k internetu.</translation>
     </message>
     <message>
         <source>Log in using a QR-Code</source>
-        <translation>Přihlaste se pomocí QR kódu</translation>
+        <translation type="vanished">Přihlaste se pomocí QR kódu</translation>
     </message>
 </context>
 <context>
@@ -761,7 +889,7 @@ Prosím zkontrolujte své připojení k internetu.</translation>
     </message>
     <message>
         <source>Could not connect to the server.</source>
-        <translation type="unfinished">Nebylo možné se připojit k serveru.</translation>
+        <translation type="obsolete">Nebylo možné se připojit k serveru.</translation>
     </message>
     <message>
         <source>Authentification protocol not supported by the server.</source>
@@ -772,7 +900,22 @@ Prosím zkontrolujte své připojení k internetu.</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>An unknown error occured.</source>
+        <source>The server is offline or blocked by a firewall.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The connection could not be refreshed.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The internet access is not permitted. Please check your system&apos;s internet access configuration.</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>QrCodeGenerator</name>
+    <message>
+        <source>Generating the QR code failed: %1</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -795,6 +938,41 @@ Zkuste zavřít jiné aplikace, které používají fotoaparát.</translation>
     <message>
         <source>The camera format &apos;%1&apos; is not supported.</source>
         <translation>Formát fotoaparátu &apos;% 1&apos; není podporován.</translation>
+    </message>
+    <message>
+        <source>Logging in…</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Scan the QR code from your existing device to transfer your account.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Show explanation</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Scan</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Continue without QR code</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>RegistrationLoginDecisionPage</name>
+    <message>
+        <source>Set up</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Register a new account</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Use an existing account</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -951,7 +1129,7 @@ Zkuste zavřít jiné aplikace, které používají fotoaparát.</translation>
     </message>
     <message>
         <source>Edit name:</source>
-        <translation>Editovat jméno:</translation>
+        <translation type="vanished">Editovat jméno:</translation>
     </message>
     <message>
         <source>Cancel</source>
@@ -978,18 +1156,32 @@ Zkuste zavřít jiné aplikace, které používají fotoaparát.</translation>
     </message>
 </context>
 <context>
-    <name>SettingsPage</name>
+    <name>ServerListModel</name>
     <message>
-        <source>Settings</source>
-        <translation>Nastavení</translation>
+        <source>Custom server</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
+        <source>No limitation</source>
+        <extracomment>Unlimited file size for uploading files
+----------
+Deletion of message history saved on server</extracomment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>%1 days</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>SettingsContent</name>
+    <message>
         <source>Change password</source>
-        <translation>Změna hesla</translation>
+        <translation type="unfinished">Změna hesla</translation>
     </message>
     <message>
         <source>Changes your account&apos;s password. You will need to re-enter it on your other devices.</source>
-        <translation>Změní heslo k vašemu účtu. Bude třeba ho zadat na všech vašich zařízeních.</translation>
+        <translation type="unfinished">Změní heslo k vašemu účtu. Bude třeba ho zadat na všech vašich zařízeních.</translation>
     </message>
     <message>
         <source>Multimedia Settings</source>
@@ -997,6 +1189,43 @@ Zkuste zavřít jiné aplikace, které používají fotoaparát.</translation>
     </message>
     <message>
         <source>Configure photo, video and audio recording settings</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>SettingsPage</name>
+    <message>
+        <source>Settings</source>
+        <translation>Nastavení</translation>
+    </message>
+    <message>
+        <source>Change password</source>
+        <translation type="vanished">Změna hesla</translation>
+    </message>
+    <message>
+        <source>Changes your account&apos;s password. You will need to re-enter it on your other devices.</source>
+        <translation type="vanished">Změní heslo k vašemu účtu. Bude třeba ho zadat na všech vašich zařízeních.</translation>
+    </message>
+    <message>
+        <source>Multimedia Settings</source>
+        <translation type="obsolete">Nastavení multimédií</translation>
+    </message>
+</context>
+<context>
+    <name>SettingsSheet</name>
+    <message>
+        <source>Settings</source>
+        <translation type="unfinished">Nastavení</translation>
+    </message>
+</context>
+<context>
+    <name>StartPage</name>
+    <message>
+        <source>Enjoy free communication on every device!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Let&apos;s start</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

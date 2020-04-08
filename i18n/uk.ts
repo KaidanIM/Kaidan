@@ -979,11 +979,11 @@ Try to close other applications using the camera.</source>
     </message>
     <message>
         <source>Multimedia Settings</source>
-        <translation type="unfinished">Параметри мультимедійних даних</translation>
+        <translation>Параметри мультимедійних даних</translation>
     </message>
     <message>
         <source>Configure photo, video and audio recording settings</source>
-        <translation type="unfinished"></translation>
+        <translation>Налаштуйте параметри обробки фотографій, відео та звукових записів</translation>
     </message>
 </context>
 <context>

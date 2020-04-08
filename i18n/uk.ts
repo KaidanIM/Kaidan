@@ -83,7 +83,7 @@
     </message>
     <message>
         <source>Quote</source>
-        <translation type="unfinished"></translation>
+        <translation>Цитування</translation>
     </message>
 </context>
 <context>
@@ -307,15 +307,15 @@
     </message>
     <message>
         <source>Offline</source>
-        <translation type="unfinished">Поза мережею</translation>
+        <translation>Поза мережею</translation>
     </message>
     <message>
         <source>Online</source>
-        <translation type="unfinished"></translation>
+        <translation>У мережі</translation>
     </message>
     <message>
         <source>Connecting…</source>
-        <translation type="unfinished"></translation>
+        <translation>Встановлюємо з&apos;єднання…</translation>
     </message>
 </context>
 <context>
@@ -498,87 +498,87 @@
     <name>MultimediaSettings</name>
     <message>
         <source>Multimedia Settings</source>
-        <translation type="unfinished">Параметри мультимедійних даних</translation>
+        <translation>Параметри мультимедійних даних</translation>
     </message>
     <message>
         <source>Configure</source>
-        <translation type="unfinished">Налаштувати</translation>
+        <translation>Налаштувати</translation>
     </message>
     <message>
         <source>Image Capture</source>
-        <translation type="unfinished">Захоплення зображень</translation>
+        <translation>Захоплення зображень</translation>
     </message>
     <message>
         <source>Audio Recording</source>
-        <translation type="unfinished">Запис звуку</translation>
+        <translation>Запис звуку</translation>
     </message>
     <message>
         <source>Video Recording</source>
-        <translation type="unfinished">Запис відео</translation>
+        <translation>Запис відео</translation>
     </message>
     <message>
         <source>Camera</source>
-        <translation type="unfinished">Відеокамера</translation>
+        <translation>Відеокамера</translation>
     </message>
     <message>
         <source>Audio input</source>
-        <translation type="unfinished">Звуковий вхід</translation>
+        <translation>Звуковий вхід</translation>
     </message>
     <message>
         <source>Container</source>
-        <translation type="unfinished">Контейнер</translation>
+        <translation>Контейнер</translation>
     </message>
     <message>
         <source>Image</source>
-        <translation type="unfinished">Зображення</translation>
+        <translation>Зображення</translation>
     </message>
     <message>
         <source>Audio</source>
-        <translation type="unfinished">Звук</translation>
+        <translation>Звук</translation>
     </message>
     <message>
         <source>Video</source>
-        <translation type="unfinished">Відео</translation>
+        <translation>Відео</translation>
     </message>
     <message>
         <source>Codec</source>
-        <translation type="unfinished">Кодек</translation>
+        <translation>Кодек</translation>
     </message>
     <message>
         <source>Resolution</source>
-        <translation type="unfinished">Роздільність</translation>
+        <translation>Роздільність</translation>
     </message>
     <message>
         <source>Quality</source>
-        <translation type="unfinished">Якість</translation>
+        <translation>Якість</translation>
     </message>
     <message>
         <source>Sample Rate</source>
-        <translation type="unfinished">Частота дискретизації</translation>
+        <translation>Частота дискретизації</translation>
     </message>
     <message>
         <source>Frame Rate</source>
-        <translation type="unfinished">Частота кадрів</translation>
+        <translation>Частота кадрів</translation>
     </message>
     <message>
         <source>Ready</source>
-        <translation type="unfinished">Готово</translation>
+        <translation>Готово</translation>
     </message>
     <message>
         <source>Initializing...</source>
-        <translation type="unfinished">Ініціалізація…</translation>
+        <translation>Ініціалізація…</translation>
     </message>
     <message>
         <source>Unavailable</source>
-        <translation type="unfinished">Немає даних</translation>
+        <translation>Немає даних</translation>
     </message>
     <message>
         <source>Recording...</source>
-        <translation type="unfinished">Запис…</translation>
+        <translation>Запис…</translation>
     </message>
     <message>
         <source>Paused</source>
-        <translation type="unfinished">Призупинено</translation>
+        <translation>Призупинено</translation>
     </message>
 </context>
 <context>
@@ -727,39 +727,39 @@
     </message>
     <message>
         <source>Invalid username or password.</source>
-        <translation type="unfinished">Некоректне ім’я користувача або пароль.</translation>
+        <translation>Некоректне ім’я користувача або пароль.</translation>
     </message>
     <message>
         <source>Cannot connect to the server. Please check your internet connection.</source>
-        <translation type="unfinished">Не вдалося встановити з&apos;єднання із сервером. Будь ласка, перевірте, чи маєте ви з&apos;єднання із інтернетом.</translation>
+        <translation>Не вдалося встановити з&apos;єднання із сервером. Будь ласка, перевірте, чи маєте ви з&apos;єднання із інтернетом.</translation>
     </message>
     <message>
         <source>The server doesn&apos;t support secure connections.</source>
-        <translation type="unfinished">На сервері не передбачено можливості захищених з&apos;єднань.</translation>
+        <translation>На сервері не передбачено можливості захищених з&apos;єднань.</translation>
     </message>
     <message>
         <source>Error while trying to connect securely.</source>
-        <translation type="unfinished">Помилка під час спроби встановлення захищеного з&apos;єднання.</translation>
+        <translation>Помилка під час спроби встановлення захищеного з&apos;єднання.</translation>
     </message>
     <message>
         <source>Could not resolve the server&apos;s address. Please check your server name.</source>
-        <translation type="unfinished"></translation>
+        <translation>Не вдалося визначити адресу сервера. Будь ласка, перевірте, чи правильно вказано назву сервера.</translation>
     </message>
     <message>
         <source>Could not connect to the server.</source>
-        <translation type="unfinished">Не вдалося встановити з’єднання із віддаленим сервером.</translation>
+        <translation>Не вдалося встановити з’єднання із сервером.</translation>
     </message>
     <message>
         <source>Authentification protocol not supported by the server.</source>
-        <translation type="unfinished">На сервері не передбачено підтримки протоколу розпізнавання.</translation>
+        <translation>На сервері не передбачено підтримки протоколу розпізнавання.</translation>
     </message>
     <message>
         <source>This server does not support registration.</source>
-        <translation type="unfinished"></translation>
+        <translation>На сервері не передбачено підтримки реєстрації.</translation>
     </message>
     <message>
         <source>An unknown error occured.</source>
-        <translation type="unfinished"></translation>
+        <translation>Сталася невідома помилка.</translation>
     </message>
 </context>
 <context>

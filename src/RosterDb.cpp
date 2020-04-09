@@ -88,7 +88,7 @@ QSqlRecord RosterDb::createUpdateRecord(const RosterItem &oldItem, const RosterI
 	if (oldItem.jid() != newItem.jid())
 		rec.append(Utils::createSqlField("jid", newItem.jid()));
 	if (oldItem.name() != newItem.name())
-		rec.append(Utils::createSqlField("name", oldItem.name()));
+		rec.append(Utils::createSqlField("name", newItem.name()));
 	if (oldItem.unreadMessages() != newItem.unreadMessages())
 		rec.append(Utils::createSqlField(
 			"unreadMessages",

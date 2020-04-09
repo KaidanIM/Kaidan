@@ -425,8 +425,6 @@ public slots:
 	void setNotificationsMuted(const QString& jid, bool muted);
 
 private:
-	void connectDatabases();
-
 	/**
 	 * Notifies if no valid login URI was found.
 	 */

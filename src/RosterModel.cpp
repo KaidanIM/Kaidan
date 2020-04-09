@@ -179,6 +179,8 @@ void RosterModel::updateItem(const QString &jid,
 			if (m_items.at(i) == item)
 				return;
 
+			m_items.replace(i, item);
+
 			// item was changed: refresh all roles
 			emit dataChanged(index(i), index(i), {});
 

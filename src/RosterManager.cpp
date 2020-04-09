@@ -65,7 +65,7 @@ RosterManager::RosterManager(Kaidan *kaidan,
 
 	connect(manager, &QXmppRosterManager::itemChanged,
 		this, [this, model] (const QString &jid) {
-		emit model->updateItemRequested(m_chatPartner, [=] (RosterItem &item) {
+		emit model->updateItemRequested(jid, [=] (RosterItem &item) {
 			item.setName(manager->getRosterEntry(jid).name());
 		});
 	});

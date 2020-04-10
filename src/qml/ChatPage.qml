@@ -461,12 +461,12 @@ ChatPageBase {
 
 		delegate: ChatMessage {
 			msgId: model.id
-			sender: model.sender
+			senderJid: model.sender
+			senderName: chatName
 			sentByMe: model.sentByMe
 			messageBody: model.body
 			dateTime: new Date(model.timestamp)
 			deliveryState: model.deliveryState
-			name: chatName
 			mediaType: model.mediaType
 			mediaGetUrl: model.mediaUrl
 			mediaLocation: model.mediaLocation

@@ -43,7 +43,8 @@ RowLayout {
 	property Controls.Menu menu
 
 	property string msgId
-	property string sender
+	property string senderJid
+	property string senderName
 	property bool sentByMe: true
 	property string messageBody
 	property date dateTime
@@ -53,7 +54,6 @@ RowLayout {
 	property string mediaLocation
 	property bool edited
 	property bool isLoading: Kaidan.transferCache.hasUpload(msgId)
-	property string name
 	property TransferJob upload: {
 		if (mediaType !== Enums.MessageType.MessageText && isLoading) {
 			return Kaidan.transferCache.jobByMessageId(model.id)
@@ -64,9 +64,8 @@ RowLayout {
 	property bool isSpoiler
 	property string spoilerHint
 	property bool isShowingSpoiler: false
-	property string avatarUrl: Kaidan.avatarStorage.getAvatarUrl(sender)
+	property string avatarUrl: Kaidan.avatarStorage.getAvatarUrl(senderJid)
 	property string errorText: ""
-
 	property alias bodyLabel: bodyLabel
 	property string deliveryStateName
 	property url deliveryStateIcon
@@ -89,7 +88,7 @@ RowLayout {
 		visible: !sentByMe
 		avatarUrl: root.avatarUrl
 		Layout.alignment: Qt.AlignHCenter | Qt.AlignTop
-		name: root.name
+		name: root.senderName
 		Layout.preferredHeight: Kirigami.Units.gridUnit * 2.2
 		Layout.preferredWidth: Kirigami.Units.gridUnit * 2.2
 	}

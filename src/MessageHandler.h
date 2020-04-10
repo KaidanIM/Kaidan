@@ -93,7 +93,6 @@ private:
 	QXmppMessageReceiptManager receiptManager;
 	MessageModel *model;
 	QXmppCarbonManager *carbonManager;
-	QString chatPartner;
 };
 
 #endif // MESSAGEHANDLER_H

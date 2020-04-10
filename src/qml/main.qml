@@ -94,6 +94,13 @@ Kirigami.ApplicationWindow {
 	Component {id: accountDeletionFromClientConfirmationPage; AccountDeletionFromClientConfirmationPage {}}
 	Component {id: accountDeletionFromClientAndServerConfirmationPage; AccountDeletionFromClientAndServerConfirmationPage {}}
 
+	function raiseWindow() {
+		if (!active) {
+			raise()
+			requestActivate()
+		}
+	}
+
 	/**
 	 * Shows a passive notification for a long period.
 	 */
@@ -155,6 +162,7 @@ Kirigami.ApplicationWindow {
 	Connections {
 		target: Kaidan
 
+		onRaiseWindowRequested: raiseWindow()
 		onPassiveNotificationRequested: passiveNotification(text)
 		onNewCredentialsNeeded: openStartPage()
 		onLoggedInWithNewCredentials: openChatView()

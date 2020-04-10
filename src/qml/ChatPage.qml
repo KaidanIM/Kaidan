@@ -44,7 +44,12 @@ import "elements"
 ChatPageBase {
 	id: root
 
-	property string chatName
+	property string chatName: {
+		var currentChatJid = Kaidan.messageModel.currentChatJid
+		var chatDisplayName = Kaidan.rosterModel.itemName(currentChatJid)
+		return chatDisplayName ? chatDisplayName : currentChatJid
+	}
+
 	property bool isWritingSpoiler
 	property string messageToCorrect
 

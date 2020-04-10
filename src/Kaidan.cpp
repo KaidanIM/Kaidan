@@ -45,6 +45,7 @@
 #include "Database.h"
 #include "MessageDb.h"
 #include "MessageModel.h"
+#include "Notifications.h"
 #include "PresenceCache.h"
 #include "QmlUtils.h"
 #include "RosterDb.h"
@@ -62,6 +63,8 @@ Kaidan::Kaidan(QGuiApplication *app, bool enableLogging, QObject *parent)
 {
 	Q_ASSERT(!s_instance);
 	s_instance = this;
+
+	connect(app, &QGuiApplication::applicationStateChanged, this, &Kaidan::handleApplicationStateChanged);
 
 	// Database setup
 	m_database->moveToThread(m_dbThrd);
@@ -98,11 +101,14 @@ Kaidan::Kaidan(QGuiApplication *app, bool enableLogging, QObject *parent)
 	// Start ClientWorker on new thread
 	//
 
-	m_client = new ClientWorker(m_caches, this, enableLogging, app);
+	m_client = new ClientWorker(m_caches, this, enableLogging);
 	m_client->setCredentials(creds);
 	m_client->moveToThread(m_cltThrd);
 
 	connect(m_client, &ClientWorker::connectionErrorChanged, this, &Kaidan::setConnectionError);
+	connect(m_client, &ClientWorker::showMessageNotificationRequested, this, [](const QString &senderJid, const QString &senderName, const QString &message) {
+		Notifications::sendMessageNotification(senderJid, senderName, message);
+	});
 	connect(m_cltThrd, &QThread::started, m_client, &ClientWorker::main);
 
 	m_client->setObjectName("XmppClient");
@@ -141,6 +147,14 @@ void Kaidan::mainDisconnect()
 	// disconnect the client if connected or connecting
 	if (connectionState != ConnectionState::StateDisconnected)
 		emit m_client->disconnectRequested();
+}
+
+void Kaidan::handleApplicationStateChanged(Qt::ApplicationState applicationState)
+{
+	if (applicationState == Qt::ApplicationActive)
+		emit applicationWindowActiveChanged(true);
+	else
+		emit applicationWindowActiveChanged(false);
 }
 
 void Kaidan::setConnectionState(QXmppClient::State state)

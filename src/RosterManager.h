@@ -70,7 +70,6 @@ private:
 	RosterModel *model;
 	AvatarFileStorage *avatarStorage;
 	VCardManager *vCardManager;
-
 	QXmppRosterManager *manager;
 	QString m_currentChatJid;
 };

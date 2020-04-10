@@ -64,7 +64,7 @@ RosterModel::RosterModel(RosterDb *rosterDb, QObject *parent)
 	connect(this, &RosterModel::replaceItemsRequested,
 	        this, &RosterModel::replaceItems);
 	connect(this, &RosterModel::replaceItemsRequested,
-	        rosterDb, &RosterDb::replaceItems);
+		rosterDb, &RosterDb::replaceItems);
 
 	// This is only done in the model, the database is updated automatically by the new
 	// messages:
@@ -135,6 +135,23 @@ QVariant RosterModel::data(const QModelIndex &index, int role) const
 	return {};
 }
 
+std::optional<const RosterItem> RosterModel::findItem(const QString &jid) const
+{
+	for (const auto &item : qAsConst(m_items)) {
+		if (item.jid() == jid)
+			return item;
+	}
+
+	return std::nullopt;
+}
+
+QString RosterModel::itemName(const QString &jid) const
+{
+	if (auto item = findItem(jid))
+		return item->name();
+	return {};
+}
+
 void RosterModel::handleItemsFetched(const QVector<RosterItem> &items)
 {
 	beginResetModel();
@@ -161,7 +178,6 @@ void RosterModel::removeItem(const QString &jid)
 		}
 		i++;
 	}
-
 }
 
 void RosterModel::updateItem(const QString &jid,

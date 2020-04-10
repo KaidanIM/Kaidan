@@ -40,14 +40,13 @@
 #include <QXmppRosterManager.h>
 #include <QXmppUtils.h>
 // Kaidan
+#include "ClientWorker.h"
 #include "Kaidan.h"
 #include "MessageModel.h"
-#include "Notifications.h"
 #include "MediaUtils.h"
 
-MessageHandler::MessageHandler(Kaidan *kaidan, QXmppClient *client, MessageModel *model,
-                               QObject *parent)
-	: QObject(parent), kaidan(kaidan), client(client), model(model)
+MessageHandler::MessageHandler(Kaidan *kaidan, ClientWorker *clientWorker, QXmppClient *client, MessageModel *model)
+    : QObject(clientWorker), kaidan(kaidan), m_clientWorker(clientWorker), client(client), model(model)
 {
 	connect(client, &QXmppClient::messageReceived, this, &MessageHandler::handleMessage);
 	connect(kaidan, &Kaidan::sendMessage, this, &MessageHandler::sendMessage);
@@ -183,8 +182,12 @@ void MessageHandler::handleMessage(const QXmppMessage &msg)
 	if (contactName.isEmpty())
 		contactName = contactJid;
 
-	if (!message.sentByMe())
-		Notifications::sendMessageNotification(contactJid, contactName, msg.body());
+	// Show a notification for the message in the following cases:
+	//  * The message was not sent by the user from another resource and received via Message Carbons.
+	//  * Notifications from the chat partner are not muted.
+	//  * The corresponding chat is not opened while the application window is active.
+	if (!message.sentByMe() && !kaidan->notificationsMuted(contactJid) && (model->currentChatJid() != message.from() || !m_clientWorker->isApplicationWindowActive()))
+		emit m_clientWorker->showMessageNotificationRequested(contactJid, contactName, msg.body());
 
 	// TODO: Move back following call to RosterManager::handleMessage when spoiler
 	// messages are implemented in QXmpp

@@ -104,6 +104,7 @@ Kirigami.ScrollablePage {
 			id: filterModel
 			sourceModel: Kaidan.rosterModel
 		}
+
 		delegate: RosterListItem {
 			id: rosterItem
 			width: root.width
@@ -115,6 +116,7 @@ Kirigami.ScrollablePage {
 			statusMsg: Kaidan.presenceCache.getStatusText(model.jid)
 			unreadMessages: model.unreadMessages
 			avatarImagePath: Kaidan.avatarStorage.getAvatarUrl(model.jid)
+
 			backgroundColor: {
 				if (!Kirigami.Settings.isMobile &&
 						Kaidan.messageModel.currentChatJid === model.jid) {
@@ -123,18 +125,8 @@ Kirigami.ScrollablePage {
 					Kirigami.Theme.backgroundColor
 				}
 			}
-			onClicked: {
-				searchAction.checked = false
-				// We need to cache the chatName, because changing the currentChatJid in the
-				// message model will in some cases also update the roster model. That
-				// will then remove this item and readd an updated version of it, so
-				// model.* won't work anymore after this.
-				var chatName = model.name ? model.name : model.jid
-				Kaidan.messageModel.currentChatJid = model.jid
-				pageStack.push(chatPage, {
-					"chatName": chatName
-				})
-			}
+
+			onClicked: openChatPage(model.jid)
 
 			function newPresenceArrived(jid) {
 				if (jid === model.jid) {
@@ -143,20 +135,42 @@ Kirigami.ScrollablePage {
 				}
 			}
 
-			function xmppUriReceived(uri) {
-				// 'xmpp:' has length of 5
-				addContactSheet.jid = uri.substr(5)
-				addContactSheet.open()
-			}
-
 			Component.onCompleted: {
 				Kaidan.presenceCache.presenceChanged.connect(newPresenceArrived)
-				Kaidan.xmppUriReceived.connect(xmppUriReceived)
 			}
+
 			Component.onDestruction: {
 				Kaidan.presenceCache.presenceChanged.disconnect(newPresenceArrived)
-				Kaidan.xmppUriReceived.disconnect(xmppUriReceived)
 			}
 		}
+
+		Connections {
+			target: Kaidan
+
+			onOpenChatPageRequested: openChatPage(chatJid)
+			onXmppUriReceived: xmppUriReceived(uri)
+		}
+	}
+
+	/**
+	 * Opens the chat page for the chat JID currently set in the message model.
+	 *
+	 * @param chatJid JID of the chat for which the chat page is opened
+	 */
+	function openChatPage(chatJid) {
+		Kaidan.messageModel.currentChatJid = chatJid
+		searchAction.checked = false
+
+		// Close all pages (especially the chat page) except the roster page.
+		while (pageStack.depth > 1)
+			pageStack.pop()
+
+		pageStack.push(chatPage)
+	}
+
+	function xmppUriReceived(uri) {
+		// 'xmpp:' has length of 5
+		addContactSheet.jid = uri.substr(5)
+		addContactSheet.open()
 	}
 }

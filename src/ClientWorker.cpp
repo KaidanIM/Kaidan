@@ -31,7 +31,6 @@
 #include "ClientWorker.h"
 // Qt
 #include <QDebug>
-#include <QGuiApplication>
 #include <QSettings>
 #include <QStringBuilder>
 #include <QString>
@@ -55,8 +54,8 @@
 #include "UploadManager.h"
 #include "VCardManager.h"
 
-ClientWorker::ClientWorker(Caches *caches, Kaidan *kaidan, bool enableLogging, QGuiApplication *app, QObject* parent)
-	: QObject(parent), m_caches(caches), kaidan(kaidan), enableLogging(enableLogging), app(app)
+ClientWorker::ClientWorker(Caches *caches, Kaidan *kaidan, bool enableLogging, QObject* parent)
+    : QObject(parent), m_caches(caches), kaidan(kaidan), enableLogging(enableLogging)
 {
 	client = new QXmppClient(this);
 	logger = new LogHandler(client, this);
@@ -65,7 +64,7 @@ ClientWorker::ClientWorker(Caches *caches, Kaidan *kaidan, bool enableLogging, Q
 	registrationManager = new RegistrationManager(kaidan, this, client, caches->settings);
 	rosterManager = new RosterManager(kaidan, client,  caches->rosterModel,
 	                                  caches->avatarStorage, vCardManager, this);
-	msgHandler = new MessageHandler(kaidan, client, caches->msgModel, this);
+	msgHandler = new MessageHandler(kaidan, this, client, caches->msgModel);
 	discoManager = new DiscoveryManager(client, this);
 	uploadManager = new UploadManager(client, rosterManager, this);
 	downloadManager = new DownloadManager(kaidan, caches->transferCache,
@@ -84,8 +83,11 @@ ClientWorker::ClientWorker(Caches *caches, Kaidan *kaidan, bool enableLogging, Q
 	versionManager->setClientVersion(VERSION_STRING);
 	versionManager->setClientOs(QSysInfo::prettyProductName());
 
-	// Client State Indication
-	connect(app, &QGuiApplication::applicationStateChanged, this, &ClientWorker::setCsiState);
+	// Inform the client worker when the application window becomes active or inactive.
+	connect(kaidan, &Kaidan::applicationWindowActiveChanged, this, &ClientWorker::setIsApplicationWindowActive);
+
+	// Reduce the network traffic when the application window is inactive.
+	connect(kaidan, &Kaidan::applicationWindowActiveChanged, client, &QXmppClient::setActive);
 
 	// account deletion
 	connect(kaidan, &Kaidan::deleteAccountFromClient, this, &ClientWorker::deleteAccountFromClient);
@@ -235,6 +237,11 @@ void ClientWorker::changeDisplayName(const QString &displayName)
 	}
 }
 
+bool ClientWorker::isApplicationWindowActive() const
+{
+	return m_isApplicationWindowActive;
+}
+
 void ClientWorker::onConnected()
 {
 	// no mutex needed, because this is called from updateClient()
@@ -346,12 +353,9 @@ void ClientWorker::onConnectionError(QXmppClient::Error error)
 	}
 }
 
-void ClientWorker::setCsiState(Qt::ApplicationState state)
+void ClientWorker::setIsApplicationWindowActive(bool active)
 {
-	if (state == Qt::ApplicationActive)
-		client->setActive(true);
-	else
-		client->setActive(false);
+	m_isApplicationWindowActive = active;
 }
 
 QString ClientWorker::generateJidResourceWithRandomSuffix(const QString jidResourcePrefix , unsigned int length) const

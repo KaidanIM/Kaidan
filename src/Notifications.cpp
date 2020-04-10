@@ -28,28 +28,41 @@
  *  along with Kaidan.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-// Kaidan
 #include "Notifications.h"
-#include "Kaidan.h"
-// Qt
-#include <QVariant>
+
 // KNotifications
 #ifdef HAVE_KNOTIFICATIONS
 #include <KNotification>
 #endif
 
+// Kaidan
+#include "Kaidan.h"
+
 #ifdef HAVE_KNOTIFICATIONS
-void Notifications::sendMessageNotification(const QString& jid, const QString& fromName, const QString& message)
+void Notifications::sendMessageNotification(const QString &senderJid, const QString &senderName, const QString &message)
 {
-	if (!Kaidan::instance()->notificationsMuted(jid)) {
-		KNotification *notification = new KNotification("new-message");
-		notification->setText(message);
-		notification->setTitle(fromName);
+	KNotification *notification = new KNotification("new-message");
+	notification->setText(message);
+	notification->setTitle(senderName);
 #ifdef Q_OS_ANDROID
-		notification->setIconName("kaidan-bw");
+	notification->setIconName("kaidan-bw");
 #endif
-		notification->sendEvent();
-	}
+	notification->setDefaultAction("Open");
+	notification->setActions(QStringList {
+	    QObject::tr("Mark as read")
+	});
+
+	QObject::connect(notification, &KNotification::defaultActivated, [=] {
+		emit Kaidan::instance()->openChatPageRequested(senderJid);
+		emit Kaidan::instance()->raiseWindowRequested();
+	});
+	QObject::connect(notification, &KNotification::action1Activated, [=] {
+		emit Kaidan::instance()->getRosterModel()->updateItemRequested(senderJid, [=](RosterItem &item) {
+			item.setUnreadMessages(0);
+		});
+	});
+
+	notification->sendEvent();
 }
 #else
 void Notifications::sendMessageNotification(const QString&, const QString&, const QString&)

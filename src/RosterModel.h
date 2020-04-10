@@ -61,6 +61,13 @@ public:
 	Q_REQUIRED_RESULT QHash<int, QByteArray> roleNames() const override;
 	Q_REQUIRED_RESULT QVariant data(const QModelIndex &index, int role) const override;
 
+	/**
+	 * Retrieves the name of a roster item.
+	 *
+	 * @return Name of the roster item or a null string
+	 */
+	Q_INVOKABLE QString itemName(const QString &jid) const;
+
 signals:
 	void addItemRequested(const RosterItem &item);
 	void removeItemRequested(const QString &jid);
@@ -82,6 +89,11 @@ private slots:
 	void setLastExchanged(const QString &contactJid, const QDateTime &newLastExchanged);
 
 private:
+	/**
+	 * Searches for the roster item with a given JID.
+	 */
+	std::optional<const RosterItem> findItem(const QString &jid) const;
+
 	void insertContact(int i, const RosterItem &item);
 	int updateItemPosition(int currentIndex);
 	int positionToInsert(const RosterItem &item);

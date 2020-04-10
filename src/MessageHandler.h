@@ -39,6 +39,7 @@
 // Kaidan
 #include "Message.h"
 
+class ClientWorker;
 class Kaidan;
 class MessageModel;
 class QXmppMessage;
@@ -53,8 +54,7 @@ class MessageHandler : public QObject
 	Q_OBJECT
 
 public:
-	MessageHandler(Kaidan *kaidan, QXmppClient *client, MessageModel *model,
-	               QObject *parent = nullptr);
+	MessageHandler(Kaidan *kaidan, ClientWorker *clientWorker, QXmppClient *client, MessageModel *model);
 
 	~MessageHandler();
 
@@ -89,6 +89,7 @@ private slots:
 
 private:
 	Kaidan *kaidan;
+	ClientWorker *m_clientWorker;
 	QXmppClient *client;
 	QXmppMessageReceiptManager receiptManager;
 	MessageModel *model;

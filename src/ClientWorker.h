@@ -35,7 +35,6 @@
 #include <QObject>
 #include <QSettings>
 #include <QTimer>
-class QGuiApplication;
 // QXmpp
 #include <QXmppClient.h>
 // Kaidan
@@ -125,10 +124,9 @@ public:
 	 * @param caches All caches running in the main thread for communication with the UI.
 	 * @param kaidan Main back-end class, running in the main thread.
 	 * @param enableLogging If logging of the XMPP stream should be done.
-	 * @param app The QGuiApplication to determine if the window is active.
 	 * @param parent Optional QObject-based parent.
 	 */
-	ClientWorker(Caches *caches, Kaidan *kaidan, bool enableLogging, QGuiApplication *app, QObject *parent = nullptr);
+	ClientWorker(Caches *caches, Kaidan *kaidan, bool enableLogging, QObject *parent = nullptr);
 
 	VCardManager *getVCardManager() const;
 
@@ -208,7 +206,23 @@ public slots:
 	 */
 	void changeDisplayName(const QString &displayName);
 
+	/**
+	 * Returns whether the application window is active.
+	 *
+	 * The application window is active when it is in the foreground and focused.
+	 */
+	bool isApplicationWindowActive() const;
+
 signals:
+	/**
+	 * Requests to show a notification for a chat message via the system's notification channel.
+	 *
+	 * @param senderJid JID of the message's sender
+	 * @param senderName name of the message's sender
+	 * @param message message to show
+	 */
+	void showMessageNotificationRequested(const QString &senderJid, const QString &senderName, const QString &message);
+
 	// Those signals are emitted by Kaidan.cpp and are used by this class.
 	void connectRequested();
 	void disconnectRequested();
@@ -229,6 +243,13 @@ signals:
 
 private slots:
 	/**
+	 * Sets the value to know whether the application window is active.
+	 *
+	 * @param active true if the application window is active, false otherwise
+	 */
+	void setIsApplicationWindowActive(bool active);
+
+	/**
 	 * Called when an authenticated connection to the server is established.
 	 */
 	void onConnected();
@@ -242,11 +263,6 @@ private slots:
 	 * Sets a new connection error.
 	 */
 	void onConnectionError(QXmppClient::Error error);
-
-	/**
-	 * Uses the QGuiApplication state to reduce network traffic when window is minimized
-	 */
-	void setCsiState(Qt::ApplicationState state);
 
 private:
 	/**
@@ -262,7 +278,6 @@ private:
 	LogHandler *logger;
 	Credentials creds;
 	bool enableLogging;
-	QGuiApplication *app;
 
 	RegistrationManager *registrationManager;
 	RosterManager *rosterManager;
@@ -272,6 +287,7 @@ private:
 	UploadManager *uploadManager;
 	DownloadManager *downloadManager;
 
+	bool m_isApplicationWindowActive;
 	bool m_isReconnecting = false;
 	QXmppConfiguration m_configToBeUsedOnNextConnect;
 

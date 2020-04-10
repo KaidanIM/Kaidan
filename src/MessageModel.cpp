@@ -248,7 +248,8 @@ void MessageModel::insertMessage(int idx, const Message &msg)
 
 void MessageModel::addMessage(Message msg)
 {
-	if (QXmppUtils::jidToBareJid(msg.from()) == m_currentChatJid || QXmppUtils::jidToBareJid(msg.to()) == m_currentChatJid) {
+	if (QXmppUtils::jidToBareJid(msg.from()) == m_currentChatJid ||
+			QXmppUtils::jidToBareJid(msg.to()) == m_currentChatJid) {
 		processMessage(msg);
 
 		// index where to add the new message

@@ -28,10 +28,22 @@
  *  along with Kaidan.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include <QString>
+#ifndef NOTIFICATIONS_H
+#define NOTIFICATIONS_H
+
+class QString;
 
 class Notifications
 {
 public:
-    static void sendMessageNotification(const QString &jid, const QString &fromName, const QString &message);
+	/**
+	 * Sends a system notification for a chat message.
+	 *
+	 * @param senderJid JID of the message's sender
+	 * @param senderName name of the message's sender
+	 * @param message message to show
+	 */
+	static void sendMessageNotification(const QString &senderJid, const QString &senderName, const QString &message);
 };
+
+#endif // NOTIFICATIONS_H

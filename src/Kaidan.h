@@ -213,6 +213,15 @@ public:
 	Q_INVOKABLE bool logInByUri(const QString &uri);
 
 signals:
+	/**
+	 * Emitted when the application window becomes active or inactive.
+	 *
+	 * The application window is active when it is in the foreground and focused.
+	 *
+	 * @param active true if the application window becomes active, false otherwise
+	 */
+	void applicationWindowActiveChanged(bool active);
+
 	void avatarStorageChanged();
 
 	/**
@@ -254,6 +263,18 @@ signals:
 	 * The client will be in connected state, when this is emitted.
 	 */
 	void loggedInWithNewCredentials();
+
+	/**
+	 * Raises the window to the foreground so that it is on top of all other windows.
+	 */
+	void raiseWindowRequested();
+
+	/**
+	 * Opens the chat page for a given JID.
+	 *
+	 * @param chatJid JID of the chat for which the chat page is opened
+	 */
+	void openChatPageRequested(const QString chatJid);
 
 	/**
 	 * Show passive notification
@@ -387,6 +408,13 @@ signals:
 	void registrationFailed(quint8 error, const QString &errrorMessage);
 
 public slots:
+	/**
+	 * Handles a changed application state and emits whether the application window is active.
+	 *
+	 * @param applicationState state of the GUI application
+	 */
+	void handleApplicationStateChanged(Qt::ApplicationState applicationState);
+
 	/**
 	 * Set current connection state
 	 */

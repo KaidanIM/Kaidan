@@ -91,12 +91,7 @@ RosterManager::RosterManager(Kaidan *kaidan,
 		}
 	});
 
-	// update local copy of chat partner
-	connect(kaidan->getMessageModel(), &MessageModel::currentChatJidChanged,
-	        this, [=] (const QString &jid) {
-		        m_currentChatJid = jid;
-	        }
-	);
+	connect(kaidan->getMessageModel(), &MessageModel::currentChatJidChanged, this, &RosterManager::setCurrentChatJid);
 
 	// user actions
 	connect(kaidan, &Kaidan::addContact, this, &RosterManager::addContact);
@@ -123,6 +118,11 @@ void RosterManager::populateRoster()
 
 	// replace current contacts with new ones from server
 	emit model->replaceItemsRequested(items);
+}
+
+void RosterManager::setCurrentChatJid(const QString &currentChatJid)
+{
+	m_currentChatJid = currentChatJid;
 }
 
 void RosterManager::addContact(const QString &jid, const QString &name, const QString &msg)

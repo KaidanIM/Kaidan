@@ -61,6 +61,7 @@ public slots:
 
 private slots:
 	void populateRoster();
+	void setCurrentChatJid(const QString &currentChatJid);
 	void handleMessage(const QXmppMessage &msg);
 
 private:

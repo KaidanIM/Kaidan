@@ -419,8 +419,8 @@ public slots:
 	/**
 	 * Sets the notifications to muted/unmuted.
 	 *
-	 * @param muted true if notifications should be muted.
-	 * @param jid contains the current chatpartner's jid.
+	 * @param muted true if notifications should be muted
+	 * @param jid JID of the entity for that notifications should be muted or unmuted
 	 */
 	void setNotificationsMuted(const QString& jid, bool muted);
 

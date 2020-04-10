@@ -178,8 +178,7 @@ QVariant MessageModel::data(const QModelIndex &index, int role) const
 
 void MessageModel::fetchMore(const QModelIndex &)
 {
-	emit msgDb->fetchMessagesRequested(kaidan->getJid(), chatPartner(),
-	                                   m_messages.size());
+	emit msgDb->fetchMessagesRequested(kaidan->getJid(), m_chatPartner, m_messages.size());
 }
 
 bool MessageModel::canFetchMore(const QModelIndex &) const

@@ -107,41 +107,12 @@ Kirigami.ScrollablePage {
 
 		delegate: RosterListItem {
 			id: rosterItem
-			width: root.width
-			height: 65
-			name: model.name ? model.name : model.jid
 			jid: model.jid
+			name: model.name ? model.name : model.jid
 			lastMessage: model.lastMessage
-			presenceType: Kaidan.presenceCache.getPresenceType(model.jid)
-			statusMsg: Kaidan.presenceCache.getStatusText(model.jid)
 			unreadMessages: model.unreadMessages
-			avatarImagePath: Kaidan.avatarStorage.getAvatarUrl(model.jid)
-
-			backgroundColor: {
-				if (!Kirigami.Settings.isMobile &&
-						Kaidan.messageModel.currentChatJid === model.jid) {
-					Kirigami.Theme.highlightColor
-				} else {
-					Kirigami.Theme.backgroundColor
-				}
-			}
-
 			onClicked: openChatPage(model.jid)
-
-			function newPresenceArrived(jid) {
-				if (jid === model.jid) {
-					rosterItem.presenceType = Kaidan.presenceCache.getPresenceType(model.jid)
-					rosterItem.statusMsg = Kaidan.presenceCache.getStatusText(model.jid)
-				}
-			}
-
-			Component.onCompleted: {
-				Kaidan.presenceCache.presenceChanged.connect(newPresenceArrived)
-			}
-
-			Component.onDestruction: {
-				Kaidan.presenceCache.presenceChanged.disconnect(newPresenceArrived)
-			}
+			isSelected: !Kirigami.Settings.isMobile && Kaidan.messageModel.currentChatJid === jid
 		}
 
 		Connections {

@@ -39,17 +39,20 @@ import im.kaidan.kaidan 1.0
 Kirigami.SwipeListItem {
 	id: listItem
 
-	property string name
 	property string jid
+	property string name
 	property string lastMessage
 	property int unreadMessages
-	property string avatarImagePath
-	property int presenceType
-	property string statusMsg
+	property string avatarImagePath: Kaidan.avatarStorage.getAvatarUrl(jid)
+	property int presenceType: Kaidan.presenceCache.getPresenceType(jid)
+	property string statusMsg: Kaidan.presenceCache.getStatusText(jid)
+	property bool isSelected
 
 	topPadding: 0
 	leftPadding: 0
 	bottomPadding: 0
+	height: 65
+	backgroundColor: isSelected ? Kirigami.Theme.highlightColor : Kirigami.Theme.backgroundColor
 
 	RowLayout {
 		spacing: Kirigami.Units.gridUnit * 0.5
@@ -137,17 +140,27 @@ Kirigami.SwipeListItem {
 			Layout.preferredHeight: Kirigami.Units.gridUnit * 1.25
 			Layout.preferredWidth: Kirigami.Units.gridUnit * 1.25
 		}
-	}
 
-	function handleNotificationsMuted(mutedContact) {
-		counter.muted = Kaidan.notificationsMuted(jid)
-		muteIcon.visible = Kaidan.notificationsMuted(jid)
-	}
+		Connections {
+			target: Kaidan
 
-	Component.onCompleted: {
-		Kaidan.notificationsMutedChanged.connect(handleNotificationsMuted)
-	}
-	Component.onDestruction: {
-		Kaidan.notificationsMutedChanged.disconnect(handleNotificationsMuted)
+			onNotificationsMutedChanged: {
+				if (jid == listItem.jid) {
+					counter.muted = Kaidan.notificationsMuted(jid)
+					muteIcon.visible = Kaidan.notificationsMuted(jid)
+				}
+			}
+		}
+
+		Connections {
+			target: Kaidan.presenceCache
+
+			onPresenceChanged: {
+				if (jid === listItem.jid) {
+					presenceType = Kaidan.presenceCache.getPresenceType(jid)
+					statusMsg = Kaidan.presenceCache.getStatusText(jid)
+				}
+			}
+		}
 	}
 }

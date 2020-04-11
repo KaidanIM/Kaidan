@@ -92,9 +92,9 @@ RosterManager::RosterManager(Kaidan *kaidan,
 	});
 
 	// update local copy of chat partner
-	connect(kaidan->getMessageModel(), &MessageModel::chatPartnerChanged,
+	connect(kaidan->getMessageModel(), &MessageModel::currentChatJidChanged,
 	        this, [=] (const QString &jid) {
-		        m_chatPartner = jid;
+		        m_currentChatJid = jid;
 	        }
 	);
 
@@ -201,7 +201,7 @@ void RosterManager::handleMessage(const QXmppMessage &msg)
 		emit model->updateItemRequested(contactJid, [](RosterItem &item) {
 			item.setUnreadMessages(0);
 		});
-	} else if (m_chatPartner != contactJid) {
+	} else if (m_currentChatJid != contactJid) {
 		emit model->updateItemRequested(contactJid, [](RosterItem &item) {
 			item.setUnreadMessages(item.unreadMessages() + 1);
 		});

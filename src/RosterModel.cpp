@@ -84,11 +84,9 @@ RosterModel::RosterModel(RosterDb *rosterDb, QObject *parent)
 
 void RosterModel::setMessageModel(MessageModel *model)
 {
-	connect(model, &MessageModel::chatPartnerChanged,
-	        this, [=] (const QString &chatPartner) {
+	connect(model, &MessageModel::currentChatJidChanged, this, [=] (const QString &currentChatJid) {
 		// reset unread message counter
-		emit updateItemRequested(chatPartner,
-		                         [] (RosterItem &item) {
+		emit updateItemRequested(currentChatJid, [] (RosterItem &item) {
 			item.setUnreadMessages(0);
 		});
 	});

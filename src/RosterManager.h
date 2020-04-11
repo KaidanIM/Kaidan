@@ -71,7 +71,7 @@ private:
 	VCardManager *vCardManager;
 
 	QXmppRosterManager *manager;
-	QString m_chatPartner;
+	QString m_currentChatJid;
 };
 
 #endif // ROSTERMANAGER_H

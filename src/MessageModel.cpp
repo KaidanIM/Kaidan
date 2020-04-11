@@ -178,7 +178,7 @@ QVariant MessageModel::data(const QModelIndex &index, int role) const
 
 void MessageModel::fetchMore(const QModelIndex &)
 {
-	emit msgDb->fetchMessagesRequested(kaidan->getJid(), m_chatPartner, m_messages.size());
+	emit msgDb->fetchMessagesRequested(kaidan->getJid(), m_currentChatJid, m_messages.size());
 }
 
 bool MessageModel::canFetchMore(const QModelIndex &) const
@@ -186,20 +186,20 @@ bool MessageModel::canFetchMore(const QModelIndex &) const
 	return !m_fetchedAll;
 }
 
-QString MessageModel::chatPartner()
+QString MessageModel::currentChatJid()
 {
-	return m_chatPartner;
+	return m_currentChatJid;
 }
 
-void MessageModel::setChatPartner(const QString &chatPartner)
+void MessageModel::setCurrentChatJid(const QString &currentChatJid)
 {
-	if (chatPartner == m_chatPartner)
+	if (currentChatJid == m_currentChatJid)
 		return;
 
-	m_chatPartner = chatPartner;
+	m_currentChatJid = currentChatJid;
 	m_fetchedAll = false;
 
-	emit chatPartnerChanged(chatPartner);
+	emit currentChatJidChanged(currentChatJid);
 	clearAll();
 }
 
@@ -248,9 +248,7 @@ void MessageModel::insertMessage(int idx, const Message &msg)
 
 void MessageModel::addMessage(Message msg)
 {
-	if (QXmppUtils::jidToBareJid(msg.from()) == m_chatPartner
-	    || QXmppUtils::jidToBareJid(msg.to()) == m_chatPartner) {
-
+	if (QXmppUtils::jidToBareJid(msg.from()) == m_currentChatJid || QXmppUtils::jidToBareJid(msg.to()) == m_currentChatJid) {
 		processMessage(msg);
 
 		// index where to add the new message

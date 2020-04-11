@@ -40,8 +40,7 @@ class Kaidan;
 class MessageModel : public QAbstractListModel
 {
 	Q_OBJECT
-	Q_PROPERTY(QString chatPartner READ chatPartner WRITE setChatPartner
-	                               NOTIFY chatPartnerChanged)
+	Q_PROPERTY(QString currentChatJid READ currentChatJid WRITE setCurrentChatJid NOTIFY currentChatJidChanged)
 
 public:
 	enum MessageRoles {
@@ -79,8 +78,8 @@ public:
 	Q_INVOKABLE void fetchMore(const QModelIndex &parent) override;
 	Q_INVOKABLE bool canFetchMore(const QModelIndex &parent) const override;
 
-	QString chatPartner();
-	void setChatPartner(const QString &chatPartner);
+	QString currentChatJid();
+	void setCurrentChatJid(const QString &currentChatJid);
 
 	Q_INVOKABLE bool canCorrectMessage(const QString &msgId) const;
 
@@ -114,7 +113,7 @@ public:
 	Q_INVOKABLE void sendPendingMessages();
 
 signals:
-	void chatPartnerChanged(const QString &chatPartner);
+	void currentChatJidChanged(const QString &currentChatJid);
 
 	void addMessageRequested(const Message &msg);
 	void updateMessageRequested(const QString &id,
@@ -145,7 +144,7 @@ private:
 	MessageDb *msgDb;
 
 	QVector<Message> m_messages;
-	QString m_chatPartner;
+	QString m_currentChatJid;
 	bool m_fetchedAll = false;
 };
 

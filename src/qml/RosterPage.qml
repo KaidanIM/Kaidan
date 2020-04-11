@@ -117,7 +117,7 @@ Kirigami.ScrollablePage {
 			avatarImagePath: Kaidan.avatarStorage.getAvatarUrl(model.jid)
 			backgroundColor: {
 				if (!Kirigami.Settings.isMobile &&
-						Kaidan.messageModel.chatPartner === model.jid) {
+						Kaidan.messageModel.currentChatJid === model.jid) {
 					Kirigami.Theme.highlightColor
 				} else {
 					Kirigami.Theme.backgroundColor
@@ -125,12 +125,12 @@ Kirigami.ScrollablePage {
 			}
 			onClicked: {
 				searchAction.checked = false
-				// We need to cache the chatName, because changing the chatPartner in the
+				// We need to cache the chatName, because changing the currentChatJid in the
 				// message model will in some cases also update the roster model. That
 				// will then remove this item and readd an updated version of it, so
 				// model.* won't work anymore after this.
 				var chatName = model.name ? model.name : model.jid
-				Kaidan.messageModel.chatPartner = model.jid
+				Kaidan.messageModel.currentChatJid = model.jid
 				pageStack.push(chatPage, {
 					"chatName": chatName
 				})

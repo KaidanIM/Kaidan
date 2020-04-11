@@ -69,27 +69,27 @@ ChatPageBase {
 		Kirigami.Action {
 			visible: true
 			icon.name: {
-				Kaidan.notificationsMuted(Kaidan.messageModel.chatPartner)
+				Kaidan.notificationsMuted(Kaidan.messageModel.currentChatJid)
 					? "player-volume"
 					: "audio-volume-muted-symbolic"
 			}
 			text: {
-				Kaidan.notificationsMuted(Kaidan.messageModel.chatPartner)
+				Kaidan.notificationsMuted(Kaidan.messageModel.currentChatJid)
 					? qsTr("Unmute notifications")
 					: qsTr("Mute notifications")
 			}
 			onTriggered: {
 				Kaidan.setNotificationsMuted(
-					Kaidan.messageModel.chatPartner,
-					!Kaidan.notificationsMuted(Kaidan.messageModel.chatPartner)
+					Kaidan.messageModel.currentChatJid,
+					!Kaidan.notificationsMuted(Kaidan.messageModel.currentChatJid)
 				)
 			}
 
 			function handleNotificationsMuted(jid) {
-				text = Kaidan.notificationsMuted(Kaidan.messageModel.chatPartner)
+				text = Kaidan.notificationsMuted(Kaidan.messageModel.currentChatJid)
 						? qsTr("Unmute notifications")
 						: qsTr("Mute notifications")
-				icon.name = Kaidan.notificationsMuted(Kaidan.messageModel.chatPartner)
+				icon.name = Kaidan.notificationsMuted(Kaidan.messageModel.currentChatJid)
 							? "player-volume"
 							: "audio-volume-muted-symbolic"
 			}
@@ -105,7 +105,7 @@ ChatPageBase {
 			visible: true
 			icon.name: "user-identity"
 			text: qsTr("View profile")
-			onTriggered: pageStack.push(userProfilePage, {jid: Kaidan.messageModel.chatPartner, name: chatName})
+			onTriggered: pageStack.push(userProfilePage, {jid: Kaidan.messageModel.currentChatJid, name: chatName})
 		},
 		Kirigami.Action {
 			readonly property int type: Enums.MessageType.MessageImage
@@ -118,7 +118,7 @@ ChatPageBase {
 			}
 
 			onTriggered: {
-				sendMediaSheet.sendNewMessageType(Kaidan.messageModel.chatPartner, type)
+				sendMediaSheet.sendNewMessageType(Kaidan.messageModel.currentChatJid, type)
 			}
 		},
 		Kirigami.Action {
@@ -131,7 +131,7 @@ ChatPageBase {
 			}
 
 			onTriggered: {
-				sendMediaSheet.sendNewMessageType(Kaidan.messageModel.chatPartner, type)
+				sendMediaSheet.sendNewMessageType(Kaidan.messageModel.currentChatJid, type)
 			}
 		},
 		Kirigami.Action {
@@ -145,7 +145,7 @@ ChatPageBase {
 			}
 
 			onTriggered: {
-				sendMediaSheet.sendNewMessageType(Kaidan.messageModel.chatPartner, type)
+				sendMediaSheet.sendNewMessageType(Kaidan.messageModel.currentChatJid, type)
 			}
 		},
 		Kirigami.Action {
@@ -158,7 +158,7 @@ ChatPageBase {
 			}
 
 			onTriggered: {
-				sendMediaSheet.sendNewMessageType(Kaidan.messageModel.chatPartner, type)
+				sendMediaSheet.sendNewMessageType(Kaidan.messageModel.currentChatJid, type)
 			}
 		},
 		Kirigami.Action {
@@ -322,7 +322,7 @@ ChatPageBase {
 	function openFileDialog(filterName, filter, title) {
 		fileChooserLoader.source = "qrc:/qml/elements/FileChooser.qml"
 		fileChooserLoader.item.selectedNameFilter = filterName
-		fileChooserLoader.item.accepted.connect(function() { sendMediaSheet.sendFile(Kaidan.messageModel.chatPartner, fileChooserLoader.item.fileUrl) })
+		fileChooserLoader.item.accepted.connect(function() { sendMediaSheet.sendFile(Kaidan.messageModel.currentChatJid, fileChooserLoader.item.fileUrl) })
 		if (title !== undefined)
 			fileChooserLoader.item.title = title
 		fileChooserLoader.item.open()
@@ -676,14 +676,14 @@ ChatPageBase {
 					// send the message
 					if (messageField.state == "compose") {
 						Kaidan.sendMessage(
-							Kaidan.messageModel.chatPartner,
+							Kaidan.messageModel.currentChatJid,
 							messageField.text,
 							isWritingSpoiler,
 							spoilerHintField.text
 						)
 					} else if (messageField.state == "edit") {
 						Kaidan.correctMessage(
-							Kaidan.messageModel.chatPartner,
+							Kaidan.messageModel.currentChatJid,
 							messageToCorrect,
 							messageField.text
 						)

@@ -29,7 +29,7 @@
  */
 
 import QtQuick 2.12
-import QtQuick.Controls.Material 2.12
+import QtQuick.Controls.Material 2.12 as Material
 import org.kde.kirigami 2.8 as Kirigami
 import StatusBar 0.1
 
@@ -51,7 +51,7 @@ Kirigami.ApplicationWindow {
 	readonly property int largeButtonWidth: Kirigami.Units.gridUnit * 25
 
 	StatusBar {
-		color: Material.color(Material.Green, Material.Shade700)
+		color: Material.Material.color(Material.Material.Green, Material.Material.Shade700)
 	}
 
 	// Global and Contextual Drawers

@@ -69,8 +69,19 @@ class Kaidan : public QObject
 	Q_PROPERTY(QString jid READ jid WRITE setJid NOTIFY jidChanged)
 	Q_PROPERTY(QString jidResourcePrefix READ jidResourcePrefix WRITE setJidResourcePrefix NOTIFY jidResourcePrefixChanged)
 	Q_PROPERTY(QString password READ password WRITE setPassword NOTIFY passwordChanged)
+	Q_PROPERTY(PasswordVisibility passwordVisibility READ passwordVisibility WRITE setPasswordVisibility NOTIFY passwordVisibilityChanged)
 
 public:
+	/**
+	 * State which specifies in which way a password is shown on the account transfer page
+	 */
+	enum PasswordVisibility {
+		PasswordVisible, ///< The password is included in the QR code and shown as plain text.
+		PasswordVisibleQrOnly, ///< The password is included in the QR code but not shown as plain text.
+		PasswordInvisible ///< The password is neither included in the QR code nor shown as plain text.
+	};
+	Q_ENUM(PasswordVisibility)
+
 	static Kaidan *instance();
 
 	Kaidan(QGuiApplication *app, bool enableLogging = true, QObject *parent = nullptr);
@@ -157,6 +168,16 @@ public:
 	{
 		return m_creds.password;
 	}
+
+	/**
+	 * Sets the visibility of the password on the account transfer page.
+	 */
+	void setPasswordVisibility(PasswordVisibility passwordVisibility);
+
+	/**
+	 * Returns the visibility of the password on the account transfer page.
+	 */
+	PasswordVisibility passwordVisibility() const;
 
 	RosterModel* rosterModel() const
 	{
@@ -274,6 +295,11 @@ signals:
 	 * @param chatJid JID of the chat for which the chat page is opened
 	 */
 	void openChatPageRequested(const QString chatJid);
+
+	/**
+	 * Emitted when the removal state of the password on the account transfer page changed.
+	 */
+	void passwordVisibilityChanged();
 
 	/**
 	 * Show passive notification

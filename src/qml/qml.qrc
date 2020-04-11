@@ -17,6 +17,10 @@
 		<file>AccountDeletionFromClientAndServerConfirmationPage.qml</file>
 		<file>AccountTransferPage.qml</file>
 
+                <file>account-transfer/PasswordRemovalPage.qml</file>
+		<file>account-transfer/PasswordRemovalFromPlainTextConfirmationPage.qml</file>
+		<file>account-transfer/PasswordRemovalFromPlainTextAndQrCodeConfirmationPage.qml</file>
+
 		<file>elements/ChatMessageContextMenu.qml</file>
 		<file>elements/SubRequestAcceptSheet.qml</file>
 		<file>elements/RosterAddContactSheet.qml</file>

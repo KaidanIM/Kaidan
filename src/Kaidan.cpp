@@ -97,6 +97,9 @@ Kaidan::Kaidan(QGuiApplication *app, bool enableLogging, QObject *parent)
 		setJidResourcePrefix(KAIDAN_JID_RESOURCE_DEFAULT_PREFIX);
 	m_creds.isFirstTry = false;
 
+	setPasswordVisibility(PasswordVisibility(
+		m_caches->settings->value(KAIDAN_SETTINGS_AUTH_PASSWD_VISIBILITY).toUInt()));
+
 	//
 	// Start ClientWorker on new thread
 	//
@@ -191,6 +194,8 @@ void Kaidan::deleteCredentials()
 	m_caches->settings->remove(KAIDAN_SETTINGS_AUTH_PASSWD);
 	setPassword(QString());
 
+	setPasswordVisibility(PasswordVisible);
+
 	emit newCredentialsNeeded();
 }
 
@@ -229,6 +234,19 @@ void Kaidan::setPassword(const QString &password)
 	// credentials were modified -> first try
 	m_creds.isFirstTry = true;
 	emit passwordChanged();
+}
+
+void Kaidan::setPasswordVisibility(PasswordVisibility passwordVisibility)
+{
+	m_caches->settings->setValue(KAIDAN_SETTINGS_AUTH_PASSWD_VISIBILITY, quint8(passwordVisibility));
+	emit passwordVisibilityChanged();
+}
+
+Kaidan::PasswordVisibility Kaidan::passwordVisibility() const
+{
+	return m_caches->settings
+		->value(KAIDAN_SETTINGS_AUTH_PASSWD_VISIBILITY, PasswordVisible)
+		.value<Kaidan::PasswordVisibility>();
 }
 
 ClientWorker::ConnectionError Kaidan::connectionError() const

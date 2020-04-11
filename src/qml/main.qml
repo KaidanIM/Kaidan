@@ -35,6 +35,7 @@ import StatusBar 0.1
 
 import im.kaidan.kaidan 1.0
 
+import "account-transfer"
 import "elements"
 import "registration"
 import "settings"
@@ -90,6 +91,9 @@ Kirigami.ApplicationWindow {
 	Component {id: qrCodeScannerPage; QrCodeScannerPage {}}
 	Component {id: userProfilePage; UserProfilePage {}}
 	Component {id: accountTransferPage; AccountTransferPage {}}
+	Component {id: passwordRemovalPage; PasswordRemovalPage {}}
+	Component {id: passwordRemovalFromPlainTextConfirmationPage; PasswordRemovalFromPlainTextConfirmationPage {}}
+	Component {id: passwordRemovalFromPlainTextAndQrCodeConfirmationPage; PasswordRemovalFromPlainTextAndQrCodeConfirmationPage {}}
 	Component {id: accountDeletionPage; AccountDeletionPage {}}
 	Component {id: accountDeletionFromClientConfirmationPage; AccountDeletionFromClientConfirmationPage {}}
 	Component {id: accountDeletionFromClientAndServerConfirmationPage; AccountDeletionFromClientAndServerConfirmationPage {}}
@@ -132,6 +136,16 @@ Kirigami.ApplicationWindow {
 		pageStack.push(rosterPage)
 		if (!Kirigami.Settings.isMobile)
 			pageStack.push(emptyChatPage)
+	}
+
+	/**
+	 * Pops a given count of layers from the page stack.
+	 *
+	 * @param countOfLayersToPop count of layers which are popped
+	 */
+	function popLayers(countOfLayersToPop) {
+		for (var i = 0; i < countOfLayersToPop; i++)
+			pageStack.layers.pop()
 	}
 
 	/**

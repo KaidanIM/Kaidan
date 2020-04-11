@@ -38,7 +38,8 @@ import im.kaidan.kaidan 1.0
 import "elements"
 
 /**
- * This page shows the user's credentials as a QR code or as cleartext, which allows the user to log in on another device.
+ * This page shows the user's credentials as a QR code or as plain text, which
+ * allows the user to log in on another device.
  */
 Kirigami.Page {
 	id: root
@@ -47,6 +48,23 @@ Kirigami.Page {
 	rightPadding: 0
 	topPadding: 0
 	bottomPadding: 0
+
+	contextualActions: [
+		// action to open a page for removing the password from the QR code or
+		// from the plain text view
+		Kirigami.Action {
+			text: qsTr("Remove password")
+			icon.name: "delete"
+			visible: Kaidan.passwordVisibility !== Kaidan.PasswordInvisible
+
+			onTriggered: {
+				if (Kaidan.passwordVisibility === Kaidan.PasswordVisible)
+				    pageStack.layers.push(passwordRemovalPage)
+				else
+					pageStack.layers.push(passwordRemovalFromPlainTextAndQrCodeConfirmationPage)
+			}
+		}
+	]
 
 	QrCodeGenerator {
 		id: qrCodeGenerator
@@ -84,7 +102,7 @@ Kirigami.Page {
 		}
 
 		Kirigami.FormLayout {
-			id: cleartext
+			id: plainText
 			visible: false
 
 			Controls.Label {
@@ -93,7 +111,8 @@ Kirigami.Page {
 			}
 
 			Controls.Label {
-				text: Kaidan.password
+				text: visible ? Kaidan.password : ""
+				visible: Kaidan.passwordVisibility === Kaidan.PasswordVisible
 				Kirigami.FormData.label: qsTr("Password:")
 			}
 		}
@@ -112,37 +131,41 @@ Kirigami.Page {
 				label.text: checked ? qsTr("Hide QR code") : qsTr("Show as QR code")
 				checkable: true
 
-				// If that was not used, this button would change its label text but not its checked state when the button for showing the cleartext is clicked right after it.
+				// If that was not used, this button would change its label text
+				// but not its checked state when the button for showing the
+				// plain text is clicked right after it.
 				checked: qrCode.visible
 
 				onClicked: {
 					if (qrCode.visible) {
 						qrCode.visible = false
-						cleartext.visible = false
+						plainText.visible = false
 						explanation.visible = true
 					} else {
 						qrCode.visible = true
-						cleartext.visible = false
+						plainText.visible = false
 						explanation.visible = false
 					}
 				}
 			}
 
-			// button for showing or hiding the credentials as cleartext
+			// button for showing or hiding the credentials as plain text
 			CenteredAdaptiveButton {
 				label.text: checked ? qsTr("Hide text") : qsTr("Show as text")
 				checkable: true
 
-				// If that was not used, this button would change its label text but not its checked state when the button for showing the QR code is clicked right after it.
-				checked: cleartext.visible
+				// If that was not used, this button would change its label text
+				// but not its checked state when the button for showing the QR
+				// code is clicked right after it.
+				checked: plainText.visible
 
 				onClicked: {
-					if (cleartext.visible) {
-						cleartext.visible = false
+					if (plainText.visible) {
+						plainText.visible = false
 						qrCode.visible = false
 						explanation.visible = true
 					} else {
-						cleartext.visible = true
+						plainText.visible = true
 						qrCode.visible = false
 						explanation.visible = false
 					}

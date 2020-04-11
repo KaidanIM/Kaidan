@@ -268,27 +268,30 @@ void Kaidan::addOpenUri(const QString &uri)
 	}
 }
 
-bool Kaidan::logInByUri(const QString &uri)
+quint8 Kaidan::logInByUri(const QString &uri)
 {
 	if (!QXmppUri::isXmppUri(uri)) {
 		notifyForInvalidLoginUri();
-		return false;
+		return quint8(LoginByUriState::InvalidLoginUri);
 	}
 
 	QXmppUri parsedUri(uri);
 
-	if (!CredentialsValidator::isAccountJidValid(parsedUri.jid()) || !parsedUri.hasAction(QXmppUri::Action::Login) || !CredentialsValidator::isPasswordValid(parsedUri.password())) {
+	if (!CredentialsValidator::isAccountJidValid(parsedUri.jid())) {
 		notifyForInvalidLoginUri();
-		return false;
+		return quint8(LoginByUriState::InvalidLoginUri);
 	}
 
 	setJid(parsedUri.jid());
-	setPassword(parsedUri.password());
+
+	if (!parsedUri.hasAction(QXmppUri::Login) || !CredentialsValidator::isPasswordValid(parsedUri.password())) {
+		return quint8(LoginByUriState::PasswordNeeded);
+	}
 
 	// Connect with the extracted credentials.
+	setPassword(parsedUri.password());
 	mainConnect();
-
-	return true;
+	return quint8(LoginByUriState::Connecting);
 }
 
 void Kaidan::notifyForInvalidLoginUri()

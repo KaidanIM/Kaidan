@@ -228,9 +228,26 @@ public:
 	/**
 	 * Connects to the server by the parsed credentials (bare JID and password) from a given XMPP URI (e.g. from scanning a QR code) like "xmpp:user@example.org?login;password=abc"
 	 *
-	 * @return true if the login worked
+	 * The URI is used in the following cases.
+	 *
+	 * Login attempt (LoginByUriState::Connecting is returned):
+	 *	xmpp:user@example.org?login;password=abc
+	 *
+	 * Pre-fill of JID for opening login page (LoginByUriState::PasswordNeeded is returned):
+	 *	xmpp:user@example.org?login;password=
+	 *	xmpp:user@example.org?login;password
+	 *	xmpp:user@example.org?login;
+	 *	xmpp:user@example.org?login
+	 *	xmpp:user@example.org?
+	 *	xmpp:user@example.org
+	 *
+	 * In all other cases, LoginByUriState::InvalidLoginUri is returned.
+	 *
+	 * @param uri string which can be an XMPP login URI
+	 *
+	 * @return the state which specifies how the XMPP login URI was used
 	 */
-	Q_INVOKABLE bool logInByUri(const QString &uri);
+	Q_INVOKABLE quint8 logInByUri(const QString &uri);
 
 signals:
 	/**

@@ -103,6 +103,16 @@ namespace Enums {
 	};
 	Q_ENUM_NS(DeliveryState)
 
+	/**
+	 * State which specifies how the XMPP login URI was used
+	 */
+	enum class LoginByUriState {
+		Connecting,         ///< The JID and password are included in the URI and the client is connecting.
+		PasswordNeeded,     ///< The JID is included in the URI but not the password.
+		InvalidLoginUri     ///< The URI cannot be used to log in.
+	};
+	Q_ENUM_NS(LoginByUriState)
+
 	template <typename T, ENABLE_IF(!has_enum_type<T>::value && std::is_enum<T>::value)>
 	QString toString(const T flag) {
 		static const QMetaEnum e = QMetaEnum::fromType<T>();

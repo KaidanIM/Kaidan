@@ -40,6 +40,7 @@ CredentialsField {
 	placeholderText: qsTr("user@example.org")
 	inputMethodHints: Qt.ImhEmailCharactersOnly
 	invalidHintText: qsTr("The chat address must have the form <b>username@server</b>")
+	text: Kaidan.jid
 
 	// Validate the entered JID and show a hint if it is not valid.
 	onTextChanged: {

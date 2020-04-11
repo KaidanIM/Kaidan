@@ -52,7 +52,7 @@ Kirigami.Page {
 	bottomPadding: 0
 
 	property bool cameraEnabled: false
-	property bool loggingIn: false
+	property bool connecting: false
 
 	// hint for camera issues
 	Kirigami.InlineMessage {
@@ -99,9 +99,17 @@ Kirigami.Page {
 		id: scannerFilter
 
 		onScanningSucceeded: {
-			if (!loggingIn) {
-				// Login by the data from the decoded QR code.
-				loggingIn = Kaidan.logInByUri(result)
+			if (!connecting) {
+				// Try to log in by the data from the decoded QR code.
+				switch (Kaidan.logInByUri(result)) {
+				case Enums.Connecting:
+					connecting = true
+					break;
+				case Enums.PasswordNeeded:
+					pageStack.push(loginPage)
+					break;
+				case Enums.InvalidLoginUri:
+				}
 			}
 		}
 
@@ -124,14 +132,14 @@ Kirigami.Page {
 		id: loadingArea
 		z: 2
 		anchors.centerIn: parent
-		visible: loggingIn
+		visible: connecting
 
 		Controls.BusyIndicator {
 			Layout.alignment: Qt.AlignHCenter
 		}
 
 		Controls.Label {
-			text: "<i>" + qsTr("Logging in…") + "</i>"
+			text: "<i>" + qsTr("Connecting…") + "</i>"
 			color: Kirigami.Theme.textColor
 		}
 
@@ -139,14 +147,14 @@ Kirigami.Page {
 			target: Kaidan
 
 			onConnectionStateChanged: {
-				if (loggingIn) {
+				if (connecting) {
 					switch (Kaidan.connectionState) {
 					case Enums.StateConnected:
 						popAllLayers()
 						break
 					case Enums.StateDisconnected:
 						showPassiveNotificationForConnectionError()
-						loggingIn = false
+						connecting = false
 						break
 					}
 				}

@@ -708,6 +708,9 @@ ChatPageBase {
 
 					// reenable the button
 					sendButton.enabled = true
+
+					// Show the cursor even if another element like the sendButton (after clicking on it) was focused before.
+					messageField.forceActiveFocus()
 				}
 			}
 		}

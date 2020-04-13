@@ -438,9 +438,9 @@ ChatPageBase {
 				enabled: contextMenu.message && contextMenu.message.bodyLabel.visible
 				onTriggered: {
 					if (contextMenu.message && !contextMenu.message.isSpoiler || message && contextMenu.message.isShowingSpoiler)
-						Utils.copyToClipboard(contextMenu.message && contextMenu.message.messageBody);
+						Utils.copyToClipboard(contextMenu.message && contextMenu.message.messageBody)
 					else
-						Utils.copyToClipboard(contextMenu.message && contextMenu.message.spoilerHint);
+						Utils.copyToClipboard(contextMenu.message && contextMenu.message.spoilerHint)
 				}
 			}
 

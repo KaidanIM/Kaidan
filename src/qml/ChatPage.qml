@@ -489,7 +489,12 @@ ChatPageBase {
 				messageToCorrect = id
 				messageField.text = body
 				messageField.state = "edit"
+
+				// Move the cursor to the end of the text being corrected.
+				messageField.selectAll()
+				messageField.cursorPosition = messageField.selectionEnd
 			}
+
 			onQuoteRequested: {
 				var quotedText = ""
 				var lines = body.split("\n")

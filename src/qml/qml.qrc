@@ -17,6 +17,7 @@
 		<file>AccountDeletionFromClientAndServerConfirmationPage.qml</file>
 		<file>AccountTransferPage.qml</file>
 
+		<file>elements/ChatMessageContextMenu.qml</file>
 		<file>elements/SubRequestAcceptSheet.qml</file>
 		<file>elements/RosterAddContactSheet.qml</file>
 		<file>elements/RosterRenameContactSheet.qml</file>

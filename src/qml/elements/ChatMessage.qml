@@ -40,7 +40,7 @@ import MediaUtils 0.1
 RowLayout {
 	id: root
 
-	property Controls.Menu menu
+	property Controls.Menu contextMenu
 
 	property string msgId
 	property string senderJid
@@ -117,16 +117,13 @@ RowLayout {
 			MouseArea {
 				anchors.fill: parent
 				acceptedButtons: Qt.LeftButton | Qt.RightButton
+
 				onClicked: {
-					if (mouse.button === Qt.RightButton) {
-						menu.message = root
-						menu.popup()
-					}
+					if (mouse.button === Qt.RightButton)
+						showContextMenu()
 				}
-				onPressAndHold: {
-					contextMenu.message = root
-					contextMenu.popup()
-				}
+
+				onPressAndHold: showContextMenu()
 			}
 		}
 
@@ -320,6 +317,18 @@ RowLayout {
 	// placeholder
 	Item {
 		Layout.fillWidth: true
+	}
+
+	/**
+	 * Shows a context menu (if available) for this message.
+	 *
+	 * That is especially the case when this message is an element of the ChatPage.
+	 */
+	function showContextMenu() {
+		if (contextMenu) {
+			contextMenu.message = this
+			contextMenu.popup()
+		}
 	}
 
 	function updateIsLoading() {

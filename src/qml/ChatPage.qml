@@ -430,44 +430,15 @@ ChatPageBase {
 		// Connect to the database,
 		model: Kaidan.messageModel
 
-		Controls.Menu {
-			id: contextMenu
-			property ChatMessage message: null
-			Controls.MenuItem {
-				text: qsTr("Copy message")
-				enabled: contextMenu.message && contextMenu.message.bodyLabel.visible
-				onTriggered: {
-					if (contextMenu.message && !contextMenu.message.isSpoiler || message && contextMenu.message.isShowingSpoiler)
-						Utils.copyToClipboard(contextMenu.message && contextMenu.message.messageBody)
-					else
-						Utils.copyToClipboard(contextMenu.message && contextMenu.message.spoilerHint)
-				}
-			}
-
-			Controls.MenuItem {
-				text: qsTr("Edit message")
-				enabled: Kaidan.messageModel.canCorrectMessage(contextMenu.message && contextMenu.message.msgId)
-				onTriggered: contextMenu.message.messageEditRequested(contextMenu.message.msgId, contextMenu.message.messageBody)
-			}
-
-			Controls.MenuItem {
-				text: qsTr("Copy download URL")
-				enabled: contextMenu.message && contextMenu.message.mediaGetUrl
-				onTriggered: Utils.copyToClipboard(contextMenu.message.mediaGetUrl)
-			}
-
-			Controls.MenuItem {
-				text: qsTr("Quote message")
-				onTriggered: {
-					contextMenu.message.quoteRequested(contextMenu.message.messageBody)
-				}
-			}
+		ChatMessageContextMenu {
+			id: messageContextMenu
 		}
 
 		delegate: ChatMessage {
 			msgId: model.id
 			senderJid: model.sender
 			senderName: chatName
+			contextMenu: messageContextMenu
 			sentByMe: model.sentByMe
 			messageBody: model.body
 			dateTime: new Date(model.timestamp)
@@ -482,8 +453,6 @@ ChatPageBase {
 			errorText: model.errorText
 			deliveryStateName: model.deliveryStateName
 			deliveryStateIcon: model.deliveryStateIcon
-
-			menu: contextMenu
 
 			onMessageEditRequested: {
 				messageToCorrect = id

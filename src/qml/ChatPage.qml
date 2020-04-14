@@ -600,7 +600,7 @@ ChatPageBase {
 				id: emojiPicker
 
 				model: EmojiProxyModel {
-					group: Emoji.Group.People
+					group: hasFavoriteEmojis ? Emoji.Group.Favorites : Emoji.Group.People
 					sourceModel: EmojiModel {}
 				}
 

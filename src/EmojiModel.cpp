@@ -1546,12 +1546,18 @@ void EmojiProxyModel::setFilter(const QString &filter)
 	emit filterChanged();
 }
 
+bool EmojiProxyModel::hasFavoriteEmojis() const
+{
+	return !m_favoriteEmojis.isEmpty();
+}
+
 void EmojiProxyModel::addFavoriteEmoji(int proxyRow)
 {
 	const Emoji emoji = index(proxyRow, 0).data(static_cast<int>(EmojiModel::Roles::Emoji)).value<Emoji>();
 
 	if (!m_favoriteEmojis.contains(emoji.unicode())) {
 		m_favoriteEmojis << emoji.unicode();
+		emit hasFavoriteEmojisChanged();
 
 		if (m_group == Emoji::Group::Favorites) {
 			invalidateFilter();

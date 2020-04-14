@@ -68,6 +68,7 @@ class EmojiProxyModel : public QSortFilterProxyModel
 
 	Q_PROPERTY(Emoji::Group group READ group WRITE setGroup NOTIFY groupChanged)
 	Q_PROPERTY(QString filter READ filter WRITE setFilter NOTIFY filterChanged)
+	Q_PROPERTY(bool hasFavoriteEmojis READ hasFavoriteEmojis NOTIFY hasFavoriteEmojisChanged)
 
 public:
 	explicit EmojiProxyModel(QObject *parent = nullptr);
@@ -79,12 +80,15 @@ public:
 	QString filter() const;
 	void setFilter(const QString &filter);
 
+	bool hasFavoriteEmojis() const;
+
 public slots:
 	void addFavoriteEmoji(int proxyRow);
 
 signals:
 	void groupChanged();
 	void filterChanged();
+	void hasFavoriteEmojisChanged();
 
 protected:
 	bool filterAcceptsRow(int sourceRow, const QModelIndex &sourceParent) const override;

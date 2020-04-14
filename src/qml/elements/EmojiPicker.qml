@@ -60,6 +60,10 @@ Controls.Popup {
 			delegate: Controls.ItemDelegate {
 				width: Kirigami.Units.gridUnit * 2
 				height: Kirigami.Units.gridUnit * 2
+				hoverEnabled: true
+				Controls.ToolTip.text: model.shortName
+				Controls.ToolTip.visible: hovered
+				Controls.ToolTip.delay: Kirigami.Units.toolTipDelay
 
 				contentItem: Text {
 					horizontalAlignment: Text.AlignHCenter
@@ -68,10 +72,6 @@ Controls.Popup {
 					font.pointSize: 20
 					text: model.unicode
 				}
-
-				hoverEnabled: true
-				Controls.ToolTip.text: model.shortName
-				Controls.ToolTip.visible: hovered
 
 				onClicked: {
 					GridView.view.model.addFavoriteEmoji(model.index);
@@ -93,7 +93,7 @@ Controls.Popup {
 			Repeater {
 				model: ListModel {
 					ListElement { label: "🔖"; group: Emoji.Group.Favorites }
-					ListElement { label: "😏"; group: Emoji.Group.People }
+					ListElement { label: "🙂"; group: Emoji.Group.People }
 					ListElement { label: "🌲"; group: Emoji.Group.Nature }
 					ListElement { label: "🍛"; group: Emoji.Group.Food }
 					ListElement { label: "🚁"; group: Emoji.Group.Activity }
@@ -107,6 +107,8 @@ Controls.Popup {
 				delegate: Controls.ItemDelegate {
 					width: Kirigami.Units.gridUnit * 1.85
 					height: Kirigami.Units.gridUnit * 1.85
+					hoverEnabled: true
+					highlighted: root.model.group === model.group
 
 					contentItem: Text {
 						horizontalAlignment: Text.AlignHCenter
@@ -116,34 +118,6 @@ Controls.Popup {
 						text: model.label
 					}
 
-					hoverEnabled: true
-					Controls.ToolTip.text: {
-						switch (model.group) {
-						case Emoji.Group.Favorites:
-							return qsTr('Favorites');
-						case Emoji.Group.People:
-							return qsTr('People');
-						case Emoji.Group.Nature:
-							return qsTr('Nature');
-						case Emoji.Group.Food:
-							return qsTr('Food');
-						case Emoji.Group.Activity:
-							return qsTr('Activity');
-						case Emoji.Group.Travel:
-							return qsTr('Travel');
-						case Emoji.Group.Objects:
-							return qsTr('Objects');
-						case Emoji.Group.Symbols:
-							return qsTr('Symbols');
-						case Emoji.Group.Flags:
-							return qsTr('Flags');
-						case Emoji.Group.Invalid:
-							return qsTr('Search');
-						}
-					}
-					Controls.ToolTip.visible: hovered
-					highlighted: root.model.group === model.group
-
 					onClicked: root.model.group = model.group
 				}
 			}
@@ -151,15 +125,6 @@ Controls.Popup {
 
 		Controls.TextField {
 			id: searchField
-
-			Timer {
-				id: searchTimer
-
-				interval: 500
-
-				onTriggered: root.model.filter = searchField.text
-			}
-
 			Layout.fillWidth: true
 			Layout.alignment: Qt.AlignVCenter
 			visible: root.model.group === Emoji.Group.Invalid
@@ -167,6 +132,17 @@ Controls.Popup {
 			selectByMouse: true
 			background: Item {}
 			rightPadding: clearButton.width
+			onTextChanged: searchTimer.restart()
+			onVisibleChanged:  {
+				if (visible)
+					forceActiveFocus()
+			}
+
+			Timer {
+				id: searchTimer
+				interval: 500
+				onTriggered: root.model.filter = searchField.text
+			}
 
 			Controls.ToolButton {
 				id: clearButton
@@ -182,10 +158,6 @@ Controls.Popup {
 
 				onClicked: searchField.clear()
 			}
-
-			onTextChanged: searchTimer.restart()
-
-			onVisibleChanged: if (visible) forceActiveFocus()
 		}
 	}
 }

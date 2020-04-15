@@ -358,7 +358,7 @@ ChatPageBase {
 				icon {
 					name: MediaUtilsInstance.iconName(model.modelData)
 					height: Kirigami.Units.gridUnit * 5
-					width: icon.height
+					width: height
 				}
 				display: Controls.AbstractButton.TextUnderIcon
 

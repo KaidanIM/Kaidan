@@ -46,8 +46,8 @@ MediaPreview {
 
 	property alias placeHolder: placeHolder.data
 
-	readonly property Multimedia.MediaPlayer player: mediaPlayer
-	readonly property Controls.Button playPauseButton: playPause
+	readonly property alias player: mediaPlayer
+	readonly property alias playPauseButton: playPause
 
 	color: 'transparent'
 

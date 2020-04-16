@@ -182,12 +182,12 @@ void Kaidan::deleteCredentials()
 
 bool Kaidan::notificationsMuted(const QString &jid)
 {
-	return m_caches->settings->value(QString("muted/") + jid, false).toBool();
+	return m_caches->settings->value(QString(KAIDAN_SETTINGS_NOTIFICATIONS_MUTED) + jid, false).toBool();
 }
 
 void Kaidan::setNotificationsMuted(const QString &jid, bool muted)
 {
-	m_caches->settings->setValue(QString("muted/") + jid, muted);
+	m_caches->settings->setValue(QString(KAIDAN_SETTINGS_NOTIFICATIONS_MUTED) + jid, muted);
 	emit notificationsMutedChanged(jid);
 }
 

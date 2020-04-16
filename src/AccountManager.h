@@ -142,9 +142,16 @@ public:
 	/**
 	 * Deletes all credentials.
 	 *
-	 * Credentials stored in the settings file are also deleted from it.
+	 * Credentials stored in the settings file are also removed from it.
 	 */
 	void deleteCredentials();
+
+	/**
+	 * Deletes all account related settings.
+	 *
+	 * Settings stored in the settings file are also removed from it.
+	 */
+ 	void deleteSettings();
 
 signals:
 	/**
@@ -163,6 +170,13 @@ signals:
 	void newCredentialsNeeded();
 
 private:
+	/**
+	 * Deletes settings in the settings / configuration file.
+	 *
+	 * @param keys keys of the settings being deleted
+	 */
+	void deleteSettingsInSettingsFile(const QStringList &keys) const;
+
 	/**
 	 * Generates the JID's resource part with the set JID resource prefix and a suffix
 	 * consisting of a dot followed by random alphanumeric characters.

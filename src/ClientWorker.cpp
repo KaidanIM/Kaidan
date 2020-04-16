@@ -251,6 +251,7 @@ void ClientWorker::deleteAccountFromClient()
 	// Otherwise, disconnect first and delete the account afterwards.
 	if (!m_client->isAuthenticated()) {
 		emit deleteAccountFromDatabase();
+		m_accountManager->deleteSettings();
 		m_accountManager->deleteCredentials();
 		m_isAccountToBeDeletedFromClient = false;
 	} else {

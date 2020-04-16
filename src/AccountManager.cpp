@@ -138,8 +138,12 @@ void AccountManager::storePasswordInSettingsFile()
 
 void AccountManager::deleteCredentials()
 {
-	m_settings->remove(KAIDAN_SETTINGS_AUTH_JID);
-	m_settings->remove(KAIDAN_SETTINGS_AUTH_PASSWD);
+	deleteSettingsInSettingsFile({
+		KAIDAN_SETTINGS_AUTH_JID,
+		KAIDAN_SETTINGS_AUTH_JID_RESOURCE_PREFIX,
+		KAIDAN_SETTINGS_AUTH_PASSWD,
+		KAIDAN_SETTINGS_AUTH_PASSWD_VISIBILITY
+	});
 
 	setJid({});
 	m_jidResourcePrefix.clear();
@@ -147,6 +151,21 @@ void AccountManager::deleteCredentials()
 	setPassword({});
 
 	emit newCredentialsNeeded();
+}
+
+void AccountManager::deleteSettings()
+{
+	deleteSettingsInSettingsFile({
+		KAIDAN_SETTINGS_AUTH_ONLINE,
+		KAIDAN_SETTINGS_NOTIFICATIONS_MUTED,
+		KAIDAN_SETTINGS_FAVORITE_EMOJIS
+	});
+}
+
+void AccountManager::deleteSettingsInSettingsFile(const QStringList &keys) const
+{
+	for (const QString &key : keys)
+		m_settings->remove(key);
 }
 
 QString AccountManager::generateJidResourceWithRandomSuffix(unsigned int numberOfRandomSuffixCharacters) const

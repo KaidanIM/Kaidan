@@ -17,11 +17,11 @@
  */
 
 #include "EmojiModel.h"
-#include "Kaidan.h"
 
 #include <QSettings>
 
-#define FAVORITES_EMOJIS_SETTINGS_PATH "Emojis/Favorites"
+#include "Globals.h"
+#include "Kaidan.h"
 
 static const QVector<Emoji> s_emojis {
 	// People
@@ -1503,7 +1503,7 @@ EmojiProxyModel::EmojiProxyModel(QObject *parent)
 {
 	QSettings *settings = Kaidan::instance()->settings();
 #if QT_VERSION >= QT_VERSION_CHECK(5, 14, 0)
-	QStringList list = settings->value(QLatin1String(FAVORITES_EMOJIS_SETTINGS_PATH)).toStringList();
+	QStringList list = settings->value(QLatin1String(KAIDAN_SETTINGS_FAVORITE_EMOJIS)).toStringList();
 	m_favoriteEmojis = QSet<QString>(list.begin(), list.end());
 #else
 	m_favoriteEmojis = settings->value(QLatin1String(FAVORITES_EMOJIS_SETTINGS_PATH)).toStringList().toSet();
@@ -1564,7 +1564,7 @@ void EmojiProxyModel::addFavoriteEmoji(int proxyRow)
 		}
 
 		QSettings *settings = Kaidan::instance()->settings();
-		settings->setValue(QLatin1String(FAVORITES_EMOJIS_SETTINGS_PATH), QStringList(m_favoriteEmojis.values()));
+		settings->setValue(QLatin1String(KAIDAN_SETTINGS_FAVORITE_EMOJIS), QStringList(m_favoriteEmojis.values()));
 	}
 }
 

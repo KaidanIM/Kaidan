@@ -103,9 +103,8 @@ RegistrationPage {
 		}
 
 		onConnectionErrorChanged: {
-			showPassiveNotificationForConnectionError()
 			removeLoadingView()
-			popLayerIfNoCustomFormFieldsAvailable()
+			pageStack.layers.pop()
 		}
 
 		onRegistrationFailed: {

@@ -148,10 +148,4 @@ Kirigami.Page {
 		AccountManager.resetCustomConnectionSettings()
 		jidField.forceFocus()
 	}
-
-	Connections {
-		target: Kaidan
-
-		onConnectionErrorChanged: showPassiveNotificationForConnectionError()
-	}
 }

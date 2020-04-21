@@ -91,4 +91,10 @@ Kirigami.Page {
 			}
 		}
 	}
+
+	Connections {
+		target: Kaidan
+
+		onConnectionErrorChanged: showPassiveNotificationForConnectionError()
+	}
 }

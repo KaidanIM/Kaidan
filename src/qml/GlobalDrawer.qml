@@ -78,6 +78,24 @@ Kirigami.GlobalDrawer {
 
 				color: parent.connected ? "green" : "silver"
 			}
+		},
+
+		Controls.Label {
+			id: errorMessage
+			visible: Kaidan.connectionError
+			text: Kaidan.connectionError ? Utils.connectionErrorMessage(Kaidan.connectionError) : ""
+			color: Kirigami.Theme.negativeTextColor
+			font.bold: true
+			wrapMode: Text.WordWrap
+			padding: 10
+			Layout.leftMargin: 5
+			Layout.rightMargin: 5
+			Layout.fillWidth: true
+
+			background: Rectangle {
+				color: Kirigami.Theme.negativeBackgroundColor
+				radius: roundedCornersRadius
+			}
 		}
 	]
 

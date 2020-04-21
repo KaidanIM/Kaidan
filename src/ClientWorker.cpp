@@ -292,6 +292,9 @@ void ClientWorker::onConnected()
 	// no mutex needed, because this is called from updateClient()
 	qDebug() << "[client] Connected successfully to server";
 
+	// If there was an error before, notify about its absence.
+	emit connectionErrorChanged(ClientWorker::NoError);
+
 	// If the account could not be deleted from the server because the client was
 	// disconnected, delete it now.
 	if (m_isAccountToBeDeletedFromClientAndServer) {
@@ -361,8 +364,7 @@ void ClientWorker::onConnectionError(QXmppClient::Error error)
 
 	switch (error) {
 	case QXmppClient::NoError:
-		emit connectionErrorChanged(ClientWorker::NoError);
-		break;
+		Q_UNREACHABLE();
 	case QXmppClient::KeepAliveError:
 		emit connectionErrorChanged(ClientWorker::KeepAliveError);
 		break;

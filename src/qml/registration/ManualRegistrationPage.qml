@@ -167,7 +167,6 @@ RegistrationPage {
 
 		onConnectionErrorChanged: {
 			connectionErrorOccurred = true
-			showPassiveNotificationForConnectionError()
 			jumpToPreviousView()
 			removeLoadingView()
 		}

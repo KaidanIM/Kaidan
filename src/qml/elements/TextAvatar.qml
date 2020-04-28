@@ -59,16 +59,6 @@ Rectangle {
 		horizontalAlignment: Text.AlignHCenter
 		verticalAlignment: Text.AlignVCenter
 
-		text: {
-			// WIPQTQUICK HACK TODO Probably doesn't work with non-latin1.
-			var match = name.match(/([a-zA-Z0-9])([a-zA-Z0-9])/);
-			var abbrev = match[1].toUpperCase();
-
-			if (match.length > 2) {
-				abbrev += match[2].toLowerCase();
-			}
-
-			return abbrev;
-		}
+		text: name.substring(0, 2)
 	}
 }

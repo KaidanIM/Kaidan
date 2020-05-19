@@ -1,5 +1,6 @@
 [Global]
 IconName=kaidan
+DesktopEntry=kaidan
 Comment=A user-friendly XMPP client for every device
 Comment[ca]=Un client d'XMPP fàcil d'emprar per a cada dispositiu
 Comment[ca@valencia]=Un client d'XMPP fàcil d'emprar per a cada dispositiu

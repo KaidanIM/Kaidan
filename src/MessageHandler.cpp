@@ -50,7 +50,7 @@ MessageHandler::MessageHandler(Kaidan *kaidan, ClientWorker *clientWorker, QXmpp
 {
 	connect(client, &QXmppClient::messageReceived, this, &MessageHandler::handleMessage);
 	connect(kaidan, &Kaidan::sendMessage, this, &MessageHandler::sendMessage);
-	connect(kaidan, &Kaidan::correctMessage, this, &MessageHandler::correctMessage);
+	connect(model, &MessageModel::sendCorrectedMessageRequested, this, &MessageHandler::sendCorrectedMessage);
 
 	client->addExtension(&receiptManager);
 	connect(&receiptManager, &QXmppMessageReceiptManager::messageDelivered,
@@ -220,42 +220,22 @@ void MessageHandler::sendMessage(const QString& toJid,
 	sendPendingMessage(msg);
 }
 
-void MessageHandler::correctMessage(const QString& toJid,
-                                    const QString& msgId,
-                                    const QString& body)
+void MessageHandler::sendCorrectedMessage(const Message &msg)
 {
-	// TODO: load old message from model and put everything into the new message
-	//       instead of only the new body
-
-	// TODO: Add offline message cache and send when connnected again
-	if (client->state() != QXmppClient::ConnectedState) {
+	auto deliveryState = Enums::DeliveryState::Sent;
+	QString errorText;
+	if (!client->sendPacket(msg)) {
+		// TODO store in the database only error codes, assign text messages right in the QML
 		emit kaidan->passiveNotificationRequested(
-			tr("Could not correct message, as a result of not being connected.")
-		);
-		qWarning() << "[client] [MessageHandler] Could not correct message, as a result of "
-		              "not being connected.";
-		return;
+			tr("Message correction was not successful."));
+		errorText = "Message correction was not successful.";
+		deliveryState = Enums::DeliveryState::Error;
 	}
 
-	Message msg;
-	msg.setFrom(client->configuration().jidBare());
-	msg.setTo(toJid);
-	msg.setId(QXmppUtils::generateStanzaHash(28));
-	msg.setBody(body);
-	msg.setReceiptRequested(true);
-	msg.setSentByMe(true);
-	msg.setMediaType(MessageType::MessageText); // text message without media
-	msg.setIsEdited(true);
-	msg.setReplaceId(msgId);
-
-	emit model->updateMessageRequested(msgId, [=] (Message &msg) {
-		msg.setBody(body);
+	emit model->updateMessageRequested(msg.id(), [=] (Message &localMessage) {
+		localMessage.setDeliveryState(deliveryState);
+		localMessage.setErrorText(errorText);
 	});
-	if (client->sendPacket(msg))
-		emit model->setMessageDeliveryStateRequested(msg.id(), Enums::DeliveryState::Sent);
-	else
-		emit kaidan->passiveNotificationRequested(
-	                        tr("Message correction was not successful."));
 }
 
 void MessageHandler::handleDiscoInfo(const QXmppDiscoveryIq &info)
@@ -267,10 +247,22 @@ void MessageHandler::handleDiscoInfo(const QXmppDiscoveryIq &info)
 		carbonManager->setCarbonsEnabled(true);
 }
 
-void MessageHandler::sendPendingMessage(const Message& message)
+void MessageHandler::sendPendingMessage(const Message &message)
 {
 	if (client->state() == QXmppClient::ConnectedState) {
-		if (client->sendPacket(static_cast<QXmppMessage>(message)))
+		bool success;
+		// if the message is a pending edition of the existing in the history message
+		// I need to send it with the most recent stamp
+		// for that I'm gonna copy that message and update in the copy just the stamp
+		if (message.isEdited()) {
+			Message msg = message;
+			msg.setStamp(QDateTime::currentDateTimeUtc());
+			success = client->sendPacket(msg);
+		} else {
+			success = client->sendPacket(message);
+		}
+
+		if (success)
 			emit model->setMessageDeliveryStateRequested(message.id(), Enums::DeliveryState::Sent);
 		// TODO this "true" from sendPacket doesn't yet mean the message was successfully sent
 

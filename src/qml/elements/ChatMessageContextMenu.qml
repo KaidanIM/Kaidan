@@ -43,7 +43,7 @@ Controls.Menu {
 
 	Controls.MenuItem {
 		text: qsTr("Copy message")
-		enabled: root.message && root.message.bodyLabel.visible
+		visible: root.message && root.message.bodyLabel.visible
 		onTriggered: {
 			if (root.message && !root.message.isSpoiler || message && root.message.isShowingSpoiler)
 				Utils.copyToClipboard(root.message && root.message.messageBody)
@@ -60,7 +60,7 @@ Controls.Menu {
 
 	Controls.MenuItem {
 		text: qsTr("Copy download URL")
-		enabled: root.message && root.message.mediaGetUrl
+		visible: root.message && root.message.mediaGetUrl
 		onTriggered: Utils.copyToClipboard(root.message.mediaGetUrl)
 	}
 

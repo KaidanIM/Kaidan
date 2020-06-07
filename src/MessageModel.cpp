@@ -59,13 +59,13 @@ MessageModel::MessageModel(Kaidan *kaidan, MessageDb *msgDb, QObject *parent)
 
 	connect(this, &MessageModel::updateMessageRequested,
 	        this, &MessageModel::updateMessage);
-	connect(this, &MessageModel::updateMessageRequested,
+	connect(this, &MessageModel::updateMessageInDatabaseRequested,
 	        msgDb, &MessageDb::updateMessage);
 
 	connect(this, &MessageModel::setMessageDeliveryStateRequested,
 	        this, &MessageModel::setMessageDeliveryState);
-	connect(this, &MessageModel::setMessageDeliveryStateRequested,
-	        msgDb, &MessageDb::setMessageDeliveryState);
+	connect(kaidan, &Kaidan::correctMessage,
+	        this, &MessageModel::correctMessage);
 }
 
 MessageModel::~MessageModel() = default;
@@ -320,6 +320,8 @@ void MessageModel::updateMessage(const QString &id,
 			break;
 		}
 	}
+
+	emit updateMessageInDatabaseRequested(id, updateMsg);
 }
 
 void MessageModel::setMessageDeliveryState(const QString &msgId, Enums::DeliveryState state, const QString &errText)
@@ -372,4 +374,44 @@ void MessageModel::processMessage(Message &msg)
 void MessageModel::sendPendingMessages()
 {
 	emit msgDb->fetchPendingMessagesRequested(kaidan->jid());
+}
+
+void MessageModel::correctMessage(const QString &msgId, const QString &message)
+{
+	const auto hasCorrectId = [&msgId](const Message& msg) {
+		return msg.id() == msgId;
+	};
+	auto itr = std::find_if(m_messages.begin(), m_messages.end(), hasCorrectId);
+
+	if (itr != m_messages.end()) {
+		Message &msg = *itr;
+		msg.setBody(message);
+		if (msg.deliveryState() != Enums::DeliveryState::Pending) {
+			msg.setId(QXmppUtils::generateStanzaHash(28));
+			// Set replaceId only on first correction, so it's always the original id
+			// (`id` is the id of the current edit, `replaceId` is the original id)
+			if (!msg.isEdited()) {
+				msg.setIsEdited(true);
+				msg.setReplaceId(msgId);
+			}
+			msg.setDeliveryState(Enums::DeliveryState::Pending);
+
+			if (ConnectionState(kaidan->connectionState()) == Enums::ConnectionState::StateConnected) {
+				// the trick with the time is important for the servers
+				// this way they can tell which version of the message is the latest
+				Message copy = msg;
+				copy.setStamp(QDateTime::currentDateTimeUtc());
+				emit sendCorrectedMessageRequested(copy);
+			}
+		} else if (!msg.isEdited()) {
+			msg.setStamp(QDateTime::currentDateTimeUtc());
+		}
+
+		QModelIndex index = createIndex(std::distance(m_messages.begin(), itr), 0);
+		emit dataChanged(index, index);
+
+		emit updateMessageInDatabaseRequested(msgId, [=] (Message &localMessage) {
+			localMessage = msg;
+		});
+	}
 }

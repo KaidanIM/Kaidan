@@ -663,7 +663,6 @@ ChatPageBase {
 						)
 					} else if (messageField.state == "edit") {
 						Kaidan.correctMessage(
-							Kaidan.messageModel.currentChatJid,
 							messageToCorrect,
 							messageField.text
 						)

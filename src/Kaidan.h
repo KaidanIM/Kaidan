@@ -351,7 +351,7 @@ signals:
 	 *
 	 * To get/check the last message id, use `kaidan.messageModel.lastMessageId(jid)`
 	 */
-	void correctMessage(QString toJid, QString msgId, QString message);
+	void correctMessage(const QString &msgId, const QString &message);
 
 	/**
 	 * Upload and send file

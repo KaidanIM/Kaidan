@@ -71,7 +71,7 @@ public slots:
 	/**
 	 * Sends the corrected version of a message.
 	 */
-	void correctMessage(const QString& toJid, const QString& msgId, const QString& newBody);
+	void sendCorrectedMessage(const Message &msg);
 
 	/**
 	 * Handles service discovery info and enables carbons if feature was found.
@@ -84,7 +84,7 @@ private slots:
 	 */
 	void handlePendingMessages(const QVector<Message> &messages);
 
-	void sendPendingMessage(const Message& message);
+	void sendPendingMessage(const Message &message);
 
 private:
 	Kaidan *kaidan;

@@ -84,7 +84,7 @@ signals:
 	void fetchPendingMessagesRequested(const QString &userJid);
 
 	/**
-	 * Emitted, when new messages have been fetched
+	 * Emitted when new messages have been fetched
 	 */
 	void messagesFetched(const QVector<Message> &messages);
 
@@ -149,15 +149,6 @@ public slots:
 	 */
 	void updateMessageRecord(const QString &id,
 	                         const QSqlRecord &updateRecord);
-
-	/**
-	 * @brief Sets the message delivery state using an UPDATE query.
-	 *
-	 * @param msgId Message ID
-	 * @param state Desired delivery state
-	 */
-
-	void setMessageDeliveryState(const QString &msgId, Enums::DeliveryState state, const QString &errText = QString());
 
 private:
 	static MessageDb *s_instance;

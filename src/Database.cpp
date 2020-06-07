@@ -51,8 +51,8 @@
 	}
 
 // Both need to be updated on version bump:
-#define DATABASE_LATEST_VERSION 11
-#define DATABASE_CONVERT_TO_LATEST_VERSION() DATABASE_CONVERT_TO_VERSION(11)
+#define DATABASE_LATEST_VERSION 12
+#define DATABASE_CONVERT_TO_LATEST_VERSION() DATABASE_CONVERT_TO_VERSION(12)
 
 #define SQL_BOOL "BOOL"
 #define SQL_INTEGER "INTEGER"
@@ -283,6 +283,7 @@ void Database::createMessagesTable()
 			SQL_ATTRIBUTE(spoilerHint, SQL_TEXT)
 			SQL_ATTRIBUTE(isSpoiler, SQL_BOOL)
 			SQL_ATTRIBUTE(errorText, SQL_TEXT)
+			SQL_ATTRIBUTE(replaceId, SQL_TEXT)
 			"FOREIGN KEY(author) REFERENCES " DB_TABLE_ROSTER " (jid),"
 			"FOREIGN KEY(recipient) REFERENCES " DB_TABLE_ROSTER " (jid)"
 		)
@@ -407,4 +408,12 @@ void Database::convertDatabaseToV11()
 	Utils::execQuery(query, "UPDATE Messages SET deliveryState = 1 WHERE deliveryState IS NULL");
 	Utils::execQuery(query, "ALTER TABLE Messages ADD errorText " SQL_TEXT);
 	m_version = 11;
+}
+
+void Database::convertDatabaseToV12()
+{
+	DATABASE_CONVERT_TO_VERSION(11);
+	QSqlQuery query(m_database);
+	Utils::execQuery(query, "ALTER TABLE Messages ADD replaceId " SQL_TEXT);
+	m_version = 12;
 }

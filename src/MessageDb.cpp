@@ -51,7 +51,7 @@ MessageDb::MessageDb(QObject *parent)
 	        this, &MessageDb::fetchMessages);
 
 	connect(this, &MessageDb::fetchPendingMessagesRequested,
-			this, &MessageDb::fetchPendingMessages);
+	        this, &MessageDb::fetchPendingMessages);
 }
 
 MessageDb::~MessageDb()
@@ -84,6 +84,7 @@ void MessageDb::parseMessagesFromQuery(QSqlQuery &query, QVector<Message> &msgs)
 	int idxSpoilerHint = rec.indexOf("spoilerHint");
 	int idxIsSpoiler = rec.indexOf("isSpoiler");
 	int idxErrorText = rec.indexOf("errorText");
+	int idxReplaceId = rec.indexOf("replaceId");
 
 	while (query.next()) {
 		Message msg;
@@ -108,6 +109,7 @@ void MessageDb::parseMessagesFromQuery(QSqlQuery &query, QVector<Message> &msgs)
 		msg.setSpoilerHint(query.value(idxSpoilerHint).toString());
 		msg.setErrorText(query.value(idxErrorText).toString());
 		msg.setIsSpoiler(query.value(idxIsSpoiler).toBool());
+		msg.setReplaceId(query.value(idxReplaceId).toString());
 		msg.setReceiptRequested(true);	//this is useful with resending pending messages
 		msgs << msg;
 	}
@@ -166,6 +168,8 @@ QSqlRecord MessageDb::createUpdateRecord(const Message &oldMsg, const Message &n
 		rec.append(Utils::createSqlField("spoilerHint", newMsg.spoilerHint()));
 	if (oldMsg.isSpoiler() != newMsg.isSpoiler())
 		rec.append(Utils::createSqlField("isSpoiler", newMsg.isSpoiler()));
+	if (oldMsg.replaceId() != newMsg.replaceId())
+		rec.append(Utils::createSqlField("replaceId", newMsg.replaceId()));
 
 	return rec;
 }
@@ -246,6 +250,7 @@ void MessageDb::addMessage(const Message &msg)
 	record.setValue("mediaSize", msg.mediaSize());
 	record.setValue("mediaLastModified", msg.mediaLastModified().toMSecsSinceEpoch());
 	record.setValue("errorText", msg.errorText());
+	record.setValue("replaceId", msg.replaceId());
 
 	QSqlQuery query(db);
 	Utils::execQuery(query, db.driver()->sqlStatement(
@@ -328,15 +333,6 @@ void MessageDb::updateMessageRecord(const QString &id,
 	        ) +
 	        Utils::simpleWhereStatement(db.driver(), "id", id)
 	);
-}
-
-void MessageDb::setMessageDeliveryState(const QString& msgId, Enums::DeliveryState state, const QString &errText)
-{
-	QSqlRecord rec;
-	rec.append(Utils::createSqlField("deliveryState", int(state)));
-	rec.append(Utils::createSqlField("errorText", errText));
-
-	updateMessageRecord(msgId, rec);
 }
 
 void MessageDb::fetchPendingMessages(const QString& userJid)

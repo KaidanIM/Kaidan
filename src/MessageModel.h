@@ -119,6 +119,9 @@ signals:
 	                            const std::function<void (Message &)> &updateMsg);
 	void setMessageDeliveryStateRequested(const QString &msgId, Enums::DeliveryState state, const QString &errText = QString());
 	void pendingMessagesFetched(const QVector<Message> &messages);
+	void sendCorrectedMessageRequested(const Message &msg);
+	void updateMessageInDatabaseRequested(const QString &id,
+	                                      const std::function<void (Message &)> &updateMsg);
 
 private slots:
 	void handleMessagesFetched(const QVector<Message> &m_messages);
@@ -128,6 +131,7 @@ private slots:
 	                   const std::function<void (Message &)> &updateMsg);
 
 	void setMessageDeliveryState(const QString &msgId, Enums::DeliveryState state, const QString &errText = QString());
+	void correctMessage(const QString &msgId, const QString &message);
 
 private:
 	void clearAll();

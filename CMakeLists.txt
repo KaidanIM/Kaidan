@@ -74,7 +74,7 @@ kde_enable_exceptions()
 # Find packages
 find_package(Qt5 ${QT_MIN_VERSION} REQUIRED NO_MODULE COMPONENTS Core Qml Quick Svg Sql QuickControls2 Xml Multimedia Positioning Location)
 find_package(KF5Kirigami2 5.58.0 REQUIRED)
-find_package(ZXing REQUIRED COMPONENTS Core)
+find_package(ZXing REQUIRED)
 find_package(QXmpp 1.2.0 REQUIRED)
 
 # Optional QtQuickCompiler
@@ -198,11 +198,15 @@ target_link_libraries(${PROJECT_NAME}
 	Qt5::Multimedia
 	Qt5::Positioning
 	Qt5::Location
-	ZXing::Core
 	QXmpp::QXmpp
 	${__Qt5Widgets_LIBRARIES}
 	${__KF5Notifications_LIBRARIES}
 )
+if(TARGET ZXing::ZXing)
+        target_link_libraries(${PROJECT_NAME} ZXing::ZXing)
+elseif(TARGET ZXing::Core)
+        target_link_libraries(${PROJECT_NAME} ZXing::Core)
+endif()
 
 if(ANDROID OR WIN32 OR IOS)
 	target_link_libraries(${PROJECT_NAME} Qt5::QuickControls2 KF5::Kirigami2)

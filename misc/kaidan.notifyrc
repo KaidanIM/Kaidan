@@ -16,6 +16,7 @@ Comment[ru]=Дружественный клиент XMPP для всех уст�
 Comment[sl]=Uporabniku prijazen odjemalec XMMP za vsako napravo
 Comment[sv]=En användarvänlig XMPP-klient för alla enheter
 Comment[uk]=Зручний у користуванні клієнт XMPP для пристроїв будь-яких типів
+Comment[x-test]=xxA user-friendly XMPP client for every devicexx
 Comment[zh_TW]=適合每一台裝置且使用者友好的 XMPP 用戶端
 Name=Kaidan
 Name[ca]=Kaidan
@@ -35,6 +36,7 @@ Name[sk]=Kaidan
 Name[sl]=Kaidan
 Name[sv]=Kaidan
 Name[uk]=Kaidan
+Name[x-test]=xxKaidanxx
 Name[zh_TW]=Kaidan
 
 [Event/new-message]
@@ -55,6 +57,7 @@ Name[sk]=Nová správa
 Name[sl]=Novo sporočilo
 Name[sv]=Nytt meddelande
 Name[uk]=Нове повідомлення
+Name[x-test]=xxNew messagexx
 Name[zh_TW]=新訊息
 Comment=You have received a new message
 Comment[ca]=Heu rebut un missatge privat nou
@@ -71,6 +74,7 @@ Comment[ru]=Вы получили сообщение
 Comment[sl]=Prejeli ste novo sporočilo
 Comment[sv]=Du har tagit emot ett nytt meddelande
 Comment[uk]=Вами отримано нове повідомлення
+Comment[x-test]=xxYou have received a new messagexx
 Comment[zh_TW]=您接收到一則新訊息
 Action=Sound|Popup
 

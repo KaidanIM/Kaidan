@@ -93,13 +93,13 @@ void MessageHandler::handleMessage(const QXmppMessage &msg)
 		return;
 	}
 
-    if (msg.body().isEmpty())
+	if (msg.body().isEmpty())
 		return;
 
 	Message message;
 	message.setFrom(QXmppUtils::jidToBareJid(msg.from()));
 	message.setTo(QXmppUtils::jidToBareJid(msg.to()));
-	message.setSentByMe(msg.from() == client->configuration().jidBare());
+	message.setSentByMe(QXmppUtils::jidToBareJid(msg.from()) == client->configuration().jidBare());
 	message.setId(msg.id());
 	message.setBody(msg.body());
 	message.setMediaType(MessageType::MessageText); // default to text message without media

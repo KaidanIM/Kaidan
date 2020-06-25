@@ -1,7 +1,7 @@
 # Contributing
 
 This is a guideline for contributing to Kaidan.
-There is also a guide for a [basic setup](https://invent.kde.org/kde/kaidan/-/wikis/setup) targeted at contributors which are unfamiliar with KDE Identity, GitLab or Git and want to start contributing quickly.
+There is also a guide for a [basic setup](https://invent.kde.org/network/kaidan/-/wikis/setup) targeted at contributors which are unfamiliar with KDE Identity, GitLab or Git and want to start contributing quickly.
 
 ## Branches
 
@@ -41,7 +41,7 @@ If SVG is not applicable like for screenshots, the graphic should have the forma
 
 ### Optimization
 
-In any case, the new or modified graphic must be [optimized](https://invent.kde.org/kde/kaidan/-/wikis/optimizing-graphics) before adding it to a commit.
+In any case, the new or modified graphic must be [optimized](https://invent.kde.org/network/kaidan/-/wikis/optimizing-graphics) before adding it to a commit.
 
 ### Copyright
 

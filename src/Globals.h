@@ -41,8 +41,8 @@
 #define KAIDAN_JID_RESOURCE_DEFAULT_PREFIX APPLICATION_DISPLAY_NAME
 
 #define INVITATION_URL "https://i.kaidan.im/#"
-#define APPLICATION_SOURCE_CODE_URL "https://invent.kde.org/kde/kaidan"
-#define ISSUE_TRACKING_URL "https://invent.kde.org/kde/kaidan/issues"
+#define APPLICATION_SOURCE_CODE_URL "https://invent.kde.org/network/kaidan"
+#define ISSUE_TRACKING_URL "https://invent.kde.org/network/kaidan/issues"
 
 #define MESSAGE_MAX_CHARS 1e4
 

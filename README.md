@@ -31,7 +31,7 @@ For a list of supported XEPs, have a look at the [Website][supp-xeps].
 
 Instead of building Kaidan yourself, you can also just install ready-made builds. On these pages is explained
 how to do that:
- * [Install the Flatpak](https://invent.kde.org/kde/kaidan/-/wikis/using/flatpak)
+ * [Install the Flatpak](https://invent.kde.org/network/kaidan/-/wikis/using/flatpak)
  * [Install from OpenStore (Ubuntu Touch)][openstore]
 
 ## Building Kaidan
@@ -49,8 +49,8 @@ Here are the general dependencies of Kaidan listed:
 ### Build instructions
 
 There are guides on how to build Kaidan for each supported platform (currently there are still pages missing):
- * [Linux Desktop](https://invent.kde.org/kde/kaidan/wikis/building/linux-debian-based)
- * [Ubuntu Touch (click package)](https://invent.kde.org/kde/kaidan/wikis/building/ubuntu-touch)
+ * [Linux Desktop](https://invent.kde.org/network/kaidan/wikis/building/linux-debian-based)
+ * [Ubuntu Touch (click package)](https://invent.kde.org/network/kaidan/wikis/building/ubuntu-touch)
 
 ## Contributing
 

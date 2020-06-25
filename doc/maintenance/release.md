@@ -31,7 +31,7 @@
 
 **X.Y.Z and N+1 must be adjusted to correspond to the actual version unless otherwise noted.**
 
-### In Repository **https://invent.kde.org/kde/kaidan.git**
+### In the main Kaidan repo
 
 1. `git checkout master`
 1. `git pull origin master`
@@ -67,9 +67,9 @@
 	1. `git tag -a vX.Y.Z` or for signed tags: `git tag -s v0.4.1`
 	1. Add changelog part for vX.Y.Z as tag message
 	1. `git push origin vX.Y.Z`
-	1. Add changelog part for vX.Y.Z as release note on https://invent.kde.org/kde/kaidan/tags
+	1. Add changelog part for vX.Y.Z as release note on the releases section of the repo
 1. Publish release builds on https://download.kde.org:
-	1. Download builds from https://invent.kde.org/kde/kaidan/pipelines?scope=tags&page=1 for tag *vX.Y.Z*
+	1. Download the pipeline builds for tag *vX.Y.Z*
 	1. Rename downloaded builds to *kaidan_X.Y.Z_<architecture>.<type>* (Replace <architecture>.<type> with the corresponding architecture and file type.)
 	1. `../releaseme/tarme.rb --version X.Y.Z --origin stable kaidan` (*releasme* is the directory of the repository **https://anongit.kde.org/releaseme.git**.)
 	1. `kdecp5 kaidan-X.Y.Z.* ftp://upload.kde.org/incoming`:
@@ -87,14 +87,14 @@
 	1. `git commit -m "Continue with Kaidan vX.Y.Z-dev"`
 	1. `git push origin master`
 
-### In Repository **https://invent.kde.org/websites/kaidan-im.git**
+### In the website repo
 
 1. `git checkout master`
 1. `git pull origin master`
 1. Update screenshot (which will update the screenshot on the website and in the README):
 	1. Create one screenshot for desktop and one for mobile version
 	1. Put those two screenshots into one image like *images/screenshot.png* and overwrite that by the new one
-	1. [Optimize](https://invent.kde.org/kde/kaidan/-/wikis/optimizing-graphics) *images/screenshot.png*
+	1. [Optimize](https://invent.kde.org/network/kaidan/-/wikis/optimizing-graphics) *images/screenshot.png*
 	1. `git add images/screenshot.png`
 	1. `git commit -m "Update screenshot"`
 	1. `git push origin master`

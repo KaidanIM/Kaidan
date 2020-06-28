@@ -178,7 +178,7 @@ QVariant MessageModel::data(const QModelIndex &index, int role) const
 
 void MessageModel::fetchMore(const QModelIndex &)
 {
-	emit msgDb->fetchMessagesRequested(kaidan->getJid(), m_currentChatJid, m_messages.size());
+	emit msgDb->fetchMessagesRequested(kaidan->jid(), m_currentChatJid, m_messages.size());
 }
 
 bool MessageModel::canFetchMore(const QModelIndex &) const
@@ -207,7 +207,7 @@ bool MessageModel::canCorrectMessage(const QString &msgId) const
 {
 	// Only allow correction of the latest message sent by us
 	for (const auto &msg : m_messages) {
-		if (msg.from() == kaidan->getJid())
+		if (msg.from() == kaidan->jid())
 			return msg.id() == msgId;
 	}
 	return false;
@@ -220,7 +220,7 @@ void MessageModel::handleMessagesFetched(const QVector<Message> &msgs)
 
 	beginInsertRows(QModelIndex(), rowCount(), rowCount() + msgs.length() - 1);
 	for (auto msg : msgs) {
-		msg.setSentByMe(kaidan->getJid() == msg.from());
+		msg.setSentByMe(kaidan->jid() == msg.from());
 		processMessage(msg);
 		m_messages << msg;
 	}
@@ -350,5 +350,5 @@ void MessageModel::processMessage(Message &msg)
 
 void MessageModel::sendPendingMessages()
 {
-	emit msgDb->fetchPendingMessagesRequested(kaidan->getJid());
+	emit msgDb->fetchPendingMessagesRequested(kaidan->jid());
 }

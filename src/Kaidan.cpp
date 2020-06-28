@@ -93,16 +93,16 @@ Kaidan::Kaidan(QGuiApplication *app, bool enableLogging, QObject *parent)
 		m_caches->settings->value(KAIDAN_SETTINGS_AUTH_PASSWD).toString().toUtf8()
 	));
 	// Use a default prefix for the JID's resource part if no prefix is already set.
-	if (creds.jidResourcePrefix.isEmpty())
+	if (m_creds.jidResourcePrefix.isEmpty())
 		setJidResourcePrefix(KAIDAN_JID_RESOURCE_DEFAULT_PREFIX);
-	creds.isFirstTry = false;
+	m_creds.isFirstTry = false;
 
 	//
 	// Start ClientWorker on new thread
 	//
 
 	m_client = new ClientWorker(m_caches, this, enableLogging);
-	m_client->setCredentials(creds);
+	m_client->setCredentials(m_creds);
 	m_client->moveToThread(m_cltThrd);
 
 	connect(m_client, &ClientWorker::connectionErrorChanged, this, &Kaidan::setConnectionError);
@@ -124,7 +124,7 @@ Kaidan::~Kaidan()
 
 void Kaidan::start()
 {
-	if (creds.jid.isEmpty() || creds.password.isEmpty())
+	if (m_creds.jid.isEmpty() || m_creds.password.isEmpty())
 		emit newCredentialsNeeded();
 	else
 		mainConnect();
@@ -132,20 +132,20 @@ void Kaidan::start()
 
 void Kaidan::mainConnect()
 {
-	emit m_client->credentialsUpdated(creds);
+	emit m_client->credentialsUpdated(m_creds);
 	emit m_client->connectRequested();
 }
 
 void Kaidan::requestRegistrationForm()
 {
-	emit m_client->credentialsUpdated(creds);
+	emit m_client->credentialsUpdated(m_creds);
 	emit m_client->registrationFormRequested();
 }
 
 void Kaidan::mainDisconnect()
 {
 	// disconnect the client if connected or connecting
-	if (connectionState != ConnectionState::StateDisconnected)
+	if (m_connectionState != ConnectionState::StateDisconnected)
 		emit m_client->disconnectRequested();
 }
 
@@ -159,17 +159,17 @@ void Kaidan::handleApplicationStateChanged(Qt::ApplicationState applicationState
 
 void Kaidan::setConnectionState(QXmppClient::State state)
 {
-	if (this->connectionState != static_cast<ConnectionState>(state)) {
-		this->connectionState = static_cast<ConnectionState>(state);
+	if (m_connectionState != static_cast<ConnectionState>(state)) {
+		m_connectionState = static_cast<ConnectionState>(state);
 		emit connectionStateChanged();
 
 		// Open the possibly cached URI when connected.
 		// This is needed because the XMPP URIs can't be opened when Kaidan is not connected.
-		if (connectionState == ConnectionState::StateConnected && !openUriCache.isEmpty()) {
+		if (m_connectionState == ConnectionState::StateConnected && !m_openUriCache.isEmpty()) {
 			// delay is needed because sometimes the RosterPage needs to be loaded first
 			QTimer::singleShot(300, [=] () {
-				emit xmppUriReceived(openUriCache);
-				openUriCache = "";
+				emit xmppUriReceived(m_openUriCache);
+				m_openUriCache = "";
 			});
 		}
 	}
@@ -177,7 +177,7 @@ void Kaidan::setConnectionState(QXmppClient::State state)
 
 void Kaidan::setConnectionError(ClientWorker::ConnectionError error)
 {
-	connectionError = error;
+	m_connectionError = error;
 	emit connectionErrorChanged(error);
 }
 
@@ -207,9 +207,9 @@ void Kaidan::setNotificationsMuted(const QString &jid, bool muted)
 
 void Kaidan::setJid(const QString &jid)
 {
-	creds.jid = jid;
+	m_creds.jid = jid;
 	// credentials were modified -> first try
-	creds.isFirstTry = true;
+	m_creds.isFirstTry = true;
 	emit jidChanged();
 }
 
@@ -217,7 +217,7 @@ void Kaidan::setJidResourcePrefix(const QString &jidResourcePrefix)
 {
 	// JID resource won't influence the authentication, so we don't need
 	// to set the first try flag and can save it.
-	creds.jidResourcePrefix = jidResourcePrefix;
+	m_creds.jidResourcePrefix = jidResourcePrefix;
 
 	m_caches->settings->setValue(KAIDAN_SETTINGS_AUTH_JID_RESOURCE_PREFIX, jidResourcePrefix);
 	emit jidResourcePrefixChanged();
@@ -225,15 +225,15 @@ void Kaidan::setJidResourcePrefix(const QString &jidResourcePrefix)
 
 void Kaidan::setPassword(const QString &password)
 {
-	creds.password = password;
+	m_creds.password = password;
 	// credentials were modified -> first try
-	creds.isFirstTry = true;
+	m_creds.isFirstTry = true;
 	emit passwordChanged();
 }
 
-quint8 Kaidan::getConnectionError() const
+ClientWorker::ConnectionError Kaidan::connectionError() const
 {
-	return static_cast<quint8>(connectionError);
+	return m_connectionError;
 }
 
 void Kaidan::addOpenUri(const QString &uri)
@@ -241,12 +241,12 @@ void Kaidan::addOpenUri(const QString &uri)
 	if (!QXmppUri::isXmppUri(uri))
 		return;
 
-	if (connectionState == ConnectionState::StateConnected) {
+	if (m_connectionState == ConnectionState::StateConnected) {
 		emit xmppUriReceived(uri);
 	} else {
 		//: The link is an XMPP-URI (i.e. 'xmpp:kaidan@muc.kaidan.im?join' for joining a chat)
 		emit passiveNotificationRequested(tr("The link will be opened after you have connected."));
-		openUriCache = uri;
+		m_openUriCache = uri;
 	}
 }
 
@@ -279,7 +279,7 @@ void Kaidan::notifyForInvalidLoginUri()
 	emit passiveNotificationRequested(tr("No valid login QR code found."));
 }
 
-ClientWorker *Kaidan::getClient() const
+ClientWorker *Kaidan::client() const
 {
 	return m_client;
 }

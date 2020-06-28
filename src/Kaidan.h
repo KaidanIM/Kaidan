@@ -58,18 +58,18 @@ class Kaidan : public QObject
 {
 	Q_OBJECT
 
-	Q_PROPERTY(RosterModel* rosterModel READ getRosterModel CONSTANT)
-	Q_PROPERTY(MessageModel* messageModel READ getMessageModel CONSTANT)
-	Q_PROPERTY(AvatarFileStorage* avatarStorage READ getAvatarStorage NOTIFY avatarStorageChanged)
-	Q_PROPERTY(PresenceCache* presenceCache READ getPresenceCache CONSTANT)
-	Q_PROPERTY(TransferCache* transferCache READ getTransferCache CONSTANT)
+	Q_PROPERTY(RosterModel* rosterModel READ rosterModel CONSTANT)
+	Q_PROPERTY(MessageModel* messageModel READ messageModel CONSTANT)
+	Q_PROPERTY(AvatarFileStorage* avatarStorage READ avatarStorage NOTIFY avatarStorageChanged)
+	Q_PROPERTY(PresenceCache* presenceCache READ presenceCache CONSTANT)
+	Q_PROPERTY(TransferCache* transferCache READ transferCache CONSTANT)
 	Q_PROPERTY(ServerFeaturesCache* serverFeaturesCache READ serverFeaturesCache CONSTANT)
-	Q_PROPERTY(QSettings* settings READ getSettings CONSTANT)
-	Q_PROPERTY(quint8 connectionState READ getConnectionState NOTIFY connectionStateChanged)
-	Q_PROPERTY(quint8 connectionError READ getConnectionError NOTIFY connectionErrorChanged)
-	Q_PROPERTY(QString jid READ getJid WRITE setJid NOTIFY jidChanged)
-	Q_PROPERTY(QString jidResourcePrefix READ getJidResourcePrefix WRITE setJidResourcePrefix NOTIFY jidResourcePrefixChanged)
-	Q_PROPERTY(QString password READ getPassword WRITE setPassword NOTIFY passwordChanged)
+	Q_PROPERTY(QSettings* settings READ settings CONSTANT)
+	Q_PROPERTY(Enums::ConnectionState connectionState READ connectionState NOTIFY connectionStateChanged)
+	Q_PROPERTY(ClientWorker::ConnectionError connectionError READ connectionError NOTIFY connectionErrorChanged)
+	Q_PROPERTY(QString jid READ jid WRITE setJid NOTIFY jidChanged)
+	Q_PROPERTY(QString jidResourcePrefix READ jidResourcePrefix WRITE setJidResourcePrefix NOTIFY jidResourcePrefixChanged)
+	Q_PROPERTY(QString password READ password WRITE setPassword NOTIFY passwordChanged)
 
 public:
 	static Kaidan *instance();
@@ -105,15 +105,15 @@ public:
 	/**
 	 * Returns the current ConnectionState
 	 */
-	Q_INVOKABLE quint8 getConnectionState() const
+	Enums::ConnectionState connectionState() const
 	{
-		return (quint8) connectionState;
+		return m_connectionState;
 	}
 
 	/**
 	 * Returns the last connection error.
 	 */
-	Q_INVOKABLE quint8 getConnectionError() const;
+	ClientWorker::ConnectionError connectionError() const;
 
 	/**
 	 * Set own JID used for connection
@@ -126,9 +126,9 @@ public:
 	/**
 	 * Get the current JID
 	 */
-	QString getJid() const
+	QString jid() const
 	{
-		return creds.jid;
+		return m_creds.jid;
 	}
 
 	/**
@@ -141,9 +141,9 @@ public:
 	/**
 	 * Provides the prefix of the JID's resource part.
 	 */
-	QString getJidResourcePrefix() const
+	QString jidResourcePrefix() const
 	{
-		return creds.jidResourcePrefix;
+		return m_creds.jidResourcePrefix;
 	}
 
 	/**
@@ -154,32 +154,32 @@ public:
 	/**
 	 * Get the currently used password
 	 */
-	QString getPassword() const
+	QString password() const
 	{
-		return creds.password;
+		return m_creds.password;
 	}
 
-	RosterModel* getRosterModel() const
+	RosterModel* rosterModel() const
 	{
 		return m_caches->rosterModel;
 	}
 
-	MessageModel* getMessageModel() const
+	MessageModel* messageModel() const
 	{
 		return m_caches->msgModel;
 	}
 
-	AvatarFileStorage* getAvatarStorage() const
+	AvatarFileStorage* avatarStorage() const
 	{
 		return m_caches->avatarStorage;
 	}
 
-	PresenceCache* getPresenceCache() const
+	PresenceCache* presenceCache() const
 	{
 		return m_caches->presCache;
 	}
 
-	TransferCache* getTransferCache() const
+	TransferCache* transferCache() const
 	{
 		return m_caches->transferCache;
 	}
@@ -189,12 +189,12 @@ public:
 		return m_caches->serverFeaturesCache;
 	}
 
-	QSettings* getSettings() const
+	QSettings* settings() const
 	{
 		return m_caches->settings;
 	}
 
-	ClientWorker *getClient() const;
+	ClientWorker *client() const;
 
 	RosterDb *rosterDb() const;
 
@@ -466,10 +466,10 @@ private:
 	ClientWorker::Caches *m_caches;
 	ClientWorker *m_client;
 
-	ClientWorker::Credentials creds;
-	QString openUriCache;
-	ConnectionState connectionState = ConnectionState::StateDisconnected;
-	ClientWorker::ConnectionError connectionError = ClientWorker::NoError;
+	ClientWorker::Credentials m_creds;
+	QString m_openUriCache;
+	ConnectionState m_connectionState = ConnectionState::StateDisconnected;
+	ClientWorker::ConnectionError m_connectionError = ClientWorker::NoError;
 
 	static Kaidan *s_instance;
 };

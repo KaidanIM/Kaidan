@@ -773,7 +773,7 @@ void MediaRecorder::saveUserSettings()
 		Q_UNREACHABLE();
 		break;
 	case MediaRecorder::Type::Image: {
-		QSettings &settings(*Kaidan::instance()->getSettings());
+		QSettings &settings(*Kaidan::instance()->settings());
 
 		settings.beginGroup(settingsKey(m_type, SETTING_USER_DEFAULT));
 		settings.setValue(SETTING_DEFAULT_CAMERA_DEVICE_NAME, m_mediaSettings.camera.deviceName());
@@ -788,7 +788,7 @@ void MediaRecorder::saveUserSettings()
 		break;
 	}
 	case MediaRecorder::Type::Audio: {
-		QSettings &settings(*Kaidan::instance()->getSettings());
+		QSettings &settings(*Kaidan::instance()->settings());
 
 		settings.beginGroup(settingsKey(m_type, SETTING_USER_DEFAULT));
 		settings.setValue(SETTING_DEFAULT_AUDIO_INPUT_DEVICE_NAME, m_mediaSettings.audioInputDevice.deviceName());
@@ -801,7 +801,7 @@ void MediaRecorder::saveUserSettings()
 		break;
 	}
 	case MediaRecorder::Type::Video: {
-		QSettings &settings(*Kaidan::instance()->getSettings());
+		QSettings &settings(*Kaidan::instance()->settings());
 
 		settings.beginGroup(settingsKey(m_type, SETTING_USER_DEFAULT));
 		settings.setValue(SETTING_DEFAULT_CAMERA_DEVICE_NAME, m_mediaSettings.camera.deviceName());
@@ -930,7 +930,7 @@ CameraInfo MediaRecorder::userDefaultCamera() const
 		return CameraInfo();
 	}
 
-	QSettings &settings(*Kaidan::instance()->getSettings());
+	QSettings &settings(*Kaidan::instance()->settings());
 	CameraInfo cameraInfo = m_cameraModel->defaultCamera();
 
 	settings.beginGroup(settingsKey(m_type, SETTING_USER_DEFAULT));
@@ -954,7 +954,7 @@ AudioDeviceInfo MediaRecorder::userDefaultAudioInput() const
 		return AudioDeviceInfo();
 	}
 
-	QSettings &settings(*Kaidan::instance()->getSettings());
+	QSettings &settings(*Kaidan::instance()->settings());
 	AudioDeviceInfo audioInput = m_audioDeviceModel->defaultAudioInputDevice();
 
 	settings.beginGroup(settingsKey(m_type, SETTING_USER_DEFAULT));
@@ -986,7 +986,7 @@ void MediaRecorder::resetSettings(const CameraInfo &camera, const AudioDeviceInf
 		m_videoEncoderSettings = VideoEncoderSettings();
 		break;
 	case MediaRecorder::Type::Image: {
-		QSettings &settings(*Kaidan::instance()->getSettings());
+		QSettings &settings(*Kaidan::instance()->settings());
 		MediaSettings mediaSettings(camera, AudioDeviceInfo());
 		ImageEncoderSettings imageSettings;
 
@@ -1000,7 +1000,7 @@ void MediaRecorder::resetSettings(const CameraInfo &camera, const AudioDeviceInf
 		break;
 	}
 	case MediaRecorder::Type::Audio: {
-		QSettings &settings(*Kaidan::instance()->getSettings());
+		QSettings &settings(*Kaidan::instance()->settings());
 		MediaSettings mediaSettings(CameraInfo(), audioInput);
 		AudioEncoderSettings audioSettings;
 
@@ -1014,7 +1014,7 @@ void MediaRecorder::resetSettings(const CameraInfo &camera, const AudioDeviceInf
 		break;
 	}
 	case MediaRecorder::Type::Video: {
-		QSettings &settings(*Kaidan::instance()->getSettings());
+		QSettings &settings(*Kaidan::instance()->settings());
 		MediaSettings mediaSettings(camera, AudioDeviceInfo());
 		AudioEncoderSettings audioSettings;
 		VideoEncoderSettings videoSettings;

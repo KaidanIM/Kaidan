@@ -49,9 +49,9 @@ QImage QrCodeGenerator::generateLoginUriQrCode(int edgePixelCount)
 {
 	QXmppUri uri;
 
-	uri.setJid(Kaidan::instance()->getJid());
+	uri.setJid(Kaidan::instance()->jid());
 	uri.setAction(QXmppUri::Login);
-	uri.setPassword(Kaidan::instance()->getPassword());
+	uri.setPassword(Kaidan::instance()->password());
 
 	return generateQrCode(uri.toString(), edgePixelCount);
 }

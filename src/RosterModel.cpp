@@ -78,7 +78,7 @@ RosterModel::RosterModel(RosterDb *rosterDb, QObject *parent)
 		m_items.clear();
 		endResetModel();
 
-		emit rosterDb->fetchItemsRequested(Kaidan::instance()->getJid());
+		emit rosterDb->fetchItemsRequested(Kaidan::instance()->jid());
 	});
 }
 

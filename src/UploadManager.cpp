@@ -99,10 +99,10 @@ void UploadManager::sendFile(const QString &jid, const QUrl &fileUrl, const QStr
 	msg->setMediaLocation(file.filePath());
 
 	// cache message and upload
-	emit Kaidan::instance()->getTransferCache()->addJobRequested(msgId, upload->bytesTotal());
+	emit Kaidan::instance()->transferCache()->addJobRequested(msgId, upload->bytesTotal());
 	messages.insert(upload->id(), msg);
 
-	emit Kaidan::instance()->getMessageModel()->addMessageRequested(*msg);
+	emit Kaidan::instance()->messageModel()->addMessageRequested(*msg);
 
 	// update last message
 	QString lastMessage = tr("File");
@@ -112,7 +112,7 @@ void UploadManager::sendFile(const QString &jid, const QUrl &fileUrl, const QStr
 	rosterManager->handleSendMessage(jid, lastMessage);
 
 	connect(upload, &QXmppHttpUpload::bytesSentChanged, this, [=] () {
-		emit Kaidan::instance()->getTransferCache()->setJobBytesSentRequested(
+		emit Kaidan::instance()->transferCache()->setJobBytesSentRequested(
 					msgId, upload->bytesSent());
 	});
 }
@@ -128,7 +128,7 @@ void UploadManager::handleUploadSucceeded(const QXmppHttpUpload *upload)
 	                     ? oobUrl
 	                     : originalMsg->body() + "\n" + oobUrl;
 
-	emit Kaidan::instance()->getMessageModel()->updateMessageRequested(originalMsg->id(), [=] (Message &msg) {
+	emit Kaidan::instance()->messageModel()->updateMessageRequested(originalMsg->id(), [=] (Message &msg) {
 		msg.setOutOfBandUrl(oobUrl);
 		msg.setBody(body);
 	});
@@ -142,15 +142,15 @@ void UploadManager::handleUploadSucceeded(const QXmppHttpUpload *upload)
 
 	bool success = client->sendPacket(m);
 	if (success) {
-		emit Kaidan::instance()->getMessageModel()->setMessageDeliveryStateRequested(
+		emit Kaidan::instance()->messageModel()->setMessageDeliveryStateRequested(
 			originalMsg->id(), Enums::DeliveryState::Sent);
 	} else {
 		emit Kaidan::instance()->passiveNotificationRequested(tr("Message could not be sent."));
-		emit Kaidan::instance()->getMessageModel()->setMessageDeliveryStateRequested(originalMsg->id(), Enums::DeliveryState::Error, "Message could not be sent.");
+		emit Kaidan::instance()->messageModel()->setMessageDeliveryStateRequested(originalMsg->id(), Enums::DeliveryState::Error, "Message could not be sent.");
 	}
 
 	messages.remove(upload->id());
-	emit Kaidan::instance()->getTransferCache()->removeJobRequested(originalMsg->id());
+	emit Kaidan::instance()->transferCache()->removeJobRequested(originalMsg->id());
 }
 
 void UploadManager::handleUploadFailed(const QXmppHttpUpload *upload)
@@ -158,5 +158,5 @@ void UploadManager::handleUploadFailed(const QXmppHttpUpload *upload)
 	qDebug() << "[client] [UploadManager] A file upload has failed.";
 	const QString &msgId = messages.value(upload->id())->id();
 	messages.remove(upload->id());
-	emit Kaidan::instance()->getTransferCache()->removeJobRequested(msgId);
+	emit Kaidan::instance()->transferCache()->removeJobRequested(msgId);
 }

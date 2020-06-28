@@ -91,7 +91,7 @@ RosterManager::RosterManager(Kaidan *kaidan,
 		}
 	});
 
-	connect(kaidan->getMessageModel(), &MessageModel::currentChatJidChanged, this, &RosterManager::setCurrentChatJid);
+	connect(kaidan->messageModel(), &MessageModel::currentChatJidChanged, this, &RosterManager::setCurrentChatJid);
 
 	// user actions
 	connect(kaidan, &Kaidan::addContact, this, &RosterManager::addContact);

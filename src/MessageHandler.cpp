@@ -196,7 +196,7 @@ void MessageHandler::handleMessage(const QXmppMessage &msg)
 								      : message.spoilerHint()
 				    : msg.body();
 
-	emit kaidan->getRosterModel()->setLastMessageRequested(contactJid, lastMessage);
+	emit kaidan->rosterModel()->setLastMessageRequested(contactJid, lastMessage);
 }
 
 void MessageHandler::sendMessage(const QString& toJid,

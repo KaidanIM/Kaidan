@@ -45,7 +45,7 @@
 #define APPLICATION_SOURCE_CODE_URL "https://invent.kde.org/network/kaidan"
 #define ISSUE_TRACKING_URL "https://invent.kde.org/network/kaidan/issues"
 
-#define MESSAGE_MAX_CHARS 1e4
+constexpr auto MESSAGE_MAX_CHARS = 1e4;
 
 // XML namespaces
 #define NS_SPOILERS "urn:xmpp:spoiler:0"
@@ -64,13 +64,13 @@
 //
 
 // Length of generated usernames
-#define GENERATED_USERNAME_LENGTH 6
+constexpr auto GENERATED_USERNAME_LENGTH = 6;
 
 // Lower bound of the length for generated passwords (inclusive)
-#define GENERATED_PASSWORD_LENGTH_LOWER_BOUND 20
+constexpr auto GENERATED_PASSWORD_LENGTH_LOWER_BOUND = 20;
 
 // Upper bound of the length for generated passwords (inclusive)
-#define GENERATED_PASSWORD_LENGTH_UPPER_BOUND 30
+constexpr auto GENERATED_PASSWORD_LENGTH_UPPER_BOUND = 30;
 
 // Characters used for password generation
 #define GENERATED_PASSWORD_ALPHABET QLatin1String( \
@@ -85,7 +85,7 @@
 #define GENERATED_PASSWORD_ALPHABET_LENGTH GENERATED_PASSWORD_ALPHABET.size()
 
 // QXmpp version compatibility
-#define QXMPP_REQUIRED_VERSION_FOR_REGISTRATION QT_VERSION_CHECK(1, 2, 0)
+constexpr auto QXMPP_REQUIRED_VERSION_FOR_REGISTRATION = QT_VERSION_CHECK(1, 2, 0);
 
 /**
  * Path of the JSON server list file
@@ -96,7 +96,7 @@
  * Number of servers required in a country so that only servers from that country are
  * randomly selected.
  */
-#define SERVER_LIST_MIN_SERVERS_FROM_COUNTRY 2
+constexpr auto SERVER_LIST_MIN_SERVERS_FROM_COUNTRY = 2;
 
 /**
  * Name of the @c QQuickImageProvider for Bits of Binary.

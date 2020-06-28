@@ -49,7 +49,7 @@ class RosterManager : public QObject
 
 public:
 	RosterManager(Kaidan *kaidan, QXmppClient *client, RosterModel *rosterModel,
-	              AvatarFileStorage *avatarStorage, VCardManager *vCardManager,
+				  AvatarFileStorage *avatarStorage, VCardManager *vCardManager,
 	              QObject *parent = nullptr);
 
 public slots:
@@ -65,13 +65,13 @@ private slots:
 	void handleMessage(const QXmppMessage &msg);
 
 private:
-	Kaidan *kaidan;
-	QXmppClient *client;
-	RosterModel *model;
-	AvatarFileStorage *avatarStorage;
-	VCardManager *vCardManager;
-	QXmppRosterManager *manager;
-	QString m_currentChatJid;
+	Kaidan *m_kaidan;
+	QXmppClient *m_client;
+	RosterModel *m_model;
+	AvatarFileStorage *m_avatarStorage;
+	VCardManager *m_vCardManager;
+	QXmppRosterManager *m_manager;
+	QString m_chatPartner;
 };
 
 #endif // ROSTERMANAGER_H

@@ -37,7 +37,7 @@ VCardModel::VCardModel(QObject *parent)
 	: QAbstractListModel(parent)
 {
 	connect(
-		Kaidan::instance()->client()->getVCardManager(),
+		Kaidan::instance()->client()->vCardManager(),
 		&VCardManager::vCardReceived,
 		this,
 		&VCardModel::handleVCardReceived

@@ -128,7 +128,7 @@ public:
 	 */
 	ClientWorker(Caches *caches, Kaidan *kaidan, bool enableLogging, QObject *parent = nullptr);
 
-	VCardManager *getVCardManager() const;
+	VCardManager *vCardManager() const;
 
 	/**
 	 * Returns all models and caches.
@@ -148,7 +148,7 @@ public slots:
 	 */
 	void setCredentials(ClientWorker::Credentials creds)
 	{
-		this->creds = creds;
+		m_creds = creds;
 	}
 
 	/**
@@ -226,7 +226,7 @@ signals:
 	// Those signals are emitted by Kaidan.cpp and are used by this class.
 	void connectRequested();
 	void disconnectRequested();
-	void credentialsUpdated(ClientWorker::Credentials creds);
+	void credentialsUpdated(ClientWorker::Credentials m_creds);
 	void registrationFormRequested();
 
 	/**
@@ -273,19 +273,20 @@ private:
 	QString generateJidResourceWithRandomSuffix(const QString jidResourcePrefix, unsigned int length = 4) const;
 
 	Caches *m_caches;
-	Kaidan *kaidan;
-	QXmppClient *client;
-	LogHandler *logger;
-	Credentials creds;
-	bool enableLogging;
 
-	RegistrationManager *registrationManager;
-	RosterManager *rosterManager;
-	MessageHandler *msgHandler;
-	DiscoveryManager *discoManager;
-	VCardManager *vCardManager;
-	UploadManager *uploadManager;
-	DownloadManager *downloadManager;
+	Kaidan *m_kaidan;
+	QXmppClient *m_client;
+	LogHandler *m_logger;
+	Credentials m_creds;
+	bool m_enableLogging;
+
+	RegistrationManager *m_registrationManager;
+	RosterManager *m_rosterManager;
+	MessageHandler *m_msgHandler;
+	DiscoveryManager *m_discoManager;
+	VCardManager *m_vCardManager;
+	UploadManager *m_uploadManager;
+	DownloadManager *m_downloadManager;
 
 	bool m_isApplicationWindowActive;
 	bool m_isReconnecting = false;

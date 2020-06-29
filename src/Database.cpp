@@ -199,6 +199,8 @@ void Database::createNewDatabase()
 	createDbInfoTable();
 	createRosterTable();
 	createMessagesTable();
+
+	m_version = DATABASE_LATEST_VERSION;
 }
 
 void Database::createDbInfoTable()

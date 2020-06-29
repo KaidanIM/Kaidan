@@ -38,18 +38,18 @@ import im.kaidan.kaidan 1.0
 Kirigami.OverlaySheet {
 	property string jid
 
+	header: Kirigami.Heading {
+		text: qsTr("Delete contact")
+
+		Layout.fillWidth: true
+	}
+
 	onSheetOpenChanged: {
 		infoLabel.text = qsTr("Do you really want to delete the contact "
 							  + "<b>%1</b> from your roster?").arg(jid)
 	}
 
 	ColumnLayout {
-		Kirigami.Heading {
-			text: qsTr("Delete contact")
-
-			Layout.fillWidth: true
-		}
-
 		Controls.Label {
 			id: infoLabel
 			text: ""

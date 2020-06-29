@@ -39,13 +39,14 @@ Kirigami.OverlaySheet {
 	property string from;
 	property string message;
 
+	header: Kirigami.Heading {
+		text: qsTr("Subscription Request")
+		Layout.fillWidth: true
+	}
+
+
 	ColumnLayout {
 		spacing: 10
-
-		Kirigami.Heading {
-			text: qsTr("Subscription Request")
-			Layout.fillWidth: true
-		}
 
 		Controls.Label {
 			text: qsTr("You received a subscription request by <b>%1</b>. " +

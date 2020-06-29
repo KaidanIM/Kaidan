@@ -38,13 +38,13 @@ import im.kaidan.kaidan 1.0
 Kirigami.OverlaySheet {
 	property string jid: ""
 
+	header: Kirigami.Heading {
+		text: qsTr("Add new contact")
+		Layout.fillWidth: true
+	}
+
 	ColumnLayout {
 		Layout.fillWidth: true
-
-		Kirigami.Heading {
-			text: qsTr("Add new contact")
-			Layout.fillWidth: true
-		}
 
 		Controls.Label {
 			text: qsTr("This will also send a request to access the " +

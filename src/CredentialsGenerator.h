@@ -28,8 +28,7 @@
  *  along with Kaidan.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef CREDENTIALSGENERATOR_H
-#define CREDENTIALSGENERATOR_H
+#pragma once
 
 #include <QObject>
 
@@ -69,5 +68,3 @@ public:
 	 */
 	Q_INVOKABLE static QString generatePassword(unsigned int length);
 };
-
-#endif // CREDENTIALSGENERATOR_H

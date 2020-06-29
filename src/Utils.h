@@ -28,8 +28,7 @@
  *  along with Kaidan.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef UTILS_H
-#define UTILS_H
+#pragma once
 
 template <class Key, class T> class QMap;
 class QSqlDatabase;
@@ -116,5 +115,3 @@ public:
 	                                    const QString &key,
 	                                    const QVariant &val);
 };
-
-#endif // UTILS_H

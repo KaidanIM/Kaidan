@@ -28,8 +28,7 @@
  *  along with Kaidan.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef ROSTERITEM_H
-#define ROSTERITEM_H
+#pragma once
 
 #include <QDateTime>
 #include "QXmppRosterIq.h"
@@ -95,5 +94,3 @@ private:
 	 */
 	QString m_lastMessage;
 };
-
-#endif // ROSTERITEM_H

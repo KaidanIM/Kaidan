@@ -28,8 +28,7 @@
  *  along with Kaidan.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef SERVERFEATURESCACHE_H
-#define SERVERFEATURESCACHE_H
+#pragma once
 
 #include <QObject>
 #include <QMutex>
@@ -78,5 +77,3 @@ private:
 	bool m_inBandRegistrationSupported = false;
 	bool m_httpUploadSupported = false;
 };
-
-#endif // SERVERFEATURESCACHE_H

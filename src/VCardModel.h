@@ -28,8 +28,7 @@
  *  along with Kaidan.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef VCARDMODEL_H
-#define VCARDMODEL_H
+#pragma once
 
 #include <QAbstractListModel>
 #include <QXmppVCardIq.h>
@@ -83,5 +82,3 @@ private:
 	QVector<Item> m_vCard;
 	QString m_jid;
 };
-
-#endif // VCARDMODEL_H

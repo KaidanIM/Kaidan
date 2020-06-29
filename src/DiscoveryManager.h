@@ -28,8 +28,7 @@
  *  along with Kaidan.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef DISCOVERYMANAGER_H
-#define DISCOVERYMANAGER_H
+#pragma once
 
 #include <QObject>
 #include <QXmppClient.h>
@@ -67,5 +66,3 @@ private:
 	QXmppClient *client;
 	QXmppDiscoveryManager *manager;
 };
-
-#endif // DISCOVERYMANAGER_H

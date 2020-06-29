@@ -28,8 +28,7 @@
  *  along with Kaidan.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef ROSTERDB_H
-#define ROSTERDB_H
+#pragma once
 
 // C++
 #include <functional>
@@ -84,5 +83,3 @@ private:
 
 	static RosterDb *s_instance;
 };
-
-#endif // ROSTERDB_H

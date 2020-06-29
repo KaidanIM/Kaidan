@@ -28,8 +28,7 @@
  *  along with Kaidan.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef KAIDAN_H
-#define KAIDAN_H
+#pragma once
 
 // Qt
 #include <QColor>
@@ -473,5 +472,3 @@ private:
 
 	static Kaidan *s_instance;
 };
-
-#endif

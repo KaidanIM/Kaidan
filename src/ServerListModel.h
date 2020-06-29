@@ -28,8 +28,7 @@
  *  along with Kaidan.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef SERVERLISTMODEL_H
-#define SERVERLISTMODEL_H
+#pragma once
 
 #include <QAbstractListModel>
 #include <QVector>
@@ -76,5 +75,3 @@ private:
 
 	QVector<ServerListItem> m_items;
 };
-
-#endif // SERVERLISTMODEL_H

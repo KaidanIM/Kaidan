@@ -1,5 +1,4 @@
-#ifndef EMOJIMODEL_H
-#define EMOJIMODEL_H
+#pragma once
 
 #include <QAbstractListModel>
 #include <QSortFilterProxyModel>
@@ -97,5 +96,3 @@ private:
 };
 
 Q_DECLARE_METATYPE(Emoji)
-
-#endif  // EMOJIMODEL_H

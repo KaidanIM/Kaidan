@@ -28,8 +28,7 @@
  *  along with Kaidan.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef REGISTRATIONDATAFORMFILTERMODEL_H
-#define REGISTRATIONDATAFORMFILTERMODEL_H
+#pragma once
 
 #include <QSortFilterProxyModel>
 
@@ -50,5 +49,3 @@ public:
 private:
 	QVector<int> m_filteredRows;
 };
-
-#endif // REGISTRATIONDATAFORMFILTERMODEL_H

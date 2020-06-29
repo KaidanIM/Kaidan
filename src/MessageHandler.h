@@ -28,8 +28,7 @@
  *  along with Kaidan.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef MESSAGEHANDLER_H
-#define MESSAGEHANDLER_H
+#pragma once
 
 // Qt
 #include <QObject>
@@ -95,5 +94,3 @@ private:
 	MessageModel *model;
 	QXmppCarbonManager *carbonManager;
 };
-
-#endif // MESSAGEHANDLER_H

@@ -28,8 +28,7 @@
  *  along with Kaidan.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef CLIENTWORKER_H
-#define CLIENTWORKER_H
+#pragma once
 
 // Qt
 #include <QObject>
@@ -301,5 +300,3 @@ private:
 	QString m_passwordToBeSetOnNextConnect;
 	QString m_displayNameToBeSetOnNextConnect;
 };
-
-#endif // CLIENTWORKER_H

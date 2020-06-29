@@ -28,8 +28,7 @@
  *  along with Kaidan.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef MESSAGEMODEL_H
-#define MESSAGEMODEL_H
+#pragma once
 
 #include <QAbstractListModel>
 #include "Message.h"
@@ -147,5 +146,3 @@ private:
 	QString m_currentChatJid;
 	bool m_fetchedAll = false;
 };
-
-#endif // MESSAGEMODEL_H

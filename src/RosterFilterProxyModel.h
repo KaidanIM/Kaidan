@@ -28,8 +28,7 @@
  *  along with Kaidan.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef ROSTERFILTERPROXYMODEL_H
-#define ROSTERFILTERPROXYMODEL_H
+#pragma once
 
 #include <QSortFilterProxyModel>
 
@@ -42,5 +41,3 @@ public:
 
 	bool filterAcceptsRow(int sourceRow, const QModelIndex &sourceParent) const override;
 };
-
-#endif // ROSTERFILTERPROXYMODEL_H

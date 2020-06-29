@@ -28,8 +28,7 @@
  *  along with Kaidan.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef PRESENCECACHE_H
-#define PRESENCECACHE_H
+#pragma once
 
 #include <QObject>
 #include <QMap>
@@ -76,5 +75,3 @@ signals:
 private:
 	QMap<QString, QMap<QString, QXmppPresence>> presences;
 };
-
-#endif // PRESENCECACHE_H

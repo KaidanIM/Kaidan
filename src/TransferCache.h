@@ -28,8 +28,7 @@
  *  along with Kaidan.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef TRANSFERCACHE_H
-#define TRANSFERCACHE_H
+#pragma once
 
 #include <QObject>
 #include <QMap>
@@ -111,5 +110,3 @@ private:
 
 	mutable QMutex mutex;
 };
-
-#endif // TRANSFERCACHE_H

@@ -28,8 +28,7 @@
  *  along with Kaidan.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef AVATARFILESTORAGE_H
-#define AVATARFILESTORAGE_H
+#pragma once
 
 #include <QObject>
 #include <QString>
@@ -104,5 +103,3 @@ private:
 
 	QMap<QString, QString> jidAvatarMap;
 };
-
-#endif // AVATARFILESTORAGE_H

@@ -28,8 +28,7 @@
  *  along with Kaidan.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef LOGHANDLER_H
-#define LOGHANDLER_H
+#pragma once
 
 #include <QObject>
 #include <QXmppLogger.h>
@@ -67,5 +66,3 @@ private:
 	QXmppClient *client;
 	bool enabled = false;
 };
-
-#endif // LOGHANDLER_H

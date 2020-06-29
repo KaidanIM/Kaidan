@@ -28,8 +28,7 @@
  *  along with Kaidan.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef QRCODEGENERATOR_H
-#define QRCODEGENERATOR_H
+#pragma once
 
 #include <QObject>
 
@@ -80,5 +79,3 @@ private:
 	 */
 	static void createColorTable(QImage &blackAndWhiteImage);
 };
-
-#endif // QRCODEGENERATOR_H

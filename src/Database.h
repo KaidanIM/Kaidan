@@ -28,8 +28,7 @@
  *  along with Kaidan.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef DATABASE_H
-#define DATABASE_H
+#pragma once
 
 #include <QObject>
 #include <QSqlDatabase>
@@ -124,5 +123,3 @@ private:
 
 	int m_transactions = 0;
 };
-
-#endif // DATABASE_H

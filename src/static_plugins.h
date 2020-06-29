@@ -28,6 +28,8 @@
  *  along with Kaidan.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+#pragma once
+
 // This file imports static plugin classes for static plugins
 #include <QtPlugin>
 

@@ -28,8 +28,7 @@
  *  along with Kaidan.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef MESSAGE_H
-#define MESSAGE_H
+#pragma once
 
 #include <QXmppMessage.h>
 #include "Enums.h"
@@ -141,5 +140,3 @@ private:
 	 */
 	QString m_errorText;
 };
-
-#endif // MESSAGE_H

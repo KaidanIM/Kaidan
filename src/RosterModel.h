@@ -28,8 +28,7 @@
  *  along with Kaidan.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef ROSTERMODEL_H
-#define ROSTERMODEL_H
+#pragma once
 
 #include <QAbstractListModel>
 #include <QVector>
@@ -101,5 +100,3 @@ private:
 	RosterDb *rosterDb;
 	QVector<RosterItem> m_items;
 };
-
-#endif // ROSTERMODEL_H

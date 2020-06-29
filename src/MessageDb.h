@@ -28,8 +28,7 @@
  *  along with Kaidan.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef MESSAGEDB_H
-#define MESSAGEDB_H
+#pragma once
 
 #include "Enums.h"
 #include "Message.h"
@@ -163,5 +162,3 @@ public slots:
 private:
 	static MessageDb *s_instance;
 };
-
-#endif // MESSAGEDB_H

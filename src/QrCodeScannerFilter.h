@@ -28,8 +28,7 @@
  *  along with Kaidan.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef QRCODESCANNERFILTER_H
-#define QRCODESCANNERFILTER_H
+#pragma once
 
 #include <QObject>
 #include <QAbstractVideoFilter>
@@ -127,5 +126,3 @@ public:
 private:
 	QrCodeScannerFilter *m_filter;
 };
-
-#endif // QRCODESCANNERFILTER_H

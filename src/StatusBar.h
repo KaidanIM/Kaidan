@@ -20,8 +20,7 @@
  * SOFTWARE.
 */
 
-#ifndef STATUSBAR_H
-#define STATUSBAR_H
+#pragma once
 
 #include <QObject>
 #include <QColor>
@@ -43,5 +42,3 @@ public:
 private:
 	QColor m_color;
 };
-
-#endif // STATUSBAR_H

@@ -28,8 +28,7 @@
  *  along with Kaidan.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef DOWNLOADMANAGER_H
-#define DOWNLOADMANAGER_H
+#pragma once
 
 #include <QObject>
 #include <QFile>
@@ -114,5 +113,3 @@ private:
 
 	QMap<QString, DownloadJob*> downloads;
 };
-
-#endif // DOWNLOADMANAGER_H

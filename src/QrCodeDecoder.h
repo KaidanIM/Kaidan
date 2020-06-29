@@ -28,8 +28,7 @@
  *  along with Kaidan.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef QRCODEDECODER_H
-#define QRCODEDECODER_H
+#pragma once
 
 #include <QObject>
 
@@ -72,5 +71,3 @@ public slots:
 	 */
 	void decodeImage(const QImage &image);
 };
-
-#endif // QRCODEDECODER_H

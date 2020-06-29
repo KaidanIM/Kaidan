@@ -28,8 +28,7 @@
  *  along with Kaidan.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef CREDENTIALSVALIDATOR_H
-#define CREDENTIALSVALIDATOR_H
+#pragma once
 
 #include <QObject>
 
@@ -71,5 +70,3 @@ public:
 	 */
 	Q_INVOKABLE static bool isPasswordValid(const QString &password);
 };
-
-#endif // CREDENTIALSVALIDATOR_H

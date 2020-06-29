@@ -28,8 +28,7 @@
  *  along with Kaidan.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef REGISTRATIONMANAGER_H
-#define REGISTRATIONMANAGER_H
+#pragma once
 
 // Kaidan
 class ClientWorker;
@@ -154,5 +153,3 @@ private:
 	RegistrationDataFormModel *m_dataFormModel;
 	QVector<QXmppBitsOfBinaryContentId> m_contentIdsToRemove;
 };
-
-#endif // REGISTRATIONMANAGER_H

@@ -28,8 +28,7 @@
  *  along with Kaidan.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef VCARDMANAGER_H
-#define VCARDMANAGER_H
+#pragma once
 
 #include <QObject>
 #include <QString>
@@ -92,5 +91,3 @@ private:
 	AvatarFileStorage *avatarStorage;
 	QString m_nicknameToBeSetAfterFetchingCurrentVCard;
 };
-
-#endif // VCARDMANAGER_H

@@ -28,8 +28,7 @@
  *  along with Kaidan.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef ROSTERMANAGER_H
-#define ROSTERMANAGER_H
+#pragma once
 
 // Qt
 #include <QObject>
@@ -73,5 +72,3 @@ private:
 	QXmppRosterManager *m_manager;
 	QString m_currentChatJid;
 };
-
-#endif // ROSTERMANAGER_H

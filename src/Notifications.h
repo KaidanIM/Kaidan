@@ -28,8 +28,7 @@
  *  along with Kaidan.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef NOTIFICATIONS_H
-#define NOTIFICATIONS_H
+#pragma once
 
 class QString;
 
@@ -45,5 +44,3 @@ public:
 	 */
 	static void sendMessageNotification(const QString &senderJid, const QString &senderName, const QString &message);
 };
-
-#endif // NOTIFICATIONS_H

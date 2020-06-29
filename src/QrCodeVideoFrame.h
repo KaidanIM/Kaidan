@@ -44,8 +44,7 @@
  * limitations under the License.
  */
 
-#ifndef QRCODEVIDEOFRAME_H
-#define QRCODEVIDEOFRAME_H
+#pragma once
 
 #include <QByteArray>
 #include <QSize>
@@ -100,5 +99,3 @@ private:
 	QSize m_size;
 	QVideoFrame::PixelFormat m_pixelFormat;
 };
-
-#endif // QRCODEVIDEOFRAME_H

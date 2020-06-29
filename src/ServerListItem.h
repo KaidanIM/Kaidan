@@ -28,8 +28,7 @@
 *  along with Kaidan.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef SERVERLISTITEM_H
-#define SERVERLISTITEM_H
+#pragma once
 
 #include <QLocale>
 #include <QSharedDataPointer>
@@ -92,5 +91,3 @@ public:
 private:
 	QSharedDataPointer<ServerListItemPrivate> d;
 };
-
-#endif // SERVERLISTITEM_H

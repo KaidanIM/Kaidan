@@ -28,8 +28,7 @@
  *  along with Kaidan.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef QMLUTILS_H
-#define QMLUTILS_H
+#pragma once
 
 #include <QObject>
 #include <QUrl>
@@ -174,5 +173,3 @@ private:
 	 */
 	static QString processMsgFormatting(const QStringList &words, bool isFirst = true);
 };
-
-#endif // QMLUTILS_H

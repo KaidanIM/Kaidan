@@ -28,8 +28,7 @@
  *  along with Kaidan.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef UPLOADMANAGER_H
-#define UPLOADMANAGER_H
+#pragma once
 
 // QXmpp
 #include "qxmpp-exts/QXmppUploadManager.h"
@@ -83,5 +82,3 @@ private:
 
 	QMap<int, Message*> messages;
 };
-
-#endif // UPLOADMANAGER_H

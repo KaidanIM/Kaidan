@@ -28,8 +28,7 @@
  *  along with Kaidan.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef BITSOFBINARYIMAGEPROVIDER_H
-#define BITSOFBINARYIMAGEPROVIDER_H
+#pragma once
 
 // Qt
 #include <QQuickImageProvider>
@@ -86,5 +85,3 @@ private:
 	QMutex m_cacheMutex;
 	QVector<QXmppBitsOfBinaryData> m_cache;
 };
-
-#endif // BITSOFBINARYIMAGEPROVIDER_H

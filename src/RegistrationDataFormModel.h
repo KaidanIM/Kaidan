@@ -28,8 +28,7 @@
  *  along with Kaidan.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef REGISTRATIONDATAFORMMODEL_H
-#define REGISTRATIONDATAFORMMODEL_H
+#pragma once
 
 #include "DataFormModel.h"
 // Qt
@@ -80,5 +79,3 @@ private:
 	bool m_isFakeForm = false;
 	QList<QString> filteredDataFormFields;
 };
-
-#endif // REGISTRATIONDATAFORMMODEL_H

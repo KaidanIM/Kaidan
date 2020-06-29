@@ -28,8 +28,7 @@
  *  along with Kaidan.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef DATAFORMMODEL_H
-#define DATAFORMMODEL_H
+#pragma once
 
 #include <QAbstractListModel>
 #include <QHash>
@@ -91,5 +90,3 @@ protected:
 private:
 	QString mediaSourceUri(const QXmppDataForm::Field &field) const;
 };
-
-#endif // DATAFORMMODEL_H

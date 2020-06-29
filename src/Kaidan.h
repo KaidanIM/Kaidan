@@ -64,8 +64,8 @@ class Kaidan : public QObject
 	Q_PROPERTY(TransferCache* transferCache READ transferCache CONSTANT)
 	Q_PROPERTY(ServerFeaturesCache* serverFeaturesCache READ serverFeaturesCache CONSTANT)
 	Q_PROPERTY(QSettings* settings READ settings CONSTANT)
-	Q_PROPERTY(Enums::ConnectionState connectionState READ connectionState NOTIFY connectionStateChanged)
-	Q_PROPERTY(ClientWorker::ConnectionError connectionError READ connectionError NOTIFY connectionErrorChanged)
+	Q_PROPERTY(quint8 connectionState READ connectionState NOTIFY connectionStateChanged)
+	Q_PROPERTY(quint8 connectionError READ connectionError NOTIFY connectionErrorChanged)
 	Q_PROPERTY(QString jid READ jid WRITE setJid NOTIFY jidChanged)
 	Q_PROPERTY(QString jidResourcePrefix READ jidResourcePrefix WRITE setJidResourcePrefix NOTIFY jidResourcePrefixChanged)
 	Q_PROPERTY(QString password READ password WRITE setPassword NOTIFY passwordChanged)
@@ -115,15 +115,15 @@ public:
 	/**
 	 * Returns the current ConnectionState
 	 */
-	Enums::ConnectionState connectionState() const
+	quint8 connectionState() const
 	{
-		return m_connectionState;
+		return quint8(m_connectionState);
 	}
 
 	/**
 	 * Returns the last connection error.
 	 */
-	ClientWorker::ConnectionError connectionError() const;
+	quint8 connectionError() const;
 
 	/**
 	 * Set own JID used for connection

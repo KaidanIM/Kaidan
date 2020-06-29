@@ -249,9 +249,9 @@ Kaidan::PasswordVisibility Kaidan::passwordVisibility() const
 		.value<Kaidan::PasswordVisibility>();
 }
 
-ClientWorker::ConnectionError Kaidan::connectionError() const
+quint8 Kaidan::connectionError() const
 {
-	return m_connectionError;
+	return quint8(m_connectionError);
 }
 
 void Kaidan::addOpenUri(const QString &uri)

@@ -28,12 +28,7 @@
  *  along with Kaidan.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-// Kaidan
 #include "DownloadManager.h"
-#include "Globals.h"
-#include "Kaidan.h"
-#include "MessageModel.h"
-#include "TransferCache.h"
 // C++
 #include <utility>
 // Qt
@@ -42,52 +37,48 @@
 #include <QNetworkReply>
 #include <QNetworkRequest>
 #include <QStandardPaths>
+// Kaidan
+#include "Globals.h"
+#include "Kaidan.h"
+#include "MessageModel.h"
+#include "TransferCache.h"
 
-DownloadManager::DownloadManager(Kaidan *kaidan, TransferCache *transferCache,
-                                 MessageModel *model, QObject *parent)
-        : QObject(parent), thread(new DownloadThread()),
-          netMngr(new QNetworkAccessManager), kaidan(kaidan),
-          transferCache(transferCache), model(model)
+DownloadManager::DownloadManager(TransferCache *transferCache, MessageModel *model, QObject *parent)
+	: QObject(parent),
+	  m_netMngr(new QNetworkAccessManager(this)),
+	  m_transferCache(transferCache),
+	  m_model(model)
 {
 	connect(this, &DownloadManager::startDownloadRequested,
 	        this, &DownloadManager::startDownload);
-	connect(this, &DownloadManager::abortDownloadRequested,
-	        this, &DownloadManager::abortDownload);
+	connect(this, &DownloadManager::abortDownloadRequested, this, &DownloadManager::abortDownload);
 
-	connect(kaidan, &Kaidan::downloadMedia, this, &DownloadManager::startDownload);
-
-	netMngr->moveToThread(thread);
-	thread->start();
+	connect(Kaidan::instance(), &Kaidan::downloadMedia, this, &DownloadManager::startDownload);
 }
 
 DownloadManager::~DownloadManager()
 {
-	delete netMngr;
-	delete thread;
 }
 
 void DownloadManager::startDownload(const QString &msgId, const QString &url)
 {
 	// don't download the same file twice and in parallel
-	if (downloads.contains(msgId)) {
+	if (m_downloads.contains(msgId)) {
 		qWarning() << "Tried to download a file that is currently being "
 		              "downloaded.";
 		return;
 	}
 
 	// we want to save files to 'Downloads/Kaidan/'
-	QString dirPath =
-	        QStandardPaths::writableLocation(QStandardPaths::DownloadLocation)
-	        + QDir::separator() + APPLICATION_DISPLAY_NAME + QDir::separator();
+	QString dirPath = QStandardPaths::writableLocation(QStandardPaths::DownloadLocation) +
+	                  QDir::separator() + APPLICATION_DISPLAY_NAME + QDir::separator();
 
-	DownloadJob *dl = new DownloadJob(msgId, QUrl(url), dirPath, netMngr,
-	                                  transferCache, kaidan);
-	dl->moveToThread(thread);
-	downloads[msgId] = dl;
+	auto *dl = new DownloadJob(msgId, QUrl(url), dirPath, m_netMngr, m_transferCache);
+	m_downloads[msgId] = dl;
 
 	connect(dl, &DownloadJob::finished, this, [=]() {
-		const QString mediaLocation = dl->downloadLocation();
-		emit model->updateMessageRequested(msgId, [=] (Message &msg) {
+		const QString &mediaLocation = dl->downloadLocation();
+		emit m_model->updateMessageRequested(msgId, [=] (Message &msg) {
 			msg.setMediaLocation(mediaLocation);
 		});
 
@@ -102,26 +93,24 @@ void DownloadManager::startDownload(const QString &msgId, const QString &url)
 
 void DownloadManager::abortDownload(const QString &msgId)
 {
-	DownloadJob *job = downloads.value(msgId);
-	delete job;
-	downloads.remove(msgId);
+	auto *job = m_downloads.value(msgId);
+	job->deleteLater();
+	m_downloads.remove(msgId);
 
-	emit transferCache->removeJobRequested(msgId);
+	emit m_transferCache->removeJobRequested(msgId);
 }
 
-DownloadJob::DownloadJob(QString msgId,
-                         QUrl source,
-                         QString filePath,
-                         QNetworkAccessManager *netMngr,
-                         TransferCache *transferCache,
-                         Kaidan *kaidan)
-        : QObject(nullptr),
-          msgId(std::move(msgId)),
-          source(std::move(source)),
-          filePath(std::move(filePath)),
-          netMngr(netMngr),
-          transferCache(transferCache),
-          kaidan(kaidan)
+DownloadJob::DownloadJob(const QString &msgId,
+	const QUrl &source,
+	const QString &filePath,
+	QNetworkAccessManager *netMngr,
+	TransferCache *transferCache)
+	: QObject(nullptr),
+	  m_msgId(msgId),
+	  m_source(source),
+	  m_filePath(filePath),
+	  m_netMngr(netMngr),
+	  m_transferCache(transferCache)
 {
 	connect(this, &DownloadJob::startDownloadRequested,
 	        this, &DownloadJob::startDownload);
@@ -129,54 +118,51 @@ DownloadJob::DownloadJob(QString msgId,
 
 void DownloadJob::startDownload()
 {
-	QDir dlDir(filePath);
+	QDir dlDir(m_filePath);
 	if (!dlDir.exists())
 		dlDir.mkpath(".");
 
 	// don't override other files
-	file.setFileName(filePath + source.fileName());
+	m_file.setFileName(m_filePath + m_source.fileName());
 	int counter = 1;
-	while (file.exists()) {
-		file.setFileName(filePath + source.fileName() + "-"
-		                 + QString::number(counter++));
+	while (m_file.exists()) {
+		m_file.setFileName(
+			m_filePath + m_source.fileName() + "-" + QString::number(counter++));
 	}
 
-	if (!file.open(QIODevice::WriteOnly)) {
-		qWarning() << "Could not open file for writing:"
-		           << file.errorString();
-		emit kaidan->passiveNotificationRequested(
-		        tr("Could not save file: %1").arg(file.errorString()));
+	if (!m_file.open(QIODevice::WriteOnly)) {
+		qWarning() << "Could not open file for writing:" << m_file.errorString();
+		emit Kaidan::instance()->passiveNotificationRequested(
+			tr("Could not save file: %1").arg(m_file.errorString()));
 		emit failed();
 		return;
 	}
 
-	QNetworkRequest request(source);
-	QNetworkReply *reply = netMngr->get(request);
+	QNetworkRequest request(m_source);
+	QNetworkReply *reply = m_netMngr->get(request);
 
-	emit transferCache->addJobRequested(msgId, 0);
+	emit m_transferCache->addJobRequested(m_msgId, 0);
 
-	connect(reply, &QNetworkReply::downloadProgress,
-	        this, [this] (qint64 bytesReceived, qint64 bytesTotal) {
-		emit transferCache->setJobProgressRequested(msgId, bytesReceived, bytesTotal);
+	connect(reply, &QNetworkReply::downloadProgress, this, [this](qint64 bytesReceived, qint64 bytesTotal) {
+		emit m_transferCache->setJobProgressRequested(m_msgId, bytesReceived, bytesTotal);
 	});
-	connect(reply, &QNetworkReply::finished, this, [=] () {
-		emit transferCache->removeJobRequested(msgId);
+	connect(reply, &QNetworkReply::finished, this, [=]() {
+		emit m_transferCache->removeJobRequested(m_msgId);
 		emit finished();
 	});
-	connect(reply, QOverload<QNetworkReply::NetworkError>::of(&QNetworkReply::error),
-	        this, [=] () {
-		emit transferCache->removeJobRequested(msgId);
+	connect(reply, QOverload<QNetworkReply::NetworkError>::of(&QNetworkReply::error), this, [=]() {
+		emit m_transferCache->removeJobRequested(m_msgId);
 		qWarning() << "Couldn't download file:" << reply->errorString();
-		emit kaidan->passiveNotificationRequested(
-		        tr("Download failed: %1").arg(reply->errorString()));
+		emit Kaidan::instance()->passiveNotificationRequested(
+			tr("Download failed: %1").arg(reply->errorString()));
 		emit finished();
 	});
-	connect(reply, &QNetworkReply::readyRead, this, [=](){
-		file.write(reply->readAll());
+	connect(reply, &QNetworkReply::readyRead, this, [=]() {
+		m_file.write(reply->readAll());
 	});
 }
 
 QString DownloadJob::downloadLocation() const
 {
-	return file.fileName();
+	return m_file.fileName();
 }

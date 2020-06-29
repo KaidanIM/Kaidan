@@ -33,36 +33,38 @@
 #include <QMutexLocker>
 
 TransferJob::TransferJob(qint64 bytesTotal)
-        : progress(0.0), bytesSent(0), bytesTotal(bytesTotal)
+	: m_progress(0.0), m_bytesSent(0), m_bytesTotal(bytesTotal)
 {
 }
 
 void TransferJob::setProgress(qreal progress)
 {
-	if (this->progress == progress)
+	if (m_progress == progress)
 		return;
-	this->progress = progress;
+	m_progress = progress;
 	emit progressChanged();
 }
 
 void TransferJob::setBytesSent(qint64 bytesSent)
 {
-	if (this->bytesSent == bytesSent)
+	if (m_bytesSent == bytesSent)
 		return;
-	this->bytesSent = bytesSent;
+	m_bytesSent = bytesSent;
 	emit bytesSentChanged();
-	if (bytesTotal != 0)
-		setProgress(qreal(bytesSent) / qreal(bytesTotal));
+
+	if (m_bytesTotal != 0)
+		setProgress(qreal(bytesSent) / qreal(m_bytesTotal));
 }
 
 void TransferJob::setBytesTotal(qint64 bytesTotal)
 {
-	if (this->bytesTotal == bytesTotal)
+	if (m_bytesTotal == bytesTotal)
 		return;
-	this->bytesTotal = bytesTotal;
+	m_bytesTotal = bytesTotal;
 	emit bytesTotalChanged();
+
 	if (bytesTotal != 0)
-		setProgress(qreal(bytesSent) / qreal(bytesTotal));
+		setProgress(qreal(m_bytesSent) / qreal(bytesTotal));
 }
 
 TransferCache::TransferCache(QObject *parent)
@@ -80,13 +82,13 @@ TransferCache::TransferCache(QObject *parent)
 TransferCache::~TransferCache()
 {
 	// wait for other threads to finish
-	QMutexLocker locker(&mutex);
+	QMutexLocker locker(&m_mutex);
 }
 
 void TransferCache::addJob(const QString& msgId, qint64 bytesTotal)
 {
-	QMutexLocker locker(&mutex);
-	uploads.insert(msgId, new TransferJob(bytesTotal));
+	QMutexLocker locker(&m_mutex);
+	m_uploads.insert(msgId, new TransferJob(bytesTotal));
 	locker.unlock();
 
 	emit jobsChanged();
@@ -94,9 +96,9 @@ void TransferCache::addJob(const QString& msgId, qint64 bytesTotal)
 
 void TransferCache::removeJob(const QString& msgId)
 {
-	QMutexLocker locker(&mutex);
-	delete uploads[msgId];
-	uploads.remove(msgId);
+	QMutexLocker locker(&m_mutex);
+	auto upload = m_uploads.take(msgId);
+	upload->deleteLater();
 	locker.unlock();
 
 	emit jobsChanged();
@@ -104,16 +106,16 @@ void TransferCache::removeJob(const QString& msgId)
 
 bool TransferCache::hasUpload(QString msgId) const
 {
-	QMutexLocker locker(&mutex);
-	return uploads.contains(msgId);
+	QMutexLocker locker(&m_mutex);
+	return m_uploads.contains(msgId);
 }
 
 TransferJob* TransferCache::jobByMessageId(QString msgId) const
 {
-	QMutexLocker locker(&mutex);
-	TransferJob* job = uploads.value(msgId);
+	QMutexLocker locker(&m_mutex);
+	TransferJob *job = m_uploads.value(msgId);
 	if (job == nullptr)
-		return emptyJob;
+		return m_emptyJob;
 	return job;
 }
 
@@ -121,7 +123,7 @@ void TransferCache::setJobProgress(const QString &msgId, qint64 bytesSent, qint6
 {
 	TransferJob* job = jobByMessageId(msgId);
 
-	QMutexLocker locker(&mutex);
+	QMutexLocker locker(&m_mutex);
 	job->setBytesTotal(bytesTotal);
 	job->setBytesSent(bytesSent);
 }
@@ -130,6 +132,6 @@ void TransferCache::setJobBytesSent(const QString &msgId, qint64 bytesSent)
 {
 	TransferJob* job = jobByMessageId(msgId);
 
-	QMutexLocker locker(&mutex);
+	QMutexLocker locker(&m_mutex);
 	job->setBytesSent(bytesSent);
 }

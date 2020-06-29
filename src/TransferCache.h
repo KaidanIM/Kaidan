@@ -40,16 +40,16 @@
 class TransferJob : public QObject
 {
 	Q_OBJECT
-	Q_PROPERTY(qreal progress MEMBER progress NOTIFY progressChanged)
-	Q_PROPERTY(qint64 bytesSent MEMBER bytesSent NOTIFY bytesSentChanged)
-	Q_PROPERTY(qint64 bytesTotal MEMBER bytesTotal NOTIFY bytesTotalChanged)
+	Q_PROPERTY(qreal progress MEMBER m_progress NOTIFY progressChanged)
+	Q_PROPERTY(qint64 bytesSent MEMBER m_bytesSent NOTIFY bytesSentChanged)
+	Q_PROPERTY(qint64 bytesTotal MEMBER m_bytesTotal NOTIFY bytesTotalChanged)
 
 public:
 	TransferJob(qint64 bytesTotal);
 
-	Q_INVOKABLE void setProgress(qreal progress);
-	Q_INVOKABLE void setBytesSent(qint64 bytesSent);
-	Q_INVOKABLE void setBytesTotal(qint64 bytesTotal);
+	Q_INVOKABLE void setProgress(qreal m_progress);
+	Q_INVOKABLE void setBytesSent(qint64 m_bytesSent);
+	Q_INVOKABLE void setBytesTotal(qint64 m_bytesTotal);
 
 signals:
 	void progressChanged();
@@ -57,9 +57,9 @@ signals:
 	void bytesTotalChanged();
 
 private:
-	qreal progress;
-	qint64 bytesSent;
-	qint64 bytesTotal;
+	qreal m_progress;
+	qint64 m_bytesSent;
+	qint64 m_bytesTotal;
 };
 
 /**
@@ -86,11 +86,10 @@ public:
 	Q_INVOKABLE TransferJob* jobByMessageId(QString msgId) const;
 
 public slots:
-	Q_INVOKABLE void addJob(const QString &msgId, qint64 bytesTotal);
-	Q_INVOKABLE void removeJob(const QString& msgId);
-	Q_INVOKABLE void setJobBytesSent(const QString& msgId, qint64 bytesSent);
-	Q_INVOKABLE void setJobProgress(const QString& msgId, qint64 bytesSent,
-	                                qint64 bytesTotal);
+	void addJob(const QString &msgId, qint64 bytesTotal);
+	void removeJob(const QString &msgId);
+	void setJobBytesSent(const QString &msgId, qint64 bytesSent);
+	void setJobProgress(const QString &msgId, qint64 bytesSent, qint64 bytesTotal);
 
 signals:
 	/**
@@ -105,8 +104,8 @@ signals:
 	                             qint64 bytesTotal);
 
 private:
-	QMap<QString, TransferJob*> uploads;
-	TransferJob* emptyJob;
+	QMap<QString, TransferJob *> m_uploads;
+	TransferJob *m_emptyJob;
 
-	mutable QMutex mutex;
+	mutable QMutex m_mutex;
 };

@@ -45,12 +45,11 @@ class DownloadJob : public QObject
 {
 	Q_OBJECT
 public:
-	DownloadJob(QString msgId,
-	            QUrl source,
-	            QString filePath,
-	            QNetworkAccessManager *netMngr,
-	            TransferCache *transferCache,
-	            Kaidan *kaidan);
+	DownloadJob(const QString &msgId,
+		const QUrl &source,
+		const QString &filePath,
+		QNetworkAccessManager *netMngr,
+		TransferCache *transferCache);
 
 	QString downloadLocation() const;
 
@@ -63,53 +62,33 @@ private slots:
 	void startDownload();
 
 private:
-	QString msgId;
-	QUrl source;
-	QString filePath;
-	QNetworkAccessManager *netMngr;
-	TransferCache *transferCache;
-	Kaidan *kaidan;
-	QFile file;
-};
-
-class DownloadThread : public QThread
-{
-	Q_OBJECT
-public:
-	DownloadThread()
-	{
-		setObjectName("DownloadManager");
-	}
-
-protected:
-	void run() override
-	{
-		exec();
-	}
+	QString m_msgId;
+	QUrl m_source;
+	QString m_filePath;
+	QNetworkAccessManager *m_netMngr;
+	TransferCache *m_transferCache;
+	QFile m_file;
 };
 
 class DownloadManager : public QObject
 {
 	Q_OBJECT
 public:
-	DownloadManager(Kaidan *kaidan, TransferCache *transferCache,
-	                MessageModel *model, QObject *parent = nullptr);
+	DownloadManager(TransferCache *m_transferCache, MessageModel *m_model, QObject *parent = nullptr);
 	~DownloadManager();
 
 signals:
-	void startDownloadRequested(const QString msgId, const QString url);
-	void abortDownloadRequested(const QString msgId);
+	void startDownloadRequested(const QString &msgId, const QString &url);
+	void abortDownloadRequested(const QString &msgId);
 
 public slots:
 	void startDownload(const QString &msgId, const QString &url);
 	void abortDownload(const QString &msgId);
 
 private:
-	DownloadThread *thread;
-	QNetworkAccessManager *netMngr;
-	Kaidan *kaidan;
-	TransferCache *transferCache;
-	MessageModel *model;
+	QNetworkAccessManager *m_netMngr;
+	TransferCache *m_transferCache;
+	MessageModel *m_model;
 
-	QMap<QString, DownloadJob*> downloads;
+	QMap<QString, DownloadJob *> m_downloads;
 };

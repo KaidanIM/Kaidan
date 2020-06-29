@@ -67,8 +67,7 @@ ClientWorker::ClientWorker(Caches *caches, Kaidan *kaidan, bool enableLogging, Q
 	m_msgHandler = new MessageHandler(kaidan, this, m_client, caches->msgModel);
 	m_discoManager = new DiscoveryManager(m_client, this);
 	m_uploadManager = new UploadManager(m_client, m_rosterManager, this);
-	m_downloadManager = new DownloadManager(kaidan, caches->transferCache,
-	                                        caches->msgModel, this);
+	m_downloadManager = new DownloadManager(caches->transferCache, caches->msgModel, this);
 
 	connect(m_client, &QXmppClient::presenceReceived,
 	        caches->presCache, &PresenceCache::updatePresence);
@@ -358,7 +357,7 @@ void ClientWorker::setIsApplicationWindowActive(bool active)
 	m_isApplicationWindowActive = active;
 }
 
-QString ClientWorker::generateJidResourceWithRandomSuffix(const QString jidResourcePrefix , unsigned int length) const
+QString ClientWorker::generateJidResourceWithRandomSuffix(const QString jidResourcePrefix, unsigned int length) const
 {
 	return jidResourcePrefix % "." % QXmppUtils::generateStanzaHash(length);
 }

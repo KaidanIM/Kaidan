@@ -71,7 +71,7 @@ private:
 	AvatarFileStorage *m_avatarStorage;
 	VCardManager *m_vCardManager;
 	QXmppRosterManager *m_manager;
-	QString m_chatPartner;
+	QString m_currentChatJid;
 };
 
 #endif // ROSTERMANAGER_H

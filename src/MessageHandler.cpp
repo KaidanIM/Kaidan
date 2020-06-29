@@ -102,19 +102,8 @@ void MessageHandler::handleMessage(const QXmppMessage &msg)
 	message.setId(msg.id());
 	message.setBody(msg.body());
 	message.setMediaType(MessageType::MessageText); // default to text message without media
-#if (QXMPP_VERSION) >= QT_VERSION_CHECK(1, 1, 0)
 	message.setIsSpoiler(msg.isSpoiler());
 	message.setSpoilerHint(msg.spoilerHint());
-#else
-	for (const QXmppElement &extension : msg.extensions()) {
-		if (extension.tagName() == "spoiler" &&
-		    extension.attribute("xmlns") == NS_SPOILERS) {
-			message.setIsSpoiler(true);
-			message.setSpoilerHint(extension.value());
-			break;
-		}
-	}
-#endif
 
 	// check if message contains a link and also check out of band url
 	QStringList bodyWords = message.body().split(" ");
@@ -188,15 +177,6 @@ void MessageHandler::handleMessage(const QXmppMessage &msg)
 	//  * The corresponding chat is not opened while the application window is active.
 	if (!message.sentByMe() && !kaidan->notificationsMuted(contactJid) && (model->currentChatJid() != message.from() || !m_clientWorker->isApplicationWindowActive()))
 		emit m_clientWorker->showMessageNotificationRequested(contactJid, contactName, msg.body());
-
-	// TODO: Move back following call to RosterManager::handleMessage when spoiler
-	// messages are implemented in QXmpp
-	const QString lastMessage =
-		message.isSpoiler() ? message.spoilerHint().isEmpty() ? tr("Spoiler")
-								      : message.spoilerHint()
-				    : msg.body();
-
-	emit kaidan->rosterModel()->setLastMessageRequested(contactJid, lastMessage);
 }
 
 void MessageHandler::sendMessage(const QString& toJid,

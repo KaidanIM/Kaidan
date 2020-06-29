@@ -203,13 +203,13 @@ void RegistrationManager::handleRegistrationFailed(const QXmppStanza::Error &err
 		}
 		break;
 	default:
-// Workaround: Catch an error which is wrongly emitted by older QXmpp versions although the registration was succesful.
-#if (QXMPP_VERSION) <= QT_VERSION_CHECK(1, 2, 0)
+#if QXMPP_VERSION == QT_VERSION_CHECK(1, 2, 0)
+		// Workaround: Catch an error which is wrongly emitted by QXmpp
+		// v1.2.0 although the registration was succesful.
 		if (error.text().isEmpty())
 			return;
-#else
-		break;
 #endif
+		break;
 	}
 
 	emit kaidan->registrationFailed(quint8(registrationError), error.text());

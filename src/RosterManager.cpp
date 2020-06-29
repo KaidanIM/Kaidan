@@ -206,4 +206,18 @@ void RosterManager::handleMessage(const QXmppMessage &msg)
 			item.setUnreadMessages(item.unreadMessages() + 1);
 		});
 	}
+
+	// Update last message of the contact
+	QString lastMessage;
+	if (msg.isSpoiler()) {
+		if (msg.spoilerHint().isEmpty()) {
+			lastMessage = tr("Spoiler");
+		} else {
+			lastMessage = msg.spoilerHint();
+		}
+	} else {
+		lastMessage = msg.body();
+	}
+
+	emit Kaidan::instance()->rosterModel()->setLastMessageRequested(contactJid, lastMessage);
 }

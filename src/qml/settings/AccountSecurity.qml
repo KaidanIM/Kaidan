@@ -29,22 +29,26 @@
  */
 
 import QtQuick 2.12
+
 import org.kde.kirigami 2.8 as Kirigami
 
+import "../elements"
 import im.kaidan.kaidan 1.0
 
-import "elements"
+BinaryDecisionPage {
+	title: qsTr("Account Security")
 
-/**
- * This page is used for confirming the deletion of an account from the client and server.
- */
-ConfirmationPage {
-	title: qsTr("Delete account completely")
-
-	topDescription: qsTr("Your account will be deleted completely, which means from this app and from the server.\nYou will not be able to use your account again!")
-
+	topDescription: qsTr("Allow to add new devices using a QR-Code, but never show the password as text. This action can not be undone, so consider storing the password in another way before using it.")
 	topAction: Kirigami.Action {
-		text: qsTr("Delete")
-		onTriggered: Kaidan.deleteAccountFromClientAndServer()
+		text: qsTr("Disable showing the password")
+		enabled: Kaidan.passwordVisibility === Kaidan.PasswordVisible
+		onTriggered: stack.push("DisablePlainTextPasswordDisplay.qml")
+	}
+
+	bottomDescription: qsTr("Don't expose the password in any form. This action can not be undone.")
+	bottomAction: Kirigami.Action {
+		text: qsTr("Disable showing the QR-Code and password")
+		enabled: Kaidan.passwordVisibility !== Kaidan.PasswordInvisible
+		onTriggered: stack.push("DisablePasswordDisplay.qml")
 	}
 }

@@ -187,8 +187,8 @@ Kirigami.Page {
 			sourceSize.height: parent.height
 			visible: explanation.visible
 			fillMode: Image.PreserveAspectFit
-			Layout.fillWidth: true
 			Layout.fillHeight: true
+			Layout.fillWidth: true
 		}
 
 		// placeholder for the explanation text and image when they are invisible

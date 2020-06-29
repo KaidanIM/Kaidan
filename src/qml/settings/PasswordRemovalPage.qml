@@ -33,28 +33,27 @@ import org.kde.kirigami 2.8 as Kirigami
 
 import im.kaidan.kaidan 1.0
 
-import "elements"
+import "../elements"
 
 /**
- * This page is used for deleting an account.
+ * This page is used for removing a password from the account transfer page.
  *
- * An account can be deleted only from the client or from the client and the server.
+ * The password can be removed only from the plain text or from the plain text and the QR code.
  */
 BinaryDecisionPage {
-	title: qsTr("Delete account")
+	title: qsTr("Remove password")
 
-	topDescription: qsTr("You can remove your account <b>%1</b> only from this app or delete it completely. If you delete your account completely, you won't be able to use it with another app because it is also removed from the server.").arg(Kaidan.jid)
-
-	topImageSource: Utils.getResourcePath("images/account-deletion-from-client.svg")
-	bottomImageSource: Utils.getResourcePath("images/account-deletion-from-client-and-server.svg")
+	topDescription: qsTr("You can decide to only not show your password for <b>%1</b> as text anymore or to remove it completely from the account transfer. If you remove your password completely, you won't be able to use the account transfer via scanning without entering your password because it is also removed from the QR code.").arg(Kaidan.jid)
 
 	topAction: Kirigami.Action {
-		text: qsTr("Remove from this app")
-		onTriggered: pageStack.layers.push(accountDeletionFromClientConfirmationPage)
+		text: qsTr("Do not show password as text")
+		enabled: Kaidan.passwordVisibility !== Kaidan.PasswordVisibleQrOnly
+		onTriggered: pageStack.layers.push(passwordRemovalFromPlainTextConfirmationPage)
 	}
 
 	bottomAction: Kirigami.Action {
-		text: qsTr("Delete completely")
-		onTriggered: pageStack.layers.push(accountDeletionFromClientAndServerConfirmationPage)
+		text: qsTr("Remove completely")
+		enabled: Kaidan.passwordVisibility !== Kaidan.PasswordInvisible
+		onTriggered: pageStack.layers.push(passwordRemovalFromPlainTextAndQrCodeConfirmationPage).popPasswordRemovalPageOnClosing = true
 	}
 }

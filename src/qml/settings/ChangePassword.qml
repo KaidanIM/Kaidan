@@ -37,6 +37,7 @@ import im.kaidan.kaidan 1.0
 import "../elements"
 
 Kirigami.Page {
+	title: qsTr("Change password")
 	topPadding: 0
 
 	Controls.BusyIndicator {

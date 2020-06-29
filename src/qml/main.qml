@@ -35,7 +35,6 @@ import StatusBar 0.1
 
 import im.kaidan.kaidan 1.0
 
-import "account-transfer"
 import "elements"
 import "registration"
 import "settings"
@@ -50,6 +49,10 @@ Kirigami.ApplicationWindow {
 	readonly property int roundedCornersRadius: Kirigami.Units.smallSpacing * 1.5
 
 	readonly property int largeButtonWidth: Kirigami.Units.gridUnit * 25
+
+	// This is an alias for use in settings ONLY
+	// it is only used on mobile, on desktop another item overrides the id "stack"
+	property QtObject stack: pageStack.layers
 
 	StatusBar {
 		color: Material.Material.color(Material.Material.Green, Material.Material.Shade700)
@@ -90,13 +93,6 @@ Kirigami.ApplicationWindow {
 	Component {id: settingsPage; SettingsPage {}}
 	Component {id: qrCodeScannerPage; QrCodeScannerPage {}}
 	Component {id: userProfilePage; UserProfilePage {}}
-	Component {id: accountTransferPage; AccountTransferPage {}}
-	Component {id: passwordRemovalPage; PasswordRemovalPage {}}
-	Component {id: passwordRemovalFromPlainTextConfirmationPage; PasswordRemovalFromPlainTextConfirmationPage {}}
-	Component {id: passwordRemovalFromPlainTextAndQrCodeConfirmationPage; PasswordRemovalFromPlainTextAndQrCodeConfirmationPage {}}
-	Component {id: accountDeletionPage; AccountDeletionPage {}}
-	Component {id: accountDeletionFromClientConfirmationPage; AccountDeletionFromClientConfirmationPage {}}
-	Component {id: accountDeletionFromClientAndServerConfirmationPage; AccountDeletionFromClientAndServerConfirmationPage {}}
 
 	function raiseWindow() {
 		if (!active) {

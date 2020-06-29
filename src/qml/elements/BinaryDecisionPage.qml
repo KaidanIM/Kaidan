@@ -77,6 +77,7 @@ Kirigami.Page {
 				label.text: topAction.text
 				icon.name: topAction.icon.name
 				onClicked: topAction.trigger()
+				enabled: topAction.enabled
 			}
 
 			// button for the top action as main action
@@ -85,6 +86,7 @@ Kirigami.Page {
 				label.text: topAction.text
 				icon.name: topAction.icon.name
 				onClicked: topAction.trigger()
+				enabled: topAction.enabled
 			}
 
 			// horizontal line to separate the two actions
@@ -99,6 +101,7 @@ Kirigami.Page {
 				label.text: bottomAction.text
 				icon.name: bottomAction.icon.name
 				onClicked: bottomAction.trigger()
+				enabled: bottomAction.enabled
 			}
 
 			// description for the bottom action

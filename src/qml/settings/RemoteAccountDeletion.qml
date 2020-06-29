@@ -33,18 +33,24 @@ import org.kde.kirigami 2.8 as Kirigami
 
 import im.kaidan.kaidan 1.0
 
-import "elements"
+import "../elements"
 
 /**
- * This page is used for confirming the deletion of an account from the client.
+ * This page is used for confirming the deletion of an account from the client and server.
  */
 ConfirmationPage {
-	title: qsTr("Remove account from this app")
+	title: qsTr("Delete account completely")
 
-	topDescription: qsTr("Your account will be removed from this app.\nYou won't be able to get your credentials back!\nMake sure that you have backed up those if you want to use your account later.")
+	topDescription: qsTr("Your account will be deleted completely, which means from this app and from the server.\nYou will not be able to use your account again!")
+
+	onCanceled: stack.pop()
 
 	topAction: Kirigami.Action {
-		text: qsTr("Remove")
-		onTriggered: Kaidan.deleteAccountFromClient()
+		text: qsTr("Delete")
+		onTriggered: {
+			Kaidan.deleteAccountFromClientAndServer()
+			settingsSheet.close()
+			stack.initialItem && stack.pop(stack.initialItem)
+		}
 	}
 }

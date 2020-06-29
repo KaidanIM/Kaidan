@@ -1,5 +1,6 @@
 <RCC>
 	<qresource prefix="/qml/">
+		<file>AccountTransferPage.qml</file>
 		<file>main.qml</file>
 		<file>StartPage.qml</file>
 		<file>RegistrationLoginDecisionPage.qml</file>
@@ -12,14 +13,6 @@
 		<file>GlobalDrawer.qml</file>
 		<file>QrCodeScannerPage.qml</file>
 		<file>UserProfilePage.qml</file>
-		<file>AccountDeletionPage.qml</file>
-		<file>AccountDeletionFromClientConfirmationPage.qml</file>
-		<file>AccountDeletionFromClientAndServerConfirmationPage.qml</file>
-		<file>AccountTransferPage.qml</file>
-
-                <file>account-transfer/PasswordRemovalPage.qml</file>
-		<file>account-transfer/PasswordRemovalFromPlainTextConfirmationPage.qml</file>
-		<file>account-transfer/PasswordRemovalFromPlainTextAndQrCodeConfirmationPage.qml</file>
 
 		<file>elements/ChatMessageContextMenu.qml</file>
 		<file>elements/SubRequestAcceptSheet.qml</file>
@@ -88,5 +81,11 @@
 		<file>settings/SettingsContent.qml</file>
 		<file>settings/ChangePassword.qml</file>
 		<file>settings/MultimediaSettings.qml</file>
+		<file>settings/AccountSecurity.qml</file>
+		<file>settings/PasswordRemovalPage.qml</file>
+		<file>settings/DisablePlainTextPasswordDisplay.qml</file>
+		<file>settings/DisablePasswordDisplay.qml</file>
+		<file>settings/LocalAccountRemoval.qml</file>
+		<file>settings/RemoteAccountDeletion.qml</file>
 	</qresource>
 </RCC>

@@ -91,17 +91,12 @@ Kirigami.GlobalDrawer {
 			}
 		},
 		Kirigami.Action {
-			text: qsTr("Transfer account")
+			text: qsTr("Switch device")
 			icon.name: "send-to-symbolic"
 
 			onTriggered: {
-				pageStack.layers.push(accountTransferPage)
+				pageStack.layers.push("AccountTransfer.qml")
 			}
-		},
-		Kirigami.Action {
-			text: qsTr("Delete account")
-			icon.name: "delete"
-			onTriggered: Kaidan.serverFeaturesCache.inBandRegistrationSupported ? pageStack.layers.push(accountDeletionPage) : pageStack.layers.push(accountDeletionFromClientConfirmationPage)
 		},
 		Kirigami.Action {
 			text: qsTr("Settings")

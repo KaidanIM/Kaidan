@@ -43,20 +43,15 @@ ConfirmationPage {
 
 	topDescription: qsTr("Your password will not be included in the QR code anymore.\nYou won't be able to use the login via QR code without entering your password again because this action cannot be undone!\nMake sure that you backed it up if you want to use your account later.")
 
+	onCanceled: stack.pop()
+
 	topAction: Kirigami.Action {
 		text: qsTr("Remove password")
 		onTriggered: {
-			Kaidan.accountTransferPasswordVisibility = Kaidan.PasswordInvisible
+			Kaidan.passwordVisibility = Kaidan.PasswordInvisible
 
-			// If this page was pushed by the passwordRemovalPage, pop that page too.
-			// If this page was directly pushed by the accountTransferPage, pop only this page.
-			// That is the case when the password was already removed from the plain text and thus the password removal page skipped.
-			if (popPasswordRemovalPageOnClosing)
-				popLayers(2)
-			else
-				popLayers(1)
+			stack.pop()
+			stack.pop()
 		}
 	}
-
-	property bool popPasswordRemovalPageOnClosing: false
 }

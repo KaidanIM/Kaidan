@@ -39,35 +39,40 @@ import im.kaidan.kaidan 1.0
  *
  * It is used on a new layer on mobile and inside of a Sheet on desktop.
  */
-ColumnLayout {
-	Controls.StackView {
-		Layout.fillHeight: true
-		Layout.fillWidth: true
+Column {
+	property string title: qsTr("Settings")
+	spacing: 0
+	height: root.height * 0.9
 
-		id: stack
-		Layout.preferredHeight: currentItem.height
-		initialItem: settingsContent
-		clip: true
+	SettingsItem {
+		name: qsTr("Change password")
+		description: qsTr("Changes your account's password. You will need to re-enter it on your other devices.")
+		visible: Kaidan.serverFeaturesCache.inBandRegistrationSupported
+		onClicked: stack.push("ChangePassword.qml")
+		icon: "lock"
 	}
-
-	Component {
-		id: settingsContent
-		Column {
-			height: root.height * 0.9
-			spacing: 0
-			SettingsItem {
-				name: qsTr("Change password")
-				description: qsTr("Changes your account's password. You will need to re-enter it on your other devices.")
-				visible: Kaidan.serverFeaturesCache.inBandRegistrationSupported
-				onClicked: stack.push("ChangePassword.qml")
-				icon: "lock"
-			}
-			SettingsItem {
-				name: qsTr("Multimedia Settings")
-				description: qsTr("Configure photo, video and audio recording settings")
-				onClicked: stack.push("MultimediaSettings.qml")
-				icon: "settings-configure"
-			}
-		}
+	SettingsItem {
+		name: qsTr("Multimedia Settings")
+		description: qsTr("Configure photo, video and audio recording settings")
+		onClicked: stack.push("MultimediaSettings.qml")
+		icon: "settings-configure"
+	}
+	SettingsItem {
+		name: qsTr("Account security")
+		description: qsTr("configure whether this device can be used to log in on a new device")
+		icon: "security-high-symbolic"
+		onClicked: stack.push("AccountSecurity.qml")
+	}
+	SettingsItem {
+		name: qsTr("Remove account from Kaidan")
+		description: qsTr("Remove account from this app")
+		icon: "system-log-out"
+		onClicked: stack.push("LocalAccountRemoval.qml")
+	}
+	SettingsItem {
+		name: qsTr("Delete account")
+		description: qsTr("Delete account from the server")
+		icon: "delete"
+		onClicked: stack.push("RemoteAccountDeletion.qml")
 	}
 }

@@ -38,10 +38,34 @@ import org.kde.kirigami 2.8 as Kirigami
  * fill the complete width, so it looks a bit nicer on large screens.
  */
 Kirigami.OverlaySheet {
-	header: Kirigami.Heading {
-		text: qsTr("Settings")
+	id: settingsSheet
+
+	header: Row {
+		spacing: 1
+		Layout.fillWidth: true
+		Controls.ToolButton {
+			id: backButton
+			enabled: stack.currentItem !== stack.initialItem
+			icon.name: "draw-arrow-back"
+			onClicked: stack.pop()
+		}
+		Kirigami.Heading {
+			height: backButton.height
+			text: stack.currentItem.title
+		}
 	}
-	contentItem: SettingsContent {
+
+	ColumnLayout {
+		Controls.StackView {
+			Layout.fillHeight: true
+			Layout.fillWidth: true
+
+			id: stack
+			Layout.preferredHeight: currentItem.height
+			initialItem: SettingsContent {}
+			clip: true
+		}
+
 		Layout.preferredWidth: Layout.maximumWidth
 		Layout.maximumWidth: 600
 		id: settingsPage

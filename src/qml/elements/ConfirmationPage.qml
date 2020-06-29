@@ -42,8 +42,10 @@ BinaryDecisionPage {
 	bottomImageSource: "dialog-cancel"
 	topActionAsMainAction: true
 
+	signal canceled
+
 	bottomAction: Kirigami.Action {
 		text: qsTr("Cancel")
-		onTriggered: pageStack.layers.pop()
+		onTriggered: canceled()
 	}
 }

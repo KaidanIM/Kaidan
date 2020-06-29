@@ -43,11 +43,14 @@ ConfirmationPage {
 
 	topDescription: qsTr("Your password will not be shown as text anymore.\nYou won't be able to see your password as text again because this action cannot be undone!\nMake sure that you backed it up if you want to use your account later.")
 
+	onCanceled: stack.pop()
+
 	topAction: Kirigami.Action {
 		text: qsTr("Do not show password")
 		onTriggered: {
-			Kaidan.accountTransferPasswordVisibility = Kaidan.PasswordVisibleQr
-			popLayers(2)
+			Kaidan.passwordVisibility = Kaidan.PasswordVisibleQrOnly
+			stack.pop()
+			stack.pop()
 		}
 	}
 }

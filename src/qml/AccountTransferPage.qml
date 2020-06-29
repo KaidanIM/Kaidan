@@ -49,23 +49,6 @@ Kirigami.Page {
 	topPadding: 0
 	bottomPadding: 0
 
-	contextualActions: [
-		// action to open a page for removing the password from the QR code or
-		// from the plain text view
-		Kirigami.Action {
-			text: qsTr("Remove password")
-			icon.name: "delete"
-			visible: Kaidan.passwordVisibility !== Kaidan.PasswordInvisible
-
-			onTriggered: {
-				if (Kaidan.passwordVisibility === Kaidan.PasswordVisible)
-				    pageStack.layers.push(passwordRemovalPage)
-				else
-					pageStack.layers.push(passwordRemovalFromPlainTextAndQrCodeConfirmationPage)
-			}
-		}
-	]
-
 	QrCodeGenerator {
 		id: qrCodeGenerator
 	}

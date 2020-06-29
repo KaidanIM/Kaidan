@@ -36,24 +36,21 @@ import im.kaidan.kaidan 1.0
 import "../elements"
 
 /**
- * This page is used for removing a password from the account transfer page.
- *
- * The password can be removed only from the plain text or from the plain text and the QR code.
+ * This page is used for confirming the deletion of an account from the client.
  */
-BinaryDecisionPage {
-	title: qsTr("Remove password")
+ConfirmationPage {
+	title: qsTr("Remove account from this app")
 
-	topDescription: qsTr("You can decide to only not show your password for <b>%1</b> as text anymore or to remove it completely from the account transfer. If you remove your password completely, you won't be able to use the account transfer via scanning without entering your password because it is also removed from the QR code.").arg(Kaidan.jid)
+	topDescription: qsTr("Your account will be removed from this app.\nYour password will be deleted, make sure it is stored in a password manager or you know it!")
+
+	onCanceled: stack.pop()
 
 	topAction: Kirigami.Action {
-		text: qsTr("Do not show password as text")
-		enabled: Kaidan.accountTransferPasswordVisibility !== Kaidan.PasswordVisibleQr
-		onTriggered: pageStack.layers.push(passwordRemovalFromPlainTextConfirmationPage)
-	}
-
-	bottomAction: Kirigami.Action {
-		text: qsTr("Remove completely")
-		enabled: Kaidan.accountTransferPasswordVisibility !== Kaidan.PasswordInvisible
-		onTriggered: pageStack.layers.push(passwordRemovalFromPlainTextAndQrCodeConfirmationPage).popPasswordRemovalPageOnClosing = true
+		text: qsTr("Remove")
+		onTriggered: {
+			Kaidan.deleteAccountFromClient()
+			settingsSheet.close()
+			stack.initialItem && stack.pop(stack.initialItem)
+		}
 	}
 }

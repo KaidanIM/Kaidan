@@ -44,6 +44,9 @@ linux-appimage:
       - "*.AppImage"
       - "*.AppImage.zsync"
     expire_in: 1 week
+  only:
+    - master
+    - stable
 
 windows-mxe:
   stage: deploy
@@ -56,6 +59,9 @@ windows-mxe:
     paths:
       - "kaidan.exe"
     expire_in: 1 week
+  only:
+    - master
+    - stable
 
 android:
   stage: deploy
@@ -70,6 +76,9 @@ android:
       - "kaidan_arm.apk"
       - "kaidan_arm64.apk"
     expire_in: 1 week
+  only:
+    - master
+    - stable
 
 mac-osxcross:
   stage: deploy
@@ -82,6 +91,10 @@ mac-osxcross:
     paths:
       - "kaidan.tar"
     expire_in: 1 week
+  only:
+    - master
+    - stable
+
 
 variables:
   GIT_SUBMODULE_STRATEGY: recursive

@@ -95,7 +95,7 @@ Kirigami.GlobalDrawer {
 			icon.name: "send-to-symbolic"
 
 			onTriggered: {
-				pageStack.layers.push("AccountTransfer.qml")
+				pageStack.layers.push("AccountTransferPage.qml")
 			}
 		},
 		Kirigami.Action {

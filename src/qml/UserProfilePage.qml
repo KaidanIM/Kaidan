@@ -222,6 +222,40 @@ Kirigami.Page {
 				}
 			}
 
+			Kirigami.Heading {
+				level: 2
+				text: qsTr("Online devices")
+			}
+
+			Repeater {
+				model: UserDevicesModel {
+					jid: root.jid
+				}
+
+				delegate: ColumnLayout {
+					Controls.Label {
+						text: {
+							if (model.name) {
+								var result = model.name
+								if (model.version) {
+									result += " v" + model.version
+								}
+								if (model.os) {
+									result += " • " + model.os
+								}
+								return result
+							}
+
+							return model.resource
+						}
+						textFormat: Text.PlainText
+					}
+					Item {
+						height: 3
+					}
+				}
+			}
+
 			// placeholder for left, right and main action
 			Item {
 				visible: Kirigami.Settings.isMobile

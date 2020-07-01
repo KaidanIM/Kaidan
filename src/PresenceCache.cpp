@@ -145,6 +145,14 @@ QString PresenceCache::pickIdealResource(const QString &jid)
 	return result.key();
 }
 
+QList<QString> PresenceCache::resources(const QString &jid)
+{
+	if (!m_presences.contains(jid))
+		return {};
+
+	return m_presences.value(jid).keys();
+}
+
 std::optional<QXmppPresence> PresenceCache::presence(const QString &jid, const QString &resource)
 {
 	if (const auto itr = m_presences.constFind(jid); itr != m_presences.cend()) {

@@ -17,6 +17,7 @@ set(KAIDAN_SOURCES
 	src/MessageHandler.cpp
 	src/Notifications.cpp
 	src/PresenceCache.cpp
+	src/UserDevicesModel.cpp
 	src/DiscoveryManager.cpp
 	src/VCardManager.cpp
 	src/VCardModel.cpp
@@ -29,6 +30,7 @@ set(KAIDAN_SOURCES
 	src/ServerFeaturesCache.cpp
 	src/QmlUtils.cpp
 	src/Utils.cpp
+	src/VersionManager.cpp
 	src/QrCodeDecoder.cpp
 	src/QrCodeGenerator.cpp
 	src/QrCodeScannerFilter.cpp

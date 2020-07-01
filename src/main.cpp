@@ -42,6 +42,7 @@
 
 // QXmpp
 #include <QXmppClient.h>
+#include <QXmppVersionIq.h>
 
 // Kaidan
 #include "AccountManager.h"
@@ -65,11 +66,14 @@
 #include "QrCodeGenerator.h"
 #include "QrCodeScannerFilter.h"
 #include "VCardModel.h"
+#include "UserDevicesModel.h"
 #include "CameraModel.h"
 #include "AudioDeviceModel.h"
 #include "MediaUtils.h"
 #include "MediaRecorder.h"
 #include "GuiStyle.h"
+
+Q_DECLARE_METATYPE(QXmppVersionIq)
 
 #ifdef STATIC_BUILD
 #include "static_plugins.h"
@@ -229,6 +233,7 @@ Q_DECL_EXPORT int main(int argc, char *argv[])
 	qRegisterMetaType<VideoEncoderSettings>();
 	qRegisterMetaType<CredentialsValidator*>();
 	qRegisterMetaType<QXmppStanza::Error>("QXmppStanza::Error");
+	qRegisterMetaType<QXmppVersionIq>();
 
 	// Enums for c++ member calls using enums
 	qRegisterMetaType<Enums::ConnectionState>();
@@ -357,6 +362,7 @@ Q_DECL_EXPORT int main(int argc, char *argv[])
 	qmlRegisterType<MediaSettingsVideoCodecModel>(APPLICATION_ID, 1, 0, "MediaSettingsVideoCodecModel");
 	qmlRegisterType<MediaSettingsVideoFrameRateModel>(APPLICATION_ID, 1, 0, "MediaSettingsVideoFrameRateModel");
 	qmlRegisterType<MediaRecorder>(APPLICATION_ID, 1, 0, "MediaRecorder");
+	qmlRegisterType<UserDevicesModel>(APPLICATION_ID, 1, 0, "UserDevicesModel");
 	qmlRegisterType<CredentialsGenerator>(APPLICATION_ID, 1, 0, "CredentialsGenerator");
 	qmlRegisterType<CredentialsValidator>(APPLICATION_ID, 1, 0, "CredentialsValidator");
 	qmlRegisterType<QrCodeGenerator>(APPLICATION_ID, 1, 0, "QrCodeGenerator");

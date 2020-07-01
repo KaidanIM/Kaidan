@@ -53,6 +53,7 @@
 #include "RosterManager.h"
 #include "UploadManager.h"
 #include "VCardManager.h"
+#include "VersionManager.h"
 
 ClientWorker::ClientWorker(Caches *caches, bool enableLogging, QObject* parent)
 	: QObject(parent), m_caches(caches), m_enableLogging(enableLogging), m_isApplicationWindowActive(true)
@@ -69,6 +70,7 @@ ClientWorker::ClientWorker(Caches *caches, bool enableLogging, QObject* parent)
 	m_discoveryManager = new DiscoveryManager(m_client, this);
 	m_uploadManager = new UploadManager(m_client, m_rosterManager, this);
 	m_downloadManager = new DownloadManager(caches->transferCache, caches->msgModel, this);
+	m_versionManager = new VersionManager(m_client, this);
 
 	connect(m_client, &QXmppClient::connected, this, &ClientWorker::onConnected);
 	connect(m_client, &QXmppClient::disconnected, this, &ClientWorker::onDisconnected);
@@ -83,12 +85,6 @@ ClientWorker::ClientWorker(Caches *caches, bool enableLogging, QObject* parent)
 	// presence
 	connect(m_client, &QXmppClient::presenceReceived, caches->presCache, &PresenceCache::updatePresence);
 	connect(m_client, &QXmppClient::disconnected, caches->presCache, &PresenceCache::clear);
-
-	// publish kaidan version
-	QXmppVersionManager* versionManager = m_client->findExtension<QXmppVersionManager>();
-	versionManager->setClientName(APPLICATION_DISPLAY_NAME);
-	versionManager->setClientVersion(VERSION_STRING);
-	versionManager->setClientOs(QSysInfo::prettyProductName());
 
 	// Inform the client worker when the application window becomes active or inactive.
 	connect(Kaidan::instance(), &Kaidan::applicationWindowActiveChanged, this, &ClientWorker::setIsApplicationWindowActive);

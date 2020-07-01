@@ -40,6 +40,7 @@
 class QGuiApplication;
 class Database;
 class QXmppClient;
+class QXmppVersionIq;
 
 /**
  * @class Kaidan Kaidan's Back-End Class
@@ -412,6 +413,17 @@ signals:
 	 * Deletes the account data from the configuration file and database.
 	 */
 	void deleteAccountFromClient();
+
+	/**
+	  * Requests fetching the version information of all resources of the given
+	  * bare JID
+	  */
+	void requestClientVersions(const QString &bareJid, const QString &resource = {});
+
+	/**
+	  * Emitted when a client version information was received
+	  */
+	void clientVersionReceived(const QXmppVersionIq &versionIq);
 
 public slots:
 	/**

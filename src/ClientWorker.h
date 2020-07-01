@@ -54,6 +54,7 @@ class DiscoveryManager;
 class VCardManager;
 class UploadManager;
 class DownloadManager;
+class VersionManager;
 
 /**
  * The ClientWorker is used as a QObject-based worker on the ClientThread.
@@ -305,6 +306,7 @@ private:
 	VCardManager *m_vCardManager;
 	UploadManager *m_uploadManager;
 	DownloadManager *m_downloadManager;
+	VersionManager *m_versionManager;
 
 	QList<std::function<void ()>> m_pendingTasks;
 	uint m_activeTasks = 0;

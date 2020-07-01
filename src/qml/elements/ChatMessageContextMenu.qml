@@ -54,7 +54,7 @@ Controls.Menu {
 
 	Controls.MenuItem {
 		text: qsTr("Edit message")
-		enabled: Kaidan.messageModel.canCorrectMessage(root.message && root.message.msgId)
+		enabled: Kaidan.messageModel.canCorrectMessage(root.message && root.message.modelIndex)
 		onTriggered: root.message.messageEditRequested(root.message.msgId, root.message.messageBody)
 	}
 

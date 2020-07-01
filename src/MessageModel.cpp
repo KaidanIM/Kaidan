@@ -37,15 +37,20 @@
 // QXmpp
 #include <QXmppUtils.h>
 
+// defines that the message is suitable for correction only if it is among the N latest messages
+constexpr int MAX_CORRECTION_MESSAGE_COUNT_DEPTH = 20;
+// defines that the message is suitable for correction only if it has ben sent not earlier than N days ago
+constexpr int MAX_CORRECTION_MESSAGE_DAYS_DEPTH = 2;
+
 MessageModel::MessageModel(Kaidan *kaidan, MessageDb *msgDb, QObject *parent)
-        : QAbstractListModel(parent),
-          kaidan(kaidan),
-          msgDb(msgDb)
+	: QAbstractListModel(parent),
+	  kaidan(kaidan),
+	  msgDb(msgDb)
 {
 	connect(msgDb, &MessageDb::messagesFetched,
 	        this, &MessageModel::handleMessagesFetched);
 	connect(msgDb, &MessageDb::pendingMessagesFetched,
-			this, &MessageModel::pendingMessagesFetched);
+	        this, &MessageModel::pendingMessagesFetched);
 
 	connect(this, &MessageModel::addMessageRequested,
 	        this, &MessageModel::addMessage);
@@ -70,7 +75,7 @@ bool MessageModel::isEmpty() const
 	return m_messages.isEmpty();
 }
 
-int MessageModel::rowCount(const QModelIndex&) const
+int MessageModel::rowCount(const QModelIndex &) const
 {
 	return m_messages.length();
 }
@@ -146,26 +151,26 @@ QVariant MessageModel::data(const QModelIndex &index, int role) const
 		return msg.errorText();
 	case DeliveryStateIcon:
 		switch (msg.deliveryState()) {
-			case DeliveryState::Pending:
-				return  QmlUtils::getResourcePath("images/dots.svg");
-			case DeliveryState::Sent:
-				return QmlUtils::getResourcePath("images/check-mark-pale.svg");
-			case DeliveryState::Delivered:
-				return QmlUtils::getResourcePath("images/check-mark.svg");
-			case DeliveryState::Error:
-				return QmlUtils::getResourcePath("images/cross.svg");
+		case DeliveryState::Pending:
+			return QmlUtils::getResourcePath("images/dots.svg");
+		case DeliveryState::Sent:
+			return QmlUtils::getResourcePath("images/check-mark-pale.svg");
+		case DeliveryState::Delivered:
+			return QmlUtils::getResourcePath("images/check-mark.svg");
+		case DeliveryState::Error:
+			return QmlUtils::getResourcePath("images/cross.svg");
 		}
 		return {};
 	case DeliveryStateName:
 		switch (msg.deliveryState()) {
-			case DeliveryState::Pending:
-				return tr("Pending");
-			case DeliveryState::Sent:
-				return tr("Sent");
-			case DeliveryState::Delivered:
-				return tr("Delivered");
-			case DeliveryState::Error:
-				return tr("Error");
+		case DeliveryState::Pending:
+			return tr("Pending");
+		case DeliveryState::Sent:
+			return tr("Sent");
+		case DeliveryState::Delivered:
+			return tr("Delivered");
+		case DeliveryState::Error:
+			return tr("Error");
 		}
 		return {};
 
@@ -203,14 +208,30 @@ void MessageModel::setCurrentChatJid(const QString &currentChatJid)
 	clearAll();
 }
 
-bool MessageModel::canCorrectMessage(const QString &msgId) const
+bool MessageModel::canCorrectMessage(int index) const
 {
-	// Only allow correction of the latest message sent by us
-	for (const auto &msg : m_messages) {
-		if (msg.from() == kaidan->jid())
-			return msg.id() == msgId;
+	// check index validity
+	if (index < 0 || index >= m_messages.size())
+		return false;
+
+	// message needs to be sent by us and needs to be no error message
+	const auto &msg = m_messages.at(index);
+	if (!msg.sentByMe() || msg.deliveryState() == Enums::DeliveryState::Error)
+		return false;
+
+	// check time limit
+	const auto timeThreshold =
+		QDateTime::currentDateTimeUtc().addDays(-MAX_CORRECTION_MESSAGE_DAYS_DEPTH);
+	if (msg.stamp() < timeThreshold)
+		return false;
+
+	// check messages count limit
+	for (int i = 0, count = 0; i < index; i++) {
+		if (m_messages.at(i).sentByMe() && ++count == MAX_CORRECTION_MESSAGE_COUNT_DEPTH)
+			return false;
 	}
-	return false;
+
+	return true;
 }
 
 void MessageModel::handleMessagesFetched(const QVector<Message> &msgs)
@@ -268,7 +289,7 @@ void MessageModel::addMessage(Message msg)
 }
 
 void MessageModel::updateMessage(const QString &id,
-                                 const std::function<void (Message &)> &updateMsg)
+                                 const std::function<void(Message &)> &updateMsg)
 {
 	for (int i = 0; i < m_messages.length(); i++) {
 		if (m_messages.at(i).id() == id) {
@@ -303,7 +324,7 @@ void MessageModel::updateMessage(const QString &id,
 
 void MessageModel::setMessageDeliveryState(const QString &msgId, Enums::DeliveryState state, const QString &errText)
 {
-	updateMessage(msgId, [state, errText] (Message &msg) {
+	updateMessage(msgId, [state, errText](Message &msg) {
 		msg.setDeliveryState(state);
 		msg.setErrorText(errText);
 	});

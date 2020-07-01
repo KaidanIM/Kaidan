@@ -42,6 +42,7 @@ RowLayout {
 
 	property Controls.Menu contextMenu
 
+	property int modelIndex
 	property string msgId
 	property string senderJid
 	property string senderName

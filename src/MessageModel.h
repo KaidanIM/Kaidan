@@ -80,7 +80,7 @@ public:
 	QString currentChatJid();
 	void setCurrentChatJid(const QString &currentChatJid);
 
-	Q_INVOKABLE bool canCorrectMessage(const QString &msgId) const;
+	Q_INVOKABLE bool canCorrectMessage(int index) const;
 
 	/**
 	 * Searches from the most recent to the oldest message to find a given substring (case insensitive).

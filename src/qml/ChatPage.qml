@@ -435,6 +435,7 @@ ChatPageBase {
 		}
 
 		delegate: ChatMessage {
+			modelIndex: index
 			msgId: model.id
 			senderJid: model.sender
 			senderName: chatName

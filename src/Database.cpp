@@ -62,7 +62,7 @@
 #define SQL_BLOB "BLOB"
 
 #define SQL_CREATE_TABLE(tableName, contents) \
-	"CREATE TABLE IF NOT EXISTS '" QT_STRINGIFY(tableName) "' (" contents ")"
+	"CREATE TABLE '" QT_STRINGIFY(tableName) "' (" contents ")"
 
 #define SQL_LAST_ATTRIBUTE(name, dataType) \
 	"'" QT_STRINGIFY(name) "' " dataType
@@ -160,6 +160,9 @@ void Database::loadDatabaseInfo()
 
 void Database::saveDatabaseInfo()
 {
+	if (m_version < 2 || m_version > DATABASE_LATEST_VERSION)
+		qFatal("[database] Fatal error: Attempted to save invalid db version number.");
+
 	QSqlRecord updateRecord;
 	updateRecord.append(Utils::createSqlField("version", m_version));
 

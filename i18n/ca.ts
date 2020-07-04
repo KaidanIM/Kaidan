@@ -17,14 +17,14 @@
     </message>
     <message>
         <source>Report problems</source>
-        <translation type="unfinished"></translation>
+        <translation>Informeu de problemes</translation>
     </message>
 </context>
 <context>
     <name>AccountDeletionFromClientAndServerConfirmationPage</name>
     <message>
         <source>Delete account completely</source>
-        <translation type="unfinished"></translation>
+        <translation>Suprimeix el compte completament</translation>
     </message>
     <message>
         <source>Your account will be deleted completely, which means from this app and from the server.
@@ -33,7 +33,7 @@ You will not be able to use your account again!</source>
     </message>
     <message>
         <source>Delete</source>
-        <translation type="unfinished">Elimina</translation>
+        <translation>Suprimeix</translation>
     </message>
 </context>
 <context>
@@ -57,7 +57,7 @@ Make sure that you have backed up those if you want to use your account later.</
     <name>AccountDeletionPage</name>
     <message>
         <source>Delete account</source>
-        <translation type="unfinished"></translation>
+        <translation>Suprimeix el compte</translation>
     </message>
     <message>
         <source>You can remove your account &lt;b&gt;%1&lt;/b&gt; only from this app or delete it completely. If you delete your account completely, you won&apos;t be able to use it with another app because it is also removed from the server.</source>
@@ -69,45 +69,48 @@ Make sure that you have backed up those if you want to use your account later.</
     </message>
     <message>
         <source>Delete completely</source>
-        <translation type="unfinished"></translation>
+        <translation>Suprimeix completament</translation>
     </message>
 </context>
 <context>
     <name>AccountTransferPage</name>
     <message>
         <source>Transfer account to another device</source>
-        <translation type="unfinished"></translation>
+        <translation>Transfereix el compte a un altre dispositiu</translation>
     </message>
     <message>
         <source>Scan the QR code or enter the credentials as text on another device to log in on it.
 
 Attention:
 Never show this QR code to anyone else. It would allow unlimited access to your account!</source>
-        <translation type="unfinished"></translation>
+        <translation>Escanegeu el codi QR o introduïu les credencials com a text en un altre dispositiu per a iniciar-hi una sessió.
+
+Atenció:
+Mai no mostreu aquest codi QR als altres. Fer-ho donaria accés il·limitat al vostre compte!</translation>
     </message>
     <message>
         <source>Chat address:</source>
-        <translation type="unfinished"></translation>
+        <translation>Adreça del xat:</translation>
     </message>
     <message>
         <source>Password:</source>
-        <translation type="unfinished"></translation>
+        <translation>Contrasenya:</translation>
     </message>
     <message>
         <source>Hide QR code</source>
-        <translation type="unfinished"></translation>
+        <translation>Amaga el codi QR</translation>
     </message>
     <message>
         <source>Show as QR code</source>
-        <translation type="unfinished"></translation>
+        <translation>Mostra com a codi QR</translation>
     </message>
     <message>
         <source>Hide text</source>
-        <translation type="unfinished"></translation>
+        <translation>Amaga el text</translation>
     </message>
     <message>
         <source>Show as text</source>
-        <translation type="unfinished"></translation>
+        <translation>Mostra com a text</translation>
     </message>
 </context>
 <context>
@@ -122,15 +125,15 @@ Never show this QR code to anyone else. It would allow unlimited access to your 
     </message>
     <message>
         <source>New password:</source>
-        <translation>Nova contrasenya:</translation>
+        <translation>Contrasenya nova:</translation>
     </message>
     <message>
         <source>New password (repeat):</source>
-        <translation>Contrasenya nova (repetir):</translation>
+        <translation>Contrasenya nova (de nou):</translation>
     </message>
     <message>
         <source>New passwords do not match.</source>
-        <translation>Les noves contrasenyes no coincideixen.</translation>
+        <translation>Les contrasenyes noves no coincideixen.</translation>
     </message>
     <message>
         <source>Current password is invalid.</source>
@@ -138,7 +141,7 @@ Never show this QR code to anyone else. It would allow unlimited access to your 
     </message>
     <message>
         <source>You need to be connected to change your password.</source>
-        <translation>Heu d&apos;estar connectat per canviar la vostra contrasenya.</translation>
+        <translation>Heu de connectar-vos per a canviar la contrasenya.</translation>
     </message>
     <message>
         <source>After changing your password, you will need to reenter it on all your other devices.</source>
@@ -165,11 +168,11 @@ Never show this QR code to anyone else. It would allow unlimited access to your 
     </message>
     <message>
         <source>Spoiler</source>
-        <translation>Filtració</translation>
+        <translation>Revelació</translation>
     </message>
     <message>
         <source>Download</source>
-        <translation>Descarrega</translation>
+        <translation>Baixa</translation>
     </message>
 </context>
 <context>
@@ -204,59 +207,59 @@ Never show this QR code to anyone else. It would allow unlimited access to your 
     </message>
     <message>
         <source>Send a spoiler message</source>
-        <translation>Envia una filtració</translation>
+        <translation>Envia una revelació</translation>
     </message>
     <message>
         <source>Spoiler hint</source>
-        <translation>Indici de la filtració</translation>
+        <translation>Indici de la revelació</translation>
     </message>
     <message>
         <source>Unmute notifications</source>
-        <translation type="unfinished"></translation>
+        <translation>Torna a activar les notificacions</translation>
     </message>
     <message>
         <source>Mute notifications</source>
-        <translation type="unfinished"></translation>
+        <translation>Silencia les notificacions</translation>
     </message>
     <message>
         <source>View profile</source>
-        <translation type="unfinished"></translation>
+        <translation>Mostra el perfil</translation>
     </message>
     <message>
         <source>Search</source>
-        <translation type="unfinished">Cerca</translation>
+        <translation>Cerca</translation>
     </message>
     <message>
         <source>Close</source>
-        <translation type="unfinished">Tanca</translation>
+        <translation>Tanca</translation>
     </message>
     <message>
         <source>Search up</source>
-        <translation type="unfinished"></translation>
+        <translation>Cerca cap enrere</translation>
     </message>
     <message>
         <source>Search down</source>
-        <translation type="unfinished"></translation>
+        <translation>Cerca cap endavant</translation>
     </message>
     <message>
         <source>All files</source>
-        <translation type="unfinished"></translation>
+        <translation>Tots els fitxers</translation>
     </message>
     <message>
         <source>Copy message</source>
-        <translation type="unfinished"></translation>
+        <translation>Copia el missatge</translation>
     </message>
     <message>
         <source>Edit message</source>
-        <translation type="unfinished"></translation>
+        <translation>Edita el missatge</translation>
     </message>
     <message>
         <source>Copy download URL</source>
-        <translation type="unfinished"></translation>
+        <translation>Copia l’URL de la baixada</translation>
     </message>
     <message>
         <source>Quote message</source>
-        <translation type="unfinished"></translation>
+        <translation>Cita el missatge</translation>
     </message>
 </context>
 <context>
@@ -290,7 +293,7 @@ Never show this QR code to anyone else. It would allow unlimited access to your 
     </message>
     <message>
         <source>Constant quality</source>
-        <translation type="unfinished"></translation>
+        <translation>Qualitat constant</translation>
     </message>
     <message>
         <source>Constant bit rate</source>
@@ -309,7 +312,7 @@ Never show this QR code to anyone else. It would allow unlimited access to your 
     <name>ConfirmationPage</name>
     <message>
         <source>Cancel</source>
-        <translation type="unfinished">Cancel·la</translation>
+        <translation>Cancel·la</translation>
     </message>
 </context>
 <context>
@@ -320,7 +323,7 @@ Never show this QR code to anyone else. It would allow unlimited access to your 
     </message>
     <message>
         <source>Download failed: %1</source>
-        <translation>La descàrrega ha fallat: %1</translation>
+        <translation>Ha fallat la baixada: %1</translation>
     </message>
 </context>
 <context>
@@ -335,7 +338,7 @@ Never show this QR code to anyone else. It would allow unlimited access to your 
     </message>
     <message>
         <source>Nature</source>
-        <translation>Naturalesa</translation>
+        <translation>Natura</translation>
     </message>
     <message>
         <source>Food</source>
@@ -347,7 +350,7 @@ Never show this QR code to anyone else. It would allow unlimited access to your 
     </message>
     <message>
         <source>Travel</source>
-        <translation>Viatjar</translation>
+        <translation>Viatges</translation>
     </message>
     <message>
         <source>Objects</source>
@@ -367,14 +370,14 @@ Never show this QR code to anyone else. It would allow unlimited access to your 
     </message>
     <message>
         <source>Search emoji</source>
-        <translation>Cerca emoji</translation>
+        <translation>Cerca emojis</translation>
     </message>
 </context>
 <context>
     <name>EmptyChatPage</name>
     <message>
         <source>Please select a chat to start messaging</source>
-        <translation>Seleccioneu un xat per començar</translation>
+        <translation>Seleccioneu un xat per a començar</translation>
     </message>
 </context>
 <context>
@@ -427,15 +430,15 @@ Never show this QR code to anyone else. It would allow unlimited access to your 
     </message>
     <message>
         <source>Connecting…</source>
-        <translation type="unfinished">Connectant…</translation>
+        <translation>S’està connectant…</translation>
     </message>
     <message>
         <source>Transfer account</source>
-        <translation type="unfinished"></translation>
+        <translation>Transfereix el compte</translation>
     </message>
     <message>
         <source>Delete account</source>
-        <translation type="unfinished"></translation>
+        <translation>Suprimeix el compte</translation>
     </message>
 </context>
 <context>
@@ -474,7 +477,7 @@ Never show this QR code to anyone else. It would allow unlimited access to your 
     </message>
     <message>
         <source>Connecting…</source>
-        <translation>Connectant…</translation>
+        <translation>S’està connectant…</translation>
     </message>
     <message>
         <source>Connect</source>
@@ -517,66 +520,66 @@ Never show this QR code to anyone else. It would allow unlimited access to your 
     <name>MediaRecorder</name>
     <message>
         <source>Default</source>
-        <translation type="unfinished"></translation>
+        <translation>Per defecte</translation>
     </message>
 </context>
 <context>
     <name>MediaUtils</name>
     <message>
         <source>Take picture</source>
-        <translation type="unfinished"></translation>
+        <translation>Fes una foto</translation>
     </message>
     <message>
         <source>Record video</source>
-        <translation type="unfinished"></translation>
+        <translation>Enregistra un vídeo</translation>
     </message>
     <message>
         <source>Record voice</source>
-        <translation type="unfinished"></translation>
+        <translation>Enregistra la veu</translation>
     </message>
     <message>
         <source>Send location</source>
-        <translation type="unfinished"></translation>
+        <translation>Envia la ubicació</translation>
     </message>
     <message>
         <source>Choose file</source>
-        <translation type="unfinished"></translation>
+        <translation>Tria un fitxer</translation>
     </message>
     <message>
         <source>Choose image</source>
-        <translation type="unfinished"></translation>
+        <translation>Tria una imatge</translation>
     </message>
     <message>
         <source>Choose video</source>
-        <translation type="unfinished"></translation>
+        <translation>Tria un vídeo</translation>
     </message>
     <message>
         <source>Choose audio file</source>
-        <translation type="unfinished"></translation>
+        <translation>Tria un fitxer d’àudio</translation>
     </message>
     <message>
         <source>Choose document</source>
-        <translation type="unfinished"></translation>
+        <translation>Tria un document</translation>
     </message>
     <message>
         <source>All files</source>
-        <translation type="unfinished"></translation>
+        <translation>Tots els fitxers</translation>
     </message>
     <message>
         <source>Images</source>
-        <translation type="unfinished"></translation>
+        <translation>Imatges</translation>
     </message>
     <message>
         <source>Videos</source>
-        <translation type="unfinished"></translation>
+        <translation>Vídeos</translation>
     </message>
     <message>
         <source>Audio files</source>
-        <translation type="unfinished"></translation>
+        <translation>Fitxers d’àudio</translation>
     </message>
     <message>
         <source>Documents</source>
-        <translation type="unfinished"></translation>
+        <translation>Documents</translation>
     </message>
     <message>
         <source>%1 (%2)</source>
@@ -595,7 +598,7 @@ Never show this QR code to anyone else. It would allow unlimited access to your 
     </message>
     <message>
         <source>Spoiler</source>
-        <translation>Filtració</translation>
+        <translation>Revelació</translation>
     </message>
     <message>
         <source>Message could not be sent.</source>
@@ -610,87 +613,87 @@ Never show this QR code to anyone else. It would allow unlimited access to your 
     <name>MultimediaSettings</name>
     <message>
         <source>Multimedia Settings</source>
-        <translation type="unfinished"></translation>
+        <translation>Configuració de multimèdia</translation>
     </message>
     <message>
         <source>Configure</source>
-        <translation type="unfinished"></translation>
+        <translation>Configura</translation>
     </message>
     <message>
         <source>Image Capture</source>
-        <translation type="unfinished"></translation>
+        <translation>Captura d’imatges</translation>
     </message>
     <message>
         <source>Audio Recording</source>
-        <translation type="unfinished"></translation>
+        <translation>Enregistrament d’àudio</translation>
     </message>
     <message>
         <source>Video Recording</source>
-        <translation type="unfinished"></translation>
+        <translation>Enregistrament de vídeo</translation>
     </message>
     <message>
         <source>Camera</source>
-        <translation type="unfinished"></translation>
+        <translation>Càmera</translation>
     </message>
     <message>
         <source>Audio input</source>
-        <translation type="unfinished"></translation>
+        <translation>Entrada d’àudio</translation>
     </message>
     <message>
         <source>Container</source>
-        <translation type="unfinished"></translation>
+        <translation>Contenidor</translation>
     </message>
     <message>
         <source>Image</source>
-        <translation type="unfinished">Imatge</translation>
+        <translation>Imatge</translation>
     </message>
     <message>
         <source>Audio</source>
-        <translation type="unfinished">Àudio</translation>
+        <translation>Àudio</translation>
     </message>
     <message>
         <source>Video</source>
-        <translation type="unfinished">Vídeo</translation>
+        <translation>Vídeo</translation>
     </message>
     <message>
         <source>Codec</source>
-        <translation type="unfinished"></translation>
+        <translation>Còdec</translation>
     </message>
     <message>
         <source>Resolution</source>
-        <translation type="unfinished"></translation>
+        <translation>Resolució</translation>
     </message>
     <message>
         <source>Quality</source>
-        <translation type="unfinished"></translation>
+        <translation>Qualitat</translation>
     </message>
     <message>
         <source>Sample Rate</source>
-        <translation type="unfinished"></translation>
+        <translation>Freqüència de mostratge</translation>
     </message>
     <message>
         <source>Frame Rate</source>
-        <translation type="unfinished"></translation>
+        <translation>Freqüència dels fotogrames</translation>
     </message>
     <message>
         <source>Ready</source>
-        <translation type="unfinished"></translation>
+        <translation>Preparat</translation>
     </message>
     <message>
         <source>Initializing...</source>
-        <translation type="unfinished"></translation>
+        <translation>S’està inicialitzant…</translation>
     </message>
     <message>
         <source>Unavailable</source>
-        <translation type="unfinished"></translation>
+        <translation>No disponible</translation>
     </message>
     <message>
         <source>Recording...</source>
-        <translation type="unfinished"></translation>
+        <translation>S’està enregistrant…</translation>
     </message>
     <message>
         <source>Paused</source>
-        <translation type="unfinished"></translation>
+        <translation>En pausa</translation>
     </message>
 </context>
 <context>
@@ -712,19 +715,19 @@ Never show this QR code to anyone else. It would allow unlimited access to your 
     <name>NewMedia</name>
     <message>
         <source>Ready</source>
-        <translation type="unfinished"></translation>
+        <translation>Preparat</translation>
     </message>
     <message>
         <source>Initializing...</source>
-        <translation type="unfinished"></translation>
+        <translation>S’està inicialitzant…</translation>
     </message>
     <message>
         <source>Unavailable</source>
-        <translation type="unfinished"></translation>
+        <translation>No disponible</translation>
     </message>
     <message>
         <source>Recording... %1</source>
-        <translation type="unfinished"></translation>
+        <translation>S’està enregistrant… %1</translation>
     </message>
     <message>
         <source>Paused %1</source>
@@ -735,7 +738,7 @@ Never show this QR code to anyone else. It would allow unlimited access to your 
     <name>QmlUtils</name>
     <message>
         <source>Available</source>
-        <translation type="unfinished">Disponible</translation>
+        <translation>Disponible</translation>
     </message>
     <message>
         <source>Free for chat</source>
@@ -743,15 +746,15 @@ Never show this QR code to anyone else. It would allow unlimited access to your 
     </message>
     <message>
         <source>Away</source>
-        <translation type="unfinished">Lluny</translation>
+        <translation>Lluny</translation>
     </message>
     <message>
         <source>Do not disturb</source>
-        <translation type="unfinished">No em molesteu</translation>
+        <translation>No em molesteu</translation>
     </message>
     <message>
         <source>Away for longer</source>
-        <translation type="unfinished">He sortit una estona</translation>
+        <translation>He sortit una estona</translation>
     </message>
     <message>
         <source>Offline</source>
@@ -759,7 +762,7 @@ Never show this QR code to anyone else. It would allow unlimited access to your 
     </message>
     <message>
         <source>Error</source>
-        <translation type="unfinished">Error</translation>
+        <translation>Error</translation>
     </message>
     <message>
         <source>Invisible</source>
@@ -767,19 +770,19 @@ Never show this QR code to anyone else. It would allow unlimited access to your 
     </message>
     <message>
         <source>Invalid username or password.</source>
-        <translation type="unfinished">Usuari o contrasenya invàlids.</translation>
+        <translation>El nom d’usuari o la contrasenya són incorrectes.</translation>
     </message>
     <message>
         <source>Cannot connect to the server. Please check your internet connection.</source>
-        <translation type="unfinished">No s&apos;ha pogut connectar al servidor. Comproveu la vostra connexió a internet.</translation>
+        <translation>No s’ha pogut connectar al servidor. Comproveu la vostra connexió a internet.</translation>
     </message>
     <message>
         <source>The server doesn&apos;t support secure connections.</source>
-        <translation type="unfinished">El servidor no és compatible amb connexions segures.</translation>
+        <translation>El servidor no és compatible amb les connexions segures.</translation>
     </message>
     <message>
         <source>Error while trying to connect securely.</source>
-        <translation type="unfinished">S&apos;ha produït un error provant de connectar de forma segura.</translation>
+        <translation>S’ha produït un error en provar de connectar de forma segura.</translation>
     </message>
     <message>
         <source>Could not resolve the server&apos;s address. Please check your server name.</source>
@@ -791,7 +794,7 @@ Never show this QR code to anyone else. It would allow unlimited access to your 
     </message>
     <message>
         <source>Authentification protocol not supported by the server.</source>
-        <translation type="unfinished">Protocol d&apos;autenticació no compatible amb el servidor.</translation>
+        <translation>El protocol d’autenticació no és compatible amb el servidor.</translation>
     </message>
     <message>
         <source>This server does not support registration.</source>
@@ -880,14 +883,14 @@ Try to close other applications using the camera.</source>
     </message>
     <message>
         <source>Failed to change password: %1</source>
-        <translation>No s&apos;ha pogut canviar la contrasenya:% 1</translation>
+        <translation>No s’ha pogut canviar la contrasenya: %1</translation>
     </message>
 </context>
 <context>
     <name>RosterAddContactSheet</name>
     <message>
         <source>Add new contact</source>
-        <translation>Afegeix un nou contacte</translation>
+        <translation>Afegeix un contacte nou</translation>
     </message>
     <message>
         <source>This will also send a request to access the presence of the contact.</source>
@@ -1026,7 +1029,7 @@ Try to close other applications using the camera.</source>
     </message>
     <message>
         <source>Cancel</source>
-        <translation type="unfinished">Cancel·la</translation>
+        <translation>Cancel·la</translation>
     </message>
     <message>
         <source>Rename</source>
@@ -1070,11 +1073,11 @@ Deletion of message history saved on server</extracomment>
     <name>SettingsContent</name>
     <message>
         <source>Change password</source>
-        <translation type="unfinished">Canvia la contrasenya</translation>
+        <translation>Canvia la contrasenya</translation>
     </message>
     <message>
         <source>Changes your account&apos;s password. You will need to re-enter it on your other devices.</source>
-        <translation type="unfinished">Canvia la contrasenya del vostre compte. Haureu de tornar a introduir-la als altres dispositius.</translation>
+        <translation>Canvia la contrasenya del vostre compte. Haureu de tornar a introduir-la als altres dispositius.</translation>
     </message>
     <message>
         <source>Multimedia Settings</source>
@@ -1104,7 +1107,7 @@ Deletion of message history saved on server</extracomment>
     <name>SettingsSheet</name>
     <message>
         <source>Settings</source>
-        <translation type="unfinished">Configuració</translation>
+        <translation>Configuració</translation>
     </message>
 </context>
 <context>
@@ -1152,14 +1155,14 @@ Deletion of message history saved on server</extracomment>
     <name>UserProfilePage</name>
     <message>
         <source>Profile</source>
-        <translation type="unfinished"></translation>
+        <translation>Perfil</translation>
     </message>
 </context>
 <context>
     <name>VCardModel</name>
     <message>
         <source>Name</source>
-        <translation type="unfinished"></translation>
+        <translation>Nom</translation>
     </message>
     <message>
         <source>Nickname</source>
@@ -1167,7 +1170,7 @@ Deletion of message history saved on server</extracomment>
     </message>
     <message>
         <source>About</source>
-        <translation type="unfinished">Quant a</translation>
+        <translation>Quant a</translation>
     </message>
     <message>
         <source>Email</source>
@@ -1175,7 +1178,7 @@ Deletion of message history saved on server</extracomment>
     </message>
     <message>
         <source>Birthday</source>
-        <translation type="unfinished"></translation>
+        <translation>Aniversari</translation>
     </message>
     <message>
         <source>Website</source>

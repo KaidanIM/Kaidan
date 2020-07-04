@@ -21,7 +21,7 @@
     </message>
     <message>
         <source>Report problems</source>
-        <translation type="unfinished"></translation>
+        <translation>Informar de problemas</translation>
     </message>
 </context>
 <context>
@@ -43,90 +43,96 @@
     <name>AccountDeletionFromClientAndServerConfirmationPage</name>
     <message>
         <source>Delete account completely</source>
-        <translation type="unfinished"></translation>
+        <translation>Eliminar cuenta completamente</translation>
     </message>
     <message>
         <source>Your account will be deleted completely, which means from this app and from the server.
 You will not be able to use your account again!</source>
-        <translation type="unfinished"></translation>
+        <translation>Su cuenta se eliminará por completo, es decir, tanto de esta aplicación como del servidor.
+No podrá utilizarla nuevamente.</translation>
     </message>
     <message>
         <source>Delete</source>
-        <translation type="unfinished">Borrar</translation>
+        <translation>Eliminar</translation>
     </message>
 </context>
 <context>
     <name>AccountDeletionFromClientConfirmationPage</name>
     <message>
         <source>Remove account from this app</source>
-        <translation type="unfinished"></translation>
+        <translation>Quitar cuenta de esta aplicación</translation>
     </message>
     <message>
         <source>Your account will be removed from this app.
 You won&apos;t be able to get your credentials back!
 Make sure that you have backed up those if you want to use your account later.</source>
-        <translation type="unfinished"></translation>
+        <translation>Se quitará su cuenta de esta aplicación.
+No podrá recuperar sus datos de acceso.
+Cerciórese de tener una copia de respaldo de estos si quiere utilizar su cuenta después.</translation>
     </message>
     <message>
         <source>Remove</source>
-        <translation type="unfinished"></translation>
+        <translation>Quitar</translation>
     </message>
 </context>
 <context>
     <name>AccountDeletionPage</name>
     <message>
         <source>Delete account</source>
-        <translation type="unfinished"></translation>
+        <translation>Eliminar cuenta</translation>
     </message>
     <message>
         <source>You can remove your account &lt;b&gt;%1&lt;/b&gt; only from this app or delete it completely. If you delete your account completely, you won&apos;t be able to use it with another app because it is also removed from the server.</source>
-        <translation type="unfinished"></translation>
+        <translation>Puede quitar la cuenta &lt;b&gt;%1&lt;/b&gt; de esta aplicación únicamente o eliminarla por completo. Si la elimina completamente, no podrá utilizarla en otras aplicaciones porque desaparecerá también del servidor.</translation>
     </message>
     <message>
         <source>Remove from this app</source>
-        <translation type="unfinished"></translation>
+        <translation>Quitar de esta aplicación</translation>
     </message>
     <message>
         <source>Delete completely</source>
-        <translation type="unfinished"></translation>
+        <translation>Eliminar completamente</translation>
     </message>
 </context>
 <context>
     <name>AccountTransferPage</name>
     <message>
         <source>Transfer account to another device</source>
-        <translation type="unfinished"></translation>
+        <translation>Transferir cuenta a otro dispositivo</translation>
     </message>
     <message>
         <source>Scan the QR code or enter the credentials as text on another device to log in on it.
 
 Attention:
 Never show this QR code to anyone else. It would allow unlimited access to your account!</source>
-        <translation type="unfinished"></translation>
+        <translation>Escanee el código QR o proporcione los datos de acceso como texto en otro dispositivo para acceder a la cuenta.
+
+Atención:
+Jamás muestre este código QR a otras personas, dado que brinda acceso ilimitado a su cuenta.</translation>
     </message>
     <message>
         <source>Chat address:</source>
-        <translation type="unfinished"></translation>
+        <translation>Dirección de charla:</translation>
     </message>
     <message>
         <source>Password:</source>
-        <translation type="unfinished"></translation>
+        <translation>Contraseña:</translation>
     </message>
     <message>
         <source>Hide QR code</source>
-        <translation type="unfinished"></translation>
+        <translation>Ocultar código QR</translation>
     </message>
     <message>
         <source>Show as QR code</source>
-        <translation type="unfinished"></translation>
+        <translation>Mostrar como código QR</translation>
     </message>
     <message>
         <source>Hide text</source>
-        <translation type="unfinished"></translation>
+        <translation>Ocultar texto</translation>
     </message>
     <message>
         <source>Show as text</source>
-        <translation type="unfinished"></translation>
+        <translation>Mostrar como texto</translation>
     </message>
 </context>
 <context>
@@ -290,26 +296,26 @@ Never show this QR code to anyone else. It would allow unlimited access to your 
     </message>
     <message>
         <source>Copy message</source>
-        <translation type="unfinished"></translation>
+        <translation>Copiar mensaje</translation>
     </message>
     <message>
         <source>Edit message</source>
-        <translation type="unfinished"></translation>
+        <translation>Editar mensaje</translation>
     </message>
     <message>
         <source>Copy download URL</source>
-        <translation type="unfinished">Copiar URL de descarga</translation>
+        <translation>Copiar URL de descarga</translation>
     </message>
     <message>
         <source>Quote message</source>
-        <translation type="unfinished"></translation>
+        <translation>Citar mensaje</translation>
     </message>
 </context>
 <context>
     <name>ClientWorker</name>
     <message>
         <source>Your account could not be deleted from the server. Therefore, it was also not removed from this app: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>No se pudo eliminar la cuenta del servidor. Por ello, tampoco se ha quitado de esta aplicación: %1</translation>
     </message>
 </context>
 <context>
@@ -355,7 +361,7 @@ Never show this QR code to anyone else. It would allow unlimited access to your 
     <name>ConfirmationPage</name>
     <message>
         <source>Cancel</source>
-        <translation type="unfinished">Cancelar</translation>
+        <translation>Cancelar</translation>
     </message>
 </context>
 <context>
@@ -487,23 +493,23 @@ Never show this QR code to anyone else. It would allow unlimited access to your 
     </message>
     <message>
         <source>Offline</source>
-        <translation type="unfinished">Desconectado</translation>
+        <translation>Desconectado</translation>
     </message>
     <message>
         <source>Online</source>
-        <translation type="unfinished"></translation>
+        <translation>En línea</translation>
     </message>
     <message>
         <source>Connecting…</source>
-        <translation type="unfinished">Conectando…</translation>
+        <translation>Conectando…</translation>
     </message>
     <message>
         <source>Transfer account</source>
-        <translation type="unfinished"></translation>
+        <translation>Transferir cuenta</translation>
     </message>
     <message>
         <source>Delete account</source>
-        <translation type="unfinished"></translation>
+        <translation>Eliminar cuenta</translation>
     </message>
 </context>
 <context>
@@ -726,87 +732,87 @@ Never show this QR code to anyone else. It would allow unlimited access to your 
     <name>MultimediaSettings</name>
     <message>
         <source>Multimedia Settings</source>
-        <translation type="unfinished">Configuración de multimedia</translation>
+        <translation>Configuración de multimedia</translation>
     </message>
     <message>
         <source>Configure</source>
-        <translation type="unfinished">Configurar</translation>
+        <translation>Configurar</translation>
     </message>
     <message>
         <source>Image Capture</source>
-        <translation type="unfinished">Captura de imagen</translation>
+        <translation>Captura de imagen</translation>
     </message>
     <message>
         <source>Audio Recording</source>
-        <translation type="unfinished">Grabación de audio</translation>
+        <translation>Grabación de audio</translation>
     </message>
     <message>
         <source>Video Recording</source>
-        <translation type="unfinished">Grabación de vídeo</translation>
+        <translation>Grabación de vídeo</translation>
     </message>
     <message>
         <source>Camera</source>
-        <translation type="unfinished">Cámara</translation>
+        <translation>Cámara</translation>
     </message>
     <message>
         <source>Audio input</source>
-        <translation type="unfinished">Entrada de audio</translation>
+        <translation>Entrada de audio</translation>
     </message>
     <message>
         <source>Container</source>
-        <translation type="unfinished">Contenedor</translation>
+        <translation>Contenedor</translation>
     </message>
     <message>
         <source>Image</source>
-        <translation type="unfinished">Imagen</translation>
+        <translation>Imagen</translation>
     </message>
     <message>
         <source>Audio</source>
-        <translation type="unfinished">Audio</translation>
+        <translation>Audio</translation>
     </message>
     <message>
         <source>Video</source>
-        <translation type="unfinished">Vídeo</translation>
+        <translation>Vídeo</translation>
     </message>
     <message>
         <source>Codec</source>
-        <translation type="unfinished">Códec</translation>
+        <translation>Códec</translation>
     </message>
     <message>
         <source>Resolution</source>
-        <translation type="unfinished">Resolución</translation>
+        <translation>Resolución</translation>
     </message>
     <message>
         <source>Quality</source>
-        <translation type="unfinished">Calidad</translation>
+        <translation>Calidad</translation>
     </message>
     <message>
         <source>Sample Rate</source>
-        <translation type="unfinished">Tasa de muestreo</translation>
+        <translation>Tasa de muestreo</translation>
     </message>
     <message>
         <source>Frame Rate</source>
-        <translation type="unfinished">Tasa de fotogramas</translation>
+        <translation>Tasa de fotogramas</translation>
     </message>
     <message>
         <source>Ready</source>
-        <translation type="unfinished">Preparado</translation>
+        <translation>Preparado</translation>
     </message>
     <message>
         <source>Initializing...</source>
-        <translation type="unfinished">Iniciando…</translation>
+        <translation>Iniciando…</translation>
     </message>
     <message>
         <source>Unavailable</source>
-        <translation type="unfinished">No disponible</translation>
+        <translation>No disponible</translation>
     </message>
     <message>
         <source>Recording...</source>
-        <translation type="unfinished">Grabando…</translation>
+        <translation>Grabando…</translation>
     </message>
     <message>
         <source>Paused</source>
-        <translation type="unfinished">En pausa</translation>
+        <translation>En pausa</translation>
     </message>
 </context>
 <context>
@@ -955,23 +961,23 @@ Never show this QR code to anyone else. It would allow unlimited access to your 
     </message>
     <message>
         <source>Invalid username or password.</source>
-        <translation type="unfinished">Usuario o contraseña no válido.</translation>
+        <translation>Usuario o contraseña no válido.</translation>
     </message>
     <message>
         <source>Cannot connect to the server. Please check your internet connection.</source>
-        <translation type="unfinished">No se puede conectar al servidor. Compruebe su conexión a internet.</translation>
+        <translation>No se puede conectar con el servidor. Compruebe su conexión a internet.</translation>
     </message>
     <message>
         <source>The server doesn&apos;t support secure connections.</source>
-        <translation type="unfinished">El servidor no admite conexiones seguras.</translation>
+        <translation>El servidor no admite conexiones seguras.</translation>
     </message>
     <message>
         <source>Error while trying to connect securely.</source>
-        <translation type="unfinished">Error al intentar conectar de forma segura.</translation>
+        <translation>Error al intentar conectar de forma segura.</translation>
     </message>
     <message>
         <source>Could not resolve the server&apos;s address. Please check your server name.</source>
-        <translation type="unfinished"></translation>
+        <translation>No se pudo resolver la dirección del servidor. Compruebe el nombre del servidor.</translation>
     </message>
     <message>
         <source>Could not connect to the server.</source>
@@ -979,30 +985,30 @@ Never show this QR code to anyone else. It would allow unlimited access to your 
     </message>
     <message>
         <source>Authentification protocol not supported by the server.</source>
-        <translation type="unfinished">El protocolo de autenticación no es compatible con el servidor.</translation>
+        <translation>El servidor no admite el protocolo de autenticación.</translation>
     </message>
     <message>
         <source>This server does not support registration.</source>
-        <translation type="unfinished"></translation>
+        <translation>Este servidor no admite registros.</translation>
     </message>
     <message>
         <source>The server is offline or blocked by a firewall.</source>
-        <translation type="unfinished"></translation>
+        <translation>El servidor está desconectado o bloqueado por un cortafuegos.</translation>
     </message>
     <message>
         <source>The connection could not be refreshed.</source>
-        <translation type="unfinished"></translation>
+        <translation>No se pudo actualizar la conexión.</translation>
     </message>
     <message>
         <source>The internet access is not permitted. Please check your system&apos;s internet access configuration.</source>
-        <translation type="unfinished"></translation>
+        <translation>No se permite el acceso a internet. Compruebe la configuración de acceso a internet del sistema.</translation>
     </message>
 </context>
 <context>
     <name>QrCodeGenerator</name>
     <message>
         <source>Generating the QR code failed: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Falló la generación del código QR: %1</translation>
     </message>
 </context>
 <context>
@@ -1027,38 +1033,38 @@ Pruebe a cerrar otras aplicaciones que utilicen la cámara.</translation>
     </message>
     <message>
         <source>Logging in…</source>
-        <translation type="unfinished"></translation>
+        <translation>Accediendo…</translation>
     </message>
     <message>
         <source>Scan the QR code from your existing device to transfer your account.</source>
-        <translation type="unfinished"></translation>
+        <translation>Escanee el código QR desde su dispositivo existente para transferir su cuenta.</translation>
     </message>
     <message>
         <source>Show explanation</source>
-        <translation type="unfinished"></translation>
+        <translation>Mostrar explicación</translation>
     </message>
     <message>
         <source>Scan</source>
-        <translation type="unfinished"></translation>
+        <translation>Escanear</translation>
     </message>
     <message>
         <source>Continue without QR code</source>
-        <translation type="unfinished"></translation>
+        <translation>Continuar sin código QR</translation>
     </message>
 </context>
 <context>
     <name>RegistrationLoginDecisionPage</name>
     <message>
         <source>Set up</source>
-        <translation type="unfinished"></translation>
+        <translation>Configurar</translation>
     </message>
     <message>
         <source>Register a new account</source>
-        <translation type="unfinished"></translation>
+        <translation>Registrar cuenta nueva</translation>
     </message>
     <message>
         <source>Use an existing account</source>
-        <translation type="unfinished"></translation>
+        <translation>Utilizar cuenta existente</translation>
     </message>
 </context>
 <context>
@@ -1076,15 +1082,15 @@ Pruebe a cerrar otras aplicaciones que utilicen la cámara.</translation>
     <name>RosterAddContactSheet</name>
     <message>
         <source>Add new contact</source>
-        <translation>Añadir nuevo contacto</translation>
+        <translation>Añadir contacto nuevo</translation>
     </message>
     <message>
         <source>Nickname:</source>
-        <translation>Alias:</translation>
+        <translation>Apodo:</translation>
     </message>
     <message>
         <source>Jabber-ID:</source>
-        <translation>Jabber-ID:</translation>
+        <translation>Id. de Jabber:</translation>
     </message>
     <message>
         <source>user@example.org</source>
@@ -1257,37 +1263,37 @@ Pruebe a cerrar otras aplicaciones que utilicen la cámara.</translation>
     <name>ServerListModel</name>
     <message>
         <source>Custom server</source>
-        <translation type="unfinished"></translation>
+        <translation>Servidor personalizado</translation>
     </message>
     <message>
         <source>No limitation</source>
         <extracomment>Unlimited file size for uploading files
 ----------
 Deletion of message history saved on server</extracomment>
-        <translation type="unfinished"></translation>
+        <translation>Sin límites</translation>
     </message>
     <message>
         <source>%1 days</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 días</translation>
     </message>
 </context>
 <context>
     <name>SettingsContent</name>
     <message>
         <source>Change password</source>
-        <translation type="unfinished">Cambiar contraseña</translation>
+        <translation>Cambiar contraseña</translation>
     </message>
     <message>
         <source>Changes your account&apos;s password. You will need to re-enter it on your other devices.</source>
-        <translation type="unfinished">Cambia la contraseña de su cuenta. Necesitará introducirla en todos sus dispositivos.</translation>
+        <translation>Cambia la contraseña de su cuenta. Necesitará introducirla en todos sus dispositivos.</translation>
     </message>
     <message>
         <source>Multimedia Settings</source>
-        <translation type="unfinished">Configuración de multimedia</translation>
+        <translation>Configuración de multimedia</translation>
     </message>
     <message>
         <source>Configure photo, video and audio recording settings</source>
-        <translation type="unfinished"></translation>
+        <translation>Defina las opciones de grabación de imágenes, vídeo y audio</translation>
     </message>
 </context>
 <context>
@@ -1313,18 +1319,18 @@ Deletion of message history saved on server</extracomment>
     <name>SettingsSheet</name>
     <message>
         <source>Settings</source>
-        <translation type="unfinished">Configuración</translation>
+        <translation>Configuración</translation>
     </message>
 </context>
 <context>
     <name>StartPage</name>
     <message>
         <source>Enjoy free communication on every device!</source>
-        <translation type="unfinished"></translation>
+        <translation>Disfrute de comunicación libre y gratuita en cualquier dispositivo.</translation>
     </message>
     <message>
         <source>Let&apos;s start</source>
-        <translation type="unfinished"></translation>
+        <translation>Empezar</translation>
     </message>
 </context>
 <context>

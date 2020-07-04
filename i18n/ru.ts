@@ -985,7 +985,7 @@ Try to close other applications using the camera.</source>
     </message>
     <message>
         <source>Cancel</source>
-        <translation>Отменить</translation>
+        <translation>Отмена</translation>
     </message>
     <message>
         <source>Add</source>
@@ -1073,7 +1073,7 @@ Try to close other applications using the camera.</source>
     </message>
     <message>
         <source>Cancel</source>
-        <translation>Отменить</translation>
+        <translation>Отмена</translation>
     </message>
     <message>
         <source>Delete</source>

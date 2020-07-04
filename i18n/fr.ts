@@ -528,7 +528,7 @@ Ne montrez ce QR code à personne d&apos;autre. Il permet un accès complet à v
     </message>
     <message>
         <source>Delete account</source>
-        <translation type="unfinished"></translation>
+        <translation>Supprimer le compte</translation>
     </message>
 </context>
 <context>

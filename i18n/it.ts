@@ -643,7 +643,7 @@
     </message>
     <message>
         <source>Away for longer</source>
-        <translation>Lontano per tanto tempo</translation>
+        <translation>Lontano per molto tempo</translation>
     </message>
     <message>
         <source>Offline</source>

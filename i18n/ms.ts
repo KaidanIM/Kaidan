@@ -17,7 +17,7 @@
     </message>
     <message>
         <source>Report problems</source>
-        <translation type="unfinished"></translation>
+        <translation>Laporkan masalah</translation>
     </message>
 </context>
 <context>
@@ -58,90 +58,96 @@
     <name>AccountDeletionFromClientAndServerConfirmationPage</name>
     <message>
         <source>Delete account completely</source>
-        <translation type="unfinished"></translation>
+        <translation>Padam keseluruhan akaun</translation>
     </message>
     <message>
         <source>Your account will be deleted completely, which means from this app and from the server.
 You will not be able to use your account again!</source>
-        <translation type="unfinished"></translation>
+        <translation>Akaun anda akan dipadan keseluruhannya, iaitu dipadam daripada aplikasi ini dan juga daripada pelayan.
+Anda tidak akan mampu menggunakan akaun anda lagi!</translation>
     </message>
     <message>
         <source>Delete</source>
-        <translation type="unfinished">Padam</translation>
+        <translation>Padam</translation>
     </message>
 </context>
 <context>
     <name>AccountDeletionFromClientConfirmationPage</name>
     <message>
         <source>Remove account from this app</source>
-        <translation type="unfinished"></translation>
+        <translation>Buang akaun daripada aplikasi ini</translation>
     </message>
     <message>
         <source>Your account will be removed from this app.
 You won&apos;t be able to get your credentials back!
 Make sure that you have backed up those if you want to use your account later.</source>
-        <translation type="unfinished"></translation>
+        <translation>Akaun anda akan dibuang daripada aplikasi ini.
+Anda tidak akan mampu mendapatkan kelayakan anda semula!
+Sila pastikan anda telah menyandarkan kelayakan sekiranya anda ingin menggunakan akaun anda pada waktu akan datang.</translation>
     </message>
     <message>
         <source>Remove</source>
-        <translation type="unfinished"></translation>
+        <translation>Buang</translation>
     </message>
 </context>
 <context>
     <name>AccountDeletionPage</name>
     <message>
         <source>Delete account</source>
-        <translation type="unfinished"></translation>
+        <translation>Padam akaun</translation>
     </message>
     <message>
         <source>You can remove your account &lt;b&gt;%1&lt;/b&gt; only from this app or delete it completely. If you delete your account completely, you won&apos;t be able to use it with another app because it is also removed from the server.</source>
-        <translation type="unfinished"></translation>
+        <translation>Anda boleh membuang akaun anda &lt;b&gt;%1&lt;/b&gt; hanya daripada akaun ini atau memadamnya secara keseluruhannya. Jika anda memadam akaun anda keseluruhannya, anda tidak akan mampu menggunakan akaun tersebut di aplikasi lain kerana ia turut dibuang daripada pelayan.</translation>
     </message>
     <message>
         <source>Remove from this app</source>
-        <translation type="unfinished"></translation>
+        <translation>Buang daripada aplikasi ini</translation>
     </message>
     <message>
         <source>Delete completely</source>
-        <translation type="unfinished"></translation>
+        <translation>Padam keseluruhannya</translation>
     </message>
 </context>
 <context>
     <name>AccountTransferPage</name>
     <message>
         <source>Transfer account to another device</source>
-        <translation type="unfinished"></translation>
+        <translation>Pindahkan akaun ke peranti lain</translation>
     </message>
     <message>
         <source>Scan the QR code or enter the credentials as text on another device to log in on it.
 
 Attention:
 Never show this QR code to anyone else. It would allow unlimited access to your account!</source>
-        <translation type="unfinished"></translation>
+        <translation>Imbas kod QR atau masukkan kelayakan sebagai teks di peranti lain untuk log masuk ke akaun.
+
+Perhatian:
+Jangan sesekali tunjukkan kod QR ini kepada orang lain. Ia akab membenarkan capaian tanpa had ke akaun anda!</translation>
     </message>
     <message>
         <source>Chat address:</source>
-        <translation type="unfinished"></translation>
+        <translation>Alamat sembang:</translation>
     </message>
     <message>
         <source>Password:</source>
-        <translation type="unfinished"></translation>
+        <translation>Kata laluan:</translation>
     </message>
     <message>
         <source>Hide QR code</source>
-        <translation type="unfinished"></translation>
+        <translation>Sembunyi kod QR</translation>
     </message>
     <message>
         <source>Show as QR code</source>
-        <translation type="unfinished"></translation>
+        <translation>Tunjuk sebagai kod QR</translation>
     </message>
     <message>
         <source>Hide text</source>
-        <translation type="unfinished"></translation>
+        <translation>Sembunyi teks</translation>
     </message>
     <message>
         <source>Show as text</source>
-        <translation type="unfinished"></translation>
+        <translation>Tunjuk sebagai teks</translation>
     </message>
 </context>
 <context>
@@ -301,26 +307,26 @@ Never show this QR code to anyone else. It would allow unlimited access to your 
     </message>
     <message>
         <source>Copy message</source>
-        <translation type="unfinished"></translation>
+        <translation>Salin mesej</translation>
     </message>
     <message>
         <source>Edit message</source>
-        <translation type="unfinished"></translation>
+        <translation>Sunting mesej</translation>
     </message>
     <message>
         <source>Copy download URL</source>
-        <translation type="unfinished">Salin URL muat turun</translation>
+        <translation>Salin URL muat turun</translation>
     </message>
     <message>
         <source>Quote message</source>
-        <translation type="unfinished"></translation>
+        <translation>Petik mesej</translation>
     </message>
 </context>
 <context>
     <name>ClientWorker</name>
     <message>
         <source>Your account could not be deleted from the server. Therefore, it was also not removed from this app: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Akaun anda tidak boleh dipadam daripada pelayan. Oleh itu, ia juga tidak dibuang daripada aplikasi ini: %1</translation>
     </message>
 </context>
 <context>
@@ -366,7 +372,7 @@ Never show this QR code to anyone else. It would allow unlimited access to your 
     <name>ConfirmationPage</name>
     <message>
         <source>Cancel</source>
-        <translation type="unfinished">Batal</translation>
+        <translation>Batal</translation>
     </message>
 </context>
 <context>
@@ -498,23 +504,23 @@ Never show this QR code to anyone else. It would allow unlimited access to your 
     </message>
     <message>
         <source>Offline</source>
-        <translation type="unfinished"></translation>
+        <translation>Luar talian</translation>
     </message>
     <message>
         <source>Online</source>
-        <translation type="unfinished"></translation>
+        <translation>Dalam talian</translation>
     </message>
     <message>
         <source>Connecting…</source>
-        <translation type="unfinished">Menyambung…</translation>
+        <translation>Menyambung…</translation>
     </message>
     <message>
         <source>Transfer account</source>
-        <translation type="unfinished"></translation>
+        <translation>Pindah akaun</translation>
     </message>
     <message>
         <source>Delete account</source>
-        <translation type="unfinished"></translation>
+        <translation>Padam akaun</translation>
     </message>
 </context>
 <context>
@@ -729,87 +735,87 @@ Never show this QR code to anyone else. It would allow unlimited access to your 
     <name>MultimediaSettings</name>
     <message>
         <source>Multimedia Settings</source>
-        <translation type="unfinished">Tetapan Multimedia</translation>
+        <translation>Tetapan Multimedia</translation>
     </message>
     <message>
         <source>Configure</source>
-        <translation type="unfinished">Tetapkan</translation>
+        <translation>Tetapkan</translation>
     </message>
     <message>
         <source>Image Capture</source>
-        <translation type="unfinished">Tangkapan Imej</translation>
+        <translation>Tangkapan Imej</translation>
     </message>
     <message>
         <source>Audio Recording</source>
-        <translation type="unfinished">Rakaman Audio</translation>
+        <translation>Rakaman Audio</translation>
     </message>
     <message>
         <source>Video Recording</source>
-        <translation type="unfinished">Rakaman Video</translation>
+        <translation>Rakaman Video</translation>
     </message>
     <message>
         <source>Camera</source>
-        <translation type="unfinished">Kamera</translation>
+        <translation>Kamera</translation>
     </message>
     <message>
         <source>Audio input</source>
-        <translation type="unfinished">Kemasukan audio</translation>
+        <translation>Kemasukan audio</translation>
     </message>
     <message>
         <source>Container</source>
-        <translation type="unfinished">Bekas</translation>
+        <translation>Bekas</translation>
     </message>
     <message>
         <source>Image</source>
-        <translation type="unfinished">Imej</translation>
+        <translation>Imej</translation>
     </message>
     <message>
         <source>Audio</source>
-        <translation type="unfinished">Audio</translation>
+        <translation>Audio</translation>
     </message>
     <message>
         <source>Video</source>
-        <translation type="unfinished">Video</translation>
+        <translation>Video</translation>
     </message>
     <message>
         <source>Codec</source>
-        <translation type="unfinished">Kodek</translation>
+        <translation>Kodek</translation>
     </message>
     <message>
         <source>Resolution</source>
-        <translation type="unfinished">Resolusi</translation>
+        <translation>Resolusi</translation>
     </message>
     <message>
         <source>Quality</source>
-        <translation type="unfinished">Kualiti</translation>
+        <translation>Kualiti</translation>
     </message>
     <message>
         <source>Sample Rate</source>
-        <translation type="unfinished">Kadar Sampel</translation>
+        <translation>Kadar Sampel</translation>
     </message>
     <message>
         <source>Frame Rate</source>
-        <translation type="unfinished">Kadar Bingkai</translation>
+        <translation>Kadar Bingkai</translation>
     </message>
     <message>
         <source>Ready</source>
-        <translation type="unfinished">Sedia</translation>
+        <translation>Sedia</translation>
     </message>
     <message>
         <source>Initializing...</source>
-        <translation type="unfinished">Mengasalkan...</translation>
+        <translation>Mengasalkan...</translation>
     </message>
     <message>
         <source>Unavailable</source>
-        <translation type="unfinished">Tidak tersedia</translation>
+        <translation>Tidak tersedia</translation>
     </message>
     <message>
         <source>Recording...</source>
-        <translation type="unfinished">Merakam...</translation>
+        <translation>Merakam...</translation>
     </message>
     <message>
         <source>Paused</source>
-        <translation type="unfinished">Dijedakan</translation>
+        <translation>Dijedakan</translation>
     </message>
 </context>
 <context>
@@ -958,23 +964,23 @@ Never show this QR code to anyone else. It would allow unlimited access to your 
     </message>
     <message>
         <source>Invalid username or password.</source>
-        <translation type="unfinished">Nama pengguna atau kata laluan tidak sah.</translation>
+        <translation>Nama pengguna atau kata laluan tidak sah.</translation>
     </message>
     <message>
         <source>Cannot connect to the server. Please check your internet connection.</source>
-        <translation type="unfinished">Tidak dapat menghubungi pelayan. Sila periksa sambungan internet anda.</translation>
+        <translation>Tidak dapat menghubungi pelayan. Sila periksa sambungan internet anda.</translation>
     </message>
     <message>
         <source>The server doesn&apos;t support secure connections.</source>
-        <translation type="unfinished">Pelayan tidak menyokong sambungan selamat.</translation>
+        <translation>Pelayan tidak menyokong sambungan selamat.</translation>
     </message>
     <message>
         <source>Error while trying to connect securely.</source>
-        <translation type="unfinished">Ralat ketika cuba untuk menyambung secara selamat.</translation>
+        <translation>Ralat ketika cuba untuk menyambung secara selamat.</translation>
     </message>
     <message>
         <source>Could not resolve the server&apos;s address. Please check your server name.</source>
-        <translation type="unfinished"></translation>
+        <translation>Tidak dapat menyelesaikan alamat pelayan. Sila periksa nama pelayan anda.</translation>
     </message>
     <message>
         <source>Could not connect to the server.</source>
@@ -982,30 +988,30 @@ Never show this QR code to anyone else. It would allow unlimited access to your 
     </message>
     <message>
         <source>Authentification protocol not supported by the server.</source>
-        <translation type="unfinished">Protokol pengesahan tidak disokong oleh pelayan.</translation>
+        <translation>Protokol pengesahan tidak disokong oleh pelayan.</translation>
     </message>
     <message>
         <source>This server does not support registration.</source>
-        <translation type="unfinished"></translation>
+        <translation>Pelayan ini tidak menyokong pendaftaran.</translation>
     </message>
     <message>
         <source>The server is offline or blocked by a firewall.</source>
-        <translation type="unfinished"></translation>
+        <translation>Pelayan berada di luar talian atau disekat tembok api.</translation>
     </message>
     <message>
         <source>The connection could not be refreshed.</source>
-        <translation type="unfinished"></translation>
+        <translation>Sambungan tidak dapat disegarkan semula.</translation>
     </message>
     <message>
         <source>The internet access is not permitted. Please check your system&apos;s internet access configuration.</source>
-        <translation type="unfinished"></translation>
+        <translation>Capaian internet tidak dibenarkan. Sila periksa tatarajah capaian internet sistem anda.</translation>
     </message>
 </context>
 <context>
     <name>QrCodeGenerator</name>
     <message>
         <source>Generating the QR code failed: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Penjanaan kod QR telah gagal: %1</translation>
     </message>
 </context>
 <context>
@@ -1030,38 +1036,38 @@ Cuba tutup aplikasi lain yang menggunakan kamera.</translation>
     </message>
     <message>
         <source>Logging in…</source>
-        <translation type="unfinished"></translation>
+        <translation>Sedang log masuk…</translation>
     </message>
     <message>
         <source>Scan the QR code from your existing device to transfer your account.</source>
-        <translation type="unfinished"></translation>
+        <translation>Imbas kod QR daripada peranti anda yang sedia ada untuk memindahkan akaun anda.</translation>
     </message>
     <message>
         <source>Show explanation</source>
-        <translation type="unfinished"></translation>
+        <translation>Tunjukkan penjelasan</translation>
     </message>
     <message>
         <source>Scan</source>
-        <translation type="unfinished"></translation>
+        <translation>Imbas</translation>
     </message>
     <message>
         <source>Continue without QR code</source>
-        <translation type="unfinished"></translation>
+        <translation>Teruskan tanpa kod QR</translation>
     </message>
 </context>
 <context>
     <name>RegistrationLoginDecisionPage</name>
     <message>
         <source>Set up</source>
-        <translation type="unfinished"></translation>
+        <translation>Persediakan</translation>
     </message>
     <message>
         <source>Register a new account</source>
-        <translation type="unfinished"></translation>
+        <translation>Daftar akaun baharu</translation>
     </message>
     <message>
         <source>Use an existing account</source>
-        <translation type="unfinished"></translation>
+        <translation>Guna akaun sedia ada</translation>
     </message>
 </context>
 <context>
@@ -1256,37 +1262,37 @@ Cuba tutup aplikasi lain yang menggunakan kamera.</translation>
     <name>ServerListModel</name>
     <message>
         <source>Custom server</source>
-        <translation type="unfinished"></translation>
+        <translation>Pelayan tersuai</translation>
     </message>
     <message>
         <source>No limitation</source>
         <extracomment>Unlimited file size for uploading files
 ----------
 Deletion of message history saved on server</extracomment>
-        <translation type="unfinished"></translation>
+        <translation>Tiada had</translation>
     </message>
     <message>
         <source>%1 days</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 hari</translation>
     </message>
 </context>
 <context>
     <name>SettingsContent</name>
     <message>
         <source>Change password</source>
-        <translation type="unfinished">Tukar kata laluan</translation>
+        <translation>Tukar kata laluan</translation>
     </message>
     <message>
         <source>Changes your account&apos;s password. You will need to re-enter it on your other devices.</source>
-        <translation type="unfinished">Tukar kata laluan akaun anda. Anda perlu log masuk semula di kesemua peranti anda yang lain.</translation>
+        <translation>Tukar kata laluan akaun anda. Anda perlu masukkan ia semula di kesemua peranti anda yang lain.</translation>
     </message>
     <message>
         <source>Multimedia Settings</source>
-        <translation type="unfinished">Tetapan Multimedia</translation>
+        <translation>Tetapan Multimedia</translation>
     </message>
     <message>
         <source>Configure photo, video and audio recording settings</source>
-        <translation type="unfinished"></translation>
+        <translation>Menatarajah tetapan rakaman gambar, video dan audio</translation>
     </message>
 </context>
 <context>
@@ -1312,18 +1318,18 @@ Deletion of message history saved on server</extracomment>
     <name>SettingsSheet</name>
     <message>
         <source>Settings</source>
-        <translation type="unfinished">Tetapan</translation>
+        <translation>Tetapan</translation>
     </message>
 </context>
 <context>
     <name>StartPage</name>
     <message>
         <source>Enjoy free communication on every device!</source>
-        <translation type="unfinished"></translation>
+        <translation>Nikmati perhubungan percuma di setiap peranti!</translation>
     </message>
     <message>
         <source>Let&apos;s start</source>
-        <translation type="unfinished"></translation>
+        <translation>Mari mulakan</translation>
     </message>
 </context>
 <context>

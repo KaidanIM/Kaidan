@@ -63,7 +63,7 @@
     <message>
         <source>Your account will be deleted completely, which means from this app and from the server.
 You will not be able to use your account again!</source>
-        <translation>Akaun anda akan dipadan keseluruhannya, iaitu dipadam daripada aplikasi ini dan juga daripada pelayan.
+        <translation>Akaun anda akan dipadam keseluruhannya, iaitu dipadam daripada aplikasi ini dan juga daripada pelayan.
 Anda tidak akan mampu menggunakan akaun anda lagi!</translation>
     </message>
     <message>
@@ -98,7 +98,7 @@ Sila pastikan anda telah menyandarkan kelayakan sekiranya anda ingin menggunakan
     </message>
     <message>
         <source>You can remove your account &lt;b&gt;%1&lt;/b&gt; only from this app or delete it completely. If you delete your account completely, you won&apos;t be able to use it with another app because it is also removed from the server.</source>
-        <translation>Anda boleh membuang akaun anda &lt;b&gt;%1&lt;/b&gt; hanya daripada akaun ini atau memadamnya secara keseluruhannya. Jika anda memadam akaun anda keseluruhannya, anda tidak akan mampu menggunakan akaun tersebut di aplikasi lain kerana ia turut dibuang daripada pelayan.</translation>
+        <translation>Anda boleh membuang akaun anda &lt;b&gt;%1&lt;/b&gt; hanya daripada aplikasi ini atau memadamnya secara keseluruhannya. Jika anda memadam akaun anda keseluruhannya, anda tidak akan mampu menggunakan akaun tersebut di aplikasi lain kerana ia turut dibuang daripada pelayan.</translation>
     </message>
     <message>
         <source>Remove from this app</source>
@@ -123,7 +123,7 @@ Never show this QR code to anyone else. It would allow unlimited access to your 
         <translation>Imbas kod QR atau masukkan kelayakan sebagai teks di peranti lain untuk log masuk ke akaun.
 
 Perhatian:
-Jangan sesekali tunjukkan kod QR ini kepada orang lain. Ia akab membenarkan capaian tanpa had ke akaun anda!</translation>
+Jangan sesekali tunjukkan kod QR ini kepada orang lain. Ia akan membenarkan capaian tanpa had ke akaun anda!</translation>
     </message>
     <message>
         <source>Chat address:</source>
@@ -216,7 +216,7 @@ Jangan sesekali tunjukkan kod QR ini kepada orang lain. Ia akab membenarkan capa
     </message>
     <message>
         <source>Spoiler</source>
-        <translation>Spoiler</translation>
+        <translation>Beberan</translation>
     </message>
     <message>
         <source>Download</source>
@@ -263,11 +263,11 @@ Jangan sesekali tunjukkan kod QR ini kepada orang lain. Ia akab membenarkan capa
     </message>
     <message>
         <source>Send a spoiler message</source>
-        <translation>Hantar mesej spoiler</translation>
+        <translation>Hantar mesej beberan</translation>
     </message>
     <message>
         <source>Spoiler hint</source>
-        <translation>Tip spoiler</translation>
+        <translation>Tip beberan</translation>
     </message>
     <message>
         <source>Unmute notifications</source>
@@ -720,7 +720,7 @@ Jangan sesekali tunjukkan kod QR ini kepada orang lain. Ia akab membenarkan capa
     </message>
     <message>
         <source>Spoiler</source>
-        <translation>Spoiler</translation>
+        <translation>Beberan</translation>
     </message>
     <message>
         <source>Message could not be sent.</source>
@@ -1093,7 +1093,7 @@ Cuba tutup aplikasi lain yang menggunakan kamera.</translation>
     </message>
     <message>
         <source>user@example.org</source>
-        <translation>contoh＠emel.com</translation>
+        <translation>contohemel@example.org</translation>
     </message>
     <message>
         <source>Cancel</source>
@@ -1171,7 +1171,7 @@ Cuba tutup aplikasi lain yang menggunakan kamera.</translation>
     </message>
     <message>
         <source>Spoiler</source>
-        <translation>Spoiler</translation>
+        <translation>Beberan</translation>
     </message>
     <message>
         <source>Could not rename contact, as a result of not being connected.</source>
@@ -1221,7 +1221,7 @@ Cuba tutup aplikasi lain yang menggunakan kamera.</translation>
     </message>
     <message>
         <source>Do you really want to delete the contact &lt;b&gt;%1&lt;/b&gt; from your roster?</source>
-        <translation>Adakah anda ingin memadam kenalan &lt;b&gt;%1&lt;/b&gt; daripada roster anda?</translation>
+        <translation>Adakah anda ingin memadam kenalan &lt;b&gt;%1&lt;/b&gt; daripada senarai anda?</translation>
     </message>
 </context>
 <context>
@@ -1340,7 +1340,7 @@ Deletion of message history saved on server</extracomment>
     </message>
     <message>
         <source>You received a subscription request by &lt;b&gt;%1&lt;/b&gt;. If you accept it, the account will have access to your presence status.</source>
-        <translation>Anda menerima permintaan langganan daripada &lt;b&gt;%1&lt;/b&gt;. Jika anda terima, akaun tersebut boleh mencapai status kehadiran anda.</translation>
+        <translation>Anda mendapat permintaan langganan daripada &lt;b&gt;%1&lt;/b&gt;. Jika anda terima, akaun tersebut boleh mencapai status kehadiran anda.</translation>
     </message>
     <message>
         <source>Decline</source>

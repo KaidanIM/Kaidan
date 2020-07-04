@@ -83,7 +83,7 @@
     </message>
     <message>
         <source>Quote</source>
-        <translation type="unfinished"></translation>
+        <translation>Citar</translation>
     </message>
 </context>
 <context>
@@ -307,15 +307,15 @@
     </message>
     <message>
         <source>Offline</source>
-        <translation type="unfinished">Desconectada</translation>
+        <translation>Desconectada</translation>
     </message>
     <message>
         <source>Online</source>
-        <translation type="unfinished"></translation>
+        <translation>Conectada</translation>
     </message>
     <message>
         <source>Connecting…</source>
-        <translation type="unfinished">Conectando…</translation>
+        <translation>Conectando…</translation>
     </message>
 </context>
 <context>
@@ -498,87 +498,87 @@
     <name>MultimediaSettings</name>
     <message>
         <source>Multimedia Settings</source>
-        <translation type="unfinished">Axustes Multimedia</translation>
+        <translation>Axustes Multimedia</translation>
     </message>
     <message>
         <source>Configure</source>
-        <translation type="unfinished">Configurar</translation>
+        <translation>Configurar</translation>
     </message>
     <message>
         <source>Image Capture</source>
-        <translation type="unfinished">Capturar imaxe</translation>
+        <translation>Capturar imaxe</translation>
     </message>
     <message>
         <source>Audio Recording</source>
-        <translation type="unfinished">Gravando audio</translation>
+        <translation>Gravar audio</translation>
     </message>
     <message>
         <source>Video Recording</source>
-        <translation type="unfinished">Gravando vídeo</translation>
+        <translation>Gravar vídeo</translation>
     </message>
     <message>
         <source>Camera</source>
-        <translation type="unfinished">Cámara</translation>
+        <translation>Cámara</translation>
     </message>
     <message>
         <source>Audio input</source>
-        <translation type="unfinished">Entrada de audio</translation>
+        <translation>Entrada de audio</translation>
     </message>
     <message>
         <source>Container</source>
-        <translation type="unfinished">Contedor</translation>
+        <translation>Contedor</translation>
     </message>
     <message>
         <source>Image</source>
-        <translation type="unfinished">Imaxe</translation>
+        <translation>Imaxe</translation>
     </message>
     <message>
         <source>Audio</source>
-        <translation type="unfinished"></translation>
+        <translation>Audio</translation>
     </message>
     <message>
         <source>Video</source>
-        <translation type="unfinished">Vídeo</translation>
+        <translation>Vídeo</translation>
     </message>
     <message>
         <source>Codec</source>
-        <translation type="unfinished">Códec</translation>
+        <translation>Códec</translation>
     </message>
     <message>
         <source>Resolution</source>
-        <translation type="unfinished">Resolución</translation>
+        <translation>Resolución</translation>
     </message>
     <message>
         <source>Quality</source>
-        <translation type="unfinished">Calidade</translation>
+        <translation>Calidade</translation>
     </message>
     <message>
         <source>Sample Rate</source>
-        <translation type="unfinished">Taxa de mostreo</translation>
+        <translation>Taxa de mostreo</translation>
     </message>
     <message>
         <source>Frame Rate</source>
-        <translation type="unfinished">Taxa de marcos</translation>
+        <translation>Taxa de marcos</translation>
     </message>
     <message>
         <source>Ready</source>
-        <translation type="unfinished"></translation>
+        <translation>Listo</translation>
     </message>
     <message>
         <source>Initializing...</source>
-        <translation type="unfinished">Inicializando...</translation>
+        <translation>Inicializando...</translation>
     </message>
     <message>
         <source>Unavailable</source>
-        <translation type="unfinished">Non dispoñible</translation>
+        <translation>Non dispoñible</translation>
     </message>
     <message>
         <source>Recording...</source>
-        <translation type="unfinished">Gravando...</translation>
+        <translation>Gravando...</translation>
     </message>
     <message>
         <source>Paused</source>
-        <translation type="unfinished">En pausa</translation>
+        <translation>En pausa</translation>
     </message>
 </context>
 <context>
@@ -727,39 +727,39 @@
     </message>
     <message>
         <source>Invalid username or password.</source>
-        <translation type="unfinished">Usuario ou contrasinal non válidos.</translation>
+        <translation>Usuario ou contrasinal non válidos.</translation>
     </message>
     <message>
         <source>Cannot connect to the server. Please check your internet connection.</source>
-        <translation type="unfinished">Non puido conectar co servidor. Por favor, comprobe a conexión a internet.</translation>
+        <translation>Non hai conexión co servidor. Por favor, comproba a conexión a internet.</translation>
     </message>
     <message>
         <source>The server doesn&apos;t support secure connections.</source>
-        <translation type="unfinished">O servidor non soporta conexións seguras.</translation>
+        <translation>O servidor non soporta conexións seguras.</translation>
     </message>
     <message>
         <source>Error while trying to connect securely.</source>
-        <translation type="unfinished">Fallo ao intentar conectar de xeito seguro.</translation>
+        <translation>Fallo ao intentar conectar de xeito seguro.</translation>
     </message>
     <message>
         <source>Could not resolve the server&apos;s address. Please check your server name.</source>
-        <translation type="unfinished"></translation>
+        <translation>Non se puido resolver o enderezo do servidor. Comproba o nome do servidor.</translation>
     </message>
     <message>
         <source>Could not connect to the server.</source>
-        <translation type="unfinished">Non puido conectar co servidor.</translation>
+        <translation>Non hai conexión co servidor.</translation>
     </message>
     <message>
         <source>Authentification protocol not supported by the server.</source>
-        <translation type="unfinished">Protocolo de autenticación non soportado polo servidor.</translation>
+        <translation>Protocolo de autenticación non soportado polo servidor.</translation>
     </message>
     <message>
         <source>This server does not support registration.</source>
-        <translation type="unfinished"></translation>
+        <translation>O servidor non permite o rexistro.</translation>
     </message>
     <message>
         <source>An unknown error occured.</source>
-        <translation type="unfinished"></translation>
+        <translation>Houbo un fallo descoñecido.</translation>
     </message>
 </context>
 <context>
@@ -979,11 +979,11 @@ Pecha outras aplicacións que a estén utilizando.</translation>
     </message>
     <message>
         <source>Multimedia Settings</source>
-        <translation type="unfinished">Axustes Multimedia</translation>
+        <translation>Axustes Multimedia</translation>
     </message>
     <message>
         <source>Configure photo, video and audio recording settings</source>
-        <translation type="unfinished"></translation>
+        <translation>Configurar os axustes para fotos e gravación de audio e vídeo</translation>
     </message>
 </context>
 <context>

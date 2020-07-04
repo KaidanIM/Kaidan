@@ -117,7 +117,7 @@ Assurez vous d&apos;en avoir fais une copie si vous comptez réutiliser ce compt
     <name>AccountTransferPage</name>
     <message>
         <source>Transfer account to another device</source>
-        <translation>Tra</translation>
+        <translation>Transférer le compte vers un autre appareil</translation>
     </message>
     <message>
         <source>Scan the QR code or enter the credentials as text on another device to log in on it.
@@ -201,7 +201,7 @@ Ne montrez ce QR code à personne d&apos;autre. Il permet un accès complet à v
     </message>
     <message>
         <source>Change</source>
-        <translation>Modifier</translation>
+        <translation>Changer</translation>
     </message>
 </context>
 <context>
@@ -315,7 +315,7 @@ Ne montrez ce QR code à personne d&apos;autre. Il permet un accès complet à v
     </message>
     <message>
         <source>Edit message</source>
-        <translation>Éditer le message</translation>
+        <translation>Modifier le message</translation>
     </message>
     <message>
         <source>Copy download URL</source>
@@ -413,7 +413,7 @@ Ne montrez ce QR code à personne d&apos;autre. Il permet un accès complet à v
     </message>
     <message>
         <source>Food</source>
-        <translation>Aliments</translation>
+        <translation>Nourriture</translation>
     </message>
     <message>
         <source>Activity</source>
@@ -516,7 +516,7 @@ Ne montrez ce QR code à personne d&apos;autre. Il permet un accès complet à v
     </message>
     <message>
         <source>Online</source>
-        <translation>Connecté</translation>
+        <translation>En ligne</translation>
     </message>
     <message>
         <source>Connecting…</source>
@@ -992,7 +992,7 @@ Ne montrez ce QR code à personne d&apos;autre. Il permet un accès complet à v
     </message>
     <message>
         <source>Authentification protocol not supported by the server.</source>
-        <translation>Protocole d&apos;authentification non supporté par le serveur.</translation>
+        <translation>Protocole d&apos;authentification non pris en charge par le serveur.</translation>
     </message>
     <message>
         <source>This server does not support registration.</source>
@@ -1008,7 +1008,7 @@ Ne montrez ce QR code à personne d&apos;autre. Il permet un accès complet à v
     </message>
     <message>
         <source>The internet access is not permitted. Please check your system&apos;s internet access configuration.</source>
-        <translation>L&apos;accès à internet n&apos;est pas authorisé. Merci de vérifier les permissions système.</translation>
+        <translation>L&apos;accès à internet n&apos;est pas autorisé. Merci de vérifier les permissions système.</translation>
     </message>
 </context>
 <context>
@@ -1040,7 +1040,7 @@ Essayez de fermer d&apos;autres applications utilisant la caméra.</translation>
     </message>
     <message>
         <source>Logging in…</source>
-        <translation>Connection…</translation>
+        <translation>Connexion…</translation>
     </message>
     <message>
         <source>Scan the QR code from your existing device to transfer your account.</source>
@@ -1063,7 +1063,7 @@ Essayez de fermer d&apos;autres applications utilisant la caméra.</translation>
     <name>RegistrationLoginDecisionPage</name>
     <message>
         <source>Set up</source>
-        <translation>MIse en place</translation>
+        <translation>Configurer</translation>
     </message>
     <message>
         <source>Register a new account</source>
@@ -1312,7 +1312,7 @@ Deletion of message history saved on server</extracomment>
     </message>
     <message>
         <source>Changes your account&apos;s password. You will need to re-enter it on your other devices.</source>
-        <translation>Modifier le mot de passe du compte. Vous devrez le ressaisir sur tous vos autres appareils.</translation>
+        <translation>Modifie le mot de passe du compte. Vous devrez le ressaisir sur tous vos autres appareils.</translation>
     </message>
     <message>
         <source>Multimedia Settings</source>
@@ -1357,7 +1357,7 @@ Deletion of message history saved on server</extracomment>
     </message>
     <message>
         <source>Let&apos;s start</source>
-        <translation>C&apos;est partit</translation>
+        <translation>C&apos;est parti</translation>
     </message>
 </context>
 <context>
@@ -1413,7 +1413,7 @@ Deletion of message history saved on server</extracomment>
     </message>
     <message>
         <source>Nickname</source>
-        <translation>Surnom</translation>
+        <translation>Pseudo</translation>
     </message>
     <message>
         <source>About</source>
@@ -1429,7 +1429,7 @@ Deletion of message history saved on server</extracomment>
     </message>
     <message>
         <source>Website</source>
-        <translation>Site internet</translation>
+        <translation>Site web</translation>
     </message>
 </context>
 </TS>

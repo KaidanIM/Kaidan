@@ -20,7 +20,7 @@
     <name>ChangePassword</name>
     <message>
         <source>Change password</source>
-        <translation>Cambia password</translation>
+        <translation>Cambia la password</translation>
     </message>
     <message>
         <source>Current password:</source>
@@ -63,11 +63,11 @@
     <name>ChatMessage</name>
     <message>
         <source>Copy Message</source>
-        <translation>Copia Messaggio</translation>
+        <translation>Copia il messaggio</translation>
     </message>
     <message>
         <source>Edit Message</source>
-        <translation>Modifica Messaggio</translation>
+        <translation>Modifica il messaggio</translation>
     </message>
     <message>
         <source>Spoiler</source>
@@ -83,7 +83,7 @@
     </message>
     <message>
         <source>Quote</source>
-        <translation type="unfinished"></translation>
+        <translation>Cita</translation>
     </message>
 </context>
 <context>
@@ -208,7 +208,7 @@
     </message>
     <message>
         <source>Download failed: %1</source>
-        <translation>Download fallito: %1</translation>
+        <translation>Scaricamento fallito: %1</translation>
     </message>
 </context>
 <context>
@@ -291,7 +291,7 @@
     </message>
     <message>
         <source>About</source>
-        <translation>Più Informazioni</translation>
+        <translation>Informazioni</translation>
     </message>
     <message>
         <source>Invite friends</source>
@@ -299,7 +299,7 @@
     </message>
     <message>
         <source>Invitation link copied to clipboard</source>
-        <translation>Link dell&apos;invito copiato negli appunti</translation>
+        <translation>Collegamento dell&apos;invito copiato negli appunti</translation>
     </message>
     <message>
         <source>Settings</source>
@@ -307,15 +307,15 @@
     </message>
     <message>
         <source>Offline</source>
-        <translation type="unfinished">Non in linea</translation>
+        <translation>Fuori linea</translation>
     </message>
     <message>
         <source>Online</source>
-        <translation type="unfinished"></translation>
+        <translation>In linea</translation>
     </message>
     <message>
         <source>Connecting…</source>
-        <translation type="unfinished">Connessione…</translation>
+        <translation>Connessione…</translation>
     </message>
 </context>
 <context>
@@ -432,23 +432,23 @@
     </message>
     <message>
         <source>Choose file</source>
-        <translation>Scegli file</translation>
+        <translation>Scegli un file</translation>
     </message>
     <message>
         <source>Choose image</source>
-        <translation>Scegli immagine</translation>
+        <translation>Scegli un&apos;immagine</translation>
     </message>
     <message>
         <source>Choose video</source>
-        <translation>Scegli video</translation>
+        <translation>Scegli un video</translation>
     </message>
     <message>
         <source>Choose audio file</source>
-        <translation>Scegli file audio</translation>
+        <translation>Scegli un file audio</translation>
     </message>
     <message>
         <source>Choose document</source>
-        <translation>Scegli documento</translation>
+        <translation>Scegli un documento</translation>
     </message>
     <message>
         <source>All files</source>
@@ -502,7 +502,7 @@
     <name>MultimediaSettings</name>
     <message>
         <source>Multimedia Settings</source>
-        <translation>Impostazioni Multimediali</translation>
+        <translation>Impostazioni multimediali</translation>
     </message>
     <message>
         <source>Configure</source>
@@ -510,15 +510,15 @@
     </message>
     <message>
         <source>Image Capture</source>
-        <translation>Cattura Immagine</translation>
+        <translation>Cattura immagine</translation>
     </message>
     <message>
         <source>Audio Recording</source>
-        <translation>Registrazione Audio</translation>
+        <translation>Registrazione audio</translation>
     </message>
     <message>
         <source>Video Recording</source>
-        <translation>Registrazione Video</translation>
+        <translation>Registrazione video</translation>
     </message>
     <message>
         <source>Camera</source>
@@ -534,15 +534,15 @@
     </message>
     <message>
         <source>Image</source>
-        <translation type="unfinished">Immagine</translation>
+        <translation>Immagine</translation>
     </message>
     <message>
         <source>Audio</source>
-        <translation type="unfinished">Audio</translation>
+        <translation>Audio</translation>
     </message>
     <message>
         <source>Video</source>
-        <translation type="unfinished">Video</translation>
+        <translation>Video</translation>
     </message>
     <message>
         <source>Codec</source>
@@ -558,11 +558,11 @@
     </message>
     <message>
         <source>Sample Rate</source>
-        <translation>Frequenza di Campionamento</translation>
+        <translation>Frequenza di campionamento</translation>
     </message>
     <message>
         <source>Frame Rate</source>
-        <translation>Frequenza Fotogrammi</translation>
+        <translation>Frequenza fotogrammi</translation>
     </message>
     <message>
         <source>Ready</source>
@@ -635,7 +635,7 @@
     </message>
     <message>
         <source>Away</source>
-        <translation>Lontano dal dispositivo</translation>
+        <translation>Assente</translation>
     </message>
     <message>
         <source>Do not disturb</source>
@@ -659,46 +659,46 @@
     </message>
     <message>
         <source>Invalid username or password.</source>
-        <translation type="unfinished">Nome utente o password non validi.</translation>
+        <translation>Nome utente o password non validi.</translation>
     </message>
     <message>
         <source>Cannot connect to the server. Please check your internet connection.</source>
-        <translation type="unfinished">Impossibile connettersi al server. Per favore controlla la tua connessione a internet.</translation>
+        <translation>Impossibile connettersi al server. Per favore controlla la tua connessione a internet.</translation>
     </message>
     <message>
         <source>The server doesn&apos;t support secure connections.</source>
-        <translation type="unfinished">Il server non supporta connessioni sicure.</translation>
+        <translation>Il server non supporta connessioni sicure.</translation>
     </message>
     <message>
         <source>Error while trying to connect securely.</source>
-        <translation type="unfinished">Errore durante il tentativo di connessione sicura.</translation>
+        <translation>Errore durante il tentativo di connessione sicura.</translation>
     </message>
     <message>
         <source>Could not resolve the server&apos;s address. Please check your server name.</source>
-        <translation type="unfinished"></translation>
+        <translation>Non è stato possibile trovare l&apos;indirizzo del server. Si prega di controllare il nome del server.</translation>
     </message>
     <message>
         <source>Could not connect to the server.</source>
-        <translation type="unfinished">Non posso connettermi al server.</translation>
+        <translation>Impossibile connettersi al server.</translation>
     </message>
     <message>
         <source>Authentification protocol not supported by the server.</source>
-        <translation type="unfinished">Protocollo di autenticazione non supportato dal server.</translation>
+        <translation>Protocollo di autenticazione non supportato dal server.</translation>
     </message>
     <message>
         <source>This server does not support registration.</source>
-        <translation type="unfinished"></translation>
+        <translation>Questo server non supporta la registrazione.</translation>
     </message>
     <message>
         <source>An unknown error occured.</source>
-        <translation type="unfinished"></translation>
+        <translation>Si è verificato un errore sconosciuto.</translation>
     </message>
 </context>
 <context>
     <name>QrCodeScannerPage</name>
     <message>
         <source>Scan QR code</source>
-        <translation>Scansiona QR code</translation>
+        <translation>Scansiona il codice QR</translation>
     </message>
     <message>
         <source>There is no camera available.</source>
@@ -712,7 +712,7 @@ Provare a chiudere altre applicazioni che stanno utilizzando la fotocamera.</tra
     </message>
     <message>
         <source>The camera format &apos;%1&apos; is not supported.</source>
-        <translation>Il formato della fotocamera &apos;%1&apos; non è supportato.</translation>
+        <translation>Il formato della fotocamera «%1» non è supportato.</translation>
     </message>
 </context>
 <context>
@@ -734,7 +734,7 @@ Provare a chiudere altre applicazioni che stanno utilizzando la fotocamera.</tra
     </message>
     <message>
         <source>user@example.org</source>
-        <translation>nome@example.org</translation>
+        <translation>nome@esempio.org</translation>
     </message>
     <message>
         <source>This will also send a request to access the presence of the contact.</source>
@@ -746,7 +746,7 @@ Provare a chiudere altre applicazioni che stanno utilizzando la fotocamera.</tra
     </message>
     <message>
         <source>Nickname:</source>
-        <translation>Nickname:</translation>
+        <translation>Soprannome:</translation>
     </message>
     <message>
         <source>Optional message:</source>
@@ -804,11 +804,11 @@ Provare a chiudere altre applicazioni che stanno utilizzando la fotocamera.</tra
     <name>RosterManager</name>
     <message>
         <source>Could not add contact, as a result of not being connected.</source>
-        <translation>Impossibile aggiungere il contatto, perchè non sei connesso.</translation>
+        <translation>Impossibile aggiungere il contatto, perché non sei connesso.</translation>
     </message>
     <message>
         <source>Could not remove contact, as a result of not being connected.</source>
-        <translation>Impossibile rimuovere il contatto, perchè non sei connesso.</translation>
+        <translation>Impossibile rimuovere il contatto, perché non sei connesso.</translation>
     </message>
     <message>
         <source>Spoiler</source>
@@ -835,7 +835,7 @@ Provare a chiudere altre applicazioni che stanno utilizzando la fotocamera.</tra
     </message>
     <message>
         <source>Offline</source>
-        <translation>Non in linea</translation>
+        <translation>Fuori linea</translation>
     </message>
     <message>
         <source>Search contacts</source>
@@ -850,7 +850,7 @@ Provare a chiudere altre applicazioni che stanno utilizzando la fotocamera.</tra
     </message>
     <message>
         <source>Delete contact</source>
-        <translation>Elimina contatto</translation>
+        <translation>Elimina il contatto</translation>
     </message>
     <message>
         <source>Cancel</source>
@@ -865,11 +865,11 @@ Provare a chiudere altre applicazioni che stanno utilizzando la fotocamera.</tra
     <name>RosterRenameContactSheet</name>
     <message>
         <source>Rename contact</source>
-        <translation>Rinomina contatto</translation>
+        <translation>Rinomina il contatto</translation>
     </message>
     <message>
         <source>Edit name:</source>
-        <translation>Modifica nome:</translation>
+        <translation>Modifica il nome:</translation>
     </message>
     <message>
         <source>Cancel</source>
@@ -903,7 +903,7 @@ Provare a chiudere altre applicazioni che stanno utilizzando la fotocamera.</tra
     </message>
     <message>
         <source>Change password</source>
-        <translation>Cambia password</translation>
+        <translation>Cambia la password</translation>
     </message>
     <message>
         <source>Changes your account&apos;s password. You will need to re-enter it on your other devices.</source>
@@ -911,18 +911,18 @@ Provare a chiudere altre applicazioni che stanno utilizzando la fotocamera.</tra
     </message>
     <message>
         <source>Multimedia Settings</source>
-        <translation type="unfinished"></translation>
+        <translation>Impostazioni multimediali</translation>
     </message>
     <message>
         <source>Configure photo, video and audio recording settings</source>
-        <translation type="unfinished"></translation>
+        <translation>Configura le impostazioni di registrazione di foto, video e audio</translation>
     </message>
 </context>
 <context>
     <name>SubRequestAcceptSheet</name>
     <message>
         <source>Subscription Request</source>
-        <translation>Richiesta di Sottoscrizione</translation>
+        <translation>Richiesta di sottoscrizione</translation>
     </message>
     <message>
         <source>You received a subscription request by &lt;b&gt;%1&lt;/b&gt;. If you accept it, the account will have access to your presence status.</source>
@@ -963,15 +963,15 @@ Provare a chiudere altre applicazioni che stanno utilizzando la fotocamera.</tra
     </message>
     <message>
         <source>Nickname</source>
-        <translation>Nickname</translation>
+        <translation>Soprannome</translation>
     </message>
     <message>
         <source>About</source>
-        <translation>Più Informazioni</translation>
+        <translation>Informazioni</translation>
     </message>
     <message>
         <source>Email</source>
-        <translation>Email</translation>
+        <translation>E-mail</translation>
     </message>
     <message>
         <source>Birthday</source>

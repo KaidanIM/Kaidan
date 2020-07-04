@@ -1174,7 +1174,7 @@ Deletion of message history saved on server</extracomment>
     </message>
     <message>
         <source>Email</source>
-        <translation type="unfinished"></translation>
+        <translation>Correu-e</translation>
     </message>
     <message>
         <source>Birthday</source>
@@ -1182,7 +1182,7 @@ Deletion of message history saved on server</extracomment>
     </message>
     <message>
         <source>Website</source>
-        <translation type="unfinished"></translation>
+        <translation>Lloc web</translation>
     </message>
 </context>
 </TS>

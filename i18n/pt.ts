@@ -1102,7 +1102,7 @@ Deletion of message history saved on server</extracomment>
     <name>SettingsPage</name>
     <message>
         <source>Settings</source>
-        <translation type="unfinished"></translation>
+        <translation>Configurações</translation>
     </message>
     <message>
         <source>Change password</source>
@@ -1113,7 +1113,7 @@ Deletion of message history saved on server</extracomment>
     <name>SettingsSheet</name>
     <message>
         <source>Settings</source>
-        <translation type="unfinished"></translation>
+        <translation>Configurações</translation>
     </message>
 </context>
 <context>
@@ -1161,14 +1161,14 @@ Deletion of message history saved on server</extracomment>
     <name>UserProfilePage</name>
     <message>
         <source>Profile</source>
-        <translation type="unfinished"></translation>
+        <translation>Perfil</translation>
     </message>
 </context>
 <context>
     <name>VCardModel</name>
     <message>
         <source>Name</source>
-        <translation type="unfinished"></translation>
+        <translation>Nome</translation>
     </message>
     <message>
         <source>Nickname</source>
@@ -1180,7 +1180,7 @@ Deletion of message history saved on server</extracomment>
     </message>
     <message>
         <source>Email</source>
-        <translation type="unfinished"></translation>
+        <translation>Correio eletrónico</translation>
     </message>
     <message>
         <source>Birthday</source>
@@ -1188,7 +1188,7 @@ Deletion of message history saved on server</extracomment>
     </message>
     <message>
         <source>Website</source>
-        <translation type="unfinished"></translation>
+        <translation>Sítio Web</translation>
     </message>
 </context>
 </TS>

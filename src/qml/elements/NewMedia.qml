@@ -74,6 +74,36 @@ MediaPreview {
 		}
 	}
 
+	Rectangle {
+		visible: !previewLoader.visible
+		color: "black"
+		anchors.fill: parent
+
+		Kirigami.Icon {
+			visible: root.mediaSourceType === Enums.MessageType.MessageAudio
+			property var images: [Utils.getResourcePath("images/mic0.svg"), Utils.getResourcePath("images/mic1.svg"), Utils.getResourcePath("images/mic2.svg"), Utils.getResourcePath("images/mic3.svg")]
+			property int currentIndex: 0
+			anchors.centerIn: parent
+			width: 100
+			smooth: true
+			height: width
+			source: images[currentIndex]
+
+			Timer {
+				interval: 200
+				repeat: true
+				running: root.mediaSourceType === Enums.MessageType.MessageAudio && recorder.status === MediaRecorder.Status.RecordingStatus
+				onTriggered: {
+					if (parent.currentIndex >= 4) {
+						parent.currentIndex = 1
+					} else {
+						parent.currentIndex++
+					}
+				}
+			}
+		}
+	}
+
 	ColumnLayout {
 		anchors {
 			fill: parent
@@ -87,10 +117,17 @@ MediaPreview {
 			Layout.fillWidth: true
 			Layout.fillHeight: true
 
-			Controls.RoundButton {
+			Controls.Button {
+				id: button
+				background: Rectangle {
+					border.color: Qt.rgba(255, 255, 255, 100)
+					border.width: 4
+					color: button.pressed ? "#C5C5C5" : Qt.rgba(0, 0, 0, 0)
+					radius: width * 0.5
+				}
 				display: Controls.AbstractButton.IconOnly
 				checkable: root.isNewVideo
-				width: parent.width * .2
+				width: 40
 				height: width
 				enabled: {
 					return recorder.isReady ||
@@ -107,7 +144,7 @@ MediaPreview {
 				anchors {
 					horizontalCenter: parent.horizontalCenter
 					bottom: parent.bottom
-					bottomMargin: -(height / 4)
+					bottomMargin: 10
 				}
 
 				onCheckedChanged: {
@@ -137,11 +174,54 @@ MediaPreview {
 				}
 			}
 
+			Rectangle {
+				color: Kirigami.Theme.negativeTextColor
+				radius: width * 0.5
+				width: 20
+				height: width
+				visible: root.mediaSourceType === Enums.MessageType.MessageVideo && recorder.status === MediaRecorder.Status.RecordingStatus
+
+				Timer {
+					interval: 500
+					running: root.mediaSourceType === Enums.MessageType.MessageVideo && recorder.status === MediaRecorder.Status.RecordingStatus
+					onTriggered: {
+						if (recorder.status === MediaRecorder.Status.RecordingStatus) {
+							parent.visible = !parent.visible
+						}
+					}
+					onRunningChanged: {
+						if (!running)
+							parent.visible = Qt.binding(function() {return root.mediaSourceType === Enums.MessageType.MessageVideo && recorder.status === MediaRecorder.Status.RecordingStatus})
+					}
+
+					repeat: true
+				}
+
+				anchors {
+					margins: 20
+					top: parent.top
+					right: parent.right
+				}
+			}
+
+			Controls.BusyIndicator {
+				visible: recorder.status === MediaRecorder.Status.FinalizingStatus
+				width: 30
+				height: width
+
+				anchors {
+					margins: 20
+					top: parent.top
+					right: parent.right
+				}
+			}
+
 			Controls.Label {
-				horizontalAlignment: Controls.Label.AlignRight
+				horizontalAlignment: Controls.Label.AlignLeft
+				color: "white"
 				text: {
 					if (root.isNewImage) {
-						return recorder.isReady ? qsTr('Ready') : qsTr('Initializing…')
+						return recorder.isReady ? "" : qsTr('Initializing…')
 					}
 
 					switch (recorder.status) {
@@ -150,20 +230,31 @@ MediaPreview {
 					case MediaRecorder.Status.UnloadedStatus:
 					case MediaRecorder.Status.LoadingStatus:
 					case MediaRecorder.Status.LoadedStatus:
-						return recorder.isReady ? qsTr('Ready') : qsTr('Initializing…')
+						return recorder.isReady ? "" : qsTr('Initializing…')
 					case MediaRecorder.Status.StartingStatus:
 					case MediaRecorder.Status.RecordingStatus:
 					case MediaRecorder.Status.FinalizingStatus:
-						return qsTr('Recording… %1').arg(MediaUtilsInstance.prettyDuration(recorder.duration))
+						return ""
 					case MediaRecorder.Status.PausedStatus:
 						return qsTr('Paused %1').arg(MediaUtilsInstance.prettyDuration(recorder.duration))
 					}
 				}
 
-				anchors {
-					left: parent.left
-					right: parent.right
-					bottom: parent.bottom
+				anchors.centerIn: parent
+			}
+
+			Controls.Label {
+				horizontalAlignment: Controls.Label.AlignLeft
+				color: "white"
+				anchors.left: parent.left
+				anchors.top: parent.top
+				anchors.margins: 10
+				text: {
+					if (recorder.status === MediaRecorder.Status.RecordingStatus) {
+						return qsTr('Recording… %1').arg(MediaUtilsInstance.prettyDuration(recorder.duration))
+					} else {
+						return ""
+					}
 				}
 			}
 		}
@@ -187,6 +278,7 @@ MediaPreview {
 				z: 1
 
 				anchors {
+					margins: 10
 					left: parent.left
 					top: parent.top
 					right: parent.right

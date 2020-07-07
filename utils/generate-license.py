@@ -401,6 +401,14 @@ def main():
 			}
 		),
 		CopyrightTarget(
+			files = ["data/images/mic0.svg", "data/images/mic1.svg", "data/images/mic2.svg", "data/images/mic3.svg"],
+			licenseName = "CC-BY-SA-4.0",
+			authorList = {
+				"Jonah Brüchert <jbb@kaidan.im>": CopyrightAuthor(years = "2020"),
+				"Mathis Brüchert <mbblp@protonmail.ch>": CopyrightAuthor(years = "2020")
+			}
+		),
+		CopyrightTarget(
 			files = ["utils/convert-prl-libs-to-cmake.pl"],
 			licenseName = "MIT-Apple",
 			authorList = {

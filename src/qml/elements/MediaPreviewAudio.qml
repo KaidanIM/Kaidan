@@ -80,6 +80,8 @@ MediaPreview {
 
 		RowLayout {
 			Layout.topMargin: 6
+			Layout.margins: 10
+			Layout.fillWidth: true
 
 			Controls.ToolButton {
 				id: playPause

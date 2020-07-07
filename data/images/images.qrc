@@ -22,5 +22,9 @@
 		<file>onboarding/server.svg</file>
 		<file>onboarding/username.svg</file>
 		<file>onboarding/web-registration.svg</file>
+		<file>mic0.svg</file>
+		<file>mic1.svg</file>
+		<file>mic2.svg</file>
+		<file>mic3.svg</file>
 	</qresource>
 </RCC>

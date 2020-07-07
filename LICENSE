@@ -5,11 +5,11 @@ Format: https://www.debian.org/doc/packaging-manuals/copyright-format/1.0/
 Files: src/*
        utils/*
        misc/*
-Copyright: 2016-2020, Linus Jahn <lnj@kaidan.im>
-           2016-2020, Jonah Brüchert <jbb@kaidan.im>
+Copyright: 2016-2020, Jonah Brüchert <jbb@kaidan.im>
+           2016-2020, Linus Jahn <lnj@kaidan.im>
            2018-2020, Nicolas Fella <nicolas.fella@gmx.de>
-           2017-2019, Ilya Bizyaev <bizyaev@zoho.com>
            2019-2020, Melvin Keskin <melvo@olomono.de>
+           2017-2019, Ilya Bizyaev <bizyaev@zoho.com>
            2019-2020, Filipe Azevedo <pasnox@gmail.com>
            2019-2020, Yury Gubich <blue@macaw.me>
            2018, Allan Nordhøy <epost@anotheragency.no>
@@ -140,6 +140,14 @@ Files: data/images/account-deletion-from-client.svg
        data/images/onboarding/username.svg
        data/images/onboarding/web-registration.svg
 Copyright: 2020, Mathis Brüchert <mbblp@protonmail.ch>
+License: CC-BY-SA-4.0
+
+Files: data/images/mic0.svg
+       data/images/mic1.svg
+       data/images/mic2.svg
+       data/images/mic3.svg
+Copyright: 2020, Jonah Brüchert <jbb@kaidan.im>
+           2020, Mathis Brüchert <mbblp@protonmail.ch>
 License: CC-BY-SA-4.0
 
 Files: utils/convert-prl-libs-to-cmake.pl

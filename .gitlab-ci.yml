@@ -1,6 +1,5 @@
 stages:
   - test
-  - build
   - deploy
 
 clazy:
@@ -18,19 +17,9 @@ qmllint:
   variables:
     QT_SELECT: 5
 
-neon-bionic:
-  stage: build
-  image: kaidan/neon-bionic
-  script: utils/travis/build.sh
-
-debian-sid:
-  stage: build
+build:
+  stage: test
   image: kaidan/debian-unstable
-  script: utils/travis/build.sh
-
-archlinux:
-  stage: build
-  image: kaidan/archlinux
   script: utils/travis/build.sh
 
 linux-appimage:

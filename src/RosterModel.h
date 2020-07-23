@@ -30,8 +30,12 @@
 
 #pragma once
 
+// std
+#include <optional>
+// Qt
 #include <QAbstractListModel>
 #include <QVector>
+// Kaidan
 #include "RosterItem.h"
 
 class Kaidan;

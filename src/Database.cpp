@@ -62,7 +62,7 @@
 #define SQL_BLOB "BLOB"
 
 #define SQL_CREATE_TABLE(tableName, contents) \
-	"CREATE TABLE '" QT_STRINGIFY(tableName) "' (" contents ")"
+	"CREATE TABLE '" tableName "' (" contents ")"
 
 #define SQL_LAST_ATTRIBUTE(name, dataType) \
 	"'" QT_STRINGIFY(name) "' " dataType
@@ -148,7 +148,7 @@ void Database::loadDatabaseInfo()
 	}
 
 	QSqlQuery query(m_database);
-	Utils::execQuery(query, "SELECT version FROM dbinfo");
+	Utils::execQuery(query, "SELECT version FROM " DB_TABLE_INFO);
 
 	QSqlRecord record = query.record();
 	int versionCol = record.indexOf("version");
@@ -212,7 +212,7 @@ void Database::createDbInfoTable()
 	Utils::execQuery(
 		query,
 		SQL_CREATE_TABLE(
-			dbinfo,
+			DB_TABLE_INFO,
 			SQL_LAST_ATTRIBUTE(version, SQL_INTEGER_NOT_NULL)
 		)
 	);
@@ -238,7 +238,7 @@ void Database::createRosterTable()
 	Utils::execQuery(
 		query,
 		SQL_CREATE_TABLE(
-			Roster,
+			DB_TABLE_ROSTER,
 			SQL_ATTRIBUTE(jid, SQL_TEXT_NOT_NULL)
 			SQL_ATTRIBUTE(name, SQL_TEXT)
 			SQL_ATTRIBUTE(lastExchanged, SQL_TEXT_NOT_NULL)
@@ -260,7 +260,7 @@ void Database::createMessagesTable()
 	Utils::execQuery(
 		query,
 		SQL_CREATE_TABLE(
-			Messages,
+			DB_TABLE_MESSAGES,
 			SQL_ATTRIBUTE(author, SQL_TEXT_NOT_NULL)
 			SQL_ATTRIBUTE(author_resource, SQL_TEXT)
 			SQL_ATTRIBUTE(recipient, SQL_TEXT_NOT_NULL)
@@ -283,8 +283,8 @@ void Database::createMessagesTable()
 			SQL_ATTRIBUTE(spoilerHint, SQL_TEXT)
 			SQL_ATTRIBUTE(isSpoiler, SQL_BOOL)
 			SQL_ATTRIBUTE(errorText, SQL_TEXT)
-			"FOREIGN KEY('author') REFERENCES Roster ('jid'),"
-			"FOREIGN KEY('recipient') REFERENCES Roster ('jid')"
+			"FOREIGN KEY(author) REFERENCES " DB_TABLE_ROSTER " (jid),"
+			"FOREIGN KEY(recipient) REFERENCES " DB_TABLE_ROSTER " (jid)"
 		)
 	);
 }
@@ -300,7 +300,7 @@ void Database::convertDatabaseToV3()
 {
 	DATABASE_CONVERT_TO_VERSION(2);
 	QSqlQuery query(m_database);
-	Utils::execQuery(query, "ALTER TABLE Roster ADD avatarHash TEXT");
+	Utils::execQuery(query, "ALTER TABLE Roster ADD avatarHash " SQL_TEXT);
 	m_version = 3;
 }
 
@@ -311,17 +311,17 @@ void Database::convertDatabaseToV4()
 	// SQLite doesn't support the ALTER TABLE drop columns feature, so we have to use a workaround.
 	// we copy all rows into a back-up table (but without `avatarHash`), and then delete the old table
 	// and copy everything to the normal table again
-	Utils::execQuery(query, "CREATE TEMPORARY TABLE roster_backup(jid,name,lastExchanged,"
-	                        "unreadMessages,lastMessage,lastOnline,activity,status,mood);");
-	Utils::execQuery(query, "INSERT INTO roster_backup SELECT jid,name,lastExchanged,unreadMessages,"
-	                        "lastMessage,lastOnline,activity,status,mood FROM Roster;");
-	Utils::execQuery(query, "DROP TABLE Roster;");
-	Utils::execQuery(query, "CREATE TABLE Roster('jid' TEXT NOT NULL,'name' TEXT NOT NULL,"
-	                        "'lastExchanged' TEXT NOT NULL,'unreadMessages' INTEGER,'lastMessage' TEXT,"
-	                        "'lastOnline' TEXT,'activity' TEXT,'status' TEXT,'mood' TEXT);");
-	Utils::execQuery(query, "INSERT INTO Roster SELECT jid,name,lastExchanged,unreadMessages,"
-	                        "lastMessage,lastOnline,activity,status,mood FROM Roster_backup;");
-	Utils::execQuery(query, "DROP TABLE Roster_backup;");
+	Utils::execQuery(query, "CREATE TEMPORARY TABLE roster_backup(jid, name, lastExchanged,"
+							"unreadMessages, lastMessage, lastOnline, activity, status, mood)");
+	Utils::execQuery(query, "INSERT INTO roster_backup SELECT jid, name, lastExchanged, unreadMessages,"
+							"lastMessage, lastOnline, activity, status, mood FROM " DB_TABLE_ROSTER);
+	Utils::execQuery(query, "DROP TABLE Roster");
+	Utils::execQuery(query, "CREATE TABLE Roster (jid " SQL_TEXT_NOT_NULL ", name " SQL_TEXT_NOT_NULL ","
+							"lastExchanged " SQL_TEXT_NOT_NULL ", unreadMessages " SQL_INTEGER ", lastMessage  " SQL_TEXT ","
+							"lastOnline " SQL_TEXT ", activity " SQL_TEXT ", status " SQL_TEXT ", mood " SQL_TEXT ")");
+	Utils::execQuery(query, "INSERT INTO Roster SELECT jid, name, lastExchanged, unreadMessages,"
+							"lastMessage, lastOnline, activity, status, mood FROM Roster_backup");
+	Utils::execQuery(query, "DROP TABLE Roster_backup");
 	m_version = 4;
 }
 
@@ -329,9 +329,9 @@ void Database::convertDatabaseToV5()
 {
 	DATABASE_CONVERT_TO_VERSION(4);
 	QSqlQuery query(m_database);
-	Utils::execQuery(query, "ALTER TABLE 'Messages' ADD 'type' INTEGER");
+	Utils::execQuery(query, "ALTER TABLE Messages ADD type " SQL_INTEGER);
 	Utils::execQuery(query, "UPDATE Messages SET type = 0 WHERE type IS NULL");
-	Utils::execQuery(query, "ALTER TABLE 'Messages' ADD 'mediaUrl' TEXT");
+	Utils::execQuery(query, "ALTER TABLE Messages ADD mediaUrl " SQL_TEXT);
 	m_version = 5;
 }
 
@@ -339,11 +339,11 @@ void Database::convertDatabaseToV6()
 {
 	DATABASE_CONVERT_TO_VERSION(5);
 	QSqlQuery query(m_database);
-	for (const QString &column : {"'mediaSize' INTEGER",
-		     "'mediaContentType' TEXT",
-		     "'mediaLastModified' INTEGER",
-		     "'mediaLocation' TEXT"}) {
-		Utils::execQuery(query, QString("ALTER TABLE 'Messages' ADD ").append(column));
+	for (const QString &column : {	"mediaSize " SQL_INTEGER,
+									"mediaContentType " SQL_TEXT,
+									"mediaLastModified " SQL_INTEGER,
+									"mediaLocation " SQL_TEXT }) {
+		Utils::execQuery(query, QString("ALTER TABLE Messages ADD ").append(column));
 	}
 	m_version = 6;
 }
@@ -352,8 +352,8 @@ void Database::convertDatabaseToV7()
 {
 	DATABASE_CONVERT_TO_VERSION(6);
 	QSqlQuery query(m_database);
-	Utils::execQuery(query, "ALTER TABLE 'Messages' ADD 'mediaThumb' BLOB");
-	Utils::execQuery(query, "ALTER TABLE 'Messages' ADD 'mediaHashes' TEXT");
+	Utils::execQuery(query, "ALTER TABLE Messages ADD mediaThumb " SQL_BLOB);
+	Utils::execQuery(query, "ALTER TABLE Messages ADD mediaHashes " SQL_TEXT);
 	m_version = 7;
 }
 
@@ -361,17 +361,23 @@ void Database::convertDatabaseToV8()
 {
 	DATABASE_CONVERT_TO_VERSION(7);
 	QSqlQuery query(m_database);
-	Utils::execQuery(query, "CREATE TEMPORARY TABLE roster_backup(jid, name, lastExchanged, "
-	                        "unreadMessages, lastMessage);");
-	Utils::execQuery(query, "INSERT INTO roster_backup SELECT jid, name, lastExchanged, unreadMessages, "
-	                        "lastMessage FROM Roster;");
-	Utils::execQuery(query, "DROP TABLE Roster;");
-	Utils::execQuery(query, "CREATE TABLE IF NOT EXISTS Roster ('jid' TEXT NOT NULL,'name' TEXT,"
-	                        "'lastExchanged' TEXT NOT NULL, 'unreadMessages' INTEGER,"
-	                        "'lastMessage' TEXT);");
-	Utils::execQuery(query, "INSERT INTO Roster SELECT jid, name, lastExchanged, unreadMessages, "
-	                        "lastMessage FROM Roster_backup;");
-	Utils::execQuery(query, "DROP TABLE roster_backup;");
+	Utils::execQuery(query, "CREATE TEMPORARY TABLE roster_backup(jid, name, lastExchanged, unreadMessages, lastMessage)");
+	Utils::execQuery(query, "INSERT INTO roster_backup SELECT jid, name, lastExchanged, unreadMessages, lastMessage FROM Roster");
+	Utils::execQuery(query, "DROP TABLE Roster");
+	Utils::execQuery(
+		query,
+		SQL_CREATE_TABLE(
+			"Roster",
+			SQL_ATTRIBUTE(jid, SQL_TEXT_NOT_NULL)
+			SQL_ATTRIBUTE(name, SQL_TEXT)
+			SQL_ATTRIBUTE(lastExchanged, SQL_TEXT_NOT_NULL)
+			SQL_ATTRIBUTE(unreadMessages, SQL_INTEGER)
+			SQL_LAST_ATTRIBUTE(lastMessage, SQL_TEXT_NOT_NULL)
+		)
+	);
+
+	Utils::execQuery(query, "INSERT INTO Roster SELECT jid, name, lastExchanged, unreadMessages, lastMessage FROM Roster_backup");
+	Utils::execQuery(query, "DROP TABLE roster_backup");
 	m_version = 8;
 }
 
@@ -379,7 +385,7 @@ void Database::convertDatabaseToV9()
 {
 	DATABASE_CONVERT_TO_VERSION(8);
 	QSqlQuery query(m_database);
-	Utils::execQuery(query, "ALTER TABLE 'Messages' ADD 'edited' BOOL");
+	Utils::execQuery(query, "ALTER TABLE Messages ADD edited " SQL_BOOL);
 	m_version = 9;
 }
 
@@ -387,8 +393,8 @@ void Database::convertDatabaseToV10()
 {
 	DATABASE_CONVERT_TO_VERSION(9);
 	QSqlQuery query(m_database);
-	Utils::execQuery(query, "ALTER TABLE 'Messages' ADD 'isSpoiler' BOOL");
-	Utils::execQuery(query, "ALTER TABLE 'Messages' ADD 'spoilerHint' TEXT");
+	Utils::execQuery(query, "ALTER TABLE Messages ADD isSpoiler " SQL_BOOL);
+	Utils::execQuery(query, "ALTER TABLE Messages ADD spoilerHint " SQL_TEXT);
 	m_version = 10;
 }
 
@@ -396,9 +402,9 @@ void Database::convertDatabaseToV11()
 {
 	DATABASE_CONVERT_TO_VERSION(10);
 	QSqlQuery query(m_database);
-	Utils::execQuery(query, "ALTER TABLE '" DB_TABLE_MESSAGES "' ADD 'deliveryState' " SQL_INTEGER);
-	Utils::execQuery(query, "UPDATE " DB_TABLE_MESSAGES " SET deliveryState = 2 WHERE isDelivered = 1");
-	Utils::execQuery(query, "UPDATE " DB_TABLE_MESSAGES " SET deliveryState = 1 WHERE deliveryState IS NULL");
-	Utils::execQuery(query, "ALTER TABLE '" DB_TABLE_MESSAGES "' ADD 'errorText' " SQL_TEXT);
+	Utils::execQuery(query, "ALTER TABLE Messages ADD deliveryState " SQL_INTEGER);
+	Utils::execQuery(query, "UPDATE Messages SET deliveryState = 2 WHERE isDelivered = 1");
+	Utils::execQuery(query, "UPDATE Messages SET deliveryState = 1 WHERE deliveryState IS NULL");
+	Utils::execQuery(query, "ALTER TABLE Messages ADD errorText " SQL_TEXT);
 	m_version = 11;
 }

@@ -114,7 +114,7 @@ if(ANDROID)
 	find_package(Qt5 REQUIRED COMPONENTS AndroidExtras)
 endif()
 
-if(ANDROID OR WIN32)
+if(ANDROID)
 	find_package(PkgConfig REQUIRED)
 	pkg_search_module(OPENSSL REQUIRED openssl IMPORTED_TARGET)
 	message(STATUS "Using OpenSSL ${OPENSSL_VERSION}")
@@ -139,7 +139,7 @@ endif()
 #
 
 # Include bundled icons on Ubuntu Touch, Android, Windows, macOS and iOS
-if(BUNDLE_ICONS OR UBUNTU_TOUCH OR ANDROID OR WIN32 OR APPLE)
+if(BUNDLE_ICONS OR UBUNTU_TOUCH OR ANDROID OR APPLE)
 	set(KAIDAN_ICONS_QRC kirigami-icons.qrc)
 endif()
 
@@ -209,11 +209,11 @@ elseif(TARGET ZXing::Core)
         target_link_libraries(${PROJECT_NAME} ZXing::Core)
 endif()
 
-if(ANDROID OR WIN32 OR IOS)
+if(ANDROID OR IOS)
 	target_link_libraries(${PROJECT_NAME} Qt5::QuickControls2 KF5::Kirigami2)
 endif()
 
-if(ANDROID OR WIN32)
+if(ANDROID)
 	target_link_libraries(${PROJECT_NAME} PkgConfig::OPENSSL)
 endif()
 
@@ -413,11 +413,6 @@ if(UBUNTU_TOUCH AND CLICK_ARCH)
 	        DESTINATION "${CMAKE_INSTALL_PREFIX}"
 	)
 elseif(UNIX AND NOT APPLE)
-	# install kaidan binary
-	install(PROGRAMS ${CMAKE_CURRENT_BINARY_DIR}/bin/${PROJECT_NAME}
-	        DESTINATION ${CMAKE_INSTALL_FULL_BINDIR}
-	)
-
 	# install kaidan media
 	install(DIRECTORY "data/"
 	        DESTINATION "${CMAKE_INSTALL_FULL_DATADIR}/${PROJECT_NAME}"
@@ -441,6 +436,13 @@ elseif(UNIX AND NOT APPLE)
 		DESTINATION "${KDE_INSTALL_METAINFODIR}"
 		RENAME "${APPLICATION_ID}.appdata.xml"
 	)
+endif()
+
+if(UNIX AND NOT APPLE OR WIN32)
+        # install kaidan binary
+        install(TARGETS kaidan
+                ${KDE_INSTALL_TARGETS_DEFAULT_ARGS}
+        )
 endif()
 
 # KNotifications

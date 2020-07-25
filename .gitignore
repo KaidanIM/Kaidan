@@ -2,7 +2,6 @@
 kaidan
 kaidan_automoc.cpp
 misc/ubuntu-touch/manifest.json
-misc/windows/*-kaidan.png
 misc/macos/kaidan.iconset
 
 3rdparty/openssl

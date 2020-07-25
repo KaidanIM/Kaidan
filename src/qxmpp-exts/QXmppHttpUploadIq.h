@@ -45,7 +45,7 @@ const QString ns_httpupload = "urn:xmpp:http:upload:0";
 ///
 /// \ingroup Stanzas
 
-class QXMPP_EXPORT QXmppHttpUploadRequestIq : public QXmppIq
+class QXmppHttpUploadRequestIq : public QXmppIq
 {
 public:
     QString fileName() const;
@@ -80,7 +80,7 @@ bool operator==(const QXmppHttpUploadRequestIq &l, const QXmppHttpUploadRequestI
 ///
 /// \ingroup Stanzas
 
-class QXMPP_EXPORT QXmppHttpUploadSlotIq : public QXmppIq
+class QXmppHttpUploadSlotIq : public QXmppIq
 {
 public:
     QUrl putUrl() const;

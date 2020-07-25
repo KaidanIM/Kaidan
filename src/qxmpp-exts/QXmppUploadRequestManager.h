@@ -36,7 +36,7 @@
 
 class QFileInfo;
 
-class QXMPP_EXPORT QXmppUploadService
+class QXmppUploadService
 {
 public:
     QString jid() const;
@@ -55,7 +55,7 @@ private:
 /// upload slots. It doesn't do the actual upload via. HTTP, \see QXmppUploadManager for that
 /// purpose.
 
-class QXMPP_EXPORT QXmppUploadRequestManager : public QXmppClientExtension
+class QXmppUploadRequestManager : public QXmppClientExtension
 {
     Q_OBJECT
     Q_PROPERTY(bool serviceFound READ serviceFound NOTIFY serviceFoundChanged)

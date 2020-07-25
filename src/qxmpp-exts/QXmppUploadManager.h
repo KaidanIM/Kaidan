@@ -43,7 +43,7 @@ class QXmppUploadManager; // needed for QXmppHttpUpload
 
 /// \class QXmppHttpUpload Represents a single HTTP file upload.
 
-class QXMPP_EXPORT QXmppHttpUpload : public QXmppLoggable
+class QXmppHttpUpload : public QXmppLoggable
 {
     Q_OBJECT
     Q_PROPERTY(qint64 bytesSent READ bytesSent NOTIFY bytesSentChanged)
@@ -117,7 +117,7 @@ bool operator==(const QXmppHttpUpload &l, const QXmppHttpUpload &r);
 /// \class QXmppHttpUploadManager This class extends the \see QXmppUploadCoreManager by also
 /// handling the actual upload via. HTTP.
 
-class QXMPP_EXPORT QXmppUploadManager : public QXmppUploadRequestManager
+class QXmppUploadManager : public QXmppUploadRequestManager
 {
     Q_OBJECT
 

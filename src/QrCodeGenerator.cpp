@@ -34,6 +34,8 @@
 #include <QImage>
 #include <QRgb>
 
+#include <stdexcept>
+
 #include "Kaidan.h"
 #include "qxmpp-exts/QXmppUri.h"
 

@@ -7,7 +7,7 @@ echo "Rendering logos"
 echo "*****************************************"
 
 rendersvg() {
-    inkscape -z -e $2 -w $3 -h $3 $1 >/dev/null
+    inkscape -o $2 -w $3 -h $3 $1 >/dev/null
     optipng -quiet -o7 $2 >/dev/null
     advpng -z4 $2 >/dev/null
 }

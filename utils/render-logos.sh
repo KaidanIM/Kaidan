@@ -19,6 +19,18 @@ androidlogo() {
     rendersvg $KAIDAN_SOURCES/data/images/kaidan.svg "$KAIDAN_SOURCES/misc/android/res/mipmap-$1/logo.png" $(( $2 * 4 ))
 }
 
+winlogo() {
+    rendersvg $KAIDAN_SOURCES/data/images/kaidan.svg "$KAIDAN_SOURCES/misc/windows/$1-kaidan.png" $1
+    optipng -o9 "$KAIDAN_SOURCES/misc/windows/$1-kaidan.png"
+}
+
+mkdir -p $KAIDAN_SOURCES/misc/windows
+
+winlogo 16
+winlogo 32
+winlogo 48
+winlogo 256
+
 androidlogo ldpi 36
 androidlogo mdpi 48
 androidlogo hdpi 72

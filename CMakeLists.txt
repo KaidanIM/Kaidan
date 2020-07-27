@@ -255,9 +255,7 @@ if(STATIC_BUILD)
 		CONVERT_PRL_LIBS_TO_CMAKE(${qt_module})
 	endforeach()
 
-	if(WIN32)
-		CONVERT_PRL_LIBS_TO_CMAKE(QWindowsIntegrationPlugin)
-	elseif(IOS)
+	if(IOS)
 		foreach(qt_module QIOSIntegrationPlugin QMacHeifPlugin QMacJp2Plugin
 			QICNSPlugin QTgaPlugin QTiffPlugin QWbmpPlugin QWebpPlugin)
 			CONVERT_PRL_LIBS_TO_CMAKE(${qt_module})
@@ -313,11 +311,7 @@ if(STATIC_BUILD)
 		${__Qt5Widgets_LIBRARIES}
 	)
 
-	if(WIN32)
-		target_link_libraries(${PROJECT_NAME}
-			Qt5::QWindowsIntegrationPlugin
-		)
-	elseif(IOS)
+	if(IOS)
 		target_link_libraries(${PROJECT_NAME}
 			Qt5::QIOSIntegrationPlugin
 			Qt5::QMacHeifPlugin

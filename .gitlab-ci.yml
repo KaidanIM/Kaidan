@@ -37,21 +37,6 @@ linux-appimage:
     - master
     - stable
 
-windows-mxe:
-  stage: deploy
-  image: kaidan/windows-mxe
-  script:
-    - utils/build-windows-mxe.sh
-    - mv build/bin/kaidan.exe kaidan.exe
-  allow_failure: true
-  artifacts:
-    paths:
-      - "kaidan.exe"
-    expire_in: 1 week
-  only:
-    - master
-    - stable
-
 android:
   stage: deploy
   image: kdeorg/android-sdk

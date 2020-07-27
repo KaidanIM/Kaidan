@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+set -e
+
 function strip_directory_arm() {
 	/opt/android-ndk/toolchains/llvm/prebuilt/linux-x86_64/bin/arm-linux-androideabi-strip $(find $1 -name "*armeabi-v7a*".so)
 }
@@ -20,7 +22,7 @@ git submodule update --init
 
 # make sure inkscape is installed
 sudo apt update
-sudo apt -y install inkscape optipng
+sudo apt -y install inkscape optipng advancecomp
 
 # HACK
 # We don't want debug symbols, but gradle doesn't strip those anymore seemingly.
@@ -35,7 +37,7 @@ strip_directory_arm64 "/opt/Qt/lib/"
 # Build dependencies
 GIT_EXTRA="--branch ${KF5_VERSION}" /opt/helpers/build-kde-dependencies --withProject kirigami knotifications
 /opt/helpers/build-cmake qxmpp https://github.com/qxmpp-project/qxmpp.git -DBUILD_EXAMPLES=OFF -DBUILD_TESTS=OFF
-/opt/helpers/build-cmake zxing-cpp https://github.com/nu-book/zxing-cpp.git
+/opt/helpers/build-cmake zxing-cpp https://github.com/nu-book/zxing-cpp.git -DBUILD_BLACKBOX_TESTS=OFF -DBUILD_EXAMPLES=OFF
 
 # Trick the script to not clone kaidan once again
 if ! [ -f "${KAIDAN_SOURCES}/kaidan/" ]; then

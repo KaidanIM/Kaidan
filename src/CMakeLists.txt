@@ -51,6 +51,7 @@ set(KAIDAN_SOURCES
 	# needed to trigger moc generation / to be displayed in IDEs
 	src/Enums.h
 	src/Globals.h
+	src/GuiStyle.h
 
 	# kaidan QXmpp extensions (need to be merged into QXmpp upstream)
 	src/qxmpp-exts/QXmppHttpUploadIq.cpp

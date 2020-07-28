@@ -199,6 +199,7 @@ target_link_libraries(${PROJECT_NAME}
 	Qt5::Multimedia
 	Qt5::Positioning
 	Qt5::Location
+	Qt5::QuickControls2
 	QXmpp::QXmpp
 	${__Qt5Widgets_LIBRARIES}
 	${__KF5Notifications_LIBRARIES}

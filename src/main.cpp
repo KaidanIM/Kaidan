@@ -77,6 +77,7 @@
 #include "MediaSettingModel.h"
 #include "MediaUtils.h"
 #include "MediaRecorder.h"
+#include "GuiStyle.h"
 
 #ifdef STATIC_BUILD
 #include "static_plugins.h"
@@ -394,6 +395,9 @@ Q_DECL_EXPORT int main(int argc, char *argv[])
 	});
 	qmlRegisterSingletonType<Kaidan>(APPLICATION_ID, 1, 0, "Kaidan", [](QQmlEngine *, QJSEngine *) {
 		return static_cast<QObject*>(Kaidan::instance());
+	});
+	qmlRegisterSingletonType<GuiStyle>(APPLICATION_ID, 1, 0, "Style", [](QQmlEngine *, QJSEngine *) {
+		return static_cast<QObject *>(new GuiStyle(QCoreApplication::instance()));
 	});
 
 	engine.load(QUrl("qrc:/qml/main.qml"));

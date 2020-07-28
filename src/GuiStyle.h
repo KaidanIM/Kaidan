@@ -28,23 +28,30 @@
  *  along with Kaidan.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-import QtQuick.Controls.Material 2.12 as Material
-import org.kde.kirigami 2.8 as Kirigami
+#pragma once
 
-import im.kaidan.kaidan 1.0
+#include <QObject>
+#include <QQuickStyle>
 
-/**
- * This is a highlighted button.
- *
- * It is used for main actions.
- */
-CenteredAdaptiveButton {
-	// Not all styles actually support coloring buttons
-	label.color: {
-		Style.buttonColoringEnabled ? Kirigami.Theme.highlightedTextColor
-		                            : Kirigami.Theme.textColor
+class GuiStyle : public QObject
+{
+	Q_OBJECT
+
+	Q_PROPERTY(QString name READ name CONSTANT)
+	Q_PROPERTY(bool buttonColoringEnabled READ buttonColoringEnabled CONSTANT)
+
+public:
+	explicit GuiStyle(QObject *parent = nullptr) : QObject(parent)
+	{
 	}
 
-	Kirigami.Theme.backgroundColor: Material.Material.accent
-	highlighted: true
-}
+	inline static QString name()
+	{
+		return QQuickStyle::name();
+	}
+
+	inline static bool buttonColoringEnabled()
+	{
+		return name() == "Material" || name() == "org.kde.desktop";
+	}
+};

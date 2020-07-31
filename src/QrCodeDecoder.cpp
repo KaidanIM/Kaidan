@@ -41,6 +41,10 @@
 #include <ZXing/MultiFormatReader.h>
 #include <ZXing/Result.h>
 #include <ZXing/TextUtfEncoding.h>
+#include <ZXing/ZXVersion.h>
+
+#define ZXING_VERSION \
+	QT_VERSION_CHECK(ZXING_VERSION_MAJOR, ZXING_VERSION_MINOR, ZXING_VERSION_PATCH)
 
 using namespace ZXing;
 
@@ -51,36 +55,20 @@ QrCodeDecoder::QrCodeDecoder(QObject *parent)
 
 void QrCodeDecoder::decodeImage(const QImage &image)
 {
-	// options for decoding
-	DecodeHints decodeHints;
+	// Advise the decoder to check for QR codes and to try decoding rotated versions of the image.
+#if ZXING_VERSION >= QT_VERSION_CHECK(1, 1, 0)
+	const auto decodeHints = DecodeHints().setTryRotate(true).setFormats(BarcodeFormat::QR_CODE);
+#else
+	const auto decodeHints =
+		DecodeHints().setTryRotate(true).setPossibleFormats({BarcodeFormat::QR_CODE});
+#endif
 
-	// Advise the decoder to also decode rotated QR codes.
-	decodeHints.setTryRotate(true);
-
-	// Advise the decoder to only decode QR codes.
-	std::vector<BarcodeFormat> allowedFormats;
-	allowedFormats.emplace_back(BarcodeFormat::QR_CODE);
-	decodeHints.setPossibleFormats(allowedFormats);
-
-	MultiFormatReader reader(decodeHints);
-
-	// Create an image source to be decoded later.
-	GenericLuminanceSource source(
-			image.width(),
-			image.height(),
-			image.bits(),
-			image.width(),
-			1,
-			0,
-			1,
-			2
-	);
-
-	// Create an image source specific for decoding black data on white background.
-	HybridBinarizer binImage(std::shared_ptr<LuminanceSource>(&source, [](void*) {}));
+	// Create a binarized image by the luminance of the image.
+	HybridBinarizer binImage(std::make_shared<GenericLuminanceSource>(GenericLuminanceSource(
+		image.width(), image.height(), image.bits(), image.width(), 1, 0, 1, 2)));
 
 	// Decode the specific image source.
-	auto result = reader.read(binImage);
+	auto result = MultiFormatReader(decodeHints).read(binImage);
 
 	// If a QR code could be found and decoded, emit a signal with the decoded string.
 	// Otherwise, emit a signal for failed decoding.

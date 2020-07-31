@@ -258,8 +258,12 @@ void RegistrationManager::copyUserDefinedValuesToNewForm(const QXmppDataForm &ol
 	// Copy values from the last form.
 	const QList<QXmppDataForm::Field> oldFields = oldForm.fields();
 	for (const auto &field : oldFields) {
-		// Only copy fields which are required, visible to the user and do not have a media element (e.g. CAPTCHA).
-		if (field.isRequired() && field.type() != QXmppDataForm::Field::HiddenField && field.media().isNull()) {
+		// Only copy fields which:
+		//  * are required,
+		//  * are visible to the user
+		//  * do not have a media element (e.g. CAPTCHA)
+		if (field.isRequired() && field.type() != QXmppDataForm::Field::HiddenField &&
+			field.mediaSources().isEmpty()) {
 			for (auto &fieldFromNewForm : newForm.fields()) {
 				if (fieldFromNewForm.key() == field.key()) {
 					fieldFromNewForm.setValue(field.value());

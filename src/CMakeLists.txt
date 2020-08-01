@@ -54,8 +54,6 @@ set(KAIDAN_SOURCES
 	src/GuiStyle.h
 
 	# kaidan QXmpp extensions (need to be merged into QXmpp upstream)
-	src/qxmpp-exts/QXmppHttpUploadIq.cpp
-	src/qxmpp-exts/QXmppUploadRequestManager.cpp
 	src/qxmpp-exts/QXmppUploadManager.cpp
 	src/qxmpp-exts/QXmppColorGenerator.cpp
 	src/qxmpp-exts/QXmppUri.cpp

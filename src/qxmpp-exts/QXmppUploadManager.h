@@ -33,12 +33,12 @@
 
 #include <QFile>
 #include <QFileInfo>
-#include <QNetworkReply>
 #include <QMutex>
-#include "QXmppUploadRequestManager.h"
+#include <QNetworkReply>
+#include <QXmppHttpUploadIq.h>
+#include <QXmppUploadRequestManager.h>
 
 class QNetworkAccessManager;
-class QXmppHttpUploadRequestIq;
 class QXmppUploadManager; // needed for QXmppHttpUpload
 
 /// \class QXmppHttpUpload Represents a single HTTP file upload.

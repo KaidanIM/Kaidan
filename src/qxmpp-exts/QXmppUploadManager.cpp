@@ -63,7 +63,6 @@ QXmppHttpUpload::QXmppHttpUpload(const QXmppHttpUpload &upload)
 
 QXmppHttpUpload::~QXmppHttpUpload()
 {
-    delete m_netManager;
 }
 
 QXmppHttpUpload& QXmppHttpUpload::operator=(const QXmppHttpUpload &other)
@@ -84,12 +83,8 @@ QXmppHttpUpload& QXmppHttpUpload::operator=(const QXmppHttpUpload &other)
 
 bool operator==(const QXmppHttpUpload &l, const QXmppHttpUpload &r)
 {
-    return l.id() == r.id() &&
-           l.customFileName() == r.customFileName() &&
-           l.fileInfo() == r.fileInfo() &&
-           l.requestId() == r.requestId() &&
-           l.requestError() == r.requestError() &&
-           l.slot() == r.slot();
+    return l.id() == r.id() && l.customFileName() == r.customFileName() &&
+           l.fileInfo() == r.fileInfo() && l.requestId() == r.requestId();
 }
 
 int QXmppHttpUpload::id() const
@@ -196,9 +191,9 @@ void QXmppHttpUpload::startUpload()
         request.setHeader(QNetworkRequest::ContentTypeHeader, mimeType.name());
 
     // other header fields
-    const QMap<QString, QString> &headers = m_slot.headerFields();
-    const QStringList headerKeys = headers.keys();
-    for (const QString &name : headerKeys)
+    const auto headers = m_slot.putHeaders();
+    const auto headerKeys = headers.keys();
+    for (const auto &name : headerKeys)
         request.setRawHeader(name.toUtf8(), headers.value(name).toUtf8());
 
     // open file
@@ -290,14 +285,16 @@ void QXmppUploadManager::startNextUpload()
     QXmppHttpUpload *upload = m_runningJobs > 0 ? m_uploads.last() : m_uploads.first();
     m_runningJobs++;
 
-    QString reqId = requestUploadSlot(upload->fileInfo(), upload->customFileName());
+    const auto fileName = upload->customFileName().isEmpty() ? upload->fileInfo().fileName()
+                                                             : upload->customFileName();
+    QString reqId = requestUploadSlot(upload->fileInfo(), fileName, {});
     upload->setRequestId(reqId);
 
     if (reqId.isEmpty()) {
         m_runningJobs--;
         m_uploads.removeAll(upload);
         emit uploadFailed(upload);
-        delete upload;
+        upload->deleteLater();
 
         // start next upload, if this wasn't a parallel upload
         if (m_runningJobs == 0)
@@ -314,7 +311,8 @@ void QXmppUploadManager::handleSlot(const QXmppHttpUploadSlotIq &slot)
         if (upload->requestId() != slot.id())
             continue;
 
-        if (!m_httpAllowed && !slot.hasHttpsUrls()) {
+        if (!m_httpAllowed && (slot.getUrl().scheme() == "http" ||
+                        slot.putUrl().scheme() == "http")) {
             m_runningJobs--;
             m_uploads.removeAll(upload);
             emit uploadFailed(upload);

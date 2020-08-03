@@ -39,12 +39,17 @@
 #include "Kaidan.h"
 
 #ifdef HAVE_KNOTIFICATIONS
+static bool IS_USING_GNOME = qEnvironmentVariable("XDG_CURRENT_DESKTOP").contains("GNOME", Qt::CaseInsensitive);
+
 void Notifications::sendMessageNotification(const QString &senderJid, const QString &senderName, const QString &message)
 {
 	KNotification *notification = new KNotification("new-message");
 	notification->setText(message);
 	notification->setTitle(senderName);
-#ifdef Q_OS_ANDROID
+#ifdef Q_OS_UNIX
+	if (IS_USING_GNOME)
+		notification->setFlags(KNotification::Persistent);
+#elif defined(Q_OS_ANDROID)
 	notification->setIconName("kaidan-bw");
 #endif
 	notification->setDefaultAction("Open");

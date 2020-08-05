@@ -88,15 +88,48 @@ Kirigami.Page {
 			id: plainText
 			visible: false
 
-			Controls.Label {
-				text: Kaidan.jid
+			RowLayout {
 				Kirigami.FormData.label: qsTr("Chat address:")
+
+				Layout.fillWidth: true
+				Controls.Label {
+					text: Kaidan.jid
+				}
+				// spacer
+				Item {
+					Layout.fillWidth: true
+				}
+
+				// copy jid
+				Controls.ToolButton {
+					icon.name: "edit-copy"
+					onClicked: {
+						Utils.copyToClipboard(Kaidan.jid);
+					}
+				}
 			}
 
-			Controls.Label {
-				text: visible ? Kaidan.password : ""
-				visible: Kaidan.passwordVisibility === Kaidan.PasswordVisible
+			RowLayout {
 				Kirigami.FormData.label: qsTr("Password:")
+
+				visible: Kaidan.passwordVisibility === Kaidan.PasswordVisible
+
+				Layout.fillWidth: true
+				Controls.Label {
+					text: Kaidan.password
+				}
+				// spacer
+				Item {
+					Layout.fillWidth: true
+				}
+
+				// copy jid password
+				Controls.ToolButton {
+					icon.name: "edit-copy"
+					onClicked: {
+						Utils.copyToClipboard(Kaidan.password);
+					}
+				}
 			}
 		}
 

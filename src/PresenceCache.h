@@ -30,9 +30,9 @@
 
 #pragma once
 
+// Qt
 #include <QObject>
-#include <QMap>
-#include <QQmlListProperty>
+// QXmpp
 #include <QXmppPresence.h>
 
 /**
@@ -48,18 +48,18 @@ public:
 	/**
 	 * Return one of the status texts from all resources
 	 */
-	Q_INVOKABLE QString getStatusText(QString bareJid);
+	Q_INVOKABLE QString getStatusText(const QString &bareJid);
 
 	/**
 	 * Returns one of the presence types from all resources
 	 */
-	Q_INVOKABLE quint8 getPresenceType(QString bareJid);
+	Q_INVOKABLE quint8 getPresenceType(const QString &bareJid);
 
 public slots:
 	/**
 	 * Updates the presence cache, it will ignore subscribe presences
 	 */
-	void updatePresence(QXmppPresence presence);
+	void updatePresence(const QXmppPresence &presence);
 
 	/**
 	 * Clears all cached presences.
@@ -70,8 +70,8 @@ signals:
 	/**
 	 * Notifies about changed presences
 	 */
-	void presenceChanged(QString jid);
+	void presenceChanged(const QString &jid);
 
 private:
-	QMap<QString, QMap<QString, QXmppPresence>> presences;
+	QMap<QString, QMap<QString, QXmppPresence>> m_presences;
 };

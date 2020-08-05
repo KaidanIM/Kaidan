@@ -39,60 +39,60 @@ PresenceCache::PresenceCache(QObject *parent)
 {
 }
 
-void PresenceCache::updatePresence(QXmppPresence presence)
+void PresenceCache::updatePresence(const QXmppPresence &presence)
 {
 	QString jid = QXmppUtils::jidToBareJid(presence.from());
 	QString resource = QXmppUtils::jidToResource(presence.from());
 
-	if (!presences.contains(jid))
-		presences[jid] = QMap<QString, QXmppPresence>();
+	if (!m_presences.contains(jid))
+		m_presences.insert(jid, {});
 
-	presences[jid][resource] = presence;
+	m_presences[jid][resource] = presence;
 
 	emit presenceChanged(jid);
 }
 
 void PresenceCache::clear()
 {
-	presences.clear();
+	m_presences.clear();
 }
 
-quint8 PresenceCache::getPresenceType(QString bareJid)
+quint8 PresenceCache::getPresenceType(const QString &bareJid)
 {
-	if (!presences.contains(bareJid))
-		return (quint8) AvailabilityTypes::PresUnavailable;
+	if (!m_presences.contains(bareJid))
+		return quint8(AvailabilityTypes::PresUnavailable);
 
-	QXmppPresence pres = presences[bareJid].last();
+	const auto pres = m_presences.value(bareJid).last();
 
 	if (pres.type() == QXmppPresence::Unavailable) {
-		return (quint8) AvailabilityTypes::PresUnavailable;
+		return quint8(AvailabilityTypes::PresUnavailable);
 	} else if (pres.type() == QXmppPresence::Available) {
 		switch (pres.availableStatusType()) {
-			case QXmppPresence::Online:
-				return (quint8) AvailabilityTypes::PresOnline;
-			case QXmppPresence::Away:
-				return (quint8) AvailabilityTypes::PresAway;
-			case QXmppPresence::XA:
-				return (quint8) AvailabilityTypes::PresXA;
-			case QXmppPresence::DND:
-				return (quint8) AvailabilityTypes::PresDND;
-			case QXmppPresence::Chat:
-				return (quint8) AvailabilityTypes::PresChat;
-			case QXmppPresence::Invisible:
-				return (quint8) AvailabilityTypes::PresInvisible;
-			default:
-				return (quint8) AvailabilityTypes::PresUnavailable;
+		case QXmppPresence::Online:
+			return quint8(AvailabilityTypes::PresOnline);
+		case QXmppPresence::Away:
+			return quint8(AvailabilityTypes::PresAway);
+		case QXmppPresence::XA:
+			return quint8(AvailabilityTypes::PresXA);
+		case QXmppPresence::DND:
+			return quint8(AvailabilityTypes::PresDND);
+		case QXmppPresence::Chat:
+			return quint8(AvailabilityTypes::PresChat);
+		case QXmppPresence::Invisible:
+			return quint8(AvailabilityTypes::PresInvisible);
+		default:
+			return quint8(AvailabilityTypes::PresUnavailable);
 		}
 	} else if (pres.type() == QXmppPresence::Error) {
-		return (quint8) AvailabilityTypes::PresError;
+		return quint8(AvailabilityTypes::PresError);
 	}
-	return (quint8) AvailabilityTypes::PresUnavailable;
+	return quint8(AvailabilityTypes::PresUnavailable);
 }
 
-QString PresenceCache::getStatusText(QString bareJid)
+QString PresenceCache::getStatusText(const QString &bareJid)
 {
-	if (!presences.contains(bareJid))
-		return "";
+	if (!m_presences.contains(bareJid))
+		return {};
 
-	return presences[bareJid].last().statusText();
+	return m_presences[bareJid].last().statusText();
 }

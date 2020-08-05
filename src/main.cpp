@@ -59,7 +59,6 @@
 #include "Kaidan.h"
 #include "Message.h"
 #include "MessageModel.h"
-#include "PresenceCache.h"
 #include "QmlUtils.h"
 #include "RegistrationDataFormFilterModel.h"
 #include "RegistrationManager.h"
@@ -216,7 +215,6 @@ Q_DECL_EXPORT int main(int argc, char *argv[])
 	qRegisterMetaType<Message>("Message");
 	qRegisterMetaType<MessageModel*>("MessageModel*");
 	qRegisterMetaType<AvatarFileStorage*>("AvatarFileStorage*");
-	qRegisterMetaType<PresenceCache*>("PresenceCache*");
 	qRegisterMetaType<QXmppPresence>("QXmppPresence");
 	qRegisterMetaType<ClientWorker::Credentials>("Credentials");
 	qRegisterMetaType<Qt::ApplicationState>("Qt::ApplicationState");
@@ -368,6 +366,7 @@ Q_DECL_EXPORT int main(int argc, char *argv[])
 	qmlRegisterType<QrCodeGenerator>(APPLICATION_ID, 1, 0, "QrCodeGenerator");
 	qmlRegisterType<RegistrationDataFormFilterModel>(APPLICATION_ID, 1, 0, "RegistrationDataFormFilterModel");
 	qmlRegisterType<ServerListModel>(APPLICATION_ID, 1, 0, "ServerListModel");
+	qmlRegisterType<UserPresenceWatcher>(APPLICATION_ID, 1, 0, "UserPresenceWatcher");
 
 	qmlRegisterUncreatableType<QAbstractItemModel>("EmojiModel", 0, 1, "QAbstractItemModel", "Used by proxy models");
 	qmlRegisterUncreatableType<Emoji>("EmojiModel", 0, 1, "Emoji", "Used by emoji models");

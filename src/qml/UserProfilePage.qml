@@ -47,8 +47,6 @@ Kirigami.Page {
 
 	property string jid
 	property string name
-	property int presenceType: Kaidan.presenceCache.getPresenceType(jid)
-	property string statusMessage: Kaidan.presenceCache.getStatusText(jid)
 
 	Timer {
 		id: pageTimer
@@ -85,6 +83,11 @@ Kirigami.Page {
 			renameSheet.open()
 			renameSheet.forceFocus()
 		}
+	}
+
+	UserPresenceWatcher {
+		id: userPresence
+		jid: root.jid
 	}
 
 	RosterRemoveContactSheet {
@@ -149,15 +152,15 @@ Kirigami.Page {
 						spacing: Kirigami.Units.smallSpacing
 
 						Kirigami.Icon {
-							source: Utils.presenceTypeToIcon(presenceType)
+							source: Utils.presenceTypeToIcon(userPresence.availability)
 							width: 26
 							height: 26
 						}
 
 						Controls.Label {
 							Layout.alignment: Qt.AlignVCenter
-							text: Utils.presenceTypeToText(presenceType)
-							color: Utils.presenceTypeToColor(presenceType)
+							text: Utils.presenceTypeToText(userPresence.availability)
+							color: Utils.presenceTypeToColor(userPresence.availability)
 							textFormat: Text.PlainText
 						}
 
@@ -200,19 +203,5 @@ Kirigami.Page {
 				Layout.preferredHeight: 60
 			}
 		}
-	}
-
-	function newPresenceArrived(jid) {
-		if (jid === root.jid) {
-			presenceType = Kaidan.presenceCache.getPresenceType(root.jid);
-			statusMessage = Kaidan.presenceCache.getStatusText(root.jid);
-		}
-	}
-
-	Component.onCompleted: {
-		Kaidan.presenceCache.presenceChanged.connect(newPresenceArrived);
-	}
-	Component.onDestruction: {
-		Kaidan.presenceCache.presenceChanged.disconnect(newPresenceArrived);
 	}
 }

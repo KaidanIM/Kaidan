@@ -30,6 +30,8 @@
 
 #pragma once
 
+// std
+#include <optional>
 // Qt
 #include <QObject>
 // QXmpp
@@ -70,6 +72,13 @@ class PresenceCache : public QObject
 	Q_OBJECT
 
 public:
+	enum ChangeType : quint8 {
+		Connected,
+		Disconnected,
+		Updated,
+	};
+	Q_ENUM(ChangeType)
+
 	PresenceCache(QObject *parent = nullptr);
 	~PresenceCache();
 
@@ -78,15 +87,8 @@ public:
 		return s_instance;
 	}
 
-	/**
-	 * Return one of the status texts from all resources
-	 */
-	Q_INVOKABLE QString getStatusText(const QString &bareJid);
-
-	/**
-	 * Returns one of the presence types from all resources
-	 */
-	Q_INVOKABLE quint8 getPresenceType(const QString &bareJid);
+	QString pickIdealResource(const QString &jid);
+	std::optional<QXmppPresence> presence(const QString &jid, const QString &resource);
 
 public slots:
 	/**
@@ -103,10 +105,51 @@ signals:
 	/**
 	 * Notifies about changed presences
 	 */
-	void presenceChanged(const QString &jid);
+	void presenceChanged(PresenceCache::ChangeType type, const QString &jid, const QString &resource);
+	void presencesCleared();
 
 private:
+	constexpr qint8 availabilityPriority(QXmppPresence::AvailableStatusType type);
+	bool presenceMoreImportant(const QXmppPresence &a, const QXmppPresence &b);
+
 	QMap<QString, QMap<QString, QXmppPresence>> m_presences;
 
 	static PresenceCache *s_instance;
+};
+
+class UserPresenceWatcher : public QObject
+{
+	Q_OBJECT
+	Q_PROPERTY(QString jid READ jid WRITE setJid NOTIFY jidChanged)
+	Q_PROPERTY(QString resource READ resource WRITE setResource NOTIFY resourceChanged)
+	Q_PROPERTY(Presence::Availability availability READ availability NOTIFY presencePropertiesChanged)
+	Q_PROPERTY(QString statusText READ statusText NOTIFY presencePropertiesChanged)
+
+public:
+	explicit UserPresenceWatcher(QObject *parent = nullptr);
+
+	QString jid() const;
+	void setJid(const QString &jid);
+
+	QString resource() const;
+	bool setResource(const QString &resource, bool autoPicked = false);
+
+	Presence::Availability availability() const;
+	QString statusText() const;
+
+	Q_SIGNAL void jidChanged();
+	Q_SIGNAL void resourceChanged();
+	Q_SIGNAL void presencePropertiesChanged();
+
+private:
+	Q_SLOT void handlePresenceChanged(PresenceCache::ChangeType type,
+		const QString &jid,
+		const QString &resource);
+	Q_SLOT void handlePresencesCleared();
+
+	bool autoPickResource();
+
+	QString m_jid;
+	QString m_resource;
+	bool m_resourceAutoPicked;
 };

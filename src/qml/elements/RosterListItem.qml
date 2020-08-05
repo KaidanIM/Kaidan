@@ -44,8 +44,6 @@ Kirigami.SwipeListItem {
 	property string lastMessage
 	property int unreadMessages
 	property string avatarImagePath: Kaidan.avatarStorage.getAvatarUrl(jid)
-	property int presenceType: Kaidan.presenceCache.getPresenceType(jid)
-	property string statusMsg: Kaidan.presenceCache.getStatusText(jid)
 	property bool isSelected
 
 	topPadding: 0
@@ -64,7 +62,12 @@ Kirigami.SwipeListItem {
 			width: Kirigami.Units.gridUnit * 0.3
 			height: parent.height
 
-			color: Utils.presenceTypeToColor(presenceType)
+			color: Utils.presenceTypeToColor(userPresence.availability)
+
+			UserPresenceWatcher {
+				id: userPresence
+				jid: listItem.jid
+			}
 		}
 
 		// left: avatar
@@ -143,17 +146,6 @@ Kirigami.SwipeListItem {
 				if (jid == listItem.jid) {
 					counter.muted = Kaidan.notificationsMuted(jid)
 					muteIcon.visible = Kaidan.notificationsMuted(jid)
-				}
-			}
-		}
-
-		Connections {
-			target: Kaidan.presenceCache
-
-			onPresenceChanged: {
-				if (jid === listItem.jid) {
-					presenceType = Kaidan.presenceCache.getPresenceType(jid)
-					statusMsg = Kaidan.presenceCache.getStatusText(jid)
 				}
 			}
 		}

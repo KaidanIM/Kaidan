@@ -139,7 +139,7 @@ endif()
 #
 
 # Include bundled icons on Ubuntu Touch, Android, Windows, macOS and iOS
-if(BUNDLE_ICONS OR UBUNTU_TOUCH OR ANDROID OR APPLE)
+if(BUNDLE_ICONS OR UBUNTU_TOUCH OR ANDROID)
 	set(KAIDAN_ICONS_QRC kirigami-icons.qrc)
 endif()
 
@@ -175,7 +175,6 @@ endif()
 qt5_add_resources(KAIDAN_MISC_QRC misc/misc.qrc)
 
 add_executable(${PROJECT_NAME}
-	MACOSX_BUNDLE
 	WIN32
 	${KAIDAN_ICNS}
 	${KAIDAN_SOURCES}

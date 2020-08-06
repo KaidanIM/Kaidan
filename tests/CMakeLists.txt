@@ -6,3 +6,9 @@ include(ECMAddTests)
 
 find_package(Qt5Test REQUIRED)
 
+ecm_add_test(
+	PresenceCacheTest.cpp
+	../src/PresenceCache.cpp
+	TEST_NAME PresenceCacheTest
+	LINK_LIBRARIES Qt5::Test QXmpp::QXmpp
+)

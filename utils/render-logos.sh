@@ -19,17 +19,18 @@ androidlogo() {
     rendersvg $KAIDAN_SOURCES/data/images/kaidan.svg "$KAIDAN_SOURCES/misc/android/res/mipmap-$1/logo.png" $(( $2 * 4 ))
 }
 
-winlogo() {
-    rendersvg $KAIDAN_SOURCES/data/images/kaidan.svg "$KAIDAN_SOURCES/misc/windows/$1-kaidan.png" $1
-    optipng -o9 "$KAIDAN_SOURCES/misc/windows/$1-kaidan.png"
+# App icons for ECM
+app_icon() {
+    rendersvg $KAIDAN_SOURCES/data/images/kaidan.svg "$KAIDAN_SOURCES/misc/app-icons/$1-kaidan.png" $1
+    optipng -o9 "$KAIDAN_SOURCES/misc/app-icons/$1-kaidan.png"
 }
 
 mkdir -p $KAIDAN_SOURCES/misc/windows
 
-winlogo 16
-winlogo 32
-winlogo 48
-winlogo 256
+app_icon 16
+app_icon 32
+app_icon 48
+app_icon 256
 
 androidlogo ldpi 36
 androidlogo mdpi 48
@@ -37,4 +38,3 @@ androidlogo hdpi 72
 androidlogo xhdpi 96
 androidlogo xxhdpi 144
 androidlogo xxxhdpi 192
-

@@ -37,6 +37,7 @@ endif()
 
 # CMake options
 option(I18N "Enable i18n support" FALSE)
+option(BUILD_TESTS "Build unit tests" FALSE)
 option(STATIC_BUILD "Build Kaidan statically")
 option(APPIMAGE "Build Kaidan as AppImage (will only work in the appimage script)" FALSE)
 option(UBUNTU_TOUCH "Building an Ubuntu Touch click (internal use only!)" FALSE)
@@ -435,6 +436,14 @@ install(TARGETS kaidan
 # KNotifications
 if(USE_KNOTIFICATIONS)
 	install(FILES misc/kaidan.notifyrc DESTINATION ${KNOTIFYRC_INSTALL_DIR})
+endif()
+
+#
+# Unit tests
+#
+
+if(BUILD_TESTS)
+	add_subdirectory(tests)
 endif()
 
 feature_summary(WHAT ALL FATAL_ON_MISSING_REQUIRED_PACKAGES)

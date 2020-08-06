@@ -432,12 +432,10 @@ elseif(UNIX AND NOT APPLE)
 	)
 endif()
 
-if(UNIX AND NOT APPLE OR WIN32)
-        # install kaidan binary
-        install(TARGETS kaidan
-                ${KDE_INSTALL_TARGETS_DEFAULT_ARGS}
-        )
-endif()
+# install kaidan binary
+install(TARGETS kaidan
+        ${KDE_INSTALL_TARGETS_DEFAULT_ARGS}
+)
 
 # KNotifications
 if(USE_KNOTIFICATIONS)

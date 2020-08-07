@@ -49,7 +49,8 @@ void Notifications::sendMessageNotification(const QString &senderJid, const QStr
 #ifdef Q_OS_UNIX
 	if (IS_USING_GNOME)
 		notification->setFlags(KNotification::Persistent);
-#elif defined(Q_OS_ANDROID)
+#endif
+#ifdef Q_OS_ANDROID
 	notification->setIconName("kaidan-bw");
 #endif
 	notification->setDefaultAction("Open");

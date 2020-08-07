@@ -78,8 +78,6 @@ quint8 PresenceCache::getPresenceType(const QString &bareJid)
 			return quint8(AvailabilityTypes::PresDND);
 		case QXmppPresence::Chat:
 			return quint8(AvailabilityTypes::PresChat);
-		case QXmppPresence::Invisible:
-			return quint8(AvailabilityTypes::PresInvisible);
 		default:
 			return quint8(AvailabilityTypes::PresUnavailable);
 		}

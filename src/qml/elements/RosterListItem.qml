@@ -60,7 +60,6 @@ Kirigami.SwipeListItem {
 		// left border: presence
 		Rectangle {
 			id: presenceIndicator
-			visible: presenceType !== Enums.PresInvisible
 
 			width: Kirigami.Units.gridUnit * 0.3
 			height: parent.height

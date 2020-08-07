@@ -88,7 +88,6 @@ namespace Enums {
 		PresXA,
 		PresDND,
 		PresChat,
-		PresInvisible
 	};
 	Q_ENUM_NS(AvailabilityTypes)
 

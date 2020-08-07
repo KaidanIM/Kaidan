@@ -38,15 +38,24 @@
 // Kaidan
 #include "Kaidan.h"
 
+// Q_OS_BSD4 includes all BSD variants and also Q_OS_DARWIN
+// Q_OS_LINUX is also defined on Android
+#if (defined(Q_OS_LINUX) || defined(Q_OS_BSD4) || defined(Q_OS_HURD)) && \
+	!defined(Q_OS_ANDROID) && !defined(Q_OS_DARWIN)
+#define DESKTOP_LINUX_ALIKE_OS
+#endif
+
 #ifdef HAVE_KNOTIFICATIONS
+#ifdef DESKTOP_LINUX_ALIKE_OS
 static bool IS_USING_GNOME = qEnvironmentVariable("XDG_CURRENT_DESKTOP").contains("GNOME", Qt::CaseInsensitive);
+#endif
 
 void Notifications::sendMessageNotification(const QString &senderJid, const QString &senderName, const QString &message)
 {
 	KNotification *notification = new KNotification("new-message");
 	notification->setText(message);
 	notification->setTitle(senderName);
-#ifdef Q_OS_UNIX
+#ifdef DESKTOP_LINUX_ALIKE_OS
 	if (IS_USING_GNOME)
 		notification->setFlags(KNotification::Persistent);
 #endif
@@ -74,4 +83,4 @@ void Notifications::sendMessageNotification(const QString &senderJid, const QStr
 void Notifications::sendMessageNotification(const QString&, const QString&, const QString&)
 {
 }
-#endif
+#endif // HAVE_KNOTIFICATIONS

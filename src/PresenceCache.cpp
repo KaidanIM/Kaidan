@@ -39,18 +39,18 @@ PresenceCache *PresenceCache::s_instance = nullptr;
 QString Presence::availabilityToIcon(Availability type)
 {
 	switch (type) {
-	case Presence::Online:
-		return "im-user-online";
-	case Presence::Chat:
-		return "im-user-online";
-	case Presence::Away:
-		return "im-user-away";
-	case Presence::DND:
-		return "im-kick-user";
-	case Presence::XA:
-		return "im-user-away";
-	case Presence::Offline:
-		return "im-user-offline";
+	case Online:
+		return QStringLiteral("im-user-online");
+	case Chat:
+		return QStringLiteral("im-user-online");
+	case Away:
+		return QStringLiteral("im-user-away");
+	case DND:
+		return QStringLiteral("im-kick-user");
+	case XA:
+		return QStringLiteral("im-user-away");
+	case Offline:
+		return QStringLiteral("im-user-offline");
 	}
 	Q_UNREACHABLE();
 	return {};
@@ -59,17 +59,17 @@ QString Presence::availabilityToIcon(Availability type)
 QString Presence::availabilityToText(Availability type)
 {
 	switch (type) {
-	case Presence::Online:
+	case Online:
 		return QObject::tr("Available");
-	case Presence::Chat:
+	case Chat:
 		return QObject::tr("Free for chat");
-	case Presence::Away:
+	case Away:
 		return QObject::tr("Away");
-	case Presence::DND:
+	case DND:
 		return QObject::tr("Do not disturb");
-	case Presence::XA:
+	case XA:
 		return QObject::tr("Away for longer");
-	case Presence::Offline:
+	case Offline:
 		return QObject::tr("Offline");
 	}
 	Q_UNREACHABLE();
@@ -79,18 +79,18 @@ QString Presence::availabilityToText(Availability type)
 QColor Presence::availabilityToColor(Availability type)
 {
 	switch (type) {
-	case Presence::Online:
-		return {"green"};
-	case Presence::Chat:
-		return {"darkgreen"};
-	case Presence::Away:
-		return {"orange"};
-	case Presence::DND:
+	case Online:
+		return QColorConstants::Svg::green;
+	case Chat:
+		return QColorConstants::Svg::darkgreen;
+	case Away:
+		return QColorConstants::Svg::orange;
+	case DND:
 		return QColor::fromRgb(218, 68, 83);
-	case Presence::XA:
-		return {"orange"};
-	case Presence::Offline:
-		return {"silver"};
+	case XA:
+		return QColorConstants::Svg::orange;
+	case Offline:
+		return QColorConstants::Svg::silver;
 	}
 	Q_UNREACHABLE();
 	return {};

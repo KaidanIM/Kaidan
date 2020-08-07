@@ -32,9 +32,18 @@
 
 #include <QXmppUtils.h>
 
+PresenceCache *PresenceCache::s_instance = nullptr;
+
 PresenceCache::PresenceCache(QObject *parent)
     : QObject(parent)
 {
+	Q_ASSERT(!s_instance);
+	s_instance = this;
+}
+
+PresenceCache::~PresenceCache()
+{
+	s_instance = nullptr;
 }
 
 void PresenceCache::updatePresence(const QXmppPresence &presence)

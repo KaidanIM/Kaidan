@@ -71,6 +71,12 @@ class PresenceCache : public QObject
 
 public:
 	PresenceCache(QObject *parent = nullptr);
+	~PresenceCache();
+
+	static PresenceCache *instance()
+	{
+		return s_instance;
+	}
 
 	/**
 	 * Return one of the status texts from all resources
@@ -101,4 +107,6 @@ signals:
 
 private:
 	QMap<QString, QMap<QString, QXmppPresence>> m_presences;
+
+	static PresenceCache *s_instance;
 };

@@ -35,7 +35,6 @@
 
 #include "ClientWorker.h"
 #include "Globals.h"
-#include "PresenceCache.h"
 
 /**
  * @brief C++ utitlities to be used in QML
@@ -53,21 +52,6 @@ public:
 
 	QmlUtils(QObject *parent = nullptr);
 	~QmlUtils();
-
-	/**
-	 * Returns the icon belonging to the given presence status type
-	 */
-	Q_INVOKABLE static QString presenceTypeToIcon(Presence::Availability type);
-
-	/**
-	 * Returns the text belonging to the given presence status type
-	 */
-	Q_INVOKABLE static QString presenceTypeToText(Presence::Availability type);
-
-	/**
-	 * Returns the color belonging to the given presence status type
-	 */
-	Q_INVOKABLE static QColor presenceTypeToColor(Presence::Availability type);
 
 	/**
 	 * Returns an error message for a connection error.

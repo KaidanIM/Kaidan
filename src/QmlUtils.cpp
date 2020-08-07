@@ -31,7 +31,6 @@
 #include "QmlUtils.h"
 // Qt
 #include <QClipboard>
-#include <QColor>
 #include <QDebug>
 #include <QDir>
 #include <QFile>
@@ -63,66 +62,6 @@ QmlUtils::QmlUtils(QObject *parent)
 QmlUtils::~QmlUtils()
 {
 	s_instance = nullptr;
-}
-
-QString QmlUtils::presenceTypeToIcon(Presence::Availability type)
-{
-	switch (type) {
-	case Presence::Online:
-		return "im-user-online";
-	case Presence::Chat:
-		return "im-user-online";
-	case Presence::Away:
-		return "im-user-away";
-	case Presence::DND:
-		return "im-kick-user";
-	case Presence::XA:
-		return "im-user-away";
-	case Presence::Offline:
-		return "im-user-offline";
-	}
-	Q_UNREACHABLE();
-	return { };
-}
-
-QString QmlUtils::presenceTypeToText(Presence::Availability type)
-{
-	switch (type) {
-	case Presence::Online:
-		return tr("Available");
-	case Presence::Chat:
-		return tr("Free for chat");
-	case Presence::Away:
-		return tr("Away");
-	case Presence::DND:
-		return tr("Do not disturb");
-	case Presence::XA:
-		return tr("Away for longer");
-	case Presence::Offline:
-		return tr("Offline");
-	}
-	Q_UNREACHABLE();
-	return { };
-}
-
-QColor QmlUtils::presenceTypeToColor(Presence::Availability type)
-{
-	switch (type) {
-	case Presence::Online:
-		return {"green"};
-	case Presence::Chat:
-		return {"darkgreen"};
-	case Presence::Away:
-		return {"orange"};
-	case Presence::DND:
-		return QColor::fromRgb(218, 68, 83);
-	case Presence::XA:
-		return {"orange"};
-	case Presence::Offline:
-		return {"silver"};
-	}
-	Q_UNREACHABLE();
-	return { };
 }
 
 QString QmlUtils::connectionErrorMessage(ClientWorker::ConnectionError error)

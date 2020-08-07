@@ -29,10 +29,72 @@
  */
 
 #include "PresenceCache.h"
-
+// Qt
+#include <QColor>
+// QXmpp
 #include <QXmppUtils.h>
 
 PresenceCache *PresenceCache::s_instance = nullptr;
+
+QString Presence::availabilityToIcon(Availability type)
+{
+	switch (type) {
+	case Presence::Online:
+		return "im-user-online";
+	case Presence::Chat:
+		return "im-user-online";
+	case Presence::Away:
+		return "im-user-away";
+	case Presence::DND:
+		return "im-kick-user";
+	case Presence::XA:
+		return "im-user-away";
+	case Presence::Offline:
+		return "im-user-offline";
+	}
+	Q_UNREACHABLE();
+	return {};
+}
+
+QString Presence::availabilityToText(Availability type)
+{
+	switch (type) {
+	case Presence::Online:
+		return QObject::tr("Available");
+	case Presence::Chat:
+		return QObject::tr("Free for chat");
+	case Presence::Away:
+		return QObject::tr("Away");
+	case Presence::DND:
+		return QObject::tr("Do not disturb");
+	case Presence::XA:
+		return QObject::tr("Away for longer");
+	case Presence::Offline:
+		return QObject::tr("Offline");
+	}
+	Q_UNREACHABLE();
+	return {};
+}
+
+QColor Presence::availabilityToColor(Availability type)
+{
+	switch (type) {
+	case Presence::Online:
+		return {"green"};
+	case Presence::Chat:
+		return {"darkgreen"};
+	case Presence::Away:
+		return {"orange"};
+	case Presence::DND:
+		return QColor::fromRgb(218, 68, 83);
+	case Presence::XA:
+		return {"orange"};
+	case Presence::Offline:
+		return {"silver"};
+	}
+	Q_UNREACHABLE();
+	return {};
+}
 
 PresenceCache::PresenceCache(QObject *parent)
 	: QObject(parent)
@@ -172,6 +234,21 @@ Presence::Availability UserPresenceWatcher::availability() const
 			presence->availableStatusType());
 	}
 	return Presence::Offline;
+}
+
+QString UserPresenceWatcher::availabilityIcon() const
+{
+	return Presence::availabilityToIcon(availability());
+}
+
+QString UserPresenceWatcher::availabilityText() const
+{
+	return Presence::availabilityToText(availability());
+}
+
+QColor UserPresenceWatcher::availabilityColor() const
+{
+	return Presence::availabilityToColor(availability());
 }
 
 QString UserPresenceWatcher::statusText() const

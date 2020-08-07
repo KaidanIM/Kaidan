@@ -62,7 +62,7 @@ Kirigami.SwipeListItem {
 			width: Kirigami.Units.gridUnit * 0.3
 			height: parent.height
 
-			color: Utils.presenceTypeToColor(userPresence.availability)
+			color: userPresence.availabilityColor
 
 			UserPresenceWatcher {
 				id: userPresence

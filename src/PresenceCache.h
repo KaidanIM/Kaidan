@@ -33,6 +33,7 @@
 // std
 #include <optional>
 // Qt
+#include <QColor>
 #include <QObject>
 // QXmpp
 #include <QXmppPresence.h>
@@ -62,6 +63,10 @@ public:
 			return Offline;
 		}
 	}
+
+	static QString availabilityToIcon(Availability type);
+	static QString availabilityToText(Availability type);
+	static QColor availabilityToColor(Availability type);
 };
 
 /**
@@ -123,6 +128,9 @@ class UserPresenceWatcher : public QObject
 	Q_PROPERTY(QString jid READ jid WRITE setJid NOTIFY jidChanged)
 	Q_PROPERTY(QString resource READ resource WRITE setResource NOTIFY resourceChanged)
 	Q_PROPERTY(Presence::Availability availability READ availability NOTIFY presencePropertiesChanged)
+	Q_PROPERTY(QString availabilityIcon READ availabilityIcon NOTIFY presencePropertiesChanged)
+	Q_PROPERTY(QString availabilityText READ availabilityText NOTIFY presencePropertiesChanged)
+	Q_PROPERTY(QColor availabilityColor READ availabilityColor NOTIFY presencePropertiesChanged)
 	Q_PROPERTY(QString statusText READ statusText NOTIFY presencePropertiesChanged)
 
 public:
@@ -135,6 +143,9 @@ public:
 	bool setResource(const QString &resource, bool autoPicked = false);
 
 	Presence::Availability availability() const;
+	QString availabilityIcon() const;
+	QString availabilityText() const;
+	QColor availabilityColor() const;
 	QString statusText() const;
 
 	Q_SIGNAL void jidChanged();

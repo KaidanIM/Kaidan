@@ -152,15 +152,15 @@ Kirigami.Page {
 						spacing: Kirigami.Units.smallSpacing
 
 						Kirigami.Icon {
-							source: Utils.presenceTypeToIcon(userPresence.availability)
+							source: userPresence.availabilityIcon
 							width: 26
 							height: 26
 						}
 
 						Controls.Label {
 							Layout.alignment: Qt.AlignVCenter
-							text: Utils.presenceTypeToText(userPresence.availability)
-							color: Utils.presenceTypeToColor(userPresence.availability)
+							text: userPresence.availabilityText
+							color: userPresence.availabilityColor
 							textFormat: Text.PlainText
 						}
 

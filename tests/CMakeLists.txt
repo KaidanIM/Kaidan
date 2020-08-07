@@ -12,3 +12,10 @@ ecm_add_test(
 	TEST_NAME PresenceCacheTest
 	LINK_LIBRARIES Qt5::Test QXmpp::QXmpp
 )
+
+ecm_add_test(
+	UserPresenceModelTest.cpp
+	../src/PresenceCache.cpp
+	TEST_NAME UserPresenceModelTest
+	LINK_LIBRARIES Qt5::Test QXmpp::QXmpp
+)

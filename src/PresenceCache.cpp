@@ -29,10 +29,8 @@
  */
 
 #include "PresenceCache.h"
-#include "Enums.h"
-#include <QXmppUtils.h>
 
-using namespace Enums;
+#include <QXmppUtils.h>
 
 PresenceCache::PresenceCache(QObject *parent)
     : QObject(parent)
@@ -60,29 +58,17 @@ void PresenceCache::clear()
 quint8 PresenceCache::getPresenceType(const QString &bareJid)
 {
 	if (!m_presences.contains(bareJid))
-		return quint8(AvailabilityTypes::PresUnavailable);
+		return quint8(Presence::Offline);
 
 	const auto pres = m_presences.value(bareJid).last();
 
 	if (pres.type() == QXmppPresence::Unavailable) {
-		return quint8(AvailabilityTypes::PresUnavailable);
+		return quint8(Presence::Offline);
 	} else if (pres.type() == QXmppPresence::Available) {
-		switch (pres.availableStatusType()) {
-		case QXmppPresence::Online:
-			return quint8(AvailabilityTypes::PresOnline);
-		case QXmppPresence::Away:
-			return quint8(AvailabilityTypes::PresAway);
-		case QXmppPresence::XA:
-			return quint8(AvailabilityTypes::PresXA);
-		case QXmppPresence::DND:
-			return quint8(AvailabilityTypes::PresDND);
-		case QXmppPresence::Chat:
-			return quint8(AvailabilityTypes::PresChat);
-		default:
-			return quint8(AvailabilityTypes::PresUnavailable);
-		}
+		return quint8(Presence::availabilityFromAvailabilityStatusType(
+			pres.availableStatusType()));
 	}
-	return quint8(AvailabilityTypes::PresUnavailable);
+	return quint8(Presence::Offline);
 }
 
 QString PresenceCache::getStatusText(const QString &bareJid)

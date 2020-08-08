@@ -29,8 +29,6 @@
  */
 
 #include "QmlUtils.h"
-// Kaidan
-#include "Globals.h"
 // Qt
 #include <QClipboard>
 #include <QColor>
@@ -67,60 +65,60 @@ QmlUtils::~QmlUtils()
 	s_instance = nullptr;
 }
 
-QString QmlUtils::presenceTypeToIcon(Enums::AvailabilityTypes type)
+QString QmlUtils::presenceTypeToIcon(Presence::Availability type)
 {
 	switch (type) {
-	case AvailabilityTypes::PresOnline:
+	case Presence::Online:
 		return "im-user-online";
-	case AvailabilityTypes::PresChat:
+	case Presence::Chat:
 		return "im-user-online";
-	case AvailabilityTypes::PresAway:
+	case Presence::Away:
 		return "im-user-away";
-	case AvailabilityTypes::PresDND:
+	case Presence::DND:
 		return "im-kick-user";
-	case AvailabilityTypes::PresXA:
+	case Presence::XA:
 		return "im-user-away";
-	case AvailabilityTypes::PresUnavailable:
+	case Presence::Offline:
 		return "im-user-offline";
 	}
 	Q_UNREACHABLE();
 	return { };
 }
 
-QString QmlUtils::presenceTypeToText(AvailabilityTypes type)
+QString QmlUtils::presenceTypeToText(Presence::Availability type)
 {
 	switch (type) {
-	case AvailabilityTypes::PresOnline:
+	case Presence::Online:
 		return tr("Available");
-	case AvailabilityTypes::PresChat:
+	case Presence::Chat:
 		return tr("Free for chat");
-	case AvailabilityTypes::PresAway:
+	case Presence::Away:
 		return tr("Away");
-	case AvailabilityTypes::PresDND:
+	case Presence::DND:
 		return tr("Do not disturb");
-	case AvailabilityTypes::PresXA:
+	case Presence::XA:
 		return tr("Away for longer");
-	case AvailabilityTypes::PresUnavailable:
+	case Presence::Offline:
 		return tr("Offline");
 	}
 	Q_UNREACHABLE();
 	return { };
 }
 
-QColor QmlUtils::presenceTypeToColor(AvailabilityTypes type)
+QColor QmlUtils::presenceTypeToColor(Presence::Availability type)
 {
 	switch (type) {
-	case AvailabilityTypes::PresOnline:
+	case Presence::Online:
 		return {"green"};
-	case AvailabilityTypes::PresChat:
+	case Presence::Chat:
 		return {"darkgreen"};
-	case AvailabilityTypes::PresAway:
+	case Presence::Away:
 		return {"orange"};
-	case AvailabilityTypes::PresDND:
+	case Presence::DND:
 		return QColor::fromRgb(218, 68, 83);
-	case AvailabilityTypes::PresXA:
+	case Presence::XA:
 		return {"orange"};
-	case AvailabilityTypes::PresUnavailable:
+	case Presence::Offline:
 		return {"silver"};
 	}
 	Q_UNREACHABLE();

@@ -35,6 +35,33 @@
 // QXmpp
 #include <QXmppPresence.h>
 
+class Presence
+{
+	Q_GADGET
+public:
+	enum Availability { Offline, Online, Away, XA, DND, Chat };
+	Q_ENUM(Availability)
+
+	static constexpr Availability availabilityFromAvailabilityStatusType(
+		QXmppPresence::AvailableStatusType type)
+	{
+		switch (type) {
+		case QXmppPresence::Online:
+			return Online;
+		case QXmppPresence::Away:
+			return Away;
+		case QXmppPresence::XA:
+			return XA;
+		case QXmppPresence::DND:
+			return DND;
+		case QXmppPresence::Chat:
+			return Chat;
+		default:
+			return Offline;
+		}
+	}
+};
+
 /**
  * @class PresenceCache A cache for presence holders for certain JIDs
  */

@@ -78,19 +78,6 @@ namespace Enums {
 	Q_ENUM_NS(MessageType)
 
 	/**
-	 * Enumeration of contact availability states
-	 */
-	enum class AvailabilityTypes {
-		PresUnavailable,
-		PresOnline,
-		PresAway,
-		PresXA,
-		PresDND,
-		PresChat,
-	};
-	Q_ENUM_NS(AvailabilityTypes)
-
-	/**
 	 * Enumeration of different message delivery states
 	 */
 	enum class DeliveryState {

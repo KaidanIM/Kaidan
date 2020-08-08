@@ -245,7 +245,7 @@ Q_DECL_EXPORT int main(int argc, char *argv[])
 	qRegisterMetaType<Enums::ConnectionState>();
 	qRegisterMetaType<ClientWorker::ConnectionError>();
 	qRegisterMetaType<Enums::MessageType>();
-	qRegisterMetaType<Enums::AvailabilityTypes>();
+	qRegisterMetaType<Presence::Availability>();
 	qRegisterMetaType<Enums::DeliveryState>();
 	qRegisterMetaType<CommonEncoderSettings::EncodingQuality>();
 	qRegisterMetaType<CommonEncoderSettings::EncodingMode>();
@@ -382,6 +382,7 @@ Q_DECL_EXPORT int main(int argc, char *argv[])
 	qmlRegisterUncreatableType<VideoEncoderSettings>(APPLICATION_ID, 1, 0, "VideoEncoderSettings", "VideoEncoderSettings type usable");
 	qmlRegisterUncreatableType<ClientWorker>(APPLICATION_ID, 1, 0, "ClientWorker", "Cannot create object; only enums defined!");
 	qmlRegisterUncreatableType<DataFormModel>(APPLICATION_ID, 1, 0, "DataFormModel", "Cannot create object; only enums defined!");
+	qmlRegisterUncreatableType<Presence>(APPLICATION_ID, 1, 0, "Presence", "Cannot create object; only enums defined!");
 	qmlRegisterUncreatableType<RegistrationManager>(APPLICATION_ID, 1, 0, "RegistrationManager", "Cannot create object; only enums defined!");
 
 	qmlRegisterUncreatableMetaObject(Enums::staticMetaObject, APPLICATION_ID, 1, 0, "Enums", "Can't create object; only enums defined!");

@@ -76,7 +76,7 @@ Kirigami.GlobalDrawer {
 					return jidAndStatus
 				}
 
-				color: parent.connected ? Utils.presenceTypeToColor(Enums.PresOnline) : Utils.presenceTypeToColor(Enums.PresUnavailable)
+				color: parent.connected ? Utils.presenceTypeToColor(Presence.Online) : Utils.presenceTypeToColor(Presence.Offline)
 			}
 		}
 	]

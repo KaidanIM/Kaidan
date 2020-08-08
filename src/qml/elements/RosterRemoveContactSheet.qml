@@ -46,7 +46,7 @@ Kirigami.OverlaySheet {
 
 	onSheetOpenChanged: {
 		infoLabel.text = qsTr("Do you really want to delete the contact "
-							  + "<b>%1</b> from your roster?").arg(jid)
+							  + "<b>%1</b> from your contact list?").arg(jid)
 	}
 
 	ColumnLayout {

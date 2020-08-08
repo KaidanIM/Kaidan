@@ -43,14 +43,18 @@ REPLACE_USER_IDS = [
 	("Jonah Brüchert <jbb.mail@gmx.de>", "Jonah Brüchert <jbb@kaidan.im>"),
 	("Jonah Bruechert <jbb.mail@gmx.de>", "Jonah Brüchert <jbb@kaidan.im>"),
 	("Georg <s.g.b@gmx.de>", "geobra <s.g.b@gmx.de>"),
-	("Muhammad Nur Hidayat Yasuyoshi (MNH48.com) <muhdnurhidayat96@yahoo.com>",
-	 "Muhammad Nur Hidayat Yasuyoshi <mnh48mail@gmail.com>"),
+	("Muhammad Nur Hidayat Yasuyoshi (MNH48.com) <muhdnurhidayat96@yahoo.com>", "Muhammad Nur Hidayat Yasuyoshi <translation@mnh48.moe>"),
+	("Muhammad Nur Hidayat Yasuyoshi <mnh48mail@gmail.com>", "Muhammad Nur Hidayat Yasuyoshi <translation@mnh48.moe>"),
+	("Muhammad Nur Hidayat Yasuyoshi <admin@mnh48.moe>", "Muhammad Nur Hidayat Yasuyoshi <translation@mnh48.moe>"),
+	("Yaya - Nurul Azeera Hidayah @ Muhammad Nur Hidayat Yasuyoshi <translation@mnh48.moe>", "Muhammad Nur Hidayat Yasuyoshi <translation@mnh48.moe>"),
 	("Joeke de Graaf <mappack@null.net>", "Joeke de Graaf <joeke.de.graaf@student.nhlstenden.com>"),
 	("X advocatux <advocatux@airpost.net>", "advocatux <advocatux@airpost.net>"),
 	("ZatroxDE <zatroxde@outlook.com>", "Robert Maerkisch <zatroxde@protonmail.ch>"),
 	("X oiseauroch <tobias.ollive@mailoo.org>", "oiseauroch <tobias.ollive@mailoo.org>"),
 	("X ssantos <ssantos@web.de>", "ssantos <ssantos@web.de>"),
-	("X Txaume <txaumevw@gmail.com>", "Txaume <txaumevw@gmail.com>")
+	("X Txaume <txaumevw@gmail.com>", "Txaume <txaumevw@gmail.com>"),
+	("X mondstern <hello@mondstern.tk>", "mondstern <hello@mondstern.tk>"),
+	("Jeannette L <j.lavoie@net-c.ca>", "Jeannette Lavoie <j.lavoie@net-c.ca>"),
 ]
 
 # These user ids will be excluded from any targets
@@ -62,7 +66,10 @@ EXCLUDE_USER_IDS = [
 	"Kaidan Translations <translations@kaidan.im>",
 	"Kaidan translations <translations@kaidan.im>",
 	"Hosted Weblate <hosted@weblate.org>",
-	"l10n daemon script <scripty@kde.org>"
+	"l10n daemon script <scripty@kde.org>",
+	"Anonymous <noreply@weblate.org>",
+	"Anonymous _ <noreply@weblate.org>",
+	"X anonymous <noreply@weblate.org>"
 ]
 
 GPL3_OPENSSL_LICENSE = """This program is free software; you can redistribute it and/or modify it under

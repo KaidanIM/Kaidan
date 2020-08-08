@@ -7,11 +7,11 @@ Files: src/*
        misc/*
 Copyright: 2016-2020, Linus Jahn <lnj@kaidan.im>
            2016-2020, Jonah Brüchert <jbb@kaidan.im>
+           2018-2020, Nicolas Fella <nicolas.fella@gmx.de>
            2017-2019, Ilya Bizyaev <bizyaev@zoho.com>
-           2018-2019, Nicolas Fella <nicolas.fella@gmx.de>
            2019-2020, Melvin Keskin <melvo@olomono.de>
+           2019-2020, Filipe Azevedo <pasnox@gmail.com>
            2019-2020, Yury Gubich <blue@macaw.me>
-           2019, Filipe Azevedo <pasnox@gmail.com>
            2018, Allan Nordhøy <epost@anotheragency.no>
            2019, Robert Maerkisch <zatroxde@protonmail.ch>
            2020, Andrea Scarpino <scarpino@kde.org>
@@ -34,23 +34,29 @@ License: GPL-3+ with OpenSSL exception
 Files: i18n/*
 Copyright: 2017-2019, Linus Jahn <lnj@kaidan.im>
            2017-2020, Jonah Brüchert <jbb@kaidan.im>
-           2017-2020, Muhammad Nur Hidayat Yasuyoshi <mnh48mail@gmail.com>
+           2017-2020, Muhammad Nur Hidayat Yasuyoshi <translation@mnh48.moe>
            2018-2019, Allan Nordhøy <epost@anotheragency.no>
            2017-2019, Joeke de Graaf <joeke.de.graaf@student.nhlstenden.com>
            2018-2019, advocatux <advocatux@airpost.net>
            2019-2020, Sylke Vicious <silkevicious@gmail.com>
+           2019-2020, Xosé M <xosem@disroot.org>
            2018-2019, oiseauroch <tobias.ollive@mailoo.org>
            2019-2020, Milan Korecky <milan.korecky@gmail.com>
            2019-2020, Anne Onyme 017 <anneonyme017@netcourrier.com>
            2018-2019, aitzol berasategi <aitzol@disroot.org>
            2019, ssantos <ssantos@web.de>
-           2019-2020, Xosé M <xosem@disroot.org>
+           2020, Adolfo Jayme Barrientos <fitojb@ubuntu.com>
+           2020, Michal Biesiada <blade-14@o2.pl>
            2019-2020, Yuri Chornoivan <yurchor@ukr.net>
            2017, Ilya Bizyaev <bizyaev@zoho.com>
            2017, Robert Maerkisch <zatroxde@protonmail.ch>
            2019, Joan CiberSheep <cibersheep@gmail.com>
-           2020, Michal Biesiada <blade-14@o2.pl>
-           2020, Adolfo Jayme Barrientos <fitojb@ubuntu.com>
+           2020, Kovalev Artem <KovalevArtem.ru@gmail.com>
+           2020, Lesya Novaselskaya <mesnevi@airpost.net>
+           2020, Tamás Fehér <ftamas85@gmail.com>
+           2020, Jeannette Lavoie <j.lavoie@net-c.ca>
+           2020, Tobias Ollive <tobias.ollive@oiseauroch.fr>
+           2020, mondstern <hello@mondstern.tk>
            2019, Eiad Rostom <eiado@olomono.de>
            2019, caca hueto <cacahueto@olomono.de>
            2019, Clemens Riese <weblate.org@clerie.de>

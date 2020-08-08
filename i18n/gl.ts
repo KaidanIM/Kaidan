@@ -1,1053 +1,1382 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.1" language="gl">
+<TS version="2.1">
 <context>
     <name>AboutDialog</name>
     <message>
+        <location filename="../src/qml/AboutDialog.qml" line="78"/>
         <source>A simple, user-friendly Jabber/XMPP client</source>
-        <translation>Un cliente Jabber/XMPP simple e amigable</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../src/qml/AboutDialog.qml" line="86"/>
         <source>License:</source>
-        <translation>Licenza:</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../src/qml/AboutDialog.qml" line="103"/>
+        <source>Report problems</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/qml/AboutDialog.qml" line="108"/>
         <source>View source code online</source>
-        <translation>Ver código fonte en liña</translation>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>AccountSecurity</name>
+    <message>
+        <location filename="../src/qml/settings/AccountSecurity.qml" line="39"/>
+        <source>Account Security</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/qml/settings/AccountSecurity.qml" line="41"/>
+        <source>Allow to add new devices using a QR-Code, but never show the password as text. This action can not be undone, so consider storing the password in another way before using it.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/qml/settings/AccountSecurity.qml" line="43"/>
+        <source>Disable showing the password</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/qml/settings/AccountSecurity.qml" line="48"/>
+        <source>Don&apos;t expose the password in any form. This action can not be undone.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/qml/settings/AccountSecurity.qml" line="50"/>
+        <source>Disable showing the QR-Code and password</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>AccountTransferPage</name>
+    <message>
+        <location filename="../src/qml/AccountTransferPage.qml" line="46"/>
+        <source>Transfer account to another device</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/qml/AccountTransferPage.qml" line="66"/>
+        <source>Scan the QR code or enter the credentials as text on another device to log in on it.
+
+Attention:
+Never show this QR code to anyone else. It would allow unlimited access to your account!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/qml/AccountTransferPage.qml" line="92"/>
+        <source>Chat address:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/qml/AccountTransferPage.qml" line="113"/>
+        <source>Password:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/qml/AccountTransferPage.qml" line="147"/>
+        <source>Hide QR code</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/qml/AccountTransferPage.qml" line="147"/>
+        <source>Show as QR code</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/qml/AccountTransferPage.qml" line="170"/>
+        <source>Hide text</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/qml/AccountTransferPage.qml" line="170"/>
+        <source>Show as text</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>ChangePassword</name>
     <message>
+        <location filename="../src/qml/settings/ChangePassword.qml" line="40"/>
+        <location filename="../src/qml/settings/ChangePassword.qml" line="59"/>
         <source>Change password</source>
-        <translation>Cambiar contrasinal</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../src/qml/settings/ChangePassword.qml" line="68"/>
         <source>Current password:</source>
-        <translation>Contrasinal actual:</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../src/qml/settings/ChangePassword.qml" line="74"/>
         <source>New password:</source>
-        <translation>Novo contrasinal:</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../src/qml/settings/ChangePassword.qml" line="80"/>
         <source>New password (repeat):</source>
-        <translation>Novo contrasinal (repita):</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../src/qml/settings/ChangePassword.qml" line="87"/>
         <source>New passwords do not match.</source>
-        <translation>Os contrasinais non concordan.</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../src/qml/settings/ChangePassword.qml" line="97"/>
         <source>Current password is invalid.</source>
-        <translation>O contrasinal actual non é correcto.</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../src/qml/settings/ChangePassword.qml" line="106"/>
         <source>You need to be connected to change your password.</source>
-        <translation>Precisa estar conectada para cambiar o contrasinal.</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../src/qml/settings/ChangePassword.qml" line="113"/>
         <source>After changing your password, you will need to reenter it on all your other devices.</source>
-        <translation>Tras cambiar o contrasinal, debe voltar a introducila en todos os outros dispositivos.</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../src/qml/settings/ChangePassword.qml" line="124"/>
         <source>Cancel</source>
-        <translation>Cancelar</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../src/qml/settings/ChangePassword.qml" line="130"/>
         <source>Change</source>
-        <translation>Cambiar</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>ChatMessage</name>
     <message>
-        <source>Copy Message</source>
-        <translation>Copiar Mensaxe</translation>
-    </message>
-    <message>
-        <source>Edit Message</source>
-        <translation>Editar Mensaxe</translation>
-    </message>
-    <message>
+        <location filename="../src/qml/elements/ChatMessage.qml" line="141"/>
         <source>Spoiler</source>
-        <translation>Spoiler</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../src/qml/elements/ChatMessage.qml" line="198"/>
         <source>Download</source>
-        <translation>Descargar</translation>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>ChatMessageContextMenu</name>
+    <message>
+        <location filename="../src/qml/elements/ChatMessageContextMenu.qml" line="45"/>
+        <source>Copy message</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../src/qml/elements/ChatMessageContextMenu.qml" line="56"/>
+        <source>Edit message</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/qml/elements/ChatMessageContextMenu.qml" line="62"/>
         <source>Copy download URL</source>
-        <translation>Copiar URL de descarga</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Quote</source>
-        <translation>Citar</translation>
+        <location filename="../src/qml/elements/ChatMessageContextMenu.qml" line="68"/>
+        <source>Quote message</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>ChatPage</name>
     <message>
-        <source>Compose message</source>
-        <translation>Redactar mensaxe</translation>
-    </message>
-    <message>
-        <source>Image</source>
-        <translation type="vanished">Imaxe</translation>
-    </message>
-    <message>
-        <source>Video</source>
-        <translation type="vanished">Vídeo</translation>
-    </message>
-    <message>
-        <source>Audio</source>
-        <translation type="vanished">Son</translation>
-    </message>
-    <message>
-        <source>Document</source>
-        <translation type="vanished">Documento</translation>
-    </message>
-    <message>
-        <source>Other file</source>
-        <translation type="vanished">Outros ficheiros</translation>
-    </message>
-    <message>
-        <source>Select a file</source>
-        <translation>Escoller ficheiro</translation>
-    </message>
-    <message>
-        <source>Send a spoiler message</source>
-        <translation>Enviar mensaxe spoiler</translation>
-    </message>
-    <message>
-        <source>Spoiler hint</source>
-        <translation>Aviso Spoiler</translation>
-    </message>
-    <message>
-        <source>Unmute notifications</source>
-        <translation>Restaurar notificacións</translation>
-    </message>
-    <message>
-        <source>Mute notifications</source>
-        <translation>Acalar notificacións</translation>
-    </message>
-    <message>
-        <source>View profile</source>
-        <translation>Ver perfil</translation>
-    </message>
-    <message>
-        <source>Multimedia settings</source>
-        <translation type="vanished">Axustes multimedia</translation>
-    </message>
-    <message>
+        <location filename="../src/qml/ChatPage.qml" line="64"/>
         <source>Search</source>
-        <translation>Buscar</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../src/qml/ChatPage.qml" line="83"/>
+        <location filename="../src/qml/ChatPage.qml" line="95"/>
+        <source>Unmute notifications</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/qml/ChatPage.qml" line="84"/>
+        <location filename="../src/qml/ChatPage.qml" line="96"/>
+        <source>Mute notifications</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/qml/ChatPage.qml" line="112"/>
+        <source>View profile</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/qml/ChatPage.qml" line="172"/>
+        <source>Send a spoiler message</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/qml/ChatPage.qml" line="275"/>
         <source>Close</source>
-        <translation>Pechar</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../src/qml/ChatPage.qml" line="296"/>
         <source>Search up</source>
-        <translation>Buscar arriba</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../src/qml/ChatPage.qml" line="307"/>
         <source>Search down</source>
-        <translation>Buscar abaixo</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../src/qml/ChatPage.qml" line="523"/>
         <source>All files</source>
-        <translation>Todos os ficheiros</translation>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/qml/ChatPage.qml" line="536"/>
+        <source>Spoiler hint</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/qml/ChatPage.qml" line="567"/>
+        <source>Compose message</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>ClientWorker</name>
+    <message>
+        <location filename="../src/ClientWorker.cpp" line="206"/>
+        <source>Your account could not be deleted from the server. Therefore, it was also not removed from this app: %1</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>CommonEncoderSettings</name>
     <message>
+        <location filename="../src/MediaSettings.cpp" line="161"/>
         <source>Very low</source>
-        <translation>Moi baixo</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../src/MediaSettings.cpp" line="163"/>
         <source>Low</source>
-        <translation>Baixo</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../src/MediaSettings.cpp" line="165"/>
         <source>Normal</source>
-        <translation>Normal</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../src/MediaSettings.cpp" line="167"/>
         <source>High</source>
-        <translation>Alto</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../src/MediaSettings.cpp" line="169"/>
         <source>Very high</source>
-        <translation>Moi alto</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../src/MediaSettings.cpp" line="180"/>
         <source>Constant quality</source>
-        <translation>Calidade constante</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../src/MediaSettings.cpp" line="182"/>
         <source>Constant bit rate</source>
-        <translation>Taxa de bits constante</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../src/MediaSettings.cpp" line="184"/>
         <source>Average bit rate</source>
-        <translation>Taxa de bits medio</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../src/MediaSettings.cpp" line="186"/>
         <source>Two pass</source>
-        <translation>Dúas pasadas</translation>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>ConfirmationPage</name>
+    <message>
+        <location filename="../src/qml/elements/ConfirmationPage.qml" line="48"/>
+        <source>Cancel</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>DisablePasswordDisplay</name>
+    <message>
+        <location filename="../src/qml/settings/DisablePasswordDisplay.qml" line="42"/>
+        <source>Remove password completely</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/qml/settings/DisablePasswordDisplay.qml" line="44"/>
+        <source>Your password will not be included in the QR code anymore.
+You won&apos;t be able to use the login via QR code without entering your password again because this action cannot be undone!
+Make sure that you backed it up if you want to use your account later.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/qml/settings/DisablePasswordDisplay.qml" line="49"/>
+        <source>Remove password</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>DisablePlainTextPasswordDisplay</name>
+    <message>
+        <location filename="../src/qml/settings/DisablePlainTextPasswordDisplay.qml" line="42"/>
+        <source>Do not show password as text</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/qml/settings/DisablePlainTextPasswordDisplay.qml" line="44"/>
+        <source>Your password will not be shown as text anymore.
+You won&apos;t be able to see your password as text again because this action cannot be undone!
+Make sure that you backed it up if you want to use your account later.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/qml/settings/DisablePlainTextPasswordDisplay.qml" line="49"/>
+        <source>Do not show password</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>DownloadJob</name>
     <message>
+        <location filename="../src/DownloadManager.cpp" line="136"/>
         <source>Could not save file: %1</source>
-        <translation>Non se gardou o ficheiro: %1</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../src/DownloadManager.cpp" line="157"/>
         <source>Download failed: %1</source>
-        <translation>Fallou a descarga: %1</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>EmojiPicker</name>
     <message>
+        <location filename="../src/qml/elements/EmojiPicker.qml" line="123"/>
         <source>Favorites</source>
-        <translation>Favoritos</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../src/qml/elements/EmojiPicker.qml" line="125"/>
         <source>People</source>
-        <translation>Xente</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../src/qml/elements/EmojiPicker.qml" line="127"/>
         <source>Nature</source>
-        <translation>Natureza</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../src/qml/elements/EmojiPicker.qml" line="129"/>
         <source>Food</source>
-        <translation>Comida</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../src/qml/elements/EmojiPicker.qml" line="131"/>
         <source>Activity</source>
-        <translation>Actividade</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../src/qml/elements/EmojiPicker.qml" line="133"/>
         <source>Travel</source>
-        <translation>Viaxes</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../src/qml/elements/EmojiPicker.qml" line="135"/>
         <source>Objects</source>
-        <translation>Obxetos</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../src/qml/elements/EmojiPicker.qml" line="137"/>
         <source>Symbols</source>
-        <translation>Símbolos</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../src/qml/elements/EmojiPicker.qml" line="139"/>
         <source>Flags</source>
-        <translation>Bandeiras</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../src/qml/elements/EmojiPicker.qml" line="141"/>
         <source>Search</source>
-        <translation>Buscar</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../src/qml/elements/EmojiPicker.qml" line="166"/>
         <source>Search emoji</source>
-        <translation>Buscar emoji</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>EmptyChatPage</name>
     <message>
+        <location filename="../src/qml/EmptyChatPage.qml" line="62"/>
         <source>Please select a chat to start messaging</source>
-        <translation>Por favor, escolla unha conversa para comezar</translation>
-    </message>
-</context>
-<context>
-    <name>FileChooser</name>
-    <message>
-        <source>Select a file</source>
-        <translation>Escoller ficheiro</translation>
-    </message>
-</context>
-<context>
-    <name>FileChooserMobile</name>
-    <message>
-        <source>Go to parent folder</source>
-        <translation>Ir ao cartafol superior</translation>
-    </message>
-    <message>
-        <source>Close</source>
-        <translation>Pechar</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>GlobalDrawer</name>
     <message>
-        <source>Log out</source>
-        <translation>Desconectar</translation>
-    </message>
-    <message>
-        <source>About</source>
-        <translation>Acerca de</translation>
-    </message>
-    <message>
-        <source>Invite friends</source>
-        <translation>Convidar amizades</translation>
-    </message>
-    <message>
-        <source>Invitation link copied to clipboard</source>
-        <translation>Ligazón do convite copiada</translation>
-    </message>
-    <message>
-        <source>Settings</source>
-        <translation>Axustes</translation>
-    </message>
-    <message>
+        <location filename="../src/qml/GlobalDrawer.qml" line="68"/>
         <source>Offline</source>
-        <translation>Desconectada</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../src/qml/GlobalDrawer.qml" line="70"/>
         <source>Online</source>
-        <translation>Conectada</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../src/qml/GlobalDrawer.qml" line="72"/>
         <source>Connecting…</source>
-        <translation>Conectando…</translation>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/qml/GlobalDrawer.qml" line="86"/>
+        <source>Invite friends</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/qml/GlobalDrawer.qml" line="90"/>
+        <source>Invitation link copied to clipboard</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/qml/GlobalDrawer.qml" line="94"/>
+        <source>Switch device</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/qml/GlobalDrawer.qml" line="102"/>
+        <source>Settings</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/qml/GlobalDrawer.qml" line="115"/>
+        <source>About</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>Kaidan</name>
     <message>
+        <location filename="../src/Kaidan.cpp" line="266"/>
         <source>The link will be opened after you have connected.</source>
         <extracomment>The link is an XMPP-URI (i.e. &apos;xmpp:kaidan@muc.kaidan.im?join&apos; for joining a chat)</extracomment>
-        <translation>Abrirase a ligazón despois de conectarse.</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>No password found. Please enter it.</source>
-        <translation>Non hai contrasinal. Por favor escríbea.</translation>
-    </message>
-    <message>
+        <location filename="../src/Kaidan.cpp" line="300"/>
         <source>No valid login QR code found.</source>
-        <translation>Non te atopou código QR de conexión válido.</translation>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>LocalAccountRemoval</name>
+    <message>
+        <location filename="../src/qml/settings/LocalAccountRemoval.qml" line="42"/>
+        <source>Remove account from this app</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/qml/settings/LocalAccountRemoval.qml" line="44"/>
+        <source>Your account will be removed from this app.
+Your password will be deleted, make sure it is stored in a password manager or you know it!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/qml/settings/LocalAccountRemoval.qml" line="49"/>
+        <source>Remove</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>LoginPage</name>
     <message>
+        <location filename="../src/qml/LoginPage.qml" line="42"/>
         <source>Log in</source>
-        <translation>Conectar</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../src/qml/LoginPage.qml" line="48"/>
         <source>Log in to your XMPP account</source>
-        <translation>Conectar coa súa conta XMPP</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Your Jabber-ID:</source>
-        <translation type="vanished">O seu ID-Jabber:</translation>
-    </message>
-    <message>
-        <source>user@example.org</source>
-        <translation type="vanished">usuaria@exemplo.org</translation>
-    </message>
-    <message>
-        <source>Your Password:</source>
-        <translation type="vanished">Contrasinal:</translation>
-    </message>
-    <message>
-        <source>Connecting…</source>
-        <translation>Conectando…</translation>
-    </message>
-    <message>
+        <location filename="../src/qml/LoginPage.qml" line="85"/>
         <source>Connect</source>
-        <translation>Conectar</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Invalid username or password.</source>
-        <translation type="vanished">Usuario ou contrasinal non válidos.</translation>
-    </message>
-    <message>
-        <source>Cannot connect to the server. Please check your internet connection.</source>
-        <translation type="vanished">Non puido conectar co servidor. Por favor, comprobe a conexión a internet.</translation>
-    </message>
-    <message>
-        <source>The server doesn&apos;t support secure connections.</source>
-        <translation type="vanished">O servidor non soporta conexións seguras.</translation>
-    </message>
-    <message>
-        <source>Error while trying to connect securely.</source>
-        <translation type="vanished">Fallo ao intentar conectar de xeito seguro.</translation>
-    </message>
-    <message>
-        <source>Could not resolve the server&apos;s address. Please check your JID again.</source>
-        <translation type="vanished">Non se atopou o enderezo do servidor. Comprobe o seu JID de novo.</translation>
-    </message>
-    <message>
-        <source>Could not connect to the server.</source>
-        <translation type="vanished">Non puido conectar co servidor.</translation>
-    </message>
-    <message>
-        <source>Authentification protocol not supported by the server.</source>
-        <translation type="vanished">Protocolo de autenticación non soportado polo servidor.</translation>
-    </message>
-    <message>
-        <source>An unknown error occured; see log for details.</source>
-        <translation type="vanished">Aconteceu un fallo descoñecido; vexa máis detalles no rexistro.</translation>
-    </message>
-    <message>
-        <source>Log in using a QR-Code</source>
-        <translation>Conectar usando código QR</translation>
+        <location filename="../src/qml/LoginPage.qml" line="93"/>
+        <source>Connecting…</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>MediaRecorder</name>
     <message>
+        <location filename="../src/MediaRecorder.cpp" line="1184"/>
+        <location filename="../src/MediaRecorder.cpp" line="1192"/>
+        <location filename="../src/MediaRecorder.cpp" line="1207"/>
+        <location filename="../src/MediaRecorder.cpp" line="1216"/>
+        <location filename="../src/MediaRecorder.cpp" line="1224"/>
+        <location filename="../src/MediaRecorder.cpp" line="1233"/>
+        <location filename="../src/MediaRecorder.cpp" line="1241"/>
         <source>Default</source>
-        <translation>Por omsión</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>MediaUtils</name>
     <message>
+        <location filename="../src/MediaUtils.cpp" line="252"/>
         <source>Take picture</source>
-        <translation>Tomar foto</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../src/MediaUtils.cpp" line="254"/>
         <source>Record video</source>
-        <translation>Gravar vídeo</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../src/MediaUtils.cpp" line="256"/>
         <source>Record voice</source>
-        <translation>Gravar voz</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../src/MediaUtils.cpp" line="258"/>
         <source>Send location</source>
-        <translation>Enviar localización</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../src/MediaUtils.cpp" line="296"/>
         <source>Choose file</source>
-        <translation>Escoller ficheiro</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../src/MediaUtils.cpp" line="298"/>
         <source>Choose image</source>
-        <translation>Escoller imaxe</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../src/MediaUtils.cpp" line="300"/>
         <source>Choose video</source>
-        <translation>Escoller vídeo</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../src/MediaUtils.cpp" line="302"/>
         <source>Choose audio file</source>
-        <translation>Escoller ficheiro de audio</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../src/MediaUtils.cpp" line="304"/>
         <source>Choose document</source>
-        <translation>Escoller documento</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../src/MediaUtils.cpp" line="326"/>
         <source>All files</source>
-        <translation>Todos os ficheiros</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../src/MediaUtils.cpp" line="328"/>
         <source>Images</source>
-        <translation>Imaxes</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../src/MediaUtils.cpp" line="330"/>
         <source>Videos</source>
-        <translation>Vídeos</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../src/MediaUtils.cpp" line="332"/>
         <source>Audio files</source>
-        <translation>Ficheiros de audio</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../src/MediaUtils.cpp" line="334"/>
         <source>Documents</source>
-        <translation>Documentos</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../src/MediaUtils.cpp" line="359"/>
         <source>%1 (%2)</source>
-        <translation>%1 (%2)</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>MessageHandler</name>
     <message>
-        <source>Could not send message, as a result of not being connected.</source>
-        <translation>Non se enviou a mensaxe, xa que non está conectada.</translation>
-    </message>
-    <message>
-        <source>Could not correct message, as a result of not being connected.</source>
-        <translation>Non se correxiu a mensaxe, xa que non está conectada.</translation>
-    </message>
-    <message>
-        <source>Spoiler</source>
-        <translation>Spoiler</translation>
-    </message>
-    <message>
-        <source>Message could not be sent.</source>
-        <translation>Non se puido enviar a mensaxe.</translation>
-    </message>
-    <message>
+        <location filename="../src/MessageHandler.cpp" line="230"/>
         <source>Message correction was not successful.</source>
-        <translation>Non se puido correxir a mensaxe.</translation>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/MessageHandler.cpp" line="276"/>
+        <source>Message could not be sent.</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>MessageModel</name>
+    <message>
+        <location filename="../src/MessageModel.cpp" line="167"/>
+        <source>Pending</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/MessageModel.cpp" line="169"/>
+        <source>Sent</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/MessageModel.cpp" line="171"/>
+        <source>Delivered</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/MessageModel.cpp" line="173"/>
+        <source>Error</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>MultimediaSettings</name>
     <message>
+        <location filename="../src/qml/settings/MultimediaSettings.qml" line="43"/>
         <source>Multimedia Settings</source>
-        <translation>Axustes Multimedia</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../src/qml/settings/MultimediaSettings.qml" line="55"/>
         <source>Configure</source>
-        <translation>Configurar</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../src/qml/settings/MultimediaSettings.qml" line="65"/>
         <source>Image Capture</source>
-        <translation>Capturar imaxe</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../src/qml/settings/MultimediaSettings.qml" line="70"/>
         <source>Audio Recording</source>
-        <translation>Gravar audio</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../src/qml/settings/MultimediaSettings.qml" line="75"/>
         <source>Video Recording</source>
-        <translation>Gravar vídeo</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../src/qml/settings/MultimediaSettings.qml" line="127"/>
         <source>Camera</source>
-        <translation>Cámara</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../src/qml/settings/MultimediaSettings.qml" line="156"/>
         <source>Audio input</source>
-        <translation>Entrada de audio</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../src/qml/settings/MultimediaSettings.qml" line="186"/>
         <source>Container</source>
-        <translation>Contedor</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../src/qml/settings/MultimediaSettings.qml" line="225"/>
         <source>Image</source>
-        <translation>Imaxe</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../src/qml/settings/MultimediaSettings.qml" line="230"/>
         <source>Audio</source>
-        <translation>Audio</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../src/qml/settings/MultimediaSettings.qml" line="236"/>
         <source>Video</source>
-        <translation>Vídeo</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../src/qml/settings/MultimediaSettings.qml" line="263"/>
+        <location filename="../src/qml/settings/MultimediaSettings.qml" line="347"/>
+        <location filename="../src/qml/settings/MultimediaSettings.qml" line="431"/>
         <source>Codec</source>
-        <translation>Códec</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../src/qml/settings/MultimediaSettings.qml" line="289"/>
+        <location filename="../src/qml/settings/MultimediaSettings.qml" line="457"/>
         <source>Resolution</source>
-        <translation>Resolución</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../src/qml/settings/MultimediaSettings.qml" line="315"/>
+        <location filename="../src/qml/settings/MultimediaSettings.qml" line="399"/>
+        <location filename="../src/qml/settings/MultimediaSettings.qml" line="509"/>
         <source>Quality</source>
-        <translation>Calidade</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../src/qml/settings/MultimediaSettings.qml" line="373"/>
         <source>Sample Rate</source>
-        <translation>Taxa de mostreo</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../src/qml/settings/MultimediaSettings.qml" line="483"/>
         <source>Frame Rate</source>
-        <translation>Taxa de marcos</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../src/qml/settings/MultimediaSettings.qml" line="573"/>
+        <location filename="../src/qml/settings/MultimediaSettings.qml" line="582"/>
         <source>Ready</source>
-        <translation>Listo</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../src/qml/settings/MultimediaSettings.qml" line="573"/>
+        <location filename="../src/qml/settings/MultimediaSettings.qml" line="582"/>
         <source>Initializing...</source>
-        <translation>Inicializando...</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../src/qml/settings/MultimediaSettings.qml" line="578"/>
         <source>Unavailable</source>
-        <translation>Non dispoñible</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../src/qml/settings/MultimediaSettings.qml" line="586"/>
         <source>Recording...</source>
-        <translation>Gravando...</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../src/qml/settings/MultimediaSettings.qml" line="588"/>
         <source>Paused</source>
-        <translation>En pausa</translation>
-    </message>
-</context>
-<context>
-    <name>MultimediaSettingsPage</name>
-    <message>
-        <source>Multimedia Settings</source>
-        <translation type="vanished">Axustes Multimedia</translation>
-    </message>
-    <message>
-        <source>Configure</source>
-        <translation type="vanished">Configurar</translation>
-    </message>
-    <message>
-        <source>Image Capture</source>
-        <translation type="vanished">Capturar imaxe</translation>
-    </message>
-    <message>
-        <source>Audio Recording</source>
-        <translation type="vanished">Gravando audio</translation>
-    </message>
-    <message>
-        <source>Video Recording</source>
-        <translation type="vanished">Gravando vídeo</translation>
-    </message>
-    <message>
-        <source>Camera</source>
-        <translation type="vanished">Cámara</translation>
-    </message>
-    <message>
-        <source>Audio input</source>
-        <translation type="vanished">Entrada de audio</translation>
-    </message>
-    <message>
-        <source>Container</source>
-        <translation type="vanished">Contedor</translation>
-    </message>
-    <message>
-        <source>Image</source>
-        <translation type="vanished">Imaxe</translation>
-    </message>
-    <message>
-        <source>Audio</source>
-        <translation type="vanished">Audio</translation>
-    </message>
-    <message>
-        <source>Video</source>
-        <translation type="vanished">Vídeo</translation>
-    </message>
-    <message>
-        <source>Codec</source>
-        <translation type="vanished">Códec</translation>
-    </message>
-    <message>
-        <source>Resolution</source>
-        <translation type="vanished">Resolución</translation>
-    </message>
-    <message>
-        <source>Quality</source>
-        <translation type="vanished">Calidade</translation>
-    </message>
-    <message>
-        <source>Sample Rate</source>
-        <translation type="vanished">Taxa de mostreo</translation>
-    </message>
-    <message>
-        <source>Frame Rate</source>
-        <translation type="vanished">Taxa de marcos</translation>
-    </message>
-    <message>
-        <source>Ready</source>
-        <translation type="vanished">Listo</translation>
-    </message>
-    <message>
-        <source>Initializing...</source>
-        <translation type="vanished">Inicializando...</translation>
-    </message>
-    <message>
-        <source>Unavailable</source>
-        <translation type="vanished">Non dispoñible</translation>
-    </message>
-    <message>
-        <source>Recording...</source>
-        <translation type="vanished">Gravando...</translation>
-    </message>
-    <message>
-        <source>Paused</source>
-        <translation type="vanished">En pausa</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>NewMedia</name>
     <message>
+        <location filename="../src/qml/elements/NewMedia.qml" line="144"/>
+        <location filename="../src/qml/elements/NewMedia.qml" line="153"/>
         <source>Ready</source>
-        <translation>Preparado</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../src/qml/elements/NewMedia.qml" line="144"/>
+        <location filename="../src/qml/elements/NewMedia.qml" line="153"/>
         <source>Initializing...</source>
-        <translation>Inicializando...</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../src/qml/elements/NewMedia.qml" line="149"/>
         <source>Unavailable</source>
-        <translation>Non dispoñible</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../src/qml/elements/NewMedia.qml" line="157"/>
         <source>Recording... %1</source>
-        <translation>Gravando... %1</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../src/qml/elements/NewMedia.qml" line="159"/>
         <source>Paused %1</source>
-        <translation>En pausa %1</translation>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>PasswordRemovalPage</name>
+    <message>
+        <location filename="../src/qml/settings/PasswordRemovalPage.qml" line="44"/>
+        <source>Remove password</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/qml/settings/PasswordRemovalPage.qml" line="46"/>
+        <source>You can decide to only not show your password for &lt;b&gt;%1&lt;/b&gt; as text anymore or to remove it completely from the account transfer. If you remove your password completely, you won&apos;t be able to use the account transfer via scanning without entering your password because it is also removed from the QR code.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/qml/settings/PasswordRemovalPage.qml" line="49"/>
+        <source>Do not show password as text</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/qml/settings/PasswordRemovalPage.qml" line="55"/>
+        <source>Remove completely</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>QObject</name>
+    <message>
+        <location filename="../src/Notifications.cpp" line="67"/>
+        <source>Mark as read</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>QmlUtils</name>
     <message>
+        <location filename="../src/QmlUtils.cpp" line="96"/>
         <source>Available</source>
-        <translation>Dispoñible</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../src/QmlUtils.cpp" line="98"/>
         <source>Free for chat</source>
-        <translation>Libre para conversar</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../src/QmlUtils.cpp" line="100"/>
         <source>Away</source>
-        <translation>Fóra</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../src/QmlUtils.cpp" line="102"/>
         <source>Do not disturb</source>
-        <translation>Non molestar</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../src/QmlUtils.cpp" line="104"/>
         <source>Away for longer</source>
-        <translation>Fóra para longo</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../src/QmlUtils.cpp" line="106"/>
         <source>Offline</source>
-        <translation>Desconectada</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../src/QmlUtils.cpp" line="108"/>
         <source>Error</source>
-        <translation>Fallo</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Invisible</source>
-        <translation>Non visible</translation>
-    </message>
-    <message>
+        <location filename="../src/QmlUtils.cpp" line="142"/>
         <source>Invalid username or password.</source>
-        <translation>Usuario ou contrasinal non válidos.</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../src/QmlUtils.cpp" line="144"/>
         <source>Cannot connect to the server. Please check your internet connection.</source>
-        <translation>Non hai conexión co servidor. Por favor, comproba a conexión a internet.</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>The server doesn&apos;t support secure connections.</source>
-        <translation>O servidor non soporta conexións seguras.</translation>
-    </message>
-    <message>
+        <location filename="../src/QmlUtils.cpp" line="146"/>
         <source>Error while trying to connect securely.</source>
-        <translation>Fallo ao intentar conectar de xeito seguro.</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../src/QmlUtils.cpp" line="148"/>
+        <source>The server doesn&apos;t support secure connections.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/QmlUtils.cpp" line="150"/>
         <source>Could not resolve the server&apos;s address. Please check your server name.</source>
-        <translation>Non se puido resolver o enderezo do servidor. Comproba o nome do servidor.</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Could not connect to the server.</source>
-        <translation>Non hai conexión co servidor.</translation>
+        <location filename="../src/QmlUtils.cpp" line="152"/>
+        <source>The server is offline or blocked by a firewall.</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../src/QmlUtils.cpp" line="154"/>
         <source>Authentification protocol not supported by the server.</source>
-        <translation>Protocolo de autenticación non soportado polo servidor.</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../src/QmlUtils.cpp" line="156"/>
+        <source>The connection could not be refreshed.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/QmlUtils.cpp" line="158"/>
+        <source>The internet access is not permitted. Please check your system&apos;s internet access configuration.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/QmlUtils.cpp" line="160"/>
         <source>This server does not support registration.</source>
-        <translation>O servidor non permite o rexistro.</translation>
+        <translation type="unfinished"></translation>
     </message>
+</context>
+<context>
+    <name>QrCodeGenerator</name>
     <message>
-        <source>An unknown error occured.</source>
-        <translation>Houbo un fallo descoñecido.</translation>
+        <location filename="../src/QrCodeGenerator.cpp" line="70"/>
+        <source>Generating the QR code failed: %1</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>QrCodeScannerPage</name>
     <message>
+        <location filename="../src/qml/QrCodeScannerPage.qml" line="48"/>
         <source>Scan QR code</source>
-        <translation>Escanear código QR</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../src/qml/QrCodeScannerPage.qml" line="68"/>
         <source>There is no camera available.</source>
-        <translation>Non hai cámara dispoñible.</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../src/qml/QrCodeScannerPage.qml" line="71"/>
         <source>Your camera is busy.
 Try to close other applications using the camera.</source>
-        <translation>A cámara está ocupada.
-Pecha outras aplicacións que a estén utilizando.</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../src/qml/QrCodeScannerPage.qml" line="118"/>
         <source>The camera format &apos;%1&apos; is not supported.</source>
-        <translation>O formato de cámara &apos;%1&apos; non está soportado.</translation>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/qml/QrCodeScannerPage.qml" line="142"/>
+        <source>Connecting…</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/qml/QrCodeScannerPage.qml" line="187"/>
+        <source>Scan the QR code from your existing device to transfer your account.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/qml/QrCodeScannerPage.qml" line="213"/>
+        <source>Show explanation</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/qml/QrCodeScannerPage.qml" line="213"/>
+        <source>Scan</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/qml/QrCodeScannerPage.qml" line="227"/>
+        <source>Continue without QR code</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>RegistrationLoginDecisionPage</name>
+    <message>
+        <location filename="../src/qml/RegistrationLoginDecisionPage.qml" line="41"/>
+        <source>Set up</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/qml/RegistrationLoginDecisionPage.qml" line="47"/>
+        <source>Register a new account</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/qml/RegistrationLoginDecisionPage.qml" line="52"/>
+        <source>Use an existing account</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>RegistrationManager</name>
     <message>
+        <location filename="../src/RegistrationManager.cpp" line="124"/>
         <source>Password changed successfully.</source>
-        <translation>Cambiou correctamente o contrasinal.</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../src/RegistrationManager.cpp" line="131"/>
         <source>Failed to change password: %1</source>
-        <translation>Fallo no cambio de contrasinal: %1</translation>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>RemoteAccountDeletion</name>
+    <message>
+        <location filename="../src/qml/settings/RemoteAccountDeletion.qml" line="42"/>
+        <source>Delete account completely</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/qml/settings/RemoteAccountDeletion.qml" line="44"/>
+        <source>Your account will be deleted completely, which means from this app and from the server.
+You will not be able to use your account again!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/qml/settings/RemoteAccountDeletion.qml" line="49"/>
+        <source>Delete</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>RosterAddContactSheet</name>
     <message>
+        <location filename="../src/qml/elements/RosterAddContactSheet.qml" line="42"/>
         <source>Add new contact</source>
-        <translation>Engadir novo contacto</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../src/qml/elements/RosterAddContactSheet.qml" line="50"/>
         <source>This will also send a request to access the presence of the contact.</source>
-        <translation>Esto tamén enviará unha solicitude  para acceder a presenza do contacto.</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../src/qml/elements/RosterAddContactSheet.qml" line="59"/>
         <source>Jabber-ID:</source>
-        <translation>ID-Jabber:</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../src/qml/elements/RosterAddContactSheet.qml" line="64"/>
         <source>user@example.org</source>
-        <translation>usuaria@exemplo.org</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../src/qml/elements/RosterAddContactSheet.qml" line="71"/>
         <source>Nickname:</source>
-        <translation>Alcume:</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../src/qml/elements/RosterAddContactSheet.qml" line="80"/>
         <source>Optional message:</source>
-        <translation>Mensaxe optativa:</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../src/qml/elements/RosterAddContactSheet.qml" line="88"/>
         <source>Tell your chat partner who you are.</source>
-        <translation>Dígalle ao seu contacto quen é vostede.</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../src/qml/elements/RosterAddContactSheet.qml" line="97"/>
         <source>Cancel</source>
-        <translation>Cancelar</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../src/qml/elements/RosterAddContactSheet.qml" line="107"/>
         <source>Add</source>
-        <translation>Engadir</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>RosterListItem</name>
     <message>
+        <location filename="../src/qml/elements/RosterListItem.qml" line="123"/>
         <source>Error: Please check the JID.</source>
-        <translation>Fallo: comprobe o JID.</translation>
-    </message>
-    <message>
-        <source>Available</source>
-        <translation type="vanished">Dispoñible</translation>
-    </message>
-    <message>
-        <source>Free for chat</source>
-        <translation type="vanished">Libre para conversar</translation>
-    </message>
-    <message>
-        <source>Away</source>
-        <translation type="vanished">Fóra</translation>
-    </message>
-    <message>
-        <source>Do not disturb</source>
-        <translation type="vanished">Non molestar</translation>
-    </message>
-    <message>
-        <source>Away for longer</source>
-        <translation type="vanished">Fóra para longo</translation>
-    </message>
-    <message>
-        <source>Offline</source>
-        <translation type="vanished">Desconectada</translation>
-    </message>
-    <message>
-        <source>Error</source>
-        <translation type="vanished">Fallo</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>RosterManager</name>
     <message>
+        <location filename="../src/RosterManager.cpp" line="135"/>
         <source>Could not add contact, as a result of not being connected.</source>
-        <translation>Non se engadiu o contacto, xa que non está conectada.</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../src/RosterManager.cpp" line="149"/>
         <source>Could not remove contact, as a result of not being connected.</source>
-        <translation>Non se eliminou o contacto, xa que non está conectada.</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Spoiler</source>
-        <translation>Spoiler</translation>
-    </message>
-    <message>
+        <location filename="../src/RosterManager.cpp" line="162"/>
         <source>Could not rename contact, as a result of not being connected.</source>
-        <translation>Non se cambiou o nome do contacto, porque non está conectado.</translation>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/RosterManager.cpp" line="175"/>
+        <location filename="../src/RosterManager.cpp" line="214"/>
+        <source>Spoiler</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>RosterPage</name>
     <message>
+        <location filename="../src/qml/RosterPage.qml" line="41"/>
         <source>Connecting…</source>
-        <translation>Conectando…</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Contacts</source>
-        <translation>Contactos</translation>
-    </message>
-    <message>
-        <source>Add new contact</source>
-        <translation>Engadir novo contacto</translation>
-    </message>
-    <message>
+        <location filename="../src/qml/RosterPage.qml" line="42"/>
         <source>Offline</source>
-        <translation>Desconectada</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../src/qml/RosterPage.qml" line="43"/>
+        <source>Contacts</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/qml/RosterPage.qml" line="56"/>
+        <source>Add new contact</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/qml/RosterPage.qml" line="68"/>
         <source>Search contacts</source>
-        <translation>Buscar contactos</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>RosterRemoveContactSheet</name>
     <message>
-        <source>Do you really want to delete the contact &lt;b&gt;%1&lt;/b&gt; from your roster?</source>
-        <translation>Desexa eliminar o contacto &lt;b&gt;%1&lt;/b&gt; da lista?</translation>
-    </message>
-    <message>
+        <location filename="../src/qml/elements/RosterRemoveContactSheet.qml" line="42"/>
         <source>Delete contact</source>
-        <translation>Eliminar contacto</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../src/qml/elements/RosterRemoveContactSheet.qml" line="48"/>
+        <source>Do you really want to delete the contact &lt;b&gt;%1&lt;/b&gt; from your roster?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/qml/elements/RosterRemoveContactSheet.qml" line="67"/>
         <source>Cancel</source>
-        <translation>Cancelar</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../src/qml/elements/RosterRemoveContactSheet.qml" line="73"/>
         <source>Delete</source>
-        <translation>Eliminar</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>RosterRenameContactSheet</name>
     <message>
+        <location filename="../src/qml/elements/RosterRenameContactSheet.qml" line="43"/>
         <source>Rename contact</source>
-        <translation>Cambiar nome ao contacto</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Edit name:</source>
-        <translation>Editar nome:</translation>
-    </message>
-    <message>
+        <location filename="../src/qml/elements/RosterRenameContactSheet.qml" line="61"/>
         <source>Cancel</source>
-        <translation>Cancelar</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../src/qml/elements/RosterRenameContactSheet.qml" line="68"/>
         <source>Rename</source>
-        <translation>Cambiar nome</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>SendMediaSheet</name>
     <message>
+        <location filename="../src/qml/elements/SendMediaSheet.qml" line="105"/>
         <source>Caption</source>
-        <translation>Descrición</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../src/qml/elements/SendMediaSheet.qml" line="118"/>
         <source>Cancel</source>
-        <translation>Cancelar</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../src/qml/elements/SendMediaSheet.qml" line="132"/>
         <source>Send</source>
-        <translation>Enviar</translation>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>ServerListModel</name>
+    <message>
+        <location filename="../src/ServerListModel.cpp" line="48"/>
+        <source>Custom server</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/ServerListModel.cpp" line="116"/>
+        <location filename="../src/ServerListModel.cpp" line="126"/>
+        <source>No limitation</source>
+        <extracomment>Unlimited file size for uploading files
+----------
+Deletion of message history saved on server</extracomment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/ServerListModel.cpp" line="128"/>
+        <source>%1 days</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>SettingsContent</name>
+    <message>
+        <location filename="../src/qml/settings/SettingsContent.qml" line="43"/>
+        <source>Settings</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/qml/settings/SettingsContent.qml" line="48"/>
+        <source>Change password</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/qml/settings/SettingsContent.qml" line="49"/>
+        <source>Changes your account&apos;s password. You will need to re-enter it on your other devices.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/qml/settings/SettingsContent.qml" line="55"/>
+        <source>Multimedia Settings</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/qml/settings/SettingsContent.qml" line="56"/>
+        <source>Configure photo, video and audio recording settings</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/qml/settings/SettingsContent.qml" line="61"/>
+        <source>Account security</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/qml/settings/SettingsContent.qml" line="62"/>
+        <source>configure whether this device can be used to log in on a new device</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/qml/settings/SettingsContent.qml" line="67"/>
+        <source>Remove account from Kaidan</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/qml/settings/SettingsContent.qml" line="68"/>
+        <source>Remove account from this app</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/qml/settings/SettingsContent.qml" line="73"/>
+        <source>Delete account</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/qml/settings/SettingsContent.qml" line="74"/>
+        <source>Delete account from the server</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>SettingsPage</name>
     <message>
+        <location filename="../src/qml/settings/SettingsPage.qml" line="35"/>
         <source>Settings</source>
-        <translation>Axustes</translation>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>StartPage</name>
+    <message>
+        <location filename="../src/qml/StartPage.qml" line="68"/>
+        <source>Enjoy free communication on every device!</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Change password</source>
-        <translation>Cambiar contrasinal</translation>
-    </message>
-    <message>
-        <source>Changes your account&apos;s password. You will need to re-enter it on your other devices.</source>
-        <translation>Cambio no contrasinal da conta. Deberá voltar a introducilo nos outros dispositivos.</translation>
-    </message>
-    <message>
-        <source>Multimedia Settings</source>
-        <translation>Axustes Multimedia</translation>
-    </message>
-    <message>
-        <source>Configure photo, video and audio recording settings</source>
-        <translation>Configurar os axustes para fotos e gravación de audio e vídeo</translation>
+        <location filename="../src/qml/StartPage.qml" line="84"/>
+        <source>Let&apos;s start</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>SubRequestAcceptSheet</name>
     <message>
+        <location filename="../src/qml/elements/SubRequestAcceptSheet.qml" line="43"/>
         <source>Subscription Request</source>
-        <translation>Solicitude de subscrición</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../src/qml/elements/SubRequestAcceptSheet.qml" line="52"/>
         <source>You received a subscription request by &lt;b&gt;%1&lt;/b&gt;. If you accept it, the account will have access to your presence status.</source>
-        <translation>Recibeu unha solicitude de subscrición de &lt;b&gt;%1&lt;/b&gt;. Se acepta, a conta terá acceso ao seu estado de presenza.</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../src/qml/elements/SubRequestAcceptSheet.qml" line="64"/>
         <source>Decline</source>
-        <translation>Rexeitar</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../src/qml/elements/SubRequestAcceptSheet.qml" line="73"/>
         <source>Accept</source>
-        <translation>Aceptar</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>UploadManager</name>
     <message>
+        <location filename="../src/UploadManager.cpp" line="72"/>
         <source>Could not send file, as a result of not being connected.</source>
-        <translation>Non se enviou o ficheiro, xa que non está conectada.</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../src/UploadManager.cpp" line="108"/>
         <source>File</source>
-        <translation>Ficheiro</translation>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/UploadManager.cpp" line="148"/>
+        <source>Message could not be sent.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>UserProfilePage</name>
     <message>
+        <location filename="../src/qml/UserProfilePage.qml" line="42"/>
         <source>Profile</source>
-        <translation>Perfil</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>VCardModel</name>
     <message>
+        <location filename="../src/VCardModel.cpp" line="88"/>
         <source>Name</source>
-        <translation>Nome</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../src/VCardModel.cpp" line="91"/>
         <source>Nickname</source>
-        <translation>Alcume</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../src/VCardModel.cpp" line="94"/>
         <source>About</source>
-        <translation>Acerca de</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../src/VCardModel.cpp" line="97"/>
         <source>Email</source>
-        <translation>Correo-e</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../src/VCardModel.cpp" line="100"/>
         <source>Birthday</source>
-        <translation>Aniversario</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../src/VCardModel.cpp" line="103"/>
         <source>Website</source>
-        <translation>Sitio web</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 </TS>

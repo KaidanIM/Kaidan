@@ -1,1258 +1,1382 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.1" language="ru">
+<TS version="2.1">
 <context>
     <name>AboutDialog</name>
     <message>
+        <location filename="../src/qml/AboutDialog.qml" line="78"/>
         <source>A simple, user-friendly Jabber/XMPP client</source>
-        <translation>Простой и удобный Jabber/XMPP клиент</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../src/qml/AboutDialog.qml" line="86"/>
         <source>License:</source>
-        <translation>Права:</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Source code on GitHub</source>
-        <translation type="obsolete">Исходный код на GitHub</translation>
-    </message>
-    <message>
-        <source>View source code online</source>
-        <translation>Просмотреть исходный код онлайн</translation>
-    </message>
-    <message>
+        <location filename="../src/qml/AboutDialog.qml" line="103"/>
         <source>Report problems</source>
-        <translation>Сообщить о проблемах</translation>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/qml/AboutDialog.qml" line="108"/>
+        <source>View source code online</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
-    <name>AboutPage</name>
+    <name>AccountSecurity</name>
     <message>
-        <source>About</source>
-        <translation type="vanished">О программе</translation>
+        <location filename="../src/qml/settings/AccountSecurity.qml" line="39"/>
+        <source>Account Security</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>A simple, user-friendly Jabber/XMPP client</source>
-        <translation type="vanished">Простой и удобный Jabber/XMPP клиент</translation>
+        <location filename="../src/qml/settings/AccountSecurity.qml" line="41"/>
+        <source>Allow to add new devices using a QR-Code, but never show the password as text. This action can not be undone, so consider storing the password in another way before using it.</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>License:</source>
-        <translation type="vanished">Лицензия:</translation>
+        <location filename="../src/qml/settings/AccountSecurity.qml" line="43"/>
+        <source>Disable showing the password</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Sourcecode on GitHub</source>
-        <translation type="vanished">Исходный код на GitHub</translation>
+        <location filename="../src/qml/settings/AccountSecurity.qml" line="48"/>
+        <source>Don&apos;t expose the password in any form. This action can not be undone.</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Close</source>
-        <translation type="vanished">Закрыть</translation>
-    </message>
-</context>
-<context>
-    <name>AboutSheet</name>
-    <message>
-        <source>A simple, user-friendly Jabber/XMPP client</source>
-        <translation type="vanished">Простой и удобный Jabber/XMPP клиент</translation>
-    </message>
-    <message>
-        <source>License:</source>
-        <translation type="vanished">Лицензия:</translation>
-    </message>
-    <message>
-        <source>Source code on GitHub</source>
-        <translation type="vanished">Исходный код на GitHub</translation>
-    </message>
-</context>
-<context>
-    <name>AccountDeletionFromClientAndServerConfirmationPage</name>
-    <message>
-        <source>Delete account completely</source>
-        <translation>Удалить аккаунт отовсюду</translation>
-    </message>
-    <message>
-        <source>Your account will be deleted completely, which means from this app and from the server.
-You will not be able to use your account again!</source>
-        <translation>Ваша учётная запись будет удалена в приложении и на сервере. 
-Вы больше не сможете ей пользоваться!</translation>
-    </message>
-    <message>
-        <source>Delete</source>
-        <translation>Удалить</translation>
-    </message>
-</context>
-<context>
-    <name>AccountDeletionFromClientConfirmationPage</name>
-    <message>
-        <source>Remove account from this app</source>
-        <translation>Удалить аккаунт в приложении</translation>
-    </message>
-    <message>
-        <source>Your account will be removed from this app.
-You won&apos;t be able to get your credentials back!
-Make sure that you have backed up those if you want to use your account later.</source>
-        <translation>Ваша учётная запись будет удалена в приложении.
-Учётные данные нельзя восстановить!
-Cохраните их, если планируете использовать её в дальнейшем.</translation>
-    </message>
-    <message>
-        <source>Remove</source>
-        <translation>Удалить</translation>
-    </message>
-</context>
-<context>
-    <name>AccountDeletionPage</name>
-    <message>
-        <source>Delete account</source>
-        <translation>Удалить аккаунт</translation>
-    </message>
-    <message>
-        <source>You can remove your account &lt;b&gt;%1&lt;/b&gt; only from this app or delete it completely. If you delete your account completely, you won&apos;t be able to use it with another app because it is also removed from the server.</source>
-        <translation>Учётную запись &lt;b&gt;%1&lt;/b&gt; можно удалить в приложении или полностью отовсюду. В последнем случае ей нельзя будет пользоваться в других приложениях, потому что она удаляется на сервере тоже.</translation>
-    </message>
-    <message>
-        <source>Remove from this app</source>
-        <translation>Удалить в приложении</translation>
-    </message>
-    <message>
-        <source>Delete completely</source>
-        <translation>Удалить отовсюду</translation>
+        <location filename="../src/qml/settings/AccountSecurity.qml" line="50"/>
+        <source>Disable showing the QR-Code and password</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>AccountTransferPage</name>
     <message>
+        <location filename="../src/qml/AccountTransferPage.qml" line="46"/>
         <source>Transfer account to another device</source>
-        <translation>Перенести учётную запись на другое устройство</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../src/qml/AccountTransferPage.qml" line="66"/>
         <source>Scan the QR code or enter the credentials as text on another device to log in on it.
 
 Attention:
 Never show this QR code to anyone else. It would allow unlimited access to your account!</source>
-        <translation>Отсканируйте QR код или введите учётные данные на другом устройстве (выполните вход). 
-
-Важно:
-Никогда никому не показывайте этот код! Это даст злоумышленникам доступ к вашей учётной записи!</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../src/qml/AccountTransferPage.qml" line="92"/>
         <source>Chat address:</source>
-        <translation>Адрес чата:</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../src/qml/AccountTransferPage.qml" line="113"/>
         <source>Password:</source>
-        <translation>Пароль:</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../src/qml/AccountTransferPage.qml" line="147"/>
         <source>Hide QR code</source>
-        <translation>Спрятать QR код</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../src/qml/AccountTransferPage.qml" line="147"/>
         <source>Show as QR code</source>
-        <translation>Показать как QR код</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../src/qml/AccountTransferPage.qml" line="170"/>
         <source>Hide text</source>
-        <translation>Спрятать текст</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../src/qml/AccountTransferPage.qml" line="170"/>
         <source>Show as text</source>
-        <translation>Показать как текст</translation>
-    </message>
-</context>
-<context>
-    <name>BackButton</name>
-    <message>
-        <source>Navigate Back</source>
-        <translation type="vanished">Назад</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>ChangePassword</name>
     <message>
+        <location filename="../src/qml/settings/ChangePassword.qml" line="40"/>
+        <location filename="../src/qml/settings/ChangePassword.qml" line="59"/>
         <source>Change password</source>
-        <translation>Изменить пароль</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../src/qml/settings/ChangePassword.qml" line="68"/>
         <source>Current password:</source>
-        <translation>Текущий пароль:</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../src/qml/settings/ChangePassword.qml" line="74"/>
         <source>New password:</source>
-        <translation>Новый пароль:</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../src/qml/settings/ChangePassword.qml" line="80"/>
         <source>New password (repeat):</source>
-        <translation>Новый пароль (повторно):</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../src/qml/settings/ChangePassword.qml" line="87"/>
         <source>New passwords do not match.</source>
-        <translation>Поля с новым паролем не одинаковые.</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../src/qml/settings/ChangePassword.qml" line="97"/>
         <source>Current password is invalid.</source>
-        <translation>Текущий пароль введён неправильно.</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../src/qml/settings/ChangePassword.qml" line="106"/>
         <source>You need to be connected to change your password.</source>
-        <translation>Чтобы изменить пароль нужно быть в сети.</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../src/qml/settings/ChangePassword.qml" line="113"/>
         <source>After changing your password, you will need to reenter it on all your other devices.</source>
-        <translation>После изменения пароля вам придётся ввести его заново на всех других устройствах.</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../src/qml/settings/ChangePassword.qml" line="124"/>
         <source>Cancel</source>
-        <translation>Отменить</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../src/qml/settings/ChangePassword.qml" line="130"/>
         <source>Change</source>
-        <translation>Изменить</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>ChatMessage</name>
     <message>
+        <location filename="../src/qml/elements/ChatMessage.qml" line="141"/>
         <source>Spoiler</source>
-        <translation>Спойлер</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../src/qml/elements/ChatMessage.qml" line="198"/>
         <source>Download</source>
-        <translation>Загрузить</translation>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>ChatMessageContextMenu</name>
+    <message>
+        <location filename="../src/qml/elements/ChatMessageContextMenu.qml" line="45"/>
+        <source>Copy message</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/qml/elements/ChatMessageContextMenu.qml" line="56"/>
+        <source>Edit message</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/qml/elements/ChatMessageContextMenu.qml" line="62"/>
+        <source>Copy download URL</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/qml/elements/ChatMessageContextMenu.qml" line="68"/>
+        <source>Quote message</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>ChatPage</name>
     <message>
-        <source>Compose message</source>
-        <translation>Создать сообщение</translation>
-    </message>
-    <message>
-        <source>Send</source>
-        <translation type="vanished">Отправить</translation>
-    </message>
-    <message>
-        <source>Image</source>
-        <translation type="vanished">Изображение</translation>
-    </message>
-    <message>
-        <source>Video</source>
-        <translation type="vanished">Видео</translation>
-    </message>
-    <message>
-        <source>Audio</source>
-        <translation type="vanished">Звук</translation>
-    </message>
-    <message>
-        <source>Document</source>
-        <translation type="vanished">Документ</translation>
-    </message>
-    <message>
-        <source>Other file</source>
-        <translation type="vanished">Другой файл</translation>
-    </message>
-    <message>
-        <source>Select a file</source>
-        <translation type="vanished">Выберите файл</translation>
-    </message>
-    <message>
-        <source>Send a spoiler message</source>
-        <translation>Послать спойлер</translation>
-    </message>
-    <message>
-        <source>Spoiler hint</source>
-        <translation>Подсказка к спойлеру</translation>
-    </message>
-    <message>
-        <source>Unmute notifications</source>
-        <translation>Включить уведомления</translation>
-    </message>
-    <message>
-        <source>Mute notifications</source>
-        <translation>Отключить уведомления</translation>
-    </message>
-    <message>
-        <source>View profile</source>
-        <translation>Посмотреть профиль</translation>
-    </message>
-    <message>
+        <location filename="../src/qml/ChatPage.qml" line="64"/>
         <source>Search</source>
-        <translation>Поиск</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../src/qml/ChatPage.qml" line="83"/>
+        <location filename="../src/qml/ChatPage.qml" line="95"/>
+        <source>Unmute notifications</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/qml/ChatPage.qml" line="84"/>
+        <location filename="../src/qml/ChatPage.qml" line="96"/>
+        <source>Mute notifications</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/qml/ChatPage.qml" line="112"/>
+        <source>View profile</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/qml/ChatPage.qml" line="172"/>
+        <source>Send a spoiler message</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/qml/ChatPage.qml" line="275"/>
         <source>Close</source>
-        <translation>Закрыть</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../src/qml/ChatPage.qml" line="296"/>
         <source>Search up</source>
-        <translation>Искать вверх</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../src/qml/ChatPage.qml" line="307"/>
         <source>Search down</source>
-        <translation>Искать вниз</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../src/qml/ChatPage.qml" line="523"/>
         <source>All files</source>
-        <translation>Все файлы</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Copy message</source>
-        <translation>Скопировать сообщение</translation>
+        <location filename="../src/qml/ChatPage.qml" line="536"/>
+        <source>Spoiler hint</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Edit message</source>
-        <translation>Редактировать сообщение</translation>
-    </message>
-    <message>
-        <source>Copy download URL</source>
-        <translation>Скопировать URL загрузки</translation>
-    </message>
-    <message>
-        <source>Quote message</source>
-        <translation>Цитировать сообщение</translation>
+        <location filename="../src/qml/ChatPage.qml" line="567"/>
+        <source>Compose message</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>ClientWorker</name>
     <message>
+        <location filename="../src/ClientWorker.cpp" line="206"/>
         <source>Your account could not be deleted from the server. Therefore, it was also not removed from this app: %1</source>
-        <translation>Вашу учётную запись не удалось удалить на сервере. Поэтому в приложении её удалить тоже не получится: %1</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>CommonEncoderSettings</name>
     <message>
+        <location filename="../src/MediaSettings.cpp" line="161"/>
         <source>Very low</source>
-        <translation>Очень низкое</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../src/MediaSettings.cpp" line="163"/>
         <source>Low</source>
-        <translation>Низкое</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../src/MediaSettings.cpp" line="165"/>
         <source>Normal</source>
-        <translation>Обычное</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../src/MediaSettings.cpp" line="167"/>
         <source>High</source>
-        <translation>Высокое</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../src/MediaSettings.cpp" line="169"/>
         <source>Very high</source>
-        <translation>Очень высокое</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../src/MediaSettings.cpp" line="180"/>
         <source>Constant quality</source>
-        <translation>Постоянное качество</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../src/MediaSettings.cpp" line="182"/>
         <source>Constant bit rate</source>
-        <translation>Постоянный битрейт</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../src/MediaSettings.cpp" line="184"/>
         <source>Average bit rate</source>
-        <translation>Средний битрейт</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../src/MediaSettings.cpp" line="186"/>
         <source>Two pass</source>
-        <translation>Двухпроходный</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>ConfirmationPage</name>
     <message>
+        <location filename="../src/qml/elements/ConfirmationPage.qml" line="48"/>
         <source>Cancel</source>
-        <translation>Отменить</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
-    <name>ContextDrawer</name>
+    <name>DisablePasswordDisplay</name>
     <message>
-        <source>Actions</source>
-        <translation type="vanished">Действия</translation>
+        <location filename="../src/qml/settings/DisablePasswordDisplay.qml" line="42"/>
+        <source>Remove password completely</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/qml/settings/DisablePasswordDisplay.qml" line="44"/>
+        <source>Your password will not be included in the QR code anymore.
+You won&apos;t be able to use the login via QR code without entering your password again because this action cannot be undone!
+Make sure that you backed it up if you want to use your account later.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/qml/settings/DisablePasswordDisplay.qml" line="49"/>
+        <source>Remove password</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>DisablePlainTextPasswordDisplay</name>
+    <message>
+        <location filename="../src/qml/settings/DisablePlainTextPasswordDisplay.qml" line="42"/>
+        <source>Do not show password as text</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/qml/settings/DisablePlainTextPasswordDisplay.qml" line="44"/>
+        <source>Your password will not be shown as text anymore.
+You won&apos;t be able to see your password as text again because this action cannot be undone!
+Make sure that you backed it up if you want to use your account later.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/qml/settings/DisablePlainTextPasswordDisplay.qml" line="49"/>
+        <source>Do not show password</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>DownloadJob</name>
     <message>
+        <location filename="../src/DownloadManager.cpp" line="136"/>
         <source>Could not save file: %1</source>
-        <translation>Не удалось сохранить файл: %1</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../src/DownloadManager.cpp" line="157"/>
         <source>Download failed: %1</source>
-        <translation>Не удалось загрузить: %1</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>EmojiPicker</name>
     <message>
+        <location filename="../src/qml/elements/EmojiPicker.qml" line="123"/>
         <source>Favorites</source>
-        <translation>Избранное</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../src/qml/elements/EmojiPicker.qml" line="125"/>
         <source>People</source>
-        <translation>Люди</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../src/qml/elements/EmojiPicker.qml" line="127"/>
         <source>Nature</source>
-        <translation>Природа</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../src/qml/elements/EmojiPicker.qml" line="129"/>
         <source>Food</source>
-        <translation>Еда</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../src/qml/elements/EmojiPicker.qml" line="131"/>
         <source>Activity</source>
-        <translation>Деятельность</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../src/qml/elements/EmojiPicker.qml" line="133"/>
         <source>Travel</source>
-        <translation>Путешествия</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../src/qml/elements/EmojiPicker.qml" line="135"/>
         <source>Objects</source>
-        <translation>Объекты</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../src/qml/elements/EmojiPicker.qml" line="137"/>
         <source>Symbols</source>
-        <translation>Символы</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../src/qml/elements/EmojiPicker.qml" line="139"/>
         <source>Flags</source>
-        <translation>Флаги</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../src/qml/elements/EmojiPicker.qml" line="141"/>
         <source>Search</source>
-        <translation>Поиск</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../src/qml/elements/EmojiPicker.qml" line="166"/>
         <source>Search emoji</source>
-        <translation>Поиск эмодзи</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>EmptyChatPage</name>
     <message>
+        <location filename="../src/qml/EmptyChatPage.qml" line="62"/>
         <source>Please select a chat to start messaging</source>
-        <translation>Чтобы начать обмен сообщениями, выберите чат</translation>
-    </message>
-</context>
-<context>
-    <name>FileChooser</name>
-    <message>
-        <source>Select a file</source>
-        <translation type="obsolete">Выберите файл</translation>
-    </message>
-</context>
-<context>
-    <name>FileChooserMobile</name>
-    <message>
-        <source>Close</source>
-        <translation type="obsolete">Закрыть</translation>
-    </message>
-</context>
-<context>
-    <name>ForwardButton</name>
-    <message>
-        <source>Navigate Forward</source>
-        <translation type="vanished">Вперёд</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>GlobalDrawer</name>
     <message>
-        <source>Log out</source>
-        <translation type="vanished">Выйти</translation>
-    </message>
-    <message>
-        <source>About</source>
-        <translation>О программе</translation>
-    </message>
-    <message>
-        <source>Add new contact</source>
-        <translation type="vanished">Добавить контакт</translation>
-    </message>
-    <message>
-        <source>Back</source>
-        <translation type="vanished">Назад</translation>
-    </message>
-    <message>
-        <source>Invite friends</source>
-        <translation>Пригласить друзей</translation>
-    </message>
-    <message>
-        <source>Invitation link copied to clipboard</source>
-        <translation>Ссылка на приглашение скопирована в буфер обмена</translation>
-    </message>
-    <message>
-        <source>Settings</source>
-        <translation>Настройки</translation>
-    </message>
-    <message>
+        <location filename="../src/qml/GlobalDrawer.qml" line="68"/>
         <source>Offline</source>
-        <translation>Не в сети</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../src/qml/GlobalDrawer.qml" line="70"/>
         <source>Online</source>
-        <translation>В сети</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../src/qml/GlobalDrawer.qml" line="72"/>
         <source>Connecting…</source>
-        <translation>Поключение…</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Transfer account</source>
-        <translation>Перенести учётную запись</translation>
+        <location filename="../src/qml/GlobalDrawer.qml" line="86"/>
+        <source>Invite friends</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Delete account</source>
-        <translation>Удалить учётную запись</translation>
+        <location filename="../src/qml/GlobalDrawer.qml" line="90"/>
+        <source>Invitation link copied to clipboard</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/qml/GlobalDrawer.qml" line="94"/>
+        <source>Switch device</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/qml/GlobalDrawer.qml" line="102"/>
+        <source>Settings</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/qml/GlobalDrawer.qml" line="115"/>
+        <source>About</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>Kaidan</name>
     <message>
+        <location filename="../src/Kaidan.cpp" line="266"/>
         <source>The link will be opened after you have connected.</source>
         <extracomment>The link is an XMPP-URI (i.e. &apos;xmpp:kaidan@muc.kaidan.im?join&apos; for joining a chat)</extracomment>
-        <translation>Ссылка будет открыта после подключения.</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../src/Kaidan.cpp" line="300"/>
         <source>No valid login QR code found.</source>
-        <translation>QR код для входа не найден.</translation>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>LocalAccountRemoval</name>
+    <message>
+        <location filename="../src/qml/settings/LocalAccountRemoval.qml" line="42"/>
+        <source>Remove account from this app</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/qml/settings/LocalAccountRemoval.qml" line="44"/>
+        <source>Your account will be removed from this app.
+Your password will be deleted, make sure it is stored in a password manager or you know it!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/qml/settings/LocalAccountRemoval.qml" line="49"/>
+        <source>Remove</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>LoginPage</name>
     <message>
-        <source>Your Jabber-ID:</source>
-        <translation type="vanished">Ваш Jabber-ID:</translation>
-    </message>
-    <message>
-        <source>user@example.org</source>
-        <translation type="vanished">ivanov@example.ru</translation>
-    </message>
-    <message>
-        <source>Your Password:</source>
-        <translation type="vanished">Ваш пароль:</translation>
-    </message>
-    <message>
-        <source>Password</source>
-        <translation type="vanished">Пароль</translation>
-    </message>
-    <message>
-        <source>Retry</source>
-        <translation type="vanished">Повторить</translation>
-    </message>
-    <message>
-        <source>Connect</source>
-        <translation>Подключиться</translation>
-    </message>
-    <message>
-        <source>Connecting…</source>
-        <translation>Подключение…</translation>
-    </message>
-    <message>
+        <location filename="../src/qml/LoginPage.qml" line="42"/>
         <source>Log in</source>
-        <translation>Вход</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../src/qml/LoginPage.qml" line="48"/>
         <source>Log in to your XMPP account</source>
-        <translation>Войдите в аккаунт Jabber</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Your diaspora*-ID:</source>
-        <translation type="vanished">Ваш ID в diaspora*:</translation>
+        <location filename="../src/qml/LoginPage.qml" line="85"/>
+        <source>Connect</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>user@diaspora.pod</source>
-        <translation type="vanished">пользователь@diaspora.pod</translation>
-    </message>
-    <message>
-        <source>Invalid username or password.</source>
-        <translation type="vanished">Неверное имя пользователя или пароль.</translation>
-    </message>
-    <message>
-        <source>Cannot connect to the server. Please check your internet connection.</source>
-        <translation type="vanished">Не удается подключиться к серверу. Пожалуйста, проверьте подключение к Интернету.</translation>
-    </message>
-    <message>
-        <source>The server doesn&apos;t support secure connections.</source>
-        <translation type="vanished">Сервер не поддерживает безопасные соединения.</translation>
-    </message>
-    <message>
-        <source>Error while trying to connect securely.</source>
-        <translation type="vanished">Ошибка при попытке надежного подключения.</translation>
-    </message>
-    <message>
-        <source>Could not resolve the server&apos;s address. Please check your JID again.</source>
-        <translation type="vanished">Не смог определить адрес сервера. Пожалуйста, проверьте ваш JID еще раз.</translation>
-    </message>
-    <message>
-        <source>Could not connect to the server.</source>
-        <translation type="vanished">Не смог подключиться к серверу.</translation>
-    </message>
-    <message>
-        <source>Authentification protocol not supported by the server.</source>
-        <translation type="vanished">Протокол аутентификации не поддерживается сервером.</translation>
-    </message>
-    <message>
-        <source>An unknown error occured; see log for details.</source>
-        <translation type="vanished">Произошла неизвестная ошибка; подробности см. в журнале.</translation>
+        <location filename="../src/qml/LoginPage.qml" line="93"/>
+        <source>Connecting…</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>MediaRecorder</name>
     <message>
+        <location filename="../src/MediaRecorder.cpp" line="1184"/>
+        <location filename="../src/MediaRecorder.cpp" line="1192"/>
+        <location filename="../src/MediaRecorder.cpp" line="1207"/>
+        <location filename="../src/MediaRecorder.cpp" line="1216"/>
+        <location filename="../src/MediaRecorder.cpp" line="1224"/>
+        <location filename="../src/MediaRecorder.cpp" line="1233"/>
+        <location filename="../src/MediaRecorder.cpp" line="1241"/>
         <source>Default</source>
-        <translation>По умолчанию</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>MediaUtils</name>
     <message>
+        <location filename="../src/MediaUtils.cpp" line="252"/>
         <source>Take picture</source>
-        <translation>Сфотографировать</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../src/MediaUtils.cpp" line="254"/>
         <source>Record video</source>
-        <translation>Записать видео</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../src/MediaUtils.cpp" line="256"/>
         <source>Record voice</source>
-        <translation>Записать аудио</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../src/MediaUtils.cpp" line="258"/>
         <source>Send location</source>
-        <translation>Оправить местоположение</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../src/MediaUtils.cpp" line="296"/>
         <source>Choose file</source>
-        <translation>Выбрать файл</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../src/MediaUtils.cpp" line="298"/>
         <source>Choose image</source>
-        <translation>Выбрать изображение</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../src/MediaUtils.cpp" line="300"/>
         <source>Choose video</source>
-        <translation>Выбрать видео</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../src/MediaUtils.cpp" line="302"/>
         <source>Choose audio file</source>
-        <translation>Выбрать аудиозапись</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../src/MediaUtils.cpp" line="304"/>
         <source>Choose document</source>
-        <translation>Выбрать документ</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../src/MediaUtils.cpp" line="326"/>
         <source>All files</source>
-        <translation>Все файлы</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../src/MediaUtils.cpp" line="328"/>
         <source>Images</source>
-        <translation>Изображения</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../src/MediaUtils.cpp" line="330"/>
         <source>Videos</source>
-        <translation>Видео</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../src/MediaUtils.cpp" line="332"/>
         <source>Audio files</source>
-        <translation>Аудио</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../src/MediaUtils.cpp" line="334"/>
         <source>Documents</source>
-        <translation>Документы</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../src/MediaUtils.cpp" line="359"/>
         <source>%1 (%2)</source>
-        <translation>%1 (%2)</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>MessageHandler</name>
     <message>
-        <source>Could not send message, as a result of not being connected.</source>
-        <translation>Сообщение не отправлено (отсутствует подключение к сети).</translation>
-    </message>
-    <message>
-        <source>Could not correct message, as a result of not being connected.</source>
-        <translation>Исправить сообщение не получилось (отсутствует подключение к сети).</translation>
-    </message>
-    <message>
-        <source>Spoiler</source>
-        <translation>Спойлер</translation>
-    </message>
-    <message>
-        <source>Message could not be sent.</source>
-        <translation>Отправить сообщение не удалось.</translation>
-    </message>
-    <message>
+        <location filename="../src/MessageHandler.cpp" line="230"/>
         <source>Message correction was not successful.</source>
-        <translation>Исправить сообщение не удалось.</translation>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/MessageHandler.cpp" line="276"/>
+        <source>Message could not be sent.</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>MessageModel</name>
+    <message>
+        <location filename="../src/MessageModel.cpp" line="167"/>
+        <source>Pending</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/MessageModel.cpp" line="169"/>
+        <source>Sent</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/MessageModel.cpp" line="171"/>
+        <source>Delivered</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/MessageModel.cpp" line="173"/>
+        <source>Error</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>MultimediaSettings</name>
     <message>
+        <location filename="../src/qml/settings/MultimediaSettings.qml" line="43"/>
         <source>Multimedia Settings</source>
-        <translation>Настройки мультимедиа</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../src/qml/settings/MultimediaSettings.qml" line="55"/>
         <source>Configure</source>
-        <translation>Настроить</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../src/qml/settings/MultimediaSettings.qml" line="65"/>
         <source>Image Capture</source>
-        <translation>Захват изображения</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../src/qml/settings/MultimediaSettings.qml" line="70"/>
         <source>Audio Recording</source>
-        <translation>Запись аудио</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../src/qml/settings/MultimediaSettings.qml" line="75"/>
         <source>Video Recording</source>
-        <translation>Запись видео</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../src/qml/settings/MultimediaSettings.qml" line="127"/>
         <source>Camera</source>
-        <translation>Камера</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../src/qml/settings/MultimediaSettings.qml" line="156"/>
         <source>Audio input</source>
-        <translation>Аудио вход</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../src/qml/settings/MultimediaSettings.qml" line="186"/>
         <source>Container</source>
-        <translation>Контейнер</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../src/qml/settings/MultimediaSettings.qml" line="225"/>
         <source>Image</source>
-        <translation>Изображение</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../src/qml/settings/MultimediaSettings.qml" line="230"/>
         <source>Audio</source>
-        <translation>Аудио</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../src/qml/settings/MultimediaSettings.qml" line="236"/>
         <source>Video</source>
-        <translation>Видео</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../src/qml/settings/MultimediaSettings.qml" line="263"/>
+        <location filename="../src/qml/settings/MultimediaSettings.qml" line="347"/>
+        <location filename="../src/qml/settings/MultimediaSettings.qml" line="431"/>
         <source>Codec</source>
-        <translation>Кодек</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../src/qml/settings/MultimediaSettings.qml" line="289"/>
+        <location filename="../src/qml/settings/MultimediaSettings.qml" line="457"/>
         <source>Resolution</source>
-        <translation>Разрешение</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../src/qml/settings/MultimediaSettings.qml" line="315"/>
+        <location filename="../src/qml/settings/MultimediaSettings.qml" line="399"/>
+        <location filename="../src/qml/settings/MultimediaSettings.qml" line="509"/>
         <source>Quality</source>
-        <translation>Качество</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../src/qml/settings/MultimediaSettings.qml" line="373"/>
         <source>Sample Rate</source>
-        <translation>Частота дискретизации</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../src/qml/settings/MultimediaSettings.qml" line="483"/>
         <source>Frame Rate</source>
-        <translation>Частота кадров</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../src/qml/settings/MultimediaSettings.qml" line="573"/>
+        <location filename="../src/qml/settings/MultimediaSettings.qml" line="582"/>
         <source>Ready</source>
-        <translation>Готово</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../src/qml/settings/MultimediaSettings.qml" line="573"/>
+        <location filename="../src/qml/settings/MultimediaSettings.qml" line="582"/>
         <source>Initializing...</source>
-        <translation>Инициализация…</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../src/qml/settings/MultimediaSettings.qml" line="578"/>
         <source>Unavailable</source>
-        <translation>Недоступно</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../src/qml/settings/MultimediaSettings.qml" line="586"/>
         <source>Recording...</source>
-        <translation>Запись…</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../src/qml/settings/MultimediaSettings.qml" line="588"/>
         <source>Paused</source>
-        <translation>Пауза</translation>
-    </message>
-</context>
-<context>
-    <name>MultimediaSettingsPage</name>
-    <message>
-        <source>Image</source>
-        <translation type="obsolete">Изображение</translation>
-    </message>
-    <message>
-        <source>Audio</source>
-        <translation type="obsolete">Звук</translation>
-    </message>
-    <message>
-        <source>Video</source>
-        <translation type="obsolete">Видео</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>NewMedia</name>
     <message>
+        <location filename="../src/qml/elements/NewMedia.qml" line="144"/>
+        <location filename="../src/qml/elements/NewMedia.qml" line="153"/>
         <source>Ready</source>
-        <translation>Готово</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../src/qml/elements/NewMedia.qml" line="144"/>
+        <location filename="../src/qml/elements/NewMedia.qml" line="153"/>
         <source>Initializing...</source>
-        <translation>Инициализация…</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../src/qml/elements/NewMedia.qml" line="149"/>
         <source>Unavailable</source>
-        <translation>Недоступно</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../src/qml/elements/NewMedia.qml" line="157"/>
         <source>Recording... %1</source>
-        <translation>Запись… %1</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../src/qml/elements/NewMedia.qml" line="159"/>
         <source>Paused %1</source>
-        <translation>Пауза %1</translation>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>PasswordRemovalPage</name>
+    <message>
+        <location filename="../src/qml/settings/PasswordRemovalPage.qml" line="44"/>
+        <source>Remove password</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/qml/settings/PasswordRemovalPage.qml" line="46"/>
+        <source>You can decide to only not show your password for &lt;b&gt;%1&lt;/b&gt; as text anymore or to remove it completely from the account transfer. If you remove your password completely, you won&apos;t be able to use the account transfer via scanning without entering your password because it is also removed from the QR code.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/qml/settings/PasswordRemovalPage.qml" line="49"/>
+        <source>Do not show password as text</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/qml/settings/PasswordRemovalPage.qml" line="55"/>
+        <source>Remove completely</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>QObject</name>
+    <message>
+        <location filename="../src/Notifications.cpp" line="67"/>
+        <source>Mark as read</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>QmlUtils</name>
     <message>
+        <location filename="../src/QmlUtils.cpp" line="96"/>
         <source>Available</source>
-        <translation>Доступен</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../src/QmlUtils.cpp" line="98"/>
         <source>Free for chat</source>
-        <translation>В настроении поболтать</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../src/QmlUtils.cpp" line="100"/>
         <source>Away</source>
-        <translation>Отошёл</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../src/QmlUtils.cpp" line="102"/>
         <source>Do not disturb</source>
-        <translation>Не беспокоить</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../src/QmlUtils.cpp" line="104"/>
         <source>Away for longer</source>
-        <translation>Ушёл надолго</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../src/QmlUtils.cpp" line="106"/>
         <source>Offline</source>
-        <translation>Не в сети</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../src/QmlUtils.cpp" line="108"/>
         <source>Error</source>
-        <translation>Ошибка</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Invisible</source>
-        <translation>Невидимый</translation>
-    </message>
-    <message>
+        <location filename="../src/QmlUtils.cpp" line="142"/>
         <source>Invalid username or password.</source>
-        <translation>Неверное имя пользователя или пароль.</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../src/QmlUtils.cpp" line="144"/>
         <source>Cannot connect to the server. Please check your internet connection.</source>
-        <translation>Не удается подключиться к серверу. Пожалуйста, проверьте подключение к сети.</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>The server doesn&apos;t support secure connections.</source>
-        <translation>Сервер не поддерживает безопасные соединения.</translation>
-    </message>
-    <message>
+        <location filename="../src/QmlUtils.cpp" line="146"/>
         <source>Error while trying to connect securely.</source>
-        <translation>Ошибка при попытке безопасного подключения.</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../src/QmlUtils.cpp" line="148"/>
+        <source>The server doesn&apos;t support secure connections.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/QmlUtils.cpp" line="150"/>
         <source>Could not resolve the server&apos;s address. Please check your server name.</source>
-        <translation>Не удалось преобразовать адрес сервера. Пожалуйста, проверьте имя сервера.</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Could not connect to the server.</source>
-        <translation type="obsolete">Не смог подключиться к серверу.</translation>
-    </message>
-    <message>
-        <source>Authentification protocol not supported by the server.</source>
-        <translation>Сервер не поддерживает этот протокол аутентификации.</translation>
-    </message>
-    <message>
-        <source>This server does not support registration.</source>
-        <translation>Этот сервер не поддерживает регистрацию.</translation>
-    </message>
-    <message>
+        <location filename="../src/QmlUtils.cpp" line="152"/>
         <source>The server is offline or blocked by a firewall.</source>
-        <translation>Этот сервер не в сети или заблокирован сетевой защитой.</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../src/QmlUtils.cpp" line="154"/>
+        <source>Authentification protocol not supported by the server.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/QmlUtils.cpp" line="156"/>
         <source>The connection could not be refreshed.</source>
-        <translation>Не удалось обновить соединение.</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../src/QmlUtils.cpp" line="158"/>
         <source>The internet access is not permitted. Please check your system&apos;s internet access configuration.</source>
-        <translation>Доступ в сеть закрыт. Пожалуйста, проверьте системные настройки доступа в интернет.</translation>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/QmlUtils.cpp" line="160"/>
+        <source>This server does not support registration.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>QrCodeGenerator</name>
     <message>
+        <location filename="../src/QrCodeGenerator.cpp" line="70"/>
         <source>Generating the QR code failed: %1</source>
-        <translation>Не удалось сгенерировать QR код: %1</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>QrCodeScannerPage</name>
     <message>
+        <location filename="../src/qml/QrCodeScannerPage.qml" line="48"/>
         <source>Scan QR code</source>
-        <translation>Отсканировать QR код</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../src/qml/QrCodeScannerPage.qml" line="68"/>
         <source>There is no camera available.</source>
-        <translation>Не удалось обнаружить камеру.</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../src/qml/QrCodeScannerPage.qml" line="71"/>
         <source>Your camera is busy.
 Try to close other applications using the camera.</source>
-        <translation>Камера занята.
-Попробуйте закрыть другие приложения, использующие камеру.</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../src/qml/QrCodeScannerPage.qml" line="118"/>
         <source>The camera format &apos;%1&apos; is not supported.</source>
-        <translation>Формат камеры &apos;%1&apos; не поддерживается.</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Logging in…</source>
-        <translation>Вход в систему…</translation>
+        <location filename="../src/qml/QrCodeScannerPage.qml" line="142"/>
+        <source>Connecting…</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../src/qml/QrCodeScannerPage.qml" line="187"/>
         <source>Scan the QR code from your existing device to transfer your account.</source>
-        <translation>Чтобы перенести учётную запись, отсканируйте код другим устройством.</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../src/qml/QrCodeScannerPage.qml" line="213"/>
         <source>Show explanation</source>
-        <translation>Показать пояснения</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../src/qml/QrCodeScannerPage.qml" line="213"/>
         <source>Scan</source>
-        <translation>Сканировать</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../src/qml/QrCodeScannerPage.qml" line="227"/>
         <source>Continue without QR code</source>
-        <translation>Продолжить без QR кода</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>RegistrationLoginDecisionPage</name>
     <message>
+        <location filename="../src/qml/RegistrationLoginDecisionPage.qml" line="41"/>
         <source>Set up</source>
-        <translation>Настроить</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../src/qml/RegistrationLoginDecisionPage.qml" line="47"/>
         <source>Register a new account</source>
-        <translation>Завести учётную запись</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../src/qml/RegistrationLoginDecisionPage.qml" line="52"/>
         <source>Use an existing account</source>
-        <translation>Существующая учётная запись</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>RegistrationManager</name>
     <message>
+        <location filename="../src/RegistrationManager.cpp" line="124"/>
         <source>Password changed successfully.</source>
-        <translation>Пароль изменён.</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../src/RegistrationManager.cpp" line="131"/>
         <source>Failed to change password: %1</source>
-        <translation>Не удалось изменить пароль: %1</translation>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>RemoteAccountDeletion</name>
+    <message>
+        <location filename="../src/qml/settings/RemoteAccountDeletion.qml" line="42"/>
+        <source>Delete account completely</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/qml/settings/RemoteAccountDeletion.qml" line="44"/>
+        <source>Your account will be deleted completely, which means from this app and from the server.
+You will not be able to use your account again!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/qml/settings/RemoteAccountDeletion.qml" line="49"/>
+        <source>Delete</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>RosterAddContactSheet</name>
     <message>
-        <source>Nickname:</source>
-        <translation>Имя (ник):</translation>
-    </message>
-    <message>
-        <source>Jabber-ID:</source>
-        <translation>Jabber ID:</translation>
-    </message>
-    <message>
-        <source>user@example.org</source>
-        <translation>ivanov@mail.ru</translation>
-    </message>
-    <message>
-        <source>Cancel</source>
-        <translation>Отмена</translation>
-    </message>
-    <message>
-        <source>Add</source>
-        <translation>Добавить</translation>
-    </message>
-    <message>
+        <location filename="../src/qml/elements/RosterAddContactSheet.qml" line="42"/>
         <source>Add new contact</source>
-        <translation>Добавить контакт</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../src/qml/elements/RosterAddContactSheet.qml" line="50"/>
         <source>This will also send a request to access the presence of the contact.</source>
-        <translation>Также будет отправлен запрос на доступ к статусу контакта.</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../src/qml/elements/RosterAddContactSheet.qml" line="59"/>
+        <source>Jabber-ID:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/qml/elements/RosterAddContactSheet.qml" line="64"/>
+        <source>user@example.org</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/qml/elements/RosterAddContactSheet.qml" line="71"/>
+        <source>Nickname:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/qml/elements/RosterAddContactSheet.qml" line="80"/>
         <source>Optional message:</source>
-        <translation>Сообщение (необязательно):</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../src/qml/elements/RosterAddContactSheet.qml" line="88"/>
         <source>Tell your chat partner who you are.</source>
-        <translation>Расскажите собеседнику, кто вы такой.</translation>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/qml/elements/RosterAddContactSheet.qml" line="97"/>
+        <source>Cancel</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/qml/elements/RosterAddContactSheet.qml" line="107"/>
+        <source>Add</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>RosterListItem</name>
     <message>
-        <source>Offline</source>
-        <translation type="obsolete">Не в сети</translation>
-    </message>
-    <message>
+        <location filename="../src/qml/elements/RosterListItem.qml" line="123"/>
         <source>Error: Please check the JID.</source>
-        <translation>Ошибка: пожалуйста, проверьте JID.</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>RosterManager</name>
     <message>
+        <location filename="../src/RosterManager.cpp" line="135"/>
         <source>Could not add contact, as a result of not being connected.</source>
-        <translation>Невозможно добавить контакт, так как он не был подключен.</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../src/RosterManager.cpp" line="149"/>
         <source>Could not remove contact, as a result of not being connected.</source>
-        <translation>Не удалось удалить контакт из-за отсутствия подключения.</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Spoiler</source>
-        <translation>Спойлер</translation>
-    </message>
-    <message>
+        <location filename="../src/RosterManager.cpp" line="162"/>
         <source>Could not rename contact, as a result of not being connected.</source>
-        <translation>Не удалось переименовать контакт (отсутствует подключение к сети).</translation>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/RosterManager.cpp" line="175"/>
+        <location filename="../src/RosterManager.cpp" line="214"/>
+        <source>Spoiler</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>RosterPage</name>
     <message>
-        <source>Contacts</source>
-        <translation>Контакты</translation>
-    </message>
-    <message>
-        <source>Add new contact</source>
-        <translation>Добавить контакт</translation>
-    </message>
-    <message>
+        <location filename="../src/qml/RosterPage.qml" line="41"/>
         <source>Connecting…</source>
-        <translation>Соединение…</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../src/qml/RosterPage.qml" line="42"/>
         <source>Offline</source>
-        <translation>Не в сети</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../src/qml/RosterPage.qml" line="43"/>
+        <source>Contacts</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/qml/RosterPage.qml" line="56"/>
+        <source>Add new contact</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/qml/RosterPage.qml" line="68"/>
         <source>Search contacts</source>
-        <translation>Искать в контактах</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>RosterRemoveContactSheet</name>
     <message>
-        <source>Do you really want to delete the contact &quot;%1&quot; from your roster?</source>
-        <translation type="vanished">Вы действительно хотите удалить контакт &quot;%1&quot; из своего списка?</translation>
-    </message>
-    <message>
+        <location filename="../src/qml/elements/RosterRemoveContactSheet.qml" line="42"/>
         <source>Delete contact</source>
-        <translation>Удалить контакт</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Cancel</source>
-        <translation>Отмена</translation>
-    </message>
-    <message>
-        <source>Delete</source>
-        <translation>Удалить</translation>
-    </message>
-    <message>
+        <location filename="../src/qml/elements/RosterRemoveContactSheet.qml" line="48"/>
         <source>Do you really want to delete the contact &lt;b&gt;%1&lt;/b&gt; from your roster?</source>
-        <translation>Хотите удалить контакт &lt;b&gt;%1&lt;/b&gt; из списка?</translation>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/qml/elements/RosterRemoveContactSheet.qml" line="67"/>
+        <source>Cancel</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/qml/elements/RosterRemoveContactSheet.qml" line="73"/>
+        <source>Delete</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>RosterRenameContactSheet</name>
     <message>
+        <location filename="../src/qml/elements/RosterRenameContactSheet.qml" line="43"/>
         <source>Rename contact</source>
-        <translation>Переименовать контакт</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../src/qml/elements/RosterRenameContactSheet.qml" line="61"/>
         <source>Cancel</source>
-        <translation>Отменить</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../src/qml/elements/RosterRenameContactSheet.qml" line="68"/>
         <source>Rename</source>
-        <translation>Переименовать</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>SendMediaSheet</name>
     <message>
-        <source>Cancel</source>
-        <translation>Отменить</translation>
-    </message>
-    <message>
-        <source>Send</source>
-        <translation>Отправить</translation>
-    </message>
-    <message>
+        <location filename="../src/qml/elements/SendMediaSheet.qml" line="105"/>
         <source>Caption</source>
-        <translation>Подпись</translation>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/qml/elements/SendMediaSheet.qml" line="118"/>
+        <source>Cancel</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/qml/elements/SendMediaSheet.qml" line="132"/>
+        <source>Send</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>ServerListModel</name>
     <message>
+        <location filename="../src/ServerListModel.cpp" line="48"/>
         <source>Custom server</source>
-        <translation>Пользовательский сервер</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../src/ServerListModel.cpp" line="116"/>
+        <location filename="../src/ServerListModel.cpp" line="126"/>
         <source>No limitation</source>
         <extracomment>Unlimited file size for uploading files
 ----------
 Deletion of message history saved on server</extracomment>
-        <translation>Без ограничений</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../src/ServerListModel.cpp" line="128"/>
         <source>%1 days</source>
-        <translation>%1 дней</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>SettingsContent</name>
     <message>
+        <location filename="../src/qml/settings/SettingsContent.qml" line="43"/>
+        <source>Settings</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/qml/settings/SettingsContent.qml" line="48"/>
         <source>Change password</source>
-        <translation>Изменить пароль</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../src/qml/settings/SettingsContent.qml" line="49"/>
         <source>Changes your account&apos;s password. You will need to re-enter it on your other devices.</source>
-        <translation>Изменяет пароль учётной записи. Вам придётся ввести его заново на других устройствах.</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../src/qml/settings/SettingsContent.qml" line="55"/>
         <source>Multimedia Settings</source>
-        <translation>Настройки мультимедиа</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../src/qml/settings/SettingsContent.qml" line="56"/>
         <source>Configure photo, video and audio recording settings</source>
-        <translation>Изменить настройки снимков, аудио- и видеозаписей</translation>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/qml/settings/SettingsContent.qml" line="61"/>
+        <source>Account security</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/qml/settings/SettingsContent.qml" line="62"/>
+        <source>configure whether this device can be used to log in on a new device</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/qml/settings/SettingsContent.qml" line="67"/>
+        <source>Remove account from Kaidan</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/qml/settings/SettingsContent.qml" line="68"/>
+        <source>Remove account from this app</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/qml/settings/SettingsContent.qml" line="73"/>
+        <source>Delete account</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/qml/settings/SettingsContent.qml" line="74"/>
+        <source>Delete account from the server</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>SettingsPage</name>
     <message>
+        <location filename="../src/qml/settings/SettingsPage.qml" line="35"/>
         <source>Settings</source>
-        <translation>Настройки</translation>
-    </message>
-</context>
-<context>
-    <name>SettingsSheet</name>
-    <message>
-        <source>Settings</source>
-        <translation>Настройки</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>StartPage</name>
     <message>
+        <location filename="../src/qml/StartPage.qml" line="68"/>
         <source>Enjoy free communication on every device!</source>
-        <translation>Общайтесь бесплатно на любом устройстве!</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../src/qml/StartPage.qml" line="84"/>
         <source>Let&apos;s start</source>
-        <translation>Начнём</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>SubRequestAcceptSheet</name>
     <message>
+        <location filename="../src/qml/elements/SubRequestAcceptSheet.qml" line="43"/>
         <source>Subscription Request</source>
-        <translation>Запрос на подписку</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../src/qml/elements/SubRequestAcceptSheet.qml" line="52"/>
         <source>You received a subscription request by &lt;b&gt;%1&lt;/b&gt;. If you accept it, the account will have access to your presence status.</source>
-        <translation>Вы получили запрос на подписку от &lt;b&gt;%1&lt;/b&gt;. Если вы его примете, у контакта будет доступ к вашему статусу.</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../src/qml/elements/SubRequestAcceptSheet.qml" line="64"/>
         <source>Decline</source>
-        <translation>Отклонить</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../src/qml/elements/SubRequestAcceptSheet.qml" line="73"/>
         <source>Accept</source>
-        <translation>Принять</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>UploadManager</name>
     <message>
+        <location filename="../src/UploadManager.cpp" line="72"/>
         <source>Could not send file, as a result of not being connected.</source>
-        <translation>Не смог отправить файл, так как не был подключен.</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../src/UploadManager.cpp" line="108"/>
         <source>File</source>
-        <translation>Файл</translation>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/UploadManager.cpp" line="148"/>
+        <source>Message could not be sent.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>UserProfilePage</name>
     <message>
+        <location filename="../src/qml/UserProfilePage.qml" line="42"/>
         <source>Profile</source>
-        <translation>Профиль</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>VCardModel</name>
     <message>
+        <location filename="../src/VCardModel.cpp" line="88"/>
         <source>Name</source>
-        <translation>Имя</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../src/VCardModel.cpp" line="91"/>
         <source>Nickname</source>
-        <translation>Имя (ник)</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../src/VCardModel.cpp" line="94"/>
         <source>About</source>
-        <translation>О программе</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../src/VCardModel.cpp" line="97"/>
         <source>Email</source>
-        <translation>Электронная почта</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../src/VCardModel.cpp" line="100"/>
         <source>Birthday</source>
-        <translation>Дата рождения</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../src/VCardModel.cpp" line="103"/>
         <source>Website</source>
-        <translation>Веб-сайт</translation>
-    </message>
-</context>
-<context>
-    <name>main</name>
-    <message>
-        <source>Successfully parsed command line input.</source>
-        <translation type="vanished">Ввод из командной строки успешно распознан.</translation>
-    </message>
-    <message>
-        <source>Log out</source>
-        <translation type="vanished">Выйти</translation>
-    </message>
-    <message>
-        <source>About</source>
-        <translation type="vanished">О программе</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 </TS>

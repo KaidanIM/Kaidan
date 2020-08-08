@@ -1,532 +1,623 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.1" language="nl">
+<TS version="2.1">
 <context>
     <name>AboutDialog</name>
     <message>
+        <location filename="../src/qml/AboutDialog.qml" line="78"/>
         <source>A simple, user-friendly Jabber/XMPP client</source>
-        <translation>Een eenvoudige, gebruiksvriendelijke Jabber/XMPP-client</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../src/qml/AboutDialog.qml" line="86"/>
         <source>License:</source>
-        <translation>Licentie:</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Source code on GitHub</source>
-        <translation type="obsolete">Broncode op GitHub</translation>
+        <location filename="../src/qml/AboutDialog.qml" line="103"/>
+        <source>Report problems</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../src/qml/AboutDialog.qml" line="108"/>
         <source>View source code online</source>
-        <translation>Broncode online bekijken</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
-    <name>AboutSheet</name>
+    <name>AccountSecurity</name>
     <message>
-        <source>A simple, user-friendly Jabber/XMPP client</source>
-        <translation type="vanished">Een simpele, gebruiksvriendelijke Jabber/XMPP client</translation>
+        <location filename="../src/qml/settings/AccountSecurity.qml" line="39"/>
+        <source>Account Security</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>License:</source>
-        <translation type="vanished">Licentie:</translation>
+        <location filename="../src/qml/settings/AccountSecurity.qml" line="41"/>
+        <source>Allow to add new devices using a QR-Code, but never show the password as text. This action can not be undone, so consider storing the password in another way before using it.</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Source code on GitHub</source>
-        <translation type="vanished">Broncode op GitHub</translation>
+        <location filename="../src/qml/settings/AccountSecurity.qml" line="43"/>
+        <source>Disable showing the password</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/qml/settings/AccountSecurity.qml" line="48"/>
+        <source>Don&apos;t expose the password in any form. This action can not be undone.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/qml/settings/AccountSecurity.qml" line="50"/>
+        <source>Disable showing the QR-Code and password</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
-    <name>BackButton</name>
+    <name>AccountTransferPage</name>
     <message>
-        <source>Navigate Back</source>
-        <translation type="vanished">Ga Terug</translation>
+        <location filename="../src/qml/AccountTransferPage.qml" line="46"/>
+        <source>Transfer account to another device</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/qml/AccountTransferPage.qml" line="66"/>
+        <source>Scan the QR code or enter the credentials as text on another device to log in on it.
+
+Attention:
+Never show this QR code to anyone else. It would allow unlimited access to your account!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/qml/AccountTransferPage.qml" line="92"/>
+        <source>Chat address:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/qml/AccountTransferPage.qml" line="113"/>
+        <source>Password:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/qml/AccountTransferPage.qml" line="147"/>
+        <source>Hide QR code</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/qml/AccountTransferPage.qml" line="147"/>
+        <source>Show as QR code</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/qml/AccountTransferPage.qml" line="170"/>
+        <source>Hide text</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/qml/AccountTransferPage.qml" line="170"/>
+        <source>Show as text</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>ChangePassword</name>
     <message>
+        <location filename="../src/qml/settings/ChangePassword.qml" line="40"/>
+        <location filename="../src/qml/settings/ChangePassword.qml" line="59"/>
         <source>Change password</source>
-        <translation>Wachtwoord veranderen</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../src/qml/settings/ChangePassword.qml" line="68"/>
         <source>Current password:</source>
-        <translation>Huidig wachtwoord:</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../src/qml/settings/ChangePassword.qml" line="74"/>
         <source>New password:</source>
-        <translation>Nieuw wachtwoord:</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../src/qml/settings/ChangePassword.qml" line="80"/>
         <source>New password (repeat):</source>
-        <translation>Nieuw wachtwoord (opnieuw):</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../src/qml/settings/ChangePassword.qml" line="87"/>
         <source>New passwords do not match.</source>
-        <translation>De ingevulde wachtwoorden komen niet overeen.</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../src/qml/settings/ChangePassword.qml" line="97"/>
         <source>Current password is invalid.</source>
-        <translation>Het huidige wachtwoord is ongeldig.</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../src/qml/settings/ChangePassword.qml" line="106"/>
         <source>You need to be connected to change your password.</source>
-        <translation>Uw moet verbonden zijn om uw wachtwoord te kunnen veranderen.</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../src/qml/settings/ChangePassword.qml" line="113"/>
         <source>After changing your password, you will need to reenter it on all your other devices.</source>
-        <translation>Nadat u uw wachtwoord heeft veranderd, zult u het opnieuw in moeten voeren op andere apparaten waarop u bent ingelogd.</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../src/qml/settings/ChangePassword.qml" line="124"/>
         <source>Cancel</source>
-        <translation>Annuleren</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../src/qml/settings/ChangePassword.qml" line="130"/>
         <source>Change</source>
-        <translation>Veranderen</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>ChatMessage</name>
     <message>
-        <source>Copy Message</source>
-        <translation>Bericht Kopiëren</translation>
-    </message>
-    <message>
-        <source>Edit Message</source>
-        <translation>Bericht Bewerken</translation>
-    </message>
-    <message>
+        <location filename="../src/qml/elements/ChatMessage.qml" line="141"/>
         <source>Spoiler</source>
-        <translation>Spoiler</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../src/qml/elements/ChatMessage.qml" line="198"/>
         <source>Download</source>
-        <translation>Downloaden</translation>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>ChatMessageContextMenu</name>
+    <message>
+        <location filename="../src/qml/elements/ChatMessageContextMenu.qml" line="45"/>
+        <source>Copy message</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../src/qml/elements/ChatMessageContextMenu.qml" line="56"/>
+        <source>Edit message</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/qml/elements/ChatMessageContextMenu.qml" line="62"/>
         <source>Copy download URL</source>
-        <translation>Kopiëer downloadlink</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Quote</source>
+        <location filename="../src/qml/elements/ChatMessageContextMenu.qml" line="68"/>
+        <source>Quote message</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>ChatPage</name>
     <message>
-        <source>Compose message</source>
-        <translation>Bericht opstellen</translation>
-    </message>
-    <message>
-        <source>Send</source>
-        <translation type="vanished">Versturen</translation>
-    </message>
-    <message>
-        <source>Image</source>
-        <translation type="vanished">Afbeelding</translation>
-    </message>
-    <message>
-        <source>Video</source>
-        <translation type="vanished">Video</translation>
-    </message>
-    <message>
-        <source>Audio</source>
-        <translation type="vanished">Geluid</translation>
-    </message>
-    <message>
-        <source>Document</source>
-        <translation type="vanished">Document</translation>
-    </message>
-    <message>
-        <source>Other file</source>
-        <translation type="vanished">Ander bestand</translation>
-    </message>
-    <message>
-        <source>Select a file</source>
-        <translation>Selecteer een bestand</translation>
-    </message>
-    <message>
-        <source>Send a spoiler message</source>
-        <translation>Bericht met spoileralert versturen</translation>
-    </message>
-    <message>
-        <source>Spoiler hint</source>
-        <translation>Spoilerhint</translation>
-    </message>
-    <message>
-        <source>Unmute notifications</source>
-        <translation>Meldingen inschakelen</translation>
-    </message>
-    <message>
-        <source>Mute notifications</source>
-        <translation>Meldingen uitschakelen</translation>
-    </message>
-    <message>
-        <source>View profile</source>
-        <translation>Profiel bekijken</translation>
-    </message>
-    <message>
+        <location filename="../src/qml/ChatPage.qml" line="64"/>
         <source>Search</source>
-        <translation type="unfinished">Zoeken</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../src/qml/ChatPage.qml" line="83"/>
+        <location filename="../src/qml/ChatPage.qml" line="95"/>
+        <source>Unmute notifications</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/qml/ChatPage.qml" line="84"/>
+        <location filename="../src/qml/ChatPage.qml" line="96"/>
+        <source>Mute notifications</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/qml/ChatPage.qml" line="112"/>
+        <source>View profile</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/qml/ChatPage.qml" line="172"/>
+        <source>Send a spoiler message</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/qml/ChatPage.qml" line="275"/>
         <source>Close</source>
-        <translation type="unfinished">Sluiten</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../src/qml/ChatPage.qml" line="296"/>
         <source>Search up</source>
-        <translation>Zoeken</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../src/qml/ChatPage.qml" line="307"/>
         <source>Search down</source>
-        <translation>Zoek naar beneden</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../src/qml/ChatPage.qml" line="523"/>
         <source>All files</source>
-        <translation>Alle bestanden</translation>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/qml/ChatPage.qml" line="536"/>
+        <source>Spoiler hint</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/qml/ChatPage.qml" line="567"/>
+        <source>Compose message</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>ClientWorker</name>
+    <message>
+        <location filename="../src/ClientWorker.cpp" line="206"/>
+        <source>Your account could not be deleted from the server. Therefore, it was also not removed from this app: %1</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>CommonEncoderSettings</name>
     <message>
+        <location filename="../src/MediaSettings.cpp" line="161"/>
         <source>Very low</source>
-        <translation>Zeer laag</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../src/MediaSettings.cpp" line="163"/>
         <source>Low</source>
-        <translation>Laag</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../src/MediaSettings.cpp" line="165"/>
         <source>Normal</source>
-        <translation>Normaal</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../src/MediaSettings.cpp" line="167"/>
         <source>High</source>
-        <translation>Hoog</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../src/MediaSettings.cpp" line="169"/>
         <source>Very high</source>
-        <translation>Zeer hoog</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../src/MediaSettings.cpp" line="180"/>
         <source>Constant quality</source>
-        <translation>Constante kwaliteit</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../src/MediaSettings.cpp" line="182"/>
         <source>Constant bit rate</source>
-        <translation>Constante bitsnelheid</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../src/MediaSettings.cpp" line="184"/>
         <source>Average bit rate</source>
-        <translation>Gemiddelde bitsnelheid</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../src/MediaSettings.cpp" line="186"/>
         <source>Two pass</source>
-        <translation>Twee passen</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
-    <name>ContextDrawer</name>
+    <name>ConfirmationPage</name>
     <message>
-        <source>Actions</source>
-        <translation type="vanished">Handelingen</translation>
+        <location filename="../src/qml/elements/ConfirmationPage.qml" line="48"/>
+        <source>Cancel</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>DisablePasswordDisplay</name>
+    <message>
+        <location filename="../src/qml/settings/DisablePasswordDisplay.qml" line="42"/>
+        <source>Remove password completely</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/qml/settings/DisablePasswordDisplay.qml" line="44"/>
+        <source>Your password will not be included in the QR code anymore.
+You won&apos;t be able to use the login via QR code without entering your password again because this action cannot be undone!
+Make sure that you backed it up if you want to use your account later.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/qml/settings/DisablePasswordDisplay.qml" line="49"/>
+        <source>Remove password</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>DisablePlainTextPasswordDisplay</name>
+    <message>
+        <location filename="../src/qml/settings/DisablePlainTextPasswordDisplay.qml" line="42"/>
+        <source>Do not show password as text</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/qml/settings/DisablePlainTextPasswordDisplay.qml" line="44"/>
+        <source>Your password will not be shown as text anymore.
+You won&apos;t be able to see your password as text again because this action cannot be undone!
+Make sure that you backed it up if you want to use your account later.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/qml/settings/DisablePlainTextPasswordDisplay.qml" line="49"/>
+        <source>Do not show password</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>DownloadJob</name>
     <message>
+        <location filename="../src/DownloadManager.cpp" line="136"/>
         <source>Could not save file: %1</source>
-        <translation>Kon bestand niet opslaan: %1</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../src/DownloadManager.cpp" line="157"/>
         <source>Download failed: %1</source>
-        <translation>Downloaden mislukt: %1</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>EmojiPicker</name>
     <message>
+        <location filename="../src/qml/elements/EmojiPicker.qml" line="123"/>
         <source>Favorites</source>
-        <translation>Favorieten</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../src/qml/elements/EmojiPicker.qml" line="125"/>
         <source>People</source>
-        <translation>Mensen</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../src/qml/elements/EmojiPicker.qml" line="127"/>
         <source>Nature</source>
-        <translation>Natuur</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../src/qml/elements/EmojiPicker.qml" line="129"/>
         <source>Food</source>
-        <translation>Eten</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../src/qml/elements/EmojiPicker.qml" line="131"/>
         <source>Activity</source>
-        <translation>Activiteiten</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../src/qml/elements/EmojiPicker.qml" line="133"/>
         <source>Travel</source>
-        <translation>Reizigen</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../src/qml/elements/EmojiPicker.qml" line="135"/>
         <source>Objects</source>
-        <translation>Voorwerpen</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../src/qml/elements/EmojiPicker.qml" line="137"/>
         <source>Symbols</source>
-        <translation>Symbolen</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../src/qml/elements/EmojiPicker.qml" line="139"/>
         <source>Flags</source>
-        <translation>Vlaggen</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../src/qml/elements/EmojiPicker.qml" line="141"/>
         <source>Search</source>
-        <translation>Zoeken</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../src/qml/elements/EmojiPicker.qml" line="166"/>
         <source>Search emoji</source>
-        <translation>Emoji&apos;s zoeken</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>EmptyChatPage</name>
     <message>
+        <location filename="../src/qml/EmptyChatPage.qml" line="62"/>
         <source>Please select a chat to start messaging</source>
-        <translation>Selecteer een chat om een gesprek te beginnen</translation>
-    </message>
-</context>
-<context>
-    <name>FileChooser</name>
-    <message>
-        <source>Select a file</source>
-        <translation>Selecteer een bestand</translation>
-    </message>
-</context>
-<context>
-    <name>FileChooserMobile</name>
-    <message>
-        <source>Go to parent folder</source>
-        <translation>Ga naar bovenliggende map</translation>
-    </message>
-    <message>
-        <source>Close</source>
-        <translation>Sluiten</translation>
-    </message>
-</context>
-<context>
-    <name>ForwardButton</name>
-    <message>
-        <source>Navigate Forward</source>
-        <translation type="vanished">Ga Vooruit</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>GlobalDrawer</name>
     <message>
-        <source>Back</source>
-        <translation type="vanished">Terug</translation>
-    </message>
-    <message>
-        <source>Log out</source>
-        <translation>Log uit</translation>
-    </message>
-    <message>
-        <source>About</source>
-        <translation>Over</translation>
-    </message>
-    <message>
-        <source>Invite friends</source>
-        <translation>Nodig vrienden uit</translation>
-    </message>
-    <message>
-        <source>Invitation link copied to clipboard</source>
-        <translation>Uitnodigingslink gekopieerd naar klembord</translation>
-    </message>
-    <message>
-        <source>Settings</source>
-        <translation>Instellingen</translation>
-    </message>
-    <message>
+        <location filename="../src/qml/GlobalDrawer.qml" line="68"/>
         <source>Offline</source>
-        <translation type="unfinished">Offline</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../src/qml/GlobalDrawer.qml" line="70"/>
         <source>Online</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../src/qml/GlobalDrawer.qml" line="72"/>
         <source>Connecting…</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/qml/GlobalDrawer.qml" line="86"/>
+        <source>Invite friends</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/qml/GlobalDrawer.qml" line="90"/>
+        <source>Invitation link copied to clipboard</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/qml/GlobalDrawer.qml" line="94"/>
+        <source>Switch device</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/qml/GlobalDrawer.qml" line="102"/>
+        <source>Settings</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/qml/GlobalDrawer.qml" line="115"/>
+        <source>About</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>Kaidan</name>
     <message>
+        <location filename="../src/Kaidan.cpp" line="266"/>
         <source>The link will be opened after you have connected.</source>
         <extracomment>The link is an XMPP-URI (i.e. &apos;xmpp:kaidan@muc.kaidan.im?join&apos; for joining a chat)</extracomment>
-        <translation>De link wordt geopend nadat u verbinding hebt gemaakt.</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>No password found. Please enter it.</source>
-        <translation>Er is geen wachtwoord gevonden. Voor alstublieft een wachtwoord in.</translation>
-    </message>
-    <message>
+        <location filename="../src/Kaidan.cpp" line="300"/>
         <source>No valid login QR code found.</source>
-        <translation>Geen geldige login-QR-code gevonden.</translation>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>LocalAccountRemoval</name>
+    <message>
+        <location filename="../src/qml/settings/LocalAccountRemoval.qml" line="42"/>
+        <source>Remove account from this app</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/qml/settings/LocalAccountRemoval.qml" line="44"/>
+        <source>Your account will be removed from this app.
+Your password will be deleted, make sure it is stored in a password manager or you know it!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/qml/settings/LocalAccountRemoval.qml" line="49"/>
+        <source>Remove</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>LoginPage</name>
     <message>
+        <location filename="../src/qml/LoginPage.qml" line="42"/>
         <source>Log in</source>
-        <translation>Log in</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Log in to your XMPP Account</source>
-        <translation type="vanished">Log in op uw XMPP-account</translation>
-    </message>
-    <message>
-        <source>Your Jabber-ID:</source>
-        <translation type="vanished">Uw Jabber-ID:</translation>
-    </message>
-    <message>
-        <source>Your diaspora*-ID:</source>
-        <translation type="vanished">Uw diaspora*-ID:</translation>
-    </message>
-    <message>
-        <source>user@example.org</source>
-        <translation type="vanished">gebruiker@voorbeeld.nl</translation>
-    </message>
-    <message>
-        <source>user@diaspora.pod</source>
-        <translation type="vanished">gebruiker@diaspora.pod</translation>
-    </message>
-    <message>
-        <source>Your Password:</source>
-        <translation type="vanished">Uw Wachtwoord:</translation>
-    </message>
-    <message>
-        <source>Retry</source>
-        <translation type="vanished">Opnieuw proberen</translation>
-    </message>
-    <message>
-        <source>Connect</source>
-        <translation>Verbind</translation>
-    </message>
-    <message>
-        <source>Connecting…</source>
-        <translation>Verbinden…</translation>
-    </message>
-    <message>
+        <location filename="../src/qml/LoginPage.qml" line="48"/>
         <source>Log in to your XMPP account</source>
-        <translation>Log in op uw XMPP-account</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Invalid username or password.</source>
-        <translation type="vanished">Ongeldige gebruikersnaam of wachtwoord.</translation>
+        <location filename="../src/qml/LoginPage.qml" line="85"/>
+        <source>Connect</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Cannot connect to the server. Please check your internet connection.</source>
-        <translation type="vanished">Kan geen verbinding maken met de server. Controleer uw internetverbinding.</translation>
-    </message>
-    <message>
-        <source>The server doesn&apos;t support secure connections.</source>
-        <translation type="vanished">De server ondersteunt geen beveiligde verbindingen.</translation>
-    </message>
-    <message>
-        <source>Error while trying to connect securely.</source>
-        <translation type="vanished">Fout bij het maken van een beveiligde verbinding.</translation>
-    </message>
-    <message>
-        <source>Could not resolve the server&apos;s address. Please check your JID again.</source>
-        <translation type="vanished">Kan het adres van de server niet oplossen. Controleer uw JID opnieuw.</translation>
-    </message>
-    <message>
-        <source>Could not connect to the server.</source>
-        <translation type="vanished">Kan geen verbinding maken met de server.</translation>
-    </message>
-    <message>
-        <source>Authentification protocol not supported by the server.</source>
-        <translation type="vanished">Authenticatieprotocol niet ondersteund door de server.</translation>
-    </message>
-    <message>
-        <source>An unknown error occured; see log for details.</source>
-        <translation type="vanished">Er is een onbekende fout opgetreden; zie logboek voor details.</translation>
-    </message>
-    <message>
-        <source>Log in using a QR-Code</source>
-        <translation>Log in met behulp van een QR-code</translation>
+        <location filename="../src/qml/LoginPage.qml" line="93"/>
+        <source>Connecting…</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>MediaRecorder</name>
     <message>
+        <location filename="../src/MediaRecorder.cpp" line="1184"/>
+        <location filename="../src/MediaRecorder.cpp" line="1192"/>
+        <location filename="../src/MediaRecorder.cpp" line="1207"/>
+        <location filename="../src/MediaRecorder.cpp" line="1216"/>
+        <location filename="../src/MediaRecorder.cpp" line="1224"/>
+        <location filename="../src/MediaRecorder.cpp" line="1233"/>
+        <location filename="../src/MediaRecorder.cpp" line="1241"/>
         <source>Default</source>
-        <translation>Standaard</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>MediaUtils</name>
     <message>
+        <location filename="../src/MediaUtils.cpp" line="252"/>
         <source>Take picture</source>
-        <translation>Neem foto&apos;s</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../src/MediaUtils.cpp" line="254"/>
         <source>Record video</source>
-        <translation>Video opnemen</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../src/MediaUtils.cpp" line="256"/>
         <source>Record voice</source>
-        <translation>Video opnemen</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../src/MediaUtils.cpp" line="258"/>
         <source>Send location</source>
-        <translation>Stuur locatie</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../src/MediaUtils.cpp" line="296"/>
         <source>Choose file</source>
-        <translation>Kies bestand</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../src/MediaUtils.cpp" line="298"/>
         <source>Choose image</source>
-        <translation>Kies een afbeelding</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../src/MediaUtils.cpp" line="300"/>
         <source>Choose video</source>
-        <translation>Kies video</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../src/MediaUtils.cpp" line="302"/>
         <source>Choose audio file</source>
-        <translation>Kies audiobestand</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../src/MediaUtils.cpp" line="304"/>
         <source>Choose document</source>
-        <translation>Kies een document</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../src/MediaUtils.cpp" line="326"/>
         <source>All files</source>
-        <translation>Alle bestanden</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../src/MediaUtils.cpp" line="328"/>
         <source>Images</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../src/MediaUtils.cpp" line="330"/>
         <source>Videos</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../src/MediaUtils.cpp" line="332"/>
         <source>Audio files</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../src/MediaUtils.cpp" line="334"/>
         <source>Documents</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../src/MediaUtils.cpp" line="359"/>
         <source>%1 (%2)</source>
         <translation type="unfinished"></translation>
     </message>
@@ -534,516 +625,758 @@
 <context>
     <name>MessageHandler</name>
     <message>
-        <source>Could not send message, as a result of not being connected.</source>
-        <translation>Kan geen bericht verzenden, omdat er geen verbinding is gemaakt.</translation>
-    </message>
-    <message>
-        <source>Could not correct message, as a result of not being connected.</source>
-        <translation>Bericht kon niet verbeterd worden, omdat er geen verbinding is.</translation>
-    </message>
-    <message>
-        <source>Spoiler</source>
-        <translation>Spoiler</translation>
-    </message>
-    <message>
-        <source>Message could not be sent.</source>
-        <translation>Het bericht kon niet worden verzonden.</translation>
-    </message>
-    <message>
+        <location filename="../src/MessageHandler.cpp" line="230"/>
         <source>Message correction was not successful.</source>
-        <translation>Het corrigeren van het bericht is mislukt.</translation>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/MessageHandler.cpp" line="276"/>
+        <source>Message could not be sent.</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>MessageModel</name>
+    <message>
+        <location filename="../src/MessageModel.cpp" line="167"/>
+        <source>Pending</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/MessageModel.cpp" line="169"/>
+        <source>Sent</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/MessageModel.cpp" line="171"/>
+        <source>Delivered</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/MessageModel.cpp" line="173"/>
+        <source>Error</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>MultimediaSettings</name>
     <message>
+        <location filename="../src/qml/settings/MultimediaSettings.qml" line="43"/>
         <source>Multimedia Settings</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../src/qml/settings/MultimediaSettings.qml" line="55"/>
         <source>Configure</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../src/qml/settings/MultimediaSettings.qml" line="65"/>
         <source>Image Capture</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../src/qml/settings/MultimediaSettings.qml" line="70"/>
         <source>Audio Recording</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../src/qml/settings/MultimediaSettings.qml" line="75"/>
         <source>Video Recording</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../src/qml/settings/MultimediaSettings.qml" line="127"/>
         <source>Camera</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../src/qml/settings/MultimediaSettings.qml" line="156"/>
         <source>Audio input</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../src/qml/settings/MultimediaSettings.qml" line="186"/>
         <source>Container</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../src/qml/settings/MultimediaSettings.qml" line="225"/>
         <source>Image</source>
-        <translation type="unfinished">Afbeelding</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../src/qml/settings/MultimediaSettings.qml" line="230"/>
         <source>Audio</source>
-        <translation type="unfinished">Geluid</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../src/qml/settings/MultimediaSettings.qml" line="236"/>
         <source>Video</source>
-        <translation type="unfinished">Video</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../src/qml/settings/MultimediaSettings.qml" line="263"/>
+        <location filename="../src/qml/settings/MultimediaSettings.qml" line="347"/>
+        <location filename="../src/qml/settings/MultimediaSettings.qml" line="431"/>
         <source>Codec</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../src/qml/settings/MultimediaSettings.qml" line="289"/>
+        <location filename="../src/qml/settings/MultimediaSettings.qml" line="457"/>
         <source>Resolution</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../src/qml/settings/MultimediaSettings.qml" line="315"/>
+        <location filename="../src/qml/settings/MultimediaSettings.qml" line="399"/>
+        <location filename="../src/qml/settings/MultimediaSettings.qml" line="509"/>
         <source>Quality</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../src/qml/settings/MultimediaSettings.qml" line="373"/>
         <source>Sample Rate</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../src/qml/settings/MultimediaSettings.qml" line="483"/>
         <source>Frame Rate</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../src/qml/settings/MultimediaSettings.qml" line="573"/>
+        <location filename="../src/qml/settings/MultimediaSettings.qml" line="582"/>
         <source>Ready</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../src/qml/settings/MultimediaSettings.qml" line="573"/>
+        <location filename="../src/qml/settings/MultimediaSettings.qml" line="582"/>
         <source>Initializing...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../src/qml/settings/MultimediaSettings.qml" line="578"/>
         <source>Unavailable</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../src/qml/settings/MultimediaSettings.qml" line="586"/>
         <source>Recording...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../src/qml/settings/MultimediaSettings.qml" line="588"/>
         <source>Paused</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
-    <name>MultimediaSettingsPage</name>
-    <message>
-        <source>Image</source>
-        <translation type="obsolete">Afbeelding</translation>
-    </message>
-    <message>
-        <source>Audio</source>
-        <translation type="obsolete">Geluid</translation>
-    </message>
-    <message>
-        <source>Video</source>
-        <translation type="obsolete">Video</translation>
-    </message>
-</context>
-<context>
     <name>NewMedia</name>
     <message>
+        <location filename="../src/qml/elements/NewMedia.qml" line="144"/>
+        <location filename="../src/qml/elements/NewMedia.qml" line="153"/>
         <source>Ready</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../src/qml/elements/NewMedia.qml" line="144"/>
+        <location filename="../src/qml/elements/NewMedia.qml" line="153"/>
         <source>Initializing...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../src/qml/elements/NewMedia.qml" line="149"/>
         <source>Unavailable</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../src/qml/elements/NewMedia.qml" line="157"/>
         <source>Recording... %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../src/qml/elements/NewMedia.qml" line="159"/>
         <source>Paused %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>PasswordRemovalPage</name>
+    <message>
+        <location filename="../src/qml/settings/PasswordRemovalPage.qml" line="44"/>
+        <source>Remove password</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/qml/settings/PasswordRemovalPage.qml" line="46"/>
+        <source>You can decide to only not show your password for &lt;b&gt;%1&lt;/b&gt; as text anymore or to remove it completely from the account transfer. If you remove your password completely, you won&apos;t be able to use the account transfer via scanning without entering your password because it is also removed from the QR code.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/qml/settings/PasswordRemovalPage.qml" line="49"/>
+        <source>Do not show password as text</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/qml/settings/PasswordRemovalPage.qml" line="55"/>
+        <source>Remove completely</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>QObject</name>
+    <message>
+        <location filename="../src/Notifications.cpp" line="67"/>
+        <source>Mark as read</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>QmlUtils</name>
     <message>
+        <location filename="../src/QmlUtils.cpp" line="96"/>
         <source>Available</source>
-        <translation>Beschikbaar</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../src/QmlUtils.cpp" line="98"/>
         <source>Free for chat</source>
-        <translation>Beschikbaar voor gesprek</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../src/QmlUtils.cpp" line="100"/>
         <source>Away</source>
-        <translation>Afwezig</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../src/QmlUtils.cpp" line="102"/>
         <source>Do not disturb</source>
-        <translation>Niet storen</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../src/QmlUtils.cpp" line="104"/>
         <source>Away for longer</source>
-        <translation>Langere tijd afwezig</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../src/QmlUtils.cpp" line="106"/>
         <source>Offline</source>
-        <translation>Offline</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../src/QmlUtils.cpp" line="108"/>
         <source>Error</source>
-        <translation>Fout</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Invisible</source>
-        <translation>Niet zichtbaar</translation>
-    </message>
-    <message>
+        <location filename="../src/QmlUtils.cpp" line="142"/>
         <source>Invalid username or password.</source>
-        <translation type="unfinished">Ongeldige gebruikersnaam of wachtwoord.</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../src/QmlUtils.cpp" line="144"/>
         <source>Cannot connect to the server. Please check your internet connection.</source>
-        <translation type="unfinished">Kan geen verbinding maken met de server. Controleer uw internetverbinding.</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>The server doesn&apos;t support secure connections.</source>
-        <translation type="unfinished">De server ondersteunt geen beveiligde verbindingen.</translation>
-    </message>
-    <message>
+        <location filename="../src/QmlUtils.cpp" line="146"/>
         <source>Error while trying to connect securely.</source>
-        <translation type="unfinished">Fout bij het maken van een beveiligde verbinding.</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../src/QmlUtils.cpp" line="148"/>
+        <source>The server doesn&apos;t support secure connections.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/QmlUtils.cpp" line="150"/>
         <source>Could not resolve the server&apos;s address. Please check your server name.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Could not connect to the server.</source>
-        <translation type="unfinished">Kan geen verbinding maken met de server.</translation>
-    </message>
-    <message>
-        <source>Authentification protocol not supported by the server.</source>
-        <translation type="unfinished">Authenticatieprotocol niet ondersteund door de server.</translation>
-    </message>
-    <message>
-        <source>This server does not support registration.</source>
+        <location filename="../src/QmlUtils.cpp" line="152"/>
+        <source>The server is offline or blocked by a firewall.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>An unknown error occured.</source>
+        <location filename="../src/QmlUtils.cpp" line="154"/>
+        <source>Authentification protocol not supported by the server.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/QmlUtils.cpp" line="156"/>
+        <source>The connection could not be refreshed.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/QmlUtils.cpp" line="158"/>
+        <source>The internet access is not permitted. Please check your system&apos;s internet access configuration.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/QmlUtils.cpp" line="160"/>
+        <source>This server does not support registration.</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>QrCodeGenerator</name>
+    <message>
+        <location filename="../src/QrCodeGenerator.cpp" line="70"/>
+        <source>Generating the QR code failed: %1</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>QrCodeScannerPage</name>
     <message>
+        <location filename="../src/qml/QrCodeScannerPage.qml" line="48"/>
         <source>Scan QR code</source>
-        <translation>Scan een QR-code</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../src/qml/QrCodeScannerPage.qml" line="68"/>
         <source>There is no camera available.</source>
-        <translation>Er is geen camera beschikbaar.</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../src/qml/QrCodeScannerPage.qml" line="71"/>
         <source>Your camera is busy.
 Try to close other applications using the camera.</source>
-        <translation>Uw camera is bezig.
-Probeer andere applicaties die de camera gebruiken te sluiten.</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../src/qml/QrCodeScannerPage.qml" line="118"/>
         <source>The camera format &apos;%1&apos; is not supported.</source>
-        <translation>Het cameraformaat &apos;%1&apos; wordt niet ondersteund.</translation>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/qml/QrCodeScannerPage.qml" line="142"/>
+        <source>Connecting…</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/qml/QrCodeScannerPage.qml" line="187"/>
+        <source>Scan the QR code from your existing device to transfer your account.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/qml/QrCodeScannerPage.qml" line="213"/>
+        <source>Show explanation</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/qml/QrCodeScannerPage.qml" line="213"/>
+        <source>Scan</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/qml/QrCodeScannerPage.qml" line="227"/>
+        <source>Continue without QR code</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>RegistrationLoginDecisionPage</name>
+    <message>
+        <location filename="../src/qml/RegistrationLoginDecisionPage.qml" line="41"/>
+        <source>Set up</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/qml/RegistrationLoginDecisionPage.qml" line="47"/>
+        <source>Register a new account</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/qml/RegistrationLoginDecisionPage.qml" line="52"/>
+        <source>Use an existing account</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>RegistrationManager</name>
     <message>
+        <location filename="../src/RegistrationManager.cpp" line="124"/>
         <source>Password changed successfully.</source>
-        <translation>Uw wachtwoord is veranderd.</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../src/RegistrationManager.cpp" line="131"/>
         <source>Failed to change password: %1</source>
-        <translation>Fout bij het wijzigen van wachtwoord: %1</translation>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>RemoteAccountDeletion</name>
+    <message>
+        <location filename="../src/qml/settings/RemoteAccountDeletion.qml" line="42"/>
+        <source>Delete account completely</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/qml/settings/RemoteAccountDeletion.qml" line="44"/>
+        <source>Your account will be deleted completely, which means from this app and from the server.
+You will not be able to use your account again!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/qml/settings/RemoteAccountDeletion.qml" line="49"/>
+        <source>Delete</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>RosterAddContactSheet</name>
     <message>
+        <location filename="../src/qml/elements/RosterAddContactSheet.qml" line="42"/>
         <source>Add new contact</source>
-        <translation>Voeg nieuw contact toe</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Nickname:</source>
-        <translation>Bijnaam:</translation>
-    </message>
-    <message>
-        <source>Jabber-ID:</source>
-        <translation>Jabber-ID:</translation>
-    </message>
-    <message>
-        <source>user@example.org</source>
-        <translation>gebruiker@voorbeeld.nl</translation>
-    </message>
-    <message>
-        <source>Cancel</source>
-        <translation>Annuleer</translation>
-    </message>
-    <message>
-        <source>Add</source>
-        <translation>Voeg toe</translation>
-    </message>
-    <message>
+        <location filename="../src/qml/elements/RosterAddContactSheet.qml" line="50"/>
         <source>This will also send a request to access the presence of the contact.</source>
-        <translation>Dit stuurt ook een verzoek om aanwezigheidsupdates naar het contact.</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../src/qml/elements/RosterAddContactSheet.qml" line="59"/>
+        <source>Jabber-ID:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/qml/elements/RosterAddContactSheet.qml" line="64"/>
+        <source>user@example.org</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/qml/elements/RosterAddContactSheet.qml" line="71"/>
+        <source>Nickname:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/qml/elements/RosterAddContactSheet.qml" line="80"/>
         <source>Optional message:</source>
-        <translation>Optioneel bericht:</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../src/qml/elements/RosterAddContactSheet.qml" line="88"/>
         <source>Tell your chat partner who you are.</source>
-        <translation>Vertel je gesprekspartner wie je bent.</translation>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/qml/elements/RosterAddContactSheet.qml" line="97"/>
+        <source>Cancel</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/qml/elements/RosterAddContactSheet.qml" line="107"/>
+        <source>Add</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>RosterListItem</name>
     <message>
-        <source>Offline</source>
-        <translation type="obsolete">Offline</translation>
-    </message>
-    <message>
+        <location filename="../src/qml/elements/RosterListItem.qml" line="123"/>
         <source>Error: Please check the JID.</source>
-        <translation>Fout: Controleer nogmaals het JID.</translation>
-    </message>
-    <message>
-        <source>Available</source>
-        <translation type="vanished">Beschikbaar</translation>
-    </message>
-    <message>
-        <source>Free for chat</source>
-        <translation type="vanished">Beschikbaar voor gesprek</translation>
-    </message>
-    <message>
-        <source>Away</source>
-        <translation type="vanished">Afwezig</translation>
-    </message>
-    <message>
-        <source>Do not disturb</source>
-        <translation type="vanished">Niet storen</translation>
-    </message>
-    <message>
-        <source>Away for longer</source>
-        <translation type="vanished">Langere tijd afwezig</translation>
-    </message>
-    <message>
-        <source>Error</source>
-        <translation type="vanished">Fout</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>RosterManager</name>
     <message>
+        <location filename="../src/RosterManager.cpp" line="135"/>
         <source>Could not add contact, as a result of not being connected.</source>
-        <translation>Kan geen contact toevoegen omdat er geen verbinding is.</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../src/RosterManager.cpp" line="149"/>
         <source>Could not remove contact, as a result of not being connected.</source>
-        <translation>Kan het contact niet verwijderen omdat er geen verbinding is.</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Spoiler</source>
-        <translation>Spoiler</translation>
-    </message>
-    <message>
+        <location filename="../src/RosterManager.cpp" line="162"/>
         <source>Could not rename contact, as a result of not being connected.</source>
-        <translation>De naam van het contact kon niet worden veranderd, doordat er geen verbinding beschikbaar is.</translation>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/RosterManager.cpp" line="175"/>
+        <location filename="../src/RosterManager.cpp" line="214"/>
+        <source>Spoiler</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>RosterPage</name>
     <message>
-        <source>Contacts</source>
-        <translation>Contacten</translation>
-    </message>
-    <message>
-        <source>Add new contact</source>
-        <translation>Voeg nieuw contact toe</translation>
-    </message>
-    <message>
+        <location filename="../src/qml/RosterPage.qml" line="41"/>
         <source>Connecting…</source>
-        <translation>Verbinding maken…</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../src/qml/RosterPage.qml" line="42"/>
         <source>Offline</source>
-        <translation>Offline</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../src/qml/RosterPage.qml" line="43"/>
+        <source>Contacts</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/qml/RosterPage.qml" line="56"/>
+        <source>Add new contact</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/qml/RosterPage.qml" line="68"/>
         <source>Search contacts</source>
-        <translation>Door contacten zoeken</translation>
-    </message>
-    <message>
-        <source>Search…</source>
-        <translation type="vanished">Zoeken...</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>RosterRemoveContactSheet</name>
     <message>
-        <source>Do you really want to delete the contact &quot;%1&quot; from your roster?</source>
-        <translation type="vanished">Wil je echt contact &quot;%1&quot; uit je contactenlijst verwijderen?</translation>
-    </message>
-    <message>
+        <location filename="../src/qml/elements/RosterRemoveContactSheet.qml" line="42"/>
         <source>Delete contact</source>
-        <translation>Verwijder contact</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Cancel</source>
-        <translation>Annuleer</translation>
-    </message>
-    <message>
-        <source>Delete</source>
-        <translation>Verwijder</translation>
-    </message>
-    <message>
+        <location filename="../src/qml/elements/RosterRemoveContactSheet.qml" line="48"/>
         <source>Do you really want to delete the contact &lt;b&gt;%1&lt;/b&gt; from your roster?</source>
-        <translation>Wil je echt het contact &lt;b&gt;%1&lt;/b&gt; uit je contactenlijst verwijderen?</translation>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/qml/elements/RosterRemoveContactSheet.qml" line="67"/>
+        <source>Cancel</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/qml/elements/RosterRemoveContactSheet.qml" line="73"/>
+        <source>Delete</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>RosterRenameContactSheet</name>
     <message>
+        <location filename="../src/qml/elements/RosterRenameContactSheet.qml" line="43"/>
         <source>Rename contact</source>
-        <translation>Naam van contact veranderen</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Edit name:</source>
-        <translation>Naam wijzigen:</translation>
-    </message>
-    <message>
+        <location filename="../src/qml/elements/RosterRenameContactSheet.qml" line="61"/>
         <source>Cancel</source>
-        <translation>Annuleren</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../src/qml/elements/RosterRenameContactSheet.qml" line="68"/>
         <source>Rename</source>
-        <translation>Naam wijzigen</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>SendMediaSheet</name>
     <message>
-        <source>Cancel</source>
-        <translation>Annuleer</translation>
-    </message>
-    <message>
-        <source>Send</source>
-        <translation>Verstuur</translation>
-    </message>
-    <message>
+        <location filename="../src/qml/elements/SendMediaSheet.qml" line="105"/>
         <source>Caption</source>
-        <translation>Bijschrift</translation>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/qml/elements/SendMediaSheet.qml" line="118"/>
+        <source>Cancel</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/qml/elements/SendMediaSheet.qml" line="132"/>
+        <source>Send</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>ServerListModel</name>
+    <message>
+        <location filename="../src/ServerListModel.cpp" line="48"/>
+        <source>Custom server</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/ServerListModel.cpp" line="116"/>
+        <location filename="../src/ServerListModel.cpp" line="126"/>
+        <source>No limitation</source>
+        <extracomment>Unlimited file size for uploading files
+----------
+Deletion of message history saved on server</extracomment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/ServerListModel.cpp" line="128"/>
+        <source>%1 days</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>SettingsContent</name>
+    <message>
+        <location filename="../src/qml/settings/SettingsContent.qml" line="43"/>
+        <source>Settings</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/qml/settings/SettingsContent.qml" line="48"/>
+        <source>Change password</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/qml/settings/SettingsContent.qml" line="49"/>
+        <source>Changes your account&apos;s password. You will need to re-enter it on your other devices.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/qml/settings/SettingsContent.qml" line="55"/>
+        <source>Multimedia Settings</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/qml/settings/SettingsContent.qml" line="56"/>
+        <source>Configure photo, video and audio recording settings</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/qml/settings/SettingsContent.qml" line="61"/>
+        <source>Account security</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/qml/settings/SettingsContent.qml" line="62"/>
+        <source>configure whether this device can be used to log in on a new device</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/qml/settings/SettingsContent.qml" line="67"/>
+        <source>Remove account from Kaidan</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/qml/settings/SettingsContent.qml" line="68"/>
+        <source>Remove account from this app</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/qml/settings/SettingsContent.qml" line="73"/>
+        <source>Delete account</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/qml/settings/SettingsContent.qml" line="74"/>
+        <source>Delete account from the server</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>SettingsPage</name>
     <message>
+        <location filename="../src/qml/settings/SettingsPage.qml" line="35"/>
         <source>Settings</source>
-        <translation>Instellingen</translation>
+        <translation type="unfinished"></translation>
     </message>
+</context>
+<context>
+    <name>StartPage</name>
     <message>
-        <source>Change password</source>
-        <translation>Wachtwoord wijzigen</translation>
-    </message>
-    <message>
-        <source>Changes your account&apos;s password. You will need to re-enter it on your other devices.</source>
-        <translation>Deze instelling verandert het wachtwoord van uw account. Als u ingelogd bent op andere apparaten zult u het daar opnieuw in moeten voeren.</translation>
-    </message>
-    <message>
-        <source>Multimedia Settings</source>
+        <location filename="../src/qml/StartPage.qml" line="68"/>
+        <source>Enjoy free communication on every device!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Configure photo, video and audio recording settings</source>
+        <location filename="../src/qml/StartPage.qml" line="84"/>
+        <source>Let&apos;s start</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>SubRequestAcceptSheet</name>
     <message>
+        <location filename="../src/qml/elements/SubRequestAcceptSheet.qml" line="43"/>
         <source>Subscription Request</source>
-        <translation>Abonneerverzoek</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../src/qml/elements/SubRequestAcceptSheet.qml" line="52"/>
         <source>You received a subscription request by &lt;b&gt;%1&lt;/b&gt;. If you accept it, the account will have access to your presence status.</source>
-        <translation>Je hebt een abonneringsverzoek ontvangen van &lt;b&gt;%1&lt;/b&gt;. Als je toestemt heeft deze account toegang tot je aanwezigheidsupdates.</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../src/qml/elements/SubRequestAcceptSheet.qml" line="64"/>
         <source>Decline</source>
-        <translation>Afwijzen</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../src/qml/elements/SubRequestAcceptSheet.qml" line="73"/>
         <source>Accept</source>
-        <translation>Accepteren</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>UploadManager</name>
     <message>
+        <location filename="../src/UploadManager.cpp" line="72"/>
         <source>Could not send file, as a result of not being connected.</source>
-        <translation>Kon bestand niet verzenden omdat er geen verbinding is.</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../src/UploadManager.cpp" line="108"/>
         <source>File</source>
-        <translation>Bestand</translation>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/UploadManager.cpp" line="148"/>
+        <source>Message could not be sent.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>UserProfilePage</name>
     <message>
+        <location filename="../src/qml/UserProfilePage.qml" line="42"/>
         <source>Profile</source>
-        <translation>Profiel</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>VCardModel</name>
     <message>
+        <location filename="../src/VCardModel.cpp" line="88"/>
         <source>Name</source>
-        <translation>Naam</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../src/VCardModel.cpp" line="91"/>
         <source>Nickname</source>
-        <translation>Bijnaam</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../src/VCardModel.cpp" line="94"/>
         <source>About</source>
-        <translation>Over</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../src/VCardModel.cpp" line="97"/>
         <source>Email</source>
-        <translation>E-mail</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../src/VCardModel.cpp" line="100"/>
         <source>Birthday</source>
-        <translation>Verjaardag</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../src/VCardModel.cpp" line="103"/>
         <source>Website</source>
-        <translation>Website</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 </TS>

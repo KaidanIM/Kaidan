@@ -141,7 +141,7 @@ MediaPreview {
 				horizontalAlignment: Controls.Label.AlignRight
 				text: {
 					if (root.isNewImage) {
-						return recorder.isReady ? qsTr('Ready') : qsTr('Initializing...')
+						return recorder.isReady ? qsTr('Ready') : qsTr('Initializing…')
 					}
 
 					switch (recorder.status) {
@@ -150,11 +150,11 @@ MediaPreview {
 					case MediaRecorder.Status.UnloadedStatus:
 					case MediaRecorder.Status.LoadingStatus:
 					case MediaRecorder.Status.LoadedStatus:
-						return recorder.isReady ? qsTr('Ready') : qsTr('Initializing...')
+						return recorder.isReady ? qsTr('Ready') : qsTr('Initializing…')
 					case MediaRecorder.Status.StartingStatus:
 					case MediaRecorder.Status.RecordingStatus:
 					case MediaRecorder.Status.FinalizingStatus:
-						return qsTr('Recording... %1').arg(MediaUtilsInstance.prettyDuration(recorder.duration))
+						return qsTr('Recording… %1').arg(MediaUtilsInstance.prettyDuration(recorder.duration))
 					case MediaRecorder.Status.PausedStatus:
 						return qsTr('Paused %1').arg(MediaUtilsInstance.prettyDuration(recorder.duration))
 					}

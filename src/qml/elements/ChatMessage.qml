@@ -197,7 +197,7 @@ RowLayout {
 					}
 					text: qsTr("Download")
 					onClicked: {
-						print("Downloading " + mediaGetUrl + "...")
+						print("Downloading " + mediaGetUrl + "…")
 						Kaidan.downloadMedia(msgId, mediaGetUrl)
 					}
 				}

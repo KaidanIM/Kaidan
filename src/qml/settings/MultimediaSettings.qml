@@ -570,7 +570,7 @@ Kirigami.Page {
 			Controls.Label {
 				text: {
 					if (recorder.type === MediaRecorder.Type.Image) {
-						return recorder.isReady ? qsTr('Ready') : qsTr('Initializing...')
+						return recorder.isReady ? qsTr('Ready') : qsTr('Initializing…')
 					}
 
 					switch (recorder.status) {
@@ -579,11 +579,11 @@ Kirigami.Page {
 					case MediaRecorder.Status.UnloadedStatus:
 					case MediaRecorder.Status.LoadingStatus:
 					case MediaRecorder.Status.LoadedStatus:
-						return recorder.isReady ? qsTr('Ready') : qsTr('Initializing...')
+						return recorder.isReady ? qsTr('Ready') : qsTr('Initializing…')
 					case MediaRecorder.Status.StartingStatus:
 					case MediaRecorder.Status.RecordingStatus:
 					case MediaRecorder.Status.FinalizingStatus:
-						return qsTr('Recording...')
+						return qsTr('Recording…')
 					case MediaRecorder.Status.PausedStatus:
 						return qsTr('Paused')
 					}

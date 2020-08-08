@@ -38,7 +38,7 @@ import QtQuick.Layouts 1.12
  * It is displayed during network interaction.
  */
 View {
-	descriptionText: qsTr("Requesting the server...")
+	descriptionText: qsTr("Requesting the server…")
 
 	Controls.BusyIndicator {
 		parent: contentArea

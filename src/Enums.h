@@ -81,7 +81,6 @@ namespace Enums {
 	 * Enumeration of contact availability states
 	 */
 	enum class AvailabilityTypes {
-		PresError,
 		PresUnavailable,
 		PresOnline,
 		PresAway,

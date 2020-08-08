@@ -82,8 +82,6 @@ QString QmlUtils::presenceTypeToIcon(Enums::AvailabilityTypes type)
 		return "im-user-away";
 	case AvailabilityTypes::PresUnavailable:
 		return "im-user-offline";
-	case AvailabilityTypes::PresError:
-		return "im-ban-kick-user";
 	}
 	Q_UNREACHABLE();
 	return { };
@@ -104,8 +102,6 @@ QString QmlUtils::presenceTypeToText(AvailabilityTypes type)
 		return tr("Away for longer");
 	case AvailabilityTypes::PresUnavailable:
 		return tr("Offline");
-	case AvailabilityTypes::PresError:
-		return tr("Error");
 	}
 	Q_UNREACHABLE();
 	return { };
@@ -124,8 +120,6 @@ QColor QmlUtils::presenceTypeToColor(AvailabilityTypes type)
 		return QColor::fromRgb(218, 68, 83);
 	case AvailabilityTypes::PresXA:
 		return {"orange"};
-	case AvailabilityTypes::PresError:
-		return {"red"};
 	case AvailabilityTypes::PresUnavailable:
 		return {"silver"};
 	}

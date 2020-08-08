@@ -81,8 +81,6 @@ quint8 PresenceCache::getPresenceType(const QString &bareJid)
 		default:
 			return quint8(AvailabilityTypes::PresUnavailable);
 		}
-	} else if (pres.type() == QXmppPresence::Error) {
-		return quint8(AvailabilityTypes::PresError);
 	}
 	return quint8(AvailabilityTypes::PresUnavailable);
 }

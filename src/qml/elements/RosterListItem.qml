@@ -118,11 +118,7 @@ Kirigami.SwipeListItem {
 					Layout.fillWidth: true
 					elide: Text.ElideRight
 					maximumLineCount: 1
-					text: {
-						presenceType === Enums.PresError ? // error presence type
-						qsTr("Error: Please check the JID.") :
-						Utils.removeNewLinesFromString(lastMessage)
-					}
+					text: Utils.removeNewLinesFromString(lastMessage)
 					textFormat: Text.PlainText
 					font.pointSize: Kirigami.Units.gridUnit * 0.58
 				}

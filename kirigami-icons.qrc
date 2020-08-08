@@ -76,12 +76,9 @@
 
 	<qresource prefix="/icons/breeze/mimetypes/64">
 		<file alias="image-jpeg.svg">3rdparty/breeze-icons/icons/mimetypes/64/image-jpeg.svg</file>
-		<file alias="image-x-hdr.svg">3rdparty/breeze-icons/icons/mimetypes/64/image-x-hdr.svg</file>
 		<file alias="video-mp4.svg">3rdparty/breeze-icons/icons/mimetypes/64/video-mp4.svg</file>
-		<file alias="video-mpeg.svg">3rdparty/breeze-icons/icons/mimetypes/64/video-mpeg.svg</file>
 		<file alias="x-office-document.svg">3rdparty/breeze-icons/icons/mimetypes/64/x-office-document.svg</file>
 		<file alias="audio-mp3.svg">3rdparty/breeze-icons/icons/mimetypes/64/audio-mp3.svg</file>
-		<file alias="audio-x-pn-realaudio-plugin.svg">3rdparty/breeze-icons/icons/mimetypes/64/audio-x-pn-realaudio-plugin.svg</file>
 		<file alias="video-x-generic.svg">3rdparty/breeze-icons/icons/mimetypes/64/video-x-generic.svg</file>
 		<file alias="application-octet-stream.svg">3rdparty/breeze-icons/icons/mimetypes/64/application-octet-stream.svg</file>
 		<file alias="application-vnd.oasis.opendocument.presentation.svg">3rdparty/breeze-icons/icons/mimetypes/64/application-vnd.oasis.opendocument.presentation.svg</file>

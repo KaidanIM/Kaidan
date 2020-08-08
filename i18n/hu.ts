@@ -24,55 +24,78 @@
     <name>AccountDeletionFromClientAndServerConfirmationPage</name>
     <message>
         <source>Delete account completely</source>
-        <translation>Fiók törlése teljesen</translation>
+        <translation type="vanished">Fiók törlése teljesen</translation>
     </message>
     <message>
         <source>Your account will be deleted completely, which means from this app and from the server.
 You will not be able to use your account again!</source>
-        <translation>Fiókja teljesen törlődik, ami azt jelenti, erről az alkalmazásból és a szerverről.
+        <translation type="vanished">Fiókja teljesen törlődik, ami azt jelenti, erről az alkalmazásból és a szerverről.
 Többé nem fogja tudni használni fiókját!</translation>
     </message>
     <message>
         <source>Delete</source>
-        <translation>Törlés</translation>
+        <translation type="vanished">Törlés</translation>
     </message>
 </context>
 <context>
     <name>AccountDeletionFromClientConfirmationPage</name>
     <message>
         <source>Remove account from this app</source>
-        <translation>Fiók eltávolítása az alkalmazásból</translation>
+        <translation type="vanished">Fiók eltávolítása az alkalmazásból</translation>
     </message>
     <message>
         <source>Your account will be removed from this app.
 You won&apos;t be able to get your credentials back!
 Make sure that you have backed up those if you want to use your account later.</source>
-        <translation>Fiókját eltávolítjuk ebből az alkalmazásból.
+        <translation type="vanished">Fiókját eltávolítjuk ebből az alkalmazásból.
 Nem fogja tudni visszaszerezni a megbízólevelét!
 Győződjön meg arról, hogy biztonsági másolatot tett ezekről, ha később használni szeretné fiókját.</translation>
     </message>
     <message>
         <source>Remove</source>
-        <translation>Eltávolít</translation>
+        <translation type="vanished">Eltávolít</translation>
     </message>
 </context>
 <context>
     <name>AccountDeletionPage</name>
     <message>
         <source>Delete account</source>
-        <translation>Fiók törlése</translation>
+        <translation type="vanished">Fiók törlése</translation>
     </message>
     <message>
         <source>You can remove your account &lt;b&gt;%1&lt;/b&gt; only from this app or delete it completely. If you delete your account completely, you won&apos;t be able to use it with another app because it is also removed from the server.</source>
-        <translation>Fiókját &lt;b&gt;%1&lt;/b&gt; csak erről az alkalmazásról távolíthatja el, vagy teljesen törölheti. Ha teljesen törli a fiókját, nem fogja tudni használni egy másik alkalmazással, mert az is törlődik a kiszolgálóról.</translation>
+        <translation type="vanished">Fiókját &lt;b&gt;%1&lt;/b&gt; csak erről az alkalmazásról távolíthatja el, vagy teljesen törölheti. Ha teljesen törli a fiókját, nem fogja tudni használni egy másik alkalmazással, mert az is törlődik a kiszolgálóról.</translation>
     </message>
     <message>
         <source>Remove from this app</source>
-        <translation>Eltávolítás az alkalmazásból</translation>
+        <translation type="vanished">Eltávolítás az alkalmazásból</translation>
     </message>
     <message>
         <source>Delete completely</source>
-        <translation>Törlés teljesen</translation>
+        <translation type="vanished">Törlés teljesen</translation>
+    </message>
+</context>
+<context>
+    <name>AccountSecurity</name>
+    <message>
+        <source>Account Security</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Allow to add new devices using a QR-Code, but never show the password as text. This action can not be undone, so consider storing the password in another way before using it.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Disable showing the password</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Don&apos;t expose the password in any form. This action can not be undone.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Disable showing the QR-Code and password</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -171,6 +194,25 @@ Soha ne jelenítse meg ezt a QR-kódot senkinek. Ez lehetővé tenné a korlátl
     </message>
 </context>
 <context>
+    <name>ChatMessageContextMenu</name>
+    <message>
+        <source>Copy message</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit message</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Copy download URL</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Quote message</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>ChatPage</name>
     <message>
         <source>Compose message</source>
@@ -214,22 +256,6 @@ Soha ne jelenítse meg ezt a QR-kódot senkinek. Ez lehetővé tenné a korlátl
     </message>
     <message>
         <source>All files</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Copy message</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Edit message</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Copy download URL</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Quote message</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -283,6 +309,40 @@ Soha ne jelenítse meg ezt a QR-kódot senkinek. Ez lehetővé tenné a korlátl
     <name>ConfirmationPage</name>
     <message>
         <source>Cancel</source>
+        <translation type="unfinished">Mégse</translation>
+    </message>
+</context>
+<context>
+    <name>DisablePasswordDisplay</name>
+    <message>
+        <source>Remove password completely</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Your password will not be included in the QR code anymore.
+You won&apos;t be able to use the login via QR code without entering your password again because this action cannot be undone!
+Make sure that you backed it up if you want to use your account later.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Remove password</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>DisablePlainTextPasswordDisplay</name>
+    <message>
+        <source>Do not show password as text</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Your password will not be shown as text anymore.
+You won&apos;t be able to see your password as text again because this action cannot be undone!
+Make sure that you backed it up if you want to use your account later.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Do not show password</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -337,7 +397,7 @@ Soha ne jelenítse meg ezt a QR-kódot senkinek. Ez lehetővé tenné a korlátl
     </message>
     <message>
         <source>Search</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Keresés</translation>
     </message>
     <message>
         <source>Search emoji</source>
@@ -382,11 +442,7 @@ Soha ne jelenítse meg ezt a QR-kódot senkinek. Ez lehetővé tenné a korlátl
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Transfer account</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Delete account</source>
+        <source>Switch device</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -400,6 +456,22 @@ Soha ne jelenítse meg ezt a QR-kódot senkinek. Ez lehetővé tenné a korlátl
     <message>
         <source>No valid login QR code found.</source>
         <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>LocalAccountRemoval</name>
+    <message>
+        <source>Remove account from this app</source>
+        <translation type="unfinished">Fiók eltávolítása az alkalmazásból</translation>
+    </message>
+    <message>
+        <source>Your account will be removed from this app.
+Your password will be deleted, make sure it is stored in a password manager or you know it!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Remove</source>
+        <translation type="unfinished">Eltávolít</translation>
     </message>
 </context>
 <context>
@@ -494,23 +566,30 @@ Soha ne jelenítse meg ezt a QR-kódot senkinek. Ez lehetővé tenné a korlátl
 <context>
     <name>MessageHandler</name>
     <message>
-        <source>Could not send message, as a result of not being connected.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Could not correct message, as a result of not being connected.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Spoiler</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Message could not be sent.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Message correction was not successful.</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>MessageModel</name>
+    <message>
+        <source>Pending</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Sent</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Delivered</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Error</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -625,6 +704,32 @@ Soha ne jelenítse meg ezt a QR-kódot senkinek. Ez lehetővé tenné a korlátl
     </message>
 </context>
 <context>
+    <name>PasswordRemovalPage</name>
+    <message>
+        <source>Remove password</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>You can decide to only not show your password for &lt;b&gt;%1&lt;/b&gt; as text anymore or to remove it completely from the account transfer. If you remove your password completely, you won&apos;t be able to use the account transfer via scanning without entering your password because it is also removed from the QR code.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Do not show password as text</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Remove completely</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>QObject</name>
+    <message>
+        <source>Mark as read</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>QmlUtils</name>
     <message>
         <source>Available</source>
@@ -652,10 +757,6 @@ Soha ne jelenítse meg ezt a QR-kódot senkinek. Ez lehetővé tenné a korlátl
     </message>
     <message>
         <source>Error</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Invisible</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -726,10 +827,6 @@ Try to close other applications using the camera.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Logging in…</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Scan the QR code from your existing device to transfer your account.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -743,6 +840,10 @@ Try to close other applications using the camera.</source>
     </message>
     <message>
         <source>Continue without QR code</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Connecting…</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -770,6 +871,23 @@ Try to close other applications using the camera.</source>
     <message>
         <source>Failed to change password: %1</source>
         <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>RemoteAccountDeletion</name>
+    <message>
+        <source>Delete account completely</source>
+        <translation type="unfinished">Fiók törlése teljesen</translation>
+    </message>
+    <message>
+        <source>Your account will be deleted completely, which means from this app and from the server.
+You will not be able to use your account again!</source>
+        <translation type="unfinished">Fiókja teljesen törlődik, ami azt jelenti, erről az alkalmazásból és a szerverről.
+Többé nem fogja tudni használni fiókját!</translation>
+    </message>
+    <message>
+        <source>Delete</source>
+        <translation type="unfinished">Törlés</translation>
     </message>
 </context>
 <context>
@@ -804,7 +922,7 @@ Try to close other applications using the camera.</source>
     </message>
     <message>
         <source>Cancel</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Mégse</translation>
     </message>
     <message>
         <source>Add</source>
@@ -830,7 +948,7 @@ Try to close other applications using the camera.</source>
     </message>
     <message>
         <source>Spoiler</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Spoiler</translation>
     </message>
     <message>
         <source>Could not rename contact, as a result of not being connected.</source>
@@ -872,11 +990,11 @@ Try to close other applications using the camera.</source>
     </message>
     <message>
         <source>Cancel</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Mégse</translation>
     </message>
     <message>
         <source>Delete</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Törlés</translation>
     </message>
 </context>
 <context>
@@ -887,7 +1005,7 @@ Try to close other applications using the camera.</source>
     </message>
     <message>
         <source>Cancel</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Mégse</translation>
     </message>
     <message>
         <source>Rename</source>
@@ -902,7 +1020,7 @@ Try to close other applications using the camera.</source>
     </message>
     <message>
         <source>Cancel</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Mégse</translation>
     </message>
     <message>
         <source>Send</source>
@@ -931,7 +1049,7 @@ Deletion of message history saved on server</extracomment>
     <name>SettingsContent</name>
     <message>
         <source>Change password</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Jelszó módosítása</translation>
     </message>
     <message>
         <source>Changes your account&apos;s password. You will need to re-enter it on your other devices.</source>
@@ -945,16 +1063,37 @@ Deletion of message history saved on server</extracomment>
         <source>Configure photo, video and audio recording settings</source>
         <translation type="unfinished"></translation>
     </message>
-</context>
-<context>
-    <name>SettingsPage</name>
     <message>
         <source>Settings</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Account security</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>configure whether this device can be used to log in on a new device</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Remove account from Kaidan</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Remove account from this app</source>
+        <translation type="unfinished">Fiók eltávolítása az alkalmazásból</translation>
+    </message>
+    <message>
+        <source>Delete account</source>
+        <translation type="unfinished">Fiók törlése</translation>
+    </message>
+    <message>
+        <source>Delete account from the server</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
-    <name>SettingsSheet</name>
+    <name>SettingsPage</name>
     <message>
         <source>Settings</source>
         <translation type="unfinished"></translation>
@@ -998,6 +1137,10 @@ Deletion of message history saved on server</extracomment>
     </message>
     <message>
         <source>File</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Message could not be sent.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

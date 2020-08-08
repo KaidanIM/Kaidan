@@ -23,52 +23,30 @@
 <context>
     <name>AccountDeletionFromClientAndServerConfirmationPage</name>
     <message>
-        <source>Delete account completely</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Your account will be deleted completely, which means from this app and from the server.
-You will not be able to use your account again!</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Delete</source>
-        <translation type="unfinished">Smazat</translation>
+        <translation type="obsolete">Smazat</translation>
     </message>
 </context>
 <context>
-    <name>AccountDeletionFromClientConfirmationPage</name>
+    <name>AccountSecurity</name>
     <message>
-        <source>Remove account from this app</source>
+        <source>Account Security</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Your account will be removed from this app.
-You won&apos;t be able to get your credentials back!
-Make sure that you have backed up those if you want to use your account later.</source>
+        <source>Allow to add new devices using a QR-Code, but never show the password as text. This action can not be undone, so consider storing the password in another way before using it.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Remove</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>AccountDeletionPage</name>
-    <message>
-        <source>Delete account</source>
+        <source>Disable showing the password</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>You can remove your account &lt;b&gt;%1&lt;/b&gt; only from this app or delete it completely. If you delete your account completely, you won&apos;t be able to use it with another app because it is also removed from the server.</source>
+        <source>Don&apos;t expose the password in any form. This action can not be undone.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Remove from this app</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Delete completely</source>
+        <source>Disable showing the QR-Code and password</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -177,6 +155,25 @@ Never show this QR code to anyone else. It would allow unlimited access to your 
     </message>
 </context>
 <context>
+    <name>ChatMessageContextMenu</name>
+    <message>
+        <source>Copy message</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit message</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Copy download URL</source>
+        <translation type="unfinished">Kopírovat stažitelnou URL</translation>
+    </message>
+    <message>
+        <source>Quote message</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>ChatPage</name>
     <message>
         <source>Compose message</source>
@@ -251,20 +248,8 @@ Never show this QR code to anyone else. It would allow unlimited access to your 
         <translation>Všechny soubory</translation>
     </message>
     <message>
-        <source>Copy message</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Edit message</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Copy download URL</source>
-        <translation type="unfinished">Kopírovat stažitelnou URL</translation>
-    </message>
-    <message>
-        <source>Quote message</source>
-        <translation type="unfinished"></translation>
+        <translation type="obsolete">Kopírovat stažitelnou URL</translation>
     </message>
 </context>
 <context>
@@ -318,6 +303,40 @@ Never show this QR code to anyone else. It would allow unlimited access to your 
     <message>
         <source>Cancel</source>
         <translation type="unfinished">Zrušit</translation>
+    </message>
+</context>
+<context>
+    <name>DisablePasswordDisplay</name>
+    <message>
+        <source>Remove password completely</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Your password will not be included in the QR code anymore.
+You won&apos;t be able to use the login via QR code without entering your password again because this action cannot be undone!
+Make sure that you backed it up if you want to use your account later.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Remove password</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>DisablePlainTextPasswordDisplay</name>
+    <message>
+        <source>Do not show password as text</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Your password will not be shown as text anymore.
+You won&apos;t be able to see your password as text again because this action cannot be undone!
+Make sure that you backed it up if you want to use your account later.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Do not show password</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -442,11 +461,7 @@ Never show this QR code to anyone else. It would allow unlimited access to your 
         <translation type="unfinished">Připojování…</translation>
     </message>
     <message>
-        <source>Transfer account</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Delete account</source>
+        <source>Switch device</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -464,6 +479,22 @@ Never show this QR code to anyone else. It would allow unlimited access to your 
     <message>
         <source>No valid login QR code found.</source>
         <translation>Nebyl nalezen žádný platný přihlašovací kód QR.</translation>
+    </message>
+</context>
+<context>
+    <name>LocalAccountRemoval</name>
+    <message>
+        <source>Remove account from this app</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Your account will be removed from this app.
+Your password will be deleted, make sure it is stored in a password manager or you know it!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Remove</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -616,15 +647,15 @@ Prosím zkontrolujte své připojení k internetu.</translation>
     <name>MessageHandler</name>
     <message>
         <source>Could not send message, as a result of not being connected.</source>
-        <translation>Nelze odeslat zprávu, neboť nejste připojeni.</translation>
+        <translation type="vanished">Nelze odeslat zprávu, neboť nejste připojeni.</translation>
     </message>
     <message>
         <source>Could not correct message, as a result of not being connected.</source>
-        <translation>Zprávu nelze editovat, neboť nejste připojeni.</translation>
+        <translation type="vanished">Zprávu nelze editovat, neboť nejste připojeni.</translation>
     </message>
     <message>
         <source>Spoiler</source>
-        <translation>«Spoiler»</translation>
+        <translation type="vanished">«Spoiler»</translation>
     </message>
     <message>
         <source>Message could not be sent.</source>
@@ -633,6 +664,25 @@ Prosím zkontrolujte své připojení k internetu.</translation>
     <message>
         <source>Message correction was not successful.</source>
         <translation>Oprava zprávy se nezdařila.</translation>
+    </message>
+</context>
+<context>
+    <name>MessageModel</name>
+    <message>
+        <source>Pending</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Sent</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Delivered</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Error</source>
+        <translation type="unfinished">Chyba</translation>
     </message>
 </context>
 <context>
@@ -833,6 +883,32 @@ Prosím zkontrolujte své připojení k internetu.</translation>
     </message>
 </context>
 <context>
+    <name>PasswordRemovalPage</name>
+    <message>
+        <source>Remove password</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>You can decide to only not show your password for &lt;b&gt;%1&lt;/b&gt; as text anymore or to remove it completely from the account transfer. If you remove your password completely, you won&apos;t be able to use the account transfer via scanning without entering your password because it is also removed from the QR code.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Do not show password as text</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Remove completely</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>QObject</name>
+    <message>
+        <source>Mark as read</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>QmlUtils</name>
     <message>
         <source>Available</source>
@@ -864,7 +940,7 @@ Prosím zkontrolujte své připojení k internetu.</translation>
     </message>
     <message>
         <source>Invisible</source>
-        <translation>Neviditelný</translation>
+        <translation type="vanished">Neviditelný</translation>
     </message>
     <message>
         <source>Invalid username or password.</source>
@@ -940,10 +1016,6 @@ Zkuste zavřít jiné aplikace, které používají fotoaparát.</translation>
         <translation>Formát fotoaparátu &apos;% 1&apos; není podporován.</translation>
     </message>
     <message>
-        <source>Logging in…</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Scan the QR code from your existing device to transfer your account.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -958,6 +1030,10 @@ Zkuste zavřít jiné aplikace, které používají fotoaparát.</translation>
     <message>
         <source>Continue without QR code</source>
         <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Connecting…</source>
+        <translation type="unfinished">Připojování…</translation>
     </message>
 </context>
 <context>
@@ -984,6 +1060,22 @@ Zkuste zavřít jiné aplikace, které používají fotoaparát.</translation>
     <message>
         <source>Failed to change password: %1</source>
         <translation>Změna hesla se nezdařila: %1</translation>
+    </message>
+</context>
+<context>
+    <name>RemoteAccountDeletion</name>
+    <message>
+        <source>Delete account completely</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Your account will be deleted completely, which means from this app and from the server.
+You will not be able to use your account again!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Delete</source>
+        <translation type="unfinished">Smazat</translation>
     </message>
 </context>
 <context>
@@ -1191,6 +1283,34 @@ Deletion of message history saved on server</extracomment>
         <source>Configure photo, video and audio recording settings</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Settings</source>
+        <translation type="unfinished">Nastavení</translation>
+    </message>
+    <message>
+        <source>Account security</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>configure whether this device can be used to log in on a new device</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Remove account from Kaidan</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Remove account from this app</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Delete account</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Delete account from the server</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>SettingsPage</name>
@@ -1215,7 +1335,7 @@ Deletion of message history saved on server</extracomment>
     <name>SettingsSheet</name>
     <message>
         <source>Settings</source>
-        <translation type="unfinished">Nastavení</translation>
+        <translation type="obsolete">Nastavení</translation>
     </message>
 </context>
 <context>
@@ -1257,6 +1377,10 @@ Deletion of message history saved on server</extracomment>
     <message>
         <source>File</source>
         <translation>Soubor</translation>
+    </message>
+    <message>
+        <source>Message could not be sent.</source>
+        <translation type="unfinished">Zprávu se nepodařilo odeslat.</translation>
     </message>
 </context>
 <context>

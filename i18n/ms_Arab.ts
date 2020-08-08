@@ -24,55 +24,78 @@
     <name>AccountDeletionFromClientAndServerConfirmationPage</name>
     <message>
         <source>Delete account completely</source>
-        <translation>ڤادم کسلوروهن اکاءون</translation>
+        <translation type="vanished">ڤادم کسلوروهن اکاءون</translation>
     </message>
     <message>
         <source>Your account will be deleted completely, which means from this app and from the server.
 You will not be able to use your account again!</source>
-        <translation>اکاءون اندا اکن دڤادم کسلوروهنڽ⹁ ايايت دڤادم درڤد اڤليکاسي اين دان جوݢ درڤد ڤلاين.
+        <translation type="vanished">اکاءون اندا اکن دڤادم کسلوروهنڽ⹁ ايايت دڤادم درڤد اڤليکاسي اين دان جوݢ درڤد ڤلاين.
 اندا تيدق اکن ممڤو مڠݢوناکن اکاءون اندا لاݢي!</translation>
     </message>
     <message>
         <source>Delete</source>
-        <translation>ڤادم</translation>
+        <translation type="vanished">ڤادم</translation>
     </message>
 </context>
 <context>
     <name>AccountDeletionFromClientConfirmationPage</name>
     <message>
         <source>Remove account from this app</source>
-        <translation>بواڠ اکاءون درڤد اڤليلاسي اين</translation>
+        <translation type="vanished">بواڠ اکاءون درڤد اڤليلاسي اين</translation>
     </message>
     <message>
         <source>Your account will be removed from this app.
 You won&apos;t be able to get your credentials back!
 Make sure that you have backed up those if you want to use your account later.</source>
-        <translation>اکاءون اندا اکن دبواڠ درڤد اڤليکاسي اين.
+        <translation type="vanished">اکاءون اندا اکن دبواڠ درڤد اڤليکاسي اين.
 اندا تيدق اکن ممڤو منداڤتکن کلايقن اندا سمولا!
 سيلا ڤستيکن اندا تله مڽندرکن کلايقن سکيراڽ اندا ايڠين مڠݢوناکن اکاءون اندا ڤد ماس اکن داتڠ.</translation>
     </message>
     <message>
         <source>Remove</source>
-        <translation>بواڠ</translation>
+        <translation type="vanished">بواڠ</translation>
     </message>
 </context>
 <context>
     <name>AccountDeletionPage</name>
     <message>
         <source>Delete account</source>
-        <translation>ڤادم اکاءون</translation>
+        <translation type="vanished">ڤادم اکاءون</translation>
     </message>
     <message>
         <source>You can remove your account &lt;b&gt;%1&lt;/b&gt; only from this app or delete it completely. If you delete your account completely, you won&apos;t be able to use it with another app because it is also removed from the server.</source>
-        <translation>اندا بوليه ممبواڠ اکاءون اندا &lt;b&gt;%1&lt;/b&gt; هاڽ درڤد اڤليکاسي اين اتاو ممادمڽ سچارا کسلوروهنڽ. جيک اندا ممادم اکاءون اندا کسلوروهنڽ⹁ اندا تيدق اکن ممڤو مڠݢوناکن اکاءون ترسبوت داڤليکاسي لاءين کران اي توروت دبواڠ درڤد ڤلاين.</translation>
+        <translation type="vanished">اندا بوليه ممبواڠ اکاءون اندا &lt;b&gt;%1&lt;/b&gt; هاڽ درڤد اڤليکاسي اين اتاو ممادمڽ سچارا کسلوروهنڽ. جيک اندا ممادم اکاءون اندا کسلوروهنڽ⹁ اندا تيدق اکن ممڤو مڠݢوناکن اکاءون ترسبوت داڤليکاسي لاءين کران اي توروت دبواڠ درڤد ڤلاين.</translation>
     </message>
     <message>
         <source>Remove from this app</source>
-        <translation>بواڠ درڤد اڤليکاسي اين</translation>
+        <translation type="vanished">بواڠ درڤد اڤليکاسي اين</translation>
     </message>
     <message>
         <source>Delete completely</source>
-        <translation>ڤادم کسلوروهنڽ</translation>
+        <translation type="vanished">ڤادم کسلوروهنڽ</translation>
+    </message>
+</context>
+<context>
+    <name>AccountSecurity</name>
+    <message>
+        <source>Account Security</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Allow to add new devices using a QR-Code, but never show the password as text. This action can not be undone, so consider storing the password in another way before using it.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Disable showing the password</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Don&apos;t expose the password in any form. This action can not be undone.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Disable showing the QR-Code and password</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -171,6 +194,25 @@ Never show this QR code to anyone else. It would allow unlimited access to your 
     </message>
 </context>
 <context>
+    <name>ChatMessageContextMenu</name>
+    <message>
+        <source>Copy message</source>
+        <translation type="unfinished">سالين ميسيج</translation>
+    </message>
+    <message>
+        <source>Edit message</source>
+        <translation type="unfinished">سونتيڠ ميسيج</translation>
+    </message>
+    <message>
+        <source>Copy download URL</source>
+        <translation type="unfinished">سالين URL موات تورون</translation>
+    </message>
+    <message>
+        <source>Quote message</source>
+        <translation type="unfinished">ڤتيق ميسيج</translation>
+    </message>
+</context>
+<context>
     <name>ChatPage</name>
     <message>
         <source>Compose message</source>
@@ -218,19 +260,19 @@ Never show this QR code to anyone else. It would allow unlimited access to your 
     </message>
     <message>
         <source>Copy message</source>
-        <translation>سالين ميسيج</translation>
+        <translation type="vanished">سالين ميسيج</translation>
     </message>
     <message>
         <source>Edit message</source>
-        <translation>سونتيڠ ميسيج</translation>
+        <translation type="vanished">سونتيڠ ميسيج</translation>
     </message>
     <message>
         <source>Copy download URL</source>
-        <translation>سالين URL موات تورون</translation>
+        <translation type="vanished">سالين URL موات تورون</translation>
     </message>
     <message>
         <source>Quote message</source>
-        <translation>ڤتيق ميسيج</translation>
+        <translation type="vanished">ڤتيق ميسيج</translation>
     </message>
 </context>
 <context>
@@ -284,6 +326,40 @@ Never show this QR code to anyone else. It would allow unlimited access to your 
     <message>
         <source>Cancel</source>
         <translation>باتل</translation>
+    </message>
+</context>
+<context>
+    <name>DisablePasswordDisplay</name>
+    <message>
+        <source>Remove password completely</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Your password will not be included in the QR code anymore.
+You won&apos;t be able to use the login via QR code without entering your password again because this action cannot be undone!
+Make sure that you backed it up if you want to use your account later.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Remove password</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>DisablePlainTextPasswordDisplay</name>
+    <message>
+        <source>Do not show password as text</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Your password will not be shown as text anymore.
+You won&apos;t be able to see your password as text again because this action cannot be undone!
+Make sure that you backed it up if you want to use your account later.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Do not show password</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -383,11 +459,15 @@ Never show this QR code to anyone else. It would allow unlimited access to your 
     </message>
     <message>
         <source>Transfer account</source>
-        <translation>ڤينده اکاءون</translation>
+        <translation type="vanished">ڤينده اکاءون</translation>
     </message>
     <message>
         <source>Delete account</source>
-        <translation>ڤادم اکاءون</translation>
+        <translation type="vanished">ڤادم اکاءون</translation>
+    </message>
+    <message>
+        <source>Switch device</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -400,6 +480,22 @@ Never show this QR code to anyone else. It would allow unlimited access to your 
     <message>
         <source>No valid login QR code found.</source>
         <translation>تيادا کود QR لوݢ ماسوق يڠ صح دجومڤاءي.</translation>
+    </message>
+</context>
+<context>
+    <name>LocalAccountRemoval</name>
+    <message>
+        <source>Remove account from this app</source>
+        <translation type="unfinished">بواڠ اکاءون درڤد اڤليلاسي اين</translation>
+    </message>
+    <message>
+        <source>Your account will be removed from this app.
+Your password will be deleted, make sure it is stored in a password manager or you know it!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Remove</source>
+        <translation type="unfinished">بواڠ</translation>
     </message>
 </context>
 <context>
@@ -495,15 +591,15 @@ Never show this QR code to anyone else. It would allow unlimited access to your 
     <name>MessageHandler</name>
     <message>
         <source>Could not send message, as a result of not being connected.</source>
-        <translation>تيدق داڤت هنتر ميسيج⹁ کران اندا تيادا سمبوڠن اينترنيت.</translation>
+        <translation type="vanished">تيدق داڤت هنتر ميسيج⹁ کران اندا تيادا سمبوڠن اينترنيت.</translation>
     </message>
     <message>
         <source>Could not correct message, as a result of not being connected.</source>
-        <translation>تيدق داڤت ممبتولکن ميسيج⹁ کران اندا تيدق سمبوڠ کاينترنيت.</translation>
+        <translation type="vanished">تيدق داڤت ممبتولکن ميسيج⹁ کران اندا تيدق سمبوڠ کاينترنيت.</translation>
     </message>
     <message>
         <source>Spoiler</source>
-        <translation>بيبيرن</translation>
+        <translation type="vanished">بيبيرن</translation>
     </message>
     <message>
         <source>Message could not be sent.</source>
@@ -512,6 +608,25 @@ Never show this QR code to anyone else. It would allow unlimited access to your 
     <message>
         <source>Message correction was not successful.</source>
         <translation>ڤمبتولن ميسيج تيدق برجاي.</translation>
+    </message>
+</context>
+<context>
+    <name>MessageModel</name>
+    <message>
+        <source>Pending</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Sent</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Delivered</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Error</source>
+        <translation type="unfinished">رالت</translation>
     </message>
 </context>
 <context>
@@ -625,6 +740,32 @@ Never show this QR code to anyone else. It would allow unlimited access to your 
     </message>
 </context>
 <context>
+    <name>PasswordRemovalPage</name>
+    <message>
+        <source>Remove password</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>You can decide to only not show your password for &lt;b&gt;%1&lt;/b&gt; as text anymore or to remove it completely from the account transfer. If you remove your password completely, you won&apos;t be able to use the account transfer via scanning without entering your password because it is also removed from the QR code.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Do not show password as text</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Remove completely</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>QObject</name>
+    <message>
+        <source>Mark as read</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>QmlUtils</name>
     <message>
         <source>Available</source>
@@ -656,7 +797,7 @@ Never show this QR code to anyone else. It would allow unlimited access to your 
     </message>
     <message>
         <source>Invisible</source>
-        <translation>تيدق کليهتن</translation>
+        <translation type="vanished">تيدق کليهتن</translation>
     </message>
     <message>
         <source>Invalid username or password.</source>
@@ -728,7 +869,7 @@ Try to close other applications using the camera.</source>
     </message>
     <message>
         <source>Logging in…</source>
-        <translation>سدڠ لوݢ ماسوق…</translation>
+        <translation type="vanished">سدڠ لوݢ ماسوق…</translation>
     </message>
     <message>
         <source>Scan the QR code from your existing device to transfer your account.</source>
@@ -745,6 +886,10 @@ Try to close other applications using the camera.</source>
     <message>
         <source>Continue without QR code</source>
         <translation>تروسکن تنڤ کود QR</translation>
+    </message>
+    <message>
+        <source>Connecting…</source>
+        <translation type="unfinished">مڽمبوڠ…</translation>
     </message>
 </context>
 <context>
@@ -771,6 +916,23 @@ Try to close other applications using the camera.</source>
     <message>
         <source>Failed to change password: %1</source>
         <translation>ݢاݢل منوکر کات لالوان: %1</translation>
+    </message>
+</context>
+<context>
+    <name>RemoteAccountDeletion</name>
+    <message>
+        <source>Delete account completely</source>
+        <translation type="unfinished">ڤادم کسلوروهن اکاءون</translation>
+    </message>
+    <message>
+        <source>Your account will be deleted completely, which means from this app and from the server.
+You will not be able to use your account again!</source>
+        <translation type="unfinished">اکاءون اندا اکن دڤادم کسلوروهنڽ⹁ ايايت دڤادم درڤد اڤليکاسي اين دان جوݢ درڤد ڤلاين.
+اندا تيدق اکن ممڤو مڠݢوناکن اکاءون اندا لاݢي!</translation>
+    </message>
+    <message>
+        <source>Delete</source>
+        <translation type="unfinished">ڤادم</translation>
     </message>
 </context>
 <context>
@@ -946,6 +1108,34 @@ Deletion of message history saved on server</extracomment>
         <source>Configure photo, video and audio recording settings</source>
         <translation>مناتاراجه تتڤن راکمن ݢمبر⹁ ۏيديو دان اءوديو</translation>
     </message>
+    <message>
+        <source>Settings</source>
+        <translation type="unfinished">تتڤن</translation>
+    </message>
+    <message>
+        <source>Account security</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>configure whether this device can be used to log in on a new device</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Remove account from Kaidan</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Remove account from this app</source>
+        <translation type="unfinished">بواڠ اکاءون درڤد اڤليلاسي اين</translation>
+    </message>
+    <message>
+        <source>Delete account</source>
+        <translation type="unfinished">ڤادم اکاءون</translation>
+    </message>
+    <message>
+        <source>Delete account from the server</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>SettingsPage</name>
@@ -958,7 +1148,7 @@ Deletion of message history saved on server</extracomment>
     <name>SettingsSheet</name>
     <message>
         <source>Settings</source>
-        <translation>تتڤن</translation>
+        <translation type="vanished">تتڤن</translation>
     </message>
 </context>
 <context>
@@ -1000,6 +1190,10 @@ Deletion of message history saved on server</extracomment>
     <message>
         <source>File</source>
         <translation>فايل</translation>
+    </message>
+    <message>
+        <source>Message could not be sent.</source>
+        <translation type="unfinished">ميسيج ݢاݢل دهنتر.</translation>
     </message>
 </context>
 <context>

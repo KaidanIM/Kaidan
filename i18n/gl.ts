@@ -15,6 +15,71 @@
         <source>View source code online</source>
         <translation>Ver código fonte en liña</translation>
     </message>
+    <message>
+        <source>Report problems</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>AccountSecurity</name>
+    <message>
+        <source>Account Security</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Allow to add new devices using a QR-Code, but never show the password as text. This action can not be undone, so consider storing the password in another way before using it.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Disable showing the password</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Don&apos;t expose the password in any form. This action can not be undone.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Disable showing the QR-Code and password</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>AccountTransferPage</name>
+    <message>
+        <source>Transfer account to another device</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Scan the QR code or enter the credentials as text on another device to log in on it.
+
+Attention:
+Never show this QR code to anyone else. It would allow unlimited access to your account!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Chat address:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Password:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Hide QR code</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Show as QR code</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Hide text</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Show as text</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>ChangePassword</name>
@@ -63,11 +128,11 @@
     <name>ChatMessage</name>
     <message>
         <source>Copy Message</source>
-        <translation>Copiar Mensaxe</translation>
+        <translation type="vanished">Copiar Mensaxe</translation>
     </message>
     <message>
         <source>Edit Message</source>
-        <translation>Editar Mensaxe</translation>
+        <translation type="vanished">Editar Mensaxe</translation>
     </message>
     <message>
         <source>Spoiler</source>
@@ -79,11 +144,30 @@
     </message>
     <message>
         <source>Copy download URL</source>
-        <translation>Copiar URL de descarga</translation>
+        <translation type="vanished">Copiar URL de descarga</translation>
     </message>
     <message>
         <source>Quote</source>
-        <translation>Citar</translation>
+        <translation type="vanished">Citar</translation>
+    </message>
+</context>
+<context>
+    <name>ChatMessageContextMenu</name>
+    <message>
+        <source>Copy message</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit message</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Copy download URL</source>
+        <translation type="unfinished">Copiar URL de descarga</translation>
+    </message>
+    <message>
+        <source>Quote message</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -114,7 +198,7 @@
     </message>
     <message>
         <source>Select a file</source>
-        <translation>Escoller ficheiro</translation>
+        <translation type="vanished">Escoller ficheiro</translation>
     </message>
     <message>
         <source>Send a spoiler message</source>
@@ -162,6 +246,13 @@
     </message>
 </context>
 <context>
+    <name>ClientWorker</name>
+    <message>
+        <source>Your account could not be deleted from the server. Therefore, it was also not removed from this app: %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>CommonEncoderSettings</name>
     <message>
         <source>Very low</source>
@@ -198,6 +289,47 @@
     <message>
         <source>Two pass</source>
         <translation>Dúas pasadas</translation>
+    </message>
+</context>
+<context>
+    <name>ConfirmationPage</name>
+    <message>
+        <source>Cancel</source>
+        <translation type="unfinished">Cancelar</translation>
+    </message>
+</context>
+<context>
+    <name>DisablePasswordDisplay</name>
+    <message>
+        <source>Remove password completely</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Your password will not be included in the QR code anymore.
+You won&apos;t be able to use the login via QR code without entering your password again because this action cannot be undone!
+Make sure that you backed it up if you want to use your account later.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Remove password</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>DisablePlainTextPasswordDisplay</name>
+    <message>
+        <source>Do not show password as text</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Your password will not be shown as text anymore.
+You won&apos;t be able to see your password as text again because this action cannot be undone!
+Make sure that you backed it up if you want to use your account later.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Do not show password</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -269,25 +401,25 @@
     <name>FileChooser</name>
     <message>
         <source>Select a file</source>
-        <translation>Escoller ficheiro</translation>
+        <translation type="vanished">Escoller ficheiro</translation>
     </message>
 </context>
 <context>
     <name>FileChooserMobile</name>
     <message>
         <source>Go to parent folder</source>
-        <translation>Ir ao cartafol superior</translation>
+        <translation type="vanished">Ir ao cartafol superior</translation>
     </message>
     <message>
         <source>Close</source>
-        <translation>Pechar</translation>
+        <translation type="vanished">Pechar</translation>
     </message>
 </context>
 <context>
     <name>GlobalDrawer</name>
     <message>
         <source>Log out</source>
-        <translation>Desconectar</translation>
+        <translation type="vanished">Desconectar</translation>
     </message>
     <message>
         <source>About</source>
@@ -317,6 +449,10 @@
         <source>Connecting…</source>
         <translation>Conectando…</translation>
     </message>
+    <message>
+        <source>Switch device</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>Kaidan</name>
@@ -327,11 +463,27 @@
     </message>
     <message>
         <source>No password found. Please enter it.</source>
-        <translation>Non hai contrasinal. Por favor escríbea.</translation>
+        <translation type="vanished">Non hai contrasinal. Por favor escríbea.</translation>
     </message>
     <message>
         <source>No valid login QR code found.</source>
         <translation>Non te atopou código QR de conexión válido.</translation>
+    </message>
+</context>
+<context>
+    <name>LocalAccountRemoval</name>
+    <message>
+        <source>Remove account from this app</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Your account will be removed from this app.
+Your password will be deleted, make sure it is stored in a password manager or you know it!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Remove</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -398,7 +550,7 @@
     </message>
     <message>
         <source>Log in using a QR-Code</source>
-        <translation>Conectar usando código QR</translation>
+        <translation type="vanished">Conectar usando código QR</translation>
     </message>
 </context>
 <context>
@@ -475,15 +627,15 @@
     <name>MessageHandler</name>
     <message>
         <source>Could not send message, as a result of not being connected.</source>
-        <translation>Non se enviou a mensaxe, xa que non está conectada.</translation>
+        <translation type="vanished">Non se enviou a mensaxe, xa que non está conectada.</translation>
     </message>
     <message>
         <source>Could not correct message, as a result of not being connected.</source>
-        <translation>Non se correxiu a mensaxe, xa que non está conectada.</translation>
+        <translation type="vanished">Non se correxiu a mensaxe, xa que non está conectada.</translation>
     </message>
     <message>
         <source>Spoiler</source>
-        <translation>Spoiler</translation>
+        <translation type="vanished">Spoiler</translation>
     </message>
     <message>
         <source>Message could not be sent.</source>
@@ -492,6 +644,25 @@
     <message>
         <source>Message correction was not successful.</source>
         <translation>Non se puido correxir a mensaxe.</translation>
+    </message>
+</context>
+<context>
+    <name>MessageModel</name>
+    <message>
+        <source>Pending</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Sent</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Delivered</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Error</source>
+        <translation type="unfinished">Fallo</translation>
     </message>
 </context>
 <context>
@@ -692,6 +863,32 @@
     </message>
 </context>
 <context>
+    <name>PasswordRemovalPage</name>
+    <message>
+        <source>Remove password</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>You can decide to only not show your password for &lt;b&gt;%1&lt;/b&gt; as text anymore or to remove it completely from the account transfer. If you remove your password completely, you won&apos;t be able to use the account transfer via scanning without entering your password because it is also removed from the QR code.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Do not show password as text</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Remove completely</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>QObject</name>
+    <message>
+        <source>Mark as read</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>QmlUtils</name>
     <message>
         <source>Available</source>
@@ -723,7 +920,7 @@
     </message>
     <message>
         <source>Invisible</source>
-        <translation>Non visible</translation>
+        <translation type="vanished">Non visible</translation>
     </message>
     <message>
         <source>Invalid username or password.</source>
@@ -747,7 +944,7 @@
     </message>
     <message>
         <source>Could not connect to the server.</source>
-        <translation>Non hai conexión co servidor.</translation>
+        <translation type="vanished">Non hai conexión co servidor.</translation>
     </message>
     <message>
         <source>Authentification protocol not supported by the server.</source>
@@ -759,7 +956,26 @@
     </message>
     <message>
         <source>An unknown error occured.</source>
-        <translation>Houbo un fallo descoñecido.</translation>
+        <translation type="vanished">Houbo un fallo descoñecido.</translation>
+    </message>
+    <message>
+        <source>The server is offline or blocked by a firewall.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The connection could not be refreshed.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The internet access is not permitted. Please check your system&apos;s internet access configuration.</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>QrCodeGenerator</name>
+    <message>
+        <source>Generating the QR code failed: %1</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -782,6 +998,41 @@ Pecha outras aplicacións que a estén utilizando.</translation>
         <source>The camera format &apos;%1&apos; is not supported.</source>
         <translation>O formato de cámara &apos;%1&apos; non está soportado.</translation>
     </message>
+    <message>
+        <source>Connecting…</source>
+        <translation type="unfinished">Conectando…</translation>
+    </message>
+    <message>
+        <source>Scan the QR code from your existing device to transfer your account.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Show explanation</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Scan</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Continue without QR code</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>RegistrationLoginDecisionPage</name>
+    <message>
+        <source>Set up</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Register a new account</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Use an existing account</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>RegistrationManager</name>
@@ -792,6 +1043,22 @@ Pecha outras aplicacións que a estén utilizando.</translation>
     <message>
         <source>Failed to change password: %1</source>
         <translation>Fallo no cambio de contrasinal: %1</translation>
+    </message>
+</context>
+<context>
+    <name>RemoteAccountDeletion</name>
+    <message>
+        <source>Delete account completely</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Your account will be deleted completely, which means from this app and from the server.
+You will not be able to use your account again!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Delete</source>
+        <translation type="unfinished">Eliminar</translation>
     </message>
 </context>
 <context>
@@ -937,7 +1204,7 @@ Pecha outras aplicacións que a estén utilizando.</translation>
     </message>
     <message>
         <source>Edit name:</source>
-        <translation>Editar nome:</translation>
+        <translation type="vanished">Editar nome:</translation>
     </message>
     <message>
         <source>Cancel</source>
@@ -964,6 +1231,71 @@ Pecha outras aplicacións que a estén utilizando.</translation>
     </message>
 </context>
 <context>
+    <name>ServerListModel</name>
+    <message>
+        <source>Custom server</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>No limitation</source>
+        <extracomment>Unlimited file size for uploading files
+----------
+Deletion of message history saved on server</extracomment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>%1 days</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>SettingsContent</name>
+    <message>
+        <source>Settings</source>
+        <translation type="unfinished">Axustes</translation>
+    </message>
+    <message>
+        <source>Change password</source>
+        <translation type="unfinished">Cambiar contrasinal</translation>
+    </message>
+    <message>
+        <source>Changes your account&apos;s password. You will need to re-enter it on your other devices.</source>
+        <translation type="unfinished">Cambio no contrasinal da conta. Deberá voltar a introducilo nos outros dispositivos.</translation>
+    </message>
+    <message>
+        <source>Multimedia Settings</source>
+        <translation type="unfinished">Axustes Multimedia</translation>
+    </message>
+    <message>
+        <source>Configure photo, video and audio recording settings</source>
+        <translation type="unfinished">Configurar os axustes para fotos e gravación de audio e vídeo</translation>
+    </message>
+    <message>
+        <source>Account security</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>configure whether this device can be used to log in on a new device</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Remove account from Kaidan</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Remove account from this app</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Delete account</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Delete account from the server</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>SettingsPage</name>
     <message>
         <source>Settings</source>
@@ -971,19 +1303,30 @@ Pecha outras aplicacións que a estén utilizando.</translation>
     </message>
     <message>
         <source>Change password</source>
-        <translation>Cambiar contrasinal</translation>
+        <translation type="vanished">Cambiar contrasinal</translation>
     </message>
     <message>
         <source>Changes your account&apos;s password. You will need to re-enter it on your other devices.</source>
-        <translation>Cambio no contrasinal da conta. Deberá voltar a introducilo nos outros dispositivos.</translation>
+        <translation type="vanished">Cambio no contrasinal da conta. Deberá voltar a introducilo nos outros dispositivos.</translation>
     </message>
     <message>
         <source>Multimedia Settings</source>
-        <translation>Axustes Multimedia</translation>
+        <translation type="vanished">Axustes Multimedia</translation>
     </message>
     <message>
         <source>Configure photo, video and audio recording settings</source>
-        <translation>Configurar os axustes para fotos e gravación de audio e vídeo</translation>
+        <translation type="vanished">Configurar os axustes para fotos e gravación de audio e vídeo</translation>
+    </message>
+</context>
+<context>
+    <name>StartPage</name>
+    <message>
+        <source>Enjoy free communication on every device!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Let&apos;s start</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -1014,6 +1357,10 @@ Pecha outras aplicacións que a estén utilizando.</translation>
     <message>
         <source>File</source>
         <translation>Ficheiro</translation>
+    </message>
+    <message>
+        <source>Message could not be sent.</source>
+        <translation type="unfinished">Non se puido enviar a mensaxe.</translation>
     </message>
 </context>
 <context>

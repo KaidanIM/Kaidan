@@ -66,55 +66,78 @@
     <name>AccountDeletionFromClientAndServerConfirmationPage</name>
     <message>
         <source>Delete account completely</source>
-        <translation>Удалить аккаунт отовсюду</translation>
+        <translation type="vanished">Удалить аккаунт отовсюду</translation>
     </message>
     <message>
         <source>Your account will be deleted completely, which means from this app and from the server.
 You will not be able to use your account again!</source>
-        <translation>Ваша учётная запись будет удалена в приложении и на сервере. 
+        <translation type="vanished">Ваша учётная запись будет удалена в приложении и на сервере. 
 Вы больше не сможете ей пользоваться!</translation>
     </message>
     <message>
         <source>Delete</source>
-        <translation>Удалить</translation>
+        <translation type="vanished">Удалить</translation>
     </message>
 </context>
 <context>
     <name>AccountDeletionFromClientConfirmationPage</name>
     <message>
         <source>Remove account from this app</source>
-        <translation>Удалить аккаунт в приложении</translation>
+        <translation type="vanished">Удалить аккаунт в приложении</translation>
     </message>
     <message>
         <source>Your account will be removed from this app.
 You won&apos;t be able to get your credentials back!
 Make sure that you have backed up those if you want to use your account later.</source>
-        <translation>Ваша учётная запись будет удалена в приложении.
+        <translation type="vanished">Ваша учётная запись будет удалена в приложении.
 Учётные данные нельзя восстановить!
 Cохраните их, если планируете использовать её в дальнейшем.</translation>
     </message>
     <message>
         <source>Remove</source>
-        <translation>Удалить</translation>
+        <translation type="vanished">Удалить</translation>
     </message>
 </context>
 <context>
     <name>AccountDeletionPage</name>
     <message>
         <source>Delete account</source>
-        <translation>Удалить аккаунт</translation>
+        <translation type="vanished">Удалить аккаунт</translation>
     </message>
     <message>
         <source>You can remove your account &lt;b&gt;%1&lt;/b&gt; only from this app or delete it completely. If you delete your account completely, you won&apos;t be able to use it with another app because it is also removed from the server.</source>
-        <translation>Учётную запись &lt;b&gt;%1&lt;/b&gt; можно удалить в приложении или полностью отовсюду. В последнем случае ей нельзя будет пользоваться в других приложениях, потому что она удаляется на сервере тоже.</translation>
+        <translation type="vanished">Учётную запись &lt;b&gt;%1&lt;/b&gt; можно удалить в приложении или полностью отовсюду. В последнем случае ей нельзя будет пользоваться в других приложениях, потому что она удаляется на сервере тоже.</translation>
     </message>
     <message>
         <source>Remove from this app</source>
-        <translation>Удалить в приложении</translation>
+        <translation type="vanished">Удалить в приложении</translation>
     </message>
     <message>
         <source>Delete completely</source>
-        <translation>Удалить отовсюду</translation>
+        <translation type="vanished">Удалить отовсюду</translation>
+    </message>
+</context>
+<context>
+    <name>AccountSecurity</name>
+    <message>
+        <source>Account Security</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Allow to add new devices using a QR-Code, but never show the password as text. This action can not be undone, so consider storing the password in another way before using it.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Disable showing the password</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Don&apos;t expose the password in any form. This action can not be undone.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Disable showing the QR-Code and password</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -220,6 +243,25 @@ Never show this QR code to anyone else. It would allow unlimited access to your 
     </message>
 </context>
 <context>
+    <name>ChatMessageContextMenu</name>
+    <message>
+        <source>Copy message</source>
+        <translation type="unfinished">Скопировать сообщение</translation>
+    </message>
+    <message>
+        <source>Edit message</source>
+        <translation type="unfinished">Редактировать сообщение</translation>
+    </message>
+    <message>
+        <source>Copy download URL</source>
+        <translation type="unfinished">Скопировать URL загрузки</translation>
+    </message>
+    <message>
+        <source>Quote message</source>
+        <translation type="unfinished">Цитировать сообщение</translation>
+    </message>
+</context>
+<context>
     <name>ChatPage</name>
     <message>
         <source>Compose message</source>
@@ -295,19 +337,19 @@ Never show this QR code to anyone else. It would allow unlimited access to your 
     </message>
     <message>
         <source>Copy message</source>
-        <translation>Скопировать сообщение</translation>
+        <translation type="vanished">Скопировать сообщение</translation>
     </message>
     <message>
         <source>Edit message</source>
-        <translation>Редактировать сообщение</translation>
+        <translation type="vanished">Редактировать сообщение</translation>
     </message>
     <message>
         <source>Copy download URL</source>
-        <translation>Скопировать URL загрузки</translation>
+        <translation type="vanished">Скопировать URL загрузки</translation>
     </message>
     <message>
         <source>Quote message</source>
-        <translation>Цитировать сообщение</translation>
+        <translation type="vanished">Цитировать сообщение</translation>
     </message>
 </context>
 <context>
@@ -368,6 +410,40 @@ Never show this QR code to anyone else. It would allow unlimited access to your 
     <message>
         <source>Actions</source>
         <translation type="vanished">Действия</translation>
+    </message>
+</context>
+<context>
+    <name>DisablePasswordDisplay</name>
+    <message>
+        <source>Remove password completely</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Your password will not be included in the QR code anymore.
+You won&apos;t be able to use the login via QR code without entering your password again because this action cannot be undone!
+Make sure that you backed it up if you want to use your account later.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Remove password</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>DisablePlainTextPasswordDisplay</name>
+    <message>
+        <source>Do not show password as text</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Your password will not be shown as text anymore.
+You won&apos;t be able to see your password as text again because this action cannot be undone!
+Make sure that you backed it up if you want to use your account later.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Do not show password</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -500,11 +576,15 @@ Never show this QR code to anyone else. It would allow unlimited access to your 
     </message>
     <message>
         <source>Transfer account</source>
-        <translation>Перенести учётную запись</translation>
+        <translation type="vanished">Перенести учётную запись</translation>
     </message>
     <message>
         <source>Delete account</source>
-        <translation>Удалить учётную запись</translation>
+        <translation type="vanished">Удалить учётную запись</translation>
+    </message>
+    <message>
+        <source>Switch device</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -517,6 +597,22 @@ Never show this QR code to anyone else. It would allow unlimited access to your 
     <message>
         <source>No valid login QR code found.</source>
         <translation>QR код для входа не найден.</translation>
+    </message>
+</context>
+<context>
+    <name>LocalAccountRemoval</name>
+    <message>
+        <source>Remove account from this app</source>
+        <translation type="unfinished">Удалить аккаунт в приложении</translation>
+    </message>
+    <message>
+        <source>Your account will be removed from this app.
+Your password will be deleted, make sure it is stored in a password manager or you know it!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Remove</source>
+        <translation type="unfinished">Удалить</translation>
     </message>
 </context>
 <context>
@@ -672,15 +768,15 @@ Never show this QR code to anyone else. It would allow unlimited access to your 
     <name>MessageHandler</name>
     <message>
         <source>Could not send message, as a result of not being connected.</source>
-        <translation>Сообщение не отправлено (отсутствует подключение к сети).</translation>
+        <translation type="vanished">Сообщение не отправлено (отсутствует подключение к сети).</translation>
     </message>
     <message>
         <source>Could not correct message, as a result of not being connected.</source>
-        <translation>Исправить сообщение не получилось (отсутствует подключение к сети).</translation>
+        <translation type="vanished">Исправить сообщение не получилось (отсутствует подключение к сети).</translation>
     </message>
     <message>
         <source>Spoiler</source>
-        <translation>Спойлер</translation>
+        <translation type="vanished">Спойлер</translation>
     </message>
     <message>
         <source>Message could not be sent.</source>
@@ -689,6 +785,25 @@ Never show this QR code to anyone else. It would allow unlimited access to your 
     <message>
         <source>Message correction was not successful.</source>
         <translation>Исправить сообщение не удалось.</translation>
+    </message>
+</context>
+<context>
+    <name>MessageModel</name>
+    <message>
+        <source>Pending</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Sent</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Delivered</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Error</source>
+        <translation type="unfinished">Ошибка</translation>
     </message>
 </context>
 <context>
@@ -817,6 +932,32 @@ Never show this QR code to anyone else. It would allow unlimited access to your 
     </message>
 </context>
 <context>
+    <name>PasswordRemovalPage</name>
+    <message>
+        <source>Remove password</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>You can decide to only not show your password for &lt;b&gt;%1&lt;/b&gt; as text anymore or to remove it completely from the account transfer. If you remove your password completely, you won&apos;t be able to use the account transfer via scanning without entering your password because it is also removed from the QR code.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Do not show password as text</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Remove completely</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>QObject</name>
+    <message>
+        <source>Mark as read</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>QmlUtils</name>
     <message>
         <source>Available</source>
@@ -848,7 +989,7 @@ Never show this QR code to anyone else. It would allow unlimited access to your 
     </message>
     <message>
         <source>Invisible</source>
-        <translation>Невидимый</translation>
+        <translation type="vanished">Невидимый</translation>
     </message>
     <message>
         <source>Invalid username or password.</source>
@@ -924,7 +1065,7 @@ Try to close other applications using the camera.</source>
     </message>
     <message>
         <source>Logging in…</source>
-        <translation>Вход в систему…</translation>
+        <translation type="vanished">Вход в систему…</translation>
     </message>
     <message>
         <source>Scan the QR code from your existing device to transfer your account.</source>
@@ -941,6 +1082,10 @@ Try to close other applications using the camera.</source>
     <message>
         <source>Continue without QR code</source>
         <translation>Продолжить без QR кода</translation>
+    </message>
+    <message>
+        <source>Connecting…</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -967,6 +1112,23 @@ Try to close other applications using the camera.</source>
     <message>
         <source>Failed to change password: %1</source>
         <translation>Не удалось изменить пароль: %1</translation>
+    </message>
+</context>
+<context>
+    <name>RemoteAccountDeletion</name>
+    <message>
+        <source>Delete account completely</source>
+        <translation type="unfinished">Удалить аккаунт отовсюду</translation>
+    </message>
+    <message>
+        <source>Your account will be deleted completely, which means from this app and from the server.
+You will not be able to use your account again!</source>
+        <translation type="unfinished">Ваша учётная запись будет удалена в приложении и на сервере. 
+Вы больше не сможете ей пользоваться!</translation>
+    </message>
+    <message>
+        <source>Delete</source>
+        <translation type="unfinished">Удалить</translation>
     </message>
 </context>
 <context>
@@ -1150,6 +1312,34 @@ Deletion of message history saved on server</extracomment>
         <source>Configure photo, video and audio recording settings</source>
         <translation>Изменить настройки снимков, аудио- и видеозаписей</translation>
     </message>
+    <message>
+        <source>Settings</source>
+        <translation type="unfinished">Настройки</translation>
+    </message>
+    <message>
+        <source>Account security</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>configure whether this device can be used to log in on a new device</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Remove account from Kaidan</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Remove account from this app</source>
+        <translation type="unfinished">Удалить аккаунт в приложении</translation>
+    </message>
+    <message>
+        <source>Delete account</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Delete account from the server</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>SettingsPage</name>
@@ -1162,7 +1352,7 @@ Deletion of message history saved on server</extracomment>
     <name>SettingsSheet</name>
     <message>
         <source>Settings</source>
-        <translation>Настройки</translation>
+        <translation type="vanished">Настройки</translation>
     </message>
 </context>
 <context>
@@ -1204,6 +1394,10 @@ Deletion of message history saved on server</extracomment>
     <message>
         <source>File</source>
         <translation>Файл</translation>
+    </message>
+    <message>
+        <source>Message could not be sent.</source>
+        <translation type="unfinished">Отправить сообщение не удалось.</translation>
     </message>
 </context>
 <context>

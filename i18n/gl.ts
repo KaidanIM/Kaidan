@@ -736,16 +736,16 @@ Your password will be deleted, make sure it is stored in a password manager or y
         <translation>Listo</translation>
     </message>
     <message>
-        <source>Initializing...</source>
-        <translation>Inicializando...</translation>
+        <source>Initializing…</source>
+        <translation>Inicializando…</translation>
     </message>
     <message>
         <source>Unavailable</source>
         <translation>Non dispoñible</translation>
     </message>
     <message>
-        <source>Recording...</source>
-        <translation>Gravando...</translation>
+        <source>Recording…</source>
+        <translation>Gravando…</translation>
     </message>
     <message>
         <source>Paused</source>
@@ -823,16 +823,16 @@ Your password will be deleted, make sure it is stored in a password manager or y
         <translation type="vanished">Listo</translation>
     </message>
     <message>
-        <source>Initializing...</source>
-        <translation type="vanished">Inicializando...</translation>
+        <source>Initializing…</source>
+        <translation type="vanished">Inicializando…</translation>
     </message>
     <message>
         <source>Unavailable</source>
         <translation type="vanished">Non dispoñible</translation>
     </message>
     <message>
-        <source>Recording...</source>
-        <translation type="vanished">Gravando...</translation>
+        <source>Recording…</source>
+        <translation type="vanished">Gravando…</translation>
     </message>
     <message>
         <source>Paused</source>
@@ -846,16 +846,16 @@ Your password will be deleted, make sure it is stored in a password manager or y
         <translation>Preparado</translation>
     </message>
     <message>
-        <source>Initializing...</source>
-        <translation>Inicializando...</translation>
+        <source>Initializing…</source>
+        <translation>Inicializando…</translation>
     </message>
     <message>
         <source>Unavailable</source>
         <translation>Non dispoñible</translation>
     </message>
     <message>
-        <source>Recording... %1</source>
-        <translation>Gravando... %1</translation>
+        <source>Recording… %1</source>
+        <translation>Gravando… %1</translation>
     </message>
     <message>
         <source>Paused %1</source>

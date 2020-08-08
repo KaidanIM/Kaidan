@@ -877,7 +877,7 @@ Your password will be deleted, make sure it is stored in a password manager or y
         <translation>Готово</translation>
     </message>
     <message>
-        <source>Initializing...</source>
+        <source>Initializing…</source>
         <translation>Инициализация…</translation>
     </message>
     <message>
@@ -885,7 +885,7 @@ Your password will be deleted, make sure it is stored in a password manager or y
         <translation>Недоступно</translation>
     </message>
     <message>
-        <source>Recording...</source>
+        <source>Recording…</source>
         <translation>Запись…</translation>
     </message>
     <message>
@@ -915,7 +915,7 @@ Your password will be deleted, make sure it is stored in a password manager or y
         <translation>Готово</translation>
     </message>
     <message>
-        <source>Initializing...</source>
+        <source>Initializing…</source>
         <translation>Инициализация…</translation>
     </message>
     <message>
@@ -923,7 +923,7 @@ Your password will be deleted, make sure it is stored in a password manager or y
         <translation>Недоступно</translation>
     </message>
     <message>
-        <source>Recording... %1</source>
+        <source>Recording… %1</source>
         <translation>Запись… %1</translation>
     </message>
     <message>

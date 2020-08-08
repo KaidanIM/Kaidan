@@ -756,16 +756,16 @@ Prosím zkontrolujte své připojení k internetu.</translation>
         <translation type="unfinished">Připravený</translation>
     </message>
     <message>
-        <source>Initializing...</source>
-        <translation type="unfinished">Zahajuji...</translation>
+        <source>Initializing…</source>
+        <translation type="unfinished">Zahajuji…</translation>
     </message>
     <message>
         <source>Unavailable</source>
         <translation type="unfinished">Nedostupný</translation>
     </message>
     <message>
-        <source>Recording...</source>
-        <translation type="unfinished">Nahrávám...</translation>
+        <source>Recording…</source>
+        <translation type="unfinished">Nahrávám…</translation>
     </message>
     <message>
         <source>Paused</source>
@@ -843,16 +843,16 @@ Prosím zkontrolujte své připojení k internetu.</translation>
         <translation type="vanished">Připravený</translation>
     </message>
     <message>
-        <source>Initializing...</source>
-        <translation type="vanished">Zahajuji...</translation>
+        <source>Initializing…</source>
+        <translation type="vanished">Zahajuji…</translation>
     </message>
     <message>
         <source>Unavailable</source>
         <translation type="vanished">Nedostupný</translation>
     </message>
     <message>
-        <source>Recording...</source>
-        <translation type="vanished">Nahrávám...</translation>
+        <source>Recording…</source>
+        <translation type="vanished">Nahrávám…</translation>
     </message>
     <message>
         <source>Paused</source>
@@ -866,16 +866,16 @@ Prosím zkontrolujte své připojení k internetu.</translation>
         <translation>Připravený</translation>
     </message>
     <message>
-        <source>Initializing...</source>
-        <translation>Zahajuji...</translation>
+        <source>Initializing…</source>
+        <translation>Zahajuji…</translation>
     </message>
     <message>
         <source>Unavailable</source>
         <translation>Nedostupný</translation>
     </message>
     <message>
-        <source>Recording... %1</source>
-        <translation>Nahrávání... %1</translation>
+        <source>Recording… %1</source>
+        <translation>Nahrávání… %1</translation>
     </message>
     <message>
         <source>Paused %1</source>

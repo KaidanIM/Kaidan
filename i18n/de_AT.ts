@@ -712,7 +712,7 @@ Your password will be deleted, make sure it is stored in a password manager or y
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Initializing...</source>
+        <source>Initializing…</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -720,7 +720,7 @@ Your password will be deleted, make sure it is stored in a password manager or y
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Recording...</source>
+        <source>Recording…</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -750,7 +750,7 @@ Your password will be deleted, make sure it is stored in a password manager or y
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Initializing...</source>
+        <source>Initializing…</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -758,7 +758,7 @@ Your password will be deleted, make sure it is stored in a password manager or y
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Recording... %1</source>
+        <source>Recording… %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>

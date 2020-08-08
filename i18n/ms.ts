@@ -917,16 +917,16 @@ Your password will be deleted, make sure it is stored in a password manager or y
         <translation>Sedia</translation>
     </message>
     <message>
-        <source>Initializing...</source>
-        <translation>Mengasalkan...</translation>
+        <source>Initializing…</source>
+        <translation>Mengasalkan…</translation>
     </message>
     <message>
         <source>Unavailable</source>
         <translation>Tidak tersedia</translation>
     </message>
     <message>
-        <source>Recording...</source>
-        <translation>Merakam...</translation>
+        <source>Recording…</source>
+        <translation>Merakam…</translation>
     </message>
     <message>
         <source>Paused</source>
@@ -1004,16 +1004,16 @@ Your password will be deleted, make sure it is stored in a password manager or y
         <translation type="vanished">Sedia</translation>
     </message>
     <message>
-        <source>Initializing...</source>
-        <translation type="vanished">Mengasalkan...</translation>
+        <source>Initializing…</source>
+        <translation type="vanished">Mengasalkan…</translation>
     </message>
     <message>
         <source>Unavailable</source>
         <translation type="vanished">Tidak tersedia</translation>
     </message>
     <message>
-        <source>Recording...</source>
-        <translation type="vanished">Merakam...</translation>
+        <source>Recording…</source>
+        <translation type="vanished">Merakam…</translation>
     </message>
     <message>
         <source>Paused</source>
@@ -1027,16 +1027,16 @@ Your password will be deleted, make sure it is stored in a password manager or y
         <translation>Sedia</translation>
     </message>
     <message>
-        <source>Initializing...</source>
-        <translation>Mengasalkan...</translation>
+        <source>Initializing…</source>
+        <translation>Mengasalkan…</translation>
     </message>
     <message>
         <source>Unavailable</source>
         <translation>Tidak tersedia</translation>
     </message>
     <message>
-        <source>Recording... %1</source>
-        <translation>Merakam... %1</translation>
+        <source>Recording… %1</source>
+        <translation>Merakam… %1</translation>
     </message>
     <message>
         <source>Paused %1</source>

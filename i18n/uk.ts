@@ -736,7 +736,7 @@ Your password will be deleted, make sure it is stored in a password manager or y
         <translation>Готово</translation>
     </message>
     <message>
-        <source>Initializing...</source>
+        <source>Initializing…</source>
         <translation>Ініціалізація…</translation>
     </message>
     <message>
@@ -744,7 +744,7 @@ Your password will be deleted, make sure it is stored in a password manager or y
         <translation>Немає даних</translation>
     </message>
     <message>
-        <source>Recording...</source>
+        <source>Recording…</source>
         <translation>Запис…</translation>
     </message>
     <message>
@@ -823,7 +823,7 @@ Your password will be deleted, make sure it is stored in a password manager or y
         <translation type="vanished">Готово</translation>
     </message>
     <message>
-        <source>Initializing...</source>
+        <source>Initializing…</source>
         <translation type="vanished">Ініціалізація…</translation>
     </message>
     <message>
@@ -831,7 +831,7 @@ Your password will be deleted, make sure it is stored in a password manager or y
         <translation type="vanished">Немає даних</translation>
     </message>
     <message>
-        <source>Recording...</source>
+        <source>Recording…</source>
         <translation type="vanished">Запис…</translation>
     </message>
     <message>
@@ -846,7 +846,7 @@ Your password will be deleted, make sure it is stored in a password manager or y
         <translation>Готово</translation>
     </message>
     <message>
-        <source>Initializing...</source>
+        <source>Initializing…</source>
         <translation>Ініціалізація…</translation>
     </message>
     <message>
@@ -854,7 +854,7 @@ Your password will be deleted, make sure it is stored in a password manager or y
         <translation>Немає даних</translation>
     </message>
     <message>
-        <source>Recording... %1</source>
+        <source>Recording… %1</source>
         <translation>Запис… %1</translation>
     </message>
     <message>

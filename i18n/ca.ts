@@ -765,7 +765,7 @@ Your password will be deleted, make sure it is stored in a password manager or y
         <translation>Preparat</translation>
     </message>
     <message>
-        <source>Initializing...</source>
+        <source>Initializing…</source>
         <translation>S’està inicialitzant…</translation>
     </message>
     <message>
@@ -773,7 +773,7 @@ Your password will be deleted, make sure it is stored in a password manager or y
         <translation>No disponible</translation>
     </message>
     <message>
-        <source>Recording...</source>
+        <source>Recording…</source>
         <translation>S’està enregistrant…</translation>
     </message>
     <message>
@@ -803,7 +803,7 @@ Your password will be deleted, make sure it is stored in a password manager or y
         <translation>Preparat</translation>
     </message>
     <message>
-        <source>Initializing...</source>
+        <source>Initializing…</source>
         <translation>S’està inicialitzant…</translation>
     </message>
     <message>
@@ -811,7 +811,7 @@ Your password will be deleted, make sure it is stored in a password manager or y
         <translation>No disponible</translation>
     </message>
     <message>
-        <source>Recording... %1</source>
+        <source>Recording… %1</source>
         <translation>S’està enregistrant… %1</translation>
     </message>
     <message>

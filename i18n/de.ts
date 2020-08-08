@@ -950,7 +950,7 @@ Your password will be deleted, make sure it is stored in a password manager or y
         <translation>Bereit</translation>
     </message>
     <message>
-        <source>Initializing...</source>
+        <source>Initializing…</source>
         <translation>Initialisiere…</translation>
     </message>
     <message>
@@ -958,8 +958,8 @@ Your password will be deleted, make sure it is stored in a password manager or y
         <translation>Nicht verfügbar</translation>
     </message>
     <message>
-        <source>Recording...</source>
-        <translation>Aufnahme...</translation>
+        <source>Recording…</source>
+        <translation>Aufnahme…</translation>
     </message>
     <message>
         <source>Paused</source>
@@ -1037,16 +1037,16 @@ Your password will be deleted, make sure it is stored in a password manager or y
         <translation type="vanished">Bereit</translation>
     </message>
     <message>
-        <source>Initializing...</source>
-        <translation type="vanished">Initialisieren...</translation>
+        <source>Initializing…</source>
+        <translation type="vanished">Initialisieren…</translation>
     </message>
     <message>
         <source>Unavailable</source>
         <translation type="vanished">Nicht verfügbar</translation>
     </message>
     <message>
-        <source>Recording...</source>
-        <translation type="vanished">Aufnahme...</translation>
+        <source>Recording…</source>
+        <translation type="vanished">Aufnahme…</translation>
     </message>
     <message>
         <source>Paused</source>
@@ -1060,16 +1060,16 @@ Your password will be deleted, make sure it is stored in a password manager or y
         <translation>Bereit</translation>
     </message>
     <message>
-        <source>Initializing...</source>
-        <translation>Initializieren...</translation>
+        <source>Initializing…</source>
+        <translation>Initializieren…</translation>
     </message>
     <message>
         <source>Unavailable</source>
         <translation>Nicht verfügbar</translation>
     </message>
     <message>
-        <source>Recording... %1</source>
-        <translation>Zeichne auf... %1</translation>
+        <source>Recording… %1</source>
+        <translation>Zeichne auf… %1</translation>
     </message>
     <message>
         <source>Paused %1</source>

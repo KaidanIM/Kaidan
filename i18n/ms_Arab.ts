@@ -700,7 +700,7 @@ Your password will be deleted, make sure it is stored in a password manager or y
         <translation>سديا</translation>
     </message>
     <message>
-        <source>Initializing...</source>
+        <source>Initializing…</source>
         <translation>مڠاصلکن…</translation>
     </message>
     <message>
@@ -708,7 +708,7 @@ Your password will be deleted, make sure it is stored in a password manager or y
         <translation>تيدق ترسديا</translation>
     </message>
     <message>
-        <source>Recording...</source>
+        <source>Recording…</source>
         <translation>مراکم…</translation>
     </message>
     <message>
@@ -723,7 +723,7 @@ Your password will be deleted, make sure it is stored in a password manager or y
         <translation>سديا</translation>
     </message>
     <message>
-        <source>Initializing...</source>
+        <source>Initializing…</source>
         <translation>مڠاصلکن…</translation>
     </message>
     <message>
@@ -731,8 +731,8 @@ Your password will be deleted, make sure it is stored in a password manager or y
         <translation>تيدق ترسديا</translation>
     </message>
     <message>
-        <source>Recording... %1</source>
-        <translation>مراکم... %1</translation>
+        <source>Recording… %1</source>
+        <translation>مراکم… %1</translation>
     </message>
     <message>
         <source>Paused %1</source>

@@ -914,7 +914,7 @@ Your password will be deleted, make sure it is stored in a password manager or y
         <translation>Preparado</translation>
     </message>
     <message>
-        <source>Initializing...</source>
+        <source>Initializing…</source>
         <translation>Iniciando…</translation>
     </message>
     <message>
@@ -922,7 +922,7 @@ Your password will be deleted, make sure it is stored in a password manager or y
         <translation>No disponible</translation>
     </message>
     <message>
-        <source>Recording...</source>
+        <source>Recording…</source>
         <translation>Grabando…</translation>
     </message>
     <message>
@@ -1001,7 +1001,7 @@ Your password will be deleted, make sure it is stored in a password manager or y
         <translation type="vanished">Preparado</translation>
     </message>
     <message>
-        <source>Initializing...</source>
+        <source>Initializing…</source>
         <translation type="vanished">Iniciando…</translation>
     </message>
     <message>
@@ -1009,7 +1009,7 @@ Your password will be deleted, make sure it is stored in a password manager or y
         <translation type="vanished">No disponible</translation>
     </message>
     <message>
-        <source>Recording...</source>
+        <source>Recording…</source>
         <translation type="vanished">Grabando…</translation>
     </message>
     <message>
@@ -1024,7 +1024,7 @@ Your password will be deleted, make sure it is stored in a password manager or y
         <translation>Preparado</translation>
     </message>
     <message>
-        <source>Initializing...</source>
+        <source>Initializing…</source>
         <translation>Iniciando…</translation>
     </message>
     <message>
@@ -1032,7 +1032,7 @@ Your password will be deleted, make sure it is stored in a password manager or y
         <translation>No disponible</translation>
     </message>
     <message>
-        <source>Recording... %1</source>
+        <source>Recording… %1</source>
         <translation>Grabando… %1</translation>
     </message>
     <message>

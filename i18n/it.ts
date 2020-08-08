@@ -740,16 +740,16 @@ Your password will be deleted, make sure it is stored in a password manager or y
         <translation>Pronto</translation>
     </message>
     <message>
-        <source>Initializing...</source>
-        <translation>Inizializzazione...</translation>
+        <source>Initializing…</source>
+        <translation>Inizializzazione…</translation>
     </message>
     <message>
         <source>Unavailable</source>
         <translation>Non disponibile</translation>
     </message>
     <message>
-        <source>Recording...</source>
-        <translation>Registrazione...</translation>
+        <source>Recording…</source>
+        <translation>Registrazione…</translation>
     </message>
     <message>
         <source>Paused</source>
@@ -778,16 +778,16 @@ Your password will be deleted, make sure it is stored in a password manager or y
         <translation>Pronto</translation>
     </message>
     <message>
-        <source>Initializing...</source>
-        <translation>Inizializzazione...</translation>
+        <source>Initializing…</source>
+        <translation>Inizializzazione…</translation>
     </message>
     <message>
         <source>Unavailable</source>
         <translation>Non disponibile</translation>
     </message>
     <message>
-        <source>Recording... %1</source>
-        <translation>Registrazione... %1</translation>
+        <source>Recording… %1</source>
+        <translation>Registrazione… %1</translation>
     </message>
     <message>
         <source>Paused %1</source>

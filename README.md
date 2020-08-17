@@ -47,9 +47,10 @@ Here are the general dependencies of Kaidan:
 ## Contributing
 
 If you are interested in contributing to Kaidan, please have a look at our
-[contribution guidelines][CONTRIBUTING.md]. If you want to improve Kaidan's
+[contribution guidelines][contributing]. If you want to improve Kaidan's
 website, feel free to visit its [project site][kaidan-website-repo].
 
+[contributing]: CONTRIBUTING.md
 [downloads]: https://www.kaidan.im/download/
 [ecm]: https://api.kde.org/ecm/manual/ecm.7.html
 [kaidan-website]: https://kaidan.im

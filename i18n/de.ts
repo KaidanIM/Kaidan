@@ -122,23 +122,23 @@ Stellen Sie sicher, dass Sie diese gesichert haben, wenn Sie Ihr Konto später b
     <name>AccountSecurity</name>
     <message>
         <source>Account Security</source>
-        <translation type="unfinished"></translation>
+        <translation>Konto-Sicherheit</translation>
     </message>
     <message>
         <source>Allow to add new devices using a QR-Code, but never show the password as text. This action can not be undone, so consider storing the password in another way before using it.</source>
-        <translation type="unfinished"></translation>
+        <translation>Erlaube das Hinzufügen neuer Geräte mit einem QR-Code, aber zeige das Passwort niemals als Text an. Diese Aktion kann nicht rückgängig gemacht werden. Ziehen Sie daher in Betracht, das Passwort vor der Verwendung auf eine andere Art und Weise zu speichern.</translation>
     </message>
     <message>
         <source>Disable showing the password</source>
-        <translation type="unfinished"></translation>
+        <translation>Passwort nicht mehr anzeigen</translation>
     </message>
     <message>
         <source>Don&apos;t expose the password in any form. This action can not be undone.</source>
-        <translation type="unfinished"></translation>
+        <translation>Passwort in keiner Form verfügbar machen. Dies kann nicht rückgängig gemacht werden.</translation>
     </message>
     <message>
         <source>Disable showing the QR-Code and password</source>
-        <translation type="unfinished"></translation>
+        <translation>Passwort und QR-Code nicht mehr anzeigen</translation>
     </message>
 </context>
 <context>
@@ -271,7 +271,7 @@ Zeigen Sie diesen QR-Code niemals anderen Personen. Er würde unbegrenzten Zugan
     </message>
     <message>
         <source>Copy download URL</source>
-        <translation type="unfinished"></translation>
+        <translation>Download-URL kopieren</translation>
     </message>
     <message>
         <source>Quote message</source>
@@ -441,34 +441,38 @@ Zeigen Sie diesen QR-Code niemals anderen Personen. Er würde unbegrenzten Zugan
     <name>DisablePasswordDisplay</name>
     <message>
         <source>Remove password completely</source>
-        <translation type="unfinished"></translation>
+        <translation>Passwort vollständig ausblenden</translation>
     </message>
     <message>
         <source>Your password will not be included in the QR code anymore.
 You won&apos;t be able to use the login via QR code without entering your password again because this action cannot be undone!
 Make sure that you backed it up if you want to use your account later.</source>
-        <translation type="unfinished"></translation>
+        <translation>Ihr Passwort wird nicht mehr im QR-Code enthalten sein.
+Sie können die Anmeldung über den QR-Code nicht mehr verwenden, ohne Ihr Passwort erneut einzugeben, da diese Aktion nicht rückgängig gemacht werden kann!
+Stellen Sie sicher, dass Sie das Passwort gesichert haben, wenn Sie Ihr Konto später verwenden möchten.</translation>
     </message>
     <message>
         <source>Remove password</source>
-        <translation type="unfinished"></translation>
+        <translation>Passwort ausblenden</translation>
     </message>
 </context>
 <context>
     <name>DisablePlainTextPasswordDisplay</name>
     <message>
         <source>Do not show password as text</source>
-        <translation type="unfinished"></translation>
+        <translation>Passwort nicht als Klartext anzeigen</translation>
     </message>
     <message>
         <source>Your password will not be shown as text anymore.
 You won&apos;t be able to see your password as text again because this action cannot be undone!
 Make sure that you backed it up if you want to use your account later.</source>
-        <translation type="unfinished"></translation>
+        <translation>Ihr Passwort wird nicht mehr als Text angezeigt werden.
+Sie werden Ihr Passwort nicht mehr als Text sehen können, da diese Aktion nicht rückgängig gemacht werden kann!
+Stellen Sie sicher, dass Sie es gesichert haben, wenn Sie sich später noch auf ihrem Konto anmelden wollen.</translation>
     </message>
     <message>
         <source>Do not show password</source>
-        <translation type="unfinished"></translation>
+        <translation>Passwort nicht anzeigen</translation>
     </message>
 </context>
 <context>
@@ -621,7 +625,7 @@ Make sure that you backed it up if you want to use your account later.</source>
     </message>
     <message>
         <source>Switch device</source>
-        <translation type="unfinished"></translation>
+        <translation>Gerät wechseln</translation>
     </message>
 </context>
 <context>
@@ -677,7 +681,8 @@ Make sure that you backed it up if you want to use your account later.</source>
     <message>
         <source>Your account will be removed from this app.
 Your password will be deleted, make sure it is stored in a password manager or you know it!</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Ihr Konto wird aus dieser App entfernt.
+Ihr Passwort wird gelöscht, stellen Sie sicher, dass es in einem Passwort-Manager gespeichert ist oder Sie es kennen!</translation>
     </message>
     <message>
         <source>Remove</source>
@@ -864,15 +869,15 @@ Your password will be deleted, make sure it is stored in a password manager or y
     <name>MessageModel</name>
     <message>
         <source>Pending</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Ausstehend</translation>
     </message>
     <message>
         <source>Sent</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Gesendet</translation>
     </message>
     <message>
         <source>Delivered</source>
-        <translation type="unfinished"></translation>
+        <translation>Angekommen</translation>
     </message>
     <message>
         <source>Error</source>
@@ -1080,26 +1085,26 @@ Your password will be deleted, make sure it is stored in a password manager or y
     <name>PasswordRemovalPage</name>
     <message>
         <source>Remove password</source>
-        <translation type="unfinished"></translation>
+        <translation>Passwort ausblenden</translation>
     </message>
     <message>
         <source>You can decide to only not show your password for &lt;b&gt;%1&lt;/b&gt; as text anymore or to remove it completely from the account transfer. If you remove your password completely, you won&apos;t be able to use the account transfer via scanning without entering your password because it is also removed from the QR code.</source>
-        <translation type="unfinished"></translation>
+        <translation>Sie können sich entscheiden, Ihr Passwort für &lt;b&gt;%1&lt;/b&gt; nur nicht mehr als Text anzuzeigen oder es vollständig aus der Kontoübertragung zu entfernen. Wenn Sie Ihr Passwort vollständig entfernen, können Sie die Kontoübertragung per QR-Code-Scan ohne Eingabe Ihres Passworts nicht mehr nutzen, da es auch aus dem QR-Code entfernt wird.</translation>
     </message>
     <message>
         <source>Do not show password as text</source>
-        <translation type="unfinished"></translation>
+        <translation>Passwort nicht als Klartext anzeigen</translation>
     </message>
     <message>
         <source>Remove completely</source>
-        <translation type="unfinished"></translation>
+        <translation>Vollständig entfernen</translation>
     </message>
 </context>
 <context>
     <name>QObject</name>
     <message>
         <source>Mark as read</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Als gelesen markieren</translation>
     </message>
 </context>
 <context>
@@ -1230,7 +1235,7 @@ Versuche andere Programme, welche die Kamera verwenden, zu schließen.</translat
     </message>
     <message>
         <source>Connecting…</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Verbinden…</translation>
     </message>
 </context>
 <context>
@@ -1268,8 +1273,7 @@ Versuche andere Programme, welche die Kamera verwenden, zu schließen.</translat
     <message>
         <source>Your account will be deleted completely, which means from this app and from the server.
 You will not be able to use your account again!</source>
-        <translation type="unfinished">Ihr Konto wird vollständig gelöscht sein, d.h. von dieser Anwendung und vom Server.
-
+        <translation>Ihr Konto wird vollständig gelöscht sein, d.h. von dieser Anwendung und vom Server.
 Sie werden Ihr Konto nicht mehr benutzen können!</translation>
     </message>
     <message>
@@ -1500,11 +1504,11 @@ Deletion of message history saved on server</extracomment>
     </message>
     <message>
         <source>Account security</source>
-        <translation type="unfinished"></translation>
+        <translation>Konto-Sicherheit</translation>
     </message>
     <message>
         <source>configure whether this device can be used to log in on a new device</source>
-        <translation type="unfinished"></translation>
+        <translation>Einstellen, ob dieses Gerät zum Anmelden an einem neuen Gerät verwendet werden kann</translation>
     </message>
     <message>
         <source>Remove account from Kaidan</source>

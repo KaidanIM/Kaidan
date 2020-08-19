@@ -25,7 +25,41 @@
     </screenshot>
   </screenshots>
   <releases>
-    <release type="stable" version="0.5.0" date="2020-04-03T00:00:00Z">
+    <release type="stable" version="0.6.0">
+      <description>
+        <p>This release adds the following features:</p>
+        <ul>
+          <li>When offline, messages are cached now to be sent later</li>
+          <li>It's allowed to also correct other messages than the last one now</li>
+          <li>Also pending (unsent) messages can be corrected now</li>
+          <li>Chats can be opened from the notifications now</li>
+          <li>New option to permanently hide your password in Kaidan</li>
+          <li>New buttons for easily copying your jid and password</li>
+          <li>Moved account management pages into the settings</li>
+          <li>The cursor is moved to the end of the text field when correcting a message now</li>
+          <li>Scanning QR codes without a password works now and results in only the JID being set</li>
+          <li>The roster is called contact list now</li>
+          <li>The resource for the displayed presence is picked with fixed rules now (it was random before which resource is displayed)</li>
+          <li>Handle notifications differently on GNOME to keep them in the notifications area</li>
+          <li>Switched to the upstream HTTP File Upload implementation</li>
+          <li>Code refactoring and partial rewrite of the following classes: Kaidan, ClientWorker, RosterManager, PresenceCache, DownloadManager, TransferCache, QrCodeDecoder</li>
+        </ul>
+        <p>This release fixes the following bugs:</p>
+        <ul>
+          <li>Playback issues in media video preview</li>
+          <li>Messages sent from other of your devices are displayed as they were sent by the chat partner</li>
+          <li>Notifications are shown persistently on the screen</li>
+          <li>Roster names are not updated in the database</li>
+          <li>Roster items are not updated in the model correctly</li>
+          <li>All sheets contain two headers: It uses the new built-in header property now</li>
+          <li>Unreadable buttons with white text on withe background in some styles</li>
+          <li>Database version isn't saved correctly</li>
+          <li>Errors when building with newer ZXing versions</li>
+        </ul>
+        <p>Kaidan requires a C++17-compliant compiler now</p>
+      </description>
+    </release>
+    <release type="stable" version="0.5.0" date="2020-04-04T00:00:00Z">
       <description>
         <p>This release adds the following features:</p>
         <ul>
@@ -48,6 +82,10 @@
           <li>Add account deletion</li>
           <li>Redesign logo and global drawer banner</li>
           <li>Add onboarding with registration, normal login and QR code login</li>
+          <li>Add OARS rating</li>
+          <li>Add secondary roster sorting by contact name</li>
+          <li>Add support for recording audio and video messages</li>
+          <li>Add Kaidan to KDE's F-Droid repository</li>
           <li>Improve build scripts for better cross-platform support</li>
           <li>Refactor code for better performance and stability</li>
           <li>Add documentation to achieve easier maintenance</li>
@@ -57,6 +95,8 @@
           <li>Fix AppImage build</li>
           <li>Fix scrolling and item height problems in settings</li>
         </ul>
+        <p>Require Qt 5.12 and QXmpp 1.2</p>
+        <p>Drop Ubuntu Touch support due to outdated Qt</p>
       </description>
     </release>
     <release type="stable" version="0.4.2" date="2020-04-02T00:00:00Z">

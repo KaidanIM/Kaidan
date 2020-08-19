@@ -2,8 +2,43 @@ Version 0.6.0
 ~~~~~~~~~~~~~
 Released: 1970-01-01
 
+Features:
+ * When offline, messages are cached now to be sent later (yugubich)
+ * It's allowed to also correct other messages than the last one now (yugubich)
+ * Also pending (unsent) messages can be corrected now (yugubich)
+ * Chats can be opened from the notifications now (melvo, jbb, cacahueto)
+ * New option to permanently hide your password in Kaidan (melvo)
+ * New buttons for easily copying your jid and password (jbb, fazevedo)
+ * Moved account management pages into the settings (jbb)
+ * The cursor is moved to the end of the text field when correcting a message
+   now (melvo)
+ * Scanning QR codes without a password works now and results in only the JID
+   being set (melvo)
+ * The roster is called contact list now (jbb)
+ * The resource for the displayed presence is picked with fixed rules now (it
+   was random before which resource is displayed) (lnj)
+ * Handle notifications differently on GNOME to keep them in the notifications
+   area (melvo)
+ * Switched to the upstream HTTP File Upload implementation (lnj)
+ * Code refactoring and partial rewrite of the following classes: Kaidan,
+   ClientWorker, RosterManager, PresenceCache, DownloadManager, TransferCache,
+   QrCodeDecoder (lnj, jbb)
+
+Bugfixes:
+ * Playback issues in media video preview (fazevedo)
+ * Messages sent from other of your devices are displayed as they were sent by
+   the chat partner (lnj)
+ * Notifications are shown persistently on the screen (jbb)
+ * Roster names are not updated in the database (melvo)
+ * Roster items are not updated in the model correctly (melvo)
+ * All sheets contain two headers: It uses the new built-in header property now
+   (jbb)
+ * Unreadable buttons with white text on withe background in some styles (jbb)
+ * Database version isn't saved correctly (melvo)
+ * Errors when building with newer ZXing versions (vkrause)
+
 Notes:
- * under development
+ * Kaidan requires a C++17-compliant compiler now
 
 Version 0.5.0
 ~~~~~~~~~~~~~

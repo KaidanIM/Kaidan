@@ -126,7 +126,7 @@ Stellen Sie sicher, dass Sie diese gesichert haben, wenn Sie Ihr Konto später b
     </message>
     <message>
         <source>Allow to add new devices using a QR-Code, but never show the password as text. This action can not be undone, so consider storing the password in another way before using it.</source>
-        <translation>Erlaube das Hinzufügen neuer Geräte mit einem QR-Code, aber zeige das Passwort niemals als Text an. Diese Aktion kann nicht rückgängig gemacht werden. Ziehen Sie daher in Betracht, das Passwort vor der Verwendung auf eine andere Art und Weise zu speichern.</translation>
+        <translation>Erlaube das Hinzufügen neuer Geräte mit einem QR-Code, aber zeige das Passwort niemals als Text an. Diese Aktion kann nicht rückgängig gemacht werden. Sie sollten also überlegen, das Passwort vor der Verwendung anderweitig zu speichern.</translation>
     </message>
     <message>
         <source>Disable showing the password</source>
@@ -263,19 +263,19 @@ Zeigen Sie diesen QR-Code niemals anderen Personen. Er würde unbegrenzten Zugan
     <name>ChatMessageContextMenu</name>
     <message>
         <source>Copy message</source>
-        <translation type="unfinished">Nachricht kopieren</translation>
+        <translation>Nachricht kopieren</translation>
     </message>
     <message>
         <source>Edit message</source>
-        <translation type="unfinished">Nachricht bearbeiten</translation>
+        <translation>Nachricht bearbeiten</translation>
     </message>
     <message>
         <source>Copy download URL</source>
-        <translation>Download-URL kopieren</translation>
+        <translation>URL zum Herunterladen kopieren</translation>
     </message>
     <message>
         <source>Quote message</source>
-        <translation type="unfinished">Nachricht zitieren</translation>
+        <translation>Nachricht zitieren</translation>
     </message>
 </context>
 <context>
@@ -676,7 +676,7 @@ Stellen Sie sicher, dass Sie es gesichert haben, wenn Sie sich später noch auf 
     <name>LocalAccountRemoval</name>
     <message>
         <source>Remove account from this app</source>
-        <translation type="unfinished">Konto aus dieser App entfernen</translation>
+        <translation>Konto aus dieser App entfernen</translation>
     </message>
     <message>
         <source>Your account will be removed from this app.
@@ -686,7 +686,7 @@ Ihr Passwort wird gelöscht, stellen Sie sicher, dass es in einem Passwort-Manag
     </message>
     <message>
         <source>Remove</source>
-        <translation type="unfinished">Entfernen</translation>
+        <translation>Entfernen</translation>
     </message>
 </context>
 <context>
@@ -873,7 +873,7 @@ Ihr Passwort wird gelöscht, stellen Sie sicher, dass es in einem Passwort-Manag
     </message>
     <message>
         <source>Sent</source>
-        <translation type="unfinished">Gesendet</translation>
+        <translation>Gesendet</translation>
     </message>
     <message>
         <source>Delivered</source>
@@ -881,7 +881,7 @@ Ihr Passwort wird gelöscht, stellen Sie sicher, dass es in einem Passwort-Manag
     </message>
     <message>
         <source>Error</source>
-        <translation type="unfinished">Fehler</translation>
+        <translation>Fehler</translation>
     </message>
 </context>
 <context>
@@ -1235,7 +1235,7 @@ Versuche andere Programme, welche die Kamera verwenden, zu schließen.</translat
     </message>
     <message>
         <source>Connecting…</source>
-        <translation type="unfinished">Verbinden…</translation>
+        <translation>Verbinden…</translation>
     </message>
 </context>
 <context>
@@ -1268,7 +1268,7 @@ Versuche andere Programme, welche die Kamera verwenden, zu schließen.</translat
     <name>RemoteAccountDeletion</name>
     <message>
         <source>Delete account completely</source>
-        <translation type="unfinished">Konto vollständig löschen</translation>
+        <translation>Konto vollständig löschen</translation>
     </message>
     <message>
         <source>Your account will be deleted completely, which means from this app and from the server.
@@ -1278,7 +1278,7 @@ Sie werden Ihr Konto nicht mehr benutzen können!</translation>
     </message>
     <message>
         <source>Delete</source>
-        <translation type="unfinished"></translation>
+        <translation>Löschen</translation>
     </message>
 </context>
 <context>
@@ -1379,7 +1379,7 @@ Sie werden Ihr Konto nicht mehr benutzen können!</translation>
     </message>
     <message>
         <source>Could not rename contact, as a result of not being connected.</source>
-        <translation>Konnte den Kontakt nicht umbenennen, da du nicht verbunden bist.</translation>
+        <translation>Konnte den Kontakt nicht umbenennen, da keine Verbindung besteht.</translation>
     </message>
 </context>
 <context>
@@ -1500,7 +1500,7 @@ Deletion of message history saved on server</extracomment>
     </message>
     <message>
         <source>Settings</source>
-        <translation type="unfinished">Einstellungen</translation>
+        <translation>Einstellungen</translation>
     </message>
     <message>
         <source>Account security</source>
@@ -1512,19 +1512,19 @@ Deletion of message history saved on server</extracomment>
     </message>
     <message>
         <source>Remove account from Kaidan</source>
-        <translation type="unfinished"></translation>
+        <translation>Konto von Kaidan entfernen</translation>
     </message>
     <message>
         <source>Remove account from this app</source>
-        <translation type="unfinished">Konto aus dieser App entfernen</translation>
+        <translation>Konto aus dieser App entfernen</translation>
     </message>
     <message>
         <source>Delete account</source>
-        <translation type="unfinished">Konto löschen</translation>
+        <translation>Konto löschen</translation>
     </message>
     <message>
         <source>Delete account from the server</source>
-        <translation type="unfinished"></translation>
+        <translation>Konto auf dem Server löschen</translation>
     </message>
 </context>
 <context>
@@ -1609,7 +1609,7 @@ Deletion of message history saved on server</extracomment>
     </message>
     <message>
         <source>Message could not be sent.</source>
-        <translation type="unfinished">Nachricht konnte nicht gesendet werden.</translation>
+        <translation>Nachricht konnte nicht gesendet werden.</translation>
     </message>
 </context>
 <context>

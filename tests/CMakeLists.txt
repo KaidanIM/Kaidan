@@ -14,8 +14,8 @@ ecm_add_test(
 )
 
 ecm_add_test(
-	UserPresenceModelTest.cpp
+	UserPresenceWatcherTest.cpp
 	../src/PresenceCache.cpp
-	TEST_NAME UserPresenceModelTest
+	TEST_NAME UserPresenceWatcherTest
 	LINK_LIBRARIES Qt5::Test Qt5::Gui QXmpp::QXmpp
 )

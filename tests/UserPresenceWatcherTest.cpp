@@ -10,7 +10,7 @@
 
 Q_DECLARE_METATYPE(QXmppPresence::AvailableStatusType)
 
-class UserPresenceModelTest : public QObject
+class UserPresenceWatcherTest : public QObject
 {
 	Q_OBJECT
 
@@ -31,21 +31,21 @@ private:
 	PresenceCache cache;
 };
 
-void UserPresenceModelTest::initTestCase()
+void UserPresenceWatcherTest::initTestCase()
 {
 	qRegisterMetaType<PresenceCache::ChangeType>();
 }
 
-void UserPresenceModelTest::testBasic()
+void UserPresenceWatcherTest::testBasic()
 {
 	cache.clear();
 
 	// set user model JID
-	UserPresenceModel userModel;
+	UserPresenceWatcher userModel;
 	userModel.setJid("bob@kaidan.im");
 
-	QSignalSpy resourceSpy(&userModel, &UserPresenceModel::resourceChanged);
-	QSignalSpy presencePropertiesSpy(&userModel, &UserPresenceModel::presencePropertiesChanged);
+	QSignalSpy resourceSpy(&userModel, &UserPresenceWatcher::resourceChanged);
+	QSignalSpy presencePropertiesSpy(&userModel, &UserPresenceWatcher::presencePropertiesChanged);
 
 	// add presences for bob@kaidan.im
 	// the user model needs to handle the new presences
@@ -102,7 +102,7 @@ void UserPresenceModelTest::testBasic()
 	QCOMPARE(userModel.statusText(), QString());
 }
 
-void UserPresenceModelTest::addBasicPresences()
+void UserPresenceWatcherTest::addBasicPresences()
 {
 	addSimplePresence("bob@kaidan.im/dev1");
 	addSimplePresence("bob@kaidan.im/dev2");
@@ -110,7 +110,7 @@ void UserPresenceModelTest::addBasicPresences()
 	addSimplePresence("alice@kaidan.im/kdn2");
 }
 
-void UserPresenceModelTest::addSimplePresence(const QString &jid,
+void UserPresenceWatcherTest::addSimplePresence(const QString &jid,
 	QXmppPresence::AvailableStatusType available,
 	const QString &status,
 	QXmppPresence::Type type)
@@ -118,7 +118,7 @@ void UserPresenceModelTest::addSimplePresence(const QString &jid,
 	cache.updatePresence(simplePresence(jid, available, status, type));
 }
 
-QXmppPresence UserPresenceModelTest::simplePresence(const QString &jid,
+QXmppPresence UserPresenceWatcherTest::simplePresence(const QString &jid,
 	QXmppPresence::AvailableStatusType available,
 	const QString &status,
 	QXmppPresence::Type type)
@@ -130,5 +130,5 @@ QXmppPresence UserPresenceModelTest::simplePresence(const QString &jid,
 	return p;
 }
 
-QTEST_MAIN(UserPresenceModelTest)
-#include "UserPresenceModelTest.moc"
+QTEST_MAIN(UserPresenceWatcherTest)
+#include "UserPresenceWatcherTest.moc"

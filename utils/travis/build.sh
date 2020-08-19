@@ -24,10 +24,12 @@ elif [[ ${BUILD_SYSTEM} == "cmake" ]]; then
 	      -GNinja \
 	      -DCMAKE_BUILD_TYPE=Debug \
 	      -DI18N=1 \
+	      -DBUILD_TESTS=ON \
 	      -DCMAKE_CXX_COMPILER_LAUNCHER=ccache \
 	      -DCMAKE_CXX_COMPILER=${CMAKE_CXX_COMPILER:-"g++"}
 
 	cmake --build .
+	CTEST_OUTPUT_ON_FAILURE=1 cmake --build . --target test
 else
 	echo "Unknown platform or build system!"
 	exit 1

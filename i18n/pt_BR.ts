@@ -13,7 +13,7 @@
     </message>
     <message>
         <source>View source code online</source>
-        <translation>Veja código fonte online</translation>
+        <translation>Veja código-fonte online</translation>
     </message>
     <message>
         <source>Report problems</source>
@@ -28,7 +28,7 @@
     </message>
     <message>
         <source>Allow to add new devices using a QR-Code, but never show the password as text. This action can not be undone, so consider storing the password in another way before using it.</source>
-        <translation>Permita adicionar novos dispositivos usando um Código-QR, mas nunca mostre a senha como texto. Esta ação não pode ser desfeita, porém considere armazenar a senha de outra forma antes de usá-la.</translation>
+        <translation>Permitir adicionar novos dispositivos usando um Código-QR, mas nunca mostrar a senha como texto. Esta ação não poderá ser desfeita, porém, considere armazenar a senha de outra forma antes de usá-la.</translation>
     </message>
     <message>
         <source>Disable showing the password</source>
@@ -36,7 +36,7 @@
     </message>
     <message>
         <source>Don&apos;t expose the password in any form. This action can not be undone.</source>
-        <translation>Não mostra a senha de nenhuma forma. Esta acção não pode ser desfeita.</translation>
+        <translation>Não mostra a senha de nenhuma forma. Esta ação não pode ser desfeita.</translation>
     </message>
     <message>
         <source>Disable showing the QR-Code and password</source>
@@ -173,7 +173,7 @@ Nunca mostre este código QR a ninguém. Ele permitiria o acesso ilimitado à su
     </message>
     <message>
         <source>Unmute notifications</source>
-        <translation>Activar notificações</translation>
+        <translation>Ativar notificações</translation>
     </message>
     <message>
         <source>Mute notifications</source>
@@ -185,11 +185,11 @@ Nunca mostre este código QR a ninguém. Ele permitiria o acesso ilimitado à su
     </message>
     <message>
         <source>Search</source>
-        <translation>Pesquise</translation>
+        <translation>Pesquisar</translation>
     </message>
     <message>
         <source>Close</source>
-        <translation>Encerrar</translation>
+        <translation>Fechar</translation>
     </message>
     <message>
         <source>Search up</source>
@@ -286,7 +286,7 @@ Certifique-se de que fez o backup se quiser usar sua conta mais tarde.</translat
         <source>Your password will not be shown as text anymore.
 You won&apos;t be able to see your password as text again because this action cannot be undone!
 Make sure that you backed it up if you want to use your account later.</source>
-        <translation>A partir de agora sua senha não irá ser exibida como texto.
+        <translation>A partir de agora sua senha não será mais exibida como texto.
 Você não será capaz de ver sua senha como texto novamente, porque essa ação não pode ser desfeita!
 Certifique-se de fazer o backup dela se você deseja usar a sua conta mais tarde.</translation>
     </message>
@@ -326,7 +326,7 @@ Certifique-se de fazer o backup dela se você deseja usar a sua conta mais tarde
     </message>
     <message>
         <source>Activity</source>
-        <translation>Actividade</translation>
+        <translation>Atividade</translation>
     </message>
     <message>
         <source>Travel</source>
@@ -357,7 +357,7 @@ Certifique-se de fazer o backup dela se você deseja usar a sua conta mais tarde
     <name>EmptyChatPage</name>
     <message>
         <source>Please select a chat to start messaging</source>
-        <translation>Por favor seleccione um bate-papo para iniciar conversa</translation>
+        <translation>Por favor, selecione um bate-papo para iniciar conversa</translation>
     </message>
 </context>
 <context>
@@ -482,11 +482,11 @@ Sua senha também será excluída, certifique-se de que ela é armazenada num ge
     </message>
     <message>
         <source>Choose audio file</source>
-        <translation>Escolha arquivo de áudio</translation>
+        <translation>Escolher arquivo de áudio</translation>
     </message>
     <message>
         <source>Choose document</source>
-        <translation type="unfinished">Escolha documento</translation>
+        <translation>Escolher documento</translation>
     </message>
     <message>
         <source>All files</source>
@@ -521,7 +521,7 @@ Sua senha também será excluída, certifique-se de que ela é armazenada num ge
     </message>
     <message>
         <source>Message correction was not successful.</source>
-        <translation>Não foi possível a correcção da mensagem.</translation>
+        <translation>Não foi possível a correção da mensagem.</translation>
     </message>
 </context>
 <context>
@@ -687,7 +687,7 @@ Sua senha também será excluída, certifique-se de que ela é armazenada num ge
     </message>
     <message>
         <source>Free for chat</source>
-        <translation>Grátis para bate-papo</translation>
+        <translation>Livre para bate-papo</translation>
     </message>
     <message>
         <source>Away</source>
@@ -775,7 +775,7 @@ Tente fechar outros aplicativos que estão usando a câmera.</translation>
     </message>
     <message>
         <source>The camera format &apos;%1&apos; is not supported.</source>
-        <translation>O formato da câmera &apos;% 1&apos; não é compatível.</translation>
+        <translation>O formato da câmera &apos;%1&apos; não é compatível.</translation>
     </message>
     <message>
         <source>Scan the QR code from your existing device to transfer your account.</source>
@@ -833,7 +833,7 @@ Tente fechar outros aplicativos que estão usando a câmera.</translation>
     <message>
         <source>Your account will be deleted completely, which means from this app and from the server.
 You will not be able to use your account again!</source>
-        <translation>Sua conta será excluída por completo, o seja deste aplicativo e do servidor.
+        <translation>Sua conta será excluída por completo, ou seja, deste aplicativo e do servidor.
 Você não poderá usar sua conta novamente!</translation>
     </message>
     <message>
@@ -914,7 +914,7 @@ Você não poderá usar sua conta novamente!</translation>
     </message>
     <message>
         <source>Contacts</source>
-        <translation>Contactos</translation>
+        <translation>Contatos</translation>
     </message>
     <message>
         <source>Add new contact</source>
@@ -926,7 +926,7 @@ Você não poderá usar sua conta novamente!</translation>
     </message>
     <message>
         <source>Search contacts</source>
-        <translation>Procurar contactos</translation>
+        <translation>Procurar contatos</translation>
     </message>
 </context>
 <context>
@@ -993,7 +993,7 @@ Deletion of message history saved on server</extracomment>
     </message>
     <message>
         <source>%1 days</source>
-        <translation>%1 dia</translation>
+        <translation>%1 dias</translation>
     </message>
 </context>
 <context>
@@ -1004,7 +1004,7 @@ Deletion of message history saved on server</extracomment>
     </message>
     <message>
         <source>Changes your account&apos;s password. You will need to re-enter it on your other devices.</source>
-        <translation>Altera a senha da sua conta. Será necessário digitá-lo novamente nos seus outros dispositivos.</translation>
+        <translation>Altera a senha da sua conta. Será necessário digitá-la novamente nos seus outros dispositivos.</translation>
     </message>
     <message>
         <source>Multimedia Settings</source>
@@ -1054,7 +1054,7 @@ Deletion of message history saved on server</extracomment>
     <name>StartPage</name>
     <message>
         <source>Enjoy free communication on every device!</source>
-        <translation>Aproveite a comunicação gratuita no cada aparelho!</translation>
+        <translation>Aproveite a comunicação gratuita em cada aparelho!</translation>
     </message>
     <message>
         <source>Let&apos;s start</source>
@@ -1073,7 +1073,7 @@ Deletion of message history saved on server</extracomment>
     </message>
     <message>
         <source>Decline</source>
-        <translation>Rejetar</translation>
+        <translation>Rejeitar</translation>
     </message>
     <message>
         <source>Accept</source>

@@ -55,6 +55,7 @@ REPLACE_USER_IDS = [
 	("X Txaume <txaumevw@gmail.com>", "Txaume <txaumevw@gmail.com>"),
 	("X mondstern <hello@mondstern.tk>", "mondstern <hello@mondstern.tk>"),
 	("Jeannette L <j.lavoie@net-c.ca>", "Jeannette Lavoie <j.lavoie@net-c.ca>"),
+	("aevw _ <arcanevw@tuta.io>", "aevw <arcanevw@tuta.io>"),
 ]
 
 # These user ids will be excluded from any targets

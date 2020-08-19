@@ -39,9 +39,21 @@ echo "*****************************************"
 echo "Fetching dependencies if required"
 echo "*****************************************"
 
-if [ ! -d "$KAIDAN_SOURCES/3rdparty/qxmpp/.git" ]; then
+mkdir -p $KAIDAN_SOURCE/3rdparty
+
+if [ ! -f "$KAIDAN_SOURCES/3rdparty/kirigami/.git" ]; then
+    echo "Cloning Kirigami"
+    git clone https://invent.kde.org/frameworks/kirigami $KAIDAN_SOURCES/3rdparty/kirigami
+fi
+
+if [ ! -f "$KAIDAN_SOURCES/3rdparty/breeze-icons/.git" ]; then
+    echo "Cloning Breeze icons"
+    git clone https://invent.kde.org/frameworks/breeze-icons $KAIDAN_SOURCES/3rdparty/breeze-icons
+fi
+
+if [ ! -e "$KAIDAN_SOURCES/3rdparty/qxmpp/.git" ]; then
     echo "Cloning QXmpp"
-    git clone https://github.com/qxmpp-project/qxmpp.git 3rdparty/qxmpp
+    git clone https://github.com/qxmpp-project/qxmpp.git $KAIDAN_SOURCES/3rdparty/qxmpp
 fi
 
 if [ ! -d "$OPENSSL_PATH" ]; then
@@ -56,11 +68,6 @@ if [ ! -f "$OPENSSL_SETENV" ]; then
     sed -i 's/arm-linux-androideabi-4.8/arm-linux-androideabi-4.9/g' $OPENSSL_SETENV
     sed -i 's/android-18/android-$ANDROID_API_VERSION/g' $OPENSSL_SETENV
     chmod +x $OPENSSL_SETENV
-fi
-
-if [ ! -f "$KAIDAN_SOURCES/3rdparty/kirigami/.git" ] || [ ! -f "$KAIDAN_SOURCES/3rdparty/breeze-icons/.git" ]; then
-    echo "Cloning Kirigami and Breeze icons"
-    git submodule update --init
 fi
 
 if [ ! -d "$CUSTOM_ANDROID_TOOLCHAIN" ]; then

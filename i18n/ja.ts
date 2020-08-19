@@ -17,11 +17,11 @@
     </message>
     <message>
         <source>View source code online</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">ソースコードをオンラインで見る</translation>
     </message>
     <message>
         <source>Report problems</source>
-        <translation type="unfinished"></translation>
+        <translation>問題を報告</translation>
     </message>
 </context>
 <context>
@@ -43,7 +43,7 @@
     <name>AccountSecurity</name>
     <message>
         <source>Account Security</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">アカウントのセキュリティ</translation>
     </message>
     <message>
         <source>Allow to add new devices using a QR-Code, but never show the password as text. This action can not be undone, so consider storing the password in another way before using it.</source>
@@ -51,7 +51,7 @@
     </message>
     <message>
         <source>Disable showing the password</source>
-        <translation type="unfinished"></translation>
+        <translation>パスワードの表示を無効にする</translation>
     </message>
     <message>
         <source>Don&apos;t expose the password in any form. This action can not be undone.</source>
@@ -59,7 +59,7 @@
     </message>
     <message>
         <source>Disable showing the QR-Code and password</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">QRコードとパスワードの表示を無効にする</translation>
     </message>
 </context>
 <context>
@@ -77,15 +77,15 @@ Never show this QR code to anyone else. It would allow unlimited access to your 
     </message>
     <message>
         <source>Chat address:</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">チャットアドレス：</translation>
     </message>
     <message>
         <source>Password:</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">パスワード：</translation>
     </message>
     <message>
         <source>Hide QR code</source>
-        <translation type="unfinished"></translation>
+        <translation>QRコードを隠す</translation>
     </message>
     <message>
         <source>Show as QR code</source>
@@ -93,7 +93,7 @@ Never show this QR code to anyone else. It would allow unlimited access to your 
     </message>
     <message>
         <source>Hide text</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">テキストを隠す</translation>
     </message>
     <message>
         <source>Show as text</source>

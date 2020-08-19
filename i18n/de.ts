@@ -681,7 +681,7 @@ Stellen Sie sicher, dass Sie es gesichert haben, wenn Sie sich später noch auf 
     <message>
         <source>Your account will be removed from this app.
 Your password will be deleted, make sure it is stored in a password manager or you know it!</source>
-        <translation type="unfinished">Ihr Konto wird aus dieser App entfernt.
+        <translation>Ihr Konto wird aus dieser App entfernt.
 Ihr Passwort wird gelöscht, stellen Sie sicher, dass es in einem Passwort-Manager gespeichert ist oder Sie es kennen!</translation>
     </message>
     <message>
@@ -869,7 +869,7 @@ Ihr Passwort wird gelöscht, stellen Sie sicher, dass es in einem Passwort-Manag
     <name>MessageModel</name>
     <message>
         <source>Pending</source>
-        <translation type="unfinished">Ausstehend</translation>
+        <translation>Ausstehend</translation>
     </message>
     <message>
         <source>Sent</source>
@@ -1512,7 +1512,7 @@ Deletion of message history saved on server</extracomment>
     </message>
     <message>
         <source>Remove account from Kaidan</source>
-        <translation>Konto von Kaidan entfernen</translation>
+        <translation>Konto aus Kaidan entfernen</translation>
     </message>
     <message>
         <source>Remove account from this app</source>

@@ -134,6 +134,13 @@ public:
 	 */
 	Caches *caches() const;
 
+	/**
+	 * Returns whether the application window is active.
+	 *
+	 * The application window is active when it is in the foreground and focused.
+	 */
+	bool isApplicationWindowActive() const;
+
 public slots:
 	/**
 	 * Main function of the client thread
@@ -187,7 +194,7 @@ public slots:
 	 *
 	 * @param error error of the failed account deletion
 	 */
-	void handleAccountDeletionFromServerFailed(QXmppStanza::Error error);
+	void handleAccountDeletionFromServerFailed(const QXmppStanza::Error &error);
 
 	/**
 	 * Changes the user's password.
@@ -204,13 +211,6 @@ public slots:
 	 * @param displayName new name that is shown to contacts
 	 */
 	void changeDisplayName(const QString &displayName);
-
-	/**
-	 * Returns whether the application window is active.
-	 *
-	 * The application window is active when it is in the foreground and focused.
-	 */
-	bool isApplicationWindowActive() const;
 
 signals:
 	/**
@@ -269,7 +269,7 @@ private:
 	 *
 	 * @param length number of random alphanumeric characters the suffix should consist of after the dot
 	 */
-	QString generateJidResourceWithRandomSuffix(const QString jidResourcePrefix, unsigned int length = 4) const;
+	QString generateJidResourceWithRandomSuffix(const QString &jidResourcePrefix, unsigned int length = 4) const;
 
 	Caches *m_caches;
 

@@ -55,7 +55,7 @@
 #include "VCardManager.h"
 
 ClientWorker::ClientWorker(Caches *caches, Kaidan *kaidan, bool enableLogging, QObject* parent)
-	: QObject(parent), m_caches(caches), m_kaidan(kaidan), m_enableLogging(enableLogging)
+	: QObject(parent), m_caches(caches), m_kaidan(kaidan), m_enableLogging(enableLogging), m_isApplicationWindowActive(true)
 {
 	m_client = new QXmppClient(this);
 	m_logger = new LogHandler(m_client, this);
@@ -201,7 +201,7 @@ void ClientWorker::handleAccountDeletedFromServer()
 	m_isAccountDeletedFromServer = true;
 }
 
-void ClientWorker::handleAccountDeletionFromServerFailed(QXmppStanza::Error error)
+void ClientWorker::handleAccountDeletionFromServerFailed(const QXmppStanza::Error &error)
 {
 	emit m_kaidan->passiveNotificationRequested(tr("Your account could not be deleted from the server. Therefore, it was also not removed from this app: %1").arg(error.text()));
 
@@ -278,7 +278,7 @@ void ClientWorker::onConnected()
 		m_displayNameToBeSetOnNextConnect.clear();
 	}
 
-	emit m_caches->msgModel->sendPendingMessages();
+	m_caches->msgModel->sendPendingMessages();
 }
 
 void ClientWorker::onDisconnected()
@@ -357,7 +357,7 @@ void ClientWorker::setIsApplicationWindowActive(bool active)
 	m_isApplicationWindowActive = active;
 }
 
-QString ClientWorker::generateJidResourceWithRandomSuffix(const QString jidResourcePrefix, unsigned int length) const
+QString ClientWorker::generateJidResourceWithRandomSuffix(const QString &jidResourcePrefix, unsigned int length) const
 {
 	return jidResourcePrefix % "." % QXmppUtils::generateStanzaHash(length);
 }

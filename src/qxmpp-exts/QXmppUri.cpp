@@ -119,7 +119,8 @@ QXmppUri::QXmppUri(QString input)
 	if (!query.queryItems().size())
 		return;
 
-	m_action = Action(ACTION_STRINGS.indexOf(query.queryItems().first().first));
+	const auto queryItems = query.queryItems();
+	m_action = Action(ACTION_STRINGS.indexOf(queryItems.first().first));
 
 	switch (m_action) {
 	case Message:

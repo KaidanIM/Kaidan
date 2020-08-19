@@ -426,7 +426,7 @@ Enums::MessageType MediaUtils::messageType(const QUrl &url)
 		mimeTypes = s_mimeDB.mimeTypesForFileName(fileInfo.fileName());
 	}
 
-	for (const QMimeType &mimeType: mimeTypes) {
+	for (const QMimeType &mimeType : std::as_const(mimeTypes)) {
 		const Enums::MessageType messageType = MediaUtils::messageType(mimeType);
 
 		if (messageType != Enums::MessageType::MessageUnknown) {

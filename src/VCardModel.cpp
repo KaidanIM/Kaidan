@@ -116,7 +116,7 @@ void VCardModel::setJid(const QString &jid)
 	m_jid = jid;
 	emit jidChanged();
 
-	Kaidan::instance()->vCardRequested(jid);
+	emit Kaidan::instance()->vCardRequested(jid);
 }
 
 VCardModel::Item::Item(const QString &key, const QString &value)

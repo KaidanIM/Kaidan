@@ -67,7 +67,7 @@ QImage QrCodeGenerator::generateQrCode(const QString &text, int edgePixelCount)
 		const ZXing::BitMatrix &bitMatrix = writer.encode(text.toStdWString(), edgePixelCount, edgePixelCount);
 		return toImage(bitMatrix);
 	} catch (const std::invalid_argument &e) {
-		Kaidan::instance()->passiveNotificationRequested(tr("Generating the QR code failed: %1").arg(e.what()));
+		emit Kaidan::instance()->passiveNotificationRequested(tr("Generating the QR code failed: %1").arg(e.what()));
 	}
 
 	return {};

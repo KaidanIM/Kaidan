@@ -297,8 +297,8 @@ Q_DECL_EXPORT int main(int argc, char *argv[])
 		                   << "You can enable multiple instances by specifying '--multiple'.";
 
 		// send a possible link to the primary instance
-		if (!parser.positionalArguments().isEmpty())
-			app.sendMessage(parser.positionalArguments().first().toUtf8());
+		if (const auto positionalArguments = parser.positionalArguments(); !positionalArguments.isEmpty())
+			app.sendMessage(positionalArguments.first().toUtf8());
 		return 0;
 	}
 #endif
@@ -315,8 +315,8 @@ Q_DECL_EXPORT int main(int argc, char *argv[])
 #endif
 
 	// open the XMPP-URI/link (if given)
-	if (!parser.positionalArguments().isEmpty())
-		kaidan->addOpenUri(parser.positionalArguments().first());
+	if (const auto positionalArguments = parser.positionalArguments(); !positionalArguments.isEmpty())
+		kaidan->addOpenUri(positionalArguments.first());
 
 	//
 	// QML-GUI

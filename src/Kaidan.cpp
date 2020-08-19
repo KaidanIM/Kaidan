@@ -170,7 +170,7 @@ void Kaidan::setConnectionState(QXmppClient::State state)
 		// This is needed because the XMPP URIs can't be opened when Kaidan is not connected.
 		if (m_connectionState == ConnectionState::StateConnected && !m_openUriCache.isEmpty()) {
 			// delay is needed because sometimes the RosterPage needs to be loaded first
-			QTimer::singleShot(300, [=] () {
+			QTimer::singleShot(300, this, [=] () {
 				emit xmppUriReceived(m_openUriCache);
 				m_openUriCache = "";
 			});

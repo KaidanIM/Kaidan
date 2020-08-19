@@ -17,68 +17,71 @@
     </message>
     <message>
         <source>Report problems</source>
-        <translation type="unfinished"></translation>
+        <translation>Повідомити про проблеми</translation>
     </message>
 </context>
 <context>
     <name>AccountSecurity</name>
     <message>
         <source>Account Security</source>
-        <translation type="unfinished"></translation>
+        <translation>Безпека облікового запису</translation>
     </message>
     <message>
         <source>Allow to add new devices using a QR-Code, but never show the password as text. This action can not be undone, so consider storing the password in another way before using it.</source>
-        <translation type="unfinished"></translation>
+        <translation>Дозволити додавання нових пристроїв за допомогою QR-коду, але ніколи не показувати пароль як текст. Цю дію неможливо скасувати, тому вам варто зберегти пароль в інший спосіб, перш ніж користатися кодом.</translation>
     </message>
     <message>
         <source>Disable showing the password</source>
-        <translation type="unfinished"></translation>
+        <translation>Вимкнути показ пароля</translation>
     </message>
     <message>
         <source>Don&apos;t expose the password in any form. This action can not be undone.</source>
-        <translation type="unfinished"></translation>
+        <translation>Не показувати пароль у жодній формі. Наслідки цієї дії не можна скасувати.</translation>
     </message>
     <message>
         <source>Disable showing the QR-Code and password</source>
-        <translation type="unfinished"></translation>
+        <translation>Вимкнути показ QR-коду і пароля</translation>
     </message>
 </context>
 <context>
     <name>AccountTransferPage</name>
     <message>
         <source>Transfer account to another device</source>
-        <translation type="unfinished"></translation>
+        <translation>Перенести обліковий запис на інший пристрій</translation>
     </message>
     <message>
         <source>Scan the QR code or enter the credentials as text on another device to log in on it.
 
 Attention:
 Never show this QR code to anyone else. It would allow unlimited access to your account!</source>
-        <translation type="unfinished"></translation>
+        <translation>Заскануйте QR-код або введіть реєстраційні дані як текст на іншому пристрої, щоб увійти до облікового запису на ньому.
+
+Увага:
+Ніколи не показуйте цей QR-код стороннім особам. Цей код надає необмежений доступ до вашого облікового запису!</translation>
     </message>
     <message>
         <source>Chat address:</source>
-        <translation type="unfinished"></translation>
+        <translation>Адреса спілкування:</translation>
     </message>
     <message>
         <source>Password:</source>
-        <translation type="unfinished"></translation>
+        <translation>Пароль:</translation>
     </message>
     <message>
         <source>Hide QR code</source>
-        <translation type="unfinished"></translation>
+        <translation>Приховати QR-код</translation>
     </message>
     <message>
         <source>Show as QR code</source>
-        <translation type="unfinished"></translation>
+        <translation>Показати як QR-код</translation>
     </message>
     <message>
         <source>Hide text</source>
-        <translation type="unfinished"></translation>
+        <translation>Сховати текст</translation>
     </message>
     <message>
         <source>Show as text</source>
-        <translation type="unfinished"></translation>
+        <translation>Показати як текст</translation>
     </message>
 </context>
 <context>
@@ -155,19 +158,19 @@ Never show this QR code to anyone else. It would allow unlimited access to your 
     <name>ChatMessageContextMenu</name>
     <message>
         <source>Copy message</source>
-        <translation type="unfinished"></translation>
+        <translation>Скопіювати повідомлення</translation>
     </message>
     <message>
         <source>Edit message</source>
-        <translation type="unfinished"></translation>
+        <translation>Редагування повідомлення</translation>
     </message>
     <message>
         <source>Copy download URL</source>
-        <translation type="unfinished">Копіювати адресу даних</translation>
+        <translation>Копіювати адресу даних</translation>
     </message>
     <message>
         <source>Quote message</source>
-        <translation type="unfinished"></translation>
+        <translation>Процитувати повідомлення</translation>
     </message>
 </context>
 <context>
@@ -249,7 +252,7 @@ Never show this QR code to anyone else. It would allow unlimited access to your 
     <name>ClientWorker</name>
     <message>
         <source>Your account could not be deleted from the server. Therefore, it was also not removed from this app: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Не вдалося вилучити ваш обліковий запис із сервера. Як наслідок, його також не було вилучено з цієї програми: %1</translation>
     </message>
 </context>
 <context>
@@ -295,41 +298,45 @@ Never show this QR code to anyone else. It would allow unlimited access to your 
     <name>ConfirmationPage</name>
     <message>
         <source>Cancel</source>
-        <translation type="unfinished">Скасувати</translation>
+        <translation>Скасувати</translation>
     </message>
 </context>
 <context>
     <name>DisablePasswordDisplay</name>
     <message>
         <source>Remove password completely</source>
-        <translation type="unfinished"></translation>
+        <translation>Вилучити пароль повністю</translation>
     </message>
     <message>
         <source>Your password will not be included in the QR code anymore.
 You won&apos;t be able to use the login via QR code without entering your password again because this action cannot be undone!
 Make sure that you backed it up if you want to use your account later.</source>
-        <translation type="unfinished"></translation>
+        <translation>Ваш пароль більше не включатиметься до QR-коду.
+Ви не зможете скористатися входом за допомогою QR-коду без введення вашого пароля, оскільки наслідки цієї дії неможливо скасувати!
+Переконайтеся, що у вас є резервна копія пароля, якщо хочете надалі користуватися вашим обліковим записом.</translation>
     </message>
     <message>
         <source>Remove password</source>
-        <translation type="unfinished"></translation>
+        <translation>Вилучити пароль</translation>
     </message>
 </context>
 <context>
     <name>DisablePlainTextPasswordDisplay</name>
     <message>
         <source>Do not show password as text</source>
-        <translation type="unfinished"></translation>
+        <translation>Не показувати пароль як текст</translation>
     </message>
     <message>
         <source>Your password will not be shown as text anymore.
 You won&apos;t be able to see your password as text again because this action cannot be undone!
 Make sure that you backed it up if you want to use your account later.</source>
-        <translation type="unfinished"></translation>
+        <translation>Ваш пароль більше не буде показано у текстовому форматі.
+Ви не зможете бачити ваш пароль як текст, оскільки наслідки цієї дії неможливо скасувати!
+Переконайтеся, що у вас є резервна копія пароля, якщо хочете надалі користуватися вашим обліковим записом.</translation>
     </message>
     <message>
         <source>Do not show password</source>
-        <translation type="unfinished"></translation>
+        <translation>Не показувати пароль</translation>
     </message>
 </context>
 <context>
@@ -451,7 +458,7 @@ Make sure that you backed it up if you want to use your account later.</source>
     </message>
     <message>
         <source>Switch device</source>
-        <translation type="unfinished"></translation>
+        <translation>Перемкнути пристрій</translation>
     </message>
 </context>
 <context>
@@ -474,16 +481,17 @@ Make sure that you backed it up if you want to use your account later.</source>
     <name>LocalAccountRemoval</name>
     <message>
         <source>Remove account from this app</source>
-        <translation type="unfinished"></translation>
+        <translation>Вилучити обліковий запис з цієї програми</translation>
     </message>
     <message>
         <source>Your account will be removed from this app.
 Your password will be deleted, make sure it is stored in a password manager or you know it!</source>
-        <translation type="unfinished"></translation>
+        <translation>Ваш обліковий запис буде вилучено з цієї програми.
+Ваш пароль буде вилучено — не забудьте зберегти його у програмі для керування паролями або запам&apos;ятати його!</translation>
     </message>
     <message>
         <source>Remove</source>
-        <translation type="unfinished"></translation>
+        <translation>Вилучити</translation>
     </message>
 </context>
 <context>
@@ -650,19 +658,19 @@ Your password will be deleted, make sure it is stored in a password manager or y
     <name>MessageModel</name>
     <message>
         <source>Pending</source>
-        <translation type="unfinished"></translation>
+        <translation>Очікування</translation>
     </message>
     <message>
         <source>Sent</source>
-        <translation type="unfinished"></translation>
+        <translation>Надіслані</translation>
     </message>
     <message>
         <source>Delivered</source>
-        <translation type="unfinished"></translation>
+        <translation>Доставлено</translation>
     </message>
     <message>
         <source>Error</source>
-        <translation type="unfinished">Помилка</translation>
+        <translation>Помилка</translation>
     </message>
 </context>
 <context>
@@ -866,26 +874,26 @@ Your password will be deleted, make sure it is stored in a password manager or y
     <name>PasswordRemovalPage</name>
     <message>
         <source>Remove password</source>
-        <translation type="unfinished"></translation>
+        <translation>Вилучити пароль</translation>
     </message>
     <message>
         <source>You can decide to only not show your password for &lt;b&gt;%1&lt;/b&gt; as text anymore or to remove it completely from the account transfer. If you remove your password completely, you won&apos;t be able to use the account transfer via scanning without entering your password because it is also removed from the QR code.</source>
-        <translation type="unfinished"></translation>
+        <translation>Ви можете наказати програмі лише більше не показувати ваш пароль до &lt;b&gt;%1&lt;/b&gt; або наказати їй повністю вилучити пароль із перенесення облікових записів. Якщо ви повністю вилучите ваш пароль, ви не зможете скористатися засобом перенесення облікових записів шляхом сканування коду без введення вашого пароля, оскільки пароль буде вилучено з QR-коду.</translation>
     </message>
     <message>
         <source>Do not show password as text</source>
-        <translation type="unfinished"></translation>
+        <translation>Не показувати пароль як текст</translation>
     </message>
     <message>
         <source>Remove completely</source>
-        <translation type="unfinished"></translation>
+        <translation>Вилучити повністю</translation>
     </message>
 </context>
 <context>
     <name>QObject</name>
     <message>
         <source>Mark as read</source>
-        <translation type="unfinished"></translation>
+        <translation>Позначити як прочитане</translation>
     </message>
 </context>
 <context>
@@ -960,22 +968,22 @@ Your password will be deleted, make sure it is stored in a password manager or y
     </message>
     <message>
         <source>The server is offline or blocked by a firewall.</source>
-        <translation type="unfinished"></translation>
+        <translation>Цей сервер перебуває поза мережею або його заблоковано брандмауером.</translation>
     </message>
     <message>
         <source>The connection could not be refreshed.</source>
-        <translation type="unfinished"></translation>
+        <translation>Не вдалося освіжити з&apos;єднання.</translation>
     </message>
     <message>
         <source>The internet access is not permitted. Please check your system&apos;s internet access configuration.</source>
-        <translation type="unfinished"></translation>
+        <translation>З&apos;єднання з інтернетом заборонено. Будь ласка, перевірте налаштування доступу до інтернету у вашій системі.</translation>
     </message>
 </context>
 <context>
     <name>QrCodeGenerator</name>
     <message>
         <source>Generating the QR code failed: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Не вдалося створити QR-код: %1</translation>
     </message>
 </context>
 <context>
@@ -1000,38 +1008,38 @@ Try to close other applications using the camera.</source>
     </message>
     <message>
         <source>Connecting…</source>
-        <translation type="unfinished"></translation>
+        <translation>Встановлення з’єднання…</translation>
     </message>
     <message>
         <source>Scan the QR code from your existing device to transfer your account.</source>
-        <translation type="unfinished"></translation>
+        <translation>Заскануйте QR-код з вашого наявного пристрою, щоб перенести ваш обліковий запис.</translation>
     </message>
     <message>
         <source>Show explanation</source>
-        <translation type="unfinished"></translation>
+        <translation>Показати пояснення</translation>
     </message>
     <message>
         <source>Scan</source>
-        <translation type="unfinished"></translation>
+        <translation>Сканувати</translation>
     </message>
     <message>
         <source>Continue without QR code</source>
-        <translation type="unfinished"></translation>
+        <translation>Продовжити без QR-коду</translation>
     </message>
 </context>
 <context>
     <name>RegistrationLoginDecisionPage</name>
     <message>
         <source>Set up</source>
-        <translation type="unfinished"></translation>
+        <translation>Налаштувати</translation>
     </message>
     <message>
         <source>Register a new account</source>
-        <translation type="unfinished"></translation>
+        <translation>Зареєструвати новий обліковий запис</translation>
     </message>
     <message>
         <source>Use an existing account</source>
-        <translation type="unfinished"></translation>
+        <translation>Використати наявний обліковий запис</translation>
     </message>
 </context>
 <context>
@@ -1049,16 +1057,17 @@ Try to close other applications using the camera.</source>
     <name>RemoteAccountDeletion</name>
     <message>
         <source>Delete account completely</source>
-        <translation type="unfinished"></translation>
+        <translation>Вилучити обліковий запис повністю</translation>
     </message>
     <message>
         <source>Your account will be deleted completely, which means from this app and from the server.
 You will not be able to use your account again!</source>
-        <translation type="unfinished"></translation>
+        <translation>Ваш обліковий запис буде повністю вилучено. Це означає, що його буде вилучено з цієї програми і з сервера.
+Ви більше не зможете скористатися вашим обліковим записом!</translation>
     </message>
     <message>
         <source>Delete</source>
-        <translation type="unfinished">Вилучити</translation>
+        <translation>Вилучити</translation>
     </message>
 </context>
 <context>
@@ -1234,65 +1243,65 @@ You will not be able to use your account again!</source>
     <name>ServerListModel</name>
     <message>
         <source>Custom server</source>
-        <translation type="unfinished"></translation>
+        <translation>Нетиповий сервер</translation>
     </message>
     <message>
         <source>No limitation</source>
         <extracomment>Unlimited file size for uploading files
 ----------
 Deletion of message history saved on server</extracomment>
-        <translation type="unfinished"></translation>
+        <translation>Без обмежень</translation>
     </message>
     <message>
         <source>%1 days</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 дні</translation>
     </message>
 </context>
 <context>
     <name>SettingsContent</name>
     <message>
         <source>Settings</source>
-        <translation type="unfinished">Параметри</translation>
+        <translation>Параметри</translation>
     </message>
     <message>
         <source>Change password</source>
-        <translation type="unfinished">Змінити пароль</translation>
+        <translation>Змінити пароль</translation>
     </message>
     <message>
         <source>Changes your account&apos;s password. You will need to re-enter it on your other devices.</source>
-        <translation type="unfinished">Змінити пароль до вашого облікового запису. Вам доведеться повторно ввести цей пароль на усіх інших ваших пристроях для спілкування.</translation>
+        <translation>Змінити пароль до вашого облікового запису. Вам доведеться повторно ввести цей пароль на усіх інших ваших пристроях для спілкування.</translation>
     </message>
     <message>
         <source>Multimedia Settings</source>
-        <translation type="unfinished">Параметри мультимедійних даних</translation>
+        <translation>Параметри мультимедійних даних</translation>
     </message>
     <message>
         <source>Configure photo, video and audio recording settings</source>
-        <translation type="unfinished">Налаштуйте параметри обробки фотографій, відео та звукових записів</translation>
+        <translation>Налаштуйте параметри обробки фотографій, відео та звукових записів</translation>
     </message>
     <message>
         <source>Account security</source>
-        <translation type="unfinished"></translation>
+        <translation>Безпека облікового запису</translation>
     </message>
     <message>
         <source>configure whether this device can be used to log in on a new device</source>
-        <translation type="unfinished"></translation>
+        <translation>Налаштуйте, чи можна використовувати цей пристрій для входу з нового пристрою</translation>
     </message>
     <message>
         <source>Remove account from Kaidan</source>
-        <translation type="unfinished"></translation>
+        <translation>Вилучити обліковий запис з Kaidan</translation>
     </message>
     <message>
         <source>Remove account from this app</source>
-        <translation type="unfinished"></translation>
+        <translation>Вилучити обліковий запис з цієї програми</translation>
     </message>
     <message>
         <source>Delete account</source>
-        <translation type="unfinished"></translation>
+        <translation>Вилучити обліковий запис</translation>
     </message>
     <message>
         <source>Delete account from the server</source>
-        <translation type="unfinished"></translation>
+        <translation>Вилучити обліковий запис з сервера</translation>
     </message>
 </context>
 <context>
@@ -1322,11 +1331,11 @@ Deletion of message history saved on server</extracomment>
     <name>StartPage</name>
     <message>
         <source>Enjoy free communication on every device!</source>
-        <translation type="unfinished"></translation>
+        <translation>Насолоджуйтеся вільним спілкуванням на будь-якому пристрої!</translation>
     </message>
     <message>
         <source>Let&apos;s start</source>
-        <translation type="unfinished"></translation>
+        <translation>Розпочнімо</translation>
     </message>
 </context>
 <context>
@@ -1360,7 +1369,7 @@ Deletion of message history saved on server</extracomment>
     </message>
     <message>
         <source>Message could not be sent.</source>
-        <translation type="unfinished">Повідомлення не вдалося надіслати.</translation>
+        <translation>Повідомлення не вдалося надіслати.</translation>
     </message>
 </context>
 <context>

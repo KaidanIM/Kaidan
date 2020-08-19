@@ -17,68 +17,71 @@
     </message>
     <message>
         <source>Report problems</source>
-        <translation type="unfinished"></translation>
+        <translation>Informar de problemas</translation>
     </message>
 </context>
 <context>
     <name>AccountSecurity</name>
     <message>
         <source>Account Security</source>
-        <translation type="unfinished"></translation>
+        <translation>Seguridade da conta</translation>
     </message>
     <message>
         <source>Allow to add new devices using a QR-Code, but never show the password as text. This action can not be undone, so consider storing the password in another way before using it.</source>
-        <translation type="unfinished"></translation>
+        <translation>Permitir engadir novos dispositivos usando un código QR, pero non mostrar o contrasinal como texto. Esta acción non ten volta, así que recomendamos gardar o contrasinal antes de utilizalo.</translation>
     </message>
     <message>
         <source>Disable showing the password</source>
-        <translation type="unfinished"></translation>
+        <translation>Desactivar mostrar o contrasinal</translation>
     </message>
     <message>
         <source>Don&apos;t expose the password in any form. This action can not be undone.</source>
-        <translation type="unfinished"></translation>
+        <translation>Non mostrar o contrasinal de ningún xeito. Esta acción non ten volta atrás.</translation>
     </message>
     <message>
         <source>Disable showing the QR-Code and password</source>
-        <translation type="unfinished"></translation>
+        <translation>Desactivar mostrar o código QR e o contrasinal</translation>
     </message>
 </context>
 <context>
     <name>AccountTransferPage</name>
     <message>
         <source>Transfer account to another device</source>
-        <translation type="unfinished"></translation>
+        <translation>Transferir conta a outro dispositivo</translation>
     </message>
     <message>
         <source>Scan the QR code or enter the credentials as text on another device to log in on it.
 
 Attention:
 Never show this QR code to anyone else. It would allow unlimited access to your account!</source>
-        <translation type="unfinished"></translation>
+        <translation>Escanear código QR ou escribir as credenciais como texto noutro dispositivo para conectar nel.
+
+Atención:
+Nunca lle mostres este código QR a ninguén. Permitiríalle acceso sen límite á túa conta!</translation>
     </message>
     <message>
         <source>Chat address:</source>
-        <translation type="unfinished"></translation>
+        <translation>Enderezo da conversa:</translation>
     </message>
     <message>
         <source>Password:</source>
-        <translation type="unfinished"></translation>
+        <translation>Contrasinal:</translation>
     </message>
     <message>
         <source>Hide QR code</source>
-        <translation type="unfinished"></translation>
+        <translation>Agochar código QR</translation>
     </message>
     <message>
         <source>Show as QR code</source>
-        <translation type="unfinished"></translation>
+        <translation>Mostrar como código QR</translation>
     </message>
     <message>
         <source>Hide text</source>
-        <translation type="unfinished"></translation>
+        <translation>Agochar texto</translation>
     </message>
     <message>
         <source>Show as text</source>
-        <translation type="unfinished"></translation>
+        <translation>Mostrar como texto</translation>
     </message>
 </context>
 <context>
@@ -155,19 +158,19 @@ Never show this QR code to anyone else. It would allow unlimited access to your 
     <name>ChatMessageContextMenu</name>
     <message>
         <source>Copy message</source>
-        <translation type="unfinished"></translation>
+        <translation>Copiar mensaxe</translation>
     </message>
     <message>
         <source>Edit message</source>
-        <translation type="unfinished"></translation>
+        <translation>Editar mensaxe</translation>
     </message>
     <message>
         <source>Copy download URL</source>
-        <translation type="unfinished">Copiar URL de descarga</translation>
+        <translation>Copiar URL de descarga</translation>
     </message>
     <message>
         <source>Quote message</source>
-        <translation type="unfinished"></translation>
+        <translation>Citar mensaxe</translation>
     </message>
 </context>
 <context>
@@ -249,7 +252,7 @@ Never show this QR code to anyone else. It would allow unlimited access to your 
     <name>ClientWorker</name>
     <message>
         <source>Your account could not be deleted from the server. Therefore, it was also not removed from this app: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>A túa conta non se pode eliminar do servidor. Así, tampouco foi eliminada desta app: %1</translation>
     </message>
 </context>
 <context>
@@ -295,41 +298,45 @@ Never show this QR code to anyone else. It would allow unlimited access to your 
     <name>ConfirmationPage</name>
     <message>
         <source>Cancel</source>
-        <translation type="unfinished">Cancelar</translation>
+        <translation>Cancelar</translation>
     </message>
 </context>
 <context>
     <name>DisablePasswordDisplay</name>
     <message>
         <source>Remove password completely</source>
-        <translation type="unfinished"></translation>
+        <translation>Eliminar contrasinal completamente</translation>
     </message>
     <message>
         <source>Your password will not be included in the QR code anymore.
 You won&apos;t be able to use the login via QR code without entering your password again because this action cannot be undone!
 Make sure that you backed it up if you want to use your account later.</source>
-        <translation type="unfinished"></translation>
+        <translation>O teu contrasinal xa non se vai incluír no código QR.
+Non poderás conectar a través do código QR sen escribir o contrasinal porque esta acción non ten volta atrás!
+Asegúrate de que tes unha copia de apoio se queres usar a conta posteriormente.</translation>
     </message>
     <message>
         <source>Remove password</source>
-        <translation type="unfinished"></translation>
+        <translation>Eliminar contrasinal</translation>
     </message>
 </context>
 <context>
     <name>DisablePlainTextPasswordDisplay</name>
     <message>
         <source>Do not show password as text</source>
-        <translation type="unfinished"></translation>
+        <translation>Non mostrar o contrasinal como texto</translation>
     </message>
     <message>
         <source>Your password will not be shown as text anymore.
 You won&apos;t be able to see your password as text again because this action cannot be undone!
 Make sure that you backed it up if you want to use your account later.</source>
-        <translation type="unfinished"></translation>
+        <translation>O teu contrasinal non se mostrará como texto nunca máis.
+Non poderás ver o teu contrasinal como texto porque esta acción non ten volta atrás!
+Asegúrate de ter unha copia de apoio se queres usar a túa conta máis adiante.</translation>
     </message>
     <message>
         <source>Do not show password</source>
-        <translation type="unfinished"></translation>
+        <translation>Non mostrar contrasinal</translation>
     </message>
 </context>
 <context>
@@ -451,7 +458,7 @@ Make sure that you backed it up if you want to use your account later.</source>
     </message>
     <message>
         <source>Switch device</source>
-        <translation type="unfinished"></translation>
+        <translation>Cambiar de dispositivo</translation>
     </message>
 </context>
 <context>
@@ -474,16 +481,17 @@ Make sure that you backed it up if you want to use your account later.</source>
     <name>LocalAccountRemoval</name>
     <message>
         <source>Remove account from this app</source>
-        <translation type="unfinished"></translation>
+        <translation>Eliminar conta desde esta app</translation>
     </message>
     <message>
         <source>Your account will be removed from this app.
 Your password will be deleted, make sure it is stored in a password manager or you know it!</source>
-        <translation type="unfinished"></translation>
+        <translation>A conta vai ser eliminada desta app.
+O contrasinal será borrado, asegúrate de que o tes gardado ou de que te lembras del!</translation>
     </message>
     <message>
         <source>Remove</source>
-        <translation type="unfinished"></translation>
+        <translation>Eliminar</translation>
     </message>
 </context>
 <context>
@@ -650,19 +658,19 @@ Your password will be deleted, make sure it is stored in a password manager or y
     <name>MessageModel</name>
     <message>
         <source>Pending</source>
-        <translation type="unfinished"></translation>
+        <translation>Pendente</translation>
     </message>
     <message>
         <source>Sent</source>
-        <translation type="unfinished"></translation>
+        <translation>Enviar</translation>
     </message>
     <message>
         <source>Delivered</source>
-        <translation type="unfinished"></translation>
+        <translation>Entregado</translation>
     </message>
     <message>
         <source>Error</source>
-        <translation type="unfinished">Fallo</translation>
+        <translation>Fallo</translation>
     </message>
 </context>
 <context>
@@ -866,26 +874,26 @@ Your password will be deleted, make sure it is stored in a password manager or y
     <name>PasswordRemovalPage</name>
     <message>
         <source>Remove password</source>
-        <translation type="unfinished"></translation>
+        <translation>Eliminar contrasinal</translation>
     </message>
     <message>
         <source>You can decide to only not show your password for &lt;b&gt;%1&lt;/b&gt; as text anymore or to remove it completely from the account transfer. If you remove your password completely, you won&apos;t be able to use the account transfer via scanning without entering your password because it is also removed from the QR code.</source>
-        <translation type="unfinished"></translation>
+        <translation>Podes decidir que non se mostre o contrasinal para &lt;b&gt;%1&lt;/b&gt; como texto nunca máis ou eliminala completamente desde a transferencia da conta. Se eliminas o contrasinal completamente non poderás voltar a utilizar a transferencia da conta vía escaneo sen escribir o contrasinal xa que tamén se eliminará do código QR.</translation>
     </message>
     <message>
         <source>Do not show password as text</source>
-        <translation type="unfinished"></translation>
+        <translation>Non mostrar o contrasinal como texto</translation>
     </message>
     <message>
         <source>Remove completely</source>
-        <translation type="unfinished"></translation>
+        <translation>Eliminar completamente</translation>
     </message>
 </context>
 <context>
     <name>QObject</name>
     <message>
         <source>Mark as read</source>
-        <translation type="unfinished"></translation>
+        <translation>Marcar como lido</translation>
     </message>
 </context>
 <context>
@@ -960,22 +968,22 @@ Your password will be deleted, make sure it is stored in a password manager or y
     </message>
     <message>
         <source>The server is offline or blocked by a firewall.</source>
-        <translation type="unfinished"></translation>
+        <translation>O servidor está desconectado ou bloqueado por cortalumes.</translation>
     </message>
     <message>
         <source>The connection could not be refreshed.</source>
-        <translation type="unfinished"></translation>
+        <translation>A conexión non se pode actualizar.</translation>
     </message>
     <message>
         <source>The internet access is not permitted. Please check your system&apos;s internet access configuration.</source>
-        <translation type="unfinished"></translation>
+        <translation>Non se permite o acceso a internet. Comproba a configuración de acceso a internet do sistema.</translation>
     </message>
 </context>
 <context>
     <name>QrCodeGenerator</name>
     <message>
         <source>Generating the QR code failed: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Fallou a creación do código QR: %1</translation>
     </message>
 </context>
 <context>
@@ -1000,38 +1008,38 @@ Pecha outras aplicacións que a estén utilizando.</translation>
     </message>
     <message>
         <source>Connecting…</source>
-        <translation type="unfinished">Conectando…</translation>
+        <translation>Conectando…</translation>
     </message>
     <message>
         <source>Scan the QR code from your existing device to transfer your account.</source>
-        <translation type="unfinished"></translation>
+        <translation>Escanea o código QR desde o outro dispositivo para transferir a conta.</translation>
     </message>
     <message>
         <source>Show explanation</source>
-        <translation type="unfinished"></translation>
+        <translation>Mostrar explicación</translation>
     </message>
     <message>
         <source>Scan</source>
-        <translation type="unfinished"></translation>
+        <translation>Escanear</translation>
     </message>
     <message>
         <source>Continue without QR code</source>
-        <translation type="unfinished"></translation>
+        <translation>Continuar sen código QR</translation>
     </message>
 </context>
 <context>
     <name>RegistrationLoginDecisionPage</name>
     <message>
         <source>Set up</source>
-        <translation type="unfinished"></translation>
+        <translation>Axustar</translation>
     </message>
     <message>
         <source>Register a new account</source>
-        <translation type="unfinished"></translation>
+        <translation>Rexistrar unha nova conta</translation>
     </message>
     <message>
         <source>Use an existing account</source>
-        <translation type="unfinished"></translation>
+        <translation>Usar unha conta existente</translation>
     </message>
 </context>
 <context>
@@ -1049,16 +1057,17 @@ Pecha outras aplicacións que a estén utilizando.</translation>
     <name>RemoteAccountDeletion</name>
     <message>
         <source>Delete account completely</source>
-        <translation type="unfinished"></translation>
+        <translation>Eliminar completamente a conta</translation>
     </message>
     <message>
         <source>Your account will be deleted completely, which means from this app and from the server.
 You will not be able to use your account again!</source>
-        <translation type="unfinished"></translation>
+        <translation>A conta vaise eliminar completamente, tanto nesta app como no servidor.
+Non poderás utilizar nunca máis a conta!</translation>
     </message>
     <message>
         <source>Delete</source>
-        <translation type="unfinished">Eliminar</translation>
+        <translation>Eliminar</translation>
     </message>
 </context>
 <context>
@@ -1069,7 +1078,7 @@ You will not be able to use your account again!</source>
     </message>
     <message>
         <source>This will also send a request to access the presence of the contact.</source>
-        <translation>Esto tamén enviará unha solicitude  para acceder a presenza do contacto.</translation>
+        <translation>Esto tamén enviará unha solicitude para acceder á presenza do contacto.</translation>
     </message>
     <message>
         <source>Jabber-ID:</source>
@@ -1234,65 +1243,65 @@ You will not be able to use your account again!</source>
     <name>ServerListModel</name>
     <message>
         <source>Custom server</source>
-        <translation type="unfinished"></translation>
+        <translation>Servidor personalizado</translation>
     </message>
     <message>
         <source>No limitation</source>
         <extracomment>Unlimited file size for uploading files
 ----------
 Deletion of message history saved on server</extracomment>
-        <translation type="unfinished"></translation>
+        <translation>Sen límite</translation>
     </message>
     <message>
         <source>%1 days</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 días</translation>
     </message>
 </context>
 <context>
     <name>SettingsContent</name>
     <message>
         <source>Settings</source>
-        <translation type="unfinished">Axustes</translation>
+        <translation>Axustes</translation>
     </message>
     <message>
         <source>Change password</source>
-        <translation type="unfinished">Cambiar contrasinal</translation>
+        <translation>Cambiar contrasinal</translation>
     </message>
     <message>
         <source>Changes your account&apos;s password. You will need to re-enter it on your other devices.</source>
-        <translation type="unfinished">Cambio no contrasinal da conta. Deberá voltar a introducilo nos outros dispositivos.</translation>
+        <translation>Cambio no contrasinal da conta. Deberás voltar a introducilo nos outros dispositivos.</translation>
     </message>
     <message>
         <source>Multimedia Settings</source>
-        <translation type="unfinished">Axustes Multimedia</translation>
+        <translation>Axustes Multimedia</translation>
     </message>
     <message>
         <source>Configure photo, video and audio recording settings</source>
-        <translation type="unfinished">Configurar os axustes para fotos e gravación de audio e vídeo</translation>
+        <translation>Configurar os axustes para fotos e gravación de audio e vídeo</translation>
     </message>
     <message>
         <source>Account security</source>
-        <translation type="unfinished"></translation>
+        <translation>Seguridade da conta</translation>
     </message>
     <message>
         <source>configure whether this device can be used to log in on a new device</source>
-        <translation type="unfinished"></translation>
+        <translation>configura se queres poder usar este dispositivo para conectar noutro dispositivo</translation>
     </message>
     <message>
         <source>Remove account from Kaidan</source>
-        <translation type="unfinished"></translation>
+        <translation>Eliminar a conta de Kaidan</translation>
     </message>
     <message>
         <source>Remove account from this app</source>
-        <translation type="unfinished"></translation>
+        <translation>Eliminar a conta desta app</translation>
     </message>
     <message>
         <source>Delete account</source>
-        <translation type="unfinished"></translation>
+        <translation>Eliminar conta</translation>
     </message>
     <message>
         <source>Delete account from the server</source>
-        <translation type="unfinished"></translation>
+        <translation>Eliminar a conta do servidor</translation>
     </message>
 </context>
 <context>
@@ -1322,11 +1331,11 @@ Deletion of message history saved on server</extracomment>
     <name>StartPage</name>
     <message>
         <source>Enjoy free communication on every device!</source>
-        <translation type="unfinished"></translation>
+        <translation>Desfruta da comunicación libre en todos os dispositivos!</translation>
     </message>
     <message>
         <source>Let&apos;s start</source>
-        <translation type="unfinished"></translation>
+        <translation>Comecemos</translation>
     </message>
 </context>
 <context>
@@ -1360,7 +1369,7 @@ Deletion of message history saved on server</extracomment>
     </message>
     <message>
         <source>Message could not be sent.</source>
-        <translation type="unfinished">Non se puido enviar a mensaxe.</translation>
+        <translation>Non se puido enviar a mensaxe.</translation>
     </message>
 </context>
 <context>

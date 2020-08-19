@@ -21,7 +21,7 @@
     </message>
     <message>
         <source>Report problems</source>
-        <translation type="unfinished"></translation>
+        <translation>Innrapporter problemer</translation>
     </message>
 </context>
 <context>
@@ -50,61 +50,64 @@
     <name>AccountSecurity</name>
     <message>
         <source>Account Security</source>
-        <translation type="unfinished"></translation>
+        <translation>Kontosikkerhet</translation>
     </message>
     <message>
         <source>Allow to add new devices using a QR-Code, but never show the password as text. This action can not be undone, so consider storing the password in another way before using it.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Tillat tillegg av nye enheter ved bruk av QR-kode, men aldri vis passord som tekst. Denne handlingen kan ikke angres, så overvei å lagre passordet på annet vis først.</translation>
     </message>
     <message>
         <source>Disable showing the password</source>
-        <translation type="unfinished"></translation>
+        <translation>Skru av visning av passordet</translation>
     </message>
     <message>
         <source>Don&apos;t expose the password in any form. This action can not be undone.</source>
-        <translation type="unfinished"></translation>
+        <translation>Ikke vis passordet i noen form. Denne handlingen kan ikke angres.</translation>
     </message>
     <message>
         <source>Disable showing the QR-Code and password</source>
-        <translation type="unfinished"></translation>
+        <translation>Skru av visning av QR-kode og passord</translation>
     </message>
 </context>
 <context>
     <name>AccountTransferPage</name>
     <message>
         <source>Transfer account to another device</source>
-        <translation type="unfinished"></translation>
+        <translation>Overfør konto til en annen enhet</translation>
     </message>
     <message>
         <source>Scan the QR code or enter the credentials as text on another device to log in on it.
 
 Attention:
 Never show this QR code to anyone else. It would allow unlimited access to your account!</source>
-        <translation type="unfinished"></translation>
+        <translation>Skann QR-koden eller skriv inn identitetsdetaljene som tekst på en annen enhet for å logge inn på den.
+
+Merk:
+Aldri vis denne QR-koden til noen andre. Den gir ubegrenset tilganger til kontoen din!</translation>
     </message>
     <message>
         <source>Chat address:</source>
-        <translation type="unfinished"></translation>
+        <translation>Sludreadresse:</translation>
     </message>
     <message>
         <source>Password:</source>
-        <translation type="unfinished"></translation>
+        <translation>Passord:</translation>
     </message>
     <message>
         <source>Hide QR code</source>
-        <translation type="unfinished"></translation>
+        <translation>Skjul QR-kode</translation>
     </message>
     <message>
         <source>Show as QR code</source>
-        <translation type="unfinished"></translation>
+        <translation>Vis som QR-kode</translation>
     </message>
     <message>
         <source>Hide text</source>
-        <translation type="unfinished"></translation>
+        <translation>Skjul tekst</translation>
     </message>
     <message>
         <source>Show as text</source>
-        <translation type="unfinished"></translation>
+        <translation>Vis som tekst</translation>
     </message>
 </context>
 <context>
@@ -184,19 +187,19 @@ Never show this QR code to anyone else. It would allow unlimited access to your 
     <name>ChatMessageContextMenu</name>
     <message>
         <source>Copy message</source>
-        <translation type="unfinished"></translation>
+        <translation>Kopier melding</translation>
     </message>
     <message>
         <source>Edit message</source>
-        <translation type="unfinished"></translation>
+        <translation>Rediger melding</translation>
     </message>
     <message>
         <source>Copy download URL</source>
-        <translation type="unfinished"></translation>
+        <translation>Kopier nedlastings-nettadresse</translation>
     </message>
     <message>
         <source>Quote message</source>
-        <translation type="unfinished"></translation>
+        <translation>Siter melding</translation>
     </message>
 </context>
 <context>
@@ -243,15 +246,15 @@ Never show this QR code to anyone else. It would allow unlimited access to your 
     </message>
     <message>
         <source>Unmute notifications</source>
-        <translation type="unfinished"></translation>
+        <translation>Opphev forstumming av merknader</translation>
     </message>
     <message>
         <source>Mute notifications</source>
-        <translation type="unfinished"></translation>
+        <translation>Forstum merknader</translation>
     </message>
     <message>
         <source>View profile</source>
-        <translation type="unfinished"></translation>
+        <translation>Vis profil</translation>
     </message>
     <message>
         <source>Search</source>
@@ -263,61 +266,61 @@ Never show this QR code to anyone else. It would allow unlimited access to your 
     </message>
     <message>
         <source>Search up</source>
-        <translation type="unfinished"></translation>
+        <translation>Søk oppover</translation>
     </message>
     <message>
         <source>Search down</source>
-        <translation type="unfinished"></translation>
+        <translation>Søk nedover</translation>
     </message>
     <message>
         <source>All files</source>
-        <translation type="unfinished"></translation>
+        <translation>Alle filer</translation>
     </message>
 </context>
 <context>
     <name>ClientWorker</name>
     <message>
         <source>Your account could not be deleted from the server. Therefore, it was also not removed from this app: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Kontoen din kunne ikke slettes fra tjeneren. Derfor ble den heller ikke fjernet fra dette programmet: %1</translation>
     </message>
 </context>
 <context>
     <name>CommonEncoderSettings</name>
     <message>
         <source>Very low</source>
-        <translation type="unfinished"></translation>
+        <translation>Veldig lavt</translation>
     </message>
     <message>
         <source>Low</source>
-        <translation type="unfinished"></translation>
+        <translation>Lavt</translation>
     </message>
     <message>
         <source>Normal</source>
-        <translation type="unfinished"></translation>
+        <translation>Normalt</translation>
     </message>
     <message>
         <source>High</source>
-        <translation type="unfinished"></translation>
+        <translation>Høyt</translation>
     </message>
     <message>
         <source>Very high</source>
-        <translation type="unfinished"></translation>
+        <translation>Veldig høyt</translation>
     </message>
     <message>
         <source>Constant quality</source>
-        <translation type="unfinished"></translation>
+        <translation>Konstant kvalitet</translation>
     </message>
     <message>
         <source>Constant bit rate</source>
-        <translation type="unfinished"></translation>
+        <translation>Konstant bitrate</translation>
     </message>
     <message>
         <source>Average bit rate</source>
-        <translation type="unfinished"></translation>
+        <translation>Gjennomsnittlig bitrate</translation>
     </message>
     <message>
         <source>Two pass</source>
-        <translation type="unfinished"></translation>
+        <translation>Dobbelt-arbeidet</translation>
     </message>
 </context>
 <context>
@@ -338,34 +341,38 @@ Never show this QR code to anyone else. It would allow unlimited access to your 
     <name>DisablePasswordDisplay</name>
     <message>
         <source>Remove password completely</source>
-        <translation type="unfinished"></translation>
+        <translation>Fjern passord fullstendig</translation>
     </message>
     <message>
         <source>Your password will not be included in the QR code anymore.
 You won&apos;t be able to use the login via QR code without entering your password again because this action cannot be undone!
 Make sure that you backed it up if you want to use your account later.</source>
-        <translation type="unfinished"></translation>
+        <translation>Passordet ditt vil ikke lenger være å finne i QR-koden.
+Du vil ikke kunne logge inn via QR-koden uten å skrive passordet ditt igjen, fordi handlingen ikke kan angres.
+Forsikre deg om at du har sikkerhetskopiert det hvis du ønsker å bruke kontoen din senere.</translation>
     </message>
     <message>
         <source>Remove password</source>
-        <translation type="unfinished"></translation>
+        <translation>Fjern passord</translation>
     </message>
 </context>
 <context>
     <name>DisablePlainTextPasswordDisplay</name>
     <message>
         <source>Do not show password as text</source>
-        <translation type="unfinished"></translation>
+        <translation>Ikke vis passordet som tekst</translation>
     </message>
     <message>
         <source>Your password will not be shown as text anymore.
 You won&apos;t be able to see your password as text again because this action cannot be undone!
 Make sure that you backed it up if you want to use your account later.</source>
-        <translation type="unfinished"></translation>
+        <translation>Passordet ditt vil ikke lenger bli vist som tekst.
+Du vil ikke kunne se passordet ditt som tekst igjen fordi handlingen ikke kan angres.
+Forsikre deg om at du har sikkerhetskopiert passordet hvis du ønsker å bruke den senere.</translation>
     </message>
     <message>
         <source>Do not show password</source>
-        <translation type="unfinished"></translation>
+        <translation>Ikke vis passord</translation>
     </message>
 </context>
 <context>
@@ -494,7 +501,7 @@ Make sure that you backed it up if you want to use your account later.</source>
     </message>
     <message>
         <source>Online</source>
-        <translation type="unfinished"></translation>
+        <translation>Pålogget</translation>
     </message>
     <message>
         <source>Connecting…</source>
@@ -502,7 +509,7 @@ Make sure that you backed it up if you want to use your account later.</source>
     </message>
     <message>
         <source>Switch device</source>
-        <translation type="unfinished"></translation>
+        <translation>Bytt enhet</translation>
     </message>
 </context>
 <context>
@@ -530,23 +537,24 @@ Make sure that you backed it up if you want to use your account later.</source>
     </message>
     <message>
         <source>No valid login QR code found.</source>
-        <translation type="unfinished"></translation>
+        <translation>Fant ingen gyldig QR-kode for innlogging.</translation>
     </message>
 </context>
 <context>
     <name>LocalAccountRemoval</name>
     <message>
         <source>Remove account from this app</source>
-        <translation type="unfinished"></translation>
+        <translation>Fjern konto fra dette programmet</translation>
     </message>
     <message>
         <source>Your account will be removed from this app.
 Your password will be deleted, make sure it is stored in a password manager or you know it!</source>
-        <translation type="unfinished"></translation>
+        <translation>Kontoen din vil bli fjernet fra dette programmet.
+Passordet ditt vil bli slettet, forsikre deg om at det er lagret i en passordshåndterer, eller at du husker det!</translation>
     </message>
     <message>
         <source>Remove</source>
-        <translation type="unfinished"></translation>
+        <translation>Fjern</translation>
     </message>
 </context>
 <context>
@@ -628,70 +636,70 @@ Your password will be deleted, make sure it is stored in a password manager or y
     <name>MediaRecorder</name>
     <message>
         <source>Default</source>
-        <translation type="unfinished"></translation>
+        <translation>Forvalg</translation>
     </message>
 </context>
 <context>
     <name>MediaUtils</name>
     <message>
         <source>Take picture</source>
-        <translation type="unfinished"></translation>
+        <translation>Ta bilde</translation>
     </message>
     <message>
         <source>Record video</source>
-        <translation type="unfinished"></translation>
+        <translation>Ta opp video</translation>
     </message>
     <message>
         <source>Record voice</source>
-        <translation type="unfinished"></translation>
+        <translation>Ta opp stemme</translation>
     </message>
     <message>
         <source>Send location</source>
-        <translation type="unfinished"></translation>
+        <translation>Send plassering</translation>
     </message>
     <message>
         <source>Choose file</source>
-        <translation type="unfinished"></translation>
+        <translation>Velg fil</translation>
     </message>
     <message>
         <source>Choose image</source>
-        <translation type="unfinished"></translation>
+        <translation>Velg bilde</translation>
     </message>
     <message>
         <source>Choose video</source>
-        <translation type="unfinished"></translation>
+        <translation>Velg video</translation>
     </message>
     <message>
         <source>Choose audio file</source>
-        <translation type="unfinished"></translation>
+        <translation>Velg lydfil</translation>
     </message>
     <message>
         <source>Choose document</source>
-        <translation type="unfinished"></translation>
+        <translation>Velg dokument</translation>
     </message>
     <message>
         <source>All files</source>
-        <translation type="unfinished"></translation>
+        <translation>Alle filer</translation>
     </message>
     <message>
         <source>Images</source>
-        <translation type="unfinished"></translation>
+        <translation>Bilder</translation>
     </message>
     <message>
         <source>Videos</source>
-        <translation type="unfinished"></translation>
+        <translation>Videoer</translation>
     </message>
     <message>
         <source>Audio files</source>
-        <translation type="unfinished"></translation>
+        <translation>Lydfiler</translation>
     </message>
     <message>
         <source>Documents</source>
-        <translation type="unfinished"></translation>
+        <translation>Dokumenter</translation>
     </message>
     <message>
         <source>%1 (%2)</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 (%2)</translation>
     </message>
 </context>
 <context>
@@ -721,15 +729,15 @@ Your password will be deleted, make sure it is stored in a password manager or y
     <name>MessageModel</name>
     <message>
         <source>Pending</source>
-        <translation type="unfinished"></translation>
+        <translation>Venter</translation>
     </message>
     <message>
         <source>Sent</source>
-        <translation type="unfinished"></translation>
+        <translation>Sendt</translation>
     </message>
     <message>
         <source>Delivered</source>
-        <translation type="unfinished"></translation>
+        <translation>Levert</translation>
     </message>
     <message>
         <source>Error</source>
@@ -740,35 +748,35 @@ Your password will be deleted, make sure it is stored in a password manager or y
     <name>MultimediaSettings</name>
     <message>
         <source>Multimedia Settings</source>
-        <translation type="unfinished"></translation>
+        <translation>Multimediainnstillinger</translation>
     </message>
     <message>
         <source>Configure</source>
-        <translation type="unfinished"></translation>
+        <translation>Sett opp</translation>
     </message>
     <message>
         <source>Image Capture</source>
-        <translation type="unfinished"></translation>
+        <translation>Bildeknipsing</translation>
     </message>
     <message>
         <source>Audio Recording</source>
-        <translation type="unfinished"></translation>
+        <translation>Lydopptak</translation>
     </message>
     <message>
         <source>Video Recording</source>
-        <translation type="unfinished"></translation>
+        <translation>Videoopptak</translation>
     </message>
     <message>
         <source>Camera</source>
-        <translation type="unfinished"></translation>
+        <translation>Kamera</translation>
     </message>
     <message>
         <source>Audio input</source>
-        <translation type="unfinished"></translation>
+        <translation>Lydinngang</translation>
     </message>
     <message>
         <source>Container</source>
-        <translation type="unfinished"></translation>
+        <translation>Beholder</translation>
     </message>
     <message>
         <source>Image</source>
@@ -784,43 +792,43 @@ Your password will be deleted, make sure it is stored in a password manager or y
     </message>
     <message>
         <source>Codec</source>
-        <translation type="unfinished"></translation>
+        <translation>Kodek</translation>
     </message>
     <message>
         <source>Resolution</source>
-        <translation type="unfinished"></translation>
+        <translation>Oppløsning</translation>
     </message>
     <message>
         <source>Quality</source>
-        <translation type="unfinished"></translation>
+        <translation>Kvalitet</translation>
     </message>
     <message>
         <source>Sample Rate</source>
-        <translation type="unfinished"></translation>
+        <translation>Samplingstakt</translation>
     </message>
     <message>
         <source>Frame Rate</source>
-        <translation type="unfinished"></translation>
+        <translation>Rammetakt</translation>
     </message>
     <message>
         <source>Ready</source>
-        <translation type="unfinished"></translation>
+        <translation>Klar</translation>
     </message>
     <message>
         <source>Initializing…</source>
-        <translation type="unfinished"></translation>
+        <translation>Igangsetter…</translation>
     </message>
     <message>
         <source>Unavailable</source>
-        <translation type="unfinished"></translation>
+        <translation>Utilgjengelig</translation>
     </message>
     <message>
         <source>Recording…</source>
-        <translation type="unfinished"></translation>
+        <translation>Tar opp…</translation>
     </message>
     <message>
         <source>Paused</source>
-        <translation type="unfinished"></translation>
+        <translation>Pauset</translation>
     </message>
 </context>
 <context>
@@ -842,49 +850,49 @@ Your password will be deleted, make sure it is stored in a password manager or y
     <name>NewMedia</name>
     <message>
         <source>Ready</source>
-        <translation type="unfinished"></translation>
+        <translation>Klar</translation>
     </message>
     <message>
         <source>Initializing…</source>
-        <translation type="unfinished"></translation>
+        <translation>Igangsetter…</translation>
     </message>
     <message>
         <source>Unavailable</source>
-        <translation type="unfinished"></translation>
+        <translation>Utilgjengelig</translation>
     </message>
     <message>
         <source>Recording… %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Tar opp… %1</translation>
     </message>
     <message>
         <source>Paused %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Satt på pause %1</translation>
     </message>
 </context>
 <context>
     <name>PasswordRemovalPage</name>
     <message>
         <source>Remove password</source>
-        <translation type="unfinished"></translation>
+        <translation>Fjern passord</translation>
     </message>
     <message>
         <source>You can decide to only not show your password for &lt;b&gt;%1&lt;/b&gt; as text anymore or to remove it completely from the account transfer. If you remove your password completely, you won&apos;t be able to use the account transfer via scanning without entering your password because it is also removed from the QR code.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Du kan bestemme deg for å ikke vise passordet for &lt;b&gt;%1&lt;/b&gt; som tekst i fremtiden, eller å fjerne det helt fra konto-overføringen. Hvis du fjerner passordet helt, vil du ikke kunne bruke konto-overføring via skanning uten å skrive inn passordet ditt, fordi det også fjernes fra QR-koden.</translation>
     </message>
     <message>
         <source>Do not show password as text</source>
-        <translation type="unfinished"></translation>
+        <translation>Ikke vis passordet som tekst</translation>
     </message>
     <message>
         <source>Remove completely</source>
-        <translation type="unfinished"></translation>
+        <translation>Fjern fullstendig</translation>
     </message>
 </context>
 <context>
     <name>QObject</name>
     <message>
         <source>Mark as read</source>
-        <translation type="unfinished"></translation>
+        <translation>Marker som lest</translation>
     </message>
 </context>
 <context>
@@ -935,7 +943,7 @@ Your password will be deleted, make sure it is stored in a password manager or y
     </message>
     <message>
         <source>Could not resolve the server&apos;s address. Please check your server name.</source>
-        <translation type="unfinished"></translation>
+        <translation>Kunne ikke fortolke tjenerens adresse. Sjekk ditt tjenernavn.</translation>
     </message>
     <message>
         <source>Could not connect to the server.</source>
@@ -947,62 +955,63 @@ Your password will be deleted, make sure it is stored in a password manager or y
     </message>
     <message>
         <source>This server does not support registration.</source>
-        <translation type="unfinished"></translation>
+        <translation>Denne tjeneren støtter ikke registrering.</translation>
     </message>
     <message>
         <source>The server is offline or blocked by a firewall.</source>
-        <translation type="unfinished"></translation>
+        <translation>Tjeneren er nede eller blokkert av en brannmur.</translation>
     </message>
     <message>
         <source>The connection could not be refreshed.</source>
-        <translation type="unfinished"></translation>
+        <translation>Tilkoblingen kunne ikke gjenoppfriskes.</translation>
     </message>
     <message>
         <source>The internet access is not permitted. Please check your system&apos;s internet access configuration.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Innvilg internettilgang i systemets tilgangsoppsett.</translation>
     </message>
 </context>
 <context>
     <name>QrCodeGenerator</name>
     <message>
         <source>Generating the QR code failed: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Kunne ikke generere QR-kode: %1</translation>
     </message>
 </context>
 <context>
     <name>QrCodeScannerPage</name>
     <message>
         <source>Scan QR code</source>
-        <translation type="unfinished"></translation>
+        <translation>Skann QR-kode</translation>
     </message>
     <message>
         <source>There is no camera available.</source>
-        <translation type="unfinished"></translation>
+        <translation>Kamera ikke tilgjengelig.</translation>
     </message>
     <message>
         <source>Your camera is busy.
 Try to close other applications using the camera.</source>
-        <translation type="unfinished"></translation>
+        <translation>Kamera ditt er opptatt.
+Prøv å lukke andre programmer ved bruk av kameraet.</translation>
     </message>
     <message>
         <source>The camera format &apos;%1&apos; is not supported.</source>
-        <translation type="unfinished"></translation>
+        <translation>Kameraformatet &quot;%1&quot; støttes ikke.</translation>
     </message>
     <message>
         <source>Scan the QR code from your existing device to transfer your account.</source>
-        <translation type="unfinished"></translation>
+        <translation>Skann QR-koden fra din eksisterende enhet for å overføre kontoen din.</translation>
     </message>
     <message>
         <source>Show explanation</source>
-        <translation type="unfinished"></translation>
+        <translation>Vis forklaring</translation>
     </message>
     <message>
         <source>Scan</source>
-        <translation type="unfinished"></translation>
+        <translation>Skann</translation>
     </message>
     <message>
         <source>Continue without QR code</source>
-        <translation type="unfinished"></translation>
+        <translation>Fortsett uten QR-kode</translation>
     </message>
     <message>
         <source>Connecting…</source>
@@ -1013,15 +1022,15 @@ Try to close other applications using the camera.</source>
     <name>RegistrationLoginDecisionPage</name>
     <message>
         <source>Set up</source>
-        <translation type="unfinished"></translation>
+        <translation>Sett opp</translation>
     </message>
     <message>
         <source>Register a new account</source>
-        <translation type="unfinished"></translation>
+        <translation>Registrer ny konto</translation>
     </message>
     <message>
         <source>Use an existing account</source>
-        <translation type="unfinished"></translation>
+        <translation>Bruk eksisterende konto</translation>
     </message>
 </context>
 <context>
@@ -1039,12 +1048,13 @@ Try to close other applications using the camera.</source>
     <name>RemoteAccountDeletion</name>
     <message>
         <source>Delete account completely</source>
-        <translation type="unfinished"></translation>
+        <translation>Slett konto fullstendig</translation>
     </message>
     <message>
         <source>Your account will be deleted completely, which means from this app and from the server.
 You will not be able to use your account again!</source>
-        <translation type="unfinished"></translation>
+        <translation>Kontoen din vil slettes fullstendig, fra programmet og tjeneren.
+Du vil ikke kunne bruke kontoen igjen.</translation>
     </message>
     <message>
         <source>Delete</source>
@@ -1145,7 +1155,7 @@ You will not be able to use your account again!</source>
     </message>
     <message>
         <source>Could not rename contact, as a result of not being connected.</source>
-        <translation type="unfinished"></translation>
+        <translation>Kunne ikke gi kontakten nytt navn, fordi den ikke er tilkoblet.</translation>
     </message>
 </context>
 <context>
@@ -1168,7 +1178,7 @@ You will not be able to use your account again!</source>
     </message>
     <message>
         <source>Search contacts</source>
-        <translation type="unfinished"></translation>
+        <translation>Søk i kontakter</translation>
     </message>
 </context>
 <context>
@@ -1202,7 +1212,7 @@ You will not be able to use your account again!</source>
     <name>RosterRenameContactSheet</name>
     <message>
         <source>Rename contact</source>
-        <translation type="unfinished"></translation>
+        <translation>Gi kontakten nytt navn</translation>
     </message>
     <message>
         <source>Cancel</source>
@@ -1210,7 +1220,7 @@ You will not be able to use your account again!</source>
     </message>
     <message>
         <source>Rename</source>
-        <translation type="unfinished"></translation>
+        <translation>Gi nytt navn</translation>
     </message>
 </context>
 <context>
@@ -1232,18 +1242,18 @@ You will not be able to use your account again!</source>
     <name>ServerListModel</name>
     <message>
         <source>Custom server</source>
-        <translation type="unfinished"></translation>
+        <translation>Egendefinert tjener</translation>
     </message>
     <message>
         <source>No limitation</source>
         <extracomment>Unlimited file size for uploading files
 ----------
 Deletion of message history saved on server</extracomment>
-        <translation type="unfinished"></translation>
+        <translation>Ingen begrensning</translation>
     </message>
     <message>
         <source>%1 days</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 dager</translation>
     </message>
 </context>
 <context>
@@ -1258,11 +1268,11 @@ Deletion of message history saved on server</extracomment>
     </message>
     <message>
         <source>Multimedia Settings</source>
-        <translation type="unfinished"></translation>
+        <translation>Multimedia-innstillinger</translation>
     </message>
     <message>
         <source>Configure photo, video and audio recording settings</source>
-        <translation type="unfinished"></translation>
+        <translation>Sett opp bilde- video- og lyd-opptaksinnstillinger</translation>
     </message>
     <message>
         <source>Settings</source>
@@ -1270,27 +1280,27 @@ Deletion of message history saved on server</extracomment>
     </message>
     <message>
         <source>Account security</source>
-        <translation type="unfinished"></translation>
+        <translation>Kontosikkerhet</translation>
     </message>
     <message>
         <source>configure whether this device can be used to log in on a new device</source>
-        <translation type="unfinished"></translation>
+        <translation>Sett opp hvorvidt denne enheten kan brukes for å logge inn på en annen</translation>
     </message>
     <message>
         <source>Remove account from Kaidan</source>
-        <translation type="unfinished"></translation>
+        <translation>Fjern konto fra Kaidan</translation>
     </message>
     <message>
         <source>Remove account from this app</source>
-        <translation type="unfinished"></translation>
+        <translation>Fjern konto fra dette programmet</translation>
     </message>
     <message>
         <source>Delete account</source>
-        <translation type="unfinished"></translation>
+        <translation>Slett konto</translation>
     </message>
     <message>
         <source>Delete account from the server</source>
-        <translation type="unfinished"></translation>
+        <translation>Slett konto fra tjeneren</translation>
     </message>
 </context>
 <context>
@@ -1319,11 +1329,11 @@ Deletion of message history saved on server</extracomment>
     <name>StartPage</name>
     <message>
         <source>Enjoy free communication on every device!</source>
-        <translation type="unfinished"></translation>
+        <translation>Nyt fri kommunikasjon på alle enheter.</translation>
     </message>
     <message>
         <source>Let&apos;s start</source>
-        <translation type="unfinished"></translation>
+        <translation>La oss begynne</translation>
     </message>
 </context>
 <context>
@@ -1378,18 +1388,18 @@ Deletion of message history saved on server</extracomment>
     <name>UserProfilePage</name>
     <message>
         <source>Profile</source>
-        <translation type="unfinished"></translation>
+        <translation>Profil</translation>
     </message>
 </context>
 <context>
     <name>VCardModel</name>
     <message>
         <source>Name</source>
-        <translation type="unfinished"></translation>
+        <translation>Navn</translation>
     </message>
     <message>
         <source>Nickname</source>
-        <translation type="unfinished"></translation>
+        <translation>Kallenavn</translation>
     </message>
     <message>
         <source>About</source>
@@ -1397,15 +1407,15 @@ Deletion of message history saved on server</extracomment>
     </message>
     <message>
         <source>Email</source>
-        <translation type="unfinished"></translation>
+        <translation>E-post</translation>
     </message>
     <message>
         <source>Birthday</source>
-        <translation type="unfinished"></translation>
+        <translation>Geburtsdag</translation>
     </message>
     <message>
         <source>Website</source>
-        <translation type="unfinished"></translation>
+        <translation>Nettside</translation>
     </message>
 </context>
 </TS>

@@ -130,5 +130,5 @@ QXmppPresence UserPresenceWatcherTest::simplePresence(const QString &jid,
 	return p;
 }
 
-QTEST_MAIN(UserPresenceWatcherTest)
+QTEST_GUILESS_MAIN(UserPresenceWatcherTest)
 #include "UserPresenceWatcherTest.moc"

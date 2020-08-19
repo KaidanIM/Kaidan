@@ -207,5 +207,5 @@ QXmppPresence PresenceCacheTest::simplePresence(const QString &jid,
 	return p;
 }
 
-QTEST_MAIN(PresenceCacheTest)
+QTEST_GUILESS_MAIN(PresenceCacheTest)
 #include "PresenceCacheTest.moc"

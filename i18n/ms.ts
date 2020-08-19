@@ -113,23 +113,23 @@ Sila pastikan anda telah menyandarkan kelayakan sekiranya anda ingin menggunakan
     <name>AccountSecurity</name>
     <message>
         <source>Account Security</source>
-        <translation type="unfinished"></translation>
+        <translation>Keselamatan Akaun</translation>
     </message>
     <message>
         <source>Allow to add new devices using a QR-Code, but never show the password as text. This action can not be undone, so consider storing the password in another way before using it.</source>
-        <translation type="unfinished"></translation>
+        <translation>Membolehkan penambahan peranti baharu menggunakan Kod QR, tetapi tidak menunjukkan kata laluan sebagai teks. Perbuatan ini tidak boleh diundur, jadi anda disyorkan untuk menyimpan kata laluan dalam cara yang lain sebelum menggunakannya.</translation>
     </message>
     <message>
         <source>Disable showing the password</source>
-        <translation type="unfinished"></translation>
+        <translation>Lumpuhkan penampakan kata laluan</translation>
     </message>
     <message>
         <source>Don&apos;t expose the password in any form. This action can not be undone.</source>
-        <translation type="unfinished"></translation>
+        <translation>Jangan dedah kata laluan dengan sebarang cara. Perbuatan ini tidak boleh diundur.</translation>
     </message>
     <message>
         <source>Disable showing the QR-Code and password</source>
-        <translation type="unfinished"></translation>
+        <translation>Lumpuhkan penampakan Kod QR dan kata laluan</translation>
     </message>
 </context>
 <context>
@@ -254,19 +254,19 @@ Jangan sesekali tunjukkan kod QR ini kepada orang lain. Ia akan membenarkan capa
     <name>ChatMessageContextMenu</name>
     <message>
         <source>Copy message</source>
-        <translation type="unfinished">Salin mesej</translation>
+        <translation>Salin mesej</translation>
     </message>
     <message>
         <source>Edit message</source>
-        <translation type="unfinished">Sunting mesej</translation>
+        <translation>Sunting mesej</translation>
     </message>
     <message>
         <source>Copy download URL</source>
-        <translation type="unfinished">Salin URL muat turun</translation>
+        <translation>Salin URL muat turun</translation>
     </message>
     <message>
         <source>Quote message</source>
-        <translation type="unfinished">Petik mesej</translation>
+        <translation>Petik mesej</translation>
     </message>
 </context>
 <context>
@@ -428,34 +428,38 @@ Jangan sesekali tunjukkan kod QR ini kepada orang lain. Ia akan membenarkan capa
     <name>DisablePasswordDisplay</name>
     <message>
         <source>Remove password completely</source>
-        <translation type="unfinished"></translation>
+        <translation>Buang kata laluan sepenuhnya</translation>
     </message>
     <message>
         <source>Your password will not be included in the QR code anymore.
 You won&apos;t be able to use the login via QR code without entering your password again because this action cannot be undone!
 Make sure that you backed it up if you want to use your account later.</source>
-        <translation type="unfinished"></translation>
+        <translation>Kata laluan anda sudah tidak akan disertakan dalam kod QR.
+Anda tidak akan mampu log masuk menerusi kod QR tanpa memasukkan kata laluan anda lagi kerana perbuatan ini tidak boleh diundur!
+Pastikan anda sandarkannya jika anda ingin gunakan akaun anda kemudian.</translation>
     </message>
     <message>
         <source>Remove password</source>
-        <translation type="unfinished"></translation>
+        <translation>Buang kata laluan</translation>
     </message>
 </context>
 <context>
     <name>DisablePlainTextPasswordDisplay</name>
     <message>
         <source>Do not show password as text</source>
-        <translation type="unfinished"></translation>
+        <translation>Jangan tunjukkan kata laluan sebagai teks</translation>
     </message>
     <message>
         <source>Your password will not be shown as text anymore.
 You won&apos;t be able to see your password as text again because this action cannot be undone!
 Make sure that you backed it up if you want to use your account later.</source>
-        <translation type="unfinished"></translation>
+        <translation>Kata laluan anda sudah tidak akan ditunjukkan sebagai teks.
+Anda tidak akan mampu melihat kata laluan anda sebagai teks lagi kerana perbuatan ini tidak boleh diundur!
+Pastikan anda sandarkannya jika anda ingin gunakan akaun anda kemudian.</translation>
     </message>
     <message>
         <source>Do not show password</source>
-        <translation type="unfinished"></translation>
+        <translation>Jangan tunjuk kata laluan</translation>
     </message>
 </context>
 <context>
@@ -600,7 +604,7 @@ Make sure that you backed it up if you want to use your account later.</source>
     </message>
     <message>
         <source>Switch device</source>
-        <translation type="unfinished"></translation>
+        <translation>Tukar peranti</translation>
     </message>
 </context>
 <context>
@@ -639,16 +643,17 @@ Make sure that you backed it up if you want to use your account later.</source>
     <name>LocalAccountRemoval</name>
     <message>
         <source>Remove account from this app</source>
-        <translation type="unfinished">Buang akaun daripada aplikasi ini</translation>
+        <translation>Buang akaun daripada aplikasi ini</translation>
     </message>
     <message>
         <source>Your account will be removed from this app.
 Your password will be deleted, make sure it is stored in a password manager or you know it!</source>
-        <translation type="unfinished"></translation>
+        <translation>Akaun anda akan dibuang daripada aplikasi ini.
+Kata laluan anda akan dipadam, pastikan ia disimpan dalam pengurus kata laluan anda atau pastikan anda mengetahui kata laluan anda!</translation>
     </message>
     <message>
         <source>Remove</source>
-        <translation type="unfinished">Buang</translation>
+        <translation>Buang</translation>
     </message>
 </context>
 <context>
@@ -831,19 +836,19 @@ Your password will be deleted, make sure it is stored in a password manager or y
     <name>MessageModel</name>
     <message>
         <source>Pending</source>
-        <translation type="unfinished"></translation>
+        <translation>Menghantar</translation>
     </message>
     <message>
         <source>Sent</source>
-        <translation type="unfinished"></translation>
+        <translation>Dihantar</translation>
     </message>
     <message>
         <source>Delivered</source>
-        <translation type="unfinished"></translation>
+        <translation>Diterima</translation>
     </message>
     <message>
         <source>Error</source>
-        <translation type="unfinished">Ralat</translation>
+        <translation>Ralat</translation>
     </message>
 </context>
 <context>
@@ -1047,26 +1052,26 @@ Your password will be deleted, make sure it is stored in a password manager or y
     <name>PasswordRemovalPage</name>
     <message>
         <source>Remove password</source>
-        <translation type="unfinished"></translation>
+        <translation>Buang kata laluan</translation>
     </message>
     <message>
         <source>You can decide to only not show your password for &lt;b&gt;%1&lt;/b&gt; as text anymore or to remove it completely from the account transfer. If you remove your password completely, you won&apos;t be able to use the account transfer via scanning without entering your password because it is also removed from the QR code.</source>
-        <translation type="unfinished"></translation>
+        <translation>Anda boleh pilih sama ada anda hanya ingin kata laluan anda tidak ditunjukkan sebagai teks lagi untuk &lt;b&gt;%1&lt;/b&gt; ataupun anda ingin membuang kata laluan sepenuhnya daripada pindahan akaun. Jika anda membuang kata laluan sepenuhnya, anda tidak akan mampu menggunakan fungsi pindahan akaun secara imbasan tanpa memasukkan kata laluan anda kerana kata laluan akan turut dibuang daripada kod QR.</translation>
     </message>
     <message>
         <source>Do not show password as text</source>
-        <translation type="unfinished"></translation>
+        <translation>Jangan tunjuk kata laluan sebagai teks</translation>
     </message>
     <message>
         <source>Remove completely</source>
-        <translation type="unfinished"></translation>
+        <translation>Buang sepenuhnya</translation>
     </message>
 </context>
 <context>
     <name>QObject</name>
     <message>
         <source>Mark as read</source>
-        <translation type="unfinished"></translation>
+        <translation>Tanda sebagai telah dibaca</translation>
     </message>
 </context>
 <context>
@@ -1197,7 +1202,7 @@ Cuba tutup aplikasi lain yang menggunakan kamera.</translation>
     </message>
     <message>
         <source>Connecting…</source>
-        <translation type="unfinished">Menyambung…</translation>
+        <translation>Menyambung…</translation>
     </message>
 </context>
 <context>
@@ -1230,17 +1235,17 @@ Cuba tutup aplikasi lain yang menggunakan kamera.</translation>
     <name>RemoteAccountDeletion</name>
     <message>
         <source>Delete account completely</source>
-        <translation type="unfinished">Padam keseluruhan akaun</translation>
+        <translation>Padam akaun keseluruhannya</translation>
     </message>
     <message>
         <source>Your account will be deleted completely, which means from this app and from the server.
 You will not be able to use your account again!</source>
-        <translation type="unfinished">Akaun anda akan dipadam keseluruhannya, iaitu dipadam daripada aplikasi ini dan juga daripada pelayan.
+        <translation>Akaun anda akan dipadam keseluruhannya, iaitu dipadam daripada aplikasi ini dan juga daripada pelayan.
 Anda tidak akan mampu menggunakan akaun anda lagi!</translation>
     </message>
     <message>
         <source>Delete</source>
-        <translation type="unfinished">Padam</translation>
+        <translation>Padam</translation>
     </message>
 </context>
 <context>
@@ -1458,31 +1463,31 @@ Deletion of message history saved on server</extracomment>
     </message>
     <message>
         <source>Settings</source>
-        <translation type="unfinished">Tetapan</translation>
+        <translation>Tetapan</translation>
     </message>
     <message>
         <source>Account security</source>
-        <translation type="unfinished"></translation>
+        <translation>Keselamatan akaun</translation>
     </message>
     <message>
         <source>configure whether this device can be used to log in on a new device</source>
-        <translation type="unfinished"></translation>
+        <translation>tetapkan sama ada peranti ini boleh digunakan untuk log masuk peranti baharu</translation>
     </message>
     <message>
         <source>Remove account from Kaidan</source>
-        <translation type="unfinished"></translation>
+        <translation>Buang akaun daripada Kaidan</translation>
     </message>
     <message>
         <source>Remove account from this app</source>
-        <translation type="unfinished">Buang akaun daripada aplikasi ini</translation>
+        <translation>Buang akaun daripada aplikasi ini</translation>
     </message>
     <message>
         <source>Delete account</source>
-        <translation type="unfinished">Padam akaun</translation>
+        <translation>Padam akaun</translation>
     </message>
     <message>
         <source>Delete account from the server</source>
-        <translation type="unfinished"></translation>
+        <translation>Padam akaun daripada pelayan</translation>
     </message>
 </context>
 <context>
@@ -1567,7 +1572,7 @@ Deletion of message history saved on server</extracomment>
     </message>
     <message>
         <source>Message could not be sent.</source>
-        <translation type="unfinished">Mesej gagal dihantar.</translation>
+        <translation>Mesej tidak dapat dihantar.</translation>
     </message>
 </context>
 <context>

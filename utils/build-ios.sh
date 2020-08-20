@@ -25,7 +25,7 @@ echo "*****************************************"
 
 export PKG_CONFIG_EXECUTABLE=/usr/local/bin/pkg-config
 
-mkdir -p $KAIDAN_SOURCE/3rdparty
+mkdir -p $KAIDAN_SOURCES/3rdparty
 
 if [ ! -f "$KAIDAN_SOURCES/3rdparty/kirigami/.git" ]; then
     echo "Cloning Kirigami"

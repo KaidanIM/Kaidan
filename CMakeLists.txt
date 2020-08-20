@@ -20,12 +20,12 @@ endif()
 
 # Version
 set(VERSION_MAJOR 0)
-set(VERSION_MINOR 6)
+set(VERSION_MINOR 7)
 set(VERSION_PATCH 0)
 set(VERSION_CODE 10)
 set(VERSION_EXTRA "" CACHE STRING "Stuff to append to version string")
 
-set(DEVELOPMENT_BUILD FALSE)
+set(DEVELOPMENT_BUILD TRUE)
 if(DEVELOPMENT_BUILD)
 	set(VERSION_EXTRA "${VERSION_EXTRA}-dev")
 endif()

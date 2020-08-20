@@ -25,6 +25,11 @@
     </screenshot>
   </screenshots>
   <releases>
+    <release type="stable" version="0.7.0-dev">
+      <description>
+        <p>under development</p>
+      </description>
+    </release>
     <release type="stable" version="0.6.0" date="2020-08-20T00:00:00Z">
       <description>
         <p>This release adds the following features:</p>

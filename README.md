@@ -39,9 +39,9 @@ Kaidan yourself can be found in our [Wiki][wiki].
 Here are the general dependencies of Kaidan:
  * [Qt][qt-build-sources] (Core Qml Quick Svg Sql QuickControls2 Xml Multimedia Positioning Location) (>= 5.12.0)
  * [QXmpp][qxmpp] (>= 1.2.0)
- * [Kirigami 2][kirigami-repo] (>= 5.58.0)
+ * [Kirigami 2][kirigami-repo] (>= 5.67.0)
  * [ECM (extra-cmake-modules)][ecm]
- * [ZXing-cpp][zxing-cpp]
+ * [ZXing-cpp][zxing-cpp] (>= 1.0.8)
  * [KNotifications][knotifications] (`-DUSE_KNOTIFICATIONS=OFF` to disable)
 
 ## Contributing

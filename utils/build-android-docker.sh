@@ -18,10 +18,6 @@ CI_PROJECT_NAME=${CI_PROJECT_NAME:-kaidan}
 CI_REPOSITORY_URL=${CI_REPOSITORY_URL:-$(git remote get-url origin)}
 CI_PROJECT_DIR=${CI_PROJECT_DIR:-${KAIDAN_SOURCES}}
 
-# clone breeze icons
-mkdir -p 3rdparty
-git clone https://invent.kde.org/frameworks/breeze-icons 3rdparty/breeze-icons
-
 # make sure inkscape is installed
 sudo apt update
 sudo apt -y install inkscape optipng advancecomp

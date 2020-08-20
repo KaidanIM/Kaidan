@@ -27,7 +27,7 @@ if [ ! -f "$KAIDAN_SOURCES/3rdparty/kirigami/.git" ]; then
     git clone https://invent.kde.org/frameworks/kirigami $KAIDAN_SOURCES/3rdparty/kirigami
 fi
 
-if [ ! -f "$KAIDAN_SOURCES/3rdparty/breeze-icons/.git" ]; then
+if [ ! -e "$KAIDAN_SOURCES/3rdparty/breeze-icons/.git" ]; then
     echo "Cloning Breeze icons"
     git clone https://invent.kde.org/frameworks/breeze-icons $KAIDAN_SOURCES/3rdparty/breeze-icons
 fi

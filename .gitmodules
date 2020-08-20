@@ -1,6 +1,3 @@
-[submodule "3rdparty/kirigami"]
-	path = 3rdparty/kirigami
-	url = https://github.com/KDE/kirigami
 [submodule "3rdparty/breeze-icons"]
 	path = 3rdparty/breeze-icons
-	url = https://github.com/kde/breeze-icons
+	url = https://invent.kde.org/frameworks/breeze-icons

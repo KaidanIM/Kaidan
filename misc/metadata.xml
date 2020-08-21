@@ -17,6 +17,7 @@
   <url type="homepage">https://kaidan.im</url>
   <url type="bugtracker">https://invent.kde.org/KDE/kaidan/issues</url>
   <url type="help">https://invent.kde.org/KDE/kaidan/wikis</url>
+  <url type="translate">https://hosted.weblate.org/projects/kaidan/translations/</url>
   <launchable type="desktop-id">kaidan.desktop</launchable>
   <screenshots>
     <screenshot>
@@ -24,6 +25,7 @@
       <image type="source">https://www.kaidan.im/images/screenshot.png</image>
     </screenshot>
   </screenshots>
+  <translation type="qt">Weblate</translation>
   <releases>
     <release type="stable" version="0.6.0" date="2020-08-20T00:00:00Z">
       <description>

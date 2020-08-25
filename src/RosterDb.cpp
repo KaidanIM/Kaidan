@@ -267,7 +267,7 @@ void RosterDb::fetchItems(const QString &accountId)
 	for (auto &item : items) {
 		Message lastMessage = MessageDb::instance()->fetchLastMessage(accountId, item.jid());
 		item.setLastExchanged(lastMessage.stamp());
-		item.setLastMessage(lastMessage.body());
+		item.setLastMessage(lastMessage.previewText());
 	}
 
 	emit itemsFetched(items);

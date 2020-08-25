@@ -66,13 +66,6 @@ RosterModel::RosterModel(RosterDb *rosterDb, QObject *parent)
 	connect(this, &RosterModel::replaceItemsRequested,
 		rosterDb, &RosterDb::replaceItems);
 
-	// This is only done in the model, the database is updated automatically by the new
-	// messages:
-	connect(this, &RosterModel::setLastMessageRequested,
-	        this, &RosterModel::setLastMessage);
-	connect(this, &RosterModel::setLastExchangedRequested,
-	        this, &RosterModel::setLastExchanged);
-
 	connect(Kaidan::instance(), &Kaidan::jidChanged, this, [=]() {
 		beginResetModel();
 		m_items.clear();
@@ -90,6 +83,9 @@ void RosterModel::setMessageModel(MessageModel *model)
 			item.setUnreadMessages(0);
 		});
 	});
+
+	connect(model, &MessageModel::addMessageRequested,
+	        this, &RosterModel::handleMessageAdded);
 }
 
 bool RosterModel::isEmpty() const
@@ -232,30 +228,42 @@ void RosterModel::replaceItems(const QHash<QString, RosterItem> &items)
 	handleItemsFetched(newItems);
 }
 
-void RosterModel::setLastMessage(const QString &contactJid, const QString &newLastMessage)
+void RosterModel::handleMessageAdded(const Message &message)
 {
-	for (int i = 0; i < m_items.length(); i++) {
-		if (m_items.at(i).jid() == contactJid) {
-			m_items[i].setLastMessage(newLastMessage);
-			emit dataChanged(index(i), index(i), QVector<int>() << int(LastMessageRole));
-			return;
-		}
-	}
-}
+	const auto contactJid = message.sentByMe() ? message.to() : message.from();
+	auto itr = std::find_if(m_items.begin(), m_items.end(), [&contactJid](const RosterItem &item) {
+		return item.jid() == contactJid;
+	});
 
-void RosterModel::setLastExchanged(const QString &contactJid, const QDateTime &newLastExchanged)
-{
-	for (int i = 0; i < m_items.length(); i++) {
-		if (m_items.at(i).jid() == contactJid) {
-			// update item
-			m_items[i].setLastExchanged(newLastExchanged);
-			emit dataChanged(index(i), index(i), QVector<int>() << int(LastExchangedRole));
+	// contact not found
+	if (itr == m_items.end())
+		return;
 
-			// Move row to correct position
-			updateItemPosition(i);
-			return;
-		}
+	// new message is older than most recent event
+	if (itr->lastExchanged() > message.stamp())
+		return;
+
+	QVector<int> changedRoles = {
+		int(LastExchangedRole)
+	};
+
+	// last exchanged
+	itr->setLastExchanged(message.stamp());
+
+	// last message
+	const auto lastMessage = message.previewText();
+	if (itr->lastMessage() != lastMessage) {
+		itr->setLastMessage(lastMessage);
+		changedRoles << int(LastMessageRole);
 	}
+
+	// notify gui
+	const auto i = std::distance(m_items.begin(), itr);
+	const auto modelIndex = index(i);
+	emit dataChanged(modelIndex, modelIndex, changedRoles);
+
+	// move row to correct position
+	updateItemPosition(i);
 }
 
 void RosterModel::insertContact(int i, const RosterItem &item)

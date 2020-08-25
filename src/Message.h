@@ -30,8 +30,13 @@
 
 #pragma once
 
+// Qt
+#include <QCoreApplication>
+// QXmpp
 #include <QXmppMessage.h>
+// Kaidan
 #include "Enums.h"
+
 class QMimeType;
 
 using namespace Enums;
@@ -43,6 +48,8 @@ using namespace Enums;
  */
 class Message : public QXmppMessage
 {
+	Q_DECLARE_TR_FUNCTIONS(Message)
+
 public:
 	/**
 	 * Compares another @c Message with this. Only attributes that are saved in the
@@ -83,6 +90,12 @@ public:
 
 	QString errorText() const;
 	void setErrorText(const QString &errText);
+
+	/**
+	 * Preview of the message in pure text form (used in the contact list for the
+	 * last message for example)
+	 */
+	QString previewText() const;
 
 private:
 	/**

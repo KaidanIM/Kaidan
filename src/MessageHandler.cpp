@@ -285,4 +285,3 @@ void MessageHandler::handlePendingMessages(const QVector<Message> &messages)
 		sendPendingMessage(message);
 	}
 }
-

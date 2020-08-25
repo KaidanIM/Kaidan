@@ -32,6 +32,7 @@
 
 #include <QDomElement>
 #include <QMimeType>
+#include <QStringBuilder>
 
 static bool operator==(const QXmppStanza::Error &left, const QXmppStanza::Error &right) {
 	return left.code() == right.code()
@@ -219,4 +220,25 @@ QString Message::errorText() const
 void Message::setErrorText(const QString &errText)
 {
 	m_errorText = errText;
+}
+
+QString Message::previewText() const
+{
+	if (isSpoiler()) {
+		if (spoilerHint().isEmpty()) {
+			return tr("Spoiler");
+		} else {
+			return spoilerHint();
+		}
+	} else {
+		if (mediaType() == Enums::MessageType::MessageText) {
+			return body();
+		} else {
+			const auto text = tr("File");
+
+			if (!body().isEmpty())
+				return text % QStringLiteral(": ") % body();
+			return text;
+		}
+	}
 }

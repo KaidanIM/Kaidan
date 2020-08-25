@@ -104,13 +104,6 @@ void UploadManager::sendFile(const QString &jid, const QUrl &fileUrl, const QStr
 
 	emit Kaidan::instance()->messageModel()->addMessageRequested(*msg);
 
-	// update last message
-	QString lastMessage = tr("File");
-	if (!body.isEmpty())
-		lastMessage = lastMessage.append(": ").append(body);
-
-	rosterManager->handleSendMessage(jid, lastMessage);
-
 	connect(upload, &QXmppHttpUpload::bytesSentChanged, this, [=] () {
 		emit Kaidan::instance()->transferCache()->setJobBytesSentRequested(
 					msgId, upload->bytesSent());

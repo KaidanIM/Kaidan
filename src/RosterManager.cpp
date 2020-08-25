@@ -97,7 +97,6 @@ RosterManager::RosterManager(Kaidan *kaidan,
 	connect(kaidan, &Kaidan::addContact, this, &RosterManager::addContact);
 	connect(kaidan, &Kaidan::removeContact, this, &RosterManager::removeContact);
 	connect(kaidan, &Kaidan::renameContact, this, &RosterManager::renameContact);
-	connect(kaidan, &Kaidan::sendMessage, this, &RosterManager::handleSendMessage);
 
 	connect(client, &QXmppClient::messageReceived, this, &RosterManager::handleMessage);
 }
@@ -166,21 +165,6 @@ void RosterManager::renameContact(const QString &jid, const QString &newContactN
 	}
 }
 
-void RosterManager::handleSendMessage(const QString &jid, const QString &message,
-                                      bool isSpoiler, const QString &spoilerHint)
-{
-	if (m_client->state() == QXmppClient::ConnectedState) {
-		// update roster item
-		const QString lastMessage =
-		        isSpoiler ? spoilerHint.isEmpty() ? tr("Spoiler")
-		                                          : spoilerHint
-		                  : message;
-		// sorting order in contact list
-		emit m_model->setLastExchangedRequested(jid, QDateTime::currentDateTimeUtc());
-		emit m_model->setLastMessageRequested(jid, lastMessage);
-	}
-}
-
 void RosterManager::handleMessage(const QXmppMessage &msg)
 {
 	if (msg.body().isEmpty() || msg.type() == QXmppMessage::Error)
@@ -191,9 +175,6 @@ void RosterManager::handleMessage(const QXmppMessage &msg)
 	bool sentByMe = fromJid == m_client->configuration().jidBare();
 	QString contactJid = sentByMe ? QXmppUtils::jidToBareJid(msg.to())
 	                              : fromJid;
-
-	// update last exchanged datetime (sorting order in contact list)
-	emit m_model->setLastExchangedRequested(contactJid, QDateTime::currentDateTimeUtc());
 
 	// update unread message counter, if chat is not active
 	if (sentByMe) {
@@ -206,18 +187,4 @@ void RosterManager::handleMessage(const QXmppMessage &msg)
 			item.setUnreadMessages(item.unreadMessages() + 1);
 		});
 	}
-
-	// Update last message of the contact
-	QString lastMessage;
-	if (msg.isSpoiler()) {
-		if (msg.spoilerHint().isEmpty()) {
-			lastMessage = tr("Spoiler");
-		} else {
-			lastMessage = msg.spoilerHint();
-		}
-	} else {
-		lastMessage = msg.body();
-	}
-
-	emit Kaidan::instance()->rosterModel()->setLastMessageRequested(contactJid, lastMessage);
 }

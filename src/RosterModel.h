@@ -41,6 +41,7 @@
 class Kaidan;
 class RosterDb;
 class MessageModel;
+class Message;
 
 class RosterModel : public QAbstractListModel
 {
@@ -77,8 +78,6 @@ signals:
 	void updateItemRequested(const QString &jid,
 	                         const std::function<void (RosterItem &)> &updateItem);
 	void replaceItemsRequested(const QHash<QString, RosterItem> &items);
-	void setLastMessageRequested(const QString &contactJid, const QString &newLastMessage);
-	void setLastExchangedRequested(const QString &contactJid, const QDateTime &newLastExchanged);
 
 private slots:
 	void handleItemsFetched(const QVector<RosterItem> &items);
@@ -88,8 +87,7 @@ private slots:
 	void updateItem(const QString &jid,
 	                const std::function<void (RosterItem &)> &updateItem);
 	void replaceItems(const QHash<QString, RosterItem> &items);
-	void setLastMessage(const QString &contactJid, const QString &newLastMessage);
-	void setLastExchanged(const QString &contactJid, const QDateTime &newLastExchanged);
+	void handleMessageAdded(const Message &message);
 
 private:
 	/**

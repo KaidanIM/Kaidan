@@ -54,7 +54,6 @@ class MessageHandler : public QObject
 
 public:
 	MessageHandler(Kaidan *kaidan, ClientWorker *clientWorker, QXmppClient *client, MessageModel *model);
-
 	~MessageHandler();
 
 public slots:
@@ -87,6 +86,8 @@ private slots:
 	void sendPendingMessage(const Message &message);
 
 private:
+	bool parseMediaUri(Message &message, const QString &uri, bool isBodyPart);
+
 	Kaidan *kaidan;
 	ClientWorker *m_clientWorker;
 	QXmppClient *client;

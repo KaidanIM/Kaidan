@@ -92,7 +92,7 @@ void MessageHandler::handleMessage(const QXmppMessage &msg)
 		return;
 	}
 
-	if (msg.body().isEmpty())
+	if (msg.body().isEmpty() && msg.outOfBandUrl().isEmpty())
 		return;
 
 	Message message;
@@ -104,43 +104,15 @@ void MessageHandler::handleMessage(const QXmppMessage &msg)
 	message.setMediaType(MessageType::MessageText); // default to text message without media
 	message.setIsSpoiler(msg.isSpoiler());
 	message.setSpoilerHint(msg.spoilerHint());
+	message.setOutOfBandUrl(msg.outOfBandUrl());
 
 	// check if message contains a link and also check out of band url
-	QStringList bodyWords = message.body().split(" ");
-	bodyWords.prepend(msg.outOfBandUrl());
-
-	for (const QString &word : qAsConst(bodyWords)) {
-		if (!MediaUtils::isHttp(word) && !MediaUtils::isGeoLocation(word)) {
-			continue;
+	if (!parseMediaUri(message, msg.outOfBandUrl(), false)) {
+		const QStringList bodyWords = message.body().split(u' ');
+		for (const QString &word : bodyWords) {
+			if (parseMediaUri(message, word, true))
+				break;
 		}
-
-		// check message type by file name in link
-		// This is hacky, but needed without SIMS or an additional HTTP request.
-		// Also, this can be useful when a user manually posts an HTTP url.
-		const QUrl url(word);
-		const QMimeType mimeType = MediaUtils::mimeType(url);
-		const MessageType messageType = MediaUtils::messageType(mimeType);
-
-		switch (messageType) {
-		case MessageType::MessageImage:
-		case MessageType::MessageAudio:
-		case MessageType::MessageVideo:
-		case MessageType::MessageDocument:
-		case MessageType::MessageFile:
-		case MessageType::MessageGeoLocation:
-			message.setMediaType(messageType);
-			if (messageType == MessageType::MessageGeoLocation) {
-				message.setMediaLocation(url.toEncoded());
-			}
-			message.setMediaContentType(mimeType.name());
-			message.setOutOfBandUrl(url.toEncoded());
-			break;
-		case MessageType::MessageText:
-		case MessageType::MessageUnknown:
-			continue;
-		}
-
-		break; // we can only handle one link
 	}
 
 	// get possible delay (timestamp)
@@ -277,6 +249,46 @@ void MessageHandler::sendPendingMessage(const Message &message)
 			emit model->setMessageDeliveryStateRequested(message.id(), Enums::DeliveryState::Error, "Message could not be sent.");
 		}
 	}
+}
+
+bool MessageHandler::parseMediaUri(Message &message, const QString &uri, bool isBodyPart)
+{
+	if (!MediaUtils::isHttp(uri) && !MediaUtils::isGeoLocation(uri)) {
+		return false;
+	}
+
+	// check message type by file name in link
+	// This is hacky, but needed without SIMS or an additional HTTP request.
+	// Also, this can be useful when a user manually posts an HTTP url.
+	const QUrl url(uri);
+	const QMimeType mimeType = MediaUtils::mimeType(url);
+	const MessageType messageType = MediaUtils::messageType(mimeType);
+
+	switch (messageType) {
+	case MessageType::MessageText:
+	case MessageType::MessageUnknown:
+		break;
+	case MessageType::MessageFile:
+		// Random files could be anything and could also include any website. We
+		// want to avoid random links to be recognized as 'file'. Intentionally
+		// sent files should be displayed of course.
+		if (isBodyPart)
+			break;
+		[[fallthrough]];
+	case MessageType::MessageGeoLocation:
+		message.setMediaLocation(url.toEncoded());
+		[[fallthrough]];
+	case MessageType::MessageImage:
+	case MessageType::MessageAudio:
+	case MessageType::MessageVideo:
+	case MessageType::MessageDocument:
+		message.setMediaType(messageType);
+		message.setMediaContentType(mimeType.name());
+		message.setOutOfBandUrl(url.toEncoded());
+		return true;
+	}
+
+	return false;
 }
 
 void MessageHandler::handlePendingMessages(const QVector<Message> &messages)

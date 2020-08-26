@@ -56,6 +56,7 @@ public:
 	Q_INVOKABLE static QString iconName(const QString &filePath);
 	Q_INVOKABLE static QString iconName(const QUrl &url);
 
+	static QString mediaTypeName(Enums::MessageType mediaType);
 	Q_INVOKABLE static QString newMediaLabel(Enums::MessageType hint);
 	Q_INVOKABLE static QString newMediaIconName(Enums::MessageType hint);
 	Q_INVOKABLE static QString label(Enums::MessageType hint);

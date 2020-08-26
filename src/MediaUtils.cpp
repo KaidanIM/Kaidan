@@ -245,6 +245,27 @@ QString MediaUtils::iconName(const QUrl &url)
 	return iconName(url.fileName());
 }
 
+QString MediaUtils::mediaTypeName(Enums::MessageType mediaType)
+{
+	switch (mediaType) {
+	case Enums::MessageType::MessageAudio:
+		return tr("Audio");
+	case Enums::MessageType::MessageDocument:
+		return tr("Document");
+	case Enums::MessageType::MessageGeoLocation:
+		return tr("Location");
+	case Enums::MessageType::MessageImage:
+		return tr("Image");
+	case Enums::MessageType::MessageVideo:
+		return tr("Video");
+	case Enums::MessageType::MessageFile:
+	case Enums::MessageType::MessageText:
+	case Enums::MessageType::MessageUnknown:
+		return tr("File");
+	}
+	return {};
+}
+
 QString MediaUtils::newMediaLabel(Enums::MessageType hint)
 {
 	switch (hint) {

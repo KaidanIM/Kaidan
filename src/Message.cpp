@@ -34,6 +34,8 @@
 #include <QMimeType>
 #include <QStringBuilder>
 
+#include "MediaUtils.h"
+
 static bool operator==(const QXmppStanza::Error &left, const QXmppStanza::Error &right) {
 	return left.code() == right.code()
 		&& left.text() == right.text()
@@ -234,7 +236,7 @@ QString Message::previewText() const
 		if (mediaType() == Enums::MessageType::MessageText) {
 			return body();
 		} else {
-			const auto text = tr("File");
+			const auto text = MediaUtils::mediaTypeName(mediaType());
 
 			if (!body().isEmpty())
 				return text % QStringLiteral(": ") % body();

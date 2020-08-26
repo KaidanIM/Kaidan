@@ -33,6 +33,8 @@ linux-appimage:
       - "*.AppImage"
       - "*.AppImage.zsync"
     expire_in: 1 week
+  only:
+    - network/kaidan
 
 android:
   stage: deploy
@@ -47,6 +49,8 @@ android:
       - "kaidan_arm.apk"
       - "kaidan_arm64.apk"
     expire_in: 1 week
+  only:
+    - network/kaidan
 
 variables:
   GIT_SUBMODULE_STRATEGY: recursive

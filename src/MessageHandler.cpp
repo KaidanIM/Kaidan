@@ -100,7 +100,9 @@ void MessageHandler::handleMessage(const QXmppMessage &msg)
 	message.setTo(QXmppUtils::jidToBareJid(msg.to()));
 	message.setSentByMe(QXmppUtils::jidToBareJid(msg.from()) == client->configuration().jidBare());
 	message.setId(msg.id());
-	message.setBody(msg.body());
+	// don't use file sharing fallback bodys
+	if (msg.body() != msg.outOfBandUrl())
+		message.setBody(msg.body());
 	message.setMediaType(MessageType::MessageText); // default to text message without media
 	message.setIsSpoiler(msg.isSpoiler());
 	message.setSpoilerHint(msg.spoilerHint());

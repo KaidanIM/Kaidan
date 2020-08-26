@@ -123,7 +123,6 @@ void UploadManager::handleUploadSucceeded(const QXmppHttpUpload *upload)
 
 	emit Kaidan::instance()->messageModel()->updateMessageRequested(originalMsg->id(), [=] (Message &msg) {
 		msg.setOutOfBandUrl(oobUrl);
-		msg.setBody(body);
 	});
 
 	// send message

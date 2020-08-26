@@ -233,7 +233,7 @@ RowLayout {
 				// message body
 				Controls.Label {
 					id: bodyLabel
-					visible: (root.mediaType === Enums.MessageType.MessageText || messageBody !== mediaGetUrl) && messageBody !== ""
+					visible: messageBody
 					text: Utils.formatMessage(messageBody)
 					textFormat: Text.StyledText
 					wrapMode: Text.Wrap

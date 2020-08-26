@@ -91,14 +91,10 @@ RosterManager::RosterManager(Kaidan *kaidan,
 		}
 	});
 
-	connect(kaidan->messageModel(), &MessageModel::currentChatJidChanged, this, &RosterManager::setCurrentChatJid);
-
 	// user actions
 	connect(kaidan, &Kaidan::addContact, this, &RosterManager::addContact);
 	connect(kaidan, &Kaidan::removeContact, this, &RosterManager::removeContact);
 	connect(kaidan, &Kaidan::renameContact, this, &RosterManager::renameContact);
-
-	connect(client, &QXmppClient::messageReceived, this, &RosterManager::handleMessage);
 }
 
 void RosterManager::populateRoster()
@@ -117,11 +113,6 @@ void RosterManager::populateRoster()
 
 	// replace current contacts with new ones from server
 	emit m_model->replaceItemsRequested(items);
-}
-
-void RosterManager::setCurrentChatJid(const QString &currentChatJid)
-{
-	m_currentChatJid = currentChatJid;
 }
 
 void RosterManager::addContact(const QString &jid, const QString &name, const QString &msg)
@@ -162,29 +153,5 @@ void RosterManager::renameContact(const QString &jid, const QString &newContactN
 		);
 		qWarning() << "[client] [RosterManager] Could not rename contact, as a result of "
 		              "not being connected.";
-	}
-}
-
-void RosterManager::handleMessage(const QXmppMessage &msg)
-{
-	if (msg.body().isEmpty() || msg.type() == QXmppMessage::Error)
-		return;
-
-	// msg.from() can be our JID, if it's a carbon/forward from another client
-	QString fromJid = QXmppUtils::jidToBareJid(msg.from());
-	bool sentByMe = fromJid == m_client->configuration().jidBare();
-	QString contactJid = sentByMe ? QXmppUtils::jidToBareJid(msg.to())
-	                              : fromJid;
-
-	// update unread message counter, if chat is not active
-	if (sentByMe) {
-		// if we sent a message (with another device), reset counter
-		emit m_model->updateItemRequested(contactJid, [](RosterItem &item) {
-			item.setUnreadMessages(0);
-		});
-	} else if (m_currentChatJid != contactJid) {
-		emit m_model->updateItemRequested(contactJid, [](RosterItem &item) {
-			item.setUnreadMessages(item.unreadMessages() + 1);
-		});
 	}
 }

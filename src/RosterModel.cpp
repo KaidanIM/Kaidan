@@ -257,6 +257,25 @@ void RosterModel::handleMessageAdded(const Message &message)
 		changedRoles << int(LastMessageRole);
 	}
 
+	// unread messages counter
+	std::optional<int> newUnreadMessages;
+	if (message.sentByMe()) {
+		// if we sent a message (with another device), reset counter
+		newUnreadMessages = 0;
+	} else if (Kaidan::instance()->messageModel()->currentChatJid() != contactJid) {
+		// increase counter, if chat isn't open
+		newUnreadMessages = itr->unreadMessages() + 1;
+	}
+
+	if (newUnreadMessages.has_value()) {
+		itr->setUnreadMessages(*newUnreadMessages);
+		changedRoles << int(UnreadMessagesRole);
+
+		emit rosterDb->updateItemRequested(contactJid, [=](RosterItem &item) {
+			item.setUnreadMessages(*newUnreadMessages);
+		});
+	}
+
 	// notify gui
 	const auto i = std::distance(m_items.begin(), itr);
 	const auto modelIndex = index(i);

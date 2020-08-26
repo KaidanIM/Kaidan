@@ -58,8 +58,6 @@ public slots:
 
 private slots:
 	void populateRoster();
-	void setCurrentChatJid(const QString &currentChatJid);
-	void handleMessage(const QXmppMessage &msg);
 
 private:
 	Kaidan *m_kaidan;
@@ -68,5 +66,4 @@ private:
 	AvatarFileStorage *m_avatarStorage;
 	VCardManager *m_vCardManager;
 	QXmppRosterManager *m_manager;
-	QString m_currentChatJid;
 };

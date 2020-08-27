@@ -151,6 +151,46 @@ QString Kaidan::password() const
 	return m_client->accountManager()->password();
 }
 
+void Kaidan::setHost(const QString &host)
+{
+	m_client->accountManager()->setHost(host);
+}
+
+void Kaidan::resetHost()
+{
+	m_client->accountManager()->resetHost();
+}
+
+QString Kaidan::host() const
+{
+	return m_client->accountManager()->host();
+}
+
+void Kaidan::setPort(int port)
+{
+	m_client->accountManager()->setPort(port);
+}
+
+void Kaidan::resetPort()
+{
+	m_client->accountManager()->resetPort();
+}
+
+int Kaidan::port() const
+{
+	return m_client->accountManager()->port();
+}
+
+void Kaidan::setCustomConnectionSettingsEnabled(bool enabled)
+{
+	m_client->accountManager()->setCustomConnectionSettingsEnabled(enabled);
+}
+
+bool Kaidan::customConnectionSettingsEnabled() const
+{
+	return m_client->accountManager()->customConnectionSettingsEnabled();
+}
+
 void Kaidan::setPasswordVisibility(PasswordVisibility passwordVisibility)
 {
 	m_caches->settings->setValue(KAIDAN_SETTINGS_AUTH_PASSWD_VISIBILITY, quint8(passwordVisibility));

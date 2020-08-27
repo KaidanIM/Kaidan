@@ -63,6 +63,11 @@ public:
 	void setJid(const QString &jid);
 
 	/**
+	 * Returns the resource part of the account's full JID.
+	 */
+	QString jidResource() const;
+
+	/**
 	 * Sets the prefix of the account's full JID's resource part.
 	 *
 	 * The resource prefix is used to create the complete resource. The resource is created by
@@ -75,11 +80,6 @@ public:
 	 * @param jidResourcePrefix prefix of the account's full JID's resource part
 	 */
 	void setJidResourcePrefix(const QString &jidResourcePrefix);
-
-	/**
-	 * Returns the resource part of the account's full JID.
-	 */
-	QString jidResource() const;
 
 	/**
 	 * Returns the password of the account.
@@ -96,6 +96,68 @@ public:
 	 * @param password password of the account
 	 */
 	void setPassword(const QString &password);
+
+	/**
+	 * Returns the custom host.
+	 *
+	 * This method is thread-safe.
+	 */
+	QString host();
+
+	/**
+	 * Sets a custom host for connecting.
+	 *
+	 * This method is thread-safe.
+	 *
+	 * @param host host to connect to
+	 */
+	void setHost(const QString &host);
+
+	/**
+	 * Resets a custom host.
+	 *
+	 * This method is thread-safe.
+	 */
+	void resetHost();
+
+	/**
+	 * Returns the custom port.
+	 *
+	 * This method is thread-safe.
+	 */
+	int port();
+
+	/**
+	 * Sets a custom port for connecting.
+	 *
+	 * This method is thread-safe.
+	 *
+	 * @param port port to connect to
+	 */
+	void setPort(const int port);
+
+	/**
+	 * Resets a custom port.
+	 *
+	 * This method is thread-safe.
+	 */
+	void resetPort();
+
+	/**
+	 * Returns true if a custom host or port is set, otherwise false.
+	 *
+	 * This method is thread-safe.
+	 */
+	bool customConnectionSettingsEnabled();
+
+	/**
+	 * Returns true if a custom host or port is set, otherwise false.
+	 *
+	 * This method is thread-safe.
+	 *
+	 * @param enabled true to enable the custom connection settings, otherwise false
+	 */
+	void setCustomConnectionSettingsEnabled(const bool enabled);
 
 	/**
 	 * Provides a way to cache whether the current credentials are new to this client.
@@ -140,7 +202,12 @@ public:
 	void storePassword();
 
 	/**
-	 * Stores credentials in the settings file.
+	 * Stores the currently set custom host and port in the settings file.
+	 */
+	void storeCustomConnectionSettings();
+
+	/**
+	 * Stores credentials (jid, password, etc.) in the settings file.
 	 */
 	void storeCredentials();
 
@@ -168,6 +235,21 @@ signals:
 	 * Emitted when the password changed.
 	 */
 	void passwordChanged();
+
+	/**
+	 * Emitted when the custom host changed.
+	 */
+	void hostChanged();
+
+	/**
+	 * Emitted when the custom port changed.
+	 */
+	void portChanged();
+
+	/**
+	 * Emitted when the custom connection settings are enabled or disabled.
+	 */
+	void customConnectionSettingsEnabledChanged();
 
 	/**
 	 * Emitted when there are no (correct) credentials and new ones are needed.
@@ -198,6 +280,9 @@ private:
 	QString m_jidResourcePrefix;
 	QString m_jidResource;
 	QString m_password;
+	QString m_host;
+	int m_port;
 
+	bool m_customConnectionSettingsEnabled = false;
 	bool m_hasNewCredentials;
 };

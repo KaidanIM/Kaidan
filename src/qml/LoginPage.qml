@@ -67,6 +67,14 @@ Kirigami.Page {
 				inputField {
 					onAccepted: loginButton.clicked()
 				}
+
+				inputField.rightActions: [
+					Kirigami.Action {
+						icon.name: "settings-configure"
+						text: qsTr("Connection settings")
+						onTriggered: pageStack.layers.push("LoginSettingsPage.qml")
+					}
+				]
 			}
 
 			// password field

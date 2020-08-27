@@ -6,6 +6,7 @@
 		<file>RegistrationLoginDecisionPage.qml</file>
 		<file>RosterPage.qml</file>
 		<file>LoginPage.qml</file>
+		<file>LoginSettingsPage.qml</file>
 		<file>ChatPageBase.qml</file>
 		<file>ChatPage.qml</file>
 		<file>EmptyChatPage.qml</file>

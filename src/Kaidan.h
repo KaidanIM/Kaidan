@@ -65,6 +65,9 @@ class Kaidan : public QObject
 	Q_PROPERTY(quint8 connectionError READ connectionError NOTIFY connectionErrorChanged)
 	Q_PROPERTY(QString jid READ jid WRITE setJid NOTIFY jidChanged)
 	Q_PROPERTY(QString password READ password WRITE setPassword NOTIFY passwordChanged)
+	Q_PROPERTY(QString host READ host WRITE setHost NOTIFY hostChanged RESET resetHost)
+	Q_PROPERTY(int port READ port WRITE setPort NOTIFY portChanged RESET resetPort)
+	Q_PROPERTY(bool customConnectionSettingsEnabled READ customConnectionSettingsEnabled WRITE setCustomConnectionSettingsEnabled NOTIFY customConnectionSettingsEnabledChanged)
 	Q_PROPERTY(PasswordVisibility passwordVisibility READ passwordVisibility WRITE setPasswordVisibility NOTIFY passwordVisibilityChanged)
 
 public:
@@ -145,6 +148,52 @@ public:
 	 * Returns the currently used password.
 	 */
 	QString password() const;
+
+	/**
+	 * Sets a custom host for connecting.
+	 *
+	 * @param host host to connect to
+	 */
+	void setHost(const QString &host);
+
+	/**
+	 * Resets a custom host.
+	 */
+	void resetHost();
+
+	/**
+	 * Returns the custom host.
+	 */
+	QString host() const;
+
+	/**
+	 * Sets a custom port for connecting.
+	 *
+	 * @param port port to connect to
+	 */
+	void setPort(const int port);
+
+	/**
+	 * Resets a custom port.
+	 */
+	void resetPort();
+
+	/**
+	 * Returns the custom port.
+	 */
+	int port() const;
+
+	/**
+	 * Returns true if a custom host or port is set, otherwise false.
+	 *
+	 * @param enabled true to enable the custom connection settings, otherwise false
+	 */
+	void setCustomConnectionSettingsEnabled(const bool enabled);
+
+	/**
+	 * Returns true if a custom host or port is set, otherwise false.
+	 */
+	bool customConnectionSettingsEnabled() const;
 
 	/**
 	 * Sets the visibility of the password on the account transfer page.
@@ -296,6 +345,21 @@ signals:
 	 * Emitted when the password used to log in changed.
 	 */
 	void passwordChanged();
+
+	/**
+	 * Emitted when the hostname was changed
+	 */
+	void hostChanged();
+
+	/**
+	 * Emitted when the port was changed
+	 */
+	void portChanged();
+
+	/**
+	 * Emitted when custom connection settings were enabled / disabled
+	 */
+	void customConnectionSettingsEnabledChanged();
 
 	/**
 	 * Emitted when there are no (correct) credentials and new ones are needed.

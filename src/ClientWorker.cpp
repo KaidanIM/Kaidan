@@ -195,6 +195,11 @@ void ClientWorker::connectToServer(QXmppConfiguration config)
 		config.setJid(m_accountManager->jid());
 		config.setStreamSecurityMode(QXmppConfiguration::TLSRequired);
 
+		if (m_accountManager->customConnectionSettingsEnabled()) {
+			config.setHost(m_accountManager->host());
+			config.setPort(m_accountManager->port());
+		}
+
 		// Disable the automatic reconnection in case this connection attempt is not
 		// successful. Otherwise, this could result in a reconnection loop. It is enabled
 		// again after a successful login.

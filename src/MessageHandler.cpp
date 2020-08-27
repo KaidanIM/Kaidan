@@ -171,15 +171,6 @@ void MessageHandler::sendMessage(const QString& toJid,
 	if (isSpoiler) {
 		msg.setIsSpoiler(isSpoiler);
 		msg.setSpoilerHint(spoilerHint);
-
-		// parsing/serialization of spoilers isn't implemented in QXmpp
-		QXmppElementList extensions = msg.extensions();
-		QXmppElement spoiler = QXmppElement();
-		spoiler.setTagName("spoiler");
-		spoiler.setValue(msg.spoilerHint());
-		spoiler.setAttribute("xmlns", NS_SPOILERS);
-		extensions.append(spoiler);
-		msg.setExtensions(extensions);
 	} else if (MediaUtils::isGeoLocation(msg.body())) {
 		const QUrl url(msg.body());
 		const QMimeType mimeType = MediaUtils::mimeType(url);

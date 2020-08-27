@@ -194,26 +194,6 @@ void Message::setMediaSize(const qint64 &mediaSize)
 	m_mediaSize = mediaSize;
 }
 
-bool Message::isSpoiler() const
-{
-	return m_isSpoiler;
-}
-
-void Message::setIsSpoiler(bool isSpoiler)
-{
-	m_isSpoiler = isSpoiler;
-}
-
-QString Message::spoilerHint() const
-{
-	return m_spoilerHint;
-}
-
-void Message::setSpoilerHint(const QString &spoilerHint)
-{
-	m_spoilerHint = spoilerHint;
-}
-
 QString Message::errorText() const
 {
 	return m_errorText;

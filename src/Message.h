@@ -82,12 +82,6 @@ public:
 	qint64 mediaSize() const;
 	void setMediaSize(const qint64 &mediaSize);
 
-	bool isSpoiler() const;
-	void setIsSpoiler(bool isSpoiler);
-
-	QString spoilerHint() const;
-	void setSpoilerHint(const QString &spoilerHint);
-
 	QString errorText() const;
 	void setErrorText(const QString &errText);
 
@@ -137,16 +131,6 @@ private:
 	 * Timestamp of the last modification date of the file locally on disk.
 	 */
 	QDateTime m_mediaLastModified;
-
-	/**
-	 * True if the message is a spoiler message.
-	 */
-	bool m_isSpoiler = false;
-
-	/**
-	 * Hint of the spoiler message.
-	 */
-	QString m_spoilerHint;
 
 	/**
 	 * Text description of an error if it ever happened to the message

@@ -49,7 +49,6 @@
 constexpr auto MESSAGE_MAX_CHARS = 1e4;
 
 // XML namespaces
-#define NS_SPOILERS "urn:xmpp:spoiler:0"
 #define NS_CARBONS "urn:xmpp:carbons:2"
 
 // SQL

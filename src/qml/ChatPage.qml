@@ -42,6 +42,15 @@ import "elements"
 ChatPageBase {
 	id: root
 
+	DropArea {
+		anchors.fill: parent
+		onDropped: (drop) => {
+			if (drop.urls.length > 0) {
+				sendMediaSheet.sendFile(Kaidan.messageModel.currentChatJid, drop.urls[0])
+			}
+		}
+	}
+
 	Shortcut {
 		sequence: "Ctrl+Shift+V"
 		context: Qt.WindowShortcut

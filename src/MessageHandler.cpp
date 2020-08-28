@@ -168,17 +168,14 @@ void MessageHandler::sendMessage(const QString& toJid,
 	msg.setMediaType(MessageType::MessageText); // text message without media
 	msg.setDeliveryState(Enums::DeliveryState::Pending);
 	msg.setStamp(QDateTime::currentDateTimeUtc());
-	if (isSpoiler) {
-		msg.setIsSpoiler(isSpoiler);
-		msg.setSpoilerHint(spoilerHint);
-	} else if (MediaUtils::isGeoLocation(msg.body())) {
-		const QUrl url(msg.body());
-		const QMimeType mimeType = MediaUtils::mimeType(url);
-		const MessageType messageType = MediaUtils::messageType(mimeType);
-		msg.setMediaType(messageType);
-		msg.setMediaLocation(msg.body());
-		msg.setMediaContentType(mimeType.name());
-		msg.setOutOfBandUrl(msg.body());
+	msg.setIsSpoiler(isSpoiler);
+	msg.setSpoilerHint(spoilerHint);
+
+	// process links from the body
+	const QStringList words = body.split(u' ');
+	for (const auto &word : words) {
+		if (parseMediaUri(msg, word, true))
+			break;
 	}
 
 	emit model->addMessageRequested(msg);

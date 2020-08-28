@@ -102,4 +102,7 @@ constexpr auto SERVER_LIST_MIN_SERVERS_FROM_COUNTRY = 2;
  */
 #define BITS_OF_BINARY_IMAGE_PROVIDER_NAME "bits-of-binary"
 
+// JPEG export quality used when saving images lossy (e.g. when saving images from clipboard)
+constexpr auto JPEG_EXPORT_QUALITY = 85;
+
 #endif // GLOBALS_H

@@ -149,6 +149,21 @@ public:
 	 */
 	Q_INVOKABLE static QColor getUserColor(const QString &nickName);
 
+	/**
+	 * Reads an image from the clipboard and returns the url of the saved image.
+	 */
+	Q_INVOKABLE static QUrl pasteImage();
+
+	/**
+	 * Returns the absolute file path for files to be downloaded.
+	 */
+	static QString downloadPath(const QString &filename);
+
+	/**
+	 * Returns the timestamp in a format for file names.
+	 */
+	static QString timestampForFileName(const QDateTime &dateTime = QDateTime::currentDateTime());
+
 private:
 	/**
 	 * Highlights links in a list of words

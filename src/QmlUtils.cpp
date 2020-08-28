@@ -35,8 +35,10 @@
 #include <QFile>
 #include <QFileInfo>
 #include <QGuiApplication>
+#include <QImage>
 #include <QMimeDatabase>
 #include <QStandardPaths>
+#include <QStringBuilder>
 #include <QUrl>
 // QXmpp
 #include "qxmpp-exts/QXmppColorGenerator.h"
@@ -168,6 +170,52 @@ QColor QmlUtils::getUserColor(const QString &nickName)
 {
 	QXmppColorGenerator::RGBColor color = QXmppColorGenerator::generateColor(nickName);
 	return {color.red, color.green, color.blue};
+}
+
+QUrl QmlUtils::pasteImage()
+{
+	const auto image = QGuiApplication::clipboard()->image();
+	if (image.isNull())
+		return {};
+
+	// create absolute file path
+	const auto path = downloadPath(u"image-" % timestampForFileName() % u".jpg");
+
+	// encode JPEG image
+	if (!image.save(path, "JPG", JPEG_EXPORT_QUALITY))
+		return {};
+	return QUrl::fromLocalFile(path);
+}
+
+QString QmlUtils::downloadPath(const QString &filename)
+{
+	// Kaidan download directory
+	const QDir directory(
+			QStandardPaths::writableLocation(QStandardPaths::DownloadLocation) %
+				QDir::separator() %
+				APPLICATION_DISPLAY_NAME);
+	// create directory if it doesn't exist
+	if (!directory.mkpath("."))
+		return {};
+
+	// check whether a file with this name already exists
+	QFileInfo info(directory, filename);
+	if (!info.exists())
+		return info.absoluteFilePath();
+
+	// find a new filename that doesn't exist
+	const auto baseName = info.baseName();
+	const auto nameSuffix = info.suffix();
+	for (uint i = 1; info.exists(); i++) {
+		// try to insert '-<i>' before the file extension
+		info = QFileInfo(directory, baseName % u'-' % QString::number(i) % nameSuffix);
+	}
+	return info.absoluteFilePath();
+}
+
+QString QmlUtils::timestampForFileName(const QDateTime &dateTime)
+{
+	return dateTime.toString(u"yyyyMMdd_hhmmss");
 }
 
 QString QmlUtils::processMsgFormatting(const QStringList &list, bool isFirst)

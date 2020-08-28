@@ -42,6 +42,18 @@ import "elements"
 ChatPageBase {
 	id: root
 
+	Shortcut {
+		sequence: "Ctrl+Shift+V"
+		context: Qt.WindowShortcut
+		onActivated: {
+			var imageUrl = Utils.pasteImage();
+			// check if there was an image to be pasted from the clipboard
+			if (imageUrl.toString().length > 0) {
+				sendMediaSheet.sendFile(Kaidan.messageModel.currentChatJid, imageUrl)
+			}
+		}
+	}
+
 	property string chatName: {
 		var currentChatJid = Kaidan.messageModel.currentChatJid
 		var chatDisplayName = Kaidan.rosterModel.itemName(currentChatJid)

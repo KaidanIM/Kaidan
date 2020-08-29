@@ -40,9 +40,9 @@ import org.kde.kirigami 2.8 as Kirigami
 Kirigami.OverlaySheet {
 	id: settingsSheet
 
-	header: Row {
+	header: RowLayout {
+		anchors.fill: parent
 		spacing: 1
-		Layout.fillWidth: true
 		Controls.ToolButton {
 			id: backButton
 			enabled: stack.currentItem !== stack.initialItem
@@ -50,7 +50,8 @@ Kirigami.OverlaySheet {
 			onClicked: stack.pop()
 		}
 		Kirigami.Heading {
-			height: backButton.height
+			Layout.fillWidth: true
+			Layout.alignment: Qt.AlignVCenter
 			text: stack.currentItem.title
 		}
 	}

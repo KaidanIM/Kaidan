@@ -66,7 +66,7 @@ public:
 	};
 	Q_ENUM(MessageRoles)
 
-	MessageModel(Kaidan *kaidan, MessageDb *msgDb, QObject *parent = nullptr);
+	MessageModel(MessageDb *msgDb, QObject *parent = nullptr);
 	~MessageModel();
 
 	Q_REQUIRED_RESULT bool isEmpty() const;
@@ -143,9 +143,7 @@ private:
 	 */
 	void processMessage(Message &msg);
 
-	Kaidan *kaidan;
 	MessageDb *msgDb;
-
 	QVector<Message> m_messages;
 	QString m_currentChatJid;
 	bool m_fetchedAll = false;

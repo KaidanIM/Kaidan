@@ -49,29 +49,29 @@
 #include <QXmppRegisterIq.h>
 #include <QXmppRegistrationManager.h>
 
-RegistrationManager::RegistrationManager(Kaidan *kaidan, ClientWorker *clientWorker, QXmppClient *client, QSettings *settings)
-        : QObject(clientWorker), kaidan(kaidan), m_clientWorker(clientWorker), m_client(client), settings(settings), m_manager(new QXmppRegistrationManager), m_dataFormModel(new RegistrationDataFormModel())
+RegistrationManager::RegistrationManager(ClientWorker *clientWorker, QXmppClient *client, QSettings *settings)
+	: QObject(clientWorker), m_clientWorker(clientWorker), m_client(client), settings(settings), m_manager(new QXmppRegistrationManager), m_dataFormModel(new RegistrationDataFormModel())
 {
 	client->addExtension(m_manager);
 
 	connect(m_manager, &QXmppRegistrationManager::supportedByServerChanged, this, &RegistrationManager::handleInBandRegistrationSupportedChanged);
 
-	connect(kaidan, &Kaidan::sendRegistrationForm, this, &RegistrationManager::sendRegistrationForm);
+	connect(Kaidan::instance(), &Kaidan::sendRegistrationForm, this, &RegistrationManager::sendRegistrationForm);
 
 	connect(m_manager, &QXmppRegistrationManager::registrationFormReceived, this, &RegistrationManager::handleRegistrationFormReceived);
 	connect(m_manager, &QXmppRegistrationManager::registrationSucceeded, this, &RegistrationManager::handleRegistrationSucceeded);
-	connect(m_manager, &QXmppRegistrationManager::registrationSucceeded, kaidan, &Kaidan::registrationSucceeded);
+	connect(m_manager, &QXmppRegistrationManager::registrationSucceeded, Kaidan::instance(), &Kaidan::registrationSucceeded);
 	connect(m_manager, &QXmppRegistrationManager::registrationFailed, this, &RegistrationManager::handleRegistrationFailed);
 
 	connect(m_manager, &QXmppRegistrationManager::accountDeletionFailed, m_clientWorker, &ClientWorker::handleAccountDeletionFromServerFailed);
 	connect(m_manager, &QXmppRegistrationManager::accountDeleted, m_clientWorker, &ClientWorker::handleAccountDeletedFromServer);
 
-	connect(m_manager, &QXmppRegistrationManager::passwordChanged, kaidan, &Kaidan::setPassword);
+	connect(m_manager, &QXmppRegistrationManager::passwordChanged, Kaidan::instance(), &Kaidan::setPassword);
 
-	connect(m_manager, &QXmppRegistrationManager::passwordChanged, kaidan, &Kaidan::passwordChangeSucceeded);
+	connect(m_manager, &QXmppRegistrationManager::passwordChanged, Kaidan::instance(), &Kaidan::passwordChangeSucceeded);
 	connect(m_manager, &QXmppRegistrationManager::passwordChanged, this, &RegistrationManager::handlePasswordChangeSucceeded);
 
-	connect(m_manager, &QXmppRegistrationManager::passwordChangeFailed, kaidan, &Kaidan::passwordChangeFailed);
+	connect(m_manager, &QXmppRegistrationManager::passwordChangeFailed, Kaidan::instance(), &Kaidan::passwordChangeFailed);
 	connect(m_manager, &QXmppRegistrationManager::passwordChangeFailed, this, &RegistrationManager::handlePasswordChangeFailed);
 }
 
@@ -120,14 +120,14 @@ void RegistrationManager::handlePasswordChangeSucceeded(const QString &newPasswo
 	    QString::fromUtf8(newPassword.toUtf8().toBase64())
 	);
 
-	emit kaidan->passiveNotificationRequested(
+	emit Kaidan::instance()->passiveNotificationRequested(
 	    tr("Password changed successfully.")
 	);
 }
 
 void RegistrationManager::handlePasswordChangeFailed(const QXmppStanza::Error &error)
 {
-	emit kaidan->passiveNotificationRequested(
+	emit Kaidan::instance()->passiveNotificationRequested(
 	    tr("Failed to change password: %1").arg(error.text())
 	);
 }
@@ -151,7 +151,7 @@ void RegistrationManager::handleRegistrationFormReceived(const QXmppRegisterIq &
 	m_dataFormModel = new RegistrationDataFormModel(newDataForm);
 	m_dataFormModel->setIsFakeForm(isFakeForm);
 	// Move to the main thread, so QML can connect signals to the model.
-	m_dataFormModel->moveToThread(kaidan->thread());
+	m_dataFormModel->moveToThread(Kaidan::instance()->thread());
 
 	// Add the attached Bits of Binary data to the corresponding image provider.
 	const auto bobDataList = iq.bitsOfBinaryData();
@@ -160,16 +160,16 @@ void RegistrationManager::handleRegistrationFormReceived(const QXmppRegisterIq &
 		m_contentIdsToRemove << bobData.cid();
 	}
 
-	emit kaidan->registrationFormReceived(m_dataFormModel);
+	emit Kaidan::instance()->registrationFormReceived(m_dataFormModel);
 }
 
 void RegistrationManager::handleRegistrationSucceeded()
 {
-	kaidan->setJid(m_dataFormModel->extractUsername().append('@').append(m_client->configuration().domain()));
-	kaidan->setPassword(m_dataFormModel->extractPassword());
+	Kaidan::instance()->setJid(m_dataFormModel->extractUsername().append('@').append(m_client->configuration().domain()));
+	Kaidan::instance()->setPassword(m_dataFormModel->extractPassword());
 
-	kaidan->mainDisconnect();
-	kaidan->mainConnect();
+	Kaidan::instance()->mainDisconnect();
+	Kaidan::instance()->mainConnect();
 
 	cleanUpLastForm();
 	m_dataFormModel = new RegistrationDataFormModel();
@@ -212,7 +212,7 @@ void RegistrationManager::handleRegistrationFailed(const QXmppStanza::Error &err
 		break;
 	}
 
-	emit kaidan->registrationFailed(quint8(registrationError), error.text());
+	emit Kaidan::instance()->registrationFailed(quint8(registrationError), error.text());
 }
 
 QXmppDataForm RegistrationManager::extractFormFromRegisterIq(const QXmppRegisterIq& iq, bool &isFakeForm)

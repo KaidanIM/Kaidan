@@ -54,17 +54,16 @@
 #include "UploadManager.h"
 #include "VCardManager.h"
 
-ClientWorker::ClientWorker(Caches *caches, Kaidan *kaidan, bool enableLogging, QObject* parent)
-	: QObject(parent), m_caches(caches), m_kaidan(kaidan), m_enableLogging(enableLogging), m_isApplicationWindowActive(true)
+ClientWorker::ClientWorker(Caches *caches, bool enableLogging, QObject* parent)
+	: QObject(parent), m_caches(caches), m_enableLogging(enableLogging), m_isApplicationWindowActive(true)
 {
 	m_client = new QXmppClient(this);
 	m_logger = new LogHandler(m_client, this);
 	m_logger->enableLogging(enableLogging);
 	m_vCardManager = new VCardManager(m_client, caches->avatarStorage, this);
-	m_registrationManager = new RegistrationManager(kaidan, this, m_client, caches->settings);
-	m_rosterManager = new RosterManager(kaidan, m_client,  caches->rosterModel,
-	                                    caches->avatarStorage, m_vCardManager, this);
-	m_msgHandler = new MessageHandler(kaidan, this, m_client, caches->msgModel);
+	m_registrationManager = new RegistrationManager(this, m_client, caches->settings);
+	m_rosterManager = new RosterManager(m_client,  caches->rosterModel, caches->avatarStorage, m_vCardManager, this);
+	m_msgHandler = new MessageHandler(this, m_client, caches->msgModel);
 	m_discoManager = new DiscoveryManager(m_client, this);
 	m_uploadManager = new UploadManager(m_client, m_rosterManager, this);
 	m_downloadManager = new DownloadManager(caches->transferCache, caches->msgModel, this);
@@ -83,19 +82,19 @@ ClientWorker::ClientWorker(Caches *caches, Kaidan *kaidan, bool enableLogging, Q
 	versionManager->setClientOs(QSysInfo::prettyProductName());
 
 	// Inform the client worker when the application window becomes active or inactive.
-	connect(kaidan, &Kaidan::applicationWindowActiveChanged, this, &ClientWorker::setIsApplicationWindowActive);
+	connect(Kaidan::instance(), &Kaidan::applicationWindowActiveChanged, this, &ClientWorker::setIsApplicationWindowActive);
 
 	// Reduce the network traffic when the application window is inactive.
-	connect(kaidan, &Kaidan::applicationWindowActiveChanged, m_client, &QXmppClient::setActive);
+	connect(Kaidan::instance(), &Kaidan::applicationWindowActiveChanged, m_client, &QXmppClient::setActive);
 
 	// account deletion
-	connect(kaidan, &Kaidan::deleteAccountFromClient, this, &ClientWorker::deleteAccountFromClient);
-	connect(kaidan, &Kaidan::deleteAccountFromClientAndServer, this, &ClientWorker::deleteAccountFromClientAndServer);
-	connect(this, &ClientWorker::deleteAccountFromDatabase, kaidan->rosterDb(), &RosterDb::clearAll);
-	connect(this, &ClientWorker::deleteAccountFromDatabase, kaidan->messageDb(), &MessageDb::removeAllMessages);
+	connect(Kaidan::instance(), &Kaidan::deleteAccountFromClient, this, &ClientWorker::deleteAccountFromClient);
+	connect(Kaidan::instance(), &Kaidan::deleteAccountFromClientAndServer, this, &ClientWorker::deleteAccountFromClientAndServer);
+	connect(this, &ClientWorker::deleteAccountFromDatabase, Kaidan::instance()->rosterDb(), &RosterDb::clearAll);
+	connect(this, &ClientWorker::deleteAccountFromDatabase, Kaidan::instance()->messageDb(), &MessageDb::removeAllMessages);
 
-	connect(kaidan, &Kaidan::changePassword, this, &ClientWorker::changePassword);
-	connect(kaidan, &Kaidan::changeDisplayName, this, &ClientWorker::changeDisplayName);
+	connect(Kaidan::instance(), &Kaidan::changePassword, this, &ClientWorker::changePassword);
+	connect(Kaidan::instance(), &Kaidan::changeDisplayName, this, &ClientWorker::changeDisplayName);
 }
 
 VCardManager *ClientWorker::vCardManager() const
@@ -114,7 +113,7 @@ void ClientWorker::main()
 	// Please do not use that deprecated method for Kaidan.
 	qsrand(time(nullptr));
 
-	connect(m_client, &QXmppClient::stateChanged, m_kaidan, &Kaidan::setConnectionState);
+	connect(m_client, &QXmppClient::stateChanged, Kaidan::instance(), &Kaidan::setConnectionState);
 
 	connect(m_client, &QXmppClient::connected, this, &ClientWorker::onConnected);
 	connect(m_client, &QXmppClient::disconnected, this, &ClientWorker::onDisconnected);
@@ -203,7 +202,7 @@ void ClientWorker::handleAccountDeletedFromServer()
 
 void ClientWorker::handleAccountDeletionFromServerFailed(const QXmppStanza::Error &error)
 {
-	emit m_kaidan->passiveNotificationRequested(tr("Your account could not be deleted from the server. Therefore, it was also not removed from this app: %1").arg(error.text()));
+	emit Kaidan::instance()->passiveNotificationRequested(tr("Your account could not be deleted from the server. Therefore, it was also not removed from this app: %1").arg(error.text()));
 
 	m_isAccountToBeDeletedFromClientAndServer = false;
 
@@ -248,7 +247,7 @@ void ClientWorker::onConnected()
 
 	// Emit signal, that logging in with these credentials has worked for the first time
 	if (m_creds.isFirstTry)
-		emit m_kaidan->loggedInWithNewCredentials();
+		emit Kaidan::instance()->loggedInWithNewCredentials();
 
 	// accept credentials and save them
 	m_creds.isFirstTry = false;

@@ -39,14 +39,12 @@
 #include <QXmppRosterManager.h>
 #include <QXmppUtils.h>
 
-RosterManager::RosterManager(Kaidan *kaidan,
-                             QXmppClient *client,
+RosterManager::RosterManager(QXmppClient *client,
                              RosterModel *model,
                              AvatarFileStorage *avatarStorage,
                              VCardManager *vCardManager,
                              QObject *parent)
-    : QObject(parent),
-	  m_kaidan(kaidan),
+	: QObject(parent),
 	  m_client(client),
 	  m_model(model),
 	  m_avatarStorage(avatarStorage),
@@ -73,11 +71,11 @@ RosterManager::RosterManager(Kaidan *kaidan,
 	connect(m_manager, &QXmppRosterManager::itemRemoved, model, &RosterModel::removeItemRequested);
 
 	connect(m_manager, &QXmppRosterManager::subscriptionReceived,
-	        this, [kaidan] (const QString &jid) {
+			this, [] (const QString &jid) {
 		// emit signal to ask user
-		emit kaidan->subscriptionRequestReceived(jid, QString());
+		emit Kaidan::instance()->subscriptionRequestReceived(jid, QString());
 	});
-	connect(kaidan, &Kaidan::subscriptionRequestAnswered,
+	connect(Kaidan::instance(), &Kaidan::subscriptionRequestAnswered,
 	        this, [=] (QString jid, bool accepted) {
 		if (accepted) {
 			m_manager->acceptSubscription(jid);
@@ -92,9 +90,9 @@ RosterManager::RosterManager(Kaidan *kaidan,
 	});
 
 	// user actions
-	connect(kaidan, &Kaidan::addContact, this, &RosterManager::addContact);
-	connect(kaidan, &Kaidan::removeContact, this, &RosterManager::removeContact);
-	connect(kaidan, &Kaidan::renameContact, this, &RosterManager::renameContact);
+	connect(Kaidan::instance(), &Kaidan::addContact, this, &RosterManager::addContact);
+	connect(Kaidan::instance(), &Kaidan::removeContact, this, &RosterManager::removeContact);
+	connect(Kaidan::instance(), &Kaidan::renameContact, this, &RosterManager::renameContact);
 }
 
 void RosterManager::populateRoster()
@@ -121,7 +119,7 @@ void RosterManager::addContact(const QString &jid, const QString &name, const QS
 		m_manager->addItem(jid, name);
 		m_manager->subscribe(jid, msg);
 	} else {
-		emit m_kaidan->passiveNotificationRequested(
+		emit Kaidan::instance()->passiveNotificationRequested(
 			tr("Could not add contact, as a result of not being connected.")
 		);
 		qWarning() << "[client] [RosterManager] Could not add contact, as a result of "
@@ -135,7 +133,7 @@ void RosterManager::removeContact(const QString &jid)
 		m_manager->unsubscribe(jid);
 		m_manager->removeItem(jid);
 	} else {
-		emit m_kaidan->passiveNotificationRequested(
+		emit Kaidan::instance()->passiveNotificationRequested(
 			tr("Could not remove contact, as a result of not being connected.")
 		);
 		qWarning() << "[client] [RosterManager] Could not remove contact, as a result of "
@@ -148,7 +146,7 @@ void RosterManager::renameContact(const QString &jid, const QString &newContactN
 	if (m_client->state() == QXmppClient::ConnectedState) {
 		m_manager->renameItem(jid, newContactName);
 	} else {
-		emit m_kaidan->passiveNotificationRequested(
+		emit Kaidan::instance()->passiveNotificationRequested(
 			tr("Could not rename contact, as a result of not being connected.")
 		);
 		qWarning() << "[client] [RosterManager] Could not rename contact, as a result of "

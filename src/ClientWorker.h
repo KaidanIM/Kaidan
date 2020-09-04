@@ -85,8 +85,8 @@ public:
 	Q_ENUM(ConnectionError)
 
 	struct Caches {
-		Caches(Kaidan *kaidan, RosterDb *rosterDb, MessageDb *msgDb, QObject *parent = nullptr)
-		        : msgModel(new MessageModel(kaidan, msgDb, parent)),
+		Caches(RosterDb *rosterDb, MessageDb *msgDb, QObject *parent = nullptr)
+				: msgModel(new MessageModel(msgDb, parent)),
 		          rosterModel(new RosterModel(rosterDb, parent)),
 		          avatarStorage(new AvatarFileStorage(parent)),
 		          serverFeaturesCache(new ServerFeaturesCache(parent)),
@@ -121,11 +121,10 @@ public:
 
 	/**
 	 * @param caches All caches running in the main thread for communication with the UI.
-	 * @param kaidan Main back-end class, running in the main thread.
 	 * @param enableLogging If logging of the XMPP stream should be done.
 	 * @param parent Optional QObject-based parent.
 	 */
-	ClientWorker(Caches *caches, Kaidan *kaidan, bool enableLogging, QObject *parent = nullptr);
+	ClientWorker(Caches *caches, bool enableLogging, QObject *parent = nullptr);
 
 	VCardManager *vCardManager() const;
 
@@ -272,8 +271,6 @@ private:
 	QString generateJidResourceWithRandomSuffix(const QString &jidResourcePrefix, unsigned int length = 4) const;
 
 	Caches *m_caches;
-
-	Kaidan *m_kaidan;
 	QXmppClient *m_client;
 	LogHandler *m_logger;
 	Credentials m_creds;

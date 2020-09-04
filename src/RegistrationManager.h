@@ -64,7 +64,7 @@ public:
 	};
 	Q_ENUM(RegistrationError)
 
-	RegistrationManager(Kaidan *kaidan, ClientWorker *clientWorker, QXmppClient *client, QSettings *settings);
+	RegistrationManager(ClientWorker *clientWorker, QXmppClient *client, QSettings *settings);
 
 	/**
 	 * Sets whether a registration is requested for the next time when the client connects to the server.
@@ -145,7 +145,6 @@ private:
 	 */
 	void cleanUpLastForm();
 
-	Kaidan *kaidan;
 	ClientWorker *m_clientWorker;
 	QXmppClient *m_client;
 	QSettings *settings;

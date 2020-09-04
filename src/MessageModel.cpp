@@ -42,9 +42,8 @@ constexpr int MAX_CORRECTION_MESSAGE_COUNT_DEPTH = 20;
 // defines that the message is suitable for correction only if it has ben sent not earlier than N days ago
 constexpr int MAX_CORRECTION_MESSAGE_DAYS_DEPTH = 2;
 
-MessageModel::MessageModel(Kaidan *kaidan, MessageDb *msgDb, QObject *parent)
+MessageModel::MessageModel(MessageDb *msgDb, QObject *parent)
 	: QAbstractListModel(parent),
-	  kaidan(kaidan),
 	  msgDb(msgDb)
 {
 	connect(msgDb, &MessageDb::messagesFetched,
@@ -64,7 +63,7 @@ MessageModel::MessageModel(Kaidan *kaidan, MessageDb *msgDb, QObject *parent)
 
 	connect(this, &MessageModel::setMessageDeliveryStateRequested,
 	        this, &MessageModel::setMessageDeliveryState);
-	connect(kaidan, &Kaidan::correctMessage,
+	connect(Kaidan::instance(), &Kaidan::correctMessage,
 	        this, &MessageModel::correctMessage);
 }
 
@@ -183,7 +182,7 @@ QVariant MessageModel::data(const QModelIndex &index, int role) const
 
 void MessageModel::fetchMore(const QModelIndex &)
 {
-	emit msgDb->fetchMessagesRequested(kaidan->jid(), m_currentChatJid, m_messages.size());
+	emit msgDb->fetchMessagesRequested(Kaidan::instance()->jid(), m_currentChatJid, m_messages.size());
 }
 
 bool MessageModel::canFetchMore(const QModelIndex &) const
@@ -241,7 +240,7 @@ void MessageModel::handleMessagesFetched(const QVector<Message> &msgs)
 
 	beginInsertRows(QModelIndex(), rowCount(), rowCount() + msgs.length() - 1);
 	for (auto msg : msgs) {
-		msg.setSentByMe(kaidan->jid() == msg.from());
+		msg.setSentByMe(Kaidan::instance()->jid() == msg.from());
 		processMessage(msg);
 		m_messages << msg;
 	}
@@ -373,7 +372,7 @@ void MessageModel::processMessage(Message &msg)
 
 void MessageModel::sendPendingMessages()
 {
-	emit msgDb->fetchPendingMessagesRequested(kaidan->jid());
+	emit msgDb->fetchPendingMessagesRequested(Kaidan::instance()->jid());
 }
 
 void MessageModel::correctMessage(const QString &msgId, const QString &message)
@@ -396,7 +395,7 @@ void MessageModel::correctMessage(const QString &msgId, const QString &message)
 			}
 			msg.setDeliveryState(Enums::DeliveryState::Pending);
 
-			if (ConnectionState(kaidan->connectionState()) == Enums::ConnectionState::StateConnected) {
+			if (ConnectionState(Kaidan::instance()->connectionState()) == Enums::ConnectionState::StateConnected) {
 				// the trick with the time is important for the servers
 				// this way they can tell which version of the message is the latest
 				Message copy = msg;

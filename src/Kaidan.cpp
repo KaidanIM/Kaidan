@@ -77,7 +77,7 @@ Kaidan::Kaidan(QGuiApplication *app, bool enableLogging, QObject *parent)
 	m_dbThrd->start();
 
 	// Caching components
-	m_caches = new ClientWorker::Caches(this, m_rosterDb, m_msgDb, this);
+	m_caches = new ClientWorker::Caches(m_rosterDb, m_msgDb, this);
 	// Connect the avatar changed signal of the avatarStorage with the NOTIFY signal
 	// of the Q_PROPERTY for the avatar storage (so all avatars are updated in QML)
 	connect(m_caches->avatarStorage, &AvatarFileStorage::avatarIdsChanged,
@@ -104,7 +104,7 @@ Kaidan::Kaidan(QGuiApplication *app, bool enableLogging, QObject *parent)
 	// Start ClientWorker on new thread
 	//
 
-	m_client = new ClientWorker(m_caches, this, enableLogging);
+	m_client = new ClientWorker(m_caches, enableLogging);
 	m_client->setCredentials(m_creds);
 	m_client->moveToThread(m_cltThrd);
 

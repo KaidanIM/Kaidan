@@ -366,7 +366,6 @@ signals:
 	/**
 	 * Correct the last message
 	 *
-	 * To get/check the last message id, use `kaidan.messageModel.lastMessageId(jid)`
 	 */
 	void correctMessage(const QString &msgId, const QString &message);
 

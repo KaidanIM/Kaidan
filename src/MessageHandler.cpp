@@ -45,11 +45,11 @@
 #include "MessageModel.h"
 #include "MediaUtils.h"
 
-MessageHandler::MessageHandler(Kaidan *kaidan, ClientWorker *clientWorker, QXmppClient *client, MessageModel *model)
-    : QObject(clientWorker), kaidan(kaidan), m_clientWorker(clientWorker), client(client), model(model)
+MessageHandler::MessageHandler(ClientWorker *clientWorker, QXmppClient *client, MessageModel *model)
+	: QObject(clientWorker), m_clientWorker(clientWorker), client(client), model(model)
 {
 	connect(client, &QXmppClient::messageReceived, this, &MessageHandler::handleMessage);
-	connect(kaidan, &Kaidan::sendMessage, this, &MessageHandler::sendMessage);
+	connect(Kaidan::instance(), &Kaidan::sendMessage, this, &MessageHandler::sendMessage);
 	connect(model, &MessageModel::sendCorrectedMessageRequested, this, &MessageHandler::sendCorrectedMessage);
 
 	client->addExtension(&receiptManager);
@@ -149,7 +149,7 @@ void MessageHandler::handleMessage(const QXmppMessage &msg)
 	//  * The message was not sent by the user from another resource and received via Message Carbons.
 	//  * Notifications from the chat partner are not muted.
 	//  * The corresponding chat is not opened while the application window is active.
-	if (!message.sentByMe() && !kaidan->notificationsMuted(contactJid) && (model->currentChatJid() != message.from() || !m_clientWorker->isApplicationWindowActive()))
+	if (!message.sentByMe() && !Kaidan::instance()->notificationsMuted(contactJid) && (model->currentChatJid() != message.from() || !m_clientWorker->isApplicationWindowActive()))
 		emit m_clientWorker->showMessageNotificationRequested(contactJid, contactName, msg.body());
 }
 
@@ -188,7 +188,7 @@ void MessageHandler::sendCorrectedMessage(const Message &msg)
 	QString errorText;
 	if (!client->sendPacket(msg)) {
 		// TODO store in the database only error codes, assign text messages right in the QML
-		emit kaidan->passiveNotificationRequested(
+		emit Kaidan::instance()->passiveNotificationRequested(
 			tr("Message correction was not successful."));
 		errorText = "Message correction was not successful.";
 		deliveryState = Enums::DeliveryState::Error;
@@ -235,7 +235,7 @@ void MessageHandler::sendPendingMessage(const Message &message)
 			// The error message of the message is saved untranslated. To make
 			// translation work in the UI, the tr() call of the passive
 			// notification must contain exactly the same string.
-			emit kaidan->passiveNotificationRequested(tr("Message could not be sent."));
+			emit Kaidan::instance()->passiveNotificationRequested(tr("Message could not be sent."));
 			emit model->setMessageDeliveryStateRequested(message.id(), Enums::DeliveryState::Error, "Message could not be sent.");
 		}
 	}

@@ -47,7 +47,7 @@ class RosterManager : public QObject
 	Q_OBJECT
 
 public:
-	RosterManager(Kaidan *kaidan, QXmppClient *client, RosterModel *rosterModel,
+	RosterManager(QXmppClient *client, RosterModel *rosterModel,
 				  AvatarFileStorage *avatarStorage, VCardManager *vCardManager,
 	              QObject *parent = nullptr);
 
@@ -60,7 +60,6 @@ private slots:
 	void populateRoster();
 
 private:
-	Kaidan *m_kaidan;
 	QXmppClient *m_client;
 	RosterModel *m_model;
 	AvatarFileStorage *m_avatarStorage;

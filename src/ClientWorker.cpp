@@ -188,7 +188,7 @@ void ClientWorker::deleteAccountFromClient()
 	// Otherwise, disconnect first and delete the account afterwards.
 	if (!m_client->isAuthenticated()) {
 		emit deleteAccountFromDatabase();
-		m_kaidan->deleteCredentials();
+		QMetaObject::invokeMethod(Kaidan::instance(), &Kaidan::deleteCredentials);
 		m_isAccountToBeDeletedFromClient = false;
 	} else {
 		m_isAccountToBeDeletedFromClient = true;

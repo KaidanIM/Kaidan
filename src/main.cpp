@@ -306,17 +306,17 @@ Q_DECL_EXPORT int main(int argc, char *argv[])
 	//
 	// Kaidan back-end
 	//
-	auto *kaidan = new Kaidan(&app, !parser.isSet("disable-xml-log"));
+	Kaidan kaidan(&app, !parser.isSet("disable-xml-log"));
 
 #if !defined(Q_OS_IOS) && !defined(Q_OS_ANDROID)
 	// receive messages from other instances of Kaidan
 	Kaidan::connect(&app, &SingleApplication::receivedMessage,
-	                kaidan, &Kaidan::receiveMessage);
+	                &kaidan, &Kaidan::receiveMessage);
 #endif
 
 	// open the XMPP-URI/link (if given)
 	if (const auto positionalArguments = parser.positionalArguments(); !positionalArguments.isEmpty())
-		kaidan->addOpenUri(positionalArguments.first());
+		kaidan.addOpenUri(positionalArguments.first());
 
 	//
 	// QML-GUI
@@ -393,8 +393,9 @@ Q_DECL_EXPORT int main(int argc, char *argv[])
 	qmlRegisterSingletonType<QmlUtils>(APPLICATION_ID, 1, 0, "Utils", [](QQmlEngine *, QJSEngine *) {
 		return static_cast<QObject*>(QmlUtils::instance());
 	});
-	qmlRegisterSingletonType<Kaidan>(APPLICATION_ID, 1, 0, "Kaidan", [](QQmlEngine *, QJSEngine *) {
-		return static_cast<QObject*>(Kaidan::instance());
+	qmlRegisterSingletonType<Kaidan>(APPLICATION_ID, 1, 0, "Kaidan", [&](QQmlEngine *, QJSEngine *) {
+		engine.setObjectOwnership(&kaidan, QQmlEngine::CppOwnership);
+		return static_cast<QObject*>(&kaidan);
 	});
 	qmlRegisterSingletonType<GuiStyle>(APPLICATION_ID, 1, 0, "Style", [](QQmlEngine *, QJSEngine *) {
 		return static_cast<QObject *>(new GuiStyle(QCoreApplication::instance()));

@@ -412,9 +412,10 @@ ChatPageBase {
 		visible: width > 0
 		width: messageListView.atYEnd ? 0 : 50
 		height: messageListView.atYEnd ? 0 : 50
-		anchors.horizontalCenter: parent.horizontalCenter
+		anchors.right: parent.right
 		anchors.bottom: parent.bottom
 		anchors.bottomMargin: sendingPane.height + 5
+		anchors.rightMargin: root.flickable.Controls.ScrollBar.vertical.implicitWidth + 5
 		icon.name: "go-down"
 		onClicked: messageListView.positionViewAtIndex(0, ListView.Center)
 
@@ -515,6 +516,24 @@ ChatPageBase {
 				}
 
 				sendingPane.messageArea.insert(0, quotedText)
+			}
+		}
+
+		// Everything is upside down, looks like a footer
+		header: ColumnLayout {
+			anchors.left: parent.left
+			anchors.right: parent.right
+			height: stateLabel.text ? 20 : 0
+
+			Controls.Label {
+				id: stateLabel
+				Layout.alignment: Qt.AlignCenter
+				Layout.maximumWidth: parent.width
+				height: !text ? 20 : 0
+				topPadding: text ? 10 : 0
+
+				text: Utils.chatStateDescription(root.chatName, MessageModel.chatState)
+				elide: Qt.ElideMiddle
 			}
 		}
 	}

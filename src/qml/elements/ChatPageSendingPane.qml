@@ -118,7 +118,16 @@ Controls.Pane {
 				Layout.fillWidth: true
 				verticalAlignment: TextEdit.AlignVCenter
 				state: "compose"
-				onTextChanged: handleShortcuts()
+				onTextChanged: {
+					handleShortcuts()
+
+					// Skip events in which the text field was emptied (probably automatically after sending)
+					if (text) {
+						MessageModel.sendChatState(ChatState.Composing)
+					} else {
+						MessageModel.sendChatState(ChatState.Active)
+					}
+				}
 
 				states: [
 					State {
@@ -197,8 +206,7 @@ Controls.Pane {
 
 		// Send the message.
 		if (messageArea.state === "compose") {
-			Kaidan.client.messageHandler.sendMessageRequested(
-				MessageModel.currentChatJid,
+			MessageModel.sendMessage(
 				messageArea.text,
 				chatPage.isWritingSpoiler,
 				spoilerHintField.text

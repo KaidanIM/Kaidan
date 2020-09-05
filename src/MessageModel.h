@@ -30,17 +30,42 @@
 
 #pragma once
 
+// Qt
 #include <QAbstractListModel>
+// QXmpp
+#include <QXmppMessage.h>
+// Kaidan
 #include "Message.h"
 
+class QTimer;
 class Kaidan;
+
+class ChatState : public QObject
+{
+	Q_OBJECT
+
+public:
+	enum State {
+		None = QXmppMessage::None,
+		Active = QXmppMessage::Active,
+		Inactive = QXmppMessage::Inactive,
+		Gone = QXmppMessage::Gone,
+		Composing = QXmppMessage::Composing,
+		Paused = QXmppMessage::Paused
+	};
+	Q_ENUM(State)
+};
+
+Q_DECLARE_METATYPE(ChatState::State)
 
 class MessageModel : public QAbstractListModel
 {
 	Q_OBJECT
 	Q_PROPERTY(QString currentChatJid READ currentChatJid WRITE setCurrentChatJid NOTIFY currentChatJidChanged)
+	Q_PROPERTY(QXmppMessage::State chatState READ chatState NOTIFY chatStateChanged)
 
 public:
+	// Basically copy from QXmpp, but we need to expose this to QML
 	enum MessageRoles {
 		Timestamp = Qt::UserRole + 1,
 		Id,
@@ -81,6 +106,8 @@ public:
 	QString currentChatJid();
 	void setCurrentChatJid(const QString &currentChatJid);
 
+	Q_INVOKABLE void sendMessage(const QString &body, bool isSpoiler, const QString &spoilerHint);
+
 	Q_INVOKABLE bool canCorrectMessage(int index) const;
 
 	/**
@@ -117,6 +144,17 @@ public:
 	 */
 	Q_INVOKABLE void sendPendingMessages();
 
+	/**
+	  * Returns the current chat state
+	  */
+	QXmppMessage::State chatState() const;
+
+	/**
+	  * Sends the chat state notification
+	  */
+	void sendChatState(QXmppMessage::State state);
+	Q_INVOKABLE void sendChatState(ChatState::State state);
+
 signals:
 	void currentChatJidChanged(const QString &currentChatJid);
 
@@ -128,6 +166,9 @@ signals:
 	void sendCorrectedMessageRequested(const Message &msg);
 	void updateMessageInDatabaseRequested(const QString &id,
 	                                      const std::function<void (Message &)> &updateMsg);
+	void chatStateChanged();
+	void sendChatStateRequested(const QString &bareJid, QXmppMessage::State state);
+	void handleChatStateRequested(const QString &bareJid, QXmppMessage::State state);
 
 private slots:
 	void handleMessagesFetched(const QVector<Message> &m_messages);
@@ -137,6 +178,8 @@ private slots:
 	                   const std::function<void (Message &)> &updateMsg);
 
 	void setMessageDeliveryState(const QString &msgId, Enums::DeliveryState state, const QString &errText = QString());
+
+	void handleChatState(const QString &bareJid, QXmppMessage::State state);
 
 private:
 	void clearAll();
@@ -151,6 +194,14 @@ private:
 	QVector<Message> m_messages;
 	QString m_currentChatJid;
 	bool m_fetchedAll = false;
+
+	QXmppMessage::State m_chatPartnerChatState = QXmppMessage::State::None;
+	QXmppMessage::State m_ownChatState = QXmppMessage::State::None;
+	QTimer *m_composingTimer;
+	QTimer *m_stateTimeoutTimer;
+	QTimer *m_inactiveTimer;
+	QTimer *m_chatPartnerChatStateTimeout;
+	QMap<QString, QXmppMessage::State> m_chatStateCache;
 
 	static MessageModel *s_instance;
 };

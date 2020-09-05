@@ -55,6 +55,8 @@ MessageHandler::MessageHandler(ClientWorker *clientWorker, QXmppClient *client, 
 	connect(this, &MessageHandler::sendMessageRequested, this, &MessageHandler::sendMessage);
 	connect(MessageModel::instance(), &MessageModel::sendCorrectedMessageRequested,
 	        this, &MessageHandler::sendCorrectedMessage);
+	connect(MessageModel::instance(), &MessageModel::sendChatStateRequested,
+	        this, &MessageHandler::sendChatState);
 
 	client->addExtension(&m_receiptManager);
 	connect(&m_receiptManager, &QXmppMessageReceiptManager::messageDelivered,
@@ -95,6 +97,11 @@ void MessageHandler::handleMessage(const QXmppMessage &msg)
 		emit MessageModel::instance()->setMessageDeliveryStateRequested(
 				msg.id(), Enums::DeliveryState::Error, msg.error().text());
 		return;
+	}
+
+	if (msg.state() != QXmppMessage::State::None) {
+		emit MessageModel::instance()->handleChatStateRequested(
+				QXmppUtils::jidToBareJid(msg.from()), msg.state());
 	}
 
 	if (msg.body().isEmpty() && msg.outOfBandUrl().isEmpty())
@@ -189,6 +196,14 @@ void MessageHandler::sendMessage(const QString& toJid,
 
 	emit MessageModel::instance()->addMessageRequested(msg);
 	sendPendingMessage(msg);
+}
+
+void MessageHandler::sendChatState(const QString &toJid, const QXmppMessage::State state)
+{
+	QXmppMessage message;
+	message.setTo(toJid);
+	message.setState(state);
+	m_client->sendPacket(message);
 }
 
 void MessageHandler::sendCorrectedMessage(const Message &msg)

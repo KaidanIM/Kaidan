@@ -43,7 +43,6 @@ class Database;
 class RosterDb;
 class MessageDb;
 class QXmppClient;
-class QXmppVersionIq;
 
 /**
  * @class Kaidan Kaidan's Back-End Class

@@ -30,13 +30,24 @@
 
 #include "MessageModel.h"
 
+#include <chrono>
+
+// Qt
+#include <QTimer>
 // QXmpp
 #include <QXmppUtils.h>
 // Kaidan
 #include "AccountManager.h"
 #include "Kaidan.h"
 #include "MessageDb.h"
+#include "MessageHandler.h"
 #include "QmlUtils.h"
+
+using namespace std::chrono_literals;
+
+constexpr auto PAUSED_TYPING_TIMEOUT = 10s;
+constexpr auto ACTIVE_TIMEOUT = 2min;
+constexpr auto TYPING_TIMEOUT = 2s;
 
 // defines that the message is suitable for correction only if it is among the N latest messages
 constexpr int MAX_CORRECTION_MESSAGE_COUNT_DEPTH = 20;
@@ -51,10 +62,47 @@ MessageModel *MessageModel::instance()
 }
 
 MessageModel::MessageModel(QObject *parent)
-	: QAbstractListModel(parent)
+	: QAbstractListModel(parent),
+	  m_composingTimer(new QTimer(this)),
+	  m_stateTimeoutTimer(new QTimer(this)),
+	  m_inactiveTimer(new QTimer(this)),
+	  m_chatPartnerChatStateTimeout(new QTimer(this))
 {
 	Q_ASSERT(!s_instance);
 	s_instance = this;
+
+	// Timer to set state to paused
+	m_composingTimer->setSingleShot(true);
+	m_composingTimer->setInterval(TYPING_TIMEOUT);
+	m_composingTimer->callOnTimeout(this, [this] {
+		sendChatState(QXmppMessage::Paused);
+
+		// 10 seconds after user stopped typing, remove "paused" state
+		m_stateTimeoutTimer->start(PAUSED_TYPING_TIMEOUT);
+	});
+
+	// Timer to reset typing-related notifications like paused and composing to active
+	m_stateTimeoutTimer->setSingleShot(true);
+	m_stateTimeoutTimer->callOnTimeout(this, [this] {
+		sendChatState(QXmppMessage::Active);
+	});
+
+	// Timer to time out active state
+	m_inactiveTimer->setSingleShot(true);
+	m_inactiveTimer->setInterval(ACTIVE_TIMEOUT);
+	m_inactiveTimer->callOnTimeout(this, [this] {
+		sendChatState(QXmppMessage::Inactive);
+	});
+
+	// Timer to reset the chat partners state
+	// if they lost connection while a state other then gone was active
+	m_chatPartnerChatStateTimeout->setSingleShot(true);
+	m_chatPartnerChatStateTimeout->setInterval(ACTIVE_TIMEOUT);
+	m_chatPartnerChatStateTimeout->callOnTimeout(this, [this] {
+		m_chatPartnerChatState = QXmppMessage::Gone;
+		m_chatStateCache.insert(m_currentChatJid, QXmppMessage::Gone);
+		emit chatStateChanged();
+	});
 
 	connect(MessageDb::instance(), &MessageDb::messagesFetched,
 	        this, &MessageModel::handleMessagesFetched);
@@ -73,6 +121,9 @@ MessageModel::MessageModel(QObject *parent)
 
 	connect(this, &MessageModel::setMessageDeliveryStateRequested,
 		this, &MessageModel::setMessageDeliveryState);
+
+	connect(this, &MessageModel::handleChatStateRequested,
+		this, &MessageModel::handleChatState);
 }
 
 MessageModel::~MessageModel() = default;
@@ -209,11 +260,36 @@ void MessageModel::setCurrentChatJid(const QString &currentChatJid)
 	if (currentChatJid == m_currentChatJid)
 		return;
 
+	// Send gone state to old chat partner
+	sendChatState(QXmppMessage::State::Gone);
 	m_currentChatJid = currentChatJid;
 	m_fetchedAll = false;
 
+	// Reset chat states
+	m_ownChatState = QXmppMessage::State::None;
+	m_chatPartnerChatState = m_chatStateCache.value(currentChatJid, QXmppMessage::State::Gone);
+	m_composingTimer->stop();
+	m_stateTimeoutTimer->stop();
+	m_inactiveTimer->stop();
+	m_chatPartnerChatStateTimeout->stop();
+
+	// Send active state to new chat partner
+	sendChatState(QXmppMessage::State::Active);
+
 	emit currentChatJidChanged(currentChatJid);
 	clearAll();
+}
+
+void MessageModel::sendMessage(const QString &body, bool isSpoiler, const QString &spoilerHint)
+{
+	emit Kaidan::instance()->client()->messageHandler()->sendMessageRequested(
+				currentChatJid(), body, isSpoiler, spoilerHint);
+
+	m_composingTimer->stop();
+	m_stateTimeoutTimer->stop();
+
+	// Reset composing chat state after message is sent
+	sendChatState(QXmppMessage::State::Active);
 }
 
 bool MessageModel::canCorrectMessage(int index) const
@@ -384,8 +460,48 @@ void MessageModel::sendPendingMessages()
 	emit MessageDb::instance()->fetchPendingMessagesRequested(AccountManager::instance()->jid());
 }
 
+QXmppMessage::State MessageModel::chatState() const
+{
+	return m_chatPartnerChatState;
+}
+
+void MessageModel::sendChatState(QXmppMessage::State state)
+{
+	// Handle some special cases
+	switch(QXmppMessage::State(state)) {
+	case QXmppMessage::State::Composing:
+		// Restart timer if new character was typed in
+		m_composingTimer->start();
+		break;
+	case QXmppMessage::State::Active:
+		// Start inactive timer when active was sent,
+		// so we can set the state to inactive two minutes later
+		m_inactiveTimer->start();
+		m_composingTimer->stop();
+		break;
+	default:
+		break;
+	}
+
+	// Only send if the state changed, filter duplicated
+	if (state != m_ownChatState) {
+		m_ownChatState = state;
+		emit sendChatStateRequested(m_currentChatJid, state);
+	}
+}
+
+void MessageModel::sendChatState(ChatState::State state)
+{
+	sendChatState(QXmppMessage::State(state));
+}
+
 void MessageModel::correctMessage(const QString &msgId, const QString &message)
 {
+	// Reset composing chat state
+	m_composingTimer->stop();
+	m_stateTimeoutTimer->stop();
+	sendChatState(QXmppMessage::State::Active);
+
 	const auto hasCorrectId = [&msgId](const Message& msg) {
 		return msg.id() == msgId;
 	};
@@ -421,5 +537,16 @@ void MessageModel::correctMessage(const QString &msgId, const QString &message)
 		emit updateMessageInDatabaseRequested(msgId, [=] (Message &localMessage) {
 			localMessage = msg;
 		});
+	}
+}
+
+void MessageModel::handleChatState(const QString &bareJid, QXmppMessage::State state)
+{
+	m_chatStateCache[bareJid] = state;
+
+	if (bareJid == m_currentChatJid) {
+		m_chatPartnerChatState = state;
+		m_chatPartnerChatStateTimeout->start();
+		emit chatStateChanged();
 	}
 }

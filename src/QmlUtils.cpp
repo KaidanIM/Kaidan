@@ -218,6 +218,25 @@ QString QmlUtils::timestampForFileName(const QDateTime &dateTime)
 	return dateTime.toString(u"yyyyMMdd_hhmmss");
 }
 
+QString QmlUtils::chatStateDescription(const QString &displayName, const QXmppMessage::State state)
+{
+	switch (state) {
+	case QXmppMessage::State::Active:
+		return tr("%1 is online").arg(displayName);
+	case QXmppMessage::State::Composing:
+		return tr("%1 is typing…").arg(displayName);
+	case QXmppMessage::State::Paused:
+		return tr("%1 paused typing").arg(displayName);
+	// Not helpful for the user, so don't display
+	case QXmppMessage::State::Gone:
+	case QXmppMessage::State::Inactive:
+	case QXmppMessage::State::None:
+		break;
+	};
+
+	return {};
+}
+
 QString QmlUtils::processMsgFormatting(const QStringList &list, bool isFirst)
 {
 	if (list.isEmpty())

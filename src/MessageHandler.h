@@ -42,6 +42,7 @@ class Kaidan;
 class QXmppMessage;
 class QXmppDiscoveryIq;
 class QXmppCarbonManager;
+class QXmppVersionIq;
 
 /**
  * @class MessageHandler Handler for incoming and outgoing messages.
@@ -60,11 +61,15 @@ public slots:
 	 */
 	void handleMessage(const QXmppMessage &msg);
 
-
 	/**
 	 * Send a text message to any JID
 	 */
 	void sendMessage(const QString &toJid, const QString &body, bool isSpoiler, const QString &spoilerHint);
+
+	/**
+	 * Sends a chat state notification to the server.
+	 */
+	void sendChatState(const QString &toJid, const QXmppMessage::State state);
 
 	/**
 	 * Sends the corrected version of a message.

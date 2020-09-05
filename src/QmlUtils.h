@@ -164,6 +164,11 @@ public:
 	 */
 	static QString timestampForFileName(const QDateTime &dateTime = QDateTime::currentDateTime());
 
+	/**
+	 * Returns a human-readable string describing the state of the chat
+	 */
+	Q_INVOKABLE static QString chatStateDescription(const QString &displayName, const QXmppMessage::State state);
+
 private:
 	/**
 	 * Highlights links in a list of words

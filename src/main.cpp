@@ -82,6 +82,7 @@
 Q_DECLARE_METATYPE(Qt::ApplicationState)
 
 Q_DECLARE_METATYPE(QXmppClient::State)
+Q_DECLARE_METATYPE(QXmppMessage::State)
 Q_DECLARE_METATYPE(QXmppPresence)
 Q_DECLARE_METATYPE(QXmppStanza::Error)
 Q_DECLARE_METATYPE(QXmppVCardIq)
@@ -256,6 +257,7 @@ Q_DECL_EXPORT int main(int argc, char *argv[])
 	// Enums for c++ member calls using enums
 	qRegisterMetaType<Qt::ApplicationState>();
 	qRegisterMetaType<QXmppClient::State>();
+	qRegisterMetaType<QXmppMessage::State>();
 	qRegisterMetaType<QXmppStanza::Error>();
 	qRegisterMetaType<MessageType>();
 	qRegisterMetaType<Enums::ConnectionState>();
@@ -272,6 +274,7 @@ Q_DECL_EXPORT int main(int argc, char *argv[])
 	qRegisterMetaType<MediaRecorder::Status>();
 	qRegisterMetaType<MediaRecorder::Error>();
 	qRegisterMetaType<ServerListModel::Role>();
+	qRegisterMetaType<ChatState::State>();
 
 	// Qt-Translator
 	QTranslator qtTranslator;
@@ -407,7 +410,9 @@ Q_DECL_EXPORT int main(int argc, char *argv[])
 	qmlRegisterUncreatableType<DataFormModel>(APPLICATION_ID, 1, 0, "DataFormModel", "Cannot create object; only enums defined!");
 	qmlRegisterUncreatableType<Presence>(APPLICATION_ID, 1, 0, "Presence", "Cannot create object; only enums defined!");
 	qmlRegisterUncreatableType<RegistrationManager>(APPLICATION_ID, 1, 0, "RegistrationManager", "Cannot create object; only enums defined!");
+	qmlRegisterUncreatableType<ChatState>(APPLICATION_ID, 1, 0, "ChatState", "Cannot create object; only enums defined");
 
+	qmlRegisterUncreatableMetaObject(ChatState::staticMetaObject, APPLICATION_ID, 1, 0, "ChatState", "Can't create object; only enums defined!");
 	qmlRegisterUncreatableMetaObject(Enums::staticMetaObject, APPLICATION_ID, 1, 0, "Enums", "Can't create object; only enums defined!");
 
 	qmlRegisterSingletonType<MediaUtils>("MediaUtils", 0, 1, "MediaUtilsInstance", [](QQmlEngine *, QJSEngine *) {

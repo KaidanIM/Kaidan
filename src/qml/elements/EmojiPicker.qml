@@ -29,16 +29,16 @@
  */
 
 import QtQuick 2.12
-import QtQuick.Controls 2.12
+import QtQuick.Controls 2.12 as Controls
 import QtQuick.Layouts 1.12
 
 import org.kde.kirigami 2.12 as Kirigami
 import EmojiModel 0.1
 
-Popup {
+Controls.Popup {
 	id: root
 
-	property TextArea textArea
+	property Controls.TextArea textArea
 	property alias model: view.model
 
 	ColumnLayout {
@@ -57,7 +57,7 @@ Popup {
 
 			clip: true
 
-			delegate: ItemDelegate {
+			delegate: Controls.ItemDelegate {
 				width: Kirigami.Units.gridUnit * 2
 				height: Kirigami.Units.gridUnit * 2
 
@@ -70,8 +70,8 @@ Popup {
 				}
 
 				hoverEnabled: true
-				ToolTip.text: model.shortName
-				ToolTip.visible: hovered
+				Controls.ToolTip.text: model.shortName
+				Controls.ToolTip.visible: hovered
 
 				onClicked: {
 					GridView.view.model.addFavoriteEmoji(model.index);
@@ -79,7 +79,7 @@ Popup {
 				}
 			}
 
-			ScrollBar.vertical: ScrollBar {}
+			Controls.ScrollBar.vertical: Controls.ScrollBar {}
 		}
 
 		Rectangle {
@@ -104,7 +104,7 @@ Popup {
 					ListElement { label: "🔍"; group: Emoji.Group.Invalid }
 				}
 
-				delegate: ItemDelegate {
+				delegate: Controls.ItemDelegate {
 					width: Kirigami.Units.gridUnit * 1.85
 					height: Kirigami.Units.gridUnit * 1.85
 
@@ -117,7 +117,7 @@ Popup {
 					}
 
 					hoverEnabled: true
-					ToolTip.text: {
+					Controls.ToolTip.text: {
 						switch (model.group) {
 						case Emoji.Group.Favorites:
 							return qsTr('Favorites');
@@ -141,7 +141,7 @@ Popup {
 							return qsTr('Search');
 						}
 					}
-					ToolTip.visible: hovered
+					Controls.ToolTip.visible: hovered
 					highlighted: root.model.group === model.group
 
 					onClicked: root.model.group = model.group
@@ -149,7 +149,7 @@ Popup {
 			}
 		}
 
-		TextField {
+		Controls.TextField {
 			id: searchField
 
 			Timer {
@@ -168,7 +168,7 @@ Popup {
 			background: Item {}
 			rightPadding: clearButton.width
 
-			ToolButton {
+			Controls.ToolButton {
 				id: clearButton
 
 				visible: searchField.text !== ''

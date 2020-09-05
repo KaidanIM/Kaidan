@@ -48,26 +48,26 @@
 UploadManager::UploadManager(QXmppClient *client, RosterManager* rosterManager,
                              QObject* parent)
 	: QObject(parent),
-	  client(client),
-	  rosterManager(rosterManager)
+	  m_client(client),
+	  m_rosterManager(rosterManager)
 {
-	client->addExtension(&manager);
+	client->addExtension(&m_manager);
 
 	connect(Kaidan::instance(), &Kaidan::sendFile, this, &UploadManager::sendFile);
 
-	connect(&manager, &QXmppUploadManager::serviceFoundChanged, this, [=]() {
-		Kaidan::instance()->serverFeaturesCache()->setHttpUploadSupported(manager.serviceFound());
+	connect(&m_manager, &QXmppUploadManager::serviceFoundChanged, this, [=]() {
+		Kaidan::instance()->serverFeaturesCache()->setHttpUploadSupported(m_manager.serviceFound());
 	});
-	connect(&manager, &QXmppUploadManager::uploadSucceeded,
+	connect(&m_manager, &QXmppUploadManager::uploadSucceeded,
 	        this, &UploadManager::handleUploadSucceeded);
-	connect(&manager, &QXmppUploadManager::uploadFailed,
+	connect(&m_manager, &QXmppUploadManager::uploadFailed,
 	        this, &UploadManager::handleUploadFailed);
 }
 
 void UploadManager::sendFile(const QString &jid, const QUrl &fileUrl, const QString &body)
 {
 	// TODO: Add offline media message cache and send when connnected again
-	if (client->state() != QXmppClient::ConnectedState) {
+	if (m_client->state() != QXmppClient::ConnectedState) {
 		emit Kaidan::instance()->passiveNotificationRequested(
 			tr("Could not send file, as a result of not being connected.")
 		);
@@ -80,13 +80,13 @@ void UploadManager::sendFile(const QString &jid, const QUrl &fileUrl, const QStr
 
 	// toString() is used for android's content:/image:-URLs
 	QFileInfo file(fileUrl.isLocalFile() ? fileUrl.toLocalFile() : fileUrl.toString());
-	const QXmppHttpUpload* upload = manager.uploadFile(file);
+	const QXmppHttpUpload* upload = m_manager.uploadFile(file);
 	const QMimeType mimeType = MediaUtils::mimeType(fileUrl);
 	const MessageType messageType = MediaUtils::messageType(mimeType);
 	const QString msgId = QXmppUtils::generateStanzaHash(48);
 
 	auto *msg = new Message;
-	msg->setFrom(client->configuration().jidBare());
+	msg->setFrom(m_client->configuration().jidBare());
 	msg->setTo(jid);
 	msg->setId(msgId);
 	msg->setSentByMe(true);
@@ -100,7 +100,7 @@ void UploadManager::sendFile(const QString &jid, const QUrl &fileUrl, const QStr
 
 	// cache message and upload
 	emit Kaidan::instance()->transferCache()->addJobRequested(msgId, upload->bytesTotal());
-	messages.insert(upload->id(), msg);
+	m_messages.insert(upload->id(), msg);
 
 	emit Kaidan::instance()->messageModel()->addMessageRequested(*msg);
 
@@ -114,7 +114,7 @@ void UploadManager::handleUploadSucceeded(const QXmppHttpUpload *upload)
 {
 	qDebug() << "[client] [UploadManager] A file upload has succeeded. Now sending message.";
 
-	Message *originalMsg = messages.value(upload->id());
+	Message *originalMsg = m_messages.value(upload->id());
 
 	const QString oobUrl = upload->slot().getUrl().toEncoded();
 	const QString body = originalMsg->body().isEmpty()
@@ -132,7 +132,7 @@ void UploadManager::handleUploadSucceeded(const QXmppHttpUpload *upload)
 	m.setStamp(originalMsg->stamp());
 	m.setOutOfBandUrl(upload->slot().getUrl().toEncoded());
 
-	bool success = client->sendPacket(m);
+	bool success = m_client->sendPacket(m);
 	if (success) {
 		emit Kaidan::instance()->messageModel()->setMessageDeliveryStateRequested(
 			originalMsg->id(), Enums::DeliveryState::Sent);
@@ -141,14 +141,14 @@ void UploadManager::handleUploadSucceeded(const QXmppHttpUpload *upload)
 		emit Kaidan::instance()->messageModel()->setMessageDeliveryStateRequested(originalMsg->id(), Enums::DeliveryState::Error, "Message could not be sent.");
 	}
 
-	messages.remove(upload->id());
+	m_messages.remove(upload->id());
 	emit Kaidan::instance()->transferCache()->removeJobRequested(originalMsg->id());
 }
 
 void UploadManager::handleUploadFailed(const QXmppHttpUpload *upload)
 {
 	qDebug() << "[client] [UploadManager] A file upload has failed.";
-	const QString &msgId = messages.value(upload->id())->id();
-	messages.remove(upload->id());
+	const QString &msgId = m_messages.value(upload->id())->id();
+	m_messages.remove(upload->id());
 	emit Kaidan::instance()->transferCache()->removeJobRequested(msgId);
 }

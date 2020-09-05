@@ -183,7 +183,7 @@ QVector<int> RegistrationDataFormModel::indiciesToFilter() const
 	// search for other common fields to filter for
 	for (int i = 0; i < m_form.fields().size(); i++) {
 		QString key = m_form.fields().at(i).key();
-		if (filteredDataFormFields.contains(key))
+		if (m_filteredDataFormFields.contains(key))
 			indicies << i;
 	}
 
@@ -192,7 +192,7 @@ QVector<int> RegistrationDataFormModel::indiciesToFilter() const
 
 void RegistrationDataFormModel::initializeFilteredDataFormFields()
 {
-	filteredDataFormFields = {
+	m_filteredDataFormFields = {
 		FORM_TYPE,
 		FROM,
 		CAPTCHA_FALLBACK_TEXT,

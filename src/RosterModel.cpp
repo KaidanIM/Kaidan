@@ -43,7 +43,7 @@
 
 RosterModel::RosterModel(RosterDb *rosterDb, QObject *parent)
         : QAbstractListModel(parent),
-          rosterDb(rosterDb)
+	  m_rosterDb(rosterDb)
 {
 	connect(rosterDb, &RosterDb::itemsFetched,
 		this, &RosterModel::handleItemsFetched);
@@ -271,7 +271,7 @@ void RosterModel::handleMessageAdded(const Message &message)
 		itr->setUnreadMessages(*newUnreadMessages);
 		changedRoles << int(UnreadMessagesRole);
 
-		emit rosterDb->updateItemRequested(contactJid, [=](RosterItem &item) {
+		emit m_rosterDb->updateItemRequested(contactJid, [=](RosterItem &item) {
 			item.setUnreadMessages(*newUnreadMessages);
 		});
 	}

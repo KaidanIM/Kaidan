@@ -76,9 +76,9 @@ public slots:
 	void handleUploadSucceeded(const QXmppHttpUpload *upload);
 
 private:
-	QXmppClient *client;
-	QXmppUploadManager manager;
-	RosterManager *rosterManager;
+	QXmppClient *m_client;
+	QXmppUploadManager m_manager;
+	RosterManager *m_rosterManager;
 
-	QMap<int, Message*> messages;
+	QMap<int, Message*> m_messages;
 };

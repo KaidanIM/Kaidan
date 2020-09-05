@@ -44,7 +44,7 @@ constexpr int MAX_CORRECTION_MESSAGE_DAYS_DEPTH = 2;
 
 MessageModel::MessageModel(MessageDb *msgDb, QObject *parent)
 	: QAbstractListModel(parent),
-	  msgDb(msgDb)
+	  m_msgDb(msgDb)
 {
 	connect(msgDb, &MessageDb::messagesFetched,
 	        this, &MessageModel::handleMessagesFetched);
@@ -182,7 +182,7 @@ QVariant MessageModel::data(const QModelIndex &index, int role) const
 
 void MessageModel::fetchMore(const QModelIndex &)
 {
-	emit msgDb->fetchMessagesRequested(Kaidan::instance()->jid(), m_currentChatJid, m_messages.size());
+	emit m_msgDb->fetchMessagesRequested(Kaidan::instance()->jid(), m_currentChatJid, m_messages.size());
 }
 
 bool MessageModel::canFetchMore(const QModelIndex &) const
@@ -372,7 +372,7 @@ void MessageModel::processMessage(Message &msg)
 
 void MessageModel::sendPendingMessages()
 {
-	emit msgDb->fetchPendingMessagesRequested(Kaidan::instance()->jid());
+	emit m_msgDb->fetchPendingMessagesRequested(Kaidan::instance()->jid());
 }
 
 void MessageModel::correctMessage(const QString &msgId, const QString &message)

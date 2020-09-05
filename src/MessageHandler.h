@@ -89,8 +89,8 @@ private:
 	bool parseMediaUri(Message &message, const QString &uri, bool isBodyPart);
 
 	ClientWorker *m_clientWorker;
-	QXmppClient *client;
-	QXmppMessageReceiptManager receiptManager;
-	MessageModel *model;
-	QXmppCarbonManager *carbonManager;
+	QXmppClient *m_client;
+	QXmppMessageReceiptManager m_receiptManager;
+	MessageModel *m_model;
+	QXmppCarbonManager *m_carbonManager;
 };

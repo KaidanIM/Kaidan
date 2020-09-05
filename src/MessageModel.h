@@ -143,7 +143,8 @@ private:
 	 */
 	void processMessage(Message &msg);
 
-	MessageDb *msgDb;
+	MessageDb *m_msgDb;
+
 	QVector<Message> m_messages;
 	QString m_currentChatJid;
 	bool m_fetchedAll = false;

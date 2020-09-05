@@ -99,6 +99,6 @@ private:
 	int updateItemPosition(int currentIndex);
 	int positionToInsert(const RosterItem &item);
 
-	RosterDb *rosterDb;
+	RosterDb *m_rosterDb;
 	QVector<RosterItem> m_items;
 };

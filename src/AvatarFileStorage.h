@@ -101,5 +101,5 @@ signals:
 private:
 	void saveAvatarsFile();
 
-	QMap<QString, QString> jidAvatarMap;
+	QMap<QString, QString> m_jidAvatarMap;
 };

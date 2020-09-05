@@ -86,8 +86,8 @@ private:
 	 */
 	void updateNicknameAfterFetchingCurrentVCard();
 
-	QXmppClient *client;
-	QXmppVCardManager *manager;
-	AvatarFileStorage *avatarStorage;
+	QXmppClient *m_client;
+	QXmppVCardManager *m_manager;
+	AvatarFileStorage *m_avatarStorage;
 	QString m_nicknameToBeSetAfterFetchingCurrentVCard;
 };

@@ -50,7 +50,12 @@
 #include <QXmppRegistrationManager.h>
 
 RegistrationManager::RegistrationManager(ClientWorker *clientWorker, QXmppClient *client, QSettings *settings)
-	: QObject(clientWorker), m_clientWorker(clientWorker), m_client(client), settings(settings), m_manager(new QXmppRegistrationManager), m_dataFormModel(new RegistrationDataFormModel())
+	: QObject(clientWorker),
+	  m_clientWorker(clientWorker),
+	  m_client(client),
+	  m_settings(settings),
+	  m_manager(new QXmppRegistrationManager),
+	  m_dataFormModel(new RegistrationDataFormModel())
 {
 	client->addExtension(m_manager);
 
@@ -115,7 +120,7 @@ void RegistrationManager::handleInBandRegistrationSupportedChanged()
 
 void RegistrationManager::handlePasswordChangeSucceeded(const QString &newPassword)
 {
-	settings->setValue(
+	m_settings->setValue(
 	    KAIDAN_SETTINGS_AUTH_PASSWD,
 	    QString::fromUtf8(newPassword.toUtf8().toBase64())
 	);

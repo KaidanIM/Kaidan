@@ -46,26 +46,29 @@
 #include "MediaUtils.h"
 
 MessageHandler::MessageHandler(ClientWorker *clientWorker, QXmppClient *client, MessageModel *model)
-	: QObject(clientWorker), m_clientWorker(clientWorker), client(client), model(model)
+	: QObject(clientWorker),
+	  m_clientWorker(clientWorker),
+	  m_client(client),
+	  m_model(model)
 {
 	connect(client, &QXmppClient::messageReceived, this, &MessageHandler::handleMessage);
 	connect(Kaidan::instance(), &Kaidan::sendMessage, this, &MessageHandler::sendMessage);
 	connect(model, &MessageModel::sendCorrectedMessageRequested, this, &MessageHandler::sendCorrectedMessage);
 
-	client->addExtension(&receiptManager);
-	connect(&receiptManager, &QXmppMessageReceiptManager::messageDelivered,
+	client->addExtension(&m_receiptManager);
+	connect(&m_receiptManager, &QXmppMessageReceiptManager::messageDelivered,
 		this, [=] (const QString&, const QString &id) {
 		emit model->setMessageDeliveryStateRequested(id, Enums::DeliveryState::Delivered);
 	});
 
-	carbonManager = new QXmppCarbonManager();
-	client->addExtension(carbonManager);
+	m_carbonManager = new QXmppCarbonManager();
+	client->addExtension(m_carbonManager);
 
 	// messages sent to our account (forwarded from another client)
-	connect(carbonManager, &QXmppCarbonManager::messageReceived,
+	connect(m_carbonManager, &QXmppCarbonManager::messageReceived,
 	        client, &QXmppClient::messageReceived);
 	// messages sent from our account (but another client)
-	connect(carbonManager, &QXmppCarbonManager::messageSent,
+	connect(m_carbonManager, &QXmppCarbonManager::messageSent,
 	        client, &QXmppClient::messageReceived);
 
 	// carbons discovery
@@ -82,13 +85,13 @@ MessageHandler::MessageHandler(ClientWorker *clientWorker, QXmppClient *client, 
 
 MessageHandler::~MessageHandler()
 {
-	delete carbonManager;
+	delete m_carbonManager;
 }
 
 void MessageHandler::handleMessage(const QXmppMessage &msg)
 {
 	if (msg.type() == QXmppMessage::Error) {
-		emit model->setMessageDeliveryStateRequested(msg.id(), Enums::DeliveryState::Error, msg.error().text());
+		emit m_model->setMessageDeliveryStateRequested(msg.id(), Enums::DeliveryState::Error, msg.error().text());
 		return;
 	}
 
@@ -98,7 +101,7 @@ void MessageHandler::handleMessage(const QXmppMessage &msg)
 	Message message;
 	message.setFrom(QXmppUtils::jidToBareJid(msg.from()));
 	message.setTo(QXmppUtils::jidToBareJid(msg.to()));
-	message.setSentByMe(QXmppUtils::jidToBareJid(msg.from()) == client->configuration().jidBare());
+	message.setSentByMe(QXmppUtils::jidToBareJid(msg.from()) == m_client->configuration().jidBare());
 	message.setId(msg.id());
 	// don't use file sharing fallback bodys
 	if (msg.body() != msg.outOfBandUrl())
@@ -125,11 +128,11 @@ void MessageHandler::handleMessage(const QXmppMessage &msg)
 	// save the message to the database
 	// in case of message correction, replace old message
 	if (msg.replaceId().isEmpty()) {
-		emit model->addMessageRequested(message);
+		emit m_model->addMessageRequested(message);
 	} else {
 		message.setIsEdited(true);
 		message.setId(QString());
-		emit model->updateMessageRequested(msg.replaceId(), [=] (Message &m) {
+		emit m_model->updateMessageRequested(msg.replaceId(), [=] (Message &m) {
 			// replace completely
 			m = message;
 		});
@@ -141,7 +144,7 @@ void MessageHandler::handleMessage(const QXmppMessage &msg)
 	// a forward of another of the user's clients.
 	QString contactJid = message.sentByMe() ? message.to() : message.from();
 	// resolve user-defined name of this JID
-	QString contactName = client->findExtension<QXmppRosterManager>()->getRosterEntry(contactJid).name();
+	QString contactName = m_client->findExtension<QXmppRosterManager>()->getRosterEntry(contactJid).name();
 	if (contactName.isEmpty())
 		contactName = contactJid;
 
@@ -149,8 +152,12 @@ void MessageHandler::handleMessage(const QXmppMessage &msg)
 	//  * The message was not sent by the user from another resource and received via Message Carbons.
 	//  * Notifications from the chat partner are not muted.
 	//  * The corresponding chat is not opened while the application window is active.
-	if (!message.sentByMe() && !Kaidan::instance()->notificationsMuted(contactJid) && (model->currentChatJid() != message.from() || !m_clientWorker->isApplicationWindowActive()))
+	if (!message.sentByMe() &&
+			!Kaidan::instance()->notificationsMuted(contactJid) &&
+			(m_model->currentChatJid() != message.from() ||
+			 !m_clientWorker->isApplicationWindowActive())) {
 		emit m_clientWorker->showMessageNotificationRequested(contactJid, contactName, msg.body());
+	}
 }
 
 void MessageHandler::sendMessage(const QString& toJid,
@@ -159,7 +166,7 @@ void MessageHandler::sendMessage(const QString& toJid,
                                  const QString& spoilerHint)
 {
 	Message msg;
-	msg.setFrom(client->configuration().jidBare());
+	msg.setFrom(m_client->configuration().jidBare());
 	msg.setTo(toJid);
 	msg.setBody(body);
 	msg.setId(QXmppUtils::generateStanzaHash(28));
@@ -178,7 +185,7 @@ void MessageHandler::sendMessage(const QString& toJid,
 			break;
 	}
 
-	emit model->addMessageRequested(msg);
+	emit m_model->addMessageRequested(msg);
 	sendPendingMessage(msg);
 }
 
@@ -186,7 +193,7 @@ void MessageHandler::sendCorrectedMessage(const Message &msg)
 {
 	auto deliveryState = Enums::DeliveryState::Sent;
 	QString errorText;
-	if (!client->sendPacket(msg)) {
+	if (!m_client->sendPacket(msg)) {
 		// TODO store in the database only error codes, assign text messages right in the QML
 		emit Kaidan::instance()->passiveNotificationRequested(
 			tr("Message correction was not successful."));
@@ -194,7 +201,7 @@ void MessageHandler::sendCorrectedMessage(const Message &msg)
 		deliveryState = Enums::DeliveryState::Error;
 	}
 
-	emit model->updateMessageRequested(msg.id(), [=] (Message &localMessage) {
+	emit m_model->updateMessageRequested(msg.id(), [=] (Message &localMessage) {
 		localMessage.setDeliveryState(deliveryState);
 		localMessage.setErrorText(errorText);
 	});
@@ -202,16 +209,16 @@ void MessageHandler::sendCorrectedMessage(const Message &msg)
 
 void MessageHandler::handleDiscoInfo(const QXmppDiscoveryIq &info)
 {
-	if (info.from() != client->configuration().domain())
+	if (info.from() != m_client->configuration().domain())
 		return;
 	// enable carbons, if feature found
 	if (info.features().contains(NS_CARBONS))
-		carbonManager->setCarbonsEnabled(true);
+		m_carbonManager->setCarbonsEnabled(true);
 }
 
 void MessageHandler::sendPendingMessage(const Message &message)
 {
-	if (client->state() == QXmppClient::ConnectedState) {
+	if (m_client->state() == QXmppClient::ConnectedState) {
 		bool success;
 		// if the message is a pending edition of the existing in the history message
 		// I need to send it with the most recent stamp
@@ -219,13 +226,13 @@ void MessageHandler::sendPendingMessage(const Message &message)
 		if (message.isEdited()) {
 			Message msg = message;
 			msg.setStamp(QDateTime::currentDateTimeUtc());
-			success = client->sendPacket(msg);
+			success = m_client->sendPacket(msg);
 		} else {
-			success = client->sendPacket(message);
+			success = m_client->sendPacket(message);
 		}
 
 		if (success)
-			emit model->setMessageDeliveryStateRequested(message.id(), Enums::DeliveryState::Sent);
+			emit m_model->setMessageDeliveryStateRequested(message.id(), Enums::DeliveryState::Sent);
 		// TODO this "true" from sendPacket doesn't yet mean the message was successfully sent
 
 		else {
@@ -236,7 +243,7 @@ void MessageHandler::sendPendingMessage(const Message &message)
 			// translation work in the UI, the tr() call of the passive
 			// notification must contain exactly the same string.
 			emit Kaidan::instance()->passiveNotificationRequested(tr("Message could not be sent."));
-			emit model->setMessageDeliveryStateRequested(message.id(), Enums::DeliveryState::Error, "Message could not be sent.");
+			emit m_model->setMessageDeliveryStateRequested(message.id(), Enums::DeliveryState::Error, "Message could not be sent.");
 		}
 	}
 }

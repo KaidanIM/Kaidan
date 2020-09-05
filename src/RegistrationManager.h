@@ -147,7 +147,7 @@ private:
 
 	ClientWorker *m_clientWorker;
 	QXmppClient *m_client;
-	QSettings *settings;
+	QSettings *m_settings;
 	QXmppRegistrationManager *m_manager;
 	RegistrationDataFormModel *m_dataFormModel;
 	QVector<QXmppBitsOfBinaryContentId> m_contentIdsToRemove;

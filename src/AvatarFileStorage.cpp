@@ -66,7 +66,7 @@ AvatarFileStorage::AvatarFileStorage(QObject *parent) : QObject(parent)
 				QStringList list = line.split(' ', QString::SkipEmptyParts);
 
 				// set the hash for the jid
-				jidAvatarMap[list.at(1)] = list.at(0);
+				m_jidAvatarMap[list.at(1)] = list.at(0);
 
 				// read the next line
 				line = stream.readLine();
@@ -84,11 +84,11 @@ AvatarFileStorage::AddAvatarResult AvatarFileStorage::addAvatar(const QString &j
 
 	// generate a hexadecimal hash of the raw avatar
 	result.hash = QString(QCryptographicHash::hash(avatar, QCryptographicHash::Sha1).toHex());
-	QString oldHash = jidAvatarMap[jid];
+	QString oldHash = m_jidAvatarMap[jid];
 
 	// set the new hash and the `hasChanged` tag
 	if (oldHash != result.hash) {
-		jidAvatarMap[jid] = result.hash;
+		m_jidAvatarMap[jid] = result.hash;
 		result.hasChanged = true;
 
 		// delete the avatar if it isn't used anymore
@@ -125,14 +125,14 @@ AvatarFileStorage::AddAvatarResult AvatarFileStorage::addAvatar(const QString &j
 void AvatarFileStorage::clearAvatar(QString &jid)
 {
 	QString oldHash;
-	if (jidAvatarMap.contains(jid))
-		oldHash = jidAvatarMap[jid];
+	if (m_jidAvatarMap.contains(jid))
+		oldHash = m_jidAvatarMap[jid];
 
 	// if user had no avatar before, just return
 	if (oldHash.isEmpty())
 		return;
 
-	jidAvatarMap.remove(jid);
+	m_jidAvatarMap.remove(jid);
 	saveAvatarsFile();
 	cleanUp(oldHash);
 	emit avatarIdsChanged();
@@ -144,7 +144,7 @@ void AvatarFileStorage::cleanUp(QString &oldHash)
 		return;
 
 	// check if the same avatar is still used by another account
-	if (std::find(jidAvatarMap.cbegin(), jidAvatarMap.cend(), oldHash) != jidAvatarMap.cend())
+	if (std::find(m_jidAvatarMap.cbegin(), m_jidAvatarMap.cend(), oldHash) != m_jidAvatarMap.cend())
 		return;
 
 	// delete the old avatar locally
@@ -163,7 +163,7 @@ QString AvatarFileStorage::getAvatarPath(const QString &hash) const
 
 QString AvatarFileStorage::getHashOfJid(const QString& jid) const
 {
-	return jidAvatarMap[jid];
+	return m_jidAvatarMap[jid];
 }
 
 QString AvatarFileStorage::getAvatarPathOfJid(const QString& jid) const
@@ -191,8 +191,8 @@ void AvatarFileStorage::saveAvatarsFile()
 		return;
 
 	QTextStream out(&file);
-	const QStringList jidAvatarKeys = jidAvatarMap.keys();
+	const QStringList jidAvatarKeys = m_jidAvatarMap.keys();
 	for (const auto &jid : jidAvatarKeys)
 		/*     < HASH >            < JID >  */
-		out << jidAvatarMap[jid] << " " << jid << "\n";
+		out << m_jidAvatarMap[jid] << " " << jid << "\n";
 }

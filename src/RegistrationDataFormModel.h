@@ -77,5 +77,5 @@ private:
 	void initializeFilteredDataFormFields();
 
 	bool m_isFakeForm = false;
-	QList<QString> filteredDataFormFields;
+	QList<QString> m_filteredDataFormFields;
 };

@@ -63,6 +63,6 @@ public:
 	void handleInfo(const QXmppDiscoveryIq&);
 
 private:
-	QXmppClient *client;
-	QXmppDiscoveryManager *manager;
+	QXmppClient *m_client;
+	QXmppDiscoveryManager *m_manager;
 };

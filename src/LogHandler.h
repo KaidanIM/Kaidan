@@ -63,6 +63,6 @@ private:
 	 */
 	static QString makeXmlPretty(QString inputXml);
 
-	QXmppClient *client;
+	QXmppClient *m_client;
 	bool enabled = false;
 };

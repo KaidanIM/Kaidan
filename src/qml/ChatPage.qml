@@ -480,12 +480,9 @@ ChatPageBase {
 
 			onMessageEditRequested: {
 				messageToCorrect = id
+
 				sendingPane.messageArea.text = body
 				sendingPane.messageArea.state = "edit"
-
-				// Move the cursor to the end of the text being corrected.
-				sendingPane.messageArea.selectAll()
-				sendingPane.messageArea.cursorPosition = sendingPane.messageField.selectionEnd
 			}
 
 			onQuoteRequested: {

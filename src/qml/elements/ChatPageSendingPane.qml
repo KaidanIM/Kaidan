@@ -41,7 +41,8 @@ import MediaUtils 0.1
  * This is a pane for writing and sending chat messages.
  */
 Controls.Pane {
-	padding: 0
+	id: root
+	padding: 6
 
 	background: Kirigami.ShadowedRectangle {
 		shadow.color: Qt.darker(color, 1.2)
@@ -52,152 +53,134 @@ Controls.Pane {
 	property QtObject chatPage
 	property alias messageArea: messageArea
 
-	RowLayout {
+	ColumnLayout {
 		anchors.fill: parent
-		Layout.preferredHeight: Kirigami.Units.gridUnit * 3
+		spacing: 0
 
-		Controls.ToolButton {
-			id: attachButton
-			visible: Kaidan.serverFeaturesCache.httpUploadSupported
-			Layout.preferredWidth: Kirigami.Units.gridUnit * 3
-			Layout.preferredHeight: Kirigami.Units.gridUnit * 3
-			padding: 0
-			Kirigami.Icon {
-				source: "document-send-symbolic"
-				isMask: true
-				smooth: true
-				anchors.centerIn: parent
-				width: Kirigami.Units.gridUnit * 2
-				height: width
-			}
-			onClicked: {
-				if (Kirigami.Settings.isMobile)
-					chatPage.mediaDrawer.open()
-				else
-					chatPage.openFileDialog(qsTr("All files"), "*", MediaUtilsInstance.label(Enums.MessageType.MessageFile))
-			}
-		}
+		RowLayout {
+			visible: chatPage.isWritingSpoiler
 
-		ColumnLayout {
-			Layout.minimumHeight: messageArea.height + Kirigami.Units.smallSpacing * 2
-			Layout.fillWidth: true
-			spacing: 0
-			RowLayout {
-				visible: chatPage.isWritingSpoiler
-				Controls.TextArea {
-					id: spoilerHintField
-					Layout.fillWidth: true
-					placeholderText: qsTr("Spoiler hint")
-					wrapMode: Controls.TextArea.Wrap
-					selectByMouse: true
-					background: Item {}
-				}
-				Controls.ToolButton {
-					Layout.preferredWidth: Kirigami.Units.gridUnit * 1.5
-					Layout.preferredHeight: Kirigami.Units.gridUnit * 1.5
-					padding: 0
-					Kirigami.Icon {
-						source: "tab-close"
-						smooth: true
-						anchors.centerIn: parent
-						width: Kirigami.Units.gridUnit * 1.5
-						height: width
-					}
-					onClicked: {
-						chatPage.isWritingSpoiler = false
-						spoilerHintField.text = ""
-					}
-				}
-			}
-			Kirigami.Separator {
-				visible: chatPage.isWritingSpoiler
-				Layout.fillWidth: true
-			}
 			Controls.TextArea {
-				id: messageArea
-
+				id: spoilerHintField
 				Layout.fillWidth: true
-				Layout.alignment: Qt.AlignVCenter
-				placeholderText: qsTr("Compose message")
+				placeholderText: qsTr("Spoiler hint")
 				wrapMode: Controls.TextArea.Wrap
 				selectByMouse: true
 				background: Item {}
+			}
+
+			Controls.ToolButton {
+				Layout.preferredWidth: Kirigami.Units.gridUnit * 1.5
+				Layout.preferredHeight: Kirigami.Units.gridUnit * 1.5
+				padding: 0
+
+				Kirigami.Icon {
+					source: "tab-close"
+					smooth: true
+					anchors.centerIn: parent
+					width: Kirigami.Units.gridUnit * 1.5
+					height: width
+				}
+
+				onClicked: {
+					chatPage.isWritingSpoiler = false
+					spoilerHintField.text = ""
+				}
+			}
+		}
+
+		Kirigami.Separator {
+			visible: chatPage.isWritingSpoiler
+			Layout.fillWidth: true
+		}
+
+		RowLayout {
+			spacing: 0
+
+			// emoji picker button
+			ClickableIcon {
+				source: "face-smile"
+				enabled: sendButton.enabled
+				onClicked: emojiPicker.visible ? emojiPicker.close() : emojiPicker.open()
+			}
+
+			EmojiPicker {
+				id: emojiPicker
+				x: - root.padding
+				y: - height - root.padding
+				width: Kirigami.Units.gridUnit * 20
+				height: Kirigami.Units.gridUnit * 15
+				textArea: messageArea
+
+				model: EmojiProxyModel {
+					group: hasFavoriteEmojis ? Emoji.Group.Favorites : Emoji.Group.People
+					sourceModel: EmojiModel {}
+				}
+			}
+
+			Controls.TextArea {
+				id: messageArea
+				placeholderText: qsTr("Compose message")
+				background: Item {}
+				wrapMode: TextEdit.Wrap
+				Layout.fillWidth: true
+				verticalAlignment: TextEdit.AlignVCenter
 				state: "compose"
+
 				states: [
 					State {
 						name: "compose"
 					},
+
 					State {
 						name: "edit"
 					}
 				]
+
+				onStateChanged: {
+					if (state === "edit") {
+						// Move the cursor to the end of the text being corrected.
+						selectAll()
+						cursorPosition = selectionEnd
+					}
+				}
+
 				Keys.onReturnPressed: {
 					if (event.key === Qt.Key_Return) {
 						if (event.modifiers & (Qt.ControlModifier | Qt.ShiftModifier)) {
 							messageArea.append("")
 						} else {
-							sendButton.onClicked()
+							sendMessage()
 							event.accepted = true
 						}
 					}
 				}
 			}
-		}
 
-		EmojiPicker {
-			x: -width + parent.width
-			y: -height - 16
+			// file sharing button
+			ClickableIcon {
+				source: "document-send-symbolic"
+				visible: Kaidan.serverFeaturesCache.httpUploadSupported
 
-			width: Kirigami.Units.gridUnit * 20
-			height: Kirigami.Units.gridUnit * 15
-
-			id: emojiPicker
-
-			model: EmojiProxyModel {
-				group: hasFavoriteEmojis ? Emoji.Group.Favorites : Emoji.Group.People
-				sourceModel: EmojiModel {}
+				onClicked: {
+					if (Kirigami.Settings.isMobile)
+						chatPage.mediaDrawer.open()
+					else
+						chatPage.openFileDialog(qsTr("All files"), "*", MediaUtilsInstance.label(Enums.MessageType.MessageFile))
+				}
 			}
 
-			textArea: messageArea
-		}
-
-		Controls.ToolButton {
-			id: emojiPickerButton
-			Layout.preferredWidth: Kirigami.Units.gridUnit * 3
-			Layout.preferredHeight: Kirigami.Units.gridUnit * 3
-			padding: 0
-			Kirigami.Icon {
-				source: "face-smile"
-				enabled: sendButton.enabled
-				isMask: false
-				smooth: true
-				anchors.centerIn: parent
-				width: Kirigami.Units.gridUnit * 2
-				height: width
-			}
-			onClicked: emojiPicker.visible ? emojiPicker.close() : emojiPicker.open()
-		}
-
-		Controls.ToolButton {
-			id: sendButton
-			Layout.preferredWidth: Kirigami.Units.gridUnit * 3
-			Layout.preferredHeight: Kirigami.Units.gridUnit * 3
-			padding: 0
-			Kirigami.Icon {
+			ClickableIcon {
+				id: sendButton
 				source: {
-					if (messageArea.state == "compose")
+					if (messageArea.state === "compose")
 						return "document-send"
-					else if (messageArea.state == "edit")
+					else if (messageArea.state === "edit")
 						return "edit-symbolic"
 				}
-				enabled: sendButton.enabled
-				isMask: true
-				smooth: true
-				anchors.centerIn: parent
-				width: Kirigami.Units.gridUnit * 2
-				height: width
+
+				onClicked: sendMessage()
 			}
-			onClicked: sendMessage()
 		}
 	}
 
@@ -212,42 +195,40 @@ Controls.Pane {
 	 * Sends the text entered in the messageArea.
 	 */
 	function sendMessage() {
-		// don't send empty messages
-		if (!messageArea.text.length) {
+		// Do not send empty messages.
+		if (!messageArea.text.length)
 			return
-		}
 
-		// disable the button to prevent sending
-		// the same message several times
+		// Disable the button to prevent sending the same message several times.
 		sendButton.enabled = false
 
-		// send the message
-		if (messageArea.state == "compose") {
+		// Send the message.
+		if (messageArea.state === "compose") {
 			Kaidan.sendMessage(
 				Kaidan.messageModel.currentChatJid,
 				messageArea.text,
 				chatPage.isWritingSpoiler,
 				spoilerHintField.text
 			)
-		} else if (messageArea.state == "edit") {
-			Kaidan.correctMessage(
-				chatPage.messageToCorrect,
-				messageArea.text
-			)
+		} else if (messageArea.state === "edit") {
+			Kaidan.correctMessage(chatPage.messageToCorrect, messageArea.text)
 		}
 
-		// clean up the text fields
-		messageArea.text = ""
-		messageArea.state = "compose"
-		spoilerHintField.text = ""
-		chatPage.isWritingSpoiler = false
-		chatPage.messageToCorrect = ''
+		clearMessageArea()
 
-		// reenable the button
+		// Enable the button again.
 		sendButton.enabled = true
 
 		// Show the cursor even if another element like the sendButton (after
 		// clicking on it) was focused before.
 		messageArea.forceActiveFocus()
+	}
+
+	function clearMessageArea() {
+		messageArea.text = ""
+		spoilerHintField.text = ""
+		chatPage.isWritingSpoiler = false
+		chatPage.messageToCorrect = ''
+		messageArea.state = "compose"
 	}
 }

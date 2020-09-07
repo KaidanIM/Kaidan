@@ -23,6 +23,7 @@
 		<file>elements/MessageCounter.qml</file>
 		<file>elements/ChatMessage.qml</file>
 		<file>elements/ChatPageSendingPane.qml</file>
+		<file>elements/ClickableIcon.qml</file>
 		<file>elements/RoundedImage.qml</file>
 		<file>elements/RoundImage.qml</file>
 		<file>elements/Button.qml</file>

@@ -37,29 +37,35 @@ import EmojiModel 0.1
 
 Controls.Popup {
 	id: root
+	width: Kirigami.Units.gridUnit * 20
+	height: Kirigami.Units.gridUnit * 15
 
 	property Controls.TextArea textArea
-	property alias model: view.model
+	property string searchedText
 
 	ColumnLayout {
 		anchors.fill: parent
 
 		GridView {
-			id: view
+			id: emojiView
 
 			Layout.fillWidth: true
 			Layout.fillHeight: true
 
-			cellWidth: Kirigami.Units.gridUnit * 2.5
-			cellHeight: Kirigami.Units.gridUnit * 2.5
+			cellWidth: Kirigami.Units.gridUnit * 2.33
+			cellHeight: cellWidth
 
 			boundsBehavior: Flickable.DragOverBounds
-
 			clip: true
 
+			model: EmojiProxyModel {
+				sourceModel: EmojiModel {}
+				group: hasFavoriteEmojis ? Emoji.Group.Favorites : Emoji.Group.People
+			}
+
 			delegate: Controls.ItemDelegate {
-				width: Kirigami.Units.gridUnit * 2
-				height: Kirigami.Units.gridUnit * 2
+				width: emojiView.cellWidth
+				height: emojiView.cellHeight
 				hoverEnabled: true
 				Controls.ToolTip.text: model.shortName
 				Controls.ToolTip.visible: hovered
@@ -74,8 +80,10 @@ Controls.Popup {
 				}
 
 				onClicked: {
-					GridView.view.model.addFavoriteEmoji(model.index);
-					textArea.insert(textArea.cursorPosition, model.unicode)
+					emojiView.model.addFavoriteEmoji(model.index);
+					textArea.remove(textArea.cursorPosition - searchedText.length, textArea.cursorPosition)
+					textArea.insert(textArea.cursorPosition, model.unicode + " ")
+					close()
 				}
 			}
 
@@ -83,13 +91,15 @@ Controls.Popup {
 		}
 
 		Rectangle {
+			visible: emojiView.model.group !== Emoji.Group.Invalid
+			color: Kirigami.Theme.highlightColor
 			Layout.fillWidth: true
 			Layout.preferredHeight: 2
-
-			color: Kirigami.Theme.highlightColor
 		}
 
 		Row {
+			visible: emojiView.model.group !== Emoji.Group.Invalid
+
 			Repeater {
 				model: ListModel {
 					ListElement { label: "🔖"; group: Emoji.Group.Favorites }
@@ -101,14 +111,13 @@ Controls.Popup {
 					ListElement { label: "💡"; group: Emoji.Group.Objects }
 					ListElement { label: "🔣"; group: Emoji.Group.Symbols }
 					ListElement { label: "🏁"; group: Emoji.Group.Flags }
-					ListElement { label: "🔍"; group: Emoji.Group.Invalid }
 				}
 
 				delegate: Controls.ItemDelegate {
-					width: Kirigami.Units.gridUnit * 1.85
-					height: Kirigami.Units.gridUnit * 1.85
+					width: Kirigami.Units.gridUnit * 2.08
+					height: width
 					hoverEnabled: true
-					highlighted: root.model.group === model.group
+					highlighted: emojiView.model.group === model.group
 
 					contentItem: Text {
 						horizontalAlignment: Text.AlignHCenter
@@ -118,46 +127,47 @@ Controls.Popup {
 						text: model.label
 					}
 
-					onClicked: root.model.group = model.group
+					onClicked: emojiView.model.group = model.group
 				}
 			}
 		}
+	}
 
-		Controls.TextField {
-			id: searchField
-			Layout.fillWidth: true
-			Layout.alignment: Qt.AlignVCenter
-			visible: root.model.group === Emoji.Group.Invalid
-			placeholderText: qsTr("Search emoji")
-			selectByMouse: true
-			background: Item {}
-			rightPadding: clearButton.width
-			onTextChanged: searchTimer.restart()
-			onVisibleChanged:  {
-				if (visible)
-					forceActiveFocus()
-			}
+	onClosed: clearSearch()
 
-			Timer {
-				id: searchTimer
-				interval: 500
-				onTriggered: root.model.filter = searchField.text
-			}
+	function toggle() {
+		if (!visible || isSearchActive())
+			openWithFavorites()
+		else
+			close()
+	}
 
-			Controls.ToolButton {
-				id: clearButton
+	function openWithFavorites() {
+		clearSearch()
+		open()
+	}
 
-				visible: searchField.text !== ''
-				icon.name: 'edit-clear'
-				focusPolicy: Qt.NoFocus
+	function openForSearch(currentCharacter) {
+		searchedText += currentCharacter
+		emojiView.model.group = Emoji.Group.Invalid
+		open()
+	}
 
-				anchors {
-					verticalCenter: parent.verticalCenter
-					right: parent.right
-				}
+	function search() {
+		emojiView.model.filter = searchedText.toLowerCase()
+	}
 
-				onClicked: searchField.clear()
-			}
-		}
+	function isSearchActive() {
+		return emojiView.model.group === Emoji.Group.Invalid
+	}
+
+	function clearSearch() {
+		searchedText = ""
+		search()
+		setFavoritesAsDefaultIfAvailable()
+	}
+
+	function setFavoritesAsDefaultIfAvailable() {
+		emojiView.model.group = emojiView.model.hasFavoriteEmojis ? Emoji.Group.Favorites : Emoji.Group.People
 	}
 }

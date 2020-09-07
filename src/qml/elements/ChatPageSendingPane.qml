@@ -34,7 +34,6 @@ import QtQuick.Controls 2.12 as Controls
 import org.kde.kirigami 2.12 as Kirigami
 
 import im.kaidan.kaidan 1.0
-import EmojiModel 0.1
 import MediaUtils 0.1
 
 /**
@@ -52,6 +51,7 @@ Controls.Pane {
 
 	property QtObject chatPage
 	property alias messageArea: messageArea
+	property int lastMessageLength: 0
 
 	ColumnLayout {
 		anchors.fill: parent
@@ -97,21 +97,14 @@ Controls.Pane {
 			ClickableIcon {
 				source: "face-smile"
 				enabled: sendButton.enabled
-				onClicked: emojiPicker.visible ? emojiPicker.close() : emojiPicker.open()
+				onClicked: !emojiPicker.toggle()
 			}
 
 			EmojiPicker {
 				id: emojiPicker
 				x: - root.padding
 				y: - height - root.padding
-				width: Kirigami.Units.gridUnit * 20
-				height: Kirigami.Units.gridUnit * 15
 				textArea: messageArea
-
-				model: EmojiProxyModel {
-					group: hasFavoriteEmojis ? Emoji.Group.Favorites : Emoji.Group.People
-					sourceModel: EmojiModel {}
-				}
 			}
 
 			Controls.TextArea {
@@ -122,6 +115,7 @@ Controls.Pane {
 				Layout.fillWidth: true
 				verticalAlignment: TextEdit.AlignVCenter
 				state: "compose"
+				onTextChanged: handleShortcuts()
 
 				states: [
 					State {
@@ -218,6 +212,43 @@ Controls.Pane {
 		// Show the cursor even if another element like the sendButton (after
 		// clicking on it) was focused before.
 		messageArea.forceActiveFocus()
+	}
+
+	/**
+	 * Handles characters used for special actions.
+	 */
+	function handleShortcuts() {
+		var currentCharacter = messageArea.getText(messageArea.cursorPosition - 1, messageArea.cursorPosition)
+
+		if (emojiPicker.isSearchActive()) {
+			if (emojiPicker.searchedText === "" || currentCharacter === "" || currentCharacter === " ") {
+				emojiPicker.close()
+				return
+			}
+
+			// Handle the deletion or addition of characters.
+			if (lastMessageLength >= messageArea.text.length)
+				emojiPicker.searchedText = emojiPicker.searchedText.substr(0, emojiPicker.searchedText.length - 1)
+			else
+				emojiPicker.searchedText += currentCharacter
+
+			emojiPicker.search()
+		} else {
+			if (currentCharacter === ":") {
+				if (messageArea.cursorPosition !== 1) {
+					var predecessorOfCurrentCharacter = messageArea.getText(messageArea.cursorPosition - 2, messageArea.cursorPosition - 1)
+					if (predecessorOfCurrentCharacter === " " || predecessorOfCurrentCharacter === "\n") {
+						emojiPicker.openForSearch(currentCharacter)
+						emojiPicker.search()
+					}
+				} else {
+					emojiPicker.openForSearch(currentCharacter)
+					emojiPicker.search()
+				}
+			}
+		}
+
+		lastMessageLength = messageArea.text.length
 	}
 
 	function clearMessageArea() {

@@ -503,5 +503,6 @@ ChatPageBase {
 
 	footer: ChatPageSendingPane {
 		id: sendingArea
+		chatPage: root
 	}
 }

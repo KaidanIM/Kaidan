@@ -59,6 +59,7 @@ Controls.Pane {
 		cached: true // element is static
 	}
 
+	property QtObject chatPage
 	property alias messageField: messageField
 
 	RowLayout {
@@ -81,9 +82,9 @@ Controls.Pane {
 			}
 			onClicked: {
 				if (Kirigami.Settings.isMobile)
-					mediaDrawer.open()
+					chatPage.mediaDrawer.open()
 				else
-					openFileDialog(qsTr("All files"), "*", MediaUtilsInstance.label(Enums.MessageType.MessageFile))
+					chatPage.openFileDialog(qsTr("All files"), "*", MediaUtilsInstance.label(Enums.MessageType.MessageFile))
 			}
 		}
 
@@ -92,7 +93,7 @@ Controls.Pane {
 			Layout.fillWidth: true
 			spacing: 0
 			RowLayout {
-				visible: isWritingSpoiler
+				visible: chatPage.isWritingSpoiler
 				Controls.TextArea {
 					id: spoilerHintField
 					Layout.fillWidth: true
@@ -113,13 +114,13 @@ Controls.Pane {
 						height: width
 					}
 					onClicked: {
-						isWritingSpoiler = false
+						chatPage.isWritingSpoiler = false
 						spoilerHintField.text = ""
 					}
 				}
 			}
 			Kirigami.Separator {
-				visible: isWritingSpoiler
+				visible: chatPage.isWritingSpoiler
 				Layout.fillWidth: true
 			}
 			Controls.TextArea {
@@ -221,12 +222,12 @@ Controls.Pane {
 					Kaidan.sendMessage(
 						Kaidan.messageModel.currentChatJid,
 						messageField.text,
-						isWritingSpoiler,
+						chatPage.isWritingSpoiler,
 						spoilerHintField.text
 					)
 				} else if (messageField.state == "edit") {
 					Kaidan.correctMessage(
-						messageToCorrect,
+						chatPage.messageToCorrect,
 						messageField.text
 					)
 				}
@@ -235,8 +236,8 @@ Controls.Pane {
 				messageField.text = ""
 				messageField.state = "compose"
 				spoilerHintField.text = ""
-				isWritingSpoiler = false
-				messageToCorrect = ''
+				chatPage.isWritingSpoiler = false
+				chatPage.messageToCorrect = ''
 
 				// reenable the button
 				sendButton.enabled = true

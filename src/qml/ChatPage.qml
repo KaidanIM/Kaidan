@@ -393,7 +393,7 @@ ChatPageBase {
 		height: messageListView.atYEnd ? 0 : 50
 		anchors.horizontalCenter: parent.horizontalCenter
 		anchors.bottom: parent.bottom
-		anchors.bottomMargin: sendingArea.height + 5
+		anchors.bottomMargin: sendingPane.height + 5
 		icon.name: "go-down"
 		onClicked: messageListView.positionViewAtIndex(0, ListView.Center)
 
@@ -480,12 +480,12 @@ ChatPageBase {
 
 			onMessageEditRequested: {
 				messageToCorrect = id
-				sendingArea.messageField.text = body
-				sendingArea.messageField.state = "edit"
+				sendingPane.messageArea.text = body
+				sendingPane.messageArea.state = "edit"
 
 				// Move the cursor to the end of the text being corrected.
-				sendingArea.messageField.selectAll()
-				sendingArea.messageField.cursorPosition = sendingArea.messageField.selectionEnd
+				sendingPane.messageArea.selectAll()
+				sendingPane.messageArea.cursorPosition = sendingPane.messageField.selectionEnd
 			}
 
 			onQuoteRequested: {
@@ -496,13 +496,13 @@ ChatPageBase {
 					quotedText += "> " + lines[line] + "\n"
 				}
 
-				sendingArea.messageField.insert(0, quotedText)
+				sendingPane.messageArea.insert(0, quotedText)
 			}
 		}
 	}
 
 	footer: ChatPageSendingPane {
-		id: sendingArea
+		id: sendingPane
 		chatPage: root
 	}
 }

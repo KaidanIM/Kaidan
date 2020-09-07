@@ -50,7 +50,7 @@ Controls.Pane {
 	}
 
 	property QtObject chatPage
-	property alias messageField: messageField
+	property alias messageArea: messageArea
 
 	RowLayout {
 		anchors.fill: parent
@@ -79,7 +79,7 @@ Controls.Pane {
 		}
 
 		ColumnLayout {
-			Layout.minimumHeight: messageField.height + Kirigami.Units.smallSpacing * 2
+			Layout.minimumHeight: messageArea.height + Kirigami.Units.smallSpacing * 2
 			Layout.fillWidth: true
 			spacing: 0
 			RowLayout {
@@ -114,7 +114,7 @@ Controls.Pane {
 				Layout.fillWidth: true
 			}
 			Controls.TextArea {
-				id: messageField
+				id: messageArea
 
 				Layout.fillWidth: true
 				Layout.alignment: Qt.AlignVCenter
@@ -134,7 +134,7 @@ Controls.Pane {
 				Keys.onReturnPressed: {
 					if (event.key === Qt.Key_Return) {
 						if (event.modifiers & (Qt.ControlModifier | Qt.ShiftModifier)) {
-							messageField.append("")
+							messageArea.append("")
 						} else {
 							sendButton.onClicked()
 							event.accepted = true
@@ -158,7 +158,7 @@ Controls.Pane {
 				sourceModel: EmojiModel {}
 			}
 
-			textArea: messageField
+			textArea: messageArea
 		}
 
 		Controls.ToolButton {
@@ -185,9 +185,9 @@ Controls.Pane {
 			padding: 0
 			Kirigami.Icon {
 				source: {
-					if (messageField.state == "compose")
+					if (messageArea.state == "compose")
 						return "document-send"
-					else if (messageField.state == "edit")
+					else if (messageArea.state == "edit")
 						return "edit-symbolic"
 				}
 				enabled: sendButton.enabled
@@ -205,7 +205,7 @@ Controls.Pane {
 		// This makes it possible on desktop devices to directly enter a message after opening the chat page.
 		// It is not used on mobile devices because the soft keyboard would otherwise always pop up after opening the chat page.
 		if (!Kirigami.Settings.isMobile)
-			messageField.forceActiveFocus()
+			messageArea.forceActiveFocus()
 	}
 
 	/**
@@ -213,7 +213,7 @@ Controls.Pane {
 	 */
 	function sendMessage() {
 		// don't send empty messages
-		if (!messageField.text.length) {
+		if (!messageArea.text.length) {
 			return
 		}
 
@@ -222,23 +222,23 @@ Controls.Pane {
 		sendButton.enabled = false
 
 		// send the message
-		if (messageField.state == "compose") {
+		if (messageArea.state == "compose") {
 			Kaidan.sendMessage(
 				Kaidan.messageModel.currentChatJid,
-				messageField.text,
+				messageArea.text,
 				chatPage.isWritingSpoiler,
 				spoilerHintField.text
 			)
-		} else if (messageField.state == "edit") {
+		} else if (messageArea.state == "edit") {
 			Kaidan.correctMessage(
 				chatPage.messageToCorrect,
-				messageField.text
+				messageArea.text
 			)
 		}
 
 		// clean up the text fields
-		messageField.text = ""
-		messageField.state = "compose"
+		messageArea.text = ""
+		messageArea.state = "compose"
 		spoilerHintField.text = ""
 		chatPage.isWritingSpoiler = false
 		chatPage.messageToCorrect = ''
@@ -248,6 +248,6 @@ Controls.Pane {
 
 		// Show the cursor even if another element like the sendButton (after
 		// clicking on it) was focused before.
-		messageField.forceActiveFocus()
+		messageArea.forceActiveFocus()
 	}
 }

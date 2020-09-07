@@ -31,7 +31,6 @@
 import QtQuick 2.12
 import QtQuick.Layouts 1.12
 import QtQuick.Controls 2.12 as Controls
-import QtGraphicalEffects 1.12
 import org.kde.kirigami 2.12 as Kirigami
 
 import im.kaidan.kaidan 1.0
@@ -45,18 +44,10 @@ Controls.Pane {
 	padding: 0
 	wheelEnabled: true
 
-	background: Rectangle {
-		id: sendingAreaBackground
+	background: Kirigami.ShadowedRectangle {
+		shadow.color: Qt.darker(color, 1.2)
+		shadow.size: 4
 		color: Kirigami.Theme.backgroundColor
-	}
-
-	layer.enabled: sendingArea.enabled
-	layer.effect: DropShadow {
-		verticalOffset: 1
-		color: Qt.darker(sendingAreaBackground.color, 1.2)
-		samples: 20
-		spread: 0.3
-		cached: true // element is static
 	}
 
 	property QtObject chatPage

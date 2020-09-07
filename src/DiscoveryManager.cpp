@@ -43,7 +43,7 @@ DiscoveryManager::DiscoveryManager(QXmppClient *client, QObject *parent)
 	m_manager->setClientName(APPLICATION_DISPLAY_NAME);
 #if defined Q_OS_ANDROID || defined UBUNTU_TOUCH
 	// on Ubuntu Touch and Android we're always a mobile client
-	manager->setClientType("phone");
+	m_manager->setClientType("phone");
 #else
 	// Plasma Mobile packages won't differ from desktop builds, so we need to check the mobile
 	// variable on runtime.

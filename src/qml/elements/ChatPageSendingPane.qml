@@ -42,7 +42,6 @@ import MediaUtils 0.1
  */
 Controls.Pane {
 	padding: 0
-	wheelEnabled: true
 
 	background: Kirigami.ShadowedRectangle {
 		shadow.color: Qt.darker(color, 1.2)

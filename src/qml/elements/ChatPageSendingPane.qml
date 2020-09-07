@@ -197,44 +197,7 @@ Controls.Pane {
 				width: Kirigami.Units.gridUnit * 2
 				height: width
 			}
-			onClicked: {
-				// don't send empty messages
-				if (!messageField.text.length) {
-					return
-				}
-
-				// disable the button to prevent sending
-				// the same message several times
-				sendButton.enabled = false
-
-				// send the message
-				if (messageField.state == "compose") {
-					Kaidan.sendMessage(
-						Kaidan.messageModel.currentChatJid,
-						messageField.text,
-						chatPage.isWritingSpoiler,
-						spoilerHintField.text
-					)
-				} else if (messageField.state == "edit") {
-					Kaidan.correctMessage(
-						chatPage.messageToCorrect,
-						messageField.text
-					)
-				}
-
-				// clean up the text fields
-				messageField.text = ""
-				messageField.state = "compose"
-				spoilerHintField.text = ""
-				chatPage.isWritingSpoiler = false
-				chatPage.messageToCorrect = ''
-
-				// reenable the button
-				sendButton.enabled = true
-
-				// Show the cursor even if another element like the sendButton (after clicking on it) was focused before.
-				messageField.forceActiveFocus()
-			}
+			onClicked: sendMessage()
 		}
 	}
 
@@ -243,5 +206,48 @@ Controls.Pane {
 		// It is not used on mobile devices because the soft keyboard would otherwise always pop up after opening the chat page.
 		if (!Kirigami.Settings.isMobile)
 			messageField.forceActiveFocus()
+	}
+
+	/**
+	 * Sends the text entered in the messageArea.
+	 */
+	function sendMessage() {
+		// don't send empty messages
+		if (!messageField.text.length) {
+			return
+		}
+
+		// disable the button to prevent sending
+		// the same message several times
+		sendButton.enabled = false
+
+		// send the message
+		if (messageField.state == "compose") {
+			Kaidan.sendMessage(
+				Kaidan.messageModel.currentChatJid,
+				messageField.text,
+				chatPage.isWritingSpoiler,
+				spoilerHintField.text
+			)
+		} else if (messageField.state == "edit") {
+			Kaidan.correctMessage(
+				chatPage.messageToCorrect,
+				messageField.text
+			)
+		}
+
+		// clean up the text fields
+		messageField.text = ""
+		messageField.state = "compose"
+		spoilerHintField.text = ""
+		chatPage.isWritingSpoiler = false
+		chatPage.messageToCorrect = ''
+
+		// reenable the button
+		sendButton.enabled = true
+
+		// Show the cursor even if another element like the sendButton (after
+		// clicking on it) was focused before.
+		messageField.forceActiveFocus()
 	}
 }

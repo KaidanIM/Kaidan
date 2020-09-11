@@ -438,11 +438,26 @@ signals:
 	 */
 	void deleteAccountFromClient();
 
+	/**
+	 * Emitted when a data form for registration is received from the server.
+	 *
+	 * @param dataFormModel received model for the registration data form
+	 */
 	void registrationFormReceived(RegistrationDataFormModel *dataFormModel);
 
+	/**
+	 * Emitted to send a completed data form for registration.
+	 */
 	void sendRegistrationForm();
 
 	void registrationSucceeded();
+
+	/**
+	 * Emitted when the account registration failed.
+	 *
+	 * @param error received error
+	 * @param errorMessage message describing the error
+	 */
 	void registrationFailed(quint8 error, const QString &errorMessage);
 
 public slots:

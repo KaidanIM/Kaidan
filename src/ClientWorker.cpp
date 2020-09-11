@@ -38,7 +38,6 @@
 // QXmpp
 #include <QXmppClient.h>
 #include <QXmppConfiguration.h>
-#include <QXmppPresence.h>
 #include <QXmppUtils.h>
 #include <QXmppVersionManager.h>
 // Kaidan

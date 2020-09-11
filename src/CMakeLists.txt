@@ -47,6 +47,7 @@ set(KAIDAN_SOURCES
 	src/RegistrationDataFormModel.cpp
 	src/ServerListModel.cpp
 	src/ServerListItem.cpp
+	src/AccountManager.cpp
 
 	# needed to trigger moc generation / to be displayed in IDEs
 	src/Enums.h

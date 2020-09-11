@@ -61,7 +61,7 @@ public:
 	};
 	Q_ENUM(RegistrationError)
 
-	RegistrationManager(ClientWorker *clientWorker, QXmppClient *client, QSettings *settings);
+	RegistrationManager(ClientWorker *clientWorker, QXmppClient *client, QSettings *settings, QObject *parent = nullptr);
 
 	/**
 	 * Sets whether a registration is requested for the next time when the client connects to the server.
@@ -70,16 +70,16 @@ public:
 	 */
 	void setRegisterOnConnectEnabled(bool registerOnConnect);
 
-public slots:
-	/**
-	 * Sends the form containing information to register an account.
-	 */
-	void sendRegistrationForm();
-
 	/**
 	 * Deletes the account from the server.
 	 */
 	void deleteAccount();
+
+private slots:
+	/**
+	 * Sends the form containing information to register an account.
+	 */
+	void sendRegistrationForm();
 
 	/**
 	 * Changes the user's password.
@@ -88,7 +88,6 @@ public slots:
 	 */
 	void changePassword(const QString &newPassword);
 
-private:
 	/**
 	 * Called when the In-Band Registration support changed.
 	 *
@@ -96,9 +95,6 @@ private:
 	 * That way, the last known state can be cached while being offline and operations like deleting an account from the server can be offered to the user even if Kaidan is not connected to the user's server.
 	 */
 	void handleInBandRegistrationSupportedChanged();
-
-	void handlePasswordChangeSucceeded(const QString &newPassword);
-	void handlePasswordChangeFailed(const QXmppStanza::Error &error);
 
 	/**
 	 * Handles an incoming form used to register an account.
@@ -119,6 +115,21 @@ private:
 	 */
 	void handleRegistrationFailed(const QXmppStanza::Error &error);
 
+	/**
+	 * Handles a successful password change.
+	 *
+	 * @param newPassword new password used to log in
+	 */
+	void handlePasswordChanged(const QString &newPassword);
+
+	/**
+	 * Handles a failed password change.
+	 *
+	 * @param error error describing the reason for the failure
+	 */
+	void handlePasswordChangeFailed(const QXmppStanza::Error &error);
+
+private:
 	/**
 	 * Extracts a form from an IQ stanza for registration.
 	 *

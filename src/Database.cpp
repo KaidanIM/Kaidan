@@ -44,6 +44,8 @@
 #include <QString>
 #include <QStringList>
 
+#include "Kaidan.h"
+
 #define DATABASE_CONVERT_TO_VERSION(n) \
 	if (m_version < n) { \
 		convertDatabaseToV##n(); \

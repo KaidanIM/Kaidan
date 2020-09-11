@@ -37,13 +37,14 @@
 #include "AvatarFileStorage.h"
 #include "Kaidan.h"
 
-VCardManager::VCardManager(QXmppClient *client, AvatarFileStorage *avatars, QObject *parent)
-	: QObject(parent), m_client(client), m_manager(client->findExtension<QXmppVCardManager>()), m_avatarStorage(avatars)
+VCardManager::VCardManager(ClientWorker *clientWorker, QXmppClient *client, AvatarFileStorage *avatars, QObject *parent)
+	: QObject(parent), m_clientWorker(clientWorker), m_client(client), m_manager(client->findExtension<QXmppVCardManager>()), m_avatarStorage(avatars)
 {
 	connect(m_manager, &QXmppVCardManager::vCardReceived, this, &VCardManager::handleVCardReceived);
 	connect(m_client, &QXmppClient::presenceReceived, this, &VCardManager::handlePresenceReceived);
 	connect(m_manager, &QXmppVCardManager::clientVCardReceived, this, &VCardManager::handleClientVCardReceived);
 	connect(Kaidan::instance(), &Kaidan::vCardRequested, this, &VCardManager::requestVCard);
+	connect(Kaidan::instance(), &Kaidan::changeDisplayName, this, &VCardManager::changeNickname);
 
 	// Currently we're not requesting the own VCard on every connection because it is probably
 	// way too resource intensive on mobile connections with many reconnects.
@@ -99,10 +100,14 @@ void VCardManager::handlePresenceReceived(const QXmppPresence &presence)
 	// ignore VCardUpdateNone (protocol unsupported) and VCardUpdateNotReady
 }
 
-void VCardManager::updateNickname(const QString &nickname)
+void VCardManager::changeNickname(const QString &nickname)
 {
-	m_nicknameToBeSetAfterReceivingCurrentVCard = nickname;
-	requestClientVCard();
+	m_clientWorker->startTask(
+		[=] () {
+			m_nicknameToBeSetAfterReceivingCurrentVCard = nickname;
+			requestClientVCard();
+		}
+	);
 }
 
 void VCardManager::changeNicknameAfterReceivingCurrentVCard()
@@ -111,4 +116,5 @@ void VCardManager::changeNicknameAfterReceivingCurrentVCard()
 	vCardIq.setNickName(m_nicknameToBeSetAfterReceivingCurrentVCard);
 	m_manager->setClientVCard(vCardIq);
 	m_nicknameToBeSetAfterReceivingCurrentVCard.clear();
+	m_clientWorker->finishTask();
 }

@@ -46,8 +46,8 @@
 #include "MessageModel.h"
 #include "MediaUtils.h"
 
-MessageHandler::MessageHandler(ClientWorker *clientWorker, QXmppClient *client, MessageModel *model)
-	: QObject(clientWorker),
+MessageHandler::MessageHandler(ClientWorker *clientWorker, QXmppClient *client, MessageModel *model, QObject *parent)
+	: QObject(parent),
 	  m_clientWorker(clientWorker),
 	  m_client(client),
 	  m_model(model)

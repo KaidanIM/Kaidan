@@ -41,14 +41,15 @@
 #include <QXmppRegisterIq.h>
 #include <QXmppRegistrationManager.h>
 // Kaidan
+#include "AccountManager.h"
 #include "BitsOfBinaryImageProvider.h"
 #include "ClientWorker.h"
 #include "Globals.h"
 #include "Kaidan.h"
 #include "RegistrationDataFormModel.h"
 
-RegistrationManager::RegistrationManager(ClientWorker *clientWorker, QXmppClient *client, QSettings *settings)
-	: QObject(clientWorker),
+RegistrationManager::RegistrationManager(ClientWorker *clientWorker, QXmppClient *client, QSettings *settings, QObject *parent)
+	: QObject(parent),
 	  m_clientWorker(clientWorker),
 	  m_client(client),
 	  m_settings(settings),
@@ -59,23 +60,30 @@ RegistrationManager::RegistrationManager(ClientWorker *clientWorker, QXmppClient
 
 	connect(m_manager, &QXmppRegistrationManager::supportedByServerChanged, this, &RegistrationManager::handleInBandRegistrationSupportedChanged);
 
+	// account creation
 	connect(Kaidan::instance(), &Kaidan::sendRegistrationForm, this, &RegistrationManager::sendRegistrationForm);
-
 	connect(m_manager, &QXmppRegistrationManager::registrationFormReceived, this, &RegistrationManager::handleRegistrationFormReceived);
 	connect(m_manager, &QXmppRegistrationManager::registrationSucceeded, this, &RegistrationManager::handleRegistrationSucceeded);
-	connect(m_manager, &QXmppRegistrationManager::registrationSucceeded, Kaidan::instance(), &Kaidan::registrationSucceeded);
 	connect(m_manager, &QXmppRegistrationManager::registrationFailed, this, &RegistrationManager::handleRegistrationFailed);
 
+	// account deletion
 	connect(m_manager, &QXmppRegistrationManager::accountDeletionFailed, m_clientWorker, &ClientWorker::handleAccountDeletionFromServerFailed);
 	connect(m_manager, &QXmppRegistrationManager::accountDeleted, m_clientWorker, &ClientWorker::handleAccountDeletedFromServer);
 
-	connect(m_manager, &QXmppRegistrationManager::passwordChanged, this, &RegistrationManager::handlePasswordChangeSucceeded);
+	// password change
+	connect(Kaidan::instance(), &Kaidan::changePassword, this, &RegistrationManager::changePassword);
+	connect(m_manager, &QXmppRegistrationManager::passwordChanged, this, &RegistrationManager::handlePasswordChanged);
 	connect(m_manager, &QXmppRegistrationManager::passwordChangeFailed, this, &RegistrationManager::handlePasswordChangeFailed);
 }
 
 void RegistrationManager::setRegisterOnConnectEnabled(bool registerOnConnect)
 {
 	m_manager->setRegisterOnConnectEnabled(registerOnConnect);
+}
+
+void RegistrationManager::deleteAccount()
+{
+	m_manager->deleteAccount();
 }
 
 void RegistrationManager::sendRegistrationForm()
@@ -94,14 +102,13 @@ void RegistrationManager::sendRegistrationForm()
 	m_clientWorker->connectToRegister();
 }
 
-void RegistrationManager::deleteAccount()
-{
-	m_manager->deleteAccount();
-}
-
 void RegistrationManager::changePassword(const QString &newPassword)
 {
-	m_manager->changePassword(newPassword);
+	m_clientWorker->startTask(
+		[=] () {
+			m_manager->changePassword(newPassword);
+		}
+	);
 }
 
 void RegistrationManager::handleInBandRegistrationSupportedChanged()
@@ -109,22 +116,6 @@ void RegistrationManager::handleInBandRegistrationSupportedChanged()
 	if (m_client->isConnected()) {
 		m_clientWorker->caches()->serverFeaturesCache->setInBandRegistrationSupported(m_manager->supportedByServer());
 	}
-}
-
-void RegistrationManager::handlePasswordChangeSucceeded(const QString &newPassword)
-{
-	m_settings->setValue(
-	    KAIDAN_SETTINGS_AUTH_PASSWD,
-	    QString::fromUtf8(newPassword.toUtf8().toBase64())
-	);
-
-	QMetaObject::invokeMethod(Kaidan::instance(), "setPassword", Q_ARG(QString, newPassword));
-	emit Kaidan::instance()->passwordChangeSucceeded();
-}
-
-void RegistrationManager::handlePasswordChangeFailed(const QXmppStanza::Error &error)
-{
-	emit Kaidan::instance()->passwordChangeFailed(error.text());
 }
 
 void RegistrationManager::handleRegistrationFormReceived(const QXmppRegisterIq &iq)
@@ -160,11 +151,12 @@ void RegistrationManager::handleRegistrationFormReceived(const QXmppRegisterIq &
 
 void RegistrationManager::handleRegistrationSucceeded()
 {
-	Kaidan::instance()->setJid(m_dataFormModel->extractUsername().append('@').append(m_client->configuration().domain()));
-	Kaidan::instance()->setPassword(m_dataFormModel->extractPassword());
+	m_clientWorker->accountManager()->setJid(m_dataFormModel->extractUsername().append('@').append(m_client->configuration().domain()));
+	m_clientWorker->accountManager()->setPassword(m_dataFormModel->extractPassword());
 
-	Kaidan::instance()->logOut();
-	Kaidan::instance()->logIn();
+	m_client->disconnectFromServer();
+	setRegisterOnConnectEnabled(false);
+	m_clientWorker->logIn();
 
 	cleanUpLastForm();
 	m_dataFormModel = new RegistrationDataFormModel();
@@ -172,6 +164,9 @@ void RegistrationManager::handleRegistrationSucceeded()
 
 void RegistrationManager::handleRegistrationFailed(const QXmppStanza::Error &error)
 {
+	m_client->disconnectFromServer();
+	setRegisterOnConnectEnabled(false);
+
 	RegistrationError registrationError = RegistrationError::UnknownError;
 
 	switch(error.type()) {
@@ -208,6 +203,20 @@ void RegistrationManager::handleRegistrationFailed(const QXmppStanza::Error &err
 	}
 
 	emit Kaidan::instance()->registrationFailed(quint8(registrationError), error.text());
+}
+
+void RegistrationManager::handlePasswordChanged(const QString &newPassword)
+{
+	m_clientWorker->accountManager()->setPassword(newPassword);
+	m_clientWorker->accountManager()->storePasswordInSettingsFile();
+	m_clientWorker->accountManager()->setHasNewCredentials(false);
+	m_clientWorker->finishTask();
+}
+
+void RegistrationManager::handlePasswordChangeFailed(const QXmppStanza::Error &error)
+{
+	emit Kaidan::instance()->passwordChangeFailed(error.text());
+	m_clientWorker->finishTask();
 }
 
 QXmppDataForm RegistrationManager::extractFormFromRegisterIq(const QXmppRegisterIq& iq, bool &isFakeForm)

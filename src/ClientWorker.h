@@ -31,17 +31,20 @@
 #pragma once
 
 // Qt
+#include <QList>
 #include <QObject>
 #include <QSettings>
 // QXmpp
 #include <QXmppClient.h>
 // Kaidan
 #include "AvatarFileStorage.h"
+#include "Enums.h"
 #include "MessageModel.h"
 #include "PresenceCache.h"
 #include "RosterModel.h"
 #include "ServerFeaturesCache.h"
 #include "TransferCache.h"
+class AccountManager;
 class LogHandler;
 class ClientWorker;
 class RegistrationManager;
@@ -105,20 +108,19 @@ public:
 		QSettings *settings;
 	};
 
-	struct Credentials {
-		QString jid;
-		QString jidResourcePrefix;
-		QString password;
-		// if never connected successfully before with these credentials
-		bool isFirstTry;
-	};
-
 	/**
 	 * @param caches All caches running in the main thread for communication with the UI.
 	 * @param enableLogging If logging of the XMPP stream should be done.
 	 * @param parent Optional QObject-based parent.
 	 */
 	ClientWorker(Caches *caches, bool enableLogging, QObject *parent = nullptr);
+
+	/**
+	 * Initializes this client worker as soon as it runs in a separate thread.
+	 */
+	void initialize();
+
+	AccountManager *accountManager() const;
 
 	VCardManager *vCardManager() const;
 
@@ -134,38 +136,59 @@ public:
 	 */
 	bool isApplicationWindowActive() const;
 
-public slots:
 	/**
-	 * Main function of the client thread
-	 */
-	void main();
-
-	/**
-	 * Sets the new credentials for next connect.
+	 * Starts or enqueues a task which will be executed after successful login (e.g. a
+	 * nickname change).
 	 *
-	 * @param credentials The new credentials for the next connect
+	 * This method is called by managers which must call "finishTask()" as soon as the
+	 * task is completed.
+	 *
+	 * If the user is logged out when this method is called, a login is triggered, the
+	 * task is started and a logout is triggered afterwards. However, if this method is
+	 * called before a login with new credentials (e.g. during account registration), the
+	 * task is started after the subsequent login.
+	 *
+	 * @param task task which is run directly if the user is logged in or enqueued to be
+	 * run after an automatic login
 	 */
-	void setCredentials(ClientWorker::Credentials credentials)
-	{
-		m_credentials = credentials;
-	}
+	void startTask(const std::function<void ()> task);
 
+	/**
+	 * Finishes a task started by "startTask()".
+	 *
+	 * This must be called after a possible completion of a pending task.
+	 *
+	 * A logout is triggered when this method is called after the second login with the
+	 * same credentials or later. That means, a logout is not triggered after a login with
+	 * new credentials (e.g. after a registration).
+	 */
+	void finishTask();
+
+public slots:
 	/**
 	 * Connects to the server and logs in with all needed configuration variables.
 	 */
 	void logIn();
 
 	/**
-	 * Connects to the server with a minimal configuration and adds additional variables to it before connecting if a configuration is passed.
+	 * Connects to the server and requests a data form for account registration.
+	 */
+	void connectToRegister();
+
+	/**
+	 * Connects to the server with a minimal configuration.
 	 *
-	 * @param config
+	 * Some additional configuration variables can be set by passing a configuration.
+	 *
+	 * @param config configuration with additional variables for connecting to the server
+	 * or nothing if only the minimal configuration should be used
 	 */
 	void connectToServer(QXmppConfiguration config = QXmppConfiguration());
 
 	/**
-	 * Connects to the server and requests a data form for account registration.
+	 * Logs out of the server if the client is not already logged out.
 	 */
-	void connectToRegister();
+	void logOut();
 
 	/**
 	 * Deletes the account data from the client and server.
@@ -189,23 +212,15 @@ public slots:
 	 */
 	void handleAccountDeletionFromServerFailed(const QXmppStanza::Error &error);
 
-	/**
-	 * Changes the user's password.
-	 *
-	 * @param newPassword new password to set
-	 */
-	void changePassword(const QString &newPassword);
-
-	/**
-	 * Changes the user's display name.
-	 *
-	 * If the user is not logged in during account registration, the display name is changed on the next login.
-	 *
-	 * @param displayName new name that is shown to contacts
-	 */
-	void changeDisplayName(const QString &displayName);
-
 signals:
+	/**
+	 * Emitted when an authenticated connection to the server is established with new
+	 * credentials for the first time.
+	 *
+	 * The client will be in connected state when this is emitted.
+	 */
+	void loggedInWithNewCredentials();
+
 	/**
 	 * Requests to show a notification for a chat message via the system's notification channel.
 	 *
@@ -215,11 +230,12 @@ signals:
 	 */
 	void showMessageNotificationRequested(const QString &senderJid, const QString &senderName, const QString &message);
 
-	// Those signals are emitted by Kaidan.cpp and are used by this class.
-	void logInRequested();
-	void logOutRequested();
-	void credentialsUpdated(ClientWorker::Credentials m_credentials);
-	void registrationFormRequested();
+	/**
+	 * Emitted when the client's connection state changed.
+	 *
+	 * @param connectionState new connection state
+	 */
+	void connectionStateChanged(Enums::ConnectionState connectionState);
 
 	/**
 	 * Emitted when the client failed to connect to the server.
@@ -252,24 +268,36 @@ private slots:
 	void onDisconnected();
 
 	/**
-	 * Sets a new connection error.
+	 * Handles the change of the connection state.
+	 *
+	 * @param connectionState new connection state
+	 */
+	void onConnectionStateChanged(QXmppClient::State connectionState);
+
+	/**
+	 * Handles a connection error.
+	 *
+	 * @param error new connection error
 	 */
 	void onConnectionError(QXmppClient::Error error);
 
 private:
 	/**
-	 * Generates the resource part of a JID with a suffix consisting of a dot followed by random alphanumeric characters.
+	 * Starts a pending (enqueued) task (e.g. a password change) if the variable (e.g. a
+	 * password) could not be changed on the server before because the client was not
+	 * logged in.
 	 *
-	 * @param length number of random alphanumeric characters the suffix should consist of after the dot
+	 * @return true if at least one pending task is started on the second login with the
+	 * same credentials or later, otherwise false
 	 */
-	QString generateJidResourceWithRandomSuffix(const QString &jidResourcePrefix, unsigned int length = 4) const;
+	bool startPendingTasks();
 
 	Caches *m_caches;
 	QXmppClient *m_client;
 	LogHandler *m_logger;
-	Credentials m_credentials;
 	bool m_enableLogging;
 
+	AccountManager *m_accountManager;
 	RegistrationManager *m_registrationManager;
 	RosterManager *m_rosterManager;
 	MessageHandler *m_messageHandler;
@@ -278,8 +306,12 @@ private:
 	UploadManager *m_uploadManager;
 	DownloadManager *m_downloadManager;
 
+	QList<std::function<void ()>> m_pendingTasks;
+	uint m_activeTasks = 0;
+
 	bool m_isApplicationWindowActive;
 	bool m_isReconnecting = false;
+	bool m_isDisconnecting = false;
 	QXmppConfiguration m_configToBeUsedOnNextConnect;
 
 	// These variables are used for checking the state of an ongoing account deletion.
@@ -287,7 +319,4 @@ private:
 	bool m_isAccountToBeDeletedFromClientAndServer = false;
 	bool m_isAccountDeletedFromServer = false;
 	bool m_isClientConnectedBeforeAccountDeletionFromServer = true;
-
-	QString m_passwordToBeSetOnNextConnect;
-	QString m_displayNameToBeSetOnNextConnect;
 };

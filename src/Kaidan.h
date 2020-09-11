@@ -64,7 +64,6 @@ class Kaidan : public QObject
 	Q_PROPERTY(quint8 connectionState READ connectionState NOTIFY connectionStateChanged)
 	Q_PROPERTY(quint8 connectionError READ connectionError NOTIFY connectionErrorChanged)
 	Q_PROPERTY(QString jid READ jid WRITE setJid NOTIFY jidChanged)
-	Q_PROPERTY(QString jidResourcePrefix READ jidResourcePrefix WRITE setJidResourcePrefix NOTIFY jidResourcePrefixChanged)
 	Q_PROPERTY(QString password READ password WRITE setPassword NOTIFY passwordChanged)
 	Q_PROPERTY(PasswordVisibility passwordVisibility READ passwordVisibility WRITE setPasswordVisibility NOTIFY passwordVisibilityChanged)
 
@@ -81,16 +80,18 @@ public:
 
 	static Kaidan *instance();
 
+	/**
+	 * Constructs Kaidan's main object and initializes all components / threads.
+	 *
+	 * @param app GUI application object for managing Kaidan's GUI
+	 * @param enableLogging true to enable logging, otherwise false
+	 */
 	Kaidan(QGuiApplication *app, bool enableLogging = true, QObject *parent = nullptr);
+
 	~Kaidan();
 
 	/**
-	 * Starts connecting (called from QML when ready).
-	 */
-	Q_INVOKABLE void start();
-
-	/**
-	 * Connects to the XMPP server.
+	 * Connects to the XMPP server and logs in to it.
 	 *
 	 * The username and password are retrieved from the settings file.
 	 */
@@ -102,7 +103,7 @@ public:
 	Q_INVOKABLE void requestRegistrationForm();
 
 	/**
-	 * Disconnects from the XMPP server.
+	 * Logs out of the XMPP server.
 	 *
 	 * This disconnects the client from the server.
 	 * When disconnected, the connectionStateChanged signal is emitted.
@@ -131,27 +132,9 @@ public:
 	void setJid(const QString &jid);
 
 	/**
-	 * Get the current JID
+	 * Returns the currently used JID.
 	 */
-	QString jid() const
-	{
-		return m_credentials.jid;
-	}
-
-	/**
-	 * Sets the prefix of the JID's resource part.
-	 *
-	 * The remaining part of the resource is set randomly.
-	 */
-	void setJidResourcePrefix(const QString &jidResourcePrefix);
-
-	/**
-	 * Provides the prefix of the JID's resource part.
-	 */
-	QString jidResourcePrefix() const
-	{
-		return m_credentials.jidResourcePrefix;
-	}
+	QString jid() const;
 
 	/**
 	 * Set the password for next connection
@@ -159,12 +142,9 @@ public:
 	void setPassword(const QString &password);
 
 	/**
-	 * Get the currently used password
+	 * Returns the currently used password.
 	 */
-	QString password() const
-	{
-		return m_credentials.password;
-	}
+	QString password() const;
 
 	/**
 	 * Sets the visibility of the password on the account transfer page.
@@ -256,6 +236,42 @@ signals:
 	 */
 	void applicationWindowActiveChanged(bool active);
 
+	/**
+	 * Emitted to request a registration form from the server which is set as the
+	 * currently used JID.
+	 */
+	void registrationFormRequested();
+
+	/**
+	 * Emitted when a data form for registration is received from the server.
+	 *
+	 * @param dataFormModel received model for the registration data form
+	 */
+	void registrationFormReceived(DataFormModel *dataFormModel);
+
+	/**
+	 * Emitted to send a completed data form for registration.
+	 */
+	void sendRegistrationForm();
+
+	/**
+	 * Emitted when the account registration failed.
+	 *
+	 * @param error received error
+	 * @param errorMessage message describing the error
+	 */
+	void registrationFailed(quint8 error, const QString &errorMessage);
+
+	/**
+	 * Emitted to log in to the server with the set credentials.
+	 */
+	void logInRequested();
+
+	/**
+	 * Emitted to log out of the server.
+	 */
+	void logOutRequested();
+
 	void avatarStorageChanged();
 
 	/**
@@ -270,31 +286,26 @@ signals:
 	void connectionErrorChanged(ClientWorker::ConnectionError error);
 
 	/**
-	 * Emitted when the JID was changed
+	 * Emitted when the JID used to log in changed.
 	 */
 	void jidChanged();
 
 	/**
-	 * Emitted when the prefix of the JID's resource part changed.
-	 */
-	void jidResourcePrefixChanged();
-
-	/**
-	 * Emitted when the used password for logging in has changed
+	 * Emitted when the password used to log in changed.
 	 */
 	void passwordChanged();
 
 	/**
-	 * Emitted when there are no (correct) credentials and new are needed
+	 * Emitted when there are no (correct) credentials and new ones are needed.
 	 *
-	 * The client will be in disconnected state, when this is emitted.
+	 * The client will be in disconnected state when this is emitted.
 	 */
 	void newCredentialsNeeded();
 
 	/**
 	 * Emitted when an authenticated connection to the server is established with new credentials for the first time.
 	 *
-	 * The client will be in connected state, when this is emitted.
+	 * The client will be in connected state when this is emitted.
 	 */
 	void loggedInWithNewCredentials();
 
@@ -414,11 +425,6 @@ signals:
 	void changePassword(const QString &newPassword);
 
 	/**
-	 * Emitted, when changing the password has succeeded.
-	 */
-	void passwordChangeSucceeded();
-
-	/**
 	 * Emitted when changing the user's password failed.
 	 *
 	 * @param errorMessage message describing the error
@@ -440,28 +446,6 @@ signals:
 	 */
 	void deleteAccountFromClient();
 
-	/**
-	 * Emitted when a data form for registration is received from the server.
-	 *
-	 * @param dataFormModel received model for the registration data form
-	 */
-	void registrationFormReceived(RegistrationDataFormModel *dataFormModel);
-
-	/**
-	 * Emitted to send a completed data form for registration.
-	 */
-	void sendRegistrationForm();
-
-	void registrationSucceeded();
-
-	/**
-	 * Emitted when the account registration failed.
-	 *
-	 * @param error received error
-	 * @param errorMessage message describing the error
-	 */
-	void registrationFailed(quint8 error, const QString &errorMessage);
-
 public slots:
 	/**
 	 * Handles a changed application state and emits whether the application window is active.
@@ -473,17 +457,12 @@ public slots:
 	/**
 	 * Set current connection state
 	 */
-	void setConnectionState(QXmppClient::State state);
+	void setConnectionState(Enums::ConnectionState connectionState);
 
 	/**
 	 * Sets a new connection error.
 	 */
 	void setConnectionError(ClientWorker::ConnectionError error);
-
-	/**
-	 * Deletes the username and password from the settings file.
-	 */
-	void deleteCredentials();
 
 	/**
 	 * Receives messages from another instance of the application
@@ -509,6 +488,23 @@ public slots:
 
 private:
 	/**
+	 * Initializes the database and the corresponding thread.
+	 */
+	void initializeDatabase();
+
+	/**
+	 * Initializes the caches.
+	 */
+	void initializeCaches();
+
+	/**
+	 * Initializes the client worker and the corresponding thread.
+	 *
+	 * @param enableLogging true to enable logging, otherwise false
+	 */
+	void initializeClientWorker(bool enableLogging = true);
+
+	/**
 	 * Notifies if no valid login URI was found.
 	 */
 	void notifyForInvalidLoginUri();
@@ -521,7 +517,6 @@ private:
 	ClientWorker::Caches *m_caches;
 	ClientWorker *m_client;
 
-	ClientWorker::Credentials m_credentials;
 	QString m_openUriCache;
 	ConnectionState m_connectionState = ConnectionState::StateDisconnected;
 	ClientWorker::ConnectionError m_connectionError = ClientWorker::NoError;

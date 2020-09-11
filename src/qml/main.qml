@@ -76,9 +76,7 @@ Kirigami.ApplicationWindow {
 	}
 
 	// Log out of the server when the application window is closed.
-	onClosing: {
-		Kaidan.logOut()
-	}
+	onClosing: Kaidan.logOut()
 
 	// components for all main pages
 	Component {id: startPage; StartPage {}}
@@ -183,6 +181,6 @@ Kirigami.ApplicationWindow {
 		openChatView()
 
 		// Announce that the user interface is ready and the application can start connecting.
-		Kaidan.start()
+		Kaidan.logIn()
 	}
 }

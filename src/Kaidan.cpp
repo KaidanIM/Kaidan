@@ -37,6 +37,7 @@
 // QXmpp
 #include "qxmpp-exts/QXmppUri.h"
 // Kaidan
+#include "AccountManager.h"
 #include "AvatarFileStorage.h"
 #include "CredentialsValidator.h"
 #include "Database.h"
@@ -48,68 +49,16 @@
 Kaidan *Kaidan::s_instance;
 
 Kaidan::Kaidan(QGuiApplication *app, bool enableLogging, QObject *parent)
-        : QObject(parent),
-          m_database(new Database()),
-          m_dbThrd(new QThread()),
-          m_msgDb(new MessageDb()),
-          m_rosterDb(new RosterDb(m_database)),
-          m_cltThrd(new QThread())
+	: QObject(parent)
 {
 	Q_ASSERT(!s_instance);
 	s_instance = this;
 
+	initializeDatabase();
+	initializeCaches();
+	initializeClientWorker(enableLogging);
+
 	connect(app, &QGuiApplication::applicationStateChanged, this, &Kaidan::handleApplicationStateChanged);
-
-	// Database setup
-	m_database->moveToThread(m_dbThrd);
-	m_msgDb->moveToThread(m_dbThrd);
-	m_rosterDb->moveToThread(m_dbThrd);
-
-	connect(m_dbThrd, &QThread::started, m_database, &Database::openDatabase);
-
-	m_dbThrd->setObjectName("SqlDatabase");
-	m_dbThrd->start();
-
-	// Caching components
-	m_caches = new ClientWorker::Caches(m_rosterDb, m_msgDb, this);
-	// Connect the avatar changed signal of the avatarStorage with the NOTIFY signal
-	// of the Q_PROPERTY for the avatar storage (so all avatars are updated in QML)
-	connect(m_caches->avatarStorage, &AvatarFileStorage::avatarIdsChanged,
-	        this, &Kaidan::avatarStorageChanged);
-
-	//
-	// Load settings
-	//
-
-	setJid(m_caches->settings->value(KAIDAN_SETTINGS_AUTH_JID).toString());
-	setJidResourcePrefix(m_caches->settings->value(KAIDAN_SETTINGS_AUTH_JID_RESOURCE_PREFIX).toString());
-	setPassword(QByteArray::fromBase64(
-		m_caches->settings->value(KAIDAN_SETTINGS_AUTH_PASSWD).toString().toUtf8()
-	));
-	// Use a default prefix for the JID's resource part if no prefix is already set.
-	if (m_credentials.jidResourcePrefix.isEmpty())
-		setJidResourcePrefix(KAIDAN_JID_RESOURCE_DEFAULT_PREFIX);
-	m_credentials.isFirstTry = false;
-
-	setPasswordVisibility(PasswordVisibility(
-		m_caches->settings->value(KAIDAN_SETTINGS_AUTH_PASSWD_VISIBILITY).toUInt()));
-
-	//
-	// Start ClientWorker on new thread
-	//
-
-	m_client = new ClientWorker(m_caches, enableLogging);
-	m_client->setCredentials(m_credentials);
-	m_client->moveToThread(m_cltThrd);
-
-	connect(m_client, &ClientWorker::connectionErrorChanged, this, &Kaidan::setConnectionError);
-	connect(m_client, &ClientWorker::showMessageNotificationRequested, this, [](const QString &senderJid, const QString &senderName, const QString &message) {
-		Notifications::sendMessageNotification(senderJid, senderName, message);
-	});
-	connect(m_cltThrd, &QThread::started, m_client, &ClientWorker::main);
-
-	m_client->setObjectName("XmppClient");
-	m_cltThrd->start();
 }
 
 Kaidan::~Kaidan()
@@ -119,31 +68,19 @@ Kaidan::~Kaidan()
 	s_instance = nullptr;
 }
 
-void Kaidan::start()
-{
-	if (m_credentials.jid.isEmpty() || m_credentials.password.isEmpty())
-		emit newCredentialsNeeded();
-	else
-		logIn();
-}
-
 void Kaidan::logIn()
 {
-	emit m_client->credentialsUpdated(m_credentials);
-	emit m_client->logInRequested();
+	emit logInRequested();
 }
 
 void Kaidan::requestRegistrationForm()
 {
-	emit m_client->credentialsUpdated(m_credentials);
-	emit m_client->registrationFormRequested();
+	emit registrationFormRequested();
 }
 
 void Kaidan::logOut()
 {
-	// disconnect the client if connected or connecting
-	if (m_connectionState != ConnectionState::StateDisconnected)
-		emit m_client->logOutRequested();
+	emit logOutRequested();
 }
 
 void Kaidan::handleApplicationStateChanged(Qt::ApplicationState applicationState)
@@ -154,10 +91,10 @@ void Kaidan::handleApplicationStateChanged(Qt::ApplicationState applicationState
 		emit applicationWindowActiveChanged(false);
 }
 
-void Kaidan::setConnectionState(QXmppClient::State state)
+void Kaidan::setConnectionState(Enums::ConnectionState connectionState)
 {
-	if (m_connectionState != static_cast<ConnectionState>(state)) {
-		m_connectionState = static_cast<ConnectionState>(state);
+	if (m_connectionState != connectionState) {
+		m_connectionState = connectionState;
 		emit connectionStateChanged();
 
 		// Open the possibly cached URI when connected.
@@ -178,21 +115,6 @@ void Kaidan::setConnectionError(ClientWorker::ConnectionError error)
 	emit connectionErrorChanged(error);
 }
 
-void Kaidan::deleteCredentials()
-{
-	// Delete the JID.
-	m_caches->settings->remove(KAIDAN_SETTINGS_AUTH_JID);
-	setJid(QString());
-
-	// Delete the password.
-	m_caches->settings->remove(KAIDAN_SETTINGS_AUTH_PASSWD);
-	setPassword(QString());
-
-	setPasswordVisibility(PasswordVisible);
-
-	emit newCredentialsNeeded();
-}
-
 bool Kaidan::notificationsMuted(const QString &jid)
 {
 	return m_caches->settings->value(QString(KAIDAN_SETTINGS_NOTIFICATIONS_MUTED) + jid, false).toBool();
@@ -206,28 +128,22 @@ void Kaidan::setNotificationsMuted(const QString &jid, bool muted)
 
 void Kaidan::setJid(const QString &jid)
 {
-	m_credentials.jid = jid;
-	// credentials were modified -> first try
-	m_credentials.isFirstTry = true;
-	emit jidChanged();
+	m_client->accountManager()->setJid(jid);
 }
 
-void Kaidan::setJidResourcePrefix(const QString &jidResourcePrefix)
+QString Kaidan::jid() const
 {
-	// JID resource won't influence the authentication, so we don't need
-	// to set the first try flag and can save it.
-	m_credentials.jidResourcePrefix = jidResourcePrefix;
-
-	m_caches->settings->setValue(KAIDAN_SETTINGS_AUTH_JID_RESOURCE_PREFIX, jidResourcePrefix);
-	emit jidResourcePrefixChanged();
+	return m_client->accountManager()->jid();
 }
 
 void Kaidan::setPassword(const QString &password)
 {
-	m_credentials.password = password;
-	// credentials were modified -> first try
-	m_credentials.isFirstTry = true;
-	emit passwordChanged();
+	m_client->accountManager()->setPassword(password);
+}
+
+QString Kaidan::password() const
+{
+	return m_client->accountManager()->password();
 }
 
 void Kaidan::setPasswordVisibility(PasswordVisibility passwordVisibility)
@@ -286,6 +202,56 @@ quint8 Kaidan::logInByUri(const QString &uri)
 	setPassword(parsedUri.password());
 	logIn();
 	return quint8(LoginByUriState::Connecting);
+}
+
+void Kaidan::initializeDatabase()
+{
+	m_dbThrd = new QThread();
+	m_dbThrd->setObjectName("SqlDatabase");
+
+	m_database = new Database();
+	m_database->moveToThread(m_dbThrd);
+
+	m_msgDb = new MessageDb();
+	m_msgDb->moveToThread(m_dbThrd);
+
+	m_rosterDb = new RosterDb(m_database);
+	m_rosterDb->moveToThread(m_dbThrd);
+
+	connect(m_dbThrd, &QThread::started, m_database, &Database::openDatabase);
+	m_dbThrd->start();
+}
+
+void Kaidan::initializeCaches()
+{
+	m_caches = new ClientWorker::Caches(m_rosterDb, m_msgDb, this);
+
+	// Connect the avatar changed signal of the avatarStorage with the NOTIFY signal
+	// of the Q_PROPERTY for the avatar storage (so all avatars are updated in QML)
+	connect(m_caches->avatarStorage, &AvatarFileStorage::avatarIdsChanged, this, &Kaidan::avatarStorageChanged);
+}
+
+void Kaidan::initializeClientWorker(bool enableLogging)
+{
+	m_cltThrd = new QThread();
+	m_cltThrd->setObjectName("XmppClient");
+
+	m_client = new ClientWorker(m_caches, enableLogging);
+	m_client->moveToThread(m_cltThrd);
+
+	connect(m_client->accountManager(), &AccountManager::jidChanged, this, &Kaidan::jidChanged);
+	connect(m_client->accountManager(), &AccountManager::passwordChanged, this, &Kaidan::passwordChanged);
+	connect(m_client->accountManager(), &AccountManager::newCredentialsNeeded, this, &Kaidan::newCredentialsNeeded);
+
+	connect(m_client, &ClientWorker::loggedInWithNewCredentials, this, &Kaidan::loggedInWithNewCredentials);
+	connect(m_client, &ClientWorker::connectionStateChanged, this, &Kaidan::setConnectionState);
+	connect(m_client, &ClientWorker::connectionErrorChanged, this, &Kaidan::setConnectionError);
+	connect(m_client, &ClientWorker::showMessageNotificationRequested, this, [](const QString &senderJid, const QString &senderName, const QString &message) {
+		Notifications::sendMessageNotification(senderJid, senderName, message);
+	});
+
+	connect(m_cltThrd, &QThread::started, m_client, &ClientWorker::initialize);
+	m_cltThrd->start();
 }
 
 void Kaidan::notifyForInvalidLoginUri()

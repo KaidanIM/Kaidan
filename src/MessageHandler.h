@@ -52,7 +52,7 @@ class MessageHandler : public QObject
 	Q_OBJECT
 
 public:
-	MessageHandler(ClientWorker *clientWorker, QXmppClient *client, MessageModel *model);
+	MessageHandler(ClientWorker *clientWorker, QXmppClient *client, MessageModel *model, QObject *parent = nullptr);
 	~MessageHandler();
 
 public slots:

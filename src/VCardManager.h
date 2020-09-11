@@ -36,6 +36,7 @@
 #include <QXmppPresence.h>
 
 class AvatarFileStorage;
+class ClientWorker;
 class QXmppClient;
 
 class VCardManager : public QObject
@@ -43,7 +44,7 @@ class VCardManager : public QObject
 	Q_OBJECT
 
 public:
-	VCardManager(QXmppClient *client, AvatarFileStorage *avatars, QObject *parent = nullptr);
+	VCardManager(ClientWorker *clientWorker, QXmppClient *client, AvatarFileStorage *avatars, QObject *parent = nullptr);
 
 	/**
 	 * Requests the vCard of a given JID from the JID's server.
@@ -77,11 +78,21 @@ public:
 	void handlePresenceReceived(const QXmppPresence &presence);
 
 	/**
-	 * Updates the user's nickname.
+	 * Executes a pending nickname change if the nickname could not be changed on the
+	 * server before because the client was disconnected.
+	 *
+	 * @return true if the pending nickname change is executed on the second login with
+	 * the same credentials or later, otherwise false
+	 */
+	bool executePendingNicknameChange();
+
+public slots:
+	/**
+	 * Changes the user's nickname.
 	 *
 	 * @param nickname name that is shown to contacts after the update
 	 */
-	void updateNickname(const QString &nickname);
+	void changeNickname(const QString &nickname);
 
 signals:
 	/**
@@ -97,6 +108,7 @@ private:
 	 */
 	void changeNicknameAfterReceivingCurrentVCard();
 
+	ClientWorker *m_clientWorker;
 	QXmppClient *m_client;
 	QXmppVCardManager *m_manager;
 	AvatarFileStorage *m_avatarStorage;

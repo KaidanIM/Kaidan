@@ -159,7 +159,7 @@ public slots:
 	/**
 	 * Connects to the server and logs in with all needed configuration variables.
 	 */
-	void xmppConnect();
+	void logIn();
 
 	/**
 	 * Connects to the server with a minimal configuration and adds additional variables to it before connecting if a configuration is passed.
@@ -222,8 +222,8 @@ signals:
 	void showMessageNotificationRequested(const QString &senderJid, const QString &senderName, const QString &message);
 
 	// Those signals are emitted by Kaidan.cpp and are used by this class.
-	void connectRequested();
-	void disconnectRequested();
+	void logInRequested();
+	void logOutRequested();
 	void credentialsUpdated(ClientWorker::Credentials m_creds);
 	void registrationFormRequested();
 

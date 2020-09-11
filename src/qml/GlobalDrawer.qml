@@ -57,7 +57,7 @@ Kirigami.GlobalDrawer {
 
 			Controls.Switch {
 				checked: !parent.disconnected
-				onClicked: parent.disconnected ? Kaidan.mainConnect() : Kaidan.mainDisconnect()
+				onClicked: parent.disconnected ? Kaidan.logIn() : Kaidan.logOut()
 			}
 
 			Text {

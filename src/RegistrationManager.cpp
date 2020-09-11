@@ -173,8 +173,8 @@ void RegistrationManager::handleRegistrationSucceeded()
 	Kaidan::instance()->setJid(m_dataFormModel->extractUsername().append('@').append(m_client->configuration().domain()));
 	Kaidan::instance()->setPassword(m_dataFormModel->extractPassword());
 
-	Kaidan::instance()->mainDisconnect();
-	Kaidan::instance()->mainConnect();
+	Kaidan::instance()->logOut();
+	Kaidan::instance()->logIn();
 
 	cleanUpLastForm();
 	m_dataFormModel = new RegistrationDataFormModel();

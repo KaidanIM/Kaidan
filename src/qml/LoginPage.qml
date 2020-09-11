@@ -63,9 +63,9 @@ Kirigami.Page {
 			JidField {
 				id: jidField
 
-				// Simulate the pressing of the connect button.
+				// Simulate the pressing of the loginButton.
 				inputField {
-					onAccepted: connectButton.clicked()
+					onAccepted: loginButton.clicked()
 				}
 			}
 
@@ -73,23 +73,22 @@ Kirigami.Page {
 			PasswordField {
 				id: passwordField
 
-				// Simulate the pressing of the connect button.
+				// Simulate the pressing of the loginButton.
 				inputField {
-					onAccepted: connectButton.clicked()
+					onAccepted: loginButton.clicked()
 				}
 			}
 
-			// Connect button
 			CenteredAdaptiveHighlightedButton {
-				id: connectButton
-				label.text: qsTr("Connect")
+				id: loginButton
+				label.text: qsTr("Log in")
 
 				state: Kaidan.connectionState !== Enums.StateDisconnected ? "connecting" : ""
 				states: [
 					State {
 						name: "connecting"
 						PropertyChanges {
-							target: connectButton
+							target: loginButton
 							label.text: "<i>" + qsTr("Connecting…") + "</i>"
 							label.color: "black"
 							label.textFormat: Text.StyledText
@@ -110,7 +109,7 @@ Kirigami.Page {
 					} else {
 						Kaidan.jid = jidField.text
 						Kaidan.password = passwordField.text
-						Kaidan.mainConnect()
+						Kaidan.logIn()
 					}
 				}
 			}

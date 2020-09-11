@@ -130,13 +130,13 @@ void Kaidan::start()
 	if (m_creds.jid.isEmpty() || m_creds.password.isEmpty())
 		emit newCredentialsNeeded();
 	else
-		mainConnect();
+		logIn();
 }
 
-void Kaidan::mainConnect()
+void Kaidan::logIn()
 {
 	emit m_client->credentialsUpdated(m_creds);
-	emit m_client->connectRequested();
+	emit m_client->logInRequested();
 }
 
 void Kaidan::requestRegistrationForm()
@@ -145,11 +145,11 @@ void Kaidan::requestRegistrationForm()
 	emit m_client->registrationFormRequested();
 }
 
-void Kaidan::mainDisconnect()
+void Kaidan::logOut()
 {
 	// disconnect the client if connected or connecting
 	if (m_connectionState != ConnectionState::StateDisconnected)
-		emit m_client->disconnectRequested();
+		emit m_client->logOutRequested();
 }
 
 void Kaidan::handleApplicationStateChanged(Qt::ApplicationState applicationState)
@@ -290,7 +290,7 @@ quint8 Kaidan::logInByUri(const QString &uri)
 
 	// Connect with the extracted credentials.
 	setPassword(parsedUri.password());
-	mainConnect();
+	logIn();
 	return quint8(LoginByUriState::Connecting);
 }
 

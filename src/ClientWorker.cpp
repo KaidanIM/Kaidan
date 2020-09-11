@@ -119,12 +119,12 @@ void ClientWorker::main()
 
 	connect(m_client, &QXmppClient::error, this, &ClientWorker::onConnectionError);
 
-	connect(this, &ClientWorker::connectRequested, this, &ClientWorker::xmppConnect);
+	connect(this, &ClientWorker::logInRequested, this, &ClientWorker::logIn);
 	connect(this, &ClientWorker::registrationFormRequested, this, &ClientWorker::connectToRegister);
-	connect(this, &ClientWorker::disconnectRequested, m_client, &QXmppClient::disconnectFromServer);
+	connect(this, &ClientWorker::logOutRequested, m_client, &QXmppClient::disconnectFromServer);
 }
 
-void ClientWorker::xmppConnect()
+void ClientWorker::logIn()
 {
 	QXmppConfiguration config;
 	config.setJid(m_creds.jid);
@@ -176,7 +176,7 @@ void ClientWorker::deleteAccountFromClientAndServer()
 		m_registrationManager->deleteAccount();
 	} else {
 		m_isClientConnectedBeforeAccountDeletionFromServer = false;
-		xmppConnect();
+		logIn();
 	}
 }
 
@@ -215,7 +215,7 @@ void ClientWorker::changePassword(const QString &newPassword)
 		m_registrationManager->changePassword(newPassword);
 	} else {
 		m_passwordToBeSetOnNextConnect = newPassword;
-		xmppConnect();
+		logIn();
 	}
 }
 
@@ -230,7 +230,7 @@ void ClientWorker::changeDisplayName(const QString &displayName)
 		// During registration, the display name is set first and the client connects to the server afterwards.
 		// The client should only connect to the server during normal usage.
 		if (!(m_creds.jid.isEmpty() || m_creds.password.isEmpty()))
-			xmppConnect();
+			logIn();
 	}
 }
 

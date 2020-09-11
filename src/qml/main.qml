@@ -75,9 +75,9 @@ Kirigami.ApplicationWindow {
 		id: subReqAcceptSheet
 	}
 
-	// when the window was closed, disconnect from jabber server
+	// Log out of the server when the application window is closed.
 	onClosing: {
-		Kaidan.mainDisconnect()
+		Kaidan.logOut()
 	}
 
 	// components for all main pages

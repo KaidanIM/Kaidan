@@ -97,7 +97,7 @@ public:
 	 *
 	 * The username and password are retrieved from the the settings file.
 	 */
-	Q_INVOKABLE void mainConnect();
+	Q_INVOKABLE void logIn();
 
 	/**
 	 * Connects to the server and requests a data form for account registration.
@@ -110,7 +110,7 @@ public:
 	 * This disconnects the client from the server.
 	 * When disconnected, the connectionStateChanged signal is emitted.
 	 */
-	Q_INVOKABLE void mainDisconnect();
+	Q_INVOKABLE void logOut();
 
 	/**
 	 * Returns the current ConnectionState

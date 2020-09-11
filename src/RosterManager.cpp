@@ -58,7 +58,7 @@ RosterManager::RosterManager(QXmppClient *client,
 		this, [this, vCardManager, model] (const QString &jid) {
 		emit model->addItemRequested(RosterItem(m_manager->getRosterEntry(jid)));
 
-		vCardManager->fetchVCard(jid);
+		vCardManager->requestVCard(jid);
 	});
 
 	connect(m_manager, &QXmppRosterManager::itemChanged,
@@ -106,7 +106,7 @@ void RosterManager::populateRoster()
 		items[jid] = RosterItem(m_manager->getRosterEntry(jid), currentTime);
 
 		if (m_avatarStorage->getHashOfJid(jid).isEmpty())
-			m_vCardManager->fetchVCard(jid);
+			m_vCardManager->requestVCard(jid);
 	}
 
 	// replace current contacts with new ones from server

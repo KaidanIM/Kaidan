@@ -46,19 +46,23 @@ public:
 	VCardManager(QXmppClient *client, AvatarFileStorage *avatars, QObject *parent = nullptr);
 
 	/**
-	 * Will request the VCard from the server
+	 * Requests the vCard of a given JID from the JID's server.
+	 *
+	 * @param jid JID for which the vCard is being requested
 	 */
-	void fetchVCard(const QString& jid);
+	void requestVCard(const QString &jid);
 
 	/**
-	 * Handles incoming VCards and processes them (save avatar, etc.)
+	 * Handles an incoming vCard and processes it like saving a containing user avatar etc..
+	 *
+	 * @param iq IQ stanza containing the vCard
 	 */
-	void handleVCard(const QXmppVCardIq &iq);
+	void handleVCardReceived(const QXmppVCardIq &iq);
 
 	/**
 	 * Requests the user's vCard from the server.
 	 */
-	void fetchClientVCard();
+	void requestClientVCard();
 
 	/**
 	 * Handles the receiving of the user's vCard.
@@ -66,9 +70,11 @@ public:
 	void handleClientVCardReceived();
 
 	/**
-	 * Handles incoming presences and checks if the avatar needs to be refreshed
+	 * Handles an incoming presence stanza and checks if the user avatar needs to be refreshed.
+	 *
+	 * @param presence a contact's presence stanza
 	 */
-	void handlePresence(const QXmppPresence &presence);
+	void handlePresenceReceived(const QXmppPresence &presence);
 
 	/**
 	 * Updates the user's nickname.
@@ -78,16 +84,21 @@ public:
 	void updateNickname(const QString &nickname);
 
 signals:
+	/**
+	 * Emitted when any vCard is received.
+	 *
+	 * @param vCard received vCard
+	 */
 	void vCardReceived(const QXmppVCardIq &vCard);
 
 private:
 	/**
-	 * Updates the nickname which was set to be updated after fetching the current vCard.
+	 * Changes the nickname which was cached to be set after receiving the current vCard.
 	 */
-	void updateNicknameAfterFetchingCurrentVCard();
+	void changeNicknameAfterReceivingCurrentVCard();
 
 	QXmppClient *m_client;
 	QXmppVCardManager *m_manager;
 	AvatarFileStorage *m_avatarStorage;
-	QString m_nicknameToBeSetAfterFetchingCurrentVCard;
+	QString m_nicknameToBeSetAfterReceivingCurrentVCard;
 };

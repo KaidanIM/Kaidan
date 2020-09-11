@@ -199,15 +199,15 @@ RegistrationPage {
 			case RegistrationManager.RequiredInformationMissing:
 				requestRegistrationForm()
 				if (customFormView) {
-					showPassiveNotificationForRequiredInformationMissingError(errrorMessage)
+					showPassiveNotificationForRequiredInformationMissingError(errorMessage)
 					jumpToView(customFormView)
 				} else {
-					showPassiveNotificationForUnknownError(errrorMessage)
+					showPassiveNotificationForUnknownError(errorMessage)
 				}
 				break
 			default:
 				requestRegistrationForm()
-				showPassiveNotificationForUnknownError(errrorMessage)
+				showPassiveNotificationForUnknownError(errorMessage)
 				jumpToView(serverView)
 			}
 		}

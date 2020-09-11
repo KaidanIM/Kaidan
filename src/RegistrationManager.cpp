@@ -210,7 +210,7 @@ void RegistrationManager::handleRegistrationFailed(const QXmppStanza::Error &err
 	default:
 #if QXMPP_VERSION == QT_VERSION_CHECK(1, 2, 0)
 		// Workaround: Catch an error which is wrongly emitted by QXmpp
-		// v1.2.0 although the registration was succesful.
+		// v1.2.0 although the registration was successful.
 		if (error.text().isEmpty())
 			return;
 #endif

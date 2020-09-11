@@ -111,7 +111,7 @@ RegistrationPage {
 		onRegistrationFailed: {
 			switch (error) {
 			case RegistrationManager.InBandRegistrationNotSupported:
-				requestRegistrationFormFromAnotherServer(errrorMessage)
+				requestRegistrationFormFromAnotherServer(errorMessage)
 				break
 			case RegistrationManager.UsernameConflict:
 				if (remainingRegistrationAttemptsAfterUsernameConflictOccurred > 0) {
@@ -121,7 +121,7 @@ RegistrationPage {
 					requestRegistrationForm()
 				} else {
 					remainingRegistrationAttemptsAfterUsernameConflictOccurred = maximumRegistrationAttemptsAfterUsernameConflictOccurred
-					requestRegistrationFormFromAnotherServer(errrorMessage)
+					requestRegistrationFormFromAnotherServer(errorMessage)
 				}
 				break
 			case RegistrationManager.CaptchaVerificationFailed:
@@ -131,21 +131,21 @@ RegistrationPage {
 					showPassiveNotificationForCaptchaVerificationFailedError()
 				} else {
 					remainingRegistrationAttemptsAfterCaptchaVerificationFailedOccurred = maximumRegistrationAttemptsAfterCaptchaVerificationFailedOccurred
-					requestRegistrationFormFromAnotherServer(errrorMessage)
+					requestRegistrationFormFromAnotherServer(errorMessage)
 				}
 				break
 			case RegistrationManager.RequiredInformationMissing:
 				if (remainingRegistrationAttemptsAfterRequiredInformationMissingOccurred > 0 && customFormFieldsAvailable()) {
 					remainingRegistrationAttemptsAfterRequiredInformationMissingOccurred--
 					requestRegistrationForm()
-					showPassiveNotificationForRequiredInformationMissingError(errrorMessage)
+					showPassiveNotificationForRequiredInformationMissingError(errorMessage)
 				} else {
 					remainingRegistrationAttemptsAfterRequiredInformationMissingOccurred = remainingRegistrationAttemptsAfterRequiredInformationMissingOccurred
-					requestRegistrationFormFromAnotherServer(errrorMessage)
+					requestRegistrationFormFromAnotherServer(errorMessage)
 				}
 				break
 			default:
-				requestRegistrationFormFromAnotherServer(errrorMessage)
+				requestRegistrationFormFromAnotherServer(errorMessage)
 			}
 		}
 	}
@@ -204,16 +204,16 @@ RegistrationPage {
 	 *
 	 * That is done multiple times and after a maximum number of attempts, the user has to intervene.
 	 *
-	 * @param errrorMessage message describing the error
+	 * @param errorMessage message describing the error
 	 */
-	function requestRegistrationFormFromAnotherServer(errrorMessage) {
+	function requestRegistrationFormFromAnotherServer(errorMessage) {
 		if (remainingAttemptsForRequestingRegistrationFormFromAnotherServer > 0) {
 			remainingAttemptsForRequestingRegistrationFormFromAnotherServer--
 			chooseServerRandomly()
 			requestRegistrationForm()
 		} else {
 			remainingAttemptsForRequestingRegistrationFormFromAnotherServer = maximumAttemptsForRequestingRegistrationFormFromAnotherServer
-			showPassiveNotificationForUnknownError(errrorMessage)
+			showPassiveNotificationForUnknownError(errorMessage)
 			popLayerIfNoCustomFormFieldsAvailable()
 		}
 	}

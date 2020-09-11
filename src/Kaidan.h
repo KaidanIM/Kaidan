@@ -95,7 +95,7 @@ public:
 	/**
 	 * Connects to the XMPP server.
 	 *
-	 * The username and password are retrieved from the the settings file.
+	 * The username and password are retrieved from the settings file.
 	 */
 	Q_INVOKABLE void logIn();
 
@@ -446,7 +446,7 @@ signals:
 	void sendRegistrationForm();
 
 	void registrationSucceeded();
-	void registrationFailed(quint8 error, const QString &errrorMessage);
+	void registrationFailed(quint8 error, const QString &errorMessage);
 
 public slots:
 	/**

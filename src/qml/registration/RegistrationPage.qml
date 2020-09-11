@@ -81,19 +81,19 @@ Kirigami.Page {
 	/**
 	 * Shows a passive notification if required information is missing.
 	 *
-	 * @param errrorMessage text describing the error and the required missing information
+	 * @param errorMessage text describing the error and the required missing information
 	 */
-	function showPassiveNotificationForRequiredInformationMissingError(errrorMessage) {
-		passiveNotification(qsTr("Required information is missing: ") + errrorMessage)
+	function showPassiveNotificationForRequiredInformationMissingError(errorMessage) {
+		passiveNotification(qsTr("Required information is missing: ") + errorMessage)
 	}
 
 	/**
 	 * Shows a passive notification for an unknown error.
 	 *
-	 * @param errrorMessage text describing the error
+	 * @param errorMessage text describing the error
 	 */
-	function showPassiveNotificationForUnknownError(errrorMessage) {
-		passiveNotification(qsTr("Registration failed:") + " " + errrorMessage)
+	function showPassiveNotificationForUnknownError(errorMessage) {
+		passiveNotification(qsTr("Registration failed:") + " " + errorMessage)
 	}
 
 	/**

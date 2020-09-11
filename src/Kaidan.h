@@ -419,9 +419,11 @@ signals:
 	void passwordChangeSucceeded();
 
 	/**
-	 * Emitted, when changing the password has failed.
+	 * Emitted when changing the user's password failed.
+	 *
+	 * @param errorMessage message describing the error
 	 */
-	void passwordChangeFailed();
+	void passwordChangeFailed(const QString &errorMessage);
 
 	/**
 	 * Emitted, when a contact was muted/unmuted.

@@ -69,12 +69,7 @@ RegistrationManager::RegistrationManager(ClientWorker *clientWorker, QXmppClient
 	connect(m_manager, &QXmppRegistrationManager::accountDeletionFailed, m_clientWorker, &ClientWorker::handleAccountDeletionFromServerFailed);
 	connect(m_manager, &QXmppRegistrationManager::accountDeleted, m_clientWorker, &ClientWorker::handleAccountDeletedFromServer);
 
-	connect(m_manager, &QXmppRegistrationManager::passwordChanged, Kaidan::instance(), &Kaidan::setPassword);
-
-	connect(m_manager, &QXmppRegistrationManager::passwordChanged, Kaidan::instance(), &Kaidan::passwordChangeSucceeded);
 	connect(m_manager, &QXmppRegistrationManager::passwordChanged, this, &RegistrationManager::handlePasswordChangeSucceeded);
-
-	connect(m_manager, &QXmppRegistrationManager::passwordChangeFailed, Kaidan::instance(), &Kaidan::passwordChangeFailed);
 	connect(m_manager, &QXmppRegistrationManager::passwordChangeFailed, this, &RegistrationManager::handlePasswordChangeFailed);
 }
 
@@ -123,16 +118,13 @@ void RegistrationManager::handlePasswordChangeSucceeded(const QString &newPasswo
 	    QString::fromUtf8(newPassword.toUtf8().toBase64())
 	);
 
-	emit Kaidan::instance()->passiveNotificationRequested(
-	    tr("Password changed successfully.")
-	);
+	QMetaObject::invokeMethod(Kaidan::instance(), "setPassword", Q_ARG(QString, newPassword));
+	emit Kaidan::instance()->passwordChangeSucceeded();
 }
 
 void RegistrationManager::handlePasswordChangeFailed(const QXmppStanza::Error &error)
 {
-	emit Kaidan::instance()->passiveNotificationRequested(
-	    tr("Failed to change password: %1").arg(error.text())
-	);
+	emit Kaidan::instance()->passwordChangeFailed(error.text());
 }
 
 void RegistrationManager::handleRegistrationFormReceived(const QXmppRegisterIq &iq)

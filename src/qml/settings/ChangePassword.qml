@@ -50,6 +50,7 @@ Kirigami.Page {
 
 	ColumnLayout {
 		id: content
+		visible: !busyIndicator.visible
 		anchors.fill: parent
 		spacing: 0
 
@@ -140,24 +141,24 @@ Kirigami.Page {
 					}
 
 					Kaidan.changePassword(password1.text)
-					content.visible = false
 					busyIndicator.visible = true
 				}
 			}
 		}
 	}
 
-	function handleChangeResult() {
-		busyIndicator.visible = false
-		stack.pop()
-	}
+	Connections {
+		target: Kaidan
 
-	Component.onCompleted: {
-		Kaidan.passwordChangeSucceeded.connect(handleChangeResult)
-		Kaidan.passwordChangeFailed.connect(handleChangeResult)
-	}
-	Component.onDestruction: {
-		Kaidan.passwordChangeSucceeded.disconnect(handleChangeResult)
-		Kaidan.passwordChangeFailed.disconnect(handleChangeResult)
+		onPasswordChangeSucceeded: {
+			busyIndicator.visible = false
+			passiveNotification(qsTr("Password changed successfully"))
+			stack.pop()
+		}
+
+		onPasswordChangeFailed: {
+			busyIndicator.visible = false
+			passiveNotification(qsTr("Failed to change password: %1").arg(errorMessage))
+		}
 	}
 }

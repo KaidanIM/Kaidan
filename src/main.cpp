@@ -393,9 +393,9 @@ Q_DECL_EXPORT int main(int argc, char *argv[])
 	qmlRegisterSingletonType<QmlUtils>(APPLICATION_ID, 1, 0, "Utils", [](QQmlEngine *, QJSEngine *) {
 		return static_cast<QObject*>(QmlUtils::instance());
 	});
-	qmlRegisterSingletonType<Kaidan>(APPLICATION_ID, 1, 0, "Kaidan", [&](QQmlEngine *, QJSEngine *) {
-		engine.setObjectOwnership(&kaidan, QQmlEngine::CppOwnership);
-		return static_cast<QObject*>(&kaidan);
+	qmlRegisterSingletonType<Kaidan>(APPLICATION_ID, 1, 0, "Kaidan", [](QQmlEngine *engine, QJSEngine *) {
+		engine->setObjectOwnership(Kaidan::instance(), QQmlEngine::CppOwnership);
+		return static_cast<QObject *>(Kaidan::instance());
 	});
 	qmlRegisterSingletonType<GuiStyle>(APPLICATION_ID, 1, 0, "Style", [](QQmlEngine *, QJSEngine *) {
 		return static_cast<QObject *>(new GuiStyle(QCoreApplication::instance()));

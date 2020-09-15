@@ -169,7 +169,7 @@ void MessageHandler::sendMessage(const QString& toJid,
 	msg.setFrom(m_client->configuration().jidBare());
 	msg.setTo(toJid);
 	msg.setBody(body);
-	msg.setId(QXmppUtils::generateStanzaHash(28));
+	msg.setId(QXmppUtils::generateStanzaHash());
 	msg.setReceiptRequested(true);
 	msg.setSentByMe(true);
 	msg.setMediaType(MessageType::MessageText); // text message without media

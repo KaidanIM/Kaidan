@@ -386,7 +386,7 @@ void MessageModel::correctMessage(const QString &msgId, const QString &message)
 		Message &msg = *itr;
 		msg.setBody(message);
 		if (msg.deliveryState() != Enums::DeliveryState::Pending) {
-			msg.setId(QXmppUtils::generateStanzaHash(28));
+			msg.setId(QXmppUtils::generateStanzaHash());
 			// Set replaceId only on first correction, so it's always the original id
 			// (`id` is the id of the current edit, `replaceId` is the original id)
 			if (!msg.isEdited()) {

@@ -83,7 +83,7 @@ void UploadManager::sendFile(const QString &jid, const QUrl &fileUrl, const QStr
 	const QXmppHttpUpload* upload = m_manager.uploadFile(file);
 	const QMimeType mimeType = MediaUtils::mimeType(fileUrl);
 	const MessageType messageType = MediaUtils::messageType(mimeType);
-	const QString msgId = QXmppUtils::generateStanzaHash(48);
+	const QString msgId = QXmppUtils::generateStanzaHash();
 
 	auto *msg = new Message;
 	msg->setFrom(m_client->configuration().jidBare());

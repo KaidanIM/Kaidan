@@ -22,7 +22,7 @@ XMPP library [QXmpp][qxmpp].
 
 Kaidan runs on mobile and desktop systems including Linux, Windows, macOS,
 Android, Plasma Mobile and Ubuntu Touch.
-Unfortunately, we are not able to provide builds for all platforms atthe moment
+Unfortunately, we are not able to provide builds for all platforms at the moment
 due to little developer resources.
 
 Kaidan does *not* have all basic features yet and has still some stability

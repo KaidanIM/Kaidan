@@ -1,10 +1,14 @@
 # Kaidan - A user-friendly XMPP client for every device!
 
 [![Kaidan MUC](https://search.jabbercat.org/api/1.0/badge?address=kaidan@muc.kaidan.im)](https://i.kaidan.im)
-[![Flatpak Build Status](https://binary-factory.kde.org/buildStatus/icon?job=Kaidan_flatpak)](https://binary-factory.kde.org/job/Kaidan_flatpak/)
 [![Translation](https://hosted.weblate.org/widgets/kaidan/-/svg-badge.svg)](https://hosted.weblate.org/projects/kaidan/translations/)
 [![license](https://img.shields.io/badge/License-GPLv3%2B%20%2F%20CC%20BY--SA%204.0-blue.svg)](https://raw.githubusercontent.com/kaidanim/kaidan/master/LICENSE)
 [![Donations](https://img.shields.io/liberapay/patrons/kaidan.svg?logo=liberapay)](https://liberapay.com/kaidan)
+
+[![Flatpak build status](https://binary-factory.kde.org/buildStatus/icon?subject=Flatpak&job=Kaidan_x86_64_flatpak)](https://binary-factory.kde.org/job/Kaidan_x86_64_flatpak/)
+[![Android build status](https://binary-factory.kde.org/buildStatus/icon?subject=Android&job=Kaidan_android)](https://binary-factory.kde.org/job/Kaidan_android/)
+[![Windows build status](https://binary-factory.kde.org/buildStatus/icon?subject=Windows&job=Kaidan_Nightly_win64)](https://binary-factory.kde.org/job/Kaidan_Nightly_win64/)
+[![macOS build status](https://binary-factory.kde.org/buildStatus/icon?subject=macOS&job=Kaidan_Nightly_macos)](https://binary-factory.kde.org/job/Kaidan_Nightly_macos/)
 
 ![Kaidan screenshot](https://www.kaidan.im/images/screenshot.png)
 

@@ -30,13 +30,13 @@
 
 #pragma once
 
-#include "CameraModel.h"
+#include <QAudioRecorder>
+
 #include "AudioDeviceModel.h"
+#include "CameraImageCapture.h"
+#include "CameraModel.h"
 #include "MediaSettings.h"
 #include "MediaSettingModel.h"
-#include "CameraImageCapture.h"
-
-#include <QAudioRecorder>
 
 class MediaSettingsContainerModel;
 class MediaSettingsQualityModel;

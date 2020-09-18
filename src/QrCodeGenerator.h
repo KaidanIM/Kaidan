@@ -32,8 +32,6 @@
 
 #include <QObject>
 
-#include <ZXing/BarcodeFormat.h>
-#include <ZXing/MultiFormatWriter.h>
 #include <ZXing/BitMatrix.h>
 
 class QImage;

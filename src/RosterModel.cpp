@@ -29,17 +29,11 @@
  */
 
 #include "RosterModel.h"
+
 // Kaidan
 #include "RosterDb.h"
 #include "MessageModel.h"
 #include "Kaidan.h"
-// C++
-#include <functional>
-// Qt
-#include <QSqlDatabase>
-#include <QSqlError>
-#include <QSqlQuery>
-#include <QSqlRecord>
 
 RosterModel::RosterModel(RosterDb *rosterDb, QObject *parent)
         : QAbstractListModel(parent),

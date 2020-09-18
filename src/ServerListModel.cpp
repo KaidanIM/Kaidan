@@ -30,7 +30,6 @@
 
 #include "ServerListModel.h"
 // Qt
-#include <QDebug>
 #include <QFile>
 #include <QJsonArray>
 #include <QJsonDocument>

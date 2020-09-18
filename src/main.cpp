@@ -29,7 +29,6 @@
  */
 
 // Qt
-#include <QAbstractSocket>
 #include <QCommandLineOption>
 #include <QCommandLineParser>
 #include <QDebug>
@@ -38,15 +37,11 @@
 #include <QLibraryInfo>
 #include <QLocale>
 #include <QQmlApplicationEngine>
-#include <QQmlContext>
 #include <QTranslator>
-#include <QStandardPaths>
 #include <qqml.h>
 
 // QXmpp
-#include "qxmpp-exts/QXmppUploadManager.h"
 #include <QXmppClient.h>
-#include <QXmppRegisterIq.h>
 
 // Kaidan
 #include "AvatarFileStorage.h"
@@ -66,14 +61,11 @@
 #include "RosterFilterProxyModel.h"
 #include "StatusBar.h"
 #include "ServerListModel.h"
-#include "UploadManager.h"
-#include "Utils.h"
 #include "QrCodeGenerator.h"
 #include "QrCodeScannerFilter.h"
 #include "VCardModel.h"
 #include "CameraModel.h"
 #include "AudioDeviceModel.h"
-#include "MediaSettingModel.h"
 #include "MediaUtils.h"
 #include "MediaRecorder.h"
 #include "GuiStyle.h"

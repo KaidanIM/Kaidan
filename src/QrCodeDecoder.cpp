@@ -30,7 +30,6 @@
 
 #include "QrCodeDecoder.h"
 // Qt
-#include <QColor>
 #include <QImage>
 // ZXing-cpp
 #include <ZXing/BarcodeFormat.h>

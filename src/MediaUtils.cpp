@@ -31,9 +31,9 @@
 #include "MediaUtils.h"
 
 #include <QFileInfo>
-#include <QUrl>
 #include <QRegularExpression>
 #include <QTime>
+#include <QUrl>
 
 static QList<QMimeType> mimeTypes(const QList<QMimeType> &mimeTypes, const QString &parent);
 

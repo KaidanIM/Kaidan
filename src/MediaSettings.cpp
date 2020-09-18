@@ -30,9 +30,9 @@
 
 #include "MediaSettings.h"
 
-#include <QSettings>
 #include <QJsonDocument>
 #include <QJsonObject>
+#include <QSettings>
 
 #define MEDIA_SETTINGS_GROUP QStringLiteral("Media Settings")
 #define IMAGE_SETTINGS_GROUP QStringLiteral("Image Settings")

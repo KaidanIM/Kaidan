@@ -30,7 +30,6 @@
 
 #pragma once
 
-#include <QLocale>
 #include <QSharedDataPointer>
 
 class QUrl;

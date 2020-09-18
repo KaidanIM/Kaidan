@@ -34,7 +34,6 @@
 
 #include <QDebug>
 #include <QDir>
-#include <QFile>
 #include <QSqlDatabase>
 #include <QSqlDriver>
 #include <QSqlError>

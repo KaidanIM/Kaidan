@@ -31,7 +31,6 @@
 #include "QmlUtils.h"
 // Qt
 #include <QClipboard>
-#include <QDebug>
 #include <QDir>
 #include <QFile>
 #include <QFileInfo>

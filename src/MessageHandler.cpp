@@ -41,6 +41,7 @@
 #include <QXmppUtils.h>
 // Kaidan
 #include "ClientWorker.h"
+#include "Globals.h"
 #include "Kaidan.h"
 #include "MessageModel.h"
 #include "MediaUtils.h"

@@ -32,15 +32,13 @@
 
 // Qt
 #include <QObject>
-// Kaidan
-class AvatarFileStorage;
-class Kaidan;
-class RosterModel;
-class VCardManager;
 // QXmpp
 class QXmppClient;
-class QXmppMessage;
 class QXmppRosterManager;
+// Kaidan
+class AvatarFileStorage;
+class RosterModel;
+class VCardManager;
 
 class RosterManager : public QObject
 {

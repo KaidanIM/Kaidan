@@ -29,7 +29,6 @@
  */
 
 #include "TransferCache.h"
-#include "qxmpp-exts/QXmppUploadManager.h"
 #include <QMutexLocker>
 
 TransferJob::TransferJob(qint64 bytesTotal)

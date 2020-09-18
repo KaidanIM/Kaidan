@@ -32,11 +32,9 @@
 
 #include <QObject>
 #include <QFile>
-#include <QThread>
 #include <QUrl>
 #include <QMap>
 
-class Kaidan;
 class TransferCache;
 class MessageModel;
 class QNetworkAccessManager;

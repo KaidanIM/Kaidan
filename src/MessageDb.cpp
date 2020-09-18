@@ -29,15 +29,16 @@
  */
 
 #include "MessageDb.h"
-// Kaidan
-#include "Globals.h"
-#include "Utils.h"
+
 // Qt
 #include <QSqlDatabase>
 #include <QSqlDriver>
 #include <QSqlField>
 #include <QSqlQuery>
 #include <QSqlRecord>
+// Kaidan
+#include "Globals.h"
+#include "Utils.h"
 
 MessageDb *MessageDb::s_instance = nullptr;
 

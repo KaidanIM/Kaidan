@@ -31,18 +31,15 @@
 #pragma once
 
 // Qt
-#include <QColor>
 #include <QObject>
 #include <QString>
 // Kaidan
 #include "ClientWorker.h"
 #include "RegistrationDataFormModel.h"
-#include "Globals.h"
 
 class QGuiApplication;
 class Database;
 class QXmppClient;
-class QXmppStanza;
 
 /**
  * @class Kaidan Kaidan's Back-End Class
@@ -441,7 +438,7 @@ signals:
 	 */
 	void deleteAccountFromClient();
 
-	void registrationFormReceived(DataFormModel *dataFormModel);
+	void registrationFormReceived(RegistrationDataFormModel *dataFormModel);
 
 	void sendRegistrationForm();
 

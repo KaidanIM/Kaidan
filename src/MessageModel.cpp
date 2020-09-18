@@ -29,13 +29,13 @@
  */
 
 #include "MessageModel.h"
+
+// QXmpp
+#include <QXmppUtils.h>
 // Kaidan
 #include "Kaidan.h"
 #include "MessageDb.h"
 #include "QmlUtils.h"
-// Qt 5
-// QXmpp
-#include <QXmppUtils.h>
 
 // defines that the message is suitable for correction only if it is among the N latest messages
 constexpr int MAX_CORRECTION_MESSAGE_COUNT_DEPTH = 20;

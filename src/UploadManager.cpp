@@ -29,21 +29,18 @@
  */
 
 #include "UploadManager.h"
-#include "Kaidan.h"
-#include "MessageHandler.h"
-#include "RosterManager.h"
-#include "TransferCache.h"
-#include "MediaUtils.h"
-// QXmpp
-#include <QXmppUtils.h>
+
 // Qt
-#include <QMimeDatabase>
-#include <QMutexLocker>
 #include <QDateTime>
-#include <QBuffer>
-#include <QImage>
 #include <QDebug>
 #include <QFileInfo>
+// QXmpp
+#include <QXmppUtils.h>
+// Kaidan
+#include "MediaUtils.h"
+#include "Kaidan.h"
+#include "RosterManager.h"
+#include "TransferCache.h"
 
 UploadManager::UploadManager(QXmppClient *client, RosterManager* rosterManager,
                              QObject* parent)

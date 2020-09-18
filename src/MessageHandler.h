@@ -33,7 +33,6 @@
 // Qt
 #include <QObject>
 // QXmpp
-#include <QXmppGlobal.h>
 #include <QXmppMessageReceiptManager.h>
 // Kaidan
 #include "Message.h"

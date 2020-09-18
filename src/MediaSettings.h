@@ -30,13 +30,13 @@
 
 #pragma once
 
+#include <QAudioEncoderSettings>
 #include <QCoreApplication>
 #include <QImageEncoderSettings>
-#include <QAudioEncoderSettings>
 #include <QVideoEncoderSettings>
 
-#include "CameraModel.h"
 #include "AudioDeviceModel.h"
+#include "CameraModel.h"
 
 class QSettings;
 

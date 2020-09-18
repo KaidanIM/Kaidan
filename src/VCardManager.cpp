@@ -29,11 +29,13 @@
  */
 
 #include "VCardManager.h"
-#include "AvatarFileStorage.h"
-#include "Kaidan.h"
+
 #include <QXmppClient.h>
 #include <QXmppUtils.h>
 #include <QXmppVCardIq.h>
+
+#include "AvatarFileStorage.h"
+#include "Kaidan.h"
 
 VCardManager::VCardManager(QXmppClient *client, AvatarFileStorage *avatars, QObject *parent)
 	: QObject(parent), m_client(client), m_manager(client->findExtension<QXmppVCardManager>()), m_avatarStorage(avatars)

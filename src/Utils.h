@@ -31,7 +31,6 @@
 #pragma once
 
 template <class Key, class T> class QMap;
-class QSqlDatabase;
 class QSqlDriver;
 class QSqlField;
 class QSqlQuery;

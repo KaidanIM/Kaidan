@@ -34,8 +34,6 @@
 #include <QAbstractVideoFilter>
 #include <QFuture>
 
-#include <ZXing/DecodeHints.h>
-
 #include "QrCodeDecoder.h"
 #include "QrCodeVideoFrame.h"
 

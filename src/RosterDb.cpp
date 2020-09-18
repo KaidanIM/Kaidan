@@ -37,7 +37,6 @@
 #include "Message.h"
 #include "MessageDb.h"
 // Qt
-#include <QDateTime>
 #include <QSqlDriver>
 #include <QSqlField>
 #include <QSqlQuery>

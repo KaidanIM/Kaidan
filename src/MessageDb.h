@@ -30,11 +30,9 @@
 
 #pragma once
 
-#include "Enums.h"
-#include "Message.h"
-
-#include <functional>
 #include <QObject>
+
+#include "Message.h"
 
 class QSqlQuery;
 class QSqlRecord;

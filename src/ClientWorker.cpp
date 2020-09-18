@@ -31,7 +31,6 @@
 #include "ClientWorker.h"
 // Qt
 #include <QDebug>
-#include <QSettings>
 #include <QStringBuilder>
 #include <QString>
 #include <QSysInfo>
@@ -43,6 +42,7 @@
 // Kaidan
 #include "DiscoveryManager.h"
 #include "DownloadManager.h"
+#include "Globals.h"
 #include "Kaidan.h"
 #include "LogHandler.h"
 #include "MessageDb.h"

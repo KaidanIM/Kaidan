@@ -30,11 +30,11 @@
 
 #include "QrCodeGenerator.h"
 
-#include <QDebug>
 #include <QImage>
 #include <QRgb>
 
-#include <stdexcept>
+#include <ZXing/BarcodeFormat.h>
+#include <ZXing/MultiFormatWriter.h>
 
 #include "Kaidan.h"
 #include "qxmpp-exts/QXmppUri.h"

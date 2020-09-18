@@ -31,25 +31,19 @@
 #include "Kaidan.h"
 
 // Qt
-#include <QDebug>
 #include <QGuiApplication>
-#include <QSettings>
 #include <QThread>
+#include <QTimer>
 // QXmpp
-#include <QXmppStanza.h>
-#include "qxmpp-exts/QXmppColorGenerator.h"
 #include "qxmpp-exts/QXmppUri.h"
 // Kaidan
 #include "AvatarFileStorage.h"
 #include "CredentialsValidator.h"
 #include "Database.h"
+#include "Globals.h"
 #include "MessageDb.h"
-#include "MessageModel.h"
 #include "Notifications.h"
-#include "PresenceCache.h"
-#include "QmlUtils.h"
 #include "RosterDb.h"
-#include "RosterModel.h"
 
 Kaidan *Kaidan::s_instance;
 

@@ -30,8 +30,6 @@
 
 #pragma once
 
-// C++
-#include <functional>
 // Qt
 #include <QObject>
 class QSqlQuery;

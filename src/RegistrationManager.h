@@ -32,8 +32,6 @@
 
 // Kaidan
 class ClientWorker;
-#include "Globals.h"
-class Kaidan;
 class RegistrationDataFormModel;
 // Qt
 #include <QObject>
@@ -43,7 +41,6 @@ class QSettings;
 #include <QXmppBitsOfBinaryContentId.h>
 class QXmppClient;
 class QXmppDataForm;
-class QXmppDiscoveryIq;
 class QXmppRegisterIq;
 #include <QXmppStanza.h>
 class QXmppRegistrationManager;

@@ -32,8 +32,6 @@
 // QXmpp
 #include <QXmppDiscoveryManager.h>
 #include <QXmppDiscoveryIq.h>
-// Kaidan
-#include "Globals.h"
 
 DiscoveryManager::DiscoveryManager(QXmppClient *client, QObject *parent)
 	: QObject(parent), m_client(client), m_manager(client->findExtension<QXmppDiscoveryManager>())

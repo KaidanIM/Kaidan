@@ -29,8 +29,7 @@
  */
 
 #include "DownloadManager.h"
-// C++
-#include <utility>
+
 // Qt
 #include <QDir>
 #include <QNetworkAccessManager>
@@ -38,7 +37,6 @@
 #include <QNetworkRequest>
 #include <QStandardPaths>
 // Kaidan
-#include "Globals.h"
 #include "Kaidan.h"
 #include "MessageModel.h"
 #include "TransferCache.h"

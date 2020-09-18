@@ -31,7 +31,6 @@
 #include "Message.h"
 
 #include <QDomElement>
-#include <QMimeType>
 #include <QStringBuilder>
 
 #include "MediaUtils.h"

@@ -30,9 +30,9 @@
 
 #pragma once
 
+#include <QGeoCoordinate>
 #include <QMimeDatabase>
 #include <QObject>
-#include <QGeoCoordinate>
 
 #include "Enums.h"
 

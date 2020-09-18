@@ -30,21 +30,14 @@
 
 #pragma once
 
-// QXmpp
-#include "qxmpp-exts/QXmppUploadManager.h"
 // Qt
 #include <QObject>
 #include <QMap>
-#include <QSize>
-// Kaidan
-#include "Enums.h"
-#include "MessageModel.h"
+// QXmpp
+#include "qxmpp-exts/QXmppUploadManager.h"
 
-using namespace Enums;
-
-class Kaidan;
+class Message;
 class RosterManager;
-class TransferCache;
 
 /**
  * @class UploadManager Class for handling and starting HTTP File Uploads

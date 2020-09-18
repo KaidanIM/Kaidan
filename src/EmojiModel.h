@@ -2,7 +2,6 @@
 
 #include <QAbstractListModel>
 #include <QSortFilterProxyModel>
-#include <QVector>
 #include <QSet>
 
 class Emoji

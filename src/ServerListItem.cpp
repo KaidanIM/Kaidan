@@ -30,7 +30,6 @@
 
 #include "ServerListItem.h"
 // Qt
-#include <QLocale>
 #include <QJsonObject>
 #include <QUrl>
 

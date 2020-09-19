@@ -388,6 +388,26 @@ ChatPageBase {
 		}
 	}
 
+	// button for jumping to the latest message
+	Controls.RoundButton {
+		visible: width > 0
+		width: messageListView.atYEnd ? 0 : 50
+		height: messageListView.atYEnd ? 0 : 50
+		anchors.horizontalCenter: parent.horizontalCenter
+		anchors.bottom: parent.bottom
+		anchors.bottomMargin: sendingArea.height + 5
+		icon.name: "go-down"
+		onClicked: messageListView.positionViewAtIndex(0, ListView.Center)
+
+		Behavior on width {
+			SmoothedAnimation {}
+		}
+
+		Behavior on height {
+			SmoothedAnimation {}
+		}
+	}
+
 	// View containing the messages
 	ListView {
 		id: messageListView

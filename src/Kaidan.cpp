@@ -87,9 +87,9 @@ Kaidan::Kaidan(QGuiApplication *app, bool enableLogging, QObject *parent)
 		m_caches->settings->value(KAIDAN_SETTINGS_AUTH_PASSWD).toString().toUtf8()
 	));
 	// Use a default prefix for the JID's resource part if no prefix is already set.
-	if (m_creds.jidResourcePrefix.isEmpty())
+	if (m_credentials.jidResourcePrefix.isEmpty())
 		setJidResourcePrefix(KAIDAN_JID_RESOURCE_DEFAULT_PREFIX);
-	m_creds.isFirstTry = false;
+	m_credentials.isFirstTry = false;
 
 	setPasswordVisibility(PasswordVisibility(
 		m_caches->settings->value(KAIDAN_SETTINGS_AUTH_PASSWD_VISIBILITY).toUInt()));
@@ -99,7 +99,7 @@ Kaidan::Kaidan(QGuiApplication *app, bool enableLogging, QObject *parent)
 	//
 
 	m_client = new ClientWorker(m_caches, enableLogging);
-	m_client->setCredentials(m_creds);
+	m_client->setCredentials(m_credentials);
 	m_client->moveToThread(m_cltThrd);
 
 	connect(m_client, &ClientWorker::connectionErrorChanged, this, &Kaidan::setConnectionError);
@@ -121,7 +121,7 @@ Kaidan::~Kaidan()
 
 void Kaidan::start()
 {
-	if (m_creds.jid.isEmpty() || m_creds.password.isEmpty())
+	if (m_credentials.jid.isEmpty() || m_credentials.password.isEmpty())
 		emit newCredentialsNeeded();
 	else
 		logIn();
@@ -129,13 +129,13 @@ void Kaidan::start()
 
 void Kaidan::logIn()
 {
-	emit m_client->credentialsUpdated(m_creds);
+	emit m_client->credentialsUpdated(m_credentials);
 	emit m_client->logInRequested();
 }
 
 void Kaidan::requestRegistrationForm()
 {
-	emit m_client->credentialsUpdated(m_creds);
+	emit m_client->credentialsUpdated(m_credentials);
 	emit m_client->registrationFormRequested();
 }
 
@@ -206,9 +206,9 @@ void Kaidan::setNotificationsMuted(const QString &jid, bool muted)
 
 void Kaidan::setJid(const QString &jid)
 {
-	m_creds.jid = jid;
+	m_credentials.jid = jid;
 	// credentials were modified -> first try
-	m_creds.isFirstTry = true;
+	m_credentials.isFirstTry = true;
 	emit jidChanged();
 }
 
@@ -216,7 +216,7 @@ void Kaidan::setJidResourcePrefix(const QString &jidResourcePrefix)
 {
 	// JID resource won't influence the authentication, so we don't need
 	// to set the first try flag and can save it.
-	m_creds.jidResourcePrefix = jidResourcePrefix;
+	m_credentials.jidResourcePrefix = jidResourcePrefix;
 
 	m_caches->settings->setValue(KAIDAN_SETTINGS_AUTH_JID_RESOURCE_PREFIX, jidResourcePrefix);
 	emit jidResourcePrefixChanged();
@@ -224,9 +224,9 @@ void Kaidan::setJidResourcePrefix(const QString &jidResourcePrefix)
 
 void Kaidan::setPassword(const QString &password)
 {
-	m_creds.password = password;
+	m_credentials.password = password;
 	// credentials were modified -> first try
-	m_creds.isFirstTry = true;
+	m_credentials.isFirstTry = true;
 	emit passwordChanged();
 }
 

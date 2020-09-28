@@ -135,7 +135,7 @@ public:
 	 */
 	QString jid() const
 	{
-		return m_creds.jid;
+		return m_credentials.jid;
 	}
 
 	/**
@@ -150,7 +150,7 @@ public:
 	 */
 	QString jidResourcePrefix() const
 	{
-		return m_creds.jidResourcePrefix;
+		return m_credentials.jidResourcePrefix;
 	}
 
 	/**
@@ -163,7 +163,7 @@ public:
 	 */
 	QString password() const
 	{
-		return m_creds.password;
+		return m_credentials.password;
 	}
 
 	/**
@@ -521,7 +521,7 @@ private:
 	ClientWorker::Caches *m_caches;
 	ClientWorker *m_client;
 
-	ClientWorker::Credentials m_creds;
+	ClientWorker::Credentials m_credentials;
 	QString m_openUriCache;
 	ConnectionState m_connectionState = ConnectionState::StateDisconnected;
 	ClientWorker::ConnectionError m_connectionError = ClientWorker::NoError;

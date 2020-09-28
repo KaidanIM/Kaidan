@@ -143,11 +143,11 @@ public slots:
 	/**
 	 * Sets the new credentials for next connect.
 	 *
-	 * @param creds The new credentials for the next connect
+	 * @param credentials The new credentials for the next connect
 	 */
-	void setCredentials(ClientWorker::Credentials creds)
+	void setCredentials(ClientWorker::Credentials credentials)
 	{
-		m_creds = creds;
+		m_credentials = credentials;
 	}
 
 	/**
@@ -218,7 +218,7 @@ signals:
 	// Those signals are emitted by Kaidan.cpp and are used by this class.
 	void logInRequested();
 	void logOutRequested();
-	void credentialsUpdated(ClientWorker::Credentials m_creds);
+	void credentialsUpdated(ClientWorker::Credentials m_credentials);
 	void registrationFormRequested();
 
 	/**
@@ -267,13 +267,13 @@ private:
 	Caches *m_caches;
 	QXmppClient *m_client;
 	LogHandler *m_logger;
-	Credentials m_creds;
+	Credentials m_credentials;
 	bool m_enableLogging;
 
 	RegistrationManager *m_registrationManager;
 	RosterManager *m_rosterManager;
-	MessageHandler *m_msgHandler;
-	DiscoveryManager *m_discoManager;
+	MessageHandler *m_messageHandler;
+	DiscoveryManager *m_discoveryManager;
 	VCardManager *m_vCardManager;
 	UploadManager *m_uploadManager;
 	DownloadManager *m_downloadManager;

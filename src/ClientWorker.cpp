@@ -62,8 +62,8 @@ ClientWorker::ClientWorker(Caches *caches, bool enableLogging, QObject* parent)
 	m_vCardManager = new VCardManager(m_client, caches->avatarStorage, this);
 	m_registrationManager = new RegistrationManager(this, m_client, caches->settings);
 	m_rosterManager = new RosterManager(m_client,  caches->rosterModel, caches->avatarStorage, m_vCardManager, this);
-	m_msgHandler = new MessageHandler(this, m_client, caches->msgModel);
-	m_discoManager = new DiscoveryManager(m_client, this);
+	m_messageHandler = new MessageHandler(this, m_client, caches->msgModel);
+	m_discoveryManager = new DiscoveryManager(m_client, this);
 	m_uploadManager = new UploadManager(m_client, m_rosterManager, this);
 	m_downloadManager = new DownloadManager(caches->transferCache, caches->msgModel, this);
 
@@ -127,9 +127,9 @@ void ClientWorker::main()
 void ClientWorker::logIn()
 {
 	QXmppConfiguration config;
-	config.setJid(m_creds.jid);
-	config.setResource(generateJidResourceWithRandomSuffix(m_creds.jidResourcePrefix));
-	config.setPassword(m_creds.password);
+	config.setJid(m_credentials.jid);
+	config.setResource(generateJidResourceWithRandomSuffix(m_credentials.jidResourcePrefix));
+	config.setPassword(m_credentials.password);
 	config.setAutoAcceptSubscriptions(false);
 
 	connectToServer(config);
@@ -145,12 +145,12 @@ void ClientWorker::connectToServer(QXmppConfiguration config)
 		return;
 	}
 
-	config.setJid(m_creds.jid);
+	config.setJid(m_credentials.jid);
 	config.setStreamSecurityMode(QXmppConfiguration::TLSRequired);
 
 	// on first try we must be sure that we connect successfully
 	// otherwise this could end in a reconnection loop
-	config.setAutoReconnectionEnabled(!m_creds.isFirstTry);
+	config.setAutoReconnectionEnabled(!m_credentials.isFirstTry);
 
 	// Reset the attribute for In-Band Registration support.
 	// That is needed when the attribute was true after the last logout but the server disabled the support until the next login.
@@ -229,7 +229,7 @@ void ClientWorker::changeDisplayName(const QString &displayName)
 		// The check is needed when this method is called during account registration to avoid connecting to the server before the registration is finished.
 		// During registration, the display name is set first and the client connects to the server afterwards.
 		// The client should only connect to the server during normal usage.
-		if (!(m_creds.jid.isEmpty() || m_creds.password.isEmpty()))
+		if (!(m_credentials.jid.isEmpty() || m_credentials.password.isEmpty()))
 			logIn();
 	}
 }
@@ -245,13 +245,13 @@ void ClientWorker::onConnected()
 	qDebug() << "[client] Connected successfully to server";
 
 	// Emit signal, that logging in with these credentials has worked for the first time
-	if (m_creds.isFirstTry)
+	if (m_credentials.isFirstTry)
 		emit Kaidan::instance()->loggedInWithNewCredentials();
 
 	// accept credentials and save them
-	m_creds.isFirstTry = false;
-	m_caches->settings->setValue(KAIDAN_SETTINGS_AUTH_JID, m_creds.jid);
-	m_caches->settings->setValue(KAIDAN_SETTINGS_AUTH_PASSWD, QString::fromUtf8(m_creds.password.toUtf8().toBase64()));
+	m_credentials.isFirstTry = false;
+	m_caches->settings->setValue(KAIDAN_SETTINGS_AUTH_JID, m_credentials.jid);
+	m_caches->settings->setValue(KAIDAN_SETTINGS_AUTH_PASSWD, QString::fromUtf8(m_credentials.password.toUtf8().toBase64()));
 
 	// If the account could not be deleted from the server because the client was disconnected, delete it now.
 	if (m_isAccountToBeDeletedFromClientAndServer) {

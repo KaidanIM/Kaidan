@@ -73,11 +73,11 @@ MessageHandler::MessageHandler(ClientWorker *clientWorker, QXmppClient *client, 
 	        client, &QXmppClient::messageReceived);
 
 	// carbons discovery
-	auto *discoManager = client->findExtension<QXmppDiscoveryManager>();
-	if (!discoManager)
+	auto *discoveryManager = client->findExtension<QXmppDiscoveryManager>();
+	if (!discoveryManager)
 		return;
 
-	connect(discoManager, &QXmppDiscoveryManager::infoReceived,
+	connect(discoveryManager, &QXmppDiscoveryManager::infoReceived,
 	        this, &MessageHandler::handleDiscoInfo);
 
 	connect(model, &MessageModel::pendingMessagesFetched,

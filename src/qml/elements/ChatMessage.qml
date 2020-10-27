@@ -81,7 +81,7 @@ RowLayout {
 
 	// placeholder
 	Item {
-		Layout.preferredWidth: root.layoutDirection === Qt.LeftToRight ? 5 : 10
+		Layout.preferredWidth: 5
 	}
 
 	Avatar {

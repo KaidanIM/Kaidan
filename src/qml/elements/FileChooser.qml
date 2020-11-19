@@ -30,16 +30,18 @@
 
 import QtQuick.Dialogs 1.3
 
+import im.kaidan.kaidan 1.0
+import MediaUtils 0.1
+
 FileDialog {
 	id: fileDialog
 	folder: shortcuts.home
 	nameFilters: [
-		"Images (*.jpg *.jpeg *.png *.gif)",
-		"Videos (*.mp4 *.mkv *.avi *.webm)",
-		"Audio files (*.mp3 *.wav *.flac *.ogg *.m4a *.mka)",
-		"Documents (*.doc *.docx *.odt)",
-		"All files (*)",
-		selectedNameFilter
+		MediaUtilsInstance.namedFilter(Enums.MessageType.MessageImage),
+		MediaUtilsInstance.namedFilter(Enums.MessageType.MessageVideo),
+		MediaUtilsInstance.namedFilter(Enums.MessageType.MessageAudio),
+		MediaUtilsInstance.namedFilter(Enums.MessageType.MessageDocument),
+		MediaUtilsInstance.namedFilter(Enums.MessageType.MessageFile)
 	]
 	// TODO: support multiple files
 	// Currently the problem is that the fileUrls list isn't cleared

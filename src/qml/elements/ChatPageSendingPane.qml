@@ -162,7 +162,7 @@ Controls.Pane {
 					if (Kirigami.Settings.isMobile)
 						chatPage.mediaDrawer.open()
 					else
-						chatPage.openFileDialog(qsTr("All files"), "*", MediaUtilsInstance.label(Enums.MessageType.MessageFile))
+						chatPage.openFileDialog(MediaUtilsInstance.namedFilter(Enums.MessageType.MessageFile), MediaUtilsInstance.label(Enums.MessageType.MessageFile))
 				}
 			}
 

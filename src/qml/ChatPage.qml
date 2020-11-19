@@ -48,9 +48,9 @@ ChatPageBase {
 		return chatDisplayName ? chatDisplayName : currentChatJid
 	}
 
+	property alias mediaDrawer: mediaDrawer
 	property bool isWritingSpoiler
 	property string messageToCorrect
-
 	readonly property bool cameraAvailable: Multimedia.QtMultimedia.availableCameras.length > 0
 
 	title: chatName
@@ -322,9 +322,9 @@ ChatPageBase {
 		id: fileChooserLoader
 	}
 
-	function openFileDialog(filterName, filter, title) {
+	function openFileDialog(nameFilter, title) {
 		fileChooserLoader.source = "qrc:/qml/elements/FileChooser.qml"
-		fileChooserLoader.item.selectedNameFilter = filterName
+		fileChooserLoader.item.selectedNameFilter = nameFilter
 		fileChooserLoader.item.accepted.connect(function() { sendMediaSheet.sendFile(Kaidan.messageModel.currentChatJid, fileChooserLoader.item.fileUrl) })
 		if (title !== undefined)
 			fileChooserLoader.item.title = title
@@ -372,8 +372,7 @@ ChatPageBase {
 					case Enums.MessageType.MessageAudio:
 					case Enums.MessageType.MessageVideo:
 					case Enums.MessageType.MessageDocument:
-						openFileDialog(MediaUtilsInstance.filterName(model.modelData),
-									   MediaUtilsInstance.filter(model.modelData),
+						openFileDialog(MediaUtilsInstance.namedFilter(model.modelData),
 									   MediaUtilsInstance.label(model.modelData))
 						break
 					case Enums.MessageType.MessageText:

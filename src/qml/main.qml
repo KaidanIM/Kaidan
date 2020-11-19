@@ -75,9 +75,6 @@ Kirigami.ApplicationWindow {
 		id: subReqAcceptSheet
 	}
 
-	// Log out of the server when the application window is closed.
-	onClosing: Kaidan.logOut()
-
 	// components for all main pages
 	Component {id: startPage; StartPage {}}
 	Component {id: registrationLoginDecisionPage; RegistrationLoginDecisionPage {}}

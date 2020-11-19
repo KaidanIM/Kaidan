@@ -269,8 +269,10 @@ signals:
 
 	/**
 	 * Emitted to log out of the server.
+	 *
+	 * @param isApplicationBeingClosed true if the application will be terminated directly after logging out, false otherwise
 	 */
-	void logOutRequested();
+	void logOutRequested(bool isApplicationBeingClosed = false);
 
 	void avatarStorageChanged();
 

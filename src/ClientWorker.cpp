@@ -154,15 +154,22 @@ void ClientWorker::finishTask()
 
 void ClientWorker::logIn()
 {
-	if (!m_accountManager->loadCredentials())
-		return;
+	if (!m_isFirstLoginAfterStart || m_caches->settings->value(KAIDAN_SETTINGS_AUTH_ONLINE, true).toBool()) {
+		// Store the latest online state which is restored when opening Kaidan again after closing.
+		m_caches->settings->setValue(KAIDAN_SETTINGS_AUTH_ONLINE, true);
 
-	QXmppConfiguration config;
-	config.setResource(m_accountManager->jidResource());
-	config.setPassword(m_accountManager->password());
-	config.setAutoAcceptSubscriptions(false);
+		if (!m_accountManager->loadCredentials())
+			return;
 
-	connectToServer(config);
+		QXmppConfiguration config;
+		config.setResource(m_accountManager->jidResource());
+		config.setPassword(m_accountManager->password());
+		config.setAutoAcceptSubscriptions(false);
+
+		connectToServer(config);
+	}
+
+	m_isFirstLoginAfterStart = false;
 }
 
 void ClientWorker::connectToRegister()
@@ -203,8 +210,12 @@ void ClientWorker::connectToServer(QXmppConfiguration config)
 	}
 }
 
-void ClientWorker::logOut()
+void ClientWorker::logOut(bool isApplicationBeingClosed)
 {
+	// Store the latest online state which is restored when opening Kaidan again after closing.
+	if (!isApplicationBeingClosed)
+		m_caches->settings->setValue(KAIDAN_SETTINGS_AUTH_ONLINE, false);
+
 	switch (m_client->state()) {
 	case QXmppClient::DisconnectedState:
 		break;

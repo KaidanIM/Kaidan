@@ -34,6 +34,7 @@
 #include <QLatin1String>
 
 // Kaidan settings
+#define KAIDAN_SETTINGS_AUTH_ONLINE "auth/online"
 #define KAIDAN_SETTINGS_AUTH_JID "auth/jid"
 #define KAIDAN_SETTINGS_AUTH_JID_RESOURCE_PREFIX "auth/jidResourcePrefix"
 #define KAIDAN_SETTINGS_AUTH_PASSWD "auth/password"

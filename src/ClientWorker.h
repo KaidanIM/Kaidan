@@ -187,8 +187,10 @@ public slots:
 
 	/**
 	 * Logs out of the server if the client is not already logged out.
+	 *
+	 * @param isApplicationBeingClosed true if the application will be terminated directly after logging out, false otherwise
 	 */
-	void logOut();
+	void logOut(bool isApplicationBeingClosed = false);
 
 	/**
 	 * Deletes the account data from the client and server.
@@ -309,6 +311,7 @@ private:
 	QList<std::function<void ()>> m_pendingTasks;
 	uint m_activeTasks = 0;
 
+	bool m_isFirstLoginAfterStart = true;
 	bool m_isApplicationWindowActive;
 	bool m_isReconnecting = false;
 	bool m_isDisconnecting = false;

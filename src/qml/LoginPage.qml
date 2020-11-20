@@ -57,7 +57,7 @@ Kirigami.Page {
 
 			// For desktop or tablet devices
 			Layout.alignment: Qt.AlignCenter
-			Layout.maximumWidth: Kirigami.Units.gridUnit * 25
+			Layout.maximumWidth: largeButtonWidth
 
 			// JID field
 			JidField {

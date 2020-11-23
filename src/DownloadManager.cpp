@@ -148,7 +148,11 @@ void DownloadJob::startDownload()
 		emit m_transferCache->removeJobRequested(m_msgId);
 		emit finished();
 	});
+#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
+	connect(reply, &QNetworkReply::errorOccurred, this, [=]() {
+#else
 	connect(reply, QOverload<QNetworkReply::NetworkError>::of(&QNetworkReply::error), this, [=]() {
+#endif
 		emit m_transferCache->removeJobRequested(m_msgId);
 		qWarning() << "Couldn't download file:" << reply->errorString();
 		emit Kaidan::instance()->passiveNotificationRequested(

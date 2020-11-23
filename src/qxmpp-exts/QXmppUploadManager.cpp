@@ -207,16 +207,22 @@ void QXmppHttpUpload::startUpload()
 
     connect(m_putReply, &QNetworkReply::finished, this, &QXmppHttpUpload::uploadFinished);
     connect(m_putReply, &QNetworkReply::uploadProgress, this, &QXmppHttpUpload::handleProgressed);
-    connect(m_putReply, QOverload<QNetworkReply::NetworkError>::of(&QNetworkReply::error),
-            this, &QXmppHttpUpload::uploadFailed);
+#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
+    connect(m_putReply, &QNetworkReply::errorOccurred, this, &QXmppHttpUpload::uploadFailed);
+#else
+    connect(m_putReply, QOverload<QNetworkReply::NetworkError>::of(&QNetworkReply::error), this, &QXmppHttpUpload::uploadFailed);
+#endif
 
     // delete file object after upload
     connect(m_putReply, &QNetworkReply::finished, this, [=] () {
         file->deleteLater();
         m_started = false;
     });
-    connect(m_putReply, QOverload<QNetworkReply::NetworkError>::of(&QNetworkReply::error),
-            this, [=] () {
+#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
+    connect(m_putReply, &QNetworkReply::errorOccurred, this, [=] () {
+#else
+    connect(m_putReply, QOverload<QNetworkReply::NetworkError>::of(&QNetworkReply::error), this, [=] () {
+#endif
         file->deleteLater();
         m_started = false;
     });

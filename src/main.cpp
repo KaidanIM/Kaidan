@@ -325,7 +325,7 @@ Q_DECL_EXPORT int main(int argc, char *argv[])
 	// QtQuickControls2 Style
 	if (qEnvironmentVariableIsEmpty("QT_QUICK_CONTROLS_STYLE")) {
 #ifdef Q_OS_WIN
-		const QString defaultStyle = QStringLiteral("Universal");
+		const QString defaultStyle = QStringLiteral("org.kde.desktop");
 #else
 		const QString defaultStyle = QStringLiteral("Material");
 #endif

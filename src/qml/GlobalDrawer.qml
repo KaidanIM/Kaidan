@@ -113,7 +113,7 @@ Kirigami.GlobalDrawer {
 		},
 		Kirigami.Action {
 			text: qsTr("About")
-			icon.name: "help-about"
+			icon.name: "help-about-symbolic"
 			onTriggered: {
 				popLayersAboveLowest()
 				// open about sheet

@@ -72,7 +72,7 @@ Controls.Pane {
 
 			Controls.Button {
 				text: qsTr("Close spoiler hint field")
-				icon.name: "tab-close"
+				icon.name: "window-close-symbolic"
 				display: Controls.Button.IconOnly
 				flat: true
 
@@ -170,9 +170,9 @@ Controls.Pane {
 				id: sendButton
 				source: {
 					if (messageArea.state === "compose")
-						return "document-send"
+						return "mail-send-symbolic"
 					else if (messageArea.state === "edit")
-						return "edit-symbolic"
+						return "document-edit-symbolic"
 				}
 
 				onClicked: sendMessage()

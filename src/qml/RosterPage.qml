@@ -67,7 +67,7 @@ Kirigami.ScrollablePage {
 		id: searchAction
 		text: qsTr("Search contacts")
 		checkable: true
-		icon.name: "search"
+		icon.name: "system-search-symbolic"
 		onTriggered: {
 			if (checked) {
 				searchField.forceActiveFocus()

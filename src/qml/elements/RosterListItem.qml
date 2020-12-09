@@ -105,8 +105,8 @@ Kirigami.SwipeListItem {
 				Kirigami.Icon {
 					id: muteIcon
 					source: "audio-volume-muted-symbolic"
-					width: 16
-					height: 16
+					width: 22
+					height: 22
 					visible: Kaidan.notificationsMuted(jid)
 				}
 				Item {

@@ -282,7 +282,7 @@ RowLayout {
 				}
 
 				Kirigami.Icon {
-					source: "edit-symbolic"
+					source: "document-edit-symbolic"
 					visible: edited
 					Layout.preferredHeight: Kirigami.Units.gridUnit * 0.65
 					Layout.preferredWidth: Kirigami.Units.gridUnit * 0.65

@@ -49,13 +49,13 @@ Column {
 		description: qsTr("Changes your account's password. You will need to re-enter it on your other devices.")
 		visible: Kaidan.serverFeaturesCache.inBandRegistrationSupported
 		onClicked: stack.push("ChangePassword.qml")
-		icon: "lock"
+		icon: "system-lock-screen-symbolic"
 	}
 	SettingsItem {
 		name: qsTr("Multimedia Settings")
 		description: qsTr("Configure photo, video and audio recording settings")
 		onClicked: stack.push("MultimediaSettings.qml")
-		icon: "settings-configure"
+		icon: "emblem-system-symbolic"
 	}
 	SettingsItem {
 		name: qsTr("Account security")
@@ -66,13 +66,13 @@ Column {
 	SettingsItem {
 		name: qsTr("Remove account from Kaidan")
 		description: qsTr("Remove account from this app")
-		icon: "system-log-out"
+		icon: "system-log-out-symbolic"
 		onClicked: stack.push("LocalAccountRemoval.qml")
 	}
 	SettingsItem {
 		name: qsTr("Delete account")
 		description: qsTr("Delete account from the server")
-		icon: "delete"
+		icon: "edit-delete-symbolic"
 		onClicked: stack.push("RemoteAccountDeletion.qml")
 	}
 }

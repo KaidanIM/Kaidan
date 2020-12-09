@@ -296,9 +296,9 @@ QString MediaUtils::newMediaIconName(Enums::MessageType hint)
 	case Enums::MessageType::MessageVideo:
 		return QStringLiteral("camera-video-symbolic");
 	case Enums::MessageType::MessageAudio:
-		return QStringLiteral("microphone");
+		return QStringLiteral("audio-input-microphone-symbolic");
 	case Enums::MessageType::MessageGeoLocation:
-		return QStringLiteral("gps");
+		return QStringLiteral("mark-location-symbolic");
 	case Enums::MessageType::MessageText:
 	case Enums::MessageType::MessageFile:
 	case Enums::MessageType::MessageDocument:

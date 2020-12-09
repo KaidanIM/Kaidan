@@ -60,7 +60,7 @@ ChatPageBase {
 		Kirigami.Action {
 			id: searchAction
 			text: qsTr("Search")
-			icon.name: "search"
+			icon.name: "system-search-symbolic"
 
 			onTriggered: {
 				if (searchBar.active)
@@ -73,7 +73,7 @@ ChatPageBase {
 			visible: true
 			icon.name: {
 				Kaidan.notificationsMuted(Kaidan.messageModel.currentChatJid)
-					? "player-volume"
+					? "audio-volume-high-symbolic"
 					: "audio-volume-muted-symbolic"
 			}
 			text: {
@@ -93,7 +93,7 @@ ChatPageBase {
 						? qsTr("Unmute notifications")
 						: qsTr("Mute notifications")
 				icon.name = Kaidan.notificationsMuted(Kaidan.messageModel.currentChatJid)
-							? "player-volume"
+							? "audio-volume-high-symbolic"
 							: "audio-volume-muted-symbolic"
 			}
 
@@ -106,7 +106,7 @@ ChatPageBase {
 		},
 		Kirigami.Action {
 			visible: true
-			icon.name: "user-identity"
+			icon.name: "avatar-default-symbolic"
 			text: qsTr("View profile")
 			onTriggered: pageStack.push(userProfilePage, {jid: Kaidan.messageModel.currentChatJid, name: chatName})
 		},
@@ -270,8 +270,8 @@ ChatPageBase {
 			anchors.margins: Kirigami.Units.largeSpacing
 
 			Controls.Button {
-				text: qsTr("Close")
-				icon.name: "dialog-close"
+				text: qsTr("Close message search bar")
+				icon.name: "window-close-symbolic"
 				onClicked: searchBar.close()
 				display: Controls.Button.IconOnly
 				flat: true

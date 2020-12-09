@@ -38,7 +38,7 @@ import org.kde.kirigami 2.12 as Kirigami
  * It provides an adjustable description, a configurable confirmation button and a predefined cancel button.
  */
 BinaryDecisionPage {
-	topImageSource: "dialog-ok"
+	topImageSource: "emblem-ok-symbolic"
 	bottomImageSource: "dialog-cancel"
 	topActionAsMainAction: true
 

@@ -73,12 +73,12 @@ Kirigami.Page {
 	}
 
 	leftAction: Kirigami.Action {
-		icon.name: "delete"
+		icon.name: "edit-delete-symbolic"
 		onTriggered: removeSheet.open()
 	}
 
 	rightAction: Kirigami.Action {
-		icon.name: "edit-rename"
+		icon.name: "document-edit-symbolic"
 		onTriggered: {
 			renameSheet.open()
 			renameSheet.forceFocus()

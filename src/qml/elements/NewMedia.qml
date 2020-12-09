@@ -205,7 +205,7 @@ MediaPreview {
 				}
 
 				Controls.ToolButton {
-					icon.name: 'dialog-ok'
+					icon.name: 'emblem-ok-symbolic'
 
 					onClicked: {
 						root.mediaSource = previewLoader.mediaSource

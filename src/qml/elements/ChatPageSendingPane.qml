@@ -59,6 +59,7 @@ Controls.Pane {
 
 		RowLayout {
 			visible: chatPage.isWritingSpoiler
+			spacing: 0
 
 			Controls.TextArea {
 				id: spoilerHintField
@@ -69,18 +70,11 @@ Controls.Pane {
 				background: Item {}
 			}
 
-			Controls.ToolButton {
-				Layout.preferredWidth: Kirigami.Units.gridUnit * 1.5
-				Layout.preferredHeight: Kirigami.Units.gridUnit * 1.5
-				padding: 0
-
-				Kirigami.Icon {
-					source: "tab-close"
-					smooth: true
-					anchors.centerIn: parent
-					width: Kirigami.Units.gridUnit * 1.5
-					height: width
-				}
+			Controls.Button {
+				text: qsTr("Close spoiler hint field")
+				icon.name: "tab-close"
+				display: Controls.Button.IconOnly
+				flat: true
 
 				onClicked: {
 					chatPage.isWritingSpoiler = false
@@ -92,6 +86,8 @@ Controls.Pane {
 		Kirigami.Separator {
 			visible: chatPage.isWritingSpoiler
 			Layout.fillWidth: true
+			Layout.topMargin: root.padding
+			Layout.bottomMargin: Layout.topMargin
 		}
 
 		RowLayout {

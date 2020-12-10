@@ -116,7 +116,7 @@ Nunca lle mostres este código QR a ninguén. Permitiríalle acceso sen límite 
     </message>
     <message>
         <source>After changing your password, you will need to reenter it on all your other devices.</source>
-        <translation>Tras cambiar o contrasinal, debe voltar a introducila en todos os outros dispositivos.</translation>
+        <translation>Tras cambiar o contrasinal, debes volver a introducila en todolos outros dispositivos.</translation>
     </message>
     <message>
         <source>Cancel</source>
@@ -878,7 +878,7 @@ O contrasinal será borrado, asegúrate de que o tes gardado ou de que te lembra
     </message>
     <message>
         <source>You can decide to only not show your password for &lt;b&gt;%1&lt;/b&gt; as text anymore or to remove it completely from the account transfer. If you remove your password completely, you won&apos;t be able to use the account transfer via scanning without entering your password because it is also removed from the QR code.</source>
-        <translation>Podes decidir que non se mostre o contrasinal para &lt;b&gt;%1&lt;/b&gt; como texto nunca máis ou eliminala completamente desde a transferencia da conta. Se eliminas o contrasinal completamente non poderás voltar a utilizar a transferencia da conta vía escaneo sen escribir o contrasinal xa que tamén se eliminará do código QR.</translation>
+        <translation>Podes decidir que non se mostre o contrasinal para &lt;b&gt;%1&lt;/b&gt; como texto nunca máis ou eliminala completamente desde a transferencia da conta. Se eliminas o contrasinal completamente non poderás volver a utilizar a transferencia da conta vía escaneo sen escribir o contrasinal xa que tamén se eliminará do código QR.</translation>
     </message>
     <message>
         <source>Do not show password as text</source>
@@ -1269,7 +1269,7 @@ Deletion of message history saved on server</extracomment>
     </message>
     <message>
         <source>Changes your account&apos;s password. You will need to re-enter it on your other devices.</source>
-        <translation>Cambio no contrasinal da conta. Deberás voltar a introducilo nos outros dispositivos.</translation>
+        <translation>Cambio no contrasinal da conta. Deberás volver a introducilo nos outros dispositivos.</translation>
     </message>
     <message>
         <source>Multimedia Settings</source>

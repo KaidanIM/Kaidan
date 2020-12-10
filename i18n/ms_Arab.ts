@@ -83,7 +83,7 @@ Make sure that you have backed up those if you want to use your account later.</
     </message>
     <message>
         <source>Allow to add new devices using a QR-Code, but never show the password as text. This action can not be undone, so consider storing the password in another way before using it.</source>
-        <translation>ممبوليهکن ڤنمبهن ڤرانتي بهارو مڠݢوناکن کود QR⹁ تتاڤي تيدق منونجوقکن کات لالوان سباݢاي تيکس. ڤربواتن اين تيدق بوليه داوندور⹁ جادي اندا دشورکن اونتوق مڽيمڤن کات لالوان دالم چارا يڠ لاءين سبلوم مڠݢوناکنڽ.</translation>
+        <translation>ممبوليهکن ڤنمبهن ڤرنتي بهارو مڠݢوناکن کود QR⹁ تتاڤي تيدق منونجوقکن کات لالوان سباݢاي تيکس. ڤربواتن اين تيدق بوليه داوندور⹁ جادي اندا دشورکن اونتوق مڽيمڤن کات لالوان دالم چارا يڠ لاٴين سبلوم مڠݢوناکنڽ.</translation>
     </message>
     <message>
         <source>Disable showing the password</source>

@@ -46,18 +46,18 @@ View {
 		parent: contentArea
 
 		CenteredAdaptiveHighlightedButton {
-			label.text: qsTr("Open registration web page")
+			text: qsTr("Open registration web page")
 			onClicked: Qt.openUrlExternally(serverView.registrationWebPage)
 		}
 
 		CenteredAdaptiveButton {
-			label.text: qsTr("Copy registration web page address")
+			text: qsTr("Copy registration web page address")
 			onClicked: Utils.copyToClipboard(serverView.registrationWebPage)
 		}
 
 		CenteredAdaptiveHighlightedButton {
 			id: loginButton
-			label.text: qsTr("Log in with your new account")
+			text: qsTr("Log in with your new account")
 			Layout.topMargin: height
 			onClicked: pageStack.layers.push(loginPage)
 		}

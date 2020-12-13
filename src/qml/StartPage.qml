@@ -81,7 +81,7 @@ Kirigami.Page {
 
 			CenteredAdaptiveHighlightedButton {
 				id: startButton
-				label.text: qsTr("Let's start")
+				text: qsTr("Let's start")
 				onClicked: pageStack.layers.push(qrCodeScannerPage)
 			}
 

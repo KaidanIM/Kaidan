@@ -144,7 +144,7 @@ Kirigami.Page {
 
 			// button for showing or hiding the credentials as a QR code
 			CenteredAdaptiveHighlightedButton {
-				label.text: checked ? qsTr("Hide QR code") : qsTr("Show as QR code")
+				text: checked ? qsTr("Hide QR code") : qsTr("Show as QR code")
 				checkable: true
 
 				// If that was not used, this button would change its label text
@@ -167,7 +167,7 @@ Kirigami.Page {
 
 			// button for showing or hiding the credentials as plain text
 			CenteredAdaptiveButton {
-				label.text: checked ? qsTr("Hide text") : qsTr("Show as text")
+				text: checked ? qsTr("Hide text") : qsTr("Show as text")
 				checkable: true
 
 				// If that was not used, this button would change its label text

@@ -74,7 +74,7 @@ Kirigami.Page {
 			// button for the top action
 			CenteredAdaptiveButton {
 				visible: !topActionAsMainAction
-				label.text: topAction.text
+				text: topAction.text
 				icon.name: topAction.icon.name
 				onClicked: topAction.trigger()
 				enabled: topAction.enabled
@@ -83,7 +83,7 @@ Kirigami.Page {
 			// button for the top action as main action
 			CenteredAdaptiveHighlightedButton {
 				visible: topActionAsMainAction
-				label.text: topAction.text
+				text: topAction.text
 				icon.name: topAction.icon.name
 				onClicked: topAction.trigger()
 				enabled: topAction.enabled
@@ -98,7 +98,7 @@ Kirigami.Page {
 
 			// button for the bottom action
 			CenteredAdaptiveButton {
-				label.text: bottomAction.text
+				text: bottomAction.text
 				icon.name: bottomAction.icon.name
 				onClicked: bottomAction.trigger()
 				enabled: bottomAction.enabled

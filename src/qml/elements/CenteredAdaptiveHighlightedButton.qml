@@ -39,12 +39,6 @@ import im.kaidan.kaidan 1.0
  * It is used for main actions.
  */
 CenteredAdaptiveButton {
-	// Not all styles actually support coloring buttons
-	label.color: {
-		Style.buttonColoringEnabled ? Kirigami.Theme.highlightedTextColor
-		                            : Kirigami.Theme.textColor
-	}
-
+	Kirigami.Theme.textColor: Style.buttonColoringEnabled ? Kirigami.Theme.highlightedTextColor : Kirigami.Theme.textColor
 	Kirigami.Theme.backgroundColor: Material.Material.accent
-	highlighted: true
 }

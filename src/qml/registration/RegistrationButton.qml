@@ -34,6 +34,6 @@ import "../elements"
  * This button is used for confirming the registration.
  */
 CenteredAdaptiveHighlightedButton {
-	label.text: qsTr("Register")
+	text: qsTr("Register")
 	onClicked: sendRegistrationFormAndShowLoadingView()
 }

@@ -31,7 +31,6 @@
 import QtQuick 2.12
 import QtQuick.Layouts 1.12
 import QtQuick.Controls 2.12 as Controls
-import QtQuick.Controls.Material 2.12 as Material
 import org.kde.kirigami 2.12 as Kirigami
 
 /**
@@ -100,7 +99,6 @@ RowLayout {
 		Layout.alignment: Qt.AlignRight
 		icon.name: "go-next-symbolic"
 		highlighted: true
-		Kirigami.Theme.backgroundColor: Material.accent
 		visible: swipeView.currentIndex !== (swipeView.count - 1)
 		enabled: jumpingToViewsEnabled
 		onClicked: jumpToNextView()

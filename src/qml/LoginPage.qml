@@ -81,7 +81,7 @@ Kirigami.Page {
 
 			CenteredAdaptiveHighlightedButton {
 				id: loginButton
-				label.text: qsTr("Log in")
+				text: qsTr("Log in")
 
 				state: Kaidan.connectionState !== Enums.StateDisconnected ? "connecting" : ""
 				states: [
@@ -89,9 +89,7 @@ Kirigami.Page {
 						name: "connecting"
 						PropertyChanges {
 							target: loginButton
-							label.text: "<i>" + qsTr("Connecting…") + "</i>"
-							label.color: "black"
-							label.textFormat: Text.StyledText
+							text: qsTr("Connecting…")
 							enabled: false
 						}
 					}

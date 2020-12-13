@@ -210,7 +210,7 @@ Kirigami.Page {
 
 			// button for showing or hiding the explanation
 			CenteredAdaptiveHighlightedButton {
-				label.text: checked ? qsTr("Show explanation") : qsTr("Scan")
+				text: checked ? qsTr("Show explanation") : qsTr("Scan")
 				checkable: true
 
 				onClicked: {
@@ -224,7 +224,8 @@ Kirigami.Page {
 
 			// button for skipping the scanning
 			CenteredAdaptiveButton {
-				label.text: qsTr("Continue without QR code")
+				text: qsTr("Continue without QR code")
+				flat: Style.isMaterial ? explanation.visible : false
 				onClicked: pageStack.layers.push(registrationLoginDecisionPage)
 			}
 		}

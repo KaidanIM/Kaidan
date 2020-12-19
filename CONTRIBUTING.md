@@ -3,6 +3,9 @@
 This is a guideline for contributing to Kaidan.
 There is also a guide for a [basic setup](https://invent.kde.org/network/kaidan/-/wikis/setup) targeted at contributors which are unfamiliar with KDE Identity, GitLab or Git and want to start contributing quickly.
 
+If you would like to contribute to Kaidan, please create branches on your repository clone and submit merge requests for them.
+Please do not create branches on Kaidan's main repository or push your commits directly to its *master* branch.
+
 ## Branches
 
 Use the following prefixes for branch names:
@@ -14,7 +17,11 @@ Use the following prefixes for branch names:
 
 ## Merge Requests (MR)
 
-Please stick to the following steps for opening and reviewing MRs.
+Currently, Linus Jahn (@lnj) and Jonah Brüchert (@jbbgameich) are the maintainers of Kaidan.
+They are responsible for accepting MRs.
+Nevertheless, everybody is welcome to review MRs and give feedback on them.
+
+Please stick to the following steps for opening, reviewing and accepting MRs.
 
 ### For Authors
 
@@ -23,16 +30,27 @@ Please stick to the following steps for opening and reviewing MRs.
 1. Split your commits logically.
 1. Do not mix unrelated changes in the same MR.
 1. Create a MR with the *master* branch as its target.
-1. Add *WIP: * in front of the MR's title as long as you are working on the MR and remove it as soon as it is ready to be reviewed.
-1. If everything is ready to be reviewed, mention at least one person not involved as an author or co-author to review the current state.
+1. Add `Draft: ` in front of the MR's title as long as you are working on the MR and remove it as soon as it is ready to be reviewed.
+1. A maintainer and possibly other reviewers will give you feedback.
+1. Improve your MR according to their feedback, push your commits and close open threads via the *Resolve thread* button.
 1. If necessary, modify, reorder or squash your commits and force-push (`git push -f`) the result to the MR's branch.
-1. If there are no open threads on your MR, a reviewer with write access will merge your commits.
+1. If there are no open threads on your MR, a maintainer will merge your commits into the *master* branch.
+
+Please do not merge your commits into the *master* branch by yourself.
+If maintainers approved your MR but have not yet merged it, that probably means that they are waiting for the approval of additional maintainers.
+Feel free to ask if anything is unclear.
 
 ### For Reviewers
 
-1. Try to provide a review to the author.
-1. Try to give the author concrete proposals for improving the code via the *insert suggestion* feature while commenting.
+1. Provide detailed descriptions of found issues to the author.
+1. Try to give the author concrete proposals for improving the code via the *Insert suggestion* button while commenting.
 1. If the proposals are too complicated, create and push a commit with your proposal to your own fork of Kaidan and open a MR with the author's MR branch as its target.
+1. In case you are a maintainer:
+	1. If you think that no additional review is needed, make editorial modifications (such as squashing the commits) and merge the result directly.
+	1. If you would like to get (more) feedback from other maintainers, approve the MR using the *Approve* button and mention other maintainers to review the MR.
+1. In case you are not a maintainer and you think that the MR is ready to be merged, approve the MR using the *Approve* button.
+
+Reviews have to be done by at least one maintainer not involved as the MR's author or co-author.
 
 ## Graphics
 

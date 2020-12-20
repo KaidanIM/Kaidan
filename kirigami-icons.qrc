@@ -17,6 +17,7 @@
 		<file alias="handle-right.svg">3rdparty/breeze-icons/icons/actions/22/handle-right.svg</file>
 		<file alias="mail-invitation.svg">3rdparty/breeze-icons/icons/actions/22/mail-invitation.svg</file>
 		<file alias="overflow-menu.svg">3rdparty/breeze-icons/icons/actions/22/overflow-menu.svg</file>
+		<file alias="system-log-out.svg">3rdparty/breeze-icons/icons/actions/22/system-log-out.svg</file>
 		<file alias="system-shutdown.svg">3rdparty/breeze-icons/icons/actions/22/system-shutdown.svg</file>
 		<file alias="view-list-icons.svg">3rdparty/breeze-icons/icons/actions/22/view-list-icons.svg</file>
 		<file alias="go-parent-folder.svg">3rdparty/breeze-icons/icons/actions/22/go-parent-folder.svg</file>
@@ -52,7 +53,6 @@
 		<file alias="mark-location-symbolic.svg">3rdparty/breeze-icons/icons/actions/symbolic/mark-location-symbolic.svg</file>
 		<file alias="system-search-symbolic.svg">3rdparty/breeze-icons/icons/actions/symbolic/system-search-symbolic.svg</file>
 		<file alias="window-close-symbolic.svg">3rdparty/breeze-icons/icons/actions/symbolic/window-close-symbolic.svg</file>
-		<file alias="system-log-out-symbolic.svg">3rdparty/breeze-icons/icons/actions/symbolic/system-log-out-symbolic.svg</file>
 		<file alias="edit-delete-symbolic.svg">3rdparty/breeze-icons/icons/actions/symbolic/edit-delete-symbolic.svg</file>
 		<file alias="help-about-symbolic.svg">3rdparty/breeze-icons/icons/actions/symbolic/help-about-symbolic.svg</file>
 	</qresource>

@@ -66,7 +66,7 @@ Column {
 	SettingsItem {
 		name: qsTr("Remove account from Kaidan")
 		description: qsTr("Remove account from this app")
-		icon: "system-log-out-symbolic"
+		icon: "system-log-out"
 		onClicked: stack.push("LocalAccountRemoval.qml")
 	}
 	SettingsItem {

@@ -106,7 +106,7 @@ Kirigami.Page {
 					connecting = true
 					break;
 				case Enums.PasswordNeeded:
-					pageStack.push(loginPage)
+					pageStack.layers.push(loginPage)
 					break;
 				case Enums.InvalidLoginUri:
 				}

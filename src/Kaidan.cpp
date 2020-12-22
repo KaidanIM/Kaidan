@@ -239,7 +239,7 @@ quint8 Kaidan::logInByUri(const QString &uri)
 
 	setJid(parsedUri.jid());
 
-	if (!parsedUri.hasAction(QXmppUri::Login) || !CredentialsValidator::isPasswordValid(parsedUri.password())) {
+	if (parsedUri.action() != QXmppUri::Login || !CredentialsValidator::isPasswordValid(parsedUri.password())) {
 		return quint8(LoginByUriState::PasswordNeeded);
 	}
 

@@ -62,7 +62,7 @@ Kirigami.GlobalDrawer {
 
 			Text {
 				text: {
-					var jidAndStatus = Kaidan.jid + " ("
+					var jidAndStatus = AccountManager.jid + " ("
 
 					if (parent.disconnected)
 						jidAndStatus += qsTr("Offline");
@@ -86,7 +86,7 @@ Kirigami.GlobalDrawer {
 			text: qsTr("Invite friends")
 			icon.name: "mail-invitation"
 			onTriggered: {
-				Utils.copyToClipboard(Utils.invitationUrl(Kaidan.jid))
+				Utils.copyToClipboard(Utils.invitationUrl(AccountManager.jid))
 				passiveNotification(qsTr("Invitation link copied to clipboard"))
 			}
 		},

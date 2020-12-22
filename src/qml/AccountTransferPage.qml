@@ -93,7 +93,7 @@ Kirigami.Page {
 
 				Layout.fillWidth: true
 				Controls.Label {
-					text: Kaidan.jid
+					text: AccountManager.jid
 				}
 				// spacer
 				Item {
@@ -104,7 +104,7 @@ Kirigami.Page {
 				Controls.ToolButton {
 					icon.name: "edit-copy"
 					onClicked: {
-						Utils.copyToClipboard(Kaidan.jid);
+						Utils.copyToClipboard(AccountManager.jid);
 					}
 				}
 			}
@@ -116,7 +116,7 @@ Kirigami.Page {
 
 				Layout.fillWidth: true
 				Controls.Label {
-					text: Kaidan.password
+					text: AccountManager.password
 				}
 				// spacer
 				Item {
@@ -127,7 +127,7 @@ Kirigami.Page {
 				Controls.ToolButton {
 					icon.name: "edit-copy"
 					onClicked: {
-						Utils.copyToClipboard(Kaidan.password);
+						Utils.copyToClipboard(AccountManager.password);
 					}
 				}
 			}

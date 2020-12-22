@@ -124,7 +124,7 @@ Kirigami.Page {
 				Layout.fillWidth: true
 				enabled: password1.text === password2.text && password1.text !== ""
 				onClicked: {
-					if (oldPassword.text !== Kaidan.password) {
+					if (oldPassword.text !== AccountManager.password) {
 						currentPasswordInvalidMessage.visible = true
 						return
 					}

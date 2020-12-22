@@ -51,7 +51,7 @@ Kirigami.ScrollablePage {
 			Layout.fillWidth: true
 			Controls.CheckBox {
 				id: enableBox
-				checked: Kaidan.customConnectionSettingsEnabled
+				checked: AccountManager.customConnectionSettingsEnabled
 				Kirigami.FormData.label: qsTr("Enable custom connection settings")
 			}
 
@@ -62,12 +62,12 @@ Kirigami.ScrollablePage {
 				Kirigami.FormData.label: qsTr("Port:")
 				from: 0
 				to: 65535
-				value: Kaidan.port
+				value: AccountManager.port
 			}
 
 			Controls.TextField {
 				id: hostField
-				text: Kaidan.host
+				text: AccountManager.host
 				enabled: enableBox.checked
 				Kirigami.FormData.label: qsTr("Hostname:")
 			}
@@ -79,18 +79,18 @@ Kirigami.ScrollablePage {
 				Layout.alignment: Qt.AlignRight
 				text: qsTr("Reset")
 				onClicked: {
-					Kaidan.customConnectionSettingsEnabled = false
-					Kaidan.port = undefined
-					Kaidan.host = undefined
+					AccountManager.customConnectionSettingsEnabled = false
+					AccountManager.port = undefined
+					AccountManager.host = undefined
 				}
 			}
 
 			Controls.Button {
 				text: qsTr("Apply")
 				onClicked: {
-					Kaidan.customConnectionSettingsEnabled = enableBox.checked
-					Kaidan.port = portField.value
-					Kaidan.host = hostField.text
+					AccountManager.customConnectionSettingsEnabled = enableBox.checked
+					AccountManager.port = portField.value
+					AccountManager.host = hostField.text
 					pageStack.layers.pop()
 				}
 			}

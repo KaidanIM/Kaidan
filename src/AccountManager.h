@@ -43,7 +43,15 @@ class AccountManager : public QObject
 {
 	Q_OBJECT
 
+	Q_PROPERTY(QString jid READ jid WRITE setJid NOTIFY jidChanged)
+	Q_PROPERTY(QString password READ password WRITE setPassword NOTIFY passwordChanged)
+	Q_PROPERTY(QString host READ host WRITE setHost NOTIFY hostChanged RESET resetHost)
+	Q_PROPERTY(int port READ port WRITE setPort NOTIFY portChanged RESET resetPort)
+	Q_PROPERTY(bool customConnectionSettingsEnabled READ customConnectionSettingsEnabled WRITE setCustomConnectionSettingsEnabled NOTIFY customConnectionSettingsEnabledChanged)
+
 public:
+	static AccountManager *instance();
+
 	AccountManager(QSettings *settings, QObject *parent = nullptr);
 
 	/**
@@ -285,4 +293,6 @@ private:
 
 	bool m_customConnectionSettingsEnabled = false;
 	bool m_hasNewCredentials;
+
+	static AccountManager *s_instance;
 };

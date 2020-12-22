@@ -43,7 +43,7 @@ import "../elements"
 BinaryDecisionPage {
 	title: qsTr("Remove password")
 
-	topDescription: qsTr("You can decide to only not show your password for <b>%1</b> as text anymore or to remove it completely from the account transfer. If you remove your password completely, you won't be able to use the account transfer via scanning without entering your password because it is also removed from the QR code.").arg(Kaidan.jid)
+	topDescription: qsTr("You can decide to only not show your password for <b>%1</b> as text anymore or to remove it completely from the account transfer. If you remove your password completely, you won't be able to use the account transfer via scanning without entering your password because it is also removed from the QR code.").arg(AccountManager.jid)
 
 	topAction: Kirigami.Action {
 		text: qsTr("Do not show password as text")

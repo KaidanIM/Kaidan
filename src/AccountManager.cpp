@@ -42,11 +42,20 @@
 constexpr int PORT_DEFAULT = 5222;
 constexpr int PORT_UNSET = -1;
 
+AccountManager *AccountManager::s_instance = nullptr;
+
+AccountManager *AccountManager::instance()
+{
+	return s_instance;
+}
+
 AccountManager::AccountManager(QSettings *settings, QObject* parent)
 	: QObject(parent),
 	  m_settings(settings),
 	  m_port(PORT_UNSET)
 {
+	Q_ASSERT(!s_instance);
+	s_instance = this;
 }
 
 QString AccountManager::jid()

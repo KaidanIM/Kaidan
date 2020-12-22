@@ -113,8 +113,8 @@ Kirigami.Page {
 					} else if (!passwordField.valid) {
 						passwordField.forceFocus()
 					} else {
-						Kaidan.jid = jidField.text
-						Kaidan.password = passwordField.text
+						AccountManager.jid = jidField.text
+						AccountManager.password = passwordField.text
 						Kaidan.logIn()
 					}
 				}

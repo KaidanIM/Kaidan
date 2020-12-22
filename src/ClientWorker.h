@@ -120,8 +120,6 @@ public:
 	 */
 	void initialize();
 
-	AccountManager *accountManager() const;
-
 	VCardManager *vCardManager() const;
 
 	/**
@@ -300,7 +298,6 @@ private:
 	LogHandler *m_logger;
 	bool m_enableLogging;
 
-	AccountManager *m_accountManager;
 	RegistrationManager *m_registrationManager;
 	RosterManager *m_rosterManager;
 	MessageHandler *m_messageHandler;

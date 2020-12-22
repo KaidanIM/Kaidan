@@ -31,6 +31,7 @@
 #include "RosterModel.h"
 
 // Kaidan
+#include "AccountManager.h"
 #include "RosterDb.h"
 #include "MessageModel.h"
 #include "Kaidan.h"
@@ -60,12 +61,12 @@ RosterModel::RosterModel(RosterDb *rosterDb, QObject *parent)
 	connect(this, &RosterModel::replaceItemsRequested,
 		rosterDb, &RosterDb::replaceItems);
 
-	connect(Kaidan::instance(), &Kaidan::jidChanged, this, [=]() {
+	connect(AccountManager::instance(), &AccountManager::jidChanged, this, [=]() {
 		beginResetModel();
 		m_items.clear();
 		endResetModel();
 
-		emit rosterDb->fetchItemsRequested(Kaidan::instance()->jid());
+		emit rosterDb->fetchItemsRequested(AccountManager::instance()->jid());
 	});
 }
 

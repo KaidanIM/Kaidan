@@ -151,8 +151,8 @@ void RegistrationManager::handleRegistrationFormReceived(const QXmppRegisterIq &
 
 void RegistrationManager::handleRegistrationSucceeded()
 {
-	m_clientWorker->accountManager()->setJid(m_dataFormModel->extractUsername().append('@').append(m_client->configuration().domain()));
-	m_clientWorker->accountManager()->setPassword(m_dataFormModel->extractPassword());
+	AccountManager::instance()->setJid(m_dataFormModel->extractUsername().append('@').append(m_client->configuration().domain()));
+	AccountManager::instance()->setPassword(m_dataFormModel->extractPassword());
 
 	m_client->disconnectFromServer();
 	setRegisterOnConnectEnabled(false);
@@ -207,9 +207,9 @@ void RegistrationManager::handleRegistrationFailed(const QXmppStanza::Error &err
 
 void RegistrationManager::handlePasswordChanged(const QString &newPassword)
 {
-	m_clientWorker->accountManager()->setPassword(newPassword);
-	m_clientWorker->accountManager()->storePassword();
-	m_clientWorker->accountManager()->setHasNewCredentials(false);
+	AccountManager::instance()->setPassword(newPassword);
+	AccountManager::instance()->storePassword();
+	AccountManager::instance()->setHasNewCredentials(false);
 	m_clientWorker->finishTask();
 }
 

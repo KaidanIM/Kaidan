@@ -62,7 +62,6 @@ ClientWorker::ClientWorker(Caches *caches, bool enableLogging, QObject* parent)
 	m_logger = new LogHandler(m_client, this);
 	m_logger->enableLogging(enableLogging);
 
-	m_accountManager = new AccountManager(m_caches->settings, this);
 	m_vCardManager = new VCardManager(this, m_client, m_caches->avatarStorage, this);
 	m_registrationManager = new RegistrationManager(this, m_client, m_caches->settings, this);
 	m_rosterManager = new RosterManager(m_client,  m_caches->rosterModel, m_caches->avatarStorage, m_vCardManager, this);
@@ -111,11 +110,6 @@ void ClientWorker::initialize()
 	qsrand(time(nullptr));
 }
 
-AccountManager *ClientWorker::accountManager() const
-{
-	return m_accountManager;
-}
-
 VCardManager *ClientWorker::vCardManager() const
 {
 	return m_vCardManager;
@@ -139,7 +133,7 @@ void ClientWorker::startTask(const std::function<void ()> task) {
 		// credentials are available. That way, the variable can already be set locally
 		// during account initialization (like during registration) and set on the server
 		// after the first login.
-		if (!m_accountManager->hasNewCredentials() && m_client->state() != QXmppClient::ConnectingState)
+		if (!AccountManager::instance()->hasNewCredentials() && m_client->state() != QXmppClient::ConnectingState)
 			logIn();
 	}
 }
@@ -148,7 +142,7 @@ void ClientWorker::finishTask()
 {
 	// If m_activeTasks > 0, there are still running tasks.
 	// If m_activeTasks = 0, all tasks are finished (the tasks may have finished directly).
-	if (m_activeTasks > 0 && --m_activeTasks == 0 && !m_accountManager->hasNewCredentials())
+	if (m_activeTasks > 0 && --m_activeTasks == 0 && !AccountManager::instance()->hasNewCredentials())
 		logOut();
 }
 
@@ -158,12 +152,12 @@ void ClientWorker::logIn()
 		// Store the latest online state which is restored when opening Kaidan again after closing.
 		m_caches->settings->setValue(KAIDAN_SETTINGS_AUTH_ONLINE, true);
 
-		if (!m_accountManager->loadCredentials())
+		if (!AccountManager::instance()->loadCredentials())
 			return;
 
 		QXmppConfiguration config;
-		config.setResource(m_accountManager->jidResource());
-		config.setPassword(m_accountManager->password());
+		config.setResource(AccountManager::instance()->jidResource());
+		config.setPassword(AccountManager::instance()->password());
 		config.setAutoAcceptSubscriptions(false);
 
 		connectToServer(config);
@@ -174,7 +168,7 @@ void ClientWorker::logIn()
 
 void ClientWorker::connectToRegister()
 {
-	m_accountManager->setHasNewCredentials(true);
+	AccountManager::instance()->setHasNewCredentials(true);
 	m_registrationManager->setRegisterOnConnectEnabled(true);
 	connectToServer();
 }
@@ -192,12 +186,12 @@ void ClientWorker::connectToServer(QXmppConfiguration config)
 		logOut();
 		break;
 	case QXmppClient::DisconnectedState:
-		config.setJid(m_accountManager->jid());
+		config.setJid(AccountManager::instance()->jid());
 		config.setStreamSecurityMode(QXmppConfiguration::TLSRequired);
 
-		if (m_accountManager->customConnectionSettingsEnabled()) {
-			config.setHost(m_accountManager->host());
-			config.setPort(m_accountManager->port());
+		if (AccountManager::instance()->customConnectionSettingsEnabled()) {
+			config.setHost(AccountManager::instance()->host());
+			config.setPort(AccountManager::instance()->port());
 		}
 
 		// Disable the automatic reconnection in case this connection attempt is not
@@ -229,8 +223,8 @@ void ClientWorker::logOut(bool isApplicationBeingClosed)
 		m_isDisconnecting = true;
 		break;
 	case QXmppClient::ConnectedState:
-		if (m_accountManager->hasNewCredentials())
-			m_accountManager->setHasNewCredentials(false);
+		if (AccountManager::instance()->hasNewCredentials())
+			AccountManager::instance()->setHasNewCredentials(false);
 
 		m_client->disconnectFromServer();
 	}
@@ -256,8 +250,8 @@ void ClientWorker::deleteAccountFromClient()
 	// Otherwise, disconnect first and delete the account afterwards.
 	if (!m_client->isAuthenticated()) {
 		emit deleteAccountFromDatabase();
-		m_accountManager->deleteSettings();
-		m_accountManager->deleteCredentials();
+		AccountManager::instance()->deleteSettings();
+		AccountManager::instance()->deleteCredentials();
 		m_isAccountToBeDeletedFromClient = false;
 	} else {
 		m_isAccountToBeDeletedFromClient = true;
@@ -311,11 +305,11 @@ void ClientWorker::onConnected()
 	}
 
 	// The following tasks are only done after a login with new credentials.
-	if (m_accountManager->hasNewCredentials()) {
+	if (AccountManager::instance()->hasNewCredentials()) {
 		emit loggedInWithNewCredentials();
 
 		// Store the valid settings.
-		m_accountManager->storeCredentials();
+		AccountManager::instance()->storeCredentials();
 	}
 
 	// Enable auto reconnection so that the client is always trying to reconnect
@@ -416,5 +410,5 @@ bool ClientWorker::startPendingTasks()
 		isBusy = true;
 	}
 
-	return !m_accountManager->hasNewCredentials() && isBusy;
+	return !AccountManager::instance()->hasNewCredentials() && isBusy;
 }

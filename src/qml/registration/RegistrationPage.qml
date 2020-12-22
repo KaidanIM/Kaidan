@@ -108,7 +108,7 @@ Kirigami.Page {
 	 */
 	function requestRegistrationForm() {
 		// Set the server's JID.
-		Kaidan.jid = server
+		AccountManager.jid = server
 
 		// Request a registration form.
 		Kaidan.requestRegistrationForm()

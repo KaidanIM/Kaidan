@@ -131,66 +131,6 @@ void Kaidan::setNotificationsMuted(const QString &jid, bool muted)
 	emit notificationsMutedChanged(jid);
 }
 
-void Kaidan::setJid(const QString &jid)
-{
-	m_client->accountManager()->setJid(jid);
-}
-
-QString Kaidan::jid() const
-{
-	return m_client->accountManager()->jid();
-}
-
-void Kaidan::setPassword(const QString &password)
-{
-	m_client->accountManager()->setPassword(password);
-}
-
-QString Kaidan::password() const
-{
-	return m_client->accountManager()->password();
-}
-
-void Kaidan::setHost(const QString &host)
-{
-	m_client->accountManager()->setHost(host);
-}
-
-void Kaidan::resetHost()
-{
-	m_client->accountManager()->resetHost();
-}
-
-QString Kaidan::host() const
-{
-	return m_client->accountManager()->host();
-}
-
-void Kaidan::setPort(int port)
-{
-	m_client->accountManager()->setPort(port);
-}
-
-void Kaidan::resetPort()
-{
-	m_client->accountManager()->resetPort();
-}
-
-int Kaidan::port() const
-{
-	return m_client->accountManager()->port();
-}
-
-void Kaidan::setCustomConnectionSettingsEnabled(bool enabled)
-{
-	m_client->accountManager()->setCustomConnectionSettingsEnabled(enabled);
-}
-
-bool Kaidan::customConnectionSettingsEnabled() const
-{
-	return m_client->accountManager()->customConnectionSettingsEnabled();
-}
-
 void Kaidan::setPasswordVisibility(PasswordVisibility passwordVisibility)
 {
 	m_caches->settings->setValue(KAIDAN_SETTINGS_AUTH_PASSWD_VISIBILITY, quint8(passwordVisibility));
@@ -237,14 +177,14 @@ quint8 Kaidan::logInByUri(const QString &uri)
 		return quint8(LoginByUriState::InvalidLoginUri);
 	}
 
-	setJid(parsedUri.jid());
+	AccountManager::instance()->setJid(parsedUri.jid());
 
 	if (parsedUri.action() != QXmppUri::Login || !CredentialsValidator::isPasswordValid(parsedUri.password())) {
 		return quint8(LoginByUriState::PasswordNeeded);
 	}
 
 	// Connect with the extracted credentials.
-	setPassword(parsedUri.password());
+	AccountManager::instance()->setPassword(parsedUri.password());
 	logIn();
 	return quint8(LoginByUriState::Connecting);
 }
@@ -284,9 +224,9 @@ void Kaidan::initializeClientWorker(bool enableLogging)
 	m_client = new ClientWorker(m_caches, enableLogging);
 	m_client->moveToThread(m_cltThrd);
 
-	connect(m_client->accountManager(), &AccountManager::jidChanged, this, &Kaidan::jidChanged);
-	connect(m_client->accountManager(), &AccountManager::passwordChanged, this, &Kaidan::passwordChanged);
-	connect(m_client->accountManager(), &AccountManager::newCredentialsNeeded, this, &Kaidan::newCredentialsNeeded);
+	new AccountManager(m_caches->settings, this);
+
+	connect(AccountManager::instance(), &AccountManager::newCredentialsNeeded, this, &Kaidan::newCredentialsNeeded);
 
 	connect(m_client, &ClientWorker::loggedInWithNewCredentials, this, &Kaidan::loggedInWithNewCredentials);
 	connect(m_client, &ClientWorker::connectionStateChanged, this, &Kaidan::setConnectionState);

@@ -36,6 +36,7 @@
 #include <ZXing/BarcodeFormat.h>
 #include <ZXing/MultiFormatWriter.h>
 
+#include "AccountManager.h"
 #include "Kaidan.h"
 #include "qxmpp-exts/QXmppUri.h"
 
@@ -51,11 +52,11 @@ QImage QrCodeGenerator::generateLoginUriQrCode(int edgePixelCount)
 {
 	QXmppUri uri;
 
-	uri.setJid(Kaidan::instance()->jid());
+	uri.setJid(AccountManager::instance()->jid());
 	uri.setAction(QXmppUri::Login);
 
 	if (Kaidan::instance()->passwordVisibility() != Kaidan::PasswordInvisible)
-		uri.setPassword(Kaidan::instance()->password());
+		uri.setPassword(AccountManager::instance()->password());
 
 	return generateQrCode(edgePixelCount, uri.toString());
 }

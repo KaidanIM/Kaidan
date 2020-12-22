@@ -33,6 +33,7 @@
 // QXmpp
 #include <QXmppUtils.h>
 // Kaidan
+#include "AccountManager.h"
 #include "Kaidan.h"
 #include "MessageDb.h"
 #include "QmlUtils.h"
@@ -182,7 +183,7 @@ QVariant MessageModel::data(const QModelIndex &index, int role) const
 
 void MessageModel::fetchMore(const QModelIndex &)
 {
-	emit m_msgDb->fetchMessagesRequested(Kaidan::instance()->jid(), m_currentChatJid, m_messages.size());
+	emit m_msgDb->fetchMessagesRequested(AccountManager::instance()->jid(), m_currentChatJid, m_messages.size());
 }
 
 bool MessageModel::canFetchMore(const QModelIndex &) const
@@ -240,7 +241,7 @@ void MessageModel::handleMessagesFetched(const QVector<Message> &msgs)
 
 	beginInsertRows(QModelIndex(), rowCount(), rowCount() + msgs.length() - 1);
 	for (auto msg : msgs) {
-		msg.setSentByMe(Kaidan::instance()->jid() == msg.from());
+		msg.setSentByMe(AccountManager::instance()->jid() == msg.from());
 		processMessage(msg);
 		m_messages << msg;
 	}
@@ -372,7 +373,7 @@ void MessageModel::processMessage(Message &msg)
 
 void MessageModel::sendPendingMessages()
 {
-	emit m_msgDb->fetchPendingMessagesRequested(Kaidan::instance()->jid());
+	emit m_msgDb->fetchPendingMessagesRequested(AccountManager::instance()->jid());
 }
 
 void MessageModel::correctMessage(const QString &msgId, const QString &message)

@@ -86,9 +86,6 @@ constexpr auto GENERATED_PASSWORD_LENGTH_UPPER_BOUND = 30;
 // Number of characters used for password generation
 #define GENERATED_PASSWORD_ALPHABET_LENGTH GENERATED_PASSWORD_ALPHABET.size()
 
-// QXmpp version compatibility
-constexpr auto QXMPP_REQUIRED_VERSION_FOR_REGISTRATION = QT_VERSION_CHECK(1, 2, 0);
-
 /**
  * Path of the JSON server list file
  */

@@ -126,14 +126,20 @@ bool AccountManager::loadCredentials()
 	return true;
 }
 
-void AccountManager::storeJidInSettingsFile()
+void AccountManager::storeJid()
 {
 	m_settings->setValue(KAIDAN_SETTINGS_AUTH_JID, jid());
 }
 
-void AccountManager::storePasswordInSettingsFile()
+void AccountManager::storePassword()
 {
 	m_settings->setValue(KAIDAN_SETTINGS_AUTH_PASSWD, QString::fromUtf8(password().toUtf8().toBase64()));
+}
+
+void AccountManager::storeCredentials()
+{
+	storeJid();
+	storePassword();
 }
 
 void AccountManager::deleteCredentials()

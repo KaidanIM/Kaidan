@@ -208,7 +208,7 @@ void RegistrationManager::handleRegistrationFailed(const QXmppStanza::Error &err
 void RegistrationManager::handlePasswordChanged(const QString &newPassword)
 {
 	m_clientWorker->accountManager()->setPassword(newPassword);
-	m_clientWorker->accountManager()->storePasswordInSettingsFile();
+	m_clientWorker->accountManager()->storePassword();
 	m_clientWorker->accountManager()->setHasNewCredentials(false);
 	m_clientWorker->finishTask();
 }

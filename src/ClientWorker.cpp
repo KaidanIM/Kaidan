@@ -309,9 +309,8 @@ void ClientWorker::onConnected()
 	if (m_accountManager->hasNewCredentials()) {
 		emit loggedInWithNewCredentials();
 
-		// Store the valid credentials.
-		m_accountManager->storeJidInSettingsFile();
-		m_accountManager->storePasswordInSettingsFile();
+		// Store the valid settings.
+		m_accountManager->storeCredentials();
 	}
 
 	// Enable auto reconnection so that the client is always trying to reconnect

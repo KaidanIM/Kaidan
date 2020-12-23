@@ -132,12 +132,17 @@ public:
 	/**
 	 * Stores the currently set JID in the settings file.
 	 */
-	void storeJidInSettingsFile();
+	void storeJid();
 
 	/**
 	 * Stores the currently set password in the settings file.
 	 */
-	void storePasswordInSettingsFile();
+	void storePassword();
+
+	/**
+	 * Stores credentials in the settings file.
+	 */
+	void storeCredentials();
 
 	/**
 	 * Deletes all credentials.

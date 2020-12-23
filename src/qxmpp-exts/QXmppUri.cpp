@@ -30,42 +30,43 @@
 
 #include "QXmppUri.h"
 
-#include <QStringBuilder>
 #include <QUrlQuery>
 
-const QString SCHEME = QStringLiteral("xmpp");
-const QString PREFIX = SCHEME % u':';
-const QChar QUERY_ITEM_DELIMITER = u';';
-const QChar QUERY_ITEM_KEY_DELIMITER = u'=';
+constexpr QStringView SCHEME = u"xmpp";
+constexpr QStringView PREFIX = u"xmpp:";
+constexpr QChar QUERY_ITEM_DELIMITER = u';';
+constexpr QChar QUERY_ITEM_KEY_DELIMITER = u'=';
 
 // Query types representing actions, e.g. "join" in
 // "xmpp:group@example.org?join" for joining a group chat
-const QStringList QUERY_TYPES = QStringList()
-        << ""
-        << "command"
-        << "disco"
-        << "invite"
-        << "join"
-        << "login"
-        << "message"
-        << "pubsub"
-        << "recvfile"
-        << "register"
-        << "remove"
-        << "roster"
-        << "sendfile"
-        << "subscribe"
-        << "unregister"
-        << "unsubscribe"
-        << "vcard";
+constexpr std::array<QStringView, 17> QUERY_TYPES = {
+	QStringView(),
+	u"command",
+	u"disco",
+	u"invite",
+	u"join",
+	u"login",
+	u"message",
+	u"pubsub",
+	u"recvfile",
+	u"register",
+	u"remove",
+	u"roster",
+	u"sendfile",
+	u"subscribe",
+	u"unregister",
+	u"unsubscribe",
+	u"vcard"
+};
 
 // QXmppMessage types as strings
-const QStringList MESSAGE_TYPES = QStringList()
-        << "error"
-        << "normal"
-        << "chat"
-        << "groupchat"
-        << "headline";
+constexpr std::array<QStringView, 5> MESSAGE_TYPES = {
+	u"error",
+	u"normal",
+	u"chat",
+	u"groupchat",
+	u"headline"
+};
 
 ///
 /// Parses the URI from a string.
@@ -101,7 +102,7 @@ QXmppUri::QXmppUri(QString input)
 QString QXmppUri::toString()
 {
 	QUrl url;
-	url.setScheme(SCHEME);
+	url.setScheme(SCHEME.toString());
 	url.setPath(m_jid);
 
 	QUrlQuery query;
@@ -255,15 +256,14 @@ bool QXmppUri::setAction(const QUrlQuery &query)
 	auto queryItems = query.queryItems();
 	auto firstQueryItem = queryItems.first();
 
-	auto queryType = QUERY_TYPES.indexOf(firstQueryItem.first);
+	const auto queryTypeIndex = std::find(QUERY_TYPES.cbegin(), QUERY_TYPES.cend(), firstQueryItem.first);
 
 	// Check if the first query item is a valid action (i.e. a query item
 	// with a query type as its key and without a value).
-	if (queryType == -1 || !firstQueryItem.second.isEmpty())
+	if (queryTypeIndex == QUERY_TYPES.cend() || !firstQueryItem.second.isEmpty())
 		return false;
 
-	m_action = Action(queryType);
-
+	m_action = Action(std::distance(MESSAGE_TYPES.cbegin(), queryTypeIndex));
 	return true;
 }
 
@@ -274,7 +274,7 @@ bool QXmppUri::setAction(const QUrlQuery &query)
 ///
 QString QXmppUri::queryType() const
 {
-	return QUERY_TYPES.at(int(m_action));
+	return QUERY_TYPES[int(m_action)].toString();
 }
 
 ///
@@ -291,10 +291,13 @@ void QXmppUri::setQueryKeyValuePairs(const QUrlQuery &query)
 		m_message.setThread(queryItemValue(query, "thread"));
 		m_message.setId(queryItemValue(query, "id"));
 		m_message.setFrom(queryItemValue(query, "from"));
-		if (!queryItemValue(query, "type").isEmpty())
-			m_message.setType(QXmppMessage::Type(MESSAGE_TYPES.indexOf(queryItemValue(query, "type"))));
-		else
+		if (!queryItemValue(query, "type").isEmpty()) {
+			const auto itr = std::find(MESSAGE_TYPES.cbegin(), MESSAGE_TYPES.cend(), queryItemValue(query, "type"));
+			if (itr != MESSAGE_TYPES.cend())
+				m_message.setType(QXmppMessage::Type(std::distance(MESSAGE_TYPES.cbegin(), itr)));
+		} else {
 			m_hasMessageType = false;
+		}
 		break;
 	case Login:
 		m_password = queryItemValue(query, "password");
@@ -320,7 +323,7 @@ void QXmppUri::addItemsToQuery(QUrlQuery &query) const
 		addKeyValuePairToQuery(query, "from", m_message.from());
 		addKeyValuePairToQuery(query, "id", m_message.id());
 		if (m_hasMessageType)
-			addKeyValuePairToQuery(query, "type", MESSAGE_TYPES.at(int(m_message.type())));
+			addKeyValuePairToQuery(query, "type", MESSAGE_TYPES[int(m_message.type())]);
 		addKeyValuePairToQuery(query, "subject", m_message.subject());
 		addKeyValuePairToQuery(query, "body", m_message.body());
 		addKeyValuePairToQuery(query, "thread", m_message.thread());
@@ -340,10 +343,10 @@ void QXmppUri::addItemsToQuery(QUrlQuery &query) const
 /// @param key key of the value
 /// @param value value of the key
 ///
-void QXmppUri::addKeyValuePairToQuery(QUrlQuery &query, const QString &key, const QString &value)
+void QXmppUri::addKeyValuePairToQuery(QUrlQuery &query, const QString &key, QStringView value)
 {
 	if (!value.isEmpty())
-		query.addQueryItem(key, value);
+		query.addQueryItem(key, value.toString());
 }
 
 ///

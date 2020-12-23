@@ -110,7 +110,7 @@ private:
 	void setQueryKeyValuePairs(const QUrlQuery &query);
 	void addItemsToQuery(QUrlQuery &query) const;
 
-	static void addKeyValuePairToQuery(QUrlQuery &query, const QString &key, const QString &val);
+	static void addKeyValuePairToQuery(QUrlQuery &query, const QString &key, QStringView val);
 	static QString queryItemValue(const QUrlQuery &query, const QString &key);
 
 	QString m_jid;

@@ -88,7 +88,7 @@
 	</qresource>
 
 	<qresource prefix="/icons/breeze/emblems/symbolic">
-		<file alias="emblem-system-symbolic.svg">3rdparty/breeze-icons/icons/status/symbolic/emblem-system-symbolic.svg</file>
-		<file alias="emblem-ok-symbolic.svg">3rdparty/breeze-icons/icons/status/symbolic/emblem-ok-symbolic.svg</file>
+		<file alias="emblem-system-symbolic.svg">3rdparty/breeze-icons/icons/emblems/symbolic/emblem-system-symbolic.svg</file>
+		<file alias="emblem-ok-symbolic.svg">3rdparty/breeze-icons/icons/emblems/symbolic/emblem-ok-symbolic.svg</file>
 	</qresource>
 </RCC>

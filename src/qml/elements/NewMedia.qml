@@ -94,8 +94,8 @@ MediaPreview {
 				repeat: true
 				running: root.mediaSourceType === Enums.MessageType.MessageAudio && recorder.status === MediaRecorder.Status.RecordingStatus
 				onTriggered: {
-					if (parent.currentIndex >= 4) {
-						parent.currentIndex = 1
+					if (parent.currentIndex > 2) {
+						parent.currentIndex = 0
 					} else {
 						parent.currentIndex++
 					}

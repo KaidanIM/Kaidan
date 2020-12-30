@@ -1,7 +1,7 @@
 /*
  *  Kaidan - A user-friendly XMPP client for every device!
  *
- *  Copyright (C) 2016-2021 Kaidan developers and contributors
+ *  Copyright (C) 2016-2020 Kaidan developers and contributors
  *  (see the LICENSE file for a full list of copyright authors)
  *
  *  Kaidan is free software: you can redistribute it and/or modify
@@ -28,76 +28,32 @@
  *  along with Kaidan.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-import QtQuick 2.14
 import QtQuick.Layouts 1.12
 import org.kde.kirigami 2.12 as Kirigami
 
 import im.kaidan.kaidan 1.0
 
-import "elements"
-
 /**
- * This page is the first page.
+ * This is a QR code generated for a specified JID.
  *
- * It is displayed if no account is available.
+ * If a JID is provided, a QR code with a general XMPP URI for sharing with contacts is generated.
+ * Otherwise a QR code with a login XMPP URI for logging in on another device is generated.
  */
-Kirigami.Page {
-	title: "Kaidan"
+Kirigami.Icon {
+	id: qrCode
+	Layout.alignment: Qt.AlignCenter
+	Layout.fillWidth: true
+	Layout.fillHeight: true
 
-	ColumnLayout {
-		anchors.fill: parent
-
-		Image {
-			source: Utils.getResourcePath("images/kaidan.svg")
-			Layout.alignment: Qt.AlignCenter
-			Layout.fillWidth: true
-			Layout.fillHeight: true
-			fillMode: Image.PreserveAspectFit
-			mipmap: true
-			sourceSize.width: width
-			sourceSize.height: height
-			Layout.bottomMargin: Kirigami.Units.gridUnit * 1.5
-		}
-
-		CenteredAdaptiveText {
-			text: "Kaidan"
-			scaleFactor: 6
-		}
-
-		CenteredAdaptiveText {
-			text: qsTr("Enjoy free communication on every device!")
-			scaleFactor: 2
-		}
-
-		// placeholder
-		Item {
-			Layout.fillHeight: true
-			Layout.minimumHeight: root.height * 0.08
-		}
-
-		ColumnLayout {
-			Layout.alignment: Qt.AlignHCenter
-			Layout.maximumWidth: largeButtonWidth
-
-			CenteredAdaptiveHighlightedButton {
-				id: startButton
-				text: qsTr("Let's start")
-				onClicked: pageStack.layers.push(qrCodeOnboardingPage)
-			}
-
-			// placeholder
-			Item {
-				height: startButton.height
-			}
-		}
+	source: {
+		if (width > 0)
+			return jid ? qrCodeGenerator.generateBareJidQrCode(width, jid) : qrCodeGenerator.generateLoginUriQrCode(width)
+		return ""
 	}
 
-	Connections {
-		target: Kaidan
+	property string jid
 
-		function onConnectionErrorChanged() {
-			if (Kaidan.connectionError !== ClientWorker.NoError)
-				passiveNotification(Utils.connectionErrorMessage(Kaidan.connectionError))
-		}
+	QrCodeGenerator {
+		id: qrCodeGenerator
 	}
 }

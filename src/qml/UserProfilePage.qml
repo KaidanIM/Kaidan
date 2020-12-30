@@ -63,10 +63,6 @@ Kirigami.Page {
 		}
 	}
 
-	QrCodeGenerator {
-		id: qrCodeGenerator
-	}
-
 	onIsCurrentPageChanged: {
 		/*
 		 * Start the timer if we are getting or loosing focus.
@@ -118,10 +114,10 @@ Kirigami.Page {
 	Kirigami.OverlaySheet {
 		id: qrCodeSheet
 
-		Kirigami.Icon {
-			width: parent.width
+		QrCode {
+			width: parent.width < parent.height ? parent.width : parent.height
 			height: width
-			source: width > 0 ? qrCodeGenerator.generateBareJidQrCode(width, jid) : ""
+			jid: root.jid
 		}
 	}
 

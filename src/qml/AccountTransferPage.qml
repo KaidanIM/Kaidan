@@ -41,151 +41,107 @@ import "elements"
  * This page shows the user's credentials as a QR code or as plain text, which
  * allows the user to log in on another device.
  */
-Kirigami.Page {
-	id: root
+ExplainedContentPage {
 	title: qsTr("Transfer account to another device")
-	leftPadding: 0
-	rightPadding: 0
-	topPadding: 0
-	bottomPadding: 0
 
-	QrCodeGenerator {
-		id: qrCodeGenerator
+	explanationToggleButton.text: explanationToggleButton.checked ? qsTr("Hide QR code") : qsTr("Show as QR code")
+
+	// If that was not used, the button would change its text
+	// but not its checked state when the button for showing the
+	// plain text is clicked right after it.
+	explanationToggleButton.checked: qrCode.visible
+
+	explanationToggleButton.onClicked: {
+		if (qrCode.visible) {
+			qrCode.visible = false
+			plainText.visible = false
+			explanation.visible = true
+		} else {
+			qrCode.visible = true
+			plainText.visible = false
+			explanation.visible = false
+		}
 	}
 
-	ColumnLayout {
-		z: 1
-		anchors.margins: 18
-		anchors.top: parent.top
-		anchors.left: parent.left
-		anchors.right: parent.right
-		anchors.bottom: parent.bottom
+	secondaryButton.text: secondaryButton.checked ? qsTr("Hide text") : qsTr("Show as text")
+	secondaryButton.checkable: true
 
-		CenteredAdaptiveText {
-			id: explanation
-			text: qsTr("Scan the QR code or enter the credentials as text on another device to log in on it.\n\nAttention:\nNever show this QR code to anyone else. It would allow unlimited access to your account!")
-			width: parent.width
-			Layout.topMargin: 10
-			scaleFactor: 1.5
+	// If that was not used, this button would change its text
+	// but not its checked state when the button for showing the QR
+	// code is clicked right after it.
+	secondaryButton.checked: plainText.visible
+
+	secondaryButton.onClicked: {
+		if (plainText.visible) {
+			plainText.visible = false
+			qrCode.visible = false
+			explanation.visible = true
+		} else {
+			plainText.visible = true
+			qrCode.visible = false
+			explanation.visible = false
 		}
+	}
 
-		// placeholder
-		Item {
-			Layout.fillHeight: true
-		}
+	CenteredAdaptiveText {
+		text: qsTr("Scan the QR code or enter the credentials as text on another device to log in on it.\n\nAttention:\nNever show this QR code to anyone else. It would allow unlimited access to your account!")
+		parent: explanation
+		verticalAlignment: Text.AlignVCenter
+		Layout.fillHeight: true
+		scaleFactor: 1.5
+	}
 
-		Kirigami.Icon {
-			id: qrCode
-			width: parent.width
-			height: width
-			visible: false
-			source: visible ? qrCodeGenerator.generateLoginUriQrCode(width) : ""
+	QrCode {
+		id: qrCode
+		visible: false
+	}
+
+	Kirigami.FormLayout {
+		id: plainText
+		visible: false
+
+		RowLayout {
+			Kirigami.FormData.label: qsTr("Chat address:")
 			Layout.fillWidth: true
-			Layout.fillHeight: true
-		}
 
-		Kirigami.FormLayout {
-			id: plainText
-			visible: false
+			Controls.Label {
+				text: AccountManager.jid
+			}
 
-			RowLayout {
-				Kirigami.FormData.label: qsTr("Chat address:")
-
+			// placeholder
+			Item {
 				Layout.fillWidth: true
-				Controls.Label {
-					text: AccountManager.jid
-				}
-				// spacer
-				Item {
-					Layout.fillWidth: true
-				}
-
-				// copy jid
-				Controls.ToolButton {
-					icon.name: "edit-copy"
-					onClicked: {
-						Utils.copyToClipboard(AccountManager.jid);
-					}
-				}
 			}
 
-			RowLayout {
-				Kirigami.FormData.label: qsTr("Password:")
+			Controls.ToolButton {
+				text: qsTr("Copy JID")
+				icon.name: "edit-copy"
+				display: Controls.AbstractButton.IconOnly
+				flat: true
+				onClicked: Utils.copyToClipboard(AccountManager.jid)
+			}
+		}
 
-				visible: Kaidan.passwordVisibility === Kaidan.PasswordVisible
+		RowLayout {
+			Kirigami.FormData.label: qsTr("Password:")
+			visible: Kaidan.passwordVisibility === Kaidan.PasswordVisible
+			Layout.fillWidth: true
 
+			Controls.Label {
+				text: AccountManager.password
+			}
+
+			//  placeholder
+			Item {
 				Layout.fillWidth: true
-				Controls.Label {
-					text: AccountManager.password
-				}
-				// spacer
-				Item {
-					Layout.fillWidth: true
-				}
-
-				// copy jid password
-				Controls.ToolButton {
-					icon.name: "edit-copy"
-					onClicked: {
-						Utils.copyToClipboard(AccountManager.password);
-					}
-				}
-			}
-		}
-
-		// placeholder
-		Item {
-			Layout.fillHeight: true
-		}
-
-		ColumnLayout {
-			Layout.alignment: Qt.AlignHCenter
-			Layout.maximumWidth: largeButtonWidth
-
-			// button for showing or hiding the credentials as a QR code
-			CenteredAdaptiveHighlightedButton {
-				text: checked ? qsTr("Hide QR code") : qsTr("Show as QR code")
-				checkable: true
-
-				// If that was not used, this button would change its label text
-				// but not its checked state when the button for showing the
-				// plain text is clicked right after it.
-				checked: qrCode.visible
-
-				onClicked: {
-					if (qrCode.visible) {
-						qrCode.visible = false
-						plainText.visible = false
-						explanation.visible = true
-					} else {
-						qrCode.visible = true
-						plainText.visible = false
-						explanation.visible = false
-					}
-				}
 			}
 
-			// button for showing or hiding the credentials as plain text
-			CenteredAdaptiveButton {
-				text: checked ? qsTr("Hide text") : qsTr("Show as text")
-				checkable: true
-
-				// If that was not used, this button would change its label text
-				// but not its checked state when the button for showing the QR
-				// code is clicked right after it.
-				checked: plainText.visible
-
-				onClicked: {
-					if (plainText.visible) {
-						plainText.visible = false
-						qrCode.visible = false
-						explanation.visible = true
-					} else {
-						plainText.visible = true
-						qrCode.visible = false
-						explanation.visible = false
-					}
-				}
+			Controls.ToolButton {
+				text: qsTr("Copy password")
+				icon.name: "edit-copy"
+				display: Controls.AbstractButton.IconOnly
+				flat: true
+				onClicked: Utils.copyToClipboard(AccountManager.password)
 			}
 		}
 	}

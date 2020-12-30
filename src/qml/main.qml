@@ -86,7 +86,7 @@ Kirigami.ApplicationWindow {
 	Component {id: chatPage; ChatPage {}}
 	Component {id: emptyChatPage; EmptyChatPage {}}
 	Component {id: settingsPage; SettingsPage {}}
-	Component {id: qrCodeScannerPage; QrCodeScannerPage {}}
+	Component {id: qrCodeOnboardingPage; QrCodeOnboardingPage {}}
 	Component {id: userProfilePage; UserProfilePage {}}
 
 	onWidthChanged: {

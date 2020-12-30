@@ -11,7 +11,7 @@
 		<file>EmptyChatPage.qml</file>
 		<file>AboutDialog.qml</file>
 		<file>GlobalDrawer.qml</file>
-		<file>QrCodeScannerPage.qml</file>
+		<file>QrCodeOnboardingPage.qml</file>
 		<file>UserProfilePage.qml</file>
 
 		<file>elements/ChatMessageContextMenu.qml</file>
@@ -35,6 +35,9 @@
 		<file>elements/BinaryDecisionPage.qml</file>
 		<file>elements/ConfirmationPage.qml</file>
 		<file>elements/DataForm.qml</file>
+		<file>elements/ExplainedContentPage.qml</file>
+		<file>elements/QrCodeScanner.qml</file>
+		<file>elements/QrCode.qml</file>
 
 		<file>elements/MediaPreview.qml</file>
 		<file>elements/MediaPreviewImage.qml</file>

@@ -1,7 +1,7 @@
 /*
  *  Kaidan - A user-friendly XMPP client for every device!
  *
- *  Copyright (C) 2016-2021 Kaidan developers and contributors
+ *  Copyright (C) 2016-2020 Kaidan developers and contributors
  *  (see the LICENSE file for a full list of copyright authors)
  *
  *  Kaidan is free software: you can redistribute it and/or modify
@@ -28,76 +28,86 @@
  *  along with Kaidan.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-import QtQuick 2.14
+import QtQuick 2.12
 import QtQuick.Layouts 1.12
+import QtQuick.Controls.Material 2.12 as Material
 import org.kde.kirigami 2.12 as Kirigami
 
 import im.kaidan.kaidan 1.0
 
-import "elements"
-
 /**
- * This page is the first page.
+ * This page is the base for pages with content needing an explanation.
  *
- * It is displayed if no account is available.
+ * It contains a centered content area, an explanation area with a background and two buttons.
  */
 Kirigami.Page {
-	title: "Kaidan"
+	leftPadding: 0
+	rightPadding: 0
+	topPadding: 0
+	bottomPadding: 0
+
+	default property alias __data: centeredContent.data
+	property alias centeredContent: centeredContent
+	property alias explanation: explanation
+	property alias explanationToggleButton: explanationToggleButton
+	property alias secondaryButton: secondaryButton
+
+	GridLayout {
+		id: centeredContent
+		width: parent.width
+		height: buttonArea.y - anchors.topMargin
+		anchors.top: parent.top
+		anchors.topMargin: 20
+	}
+
+	// background of the explanation area
+	Rectangle {
+		z: explanationArea.z
+		anchors.fill: explanationArea
+		anchors.margins: -8
+		radius: roundedCornersRadius
+		color: Kirigami.Theme.backgroundColor
+		opacity: 0.90
+		visible: explanation.visible
+	}
 
 	ColumnLayout {
-		anchors.fill: parent
+		id: explanationArea
+		z: 1
+		anchors.margins: 18
+		anchors.top: parent.top
+		anchors.left: parent.left
+		anchors.right: parent.right
+		anchors.bottom: parent.bottom
 
-		Image {
-			source: Utils.getResourcePath("images/kaidan.svg")
-			Layout.alignment: Qt.AlignCenter
+		GridLayout {
+			id: explanation
 			Layout.fillWidth: true
 			Layout.fillHeight: true
-			fillMode: Image.PreserveAspectFit
-			mipmap: true
-			sourceSize.width: width
-			sourceSize.height: height
-			Layout.bottomMargin: Kirigami.Units.gridUnit * 1.5
 		}
 
-		CenteredAdaptiveText {
-			text: "Kaidan"
-			scaleFactor: 6
-		}
-
-		CenteredAdaptiveText {
-			text: qsTr("Enjoy free communication on every device!")
-			scaleFactor: 2
-		}
-
-		// placeholder
+		// placeholder for the explanation when it is invisible
 		Item {
 			Layout.fillHeight: true
-			Layout.minimumHeight: root.height * 0.08
 		}
 
 		ColumnLayout {
+			id: buttonArea
 			Layout.alignment: Qt.AlignHCenter
 			Layout.maximumWidth: largeButtonWidth
 
+			// button for showing or hiding the explanation
 			CenteredAdaptiveHighlightedButton {
-				id: startButton
-				text: qsTr("Let's start")
-				onClicked: pageStack.layers.push(qrCodeOnboardingPage)
+				id: explanationToggleButton
+				checkable: true
+				onClicked: explanation.visible = !explanation.visible
 			}
 
-			// placeholder
-			Item {
-				height: startButton.height
+			// button for a second action
+			CenteredAdaptiveButton {
+				id: secondaryButton
+				flat: Style.isMaterial ? explanation.visible : false
 			}
-		}
-	}
-
-	Connections {
-		target: Kaidan
-
-		function onConnectionErrorChanged() {
-			if (Kaidan.connectionError !== ClientWorker.NoError)
-				passiveNotification(Utils.connectionErrorMessage(Kaidan.connectionError))
 		}
 	}
 }

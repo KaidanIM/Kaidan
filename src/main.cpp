@@ -323,10 +323,10 @@ Q_DECL_EXPORT int main(int argc, char *argv[])
 
 	// QtQuickControls2 Style
 	if (qEnvironmentVariableIsEmpty("QT_QUICK_CONTROLS_STYLE")) {
-#ifdef Q_OS_WIN
-		const QString defaultStyle = QStringLiteral("org.kde.desktop");
-#else
+#if defined(Q_OS_ANDROID) || defined(Q_OS_IOS)
 		const QString defaultStyle = QStringLiteral("Material");
+#else
+		const QString defaultStyle = QStringLiteral("org.kde.desktop");
 #endif
 		qDebug() << "QT_QUICK_CONTROLS_STYLE not set, setting to" << defaultStyle;
 		qputenv("QT_QUICK_CONTROLS_STYLE", defaultStyle.toLatin1());

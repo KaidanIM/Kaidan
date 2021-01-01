@@ -1,7 +1,7 @@
 /*
  *  Kaidan - A user-friendly XMPP client for every device!
  *
- *  Copyright (C) 2016-2020 Kaidan developers and contributors
+ *  Copyright (C) 2016-2021 Kaidan developers and contributors
  *  (see the LICENSE file for a full list of copyright authors)
  *
  *  Kaidan is free software: you can redistribute it and/or modify
@@ -91,7 +91,7 @@ Controls.Dialog {
 			}
 
 			Controls.Label {
-				text: "Copyright © 2016-2020\nKaidan developers and contributors"
+				text: "Copyright © 2016-2021\nKaidan developers and contributors"
 				textFormat: Text.PlainText
 				wrapMode: Text.WordWrap
 				Layout.fillWidth: true

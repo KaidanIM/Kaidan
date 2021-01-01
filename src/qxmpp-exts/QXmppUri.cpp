@@ -263,7 +263,7 @@ bool QXmppUri::setAction(const QUrlQuery &query)
 	if (queryTypeIndex == QUERY_TYPES.cend() || !firstQueryItem.second.isEmpty())
 		return false;
 
-	m_action = Action(std::distance(MESSAGE_TYPES.cbegin(), queryTypeIndex));
+	m_action = Action(std::distance(QUERY_TYPES.cbegin(), queryTypeIndex));
 	return true;
 }
 

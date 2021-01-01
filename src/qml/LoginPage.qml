@@ -37,6 +37,7 @@ import im.kaidan.kaidan 1.0
 
 import "elements"
 import "elements/fields"
+import "settings"
 
 Kirigami.Page {
 	title: qsTr("Log in")
@@ -72,9 +73,22 @@ Kirigami.Page {
 					Kirigami.Action {
 						icon.name: "settings-configure"
 						text: qsTr("Connection settings")
-						onTriggered: pageStack.layers.push("LoginSettingsPage.qml")
+						onTriggered: {
+							customConnectionSettings.visible = !customConnectionSettings.visible
+
+							if (jidField.valid && customConnectionSettings.visible)
+								customConnectionSettings.forceFocus()
+							else
+								jidField.forceFocus()
+						}
 					}
 				]
+			}
+
+			CustomConnectionSettings {
+				id: customConnectionSettings
+				confirmationButton: loginButton
+				visible: false
 			}
 
 			// password field
@@ -115,6 +129,9 @@ Kirigami.Page {
 					} else {
 						AccountManager.jid = jidField.text
 						AccountManager.password = passwordField.text
+						AccountManager.host = customConnectionSettings.hostField.text
+						AccountManager.port = customConnectionSettings.portField.value
+
 						Kaidan.logIn()
 					}
 				}
@@ -128,6 +145,7 @@ Kirigami.Page {
 	}
 
 	Component.onCompleted: {
+		AccountManager.resetCustomConnectionSettings()
 		jidField.forceFocus()
 	}
 

@@ -40,7 +40,6 @@
 #define KAIDAN_SETTINGS_AUTH_PASSWD "auth/password"
 #define KAIDAN_SETTINGS_AUTH_HOST "auth/host"
 #define KAIDAN_SETTINGS_AUTH_PORT "auth/port"
-#define KAIDAN_SETTINGS_AUTH_USE_CUSTOM "auth/custom"
 #define KAIDAN_SETTINGS_AUTH_PASSWD_VISIBILITY "auth/passwordVisibility"
 #define KAIDAN_SETTINGS_NOTIFICATIONS_MUTED "muted/"
 #define KAIDAN_SETTINGS_FAVORITE_EMOJIS "emojis/favorites"

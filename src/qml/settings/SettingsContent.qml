@@ -58,6 +58,12 @@ Column {
 		icon: "emblem-system-symbolic"
 	}
 	SettingsItem {
+		name: qsTr("Connection Settings")
+		description: qsTr("Configure the hostname and port to connect to")
+		onClicked: stack.push("ConnectionSettings.qml")
+		icon: "settings-configure"
+	}
+	SettingsItem {
 		name: qsTr("Account security")
 		description: qsTr("Configure whether this device can be used to log in on a new device")
 		icon: "security-high-symbolic"

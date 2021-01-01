@@ -6,7 +6,6 @@
 		<file>RegistrationLoginDecisionPage.qml</file>
 		<file>RosterPage.qml</file>
 		<file>LoginPage.qml</file>
-		<file>LoginSettingsPage.qml</file>
 		<file>ChatPageBase.qml</file>
 		<file>ChatPage.qml</file>
 		<file>EmptyChatPage.qml</file>
@@ -84,6 +83,8 @@
 		<file>settings/SettingsContent.qml</file>
 		<file>settings/ChangePassword.qml</file>
 		<file>settings/MultimediaSettings.qml</file>
+		<file>settings/ConnectionSettings.qml</file>
+		<file>settings/CustomConnectionSettings.qml</file>
 		<file>settings/AccountSecurity.qml</file>
 		<file>settings/PasswordRemovalPage.qml</file>
 		<file>settings/DisablePlainTextPasswordDisplay.qml</file>

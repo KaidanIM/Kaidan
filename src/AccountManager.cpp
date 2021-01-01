@@ -39,9 +39,6 @@
 // Kaidan
 #include "Globals.h"
 
-constexpr int PORT_DEFAULT = 5222;
-constexpr int PORT_UNSET = -1;
-
 AccountManager *AccountManager::s_instance = nullptr;
 
 AccountManager *AccountManager::instance()
@@ -51,8 +48,7 @@ AccountManager *AccountManager::instance()
 
 AccountManager::AccountManager(QSettings *settings, QObject* parent)
 	: QObject(parent),
-	  m_settings(settings),
-	  m_port(PORT_UNSET)
+	  m_settings(settings)
 {
 	Q_ASSERT(!s_instance);
 	s_instance = this;
@@ -67,8 +63,12 @@ QString AccountManager::jid()
 void AccountManager::setJid(const QString &jid)
 {
 	QMutexLocker locker(&m_mutex);
-	m_jid = jid;
-	m_hasNewCredentials = true;
+
+	if (m_jid != jid) {
+		m_jid = jid;
+		m_hasNewCredentials = true;
+	}
+
 	locker.unlock();
 	emit jidChanged();
 }
@@ -93,8 +93,12 @@ QString AccountManager::password()
 void AccountManager::setPassword(const QString &password)
 {
 	QMutexLocker locker(&m_mutex);
-	m_password = password;
-	m_hasNewCredentials = true;
+
+	if (m_password != password) {
+		m_password = password;
+		m_hasNewCredentials = true;
+	}
+
 	locker.unlock();
 	emit passwordChanged();
 }
@@ -108,49 +112,44 @@ QString AccountManager::host()
 void AccountManager::setHost(const QString &host)
 {
 	QMutexLocker locker(&m_mutex);
-	m_host = host;
-	m_hasNewCredentials = true;
+
+	if (m_host != host) {
+		m_host = host;
+		m_hasNewCredentials = true;
+	}
+
 	locker.unlock();
 	emit hostChanged();
-}
-
-void AccountManager::resetHost()
-{
-	setHost({});
 }
 
 int AccountManager::port()
 {
 	QMutexLocker locker(&m_mutex);
-	return m_port < 0 ? PORT_DEFAULT : m_port;
+	return m_port < 0 ? NON_CUSTOM_PORT : m_port;
 }
 
 void AccountManager::setPort(const int port)
 {
 	QMutexLocker locker(&m_mutex);
-	m_port = port;
-	m_hasNewCredentials = true;
+
+	if (m_port != port) {
+		m_port = port;
+		m_hasNewCredentials = true;
+	}
+
 	locker.unlock();
 	emit portChanged();
 }
 
-void AccountManager::resetPort()
+int AccountManager::nonCustomPort() const
 {
-	setPort(PORT_UNSET);
+	return NON_CUSTOM_PORT;
 }
 
-bool AccountManager::customConnectionSettingsEnabled()
+void AccountManager::resetCustomConnectionSettings()
 {
-	QMutexLocker locker(&m_mutex);
-	return m_settings->value(KAIDAN_SETTINGS_AUTH_USE_CUSTOM).toBool();
-}
-
-void AccountManager::setCustomConnectionSettingsEnabled(const bool enabled)
-{
-	QMutexLocker locker(&m_mutex);
-	m_customConnectionSettingsEnabled = enabled;
-	locker.unlock();
-	emit customConnectionSettingsEnabledChanged();
+	setHost({});
+	setPort(NON_CUSTOM_PORT);
 }
 
 bool AccountManager::hasNewCredentials() const
@@ -181,7 +180,7 @@ bool AccountManager::loadCredentials()
 
 		// Load the custom connection setings.
 		setHost(m_settings->value(KAIDAN_SETTINGS_AUTH_HOST).toString());
-		setPort(m_settings->value(KAIDAN_SETTINGS_AUTH_PORT, PORT_UNSET).toInt());
+		setPort(m_settings->value(KAIDAN_SETTINGS_AUTH_PORT, NON_CUSTOM_PORT).toInt());
 
 		// This method is only used to load old credentials. Therefore,
 		// "m_hasNewCredentials" which was set to "true" by setting the credentials in this
@@ -213,7 +212,7 @@ void AccountManager::storeCustomConnectionSettings()
 {
 	if (!m_host.isEmpty())
 		m_settings->setValue(KAIDAN_SETTINGS_AUTH_HOST, m_host);
-	if (m_port != PORT_UNSET)
+	if (m_port != NON_CUSTOM_PORT)
 		m_settings->setValue(KAIDAN_SETTINGS_AUTH_PORT, m_port);
 }
 
@@ -232,7 +231,6 @@ void AccountManager::deleteCredentials()
 		KAIDAN_SETTINGS_AUTH_PASSWD,
 		KAIDAN_SETTINGS_AUTH_HOST,
 		KAIDAN_SETTINGS_AUTH_PORT,
-		KAIDAN_SETTINGS_AUTH_USE_CUSTOM,
 		KAIDAN_SETTINGS_AUTH_PASSWD_VISIBILITY
 	});
 
@@ -240,8 +238,7 @@ void AccountManager::deleteCredentials()
 	m_jidResourcePrefix.clear();
 	m_jidResource.clear();
 	setPassword({});
-	resetHost();
-	resetPort();
+	resetCustomConnectionSettings();
 
 	emit newCredentialsNeeded();
 }

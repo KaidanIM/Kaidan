@@ -71,6 +71,8 @@ Kirigami.Page {
 		id: credentialsGenerator
 	}
 
+	Component.onCompleted: AccountManager.resetCustomConnectionSettings()
+
 	/**
 	 * Shows a passive notification if the CAPTCHA verification failed.
 	 */

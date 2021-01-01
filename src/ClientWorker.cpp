@@ -189,9 +189,17 @@ void ClientWorker::connectToServer(QXmppConfiguration config)
 		config.setJid(AccountManager::instance()->jid());
 		config.setStreamSecurityMode(QXmppConfiguration::TLSRequired);
 
-		if (AccountManager::instance()->customConnectionSettingsEnabled()) {
-			config.setHost(AccountManager::instance()->host());
-			config.setPort(AccountManager::instance()->port());
+		auto host = AccountManager::instance()->host();
+		if (!host.isEmpty())
+			config.setHost(host);
+
+		auto port = AccountManager::instance()->port();
+		if (port != NON_CUSTOM_PORT) {
+			config.setPort(port);
+
+			// Set the JID's domain part as the host if no custom host is set.
+			if (host.isEmpty())
+				config.setHost(QXmppUtils::jidToDomain(AccountManager::instance()->jid()));
 		}
 
 		// Disable the automatic reconnection in case this connection attempt is not

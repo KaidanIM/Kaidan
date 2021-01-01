@@ -36,19 +36,23 @@ import org.kde.kirigami 2.12 as Kirigami
 import im.kaidan.kaidan 1.0
 
 import "../elements"
+import "../elements/fields"
+import "../settings"
 
 /**
  * This view is used for choosing a server.
  */
-View {
+FieldView {
 	descriptionText: qsTr("The server is the provider your communication will be managed by.\nThe selectable servers are hand-picked by our community!")
 	imageSource: "server"
 
-	property string text: customServerSelected ? customServerField.text : serverListModel.data(comboBox.currentIndex, ServerListModel.JidRole)
+	property string text: customServerSelected ? field.text : serverListModel.data(comboBox.currentIndex, ServerListModel.JidRole)
 	property bool customServerSelected: serverListModel.data(comboBox.currentIndex, ServerListModel.IsCustomServerRole)
 	property bool inBandRegistrationSupported: serverListModel.data(comboBox.currentIndex, ServerListModel.SupportsInBandRegistrationRole)
 	property string registrationWebPage: serverListModel.data(comboBox.currentIndex, ServerListModel.RegistrationWebPageRole)
 	property bool shouldWebRegistrationViewBeShown: !customServerSelected && !inBandRegistrationSupported
+
+	property alias customConnectionSettings: customConnectionSettings
 
 	ColumnLayout {
 		parent: contentArea
@@ -66,7 +70,7 @@ View {
 			}
 			textRole: "display"
 			currentIndex: indexOfRandomlySelectedServer()
-			onCurrentIndexChanged: customServerField.text = ""
+			onCurrentIndexChanged: field.text = ""
 
 			onActivated: {
 				if (index === 0) {
@@ -77,15 +81,47 @@ View {
 
 					// Focus the input text field of the combo box.
 					nextItemInFocusChain().forceActiveFocus()
+				} else if (customConnectionSettings.visible) {
+					customConnectionSettings.visible = false
 				}
 			}
 		}
 
-		Controls.TextField {
-			id: customServerField
+		Field {
+			id: field
 			visible: customServerSelected
-			Layout.fillWidth: true
 			placeholderText: "example.org"
+
+			inputField.rightActions: [
+				Kirigami.Action {
+					icon.name: "settings-configure"
+					text: qsTr("Connection settings")
+					onTriggered: {
+						customConnectionSettings.visible = !customConnectionSettings.visible
+
+						if (customConnectionSettings.visible)
+							customConnectionSettings.forceFocus()
+					}
+				}
+			]
+
+			// Focus the customConnectionSettings on confirmation.
+			Keys.onPressed: {
+				if (customConnectionSettings.visible) {
+					switch (event.key) {
+					case Qt.Key_Return:
+					case Qt.Key_Enter:
+						customConnectionSettings.forceFocus()
+						event.accepted = true
+					}
+				}
+			}
+		}
+
+		CustomConnectionSettings {
+			id: customConnectionSettings
+			confirmationButton: navigationBar.nextButton
+			visible: false
 		}
 
 		Controls.ScrollView {

@@ -36,6 +36,8 @@
 
 class QSettings;
 
+constexpr int NON_CUSTOM_PORT = 0;
+
 /**
  * This class manages account-related settings.
  */
@@ -45,9 +47,9 @@ class AccountManager : public QObject
 
 	Q_PROPERTY(QString jid READ jid WRITE setJid NOTIFY jidChanged)
 	Q_PROPERTY(QString password READ password WRITE setPassword NOTIFY passwordChanged)
-	Q_PROPERTY(QString host READ host WRITE setHost NOTIFY hostChanged RESET resetHost)
-	Q_PROPERTY(int port READ port WRITE setPort NOTIFY portChanged RESET resetPort)
-	Q_PROPERTY(bool customConnectionSettingsEnabled READ customConnectionSettingsEnabled WRITE setCustomConnectionSettingsEnabled NOTIFY customConnectionSettingsEnabledChanged)
+	Q_PROPERTY(QString host READ host WRITE setHost NOTIFY hostChanged)
+	Q_PROPERTY(int port READ port WRITE setPort NOTIFY portChanged)
+	Q_PROPERTY(int nonCustomPort READ nonCustomPort CONSTANT)
 
 public:
 	static AccountManager *instance();
@@ -109,6 +111,8 @@ public:
 	 * Returns the custom host.
 	 *
 	 * This method is thread-safe.
+	 *
+	 * @return the custom host or an empty string if no custom host is set
 	 */
 	QString host();
 
@@ -122,16 +126,11 @@ public:
 	void setHost(const QString &host);
 
 	/**
-	 * Resets a custom host.
-	 *
-	 * This method is thread-safe.
-	 */
-	void resetHost();
-
-	/**
 	 * Returns the custom port.
 	 *
 	 * This method is thread-safe.
+	 *
+	 * @return the custom port or nonCustomPort if no custom port is set
 	 */
 	int port();
 
@@ -145,27 +144,14 @@ public:
 	void setPort(const int port);
 
 	/**
-	 * Resets a custom port.
-	 *
-	 * This method is thread-safe.
+	 * Returns the port which indicates that no custom port is set.
 	 */
-	void resetPort();
+	int nonCustomPort() const;
 
 	/**
-	 * Returns true if a custom host or port is set, otherwise false.
-	 *
-	 * This method is thread-safe.
+	 * Resets the custom connection settings.
 	 */
-	bool customConnectionSettingsEnabled();
-
-	/**
-	 * Returns true if a custom host or port is set, otherwise false.
-	 *
-	 * This method is thread-safe.
-	 *
-	 * @param enabled true to enable the custom connection settings, otherwise false
-	 */
-	void setCustomConnectionSettingsEnabled(const bool enabled);
+	Q_INVOKABLE void resetCustomConnectionSettings();
 
 	/**
 	 * Provides a way to cache whether the current credentials are new to this client.
@@ -255,11 +241,6 @@ signals:
 	void portChanged();
 
 	/**
-	 * Emitted when the custom connection settings are enabled or disabled.
-	 */
-	void customConnectionSettingsEnabledChanged();
-
-	/**
 	 * Emitted when there are no (correct) credentials and new ones are needed.
 	 */
 	void newCredentialsNeeded();
@@ -289,9 +270,8 @@ private:
 	QString m_jidResource;
 	QString m_password;
 	QString m_host;
-	int m_port;
+	int m_port = NON_CUSTOM_PORT;
 
-	bool m_customConnectionSettingsEnabled = false;
 	bool m_hasNewCredentials;
 
 	static AccountManager *s_instance;

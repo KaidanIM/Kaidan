@@ -33,7 +33,7 @@
  * the user. It just displays the map in a rectangle.
  */
 
-import QtQuick 2.12
+import QtQuick 2.14
 import QtQuick.Layouts 1.12
 import QtQuick.Controls 2.12 as Controls
 import QtPositioning 5.12 as Positioning

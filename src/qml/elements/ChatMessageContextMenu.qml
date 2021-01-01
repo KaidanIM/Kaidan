@@ -28,7 +28,7 @@
  *  along with Kaidan.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-import QtQuick 2.12
+import QtQuick 2.14
 import QtQuick.Controls 2.12 as Controls
 
 import im.kaidan.kaidan 1.0

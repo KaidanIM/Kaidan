@@ -32,6 +32,8 @@
 
 #include <QUrlQuery>
 
+#include <array>
+
 constexpr QStringView SCHEME = u"xmpp";
 constexpr QStringView PREFIX = u"xmpp:";
 constexpr QChar QUERY_ITEM_DELIMITER = u';';
@@ -39,7 +41,7 @@ constexpr QChar QUERY_ITEM_KEY_DELIMITER = u'=';
 
 // Query types representing actions, e.g. "join" in
 // "xmpp:group@example.org?join" for joining a group chat
-const std::array<QStringView, 17> QUERY_TYPES = {
+constexpr std::array<QStringView, 17> QUERY_TYPES = {
 	QStringView(),
 	u"command",
 	u"disco",
@@ -60,7 +62,7 @@ const std::array<QStringView, 17> QUERY_TYPES = {
 };
 
 // QXmppMessage types as strings
-const std::array<QStringView, 5> MESSAGE_TYPES = {
+constexpr std::array<QStringView, 5> MESSAGE_TYPES = {
 	u"error",
 	u"normal",
 	u"chat",

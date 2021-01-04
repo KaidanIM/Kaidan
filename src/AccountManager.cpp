@@ -122,13 +122,13 @@ void AccountManager::setHost(const QString &host)
 	emit hostChanged();
 }
 
-int AccountManager::port()
+quint16 AccountManager::port()
 {
 	QMutexLocker locker(&m_mutex);
-	return m_port < 0 ? NON_CUSTOM_PORT : m_port;
+	return m_port;
 }
 
-void AccountManager::setPort(const int port)
+void AccountManager::setPort(const quint16 port)
 {
 	QMutexLocker locker(&m_mutex);
 
@@ -141,7 +141,7 @@ void AccountManager::setPort(const int port)
 	emit portChanged();
 }
 
-int AccountManager::nonCustomPort() const
+quint16 AccountManager::nonCustomPort() const
 {
 	return NON_CUSTOM_PORT;
 }
@@ -210,9 +210,14 @@ void AccountManager::storePassword()
 
 void AccountManager::storeCustomConnectionSettings()
 {
-	if (!m_host.isEmpty())
+	if (m_host.isEmpty())
+		m_settings->remove(KAIDAN_SETTINGS_AUTH_HOST);
+	else
 		m_settings->setValue(KAIDAN_SETTINGS_AUTH_HOST, m_host);
-	if (m_port != NON_CUSTOM_PORT)
+
+	if (m_port == NON_CUSTOM_PORT)
+		m_settings->remove(KAIDAN_SETTINGS_AUTH_PORT);
+	else
 		m_settings->setValue(KAIDAN_SETTINGS_AUTH_PORT, m_port);
 }
 

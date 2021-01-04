@@ -69,12 +69,13 @@ Kirigami.Page {
 				text: qsTr("Change")
 
 				onClicked: {
-					if (Kaidan.connectionState === Enums.StateDisconnected)
-						Kaidan.logIn()
-					else
-						Kaidan.logOut()
-
 					busyIndicator.visible = true
+
+					if (Kaidan.connectionState === Enums.StateDisconnected) {
+						logIn()
+					} else {
+						Kaidan.logOut()
+					}
 				}
 			}
 
@@ -99,17 +100,19 @@ Kirigami.Page {
 
 		onConnectionStateChanged: {
 			if (Kaidan.connectionState === Enums.StateDisconnected && !Kaidan.connectionError) {
-				AccountManager.host = customConnectionSettings.hostField.text
-				AccountManager.port = customConnectionSettings.portField.value
-				Kaidan.logIn()
+				logIn()
 			} else if (Kaidan.connectionState === Enums.StateConnected) {
-				AccountManager.host = customConnectionSettings.hostField.text
-				AccountManager.port = customConnectionSettings.portField.value
-				Kaidan.logIn()
 				busyIndicator.visible = false
 				passiveNotification(qsTr("Connection settings changed"))
 				stack.pop()
 			}
 		}
 	}
+
+	function logIn() {
+		AccountManager.host = customConnectionSettings.hostField.text
+		AccountManager.port = customConnectionSettings.portField.value
+		Kaidan.logIn()
+	}
+
 }

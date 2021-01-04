@@ -93,6 +93,9 @@ RowLayout {
 				switch (event.key) {
 				case Qt.Key_Return:
 				case Qt.Key_Enter:
+					// Trigger that the text inside portField is set as its value.
+					confirmationButton.forceActiveFocus()
+
 					confirmationButton.clicked()
 					event.accepted = true
 				}

@@ -36,7 +36,7 @@
 
 class QSettings;
 
-constexpr int NON_CUSTOM_PORT = 0;
+constexpr quint16 NON_CUSTOM_PORT = 0;
 
 /**
  * This class manages account-related settings.
@@ -48,8 +48,8 @@ class AccountManager : public QObject
 	Q_PROPERTY(QString jid READ jid WRITE setJid NOTIFY jidChanged)
 	Q_PROPERTY(QString password READ password WRITE setPassword NOTIFY passwordChanged)
 	Q_PROPERTY(QString host READ host WRITE setHost NOTIFY hostChanged)
-	Q_PROPERTY(int port READ port WRITE setPort NOTIFY portChanged)
-	Q_PROPERTY(int nonCustomPort READ nonCustomPort CONSTANT)
+	Q_PROPERTY(quint16 port READ port WRITE setPort NOTIFY portChanged)
+	Q_PROPERTY(quint16 nonCustomPort READ nonCustomPort CONSTANT)
 
 public:
 	static AccountManager *instance();
@@ -132,7 +132,7 @@ public:
 	 *
 	 * @return the custom port or nonCustomPort if no custom port is set
 	 */
-	int port();
+	quint16 port();
 
 	/**
 	 * Sets a custom port for connecting.
@@ -141,12 +141,12 @@ public:
 	 *
 	 * @param port port to connect to
 	 */
-	void setPort(const int port);
+	void setPort(const quint16 port);
 
 	/**
 	 * Returns the port which indicates that no custom port is set.
 	 */
-	int nonCustomPort() const;
+	quint16 nonCustomPort() const;
 
 	/**
 	 * Resets the custom connection settings.
@@ -197,6 +197,8 @@ public:
 
 	/**
 	 * Stores the currently set custom host and port in the settings file.
+	 *
+	 * If a custom connection setting is not set, it is removed from the settings file.
 	 */
 	void storeCustomConnectionSettings();
 
@@ -270,7 +272,7 @@ private:
 	QString m_jidResource;
 	QString m_password;
 	QString m_host;
-	int m_port = NON_CUSTOM_PORT;
+	quint16 m_port = NON_CUSTOM_PORT;
 
 	bool m_hasNewCredentials;
 

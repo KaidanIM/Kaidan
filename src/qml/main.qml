@@ -89,6 +89,12 @@ Kirigami.ApplicationWindow {
 	Component {id: qrCodeScannerPage; QrCodeScannerPage {}}
 	Component {id: userProfilePage; UserProfilePage {}}
 
+	onWidthChanged: {
+		// Show the rosterPage instead of the emptyChatPage if the window is narrow.
+		if (pageStack.currentItem instanceof EmptyChatPage && width < 680)
+			pageStack.goBack()
+	}
+
 	function raiseWindow() {
 		if (!active) {
 			raise()

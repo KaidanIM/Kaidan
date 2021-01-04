@@ -67,10 +67,10 @@ void AccountManager::setJid(const QString &jid)
 	if (m_jid != jid) {
 		m_jid = jid;
 		m_hasNewCredentials = true;
-	}
 
-	locker.unlock();
-	emit jidChanged();
+		locker.unlock();
+		emit jidChanged();
+	}
 }
 
 void AccountManager::setJidResourcePrefix(const QString &jidResourcePrefix)
@@ -97,10 +97,10 @@ void AccountManager::setPassword(const QString &password)
 	if (m_password != password) {
 		m_password = password;
 		m_hasNewCredentials = true;
-	}
 
-	locker.unlock();
-	emit passwordChanged();
+		locker.unlock();
+		emit passwordChanged();
+	}
 }
 
 QString AccountManager::host()
@@ -116,10 +116,10 @@ void AccountManager::setHost(const QString &host)
 	if (m_host != host) {
 		m_host = host;
 		m_hasNewCredentials = true;
-	}
 
-	locker.unlock();
-	emit hostChanged();
+		locker.unlock();
+		emit hostChanged();
+	}
 }
 
 quint16 AccountManager::port()
@@ -135,10 +135,10 @@ void AccountManager::setPort(const quint16 port)
 	if (m_port != port) {
 		m_port = port;
 		m_hasNewCredentials = true;
-	}
 
-	locker.unlock();
-	emit portChanged();
+		locker.unlock();
+		emit portChanged();
+	}
 }
 
 quint16 AccountManager::nonCustomPort() const

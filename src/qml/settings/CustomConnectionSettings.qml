@@ -47,6 +47,14 @@ RowLayout {
 		labelText: qsTr("Hostname:")
 		placeholderText: "xmpp.example.org"
 		text: AccountManager.host
+		inputMethodHints: Qt.ImhUrlCharactersOnly
+		invalidHintText: qsTr("The hostname must not contain blank spaces")
+		invalidHintMayBeShown: true
+
+		onTextChanged: {
+			valid = !text.match(/\s/);
+			toggleHintForInvalidText()
+		}
 
 		// Focus the portField on confirmation.
 		Keys.onPressed: {
@@ -60,6 +68,9 @@ RowLayout {
 	}
 
 	ColumnLayout {
+		// Position this field on top even if hostField.invalidHintText is shown.
+		Layout.alignment: Qt.AlignTop
+
 		Controls.Label {
 			text: qsTr("Port:")
 		}

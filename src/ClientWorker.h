@@ -37,6 +37,7 @@
 // QXmpp
 #include <QXmppClient.h>
 // Kaidan
+#include "AccountManager.h"
 #include "AvatarFileStorage.h"
 #include "Enums.h"
 #include "MessageModel.h"
@@ -84,13 +85,14 @@ public:
 
 	struct Caches {
 		Caches(RosterDb *rosterDb, MessageDb *msgDb, QObject *parent = nullptr)
-				: msgModel(new MessageModel(msgDb, parent)),
-		          rosterModel(new RosterModel(rosterDb, parent)),
+			: settings(new QSettings(APPLICATION_NAME, APPLICATION_NAME)),
+			  accountManager(new AccountManager(settings, parent)),
+			  msgModel(new MessageModel(msgDb, parent)),
+			  rosterModel(new RosterModel(rosterDb, parent)),
 		          avatarStorage(new AvatarFileStorage(parent)),
 		          serverFeaturesCache(new ServerFeaturesCache(parent)),
 		          presCache(new PresenceCache(parent)),
-		          transferCache(new TransferCache(parent)),
-		          settings(new QSettings(APPLICATION_NAME, APPLICATION_NAME))
+			  transferCache(new TransferCache(parent))
 		{
 			rosterModel->setMessageModel(msgModel);
 		}
@@ -100,13 +102,14 @@ public:
 			delete settings;
 		}
 
+		QSettings *settings;
+		AccountManager *accountManager;
 		MessageModel *msgModel;
 		RosterModel *rosterModel;
 		AvatarFileStorage *avatarStorage;
 		ServerFeaturesCache *serverFeaturesCache;
 		PresenceCache *presCache;
 		TransferCache* transferCache;
-		QSettings *settings;
 	};
 
 	/**

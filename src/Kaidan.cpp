@@ -37,7 +37,6 @@
 // QXmpp
 #include "qxmpp-exts/QXmppUri.h"
 // Kaidan
-#include "AccountManager.h"
 #include "AvatarFileStorage.h"
 #include "CredentialsValidator.h"
 #include "Database.h"
@@ -223,8 +222,6 @@ void Kaidan::initializeClientWorker(bool enableLogging)
 
 	m_client = new ClientWorker(m_caches, enableLogging);
 	m_client->moveToThread(m_cltThrd);
-
-	new AccountManager(m_caches->settings, this);
 
 	connect(AccountManager::instance(), &AccountManager::newCredentialsNeeded, this, &Kaidan::newCredentialsNeeded);
 

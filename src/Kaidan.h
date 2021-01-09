@@ -259,9 +259,11 @@ signals:
 	void connectionStateChanged();
 
 	/**
-	 * Emitted when the client failed to connect.
+	 * Emitted when the connection error changed.
+	 *
+	 * That is the case when the client failed to connect or it succeeded to connect after an error.
 	 */
-	void connectionErrorChanged(ClientWorker::ConnectionError error);
+	void connectionErrorChanged();
 
 	/**
 	 * Emitted when there are no (correct) credentials and new ones are needed.

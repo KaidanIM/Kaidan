@@ -69,7 +69,7 @@ QString QmlUtils::connectionErrorMessage(ClientWorker::ConnectionError error)
 {
 	switch (error) {
 	case ClientWorker::NoError:
-		Q_UNREACHABLE();
+		break;
 	case ClientWorker::AuthenticationFailed:
 		return tr("Invalid username or password.");
 	case ClientWorker::NotConnected:

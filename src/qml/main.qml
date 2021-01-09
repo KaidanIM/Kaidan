@@ -109,10 +109,6 @@ Kirigami.ApplicationWindow {
 		showPassiveNotification(text, "long")
 	}
 
-	function showPassiveNotificationForConnectionError() {
-		passiveNotification(Utils.connectionErrorMessage(Kaidan.connectionError))
-	}
-
 	function openStartPage() {
 		globalDrawer.enabled = false
 		globalDrawer.visible = false

@@ -115,8 +115,10 @@ void Kaidan::setConnectionState(Enums::ConnectionState connectionState)
 
 void Kaidan::setConnectionError(ClientWorker::ConnectionError error)
 {
-	m_connectionError = error;
-	emit connectionErrorChanged(error);
+	if (error != m_connectionError) {
+		m_connectionError = error;
+		emit connectionErrorChanged();
+	}
 }
 
 bool Kaidan::notificationsMuted(const QString &jid)

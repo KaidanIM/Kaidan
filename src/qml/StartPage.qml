@@ -95,6 +95,9 @@ Kirigami.Page {
 	Connections {
 		target: Kaidan
 
-		onConnectionErrorChanged: showPassiveNotificationForConnectionError()
+		function onConnectionErrorChanged() {
+			if (Kaidan.connectionError !== ClientWorker.NoError)
+				passiveNotification(Utils.connectionErrorMessage(Kaidan.connectionError))
+		}
 	}
 }

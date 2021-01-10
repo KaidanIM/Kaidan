@@ -325,14 +325,11 @@ RowLayout {
 		}
 	}
 
-	function updateIsLoading() {
-		isLoading = Kaidan.transferCache.hasUpload(msgId)
-	}
+	Connections {
+		target: Kaidan.transferCache
 
-	Component.onCompleted: {
-		Kaidan.transferCache.jobsChanged.connect(updateIsLoading)
-	}
-	Component.onDestruction: {
-		Kaidan.transferCache.jobsChanged.disconnect(updateIsLoading)
+		function onJobsChanged() {
+			isLoading = Kaidan.transferCache.hasUpload(msgId)
+		}
 	}
 }

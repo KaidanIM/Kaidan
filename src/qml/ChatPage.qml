@@ -109,20 +109,17 @@ ChatPageBase {
 				)
 			}
 
-			function handleNotificationsMuted(jid) {
-				text = Kaidan.notificationsMuted(Kaidan.messageModel.currentChatJid)
-						? qsTr("Unmute notifications")
-						: qsTr("Mute notifications")
-				icon.name = Kaidan.notificationsMuted(Kaidan.messageModel.currentChatJid)
-							? "audio-volume-high-symbolic"
-							: "audio-volume-muted-symbolic"
-			}
+			Connections {
+				target: Kaidan
 
-			Component.onCompleted: {
-				Kaidan.notificationsMutedChanged.connect(handleNotificationsMuted)
-			}
-			Component.onDestruction: {
-				Kaidan.notificationsMutedChanged.disconnect(handleNotificationsMuted)
+				function onNotificationsMuted(jid) {
+					text = Kaidan.notificationsMuted(Kaidan.messageModel.currentChatJid)
+							? qsTr("Unmute notifications")
+							: qsTr("Mute notifications")
+					icon.name = Kaidan.notificationsMuted(Kaidan.messageModel.currentChatJid)
+							    ? "audio-volume-high-symbolic"
+								: "audio-volume-muted-symbolic"
+				}
 			}
 		},
 		Kirigami.Action {
@@ -346,7 +343,11 @@ ChatPageBase {
 	function openFileDialog(nameFilter, title) {
 		fileChooserLoader.source = "qrc:/qml/elements/FileChooser.qml"
 		fileChooserLoader.item.selectedNameFilter = nameFilter
-		fileChooserLoader.item.accepted.connect(function() { sendMediaSheet.sendFile(Kaidan.messageModel.currentChatJid, fileChooserLoader.item.fileUrl) })
+		fileChooserLoader.item.accepted.connect(
+			function() {
+				sendMediaSheet.sendFile(Kaidan.messageModel.currentChatJid, fileChooserLoader.item.fileUrl)
+			}
+		)
 		if (title !== undefined)
 			fileChooserLoader.item.title = title
 		fileChooserLoader.item.open()

@@ -311,7 +311,7 @@ MediaPreview {
 		target: root.mediaSheet
 		enabled: target
 
-		onRejected: {
+		function onRejected() {
 			recorder.cancel()
 		}
 	}

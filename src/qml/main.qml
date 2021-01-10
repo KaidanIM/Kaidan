@@ -96,13 +96,6 @@ Kirigami.ApplicationWindow {
 
 	onWidthChanged: showRosterPageForNarrowWindow()
 
-	function raiseWindow() {
-		if (!active) {
-			raise()
-			requestActivate()
-		}
-	}
-
 	/**
 	 * Shows a passive notification for a long period.
 	 */
@@ -165,28 +158,40 @@ Kirigami.ApplicationWindow {
 			pageStack.pop()
 	}
 
-	function handleSubRequest(from, message) {
-		Kaidan.client.vCardManager.vCardRequested(from)
-
-		subReqAcceptSheet.from = from
-		subReqAcceptSheet.message = message
-
-		subReqAcceptSheet.open()
-	}
-
 	Connections {
 		target: Kaidan
 
-		onRaiseWindowRequested: raiseWindow()
-		onPassiveNotificationRequested: passiveNotification(text)
-		onCredentialsNeeded: openStartPage()
-		onLoggedInWithNewCredentials: openChatView()
+		function onRaiseWindowRequested() {
+			if (!root.active) {
+				root.raise()
+				root.requestActivate()
+			}
+		}
+
+		function onPassiveNotificationRequested(text) {
+			passiveNotification(text)
+		}
+
+		function onCredentialsNeeded() {
+			openStartPage()
+		}
+
+		function onLoggedInWithNewCredentials() {
+			openChatView()
+		}
 	}
 
 	Connections {
 		target: Kaidan.rosterModel
 
-		onSubscriptionRequestReceived: handleSubRequest(from, msg)
+		function onSubscriptionRequestReceived(from, msg) {
+			Kaidan.client.vCardManager.vCardRequested(from)
+
+			subReqAcceptSheet.from = from
+			subReqAcceptSheet.message = message
+
+			subReqAcceptSheet.open()
+		}
 	}
 
 	Component.onCompleted: {

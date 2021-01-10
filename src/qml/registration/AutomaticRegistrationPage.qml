@@ -90,7 +90,7 @@ RegistrationPage {
 	Connections {
 		target: Kaidan
 
-		onRegistrationFormReceived: {
+		function onRegistrationFormReceived() {
 			formModel = dataFormModel
 			formFilterModel.sourceModel = dataFormModel
 
@@ -101,7 +101,8 @@ RegistrationPage {
 			else
 				removeLoadingView()
 		}
-		onRegistrationFailed: {
+
+		function onRegistrationFailed(error, errorMessage) {
 			switch (error) {
 			case RegistrationManager.InBandRegistrationNotSupported:
 				requestRegistrationFormFromAnotherServer(errorMessage)
@@ -142,7 +143,7 @@ RegistrationPage {
 			}
 		}
 
-		onConnectionErrorChanged: {
+		function onConnectionErrorChanged() {
 			removeLoadingView()
 			pageStack.layers.pop()
 		}

@@ -137,7 +137,7 @@ Kirigami.Page {
 			stack.pop()
 		}
 
-		function onPasswordChangeFailed() {
+		function onPasswordChangeFailed(errorMessage) {
 			busyIndicator.visible = false
 			passiveNotification(qsTr("Failed to change password: %1").arg(errorMessage))
 		}

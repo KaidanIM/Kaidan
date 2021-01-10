@@ -118,10 +118,18 @@ Kirigami.ScrollablePage {
 		Connections {
 			target: Kaidan
 
-			onOpenChatPageRequested: openChatPage(chatJid)
-			onXmppUriReceived: xmppUriReceived(uri)
+			function onOpenChatPageRequested(chatJid) {
+				openChatPage(chatJid)
+			}
+
+			function onXmppUriReceived(uri) {
+				// 'xmpp:' has length of 5
+				addContactSheet.jid = uri.substr(5)
+				addContactSheet.open()
+			}
 		}
 	}
+
 
 	/**
 	 * Opens the chat page for the chat JID currently set in the message model.
@@ -139,9 +147,4 @@ Kirigami.ScrollablePage {
 		pageStack.push(chatPage)
 	}
 
-	function xmppUriReceived(uri) {
-		// 'xmpp:' has length of 5
-		addContactSheet.jid = uri.substr(5)
-		addContactSheet.open()
-	}
 }

@@ -142,8 +142,8 @@ Kirigami.SwipeListItem {
 		Connections {
 			target: Kaidan
 
-			onNotificationsMutedChanged: {
-				if (jid == listItem.jid) {
+			function onNotificationsMutedChanged(jid) {
+				if (jid === listItem.jid) {
 					counter.muted = Kaidan.notificationsMuted(jid)
 					muteIcon.visible = Kaidan.notificationsMuted(jid)
 				}

@@ -91,14 +91,14 @@ Kirigami.Page {
 	Connections {
 		target: Kaidan
 
-		onConnectionErrorChanged: {
+		function onConnectionErrorChanged() {
 			if (busyIndicator.visible) {
 				busyIndicator.visible = false
 				passiveNotification(qsTr("Connection settings could not be changed"))
 			}
 		}
 
-		onConnectionStateChanged: {
+		function onConnectionStateChanged() {
 			if (Kaidan.connectionState === Enums.StateDisconnected && !Kaidan.connectionError) {
 				logIn()
 			} else if (Kaidan.connectionState === Enums.StateConnected) {

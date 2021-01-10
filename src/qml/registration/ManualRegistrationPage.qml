@@ -115,7 +115,7 @@ RegistrationPage {
 	Connections {
 		target: Kaidan
 
-		onConnectionErrorChanged: {
+		function onConnectionErrorChanged() {
 			connectionErrorOccurred = true
 			jumpToPreviousView()
 			removeLoadingView()
@@ -125,7 +125,7 @@ RegistrationPage {
 	Connections {
 		target: Kaidan
 
-		onRegistrationFormReceived: {
+		function onRegistrationFormReceived(dataFormModel) {
 			formModel = dataFormModel
 			formFilterModel.sourceModel = dataFormModel
 
@@ -177,7 +177,7 @@ RegistrationPage {
 
 		// Depending on the error, the swipe view jumps to the view where the input should be corrected.
 		// For all remaining errors, the swipe view jumps to the server view.
-		onRegistrationFailed: {
+		function onRegistrationFailed(error, errorMessage) {
 			registrationErrorOccurred = true
 
 			switch(error) {

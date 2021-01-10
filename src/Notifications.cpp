@@ -46,12 +46,13 @@
 #endif
 
 #ifdef HAVE_KNOTIFICATIONS
-#ifdef DESKTOP_LINUX_ALIKE_OS
-static bool IS_USING_GNOME = qEnvironmentVariable("XDG_CURRENT_DESKTOP").contains("GNOME", Qt::CaseInsensitive);
-#endif
 
 void Notifications::sendMessageNotification(const QString &senderJid, const QString &senderName, const QString &message)
 {
+#ifdef DESKTOP_LINUX_ALIKE_OS
+	static bool IS_USING_GNOME = qEnvironmentVariable("XDG_CURRENT_DESKTOP").contains("GNOME", Qt::CaseInsensitive);
+#endif
+
 	KNotification *notification = new KNotification("new-message");
 	notification->setText(message);
 	notification->setTitle(senderName);

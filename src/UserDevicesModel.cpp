@@ -34,6 +34,7 @@
 #include <QXmppVersionIq.h>
 
 #include "Kaidan.h"
+#include "VersionManager.h"
 
 UserDevicesModel::UserDevicesModel(QObject *parent)
 	: QAbstractListModel(parent)
@@ -42,8 +43,10 @@ UserDevicesModel::UserDevicesModel(QObject *parent)
 	        this, &UserDevicesModel::handlePresenceChanged);
 	connect(PresenceCache::instance(), &PresenceCache::presencesCleared,
 	        this, &UserDevicesModel::handlePresencesCleared);
-	connect(Kaidan::instance(), &Kaidan::clientVersionReceived,
-	        this, &UserDevicesModel::handleClientVersionReceived);
+	connect(this, &UserDevicesModel::clientVersionsRequested,
+		Kaidan::instance()->client()->versionManager(), &VersionManager::fetchVersions);
+	connect(Kaidan::instance()->client()->versionManager(), &VersionManager::clientVersionReceived,
+		this, &UserDevicesModel::handleClientVersionReceived);
 }
 
 QHash<int, QByteArray> UserDevicesModel::roleNames() const
@@ -107,7 +110,7 @@ void UserDevicesModel::setJid(const QString &jid)
 	endResetModel();
 
 	// request version data for all available resources
-	emit Kaidan::instance()->requestClientVersions(m_jid);
+	emit clientVersionsRequested(m_jid);
 
 	emit jidChanged();
 }
@@ -144,7 +147,7 @@ void UserDevicesModel::handlePresenceChanged(PresenceCache::ChangeType type, con
 		m_devices.append(DeviceInfo(resource));
 		endInsertRows();
 
-		emit Kaidan::instance()->requestClientVersions(m_jid, resource);
+		emit clientVersionsRequested(m_jid, resource);
 		break;
 	case PresenceCache::Disconnected:
 		for (int i = 0; i < m_devices.count(); i++) {

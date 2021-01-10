@@ -63,9 +63,7 @@ MessageModel::MessageModel(MessageDb *msgDb, QObject *parent)
 	        msgDb, &MessageDb::updateMessage);
 
 	connect(this, &MessageModel::setMessageDeliveryStateRequested,
-	        this, &MessageModel::setMessageDeliveryState);
-	connect(Kaidan::instance(), &Kaidan::correctMessage,
-	        this, &MessageModel::correctMessage);
+		this, &MessageModel::setMessageDeliveryState);
 }
 
 MessageModel::~MessageModel() = default;

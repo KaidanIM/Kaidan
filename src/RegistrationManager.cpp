@@ -61,7 +61,8 @@ RegistrationManager::RegistrationManager(ClientWorker *clientWorker, QXmppClient
 	connect(m_manager, &QXmppRegistrationManager::supportedByServerChanged, this, &RegistrationManager::handleInBandRegistrationSupportedChanged);
 
 	// account creation
-	connect(Kaidan::instance(), &Kaidan::sendRegistrationForm, this, &RegistrationManager::sendRegistrationForm);
+	connect(this, &RegistrationManager::sendRegistrationFormRequested,
+		this, &RegistrationManager::sendRegistrationForm);
 	connect(m_manager, &QXmppRegistrationManager::registrationFormReceived, this, &RegistrationManager::handleRegistrationFormReceived);
 	connect(m_manager, &QXmppRegistrationManager::registrationSucceeded, this, &RegistrationManager::handleRegistrationSucceeded);
 	connect(m_manager, &QXmppRegistrationManager::registrationFailed, this, &RegistrationManager::handleRegistrationFailed);
@@ -71,7 +72,8 @@ RegistrationManager::RegistrationManager(ClientWorker *clientWorker, QXmppClient
 	connect(m_manager, &QXmppRegistrationManager::accountDeleted, m_clientWorker, &ClientWorker::handleAccountDeletedFromServer);
 
 	// password change
-	connect(Kaidan::instance(), &Kaidan::changePassword, this, &RegistrationManager::changePassword);
+	connect(this, &RegistrationManager::changePasswordRequested,
+		this, &RegistrationManager::changePassword);
 	connect(m_manager, &QXmppRegistrationManager::passwordChanged, this, &RegistrationManager::handlePasswordChanged);
 	connect(m_manager, &QXmppRegistrationManager::passwordChangeFailed, this, &RegistrationManager::handlePasswordChangeFailed);
 }
@@ -211,6 +213,7 @@ void RegistrationManager::handlePasswordChanged(const QString &newPassword)
 	AccountManager::instance()->storePassword();
 	AccountManager::instance()->setHasNewCredentials(false);
 	m_clientWorker->finishTask();
+	emit Kaidan::instance()->passwordChangeSucceeded();
 }
 
 void RegistrationManager::handlePasswordChangeFailed(const QXmppStanza::Error &error)

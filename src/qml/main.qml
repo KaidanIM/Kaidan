@@ -166,7 +166,7 @@ Kirigami.ApplicationWindow {
 	}
 
 	function handleSubRequest(from, message) {
-		Kaidan.vCardRequested(from)
+		Kaidan.client.vCardManager.vCardRequested(from)
 
 		subReqAcceptSheet.from = from
 		subReqAcceptSheet.message = message
@@ -181,6 +181,11 @@ Kirigami.ApplicationWindow {
 		onPassiveNotificationRequested: passiveNotification(text)
 		onCredentialsNeeded: openStartPage()
 		onLoggedInWithNewCredentials: openChatView()
+	}
+
+	Connections {
+		target: Kaidan.rosterModel
+
 		onSubscriptionRequestReceived: handleSubRequest(from, msg)
 	}
 

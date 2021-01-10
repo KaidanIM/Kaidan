@@ -62,6 +62,7 @@ public:
 
 signals:
 	void jidChanged();
+	void clientVersionsRequested(const QString &bareJid, const QString &resource = {});
 
 private slots:
 	void handleClientVersionReceived(const QXmppVersionIq &versionIq);

@@ -61,10 +61,11 @@ public slots:
 	 */
 	void handleMessage(const QXmppMessage &msg);
 
+
 	/**
-	 * Sends a new message to the server and inserts it into the database.
+	 * Send a text message to any JID
 	 */
-	void sendMessage(const QString& toJid, const QString& body, bool isSpoiler, const QString& spoilerHint);
+	void sendMessage(const QString &toJid, const QString &body, bool isSpoiler, const QString &spoilerHint);
 
 	/**
 	 * Sends the corrected version of a message.
@@ -75,6 +76,12 @@ public slots:
 	 * Handles service discovery info and enables carbons if feature was found.
 	 */
 	void handleDiscoInfo(const QXmppDiscoveryIq &);
+
+signals:
+	void sendMessageRequested(const QString &toJid,
+				  const QString &body,
+				  bool isSpoiler,
+				  const QString &spoilerHint);
 
 private slots:
 	/**

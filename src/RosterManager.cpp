@@ -68,11 +68,11 @@ RosterManager::RosterManager(QXmppClient *client,
 	connect(m_manager, &QXmppRosterManager::itemRemoved, model, &RosterModel::removeItemRequested);
 
 	connect(m_manager, &QXmppRosterManager::subscriptionReceived,
-			this, [] (const QString &jid) {
+			this, [this] (const QString &jid) {
 		// emit signal to ask user
-		emit Kaidan::instance()->subscriptionRequestReceived(jid, QString());
+		emit Kaidan::instance()->rosterModel()->subscriptionRequestReceived(jid, {});
 	});
-	connect(Kaidan::instance(), &Kaidan::subscriptionRequestAnswered,
+	connect(this, &RosterManager::answerSubscriptionRequestRequested,
 	        this, [=] (QString jid, bool accepted) {
 		if (accepted) {
 			m_manager->acceptSubscription(jid);
@@ -87,9 +87,9 @@ RosterManager::RosterManager(QXmppClient *client,
 	});
 
 	// user actions
-	connect(Kaidan::instance(), &Kaidan::addContact, this, &RosterManager::addContact);
-	connect(Kaidan::instance(), &Kaidan::removeContact, this, &RosterManager::removeContact);
-	connect(Kaidan::instance(), &Kaidan::renameContact, this, &RosterManager::renameContact);
+	connect(this, &RosterManager::addContactRequested, this, &RosterManager::addContact);
+	connect(this, &RosterManager::removeContactRequested, this, &RosterManager::removeContact);
+	connect(this, &RosterManager::renameContactRequested, this, &RosterManager::renameContact);
 }
 
 void RosterManager::populateRoster()

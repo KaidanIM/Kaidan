@@ -31,19 +31,21 @@
 #pragma once
 
 // Kaidan
-class ClientWorker;
-class RegistrationDataFormModel;
 // Qt
 #include <QObject>
 #include <QVector>
-class QSettings;
 // QXmpp
 #include <QXmppBitsOfBinaryContentId.h>
+#include <QXmppStanza.h>
+
+class ClientWorker;
+class RegistrationDataFormModel;
+class DataFormModel;
+class QSettings;
+class QXmppRegistrationManager;
 class QXmppClient;
 class QXmppDataForm;
 class QXmppRegisterIq;
-#include <QXmppStanza.h>
-class QXmppRegistrationManager;
 
 class RegistrationManager : public QObject
 {
@@ -75,6 +77,14 @@ public:
 	 */
 	void deleteAccount();
 
+signals:
+	void changePasswordRequested(const QString &newPassword);
+
+	/**
+	 * Emitted to send a completed data form for registration.
+	 */
+	void sendRegistrationFormRequested();
+
 private slots:
 	/**
 	 * Sends the form containing information to register an account.
@@ -91,8 +101,11 @@ private slots:
 	/**
 	 * Called when the In-Band Registration support changed.
 	 *
-	 * The server feature state for In-Band Registration is only changed when the server disables it, not on disconnect.
-	 * That way, the last known state can be cached while being offline and operations like deleting an account from the server can be offered to the user even if Kaidan is not connected to the user's server.
+	 * The server feature state for In-Band Registration is only changed
+	 * when the server disables it, not on disconnect. That way, the last
+	 * known state can be cached while being offline and operations like
+	 * deleting an account from the server can be offered to the user even
+	 * if Kaidan is not connected to the user's server.
 	 */
 	void handleInBandRegistrationSupportedChanged();
 

@@ -247,11 +247,6 @@ void Kaidan::initializeClientWorker(bool enableLogging)
 	m_cltThrd->start();
 }
 
-ClientWorker *Kaidan::client() const
-{
-	return m_client;
-}
-
 RosterDb *Kaidan::rosterDb() const
 {
 	return m_rosterDb;

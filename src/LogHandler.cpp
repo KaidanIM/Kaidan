@@ -38,9 +38,10 @@
 #include <QXmppClient.h>
 #include <QXmppLogger.h>
 
-LogHandler::LogHandler(QXmppClient *client, QObject *parent) : QObject(parent), m_client(client)
+LogHandler::LogHandler(QXmppClient *client, bool enable, QObject *parent) : QObject(parent), m_client(client)
 {
 	client->logger()->setLoggingType(QXmppLogger::SignalLogging);
+	enableLogging(enable);
 }
 
 void LogHandler::enableLogging(bool enabled)

@@ -70,7 +70,7 @@ Kirigami.OverlaySheet {
 				Layout.fillWidth: true
 
 				onClicked: {
-					Kaidan.renameContact(jid, enteredName)
+					Kaidan.client.rosterManager.renameContactRequested(jid, enteredName)
 					close()
 				}
 			}

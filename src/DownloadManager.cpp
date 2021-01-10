@@ -50,8 +50,6 @@ DownloadManager::DownloadManager(TransferCache *transferCache, MessageModel *mod
 	connect(this, &DownloadManager::startDownloadRequested,
 	        this, &DownloadManager::startDownload);
 	connect(this, &DownloadManager::abortDownloadRequested, this, &DownloadManager::abortDownload);
-
-	connect(Kaidan::instance(), &Kaidan::downloadMedia, this, &DownloadManager::startDownload);
 }
 
 DownloadManager::~DownloadManager()

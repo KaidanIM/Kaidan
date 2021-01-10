@@ -56,22 +56,21 @@
 #include "VersionManager.h"
 
 ClientWorker::ClientWorker(Caches *caches, bool enableLogging, QObject* parent)
-	: QObject(parent), m_caches(caches), m_enableLogging(enableLogging), m_isApplicationWindowActive(true)
+	: QObject(parent),
+	  m_caches(caches),
+	  m_client(new QXmppClient(this)),
+	  m_logger(new LogHandler(m_client, enableLogging, this)),
+	  m_enableLogging(enableLogging),
+	  m_registrationManager(new RegistrationManager(this, m_client, m_caches->settings, this)),
+	  m_vCardManager(new VCardManager(this, m_client, m_caches->avatarStorage, this)),
+	  m_rosterManager(new RosterManager(m_client,  m_caches->rosterModel, m_caches->avatarStorage, m_vCardManager, this)),
+	  m_messageHandler(new MessageHandler(this, m_client, m_caches->msgModel, this)),
+	  m_discoveryManager(new DiscoveryManager(m_client, this)),
+	  m_uploadManager(new UploadManager(m_client, m_rosterManager, this)),
+	  m_downloadManager(new DownloadManager(caches->transferCache, caches->msgModel, this)),
+	  m_versionManager(new VersionManager(m_client, this)),
+	  m_isApplicationWindowActive(true)
 {
-	m_client = new QXmppClient(this);
-
-	m_logger = new LogHandler(m_client, this);
-	m_logger->enableLogging(enableLogging);
-
-	m_vCardManager = new VCardManager(this, m_client, m_caches->avatarStorage, this);
-	m_registrationManager = new RegistrationManager(this, m_client, m_caches->settings, this);
-	m_rosterManager = new RosterManager(m_client,  m_caches->rosterModel, m_caches->avatarStorage, m_vCardManager, this);
-	m_messageHandler = new MessageHandler(this, m_client, m_caches->msgModel, this);
-	m_discoveryManager = new DiscoveryManager(m_client, this);
-	m_uploadManager = new UploadManager(m_client, m_rosterManager, this);
-	m_downloadManager = new DownloadManager(caches->transferCache, caches->msgModel, this);
-	m_versionManager = new VersionManager(m_client, this);
-
 	connect(m_client, &QXmppClient::connected, this, &ClientWorker::onConnected);
 	connect(m_client, &QXmppClient::disconnected, this, &ClientWorker::onDisconnected);
 
@@ -104,16 +103,6 @@ void ClientWorker::initialize()
 	// Initialize the random number generator used by "qrand()" for QXmpp < 1.3.0 or QXmpp
 	// built with Qt < 5.10. Please do not use that deprecated method for Kaidan.
 	qsrand(time(nullptr));
-}
-
-VCardManager *ClientWorker::vCardManager() const
-{
-	return m_vCardManager;
-}
-
-ClientWorker::Caches *ClientWorker::caches() const
-{
-	return m_caches;
 }
 
 void ClientWorker::startTask(const std::function<void ()> task) {

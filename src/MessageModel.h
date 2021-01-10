@@ -83,6 +83,11 @@ public:
 	Q_INVOKABLE bool canCorrectMessage(int index) const;
 
 	/**
+	 * Correct the last message
+	 */
+	Q_INVOKABLE void correctMessage(const QString &msgId, const QString &message);
+
+	/**
 	 * Searches from the most recent to the oldest message to find a given substring (case insensitive).
 	 *
 	 * If no index is passed, the search begins from the most recent message.
@@ -131,7 +136,6 @@ private slots:
 	                   const std::function<void (Message &)> &updateMsg);
 
 	void setMessageDeliveryState(const QString &msgId, Enums::DeliveryState state, const QString &errText = QString());
-	void correctMessage(const QString &msgId, const QString &message);
 
 private:
 	void clearAll();

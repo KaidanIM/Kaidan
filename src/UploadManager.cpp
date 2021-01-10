@@ -50,7 +50,7 @@ UploadManager::UploadManager(QXmppClient *client, RosterManager* rosterManager,
 {
 	client->addExtension(&m_manager);
 
-	connect(Kaidan::instance(), &Kaidan::sendFile, this, &UploadManager::sendFile);
+	connect(this, &UploadManager::sendFileRequested, this, &UploadManager::sendFile);
 
 	connect(&m_manager, &QXmppUploadManager::serviceFoundChanged, this, [=]() {
 		Kaidan::instance()->serverFeaturesCache()->setHttpUploadSupported(m_manager.serviceFound());

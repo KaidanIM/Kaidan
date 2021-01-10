@@ -55,11 +55,16 @@ public:
 
 signals:
 	/**
-	 * Connect to it to be notified about progress on uploads
+	 * The upload progress of a file upload has changed
 	 */
-	void uploadProgressMade(QString msgId, unsigned long sent, unsigned long total);
+	void uploadProgressMade(const QString &msgId, quint64 sent, quint64 total);
 
-public slots:
+	/**
+	 * Upload and send file
+	 */
+	void sendFileRequested(const QString &jid, const QUrl &fileUrl, const QString &body);
+
+private slots:
 	/**
 	 * Starts uploading a file
 	 */

@@ -115,6 +115,16 @@ RegistrationPage {
 	Connections {
 		target: Kaidan
 
+		onConnectionErrorChanged: {
+			connectionErrorOccurred = true
+			jumpToPreviousView()
+			removeLoadingView()
+		}
+	}
+
+	Connections {
+		target: Kaidan
+
 		onRegistrationFormReceived: {
 			formModel = dataFormModel
 			formFilterModel.sourceModel = dataFormModel
@@ -163,12 +173,6 @@ RegistrationPage {
 
 			removeLoadingView()
 			focusFieldViews()
-		}
-
-		onConnectionErrorChanged: {
-			connectionErrorOccurred = true
-			jumpToPreviousView()
-			removeLoadingView()
 		}
 
 		// Depending on the error, the swipe view jumps to the view where the input should be corrected.
@@ -401,7 +405,7 @@ RegistrationPage {
 		addLoadingView(swipeView.currentIndex + 1)
 		jumpToNextView()
 
-		Kaidan.changeDisplayName(displayName)
+		Kaidan.client.vCardManager.changeDisplayNameRequested(displayName)
 		sendRegistrationForm()
 	}
 }

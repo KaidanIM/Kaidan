@@ -79,6 +79,11 @@ signals:
 	                         const std::function<void (RosterItem &)> &updateItem);
 	void replaceItemsRequested(const QHash<QString, RosterItem> &items);
 
+	/**
+	 * Emitted, whan a subscription request was received
+	 */
+	void subscriptionRequestReceived(const QString &from, const QString &msg);
+
 private slots:
 	void handleItemsFetched(const QVector<RosterItem> &items);
 

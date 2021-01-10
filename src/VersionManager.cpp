@@ -51,10 +51,8 @@ VersionManager::VersionManager(QXmppClient *client, QObject *parent)
 	m_manager->setClientVersion(VERSION_STRING);
 	m_manager->setClientOs(QSysInfo::prettyProductName());
 
-	connect(Kaidan::instance(), &Kaidan::requestClientVersions,
-	        this, &VersionManager::fetchVersions);
 	connect(m_manager, &QXmppVersionManager::versionReceived,
-	        Kaidan::instance(), &Kaidan::clientVersionReceived);
+		this, &VersionManager::clientVersionReceived);
 }
 
 void VersionManager::fetchVersions(const QString &bareJid, const QString &resource)

@@ -121,7 +121,7 @@ Kirigami.Page {
 						return
 					}
 
-					Kaidan.changePassword(password1.text)
+					Kaidan.client.registrationManager.changePasswordRequested(password1.text)
 					busyIndicator.visible = true
 				}
 			}
@@ -129,17 +129,13 @@ Kirigami.Page {
 	}
 
 	Connections {
-		target: AccountManager
+		target: Kaidan
 
-		function onPasswordChanged() {
+		function onPasswordChangeSucceeded() {
 			busyIndicator.visible = false
 			passiveNotification(qsTr("Password changed successfully"))
 			stack.pop()
 		}
-	}
-
-	Connections {
-		target: Kaidan
 
 		function onPasswordChangeFailed() {
 			busyIndicator.visible = false

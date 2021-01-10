@@ -64,6 +64,15 @@ class ClientWorker : public QObject
 {
 	Q_OBJECT
 
+	Q_PROPERTY(RegistrationManager* registrationManager READ registrationManager CONSTANT)
+	Q_PROPERTY(VCardManager* vCardManager READ vCardManager CONSTANT)
+	Q_PROPERTY(RosterManager* rosterManager READ rosterManager CONSTANT)
+	Q_PROPERTY(MessageHandler* messageHandler READ messageHandler CONSTANT)
+	Q_PROPERTY(DiscoveryManager* discoveryManager READ discoveryManager CONSTANT)
+	Q_PROPERTY(UploadManager* uploadManager READ uploadManager CONSTANT)
+	Q_PROPERTY(DownloadManager* downloadManager READ downloadManager CONSTANT)
+	Q_PROPERTY(VersionManager* versionManager READ versionManager CONSTANT)
+
 public:
 	/**
 	 * enumeration of possible connection errors
@@ -124,12 +133,50 @@ public:
 	 */
 	void initialize();
 
-	VCardManager *vCardManager() const;
+	RegistrationManager *registrationManager() const
+	{
+		return m_registrationManager;
+	}
 
-	/**
-	 * Returns all models and caches.
-	 */
-	Caches *caches() const;
+	VCardManager *vCardManager() const
+	{
+		return m_vCardManager;
+	}
+
+	RosterManager *rosterManager() const
+	{
+		return m_rosterManager;
+	}
+
+	MessageHandler *messageHandler() const
+	{
+		return m_messageHandler;
+	}
+
+	DiscoveryManager *discoveryManager() const
+	{
+		return m_discoveryManager;
+	}
+
+	UploadManager *uploadManager() const
+	{
+		return m_uploadManager;
+	}
+
+	DownloadManager *downloadManager() const
+	{
+		return m_downloadManager;
+	}
+
+	VersionManager *versionManager() const
+	{
+		return m_versionManager;
+	}
+
+	Caches *caches() const
+	{
+		return m_caches;
+	}
 
 	/**
 	 * Returns whether the application window is active.
@@ -302,14 +349,14 @@ private:
 	LogHandler *m_logger;
 	bool m_enableLogging;
 
-	RegistrationManager *m_registrationManager;
-	RosterManager *m_rosterManager;
-	MessageHandler *m_messageHandler;
-	DiscoveryManager *m_discoveryManager;
-	VCardManager *m_vCardManager;
-	UploadManager *m_uploadManager;
-	DownloadManager *m_downloadManager;
-	VersionManager *m_versionManager;
+	RegistrationManager *const m_registrationManager;
+	VCardManager *const m_vCardManager;
+	RosterManager *const m_rosterManager;
+	MessageHandler *const m_messageHandler;
+	DiscoveryManager *const m_discoveryManager;
+	UploadManager *const m_uploadManager;
+	DownloadManager *const m_downloadManager;
+	VersionManager *const m_versionManager;
 
 	QList<std::function<void ()>> m_pendingTasks;
 	uint m_activeTasks = 0;

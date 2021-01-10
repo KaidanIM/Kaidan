@@ -79,7 +79,13 @@ signals:
 	void startDownloadRequested(const QString &msgId, const QString &url);
 	void abortDownloadRequested(const QString &msgId);
 
-public slots:
+private slots:
+	/**
+	 * Downloads an attached media file of a message
+	 *
+	 * @param msgId The message
+	 * @param url the media url from the message
+	 */
 	void startDownload(const QString &msgId, const QString &url);
 	void abortDownload(const QString &msgId);
 

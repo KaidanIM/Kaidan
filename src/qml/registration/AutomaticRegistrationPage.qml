@@ -101,12 +101,6 @@ RegistrationPage {
 			else
 				removeLoadingView()
 		}
-
-		onConnectionErrorChanged: {
-			removeLoadingView()
-			pageStack.layers.pop()
-		}
-
 		onRegistrationFailed: {
 			switch (error) {
 			case RegistrationManager.InBandRegistrationNotSupported:
@@ -146,6 +140,11 @@ RegistrationPage {
 			default:
 				requestRegistrationFormFromAnotherServer(errorMessage)
 			}
+		}
+
+		onConnectionErrorChanged: {
+			removeLoadingView()
+			pageStack.layers.pop()
 		}
 	}
 

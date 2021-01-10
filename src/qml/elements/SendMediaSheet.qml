@@ -143,10 +143,10 @@ Kirigami.OverlaySheet {
 					case Enums.MessageType.MessageVideo:
 					case Enums.MessageType.MessageFile:
 					case Enums.MessageType.MessageDocument:
-						Kaidan.sendFile(root.targetJid, root.source, descField.text)
+						Kaidan.client.uploadManager.sendFileRequested(root.targetJid, root.source, descField.text)
 						break
 					case Enums.MessageType.MessageGeoLocation:
-						Kaidan.sendMessage(root.targetJid, root.source, false, '')
+						Kaidan.client.messageHandler.sendMessageRequested(root.targetJid, root.source, false, '')
 						break
 					}
 

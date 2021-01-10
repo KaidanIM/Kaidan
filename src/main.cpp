@@ -51,21 +51,27 @@
 #include "CredentialsGenerator.h"
 #include "CredentialsValidator.h"
 #include "DataFormModel.h"
+#include "DiscoveryManager.h"
 #include "EmojiModel.h"
 #include "Enums.h"
 #include "Kaidan.h"
 #include "Message.h"
 #include "MessageModel.h"
+#include "MessageHandler.h"
 #include "QmlUtils.h"
 #include "RegistrationDataFormFilterModel.h"
 #include "RegistrationManager.h"
+#include "RosterManager.h"
 #include "RosterModel.h"
 #include "RosterFilterProxyModel.h"
 #include "StatusBar.h"
 #include "ServerListModel.h"
 #include "QrCodeGenerator.h"
 #include "QrCodeScannerFilter.h"
+#include "UploadManager.h"
 #include "VCardModel.h"
+#include "VCardManager.h"
+#include "VersionManager.h"
 #include "UserDevicesModel.h"
 #include "CameraModel.h"
 #include "AudioDeviceModel.h"
@@ -209,9 +215,16 @@ Q_DECL_EXPORT int main(int argc, char *argv[])
 	// register qMetaTypes
 	qRegisterMetaType<RosterItem>("RosterItem");
 	qRegisterMetaType<RosterModel*>("RosterModel*");
+	qRegisterMetaType<RosterManager*>();
 	qRegisterMetaType<Message>("Message");
 	qRegisterMetaType<MessageModel*>("MessageModel*");
+	qRegisterMetaType<MessageHandler*>();
 	qRegisterMetaType<AvatarFileStorage*>("AvatarFileStorage*");
+	qRegisterMetaType<VCardManager*>();
+	qRegisterMetaType<DiscoveryManager*>();
+	qRegisterMetaType<UploadManager*>();
+	qRegisterMetaType<VersionManager*>();
+	qRegisterMetaType<RegistrationManager*>();
 	qRegisterMetaType<QXmppPresence>("QXmppPresence");
 	qRegisterMetaType<Qt::ApplicationState>("Qt::ApplicationState");
 	qRegisterMetaType<QXmppClient::State>("QXmppClient::State");

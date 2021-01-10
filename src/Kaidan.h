@@ -56,6 +56,7 @@ class Kaidan : public QObject
 {
 	Q_OBJECT
 
+	Q_PROPERTY(ClientWorker* client READ client CONSTANT)
 	Q_PROPERTY(RosterModel* rosterModel READ rosterModel CONSTANT)
 	Q_PROPERTY(MessageModel* messageModel READ messageModel CONSTANT)
 	Q_PROPERTY(AvatarFileStorage* avatarStorage READ avatarStorage NOTIFY avatarStorageChanged)
@@ -148,6 +149,11 @@ public:
 	 */
 	PasswordVisibility passwordVisibility() const;
 
+	ClientWorker *client() const
+	{
+		return m_client;
+	}
+
 	RosterModel* rosterModel() const
 	{
 		return m_caches->rosterModel;
@@ -182,8 +188,6 @@ public:
 	{
 		return m_caches->settings;
 	}
-
-	ClientWorker *client() const;
 
 	RosterDb *rosterDb() const;
 
@@ -229,12 +233,6 @@ signals:
 	void applicationWindowActiveChanged(bool active);
 
 	/**
-	 * Emitted to request a registration form from the server which is set as the
-	 * currently used JID.
-	 */
-	void registrationFormRequested();
-
-	/**
 	 * Emitted when a data form for registration is received from the server.
 	 *
 	 * @param dataFormModel received model for the registration data form
@@ -242,9 +240,10 @@ signals:
 	void registrationFormReceived(DataFormModel *dataFormModel);
 
 	/**
-	 * Emitted to send a completed data form for registration.
+	 * Emitted to request a registration form from the server which is set as the
+	 * currently used JID.
 	 */
-	void sendRegistrationForm();
+	void registrationFormRequested();
 
 	/**
 	 * Emitted when the account registration failed.
@@ -305,7 +304,7 @@ signals:
 	 *
 	 * @param chatJid JID of the chat for which the chat page is opened
 	 */
-	void openChatPageRequested(const QString chatJid);
+	void openChatPageRequested(const QString &chatJid);
 
 	/**
 	 * Emitted when the removal state of the password on the account transfer page changed.
@@ -318,24 +317,6 @@ signals:
 	void passiveNotificationRequested(QString text);
 
 	/**
-	 * Emitted, whan a subscription request was received
-	 */
-	void subscriptionRequestReceived(QString from, QString msg);
-
-	/**
-	 * Incoming subscription request was accepted or declined by the user
-	 */
-	void subscriptionRequestAnswered(QString jid, bool accepted);
-
-	/**
-	 * Request vCard of any JID
-	 *
-	 * Is required when the avatar (or other information) of a JID are
-	 * requested and the JID is not in the roster.
-	 */
-	void vCardRequested(const QString &jid);
-
-	/**
 	 * XMPP URI received
 	 *
 	 * Is called when Kaidan was used to open an XMPP URI (i.e. 'xmpp:kaidan@muc.kaidan.im?join')
@@ -343,72 +324,9 @@ signals:
 	void xmppUriReceived(QString uri);
 
 	/**
-	 * The upload progress of a file upload has changed
+	 * Emitted when changing of the user's password finished succfessully.
 	 */
-	void uploadProgressMade(QString msgId, quint64 sent, quint64 total);
-
-	/**
-	 * Send a text message to any JID
-	 *
-	 * Currently only contacts are displayed on the RosterPage (there is no
-	 * way to view a list of all chats -> for contacts and non-contacts), so
-	 * you should only send messages to JIDs from your roster, otherwise you
-	 * won't be able to see the message history.
-	 */
-	void sendMessage(QString jid, QString message, bool isSpoiler, QString spoilerHint);
-
-	/**
-	 * Correct the last message
-	 *
-	 */
-	void correctMessage(const QString &msgId, const QString &message);
-
-	/**
-	 * Upload and send file
-	 */
-	void sendFile(const QString &jid, const QUrl &fileUrl, const QString &body);
-
-	/**
-	 * Add a contact to your roster
-	 *
-	 * @param nick A simple nick name for the new contact, which should be
-	 *             used to display in the roster.
-	 */
-	void addContact(QString jid, QString nick, QString msg);
-
-	/**
-	 * Remove a contact from your roster
-	 *
-	 * Only the JID is needed.
-	 */
-	void removeContact(QString jid);
-
-	/**
-	 * Change a contact's name
-	 */
-	void renameContact(const QString &jid, const QString &newContactName);
-
-	/**
-	 * Downloads an attached media file of a message
-	 *
-	 * @param msgId The message
-	 * @param url the media url from the message
-	 */
-	void downloadMedia(QString msgId, QString url);
-
-	/**
-	 * Changes the user's display name.
-	 *
-	 * @param displayName new name that is shown to contacts
-	 */
-	void changeDisplayName(const QString &displayName);
-
-	/**
-	 * Changes the user's password on the server
-	 *
-	 * @param newPassword The new password
-	 */
-	void changePassword(const QString &newPassword);
+	void passwordChangeSucceeded();
 
 	/**
 	 * Emitted when changing the user's password failed.
@@ -431,17 +349,6 @@ signals:
 	 * Deletes the account data from the configuration file and database.
 	 */
 	void deleteAccountFromClient();
-
-	/**
-	  * Requests fetching the version information of all resources of the given
-	  * bare JID
-	  */
-	void requestClientVersions(const QString &bareJid, const QString &resource = {});
-
-	/**
-	  * Emitted when a client version information was received
-	  */
-	void clientVersionReceived(const QXmppVersionIq &versionIq);
 
 public slots:
 	/**

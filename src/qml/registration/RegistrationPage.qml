@@ -125,6 +125,6 @@ Kirigami.Page {
 		if (formModel.hasPasswordField())
 			formModel.setPassword(password)
 
-		Kaidan.sendRegistrationForm()
+		Kaidan.client.registrationManager.sendRegistrationFormRequested()
 	}
 }

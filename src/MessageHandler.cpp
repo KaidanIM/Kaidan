@@ -53,7 +53,7 @@ MessageHandler::MessageHandler(ClientWorker *clientWorker, QXmppClient *client, 
 	  m_model(model)
 {
 	connect(client, &QXmppClient::messageReceived, this, &MessageHandler::handleMessage);
-	connect(Kaidan::instance(), &Kaidan::sendMessage, this, &MessageHandler::sendMessage);
+	connect(this, &MessageHandler::sendMessageRequested, this, &MessageHandler::sendMessage);
 	connect(model, &MessageModel::sendCorrectedMessageRequested, this, &MessageHandler::sendCorrectedMessage);
 
 	client->addExtension(&m_receiptManager);

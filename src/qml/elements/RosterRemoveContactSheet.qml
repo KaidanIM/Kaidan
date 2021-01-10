@@ -72,7 +72,7 @@ Kirigami.OverlaySheet {
 			Button {
 				text: qsTr("Delete")
 				onClicked: {
-					Kaidan.removeContact(jid)
+					Kaidan.client.rosterManager.removeContactRequested(jid)
 					close()
 				}
 				Layout.fillWidth: true

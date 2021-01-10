@@ -43,7 +43,7 @@ public:
 	/**
 	 * Default constructor
 	 */
-	LogHandler(QXmppClient *client, QObject *parent = nullptr);
+	LogHandler(QXmppClient *client, bool enable, QObject *parent = nullptr);
 
 	/**
 	 * Enable/disable logging to stdout (default: disabled)

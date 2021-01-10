@@ -63,7 +63,7 @@ Kirigami.OverlaySheet {
 				Layout.fillWidth: true
 				text: qsTr("Decline")
 				onClicked: {
-					Kaidan.subscriptionRequestAnswered(from, false)
+					Kaidan.client.rosterManager.subscriptionRequestAnswered(from, false)
 					close()
 				}
 			}
@@ -72,7 +72,7 @@ Kirigami.OverlaySheet {
 				Layout.fillWidth: true
 				text: qsTr("Accept")
 				onClicked: {
-					Kaidan.subscriptionRequestAnswered(from, true)
+					Kaidan.client.rosterManager.subscriptionRequestAnswered(from, true)
 					close()
 				}
 			}

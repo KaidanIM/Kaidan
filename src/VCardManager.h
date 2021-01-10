@@ -86,14 +86,6 @@ public:
 	 */
 	bool executePendingNicknameChange();
 
-public slots:
-	/**
-	 * Changes the user's nickname.
-	 *
-	 * @param nickname name that is shown to contacts after the update
-	 */
-	void changeNickname(const QString &nickname);
-
 signals:
 	/**
 	 * Emitted when any vCard is received.
@@ -101,6 +93,17 @@ signals:
 	 * @param vCard received vCard
 	 */
 	void vCardReceived(const QXmppVCardIq &vCard);
+
+	void vCardRequested(const QString &jid);
+	void changeDisplayNameRequested(const QString &displayName);
+
+private slots:
+	/**
+	 * Changes the user's nickname.
+	 *
+	 * @param nickname name that is shown to contacts after the update
+	 */
+	void changeNickname(const QString &nickname);
 
 private:
 	/**

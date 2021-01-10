@@ -43,8 +43,17 @@ class VersionManager : public QObject
 public:
 	explicit VersionManager(QXmppClient *client, QObject *parent = nullptr);
 
-private slots:
+public slots:
+	/**
+	 * Fetches the version information of all resources of the given  bare JID
+	 */
 	void fetchVersions(const QString &bareJid, const QString &resource);
+
+signals:
+	/**
+	 * Emitted when a client version information was received
+	 */
+	void clientVersionReceived(const QXmppVersionIq &versionIq);
 
 private:
 	QXmppVersionManager *m_manager;

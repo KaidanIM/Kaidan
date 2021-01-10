@@ -43,8 +43,8 @@ VCardManager::VCardManager(ClientWorker *clientWorker, QXmppClient *client, Avat
 	connect(m_manager, &QXmppVCardManager::vCardReceived, this, &VCardManager::handleVCardReceived);
 	connect(m_client, &QXmppClient::presenceReceived, this, &VCardManager::handlePresenceReceived);
 	connect(m_manager, &QXmppVCardManager::clientVCardReceived, this, &VCardManager::handleClientVCardReceived);
-	connect(Kaidan::instance(), &Kaidan::vCardRequested, this, &VCardManager::requestVCard);
-	connect(Kaidan::instance(), &Kaidan::changeDisplayName, this, &VCardManager::changeNickname);
+	connect(this, &VCardManager::vCardRequested, this, &VCardManager::requestVCard);
+	connect(this, &VCardManager::changeDisplayNameRequested, this, &VCardManager::changeNickname);
 
 	// Currently we're not requesting the own VCard on every connection because it is probably
 	// way too resource intensive on mobile connections with many reconnects.

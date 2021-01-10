@@ -49,6 +49,33 @@ public:
 				  AvatarFileStorage *avatarStorage, VCardManager *vCardManager,
 	              QObject *parent = nullptr);
 
+signals:
+	/**
+	 * Requests to send subscription request answer (whether it was accepted
+	 * or declined by the user)
+	 */
+	void answerSubscriptionRequestRequested(const QString &jid, bool accepted);
+
+	/**
+	 * Add a contact to your roster
+	 *
+	 * @param nick A simple nick name for the new contact, which should be
+	 *             used to display in the roster.
+	 */
+	void addContactRequested(const QString &jid, const QString &nick, const QString &msg);
+
+	/**
+	 * Remove a contact from your roster
+	 *
+	 * Only the JID is needed.
+	 */
+	void removeContactRequested(const QString &jid);
+
+	/**
+	 * Change a contact's name
+	 */
+	void renameContactRequested(const QString &jid, const QString &newContactName);
+
 public slots:
 	void addContact(const QString &jid, const QString &name, const QString &msg);
 	void removeContact(const QString &jid);

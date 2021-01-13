@@ -12,6 +12,10 @@
 
 ![Kaidan screenshot](https://www.kaidan.im/images/screenshot.png)
 
+<a href="https://repology.org/project/kaidan/versions">
+    <img src="https://repology.org/badge/vertical-allrepos/kaidan.svg" alt="Packaging status" align="right">
+</a>
+
 ## About
 
 [Kaidan][kaidan-website] is a simple, user-friendly and modern chat client. It

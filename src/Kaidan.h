@@ -485,11 +485,6 @@ private:
 	 */
 	void initializeClientWorker(bool enableLogging = true);
 
-	/**
-	 * Notifies if no valid login URI was found.
-	 */
-	void notifyForInvalidLoginUri();
-
 	Database *m_database;
 	QThread *m_dbThrd;
 	MessageDb *m_msgDb;

@@ -84,7 +84,6 @@ Kirigami.GlobalDrawer {
 			id: errorMessage
 			visible: Kaidan.connectionError
 			text: Kaidan.connectionError ? Utils.connectionErrorMessage(Kaidan.connectionError) : ""
-			color: Kirigami.Theme.negativeTextColor
 			font.bold: true
 			wrapMode: Text.WordWrap
 			padding: 10

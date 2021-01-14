@@ -54,12 +54,6 @@ Kirigami.Page {
 		anchors.fill: parent
 		spacing: 0
 
-		Kirigami.Heading {
-			Layout.alignment: Qt.Top
-			level: 2
-			text: qsTr("Change password")
-		}
-
 		Kirigami.FormLayout {
 			Layout.fillWidth: true
 			Controls.TextField {
@@ -86,9 +80,8 @@ Kirigami.Page {
 			type: Kirigami.MessageType.Warning
 			visible: password1.text !== password2.text
 			text: qsTr("New passwords do not match.")
-			anchors.left: parent.left
-			anchors.right: parent.right
 			showCloseButton: true
+			Layout.fillWidth: true
 		}
 
 		Kirigami.InlineMessage {
@@ -96,9 +89,8 @@ Kirigami.Page {
 			visible: false
 			type: Kirigami.MessageType.Warning
 			text: qsTr("Current password is invalid.")
-			anchors.left: parent.left
-			anchors.right: parent.right
 			showCloseButton: true
+			Layout.fillWidth: true
 		}
 
 		Controls.Label {
@@ -137,15 +129,19 @@ Kirigami.Page {
 	}
 
 	Connections {
-		target: Kaidan
+		target: AccountManager
 
-		onPasswordChanged: {
+		function onPasswordChanged() {
 			busyIndicator.visible = false
 			passiveNotification(qsTr("Password changed successfully"))
 			stack.pop()
 		}
+	}
 
-		onPasswordChangeFailed: {
+	Connections {
+		target: Kaidan
+
+		function onPasswordChangeFailed() {
 			busyIndicator.visible = false
 			passiveNotification(qsTr("Failed to change password: %1").arg(errorMessage))
 		}

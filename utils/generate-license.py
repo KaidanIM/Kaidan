@@ -53,7 +53,8 @@ REPLACE_USER_IDS = [
 	("X oiseauroch <tobias.ollive@mailoo.org>", "oiseauroch <tobias.ollive@mailoo.org>"),
 	("X ssantos <ssantos@web.de>", "ssantos <ssantos@web.de>"),
 	("X Txaume <txaumevw@gmail.com>", "Txaume <txaumevw@gmail.com>"),
-	("X mondstern <hello@mondstern.tk>", "mondstern <hello@mondstern.tk>"),
+	("X mondstern <hello@mondstern.tk>", "mondstern <mondstern@snopyta.org>"),
+	("X mondstern <mondstern@snopyta.org>", "mondstern <mondstern@snopyta.org>"),
 	("Jeannette L <j.lavoie@net-c.ca>", "Jeannette Lavoie <j.lavoie@net-c.ca>"),
 	("aevw _ <arcanevw@tuta.io>", "aevw <arcanevw@tuta.io>"),
 ]

@@ -241,7 +241,7 @@ void Kaidan::initializeClientWorker(bool enableLogging)
 void Kaidan::notifyForInvalidLoginUri()
 {
 	qWarning() << "[main]" << "No valid login URI found.";
-	emit passiveNotificationRequested(tr("No valid login QR code found."));
+	emit passiveNotificationRequested(tr("This QR code is not a valid login QR code."));
 }
 
 ClientWorker *Kaidan::client() const

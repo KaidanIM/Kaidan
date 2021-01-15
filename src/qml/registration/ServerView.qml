@@ -91,6 +91,7 @@ FieldView {
 			id: field
 			visible: customServerSelected
 			placeholderText: "example.org"
+			inputMethodHints: Qt.ImhUrlCharactersOnly
 
 			inputField.rightActions: [
 				Kirigami.Action {

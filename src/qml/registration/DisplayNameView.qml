@@ -45,5 +45,6 @@ FieldView {
 		id: field
 		parent: contentArea
 		labelText: qsTr("Display Name")
+		inputMethodHints: Qt.ImhPreferUppercase
 	}
 }

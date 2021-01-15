@@ -51,6 +51,7 @@ Kirigami.OverlaySheet {
 			id: nameField
 			selectByMouse: true
 			Layout.fillWidth: true
+			inputMethodHints: Qt.ImhPreferUppercase
 			onAccepted: renameButton.clicked()
 		}
 

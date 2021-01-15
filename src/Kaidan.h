@@ -38,6 +38,7 @@
 #include "RegistrationDataFormModel.h"
 
 class QGuiApplication;
+class QSize;
 class Database;
 class QXmppClient;
 class QXmppVersionIq;
@@ -88,6 +89,21 @@ public:
 	Kaidan(QGuiApplication *app, bool enableLogging = true, QObject *parent = nullptr);
 
 	~Kaidan();
+
+	/**
+	 * Returns the application window size stored in the settings file.
+	 *
+	 * @return the application window size
+	 */
+	Q_INVOKABLE QSize applicationWindowSize() const;
+
+	/**
+	 * Stores the application window size in the settings file to be restored
+	 * on the next application start.
+	 *
+	 * @param size size of the application window
+	 */
+	Q_INVOKABLE void storeApplicationWindowSize(const QSize &size) const;
 
 	/**
 	 * Connects to the XMPP server and logs in to it.

@@ -177,9 +177,25 @@ Kirigami.ApplicationWindow {
 	}
 
 	Component.onCompleted: {
+		// Restore the latest application window size if they are stored.
+		if (!Kirigami.Settings.isMobile) {
+			var latestSize = Kaidan.applicationWindowSize()
+			if (latestSize.width > 0) {
+				width = latestSize.width
+				height = latestSize.height
+			}
+		}
+
 		openChatView()
 
 		// Announce that the user interface is ready and the application can start connecting.
 		Kaidan.logIn()
+	}
+
+	Component.onDestruction: {
+		// Store the application window size for restoring the latest size
+		// on the next start.
+		if (!Kirigami.Settings.isMobile)
+			Kaidan.storeApplicationWindowSize(Qt.size(width, height))
 	}
 }

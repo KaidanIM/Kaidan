@@ -32,6 +32,7 @@
 
 // Qt
 #include <QGuiApplication>
+#include <QSize>
 #include <QThread>
 #include <QTimer>
 // QXmpp
@@ -70,6 +71,16 @@ Kaidan::~Kaidan()
 	delete m_caches;
 	delete m_database;
 	s_instance = nullptr;
+}
+
+QSize Kaidan::applicationWindowSize() const
+{
+	return m_caches->settings->value(KAIDAN_SETTINGS_WINDOW_SIZE).toSize();
+}
+
+void Kaidan::storeApplicationWindowSize(const QSize &size) const
+{
+	m_caches->settings->setValue(KAIDAN_SETTINGS_WINDOW_SIZE, size);
 }
 
 void Kaidan::logIn()

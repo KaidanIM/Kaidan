@@ -156,25 +156,5 @@
 		"httpUploadSize": 100,
 		"messageStorageDuration": 31,
 		"lastCheck": "2021-01-15"
-	},
-	{
-		"jid": "yochat.eu",
-		"supportsInBandRegistration": false,
-		"registrationWebPage": "https://yochat.eu/#converse/register",
-		"hosting": "private",
-		"passwordReset": false,
-		"mucSupport": false,
-		"ratingCompliance": 100,
-		"ratingObservatory": "A",
-		"commercial": false,
-		"language": "de",
-		"languageEnglish": false,
-		"country": "de",
-		"website": "https://yochat.eu",
-		"imprint": false,
-		"onlineSince": 2019,
-		"httpUploadSize": 0,
-		"messageStorageDuration": 0,
-		"lastCheck": "2021-01-15"
 	}
 ]

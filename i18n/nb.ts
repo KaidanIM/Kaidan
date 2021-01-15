@@ -109,6 +109,14 @@ Aldri vis denne QR-koden til noen andre. Den gir ubegrenset tilganger til kontoe
         <source>Show as text</source>
         <translation>Vis som tekst</translation>
     </message>
+    <message>
+        <source>Copy JID</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Copy password</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>BackButton</name>
@@ -145,7 +153,7 @@ Aldri vis denne QR-koden til noen andre. Den gir ubegrenset tilganger til kontoe
     </message>
     <message>
         <source>You need to be connected to change your password.</source>
-        <translation>Du må være tilkoblet for å endre passordet ditt.</translation>
+        <translation type="vanished">Du må være tilkoblet for å endre passordet ditt.</translation>
     </message>
     <message>
         <source>After changing your password, you will need to reenter it on all your other devices.</source>
@@ -158,6 +166,14 @@ Aldri vis denne QR-koden til noen andre. Den gir ubegrenset tilganger til kontoe
     <message>
         <source>Change</source>
         <translation>Endre</translation>
+    </message>
+    <message>
+        <source>Password changed successfully</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Failed to change password: %1</source>
+        <translation type="unfinished">Klarte ikke å endre passord: %1</translation>
     </message>
 </context>
 <context>
@@ -206,7 +222,7 @@ Aldri vis denne QR-koden til noen andre. Den gir ubegrenset tilganger til kontoe
     <name>ChatPage</name>
     <message>
         <source>Compose message</source>
-        <translation>Forfatt melding</translation>
+        <translation type="vanished">Forfatt melding</translation>
     </message>
     <message>
         <source>Send</source>
@@ -242,7 +258,7 @@ Aldri vis denne QR-koden til noen andre. Den gir ubegrenset tilganger til kontoe
     </message>
     <message>
         <source>Spoiler hint</source>
-        <translation>Avsløringshint</translation>
+        <translation type="vanished">Avsløringshint</translation>
     </message>
     <message>
         <source>Unmute notifications</source>
@@ -262,7 +278,7 @@ Aldri vis denne QR-koden til noen andre. Den gir ubegrenset tilganger til kontoe
     </message>
     <message>
         <source>Close</source>
-        <translation type="unfinished">Lukk</translation>
+        <translation type="obsolete">Lukk</translation>
     </message>
     <message>
         <source>Search up</source>
@@ -274,7 +290,26 @@ Aldri vis denne QR-koden til noen andre. Den gir ubegrenset tilganger til kontoe
     </message>
     <message>
         <source>All files</source>
-        <translation>Alle filer</translation>
+        <translation type="vanished">Alle filer</translation>
+    </message>
+    <message>
+        <source>Close message search bar</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>ChatPageSendingPane</name>
+    <message>
+        <source>Spoiler hint</source>
+        <translation type="unfinished">Avsløringshint</translation>
+    </message>
+    <message>
+        <source>Close spoiler hint field</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Compose message</source>
+        <translation type="unfinished">Forfatt melding</translation>
     </message>
 </context>
 <context>
@@ -331,10 +366,48 @@ Aldri vis denne QR-koden til noen andre. Den gir ubegrenset tilganger til kontoe
     </message>
 </context>
 <context>
+    <name>ConnectionSettings</name>
+    <message>
+        <source>Connection settings</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Change</source>
+        <translation type="unfinished">Endre</translation>
+    </message>
+    <message>
+        <source>Cancel</source>
+        <translation type="unfinished">Avbryt</translation>
+    </message>
+    <message>
+        <source>Connection settings could not be changed</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Connection settings changed</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>ContextDrawer</name>
     <message>
         <source>Actions</source>
         <translation type="vanished">Handling</translation>
+    </message>
+</context>
+<context>
+    <name>CustomConnectionSettings</name>
+    <message>
+        <source>Hostname:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The hostname must not contain blank spaces</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Port:</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -390,47 +463,47 @@ Forsikre deg om at du har sikkerhetskopiert passordet hvis du ønsker å bruke d
     <name>EmojiPicker</name>
     <message>
         <source>Favorites</source>
-        <translation>Favoritter</translation>
+        <translation type="vanished">Favoritter</translation>
     </message>
     <message>
         <source>People</source>
-        <translation>Folk</translation>
+        <translation type="vanished">Folk</translation>
     </message>
     <message>
         <source>Nature</source>
-        <translation>Natur</translation>
+        <translation type="vanished">Natur</translation>
     </message>
     <message>
         <source>Food</source>
-        <translation>Mat</translation>
+        <translation type="vanished">Mat</translation>
     </message>
     <message>
         <source>Activity</source>
-        <translation>Aktivitet</translation>
+        <translation type="vanished">Aktivitet</translation>
     </message>
     <message>
         <source>Travel</source>
-        <translation>Reise</translation>
+        <translation type="vanished">Reise</translation>
     </message>
     <message>
         <source>Objects</source>
-        <translation>Objekter</translation>
+        <translation type="vanished">Objekter</translation>
     </message>
     <message>
         <source>Symbols</source>
-        <translation>Symboler</translation>
+        <translation type="vanished">Symboler</translation>
     </message>
     <message>
         <source>Flags</source>
-        <translation>Flagg</translation>
+        <translation type="vanished">Flagg</translation>
     </message>
     <message>
         <source>Search</source>
-        <translation>Søk</translation>
+        <translation type="vanished">Søk</translation>
     </message>
     <message>
         <source>Search emoji</source>
-        <translation>Søk etter emoji</translation>
+        <translation type="vanished">Søk etter emoji</translation>
     </message>
 </context>
 <context>
@@ -593,7 +666,7 @@ Passordet ditt vil bli slettet, forsikre deg om at det er lagret i en passordsh�
     </message>
     <message>
         <source>Connect</source>
-        <translation>Koble til</translation>
+        <translation type="vanished">Koble til</translation>
     </message>
     <message>
         <source>Connecting…</source>
@@ -630,6 +703,41 @@ Passordet ditt vil bli slettet, forsikre deg om at det er lagret i en passordsh�
     <message>
         <source>An unknown error occured; see log for details.</source>
         <translation type="vanished">En ukjent feil inntraff; sjekk loggen for detaljer.</translation>
+    </message>
+    <message>
+        <source>Connection settings</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>LoginSettingsPage</name>
+    <message>
+        <source>Connection settings</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The connection settings will be saved permanently after the first successful login. If they don&apos;t work, you&apos;ll get back to the login page.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Enable custom connection settings</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Port:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Hostname:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Reset</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Apply</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -700,6 +808,37 @@ Passordet ditt vil bli slettet, forsikre deg om at det er lagret i en passordsh�
     <message>
         <source>%1 (%2)</source>
         <translation>%1 (%2)</translation>
+    </message>
+    <message>
+        <source>Audio</source>
+        <translation type="unfinished">Lyd</translation>
+    </message>
+    <message>
+        <source>Document</source>
+        <translation type="unfinished">Dokument</translation>
+    </message>
+    <message>
+        <source>Location</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Image</source>
+        <translation type="unfinished">Bilde</translation>
+    </message>
+    <message>
+        <source>Video</source>
+        <translation type="unfinished">Video</translation>
+    </message>
+    <message>
+        <source>File</source>
+        <translation type="unfinished">Fil</translation>
+    </message>
+</context>
+<context>
+    <name>Message</name>
+    <message>
+        <source>Spoiler</source>
+        <translation type="unfinished">Avsløring</translation>
     </message>
 </context>
 <context>
@@ -850,7 +989,7 @@ Passordet ditt vil bli slettet, forsikre deg om at det er lagret i en passordsh�
     <name>NewMedia</name>
     <message>
         <source>Ready</source>
-        <translation>Klar</translation>
+        <translation type="vanished">Klar</translation>
     </message>
     <message>
         <source>Initializing…</source>
@@ -894,9 +1033,6 @@ Passordet ditt vil bli slettet, forsikre deg om at det er lagret i en passordsh�
         <source>Mark as read</source>
         <translation>Marker som lest</translation>
     </message>
-</context>
-<context>
-    <name>QmlUtils</name>
     <message>
         <source>Available</source>
         <translation type="unfinished">Tilgjengelig</translation>
@@ -921,9 +1057,36 @@ Passordet ditt vil bli slettet, forsikre deg om at det er lagret i en passordsh�
         <source>Offline</source>
         <translation type="unfinished">Frakoblet</translation>
     </message>
+</context>
+<context>
+    <name>QmlUtils</name>
+    <message>
+        <source>Available</source>
+        <translation type="obsolete">Tilgjengelig</translation>
+    </message>
+    <message>
+        <source>Free for chat</source>
+        <translation type="obsolete">Ledig for sludring</translation>
+    </message>
+    <message>
+        <source>Away</source>
+        <translation type="obsolete">Borte</translation>
+    </message>
+    <message>
+        <source>Do not disturb</source>
+        <translation type="obsolete">Ikke forstyrr</translation>
+    </message>
+    <message>
+        <source>Away for longer</source>
+        <translation type="obsolete">Lengre tids fravær</translation>
+    </message>
+    <message>
+        <source>Offline</source>
+        <translation type="obsolete">Frakoblet</translation>
+    </message>
     <message>
         <source>Error</source>
-        <translation type="unfinished">Feil</translation>
+        <translation type="obsolete">Feil</translation>
     </message>
     <message>
         <source>Invalid username or password.</source>
@@ -943,7 +1106,7 @@ Passordet ditt vil bli slettet, forsikre deg om at det er lagret i en passordsh�
     </message>
     <message>
         <source>Could not resolve the server&apos;s address. Please check your server name.</source>
-        <translation>Kunne ikke fortolke tjenerens adresse. Sjekk ditt tjenernavn.</translation>
+        <translation type="vanished">Kunne ikke fortolke tjenerens adresse. Sjekk ditt tjenernavn.</translation>
     </message>
     <message>
         <source>Could not connect to the server.</source>
@@ -969,6 +1132,10 @@ Passordet ditt vil bli slettet, forsikre deg om at det er lagret i en passordsh�
         <source>The internet access is not permitted. Please check your system&apos;s internet access configuration.</source>
         <translation type="unfinished">Innvilg internettilgang i systemets tilgangsoppsett.</translation>
     </message>
+    <message>
+        <source>Could not connect to the server. Please check your internet connection or your server name.</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>QrCodeGenerator</name>
@@ -978,44 +1145,84 @@ Passordet ditt vil bli slettet, forsikre deg om at det er lagret i en passordsh�
     </message>
 </context>
 <context>
-    <name>QrCodeScannerPage</name>
+    <name>QrCodeOnboardingPage</name>
     <message>
         <source>Scan QR code</source>
-        <translation>Skann QR-kode</translation>
-    </message>
-    <message>
-        <source>There is no camera available.</source>
-        <translation>Kamera ikke tilgjengelig.</translation>
-    </message>
-    <message>
-        <source>Your camera is busy.
-Try to close other applications using the camera.</source>
-        <translation>Kamera ditt er opptatt.
-Prøv å lukke andre programmer ved bruk av kameraet.</translation>
-    </message>
-    <message>
-        <source>The camera format &apos;%1&apos; is not supported.</source>
-        <translation>Kameraformatet &quot;%1&quot; støttes ikke.</translation>
-    </message>
-    <message>
-        <source>Scan the QR code from your existing device to transfer your account.</source>
-        <translation>Skann QR-koden fra din eksisterende enhet for å overføre kontoen din.</translation>
+        <translation type="unfinished">Skann QR-kode</translation>
     </message>
     <message>
         <source>Show explanation</source>
-        <translation>Vis forklaring</translation>
-    </message>
-    <message>
-        <source>Scan</source>
-        <translation>Skann</translation>
+        <translation type="unfinished">Vis forklaring</translation>
     </message>
     <message>
         <source>Continue without QR code</source>
-        <translation>Fortsett uten QR-kode</translation>
+        <translation type="unfinished">Fortsett uten QR-kode</translation>
+    </message>
+    <message>
+        <source>Scan the QR code from your existing device to transfer your account.</source>
+        <translation type="unfinished">Skann QR-koden fra din eksisterende enhet for å overføre kontoen din.</translation>
     </message>
     <message>
         <source>Connecting…</source>
         <translation type="unfinished">Kobler til…</translation>
+    </message>
+</context>
+<context>
+    <name>QrCodeScanner</name>
+    <message>
+        <source>The camera format &apos;%1&apos; is not supported.</source>
+        <translation type="unfinished">Kameraformatet &quot;%1&quot; støttes ikke.</translation>
+    </message>
+    <message>
+        <source>There is no camera available.</source>
+        <translation type="unfinished">Kamera ikke tilgjengelig.</translation>
+    </message>
+    <message>
+        <source>Your camera is busy.
+Try to close other applications using the camera.</source>
+        <translation type="unfinished">Kamera ditt er opptatt.
+Prøv å lukke andre programmer ved bruk av kameraet.</translation>
+    </message>
+</context>
+<context>
+    <name>QrCodeScannerPage</name>
+    <message>
+        <source>Scan QR code</source>
+        <translation type="vanished">Skann QR-kode</translation>
+    </message>
+    <message>
+        <source>There is no camera available.</source>
+        <translation type="vanished">Kamera ikke tilgjengelig.</translation>
+    </message>
+    <message>
+        <source>Your camera is busy.
+Try to close other applications using the camera.</source>
+        <translation type="vanished">Kamera ditt er opptatt.
+Prøv å lukke andre programmer ved bruk av kameraet.</translation>
+    </message>
+    <message>
+        <source>The camera format &apos;%1&apos; is not supported.</source>
+        <translation type="vanished">Kameraformatet &quot;%1&quot; støttes ikke.</translation>
+    </message>
+    <message>
+        <source>Scan the QR code from your existing device to transfer your account.</source>
+        <translation type="vanished">Skann QR-koden fra din eksisterende enhet for å overføre kontoen din.</translation>
+    </message>
+    <message>
+        <source>Show explanation</source>
+        <translation type="vanished">Vis forklaring</translation>
+    </message>
+    <message>
+        <source>Scan</source>
+        <translation type="vanished">Skann</translation>
+    </message>
+    <message>
+        <source>Continue without QR code</source>
+        <translation type="vanished">Fortsett uten QR-kode</translation>
+    </message>
+    <message>
+        <source>Connecting…</source>
+        <translation type="obsolete">Kobler til…</translation>
     </message>
 </context>
 <context>
@@ -1037,11 +1244,11 @@ Prøv å lukke andre programmer ved bruk av kameraet.</translation>
     <name>RegistrationManager</name>
     <message>
         <source>Password changed successfully.</source>
-        <translation>Passord endret</translation>
+        <translation type="vanished">Passord endret</translation>
     </message>
     <message>
         <source>Failed to change password: %1</source>
-        <translation>Klarte ikke å endre passord: %1</translation>
+        <translation type="vanished">Klarte ikke å endre passord: %1</translation>
     </message>
 </context>
 <context>
@@ -1104,7 +1311,7 @@ Du vil ikke kunne bruke kontoen igjen.</translation>
     <name>RosterListItem</name>
     <message>
         <source>Error: Please check the JID.</source>
-        <translation>Feil: Sjekk JID-en.</translation>
+        <translation type="vanished">Feil: Sjekk JID-en.</translation>
     </message>
     <message>
         <source>Available</source>
@@ -1151,7 +1358,7 @@ Du vil ikke kunne bruke kontoen igjen.</translation>
     </message>
     <message>
         <source>Spoiler</source>
-        <translation>Avsløring</translation>
+        <translation type="vanished">Avsløring</translation>
     </message>
     <message>
         <source>Could not rename contact, as a result of not being connected.</source>
@@ -1205,7 +1412,11 @@ Du vil ikke kunne bruke kontoen igjen.</translation>
     </message>
     <message>
         <source>Do you really want to delete the contact &lt;b&gt;%1&lt;/b&gt; from your roster?</source>
-        <translation>Ønsker du virkelig å slette kontakten &lt;b&gt;%1&lt;/b&gt; from din kontaktliste?</translation>
+        <translation type="vanished">Ønsker du virkelig å slette kontakten &lt;b&gt;%1&lt;/b&gt; from din kontaktliste?</translation>
+    </message>
+    <message>
+        <source>Do you really want to delete the contact &lt;b&gt;%1&lt;/b&gt; from your contact list?</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -1284,7 +1495,7 @@ Deletion of message history saved on server</extracomment>
     </message>
     <message>
         <source>configure whether this device can be used to log in on a new device</source>
-        <translation>Sett opp hvorvidt denne enheten kan brukes for å logge inn på en annen</translation>
+        <translation type="vanished">Sett opp hvorvidt denne enheten kan brukes for å logge inn på en annen</translation>
     </message>
     <message>
         <source>Remove account from Kaidan</source>
@@ -1301,6 +1512,18 @@ Deletion of message history saved on server</extracomment>
     <message>
         <source>Delete account from the server</source>
         <translation>Slett konto fra tjeneren</translation>
+    </message>
+    <message>
+        <source>Connection Settings</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Configure the hostname and port to connect to</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Configure whether this device can be used to log in on a new device</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -1377,7 +1600,7 @@ Deletion of message history saved on server</extracomment>
     </message>
     <message>
         <source>File</source>
-        <translation>Fil</translation>
+        <translation type="vanished">Fil</translation>
     </message>
     <message>
         <source>Message could not be sent.</source>
@@ -1389,6 +1612,22 @@ Deletion of message history saved on server</extracomment>
     <message>
         <source>Profile</source>
         <translation>Profil</translation>
+    </message>
+    <message>
+        <source>Rename contact</source>
+        <translation type="unfinished">Gi kontakten nytt navn</translation>
+    </message>
+    <message>
+        <source>Show QR code</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Remove contact</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Online devices</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

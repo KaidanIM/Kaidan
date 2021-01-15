@@ -87,6 +87,14 @@ Never show this QR code to anyone else. It would allow unlimited access to your 
         <source>Show as text</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Copy JID</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Copy password</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>ChangePassword</name>
@@ -116,7 +124,7 @@ Never show this QR code to anyone else. It would allow unlimited access to your 
     </message>
     <message>
         <source>You need to be connected to change your password.</source>
-        <translation>Pro změnu hesla je nutné být připojen.</translation>
+        <translation type="vanished">Pro změnu hesla je nutné být připojen.</translation>
     </message>
     <message>
         <source>After changing your password, you will need to reenter it on all your other devices.</source>
@@ -129,6 +137,14 @@ Never show this QR code to anyone else. It would allow unlimited access to your 
     <message>
         <source>Change</source>
         <translation>Změnit</translation>
+    </message>
+    <message>
+        <source>Password changed successfully</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Failed to change password: %1</source>
+        <translation type="unfinished">Změna hesla se nezdařila: %1</translation>
     </message>
 </context>
 <context>
@@ -177,7 +193,7 @@ Never show this QR code to anyone else. It would allow unlimited access to your 
     <name>ChatPage</name>
     <message>
         <source>Compose message</source>
-        <translation>Vytvořit zprávu</translation>
+        <translation type="vanished">Vytvořit zprávu</translation>
     </message>
     <message>
         <source>Image</source>
@@ -209,7 +225,7 @@ Never show this QR code to anyone else. It would allow unlimited access to your 
     </message>
     <message>
         <source>Spoiler hint</source>
-        <translation>«Spoiler» tip</translation>
+        <translation type="vanished">«Spoiler» tip</translation>
     </message>
     <message>
         <source>Unmute notifications</source>
@@ -233,7 +249,7 @@ Never show this QR code to anyone else. It would allow unlimited access to your 
     </message>
     <message>
         <source>Close</source>
-        <translation>Zavřít</translation>
+        <translation type="vanished">Zavřít</translation>
     </message>
     <message>
         <source>Search up</source>
@@ -245,11 +261,30 @@ Never show this QR code to anyone else. It would allow unlimited access to your 
     </message>
     <message>
         <source>All files</source>
-        <translation>Všechny soubory</translation>
+        <translation type="vanished">Všechny soubory</translation>
     </message>
     <message>
         <source>Copy download URL</source>
         <translation type="obsolete">Kopírovat stažitelnou URL</translation>
+    </message>
+    <message>
+        <source>Close message search bar</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>ChatPageSendingPane</name>
+    <message>
+        <source>Spoiler hint</source>
+        <translation type="unfinished">«Spoiler» tip</translation>
+    </message>
+    <message>
+        <source>Close spoiler hint field</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Compose message</source>
+        <translation type="unfinished">Vytvořit zprávu</translation>
     </message>
 </context>
 <context>
@@ -306,6 +341,44 @@ Never show this QR code to anyone else. It would allow unlimited access to your 
     </message>
 </context>
 <context>
+    <name>ConnectionSettings</name>
+    <message>
+        <source>Connection settings</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Change</source>
+        <translation type="unfinished">Změnit</translation>
+    </message>
+    <message>
+        <source>Cancel</source>
+        <translation type="unfinished">Zrušit</translation>
+    </message>
+    <message>
+        <source>Connection settings could not be changed</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Connection settings changed</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>CustomConnectionSettings</name>
+    <message>
+        <source>Hostname:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The hostname must not contain blank spaces</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Port:</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>DisablePasswordDisplay</name>
     <message>
         <source>Remove password completely</source>
@@ -358,47 +431,47 @@ Make sure that you backed it up if you want to use your account later.</source>
     <name>EmojiPicker</name>
     <message>
         <source>Favorites</source>
-        <translation>Oblíbené</translation>
+        <translation type="vanished">Oblíbené</translation>
     </message>
     <message>
         <source>People</source>
-        <translation>Lidé</translation>
+        <translation type="vanished">Lidé</translation>
     </message>
     <message>
         <source>Nature</source>
-        <translation>Příroda</translation>
+        <translation type="vanished">Příroda</translation>
     </message>
     <message>
         <source>Food</source>
-        <translation>Jídlo</translation>
+        <translation type="vanished">Jídlo</translation>
     </message>
     <message>
         <source>Activity</source>
-        <translation>Činnosti</translation>
+        <translation type="vanished">Činnosti</translation>
     </message>
     <message>
         <source>Travel</source>
-        <translation>Cestování</translation>
+        <translation type="vanished">Cestování</translation>
     </message>
     <message>
         <source>Objects</source>
-        <translation>Předměty</translation>
+        <translation type="vanished">Předměty</translation>
     </message>
     <message>
         <source>Symbols</source>
-        <translation>Symboly</translation>
+        <translation type="vanished">Symboly</translation>
     </message>
     <message>
         <source>Flags</source>
-        <translation>Vlajky</translation>
+        <translation type="vanished">Vlajky</translation>
     </message>
     <message>
         <source>Search</source>
-        <translation>Hledat</translation>
+        <translation type="vanished">Hledat</translation>
     </message>
     <message>
         <source>Search emoji</source>
-        <translation>Hledat emoji</translation>
+        <translation type="vanished">Hledat emoji</translation>
     </message>
 </context>
 <context>
@@ -533,7 +606,7 @@ Your password will be deleted, make sure it is stored in a password manager or y
     </message>
     <message>
         <source>Connect</source>
-        <translation>Připojit</translation>
+        <translation type="vanished">Připojit</translation>
     </message>
     <message>
         <source>Invalid username or password.</source>
@@ -571,6 +644,41 @@ Prosím zkontrolujte své připojení k internetu.</translation>
     <message>
         <source>Log in using a QR-Code</source>
         <translation type="vanished">Přihlaste se pomocí QR kódu</translation>
+    </message>
+    <message>
+        <source>Connection settings</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>LoginSettingsPage</name>
+    <message>
+        <source>Connection settings</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The connection settings will be saved permanently after the first successful login. If they don&apos;t work, you&apos;ll get back to the login page.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Enable custom connection settings</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Port:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Hostname:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Reset</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Apply</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -641,6 +749,37 @@ Prosím zkontrolujte své připojení k internetu.</translation>
     <message>
         <source>%1 (%2)</source>
         <translation>%1 (%2)</translation>
+    </message>
+    <message>
+        <source>Audio</source>
+        <translation type="unfinished">Audio</translation>
+    </message>
+    <message>
+        <source>Document</source>
+        <translation type="unfinished">Dokument</translation>
+    </message>
+    <message>
+        <source>Location</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Image</source>
+        <translation type="unfinished">Obrázek</translation>
+    </message>
+    <message>
+        <source>Video</source>
+        <translation type="unfinished">Video</translation>
+    </message>
+    <message>
+        <source>File</source>
+        <translation type="unfinished">Soubor</translation>
+    </message>
+</context>
+<context>
+    <name>Message</name>
+    <message>
+        <source>Spoiler</source>
+        <translation type="unfinished">«Spoiler»</translation>
     </message>
 </context>
 <context>
@@ -863,7 +1002,7 @@ Prosím zkontrolujte své připojení k internetu.</translation>
     <name>NewMedia</name>
     <message>
         <source>Ready</source>
-        <translation>Připravený</translation>
+        <translation type="vanished">Připravený</translation>
     </message>
     <message>
         <source>Initializing…</source>
@@ -907,36 +1046,60 @@ Prosím zkontrolujte své připojení k internetu.</translation>
         <source>Mark as read</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Available</source>
+        <translation type="unfinished">Dostupný</translation>
+    </message>
+    <message>
+        <source>Free for chat</source>
+        <translation type="unfinished">Dostupný k chatování</translation>
+    </message>
+    <message>
+        <source>Away</source>
+        <translation type="unfinished">Nepřítomný</translation>
+    </message>
+    <message>
+        <source>Do not disturb</source>
+        <translation type="unfinished">Nerušit</translation>
+    </message>
+    <message>
+        <source>Away for longer</source>
+        <translation type="unfinished">Dlouhodobě nepřítomný</translation>
+    </message>
+    <message>
+        <source>Offline</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>QmlUtils</name>
     <message>
         <source>Available</source>
-        <translation>Dostupný</translation>
+        <translation type="vanished">Dostupný</translation>
     </message>
     <message>
         <source>Free for chat</source>
-        <translation>Dostupný k chatování</translation>
+        <translation type="vanished">Dostupný k chatování</translation>
     </message>
     <message>
         <source>Away</source>
-        <translation>Nepřítomný</translation>
+        <translation type="vanished">Nepřítomný</translation>
     </message>
     <message>
         <source>Do not disturb</source>
-        <translation>Nerušit</translation>
+        <translation type="vanished">Nerušit</translation>
     </message>
     <message>
         <source>Away for longer</source>
-        <translation>Dlouhodobě nepřítomný</translation>
+        <translation type="vanished">Dlouhodobě nepřítomný</translation>
     </message>
     <message>
         <source>Offline</source>
-        <translation>Nepřipojený</translation>
+        <translation type="vanished">Nepřipojený</translation>
     </message>
     <message>
         <source>Error</source>
-        <translation>Chyba</translation>
+        <translation type="vanished">Chyba</translation>
     </message>
     <message>
         <source>Invisible</source>
@@ -958,10 +1121,6 @@ Prosím zkontrolujte své připojení k internetu.</translation>
     <message>
         <source>Error while trying to connect securely.</source>
         <translation type="unfinished">Hlášení o chybě při pokusu o zabezpečené připojení.</translation>
-    </message>
-    <message>
-        <source>Could not resolve the server&apos;s address. Please check your server name.</source>
-        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Could not connect to the server.</source>
@@ -987,6 +1146,10 @@ Prosím zkontrolujte své připojení k internetu.</translation>
         <source>The internet access is not permitted. Please check your system&apos;s internet access configuration.</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Could not connect to the server. Please check your internet connection or your server name.</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>QrCodeGenerator</name>
@@ -996,35 +1159,13 @@ Prosím zkontrolujte své připojení k internetu.</translation>
     </message>
 </context>
 <context>
-    <name>QrCodeScannerPage</name>
+    <name>QrCodeOnboardingPage</name>
     <message>
         <source>Scan QR code</source>
-        <translation>Naskenujte QR kód</translation>
-    </message>
-    <message>
-        <source>There is no camera available.</source>
-        <translation>Není k dispozici žádná kamera.</translation>
-    </message>
-    <message>
-        <source>Your camera is busy.
-Try to close other applications using the camera.</source>
-        <translation>Váš fotoaparát je zaneprázdněn.
-Zkuste zavřít jiné aplikace, které používají fotoaparát.</translation>
-    </message>
-    <message>
-        <source>The camera format &apos;%1&apos; is not supported.</source>
-        <translation>Formát fotoaparátu &apos;% 1&apos; není podporován.</translation>
-    </message>
-    <message>
-        <source>Scan the QR code from your existing device to transfer your account.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Naskenujte QR kód</translation>
     </message>
     <message>
         <source>Show explanation</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Scan</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -1032,8 +1173,54 @@ Zkuste zavřít jiné aplikace, které používají fotoaparát.</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <source>Scan the QR code from your existing device to transfer your account.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>Connecting…</source>
         <translation type="unfinished">Připojování…</translation>
+    </message>
+</context>
+<context>
+    <name>QrCodeScanner</name>
+    <message>
+        <source>The camera format &apos;%1&apos; is not supported.</source>
+        <translation type="unfinished">Formát fotoaparátu &apos;% 1&apos; není podporován.</translation>
+    </message>
+    <message>
+        <source>There is no camera available.</source>
+        <translation type="unfinished">Není k dispozici žádná kamera.</translation>
+    </message>
+    <message>
+        <source>Your camera is busy.
+Try to close other applications using the camera.</source>
+        <translation type="unfinished">Váš fotoaparát je zaneprázdněn.
+Zkuste zavřít jiné aplikace, které používají fotoaparát.</translation>
+    </message>
+</context>
+<context>
+    <name>QrCodeScannerPage</name>
+    <message>
+        <source>Scan QR code</source>
+        <translation type="vanished">Naskenujte QR kód</translation>
+    </message>
+    <message>
+        <source>There is no camera available.</source>
+        <translation type="vanished">Není k dispozici žádná kamera.</translation>
+    </message>
+    <message>
+        <source>Your camera is busy.
+Try to close other applications using the camera.</source>
+        <translation type="vanished">Váš fotoaparát je zaneprázdněn.
+Zkuste zavřít jiné aplikace, které používají fotoaparát.</translation>
+    </message>
+    <message>
+        <source>The camera format &apos;%1&apos; is not supported.</source>
+        <translation type="vanished">Formát fotoaparátu &apos;% 1&apos; není podporován.</translation>
+    </message>
+    <message>
+        <source>Connecting…</source>
+        <translation type="obsolete">Připojování…</translation>
     </message>
 </context>
 <context>
@@ -1055,11 +1242,11 @@ Zkuste zavřít jiné aplikace, které používají fotoaparát.</translation>
     <name>RegistrationManager</name>
     <message>
         <source>Password changed successfully.</source>
-        <translation>Změna hesla byla úspěšná.</translation>
+        <translation type="vanished">Změna hesla byla úspěšná.</translation>
     </message>
     <message>
         <source>Failed to change password: %1</source>
-        <translation>Změna hesla se nezdařila: %1</translation>
+        <translation type="vanished">Změna hesla se nezdařila: %1</translation>
     </message>
 </context>
 <context>
@@ -1121,7 +1308,7 @@ You will not be able to use your account again!</source>
     <name>RosterListItem</name>
     <message>
         <source>Error: Please check the JID.</source>
-        <translation>Chyba: zkontrolujte prosím JID.</translation>
+        <translation type="vanished">Chyba: zkontrolujte prosím JID.</translation>
     </message>
     <message>
         <source>Available</source>
@@ -1164,7 +1351,7 @@ You will not be able to use your account again!</source>
     </message>
     <message>
         <source>Spoiler</source>
-        <translation>«Spoiler»</translation>
+        <translation type="vanished">«Spoiler»</translation>
     </message>
     <message>
         <source>Could not rename contact, as a result of not being connected.</source>
@@ -1198,7 +1385,7 @@ You will not be able to use your account again!</source>
     <name>RosterRemoveContactSheet</name>
     <message>
         <source>Do you really want to delete the contact &lt;b&gt;%1&lt;/b&gt; from your roster?</source>
-        <translation>Opravdu chcete smazat kontakt &lt;b&gt;%1&lt;/b&gt; z vašeho seznamu?</translation>
+        <translation type="vanished">Opravdu chcete smazat kontakt &lt;b&gt;%1&lt;/b&gt; z vašeho seznamu?</translation>
     </message>
     <message>
         <source>Delete contact</source>
@@ -1211,6 +1398,10 @@ You will not be able to use your account again!</source>
     <message>
         <source>Delete</source>
         <translation>Smazat</translation>
+    </message>
+    <message>
+        <source>Do you really want to delete the contact &lt;b&gt;%1&lt;/b&gt; from your contact list?</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -1292,10 +1483,6 @@ Deletion of message history saved on server</extracomment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>configure whether this device can be used to log in on a new device</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Remove account from Kaidan</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1309,6 +1496,18 @@ Deletion of message history saved on server</extracomment>
     </message>
     <message>
         <source>Delete account from the server</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Connection Settings</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Configure the hostname and port to connect to</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Configure whether this device can be used to log in on a new device</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -1376,7 +1575,7 @@ Deletion of message history saved on server</extracomment>
     </message>
     <message>
         <source>File</source>
-        <translation>Soubor</translation>
+        <translation type="vanished">Soubor</translation>
     </message>
     <message>
         <source>Message could not be sent.</source>
@@ -1388,6 +1587,22 @@ Deletion of message history saved on server</extracomment>
     <message>
         <source>Profile</source>
         <translation>Profil</translation>
+    </message>
+    <message>
+        <source>Rename contact</source>
+        <translation type="unfinished">Přejmenovat kontakt</translation>
+    </message>
+    <message>
+        <source>Show QR code</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Remove contact</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Online devices</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

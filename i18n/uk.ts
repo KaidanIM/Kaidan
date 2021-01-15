@@ -83,6 +83,14 @@ Never show this QR code to anyone else. It would allow unlimited access to your 
         <source>Show as text</source>
         <translation>Показати як текст</translation>
     </message>
+    <message>
+        <source>Copy JID</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Copy password</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>ChangePassword</name>
@@ -112,7 +120,7 @@ Never show this QR code to anyone else. It would allow unlimited access to your 
     </message>
     <message>
         <source>You need to be connected to change your password.</source>
-        <translation>Вам слід встановити з&apos;єднання, щоб змінити ваш пароль.</translation>
+        <translation type="vanished">Вам слід встановити з&apos;єднання, щоб змінити ваш пароль.</translation>
     </message>
     <message>
         <source>After changing your password, you will need to reenter it on all your other devices.</source>
@@ -125,6 +133,14 @@ Never show this QR code to anyone else. It would allow unlimited access to your 
     <message>
         <source>Change</source>
         <translation>Змінити</translation>
+    </message>
+    <message>
+        <source>Password changed successfully</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Failed to change password: %1</source>
+        <translation type="unfinished">Не вдалося змінити пароль: %1</translation>
     </message>
 </context>
 <context>
@@ -177,7 +193,7 @@ Never show this QR code to anyone else. It would allow unlimited access to your 
     <name>ChatPage</name>
     <message>
         <source>Compose message</source>
-        <translation>Створити повідомлення</translation>
+        <translation type="vanished">Створити повідомлення</translation>
     </message>
     <message>
         <source>Image</source>
@@ -209,7 +225,7 @@ Never show this QR code to anyone else. It would allow unlimited access to your 
     </message>
     <message>
         <source>Spoiler hint</source>
-        <translation>Підказка до спойлера</translation>
+        <translation type="vanished">Підказка до спойлера</translation>
     </message>
     <message>
         <source>Unmute notifications</source>
@@ -233,7 +249,7 @@ Never show this QR code to anyone else. It would allow unlimited access to your 
     </message>
     <message>
         <source>Close</source>
-        <translation>Закрити</translation>
+        <translation type="vanished">Закрити</translation>
     </message>
     <message>
         <source>Search up</source>
@@ -245,7 +261,26 @@ Never show this QR code to anyone else. It would allow unlimited access to your 
     </message>
     <message>
         <source>All files</source>
-        <translation>усі файли</translation>
+        <translation type="vanished">усі файли</translation>
+    </message>
+    <message>
+        <source>Close message search bar</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>ChatPageSendingPane</name>
+    <message>
+        <source>Spoiler hint</source>
+        <translation type="unfinished">Підказка до спойлера</translation>
+    </message>
+    <message>
+        <source>Close spoiler hint field</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Compose message</source>
+        <translation type="unfinished">Створити повідомлення</translation>
     </message>
 </context>
 <context>
@@ -302,6 +337,44 @@ Never show this QR code to anyone else. It would allow unlimited access to your 
     </message>
 </context>
 <context>
+    <name>ConnectionSettings</name>
+    <message>
+        <source>Connection settings</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Change</source>
+        <translation type="unfinished">Змінити</translation>
+    </message>
+    <message>
+        <source>Cancel</source>
+        <translation type="unfinished">Скасувати</translation>
+    </message>
+    <message>
+        <source>Connection settings could not be changed</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Connection settings changed</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>CustomConnectionSettings</name>
+    <message>
+        <source>Hostname:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The hostname must not contain blank spaces</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Port:</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>DisablePasswordDisplay</name>
     <message>
         <source>Remove password completely</source>
@@ -354,47 +427,47 @@ Make sure that you backed it up if you want to use your account later.</source>
     <name>EmojiPicker</name>
     <message>
         <source>Favorites</source>
-        <translation>Улюблене</translation>
+        <translation type="vanished">Улюблене</translation>
     </message>
     <message>
         <source>People</source>
-        <translation>Люди</translation>
+        <translation type="vanished">Люди</translation>
     </message>
     <message>
         <source>Nature</source>
-        <translation>Природа</translation>
+        <translation type="vanished">Природа</translation>
     </message>
     <message>
         <source>Food</source>
-        <translation>Їжа</translation>
+        <translation type="vanished">Їжа</translation>
     </message>
     <message>
         <source>Activity</source>
-        <translation>Діяльність</translation>
+        <translation type="vanished">Діяльність</translation>
     </message>
     <message>
         <source>Travel</source>
-        <translation>Подорожі</translation>
+        <translation type="vanished">Подорожі</translation>
     </message>
     <message>
         <source>Objects</source>
-        <translation>Об&apos;єкти</translation>
+        <translation type="vanished">Об&apos;єкти</translation>
     </message>
     <message>
         <source>Symbols</source>
-        <translation>Символи</translation>
+        <translation type="vanished">Символи</translation>
     </message>
     <message>
         <source>Flags</source>
-        <translation>Прапори</translation>
+        <translation type="vanished">Прапори</translation>
     </message>
     <message>
         <source>Search</source>
-        <translation>Пошук</translation>
+        <translation type="vanished">Пошук</translation>
     </message>
     <message>
         <source>Search emoji</source>
-        <translation>Шукати емодзі</translation>
+        <translation type="vanished">Шукати емодзі</translation>
     </message>
 </context>
 <context>
@@ -522,7 +595,7 @@ Your password will be deleted, make sure it is stored in a password manager or y
     </message>
     <message>
         <source>Connect</source>
-        <translation>З&apos;єднатися</translation>
+        <translation type="vanished">З&apos;єднатися</translation>
     </message>
     <message>
         <source>Invalid username or password.</source>
@@ -559,6 +632,41 @@ Your password will be deleted, make sure it is stored in a password manager or y
     <message>
         <source>Log in using a QR-Code</source>
         <translation type="vanished">Вхід за допомогою QR-коду</translation>
+    </message>
+    <message>
+        <source>Connection settings</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>LoginSettingsPage</name>
+    <message>
+        <source>Connection settings</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The connection settings will be saved permanently after the first successful login. If they don&apos;t work, you&apos;ll get back to the login page.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Enable custom connection settings</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Port:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Hostname:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Reset</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Apply</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -629,6 +737,37 @@ Your password will be deleted, make sure it is stored in a password manager or y
     <message>
         <source>%1 (%2)</source>
         <translation>%1 (%2)</translation>
+    </message>
+    <message>
+        <source>Audio</source>
+        <translation type="unfinished">Звук</translation>
+    </message>
+    <message>
+        <source>Document</source>
+        <translation type="unfinished">Документ</translation>
+    </message>
+    <message>
+        <source>Location</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Image</source>
+        <translation type="unfinished">Зображення</translation>
+    </message>
+    <message>
+        <source>Video</source>
+        <translation type="unfinished">Відео</translation>
+    </message>
+    <message>
+        <source>File</source>
+        <translation type="unfinished">Файл</translation>
+    </message>
+</context>
+<context>
+    <name>Message</name>
+    <message>
+        <source>Spoiler</source>
+        <translation type="unfinished">Спойлер</translation>
     </message>
 </context>
 <context>
@@ -851,7 +990,7 @@ Your password will be deleted, make sure it is stored in a password manager or y
     <name>NewMedia</name>
     <message>
         <source>Ready</source>
-        <translation>Готово</translation>
+        <translation type="vanished">Готово</translation>
     </message>
     <message>
         <source>Initializing…</source>
@@ -895,36 +1034,60 @@ Your password will be deleted, make sure it is stored in a password manager or y
         <source>Mark as read</source>
         <translation>Позначити як прочитане</translation>
     </message>
+    <message>
+        <source>Available</source>
+        <translation type="unfinished">Доступний</translation>
+    </message>
+    <message>
+        <source>Free for chat</source>
+        <translation type="unfinished">Вільний для спілкування</translation>
+    </message>
+    <message>
+        <source>Away</source>
+        <translation type="unfinished">Відсутність</translation>
+    </message>
+    <message>
+        <source>Do not disturb</source>
+        <translation type="unfinished">Не турбувати</translation>
+    </message>
+    <message>
+        <source>Away for longer</source>
+        <translation type="unfinished">Довга відсутність</translation>
+    </message>
+    <message>
+        <source>Offline</source>
+        <translation type="unfinished">Поза мережею</translation>
+    </message>
 </context>
 <context>
     <name>QmlUtils</name>
     <message>
         <source>Available</source>
-        <translation>Доступний</translation>
+        <translation type="vanished">Доступний</translation>
     </message>
     <message>
         <source>Free for chat</source>
-        <translation>Вільний для спілкування</translation>
+        <translation type="vanished">Вільний для спілкування</translation>
     </message>
     <message>
         <source>Away</source>
-        <translation>Відсутність</translation>
+        <translation type="vanished">Відсутність</translation>
     </message>
     <message>
         <source>Do not disturb</source>
-        <translation>Не турбувати</translation>
+        <translation type="vanished">Не турбувати</translation>
     </message>
     <message>
         <source>Away for longer</source>
-        <translation>Довга відсутність</translation>
+        <translation type="vanished">Довга відсутність</translation>
     </message>
     <message>
         <source>Offline</source>
-        <translation>Поза мережею</translation>
+        <translation type="vanished">Поза мережею</translation>
     </message>
     <message>
         <source>Error</source>
-        <translation>Помилка</translation>
+        <translation type="vanished">Помилка</translation>
     </message>
     <message>
         <source>Invisible</source>
@@ -948,7 +1111,7 @@ Your password will be deleted, make sure it is stored in a password manager or y
     </message>
     <message>
         <source>Could not resolve the server&apos;s address. Please check your server name.</source>
-        <translation>Не вдалося визначити адресу сервера. Будь ласка, перевірте, чи правильно вказано назву сервера.</translation>
+        <translation type="vanished">Не вдалося визначити адресу сервера. Будь ласка, перевірте, чи правильно вказано назву сервера.</translation>
     </message>
     <message>
         <source>Could not connect to the server.</source>
@@ -978,6 +1141,10 @@ Your password will be deleted, make sure it is stored in a password manager or y
         <source>The internet access is not permitted. Please check your system&apos;s internet access configuration.</source>
         <translation>З&apos;єднання з інтернетом заборонено. Будь ласка, перевірте налаштування доступу до інтернету у вашій системі.</translation>
     </message>
+    <message>
+        <source>Could not connect to the server. Please check your internet connection or your server name.</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>QrCodeGenerator</name>
@@ -987,44 +1154,84 @@ Your password will be deleted, make sure it is stored in a password manager or y
     </message>
 </context>
 <context>
-    <name>QrCodeScannerPage</name>
+    <name>QrCodeOnboardingPage</name>
     <message>
         <source>Scan QR code</source>
-        <translation>Сканувати QR-код</translation>
+        <translation type="unfinished">Сканувати QR-код</translation>
+    </message>
+    <message>
+        <source>Show explanation</source>
+        <translation type="unfinished">Показати пояснення</translation>
+    </message>
+    <message>
+        <source>Continue without QR code</source>
+        <translation type="unfinished">Продовжити без QR-коду</translation>
+    </message>
+    <message>
+        <source>Scan the QR code from your existing device to transfer your account.</source>
+        <translation type="unfinished">Заскануйте QR-код з вашого наявного пристрою, щоб перенести ваш обліковий запис.</translation>
+    </message>
+    <message>
+        <source>Connecting…</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>QrCodeScanner</name>
+    <message>
+        <source>The camera format &apos;%1&apos; is not supported.</source>
+        <translation type="unfinished">Підримки формату відеокамери «%1» не передбачено.</translation>
     </message>
     <message>
         <source>There is no camera available.</source>
-        <translation>Немає доступної відеокамери.</translation>
+        <translation type="unfinished">Немає доступної відеокамери.</translation>
     </message>
     <message>
         <source>Your camera is busy.
 Try to close other applications using the camera.</source>
-        <translation>Із відеокамерою працює інша програма.
+        <translation type="unfinished">Із відеокамерою працює інша програма.
+Спробуйте завершити роботу інших програм, які користуються відеокамерою.</translation>
+    </message>
+</context>
+<context>
+    <name>QrCodeScannerPage</name>
+    <message>
+        <source>Scan QR code</source>
+        <translation type="vanished">Сканувати QR-код</translation>
+    </message>
+    <message>
+        <source>There is no camera available.</source>
+        <translation type="vanished">Немає доступної відеокамери.</translation>
+    </message>
+    <message>
+        <source>Your camera is busy.
+Try to close other applications using the camera.</source>
+        <translation type="vanished">Із відеокамерою працює інша програма.
 Спробуйте завершити роботу інших програм, які користуються відеокамерою.</translation>
     </message>
     <message>
         <source>The camera format &apos;%1&apos; is not supported.</source>
-        <translation>Підримки формату відеокамери «%1» не передбачено.</translation>
+        <translation type="vanished">Підримки формату відеокамери «%1» не передбачено.</translation>
     </message>
     <message>
         <source>Connecting…</source>
-        <translation>Встановлення з’єднання…</translation>
+        <translation type="vanished">Встановлення з’єднання…</translation>
     </message>
     <message>
         <source>Scan the QR code from your existing device to transfer your account.</source>
-        <translation>Заскануйте QR-код з вашого наявного пристрою, щоб перенести ваш обліковий запис.</translation>
+        <translation type="vanished">Заскануйте QR-код з вашого наявного пристрою, щоб перенести ваш обліковий запис.</translation>
     </message>
     <message>
         <source>Show explanation</source>
-        <translation>Показати пояснення</translation>
+        <translation type="vanished">Показати пояснення</translation>
     </message>
     <message>
         <source>Scan</source>
-        <translation>Сканувати</translation>
+        <translation type="vanished">Сканувати</translation>
     </message>
     <message>
         <source>Continue without QR code</source>
-        <translation>Продовжити без QR-коду</translation>
+        <translation type="vanished">Продовжити без QR-коду</translation>
     </message>
 </context>
 <context>
@@ -1046,11 +1253,11 @@ Try to close other applications using the camera.</source>
     <name>RegistrationManager</name>
     <message>
         <source>Password changed successfully.</source>
-        <translation>Пароль успішно змінено.</translation>
+        <translation type="vanished">Пароль успішно змінено.</translation>
     </message>
     <message>
         <source>Failed to change password: %1</source>
-        <translation>Не вдалося змінити пароль: %1</translation>
+        <translation type="vanished">Не вдалося змінити пароль: %1</translation>
     </message>
 </context>
 <context>
@@ -1113,7 +1320,7 @@ You will not be able to use your account again!</source>
     <name>RosterListItem</name>
     <message>
         <source>Error: Please check the JID.</source>
-        <translation>Помилка: будь ласка, перевірте, чи правильно вказано ідентифікатор Jabber.</translation>
+        <translation type="vanished">Помилка: будь ласка, перевірте, чи правильно вказано ідентифікатор Jabber.</translation>
     </message>
     <message>
         <source>Available</source>
@@ -1156,7 +1363,7 @@ You will not be able to use your account again!</source>
     </message>
     <message>
         <source>Spoiler</source>
-        <translation>Спойлер</translation>
+        <translation type="vanished">Спойлер</translation>
     </message>
     <message>
         <source>Could not rename contact, as a result of not being connected.</source>
@@ -1190,7 +1397,7 @@ You will not be able to use your account again!</source>
     <name>RosterRemoveContactSheet</name>
     <message>
         <source>Do you really want to delete the contact &lt;b&gt;%1&lt;/b&gt; from your roster?</source>
-        <translation>Ви справді хочете вилучити запис контакту &lt;b&gt;%1&lt;/b&gt; із вашої книги записів контактів?</translation>
+        <translation type="vanished">Ви справді хочете вилучити запис контакту &lt;b&gt;%1&lt;/b&gt; із вашої книги записів контактів?</translation>
     </message>
     <message>
         <source>Delete contact</source>
@@ -1203,6 +1410,10 @@ You will not be able to use your account again!</source>
     <message>
         <source>Delete</source>
         <translation>Вилучити</translation>
+    </message>
+    <message>
+        <source>Do you really want to delete the contact &lt;b&gt;%1&lt;/b&gt; from your contact list?</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -1285,7 +1496,7 @@ Deletion of message history saved on server</extracomment>
     </message>
     <message>
         <source>configure whether this device can be used to log in on a new device</source>
-        <translation>Налаштуйте, чи можна використовувати цей пристрій для входу з нового пристрою</translation>
+        <translation type="vanished">Налаштуйте, чи можна використовувати цей пристрій для входу з нового пристрою</translation>
     </message>
     <message>
         <source>Remove account from Kaidan</source>
@@ -1302,6 +1513,18 @@ Deletion of message history saved on server</extracomment>
     <message>
         <source>Delete account from the server</source>
         <translation>Вилучити обліковий запис з сервера</translation>
+    </message>
+    <message>
+        <source>Connection Settings</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Configure the hostname and port to connect to</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Configure whether this device can be used to log in on a new device</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -1365,7 +1588,7 @@ Deletion of message history saved on server</extracomment>
     </message>
     <message>
         <source>File</source>
-        <translation>Файл</translation>
+        <translation type="vanished">Файл</translation>
     </message>
     <message>
         <source>Message could not be sent.</source>
@@ -1377,6 +1600,22 @@ Deletion of message history saved on server</extracomment>
     <message>
         <source>Profile</source>
         <translation>Профіль</translation>
+    </message>
+    <message>
+        <source>Rename contact</source>
+        <translation type="unfinished">Перейменувати запис контакту</translation>
+    </message>
+    <message>
+        <source>Show QR code</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Remove contact</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Online devices</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

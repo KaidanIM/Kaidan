@@ -5,11 +5,12 @@ Format: https://www.debian.org/doc/packaging-manuals/copyright-format/1.0/
 Files: src/*
        utils/*
        misc/*
-Copyright: 2016-2020, Jonah Brüchert <jbb@kaidan.im>
-           2016-2020, Linus Jahn <lnj@kaidan.im>
+Copyright: 2016-2021, Linus Jahn <lnj@kaidan.im>
+           2016-2021, Jonah Brüchert <jbb@kaidan.im>
            2018-2020, Nicolas Fella <nicolas.fella@gmx.de>
-           2019-2020, Melvin Keskin <melvo@olomono.de>
+           2019-2021, Melvin Keskin <melvo@olomono.de>
            2017-2019, Ilya Bizyaev <bizyaev@zoho.com>
+           2019-2020, Volker Krause <vkrause@kde.org>
            2019-2020, Filipe Azevedo <pasnox@gmail.com>
            2019-2020, Yury Gubich <blue@macaw.me>
            2018, Allan Nordhøy <epost@anotheragency.no>
@@ -18,7 +19,6 @@ Copyright: 2016-2020, Jonah Brüchert <jbb@kaidan.im>
            2019, caca hueto <cacahueto@olomono.de>
            2020, Emmanuel Gil Peyrot <linkmauve@linkmauve.fr>
            2019, Mauricio Torres Mejía <mauro@olomono.de>
-           2019, Volker Krause <vkrause@kde.org>
            2019, Simon Schmeisser <s.schmeisser@gmx.net>
            2019, Nick Richards <nick@nedrichards.com>
            2019, Simon Redman <simon@ergotech.com>
@@ -36,6 +36,7 @@ Copyright: 2017-2020, Linus Jahn <lnj@kaidan.im>
            2017-2020, Jonah Brüchert <jbb@kaidan.im>
            2017-2020, Muhammad Nur Hidayat Yasuyoshi <translation@mnh48.moe>
            2018-2020, Allan Nordhøy <epost@anotheragency.no>
+           2019-2020, ssantos <ssantos@web.de>
            2017-2019, Joeke de Graaf <joeke.de.graaf@student.nhlstenden.com>
            2019-2020, Anne Onyme 017 <anneonyme017@netcourrier.com>
            2018-2019, advocatux <advocatux@airpost.net>
@@ -44,13 +45,15 @@ Copyright: 2017-2020, Linus Jahn <lnj@kaidan.im>
            2018-2019, oiseauroch <tobias.ollive@mailoo.org>
            2019-2020, Milan Korecky <milan.korecky@gmail.com>
            2019-2020, Yuri Chornoivan <yurchor@ukr.net>
+           2020, mondstern <mondstern@snopyta.org>
            2018-2019, aitzol berasategi <aitzol@disroot.org>
-           2019, ssantos <ssantos@web.de>
            2020, Adolfo Jayme Barrientos <fitojb@ubuntu.com>
            2020, Michal Biesiada <blade-14@o2.pl>
            2017, Ilya Bizyaev <bizyaev@zoho.com>
            2017, Robert Maerkisch <zatroxde@protonmail.ch>
            2019, Joan CiberSheep <cibersheep@gmail.com>
+           2020, Prachi Joshi <josprachi@yahoo.com>
+           2020, Omeritzics Games <omeritzicschwartz@gmail.com>
            2020, André Marcelo Alvarenga <andrealvarenga@gmx.net>
            2020, aevw <arcanevw@tuta.io>
            2020, Kovalev Artem <KovalevArtem.ru@gmail.com>
@@ -58,7 +61,6 @@ Copyright: 2017-2020, Linus Jahn <lnj@kaidan.im>
            2020, Tamás Fehér <ftamas85@gmail.com>
            2020, Jeannette Lavoie <j.lavoie@net-c.ca>
            2020, Tobias Ollive <tobias.ollive@oiseauroch.fr>
-           2020, mondstern <hello@mondstern.tk>
            2019, Eiad Rostom <eiado@olomono.de>
            2019, caca hueto <cacahueto@olomono.de>
            2019, Clemens Riese <weblate.org@clerie.de>

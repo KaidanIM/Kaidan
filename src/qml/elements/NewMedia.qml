@@ -138,7 +138,7 @@ MediaPreview {
 				icon {
 					width: parent.width
 					height: width
-					name: pressed || checked ? 'media-playback-stop' : 'media-record'
+					name: pressed || checked ? 'media-playback-stop-symbolic' : 'media-record-symbolic'
 				}
 
 				anchors {

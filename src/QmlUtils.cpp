@@ -79,7 +79,7 @@ QString QmlUtils::connectionErrorMessage(ClientWorker::ConnectionError error)
 	case ClientWorker::TlsNotAvailable:
 		return tr("The server doesn't support secure connections.");
 	case ClientWorker::DnsError:
-		return tr("Could not resolve the server's address. Please check your server name.");
+		return tr("Could not connect to the server. Please check your internet connection or your server name.");
 	case ClientWorker::ConnectionRefused:
 		return tr("The server is offline or blocked by a firewall.");
 	case ClientWorker::NoSupportedAuth:

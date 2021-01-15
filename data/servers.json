@@ -1,7 +1,7 @@
 [
 	{
 		"jid": "anoxinon.me",
-		"supportsInBandRegistration": true,
+		"supportsInBandRegistration": false,
 		"registrationWebPage": "https://xmpp.anoxinon.me/register/new",
 		"hosting": "professional",
 		"passwordReset": true,
@@ -17,7 +17,7 @@
 		"onlineSince": 2018,
 		"httpUploadSize": 25,
 		"messageStorageDuration": 14,
-		"lastCheck": "2019-10-07"
+		"lastCheck": "2021-01-15"
 	},
 	{
 		"jid": "blabber.im",
@@ -37,11 +37,11 @@
 		"onlineSince": 2018,
 		"httpUploadSize": 500,
 		"messageStorageDuration": 33,
-		"lastCheck": "2019-06-20"
+		"lastCheck": "2021-01-15"
 	},
 	{
 		"jid": "dismail.de",
-		"supportsInBandRegistration": true,
+		"supportsInBandRegistration": false,
 		"hosting": "professional",
 		"passwordReset": false,
 		"mucSupport": true,
@@ -56,7 +56,7 @@
 		"onlineSince": 2015,
 		"httpUploadSize": 50,
 		"messageStorageDuration": 31,
-		"lastCheck": "2019-07-08"
+		"lastCheck": "2021-01-15"
 	},
 	{
 		"jid": "jabber.fr",
@@ -65,7 +65,7 @@
 		"hosting": "professional",
 		"passwordReset": true,
 		"mucSupport": true,
-		"ratingCompliance": 100,
+		"ratingCompliance": 95,
 		"ratingObservatory": "A",
 		"commercial": false,
 		"language": "fr",
@@ -76,11 +76,11 @@
 		"onlineSince": 2012,
 		"httpUploadSize": 0,
 		"messageStorageDuration": 0,
-		"lastCheck": "2019-10-15"
+		"lastCheck": "2021-01-15"
 	},
 	{
 		"jid": "jabbers.one",
-		"supportsInBandRegistration": true,
+		"supportsInBandRegistration": false,
 		"registrationWebPage": "",
 		"hosting": "professional",
 		"passwordReset": false,
@@ -96,7 +96,7 @@
 		"onlineSince": 2014,
 		"httpUploadSize": 50,
 		"messageStorageDuration": 30,
-		"lastCheck": "2019-12-30"
+		"lastCheck": "2021-01-15"
 	},
 	{
 		"jid": "macaw.me",
@@ -105,27 +105,27 @@
 		"hosting": "professional",
 		"passwordReset": false,
 		"mucSupport": true,
-		"ratingCompliance": 94,
+		"ratingCompliance": 100,
 		"ratingObservatory": "A",
 		"commercial": false,
 		"language": "en",
 		"languageEnglish": true,
 		"country": "us",
-		"website": "https://macaw.me/",
+		"website": "https://macaw.me",
 		"imprint": false,
 		"onlineSince": 2019,
 		"httpUploadSize": 100,
 		"messageStorageDuration": 31,
-		"lastCheck": "2020-02-24"
+		"lastCheck": "2021-01-15"
 	},
 	{
 		"jid": "openim.de",
-		"supportsInBandRegistration": false,
+		"supportsInBandRegistration": true,
 		"registrationWebPage": "https://openim.de:5281/register_web",
 		"hosting": "professional",
 		"passwordReset": true,
 		"mucSupport": true,
-		"ratingCompliance": 100,
+		"ratingCompliance": 95,
 		"ratingObservatory": "A",
 		"language": "de",
 		"languageEnglish": false,
@@ -135,7 +135,7 @@
 		"imprint": "https://www.openim.de/datenschutz.html",
 		"onlineSince": 2019,
 		"messageStorageDuration": 28,
-		"lastCheck": "2019-07-06"
+		"lastCheck": "2021-01-15"
 	},
 	{
 		"jid": "xmpp-hosting.de",
@@ -155,26 +155,6 @@
 		"onlineSince": 2005,
 		"httpUploadSize": 100,
 		"messageStorageDuration": 31,
-		"lastCheck": "2019-09-07"
-	},
-	{
-		"jid": "yochat.eu",
-		"supportsInBandRegistration": false,
-		"registrationWebPage": "https://yochat.eu/#converse/register",
-		"hosting": "private",
-		"passwordReset": false,
-		"mucSupport": false,
-		"ratingCompliance": 100,
-		"ratingObservatory": "A",
-		"commercial": false,
-		"language": "de",
-		"languageEnglish": false,
-		"country": "de",
-		"website": "https://yochat.eu",
-		"imprint": false,
-		"onlineSince": 2019,
-		"httpUploadSize": 0,
-		"messageStorageDuration": 0,
-		"lastCheck": "2020-03-07"
+		"lastCheck": "2021-01-15"
 	}
 ]

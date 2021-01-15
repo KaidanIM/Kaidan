@@ -114,7 +114,7 @@ ExplainedContentPage {
 			}
 
 			Controls.ToolButton {
-				text: qsTr("Copy JID")
+				text: qsTr("Copy chat address")
 				icon.name: "edit-copy"
 				display: Controls.AbstractButton.IconOnly
 				flat: true

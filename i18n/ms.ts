@@ -172,6 +172,14 @@ Jangan sesekali tunjukkan kod QR ini kepada orang lain. Ia akan membenarkan capa
         <source>Show as text</source>
         <translation>Tunjuk sebagai teks</translation>
     </message>
+    <message>
+        <source>Copy JID</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Copy password</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>BackButton</name>
@@ -208,7 +216,7 @@ Jangan sesekali tunjukkan kod QR ini kepada orang lain. Ia akan membenarkan capa
     </message>
     <message>
         <source>You need to be connected to change your password.</source>
-        <translation>Anda mesti sambung ke internet untuk menukar kata laluan anda.</translation>
+        <translation type="vanished">Anda mesti sambung ke internet untuk menukar kata laluan anda.</translation>
     </message>
     <message>
         <source>After changing your password, you will need to reenter it on all your other devices.</source>
@@ -221,6 +229,14 @@ Jangan sesekali tunjukkan kod QR ini kepada orang lain. Ia akan membenarkan capa
     <message>
         <source>Change</source>
         <translation>Tukar</translation>
+    </message>
+    <message>
+        <source>Password changed successfully</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Failed to change password: %1</source>
+        <translation type="unfinished">Gagal menukar kata laluan: %1</translation>
     </message>
 </context>
 <context>
@@ -273,7 +289,7 @@ Jangan sesekali tunjukkan kod QR ini kepada orang lain. Ia akan membenarkan capa
     <name>ChatPage</name>
     <message>
         <source>Compose message</source>
-        <translation>Tulis mesej</translation>
+        <translation type="vanished">Tulis mesej</translation>
     </message>
     <message>
         <source>Send</source>
@@ -309,7 +325,7 @@ Jangan sesekali tunjukkan kod QR ini kepada orang lain. Ia akan membenarkan capa
     </message>
     <message>
         <source>Spoiler hint</source>
-        <translation>Tip beberan</translation>
+        <translation type="vanished">Tip beberan</translation>
     </message>
     <message>
         <source>Unmute notifications</source>
@@ -333,7 +349,7 @@ Jangan sesekali tunjukkan kod QR ini kepada orang lain. Ia akan membenarkan capa
     </message>
     <message>
         <source>Close</source>
-        <translation>Tutup</translation>
+        <translation type="vanished">Tutup</translation>
     </message>
     <message>
         <source>Search up</source>
@@ -345,7 +361,7 @@ Jangan sesekali tunjukkan kod QR ini kepada orang lain. Ia akan membenarkan capa
     </message>
     <message>
         <source>All files</source>
-        <translation>Semua fail</translation>
+        <translation type="vanished">Semua fail</translation>
     </message>
     <message>
         <source>Copy message</source>
@@ -362,6 +378,25 @@ Jangan sesekali tunjukkan kod QR ini kepada orang lain. Ia akan membenarkan capa
     <message>
         <source>Quote message</source>
         <translation type="vanished">Petik mesej</translation>
+    </message>
+    <message>
+        <source>Close message search bar</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>ChatPageSendingPane</name>
+    <message>
+        <source>Spoiler hint</source>
+        <translation type="unfinished">Tip beberan</translation>
+    </message>
+    <message>
+        <source>Close spoiler hint field</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Compose message</source>
+        <translation type="unfinished">Tulis mesej</translation>
     </message>
 </context>
 <context>
@@ -418,10 +453,48 @@ Jangan sesekali tunjukkan kod QR ini kepada orang lain. Ia akan membenarkan capa
     </message>
 </context>
 <context>
+    <name>ConnectionSettings</name>
+    <message>
+        <source>Connection settings</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Change</source>
+        <translation type="unfinished">Tukar</translation>
+    </message>
+    <message>
+        <source>Cancel</source>
+        <translation type="unfinished">Batal</translation>
+    </message>
+    <message>
+        <source>Connection settings could not be changed</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Connection settings changed</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>ContextDrawer</name>
     <message>
         <source>Actions</source>
         <translation type="vanished">Tindakan</translation>
+    </message>
+</context>
+<context>
+    <name>CustomConnectionSettings</name>
+    <message>
+        <source>Hostname:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The hostname must not contain blank spaces</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Port:</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -477,47 +550,47 @@ Pastikan anda sandarkannya jika anda ingin gunakan akaun anda kemudian.</transla
     <name>EmojiPicker</name>
     <message>
         <source>Favorites</source>
-        <translation>Kegemaran</translation>
+        <translation type="vanished">Kegemaran</translation>
     </message>
     <message>
         <source>People</source>
-        <translation>Manusia</translation>
+        <translation type="vanished">Manusia</translation>
     </message>
     <message>
         <source>Nature</source>
-        <translation>Alam</translation>
+        <translation type="vanished">Alam</translation>
     </message>
     <message>
         <source>Food</source>
-        <translation>Makanan</translation>
+        <translation type="vanished">Makanan</translation>
     </message>
     <message>
         <source>Activity</source>
-        <translation>Aktiviti</translation>
+        <translation type="vanished">Aktiviti</translation>
     </message>
     <message>
         <source>Travel</source>
-        <translation>Perlancongan</translation>
+        <translation type="vanished">Perlancongan</translation>
     </message>
     <message>
         <source>Objects</source>
-        <translation>Objek</translation>
+        <translation type="vanished">Objek</translation>
     </message>
     <message>
         <source>Symbols</source>
-        <translation>Simbol</translation>
+        <translation type="vanished">Simbol</translation>
     </message>
     <message>
         <source>Flags</source>
-        <translation>Bendera</translation>
+        <translation type="vanished">Bendera</translation>
     </message>
     <message>
         <source>Search</source>
-        <translation>Cari</translation>
+        <translation type="vanished">Cari</translation>
     </message>
     <message>
         <source>Search emoji</source>
-        <translation>Cari emoji</translation>
+        <translation type="vanished">Cari emoji</translation>
     </message>
 </context>
 <context>
@@ -680,7 +753,7 @@ Kata laluan anda akan dipadam, pastikan ia disimpan dalam pengurus kata laluan a
     </message>
     <message>
         <source>Connect</source>
-        <translation>Sambung</translation>
+        <translation type="vanished">Sambung</translation>
     </message>
     <message>
         <source>Connecting…</source>
@@ -737,6 +810,41 @@ Kata laluan anda akan dipadam, pastikan ia disimpan dalam pengurus kata laluan a
     <message>
         <source>Log in using a QR-Code</source>
         <translation type="vanished">Log masuk menggunakan kod QR</translation>
+    </message>
+    <message>
+        <source>Connection settings</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>LoginSettingsPage</name>
+    <message>
+        <source>Connection settings</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The connection settings will be saved permanently after the first successful login. If they don&apos;t work, you&apos;ll get back to the login page.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Enable custom connection settings</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Port:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Hostname:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Reset</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Apply</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -807,6 +915,37 @@ Kata laluan anda akan dipadam, pastikan ia disimpan dalam pengurus kata laluan a
     <message>
         <source>%1 (%2)</source>
         <translation>%1 (%2)</translation>
+    </message>
+    <message>
+        <source>Audio</source>
+        <translation type="unfinished">Audio</translation>
+    </message>
+    <message>
+        <source>Document</source>
+        <translation type="unfinished">Dokumen</translation>
+    </message>
+    <message>
+        <source>Location</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Image</source>
+        <translation type="unfinished">Imej</translation>
+    </message>
+    <message>
+        <source>Video</source>
+        <translation type="unfinished">Video</translation>
+    </message>
+    <message>
+        <source>File</source>
+        <translation type="unfinished">Fail</translation>
+    </message>
+</context>
+<context>
+    <name>Message</name>
+    <message>
+        <source>Spoiler</source>
+        <translation type="unfinished">Beberan</translation>
     </message>
 </context>
 <context>
@@ -1029,7 +1168,7 @@ Kata laluan anda akan dipadam, pastikan ia disimpan dalam pengurus kata laluan a
     <name>NewMedia</name>
     <message>
         <source>Ready</source>
-        <translation>Sedia</translation>
+        <translation type="vanished">Sedia</translation>
     </message>
     <message>
         <source>Initializing…</source>
@@ -1073,36 +1212,60 @@ Kata laluan anda akan dipadam, pastikan ia disimpan dalam pengurus kata laluan a
         <source>Mark as read</source>
         <translation>Tanda sebagai telah dibaca</translation>
     </message>
+    <message>
+        <source>Available</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Free for chat</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Away</source>
+        <translation type="unfinished">Tidak lapang</translation>
+    </message>
+    <message>
+        <source>Do not disturb</source>
+        <translation type="unfinished">Jangan ganggu</translation>
+    </message>
+    <message>
+        <source>Away for longer</source>
+        <translation type="unfinished">Tidak lapang lebih lama</translation>
+    </message>
+    <message>
+        <source>Offline</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>QmlUtils</name>
     <message>
         <source>Available</source>
-        <translation>Tersedia</translation>
+        <translation type="vanished">Tersedia</translation>
     </message>
     <message>
         <source>Free for chat</source>
-        <translation>Lapang untuk sembang</translation>
+        <translation type="vanished">Lapang untuk sembang</translation>
     </message>
     <message>
         <source>Away</source>
-        <translation>Tidak lapang</translation>
+        <translation type="vanished">Tidak lapang</translation>
     </message>
     <message>
         <source>Do not disturb</source>
-        <translation>Jangan ganggu</translation>
+        <translation type="vanished">Jangan ganggu</translation>
     </message>
     <message>
         <source>Away for longer</source>
-        <translation>Tidak lapang lebih lama</translation>
+        <translation type="vanished">Tidak lapang lebih lama</translation>
     </message>
     <message>
         <source>Offline</source>
-        <translation>Luar talian</translation>
+        <translation type="vanished">Luar talian</translation>
     </message>
     <message>
         <source>Error</source>
-        <translation>Ralat</translation>
+        <translation type="vanished">Ralat</translation>
     </message>
     <message>
         <source>Invisible</source>
@@ -1126,7 +1289,7 @@ Kata laluan anda akan dipadam, pastikan ia disimpan dalam pengurus kata laluan a
     </message>
     <message>
         <source>Could not resolve the server&apos;s address. Please check your server name.</source>
-        <translation>Tidak dapat menyelesaikan alamat pelayan. Sila periksa nama pelayan anda.</translation>
+        <translation type="vanished">Tidak dapat menyelesaikan alamat pelayan. Sila periksa nama pelayan anda.</translation>
     </message>
     <message>
         <source>Could not connect to the server.</source>
@@ -1152,6 +1315,10 @@ Kata laluan anda akan dipadam, pastikan ia disimpan dalam pengurus kata laluan a
         <source>The internet access is not permitted. Please check your system&apos;s internet access configuration.</source>
         <translation>Capaian internet tidak dibenarkan. Sila periksa tatarajah capaian internet sistem anda.</translation>
     </message>
+    <message>
+        <source>Could not connect to the server. Please check your internet connection or your server name.</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>QrCodeGenerator</name>
@@ -1161,24 +1328,64 @@ Kata laluan anda akan dipadam, pastikan ia disimpan dalam pengurus kata laluan a
     </message>
 </context>
 <context>
-    <name>QrCodeScannerPage</name>
+    <name>QrCodeOnboardingPage</name>
     <message>
         <source>Scan QR code</source>
-        <translation>Imbas kod QR</translation>
+        <translation type="unfinished">Imbas kod QR</translation>
+    </message>
+    <message>
+        <source>Show explanation</source>
+        <translation type="unfinished">Tunjukkan penjelasan</translation>
+    </message>
+    <message>
+        <source>Continue without QR code</source>
+        <translation type="unfinished">Teruskan tanpa kod QR</translation>
+    </message>
+    <message>
+        <source>Scan the QR code from your existing device to transfer your account.</source>
+        <translation type="unfinished">Imbas kod QR daripada peranti anda yang sedia ada untuk memindahkan akaun anda.</translation>
+    </message>
+    <message>
+        <source>Connecting…</source>
+        <translation type="unfinished">Menyambung…</translation>
+    </message>
+</context>
+<context>
+    <name>QrCodeScanner</name>
+    <message>
+        <source>The camera format &apos;%1&apos; is not supported.</source>
+        <translation type="unfinished">Format kamera &apos;%1&apos; tidak disokong.</translation>
     </message>
     <message>
         <source>There is no camera available.</source>
-        <translation>Tiada kamera tersedia.</translation>
+        <translation type="unfinished">Tiada kamera tersedia.</translation>
     </message>
     <message>
         <source>Your camera is busy.
 Try to close other applications using the camera.</source>
-        <translation>Kamera anda sibuk.
+        <translation type="unfinished">Kamera anda sibuk.
+Cuba tutup aplikasi lain yang menggunakan kamera.</translation>
+    </message>
+</context>
+<context>
+    <name>QrCodeScannerPage</name>
+    <message>
+        <source>Scan QR code</source>
+        <translation type="vanished">Imbas kod QR</translation>
+    </message>
+    <message>
+        <source>There is no camera available.</source>
+        <translation type="vanished">Tiada kamera tersedia.</translation>
+    </message>
+    <message>
+        <source>Your camera is busy.
+Try to close other applications using the camera.</source>
+        <translation type="vanished">Kamera anda sibuk.
 Cuba tutup aplikasi lain yang menggunakan kamera.</translation>
     </message>
     <message>
         <source>The camera format &apos;%1&apos; is not supported.</source>
-        <translation>Format kamera &apos;%1&apos; tidak disokong.</translation>
+        <translation type="vanished">Format kamera &apos;%1&apos; tidak disokong.</translation>
     </message>
     <message>
         <source>Logging in…</source>
@@ -1186,23 +1393,23 @@ Cuba tutup aplikasi lain yang menggunakan kamera.</translation>
     </message>
     <message>
         <source>Scan the QR code from your existing device to transfer your account.</source>
-        <translation>Imbas kod QR daripada peranti anda yang sedia ada untuk memindahkan akaun anda.</translation>
+        <translation type="vanished">Imbas kod QR daripada peranti anda yang sedia ada untuk memindahkan akaun anda.</translation>
     </message>
     <message>
         <source>Show explanation</source>
-        <translation>Tunjukkan penjelasan</translation>
+        <translation type="vanished">Tunjukkan penjelasan</translation>
     </message>
     <message>
         <source>Scan</source>
-        <translation>Imbas</translation>
+        <translation type="vanished">Imbas</translation>
     </message>
     <message>
         <source>Continue without QR code</source>
-        <translation>Teruskan tanpa kod QR</translation>
+        <translation type="vanished">Teruskan tanpa kod QR</translation>
     </message>
     <message>
         <source>Connecting…</source>
-        <translation>Menyambung…</translation>
+        <translation type="vanished">Menyambung…</translation>
     </message>
 </context>
 <context>
@@ -1224,11 +1431,11 @@ Cuba tutup aplikasi lain yang menggunakan kamera.</translation>
     <name>RegistrationManager</name>
     <message>
         <source>Password changed successfully.</source>
-        <translation>Kata laluan berjaya ditukar.</translation>
+        <translation type="vanished">Kata laluan berjaya ditukar.</translation>
     </message>
     <message>
         <source>Failed to change password: %1</source>
-        <translation>Gagal menukar kata laluan: %1</translation>
+        <translation type="vanished">Gagal menukar kata laluan: %1</translation>
     </message>
 </context>
 <context>
@@ -1291,7 +1498,7 @@ Anda tidak akan mampu menggunakan akaun anda lagi!</translation>
     <name>RosterListItem</name>
     <message>
         <source>Error: Please check the JID.</source>
-        <translation>Ralat: Sila periksa JID.</translation>
+        <translation type="vanished">Ralat: Sila periksa JID.</translation>
     </message>
     <message>
         <source>Available</source>
@@ -1338,7 +1545,7 @@ Anda tidak akan mampu menggunakan akaun anda lagi!</translation>
     </message>
     <message>
         <source>Spoiler</source>
-        <translation>Beberan</translation>
+        <translation type="vanished">Beberan</translation>
     </message>
     <message>
         <source>Could not rename contact, as a result of not being connected.</source>
@@ -1388,7 +1595,11 @@ Anda tidak akan mampu menggunakan akaun anda lagi!</translation>
     </message>
     <message>
         <source>Do you really want to delete the contact &lt;b&gt;%1&lt;/b&gt; from your roster?</source>
-        <translation>Adakah anda ingin memadam kenalan &lt;b&gt;%1&lt;/b&gt; daripada senarai anda?</translation>
+        <translation type="vanished">Adakah anda ingin memadam kenalan &lt;b&gt;%1&lt;/b&gt; daripada senarai anda?</translation>
+    </message>
+    <message>
+        <source>Do you really want to delete the contact &lt;b&gt;%1&lt;/b&gt; from your contact list?</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -1471,7 +1682,7 @@ Deletion of message history saved on server</extracomment>
     </message>
     <message>
         <source>configure whether this device can be used to log in on a new device</source>
-        <translation>tetapkan sama ada peranti ini boleh digunakan untuk log masuk peranti baharu</translation>
+        <translation type="vanished">tetapkan sama ada peranti ini boleh digunakan untuk log masuk peranti baharu</translation>
     </message>
     <message>
         <source>Remove account from Kaidan</source>
@@ -1488,6 +1699,18 @@ Deletion of message history saved on server</extracomment>
     <message>
         <source>Delete account from the server</source>
         <translation>Padam akaun daripada pelayan</translation>
+    </message>
+    <message>
+        <source>Connection Settings</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Configure the hostname and port to connect to</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Configure whether this device can be used to log in on a new device</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -1568,7 +1791,7 @@ Deletion of message history saved on server</extracomment>
     </message>
     <message>
         <source>File</source>
-        <translation>Fail</translation>
+        <translation type="vanished">Fail</translation>
     </message>
     <message>
         <source>Message could not be sent.</source>
@@ -1580,6 +1803,22 @@ Deletion of message history saved on server</extracomment>
     <message>
         <source>Profile</source>
         <translation>Profil</translation>
+    </message>
+    <message>
+        <source>Rename contact</source>
+        <translation type="unfinished">Namakan semula kenalan</translation>
+    </message>
+    <message>
+        <source>Show QR code</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Remove contact</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Online devices</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

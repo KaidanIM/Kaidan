@@ -105,6 +105,14 @@ Mai no mostreu aquest codi QR als altres. Fer-ho donaria accés il·limitat al v
         <source>Show as text</source>
         <translation>Mostra com a text</translation>
     </message>
+    <message>
+        <source>Copy JID</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Copy password</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>ChangePassword</name>
@@ -134,7 +142,7 @@ Mai no mostreu aquest codi QR als altres. Fer-ho donaria accés il·limitat al v
     </message>
     <message>
         <source>You need to be connected to change your password.</source>
-        <translation>Heu de connectar-vos per a canviar la contrasenya.</translation>
+        <translation type="vanished">Heu de connectar-vos per a canviar la contrasenya.</translation>
     </message>
     <message>
         <source>After changing your password, you will need to reenter it on all your other devices.</source>
@@ -147,6 +155,14 @@ Mai no mostreu aquest codi QR als altres. Fer-ho donaria accés il·limitat al v
     <message>
         <source>Change</source>
         <translation>Canvia</translation>
+    </message>
+    <message>
+        <source>Password changed successfully</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Failed to change password: %1</source>
+        <translation type="unfinished">No s’ha pogut canviar la contrasenya: %1</translation>
     </message>
 </context>
 <context>
@@ -191,7 +207,7 @@ Mai no mostreu aquest codi QR als altres. Fer-ho donaria accés il·limitat al v
     <name>ChatPage</name>
     <message>
         <source>Compose message</source>
-        <translation>Crea un missatge</translation>
+        <translation type="vanished">Crea un missatge</translation>
     </message>
     <message>
         <source>Image</source>
@@ -223,7 +239,7 @@ Mai no mostreu aquest codi QR als altres. Fer-ho donaria accés il·limitat al v
     </message>
     <message>
         <source>Spoiler hint</source>
-        <translation>Indici de la revelació</translation>
+        <translation type="vanished">Indici de la revelació</translation>
     </message>
     <message>
         <source>Unmute notifications</source>
@@ -243,7 +259,7 @@ Mai no mostreu aquest codi QR als altres. Fer-ho donaria accés il·limitat al v
     </message>
     <message>
         <source>Close</source>
-        <translation>Tanca</translation>
+        <translation type="vanished">Tanca</translation>
     </message>
     <message>
         <source>Search up</source>
@@ -255,7 +271,7 @@ Mai no mostreu aquest codi QR als altres. Fer-ho donaria accés il·limitat al v
     </message>
     <message>
         <source>All files</source>
-        <translation>Tots els fitxers</translation>
+        <translation type="vanished">Tots els fitxers</translation>
     </message>
     <message>
         <source>Copy message</source>
@@ -272,6 +288,25 @@ Mai no mostreu aquest codi QR als altres. Fer-ho donaria accés il·limitat al v
     <message>
         <source>Quote message</source>
         <translation type="vanished">Cita el missatge</translation>
+    </message>
+    <message>
+        <source>Close message search bar</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>ChatPageSendingPane</name>
+    <message>
+        <source>Spoiler hint</source>
+        <translation type="unfinished">Indici de la revelació</translation>
+    </message>
+    <message>
+        <source>Close spoiler hint field</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Compose message</source>
+        <translation type="unfinished">Crea un missatge</translation>
     </message>
 </context>
 <context>
@@ -328,6 +363,44 @@ Mai no mostreu aquest codi QR als altres. Fer-ho donaria accés il·limitat al v
     </message>
 </context>
 <context>
+    <name>ConnectionSettings</name>
+    <message>
+        <source>Connection settings</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Change</source>
+        <translation type="unfinished">Canvia</translation>
+    </message>
+    <message>
+        <source>Cancel</source>
+        <translation type="unfinished">Cancel·la</translation>
+    </message>
+    <message>
+        <source>Connection settings could not be changed</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Connection settings changed</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>CustomConnectionSettings</name>
+    <message>
+        <source>Hostname:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The hostname must not contain blank spaces</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Port:</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>DisablePasswordDisplay</name>
     <message>
         <source>Remove password completely</source>
@@ -376,47 +449,47 @@ Make sure that you backed it up if you want to use your account later.</source>
     <name>EmojiPicker</name>
     <message>
         <source>Favorites</source>
-        <translation>Preferits</translation>
+        <translation type="vanished">Preferits</translation>
     </message>
     <message>
         <source>People</source>
-        <translation>Gent</translation>
+        <translation type="vanished">Gent</translation>
     </message>
     <message>
         <source>Nature</source>
-        <translation>Natura</translation>
+        <translation type="vanished">Natura</translation>
     </message>
     <message>
         <source>Food</source>
-        <translation>Menjar</translation>
+        <translation type="vanished">Menjar</translation>
     </message>
     <message>
         <source>Activity</source>
-        <translation>Activitat</translation>
+        <translation type="vanished">Activitat</translation>
     </message>
     <message>
         <source>Travel</source>
-        <translation>Viatges</translation>
+        <translation type="vanished">Viatges</translation>
     </message>
     <message>
         <source>Objects</source>
-        <translation>Objectes</translation>
+        <translation type="vanished">Objectes</translation>
     </message>
     <message>
         <source>Symbols</source>
-        <translation>Símbols</translation>
+        <translation type="vanished">Símbols</translation>
     </message>
     <message>
         <source>Flags</source>
-        <translation>Banderes</translation>
+        <translation type="vanished">Banderes</translation>
     </message>
     <message>
         <source>Search</source>
-        <translation>Cerca</translation>
+        <translation type="vanished">Cerca</translation>
     </message>
     <message>
         <source>Search emoji</source>
-        <translation>Cerca emojis</translation>
+        <translation type="vanished">Cerca emojis</translation>
     </message>
 </context>
 <context>
@@ -547,7 +620,7 @@ Your password will be deleted, make sure it is stored in a password manager or y
     </message>
     <message>
         <source>Connect</source>
-        <translation>Connecta</translation>
+        <translation type="vanished">Connecta</translation>
     </message>
     <message>
         <source>Invalid username or password.</source>
@@ -580,6 +653,41 @@ Your password will be deleted, make sure it is stored in a password manager or y
     <message>
         <source>An unknown error occured; see log for details.</source>
         <translation type="vanished">S&apos;ha produït un error desconegut. Vegeu el registre per més detalls.</translation>
+    </message>
+    <message>
+        <source>Connection settings</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>LoginSettingsPage</name>
+    <message>
+        <source>Connection settings</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The connection settings will be saved permanently after the first successful login. If they don&apos;t work, you&apos;ll get back to the login page.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Enable custom connection settings</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Port:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Hostname:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Reset</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Apply</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -649,6 +757,37 @@ Your password will be deleted, make sure it is stored in a password manager or y
     </message>
     <message>
         <source>%1 (%2)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Audio</source>
+        <translation type="unfinished">Àudio</translation>
+    </message>
+    <message>
+        <source>Document</source>
+        <translation type="unfinished">Document</translation>
+    </message>
+    <message>
+        <source>Location</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Image</source>
+        <translation type="unfinished">Imatge</translation>
+    </message>
+    <message>
+        <source>Video</source>
+        <translation type="unfinished">Vídeo</translation>
+    </message>
+    <message>
+        <source>File</source>
+        <translation type="unfinished">Fitxer</translation>
+    </message>
+</context>
+<context>
+    <name>Message</name>
+    <message>
+        <source>Spoiler</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -800,7 +939,7 @@ Your password will be deleted, make sure it is stored in a password manager or y
     <name>NewMedia</name>
     <message>
         <source>Ready</source>
-        <translation>Preparat</translation>
+        <translation type="vanished">Preparat</translation>
     </message>
     <message>
         <source>Initializing…</source>
@@ -844,12 +983,9 @@ Your password will be deleted, make sure it is stored in a password manager or y
         <source>Mark as read</source>
         <translation type="unfinished"></translation>
     </message>
-</context>
-<context>
-    <name>QmlUtils</name>
     <message>
         <source>Available</source>
-        <translation>Disponible</translation>
+        <translation type="unfinished">Disponible</translation>
     </message>
     <message>
         <source>Free for chat</source>
@@ -857,23 +993,50 @@ Your password will be deleted, make sure it is stored in a password manager or y
     </message>
     <message>
         <source>Away</source>
-        <translation>Lluny</translation>
+        <translation type="unfinished">Lluny</translation>
     </message>
     <message>
         <source>Do not disturb</source>
-        <translation>No em molesteu</translation>
+        <translation type="unfinished">No em molesteu</translation>
     </message>
     <message>
         <source>Away for longer</source>
-        <translation>He sortit una estona</translation>
+        <translation type="unfinished">He sortit una estona</translation>
     </message>
     <message>
         <source>Offline</source>
         <translation type="unfinished">Fora de línia</translation>
     </message>
+</context>
+<context>
+    <name>QmlUtils</name>
+    <message>
+        <source>Available</source>
+        <translation type="vanished">Disponible</translation>
+    </message>
+    <message>
+        <source>Free for chat</source>
+        <translation type="obsolete">Lliure per xatejar</translation>
+    </message>
+    <message>
+        <source>Away</source>
+        <translation type="vanished">Lluny</translation>
+    </message>
+    <message>
+        <source>Do not disturb</source>
+        <translation type="vanished">No em molesteu</translation>
+    </message>
+    <message>
+        <source>Away for longer</source>
+        <translation type="vanished">He sortit una estona</translation>
+    </message>
+    <message>
+        <source>Offline</source>
+        <translation type="obsolete">Fora de línia</translation>
+    </message>
     <message>
         <source>Error</source>
-        <translation>Error</translation>
+        <translation type="vanished">Error</translation>
     </message>
     <message>
         <source>Invalid username or password.</source>
@@ -890,10 +1053,6 @@ Your password will be deleted, make sure it is stored in a password manager or y
     <message>
         <source>Error while trying to connect securely.</source>
         <translation>S’ha produït un error en provar de connectar de forma segura.</translation>
-    </message>
-    <message>
-        <source>Could not resolve the server&apos;s address. Please check your server name.</source>
-        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Could not connect to the server.</source>
@@ -919,6 +1078,10 @@ Your password will be deleted, make sure it is stored in a password manager or y
         <source>The internet access is not permitted. Please check your system&apos;s internet access configuration.</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Could not connect to the server. Please check your internet connection or your server name.</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>QrCodeGenerator</name>
@@ -928,9 +1091,32 @@ Your password will be deleted, make sure it is stored in a password manager or y
     </message>
 </context>
 <context>
-    <name>QrCodeScannerPage</name>
+    <name>QrCodeOnboardingPage</name>
     <message>
         <source>Scan QR code</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Show explanation</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Continue without QR code</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Scan the QR code from your existing device to transfer your account.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Connecting…</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>QrCodeScanner</name>
+    <message>
+        <source>The camera format &apos;%1&apos; is not supported.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -940,30 +1126,6 @@ Your password will be deleted, make sure it is stored in a password manager or y
     <message>
         <source>Your camera is busy.
 Try to close other applications using the camera.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>The camera format &apos;%1&apos; is not supported.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Scan the QR code from your existing device to transfer your account.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Show explanation</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Scan</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Continue without QR code</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Connecting…</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -986,11 +1148,11 @@ Try to close other applications using the camera.</source>
     <name>RegistrationManager</name>
     <message>
         <source>Password changed successfully.</source>
-        <translation>La contrasenya s&apos;ha canviat correctament.</translation>
+        <translation type="vanished">La contrasenya s&apos;ha canviat correctament.</translation>
     </message>
     <message>
         <source>Failed to change password: %1</source>
-        <translation>No s’ha pogut canviar la contrasenya: %1</translation>
+        <translation type="vanished">No s’ha pogut canviar la contrasenya: %1</translation>
     </message>
 </context>
 <context>
@@ -1052,7 +1214,7 @@ You will not be able to use your account again!</source>
     <name>RosterListItem</name>
     <message>
         <source>Error: Please check the JID.</source>
-        <translation>Error: Comproveu el IDJ.</translation>
+        <translation type="vanished">Error: Comproveu el IDJ.</translation>
     </message>
     <message>
         <source>Available</source>
@@ -1095,7 +1257,7 @@ You will not be able to use your account again!</source>
     </message>
     <message>
         <source>Spoiler</source>
-        <translation>Filtració</translation>
+        <translation type="vanished">Filtració</translation>
     </message>
     <message>
         <source>Could not rename contact, as a result of not being connected.</source>
@@ -1129,7 +1291,7 @@ You will not be able to use your account again!</source>
     <name>RosterRemoveContactSheet</name>
     <message>
         <source>Do you really want to delete the contact &lt;b&gt;%1&lt;/b&gt; from your roster?</source>
-        <translation>Segur que voleu eliminar el contacte &lt;b&gt;%1&lt;/b&gt; de la vostra llista?</translation>
+        <translation type="vanished">Segur que voleu eliminar el contacte &lt;b&gt;%1&lt;/b&gt; de la vostra llista?</translation>
     </message>
     <message>
         <source>Delete contact</source>
@@ -1142,6 +1304,10 @@ You will not be able to use your account again!</source>
     <message>
         <source>Delete</source>
         <translation>Elimina</translation>
+    </message>
+    <message>
+        <source>Do you really want to delete the contact &lt;b&gt;%1&lt;/b&gt; from your contact list?</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -1219,10 +1385,6 @@ Deletion of message history saved on server</extracomment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>configure whether this device can be used to log in on a new device</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Remove account from Kaidan</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1236,6 +1398,18 @@ Deletion of message history saved on server</extracomment>
     </message>
     <message>
         <source>Delete account from the server</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Connection Settings</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Configure the hostname and port to connect to</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Configure whether this device can be used to log in on a new device</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -1299,7 +1473,7 @@ Deletion of message history saved on server</extracomment>
     </message>
     <message>
         <source>File</source>
-        <translation>Fitxer</translation>
+        <translation type="vanished">Fitxer</translation>
     </message>
     <message>
         <source>Message could not be sent.</source>
@@ -1311,6 +1485,22 @@ Deletion of message history saved on server</extracomment>
     <message>
         <source>Profile</source>
         <translation>Perfil</translation>
+    </message>
+    <message>
+        <source>Rename contact</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Show QR code</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Remove contact</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Online devices</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

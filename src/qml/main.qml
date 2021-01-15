@@ -89,11 +89,7 @@ Kirigami.ApplicationWindow {
 	Component {id: qrCodeOnboardingPage; QrCodeOnboardingPage {}}
 	Component {id: userProfilePage; UserProfilePage {}}
 
-	onWidthChanged: {
-		// Show the rosterPage instead of the emptyChatPage if the window is narrow.
-		if (pageStack.currentItem instanceof EmptyChatPage && width < 680)
-			pageStack.goBack()
-	}
+	onWidthChanged: showRosterPageForNarrowWindow()
 
 	function raiseWindow() {
 		if (!active) {
@@ -129,6 +125,13 @@ Kirigami.ApplicationWindow {
 		pageStack.push(rosterPage)
 		if (!Kirigami.Settings.isMobile)
 			pageStack.push(emptyChatPage)
+		showRosterPageForNarrowWindow()
+	}
+
+	// Show the rosterPage instead of the emptyChatPage if the window is narrow.
+	function showRosterPageForNarrowWindow() {
+		if (pageStack.currentItem instanceof EmptyChatPage && width < 680)
+			pageStack.goBack()
 	}
 
 	/**

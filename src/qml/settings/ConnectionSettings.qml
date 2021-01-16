@@ -86,7 +86,7 @@ Kirigami.Page {
 		}
 	}
 
-	Component.onCompleted: customConnectionSettings.hostField.forceFocus()
+	Component.onCompleted: customConnectionSettings.hostField.forceActiveFocus()
 
 	Connections {
 		target: Kaidan

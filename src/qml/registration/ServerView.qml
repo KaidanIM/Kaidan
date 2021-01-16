@@ -101,7 +101,7 @@ FieldView {
 						customConnectionSettings.visible = !customConnectionSettings.visible
 
 						if (customConnectionSettings.visible)
-							customConnectionSettings.forceFocus()
+							customConnectionSettings.forceActiveFocus()
 					}
 				}
 			]
@@ -112,7 +112,7 @@ FieldView {
 					switch (event.key) {
 					case Qt.Key_Return:
 					case Qt.Key_Enter:
-						customConnectionSettings.forceFocus()
+						customConnectionSettings.forceActiveFocus()
 						event.accepted = true
 					}
 				}

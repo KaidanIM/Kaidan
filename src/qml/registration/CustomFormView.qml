@@ -48,7 +48,7 @@ View {
 		displayInstructions: false
 	}
 
-	function forceFocus() {
+	function forceActiveFocus() {
 		registrationForm.firstVisibleTextField.forceActiveFocus()
 	}
 }

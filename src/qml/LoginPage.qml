@@ -77,9 +77,9 @@ Kirigami.Page {
 							customConnectionSettings.visible = !customConnectionSettings.visible
 
 							if (jidField.valid && customConnectionSettings.visible)
-								customConnectionSettings.forceFocus()
+								customConnectionSettings.forceActiveFocus()
 							else
-								jidField.forceFocus()
+								jidField.forceActiveFocus()
 						}
 					}
 				]
@@ -121,11 +121,11 @@ Kirigami.Page {
 				onClicked: {
 					// If the JID is invalid, focus its field.
 					if (!jidField.valid) {
-						jidField.forceFocus()
+						jidField.forceActiveFocus()
 					// If the password is invalid, focus its field.
 					// This also implies that if the JID field is focused and the password invalid, the password field will be focused instead of immediately trying to connect.
 					} else if (!passwordField.valid) {
-						passwordField.forceFocus()
+						passwordField.forceActiveFocus()
 					} else {
 						AccountManager.jid = jidField.text
 						AccountManager.password = passwordField.text
@@ -146,6 +146,6 @@ Kirigami.Page {
 
 	Component.onCompleted: {
 		AccountManager.resetCustomConnectionSettings()
-		jidField.forceFocus()
+		jidField.forceActiveFocus()
 	}
 }

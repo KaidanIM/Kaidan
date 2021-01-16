@@ -79,7 +79,7 @@ Kirigami.Page {
 
 			onTriggered: {
 				renameSheet.open()
-				renameSheet.forceFocus()
+				renameSheet.forceActiveFocus()
 			}
 		}
 

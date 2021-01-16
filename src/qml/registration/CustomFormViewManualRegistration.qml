@@ -37,7 +37,7 @@ CustomFormView {
 	// This is used for automatically focusing the first field of the form.
 	Controls.SwipeView.onIsCurrentItemChanged: {
 		if (Controls.SwipeView.isCurrentItem) {
-			forceFocus()
+			forceActiveFocus()
 		}
 	}
 }

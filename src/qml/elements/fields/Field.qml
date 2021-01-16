@@ -115,7 +115,7 @@ ColumnLayout {
 	 * Focuses the input field and selects its text.
 	 * If the input field is already focused, the focusing is executed again to trigger its onFocusChanged().
 	 */
-	function forceFocus() {
+	function forceActiveFocus() {
 		if (inputField.focus)
 			inputField.focus = false
 

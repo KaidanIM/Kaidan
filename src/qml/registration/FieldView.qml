@@ -45,21 +45,21 @@ View {
 		field.toggleHintForInvalidText()
 	}
 
-	function forceFocus() {
-		field.forceFocus()
+	function forceActiveFocus() {
+		field.forceActiveFocus()
 	}
 
 	Controls.SwipeView.onIsCurrentItemChanged: {
 		if (Controls.SwipeView.isCurrentItem) {
 			if (!field.focus) {
-				forceFocus()
+				forceActiveFocus()
 			}
 		}
 	}
 
 	Component.onCompleted: {
 		if (Controls.SwipeView.isCurrentItem) {
-			forceFocus()
+			forceActiveFocus()
 		}
 	}
 }

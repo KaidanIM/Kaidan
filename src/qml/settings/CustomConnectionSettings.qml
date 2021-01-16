@@ -114,7 +114,7 @@ RowLayout {
 		}
 	}
 
-	function forceFocus() {
-		hostField.forceFocus()
+	function forceActiveFocus() {
+		hostField.forceActiveFocus()
 	}
 }

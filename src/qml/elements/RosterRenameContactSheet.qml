@@ -77,7 +77,7 @@ Kirigami.OverlaySheet {
 		}
 	}
 
-	function forceFocus() {
+	function forceActiveFocus() {
 		nameField.forceActiveFocus()
 	}
 }

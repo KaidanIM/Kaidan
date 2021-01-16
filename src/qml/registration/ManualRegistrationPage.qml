@@ -270,7 +270,7 @@ RegistrationPage {
 	 */
 	function focusFieldViews() {
 		if (swipeView.currentItem === usernameView || swipeView.currentIndex === passwordView || swipeView.currentIndex === customFormView)
-			swipeView.currentItem.forceFocus()
+			swipeView.currentItem.forceActiveFocus()
 	}
 
 	/**

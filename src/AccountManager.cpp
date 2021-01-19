@@ -245,7 +245,7 @@ void AccountManager::deleteCredentials()
 	setPassword({});
 	resetCustomConnectionSettings();
 
-	emit newCredentialsNeeded();
+	emit credentialsNeeded();
 }
 
 void AccountManager::deleteSettings()

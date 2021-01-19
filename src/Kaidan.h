@@ -270,7 +270,7 @@ signals:
 	 *
 	 * The client will be in disconnected state when this is emitted.
 	 */
-	void newCredentialsNeeded();
+	void credentialsNeeded();
 
 	/**
 	 * Emitted when an authenticated connection to the server is established with new credentials for the first time.

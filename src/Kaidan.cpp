@@ -225,7 +225,7 @@ void Kaidan::initializeClientWorker(bool enableLogging)
 	m_client = new ClientWorker(m_caches, enableLogging);
 	m_client->moveToThread(m_cltThrd);
 
-	connect(AccountManager::instance(), &AccountManager::newCredentialsNeeded, this, &Kaidan::newCredentialsNeeded);
+	connect(AccountManager::instance(), &AccountManager::credentialsNeeded, this, &Kaidan::credentialsNeeded);
 
 	connect(m_client, &ClientWorker::loggedInWithNewCredentials, this, &Kaidan::loggedInWithNewCredentials);
 	connect(m_client, &ClientWorker::connectionStateChanged, this, &Kaidan::setConnectionState);

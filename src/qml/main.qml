@@ -171,7 +171,7 @@ Kirigami.ApplicationWindow {
 
 		onRaiseWindowRequested: raiseWindow()
 		onPassiveNotificationRequested: passiveNotification(text)
-		onNewCredentialsNeeded: openStartPage()
+		onCredentialsNeeded: openStartPage()
 		onLoggedInWithNewCredentials: openChatView()
 		onSubscriptionRequestReceived: handleSubRequest(from, msg)
 	}

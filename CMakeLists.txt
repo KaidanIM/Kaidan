@@ -423,7 +423,7 @@ elseif(UNIX AND NOT APPLE)
 	        DESTINATION "${KDE_INSTALL_APPDIR}"
 	)
 	# install metainfo
-	install(FILES "misc/metadata.xml"
+	install(FILES "misc/im.kaidan.kaidan.appdata.xml"
 		DESTINATION "${KDE_INSTALL_METAINFODIR}"
 		RENAME "${APPLICATION_ID}.appdata.xml"
 	)

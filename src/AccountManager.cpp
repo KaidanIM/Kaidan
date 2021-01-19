@@ -189,10 +189,8 @@ bool AccountManager::loadCredentials()
 
 		// If no credentials could be loaded from the settings file, notify the GUI to ask
 		// the user for credentials.
-		if (!hasEnoughCredentialsForLogin()) {
-			emit newCredentialsNeeded();
+		if (!hasEnoughCredentialsForLogin())
 			return false;
-		}
 	}
 
 	return true;

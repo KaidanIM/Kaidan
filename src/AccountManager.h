@@ -183,7 +183,7 @@ public:
 	 *
 	 * @return true if the credentials could be loaded, otherwise false
 	 */
-	bool loadCredentials();
+	Q_INVOKABLE bool loadCredentials();
 
 	/**
 	 * Stores the currently set JID in the settings file.

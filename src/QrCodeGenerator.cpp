@@ -40,6 +40,8 @@
 #include "Kaidan.h"
 #include "qxmpp-exts/QXmppUri.h"
 
+#include <stdexcept>
+
 #define COLOR_TABLE_INDEX_FOR_WHITE 0
 #define COLOR_TABLE_INDEX_FOR_BLACK 1
 

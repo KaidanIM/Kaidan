@@ -112,6 +112,9 @@ Controls.Pane {
 				placeholderText: qsTr("Compose message")
 				background: Item {}
 				wrapMode: TextEdit.Wrap
+				Layout.leftMargin: Style.isMaterial ? 6 : 0
+				Layout.rightMargin: Style.isMaterial ? 6 : 0
+				Layout.bottomMargin: Style.isMaterial ? -8 : 0
 				Layout.fillWidth: true
 				verticalAlignment: TextEdit.AlignVCenter
 				state: "compose"

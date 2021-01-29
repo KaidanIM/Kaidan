@@ -56,8 +56,6 @@ ExplainedContentPage {
 	secondaryButton.text: qsTr("Continue without QR code")
 	secondaryButton.onClicked: pageStack.layers.push(registrationLoginDecisionPage)
 
-	property bool connecting: false
-
 	QrCodeScanner {
 		id: scanner
 		parent: root
@@ -70,7 +68,6 @@ ExplainedContentPage {
 				// Try to log in by the data from the decoded QR code.
 				switch (Kaidan.logInByUri(result)) {
 				case Enums.Connecting:
-					connecting = true
 					break
 				case Enums.PasswordNeeded:
 					pageStack.layers.push(loginPage)
@@ -126,7 +123,7 @@ ExplainedContentPage {
 		ColumnLayout {
 			id: loadingArea
 			anchors.centerIn: parent
-			visible: connecting
+			visible: Kaidan.connectionState === Enums.StateConnecting
 
 			Controls.BusyIndicator {
 				Layout.alignment: Qt.AlignHCenter

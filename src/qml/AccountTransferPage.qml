@@ -94,6 +94,8 @@ ExplainedContentPage {
 	QrCode {
 		id: qrCode
 		visible: false
+		Layout.fillWidth: true
+		Layout.fillHeight: true
 	}
 
 	Kirigami.FormLayout {

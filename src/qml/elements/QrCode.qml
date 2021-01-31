@@ -42,8 +42,6 @@ import im.kaidan.kaidan 1.0
 Kirigami.Icon {
 	id: qrCode
 	Layout.alignment: Qt.AlignCenter
-	Layout.fillWidth: true
-	Layout.fillHeight: true
 
 	source: {
 		if (width > 0)

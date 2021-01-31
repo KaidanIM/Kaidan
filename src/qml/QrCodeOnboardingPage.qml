@@ -41,7 +41,9 @@ import "elements"
  * This page is used for logging in by scanning a QR code which contains an XMPP login URI.
  */
 ExplainedContentPage {
+	id: root
 	title: qsTr("Scan QR code")
+	useMarginsForContent: false
 	explanationToggleButton.text: explanationToggleButton.checked ? qsTr("Show explanation") : qsTr("Scan QR code")
 
 	explanationToggleButton.onClicked: {
@@ -54,25 +56,35 @@ ExplainedContentPage {
 	secondaryButton.text: qsTr("Continue without QR code")
 	secondaryButton.onClicked: pageStack.layers.push(registrationLoginDecisionPage)
 
-	property bool connecting: false
-
 	QrCodeScanner {
 		id: scanner
+		parent: root
 		anchors.fill: parent
 
+		property bool acceptResult: true
+
 		filter.onScanningSucceeded: {
-			if (!connecting) {
+			if (acceptResult) {
 				// Try to log in by the data from the decoded QR code.
 				switch (Kaidan.logInByUri(result)) {
 				case Enums.Connecting:
-					connecting = true
-					break;
+					break
 				case Enums.PasswordNeeded:
 					pageStack.layers.push(loginPage)
-					break;
+					break
 				case Enums.InvalidLoginUri:
+					acceptResult = false
+					resetAcceptResultTimer.start()
+					showPassiveNotification(qsTr("This QR code is not a valid login QR code."), Kirigami.Units.veryLongDuration * 4)
 				}
 			}
+		}
+
+		// timer to accept the result again after an invalid login URI was scanned
+		Timer {
+			id: resetAcceptResultTimer
+			interval: Kirigami.Units.veryLongDuration * 4
+			onTriggered: scanner.acceptResult = true
 		}
 	}
 
@@ -94,46 +106,32 @@ ExplainedContentPage {
 		}
 	}
 
-	Rectangle {
-		z: loadingArea.z
-		anchors.fill: loadingArea
-		anchors.margins: -8
-		radius: roundedCornersRadius
-		color: Kirigami.Theme.backgroundColor
-		opacity: 0.90
-		visible: loadingArea.visible
-	}
-
-	ColumnLayout {
-		id: loadingArea
-		z: 2
+	Item {
+		parent: root
 		anchors.centerIn: parent
-		visible: connecting
 
-		Controls.BusyIndicator {
-			Layout.alignment: Qt.AlignHCenter
+		// background of loadingArea
+		Rectangle {
+			anchors.fill: loadingArea
+			anchors.margins: -8
+			radius: roundedCornersRadius
+			color: Kirigami.Theme.backgroundColor
+			opacity: 0.9
+			visible: loadingArea.visible
 		}
 
-		Controls.Label {
-			text: "<i>" + qsTr("Connecting…") + "</i>"
-			color: Kirigami.Theme.textColor
-		}
+		ColumnLayout {
+			id: loadingArea
+			anchors.centerIn: parent
+			visible: Kaidan.connectionState === Enums.StateConnecting
 
-		Connections {
-			target: Kaidan
+			Controls.BusyIndicator {
+				Layout.alignment: Qt.AlignHCenter
+			}
 
-			onConnectionStateChanged: {
-				if (connecting) {
-					switch (Kaidan.connectionState) {
-					case Enums.StateConnected:
-						popAllLayers()
-						break
-					case Enums.StateDisconnected:
-						showPassiveNotificationForConnectionError()
-						connecting = false
-						break
-					}
-				}
+			Controls.Label {
+				text: "<i>" + qsTr("Connecting…") + "</i>"
+				color: Kirigami.Theme.textColor
 			}
 		}
 	}

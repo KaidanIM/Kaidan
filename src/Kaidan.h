@@ -286,7 +286,7 @@ signals:
 	 *
 	 * The client will be in disconnected state when this is emitted.
 	 */
-	void newCredentialsNeeded();
+	void credentialsNeeded();
 
 	/**
 	 * Emitted when an authenticated connection to the server is established with new credentials for the first time.
@@ -500,11 +500,6 @@ private:
 	 * @param enableLogging true to enable logging, otherwise false
 	 */
 	void initializeClientWorker(bool enableLogging = true);
-
-	/**
-	 * Notifies if no valid login URI was found.
-	 */
-	void notifyForInvalidLoginUri();
 
 	Database *m_database;
 	QThread *m_dbThrd;

@@ -113,11 +113,18 @@ Kirigami.Page {
 
 	Kirigami.OverlaySheet {
 		id: qrCodeSheet
+		parent: applicationWindow().overlay
 
-		QrCode {
-			width: parent.width < parent.height ? parent.width : parent.height
-			height: width
-			jid: root.jid
+		ColumnLayout {
+			QrCode {
+				Layout.fillHeight: true
+				Layout.fillWidth: true
+				Layout.preferredWidth: 500
+				Layout.preferredHeight: 500
+				Layout.maximumHeight: applicationWindow().height * 0.5
+
+				jid: root.jid
+			}
 		}
 	}
 

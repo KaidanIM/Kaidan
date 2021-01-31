@@ -178,14 +178,12 @@ void Kaidan::addOpenUri(const QString &uri)
 quint8 Kaidan::logInByUri(const QString &uri)
 {
 	if (!QXmppUri::isXmppUri(uri)) {
-		notifyForInvalidLoginUri();
 		return quint8(LoginByUriState::InvalidLoginUri);
 	}
 
 	QXmppUri parsedUri(uri);
 
 	if (!CredentialsValidator::isAccountJidValid(parsedUri.jid())) {
-		notifyForInvalidLoginUri();
 		return quint8(LoginByUriState::InvalidLoginUri);
 	}
 
@@ -236,7 +234,7 @@ void Kaidan::initializeClientWorker(bool enableLogging)
 	m_client = new ClientWorker(m_caches, enableLogging);
 	m_client->moveToThread(m_cltThrd);
 
-	connect(AccountManager::instance(), &AccountManager::newCredentialsNeeded, this, &Kaidan::newCredentialsNeeded);
+	connect(AccountManager::instance(), &AccountManager::credentialsNeeded, this, &Kaidan::credentialsNeeded);
 
 	connect(m_client, &ClientWorker::loggedInWithNewCredentials, this, &Kaidan::loggedInWithNewCredentials);
 	connect(m_client, &ClientWorker::connectionStateChanged, this, &Kaidan::setConnectionState);
@@ -247,12 +245,6 @@ void Kaidan::initializeClientWorker(bool enableLogging)
 
 	connect(m_cltThrd, &QThread::started, m_client, &ClientWorker::initialize);
 	m_cltThrd->start();
-}
-
-void Kaidan::notifyForInvalidLoginUri()
-{
-	qWarning() << "[main]" << "No valid login URI found.";
-	emit passiveNotificationRequested(tr("No valid login QR code found."));
 }
 
 ClientWorker *Kaidan::client() const

@@ -179,11 +179,11 @@ public:
 	/**
 	 * Loads all credentials used to connect to the server.
 	 *
-	 * If credentials are missing for a login, the signal newCredentialsNeeded() is emitted.
+	 * If credentials are missing for a login, the signal credentialsNeeded() is emitted.
 	 *
-	 * @return true if the credentials could be loaded, false otherwise
+	 * @return true if the credentials could be loaded, otherwise false
 	 */
-	bool loadCredentials();
+	Q_INVOKABLE bool loadCredentials();
 
 	/**
 	 * Stores the currently set JID in the settings file.
@@ -243,9 +243,9 @@ signals:
 	void portChanged();
 
 	/**
-	 * Emitted when there are no (correct) credentials and new ones are needed.
+	 * Emitted when there are no (correct) credentials to log in.
 	 */
-	void newCredentialsNeeded();
+	void credentialsNeeded();
 
 private:
 	/**

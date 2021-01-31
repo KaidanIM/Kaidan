@@ -59,7 +59,12 @@ Kirigami.ApplicationWindow {
 	}
 
 	// Global and Contextual Drawers
-	globalDrawer: GlobalDrawer {}
+	// It is initialized as invisible.
+	// That way, it does not pop up for a moment before the startPage is opened.
+	globalDrawer: GlobalDrawer {
+		visible: false
+	}
+
 	contextDrawer: Kirigami.ContextDrawer {
 		id: contextDrawer
 	}
@@ -174,7 +179,7 @@ Kirigami.ApplicationWindow {
 
 		onRaiseWindowRequested: raiseWindow()
 		onPassiveNotificationRequested: passiveNotification(text)
-		onNewCredentialsNeeded: openStartPage()
+		onCredentialsNeeded: openStartPage()
 		onLoggedInWithNewCredentials: openChatView()
 		onSubscriptionRequestReceived: handleSubRequest(from, msg)
 	}
@@ -189,10 +194,13 @@ Kirigami.ApplicationWindow {
 			}
 		}
 
-		openChatView()
-
-		// Announce that the user interface is ready and the application can start connecting.
-		Kaidan.logIn()
+		if (AccountManager.loadCredentials()) {
+			openChatView()
+			// Announce that the user interface is ready and the application can start connecting.
+			Kaidan.logIn()
+		} else {
+			openStartPage()
+		}
 	}
 
 	Component.onDestruction: {

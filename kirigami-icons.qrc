@@ -34,10 +34,9 @@
 		<file alias="im-user-offline.svg">3rdparty/breeze-icons/icons/actions/22/im-user-offline.svg</file>
 		<file alias="im-invisible-user.svg">3rdparty/breeze-icons/icons/actions/22/im-invisible-user.svg</file>
 		<file alias="dialog-cancel.svg">3rdparty/breeze-icons/icons/actions/22/dialog-cancel.svg</file>
-		<file alias="media-record.svg">3rdparty/breeze-icons/icons/actions/22/media-record.svg</file>
-		<file alias="media-playback-stop.svg">3rdparty/breeze-icons/icons/actions/22/media-playback-stop.svg</file>
 		<file alias="error.svg">3rdparty/breeze-icons/icons/actions/22/error.svg</file>
 		<file alias="view-barcode-qr.svg">3rdparty/breeze-icons/icons/actions/22/view-barcode-qr.svg</file>
+		<file alias="crosshairs.svg">3rdparty/breeze-icons/icons/actions/22/crosshairs.svg</file>
 	</qresource>
 
 	<qresource prefix="/icons/breeze/emotes/22">
@@ -56,6 +55,11 @@
 		<file alias="window-close-symbolic.svg">3rdparty/breeze-icons/icons/actions/symbolic/window-close-symbolic.svg</file>
 		<file alias="edit-delete-symbolic.svg">3rdparty/breeze-icons/icons/actions/symbolic/edit-delete-symbolic.svg</file>
 		<file alias="help-about-symbolic.svg">3rdparty/breeze-icons/icons/actions/symbolic/help-about-symbolic.svg</file>
+		<file alias="media-playback-start-symbolic.svg">3rdparty/breeze-icons/icons/actions/symbolic/media-playback-start-symbolic.svg</file>
+		<file alias="media-playback-pause-symbolic.svg">3rdparty/breeze-icons/icons/actions/symbolic/media-playback-pause-symbolic.svg</file>
+		<file alias="media-playback-stop-symbolic.svg">3rdparty/breeze-icons/icons/actions/symbolic/media-playback-stop-symbolic.svg</file>
+		<file alias="media-record-symbolic.svg">3rdparty/breeze-icons/icons/actions/symbolic/media-record-symbolic.svg</file>
+		<file alias="document-open-symbolic.svg">3rdparty/breeze-icons/icons/actions/symbolic/document-open-symbolic.svg</file>
 	</qresource>
 
 	<qresource prefix="/icons/breeze/devices/symbolic">

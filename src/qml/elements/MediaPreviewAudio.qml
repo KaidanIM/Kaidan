@@ -87,8 +87,8 @@ MediaPreview {
 				id: playPause
 
 				icon.name: mediaPlayer.playbackState === Multimedia.MediaPlayer.PlayingState
-						   ? 'media-playback-pause'
-						   : 'media-playback-start'
+						   ? 'media-playback-pause-symbolic'
+						   : 'media-playback-start-symbolic'
 
 				onClicked: {
 					switch (mediaPlayer.playbackState) {
@@ -159,7 +159,7 @@ MediaPreview {
 				visible: root.showOpenButton
 
 				icon {
-					name: 'document-open'
+					name: 'document-open-symbolic'
 				}
 
 				onClicked: Qt.openUrlExternally(root.mediaSource)

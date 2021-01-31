@@ -47,17 +47,17 @@ Kirigami.Page {
 	bottomPadding: 0
 
 	default property alias __data: centeredContent.data
-	property alias centeredContent: centeredContent
 	property alias explanation: explanation
 	property alias explanationToggleButton: explanationToggleButton
 	property alias secondaryButton: secondaryButton
 
+	property bool useMarginsForContent: true
+
 	GridLayout {
 		id: centeredContent
-		width: parent.width
-		height: buttonArea.y - anchors.topMargin
-		anchors.top: parent.top
-		anchors.topMargin: 20
+		anchors.fill: parent
+		anchors.margins: useMarginsForContent ? 20 : 0
+		anchors.bottomMargin: useMarginsForContent ? parent.height - buttonArea.y : 0
 	}
 
 	// background of the explanation area
@@ -86,14 +86,9 @@ Kirigami.Page {
 			Layout.fillHeight: true
 		}
 
-		// placeholder for the explanation when it is invisible
-		Item {
-			Layout.fillHeight: true
-		}
-
 		ColumnLayout {
 			id: buttonArea
-			Layout.alignment: Qt.AlignHCenter
+			Layout.alignment: Qt.AlignBottom | Qt.AlignHCenter
 			Layout.maximumWidth: largeButtonWidth
 
 			// button for showing or hiding the explanation

@@ -148,9 +148,6 @@ void ClientWorker::logIn()
 		// Store the latest online state which is restored when opening Kaidan again after closing.
 		m_caches->settings->setValue(KAIDAN_SETTINGS_AUTH_ONLINE, true);
 
-		if (!AccountManager::instance()->loadCredentials())
-			return;
-
 		QXmppConfiguration config;
 		config.setResource(AccountManager::instance()->jidResource());
 		config.setPassword(AccountManager::instance()->password());

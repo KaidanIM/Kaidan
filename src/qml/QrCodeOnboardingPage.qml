@@ -40,7 +40,7 @@ import "elements"
 /**
  * This page is used for logging in by scanning a QR code which contains an XMPP login URI.
  */
-ExplainedContentPage {
+ExplanationTogglePage {
 	id: root
 	title: qsTr("Scan QR code")
 	useMarginsForContent: false
@@ -55,13 +55,57 @@ ExplainedContentPage {
 
 	secondaryButton.text: qsTr("Continue without QR code")
 	secondaryButton.onClicked: pageStack.layers.push(registrationLoginDecisionPage)
+	secondaryButton.flat: Style.isMaterial ? explanation.visible : false
 
-	QrCodeScanner {
+	explanation: ColumnLayout {
+		CenteredAdaptiveText {
+			text: qsTr("Scan the QR code from your existing device to transfer your account.")
+			Layout.topMargin: 10
+			scaleFactor: 1.5
+		}
+
+		Image {
+			source: Utils.getResourcePath("images/onboarding/account-transfer.svg")
+			sourceSize.height: root.height
+			fillMode: Image.PreserveAspectFit
+			Layout.fillHeight: true
+			Layout.fillWidth: true
+		}
+	}
+
+	content: QrCodeScanner {
 		id: scanner
-		parent: root
-		anchors.fill: parent
+		Layout.fillWidth: true
+		Layout.fillHeight: true
 
-		property bool acceptResult: true
+		Item {
+			anchors.centerIn: parent
+
+			// background of loadingArea
+			Rectangle {
+				anchors.fill: loadingArea
+				anchors.margins: -8
+				radius: roundedCornersRadius
+				color: Kirigami.Theme.backgroundColor
+				opacity: 0.9
+				visible: loadingArea.visible
+			}
+
+			ColumnLayout {
+				id: loadingArea
+				anchors.centerIn: parent
+				visible: Kaidan.connectionState === Enums.StateConnecting
+
+				Controls.BusyIndicator {
+					Layout.alignment: Qt.AlignHCenter
+				}
+
+				Controls.Label {
+					text: "<i>" + qsTr("Connecting…") + "</i>"
+					color: Kirigami.Theme.textColor
+				}
+			}
+		}
 
 		filter.onScanningSucceeded: {
 			if (acceptResult) {
@@ -80,59 +124,13 @@ ExplainedContentPage {
 			}
 		}
 
+		property bool acceptResult: true
+
 		// timer to accept the result again after an invalid login URI was scanned
 		Timer {
 			id: resetAcceptResultTimer
 			interval: Kirigami.Units.veryLongDuration * 4
 			onTriggered: scanner.acceptResult = true
-		}
-	}
-
-	ColumnLayout {
-		parent: explanation
-
-		CenteredAdaptiveText {
-			text: qsTr("Scan the QR code from your existing device to transfer your account.")
-			Layout.topMargin: 10
-			scaleFactor: 1.5
-		}
-
-		Image {
-			source: Utils.getResourcePath("images/onboarding/account-transfer.svg")
-			sourceSize.height: explanation.parent.height
-			fillMode: Image.PreserveAspectFit
-			Layout.fillHeight: true
-			Layout.fillWidth: true
-		}
-	}
-
-	Item {
-		parent: root
-		anchors.centerIn: parent
-
-		// background of loadingArea
-		Rectangle {
-			anchors.fill: loadingArea
-			anchors.margins: -8
-			radius: roundedCornersRadius
-			color: Kirigami.Theme.backgroundColor
-			opacity: 0.9
-			visible: loadingArea.visible
-		}
-
-		ColumnLayout {
-			id: loadingArea
-			anchors.centerIn: parent
-			visible: Kaidan.connectionState === Enums.StateConnecting
-
-			Controls.BusyIndicator {
-				Layout.alignment: Qt.AlignHCenter
-			}
-
-			Controls.Label {
-				text: "<i>" + qsTr("Connecting…") + "</i>"
-				color: Kirigami.Theme.textColor
-			}
 		}
 	}
 }

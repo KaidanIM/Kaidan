@@ -28,29 +28,16 @@
  *  along with Kaidan.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-import QtQuick.Layouts 1.12
-import org.kde.kirigami 2.12 as Kirigami
-
-import im.kaidan.kaidan 1.0
-
 /**
- * This is a QR code generated for a specified JID.
- *
- * If a JID is provided, a QR code with a general XMPP URI for sharing with contacts is generated.
- * Otherwise a QR code with a login XMPP URI for logging in on another device is generated.
+ * This is the base for pages having an explained content and a button for toggling the explanation.
  */
-Kirigami.Icon {
-	id: qrCode
+ExplainedContentPage {
+	id: root
+	primaryButton.checkable: true
+	primaryButton.onClicked: explanationArea.visible = !explanationArea.visible
 
-	source: {
-		if (width > 0)
-			return jid ? qrCodeGenerator.generateBareJidQrCode(width, jid) : qrCodeGenerator.generateLoginUriQrCode(width)
-		return ""
-	}
-
-	property string jid
-
-	QrCodeGenerator {
-		id: qrCodeGenerator
-	}
+	/**
+	 * button for showing or hiding the explanation
+	 */
+	property alias explanationToggleButton: root.primaryButton
 }

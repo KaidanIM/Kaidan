@@ -5,11 +5,11 @@
     <name>AboutDialog</name>
     <message>
         <source>A simple, user-friendly Jabber/XMPP client</source>
-        <translation>Un client Jabber/XMPP, simple et convivial</translation>
+        <translation>Un client Jabber/XMPP simple et convivial</translation>
     </message>
     <message>
         <source>License:</source>
-        <translation>Licence :</translation>
+        <translation>Licence :</translation>
     </message>
     <message>
         <source>Source code on GitHub</source>
@@ -121,19 +121,19 @@ Assurez vous d&apos;en avoir fais une copie si vous comptez réutiliser ce compt
     </message>
     <message>
         <source>Allow to add new devices using a QR-Code, but never show the password as text. This action can not be undone, so consider storing the password in another way before using it.</source>
-        <translation>Autoriser l&apos;ajout de nouveaux appareils en utilisant un code QR, mais ne jamais afficher le mot de passe sous forme de texte. Cette action ne peut pas être annulée, veuillez donc envisager de stocker le mot de passe d&apos;une autre manière avant de l&apos;utiliser.</translation>
+        <translation>Autoriser l’ajout de nouveaux appareils en utilisant un QR code, mais ne jamais afficher le mot de passe sous forme de texte. Cette action ne peut pas être annulée, veuillez donc envisager de conserver le mot de passe d’une autre manière avant de l’utiliser.</translation>
     </message>
     <message>
         <source>Disable showing the password</source>
-        <translation>Désactiver l&apos;affichage du mot de passe</translation>
+        <translation>Désactiver l’affichage du mot de passe</translation>
     </message>
     <message>
         <source>Don&apos;t expose the password in any form. This action can not be undone.</source>
-        <translation>N&apos;expose pas le mot de passe sous quelque forme que ce soit. Cette action ne peut pas être annulée.</translation>
+        <translation>Ne jamais exposer le mot de passe sous quelque forme que ce soit. Cette action ne peut pas être annulée.</translation>
     </message>
     <message>
         <source>Disable showing the QR-Code and password</source>
-        <translation>Désactiver l&apos;affichage du code QR et d mot de passe</translation>
+        <translation>Désactiver l’affichage du QR code et du mot de passe</translation>
     </message>
 </context>
 <context>
@@ -147,18 +147,18 @@ Assurez vous d&apos;en avoir fais une copie si vous comptez réutiliser ce compt
 
 Attention:
 Never show this QR code to anyone else. It would allow unlimited access to your account!</source>
-        <translation>Scannez le QR code ou entrez les identifiants sur un autre appareil pour vous y connecter.
+        <translation>Scannez le QR code ou entrez les identifiants sur un autre appareil pour vous connecter sur celui-ci.
 
-Attention :
+Attention :
 Ne montrez ce QR code à personne d&apos;autre. Il permet un accès complet à votre compte !</translation>
     </message>
     <message>
         <source>Chat address:</source>
-        <translation>Adresse de clavardage :</translation>
+        <translation>Adresse de clavardage :</translation>
     </message>
     <message>
         <source>Password:</source>
-        <translation>Mot de passe :</translation>
+        <translation>Mot de passe :</translation>
     </message>
     <message>
         <source>Hide QR code</source>
@@ -170,7 +170,7 @@ Ne montrez ce QR code à personne d&apos;autre. Il permet un accès complet à v
     </message>
     <message>
         <source>Hide text</source>
-        <translation>Cacher le texte</translation>
+        <translation>Masquer le texte</translation>
     </message>
     <message>
         <source>Show as text</source>
@@ -178,11 +178,11 @@ Ne montrez ce QR code à personne d&apos;autre. Il permet un accès complet à v
     </message>
     <message>
         <source>Copy JID</source>
-        <translation type="unfinished"></translation>
+        <translation>Copier le JID</translation>
     </message>
     <message>
         <source>Copy password</source>
-        <translation type="unfinished"></translation>
+        <translation>Copier le mot de passe</translation>
     </message>
 </context>
 <context>
@@ -200,15 +200,15 @@ Ne montrez ce QR code à personne d&apos;autre. Il permet un accès complet à v
     </message>
     <message>
         <source>Current password:</source>
-        <translation>Mot de passe actuel :</translation>
+        <translation>Mot de passe actuel :</translation>
     </message>
     <message>
         <source>New password:</source>
-        <translation>Nouveau mot de passe :</translation>
+        <translation>Nouveau mot de passe :</translation>
     </message>
     <message>
         <source>New password (repeat):</source>
-        <translation>Nouveau mot de passe (répétez) :</translation>
+        <translation>Nouveau mot de passe (répétez) :</translation>
     </message>
     <message>
         <source>New passwords do not match.</source>
@@ -232,15 +232,15 @@ Ne montrez ce QR code à personne d&apos;autre. Il permet un accès complet à v
     </message>
     <message>
         <source>Change</source>
-        <translation>Changer</translation>
+        <translation>Modifier</translation>
     </message>
     <message>
         <source>Password changed successfully</source>
-        <translation type="unfinished"></translation>
+        <translation>Mot de passe modifié</translation>
     </message>
     <message>
         <source>Failed to change password: %1</source>
-        <translation type="unfinished">Échec lors de la modification du mot de passe : %1</translation>
+        <translation>Échec de la modification du mot de passe : %1</translation>
     </message>
 </context>
 <context>
@@ -259,7 +259,7 @@ Ne montrez ce QR code à personne d&apos;autre. Il permet un accès complet à v
     </message>
     <message>
         <source>Spoiler</source>
-        <translation>Révélation</translation>
+        <translation>Avertissement sur le contenu</translation>
     </message>
     <message>
         <source>Download</source>
@@ -325,7 +325,7 @@ Ne montrez ce QR code à personne d&apos;autre. Il permet un accès complet à v
     </message>
     <message>
         <source>Send a spoiler message</source>
-        <translation>Envoyer un message contenant une révélation</translation>
+        <translation>Envoyer un message contenant un avertissement sur le contenu</translation>
     </message>
     <message>
         <source>Spoiler hint</source>
@@ -385,52 +385,52 @@ Ne montrez ce QR code à personne d&apos;autre. Il permet un accès complet à v
     </message>
     <message>
         <source>Close message search bar</source>
-        <translation type="unfinished"></translation>
+        <translation>Fermer la barre de recherche de message</translation>
     </message>
 </context>
 <context>
     <name>ChatPageSendingPane</name>
     <message>
         <source>Spoiler hint</source>
-        <translation type="unfinished">Indice sur la révélation</translation>
+        <translation>Avertissement sur le contenu</translation>
     </message>
     <message>
         <source>Close spoiler hint field</source>
-        <translation type="unfinished"></translation>
+        <translation>Fermer l’avertissement sur le contenu</translation>
     </message>
     <message>
         <source>Compose message</source>
-        <translation type="unfinished">Écrire un message</translation>
+        <translation>Écrire un message</translation>
     </message>
 </context>
 <context>
     <name>ClientWorker</name>
     <message>
         <source>Your account could not be deleted from the server. Therefore, it was also not removed from this app: %1</source>
-        <translation>Votre compte ne peut pas être supprimé du serveur. Il m&apos;a pas été non plus supprimé de l&apos;application : %1</translation>
+        <translation>Votre compte ne peut pas être supprimé du serveur. Il n’a donc pas été supprimé non plus de l’application : %1</translation>
     </message>
 </context>
 <context>
     <name>CommonEncoderSettings</name>
     <message>
         <source>Very low</source>
-        <translation>Très bas</translation>
+        <translation>Très basse</translation>
     </message>
     <message>
         <source>Low</source>
-        <translation>Bas</translation>
+        <translation>Basse</translation>
     </message>
     <message>
         <source>Normal</source>
-        <translation>Normal</translation>
+        <translation>Normale</translation>
     </message>
     <message>
         <source>High</source>
-        <translation>Haut</translation>
+        <translation>Élevée</translation>
     </message>
     <message>
         <source>Very high</source>
-        <translation>Très haut</translation>
+        <translation>Très élevée</translation>
     </message>
     <message>
         <source>Constant quality</source>
@@ -438,11 +438,11 @@ Ne montrez ce QR code à personne d&apos;autre. Il permet un accès complet à v
     </message>
     <message>
         <source>Constant bit rate</source>
-        <translation>Débit binaire constant</translation>
+        <translation>Débit constant</translation>
     </message>
     <message>
         <source>Average bit rate</source>
-        <translation>Débit binaire moyen</translation>
+        <translation>Débit moyen</translation>
     </message>
     <message>
         <source>Two pass</source>
@@ -460,23 +460,23 @@ Ne montrez ce QR code à personne d&apos;autre. Il permet un accès complet à v
     <name>ConnectionSettings</name>
     <message>
         <source>Connection settings</source>
-        <translation type="unfinished"></translation>
+        <translation>Paramètres de connexion</translation>
     </message>
     <message>
         <source>Change</source>
-        <translation type="unfinished">Changer</translation>
+        <translation>Modifier</translation>
     </message>
     <message>
         <source>Cancel</source>
-        <translation type="unfinished">Annuler</translation>
+        <translation>Annuler</translation>
     </message>
     <message>
         <source>Connection settings could not be changed</source>
-        <translation type="unfinished"></translation>
+        <translation>Impossible de modifier les paramètres de connexion</translation>
     </message>
     <message>
         <source>Connection settings changed</source>
-        <translation type="unfinished"></translation>
+        <translation>Paramètres de connexion modifiés</translation>
     </message>
 </context>
 <context>
@@ -490,15 +490,15 @@ Ne montrez ce QR code à personne d&apos;autre. Il permet un accès complet à v
     <name>CustomConnectionSettings</name>
     <message>
         <source>Hostname:</source>
-        <translation type="unfinished"></translation>
+        <translation>Nom du serveur :</translation>
     </message>
     <message>
         <source>The hostname must not contain blank spaces</source>
-        <translation type="unfinished"></translation>
+        <translation>Le nom du serveur ne doit pas contenir d’espace</translation>
     </message>
     <message>
         <source>Port:</source>
-        <translation type="unfinished"></translation>
+        <translation>Port :</translation>
     </message>
 </context>
 <context>
@@ -513,7 +513,7 @@ You won&apos;t be able to use the login via QR code without entering your passwo
 Make sure that you backed it up if you want to use your account later.</source>
         <translation>Votre mot de passe ne sera plus inclus dans le code QR.
 Vous ne pourrez plus utiliser la connexion par code QR sans saisir de nouveau votre mot de passe car cette action ne peut pas être annulée !
-Assurez-vous que vous l&apos;avez sauvegardé si vous voulez utiliser votre compte plus tard.</translation>
+Assurez-vous de l’avoir sauvegardé si vous souhaitez utiliser votre compte plus tard.</translation>
     </message>
     <message>
         <source>Remove password</source>
@@ -532,7 +532,7 @@ You won&apos;t be able to see your password as text again because this action ca
 Make sure that you backed it up if you want to use your account later.</source>
         <translation>Votre mot de passe ne sera plus affiché sous forme de texte.
 Vous ne pourrez plus voir votre mot de passe sous forme de texte car cette action ne peut pas être annulée !
-Assurez-vous que vous l&apos;avez sauvegardé si vous voulez utiliser votre compte plus tard.</translation>
+Assurez-vous de l’avoir sauvegardé si vous souhaitez utiliser votre compte plus tard.</translation>
     </message>
     <message>
         <source>Do not show password</source>
@@ -543,11 +543,11 @@ Assurez-vous que vous l&apos;avez sauvegardé si vous voulez utiliser votre comp
     <name>DownloadJob</name>
     <message>
         <source>Could not save file: %1</source>
-        <translation>Impossible d&apos;enregistrer le fichier : %1</translation>
+        <translation>Impossible d’enregistrer le fichier : %1</translation>
     </message>
     <message>
         <source>Download failed: %1</source>
-        <translation>Échec du téléchargement : %1</translation>
+        <translation>Échec du téléchargement : %1</translation>
     </message>
 </context>
 <context>
@@ -657,7 +657,7 @@ Assurez-vous que vous l&apos;avez sauvegardé si vous voulez utiliser votre comp
     </message>
     <message>
         <source>Invitation link copied to clipboard</source>
-        <translation>Lien d&apos;invitation copié dans le presse-papier</translation>
+        <translation>Lien d’invitation copié dans le presse-papier</translation>
     </message>
     <message>
         <source>Settings</source>
@@ -685,7 +685,7 @@ Assurez-vous que vous l&apos;avez sauvegardé si vous voulez utiliser votre comp
     </message>
     <message>
         <source>Switch device</source>
-        <translation>Permuter d&apos;appareil</translation>
+        <translation>Changer d’appareil</translation>
     </message>
 </context>
 <context>
@@ -705,7 +705,7 @@ Assurez-vous que vous l&apos;avez sauvegardé si vous voulez utiliser votre comp
     <message>
         <source>The link will be opened after you have connected.</source>
         <extracomment>The link is an XMPP-URI (i.e. &apos;xmpp:kaidan@muc.kaidan.im?join&apos; for joining a chat)</extracomment>
-        <translation>Le lien s&apos;ouvrira une fois que vous serez connecté(e).</translation>
+        <translation>Kaidan ouvrira le lien une fois que vous serez connecté(e).</translation>
     </message>
     <message>
         <source>Could not send file, as a result of not being connected.</source>
@@ -717,20 +717,20 @@ Assurez-vous que vous l&apos;avez sauvegardé si vous voulez utiliser votre comp
     </message>
     <message>
         <source>No valid login QR code found.</source>
-        <translation>Aucun code QR de connexion valide trouvé.</translation>
+        <translation>Le QR code fourni n’est pas un QR code de connexion valide.</translation>
     </message>
 </context>
 <context>
     <name>LocalAccountRemoval</name>
     <message>
         <source>Remove account from this app</source>
-        <translation>Supprimer ce compte de l&apos;application</translation>
+        <translation>Supprimer ce compte de l’application</translation>
     </message>
     <message>
         <source>Your account will be removed from this app.
 Your password will be deleted, make sure it is stored in a password manager or you know it!</source>
-        <translation>Votre compte sera supprimé de l&apos;application.
-Votre mot de passe sera supprimé, assurez-vous qu&apos;il est enregistré dans un gestionnaire de mots de passe ou que vous le connaissez !</translation>
+        <translation>Votre compte sera supprimé de l’application.
+Votre mot de passe sera supprimé, assurez-vous qu’il est enregistré dans un gestionnaire de mots de passe ou que vous le connaissez !</translation>
     </message>
     <message>
         <source>Remove</source>
@@ -769,7 +769,7 @@ Votre mot de passe sera supprimé, assurez-vous qu&apos;il est enregistré dans 
     </message>
     <message>
         <source>Log in to your XMPP account</source>
-        <translation>Connexion à votre compte Jabber</translation>
+        <translation>Se connecter à votre compte XMPP</translation>
     </message>
     <message>
         <source>Your diaspora*-ID:</source>
@@ -817,38 +817,38 @@ Votre mot de passe sera supprimé, assurez-vous qu&apos;il est enregistré dans 
     </message>
     <message>
         <source>Connection settings</source>
-        <translation type="unfinished"></translation>
+        <translation>Paramètres de connexion</translation>
     </message>
 </context>
 <context>
     <name>LoginSettingsPage</name>
     <message>
         <source>Connection settings</source>
-        <translation type="unfinished"></translation>
+        <translation>Paramètres de connexion</translation>
     </message>
     <message>
         <source>The connection settings will be saved permanently after the first successful login. If they don&apos;t work, you&apos;ll get back to the login page.</source>
-        <translation type="unfinished"></translation>
+        <translation>Les paramètres de connexion sont enregistrés lorsque la connexion est réussie. S’ils ne fonctionnent pas vous serez redirigé(e) vers la page de connexion.</translation>
     </message>
     <message>
         <source>Enable custom connection settings</source>
-        <translation type="unfinished"></translation>
+        <translation>Activer les paramètres de connexion personnalisés</translation>
     </message>
     <message>
         <source>Port:</source>
-        <translation type="unfinished"></translation>
+        <translation>Port :</translation>
     </message>
     <message>
         <source>Hostname:</source>
-        <translation type="unfinished"></translation>
+        <translation>Nom du serveur :</translation>
     </message>
     <message>
         <source>Reset</source>
-        <translation type="unfinished"></translation>
+        <translation>Réinitialiser</translation>
     </message>
     <message>
         <source>Apply</source>
-        <translation type="unfinished"></translation>
+        <translation>Appliquer</translation>
     </message>
 </context>
 <context>
@@ -922,34 +922,34 @@ Votre mot de passe sera supprimé, assurez-vous qu&apos;il est enregistré dans 
     </message>
     <message>
         <source>Audio</source>
-        <translation type="unfinished">Audio</translation>
+        <translation>Audio</translation>
     </message>
     <message>
         <source>Document</source>
-        <translation type="unfinished">Document</translation>
+        <translation>Document</translation>
     </message>
     <message>
         <source>Location</source>
-        <translation type="unfinished"></translation>
+        <translation>Position</translation>
     </message>
     <message>
         <source>Image</source>
-        <translation type="unfinished">Image</translation>
+        <translation>Image</translation>
     </message>
     <message>
         <source>Video</source>
-        <translation type="unfinished">Vidéo</translation>
+        <translation>Vidéo</translation>
     </message>
     <message>
         <source>File</source>
-        <translation type="unfinished">Fichier</translation>
+        <translation>Fichier</translation>
     </message>
 </context>
 <context>
     <name>Message</name>
     <message>
         <source>Spoiler</source>
-        <translation type="unfinished">Révélation</translation>
+        <translation>Avertissement sur le contenu</translation>
     </message>
 </context>
 <context>
@@ -968,7 +968,7 @@ Votre mot de passe sera supprimé, assurez-vous qu&apos;il est enregistré dans 
     </message>
     <message>
         <source>Message could not be sent.</source>
-        <translation>Le message n&apos;a pas pu être envoyé.</translation>
+        <translation>Le message n’a pas pu être envoyé.</translation>
     </message>
     <message>
         <source>Message correction was not successful.</source>
@@ -1006,7 +1006,7 @@ Votre mot de passe sera supprimé, assurez-vous qu&apos;il est enregistré dans 
     </message>
     <message>
         <source>Image Capture</source>
-        <translation>Capturer une image</translation>
+        <translation>Capture d’images</translation>
     </message>
     <message>
         <source>Audio Recording</source>
@@ -1018,7 +1018,7 @@ Votre mot de passe sera supprimé, assurez-vous qu&apos;il est enregistré dans 
     </message>
     <message>
         <source>Camera</source>
-        <translation>Caméra</translation>
+        <translation>Appareil photo</translation>
     </message>
     <message>
         <source>Audio input</source>
@@ -1054,7 +1054,7 @@ Votre mot de passe sera supprimé, assurez-vous qu&apos;il est enregistré dans 
     </message>
     <message>
         <source>Sample Rate</source>
-        <translation>Taux d&apos;échantillonnage</translation>
+        <translation>Taux d’échantillonnage</translation>
     </message>
     <message>
         <source>Frame Rate</source>
@@ -1199,7 +1199,7 @@ Votre mot de passe sera supprimé, assurez-vous qu&apos;il est enregistré dans 
     </message>
     <message>
         <source>You can decide to only not show your password for &lt;b&gt;%1&lt;/b&gt; as text anymore or to remove it completely from the account transfer. If you remove your password completely, you won&apos;t be able to use the account transfer via scanning without entering your password because it is also removed from the QR code.</source>
-        <translation>Vous pouvez décider non seulement de ne pas afficher votre mot de passe pour &lt;b&gt;%1&lt;/b&gt; sous forme de texte ou de le supprimer complètement lors du transfert de compte. Si vous supprimez complètement votre mot de passe, vous ne pourrez plus utiliser le transfert de compte par lecture optique sans saisir votre mot de passe, car il est également supprimé du code QR.</translation>
+        <translation>Vous pouvez décider non seulement d’interdire l’affichage en clair de votre mot de passe pour &lt;b&gt;%1&lt;/b&gt; mais également de le supprimer complètement lors du transfert de compte. Si vous supprimez complètement votre mot de passe, vous serez obligé de le resaisir lors d’un transfert de compte par scan de QR code car le mot de passe est également supprimé du QR code.</translation>
     </message>
     <message>
         <source>Do not show password as text</source>
@@ -1214,31 +1214,31 @@ Votre mot de passe sera supprimé, assurez-vous qu&apos;il est enregistré dans 
     <name>QObject</name>
     <message>
         <source>Mark as read</source>
-        <translation>Noter comme lu</translation>
+        <translation>Marquer comme lu</translation>
     </message>
     <message>
         <source>Available</source>
-        <translation type="unfinished">Disponible</translation>
+        <translation>Disponible</translation>
     </message>
     <message>
         <source>Free for chat</source>
-        <translation type="unfinished">Libre pour discuter</translation>
+        <translation>Libre pour discuter</translation>
     </message>
     <message>
         <source>Away</source>
-        <translation type="unfinished">Absent(e)</translation>
+        <translation>Absent(e)</translation>
     </message>
     <message>
         <source>Do not disturb</source>
-        <translation type="unfinished">Ne pas déranger</translation>
+        <translation>Ne pas déranger</translation>
     </message>
     <message>
         <source>Away for longer</source>
-        <translation type="unfinished">Absent(e) pour longtemps</translation>
+        <translation>Absence prolongée</translation>
     </message>
     <message>
         <source>Offline</source>
-        <translation type="unfinished">Hors ligne</translation>
+        <translation>Hors ligne</translation>
     </message>
 </context>
 <context>
@@ -1281,7 +1281,7 @@ Votre mot de passe sera supprimé, assurez-vous qu&apos;il est enregistré dans 
     </message>
     <message>
         <source>Cannot connect to the server. Please check your internet connection.</source>
-        <translation>Impossible de se connecter au serveur. Veuillez tester votre connexion à internet.</translation>
+        <translation>Impossible de se connecter au serveur. Veuillez vérifier votre connexion Internet.</translation>
     </message>
     <message>
         <source>The server doesn&apos;t support secure connections.</source>
@@ -1301,11 +1301,11 @@ Votre mot de passe sera supprimé, assurez-vous qu&apos;il est enregistré dans 
     </message>
     <message>
         <source>Authentification protocol not supported by the server.</source>
-        <translation>Protocole d&apos;authentification non pris en charge par le serveur.</translation>
+        <translation>Protocole d’authentification non pris en charge par le serveur.</translation>
     </message>
     <message>
         <source>This server does not support registration.</source>
-        <translation>Ce serveur ne gère pas l&apos;inscription.</translation>
+        <translation>Ce serveur ne gère pas les inscriptions.</translation>
     </message>
     <message>
         <source>The server is offline or blocked by a firewall.</source>
@@ -1313,15 +1313,15 @@ Votre mot de passe sera supprimé, assurez-vous qu&apos;il est enregistré dans 
     </message>
     <message>
         <source>The connection could not be refreshed.</source>
-        <translation>La connection ne peut pas être actualisée.</translation>
+        <translation>La connexion ne peut pas être actualisée.</translation>
     </message>
     <message>
         <source>The internet access is not permitted. Please check your system&apos;s internet access configuration.</source>
-        <translation>L&apos;accès à internet n&apos;est pas autorisé. Merci de vérifier les permissions système.</translation>
+        <translation>L’accès à internet n’est pas autorisé. Merci de vérifier les permissions système.</translation>
     </message>
     <message>
         <source>Could not connect to the server. Please check your internet connection or your server name.</source>
-        <translation type="unfinished"></translation>
+        <translation>Impossible de se connecter au serveur. Veuillez vérifier votre connexion Internet et les paramètres du serveur.</translation>
     </message>
 </context>
 <context>
@@ -1335,40 +1335,40 @@ Votre mot de passe sera supprimé, assurez-vous qu&apos;il est enregistré dans 
     <name>QrCodeOnboardingPage</name>
     <message>
         <source>Scan QR code</source>
-        <translation type="unfinished">Scanner le code QR</translation>
+        <translation>Scanner un QR code</translation>
     </message>
     <message>
         <source>Show explanation</source>
-        <translation type="unfinished">Afficher des explications</translation>
+        <translation>Afficher les explications</translation>
     </message>
     <message>
         <source>Continue without QR code</source>
-        <translation type="unfinished">Continuer sans QR Code</translation>
+        <translation>Continuer sans QR code</translation>
     </message>
     <message>
         <source>Scan the QR code from your existing device to transfer your account.</source>
-        <translation type="unfinished">Scanner le QR code de votre appareil pour transférer votre compte.</translation>
+        <translation>Scanner le QR code d’un autre de vos appareils pour transférer votre compte.</translation>
     </message>
     <message>
         <source>Connecting…</source>
-        <translation type="unfinished"></translation>
+        <translation>Connexion…</translation>
     </message>
 </context>
 <context>
     <name>QrCodeScanner</name>
     <message>
         <source>The camera format &apos;%1&apos; is not supported.</source>
-        <translation type="unfinished">Le format « %1 » de la caméra n&apos;est pas pris en charge.</translation>
+        <translation>Le format « %1 » de l’appareil photo n’est pas pris en charge.</translation>
     </message>
     <message>
         <source>There is no camera available.</source>
-        <translation type="unfinished">Aucune caméra n&apos;est disponible.</translation>
+        <translation>Aucun appareil photo n’est disponible.</translation>
     </message>
     <message>
         <source>Your camera is busy.
 Try to close other applications using the camera.</source>
-        <translation type="unfinished">Vitre caméra est occupée.
-Essayez de fermer d&apos;autres applications utilisant la caméra.</translation>
+        <translation>L’appareil photo est occupé.
+Essayez de fermer d’autres applications utilisant l’appareil photo.</translation>
     </message>
 </context>
 <context>
@@ -1420,7 +1420,7 @@ Essayez de fermer d&apos;autres applications utilisant la caméra.</translation>
     <name>RegistrationLoginDecisionPage</name>
     <message>
         <source>Set up</source>
-        <translation>Configurer</translation>
+        <translation>Configuration initiale</translation>
     </message>
     <message>
         <source>Register a new account</source>
@@ -1451,8 +1451,8 @@ Essayez de fermer d&apos;autres applications utilisant la caméra.</translation>
     <message>
         <source>Your account will be deleted completely, which means from this app and from the server.
 You will not be able to use your account again!</source>
-        <translation>Votre compte va être complètement supprimé. C&apos;est-à-dire localement dans l&apos;application et sur le serveur.
-Vous ne pourrez plus utiliser ce compte à nouveau !</translation>
+        <translation>Votre compte va être complètement supprimé, c’est-à-dire localement dans l’application et également sur le serveur.
+Vous ne pourrez plus jamais utiliser ce compte !</translation>
     </message>
     <message>
         <source>Delete</source>
@@ -1463,15 +1463,15 @@ Vous ne pourrez plus utiliser ce compte à nouveau !</translation>
     <name>RosterAddContactSheet</name>
     <message>
         <source>Nickname:</source>
-        <translation>Pseudonyme :</translation>
+        <translation>Pseudonyme :</translation>
     </message>
     <message>
         <source>Jabber-ID:</source>
-        <translation>Identifiant Jabber :</translation>
+        <translation>Identifiant Jabber :</translation>
     </message>
     <message>
         <source>user@example.org</source>
-        <translation>identifiant@exemple.org</translation>
+        <translation>identifiant@example.org</translation>
     </message>
     <message>
         <source>Cancel</source>
@@ -1487,11 +1487,11 @@ Vous ne pourrez plus utiliser ce compte à nouveau !</translation>
     </message>
     <message>
         <source>This will also send a request to access the presence of the contact.</source>
-        <translation>Cette action va aussi envoyer une requête pour s&apos;assurer de la présence du contact.</translation>
+        <translation>Une demande sera également envoyée au contact pour avoir accès à son statut de présence en ligne.</translation>
     </message>
     <message>
         <source>Optional message:</source>
-        <translation>Message facultatif :</translation>
+        <translation>Message facultatif :</translation>
     </message>
     <message>
         <source>Tell your chat partner who you are.</source>
@@ -1541,11 +1541,11 @@ Vous ne pourrez plus utiliser ce compte à nouveau !</translation>
     <name>RosterManager</name>
     <message>
         <source>Could not add contact, as a result of not being connected.</source>
-        <translation>Impossible d&apos;ajouter un contact car vous n&apos;êtes pas connecté(e).</translation>
+        <translation>Impossible d’ajouter un contact car vous n’êtes pas connecté(e).</translation>
     </message>
     <message>
         <source>Could not remove contact, as a result of not being connected.</source>
-        <translation>Impossible de supprimer le contact car vous n&apos;êtes pas connecté(e).</translation>
+        <translation>Impossible de supprimer le contact car vous n’êtes pas connecté(e).</translation>
     </message>
     <message>
         <source>This will also send a request to access the presence of the contact.</source>
@@ -1565,7 +1565,7 @@ Vous ne pourrez plus utiliser ce compte à nouveau !</translation>
     </message>
     <message>
         <source>Could not rename contact, as a result of not being connected.</source>
-        <translation>Impossible de renommer le contact, car vous n&apos;êtes pas connecté(e).</translation>
+        <translation>Impossible de renommer le contact car vous n’êtes pas connecté(e).</translation>
     </message>
 </context>
 <context>
@@ -1588,7 +1588,7 @@ Vous ne pourrez plus utiliser ce compte à nouveau !</translation>
     </message>
     <message>
         <source>Search contacts</source>
-        <translation>Rechercher des contacts</translation>
+        <translation>Rechercher dans les contacts</translation>
     </message>
 </context>
 <context>
@@ -1615,7 +1615,7 @@ Vous ne pourrez plus utiliser ce compte à nouveau !</translation>
     </message>
     <message>
         <source>Do you really want to delete the contact &lt;b&gt;%1&lt;/b&gt; from your contact list?</source>
-        <translation type="unfinished"></translation>
+        <translation>Voulez-vous vraiment supprimer le contact &lt;b&gt;%1&lt;/b&gt; de votre liste de contacts ?</translation>
     </message>
 </context>
 <context>
@@ -1675,7 +1675,7 @@ Vous ne pourrez plus utiliser ce compte à nouveau !</translation>
         <extracomment>Unlimited file size for uploading files
 ----------
 Deletion of message history saved on server</extracomment>
-        <translation>Pas de limites</translation>
+        <translation>Pas de limite</translation>
     </message>
     <message>
         <source>%1 days</source>
@@ -1698,7 +1698,7 @@ Deletion of message history saved on server</extracomment>
     </message>
     <message>
         <source>Configure photo, video and audio recording settings</source>
-        <translation>Configurer les paramètres d&apos;enregistrement des photos, video et audio</translation>
+        <translation>Configurer les paramètres d’enregistrement d’image, vidéo et audio</translation>
     </message>
     <message>
         <source>Settings</source>
@@ -1718,7 +1718,7 @@ Deletion of message history saved on server</extracomment>
     </message>
     <message>
         <source>Remove account from this app</source>
-        <translation>Supprimer ce compte de l&apos;application</translation>
+        <translation>Supprimer ce compte de l’application</translation>
     </message>
     <message>
         <source>Delete account</source>
@@ -1730,15 +1730,15 @@ Deletion of message history saved on server</extracomment>
     </message>
     <message>
         <source>Connection Settings</source>
-        <translation type="unfinished"></translation>
+        <translation>Paramètres de connexion</translation>
     </message>
     <message>
         <source>Configure the hostname and port to connect to</source>
-        <translation type="unfinished"></translation>
+        <translation>Configurer le nom du serveur et le port auxquels se connecter</translation>
     </message>
     <message>
         <source>Configure whether this device can be used to log in on a new device</source>
-        <translation type="unfinished"></translation>
+        <translation>Choisir si cet appareil peut être utilisé pour se connecter sur un autre appareil</translation>
     </message>
 </context>
 <context>
@@ -1771,22 +1771,22 @@ Deletion of message history saved on server</extracomment>
     <name>StartPage</name>
     <message>
         <source>Enjoy free communication on every device!</source>
-        <translation>Profitez d&apos;une communication libre sur tous vos appareils !</translation>
+        <translation>Profitez d’une communication libre sur tous vos appareils !</translation>
     </message>
     <message>
         <source>Let&apos;s start</source>
-        <translation>C&apos;est parti</translation>
+        <translation>C’est parti</translation>
     </message>
 </context>
 <context>
     <name>SubRequestAcceptSheet</name>
     <message>
         <source>Subscription Request</source>
-        <translation>Demande d&apos;abonnement</translation>
+        <translation>Demande d’accès à votre statut</translation>
     </message>
     <message>
         <source>You received a subscription request by &lt;b&gt;%1&lt;/b&gt;. If you accept it, the account will have access to your presence status.</source>
-        <translation>Vous avez reçu une demande d&apos;abonnement de la part de &lt;b&gt;%1&lt;/b&gt;. Si vous acceptez, il aura accès à votre statut de présence.</translation>
+        <translation>Vous avez reçu une demande d’accès à votre statut de la part de &lt;b&gt;%1&lt;/b&gt;. Si vous acceptez, ce compte aura accès à votre statut de présence en ligne.</translation>
     </message>
     <message>
         <source>Decline</source>
@@ -1801,7 +1801,7 @@ Deletion of message history saved on server</extracomment>
     <name>UploadManager</name>
     <message>
         <source>Could not send file, as a result of not being connected.</source>
-        <translation>Impossible d&apos;envoyer le fichier car vous n&apos;êtes pas connecté(e).</translation>
+        <translation>Impossible d’envoyer le fichier car vous n’êtes pas connecté(e).</translation>
     </message>
     <message>
         <source>Accept</source>
@@ -1817,7 +1817,7 @@ Deletion of message history saved on server</extracomment>
     </message>
     <message>
         <source>Message could not be sent.</source>
-        <translation>Le message n&apos;a pas pu être envoyé.</translation>
+        <translation>Le message n’a pas pu être envoyé.</translation>
     </message>
 </context>
 <context>
@@ -1828,19 +1828,19 @@ Deletion of message history saved on server</extracomment>
     </message>
     <message>
         <source>Rename contact</source>
-        <translation type="unfinished">Renommer le contact</translation>
+        <translation>Renommer le contact</translation>
     </message>
     <message>
         <source>Show QR code</source>
-        <translation type="unfinished"></translation>
+        <translation>Afficher le QR code</translation>
     </message>
     <message>
         <source>Remove contact</source>
-        <translation type="unfinished"></translation>
+        <translation>Supprimer le contact</translation>
     </message>
     <message>
         <source>Online devices</source>
-        <translation type="unfinished"></translation>
+        <translation>Appareils en ligne</translation>
     </message>
 </context>
 <context>

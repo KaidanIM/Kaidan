@@ -57,6 +57,7 @@ REPLACE_USER_IDS = [
 	("X mondstern <mondstern@snopyta.org>", "mondstern <mondstern@snopyta.org>"),
 	("Jeannette L <j.lavoie@net-c.ca>", "Jeannette Lavoie <j.lavoie@net-c.ca>"),
 	("aevw _ <arcanevw@tuta.io>", "aevw <arcanevw@tuta.io>"),
+    ("Coucouf _ <coucouf@coucouf.fr>", "Coucouf <coucouf@coucouf.fr>"),
 ]
 
 # These user ids will be excluded from any targets

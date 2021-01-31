@@ -183,11 +183,11 @@ Zeigen Sie diesen QR-Code niemals anderen Personen. Er würde unbegrenzten Zugan
     </message>
     <message>
         <source>Copy JID</source>
-        <translation type="unfinished"></translation>
+        <translation>JID kopieren</translation>
     </message>
     <message>
         <source>Copy password</source>
-        <translation type="unfinished"></translation>
+        <translation>Passwort kopieren</translation>
     </message>
 </context>
 <context>
@@ -241,11 +241,11 @@ Zeigen Sie diesen QR-Code niemals anderen Personen. Er würde unbegrenzten Zugan
     </message>
     <message>
         <source>Password changed successfully</source>
-        <translation type="unfinished"></translation>
+        <translation>Passwort wurde erfolgreich geändert</translation>
     </message>
     <message>
         <source>Failed to change password: %1</source>
-        <translation type="unfinished">Änderung des Passworts ist fehlgeschlagen: %1</translation>
+        <translation>Änderung des Passworts ist fehlgeschlagen: %1</translation>
     </message>
 </context>
 <context>
@@ -394,22 +394,22 @@ Zeigen Sie diesen QR-Code niemals anderen Personen. Er würde unbegrenzten Zugan
     </message>
     <message>
         <source>Close message search bar</source>
-        <translation type="unfinished"></translation>
+        <translation>Suche schließen</translation>
     </message>
 </context>
 <context>
     <name>ChatPageSendingPane</name>
     <message>
         <source>Spoiler hint</source>
-        <translation type="unfinished">Titel für versteckte Nachricht</translation>
+        <translation>Spoiler Hinweis</translation>
     </message>
     <message>
         <source>Close spoiler hint field</source>
-        <translation type="unfinished"></translation>
+        <translation>Spoiler-Feld ausblenden</translation>
     </message>
     <message>
         <source>Compose message</source>
-        <translation type="unfinished">Nachricht verfassen</translation>
+        <translation>Nachricht verfassen</translation>
     </message>
 </context>
 <context>
@@ -469,23 +469,23 @@ Zeigen Sie diesen QR-Code niemals anderen Personen. Er würde unbegrenzten Zugan
     <name>ConnectionSettings</name>
     <message>
         <source>Connection settings</source>
-        <translation type="unfinished"></translation>
+        <translation>Verbindungseinstellungen</translation>
     </message>
     <message>
         <source>Change</source>
-        <translation type="unfinished">Ändern</translation>
+        <translation>Ändern</translation>
     </message>
     <message>
         <source>Cancel</source>
-        <translation type="unfinished">Abbrechen</translation>
+        <translation>Abbrechen</translation>
     </message>
     <message>
         <source>Connection settings could not be changed</source>
-        <translation type="unfinished"></translation>
+        <translation>Verbindungseinstellungen konnten nicht geändert werden</translation>
     </message>
     <message>
         <source>Connection settings changed</source>
-        <translation type="unfinished"></translation>
+        <translation>Verbindungseinstellungen geändert</translation>
     </message>
 </context>
 <context>
@@ -499,15 +499,15 @@ Zeigen Sie diesen QR-Code niemals anderen Personen. Er würde unbegrenzten Zugan
     <name>CustomConnectionSettings</name>
     <message>
         <source>Hostname:</source>
-        <translation type="unfinished"></translation>
+        <translation>Host-Name:</translation>
     </message>
     <message>
         <source>The hostname must not contain blank spaces</source>
-        <translation type="unfinished"></translation>
+        <translation>Der Host-Name darf keine Leerzeichen enthalten</translation>
     </message>
     <message>
         <source>Port:</source>
-        <translation type="unfinished"></translation>
+        <translation>Port:</translation>
     </message>
 </context>
 <context>
@@ -846,38 +846,38 @@ Ihr Passwort wird gelöscht, stellen Sie sicher, dass es in einem Passwort-Manag
     </message>
     <message>
         <source>Connection settings</source>
-        <translation type="unfinished"></translation>
+        <translation>Verbindungseinstellungen</translation>
     </message>
 </context>
 <context>
     <name>LoginSettingsPage</name>
     <message>
         <source>Connection settings</source>
-        <translation type="unfinished"></translation>
+        <translation>Verbindungseinstellungen</translation>
     </message>
     <message>
         <source>The connection settings will be saved permanently after the first successful login. If they don&apos;t work, you&apos;ll get back to the login page.</source>
-        <translation type="unfinished"></translation>
+        <translation>Die Verbindungseinstellungen werden nach dem ersten erfolgreichem Login gespeichert. Wenn sie nicht funktionieren, wird die Anmeldeseite geöffnet.</translation>
     </message>
     <message>
         <source>Enable custom connection settings</source>
-        <translation type="unfinished"></translation>
+        <translation>Aktivieren der manuellen Verbindungseinstellungen</translation>
     </message>
     <message>
         <source>Port:</source>
-        <translation type="unfinished"></translation>
+        <translation>Port:</translation>
     </message>
     <message>
         <source>Hostname:</source>
-        <translation type="unfinished"></translation>
+        <translation>Host-Name:</translation>
     </message>
     <message>
         <source>Reset</source>
-        <translation type="unfinished"></translation>
+        <translation>Zurücksetzen</translation>
     </message>
     <message>
         <source>Apply</source>
-        <translation type="unfinished"></translation>
+        <translation>Anwenden</translation>
     </message>
 </context>
 <context>
@@ -951,34 +951,34 @@ Ihr Passwort wird gelöscht, stellen Sie sicher, dass es in einem Passwort-Manag
     </message>
     <message>
         <source>Audio</source>
-        <translation type="unfinished">Ton</translation>
+        <translation>Ton</translation>
     </message>
     <message>
         <source>Document</source>
-        <translation type="unfinished">Dokument</translation>
+        <translation>Dokument</translation>
     </message>
     <message>
         <source>Location</source>
-        <translation type="unfinished"></translation>
+        <translation>Standort</translation>
     </message>
     <message>
         <source>Image</source>
-        <translation type="unfinished">Bild</translation>
+        <translation>Bild</translation>
     </message>
     <message>
         <source>Video</source>
-        <translation type="unfinished">Video</translation>
+        <translation>Video</translation>
     </message>
     <message>
         <source>File</source>
-        <translation type="unfinished">Datei</translation>
+        <translation>Datei</translation>
     </message>
 </context>
 <context>
     <name>Message</name>
     <message>
         <source>Spoiler</source>
-        <translation type="unfinished"></translation>
+        <translation>Spoiler</translation>
     </message>
 </context>
 <context>
@@ -1243,31 +1243,31 @@ Ihr Passwort wird gelöscht, stellen Sie sicher, dass es in einem Passwort-Manag
     <name>QObject</name>
     <message>
         <source>Mark as read</source>
-        <translation type="unfinished">Als gelesen markieren</translation>
+        <translation>Als gelesen markieren</translation>
     </message>
     <message>
         <source>Available</source>
-        <translation type="unfinished">Verfügbar</translation>
+        <translation>Verfügbar</translation>
     </message>
     <message>
         <source>Free for chat</source>
-        <translation type="unfinished">Frei zum Chatten</translation>
+        <translation>Frei zum Chatten</translation>
     </message>
     <message>
         <source>Away</source>
-        <translation type="unfinished">Abwesend</translation>
+        <translation>Abwesend</translation>
     </message>
     <message>
         <source>Do not disturb</source>
-        <translation type="unfinished"></translation>
+        <translation>Nicht stören</translation>
     </message>
     <message>
         <source>Away for longer</source>
-        <translation type="unfinished">Für längere Zeit abwesend</translation>
+        <translation>Für längere Zeit abwesend</translation>
     </message>
     <message>
         <source>Offline</source>
-        <translation type="unfinished">Offline</translation>
+        <translation>Offline</translation>
     </message>
 </context>
 <context>
@@ -1350,7 +1350,7 @@ Ihr Passwort wird gelöscht, stellen Sie sicher, dass es in einem Passwort-Manag
     </message>
     <message>
         <source>Could not connect to the server. Please check your internet connection or your server name.</source>
-        <translation type="unfinished"></translation>
+        <translation>Konnte nicht zum Server verbinden. Bitte überprüfe deine Internetverbindung oder den Server-Namen.</translation>
     </message>
 </context>
 <context>
@@ -1364,39 +1364,39 @@ Ihr Passwort wird gelöscht, stellen Sie sicher, dass es in einem Passwort-Manag
     <name>QrCodeOnboardingPage</name>
     <message>
         <source>Scan QR code</source>
-        <translation type="unfinished">QR-Code scannen</translation>
+        <translation>QR-Code scannen</translation>
     </message>
     <message>
         <source>Show explanation</source>
-        <translation type="unfinished">Erklärung anzeigen</translation>
+        <translation>Erklärung anzeigen</translation>
     </message>
     <message>
         <source>Continue without QR code</source>
-        <translation type="unfinished">Ohne QR-Code fortfahren</translation>
+        <translation>Ohne QR-Code fortfahren</translation>
     </message>
     <message>
         <source>Scan the QR code from your existing device to transfer your account.</source>
-        <translation type="unfinished">Scannen Sie den QR-Code von Ihrem vorhandenen Gerät, um Ihr Konto zu übertragen.</translation>
+        <translation>Scannen den QR-Code von deinem bestehendem Gerät, um dein Konto zu übertragen.</translation>
     </message>
     <message>
         <source>Connecting…</source>
-        <translation type="unfinished"></translation>
+        <translation>Verbinde…</translation>
     </message>
 </context>
 <context>
     <name>QrCodeScanner</name>
     <message>
         <source>The camera format &apos;%1&apos; is not supported.</source>
-        <translation type="unfinished">Das Kamera-Format „%1“ wird nicht unterstüzt.</translation>
+        <translation>Das Kamera-Format „%1“ wird nicht unterstüzt.</translation>
     </message>
     <message>
         <source>There is no camera available.</source>
-        <translation type="unfinished">Keine Kamera verfügbar.</translation>
+        <translation>Keine Kamera verfügbar.</translation>
     </message>
     <message>
         <source>Your camera is busy.
 Try to close other applications using the camera.</source>
-        <translation type="unfinished">Deine Kamera ist beschäftigt.
+        <translation>Deine Kamera ist beschäftigt.
 Versuche andere Programme, welche die Kamera verwenden, zu schließen.</translation>
     </message>
 </context>
@@ -1636,7 +1636,7 @@ Sie werden Ihr Konto nicht mehr benutzen können!</translation>
     </message>
     <message>
         <source>Do you really want to delete the contact &lt;b&gt;%1&lt;/b&gt; from your contact list?</source>
-        <translation type="unfinished"></translation>
+        <translation>Möchtest du wirklich den Kontakt &lt;b&gt;%1&lt;/b&gt; aus deiner Kontaktliste entfernen?</translation>
     </message>
 </context>
 <context>
@@ -1739,15 +1739,15 @@ Deletion of message history saved on server</extracomment>
     </message>
     <message>
         <source>Connection Settings</source>
-        <translation type="unfinished"></translation>
+        <translation>Verbindungseinstellungen</translation>
     </message>
     <message>
         <source>Configure the hostname and port to connect to</source>
-        <translation type="unfinished"></translation>
+        <translation>Einstellen des Host-Namen und Ports der Verbindung zum Server</translation>
     </message>
     <message>
         <source>Configure whether this device can be used to log in on a new device</source>
-        <translation type="unfinished"></translation>
+        <translation>Einstellen, ob das Gerät das Passwort übertragen kann</translation>
     </message>
 </context>
 <context>
@@ -1843,19 +1843,19 @@ Deletion of message history saved on server</extracomment>
     </message>
     <message>
         <source>Rename contact</source>
-        <translation type="unfinished">Kontakt umbenennen</translation>
+        <translation>Kontakt umbenennen</translation>
     </message>
     <message>
         <source>Show QR code</source>
-        <translation type="unfinished"></translation>
+        <translation>QR-Code anzeigen</translation>
     </message>
     <message>
         <source>Remove contact</source>
-        <translation type="unfinished"></translation>
+        <translation>Kontakt entfernen</translation>
     </message>
     <message>
         <source>Online devices</source>
-        <translation type="unfinished"></translation>
+        <translation>Verbundene Geräte</translation>
     </message>
 </context>
 <context>

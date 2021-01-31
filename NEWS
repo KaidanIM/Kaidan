@@ -2,8 +2,26 @@ Version 0.7.0-dev
 ~~~~~~~~~~~~~~~~~
 Released: 1970-01-01
 
+Features:
+ * Display client information (name, version, OS) of contacts (jbb, lnj)
+ * Drag'n'drop for sending files (jbb)
+ * Allow pasting images from the clipboard (Ctrl+Shift+V) into the chat (jbb)
+ * Allow inserting newlines using Shift+Enter (jbb)
+ * Add configuration of custom hostname/port (jbb, melvo)
+ * Favourite emojis are shown by default now (melvo)
+ * Search emojis by ":<name>" (melvo)
+ * Display connection errors in the global drawer after login (melvo)
+ * Improved design of media preview sheets (jbb)
+ * Restructure message sending bar (melvo)
+
+Bugfixes:
+ * Do not interpret random URLs as files anymore (lnj)
+ * Fix the style of buttons when using Material style (melvo)
+ * Fix file dialog and media drawer opening in some cases (melvo)
+ * Fix opening of the LoginPage when scanning QR code without password (melvo)
+
 Notes:
- * under development
+ * Kaidan requires Qt 5.14 now
 
 Version 0.6.0
 ~~~~~~~~~~~~~

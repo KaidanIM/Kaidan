@@ -27,7 +27,7 @@
     </screenshot>
   </screenshots>
   <releases>
-    <release type="stable" version="0.7.0-dev">
+    <release type="stable" version="0.7.0" date="2021-02-02T00:00:00Z">
       <description>
         <p>This release adds the following features:</p>
         <ul>

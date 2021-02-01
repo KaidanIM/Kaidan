@@ -1,7 +1,7 @@
 /*
  *  Kaidan - A user-friendly XMPP client for every device!
  *
- *  Copyright (C) 2016-2020 Kaidan developers and contributors
+ *  Copyright (C) 2016-2021 Kaidan developers and contributors
  *  (see the LICENSE file for a full list of copyright authors)
  *
  *  Kaidan is free software: you can redistribute it and/or modify
@@ -30,7 +30,6 @@
 
 import QtQuick 2.12
 import QtQuick.Layouts 1.12
-import QtQuick.Controls.Material 2.12 as Material
 import org.kde.kirigami 2.12 as Kirigami
 
 import im.kaidan.kaidan 1.0
@@ -38,7 +37,7 @@ import im.kaidan.kaidan 1.0
 /**
  * This page is the base for pages with content needing an explanation.
  *
- * It contains a centered content area, an explanation area with a background and two buttons.
+ * It consists of a centered content area and an overlay containing an explanation area with a background and two buttons.
  */
 Kirigami.Page {
 	leftPadding: 0
@@ -46,62 +45,84 @@ Kirigami.Page {
 	topPadding: 0
 	bottomPadding: 0
 
-	default property alias __data: centeredContent.data
-	property alias explanation: explanation
-	property alias explanationToggleButton: explanationToggleButton
+	/**
+	 * area containing the explanation displayed while the content is not displayed
+	 */
+	property alias explanationArea: explanationArea
+
+	/**
+	 * explanation within the explanation area
+	 */
+	property alias explanation: explanationArea.data
+
+	/**
+	 * content displayed while the explanation is not displayed
+	 */
+	property alias content: contentArea.data
+
+	/**
+	 * button for a primary action
+	 */
+	property alias primaryButton: primaryButton
+
+	/**
+	 * button for a secondary action
+	 */
 	property alias secondaryButton: secondaryButton
 
+	/**
+	 * true to have a margin between the content and the window's border, otherwise false
+	 */
 	property bool useMarginsForContent: true
 
-	GridLayout {
-		id: centeredContent
+	Item {
 		anchors.fill: parent
-		anchors.margins: useMarginsForContent ? 20 : 0
-		anchors.bottomMargin: useMarginsForContent ? parent.height - buttonArea.y : 0
-	}
-
-	// background of the explanation area
-	Rectangle {
-		z: explanationArea.z
-		anchors.fill: explanationArea
-		anchors.margins: -8
-		radius: roundedCornersRadius
-		color: Kirigami.Theme.backgroundColor
-		opacity: 0.90
-		visible: explanation.visible
-	}
-
-	ColumnLayout {
-		id: explanationArea
-		z: 1
-		anchors.margins: 18
-		anchors.top: parent.top
-		anchors.left: parent.left
-		anchors.right: parent.right
-		anchors.bottom: parent.bottom
 
 		GridLayout {
-			id: explanation
-			Layout.fillWidth: true
-			Layout.fillHeight: true
+			id: contentArea
+			anchors.fill: parent
+			anchors.margins: useMarginsForContent ? 20 : 0
+			anchors.bottomMargin: useMarginsForContent ? parent.height - buttonArea.y : 0
+		}
+
+		// background of overlay
+		Rectangle {
+			z: 1
+			anchors.fill: overlay
+			anchors.margins: -8
+			radius: roundedCornersRadius
+			color: Kirigami.Theme.backgroundColor
+			opacity: 0.90
+			visible: explanationArea.visible
 		}
 
 		ColumnLayout {
-			id: buttonArea
-			Layout.alignment: Qt.AlignBottom | Qt.AlignHCenter
-			Layout.maximumWidth: largeButtonWidth
+			id: overlay
+			z: 2
+			anchors.margins: 18
+			anchors.top: parent.top
+			anchors.left: parent.left
+			anchors.right: parent.right
+			anchors.bottom: parent.bottom
 
-			// button for showing or hiding the explanation
-			CenteredAdaptiveHighlightedButton {
-				id: explanationToggleButton
-				checkable: true
-				onClicked: explanation.visible = !explanation.visible
+			GridLayout {
+				id: explanationArea
+				Layout.fillWidth: true
+				Layout.fillHeight: true
 			}
 
-			// button for a second action
-			CenteredAdaptiveButton {
-				id: secondaryButton
-				flat: Style.isMaterial ? explanation.visible : false
+			ColumnLayout {
+				id: buttonArea
+				Layout.alignment: Qt.AlignBottom | Qt.AlignHCenter
+				Layout.maximumWidth: largeButtonWidth
+
+				CenteredAdaptiveHighlightedButton {
+					id: primaryButton
+				}
+
+				CenteredAdaptiveButton {
+					id: secondaryButton
+				}
 			}
 		}
 	}

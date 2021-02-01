@@ -36,6 +36,7 @@
 		<file>elements/ConfirmationPage.qml</file>
 		<file>elements/DataForm.qml</file>
 		<file>elements/ExplainedContentPage.qml</file>
+		<file>elements/ExplanationTogglePage.qml</file>
 		<file>elements/QrCodeScanner.qml</file>
 		<file>elements/QrCode.qml</file>
 

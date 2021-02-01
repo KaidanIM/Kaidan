@@ -75,6 +75,7 @@
   <url type="help">https://invent.kde.org/KDE/kaidan/wikis</url>
   <url type="translate">https://hosted.weblate.org/projects/kaidan/translations/</url>
   <launchable type="desktop-id">kaidan.desktop</launchable>
+  <translation type="qt">Weblate</translation>
   <screenshots>
     <screenshot>
       <caption>Example chat on a desktop and on a mobile device</caption>
@@ -90,11 +91,30 @@
       <image type="source">https://www.kaidan.im/images/screenshot.png</image>
     </screenshot>
   </screenshots>
-  <translation type="qt">Weblate</translation>
   <releases>
     <release type="stable" version="0.7.0-dev">
       <description>
-        <p>under development</p>
+        <p>This release adds the following features:</p>
+        <ul>
+          <li>Display client information (name, version, OS) of contacts</li>
+          <li>Drag'n'drop for sending files</li>
+          <li>Allow pasting images from the clipboard (Ctrl+Shift+V) into the chat</li>
+          <li>Allow inserting newlines using Shift+Enter</li>
+          <li>Add configuration of custom hostname/port</li>
+          <li>Favourite emojis are shown by default now</li>
+          <li>Search emojis by ":&lt;name&gt;"</li>
+          <li>Display connection errors in the global drawer after login</li>
+          <li>Improved design of media preview sheets</li>
+          <li>Restructure message sending bar</li>
+        </ul>
+        <p>This release fixes the following bugs:</p>
+        <ul>
+          <li>Do not interpret random URLs as files anymore</li>
+          <li>Fix the style of buttons when using Material style</li>
+          <li>Fix file dialog and media drawer opening in some cases</li>
+          <li>Fix opening of the LoginPage when scanning QR code without password</li>
+        </ul>
+        <p>Kaidan requires Qt 5.14 now</p>
       </description>
     </release>
     <release type="stable" version="0.6.0" date="2020-08-20T00:00:00Z">

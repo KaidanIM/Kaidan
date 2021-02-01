@@ -72,6 +72,15 @@ Item {
 		}
 	}
 
+	// video output from the camera which is shown on the screen and decoded by a filter
+	VideoOutput {
+		anchors.fill: parent
+		fillMode: VideoOutput.PreserveAspectCrop
+		source: camera
+		autoOrientation: true
+		filters: [filter]
+	}
+
 	// hint for camera issues
 	Kirigami.InlineMessage {
 		visible: cameraEnabled && text !== ""
@@ -93,14 +102,5 @@ Item {
 				return ""
 			}
 		}
-	}
-
-	// video output from the camera which is shown on the screen and decoded by a filter
-	VideoOutput {
-		anchors.fill: parent
-		fillMode: VideoOutput.PreserveAspectCrop
-		source: camera
-		autoOrientation: true
-		filters: [filter]
 	}
 }

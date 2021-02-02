@@ -60,6 +60,7 @@
 		<file alias="media-playback-stop-symbolic.svg">3rdparty/breeze-icons/icons/actions/symbolic/media-playback-stop-symbolic.svg</file>
 		<file alias="media-record-symbolic.svg">3rdparty/breeze-icons/icons/actions/symbolic/media-record-symbolic.svg</file>
 		<file alias="document-open-symbolic.svg">3rdparty/breeze-icons/icons/actions/symbolic/document-open-symbolic.svg</file>
+		<file alias="edit-copy-symbolic.svg">3rdparty/breeze-icons/icons/actions/symbolic/edit-copy-symbolic.svg</file>
 	</qresource>
 
 	<qresource prefix="/icons/breeze/devices/symbolic">

@@ -115,7 +115,7 @@ ExplainedContentPage {
 
 				Controls.ToolButton {
 					text: qsTr("Copy chat address")
-					icon.name: "edit-copy"
+					icon.name: "edit-copy-symbolic"
 					display: Controls.AbstractButton.IconOnly
 					flat: true
 					Layout.alignment: Qt.AlignRight
@@ -135,7 +135,7 @@ ExplainedContentPage {
 
 				Controls.ToolButton {
 					text: qsTr("Copy password")
-					icon.name: "edit-copy"
+					icon.name: "edit-copy-symbolic"
 					display: Controls.AbstractButton.IconOnly
 					flat: true
 					Layout.alignment: Qt.AlignRight

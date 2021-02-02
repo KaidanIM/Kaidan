@@ -73,7 +73,7 @@
   <url type="homepage">https://kaidan.im</url>
   <url type="bugtracker">https://invent.kde.org/network/kaidan/issues</url>
   <url type="help">https://invent.kde.org/network/kaidan/wikis</url>
-  <url type="translate">https://hosted.weblate.org/projects/kaidan/translations/</url>
+  <url type="translate">https://hosted.weblate.org/engage/kaidan/</url>
   <launchable type="desktop-id">kaidan.desktop</launchable>
   <translation type="qt">Weblate</translation>
   <screenshots>

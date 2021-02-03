@@ -137,3 +137,5 @@ private:
 	 */
 	QString m_errorText;
 };
+
+Q_DECLARE_METATYPE(Message)

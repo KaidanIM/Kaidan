@@ -79,7 +79,16 @@
 #include "MediaRecorder.h"
 #include "GuiStyle.h"
 
+Q_DECLARE_METATYPE(Qt::ApplicationState)
+
+Q_DECLARE_METATYPE(QXmppClient::State)
+Q_DECLARE_METATYPE(QXmppPresence)
+Q_DECLARE_METATYPE(QXmppStanza::Error)
+Q_DECLARE_METATYPE(QXmppVCardIq)
 Q_DECLARE_METATYPE(QXmppVersionIq)
+
+Q_DECLARE_METATYPE(std::function<void(RosterItem&)>)
+Q_DECLARE_METATYPE(std::function<void(Message&)>)
 
 #ifdef STATIC_BUILD
 #include "static_plugins.h"
@@ -213,30 +222,27 @@ Q_DECL_EXPORT int main(int argc, char *argv[])
 #endif // APPIMAGE
 
 	// register qMetaTypes
-	qRegisterMetaType<RosterItem>("RosterItem");
-	qRegisterMetaType<RosterModel*>("RosterModel*");
+	qRegisterMetaType<RosterItem>();
+	qRegisterMetaType<RosterModel*>();
 	qRegisterMetaType<RosterManager*>();
-	qRegisterMetaType<Message>("Message");
-	qRegisterMetaType<MessageModel*>("MessageModel*");
+	qRegisterMetaType<Message>();
+	qRegisterMetaType<MessageModel*>();
 	qRegisterMetaType<MessageHandler*>();
-	qRegisterMetaType<AvatarFileStorage*>("AvatarFileStorage*");
-	qRegisterMetaType<VCardManager*>();
 	qRegisterMetaType<DiscoveryManager*>();
 	qRegisterMetaType<UploadManager*>();
+	qRegisterMetaType<VCardManager*>();
 	qRegisterMetaType<VersionManager*>();
 	qRegisterMetaType<RegistrationManager*>();
-	qRegisterMetaType<QXmppPresence>("QXmppPresence");
-	qRegisterMetaType<Qt::ApplicationState>("Qt::ApplicationState");
-	qRegisterMetaType<QXmppClient::State>("QXmppClient::State");
-	qRegisterMetaType<MessageType>("MessageType");
-	qRegisterMetaType<TransferJob*>("TransferJob*");
-	qRegisterMetaType<QmlUtils*>("QmlUtils*");
-	qRegisterMetaType<QVector<Message>>("QVector<Message>");
-	qRegisterMetaType<QVector<RosterItem>>("QVector<RosterItem>");
-	qRegisterMetaType<QHash<QString,RosterItem>>("QHash<QString,RosterItem>");
-	qRegisterMetaType<std::function<void(RosterItem&)>>("std::function<void(RosterItem&)>");
-	qRegisterMetaType<std::function<void(Message&)>>("std::function<void(Message&)>");
-	qRegisterMetaType<QXmppVCardIq>("QXmppVCardIq");
+	qRegisterMetaType<AvatarFileStorage*>();
+	qRegisterMetaType<QXmppPresence>();
+	qRegisterMetaType<TransferJob*>();
+	qRegisterMetaType<QmlUtils*>();
+	qRegisterMetaType<QVector<Message>>();
+	qRegisterMetaType<QVector<RosterItem>>();
+	qRegisterMetaType<QHash<QString,RosterItem>>();
+	qRegisterMetaType<std::function<void(RosterItem&)>>();
+	qRegisterMetaType<std::function<void(Message&)>>();
+	qRegisterMetaType<QXmppVCardIq>();
 	qRegisterMetaType<QMimeType>();
 	qRegisterMetaType<CameraInfo>();
 	qRegisterMetaType<AudioDeviceInfo>();
@@ -245,10 +251,13 @@ Q_DECL_EXPORT int main(int argc, char *argv[])
 	qRegisterMetaType<AudioEncoderSettings>();
 	qRegisterMetaType<VideoEncoderSettings>();
 	qRegisterMetaType<CredentialsValidator*>();
-	qRegisterMetaType<QXmppStanza::Error>("QXmppStanza::Error");
 	qRegisterMetaType<QXmppVersionIq>();
 
 	// Enums for c++ member calls using enums
+	qRegisterMetaType<Qt::ApplicationState>();
+	qRegisterMetaType<QXmppClient::State>();
+	qRegisterMetaType<QXmppStanza::Error>();
+	qRegisterMetaType<MessageType>();
 	qRegisterMetaType<Enums::ConnectionState>();
 	qRegisterMetaType<ClientWorker::ConnectionError>();
 	qRegisterMetaType<Enums::MessageType>();

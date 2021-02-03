@@ -94,3 +94,5 @@ private:
 	 */
 	QString m_lastMessage;
 };
+
+Q_DECLARE_METATYPE(RosterItem);

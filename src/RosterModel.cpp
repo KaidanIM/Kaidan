@@ -261,8 +261,9 @@ void RosterModel::handleMessageAdded(const Message &message)
 	if (itr == m_items.end())
 		return;
 
-	// new message is older than most recent event
-	if (itr->lastExchanged() > message.stamp())
+	// only set new message if it's newer
+	// allow setting old message if the current message is empty
+	if (!itr->lastMessage().isEmpty() && itr->lastExchanged() >= message.stamp())
 		return;
 
 	QVector<int> changedRoles = {

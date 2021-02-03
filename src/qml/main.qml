@@ -128,7 +128,7 @@ Kirigami.ApplicationWindow {
 
 	// Show the rosterPage instead of the emptyChatPage if the window is narrow.
 	function showRosterPageForNarrowWindow() {
-		if (pageStack.currentItem instanceof EmptyChatPage && width < 680)
+		if (pageStack.layers.depth < 2 && pageStack.currentItem instanceof EmptyChatPage && width < 680)
 			pageStack.goBack()
 	}
 

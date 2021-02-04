@@ -90,7 +90,7 @@ RegistrationPage {
 	Connections {
 		target: Kaidan
 
-		function onRegistrationFormReceived() {
+		function onRegistrationFormReceived(dataFormModel) {
 			formModel = dataFormModel
 			formFilterModel.sourceModel = dataFormModel
 

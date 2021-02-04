@@ -47,10 +47,6 @@ ConfirmationPage {
 
 	topAction: Kirigami.Action {
 		text: qsTr("Remove")
-		onTriggered: {
-			Kaidan.deleteAccountFromClient()
-			settingsSheet.close()
-			stack.initialItem && stack.pop(stack.initialItem)
-		}
+		onTriggered: Kaidan.deleteAccountFromClient()
 	}
 }

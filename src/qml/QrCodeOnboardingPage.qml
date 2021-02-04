@@ -55,7 +55,7 @@ ExplanationTogglePage {
 
 	secondaryButton.text: qsTr("Continue without QR code")
 	secondaryButton.onClicked: pageStack.layers.push(registrationLoginDecisionPage)
-	secondaryButton.flat: Style.isMaterial ? explanation.visible : false
+	secondaryButton.flat: Style.isMaterial ? explanationArea.visible : false
 
 	explanation: ColumnLayout {
 		CenteredAdaptiveText {

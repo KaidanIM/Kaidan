@@ -359,7 +359,7 @@ Q_DECL_EXPORT int main(int argc, char *argv[])
 		qputenv("QT_QUICK_CONTROLS_STYLE", defaultStyle.toLatin1());
 	}
 
-#ifdef Q_OS_WIN
+#if defined(Q_OS_WIN) || defined(Q_OS_MACOS)
 	QApplication::setStyle(QStringLiteral("breeze"));
 #endif
 

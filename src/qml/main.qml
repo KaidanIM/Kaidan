@@ -62,7 +62,7 @@ Kirigami.ApplicationWindow {
 	// It is initialized as invisible.
 	// That way, it does not pop up for a moment before the startPage is opened.
 	globalDrawer: GlobalDrawer {
-		visible: false
+		enabled: false
 	}
 
 	contextDrawer: Kirigami.ContextDrawer {
@@ -105,7 +105,6 @@ Kirigami.ApplicationWindow {
 
 	function openStartPage() {
 		globalDrawer.enabled = false
-		globalDrawer.visible = false
 
 		popLayersAboveLowest()
 		popAllPages()

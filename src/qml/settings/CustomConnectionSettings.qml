@@ -40,7 +40,7 @@ import "../elements/fields"
 RowLayout {
 	property alias hostField: hostField
 	property alias portField: portField
-	property CenteredAdaptiveHighlightedButton confirmationButton
+	property Button confirmationButton
 
 	Field {
 		id: hostField

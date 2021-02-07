@@ -6,6 +6,7 @@
   <name xml:lang="ca-valencia">Kaidan</name>
   <name xml:lang="es">Kaidan</name>
   <name xml:lang="nl">Kaidan</name>
+  <name xml:lang="nn">Kaidan</name>
   <name xml:lang="pt">Kaidan</name>
   <name xml:lang="sk">Kaidan</name>
   <name xml:lang="sl">Kaidan</name>
@@ -17,6 +18,7 @@
   <summary xml:lang="ca-valencia">El Kaidan, un client de Jabber/XMPP senzill i fàcil d'emprar per a cada dispositiu i plataforma</summary>
   <summary xml:lang="es">Kaidan, un sencillo y amigable cliente de Jabber/XMPP para cualquier dispositivo y plataforma</summary>
   <summary xml:lang="nl">Kaidan, een eenvoudige en gebruikersvriendelijke client voor Jabber/XMPP voor elk apparaat en platform</summary>
+  <summary xml:lang="nn">Kaiden er ein brukarvennleg Jabber-/XMPP-klient for alle typar einingar og plattformer</summary>
   <summary xml:lang="pt">Kaidan, um cliente simples amigável de Jabber/XMPP para cada dispositivo e plataforma</summary>
   <summary xml:lang="sl">Kaidan, preprost in uporabniku prijazen odjemalec Jabber/XMPP za vsako napravo in platformo</summary>
   <summary xml:lang="sv">Kaidan, ett enkelt och användarvänligt Jabber/XMPP-program för alla enheter och plattformar</summary>
@@ -29,6 +31,7 @@
   <developer_name xml:lang="ca-valencia">Els desenvolupadors i col·laboradors del Kaidan</developer_name>
   <developer_name xml:lang="es">Desarrolladores y colaboradores de Kaidan</developer_name>
   <developer_name xml:lang="nl">Ontwikkelaars &amp; medewerkers van Kaidan </developer_name>
+  <developer_name xml:lang="nn">Kaiden-utviklarar og -bidragsytarar</developer_name>
   <developer_name xml:lang="pt">Programadores &amp; Colaboradores do Kaidan</developer_name>
   <developer_name xml:lang="sk">Kaidan vývojári &amp; prispievatelia</developer_name>
   <developer_name xml:lang="sl">Razvijalci in sodelavci Kaidana</developer_name>
@@ -83,6 +86,7 @@
       <caption xml:lang="ca-valencia">Exemple de xat en un escriptori i en un dispositiu mòbil</caption>
       <caption xml:lang="es">Ejemplo de chat en un escritorio y en un dispositivo móvil</caption>
       <caption xml:lang="nl">Voorbeeld van een chat op een desktop en op een mobiel apparaat</caption>
+      <caption xml:lang="nn">Eksempel på nettprat på PC og på mobil eining</caption>
       <caption xml:lang="pt">Conversa de exemplo num computador e num dispositivo móvel</caption>
       <caption xml:lang="sl">Primer pogovora na namizju in na mobilni napravi</caption>
       <caption xml:lang="sv">Exempel på en chatt på ett skrivbord och på en mobil</caption>

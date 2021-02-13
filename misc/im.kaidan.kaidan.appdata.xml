@@ -9,6 +9,7 @@
   <name xml:lang="nl">Kaidan</name>
   <name xml:lang="nn">Kaidan</name>
   <name xml:lang="pt">Kaidan</name>
+  <name xml:lang="pt-BR">Kaidan</name>
   <name xml:lang="sk">Kaidan</name>
   <name xml:lang="sl">Kaidan</name>
   <name xml:lang="sv">Kaidan</name>
@@ -36,6 +37,7 @@
   <developer_name xml:lang="nl">Ontwikkelaars &amp; medewerkers van Kaidan </developer_name>
   <developer_name xml:lang="nn">Kaiden-utviklarar og -bidragsytarar</developer_name>
   <developer_name xml:lang="pt">Programadores &amp; Colaboradores do Kaidan</developer_name>
+  <developer_name xml:lang="pt-BR">Desenvolvedores e contribuintes do Kaidan</developer_name>
   <developer_name xml:lang="sk">Kaidan vývojári &amp; prispievatelia</developer_name>
   <developer_name xml:lang="sl">Razvijalci in sodelavci Kaidana</developer_name>
   <developer_name xml:lang="sv">Kaidan utvecklare och bidragsgivare</developer_name>
@@ -74,6 +76,7 @@
     <p xml:lang="nl">Voor een lijst met ondersteunde XEP's, kijk op de Wiki.</p>
     <p xml:lang="nn">Du finn ei oversikt over støtta XEP-ar på wikien.</p>
     <p xml:lang="pt">Para uma lista dos XEP's suportados, dê uma vista de olhos na Wiki.</p>
+    <p xml:lang="pt-BR">Para uma lista de XEPs suportadas, consulte a Wiki.</p>
     <p xml:lang="sl">Za seznam podprtih XEP-ov si oglejte Wiki</p>
     <p xml:lang="sv">Ta en titt på Wiki för en lista över XEP:er som stöds.</p>
     <p xml:lang="uk">Список підтримуваних XEP можна знайти у вікі.</p>
@@ -98,6 +101,7 @@
       <caption xml:lang="nl">Voorbeeld van een chat op een desktop en op een mobiel apparaat</caption>
       <caption xml:lang="nn">Eksempel på nettprat på PC og på mobil eining</caption>
       <caption xml:lang="pt">Conversa de exemplo num computador e num dispositivo móvel</caption>
+      <caption xml:lang="pt-BR">Exemplo de bate-papo em uma área de trabalho e num móvel</caption>
       <caption xml:lang="sl">Primer pogovora na namizju in na mobilni napravi</caption>
       <caption xml:lang="sv">Exempel på en chatt på ett skrivbord och på en mobil</caption>
       <caption xml:lang="uk">Приклад спілкування на комп'ютері та на мобільному пристрої</caption>

@@ -36,10 +36,20 @@
 #include "MessageModel.h"
 #include "Kaidan.h"
 
+RosterModel *RosterModel::s_instance = nullptr;
+
+RosterModel *RosterModel::instance()
+{
+	return s_instance;
+}
+
 RosterModel::RosterModel(RosterDb *rosterDb, QObject *parent)
         : QAbstractListModel(parent),
 	  m_rosterDb(rosterDb)
 {
+	Q_ASSERT(!s_instance);
+	s_instance = this;
+
 	connect(rosterDb, &RosterDb::itemsFetched,
 		this, &RosterModel::handleItemsFetched);
 
@@ -257,7 +267,7 @@ void RosterModel::handleMessageAdded(const Message &message)
 	if (message.sentByMe()) {
 		// if we sent a message (with another device), reset counter
 		newUnreadMessages = 0;
-	} else if (Kaidan::instance()->messageModel()->currentChatJid() != contactJid) {
+	} else if (MessageModel::instance()->currentChatJid() != contactJid) {
 		// increase counter, if chat isn't open
 		newUnreadMessages = itr->unreadMessages() + 1;
 	}

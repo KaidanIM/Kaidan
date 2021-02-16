@@ -37,6 +37,7 @@
 
 // Kaidan
 #include "Kaidan.h"
+#include "RosterModel.h"
 
 // Q_OS_BSD4 includes all BSD variants and also Q_OS_DARWIN
 // Q_OS_LINUX is also defined on Android
@@ -73,7 +74,7 @@ void Notifications::sendMessageNotification(const QString &senderJid, const QStr
 		emit Kaidan::instance()->raiseWindowRequested();
 	});
 	QObject::connect(notification, &KNotification::action1Activated, [=] {
-		emit Kaidan::instance()->rosterModel()->updateItemRequested(senderJid, [=](RosterItem &item) {
+		emit RosterModel::instance()->updateItemRequested(senderJid, [=](RosterItem &item) {
 			item.setUnreadMessages(0);
 		});
 	});

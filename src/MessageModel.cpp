@@ -43,10 +43,20 @@ constexpr int MAX_CORRECTION_MESSAGE_COUNT_DEPTH = 20;
 // defines that the message is suitable for correction only if it has ben sent not earlier than N days ago
 constexpr int MAX_CORRECTION_MESSAGE_DAYS_DEPTH = 2;
 
+MessageModel *MessageModel::s_instance = nullptr;
+
+MessageModel *MessageModel::instance()
+{
+	return s_instance;
+}
+
 MessageModel::MessageModel(MessageDb *msgDb, QObject *parent)
 	: QAbstractListModel(parent),
 	  m_msgDb(msgDb)
 {
+	Q_ASSERT(!s_instance);
+	s_instance = this;
+
 	connect(msgDb, &MessageDb::messagesFetched,
 	        this, &MessageModel::handleMessagesFetched);
 	connect(msgDb, &MessageDb::pendingMessagesFetched,

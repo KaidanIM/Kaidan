@@ -427,6 +427,12 @@ Q_DECL_EXPORT int main(int argc, char *argv[])
 	qmlRegisterSingletonType<AccountManager>(APPLICATION_ID, 1, 0, "AccountManager", [](QQmlEngine *, QJSEngine *) {
 		return static_cast<QObject *>(AccountManager::instance());
 	});
+	qmlRegisterSingletonType<RosterModel>(APPLICATION_ID, 1, 0, "RosterModel", [](QQmlEngine *, QJSEngine *) {
+		return static_cast<QObject *>(RosterModel::instance());
+	});
+	qmlRegisterSingletonType<MessageModel>(APPLICATION_ID, 1, 0, "MessageModel", [](QQmlEngine *, QJSEngine *) {
+		return static_cast<QObject *>(MessageModel::instance());
+	});
 
 	engine.load(QUrl("qrc:/qml/main.qml"));
 	if (engine.rootObjects().isEmpty())

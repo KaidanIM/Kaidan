@@ -46,7 +46,7 @@ ChatPageBase {
 		anchors.fill: parent
 		onDropped: (drop) => {
 			if (drop.urls.length > 0) {
-				sendMediaSheet.sendFile(Kaidan.messageModel.currentChatJid, drop.urls[0])
+				sendMediaSheet.sendFile(MessageModel.currentChatJid, drop.urls[0])
 			}
 		}
 	}
@@ -58,14 +58,14 @@ ChatPageBase {
 			var imageUrl = Utils.pasteImage();
 			// check if there was an image to be pasted from the clipboard
 			if (imageUrl.toString().length > 0) {
-				sendMediaSheet.sendFile(Kaidan.messageModel.currentChatJid, imageUrl)
+				sendMediaSheet.sendFile(MessageModel.currentChatJid, imageUrl)
 			}
 		}
 	}
 
 	property string chatName: {
-		var currentChatJid = Kaidan.messageModel.currentChatJid
-		var chatDisplayName = Kaidan.rosterModel.itemName(currentChatJid)
+		var currentChatJid = MessageModel.currentChatJid
+		var chatDisplayName = RosterModel.itemName(currentChatJid)
 		return chatDisplayName ? chatDisplayName : currentChatJid
 	}
 
@@ -93,19 +93,19 @@ ChatPageBase {
 		Kirigami.Action {
 			visible: true
 			icon.name: {
-				Kaidan.notificationsMuted(Kaidan.messageModel.currentChatJid)
+				Kaidan.notificationsMuted(MessageModel.currentChatJid)
 					? "audio-volume-high-symbolic"
 					: "audio-volume-muted-symbolic"
 			}
 			text: {
-				Kaidan.notificationsMuted(Kaidan.messageModel.currentChatJid)
+				Kaidan.notificationsMuted(MessageModel.currentChatJid)
 					? qsTr("Unmute notifications")
 					: qsTr("Mute notifications")
 			}
 			onTriggered: {
 				Kaidan.setNotificationsMuted(
-					Kaidan.messageModel.currentChatJid,
-					!Kaidan.notificationsMuted(Kaidan.messageModel.currentChatJid)
+					MessageModel.currentChatJid,
+					!Kaidan.notificationsMuted(MessageModel.currentChatJid)
 				)
 			}
 
@@ -113,10 +113,10 @@ ChatPageBase {
 				target: Kaidan
 
 				function onNotificationsMuted(jid) {
-					text = Kaidan.notificationsMuted(Kaidan.messageModel.currentChatJid)
+					text = Kaidan.notificationsMuted(MessageModel.currentChatJid)
 							? qsTr("Unmute notifications")
 							: qsTr("Mute notifications")
-					icon.name = Kaidan.notificationsMuted(Kaidan.messageModel.currentChatJid)
+					icon.name = Kaidan.notificationsMuted(MessageModel.currentChatJid)
 							    ? "audio-volume-high-symbolic"
 								: "audio-volume-muted-symbolic"
 				}
@@ -126,7 +126,7 @@ ChatPageBase {
 			visible: true
 			icon.name: "avatar-default-symbolic"
 			text: qsTr("View profile")
-			onTriggered: pageStack.push(userProfilePage, {jid: Kaidan.messageModel.currentChatJid, name: chatName})
+			onTriggered: pageStack.push(userProfilePage, {jid: MessageModel.currentChatJid, name: chatName})
 		},
 		Kirigami.Action {
 			readonly property int type: Enums.MessageType.MessageImage
@@ -139,7 +139,7 @@ ChatPageBase {
 			}
 
 			onTriggered: {
-				sendMediaSheet.sendNewMessageType(Kaidan.messageModel.currentChatJid, type)
+				sendMediaSheet.sendNewMessageType(MessageModel.currentChatJid, type)
 			}
 		},
 		Kirigami.Action {
@@ -152,7 +152,7 @@ ChatPageBase {
 			}
 
 			onTriggered: {
-				sendMediaSheet.sendNewMessageType(Kaidan.messageModel.currentChatJid, type)
+				sendMediaSheet.sendNewMessageType(MessageModel.currentChatJid, type)
 			}
 		},
 		Kirigami.Action {
@@ -166,7 +166,7 @@ ChatPageBase {
 			}
 
 			onTriggered: {
-				sendMediaSheet.sendNewMessageType(Kaidan.messageModel.currentChatJid, type)
+				sendMediaSheet.sendNewMessageType(MessageModel.currentChatJid, type)
 			}
 		},
 		Kirigami.Action {
@@ -179,7 +179,7 @@ ChatPageBase {
 			}
 
 			onTriggered: {
-				sendMediaSheet.sendNewMessageType(Kaidan.messageModel.currentChatJid, type)
+				sendMediaSheet.sendNewMessageType(MessageModel.currentChatJid, type)
 			}
 		},
 		Kirigami.Action {
@@ -226,16 +226,16 @@ ChatPageBase {
 			if (searchBar.active && searchField.text.length > 0) {
 				if (searchUpwards) {
 					if (startIndex === 0) {
-						newIndex = Kaidan.messageModel.searchForMessageFromNewToOld(searchField.text)
+						newIndex = MessageModel.searchForMessageFromNewToOld(searchField.text)
 					} else {
-						newIndex = Kaidan.messageModel.searchForMessageFromNewToOld(searchField.text, startIndex)
+						newIndex = MessageModel.searchForMessageFromNewToOld(searchField.text, startIndex)
 						if (newIndex === -1)
-							newIndex = Kaidan.messageModel.searchForMessageFromNewToOld(searchField.text, 0)
+							newIndex = MessageModel.searchForMessageFromNewToOld(searchField.text, 0)
 					}
 				} else {
-					newIndex = Kaidan.messageModel.searchForMessageFromOldToNew(searchField.text, startIndex)
+					newIndex = MessageModel.searchForMessageFromOldToNew(searchField.text, startIndex)
 					if (newIndex === -1)
-						newIndex = Kaidan.messageModel.searchForMessageFromOldToNew(searchField.text)
+						newIndex = MessageModel.searchForMessageFromOldToNew(searchField.text)
 				}
 			}
 			messageListView.currentIndex = newIndex
@@ -345,7 +345,7 @@ ChatPageBase {
 		fileChooserLoader.item.selectedNameFilter = nameFilter
 		fileChooserLoader.item.accepted.connect(
 			function() {
-				sendMediaSheet.sendFile(Kaidan.messageModel.currentChatJid, fileChooserLoader.item.fileUrl)
+				sendMediaSheet.sendFile(MessageModel.currentChatJid, fileChooserLoader.item.fileUrl)
 			}
 		)
 		if (title !== undefined)
@@ -472,7 +472,7 @@ ChatPageBase {
 		currentIndex: -1
 
 		// Connect to the database,
-		model: Kaidan.messageModel
+		model: MessageModel
 
 		ChatMessageContextMenu {
 			id: messageContextMenu

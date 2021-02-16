@@ -43,7 +43,7 @@ Kirigami.SwipeListItem {
 	property string name
 	property string lastMessage
 	property int unreadMessages
-	property bool isSelected: !Kirigami.Settings.isMobile && Kaidan.messageModel.currentChatJid === jid
+	property bool isSelected: !Kirigami.Settings.isMobile && MessageModel.currentChatJid === jid
 
 	topPadding: 0
 	leftPadding: 0

@@ -56,6 +56,8 @@ public:
 		LastMessageRole,
 	};
 
+	static RosterModel *instance();
+
 	RosterModel(RosterDb *rosterDb, QObject *parent = nullptr);
 
 	void setMessageModel(MessageModel *model);
@@ -106,4 +108,6 @@ private:
 
 	RosterDb *m_rosterDb;
 	QVector<RosterItem> m_items;
+
+	static RosterModel *s_instance;
 };

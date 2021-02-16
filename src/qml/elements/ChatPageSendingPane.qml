@@ -198,13 +198,13 @@ Controls.Pane {
 		// Send the message.
 		if (messageArea.state === "compose") {
 			Kaidan.client.messageHandler.sendMessageRequested(
-				Kaidan.messageModel.currentChatJid,
+				MessageModel.currentChatJid,
 				messageArea.text,
 				chatPage.isWritingSpoiler,
 				spoilerHintField.text
 			)
 		} else if (messageArea.state === "edit") {
-			Kaidan.messageModel.correctMessage(chatPage.messageToCorrect, messageArea.text)
+			MessageModel.correctMessage(chatPage.messageToCorrect, messageArea.text)
 		}
 
 		clearMessageArea()

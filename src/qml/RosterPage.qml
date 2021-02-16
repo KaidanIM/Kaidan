@@ -102,7 +102,7 @@ Kirigami.ScrollablePage {
 		width: root.width
 		model: RosterFilterProxyModel {
 			id: filterModel
-			sourceModel: Kaidan.rosterModel
+			sourceModel: RosterModel
 		}
 
 		delegate: RosterListItem {
@@ -136,7 +136,7 @@ Kirigami.ScrollablePage {
 	 * @param chatJid JID of the chat for which the chat page is opened
 	 */
 	function openChatPage(chatJid) {
-		Kaidan.messageModel.currentChatJid = chatJid
+		MessageModel.currentChatJid = chatJid
 		searchAction.checked = false
 
 		// Close all pages (especially the chat page) except the roster page.

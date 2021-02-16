@@ -181,7 +181,7 @@ Kirigami.ApplicationWindow {
 	}
 
 	Connections {
-		target: Kaidan.rosterModel
+		target: RosterModel
 
 		function onSubscriptionRequestReceived(from, msg) {
 			Kaidan.client.vCardManager.vCardRequested(from)

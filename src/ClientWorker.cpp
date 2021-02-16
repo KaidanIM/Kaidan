@@ -63,11 +63,11 @@ ClientWorker::ClientWorker(Caches *caches, bool enableLogging, QObject* parent)
 	  m_enableLogging(enableLogging),
 	  m_registrationManager(new RegistrationManager(this, m_client, m_caches->settings, this)),
 	  m_vCardManager(new VCardManager(this, m_client, m_caches->avatarStorage, this)),
-	  m_rosterManager(new RosterManager(m_client,  m_caches->rosterModel, m_caches->avatarStorage, m_vCardManager, this)),
-	  m_messageHandler(new MessageHandler(this, m_client, m_caches->msgModel, this)),
+	  m_rosterManager(new RosterManager(m_client, RosterModel::instance(), m_caches->avatarStorage, m_vCardManager, this)),
+	  m_messageHandler(new MessageHandler(this, m_client, MessageModel::instance(), this)),
 	  m_discoveryManager(new DiscoveryManager(m_client, this)),
 	  m_uploadManager(new UploadManager(m_client, m_rosterManager, this)),
-	  m_downloadManager(new DownloadManager(caches->transferCache, caches->msgModel, this)),
+	  m_downloadManager(new DownloadManager(caches->transferCache, MessageModel::instance(), this)),
 	  m_versionManager(new VersionManager(m_client, this)),
 	  m_isApplicationWindowActive(true)
 {
@@ -309,7 +309,7 @@ void ClientWorker::onConnected()
 	// automatically in case of a connection outage.
 	m_client->configuration().setAutoReconnectionEnabled(true);
 
-	m_caches->msgModel->sendPendingMessages();
+	MessageModel::instance()->sendPendingMessages();
 }
 
 void ClientWorker::onDisconnected()

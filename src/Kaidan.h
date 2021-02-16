@@ -57,8 +57,6 @@ class Kaidan : public QObject
 	Q_OBJECT
 
 	Q_PROPERTY(ClientWorker* client READ client CONSTANT)
-	Q_PROPERTY(RosterModel* rosterModel READ rosterModel CONSTANT)
-	Q_PROPERTY(MessageModel* messageModel READ messageModel CONSTANT)
 	Q_PROPERTY(AvatarFileStorage* avatarStorage READ avatarStorage NOTIFY avatarStorageChanged)
 	Q_PROPERTY(PresenceCache* presenceCache READ presenceCache CONSTANT)
 	Q_PROPERTY(TransferCache* transferCache READ transferCache CONSTANT)
@@ -152,16 +150,6 @@ public:
 	ClientWorker *client() const
 	{
 		return m_client;
-	}
-
-	RosterModel* rosterModel() const
-	{
-		return m_caches->rosterModel;
-	}
-
-	MessageModel* messageModel() const
-	{
-		return m_caches->msgModel;
 	}
 
 	AvatarFileStorage* avatarStorage() const

@@ -66,6 +66,8 @@ public:
 	};
 	Q_ENUM(MessageRoles)
 
+	static MessageModel *instance();
+
 	MessageModel(MessageDb *msgDb, QObject *parent = nullptr);
 	~MessageModel();
 
@@ -152,4 +154,6 @@ private:
 	QVector<Message> m_messages;
 	QString m_currentChatJid;
 	bool m_fetchedAll = false;
+
+	static MessageModel *s_instance;
 };

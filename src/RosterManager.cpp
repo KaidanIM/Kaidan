@@ -70,7 +70,7 @@ RosterManager::RosterManager(QXmppClient *client,
 	connect(m_manager, &QXmppRosterManager::subscriptionReceived,
 			this, [this] (const QString &jid) {
 		// emit signal to ask user
-		emit Kaidan::instance()->rosterModel()->subscriptionRequestReceived(jid, {});
+		emit RosterModel::instance()->subscriptionRequestReceived(jid, {});
 	});
 	connect(this, &RosterManager::answerSubscriptionRequestRequested,
 	        this, [=] (QString jid, bool accepted) {

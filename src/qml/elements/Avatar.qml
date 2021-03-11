@@ -31,7 +31,6 @@
 import QtQuick 2.14
 
 Item {
-	id: avatar
 	property string avatarUrl
 	property string name
 
@@ -46,9 +45,8 @@ Item {
 	}
 
 	TextAvatar {
-		id: textAvatar
 		visible: !avatarUrl
-		name: avatar.name
+		name: parent.name
 		anchors.fill: parent
 	}
 }

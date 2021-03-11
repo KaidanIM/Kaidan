@@ -37,14 +37,13 @@ import org.kde.kirigami 2.12 as Kirigami
 import im.kaidan.kaidan 1.0
 
 Kirigami.SwipeListItem {
-	id: listItem
+	id: root
 
 	property string jid
 	property string name
 	property string lastMessage
 	property int unreadMessages
-	property string avatarImagePath: Kaidan.avatarStorage.getAvatarUrl(jid)
-	property bool isSelected
+	property bool isSelected: !Kirigami.Settings.isMobile && Kaidan.messageModel.currentChatJid === jid
 
 	topPadding: 0
 	leftPadding: 0
@@ -66,21 +65,19 @@ Kirigami.SwipeListItem {
 
 			UserPresenceWatcher {
 				id: userPresence
-				jid: listItem.jid
+				jid: root.jid
 			}
 		}
 
 		// left: avatar
 		Item {
-			id: avatarSpace
 			Layout.preferredHeight: parent.height - Kirigami.Units.gridUnit * 0.8
 			Layout.preferredWidth: parent.height - Kirigami.Units.gridUnit * 0.8
 
 			Avatar {
-				id: avatar
 				anchors.fill: parent
-				avatarUrl: avatarImagePath
-				name: listItem.name
+				avatarUrl: Kaidan.avatarStorage.getAvatarUrl(jid)
+				name: root.name
 				width: height
 			}
 		}
@@ -143,7 +140,7 @@ Kirigami.SwipeListItem {
 			target: Kaidan
 
 			function onNotificationsMutedChanged(jid) {
-				if (jid === listItem.jid) {
+				if (jid === root.jid) {
 					counter.muted = Kaidan.notificationsMuted(jid)
 					muteIcon.visible = Kaidan.notificationsMuted(jid)
 				}

@@ -35,8 +35,6 @@ import org.kde.kirigami 2.12 as Kirigami
 import im.kaidan.kaidan 1.0
 
 Rectangle {
-	id: avatar
-
 	property string name
 
 	color: Qt.lighter(Utils.getUserColor(name))

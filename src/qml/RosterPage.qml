@@ -112,7 +112,6 @@ Kirigami.ScrollablePage {
 			lastMessage: model.lastMessage
 			unreadMessages: model.unreadMessages
 			onClicked: openChatPage(model.jid)
-			isSelected: !Kirigami.Settings.isMobile && Kaidan.messageModel.currentChatJid === jid
 		}
 
 		Connections {

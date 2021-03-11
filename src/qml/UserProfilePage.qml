@@ -159,6 +159,7 @@ Kirigami.Page {
 					Layout.preferredWidth: Kirigami.Units.gridUnit * 10
 					name: root.name
 					avatarUrl: Kaidan.avatarStorage.getAvatarUrl(jid)
+					isBorderVisible: false
 				}
 
 				ColumnLayout {

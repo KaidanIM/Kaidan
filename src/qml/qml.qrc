@@ -25,7 +25,6 @@
 		<file>elements/ChatPageSendingPane.qml</file>
 		<file>elements/ClickableIcon.qml</file>
 		<file>elements/RoundedImage.qml</file>
-		<file>elements/RoundImage.qml</file>
 		<file>elements/Button.qml</file>
 		<file>elements/CenteredAdaptiveButton.qml</file>
 		<file>elements/CenteredAdaptiveHighlightedButton.qml</file>

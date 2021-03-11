@@ -38,7 +38,6 @@ Rectangle {
 	property string name
 
 	color: Qt.lighter(Utils.getUserColor(name))
-	radius: width * 0.5
 
 	Text {
 		id: text

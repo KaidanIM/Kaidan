@@ -29,24 +29,43 @@
  */
 
 import QtQuick 2.14
+import org.kde.kirigami 2.12 as Kirigami
 
 Item {
 	property string avatarUrl
 	property string name
+	property double radius: width * 0.5
+	property alias isBorderVisible: border.visible
 
-	RoundImage {
-		id: imageAvatar
+	Kirigami.ShadowedRectangle {
+		id: border
+		shadow.color: Qt.darker(color, 1.2)
+		shadow.size: 4
+		anchors.centerIn: parent
+		radius: parent.radius
+		width: parent.width + 2
+		height: width
+
+		color: {
+			var accentColor = Kirigami.Theme.textColor
+			return Qt.tint(Kirigami.Theme.backgroundColor, Qt.rgba(accentColor.r, accentColor.g, accentColor.b, 0.1))
+		}
+	}
+
+	RoundedImage {
 		visible: avatarUrl
 		source: avatarUrl
 		fillMode: Image.PreserveAspectFit
 		mipmap: true
 		height: width
+		radius: parent.radius
 		anchors.fill: parent
 	}
 
 	TextAvatar {
 		visible: !avatarUrl
 		name: parent.name
+		radius: parent.radius
 		anchors.fill: parent
 	}
 }

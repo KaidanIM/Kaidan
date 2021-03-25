@@ -419,7 +419,7 @@ elseif(UNIX AND NOT APPLE)
 	        RENAME "kaidan.png"
 	)
 	# install desktop file
-	install(FILES "misc/kaidan.desktop"
+	install(FILES "misc/im.kaidan.kaidan.desktop"
 	        DESTINATION "${KDE_INSTALL_APPDIR}"
 	)
 	# install metainfo

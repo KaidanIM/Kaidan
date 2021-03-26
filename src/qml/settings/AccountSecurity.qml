@@ -38,16 +38,16 @@ import im.kaidan.kaidan 1.0
 BinaryDecisionPage {
 	title: qsTr("Account Security")
 
-	topDescription: qsTr("Allow to add new devices using a QR-Code, but never show the password as text. This action can not be undone, so consider storing the password in another way before using it.")
+	topDescription: qsTr("Allow to add additional devices using the login QR code but never show the password.")
 	topAction: Kirigami.Action {
-		text: qsTr("Disable showing the password")
+		text: qsTr("Don't show password")
 		enabled: Kaidan.passwordVisibility === Kaidan.PasswordVisible
 		onTriggered: stack.push("DisablePlainTextPasswordDisplay.qml")
 	}
 
-	bottomDescription: qsTr("Don't expose the password in any form. This action can not be undone.")
+	bottomDescription: qsTr("Neither allow to add additional devices using the login QR code nor show the password.")
 	bottomAction: Kirigami.Action {
-		text: qsTr("Disable showing the QR-Code and password")
+		text: qsTr("Don't expose password in any way")
 		enabled: Kaidan.passwordVisibility !== Kaidan.PasswordInvisible
 		onTriggered: stack.push("DisablePasswordDisplay.qml")
 	}

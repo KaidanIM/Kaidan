@@ -36,17 +36,18 @@ import im.kaidan.kaidan 1.0
 import "../elements"
 
 /**
- * This page is used for confirming the removal of a password from the plain text of the account transfer page.
+ * This page is used for confirming the removal of the plain text password from
+ * the account transfer page.
  */
 ConfirmationPage {
-	title: qsTr("Do not show password as text")
+	title: qsTr("Don't show your password")
 
-	topDescription: qsTr("Your password will not be shown as text anymore.\nYou won't be able to see your password as text again because this action cannot be undone!\nMake sure that you backed it up if you want to use your account later.")
+	topDescription: qsTr("Your password will not be shown anymore but still exposed via the login QR code.\nYou won't be able to see your password again because this action cannot be undone!\nConsider storing the password somewhere else if you want to use your account on another device without the login QR code.")
 
 	onCanceled: stack.pop()
 
 	topAction: Kirigami.Action {
-		text: qsTr("Do not show password")
+		text: qsTr("Don't show password")
 		onTriggered: {
 			Kaidan.passwordVisibility = Kaidan.PasswordVisibleQrOnly
 			stack.pop()

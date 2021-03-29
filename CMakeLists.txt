@@ -97,7 +97,7 @@ endif()
 # Optional QWidget style integration (not on mobile)
 if(NOT UBUNTU_TOUCH AND NOT ANDROID AND NOT IOS)
 	find_package(Qt5Widgets)
-	find_package(KF5QQC2DeskopStyle)
+	find_package(KF5QQC2DesktopStyle)
 	set_package_properties(Qt5Widgets PROPERTIES
 		DESCRIPTION "Integration with QWidget based desktop styles"
 		TYPE OPTIONAL

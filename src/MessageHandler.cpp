@@ -46,20 +46,20 @@
 #include "MessageModel.h"
 #include "MediaUtils.h"
 
-MessageHandler::MessageHandler(ClientWorker *clientWorker, QXmppClient *client, MessageModel *model, QObject *parent)
+MessageHandler::MessageHandler(ClientWorker *clientWorker, QXmppClient *client, QObject *parent)
 	: QObject(parent),
 	  m_clientWorker(clientWorker),
-	  m_client(client),
-	  m_model(model)
+	  m_client(client)
 {
 	connect(client, &QXmppClient::messageReceived, this, &MessageHandler::handleMessage);
 	connect(this, &MessageHandler::sendMessageRequested, this, &MessageHandler::sendMessage);
-	connect(model, &MessageModel::sendCorrectedMessageRequested, this, &MessageHandler::sendCorrectedMessage);
+	connect(MessageModel::instance(), &MessageModel::sendCorrectedMessageRequested,
+	        this, &MessageHandler::sendCorrectedMessage);
 
 	client->addExtension(&m_receiptManager);
 	connect(&m_receiptManager, &QXmppMessageReceiptManager::messageDelivered,
 		this, [=] (const QString&, const QString &id) {
-		emit model->setMessageDeliveryStateRequested(id, Enums::DeliveryState::Delivered);
+		emit MessageModel::instance()->setMessageDeliveryStateRequested(id, Enums::DeliveryState::Delivered);
 	});
 
 	m_carbonManager = new QXmppCarbonManager();
@@ -80,7 +80,7 @@ MessageHandler::MessageHandler(ClientWorker *clientWorker, QXmppClient *client, 
 	connect(discoveryManager, &QXmppDiscoveryManager::infoReceived,
 	        this, &MessageHandler::handleDiscoInfo);
 
-	connect(model, &MessageModel::pendingMessagesFetched,
+	connect(MessageModel::instance(), &MessageModel::pendingMessagesFetched,
 			this, &MessageHandler::handlePendingMessages);
 }
 
@@ -92,7 +92,8 @@ MessageHandler::~MessageHandler()
 void MessageHandler::handleMessage(const QXmppMessage &msg)
 {
 	if (msg.type() == QXmppMessage::Error) {
-		emit m_model->setMessageDeliveryStateRequested(msg.id(), Enums::DeliveryState::Error, msg.error().text());
+		emit MessageModel::instance()->setMessageDeliveryStateRequested(
+				msg.id(), Enums::DeliveryState::Error, msg.error().text());
 		return;
 	}
 
@@ -129,11 +130,11 @@ void MessageHandler::handleMessage(const QXmppMessage &msg)
 	// save the message to the database
 	// in case of message correction, replace old message
 	if (msg.replaceId().isEmpty()) {
-		emit m_model->addMessageRequested(message);
+		emit MessageModel::instance()->addMessageRequested(message);
 	} else {
 		message.setIsEdited(true);
 		message.setId(QString());
-		emit m_model->updateMessageRequested(msg.replaceId(), [=] (Message &m) {
+		emit MessageModel::instance()->updateMessageRequested(msg.replaceId(), [=](Message &m) {
 			// replace completely
 			m = message;
 		});
@@ -155,7 +156,7 @@ void MessageHandler::handleMessage(const QXmppMessage &msg)
 	//  * The corresponding chat is not opened while the application window is active.
 	if (!message.sentByMe() &&
 			!Kaidan::instance()->notificationsMuted(contactJid) &&
-			(m_model->currentChatJid() != message.from() ||
+			(MessageModel::instance()->currentChatJid() != message.from() ||
 			 !m_clientWorker->isApplicationWindowActive())) {
 		emit m_clientWorker->showMessageNotificationRequested(contactJid, contactName, msg.body());
 	}
@@ -186,7 +187,7 @@ void MessageHandler::sendMessage(const QString& toJid,
 			break;
 	}
 
-	emit m_model->addMessageRequested(msg);
+	emit MessageModel::instance()->addMessageRequested(msg);
 	sendPendingMessage(msg);
 }
 
@@ -202,7 +203,7 @@ void MessageHandler::sendCorrectedMessage(const Message &msg)
 		deliveryState = Enums::DeliveryState::Error;
 	}
 
-	emit m_model->updateMessageRequested(msg.id(), [=] (Message &localMessage) {
+	emit MessageModel::instance()->updateMessageRequested(msg.id(), [=](Message &localMessage) {
 		localMessage.setDeliveryState(deliveryState);
 		localMessage.setErrorText(errorText);
 	});
@@ -232,8 +233,10 @@ void MessageHandler::sendPendingMessage(const Message &message)
 			success = m_client->sendPacket(message);
 		}
 
-		if (success)
-			emit m_model->setMessageDeliveryStateRequested(message.id(), Enums::DeliveryState::Sent);
+		if (success) {
+			emit MessageModel::instance()->setMessageDeliveryStateRequested(
+					message.id(), Enums::DeliveryState::Sent);
+		}
 		// TODO this "true" from sendPacket doesn't yet mean the message was successfully sent
 
 		else {
@@ -244,7 +247,8 @@ void MessageHandler::sendPendingMessage(const Message &message)
 			// translation work in the UI, the tr() call of the passive
 			// notification must contain exactly the same string.
 			emit Kaidan::instance()->passiveNotificationRequested(tr("Message could not be sent."));
-			emit m_model->setMessageDeliveryStateRequested(message.id(), Enums::DeliveryState::Error, "Message could not be sent.");
+			emit MessageModel::instance()->setMessageDeliveryStateRequested(
+					message.id(), Enums::DeliveryState::Error, "Message could not be sent.");
 		}
 	}
 }

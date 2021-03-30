@@ -36,7 +36,6 @@
 #include <QMap>
 
 class TransferCache;
-class MessageModel;
 class QNetworkAccessManager;
 
 class DownloadJob : public QObject
@@ -72,7 +71,7 @@ class DownloadManager : public QObject
 {
 	Q_OBJECT
 public:
-	DownloadManager(TransferCache *m_transferCache, MessageModel *m_model, QObject *parent = nullptr);
+	DownloadManager(TransferCache *m_transferCache, QObject *parent = nullptr);
 	~DownloadManager();
 
 signals:
@@ -92,7 +91,6 @@ private slots:
 private:
 	QNetworkAccessManager *m_netMngr;
 	TransferCache *m_transferCache;
-	MessageModel *m_model;
 
 	QMap<QString, DownloadJob *> m_downloads;
 };

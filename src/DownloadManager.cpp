@@ -41,11 +41,10 @@
 #include "MessageModel.h"
 #include "TransferCache.h"
 
-DownloadManager::DownloadManager(TransferCache *transferCache, MessageModel *model, QObject *parent)
+DownloadManager::DownloadManager(TransferCache *transferCache, QObject *parent)
 	: QObject(parent),
 	  m_netMngr(new QNetworkAccessManager(this)),
-	  m_transferCache(transferCache),
-	  m_model(model)
+	  m_transferCache(transferCache)
 {
 	connect(this, &DownloadManager::startDownloadRequested,
 	        this, &DownloadManager::startDownload);
@@ -74,7 +73,7 @@ void DownloadManager::startDownload(const QString &msgId, const QString &url)
 
 	connect(dl, &DownloadJob::finished, this, [=]() {
 		const QString &mediaLocation = dl->downloadLocation();
-		emit m_model->updateMessageRequested(msgId, [=] (Message &msg) {
+		emit MessageModel::instance()->updateMessageRequested(msgId, [=](Message &msg) {
 			msg.setMediaLocation(mediaLocation);
 		});
 

@@ -37,13 +37,11 @@
 #include <QXmppRosterManager.h>
 
 RosterManager::RosterManager(QXmppClient *client,
-                             RosterModel *model,
                              AvatarFileStorage *avatarStorage,
                              VCardManager *vCardManager,
                              QObject *parent)
 	: QObject(parent),
 	  m_client(client),
-	  m_model(model),
 	  m_avatarStorage(avatarStorage),
 	  m_vCardManager(vCardManager),
 	  m_manager(client->findExtension<QXmppRosterManager>())
@@ -52,23 +50,22 @@ RosterManager::RosterManager(QXmppClient *client,
 	        this, &RosterManager::populateRoster);
 
 	connect(m_manager, &QXmppRosterManager::itemAdded,
-		this, [this, vCardManager, model] (const QString &jid) {
-		emit model->addItemRequested(RosterItem(m_manager->getRosterEntry(jid)));
-
+		this, [this, vCardManager] (const QString &jid) {
+		emit RosterModel::instance()->addItemRequested(RosterItem(m_manager->getRosterEntry(jid)));
 		vCardManager->requestVCard(jid);
 	});
 
 	connect(m_manager, &QXmppRosterManager::itemChanged,
-		this, [this, model] (const QString &jid) {
-		emit model->updateItemRequested(jid, [=] (RosterItem &item) {
+		this, [this] (const QString &jid) {
+		emit RosterModel::instance()->updateItemRequested(jid, [=] (RosterItem &item) {
 			item.setName(m_manager->getRosterEntry(jid).name());
 		});
 	});
 
-	connect(m_manager, &QXmppRosterManager::itemRemoved, model, &RosterModel::removeItemRequested);
+	connect(m_manager, &QXmppRosterManager::itemRemoved, RosterModel::instance(), &RosterModel::removeItemRequested);
 
 	connect(m_manager, &QXmppRosterManager::subscriptionReceived,
-			this, [this] (const QString &jid) {
+			this, [] (const QString &jid) {
 		// emit signal to ask user
 		emit RosterModel::instance()->subscriptionRequestReceived(jid, {});
 	});
@@ -107,7 +104,7 @@ void RosterManager::populateRoster()
 	}
 
 	// replace current contacts with new ones from server
-	emit m_model->replaceItemsRequested(items);
+	emit RosterModel::instance()->replaceItemsRequested(items);
 }
 
 void RosterManager::addContact(const QString &jid, const QString &name, const QString &msg)

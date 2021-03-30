@@ -39,7 +39,6 @@
 
 class ClientWorker;
 class Kaidan;
-class MessageModel;
 class QXmppMessage;
 class QXmppDiscoveryIq;
 class QXmppCarbonManager;
@@ -52,7 +51,7 @@ class MessageHandler : public QObject
 	Q_OBJECT
 
 public:
-	MessageHandler(ClientWorker *clientWorker, QXmppClient *client, MessageModel *model, QObject *parent = nullptr);
+	MessageHandler(ClientWorker *clientWorker, QXmppClient *client, QObject *parent = nullptr);
 	~MessageHandler();
 
 public slots:
@@ -97,6 +96,5 @@ private:
 	ClientWorker *m_clientWorker;
 	QXmppClient *m_client;
 	QXmppMessageReceiptManager m_receiptManager;
-	MessageModel *m_model;
 	QXmppCarbonManager *m_carbonManager;
 };

@@ -37,7 +37,6 @@ class QXmppClient;
 class QXmppRosterManager;
 // Kaidan
 class AvatarFileStorage;
-class RosterModel;
 class VCardManager;
 
 class RosterManager : public QObject
@@ -45,9 +44,7 @@ class RosterManager : public QObject
 	Q_OBJECT
 
 public:
-	RosterManager(QXmppClient *client, RosterModel *rosterModel,
-				  AvatarFileStorage *avatarStorage, VCardManager *vCardManager,
-	              QObject *parent = nullptr);
+	RosterManager(QXmppClient *client, AvatarFileStorage *avatarStorage, VCardManager *vCardManager, QObject *parent = nullptr);
 
 signals:
 	/**
@@ -86,7 +83,6 @@ private slots:
 
 private:
 	QXmppClient *m_client;
-	RosterModel *m_model;
 	AvatarFileStorage *m_avatarStorage;
 	VCardManager *m_vCardManager;
 	QXmppRosterManager *m_manager;

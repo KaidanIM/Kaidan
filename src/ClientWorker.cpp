@@ -94,8 +94,8 @@ ClientWorker::ClientWorker(Caches *caches, bool enableLogging, QObject* parent)
 	// account deletion
 	connect(Kaidan::instance(), &Kaidan::deleteAccountFromClient, this, &ClientWorker::deleteAccountFromClient);
 	connect(Kaidan::instance(), &Kaidan::deleteAccountFromClientAndServer, this, &ClientWorker::deleteAccountFromClientAndServer);
-	connect(this, &ClientWorker::deleteAccountFromDatabase, Kaidan::instance()->rosterDb(), &RosterDb::clearAll);
-	connect(this, &ClientWorker::deleteAccountFromDatabase, Kaidan::instance()->messageDb(), &MessageDb::removeAllMessages);
+	connect(this, &ClientWorker::deleteAccountFromDatabase, RosterDb::instance(), &RosterDb::clearAll);
+	connect(this, &ClientWorker::deleteAccountFromDatabase, MessageDb::instance(), &MessageDb::removeAllMessages);
 }
 
 void ClientWorker::initialize()

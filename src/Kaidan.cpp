@@ -219,7 +219,7 @@ void Kaidan::initializeDatabase()
 
 void Kaidan::initializeCaches()
 {
-	m_caches = new ClientWorker::Caches(m_rosterDb, m_msgDb, this);
+	m_caches = new ClientWorker::Caches(this);
 
 	// Connect the avatar changed signal of the avatarStorage with the NOTIFY signal
 	// of the Q_PROPERTY for the avatar storage (so all avatars are updated in QML)
@@ -245,16 +245,6 @@ void Kaidan::initializeClientWorker(bool enableLogging)
 
 	connect(m_cltThrd, &QThread::started, m_client, &ClientWorker::initialize);
 	m_cltThrd->start();
-}
-
-RosterDb *Kaidan::rosterDb() const
-{
-	return m_rosterDb;
-}
-
-MessageDb *Kaidan::messageDb() const
-{
-	return m_msgDb;
 }
 
 Kaidan *Kaidan::instance()

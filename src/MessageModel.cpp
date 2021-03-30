@@ -50,27 +50,26 @@ MessageModel *MessageModel::instance()
 	return s_instance;
 }
 
-MessageModel::MessageModel(MessageDb *msgDb, QObject *parent)
-	: QAbstractListModel(parent),
-	  m_msgDb(msgDb)
+MessageModel::MessageModel(QObject *parent)
+	: QAbstractListModel(parent)
 {
 	Q_ASSERT(!s_instance);
 	s_instance = this;
 
-	connect(msgDb, &MessageDb::messagesFetched,
+	connect(MessageDb::instance(), &MessageDb::messagesFetched,
 	        this, &MessageModel::handleMessagesFetched);
-	connect(msgDb, &MessageDb::pendingMessagesFetched,
+	connect(MessageDb::instance(), &MessageDb::pendingMessagesFetched,
 	        this, &MessageModel::pendingMessagesFetched);
 
 	connect(this, &MessageModel::addMessageRequested,
 	        this, &MessageModel::addMessage);
 	connect(this, &MessageModel::addMessageRequested,
-	        msgDb, &MessageDb::addMessage);
+	        MessageDb::instance(), &MessageDb::addMessage);
 
 	connect(this, &MessageModel::updateMessageRequested,
 	        this, &MessageModel::updateMessage);
 	connect(this, &MessageModel::updateMessageInDatabaseRequested,
-	        msgDb, &MessageDb::updateMessage);
+	        MessageDb::instance(), &MessageDb::updateMessage);
 
 	connect(this, &MessageModel::setMessageDeliveryStateRequested,
 		this, &MessageModel::setMessageDeliveryState);
@@ -191,7 +190,8 @@ QVariant MessageModel::data(const QModelIndex &index, int role) const
 
 void MessageModel::fetchMore(const QModelIndex &)
 {
-	emit m_msgDb->fetchMessagesRequested(AccountManager::instance()->jid(), m_currentChatJid, m_messages.size());
+	emit MessageDb::instance()->fetchMessagesRequested(
+			AccountManager::instance()->jid(), m_currentChatJid, m_messages.size());
 }
 
 bool MessageModel::canFetchMore(const QModelIndex &) const
@@ -381,7 +381,7 @@ void MessageModel::processMessage(Message &msg)
 
 void MessageModel::sendPendingMessages()
 {
-	emit m_msgDb->fetchPendingMessagesRequested(AccountManager::instance()->jid());
+	emit MessageDb::instance()->fetchPendingMessagesRequested(AccountManager::instance()->jid());
 }
 
 void MessageModel::correctMessage(const QString &msgId, const QString &message)

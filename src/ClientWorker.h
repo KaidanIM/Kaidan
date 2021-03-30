@@ -93,14 +93,14 @@ public:
 	Q_ENUM(ConnectionError)
 
 	struct Caches {
-		Caches(RosterDb *rosterDb, MessageDb *msgDb, QObject *parent = nullptr)
+		Caches(QObject *parent = nullptr)
 			: settings(new QSettings(APPLICATION_NAME, APPLICATION_NAME)),
 			  accountManager(new AccountManager(settings, parent)),
-			  msgModel(new MessageModel(msgDb, parent)),
-			  rosterModel(new RosterModel(rosterDb, parent)),
-		          avatarStorage(new AvatarFileStorage(parent)),
-		          serverFeaturesCache(new ServerFeaturesCache(parent)),
-		          presCache(new PresenceCache(parent)),
+			  msgModel(new MessageModel(parent)),
+			  rosterModel(new RosterModel(parent)),
+			  avatarStorage(new AvatarFileStorage(parent)),
+			  serverFeaturesCache(new ServerFeaturesCache(parent)),
+			  presCache(new PresenceCache(parent)),
 			  transferCache(new TransferCache(parent))
 		{
 			rosterModel->setMessageModel(msgModel);

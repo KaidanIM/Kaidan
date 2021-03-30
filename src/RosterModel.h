@@ -39,7 +39,6 @@
 #include "RosterItem.h"
 
 class Kaidan;
-class RosterDb;
 class MessageModel;
 class Message;
 
@@ -58,7 +57,7 @@ public:
 
 	static RosterModel *instance();
 
-	RosterModel(RosterDb *rosterDb, QObject *parent = nullptr);
+	RosterModel(QObject *parent = nullptr);
 
 	void setMessageModel(MessageModel *model);
 
@@ -106,7 +105,6 @@ private:
 	int updateItemPosition(int currentIndex);
 	int positionToInsert(const RosterItem &item);
 
-	RosterDb *m_rosterDb;
 	QVector<RosterItem> m_items;
 
 	static RosterModel *s_instance;

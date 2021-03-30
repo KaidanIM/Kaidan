@@ -40,6 +40,8 @@
 class QGuiApplication;
 class QSize;
 class Database;
+class RosterDb;
+class MessageDb;
 class QXmppClient;
 class QXmppVersionIq;
 
@@ -176,10 +178,6 @@ public:
 	{
 		return m_caches->settings;
 	}
-
-	RosterDb *rosterDb() const;
-
-	MessageDb *messageDb() const;
 
 	/**
 	 * Adds XMPP URI to open as soon as possible

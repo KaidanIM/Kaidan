@@ -33,7 +33,6 @@
 #include <QAbstractListModel>
 #include "Message.h"
 
-class MessageDb;
 class Kaidan;
 
 class MessageModel : public QAbstractListModel
@@ -68,7 +67,7 @@ public:
 
 	static MessageModel *instance();
 
-	MessageModel(MessageDb *msgDb, QObject *parent = nullptr);
+	MessageModel(QObject *parent = nullptr);
 	~MessageModel();
 
 	Q_REQUIRED_RESULT bool isEmpty() const;
@@ -148,8 +147,6 @@ private:
 	 * @param message to process
 	 */
 	void processMessage(Message &msg);
-
-	MessageDb *m_msgDb;
 
 	QVector<Message> m_messages;
 	QString m_currentChatJid;

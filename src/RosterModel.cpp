@@ -43,40 +43,36 @@ RosterModel *RosterModel::instance()
 	return s_instance;
 }
 
-RosterModel::RosterModel(RosterDb *rosterDb, QObject *parent)
-        : QAbstractListModel(parent),
-	  m_rosterDb(rosterDb)
+RosterModel::RosterModel(QObject *parent)
+	: QAbstractListModel(parent)
 {
 	Q_ASSERT(!s_instance);
 	s_instance = this;
 
-	connect(rosterDb, &RosterDb::itemsFetched,
+	connect(RosterDb::instance(), &RosterDb::itemsFetched,
 		this, &RosterModel::handleItemsFetched);
 
 	connect(this, &RosterModel::addItemRequested, this, &RosterModel::addItem);
-	connect(this, &RosterModel::addItemRequested, rosterDb, &RosterDb::addItem);
+	connect(this, &RosterModel::addItemRequested, RosterDb::instance(), &RosterDb::addItem);
 
 	connect(this, &RosterModel::removeItemRequested,
 	        this, &RosterModel::removeItem);
-	connect(this, &RosterModel::removeItemRequested,
-	        rosterDb, &RosterDb::removeItem);
+	connect(this, &RosterModel::removeItemRequested, RosterDb::instance(), &RosterDb::removeItem);
 
 	connect(this, &RosterModel::updateItemRequested,
 	        this, &RosterModel::updateItem);
-	connect(this, &RosterModel::updateItemRequested,
-	        rosterDb, &RosterDb::updateItem);
+	connect(this, &RosterModel::updateItemRequested, RosterDb::instance(), &RosterDb::updateItem);
 
 	connect(this, &RosterModel::replaceItemsRequested,
 	        this, &RosterModel::replaceItems);
-	connect(this, &RosterModel::replaceItemsRequested,
-		rosterDb, &RosterDb::replaceItems);
+	connect(this, &RosterModel::replaceItemsRequested, RosterDb::instance(), &RosterDb::replaceItems);
 
 	connect(AccountManager::instance(), &AccountManager::jidChanged, this, [=]() {
 		beginResetModel();
 		m_items.clear();
 		endResetModel();
 
-		emit rosterDb->fetchItemsRequested(AccountManager::instance()->jid());
+		emit RosterDb::instance()->fetchItemsRequested(AccountManager::instance()->jid());
 	});
 }
 
@@ -276,7 +272,7 @@ void RosterModel::handleMessageAdded(const Message &message)
 		itr->setUnreadMessages(*newUnreadMessages);
 		changedRoles << int(UnreadMessagesRole);
 
-		emit m_rosterDb->updateItemRequested(contactJid, [=](RosterItem &item) {
+		emit RosterDb::instance()->updateItemRequested(contactJid, [=](RosterItem &item) {
 			item.setUnreadMessages(*newUnreadMessages);
 		});
 	}

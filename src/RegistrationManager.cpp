@@ -30,15 +30,8 @@
 
 #include "RegistrationManager.h"
 
-// Qt
-#include <QDomElement>
-#include <QList>
-#include <QObject>
-#include <QSettings>
 // QXmpp
 #include <QXmppBitsOfBinaryDataList.h>
-#include <QXmppClient.h>
-#include <QXmppRegisterIq.h>
 #include <QXmppRegistrationManager.h>
 // Kaidan
 #include "AccountManager.h"
@@ -47,6 +40,7 @@
 #include "Globals.h"
 #include "Kaidan.h"
 #include "RegistrationDataFormModel.h"
+#include "ServerFeaturesCache.h"
 
 RegistrationManager::RegistrationManager(ClientWorker *clientWorker, QXmppClient *client, QSettings *settings, QObject *parent)
 	: QObject(parent),

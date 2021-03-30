@@ -32,32 +32,35 @@
 
 // Qt
 #include <QDateTime>
-#include <QDebug>
 #include <QFileInfo>
 // QXmpp
 #include <QXmppUtils.h>
+#include "qxmpp-exts/QXmppUploadManager.h"
 // Kaidan
-#include "MediaUtils.h"
 #include "Kaidan.h"
+#include "MediaUtils.h"
+#include "MessageModel.h"
 #include "RosterManager.h"
+#include "ServerFeaturesCache.h"
 #include "TransferCache.h"
 
 UploadManager::UploadManager(QXmppClient *client, RosterManager* rosterManager,
                              QObject* parent)
 	: QObject(parent),
 	  m_client(client),
+	  m_manager(new QXmppUploadManager),
 	  m_rosterManager(rosterManager)
 {
-	client->addExtension(&m_manager);
+	client->addExtension(m_manager);
 
 	connect(this, &UploadManager::sendFileRequested, this, &UploadManager::sendFile);
 
-	connect(&m_manager, &QXmppUploadManager::serviceFoundChanged, this, [=]() {
-		Kaidan::instance()->serverFeaturesCache()->setHttpUploadSupported(m_manager.serviceFound());
+	connect(m_manager, &QXmppUploadManager::serviceFoundChanged, this, [=]() {
+		Kaidan::instance()->serverFeaturesCache()->setHttpUploadSupported(m_manager->serviceFound());
 	});
-	connect(&m_manager, &QXmppUploadManager::uploadSucceeded,
+	connect(m_manager, &QXmppUploadManager::uploadSucceeded,
 	        this, &UploadManager::handleUploadSucceeded);
-	connect(&m_manager, &QXmppUploadManager::uploadFailed,
+	connect(m_manager, &QXmppUploadManager::uploadFailed,
 	        this, &UploadManager::handleUploadFailed);
 }
 
@@ -77,7 +80,7 @@ void UploadManager::sendFile(const QString &jid, const QUrl &fileUrl, const QStr
 
 	// toString() is used for android's content:/image:-URLs
 	QFileInfo file(fileUrl.isLocalFile() ? fileUrl.toLocalFile() : fileUrl.toString());
-	const QXmppHttpUpload* upload = m_manager.uploadFile(file);
+	const QXmppHttpUpload* upload = m_manager->uploadFile(file);
 	const QMimeType mimeType = MediaUtils::mimeType(fileUrl);
 	const MessageType messageType = MediaUtils::messageType(mimeType);
 	const QString msgId = QXmppUtils::generateStanzaHash();

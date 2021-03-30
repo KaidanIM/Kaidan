@@ -33,11 +33,12 @@
 // Qt
 #include <QObject>
 #include <QMap>
-// QXmpp
-#include "qxmpp-exts/QXmppUploadManager.h"
 
 class Message;
 class RosterManager;
+class QXmppClient;
+class QXmppHttpUpload;
+class QXmppUploadManager;
 
 /**
  * @class UploadManager Class for handling and starting HTTP File Uploads
@@ -75,7 +76,7 @@ private slots:
 
 private:
 	QXmppClient *m_client;
-	QXmppUploadManager m_manager;
+	QXmppUploadManager *m_manager;
 	RosterManager *m_rosterManager;
 
 	QMap<int, Message*> m_messages;

@@ -30,10 +30,11 @@
 
 #include "RosterManager.h"
 // Kaidan
+#include "AvatarFileStorage.h"
 #include "Kaidan.h"
+#include "RosterModel.h"
 #include "VCardManager.h"
 // QXmpp
-#include <QXmppClient.h>
 #include <QXmppRosterManager.h>
 
 RosterManager::RosterManager(QXmppClient *client,

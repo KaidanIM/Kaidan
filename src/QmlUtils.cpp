@@ -31,15 +31,13 @@
 #include "QmlUtils.h"
 // Qt
 #include <QClipboard>
+#include <QDateTime>
 #include <QDir>
-#include <QFile>
-#include <QFileInfo>
 #include <QGuiApplication>
 #include <QImage>
 #include <QMimeDatabase>
 #include <QStandardPaths>
 #include <QStringBuilder>
-#include <QUrl>
 // QXmpp
 #include "qxmpp-exts/QXmppColorGenerator.h"
 
@@ -211,6 +209,11 @@ QString QmlUtils::downloadPath(const QString &filename)
 		info = QFileInfo(directory, baseName % u'-' % QString::number(i) % nameSuffix);
 	}
 	return info.absoluteFilePath();
+}
+
+QString QmlUtils::timestampForFileName()
+{
+	return timestampForFileName(QDateTime::currentDateTime());
 }
 
 QString QmlUtils::timestampForFileName(const QDateTime &dateTime)

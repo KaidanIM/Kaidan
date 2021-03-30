@@ -43,41 +43,43 @@
 // QXmpp
 #include <QXmppClient.h>
 #include <QXmppVersionIq.h>
+#include <QXmppVCardIq.h>
 
 // Kaidan
 #include "AccountManager.h"
+#include "AudioDeviceModel.h"
 #include "AvatarFileStorage.h"
 #include "BitsOfBinaryImageProvider.h"
+#include "CameraModel.h"
 #include "CredentialsGenerator.h"
 #include "CredentialsValidator.h"
 #include "DataFormModel.h"
 #include "DiscoveryManager.h"
 #include "EmojiModel.h"
 #include "Enums.h"
+#include "GuiStyle.h"
 #include "Kaidan.h"
+#include "MediaUtils.h"
+#include "MediaRecorder.h"
 #include "Message.h"
 #include "MessageModel.h"
 #include "MessageHandler.h"
 #include "QmlUtils.h"
+#include "QrCodeGenerator.h"
+#include "QrCodeScannerFilter.h"
 #include "RegistrationDataFormFilterModel.h"
 #include "RegistrationManager.h"
 #include "RosterManager.h"
 #include "RosterModel.h"
 #include "RosterFilterProxyModel.h"
-#include "StatusBar.h"
 #include "ServerListModel.h"
-#include "QrCodeGenerator.h"
-#include "QrCodeScannerFilter.h"
+#include "StatusBar.h"
+#include "TransferCache.h"
 #include "UploadManager.h"
+#include "UserDevicesModel.h"
 #include "VCardModel.h"
 #include "VCardManager.h"
 #include "VersionManager.h"
-#include "UserDevicesModel.h"
-#include "CameraModel.h"
-#include "AudioDeviceModel.h"
-#include "MediaUtils.h"
-#include "MediaRecorder.h"
-#include "GuiStyle.h"
 
 Q_DECLARE_METATYPE(Qt::ApplicationState)
 

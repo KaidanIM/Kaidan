@@ -30,16 +30,12 @@
 
 #include "ClientWorker.h"
 // Qt
-#include <QDebug>
-#include <QString>
-#include <QSysInfo>
+#include <QSettings>
 // QXmpp
-#include <QXmppClient.h>
-#include <QXmppConfiguration.h>
 #include <QXmppUtils.h>
-#include <QXmppVersionManager.h>
 // Kaidan
 #include "AccountManager.h"
+#include "AvatarFileStorage.h"
 #include "DiscoveryManager.h"
 #include "DownloadManager.h"
 #include "Enums.h"
@@ -48,12 +44,35 @@
 #include "LogHandler.h"
 #include "MessageDb.h"
 #include "MessageHandler.h"
+#include "MessageModel.h"
+#include "PresenceCache.h"
 #include "RegistrationManager.h"
 #include "RosterDb.h"
 #include "RosterManager.h"
+#include "RosterModel.h"
+#include "ServerFeaturesCache.h"
+#include "TransferCache.h"
 #include "UploadManager.h"
 #include "VCardManager.h"
 #include "VersionManager.h"
+
+ClientWorker::Caches::Caches(QObject *parent)
+	: settings(new QSettings(APPLICATION_NAME, APPLICATION_NAME)),
+	  accountManager(new AccountManager(settings, parent)),
+	  msgModel(new MessageModel(parent)),
+	  rosterModel(new RosterModel(parent)),
+	  avatarStorage(new AvatarFileStorage(parent)),
+	  serverFeaturesCache(new ServerFeaturesCache(parent)),
+	  presCache(new PresenceCache(parent)),
+	  transferCache(new TransferCache(parent))
+{
+	rosterModel->setMessageModel(msgModel);
+}
+
+ClientWorker::Caches::~Caches()
+{
+	delete settings;
+}
 
 ClientWorker::ClientWorker(Caches *caches, bool enableLogging, QObject* parent)
 	: QObject(parent),

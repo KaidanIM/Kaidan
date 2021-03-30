@@ -34,7 +34,6 @@
 #include "AccountManager.h"
 #include "RosterDb.h"
 #include "MessageModel.h"
-#include "Kaidan.h"
 
 RosterModel *RosterModel::s_instance = nullptr;
 

@@ -31,7 +31,6 @@
 #pragma once
 
 #include <QObject>
-#include <QString>
 #include <QMap>
 
 class AvatarFileStorage : public QObject

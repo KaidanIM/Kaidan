@@ -32,9 +32,7 @@
 
 // Qt
 #include <QDir>
-#include <QNetworkAccessManager>
 #include <QNetworkReply>
-#include <QNetworkRequest>
 #include <QStandardPaths>
 // Kaidan
 #include "Kaidan.h"

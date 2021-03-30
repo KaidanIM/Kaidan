@@ -30,12 +30,9 @@
 
 #include "MessageHandler.h"
 // Qt
-#include <QDateTime>
-#include <QMimeDatabase>
 #include <QUrl>
 // QXmpp
 #include <QXmppCarbonManager.h>
-#include <QXmppClient.h>
 #include <QXmppDiscoveryManager.h>
 #include <QXmppRosterManager.h>
 #include <QXmppUtils.h>

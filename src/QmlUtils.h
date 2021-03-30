@@ -162,7 +162,8 @@ public:
 	/**
 	 * Returns the timestamp in a format for file names.
 	 */
-	static QString timestampForFileName(const QDateTime &dateTime = QDateTime::currentDateTime());
+	static QString timestampForFileName();
+	static QString timestampForFileName(const QDateTime &dateTime);
 
 	/**
 	 * Returns a human-readable string describing the state of the chat

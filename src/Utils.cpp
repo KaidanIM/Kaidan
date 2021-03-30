@@ -31,14 +31,11 @@
 #include "Utils.h"
 // Qt
 #include <QDebug>
-#include <QMap>
 #include <QSqlDriver>
 #include <QSqlError>
 #include <QSqlField>
 #include <QSqlQuery>
 #include <QSqlRecord>
-#include <QVariant>
-#include <QVector>
 
 void Utils::prepareQuery(QSqlQuery &query, const QString &sql)
 {

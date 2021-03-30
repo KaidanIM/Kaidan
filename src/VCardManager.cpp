@@ -30,10 +30,11 @@
 
 #include "VCardManager.h"
 
-#include <QXmppClient.h>
+// QXmpp
 #include <QXmppUtils.h>
+#include <QXmppVCardManager.h>
 #include <QXmppVCardIq.h>
-
+// Kaidan
 #include "AvatarFileStorage.h"
 #include "Kaidan.h"
 

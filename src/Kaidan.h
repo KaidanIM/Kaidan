@@ -32,14 +32,13 @@
 
 // Qt
 #include <QObject>
-#include <QString>
 // Kaidan
 #include "ClientWorker.h"
-#include "RegistrationDataFormModel.h"
 
 class QGuiApplication;
 class QSize;
 class Database;
+class DataFormModel;
 class RosterDb;
 class MessageDb;
 class QXmppClient;
@@ -402,7 +401,7 @@ private:
 	ClientWorker *m_client;
 
 	QString m_openUriCache;
-	ConnectionState m_connectionState = ConnectionState::StateDisconnected;
+	Enums::ConnectionState m_connectionState = Enums::ConnectionState::StateDisconnected;
 	ClientWorker::ConnectionError m_connectionError = ClientWorker::NoError;
 
 	static Kaidan *s_instance;

@@ -32,12 +32,13 @@
 
 // Qt
 #include <QGuiApplication>
-#include <QSize>
+#include <QSettings>
 #include <QThread>
 #include <QTimer>
 // QXmpp
 #include "qxmpp-exts/QXmppUri.h"
 // Kaidan
+#include "AccountManager.h"
 #include "AvatarFileStorage.h"
 #include "CredentialsValidator.h"
 #include "Database.h"

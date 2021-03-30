@@ -30,6 +30,8 @@
 
 #include "VCardModel.h"
 
+#include <QXmppVCardIq.h>
+
 #include "Kaidan.h"
 #include "VCardManager.h"
 

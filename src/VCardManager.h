@@ -31,13 +31,13 @@
 #pragma once
 
 #include <QObject>
-#include <QString>
-#include <QXmppVCardManager.h>
-#include <QXmppPresence.h>
 
 class AvatarFileStorage;
 class ClientWorker;
 class QXmppClient;
+class QXmppPresence;
+class QXmppVCardIq;
+class QXmppVCardManager;
 
 class VCardManager : public QObject
 {

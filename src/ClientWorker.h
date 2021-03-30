@@ -31,31 +31,28 @@
 #pragma once
 
 // Qt
-#include <QList>
-#include <QObject>
-#include <QSettings>
 // QXmpp
 #include <QXmppClient.h>
 // Kaidan
-#include "AccountManager.h"
-#include "AvatarFileStorage.h"
 #include "Enums.h"
-#include "MessageModel.h"
-#include "PresenceCache.h"
-#include "RosterModel.h"
-#include "ServerFeaturesCache.h"
-#include "TransferCache.h"
+
 class AccountManager;
+class AvatarFileStorage;
+class DiscoveryManager;
+class DownloadManager;
 class LogHandler;
-class ClientWorker;
+class MessageHandler;
+class MessageModel;
+class PresenceCache;
 class RegistrationManager;
 class RosterManager;
-class MessageHandler;
-class DiscoveryManager;
-class VCardManager;
+class RosterModel;
+class ServerFeaturesCache;
+class TransferCache;
 class UploadManager;
-class DownloadManager;
+class VCardManager;
 class VersionManager;
+class QSettings;
 
 /**
  * The ClientWorker is used as a QObject-based worker on the ClientThread.
@@ -93,23 +90,8 @@ public:
 	Q_ENUM(ConnectionError)
 
 	struct Caches {
-		Caches(QObject *parent = nullptr)
-			: settings(new QSettings(APPLICATION_NAME, APPLICATION_NAME)),
-			  accountManager(new AccountManager(settings, parent)),
-			  msgModel(new MessageModel(parent)),
-			  rosterModel(new RosterModel(parent)),
-			  avatarStorage(new AvatarFileStorage(parent)),
-			  serverFeaturesCache(new ServerFeaturesCache(parent)),
-			  presCache(new PresenceCache(parent)),
-			  transferCache(new TransferCache(parent))
-		{
-			rosterModel->setMessageModel(msgModel);
-		}
-
-		~Caches()
-		{
-			delete settings;
-		}
+		Caches(QObject *parent = nullptr);
+		~Caches();
 
 		QSettings *settings;
 		AccountManager *accountManager;

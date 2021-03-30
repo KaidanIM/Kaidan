@@ -30,7 +30,6 @@
 
 #include "AccountManager.h"
 // Qt
-#include <QMutex>
 #include <QMutexLocker>
 #include <QSettings>
 #include <QStringBuilder>

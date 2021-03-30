@@ -31,7 +31,8 @@
 #pragma once
 
 #include <QAbstractListModel>
-#include <QXmppVCardIq.h>
+
+class QXmppVCardIq;
 
 class VCardModel : public QAbstractListModel
 {

@@ -33,6 +33,7 @@
 
 #include <QUrl>
 #include <QFile>
+#include <QSettings>
 
 /*
  * NOTES: Codecs and containers supported list are available as soon as the object is created.

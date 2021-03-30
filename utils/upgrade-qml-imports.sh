@@ -17,17 +17,17 @@ set -e
 # find "${SOURCE_DIR}" -iname '*.qml' -exec grep 'import ' {} \; | sort -u
 
 declare -A QT
-QT["QtGraphicalEffects"]="1.12"
+QT["QtGraphicalEffects"]="1.14"
 QT["Qt.labs.folderlistmodel"]="2.1"
-QT["QtLocation"]="5.12"
-QT["QtMultimedia"]="5.12"
-QT["QtPositioning"]="5.12"
-QT["QtQml"]="2.12"
+QT["QtLocation"]="5.14"
+QT["QtMultimedia"]="5.14"
+QT["QtPositioning"]="5.14"
+QT["QtQml"]="2.14"
 QT["QtQuick"]="2.14"
-QT["QtQuick.Controls"]="2.12"
-QT["QtQuick.Controls.Material"]="2.12"
+QT["QtQuick.Controls"]="2.14"
+QT["QtQuick.Controls.Material"]="2.14"
 QT["QtQuick.Dialogs"]="1.3"
-QT["QtQuick.Layouts"]="1.12"
+QT["QtQuick.Layouts"]="1.14"
 
 declare -A KIRIGAMI
 KIRIGAMI["org.kde.kirigami"]="2.12"

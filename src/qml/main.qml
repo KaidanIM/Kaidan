@@ -29,7 +29,7 @@
  */
 
 import QtQuick 2.14
-import QtQuick.Controls.Material 2.12 as Material
+import QtQuick.Controls.Material 2.14 as Material
 import org.kde.kirigami 2.12 as Kirigami
 import StatusBar 0.1
 

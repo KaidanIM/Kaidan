@@ -34,10 +34,10 @@
  */
 
 import QtQuick 2.14
-import QtQuick.Layouts 1.12
-import QtQuick.Controls 2.12 as Controls
-import QtPositioning 5.12 as Positioning
-import QtLocation 5.12 as Location
+import QtQuick.Layouts 1.14
+import QtQuick.Controls 2.14 as Controls
+import QtPositioning 5.14 as Positioning
+import QtLocation 5.14 as Location
 import org.kde.kirigami 2.12 as Kirigami
 
 import im.kaidan.kaidan 1.0

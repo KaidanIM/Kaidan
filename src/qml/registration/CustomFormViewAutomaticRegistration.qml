@@ -28,7 +28,7 @@
  *  along with Kaidan.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-import QtQuick.Controls 2.12 as Controls
+import QtQuick.Controls 2.14 as Controls
 
 /**
  * This view is used for entering the values into the custom fields of the received registration form during the automatic registration.

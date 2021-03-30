@@ -29,8 +29,8 @@
  */
 
 import QtQuick 2.14
-import QtQuick.Controls 2.12 as Controls
-import QtQuick.Layouts 1.12
+import QtQuick.Controls 2.14 as Controls
+import QtQuick.Layouts 1.14
 
 /**
  * This view shows a busy indicator.

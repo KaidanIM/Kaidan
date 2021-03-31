@@ -33,6 +33,8 @@
 #include <QObject>
 #include <QUrl>
 
+#include <QXmppMessage.h>
+
 #include "ClientWorker.h"
 #include "Globals.h"
 

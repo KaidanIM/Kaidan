@@ -172,6 +172,11 @@ public:
 		return m_caches->serverFeaturesCache;
 	}
 
+	VCardCache *vCardCache() const
+	{
+		return m_caches->vCardCache;
+	}
+
 	QSettings* settings() const
 	{
 		return m_caches->settings;

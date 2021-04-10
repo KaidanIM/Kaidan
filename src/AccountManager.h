@@ -35,6 +35,7 @@
 #include <QObject>
 
 class QSettings;
+class VCardCache;
 
 constexpr quint16 NON_CUSTOM_PORT = 0;
 
@@ -50,11 +51,12 @@ class AccountManager : public QObject
 	Q_PROPERTY(QString host READ host WRITE setHost NOTIFY hostChanged)
 	Q_PROPERTY(quint16 port READ port WRITE setPort NOTIFY portChanged)
 	Q_PROPERTY(quint16 nonCustomPort READ nonCustomPort CONSTANT)
+	Q_PROPERTY(QString displayName READ displayName NOTIFY displayNameChanged)
 
 public:
 	static AccountManager *instance();
 
-	AccountManager(QSettings *settings, QObject *parent = nullptr);
+	AccountManager(QSettings *settings, VCardCache *cache, QObject *parent = nullptr);
 
 	/**
 	 * Returns the bare JID of the account.
@@ -149,6 +151,11 @@ public:
 	quint16 nonCustomPort() const;
 
 	/**
+	 * Returns the user's display name.
+	 */
+	QString displayName();
+
+	/**
 	 * Resets the custom connection settings.
 	 */
 	Q_INVOKABLE void resetCustomConnectionSettings();
@@ -241,6 +248,11 @@ signals:
 	 * Emitted when the custom port changed.
 	 */
 	void portChanged();
+
+	/**
+	 * Emitted when the user's display name changed.
+	 */
+	void displayNameChanged();
 
 	/**
 	 * Emitted when there are no (correct) credentials to log in.

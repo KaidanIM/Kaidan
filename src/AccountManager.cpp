@@ -37,6 +37,8 @@
 #include <QXmppUtils.h>
 // Kaidan
 #include "Globals.h"
+#include "Kaidan.h"
+#include "VCardCache.h"
 
 AccountManager *AccountManager::s_instance = nullptr;
 
@@ -45,12 +47,18 @@ AccountManager *AccountManager::instance()
 	return s_instance;
 }
 
-AccountManager::AccountManager(QSettings *settings, QObject* parent)
+AccountManager::AccountManager(QSettings *settings, VCardCache *cache, QObject *parent)
 	: QObject(parent),
 	  m_settings(settings)
 {
 	Q_ASSERT(!s_instance);
 	s_instance = this;
+
+	connect(cache, &VCardCache::vCardChanged, this, [=](const QString &jid) {
+		if (m_jid == jid) {
+			emit displayNameChanged();
+		}
+	});
 }
 
 QString AccountManager::jid()
@@ -143,6 +151,13 @@ void AccountManager::setPort(const quint16 port)
 quint16 AccountManager::nonCustomPort() const
 {
 	return NON_CUSTOM_PORT;
+}
+
+QString AccountManager::displayName()
+{
+	// no mutex locker required, own attributes are not accessed
+	const auto nickname = Kaidan::instance()->vCardCache()->vCard(m_jid)->nickName();
+	return nickname.isEmpty() ? QXmppUtils::jidToUser(m_jid) : nickname;
 }
 
 void AccountManager::resetCustomConnectionSettings()

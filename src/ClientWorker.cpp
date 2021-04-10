@@ -53,12 +53,14 @@
 #include "ServerFeaturesCache.h"
 #include "TransferCache.h"
 #include "UploadManager.h"
+#include "VCardCache.h"
 #include "VCardManager.h"
 #include "VersionManager.h"
 
 ClientWorker::Caches::Caches(QObject *parent)
 	: settings(new QSettings(APPLICATION_NAME, APPLICATION_NAME)),
-	  accountManager(new AccountManager(settings, parent)),
+	  vCardCache(new VCardCache(parent)),
+	  accountManager(new AccountManager(settings, vCardCache, parent)),
 	  msgModel(new MessageModel(parent)),
 	  rosterModel(new RosterModel(parent)),
 	  avatarStorage(new AvatarFileStorage(parent)),

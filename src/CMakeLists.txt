@@ -50,6 +50,7 @@ set(KAIDAN_SOURCES
 	src/ServerListModel.cpp
 	src/ServerListItem.cpp
 	src/AccountManager.cpp
+	src/VCardCache.cpp
 
 	# needed to trigger moc generation / to be displayed in IDEs
 	src/Enums.h

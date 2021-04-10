@@ -37,6 +37,7 @@
 // Kaidan
 #include "AvatarFileStorage.h"
 #include "Kaidan.h"
+#include "VCardCache.h"
 
 VCardManager::VCardManager(ClientWorker *clientWorker, QXmppClient *client, AvatarFileStorage *avatars, QObject *parent)
 	: QObject(parent), m_clientWorker(clientWorker), m_client(client), m_manager(client->findExtension<QXmppVCardManager>()), m_avatarStorage(avatars)
@@ -82,6 +83,8 @@ void VCardManager::handleClientVCardReceived()
 {
 	if (!m_nicknameToBeSetAfterReceivingCurrentVCard.isEmpty())
 		changeNicknameAfterReceivingCurrentVCard();
+
+	m_clientWorker->caches()->vCardCache->setVCard(m_client->configuration().jidBare(), m_manager->clientVCard());
 }
 
 void VCardManager::handlePresenceReceived(const QXmppPresence &presence)

@@ -50,6 +50,7 @@ class RosterModel;
 class ServerFeaturesCache;
 class TransferCache;
 class UploadManager;
+class VCardCache;
 class VCardManager;
 class VersionManager;
 class QSettings;
@@ -94,6 +95,7 @@ public:
 		~Caches();
 
 		QSettings *settings;
+		VCardCache *vCardCache;
 		AccountManager *accountManager;
 		MessageModel *msgModel;
 		RosterModel *rosterModel;

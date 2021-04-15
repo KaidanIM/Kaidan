@@ -13,18 +13,18 @@
     </message>
     <message>
         <source>View source code online</source>
-        <translation>Quellcode online einsehen</translation>
+        <translation>Quellcode online ansehen</translation>
     </message>
     <message>
         <source>Report problems</source>
-        <translation type="unfinished"></translation>
+        <translation>Probleme melden</translation>
     </message>
 </context>
 <context>
     <name>AccountSecurity</name>
     <message>
         <source>Account Security</source>
-        <translation type="unfinished"></translation>
+        <translation>Kontosicherheit</translation>
     </message>
     <message>
         <source>Allow to add new devices using a QR-Code, but never show the password as text. This action can not be undone, so consider storing the password in another way before using it.</source>
@@ -32,7 +32,7 @@
     </message>
     <message>
         <source>Disable showing the password</source>
-        <translation type="unfinished"></translation>
+        <translation>Anzeigen des Kennworts ausschalten</translation>
     </message>
     <message>
         <source>Don&apos;t expose the password in any form. This action can not be undone.</source>
@@ -40,21 +40,24 @@
     </message>
     <message>
         <source>Disable showing the QR-Code and password</source>
-        <translation type="unfinished"></translation>
+        <translation>QR-Code und Kennwort ausblenden</translation>
     </message>
 </context>
 <context>
     <name>AccountTransferPage</name>
     <message>
         <source>Transfer account to another device</source>
-        <translation type="unfinished"></translation>
+        <translation>Konto auf ein anderes Gerät übertragen</translation>
     </message>
     <message>
         <source>Scan the QR code or enter the credentials as text on another device to log in on it.
 
 Attention:
 Never show this QR code to anyone else. It would allow unlimited access to your account!</source>
-        <translation type="unfinished"></translation>
+        <translation>Scannen Sie den QR-Code oder geben Sie die Anmeldedaten als Text auf einem anderen Gerät ein, um sich dort anzumelden.
+
+Achtung!
+Zeigen Sie diesen QR-Code niemals anderen Personen. Dies würde unbegrenzten Zugang zu Ihrem Konto ermöglichen!</translation>
     </message>
     <message>
         <source>Chat address:</source>
@@ -62,58 +65,58 @@ Never show this QR code to anyone else. It would allow unlimited access to your 
     </message>
     <message>
         <source>Password:</source>
-        <translation type="unfinished"></translation>
+        <translation>Kennwort:</translation>
     </message>
     <message>
         <source>Hide QR code</source>
-        <translation type="unfinished"></translation>
+        <translation>QR-Code ausblenden</translation>
     </message>
     <message>
         <source>Show as QR code</source>
-        <translation type="unfinished"></translation>
+        <translation>Als QR-Code anzeigen</translation>
     </message>
     <message>
         <source>Hide text</source>
-        <translation type="unfinished"></translation>
+        <translation>Text verstecken</translation>
     </message>
     <message>
         <source>Show as text</source>
-        <translation type="unfinished"></translation>
+        <translation>Als Text anzeigen</translation>
     </message>
     <message>
         <source>Copy JID</source>
-        <translation type="unfinished"></translation>
+        <translation>JID kopieren</translation>
     </message>
     <message>
         <source>Copy password</source>
-        <translation type="unfinished"></translation>
+        <translation>Kennwort kopieren</translation>
     </message>
 </context>
 <context>
     <name>ChangePassword</name>
     <message>
         <source>Change password</source>
-        <translation>Passwort ändern</translation>
+        <translation>Kennwort ändern</translation>
     </message>
     <message>
         <source>Current password:</source>
-        <translation>Aktuelles Passwort:</translation>
+        <translation>Aktuelles Kennwort:</translation>
     </message>
     <message>
         <source>New password:</source>
-        <translation>Neues Passwort:</translation>
+        <translation>Neues Kennwort:</translation>
     </message>
     <message>
         <source>New password (repeat):</source>
-        <translation>Neues Passwort (wiederholen):</translation>
+        <translation>Neues Kennwort (wiederholen):</translation>
     </message>
     <message>
         <source>New passwords do not match.</source>
-        <translation>Die eingegebenen Passwörter stimmen nicht überein.</translation>
+        <translation>Die eingegebenen Kennwörter stimmen nicht überein.</translation>
     </message>
     <message>
         <source>Current password is invalid.</source>
-        <translation>Das aktuelle Passwort ist ungültig.</translation>
+        <translation>Das aktuelle Kennwort ist ungültig.</translation>
     </message>
     <message>
         <source>You need to be connected to change your password.</source>
@@ -121,7 +124,7 @@ Never show this QR code to anyone else. It would allow unlimited access to your 
     </message>
     <message>
         <source>After changing your password, you will need to reenter it on all your other devices.</source>
-        <translation>Wenn sie ihr Passwort ändern, müssen sie es im Anschluss auf allen Geräten neu eingeben.</translation>
+        <translation>Wenn Sie ihr Kennwort ändern, mußt du es im Anschluss auf allen Geräten neu eingeben.</translation>
     </message>
     <message>
         <source>Cancel</source>
@@ -133,11 +136,11 @@ Never show this QR code to anyone else. It would allow unlimited access to your 
     </message>
     <message>
         <source>Password changed successfully</source>
-        <translation type="unfinished"></translation>
+        <translation>Kennwort wurde geändert</translation>
     </message>
     <message>
         <source>Failed to change password: %1</source>
-        <translation type="unfinished">Änderung des Passworts ist fehlgeschlagen: %1</translation>
+        <translation>Ändern des Kennworts fehlgeschlagen: %1</translation>
     </message>
 </context>
 <context>
@@ -152,7 +155,7 @@ Never show this QR code to anyone else. It would allow unlimited access to your 
     </message>
     <message>
         <source>Spoiler</source>
-        <translation>Versteckt</translation>
+        <translation>Spoiler</translation>
     </message>
     <message>
         <source>Download</source>
@@ -163,19 +166,19 @@ Never show this QR code to anyone else. It would allow unlimited access to your 
     <name>ChatMessageContextMenu</name>
     <message>
         <source>Copy message</source>
-        <translation type="unfinished"></translation>
+        <translation>Nachricht kopieren</translation>
     </message>
     <message>
         <source>Edit message</source>
-        <translation type="unfinished"></translation>
+        <translation>Nachricht ändern</translation>
     </message>
     <message>
         <source>Copy download URL</source>
-        <translation type="unfinished"></translation>
+        <translation>Download-URL kopieren</translation>
     </message>
     <message>
         <source>Quote message</source>
-        <translation type="unfinished"></translation>
+        <translation>Nachricht zitieren</translation>
     </message>
 </context>
 <context>
@@ -230,7 +233,7 @@ Never show this QR code to anyone else. It would allow unlimited access to your 
     </message>
     <message>
         <source>Search</source>
-        <translation type="unfinished">Suche</translation>
+        <translation>Suche</translation>
     </message>
     <message>
         <source>Close</source>
@@ -238,11 +241,11 @@ Never show this QR code to anyone else. It would allow unlimited access to your 
     </message>
     <message>
         <source>Search up</source>
-        <translation type="unfinished"></translation>
+        <translation>Suche nach oben</translation>
     </message>
     <message>
         <source>Search down</source>
-        <translation type="unfinished"></translation>
+        <translation>Suche nach unten</translation>
     </message>
     <message>
         <source>Close message search bar</source>
@@ -261,7 +264,7 @@ Never show this QR code to anyone else. It would allow unlimited access to your 
     </message>
     <message>
         <source>Compose message</source>
-        <translation type="unfinished">Nachricht verfassen</translation>
+        <translation>Nachricht verfassen</translation>
     </message>
 </context>
 <context>
@@ -275,23 +278,23 @@ Never show this QR code to anyone else. It would allow unlimited access to your 
     <name>CommonEncoderSettings</name>
     <message>
         <source>Very low</source>
-        <translation type="unfinished"></translation>
+        <translation>Sehr niedrig</translation>
     </message>
     <message>
         <source>Low</source>
-        <translation type="unfinished"></translation>
+        <translation>Niedrig</translation>
     </message>
     <message>
         <source>Normal</source>
-        <translation type="unfinished"></translation>
+        <translation>Normal</translation>
     </message>
     <message>
         <source>High</source>
-        <translation type="unfinished"></translation>
+        <translation>Hoch</translation>
     </message>
     <message>
         <source>Very high</source>
-        <translation type="unfinished"></translation>
+        <translation>Sehr hoch</translation>
     </message>
     <message>
         <source>Constant quality</source>
@@ -299,7 +302,7 @@ Never show this QR code to anyone else. It would allow unlimited access to your 
     </message>
     <message>
         <source>Constant bit rate</source>
-        <translation type="unfinished"></translation>
+        <translation>Konstante Bitrate</translation>
     </message>
     <message>
         <source>Average bit rate</source>
@@ -314,22 +317,22 @@ Never show this QR code to anyone else. It would allow unlimited access to your 
     <name>ConfirmationPage</name>
     <message>
         <source>Cancel</source>
-        <translation type="unfinished">Abbrechen</translation>
+        <translation>Abbrechen</translation>
     </message>
 </context>
 <context>
     <name>ConnectionSettings</name>
     <message>
         <source>Connection settings</source>
-        <translation type="unfinished"></translation>
+        <translation>Verbindungseinstellungen</translation>
     </message>
     <message>
         <source>Change</source>
-        <translation type="unfinished">Ändern</translation>
+        <translation>Ändern</translation>
     </message>
     <message>
         <source>Cancel</source>
-        <translation type="unfinished">Abbrechen</translation>
+        <translation>Abbrechen</translation>
     </message>
     <message>
         <source>Connection settings could not be changed</source>
@@ -708,7 +711,7 @@ Your password will be deleted, make sure it is stored in a password manager or y
     </message>
     <message>
         <source>Document</source>
-        <translation type="unfinished">Dokument</translation>
+        <translation>Dokument</translation>
     </message>
     <message>
         <source>Location</source>
@@ -716,11 +719,11 @@ Your password will be deleted, make sure it is stored in a password manager or y
     </message>
     <message>
         <source>Image</source>
-        <translation type="unfinished">Bild</translation>
+        <translation>Bild</translation>
     </message>
     <message>
         <source>Video</source>
-        <translation type="unfinished">Video</translation>
+        <translation>Video</translation>
     </message>
     <message>
         <source>File</source>
@@ -812,7 +815,7 @@ Your password will be deleted, make sure it is stored in a password manager or y
     </message>
     <message>
         <source>Image</source>
-        <translation type="unfinished">Bild</translation>
+        <translation>Bild</translation>
     </message>
     <message>
         <source>Audio</source>
@@ -820,7 +823,7 @@ Your password will be deleted, make sure it is stored in a password manager or y
     </message>
     <message>
         <source>Video</source>
-        <translation type="unfinished">Video</translation>
+        <translation>Video</translation>
     </message>
     <message>
         <source>Codec</source>
@@ -955,15 +958,15 @@ Your password will be deleted, make sure it is stored in a password manager or y
     </message>
     <message>
         <source>Cannot connect to the server. Please check your internet connection.</source>
-        <translation type="unfinished">Server nicht erreichbar. Überprüfen sie ihrer Internetverbindung.</translation>
+        <translation>Server nicht erreichbar. Überprüfen Sie die Internetverbindung.</translation>
     </message>
     <message>
         <source>The server doesn&apos;t support secure connections.</source>
-        <translation type="unfinished">Dieser Server unterstützt keine sicheren Verbindungen.</translation>
+        <translation>Dieser Server unterstützt keine sicheren Verbindungen.</translation>
     </message>
     <message>
         <source>Error while trying to connect securely.</source>
-        <translation type="unfinished">Fehler bei der Herstellung einer sicheren Verbindung.</translation>
+        <translation>Fehler bei der Herstellung einer sicheren Verbindung.</translation>
     </message>
     <message>
         <source>Could not connect to the server.</source>
@@ -971,7 +974,7 @@ Your password will be deleted, make sure it is stored in a password manager or y
     </message>
     <message>
         <source>Authentification protocol not supported by the server.</source>
-        <translation type="unfinished">Authentifizierungsprotokolle nicht vom Server unterstützt.</translation>
+        <translation>Authentifizierungsprotokolle nicht vom Server unterstützt.</translation>
     </message>
     <message>
         <source>This server does not support registration.</source>
@@ -1114,7 +1117,7 @@ You will not be able to use your account again!</source>
     </message>
     <message>
         <source>Cancel</source>
-        <translation type="unfinished">Abbrechen</translation>
+        <translation>Abbrechen</translation>
     </message>
     <message>
         <source>Add</source>
@@ -1171,7 +1174,7 @@ You will not be able to use your account again!</source>
     </message>
     <message>
         <source>Cancel</source>
-        <translation type="unfinished">Abbrechen</translation>
+        <translation>Abbrechen</translation>
     </message>
     <message>
         <source>Delete</source>
@@ -1190,7 +1193,7 @@ You will not be able to use your account again!</source>
     </message>
     <message>
         <source>Cancel</source>
-        <translation type="unfinished">Abbrechen</translation>
+        <translation>Abbrechen</translation>
     </message>
     <message>
         <source>Rename</source>
@@ -1205,7 +1208,7 @@ You will not be able to use your account again!</source>
     </message>
     <message>
         <source>Cancel</source>
-        <translation type="unfinished">Abbrechen</translation>
+        <translation>Abbrechen</translation>
     </message>
     <message>
         <source>Send</source>
@@ -1234,7 +1237,7 @@ Deletion of message history saved on server</extracomment>
     <name>SettingsContent</name>
     <message>
         <source>Change password</source>
-        <translation type="unfinished">Passwort ändern</translation>
+        <translation>Kennwort ändern</translation>
     </message>
     <message>
         <source>Changes your account&apos;s password. You will need to re-enter it on your other devices.</source>
@@ -1250,7 +1253,7 @@ Deletion of message history saved on server</extracomment>
     </message>
     <message>
         <source>Settings</source>
-        <translation type="unfinished">Einstellungen</translation>
+        <translation>Einstellungen</translation>
     </message>
     <message>
         <source>Account security</source>
@@ -1289,7 +1292,7 @@ Deletion of message history saved on server</extracomment>
     <name>SettingsPage</name>
     <message>
         <source>Settings</source>
-        <translation type="unfinished">Einstellungen</translation>
+        <translation>Einstellungen</translation>
     </message>
     <message>
         <source>Change password</source>
@@ -1341,7 +1344,7 @@ Deletion of message history saved on server</extracomment>
     </message>
     <message>
         <source>Message could not be sent.</source>
-        <translation type="unfinished">Nachricht konnte nicht gesendet werden.</translation>
+        <translation>Nachricht konnte nicht gesendet werden.</translation>
     </message>
 </context>
 <context>
@@ -1379,7 +1382,7 @@ Deletion of message history saved on server</extracomment>
     </message>
     <message>
         <source>About</source>
-        <translation type="unfinished">Über</translation>
+        <translation>Über</translation>
     </message>
     <message>
         <source>Email</source>

@@ -1784,7 +1784,7 @@ Deletion of message history saved on server</extracomment>
     </message>
     <message>
         <source>Let&apos;s start</source>
-        <translation>Fangen wir an</translation>
+        <translation>Los geht&apos;s</translation>
     </message>
 </context>
 <context>

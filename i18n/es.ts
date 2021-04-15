@@ -128,10 +128,10 @@ Cerciórese de tener una copia de respaldo de estos si quiere utilizar su cuenta
 
 Attention:
 Never show this QR code to anyone else. It would allow unlimited access to your account!</source>
-        <translation>Escanee el código QR o proporcione los datos de acceso como texto en otro dispositivo para acceder a la cuenta.
+        <translation>Escanee el código QR o proporcione los credenciales como texto en otro dispositivo para acceder a la cuenta.
 
 Atención:
-Jamás muestre este código QR a otras personas, dado que brinda acceso ilimitado a su cuenta.</translation>
+¡Jamás muestre este código QR a otras personas, dado que brinda acceso ilimitado a su cuenta!</translation>
     </message>
     <message>
         <source>Chat address:</source>
@@ -1521,7 +1521,7 @@ Deletion of message history saved on server</extracomment>
     <name>StartPage</name>
     <message>
         <source>Enjoy free communication on every device!</source>
-        <translation>Disfrute de comunicación libre y gratuita en cualquier dispositivo.</translation>
+        <translation>¡Disfrute de comunicación libre en cualquier dispositivo!</translation>
     </message>
     <message>
         <source>Let&apos;s start</source>

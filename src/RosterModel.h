@@ -101,7 +101,7 @@ private:
 	 */
 	std::optional<const RosterItem> findItem(const QString &jid) const;
 
-	void insertContact(int i, const RosterItem &item);
+	void insertItem(int index, const RosterItem &item);
 	int updateItemPosition(int currentIndex);
 	int positionToInsert(const RosterItem &item);
 

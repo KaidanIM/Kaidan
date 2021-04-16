@@ -158,7 +158,7 @@ void RosterModel::handleItemsFetched(const QVector<RosterItem> &items)
 
 void RosterModel::addItem(const RosterItem &item)
 {
-	insertContact(positionToInsert(item), item);
+	insertItem(positionToInsert(item), item);
 }
 
 void RosterModel::removeItem(const QString &jid)
@@ -285,10 +285,10 @@ void RosterModel::handleMessageAdded(const Message &message)
 	updateItemPosition(i);
 }
 
-void RosterModel::insertContact(int i, const RosterItem &item)
+void RosterModel::insertItem(int index, const RosterItem &item)
 {
-	beginInsertRows(QModelIndex(), i, i);
-	m_items.insert(i, item);
+	beginInsertRows(QModelIndex(), index, index);
+	m_items.insert(index, item);
 	endInsertRows();
 }
 

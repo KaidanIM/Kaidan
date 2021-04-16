@@ -222,6 +222,13 @@ private:
 	 */
 	void processMessage(Message &msg);
 
+	/**
+	 * Shows a notification for the message when needed
+	 *
+	 * @param message message for which a notification might be shown
+	 */
+	void showMessageNotification(const Message &message) const;
+
 	QVector<Message> m_messages;
 	QString m_currentAccountJid;
 	QString m_currentChatJid;

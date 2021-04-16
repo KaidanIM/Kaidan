@@ -65,7 +65,7 @@ ChatPageBase {
 
 	property string chatName: {
 		var currentChatJid = MessageModel.currentChatJid
-		var chatDisplayName = RosterModel.itemName(currentChatJid)
+		var chatDisplayName = RosterModel.itemName(AccountManager.jid, currentChatJid)
 		return chatDisplayName ? chatDisplayName : currentChatJid
 	}
 

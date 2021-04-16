@@ -163,13 +163,6 @@ public:
 	}
 
 	/**
-	 * Returns whether the application window is active.
-	 *
-	 * The application window is active when it is in the foreground and focused.
-	 */
-	bool isApplicationWindowActive() const;
-
-	/**
 	 * Starts or enqueues a task which will be executed after successful login (e.g. a
 	 * nickname change).
 	 *
@@ -257,16 +250,6 @@ signals:
 	void loggedInWithNewCredentials();
 
 	/**
-	 * Requests to show a notification for a chat message via the system's notification channel.
-	 *
-	 * @param accountJid JID of the message's account
-	 * @param chatJid JID of the message's chat
-	 * @param chatName name of the message's chat
-	 * @param message message to show
-	 */
-	void showMessageNotificationRequested(const QString &accountJid, const QString &chatJid, const QString &chatName, const QString &message);
-
-	/**
 	 * Emitted when the client's connection state changed.
 	 *
 	 * @param connectionState new connection state
@@ -281,13 +264,6 @@ signals:
 	void connectionErrorChanged(ClientWorker::ConnectionError error);
 
 private slots:
-	/**
-	 * Sets the value to know whether the application window is active.
-	 *
-	 * @param active true if the application window is active, false otherwise
-	 */
-	void setIsApplicationWindowActive(bool active);
-
 	/**
 	 * Called when an authenticated connection to the server is established.
 	 */
@@ -342,7 +318,6 @@ private:
 	uint m_activeTasks = 0;
 
 	bool m_isFirstLoginAfterStart = true;
-	bool m_isApplicationWindowActive;
 	bool m_isReconnecting = false;
 	bool m_isDisconnecting = false;
 	QXmppConfiguration m_configToBeUsedOnNextConnect;

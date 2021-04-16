@@ -33,6 +33,7 @@
 #include <chrono>
 
 // Qt
+#include <QGuiApplication>
 #include <QTimer>
 // QXmpp
 #include <QXmppUtils.h>
@@ -41,7 +42,9 @@
 #include "Kaidan.h"
 #include "MessageDb.h"
 #include "MessageHandler.h"
+#include "Notifications.h"
 #include "QmlUtils.h"
+#include "RosterModel.h"
 
 using namespace std::chrono_literals;
 
@@ -291,7 +294,7 @@ void MessageModel::setCurrentChat(const QString &accountJid, const QString &chat
 
 bool MessageModel::isChatCurrentChat(const QString &accountJid, const QString &chatJid) const
 {
-	return accountJid == AccountManager::instance()->jid() && chatJid == m_currentChatJid;
+	return accountJid == m_currentAccountJid && chatJid == m_currentChatJid;
 }
 
 void MessageModel::sendMessage(const QString &body, bool isSpoiler, const QString &spoilerHint)
@@ -375,6 +378,8 @@ void MessageModel::insertMessage(int idx, const Message &msg)
 
 void MessageModel::addMessage(Message msg)
 {
+	showMessageNotification(msg);
+
 	if (QXmppUtils::jidToBareJid(msg.from()) == m_currentChatJid ||
 			QXmppUtils::jidToBareJid(msg.to()) == m_currentChatJid) {
 		processMessage(msg);
@@ -423,6 +428,9 @@ void MessageModel::updateMessage(const QString &id,
 				// put to new position
 				addMessage(msg);
 			}
+
+			showMessageNotification(msg);
+
 			break;
 		}
 	}
@@ -570,5 +578,30 @@ void MessageModel::handleChatState(const QString &bareJid, QXmppMessage::State s
 		m_chatPartnerChatState = state;
 		m_chatPartnerChatStateTimeout->start();
 		emit chatStateChanged();
+	}
+}
+
+void MessageModel::showMessageNotification(const Message &message) const
+{
+	// Send a notification in the following cases:
+	// * The message was not sent by the user from another resource and
+	//   received via Message Carbons.
+	// * Notifications from the chat partner are not muted.
+	// * The corresponding chat is not opened while the application window
+	//   is active.
+
+	if (!message.sentByMe()) {
+		const auto accountJid = AccountManager::instance()->jid();
+		const auto chatJid = message.from();
+
+		bool userMuted = !Kaidan::instance()->notificationsMuted(chatJid);
+		bool chatActive =
+				isChatCurrentChat(accountJid, chatJid) &&
+				QGuiApplication::applicationState() != Qt::ApplicationActive;
+
+		if (!userMuted && !chatActive) {
+			const auto chatName = RosterModel::instance()->itemName(accountJid, chatJid);
+			Notifications::sendMessageNotification(accountJid, chatJid, chatName, message.body());
+		}
 	}
 }

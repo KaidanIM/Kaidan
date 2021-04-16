@@ -230,9 +230,6 @@ void Kaidan::initializeClientWorker(bool enableLogging)
 	connect(m_client, &ClientWorker::loggedInWithNewCredentials, this, &Kaidan::openChatViewRequested);
 	connect(m_client, &ClientWorker::connectionStateChanged, this, &Kaidan::setConnectionState);
 	connect(m_client, &ClientWorker::connectionErrorChanged, this, &Kaidan::setConnectionError);
-	connect(m_client, &ClientWorker::showMessageNotificationRequested, this, [](const QString &accountJid, const QString &chatJid, const QString &chatName, const QString &message) {
-		Notifications::sendMessageNotification(accountJid, chatJid, chatName, message);
-	});
 
 	connect(m_cltThrd, &QThread::started, m_client, &ClientWorker::initialize);
 	m_cltThrd->start();

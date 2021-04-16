@@ -90,8 +90,7 @@ ClientWorker::ClientWorker(Caches *caches, bool enableLogging, QObject* parent)
 	  m_discoveryManager(new DiscoveryManager(m_client, this)),
 	  m_uploadManager(new UploadManager(m_client, m_rosterManager, this)),
 	  m_downloadManager(new DownloadManager(caches->transferCache, this)),
-	  m_versionManager(new VersionManager(m_client, this)),
-	  m_isApplicationWindowActive(true)
+	  m_versionManager(new VersionManager(m_client, this))
 {
 	connect(m_client, &QXmppClient::connected, this, &ClientWorker::onConnected);
 	connect(m_client, &QXmppClient::disconnected, this, &ClientWorker::onDisconnected);
@@ -108,14 +107,11 @@ ClientWorker::ClientWorker(Caches *caches, bool enableLogging, QObject* parent)
 	connect(m_client, &QXmppClient::disconnected, caches->presCache, &PresenceCache::clear);
 
 	// Reduce the network traffic when the application window is not active.
-	// Inform the client worker when the application window becomes active or inactive.
 	connect(qGuiApp, &QGuiApplication::applicationStateChanged, [=](Qt::ApplicationState state) {
 		if (state == Qt::ApplicationActive) {
 			m_client->setActive(true);
-			setIsApplicationWindowActive(true);
 		} else {
 			m_client->setActive(false);
-			setIsApplicationWindowActive(false);
 		}
 	});
 
@@ -288,11 +284,6 @@ void ClientWorker::handleAccountDeletionFromServerFailed(const QXmppStanza::Erro
 		logOut();
 }
 
-bool ClientWorker::isApplicationWindowActive() const
-{
-	return m_isApplicationWindowActive;
-}
-
 void ClientWorker::onConnected()
 {
 	// no mutex needed, because this is called from updateClient()
@@ -408,11 +399,6 @@ void ClientWorker::onConnectionError(QXmppClient::Error error)
 		}
 		break;
 	}
-}
-
-void ClientWorker::setIsApplicationWindowActive(bool active)
-{
-	m_isApplicationWindowActive = active;
 }
 
 bool ClientWorker::startPendingTasks()

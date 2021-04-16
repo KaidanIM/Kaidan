@@ -143,27 +143,6 @@ void MessageHandler::handleMessage(const QXmppMessage &msg)
 			m = message;
 		});
 	}
-
-	// Send a message notification
-
-	// The contact can differ if the message is really from a contact or just
-	// a forward of another of the user's clients.
-	QString contactJid = message.sentByMe() ? message.to() : message.from();
-	// resolve user-defined name of this JID
-	QString contactName = m_client->findExtension<QXmppRosterManager>()->getRosterEntry(contactJid).name();
-	if (contactName.isEmpty())
-		contactName = contactJid;
-
-	// Show a notification for the message in the following cases:
-	//  * The message was not sent by the user from another resource and received via Message Carbons.
-	//  * Notifications from the chat partner are not muted.
-	//  * The corresponding chat is not opened while the application window is active.
-	if (!message.sentByMe() &&
-			!Kaidan::instance()->notificationsMuted(contactJid) &&
-			(MessageModel::instance()->currentChatJid() != message.from() ||
-			 !m_clientWorker->isApplicationWindowActive())) {
-		emit m_clientWorker->showMessageNotificationRequested(m_client->configuration().jidBare(), contactJid, contactName, msg.body());
-	}
 }
 
 void MessageHandler::sendMessage(const QString& toJid,

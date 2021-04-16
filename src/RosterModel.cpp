@@ -36,6 +36,8 @@
 #include "MessageModel.h"
 #include "RosterDb.h"
 
+#include <QXmppUtils.h>
+
 RosterModel *RosterModel::s_instance = nullptr;
 
 RosterModel *RosterModel::instance()
@@ -147,10 +149,10 @@ std::optional<const RosterItem> RosterModel::findItem(const QString &jid) const
 	return std::nullopt;
 }
 
-QString RosterModel::itemName(const QString &jid) const
+QString RosterModel::itemName(const QString &accountJid, const QString &jid) const
 {
 	if (auto item = findItem(jid))
-		return item->name();
+		return determineItemName(jid, item->name());
 	return {};
 }
 
@@ -338,4 +340,9 @@ int RosterModel::positionToInsert(const RosterItem &item)
 
 	// append
 	return m_items.size();
+}
+
+QString RosterModel::determineItemName(const QString &jid, const QString &name) const
+{
+	return name.isEmpty() ? QXmppUtils::jidToUser(jid) : name;
 }

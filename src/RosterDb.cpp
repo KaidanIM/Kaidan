@@ -169,16 +169,7 @@ void RosterDb::updateItem(const QString &jid,
 			if (rec.isEmpty())
 				return;
 
-			Utils::execQuery(
-			        query,
-			        db.driver()->sqlStatement(
-			                QSqlDriver::UpdateStatement,
-			                DB_TABLE_ROSTER,
-			                rec,
-			                false
-			        ) +
-			        Utils::simpleWhereStatement(db.driver(), "jid", jid)
-			);
+			updateItemByRecord(jid, rec);
 		}
 	}
 }
@@ -271,4 +262,25 @@ void RosterDb::fetchItems(const QString &accountId)
 	}
 
 	emit itemsFetched(items);
+}
+
+void RosterDb::updateItemByRecord(const QString &jid, const QSqlRecord &record)
+{
+	QSqlDatabase db = QSqlDatabase::database(DB_CONNECTION);
+	QSqlQuery query(db);
+
+	QMap<QString, QVariant> keyValuePairs = {
+		{ "jid", jid }
+	};
+
+	Utils::execQuery(
+		query,
+		db.driver()->sqlStatement(
+			QSqlDriver::UpdateStatement,
+			DB_TABLE_ROSTER,
+			record,
+			false
+		) +
+		Utils::simpleWhereStatement(db.driver(), keyValuePairs)
+	);
 }

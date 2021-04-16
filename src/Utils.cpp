@@ -105,3 +105,18 @@ QString Utils::simpleWhereStatement(const QSqlDriver *driver,
 	        false
 	);
 }
+
+QString Utils::simpleWhereStatement(const QSqlDriver *driver, const QMap<QString, QVariant> &keyValuePairs)
+{
+	QSqlRecord rec;
+
+	for (const QString &key : keyValuePairs.keys())
+		rec.append(createSqlField(key, keyValuePairs.value(key)));
+
+	return " " + driver->sqlStatement(
+		QSqlDriver::WhereStatement,
+		{},
+		rec,
+		false
+	);
+}

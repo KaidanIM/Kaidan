@@ -79,6 +79,8 @@ private slots:
 	void fetchItems(const QString &accountId);
 
 private:
+	void updateItemByRecord(const QString &jid, const QSqlRecord &record);
+
 	Database *m_db;
 
 	static RosterDb *s_instance;

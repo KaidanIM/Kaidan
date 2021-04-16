@@ -113,4 +113,14 @@ public:
 	static QString simpleWhereStatement(const QSqlDriver *driver,
 	                                    const QString &key,
 	                                    const QVariant &val);
+
+	/**
+	 * Creates a where clause with multiple key value pairs.
+	 *
+	 * @param driver SQL database driver
+	 * @param keyValuePairs key-value pairs of the where clause
+	 * @return a where clause starting with a space, so it can be directly
+	 *         appended to another statement
+	 */
+	static QString simpleWhereStatement(const QSqlDriver *driver, const QMap<QString, QVariant> &keyValuePairs);
 };

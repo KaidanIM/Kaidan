@@ -81,6 +81,7 @@ signals:
 	 */
 	void fetchPendingMessagesRequested(const QString &userJid);
 
+	void updateMessageRequested(const QString &id, const std::function<void (Message &)> &updateMsg);
 	void removeAllMessagesRequested();
 
 	/**

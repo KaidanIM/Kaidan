@@ -177,8 +177,6 @@ signals:
 	                            const std::function<void (Message &)> &updateMsg);
 	void pendingMessagesFetched(const QVector<Message> &messages);
 	void sendCorrectedMessageRequested(const Message &msg);
-	void updateMessageInDatabaseRequested(const QString &id,
-	                                      const std::function<void (Message &)> &updateMsg);
 	void chatStateChanged();
 	void sendChatStateRequested(const QString &bareJid, QXmppMessage::State state);
 	void handleChatStateRequested(const QString &bareJid, QXmppMessage::State state);

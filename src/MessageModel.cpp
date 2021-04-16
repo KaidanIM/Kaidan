@@ -119,8 +119,6 @@ MessageModel::MessageModel(QObject *parent)
 
 	connect(this, &MessageModel::updateMessageRequested,
 	        this, &MessageModel::updateMessage);
-	connect(this, &MessageModel::updateMessageInDatabaseRequested,
-	        MessageDb::instance(), &MessageDb::updateMessage);
 
 	connect(this, &MessageModel::handleChatStateRequested,
 		this, &MessageModel::handleChatState);
@@ -432,7 +430,7 @@ void MessageModel::updateMessage(const QString &id,
 		}
 	}
 
-	emit updateMessageInDatabaseRequested(id, updateMsg);
+	emit MessageDb::instance()->updateMessageRequested(id, updateMsg);
 }
 
 int MessageModel::searchForMessageFromNewToOld(const QString &searchString, const int startIndex) const
@@ -553,7 +551,7 @@ void MessageModel::correctMessage(const QString &msgId, const QString &message)
 		QModelIndex index = createIndex(std::distance(m_messages.begin(), itr), 0);
 		emit dataChanged(index, index);
 
-		emit updateMessageInDatabaseRequested(msgId, [=] (Message &localMessage) {
+		emit MessageDb::instance()->updateMessageRequested(msgId, [=](Message &localMessage) {
 			localMessage = msg;
 		});
 	}

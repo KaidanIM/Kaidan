@@ -279,11 +279,6 @@ signals:
 	 */
 	void connectionErrorChanged(ClientWorker::ConnectionError error);
 
-	/**
-	 * Deletes data related to the current account (messages, contacts etc.) from the database.
-	 */
-	void deleteAccountFromDatabase();
-
 private slots:
 	/**
 	 * Sets the value to know whether the application window is active.

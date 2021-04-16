@@ -228,6 +228,11 @@ public:
 	 */
  	void deleteSettings();
 
+	/**
+	 * Removes the account.
+	 */
+	void removeAccount();
+
 signals:
 	/**
 	 * Emitted when the JID changed.

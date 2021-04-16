@@ -64,6 +64,7 @@ signals:
 	void itemsFetched(const QVector<RosterItem> &items);
 	void updateItemRequested(const QString &jid,
 	                         const std::function<void (RosterItem &)> &updateItem);
+	void clearAllRequested();
 
 public slots:
 	void addItem(const RosterItem &item);

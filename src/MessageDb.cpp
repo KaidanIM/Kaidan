@@ -53,6 +53,7 @@ MessageDb::MessageDb(QObject *parent)
 
 	connect(this, &MessageDb::fetchPendingMessagesRequested,
 	        this, &MessageDb::fetchPendingMessages);
+	connect(this, &MessageDb::removeAllMessagesRequested, this, &MessageDb::removeAllMessages);
 }
 
 MessageDb::~MessageDb()

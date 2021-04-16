@@ -115,8 +115,6 @@ ClientWorker::ClientWorker(Caches *caches, bool enableLogging, QObject* parent)
 	// account deletion
 	connect(Kaidan::instance(), &Kaidan::deleteAccountFromClient, this, &ClientWorker::deleteAccountFromClient);
 	connect(Kaidan::instance(), &Kaidan::deleteAccountFromClientAndServer, this, &ClientWorker::deleteAccountFromClientAndServer);
-	connect(this, &ClientWorker::deleteAccountFromDatabase, RosterDb::instance(), &RosterDb::clearAll);
-	connect(this, &ClientWorker::deleteAccountFromDatabase, MessageDb::instance(), &MessageDb::removeAllMessages);
 }
 
 void ClientWorker::initialize()
@@ -260,9 +258,7 @@ void ClientWorker::deleteAccountFromClient()
 	// If the client is already disconnected, delete the account directly from the client.
 	// Otherwise, disconnect first and delete the account afterwards.
 	if (!m_client->isAuthenticated()) {
-		emit deleteAccountFromDatabase();
-		AccountManager::instance()->deleteSettings();
-		AccountManager::instance()->deleteCredentials();
+		AccountManager::instance()->removeAccount();
 		m_isAccountToBeDeletedFromClient = false;
 	} else {
 		m_isAccountToBeDeletedFromClient = true;

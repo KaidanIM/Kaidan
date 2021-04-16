@@ -81,6 +81,8 @@ signals:
 	 */
 	void fetchPendingMessagesRequested(const QString &userJid);
 
+	void removeAllMessagesRequested();
+
 	/**
 	 * Emitted when new messages have been fetched
 	 */

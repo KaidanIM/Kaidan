@@ -38,6 +38,8 @@
 // Kaidan
 #include "Globals.h"
 #include "Kaidan.h"
+#include "MessageDb.h"
+#include "RosterDb.h"
 #include "VCardCache.h"
 
 AccountManager *AccountManager::s_instance = nullptr;
@@ -267,6 +269,15 @@ void AccountManager::deleteSettings()
 		KAIDAN_SETTINGS_NOTIFICATIONS_MUTED,
 		KAIDAN_SETTINGS_FAVORITE_EMOJIS
 	});
+}
+
+void AccountManager::removeAccount()
+{
+	deleteSettings();
+	deleteCredentials();
+
+	emit RosterDb::instance()->clearAllRequested();
+	emit MessageDb::instance()->removeAllMessagesRequested();
 }
 
 void AccountManager::deleteSettingsInSettingsFile(const QStringList &keys) const

@@ -53,6 +53,7 @@ RosterDb::RosterDb(Database *db, QObject *parent)
 
 	connect(this, &RosterDb::fetchItemsRequested, this, &RosterDb::fetchItems);
 	connect(this, &RosterDb::updateItemRequested, this, &RosterDb::updateItem);
+	connect(this, &RosterDb::clearAllRequested, this, &RosterDb::clearAll);
 }
 
 RosterDb::~RosterDb()

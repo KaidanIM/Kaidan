@@ -175,7 +175,6 @@ signals:
 	void addMessageRequested(const Message &msg);
 	void updateMessageRequested(const QString &id,
 	                            const std::function<void (Message &)> &updateMsg);
-	void setMessageDeliveryStateRequested(const QString &msgId, Enums::DeliveryState state, const QString &errText = QString());
 	void pendingMessagesFetched(const QVector<Message> &messages);
 	void sendCorrectedMessageRequested(const Message &msg);
 	void updateMessageInDatabaseRequested(const QString &id,
@@ -198,8 +197,6 @@ private slots:
 	void addMessage(Message msg);
 	void updateMessage(const QString &id,
 	                   const std::function<void (Message &)> &updateMsg);
-
-	void setMessageDeliveryState(const QString &msgId, Enums::DeliveryState state, const QString &errText = QString());
 
 	void handleChatState(const QString &bareJid, QXmppMessage::State state);
 

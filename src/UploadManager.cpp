@@ -134,11 +134,16 @@ void UploadManager::handleUploadSucceeded(const QXmppHttpUpload *upload)
 
 	bool success = m_client->sendPacket(m);
 	if (success) {
-		emit MessageModel::instance()->setMessageDeliveryStateRequested(
-			originalMsg->id(), Enums::DeliveryState::Sent);
+		emit MessageModel::instance()->updateMessageRequested(originalMsg->id(), [](Message &msg) {
+			msg.setDeliveryState(Enums::DeliveryState::Sent);
+			msg.setErrorText({});
+		});
 	} else {
 		emit Kaidan::instance()->passiveNotificationRequested(tr("Message could not be sent."));
-		emit MessageModel::instance()->setMessageDeliveryStateRequested(originalMsg->id(), Enums::DeliveryState::Error, "Message could not be sent.");
+		emit MessageModel::instance()->updateMessageRequested(originalMsg->id(), [](Message &msg) {
+			msg.setDeliveryState(Enums::DeliveryState::Error);
+			msg.setErrorText(QStringLiteral("Message could not be sent."));
+		});
 	}
 
 	m_messages.remove(upload->id());

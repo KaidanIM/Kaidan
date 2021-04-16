@@ -57,8 +57,11 @@ MessageHandler::MessageHandler(ClientWorker *clientWorker, QXmppClient *client, 
 
 	client->addExtension(&m_receiptManager);
 	connect(&m_receiptManager, &QXmppMessageReceiptManager::messageDelivered,
-		this, [=] (const QString&, const QString &id) {
-		emit MessageModel::instance()->setMessageDeliveryStateRequested(id, Enums::DeliveryState::Delivered);
+		this, [=](const QString &, const QString &id) {
+		emit MessageModel::instance()->updateMessageRequested(id, [](Message &msg) {
+			msg.setDeliveryState(Enums::DeliveryState::Delivered);
+			msg.setErrorText({});
+		});
 	});
 
 	m_carbonManager = new QXmppCarbonManager();
@@ -91,8 +94,10 @@ MessageHandler::~MessageHandler()
 void MessageHandler::handleMessage(const QXmppMessage &msg)
 {
 	if (msg.type() == QXmppMessage::Error) {
-		emit MessageModel::instance()->setMessageDeliveryStateRequested(
-				msg.id(), Enums::DeliveryState::Error, msg.error().text());
+		emit MessageModel::instance()->updateMessageRequested(msg.id(), [errorText { msg.error().text() }](Message &msg) {
+			msg.setDeliveryState(Enums::DeliveryState::Error);
+			msg.setErrorText(errorText);
+		});
 		return;
 	}
 
@@ -225,8 +230,10 @@ void MessageHandler::sendPendingMessage(const Message &message)
 		}
 
 		if (success) {
-			emit MessageModel::instance()->setMessageDeliveryStateRequested(
-					message.id(), Enums::DeliveryState::Sent);
+			emit MessageModel::instance()->updateMessageRequested(message.id(), [](Message &msg) {
+				msg.setDeliveryState(Enums::DeliveryState::Sent);
+				msg.setErrorText({});
+			});
 		}
 		// TODO this "true" from sendPacket doesn't yet mean the message was successfully sent
 
@@ -238,8 +245,10 @@ void MessageHandler::sendPendingMessage(const Message &message)
 			// translation work in the UI, the tr() call of the passive
 			// notification must contain exactly the same string.
 			emit Kaidan::instance()->passiveNotificationRequested(tr("Message could not be sent."));
-			emit MessageModel::instance()->setMessageDeliveryStateRequested(
-					message.id(), Enums::DeliveryState::Error, "Message could not be sent.");
+			emit MessageModel::instance()->updateMessageRequested(message.id(), [](Message &msg) {
+				msg.setDeliveryState(Enums::DeliveryState::Error);
+				msg.setErrorText(QStringLiteral("Message could not be sent."));
+			});
 		}
 	}
 }

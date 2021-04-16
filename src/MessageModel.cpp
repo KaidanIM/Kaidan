@@ -122,9 +122,6 @@ MessageModel::MessageModel(QObject *parent)
 	connect(this, &MessageModel::updateMessageInDatabaseRequested,
 	        MessageDb::instance(), &MessageDb::updateMessage);
 
-	connect(this, &MessageModel::setMessageDeliveryStateRequested,
-		this, &MessageModel::setMessageDeliveryState);
-
 	connect(this, &MessageModel::handleChatStateRequested,
 		this, &MessageModel::handleChatState);
 
@@ -436,14 +433,6 @@ void MessageModel::updateMessage(const QString &id,
 	}
 
 	emit updateMessageInDatabaseRequested(id, updateMsg);
-}
-
-void MessageModel::setMessageDeliveryState(const QString &msgId, Enums::DeliveryState state, const QString &errText)
-{
-	updateMessage(msgId, [state, errText](Message &msg) {
-		msg.setDeliveryState(state);
-		msg.setErrorText(errText);
-	});
 }
 
 int MessageModel::searchForMessageFromNewToOld(const QString &searchString, const int startIndex) const

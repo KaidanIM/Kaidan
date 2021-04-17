@@ -1,3 +1,7 @@
+add_compile_definitions(
+	QXMPP_DISABLE_DEPRECATED_BEFORE=0x010400
+)
+
 # set Kaidans sources (used in main cmake file)
 set(KAIDAN_SOURCES
 	src/main.cpp

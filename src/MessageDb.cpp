@@ -53,7 +53,6 @@ MessageDb::MessageDb(QObject *parent)
 
 	connect(this, &MessageDb::fetchPendingMessagesRequested,
 	        this, &MessageDb::fetchPendingMessages);
-	connect(this, &MessageDb::removeAllMessagesRequested, this, &MessageDb::removeAllMessages);
 }
 
 MessageDb::~MessageDb()
@@ -263,7 +262,7 @@ void MessageDb::addMessage(const Message &msg)
 	));
 }
 
-void MessageDb::removeAllMessages()
+void MessageDb::removeMessages(const QString &accountJid, const QString &chatJid)
 {
 	QSqlQuery query(QSqlDatabase::database(DB_CONNECTION));
 	Utils::execQuery(query, "DELETE FROM " DB_TABLE_MESSAGES);

@@ -175,7 +175,7 @@ Kirigami.ApplicationWindow {
 			openStartPage()
 		}
 
-		function onLoggedInWithNewCredentials() {
+		function onOpenChatViewRequested() {
 			openChatView()
 		}
 	}

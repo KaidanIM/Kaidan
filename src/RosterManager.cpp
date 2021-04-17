@@ -32,6 +32,7 @@
 // Kaidan
 #include "AvatarFileStorage.h"
 #include "Kaidan.h"
+#include "MessageModel.h"
 #include "RosterModel.h"
 #include "VCardManager.h"
 // QXmpp
@@ -63,7 +64,11 @@ RosterManager::RosterManager(QXmppClient *client,
 		});
 	});
 
-	connect(m_manager, &QXmppRosterManager::itemRemoved, RosterModel::instance(), &RosterModel::removeItemRequested);
+	connect(m_manager, &QXmppRosterManager::itemRemoved, this, [client](const QString &jid) {
+		const auto accountJid = client->configuration().jidBare();
+		emit MessageModel::instance()->removeMessagesRequested(accountJid, jid);
+		emit RosterModel::instance()->removeItemsRequested(accountJid, jid);
+	});
 
 	connect(m_manager, &QXmppRosterManager::subscriptionReceived,
 			this, [] (const QString &jid) {

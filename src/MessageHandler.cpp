@@ -162,7 +162,7 @@ void MessageHandler::handleMessage(const QXmppMessage &msg)
 			!Kaidan::instance()->notificationsMuted(contactJid) &&
 			(MessageModel::instance()->currentChatJid() != message.from() ||
 			 !m_clientWorker->isApplicationWindowActive())) {
-		emit m_clientWorker->showMessageNotificationRequested(contactJid, contactName, msg.body());
+		emit m_clientWorker->showMessageNotificationRequested(m_client->configuration().jidBare(), contactJid, contactName, msg.body());
 	}
 }
 

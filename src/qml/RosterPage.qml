@@ -111,14 +111,14 @@ Kirigami.ScrollablePage {
 			name: model.name ? model.name : model.jid
 			lastMessage: model.lastMessage
 			unreadMessages: model.unreadMessages
-			onClicked: openChatPage(model.jid)
+			onClicked: openChatPage(AccountManager.jid, model.jid)
 		}
 
 		Connections {
 			target: Kaidan
 
-			function onOpenChatPageRequested(chatJid) {
-				openChatPage(chatJid)
+			function onOpenChatPageRequested(accountJid, chatJid) {
+				openChatPage(accountJid, chatJid)
 			}
 
 			function onXmppUriReceived(uri) {
@@ -129,14 +129,14 @@ Kirigami.ScrollablePage {
 		}
 	}
 
-
 	/**
 	 * Opens the chat page for the chat JID currently set in the message model.
 	 *
-	 * @param chatJid JID of the chat for which the chat page is opened
+	 * @param accountJid JID of the account for that the chat page is opened
+	 * @param chatJid JID of the chat for that the chat page is opened
 	 */
-	function openChatPage(chatJid) {
-		MessageModel.currentChatJid = chatJid
+	function openChatPage(accountJid, chatJid) {
+		MessageModel.setCurrentChat(accountJid, chatJid)
 		searchAction.checked = false
 
 		// Close all pages (especially the chat page) except the roster page.
@@ -145,5 +145,4 @@ Kirigami.ScrollablePage {
 
 		pageStack.push(chatPage)
 	}
-
 }

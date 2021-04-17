@@ -124,9 +124,12 @@ public slots:
 	void addMessage(const Message &msg);
 
 	/**
-	 * Removes all messages from the database.
+	 * Removes all messages of an account or an account's chat.
+	 *
+	 * @param accountJid JID of the account whose messages are being removed
+	 * @param chatJid JID of the chat whose messages are being removed (optional)
 	 */
-	void removeAllMessages();
+	void removeMessages(const QString &accountJid, const QString &chatJid = {});
 
 	/**
 	 * Loads a message, runs the update lambda and writes it to the DB again.

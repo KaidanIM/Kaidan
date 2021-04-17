@@ -81,6 +81,14 @@ signals:
 	void replaceItemsRequested(const QHash<QString, RosterItem> &items);
 
 	/**
+	 * Emitted to remove all roster items of an account or a specific roster item.
+	 *
+	 * @param accountJid JID of the account whose roster items are being removed
+	 * @param jid JID of the roster item being removed (optional)
+	 */
+	void removeItemsRequested(const QString &accountJid, const QString &jid = {});
+
+	/**
 	 * Emitted, whan a subscription request was received
 	 */
 	void subscriptionRequestReceived(const QString &from, const QString &msg);
@@ -93,6 +101,15 @@ private slots:
 	void updateItem(const QString &jid,
 	                const std::function<void (RosterItem &)> &updateItem);
 	void replaceItems(const QHash<QString, RosterItem> &items);
+
+	/**
+	 * Removes all roster items of an account or a specific roster item.
+	 *
+	 * @param accountJid JID of the account whose roster items are being removed
+	 * @param jid JID of the roster item being removed (optional)
+	 */
+	void removeItems(const QString &accountJid, const QString &jid = {});
+
 	void handleMessageAdded(const Message &message);
 
 private:

@@ -124,6 +124,9 @@ MessageModel::MessageModel(QObject *parent)
 
 	connect(this, &MessageModel::handleChatStateRequested,
 		this, &MessageModel::handleChatState);
+
+	connect(this, &MessageModel::removeMessagesRequested, this, &MessageModel::removeMessages);
+	connect(this, &MessageModel::removeMessagesRequested, MessageDb::instance(), &MessageDb::removeMessages);
 }
 
 MessageModel::~MessageModel() = default;
@@ -250,24 +253,30 @@ bool MessageModel::canFetchMore(const QModelIndex &) const
 	return !m_fetchedAll;
 }
 
+QString MessageModel::currentAccountJid()
+{
+	return m_currentAccountJid;
+}
+
 QString MessageModel::currentChatJid()
 {
 	return m_currentChatJid;
 }
 
-void MessageModel::setCurrentChatJid(const QString &currentChatJid)
+void MessageModel::setCurrentChat(const QString &accountJid, const QString &chatJid)
 {
-	if (currentChatJid == m_currentChatJid)
+	if (accountJid == m_currentAccountJid && chatJid == m_currentChatJid)
 		return;
 
 	// Send gone state to old chat partner
 	sendChatState(QXmppMessage::State::Gone);
-	m_currentChatJid = currentChatJid;
-	m_fetchedAll = false;
+
+	m_currentAccountJid = accountJid;
+	m_currentChatJid = chatJid;
 
 	// Reset chat states
 	m_ownChatState = QXmppMessage::State::None;
-	m_chatPartnerChatState = m_chatStateCache.value(currentChatJid, QXmppMessage::State::Gone);
+	m_chatPartnerChatState = m_chatStateCache.value(chatJid, QXmppMessage::State::Gone);
 	m_composingTimer->stop();
 	m_stateTimeoutTimer->stop();
 	m_inactiveTimer->stop();
@@ -276,8 +285,13 @@ void MessageModel::setCurrentChatJid(const QString &currentChatJid)
 	// Send active state to new chat partner
 	sendChatState(QXmppMessage::State::Active);
 
-	emit currentChatJidChanged(currentChatJid);
-	clearAll();
+	emit currentChatJidChanged(chatJid);
+	removeAllMessages();
+}
+
+bool MessageModel::isChatCurrentChat(const QString &accountJid, const QString &chatJid) const
+{
+	return accountJid == AccountManager::instance()->jid() && chatJid == m_currentChatJid;
 }
 
 void MessageModel::sendMessage(const QString &body, bool isSpoiler, const QString &spoilerHint)
@@ -335,13 +349,21 @@ void MessageModel::handleMessagesFetched(const QVector<Message> &msgs)
 		m_fetchedAll = true;
 }
 
-void MessageModel::clearAll()
+void MessageModel::removeMessages(const QString &accountJid, const QString &chatJid)
+{
+	if (accountJid == m_currentAccountJid && chatJid == m_currentChatJid)
+		removeAllMessages();
+}
+
+void MessageModel::removeAllMessages()
 {
 	if (!m_messages.isEmpty()) {
 		beginRemoveRows(QModelIndex(), 0, rowCount() - 1);
 		m_messages.clear();
 		endRemoveRows();
 	}
+
+	m_fetchedAll = false;
 }
 
 void MessageModel::insertMessage(int idx, const Message &msg)

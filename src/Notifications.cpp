@@ -48,7 +48,7 @@
 
 #ifdef HAVE_KNOTIFICATIONS
 
-void Notifications::sendMessageNotification(const QString &senderJid, const QString &senderName, const QString &message)
+void Notifications::sendMessageNotification(const QString &accountJid, const QString &chatJid, const QString &chatName, const QString &message)
 {
 #ifdef DESKTOP_LINUX_ALIKE_OS
 	static bool IS_USING_GNOME = qEnvironmentVariable("XDG_CURRENT_DESKTOP").contains("GNOME", Qt::CaseInsensitive);
@@ -56,7 +56,7 @@ void Notifications::sendMessageNotification(const QString &senderJid, const QStr
 
 	KNotification *notification = new KNotification("new-message");
 	notification->setText(message);
-	notification->setTitle(senderName);
+	notification->setTitle(chatName);
 #ifdef DESKTOP_LINUX_ALIKE_OS
 	if (IS_USING_GNOME)
 		notification->setFlags(KNotification::Persistent);
@@ -70,11 +70,11 @@ void Notifications::sendMessageNotification(const QString &senderJid, const QStr
 	});
 
 	QObject::connect(notification, &KNotification::defaultActivated, [=] {
-		emit Kaidan::instance()->openChatPageRequested(senderJid);
+		emit Kaidan::instance()->openChatPageRequested(accountJid, chatJid);
 		emit Kaidan::instance()->raiseWindowRequested();
 	});
 	QObject::connect(notification, &KNotification::action1Activated, [=] {
-		emit RosterModel::instance()->updateItemRequested(senderJid, [=](RosterItem &item) {
+		emit RosterModel::instance()->updateItemRequested(chatJid, [=](RosterItem &item) {
 			item.setUnreadMessages(0);
 		});
 	});

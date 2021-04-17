@@ -259,11 +259,12 @@ signals:
 	/**
 	 * Requests to show a notification for a chat message via the system's notification channel.
 	 *
-	 * @param senderJid JID of the message's sender
-	 * @param senderName name of the message's sender
+	 * @param accountJid JID of the message's account
+	 * @param chatJid JID of the message's chat
+	 * @param chatName name of the message's chat
 	 * @param message message to show
 	 */
-	void showMessageNotificationRequested(const QString &senderJid, const QString &senderName, const QString &message);
+	void showMessageNotificationRequested(const QString &accountJid, const QString &chatJid, const QString &chatName, const QString &message);
 
 	/**
 	 * Emitted when the client's connection state changed.

@@ -32,8 +32,9 @@
 
 // Kaidan
 #include "AccountManager.h"
-#include "RosterDb.h"
+#include "Kaidan.h"
 #include "MessageModel.h"
+#include "RosterDb.h"
 
 RosterModel *RosterModel::s_instance = nullptr;
 
@@ -54,10 +55,6 @@ RosterModel::RosterModel(QObject *parent)
 	connect(this, &RosterModel::addItemRequested, this, &RosterModel::addItem);
 	connect(this, &RosterModel::addItemRequested, RosterDb::instance(), &RosterDb::addItem);
 
-	connect(this, &RosterModel::removeItemRequested,
-	        this, &RosterModel::removeItem);
-	connect(this, &RosterModel::removeItemRequested, RosterDb::instance(), &RosterDb::removeItem);
-
 	connect(this, &RosterModel::updateItemRequested,
 	        this, &RosterModel::updateItem);
 	connect(this, &RosterModel::updateItemRequested, RosterDb::instance(), &RosterDb::updateItem);
@@ -72,6 +69,15 @@ RosterModel::RosterModel(QObject *parent)
 		endResetModel();
 
 		emit RosterDb::instance()->fetchItemsRequested(AccountManager::instance()->jid());
+	});
+
+	connect(this, &RosterModel::removeItemsRequested, this, [=](const QString &accountJid, const QString &chatJid) {
+		emit RosterDb::instance()->removeItemsRequested(accountJid, chatJid);
+
+		removeItems(accountJid, chatJid);
+
+		if (accountJid == MessageModel::instance()->currentAccountJid() && chatJid == MessageModel::instance()->currentChatJid())
+			emit Kaidan::instance()->openChatViewRequested();
 	});
 }
 
@@ -226,6 +232,20 @@ void RosterModel::replaceItems(const QHash<QString, RosterItem> &items)
 
 	// replace all items
 	handleItemsFetched(newItems);
+}
+
+void RosterModel::removeItems(const QString &accountJid, const QString &jid)
+{
+	for (int i = 0; i < m_items.size(); i++) {
+		RosterItem &item = m_items[i];
+
+		if (AccountManager::instance()->jid() == accountJid && (item.jid().isEmpty() || item.jid() == jid)) {
+			beginRemoveRows(QModelIndex(), i, i);
+			m_items.remove(i);
+			endRemoveRows();
+			return;
+		}
+	}
 }
 
 void RosterModel::handleMessageAdded(const Message &message)

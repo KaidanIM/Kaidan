@@ -38,8 +38,8 @@
 // Kaidan
 #include "Globals.h"
 #include "Kaidan.h"
-#include "MessageDb.h"
-#include "RosterDb.h"
+#include "MessageModel.h"
+#include "RosterModel.h"
 #include "VCardCache.h"
 
 AccountManager *AccountManager::s_instance = nullptr;
@@ -271,13 +271,13 @@ void AccountManager::deleteSettings()
 	});
 }
 
-void AccountManager::removeAccount()
+void AccountManager::removeAccount(const QString &accountJid)
 {
 	deleteSettings();
 	deleteCredentials();
 
-	emit RosterDb::instance()->clearAllRequested();
-	emit MessageDb::instance()->removeAllMessagesRequested();
+	emit MessageModel::instance()->removeMessagesRequested(accountJid);
+	emit RosterModel::instance()->removeItemsRequested(accountJid);
 }
 
 void AccountManager::deleteSettingsInSettingsFile(const QStringList &keys) const

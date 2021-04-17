@@ -278,11 +278,17 @@ signals:
 	void raiseWindowRequested();
 
 	/**
-	 * Opens the chat page for a given JID.
-	 *
-	 * @param chatJid JID of the chat for which the chat page is opened
+	 * Opens the view with the roster and empty chat page.
 	 */
-	void openChatPageRequested(const QString &chatJid);
+	void openChatViewRequested();
+
+	/**
+	 * Opens the chat page for a given chat.
+	 *
+	 * @param accountJid JID of the account for that the chat page is opened
+	 * @param chatJid JID of the chat for that the chat page is opened
+	 */
+	void openChatPageRequested(const QString &accountJid, const QString &chatJid);
 
 	/**
 	 * Emitted when the removal state of the password on the account transfer page changed.

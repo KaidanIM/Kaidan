@@ -61,7 +61,9 @@ Q_DECLARE_METATYPE(ChatState::State)
 class MessageModel : public QAbstractListModel
 {
 	Q_OBJECT
-	Q_PROPERTY(QString currentChatJid READ currentChatJid WRITE setCurrentChatJid NOTIFY currentChatJidChanged)
+
+	Q_PROPERTY(QString currentAccountJid READ currentAccountJid NOTIFY currentAccountJidChanged)
+	Q_PROPERTY(QString currentChatJid READ currentChatJid NOTIFY currentChatJidChanged)
 	Q_PROPERTY(QXmppMessage::State chatState READ chatState NOTIFY chatStateChanged)
 
 public:
@@ -103,8 +105,19 @@ public:
 	Q_INVOKABLE void fetchMore(const QModelIndex &parent) override;
 	Q_INVOKABLE bool canFetchMore(const QModelIndex &parent) const override;
 
+	QString currentAccountJid();
 	QString currentChatJid();
-	void setCurrentChatJid(const QString &currentChatJid);
+	Q_INVOKABLE void setCurrentChat(const QString &accountJid, const QString &chatJid);
+
+	/**
+	 * Determines whether a chat is the currently open chat.
+	 *
+	 * @param accountJid JID of the chat's account
+	 * @param chatJid JID of the chat
+	 *
+	 * @return true if the chat is currently open, otherwise false
+	 */
+	bool isChatCurrentChat(const QString &accountJid, const QString &chatJid) const;
 
 	Q_INVOKABLE void sendMessage(const QString &body, bool isSpoiler, const QString &spoilerHint);
 
@@ -156,6 +169,7 @@ public:
 	Q_INVOKABLE void sendChatState(ChatState::State state);
 
 signals:
+	void currentAccountJidChanged(const QString &accountJid);
 	void currentChatJidChanged(const QString &currentChatJid);
 
 	void addMessageRequested(const Message &msg);
@@ -170,6 +184,14 @@ signals:
 	void sendChatStateRequested(const QString &bareJid, QXmppMessage::State state);
 	void handleChatStateRequested(const QString &bareJid, QXmppMessage::State state);
 
+	/**
+	 * Emitted to remove all messages of an account or an account's chat.
+	 *
+	 * @param accountJid JID of the account whose messages are being removed
+	 * @param chatJid JID of the chat whose messages are being removed (optional)
+	 */
+	void removeMessagesRequested(const QString &accountJid, const QString &chatJid = {});
+
 private slots:
 	void handleMessagesFetched(const QVector<Message> &m_messages);
 
@@ -182,7 +204,16 @@ private slots:
 	void handleChatState(const QString &bareJid, QXmppMessage::State state);
 
 private:
-	void clearAll();
+	/**
+	 * Removes all messages of an account or an account's chat.
+	 *
+	 * @param accountJid JID of the account whose messages are being removed
+	 * @param chatJid JID of the chat whose messages are being removed (optional)
+	 */
+	void removeMessages(const QString &accountJid, const QString &chatJid = {});
+
+	void removeAllMessages();
+
 	void insertMessage(int i, const Message &msg);
 
 	/**
@@ -192,6 +223,7 @@ private:
 	void processMessage(Message &msg);
 
 	QVector<Message> m_messages;
+	QString m_currentAccountJid;
 	QString m_currentChatJid;
 	bool m_fetchedAll = false;
 

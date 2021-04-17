@@ -229,9 +229,11 @@ public:
  	void deleteSettings();
 
 	/**
-	 * Removes the account.
+	 * Removes an account.
+	 *
+	 * @param accountJid JID of the account being removed
 	 */
-	void removeAccount();
+	void removeAccount(const QString &accountJid);
 
 signals:
 	/**
@@ -263,6 +265,13 @@ signals:
 	 * Emitted when there are no (correct) credentials to log in.
 	 */
 	void credentialsNeeded();
+
+	/**
+	 * Emitted to remove an account.
+	 *
+	 * @param accountJid JID of the account being removed
+	 */
+	void removeAccountRequested(const QString &accountJid);
 
 private:
 	/**

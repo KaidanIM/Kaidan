@@ -53,7 +53,7 @@ RosterDb::RosterDb(Database *db, QObject *parent)
 
 	connect(this, &RosterDb::fetchItemsRequested, this, &RosterDb::fetchItems);
 	connect(this, &RosterDb::updateItemRequested, this, &RosterDb::updateItem);
-	connect(this, &RosterDb::clearAllRequested, this, &RosterDb::clearAll);
+	connect(this, &RosterDb::removeItemsRequested, this, &RosterDb::removeItems);
 }
 
 RosterDb::~RosterDb()
@@ -128,17 +128,6 @@ void RosterDb::addItems(const QVector<RosterItem> &items)
 	m_db->commit();
 }
 
-void RosterDb::removeItem(const QString &jid)
-{
-	QSqlDatabase db = QSqlDatabase::database(DB_CONNECTION);
-	QSqlQuery query(db);
-	Utils::execQuery(
-	        query,
-	        "DELETE FROM Roster WHERE jid = ?",
-	        QVector<QVariant>() << jid
-	);
-}
-
 void RosterDb::updateItem(const QString &jid,
 			  const std::function<void (RosterItem &)> &updateItem)
 {
@@ -210,7 +199,7 @@ void RosterDb::replaceItems(const QHash<QString, RosterItem> &items)
 				setItemName(oldItem.jid(), items[oldItem.jid()].name());
 		} else {
 			// item is not included in newJids -> delete
-			removeItem(oldItem.jid());
+			removeItems({}, oldItem.jid());
 		}
 	}
 
@@ -219,6 +208,12 @@ void RosterDb::replaceItems(const QHash<QString, RosterItem> &items)
 		addItem(items[jid]);
 
 	m_db->commit();
+}
+
+void RosterDb::removeItems(const QString &accountJid, const QString &jid)
+{
+	QSqlQuery query(QSqlDatabase::database(DB_CONNECTION));
+	Utils::execQuery(query, "DELETE FROM Roster");
 }
 
 void RosterDb::setItemName(const QString &jid, const QString &name)
@@ -239,12 +234,6 @@ void RosterDb::setItemName(const QString &jid, const QString &name)
 		) +
 		Utils::simpleWhereStatement(db.driver(), "jid", jid)
 	);
-}
-
-void RosterDb::clearAll()
-{
-	QSqlQuery query(QSqlDatabase::database(DB_CONNECTION));
-	Utils::execQuery(query, "DELETE FROM Roster");
 }
 
 void RosterDb::fetchItems(const QString &accountId)

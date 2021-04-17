@@ -66,15 +66,30 @@ signals:
 	                         const std::function<void (RosterItem &)> &updateItem);
 	void clearAllRequested();
 
+	/**
+	 * Emitted to remove all roster items of an account or a specific roster item.
+	 *
+	 * @param accountJid JID of the account whose roster items are being removed
+	 * @param jid JID of the roster item being removed (optional)
+	 */
+	void removeItemsRequested(const QString &accountJid, const QString &jid = {});
+
 public slots:
 	void addItem(const RosterItem &item);
 	void addItems(const QVector<RosterItem> &items);
-	void removeItem(const QString &jid);
 	void updateItem(const QString &jid,
 	                const std::function<void (RosterItem &)> &updateItem);
 	void replaceItems(const QHash<QString, RosterItem> &items);
+
+	/**
+	 * Removes all roster items of an account or a specific roster item.
+	 *
+	 * @param accountJid JID of the account whose roster items are being removed
+	 * @param jid JID of the roster item being removed (optional)
+	 */
+	void removeItems(const QString &accountJid, const QString &jid = {});
+
 	void setItemName(const QString &jid, const QString &name);
-	void clearAll();
 
 private slots:
 	void fetchItems(const QString &accountId);

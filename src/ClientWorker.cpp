@@ -265,7 +265,7 @@ void ClientWorker::deleteAccountFromClient()
 	// If the client is already disconnected, delete the account directly from the client.
 	// Otherwise, disconnect first and delete the account afterwards.
 	if (!m_client->isAuthenticated()) {
-		AccountManager::instance()->removeAccount();
+		AccountManager::instance()->removeAccount(m_client->configuration().jidBare());
 		m_isAccountToBeDeletedFromClient = false;
 	} else {
 		m_isAccountToBeDeletedFromClient = true;

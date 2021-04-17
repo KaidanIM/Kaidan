@@ -38,9 +38,10 @@ public:
 	/**
 	 * Sends a system notification for a chat message.
 	 *
-	 * @param senderJid JID of the message's sender
-	 * @param senderName name of the message's sender
+	 * @param accountJid JID of the message's account
+	 * @param chatJid JID of the message's chat
+	 * @param chatName name of the message's chat
 	 * @param message message to show
 	 */
-	static void sendMessageNotification(const QString &senderJid, const QString &senderName, const QString &message);
+	static void sendMessageNotification(const QString &accountJid, const QString &chatJid, const QString &chatName, const QString &message);
 };

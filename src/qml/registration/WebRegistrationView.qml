@@ -47,12 +47,12 @@ View {
 
 		CenteredAdaptiveHighlightedButton {
 			text: qsTr("Open registration web page")
-			onClicked: Qt.openUrlExternally(serverView.registrationWebPage)
+			onClicked: Qt.openUrlExternally(serverView.registrationWebPage ? serverView.registrationWebPage : serverView.outOfBandUrl)
 		}
 
 		CenteredAdaptiveButton {
 			text: qsTr("Copy registration web page address")
-			onClicked: Utils.copyToClipboard(serverView.registrationWebPage)
+			onClicked: Utils.copyToClipboard(serverView.registrationWebPage ? serverView.registrationWebPage : serverView.outOfBandUrl)
 		}
 
 		CenteredAdaptiveHighlightedButton {

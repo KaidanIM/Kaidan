@@ -218,6 +218,14 @@ signals:
 	void registrationFormReceived(DataFormModel *dataFormModel);
 
 	/**
+	 * Emitted when an out-of-band URL for registration is received from the
+	 * server.
+	 *
+	 * @param outOfBandUrl URL used for out-of-band registration
+	 */
+	void registrationOutOfBandUrlReceived(const QString &outOfBandUrl);
+
+	/**
 	 * Emitted to request a registration form from the server which is set as the
 	 * currently used JID.
 	 */

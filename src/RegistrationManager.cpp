@@ -121,8 +121,27 @@ void RegistrationManager::handleRegistrationFormReceived(const QXmppRegisterIq &
 	bool isFakeForm;
 	QXmppDataForm newDataForm = extractFormFromRegisterIq(iq, isFakeForm);
 
-	// If the data form is not set, there is a problem with the server.
+	// If there is no registration data form, try to use an out-of-band URL.
 	if (newDataForm.fields().isEmpty()) {
+#if QXMPP_VERSION >= QT_VERSION_CHECK(1, 5, 0)
+		// If there is a standardized out-of-band URL, use that.
+		if (!iq.outOfBandUrl().isEmpty()) {
+			emit Kaidan::instance()->registrationOutOfBandUrlReceived(iq.outOfBandUrl());
+			return;
+		}
+#endif
+		// Try to find an out-of-band URL within the instructions element.
+		// Most servers include a text with a link to the website.
+		const auto words = iq.instructions().split(u' ');
+		for (const auto &instructionPart : words) {
+			if (instructionPart.startsWith(u"https://")) {
+				emit Kaidan::instance()->registrationOutOfBandUrlReceived(instructionPart);
+				return;
+			}
+		}
+
+		// If no URL has been found in the instructions, there is a
+		// problem with the server.
 		emit m_clientWorker->connectionErrorChanged(ClientWorker::RegistrationUnsupported);
 		return;
 	}

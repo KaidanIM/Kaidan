@@ -102,6 +102,10 @@ RegistrationPage {
 				removeLoadingView()
 		}
 
+		function onRegistrationOutOfBandUrlReceived(outOfBandUrl) {
+			requestRegistrationFormFromAnotherServer(qsTr("The server does currently not support registration via this app."))
+		}
+
 		function onRegistrationFailed(error, errorMessage) {
 			switch (error) {
 			case RegistrationManager.InBandRegistrationNotSupported:

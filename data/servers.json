@@ -42,6 +42,7 @@
 	{
 		"jid": "dismail.de",
 		"supportsInBandRegistration": false,
+		"registrationWebPage": "https://dismail.de/register.html",
 		"hosting": "professional",
 		"passwordReset": false,
 		"mucSupport": true,

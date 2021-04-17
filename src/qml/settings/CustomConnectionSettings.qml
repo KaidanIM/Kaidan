@@ -40,7 +40,9 @@ import "../elements/fields"
 RowLayout {
 	property alias hostField: hostField
 	property alias portField: portField
-	property Button confirmationButton
+
+	// The type Item is used because the type Button does not work for buttons of type RoundButton.
+	property Item confirmationButton
 
 	Field {
 		id: hostField

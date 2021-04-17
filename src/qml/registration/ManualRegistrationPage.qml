@@ -120,10 +120,6 @@ RegistrationPage {
 			jumpToPreviousView()
 			removeLoadingView()
 		}
-	}
-
-	Connections {
-		target: Kaidan
 
 		function onRegistrationFormReceived(dataFormModel) {
 			formModel = dataFormModel
@@ -175,6 +171,11 @@ RegistrationPage {
 			focusFieldViews()
 		}
 
+		function onRegistrationOutOfBandUrlReceived(outOfBandUrl) {
+			serverView.outOfBandUrl = outOfBandUrl
+			handleInBandRegistrationNotSupported()
+		}
+
 		// Depending on the error, the swipe view jumps to the view where the input should be corrected.
 		// For all remaining errors, the swipe view jumps to the server view.
 		function onRegistrationFailed(error, errorMessage) {
@@ -182,7 +183,7 @@ RegistrationPage {
 
 			switch(error) {
 			case RegistrationManager.InBandRegistrationNotSupported:
-				handleInBandRegistrationNotSupportedError()
+				handleInBandRegistrationNotSupported()
 				break
 			case RegistrationManager.UsernameConflict:
 				requestRegistrationForm()
@@ -229,14 +230,14 @@ RegistrationPage {
 	}
 
 	/**
-	 * Shows a passive notification if the server does not support In-Band Registration.
+	 * Shows a passive notification regarding the missing support of In-Band Registration.
 	 * If the server supports web registration, the corresponding view is opened.
 	 * If the server does not support web registration and it is not a custom server, another one is automatically selected.
 	 */
-	function handleInBandRegistrationNotSupportedError() {
+	function handleInBandRegistrationNotSupported() {
 		var notificationText = serverView.customServerSelected ? qsTr("The server does not support registration via this app.") : qsTr("The server does currently not support registration via this app.")
 
-		if (serverView.inBandRegistrationSupported) {
+		if (serverView.registrationWebPage || serverView.outOfBandUrl) {
 			addWebRegistrationView()
 			notificationText += " " + qsTr("But you can use the server's web registration.")
 		} else {
@@ -283,7 +284,7 @@ RegistrationPage {
 	function addWebRegistrationView() {
 		removeDynamicallyLoadedInBandRegistrationViews()
 
-		webRegistrationView = webRegistrationViewComponent.createObject(webRegistrationView)
+		webRegistrationView = webRegistrationViewComponent.createObject(swipeView)
 		swipeView.insertItem(serverView.Controls.SwipeView.index + 1, webRegistrationView)
 	}
 

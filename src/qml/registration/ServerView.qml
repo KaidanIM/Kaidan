@@ -51,6 +51,7 @@ FieldView {
 	property bool inBandRegistrationSupported: serverListModel.data(comboBox.currentIndex, ServerListModel.SupportsInBandRegistrationRole)
 	property string registrationWebPage: serverListModel.data(comboBox.currentIndex, ServerListModel.RegistrationWebPageRole)
 	property bool shouldWebRegistrationViewBeShown: !customServerSelected && !inBandRegistrationSupported
+	property string outOfBandUrl
 
 	property alias customConnectionSettings: customConnectionSettings
 
@@ -105,6 +106,13 @@ FieldView {
 					}
 				}
 			]
+
+			onTextChanged: {
+				if (outOfBandUrl && customServerSelected) {
+					outOfBandUrl = ""
+					removeWebRegistrationView()
+				}
+			}
 
 			// Focus the customConnectionSettings on confirmation.
 			Keys.onPressed: {

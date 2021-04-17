@@ -263,16 +263,6 @@ void MessageDb::addMessage(const Message &msg)
 	));
 }
 
-void MessageDb::removeMessage(const QString &id)
-{
-	QSqlQuery query(QSqlDatabase::database(DB_CONNECTION));
-	Utils::execQuery(
-		query,
-		"DELETE FROM " DB_TABLE_MESSAGES " WHERE id = ?",
-		QVector<QVariant>() << id
-	);
-}
-
 void MessageDb::removeAllMessages()
 {
 	QSqlQuery query(QSqlDatabase::database(DB_CONNECTION));

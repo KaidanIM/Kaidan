@@ -124,11 +124,6 @@ public slots:
 	void addMessage(const Message &msg);
 
 	/**
-	 * Deletes a message from the database.
-	 */
-	void removeMessage(const QString &id);
-
-	/**
 	 * Removes all messages from the database.
 	 */
 	void removeAllMessages();

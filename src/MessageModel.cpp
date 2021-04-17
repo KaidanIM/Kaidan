@@ -112,14 +112,13 @@ MessageModel::MessageModel(QObject *parent)
 	connect(MessageDb::instance(), &MessageDb::pendingMessagesFetched,
 	        this, &MessageModel::pendingMessagesFetched);
 
-	connect(this, &MessageModel::addMessageRequested,
-	        this, &MessageModel::addMessage);
-	connect(this, &MessageModel::addMessageRequested,
-	        MessageDb::instance(), &MessageDb::addMessage);
+	// addMessage requests are forwarded to the MessageDb, are deduplicated there and
+	// added if MessageDb::messageAdded is emitted
+	connect(this, &MessageModel::addMessageRequested, MessageDb::instance(), &MessageDb::addMessage);
+	connect(MessageDb::instance(), &MessageDb::messageAdded, this, &MessageModel::addMessage);
 
 	connect(this, &MessageModel::updateMessageRequested,
 	        this, &MessageModel::updateMessage);
-
 	connect(this, &MessageModel::handleChatStateRequested,
 		this, &MessageModel::handleChatState);
 

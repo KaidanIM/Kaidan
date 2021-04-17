@@ -94,6 +94,8 @@ signals:
 	 */
 	void pendingMessagesFetched(const QVector<Message> &messages);
 
+	void messageAdded(const Message &msg);
+
 public slots:
 	/**
 	 * @brief Fetches more entries from the database and emits messagesFetched() with

@@ -232,6 +232,9 @@ Message MessageDb::fetchLastMessage(const QString &user1, const QString &user2)
 
 void MessageDb::addMessage(const Message &msg)
 {
+	// deduplication can be made here in the future by not emitting the signal
+	emit messageAdded(msg);
+
 	QSqlDatabase db = QSqlDatabase::database(DB_CONNECTION);
 
 	QSqlRecord record = db.record(DB_TABLE_MESSAGES);

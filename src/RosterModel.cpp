@@ -33,6 +33,7 @@
 // Kaidan
 #include "AccountManager.h"
 #include "Kaidan.h"
+#include "MessageDb.h"
 #include "MessageModel.h"
 #include "RosterDb.h"
 
@@ -81,6 +82,8 @@ RosterModel::RosterModel(QObject *parent)
 		if (accountJid == MessageModel::instance()->currentAccountJid() && chatJid == MessageModel::instance()->currentChatJid())
 			emit Kaidan::instance()->openChatViewRequested();
 	});
+
+	connect(MessageDb::instance(), &MessageDb::messageAdded, this, &RosterModel::handleMessageAdded);
 }
 
 void RosterModel::setMessageModel(MessageModel *model)
@@ -91,9 +94,6 @@ void RosterModel::setMessageModel(MessageModel *model)
 			item.setUnreadMessages(0);
 		});
 	});
-
-	connect(model, &MessageModel::addMessageRequested,
-	        this, &RosterModel::handleMessageAdded);
 }
 
 bool RosterModel::isEmpty() const

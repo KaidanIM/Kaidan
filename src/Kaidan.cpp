@@ -49,7 +49,7 @@
 
 Kaidan *Kaidan::s_instance;
 
-Kaidan::Kaidan(QGuiApplication *app, bool enableLogging, QObject *parent)
+Kaidan::Kaidan(bool enableLogging, QObject *parent)
 	: QObject(parent)
 {
 	Q_ASSERT(!s_instance);
@@ -59,10 +59,8 @@ Kaidan::Kaidan(QGuiApplication *app, bool enableLogging, QObject *parent)
 	initializeCaches();
 	initializeClientWorker(enableLogging);
 
-	connect(app, &QGuiApplication::applicationStateChanged, this, &Kaidan::handleApplicationStateChanged);
-
 	// Log out of the server when the application window is closed.
-	connect(app, &QGuiApplication::lastWindowClosed, this, [this]() {
+	connect(qGuiApp, &QGuiApplication::lastWindowClosed, this, [this]() {
 		emit logOutRequested(true);
 	});
 }
@@ -97,14 +95,6 @@ void Kaidan::requestRegistrationForm()
 void Kaidan::logOut()
 {
 	emit logOutRequested();
-}
-
-void Kaidan::handleApplicationStateChanged(Qt::ApplicationState applicationState)
-{
-	if (applicationState == Qt::ApplicationActive)
-		emit applicationWindowActiveChanged(true);
-	else
-		emit applicationWindowActiveChanged(false);
 }
 
 void Kaidan::setConnectionState(Enums::ConnectionState connectionState)

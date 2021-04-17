@@ -35,7 +35,6 @@
 // Kaidan
 #include "ClientWorker.h"
 
-class QGuiApplication;
 class QSize;
 class Database;
 class DataFormModel;
@@ -82,10 +81,9 @@ public:
 	/**
 	 * Constructs Kaidan's main object and initializes all components / threads.
 	 *
-	 * @param app GUI application object for managing Kaidan's GUI
 	 * @param enableLogging true to enable logging, otherwise false
 	 */
-	Kaidan(QGuiApplication *app, bool enableLogging = true, QObject *parent = nullptr);
+	Kaidan(bool enableLogging = true, QObject *parent = nullptr);
 
 	~Kaidan();
 
@@ -213,15 +211,6 @@ public:
 
 signals:
 	/**
-	 * Emitted when the application window becomes active or inactive.
-	 *
-	 * The application window is active when it is in the foreground and focused.
-	 *
-	 * @param active true if the application window becomes active, false otherwise
-	 */
-	void applicationWindowActiveChanged(bool active);
-
-	/**
 	 * Emitted when a data form for registration is received from the server.
 	 *
 	 * @param dataFormModel received model for the registration data form
@@ -340,13 +329,6 @@ signals:
 	void deleteAccountFromClient();
 
 public slots:
-	/**
-	 * Handles a changed application state and emits whether the application window is active.
-	 *
-	 * @param applicationState state of the GUI application
-	 */
-	void handleApplicationStateChanged(Qt::ApplicationState applicationState);
-
 	/**
 	 * Set current connection state
 	 */

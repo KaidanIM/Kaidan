@@ -30,6 +30,7 @@
 
 #include "ClientWorker.h"
 // Qt
+#include <QGuiApplication>
 #include <QSettings>
 // QXmpp
 #include <QXmppUtils.h>
@@ -106,11 +107,17 @@ ClientWorker::ClientWorker(Caches *caches, bool enableLogging, QObject* parent)
 	connect(m_client, &QXmppClient::presenceReceived, caches->presCache, &PresenceCache::updatePresence);
 	connect(m_client, &QXmppClient::disconnected, caches->presCache, &PresenceCache::clear);
 
+	// Reduce the network traffic when the application window is not active.
 	// Inform the client worker when the application window becomes active or inactive.
-	connect(Kaidan::instance(), &Kaidan::applicationWindowActiveChanged, this, &ClientWorker::setIsApplicationWindowActive);
-
-	// Reduce the network traffic when the application window is inactive.
-	connect(Kaidan::instance(), &Kaidan::applicationWindowActiveChanged, m_client, &QXmppClient::setActive);
+	connect(qGuiApp, &QGuiApplication::applicationStateChanged, [=](Qt::ApplicationState state) {
+		if (state == Qt::ApplicationActive) {
+			m_client->setActive(true);
+			setIsApplicationWindowActive(true);
+		} else {
+			m_client->setActive(false);
+			setIsApplicationWindowActive(false);
+		}
+	});
 
 	// account deletion
 	connect(Kaidan::instance(), &Kaidan::deleteAccountFromClient, this, &ClientWorker::deleteAccountFromClient);

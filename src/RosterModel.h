@@ -76,7 +76,7 @@ public:
 	 * the local part of its JID if the found roster item has no name, or
 	 * an empty string if no roster item with the given JID could be found
 	 */
-	QString itemName(const QString &accountJid, const QString &jid) const;
+	Q_INVOKABLE QString itemName(const QString &accountJid, const QString &jid) const;
 
 signals:
 	void addItemRequested(const RosterItem &item);

@@ -80,6 +80,7 @@ signals:
 	 *  Emitted to fetch pending messages.
 	 */
 	void fetchPendingMessagesRequested(const QString &userJid);
+	void fetchLastMessageStampRequested();
 
 	void updateMessageRequested(const QString &id, const std::function<void (Message &)> &updateMsg);
 	void removeAllMessagesRequested();
@@ -93,6 +94,11 @@ signals:
 	 * Emitted when pending messages have been fetched
 	 */
 	void pendingMessagesFetched(const QVector<Message> &messages);
+
+	/**
+	 * Emitted when the latest message stamp was fetched
+	 */
+	void lastMessageStampFetched(const QDateTime &stamp);
 
 	void messageAdded(const Message &msg, MessageOrigin origin);
 
@@ -120,6 +126,11 @@ public slots:
 	 * Fetches the last message and returns it.
 	 */
 	Message fetchLastMessage(const QString &user1, const QString &user2);
+
+	/**
+	 * Fetch the latest message stamp
+	 */
+	void fetchLastMessageStamp();
 
 	/**
 	 * Adds a message to the database.

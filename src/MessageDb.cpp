@@ -56,6 +56,8 @@ MessageDb::MessageDb(QObject *parent)
 
 	connect(this, &MessageDb::fetchPendingMessagesRequested,
 	        this, &MessageDb::fetchPendingMessages);
+
+	connect(this, &MessageDb::fetchLastMessageStampRequested, this, &MessageDb::fetchLastMessageStamp);
 }
 
 MessageDb::~MessageDb()
@@ -239,6 +241,24 @@ Message MessageDb::fetchLastMessage(const QString &user1, const QString &user2)
 	if (!messages.isEmpty())
 		return messages.first();
 	return {};
+}
+
+void MessageDb::fetchLastMessageStamp()
+{
+	QSqlQuery query(QSqlDatabase::database(DB_CONNECTION));
+	query.setForwardOnly(true);
+
+	Utils::execQuery(query, "SELECT timestamp FROM Messages ORDER BY timestamp DESC LIMIT 1");
+
+	QDateTime stamp;
+	while (query.next()) {
+		stamp = QDateTime::fromString(
+			query.value(query.record().indexOf("timestamp")).toString(),
+			Qt::ISODate
+		);
+	}
+
+	emit lastMessageStampFetched(stamp);
 }
 
 void MessageDb::addMessage(const Message &msg, MessageOrigin origin)

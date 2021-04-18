@@ -102,7 +102,7 @@ void UploadManager::sendFile(const QString &jid, const QUrl &fileUrl, const QStr
 	emit Kaidan::instance()->transferCache()->addJobRequested(msgId, upload->bytesTotal());
 	m_messages.insert(upload->id(), msg);
 
-	emit MessageModel::instance()->addMessageRequested(*msg);
+	emit MessageModel::instance()->addMessageRequested(*msg, MessageOrigin::UserInput);
 
 	connect(upload, &QXmppHttpUpload::bytesSentChanged, this, [=] () {
 		emit Kaidan::instance()->transferCache()->setJobBytesSentRequested(

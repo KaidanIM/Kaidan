@@ -115,7 +115,7 @@ MessageModel::MessageModel(QObject *parent)
 	// addMessage requests are forwarded to the MessageDb, are deduplicated there and
 	// added if MessageDb::messageAdded is emitted
 	connect(this, &MessageModel::addMessageRequested, MessageDb::instance(), &MessageDb::addMessage);
-	connect(MessageDb::instance(), &MessageDb::messageAdded, this, &MessageModel::addMessage);
+	connect(MessageDb::instance(), &MessageDb::messageAdded, this, &MessageModel::handleMessage);
 
 	connect(this, &MessageModel::updateMessageRequested,
 	        this, &MessageModel::updateMessage);
@@ -370,27 +370,20 @@ void MessageModel::insertMessage(int idx, const Message &msg)
 	endInsertRows();
 }
 
-void MessageModel::addMessage(Message msg)
+void MessageModel::addMessage(const Message &msg)
 {
-	showMessageNotification(msg);
-
-	if (QXmppUtils::jidToBareJid(msg.from()) == m_currentChatJid ||
-			QXmppUtils::jidToBareJid(msg.to()) == m_currentChatJid) {
-		processMessage(msg);
-
-		// index where to add the new message
-		int i = 0;
-		for (const auto &message : qAsConst(m_messages)) {
-			if (msg.stamp() > message.stamp()) {
-				insertMessage(i, msg);
-				return;
-			}
-			i++;
+	// index where to add the new message
+	int i = 0;
+	for (const auto &message : qAsConst(m_messages)) {
+		if (msg.stamp() > message.stamp()) {
+			insertMessage(i, msg);
+			return;
 		}
-
-		// add message to the end of the list
-		insertMessage(i, msg);
+		i++;
 	}
+
+	// add message to the end of the list
+	insertMessage(i, msg);
 }
 
 void MessageModel::updateMessage(const QString &id,
@@ -423,13 +416,24 @@ void MessageModel::updateMessage(const QString &id,
 				addMessage(msg);
 			}
 
-			showMessageNotification(msg);
+			showMessageNotification(msg, MessageOrigin::Stream);
 
 			break;
 		}
 	}
 
 	emit MessageDb::instance()->updateMessageRequested(id, updateMsg);
+}
+
+void MessageModel::handleMessage(Message msg, MessageOrigin origin)
+{
+	processMessage(msg);
+
+	showMessageNotification(msg, origin);
+
+	if (msg.from() == m_currentChatJid || msg.to() == m_currentChatJid) {
+		addMessage(std::move(msg));
+	}
 }
 
 int MessageModel::searchForMessageFromNewToOld(const QString &searchString, const int startIndex) const
@@ -567,7 +571,7 @@ void MessageModel::handleChatState(const QString &bareJid, QXmppMessage::State s
 	}
 }
 
-void MessageModel::showMessageNotification(const Message &message) const
+void MessageModel::showMessageNotification(const Message &message, MessageOrigin origin) const
 {
 	// Send a notification in the following cases:
 	// * The message was not sent by the user from another resource and
@@ -575,6 +579,14 @@ void MessageModel::showMessageNotification(const Message &message) const
 	// * Notifications from the chat partner are not muted.
 	// * The corresponding chat is not opened while the application window
 	//   is active.
+
+	switch (origin) {
+	case MessageOrigin::UserInput:
+		// no notifications
+		return;
+	case MessageOrigin::Stream:
+		break;
+	}
 
 	if (!message.sentByMe()) {
 		const auto accountJid = AccountManager::instance()->jid();

@@ -94,7 +94,7 @@ signals:
 	 */
 	void pendingMessagesFetched(const QVector<Message> &messages);
 
-	void messageAdded(const Message &msg);
+	void messageAdded(const Message &msg, MessageOrigin origin);
 
 public slots:
 	/**
@@ -124,7 +124,7 @@ public slots:
 	/**
 	 * Adds a message to the database.
 	 */
-	void addMessage(const Message &msg);
+	void addMessage(const Message &msg, MessageOrigin origin);
 
 	/**
 	 * Removes all messages of an account or an account's chat.

@@ -48,7 +48,9 @@ MessageHandler::MessageHandler(ClientWorker *clientWorker, QXmppClient *client, 
 	  m_clientWorker(clientWorker),
 	  m_client(client)
 {
-	connect(client, &QXmppClient::messageReceived, this, &MessageHandler::handleMessage);
+	connect(client, &QXmppClient::messageReceived, this, [=](const QXmppMessage &msg) {
+		handleMessage(msg, MessageOrigin::Stream);
+	});
 	connect(this, &MessageHandler::sendMessageRequested, this, &MessageHandler::sendMessage);
 	connect(MessageModel::instance(), &MessageModel::sendCorrectedMessageRequested,
 	        this, &MessageHandler::sendCorrectedMessage);
@@ -91,7 +93,7 @@ MessageHandler::~MessageHandler()
 	delete m_carbonManager;
 }
 
-void MessageHandler::handleMessage(const QXmppMessage &msg)
+void MessageHandler::handleMessage(const QXmppMessage &msg, MessageOrigin origin)
 {
 	if (msg.type() == QXmppMessage::Error) {
 		emit MessageModel::instance()->updateMessageRequested(msg.id(), [errorText { msg.error().text() }](Message &msg) {
@@ -141,7 +143,7 @@ void MessageHandler::handleMessage(const QXmppMessage &msg)
 	// save the message to the database
 	// in case of message correction, replace old message
 	if (msg.replaceId().isEmpty()) {
-		emit MessageModel::instance()->addMessageRequested(message);
+		emit MessageModel::instance()->addMessageRequested(message, origin);
 	} else {
 		message.setIsEdited(true);
 		message.setId(QString());
@@ -178,7 +180,7 @@ void MessageHandler::sendMessage(const QString& toJid,
 			break;
 	}
 
-	emit MessageModel::instance()->addMessageRequested(msg);
+	emit MessageModel::instance()->addMessageRequested(msg, MessageOrigin::UserInput);
 	sendPendingMessage(msg);
 }
 

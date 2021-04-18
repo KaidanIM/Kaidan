@@ -238,10 +238,10 @@ Message MessageDb::fetchLastMessage(const QString &user1, const QString &user2)
 	return {};
 }
 
-void MessageDb::addMessage(const Message &msg)
+void MessageDb::addMessage(const Message &msg, MessageOrigin origin)
 {
 	// deduplication can be made here in the future by not emitting the signal
-	emit messageAdded(msg);
+	emit messageAdded(msg, origin);
 
 	QSqlDatabase db = QSqlDatabase::database(DB_CONNECTION);
 

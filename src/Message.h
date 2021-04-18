@@ -139,3 +139,10 @@ private:
 };
 
 Q_DECLARE_METATYPE(Message)
+
+enum class MessageOrigin : quint8 {
+	Stream,
+	UserInput,
+};
+
+Q_DECLARE_METATYPE(MessageOrigin);

@@ -250,7 +250,7 @@ void RosterModel::removeItems(const QString &accountJid, const QString &jid)
 	}
 }
 
-void RosterModel::handleMessageAdded(const Message &message)
+void RosterModel::handleMessageAdded(const Message &message, MessageOrigin origin)
 {
 	const auto contactJid = message.sentByMe() ? message.to() : message.from();
 	auto itr = std::find_if(m_items.begin(), m_items.end(), [&contactJid](const RosterItem &item) {

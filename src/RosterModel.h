@@ -41,6 +41,7 @@
 class Kaidan;
 class MessageModel;
 class Message;
+enum class MessageOrigin : quint8;
 
 class RosterModel : public QAbstractListModel
 {
@@ -115,7 +116,7 @@ private slots:
 	 */
 	void removeItems(const QString &accountJid, const QString &jid = {});
 
-	void handleMessageAdded(const Message &message);
+	void handleMessageAdded(const Message &message, MessageOrigin origin);
 
 private:
 	/**

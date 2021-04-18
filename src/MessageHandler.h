@@ -59,7 +59,7 @@ public slots:
 	/**
 	 * Handles incoming messages from the server.
 	 */
-	void handleMessage(const QXmppMessage &msg);
+	void handleMessage(const QXmppMessage &msg, MessageOrigin origin);
 
 	/**
 	 * Send a text message to any JID

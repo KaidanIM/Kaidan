@@ -172,7 +172,7 @@ signals:
 	void currentAccountJidChanged(const QString &accountJid);
 	void currentChatJidChanged(const QString &currentChatJid);
 
-	void addMessageRequested(const Message &msg);
+	void addMessageRequested(const Message &message, MessageOrigin origin);
 	void updateMessageRequested(const QString &id,
 	                            const std::function<void (Message &)> &updateMsg);
 	void pendingMessagesFetched(const QVector<Message> &messages);
@@ -192,10 +192,11 @@ signals:
 private slots:
 	void handleMessagesFetched(const QVector<Message> &m_messages);
 
-	void addMessage(Message msg);
+	void addMessage(const Message &msg);
 	void updateMessage(const QString &id,
 	                   const std::function<void (Message &)> &updateMsg);
 
+	void handleMessage(Message msg, MessageOrigin origin);
 	void handleChatState(const QString &bareJid, QXmppMessage::State state);
 
 private:
@@ -222,7 +223,7 @@ private:
 	 *
 	 * @param message message for which a notification might be shown
 	 */
-	void showMessageNotification(const Message &message) const;
+	void showMessageNotification(const Message &message, MessageOrigin origin) const;
 
 	QVector<Message> m_messages;
 	QString m_currentAccountJid;

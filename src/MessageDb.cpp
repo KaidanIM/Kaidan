@@ -262,7 +262,7 @@ void MessageDb::addMessage(const Message &msg)
 	));
 }
 
-void MessageDb::removeMessages(const QString &accountJid, const QString &chatJid)
+void MessageDb::removeMessages(const QString &, const QString &)
 {
 	QSqlQuery query(QSqlDatabase::database(DB_CONNECTION));
 	Utils::execQuery(query, "DELETE FROM " DB_TABLE_MESSAGES);

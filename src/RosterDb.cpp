@@ -210,7 +210,7 @@ void RosterDb::replaceItems(const QHash<QString, RosterItem> &items)
 	m_db->commit();
 }
 
-void RosterDb::removeItems(const QString &accountJid, const QString &jid)
+void RosterDb::removeItems(const QString &, const QString &)
 {
 	QSqlQuery query(QSqlDatabase::database(DB_CONNECTION));
 	Utils::execQuery(query, "DELETE FROM Roster");

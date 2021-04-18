@@ -149,7 +149,7 @@ std::optional<const RosterItem> RosterModel::findItem(const QString &jid) const
 	return std::nullopt;
 }
 
-QString RosterModel::itemName(const QString &accountJid, const QString &jid) const
+QString RosterModel::itemName(const QString &, const QString &jid) const
 {
 	if (auto item = findItem(jid))
 		return determineItemName(jid, item->name());

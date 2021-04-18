@@ -151,6 +151,12 @@ public slots:
 	void updateMessageRecord(const QString &id,
 	                         const QSqlRecord &updateRecord);
 
+private slots:
+	/**
+	 * Checks whether a message already exists in the database
+	 */
+	bool checkMessageExists(const Message &message);
+
 private:
 	static MessageDb *s_instance;
 };

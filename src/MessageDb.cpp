@@ -36,9 +36,12 @@
 #include <QSqlField>
 #include <QSqlQuery>
 #include <QSqlRecord>
+#include <QStringBuilder>
 // Kaidan
 #include "Globals.h"
 #include "Utils.h"
+
+#define CHECK_MESSAGE_EXISTS_DEPTH_LIMIT "20"
 
 MessageDb *MessageDb::s_instance = nullptr;
 
@@ -240,7 +243,20 @@ Message MessageDb::fetchLastMessage(const QString &user1, const QString &user2)
 
 void MessageDb::addMessage(const Message &msg, MessageOrigin origin)
 {
-	// deduplication can be made here in the future by not emitting the signal
+	// deduplication
+	switch (origin) {
+	case MessageOrigin::Stream:
+		if (checkMessageExists(msg)) {
+			// message deduplicated (messageAdded() signal is not emitted)
+			return;
+		}
+		break;
+	case MessageOrigin::UserInput:
+		// no deduplication required
+		break;
+	}
+
+	// to speed up the whole process emit signal first and do the actual insert after that
 	emit messageAdded(msg, origin);
 
 	QSqlDatabase db = QSqlDatabase::database(DB_CONNECTION);
@@ -337,6 +353,54 @@ void MessageDb::updateMessageRecord(const QString &id,
 	        ) +
 	        Utils::simpleWhereStatement(db.driver(), "id", id)
 	);
+}
+
+bool MessageDb::checkMessageExists(const Message &message)
+{
+	QMap<QString, QVariant> bindValues = {
+		{ ":to", message.to() },
+		{ ":from", message.from() },
+	};
+
+	// Check which IDs to check
+	QStringList idChecks;
+	if (!message.stanzaId().isEmpty()) {
+		idChecks << QStringLiteral("stanzaId = :stanzaId");
+		bindValues.insert(QStringLiteral(":stanzaId"), message.stanzaId());
+	}
+	// only check origin IDs if the message was possibly sent by us (since
+	// Kaidan uses random suffixes in the resource, we can't check the resource)
+	if (message.sentByMe() && !message.originId().isEmpty()) {
+		idChecks << QStringLiteral("originId = :originId");
+		bindValues.insert(QStringLiteral(":originId"), message.stanzaId());
+	}
+	if (!message.id().isEmpty()) {
+		idChecks << QStringLiteral("id = :id");
+		bindValues.insert(QStringLiteral(":id"), message.stanzaId());
+	}
+
+	if (idChecks.isEmpty()) {
+		// if we have no checks because of missing IDs, report that the message
+		// does not exist
+		return false;
+	}
+
+	const QString idConditionSql = idChecks.join(u" OR ");
+	const QString querySql =
+		QStringLiteral("SELECT COUNT(*) FROM " DB_TABLE_MESSAGES " "
+			       "WHERE (author = :from AND recipient = :to AND (") %
+		idConditionSql %
+		QStringLiteral(")) ORDER BY timestamp DESC LIMIT " CHECK_MESSAGE_EXISTS_DEPTH_LIMIT);
+
+	QSqlQuery query(QSqlDatabase::database(DB_CONNECTION));
+	query.setForwardOnly(true);
+	Utils::execQuery(query, querySql, bindValues);
+
+	int count = 0;
+	if (query.next()) {
+		count = query.value(0).toInt();
+	}
+	return count > 0;
 }
 
 void MessageDb::fetchPendingMessages(const QString& userJid)

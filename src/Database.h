@@ -63,6 +63,13 @@ public:
 	 */
 	void commit();
 
+signals:
+	/// Emit, to begin a transaction if none has been started already.
+	void transactionRequested();
+
+	/// Emit, to commit the transaction if every transaction has been finished.
+	void commitRequested();
+
 private:
 	/**
 	 * @return true if the database has to be converted using @c convertDatabase()

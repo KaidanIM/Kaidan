@@ -74,6 +74,8 @@
 Database::Database(QObject *parent)
 	: QObject(parent)
 {
+	connect(this, &Database::transactionRequested, this, &Database::transaction);
+	connect(this, &Database::commitRequested, this, &Database::commit);
 }
 
 Database::~Database()

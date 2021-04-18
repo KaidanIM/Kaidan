@@ -180,6 +180,8 @@ public:
 		return m_caches->settings;
 	}
 
+	Database *database() const;
+
 	/**
 	 * Adds XMPP URI to open as soon as possible
 	 */

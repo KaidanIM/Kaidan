@@ -239,3 +239,8 @@ Kaidan *Kaidan::instance()
 {
 	return s_instance;
 }
+
+Database *Kaidan::database() const
+{
+	return m_database;
+}

@@ -288,7 +288,6 @@ private slots:
 	 */
 	void onConnectionError(QXmppClient::Error error);
 
-
 private:
 	/**
 	 * Starts a pending (enqueued) task (e.g. a password change) if the variable (e.g. a

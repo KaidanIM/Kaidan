@@ -86,6 +86,8 @@ void MessageDb::parseMessagesFromQuery(QSqlQuery &query, QVector<Message> &msgs)
 	int idxIsSpoiler = rec.indexOf("isSpoiler");
 	int idxErrorText = rec.indexOf("errorText");
 	int idxReplaceId = rec.indexOf("replaceId");
+	int idxOriginId = rec.indexOf("originId");
+	int idxStanza = rec.indexOf("stanzaId");
 
 	while (query.next()) {
 		Message msg;
@@ -111,6 +113,8 @@ void MessageDb::parseMessagesFromQuery(QSqlQuery &query, QVector<Message> &msgs)
 		msg.setErrorText(query.value(idxErrorText).toString());
 		msg.setIsSpoiler(query.value(idxIsSpoiler).toBool());
 		msg.setReplaceId(query.value(idxReplaceId).toString());
+		msg.setOriginId(query.value(idxOriginId).toString());
+		msg.setStanzaId(query.value(idxStanza).toString());
 		msg.setReceiptRequested(true);	//this is useful with resending pending messages
 		msgs << msg;
 	}
@@ -171,6 +175,10 @@ QSqlRecord MessageDb::createUpdateRecord(const Message &oldMsg, const Message &n
 		rec.append(Utils::createSqlField("isSpoiler", newMsg.isSpoiler()));
 	if (oldMsg.replaceId() != newMsg.replaceId())
 		rec.append(Utils::createSqlField("replaceId", newMsg.replaceId()));
+	if (oldMsg.originId() != newMsg.originId())
+		rec.append(Utils::createSqlField("originId", newMsg.originId()));
+	if (oldMsg.stanzaId() != newMsg.stanzaId())
+		rec.append(Utils::createSqlField("stanzaId", newMsg.stanzaId()));
 
 	return rec;
 }
@@ -255,6 +263,8 @@ void MessageDb::addMessage(const Message &msg)
 	record.setValue("mediaLastModified", msg.mediaLastModified().toMSecsSinceEpoch());
 	record.setValue("errorText", msg.errorText());
 	record.setValue("replaceId", msg.replaceId());
+	record.setValue("originId", msg.originId());
+	record.setValue("stanzaId", msg.stanzaId());
 
 	QSqlQuery query(db);
 	Utils::execQuery(query, db.driver()->sqlStatement(

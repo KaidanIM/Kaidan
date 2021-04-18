@@ -121,6 +121,8 @@ void MessageHandler::handleMessage(const QXmppMessage &msg)
 	message.setIsSpoiler(msg.isSpoiler());
 	message.setSpoilerHint(msg.spoilerHint());
 	message.setOutOfBandUrl(msg.outOfBandUrl());
+	message.setStanzaId(msg.stanzaId());
+	message.setOriginId(msg.originId());
 
 	// check if message contains a link and also check out of band url
 	if (!parseMediaUri(message, msg.outOfBandUrl(), false)) {
@@ -160,6 +162,7 @@ void MessageHandler::sendMessage(const QString& toJid,
 	msg.setTo(toJid);
 	msg.setBody(body);
 	msg.setId(QXmppUtils::generateStanzaHash());
+	msg.setOriginId(msg.id());
 	msg.setReceiptRequested(true);
 	msg.setSentByMe(true);
 	msg.setMediaType(MessageType::MessageText); // text message without media

@@ -52,8 +52,8 @@
 	}
 
 // Both need to be updated on version bump:
-#define DATABASE_LATEST_VERSION 12
-#define DATABASE_CONVERT_TO_LATEST_VERSION() DATABASE_CONVERT_TO_VERSION(12)
+#define DATABASE_LATEST_VERSION 13
+#define DATABASE_CONVERT_TO_LATEST_VERSION() DATABASE_CONVERT_TO_VERSION(13)
 
 #define SQL_BOOL "BOOL"
 #define SQL_INTEGER "INTEGER"
@@ -285,6 +285,8 @@ void Database::createMessagesTable()
 			SQL_ATTRIBUTE(isSpoiler, SQL_BOOL)
 			SQL_ATTRIBUTE(errorText, SQL_TEXT)
 			SQL_ATTRIBUTE(replaceId, SQL_TEXT)
+			SQL_ATTRIBUTE(originId, SQL_TEXT)
+			SQL_ATTRIBUTE(stanzaId, SQL_TEXT)
 			"FOREIGN KEY(author) REFERENCES " DB_TABLE_ROSTER " (jid),"
 			"FOREIGN KEY(recipient) REFERENCES " DB_TABLE_ROSTER " (jid)"
 		)
@@ -417,4 +419,13 @@ void Database::convertDatabaseToV12()
 	QSqlQuery query(m_database);
 	Utils::execQuery(query, "ALTER TABLE Messages ADD replaceId " SQL_TEXT);
 	m_version = 12;
+}
+
+void Database::convertDatabaseToV13()
+{
+	DATABASE_CONVERT_TO_VERSION(12);
+	QSqlQuery query(m_database);
+	Utils::execQuery(query, "ALTER TABLE Messages ADD stanzaId " SQL_TEXT);
+	Utils::execQuery(query, "ALTER TABLE Messages ADD originId " SQL_TEXT);
+	m_version = 13;
 }

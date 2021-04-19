@@ -5,6 +5,7 @@
   <name xml:lang="ca">Kaidan</name>
   <name xml:lang="ca-valencia">Kaidan</name>
   <name xml:lang="cs">Kaidan</name>
+  <name xml:lang="de">Kaidan</name>
   <name xml:lang="el">Kaidan</name>
   <name xml:lang="en-GB">Kaidan</name>
   <name xml:lang="es">Kaidan</name>
@@ -23,6 +24,7 @@
   <summary>Kaidan, a simple and user-friendly Jabber/XMPP client for every device and platform</summary>
   <summary xml:lang="ca">El Kaidan, un client de Jabber/XMPP senzill i fàcil d'emprar per a cada dispositiu i plataforma</summary>
   <summary xml:lang="ca-valencia">El Kaidan, un client de Jabber/XMPP senzill i fàcil d'emprar per a cada dispositiu i plataforma</summary>
+  <summary xml:lang="de">Kaidan, ein einfacher und benutzerfreundlicher Jabber-/XMPP-Client für alle Geräte und Plattformen</summary>
   <summary xml:lang="el">Kaidan, μία απλή και φιλική στο χρήστη εφαρμογή Jabber/XMPP για κάθε συσκευή και πλατφόρμα</summary>
   <summary xml:lang="en-GB">Kaidan, a simple and user-friendly Jabber/XMPP client for every device and platform</summary>
   <summary xml:lang="es">Kaidan, un sencillo y amigable cliente de Jabber/XMPP para cualquier dispositivo y plataforma</summary>
@@ -42,6 +44,7 @@
   <developer_name>Kaidan Developers &amp; Contributors</developer_name>
   <developer_name xml:lang="ca">Els desenvolupadors i col·laboradors del Kaidan</developer_name>
   <developer_name xml:lang="ca-valencia">Els desenvolupadors i col·laboradors del Kaidan</developer_name>
+  <developer_name xml:lang="de">Kaidan-Entwickler &amp; -Mitwirkende</developer_name>
   <developer_name xml:lang="el">Οι προγραμματιστές &amp; οι συνεισφέροντες στο Kaidan</developer_name>
   <developer_name xml:lang="en-GB">Kaidan Developers &amp; Contributors</developer_name>
   <developer_name xml:lang="es">Desarrolladores y colaboradores de Kaidan</developer_name>

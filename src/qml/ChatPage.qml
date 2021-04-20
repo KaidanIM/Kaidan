@@ -533,8 +533,15 @@ ChatPageBase {
 		}
 
 		footer: Controls.BusyIndicator {
-			visible: MessageModel.mamLoading
+			visible: opacity !== 0.0
 			anchors.horizontalCenter: parent.horizontalCenter
+			opacity: MessageModel.mamLoading ? 1.0 : 0.0
+
+			Behavior on opacity {
+				NumberAnimation {
+					duration: Kirigami.Units.shortDuration
+				}
+			}
 		}
 	}
 

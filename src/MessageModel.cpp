@@ -257,7 +257,7 @@ void MessageModel::fetchMore(const QModelIndex &)
 		};
 
 		emit Kaidan::instance()->client()->messageHandler()->retrieveBacklogMessagesRequested(m_currentChatJid, lastStamp());
-		m_mamLoading = true;
+		setMamLoading(true);
 	}
 	// already fetched everything from DB and MAM
 }
@@ -373,7 +373,7 @@ void MessageModel::handleMamBacklogRetrieved(const QString &accountJid, const QS
 		// Solution: Cache the last stamp from the query and request messages older than
 		// that
 		m_mamBacklogLastStamp = lastStamp;
-		m_mamLoading = false;
+		setMamLoading(false);
 		if (complete) {
 			m_fetchedAllFromMam = true;
 		}
@@ -396,8 +396,8 @@ void MessageModel::removeAllMessages()
 
 	m_fetchedAllFromDb = false;
 	m_fetchedAllFromMam = false;
-	m_mamLoading = false;
 	m_mamBacklogLastStamp = QDateTime();
+	setMamLoading(false);
 }
 
 void MessageModel::insertMessage(int idx, const Message &msg)
@@ -625,7 +625,6 @@ void MessageModel::showMessageNotification(const Message &message, MessageOrigin
 		return;
 	case MessageOrigin::Stream:
 	case MessageOrigin::MamCatchUp:
-		showMessageNotification(msg);
 		break;
 	}
 
@@ -642,5 +641,18 @@ void MessageModel::showMessageNotification(const Message &message, MessageOrigin
 			const auto chatName = RosterModel::instance()->itemName(accountJid, chatJid);
 			Notifications::sendMessageNotification(accountJid, chatJid, chatName, message.body());
 		}
+	}
+}
+
+bool MessageModel::mamLoading() const
+{
+	return m_mamLoading;
+}
+
+void MessageModel::setMamLoading(bool mamLoading)
+{
+	if (m_mamLoading != mamLoading) {
+		m_mamLoading = mamLoading;
+		emit mamLoadingChanged();
 	}
 }

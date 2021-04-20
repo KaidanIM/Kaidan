@@ -65,6 +65,7 @@ class MessageModel : public QAbstractListModel
 	Q_PROPERTY(QString currentAccountJid READ currentAccountJid NOTIFY currentAccountJidChanged)
 	Q_PROPERTY(QString currentChatJid READ currentChatJid NOTIFY currentChatJidChanged)
 	Q_PROPERTY(QXmppMessage::State chatState READ chatState NOTIFY chatStateChanged)
+	Q_PROPERTY(bool mamLoading READ mamLoading NOTIFY mamLoadingChanged)
 
 public:
 	// Basically copy from QXmpp, but we need to expose this to QML
@@ -168,9 +169,13 @@ public:
 	void sendChatState(QXmppMessage::State state);
 	Q_INVOKABLE void sendChatState(ChatState::State state);
 
+	bool mamLoading() const;
+	void setMamLoading(bool mamLoading);
+
 signals:
 	void currentAccountJidChanged(const QString &accountJid);
 	void currentChatJidChanged(const QString &currentChatJid);
+	void mamLoadingChanged();
 
 	void addMessageRequested(const Message &message, MessageOrigin origin);
 	void updateMessageRequested(const QString &id,

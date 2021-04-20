@@ -434,11 +434,6 @@ ChatPageBase {
 		verticalLayoutDirection: ListView.BottomToTop
 		spacing: Kirigami.Units.smallSpacing * 1.5
 
-		// placeholder
-		footer: Item {
-			height: Kirigami.Units.smallSpacing * 4
-		}
-
 		// Highlighting of the message containing a searched string.
 		highlight: Component {
 			id: highlightBar
@@ -535,6 +530,11 @@ ChatPageBase {
 				text: Utils.chatStateDescription(root.chatName, MessageModel.chatState)
 				elide: Qt.ElideMiddle
 			}
+		}
+
+		footer: Controls.BusyIndicator {
+			visible: MessageModel.mamLoading
+			anchors.horizontalCenter: parent.horizontalCenter
 		}
 	}
 

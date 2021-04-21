@@ -63,12 +63,7 @@ ChatPageBase {
 		}
 	}
 
-	property string chatName: {
-		var currentChatJid = MessageModel.currentChatJid
-		var chatDisplayName = RosterModel.itemName(AccountManager.jid, currentChatJid)
-		return chatDisplayName ? chatDisplayName : currentChatJid
-	}
-
+	property string chatName: RosterModel.itemName(MessageModel.currentAccountJid, MessageModel.currentChatJid)
 	property alias mediaDrawer: mediaDrawer
 	property bool isWritingSpoiler
 	property string messageToCorrect

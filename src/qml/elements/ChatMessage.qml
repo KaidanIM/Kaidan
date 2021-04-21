@@ -105,7 +105,7 @@ RowLayout {
 			shadow.color: Qt.darker(color, 1.2)
 			shadow.size: 4
 			radius: roundedCornersRadius
-			color: isOwn ? rightMessageBubbleColor : leftMessageBubbleColor
+			color: isOwn ? rightMessageBubbleColor : primaryBackgroundColor
 
 			MouseArea {
 				anchors.fill: parent

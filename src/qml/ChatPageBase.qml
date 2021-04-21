@@ -39,12 +39,6 @@ import im.kaidan.kaidan 1.0
  * This is the base for a chat page.
  */
 Kirigami.ScrollablePage {
-	// color of the message bubbles on the left side
-	readonly property color leftMessageBubbleColor: {
-		Kirigami.Theme.colorSet = Kirigami.Theme.View
-		return Kirigami.Theme.backgroundColor
-	}
-
 	// color of the message bubbles on the right side
 	readonly property color rightMessageBubbleColor: {
 		Kirigami.Theme.colorSet = Kirigami.Theme.View
@@ -54,10 +48,7 @@ Kirigami.ScrollablePage {
 
 	// background of the chat page
 	background: Rectangle {
-		color: {
-			Kirigami.Theme.colorSet = Kirigami.Theme.Window
-			return Kirigami.Theme.backgroundColor
-		}
+		color: secondaryBackgroundColor
 
 		Image {
 			source: Utils.getResourcePath("images/chat-page-background.svg")

@@ -45,6 +45,16 @@ Kirigami.ApplicationWindow {
 	minimumHeight: 300
 	minimumWidth: 280
 
+	readonly property color primaryBackgroundColor: {
+		Kirigami.Theme.colorSet = Kirigami.Theme.View
+		return Kirigami.Theme.backgroundColor
+	}
+
+	readonly property color secondaryBackgroundColor: {
+		Kirigami.Theme.colorSet = Kirigami.Theme.Window
+		return Kirigami.Theme.backgroundColor
+	}
+
 	// radius for using rounded corners
 	readonly property int roundedCornersRadius: Kirigami.Units.smallSpacing * 1.5
 

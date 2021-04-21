@@ -47,7 +47,7 @@ ChatPageBase {
 			shadow.color: Qt.darker(color, 1.2)
 			shadow.size: 4
 			radius: roundedCornersRadius
-			color: leftMessageBubbleColor
+			color: primaryBackgroundColor
 
 			Controls.Label {
 				id: label

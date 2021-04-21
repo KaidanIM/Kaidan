@@ -406,7 +406,7 @@ RegistrationPage {
 		addLoadingView(swipeView.currentIndex + 1)
 		jumpToNextView()
 
-		Kaidan.client.vCardManager.changeDisplayNameRequested(displayName)
+		Kaidan.client.vCardManager.changeNicknameRequested(displayName)
 		sendRegistrationForm()
 	}
 }

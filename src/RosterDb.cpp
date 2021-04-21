@@ -177,12 +177,8 @@ void RosterDb::replaceItems(const QHash<QString, RosterItem> &items)
 
 	m_db->transaction();
 
-#if QT_VERSION >= QT_VERSION_CHECK(5, 14, 0)
 	QList<QString> keys = items.keys();
 	QSet<QString> newJids = QSet<QString>(keys.begin(), keys.end());
-#else
-	QSet<QString> newJids = items.keys().toSet();
-#endif
 
 	for (const auto &oldItem : qAsConst(currentItems)) {
 		// We will remove the already existing JIDs, so we get a set of JIDs that

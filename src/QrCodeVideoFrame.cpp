@@ -207,11 +207,9 @@ QImage *QrCodeVideoFrame::toGrayscaleImage()
 	case QVideoFrame::Format_BGRA32_Premultiplied:
 		image = rgbDataToGrayscale(data, captureRect, 3, 2, 1, 0, true);
 		break;
-#if QT_VERSION >= QT_VERSION_CHECK(5, 13, 0)
 	case QVideoFrame::Format_ABGR32:
 		image = rgbDataToGrayscale(data, captureRect, 0, 3, 2, 1);
 		break;
-#endif
 	case QVideoFrame::Format_BGR32:
 		image = rgbDataToGrayscale(data, captureRect, 3, 2, 1, 0);
 		break;

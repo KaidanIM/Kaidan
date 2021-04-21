@@ -78,7 +78,6 @@ QString Presence::availabilityToText(Availability type)
 
 QColor Presence::availabilityToColor(Availability type)
 {
-#if QT_VERSION >= QT_VERSION_CHECK(5, 14, 0)
 	switch (type) {
 	case Online:
 		return QColorConstants::Svg::green;
@@ -93,22 +92,6 @@ QColor Presence::availabilityToColor(Availability type)
 	case Offline:
 		return QColorConstants::Svg::silver;
 	}
-#else
-	switch (type) {
-	case Online:
-		return "green";
-	case Chat:
-		return "darkgreen";
-	case Away:
-		return "orange";
-	case DND:
-		return QColor::fromRgb(218, 68, 83);
-	case XA:
-		return "orange";
-	case Offline:
-		return "silver";
-	}
-#endif
 	Q_UNREACHABLE();
 	return {};
 }

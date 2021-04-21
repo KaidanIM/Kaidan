@@ -77,7 +77,6 @@ Kirigami.SwipeListItem {
 			Avatar {
 				anchors.fill: parent
 				jid: root.jid
-				avatarUrl: Kaidan.avatarStorage.getAvatarUrl(jid)
 				name: root.name
 				width: height
 				isBorderVisible: root.hovered || root.isSelected

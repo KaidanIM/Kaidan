@@ -65,7 +65,6 @@ RowLayout {
 	property bool isSpoiler
 	property string spoilerHint
 	property bool isShowingSpoiler: false
-	property string avatarUrl: Kaidan.avatarStorage.getAvatarUrl(senderJid)
 	property string errorText: ""
 	property alias bodyLabel: bodyLabel
 	property string deliveryStateName
@@ -88,7 +87,6 @@ RowLayout {
 		id: avatar
 		visible: !isOwn
 		jid: root.senderJid
-		avatarUrl: root.avatarUrl
 		name: root.senderName
 		Layout.alignment: Qt.AlignHCenter | Qt.AlignTop
 		Layout.preferredHeight: Kirigami.Units.gridUnit * 2.2

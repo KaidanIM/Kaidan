@@ -31,9 +31,10 @@
 import QtQuick 2.14
 import org.kde.kirigami 2.12 as Kirigami
 
+import im.kaidan.kaidan 1.0
+
 Item {
 	property string jid
-	property string avatarUrl
 	property string name
 	property double radius: width * 0.5
 	property alias isBorderVisible: border.visible
@@ -54,8 +55,9 @@ Item {
 	}
 
 	RoundedImage {
-		visible: avatarUrl
-		source: avatarUrl
+		id: imageAvatar
+		visible: source != ""
+		source: parent.jid ? Kaidan.avatarStorage.getAvatarUrl(parent.jid) : ""
 		fillMode: Image.PreserveAspectFit
 		mipmap: true
 		height: width
@@ -64,7 +66,7 @@ Item {
 	}
 
 	TextAvatar {
-		visible: !avatarUrl
+		visible: !imageAvatar.visible
 		jid: parent.jid
 		name: parent.name
 		radius: parent.radius

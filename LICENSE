@@ -7,16 +7,17 @@ Files: src/*
        misc/*
 Copyright: 2016-2021, Linus Jahn <lnj@kaidan.im>
            2016-2021, Jonah Brüchert <jbb@kaidan.im>
-           2018-2020, Nicolas Fella <nicolas.fella@gmx.de>
+           2018-2021, Nicolas Fella <nicolas.fella@gmx.de>
            2019-2021, Melvin Keskin <melvo@olomono.de>
            2017-2019, Ilya Bizyaev <bizyaev@zoho.com>
-           2019-2020, Volker Krause <vkrause@kde.org>
+           2019-2021, Volker Krause <vkrause@kde.org>
            2019-2020, Filipe Azevedo <pasnox@gmail.com>
            2019-2020, Yury Gubich <blue@macaw.me>
            2018, Allan Nordhøy <epost@anotheragency.no>
            2019, Robert Maerkisch <zatroxde@protonmail.ch>
            2020, Andrea Scarpino <scarpino@kde.org>
            2019, caca hueto <cacahueto@olomono.de>
+           2021, Carl Schwan <carl@carlschwan.eu>
            2021, Aurélien Couderc <coucouf@coucouf.fr>
            2020, Emmanuel Gil Peyrot <linkmauve@linkmauve.fr>
            2019, Mauricio Torres Mejía <mauro@olomono.de>
@@ -54,6 +55,10 @@ Copyright: 2017-2021, Linus Jahn <lnj@kaidan.im>
            2017, Ilya Bizyaev <bizyaev@zoho.com>
            2017, Robert Maerkisch <zatroxde@protonmail.ch>
            2019, Joan CiberSheep <cibersheep@gmail.com>
+           2021, Peter G <gitlab@nephros.org>
+           2021, t4llkr <anaterem2015@yandex.ru>
+           2021, Rainer Bielefeld <rainerbielefeldng@bielefeldundbuss.de>
+           2021, Andrés Barrantes Silman <andresbs2000@gmail.com>
            2021, Aman Alam <alam.yellow@gmail.com>
            2021, Coucouf <coucouf@coucouf.fr>
            2020, Prachi Joshi <josprachi@yahoo.com>

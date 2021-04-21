@@ -33,6 +33,7 @@
 // std
 #include <optional>
 // Qt
+#include <QHash>
 #include <QMutex>
 #include <QObject>
 // QXmpp

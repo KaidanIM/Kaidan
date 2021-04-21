@@ -530,6 +530,8 @@ ChatPageBase {
 		footer: Controls.BusyIndicator {
 			visible: opacity !== 0.0
 			anchors.horizontalCenter: parent.horizontalCenter
+			height: visible ? undefined : Kirigami.Units.smallSpacing * 4
+			padding: 0
 			opacity: MessageModel.mamLoading ? 1.0 : 0.0
 
 			Behavior on opacity {

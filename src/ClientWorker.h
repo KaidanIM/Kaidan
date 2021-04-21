@@ -112,11 +112,6 @@ public:
 	 */
 	ClientWorker(Caches *caches, bool enableLogging, QObject *parent = nullptr);
 
-	/**
-	 * Initializes this client worker as soon as it runs in a separate thread.
-	 */
-	void initialize();
-
 	RegistrationManager *registrationManager() const
 	{
 		return m_registrationManager;

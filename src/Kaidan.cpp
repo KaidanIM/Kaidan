@@ -231,7 +231,6 @@ void Kaidan::initializeClientWorker(bool enableLogging)
 	connect(m_client, &ClientWorker::connectionStateChanged, this, &Kaidan::setConnectionState);
 	connect(m_client, &ClientWorker::connectionErrorChanged, this, &Kaidan::setConnectionError);
 
-	connect(m_cltThrd, &QThread::started, m_client, &ClientWorker::initialize);
 	m_cltThrd->start();
 }
 

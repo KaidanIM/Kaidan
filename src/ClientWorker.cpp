@@ -120,13 +120,6 @@ ClientWorker::ClientWorker(Caches *caches, bool enableLogging, QObject* parent)
 	connect(Kaidan::instance(), &Kaidan::deleteAccountFromClientAndServer, this, &ClientWorker::deleteAccountFromClientAndServer);
 }
 
-void ClientWorker::initialize()
-{
-	// Initialize the random number generator used by "qrand()" for QXmpp < 1.3.0 or QXmpp
-	// built with Qt < 5.10. Please do not use that deprecated method for Kaidan.
-	qsrand(time(nullptr));
-}
-
 void ClientWorker::startTask(const std::function<void ()> task) {
 	if (m_client->isAuthenticated()) {
 		task();

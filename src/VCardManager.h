@@ -95,6 +95,7 @@ signals:
 	void vCardReceived(const QXmppVCardIq &vCard);
 
 	void vCardRequested(const QString &jid);
+	void clientVCardRequested();
 	void changeNicknameRequested(const QString &nickname);
 
 private slots:

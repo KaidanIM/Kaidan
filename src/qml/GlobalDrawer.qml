@@ -62,18 +62,18 @@ Kirigami.GlobalDrawer {
 
 			Text {
 				text: {
-					var jidAndStatus = AccountManager.jid + " ("
+					var accountStatus = AccountManager.displayName + " ("
 
 					if (parent.disconnected)
-						jidAndStatus += qsTr("Offline");
+						accountStatus += qsTr("Offline");
 					else if (parent.connected)
-						jidAndStatus += qsTr("Online");
+						accountStatus += qsTr("Online");
 					else
-						jidAndStatus += qsTr("Connecting…");
+						accountStatus += qsTr("Connecting…");
 
-					jidAndStatus += ")"
+					accountStatus += ")"
 
-					return jidAndStatus
+					return accountStatus
 				}
 
 				color: parent.connected ? "green" : "silver"
@@ -138,4 +138,9 @@ Kirigami.GlobalDrawer {
 			}
 		}
 	]
+
+	onOpened: {
+		// Request the user's current vCard which contains the user's nickname.
+		Kaidan.client.vCardManager.clientVCardRequested()
+	}
 }

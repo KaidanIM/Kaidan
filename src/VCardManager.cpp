@@ -46,6 +46,7 @@ VCardManager::VCardManager(ClientWorker *clientWorker, QXmppClient *client, Avat
 	connect(m_client, &QXmppClient::presenceReceived, this, &VCardManager::handlePresenceReceived);
 	connect(m_manager, &QXmppVCardManager::clientVCardReceived, this, &VCardManager::handleClientVCardReceived);
 	connect(this, &VCardManager::vCardRequested, this, &VCardManager::requestVCard);
+	connect(this, &VCardManager::clientVCardRequested, this, &VCardManager::requestClientVCard);
 	connect(this, &VCardManager::changeNicknameRequested, this, &VCardManager::changeNickname);
 
 	// Currently we're not requesting the own VCard on every connection because it is probably

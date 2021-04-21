@@ -27,19 +27,23 @@
         <translation>ਅਕਾਊਂਟ ਸੁਰੱਖਿਆ</translation>
     </message>
     <message>
-        <source>Allow to add new devices using a QR-Code, but never show the password as text. This action can not be undone, so consider storing the password in another way before using it.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Disable showing the password</source>
-        <translation>ਪਾਸਵਰਡ ਵੇਖਾਉਣਾ ਅਸਮਰੱਥ ਕਰੋ</translation>
+        <translation type="vanished">ਪਾਸਵਰਡ ਵੇਖਾਉਣਾ ਅਸਮਰੱਥ ਕਰੋ</translation>
     </message>
     <message>
-        <source>Don&apos;t expose the password in any form. This action can not be undone.</source>
+        <source>Allow to add additional devices using the login QR code but never show the password.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Disable showing the QR-Code and password</source>
+        <source>Don&apos;t show password</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Neither allow to add additional devices using the login QR code nor show the password.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Don&apos;t expose password in any way</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -81,12 +85,12 @@ Never show this QR code to anyone else. It would allow unlimited access to your 
         <translation>ਲਿਖਤ ਵਜੋਂ ਵੇਖਾਓ</translation>
     </message>
     <message>
-        <source>Copy JID</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Copy password</source>
         <translation>ਪਾਸਵਰਡ ਕਾਪੀ ਕਰੋ</translation>
+    </message>
+    <message>
+        <source>Copy chat address</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -266,7 +270,7 @@ Never show this QR code to anyone else. It would allow unlimited access to your 
     <name>ConfirmationPage</name>
     <message>
         <source>Cancel</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">ਰੱਦ ਕਰੋ</translation>
     </message>
 </context>
 <context>
@@ -277,11 +281,11 @@ Never show this QR code to anyone else. It would allow unlimited access to your 
     </message>
     <message>
         <source>Change</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">ਬਦਲੋ</translation>
     </message>
     <message>
         <source>Cancel</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">ਰੱਦ ਕਰੋ</translation>
     </message>
     <message>
         <source>Connection settings could not be changed</source>
@@ -310,34 +314,34 @@ Never show this QR code to anyone else. It would allow unlimited access to your 
 <context>
     <name>DisablePasswordDisplay</name>
     <message>
-        <source>Remove password completely</source>
+        <source>Don&apos;t expose your password in any way</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Your password will not be included in the QR code anymore.
+        <source>Your password will neither be shown as plain text nor included in the login QR code anymore.
 You won&apos;t be able to use the login via QR code without entering your password again because this action cannot be undone!
-Make sure that you backed it up if you want to use your account later.</source>
+Consider storing the password somewhere else if you want to use your account on another device.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Remove password</source>
+        <source>Don&apos;t expose password in any way</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>DisablePlainTextPasswordDisplay</name>
     <message>
-        <source>Do not show password as text</source>
+        <source>Don&apos;t show your password</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Your password will not be shown as text anymore.
-You won&apos;t be able to see your password as text again because this action cannot be undone!
-Make sure that you backed it up if you want to use your account later.</source>
+        <source>Your password will not be shown anymore but still exposed via the login QR code.
+You won&apos;t be able to see your password again because this action cannot be undone!
+Consider storing the password somewhere else if you want to use your account on another device without the login QR code.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Do not show password</source>
+        <source>Don&apos;t show password</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -399,10 +403,6 @@ Make sure that you backed it up if you want to use your account later.</source>
     <message>
         <source>The link will be opened after you have connected.</source>
         <extracomment>The link is an XMPP-URI (i.e. &apos;xmpp:kaidan@muc.kaidan.im?join&apos; for joining a chat)</extracomment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>No valid login QR code found.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -801,6 +801,18 @@ Your password will be deleted, make sure it is stored in a password manager or y
         <source>Could not connect to the server. Please check your internet connection or your server name.</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>%1 is online</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>%1 is typing…</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>%1 paused typing</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>QrCodeGenerator</name>
@@ -829,6 +841,10 @@ Your password will be deleted, make sure it is stored in a password manager or y
     </message>
     <message>
         <source>Connecting…</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>This QR code is not a valid login QR code.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -911,7 +927,7 @@ You will not be able to use your account again!</source>
     </message>
     <message>
         <source>Cancel</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">ਰੱਦ ਕਰੋ</translation>
     </message>
     <message>
         <source>Add</source>
@@ -964,7 +980,7 @@ You will not be able to use your account again!</source>
     </message>
     <message>
         <source>Cancel</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">ਰੱਦ ਕਰੋ</translation>
     </message>
     <message>
         <source>Delete</source>
@@ -983,7 +999,7 @@ You will not be able to use your account again!</source>
     </message>
     <message>
         <source>Cancel</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">ਰੱਦ ਕਰੋ</translation>
     </message>
     <message>
         <source>Rename</source>
@@ -998,7 +1014,7 @@ You will not be able to use your account again!</source>
     </message>
     <message>
         <source>Cancel</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">ਰੱਦ ਕਰੋ</translation>
     </message>
     <message>
         <source>Send</source>
@@ -1027,7 +1043,7 @@ Deletion of message history saved on server</extracomment>
     <name>SettingsContent</name>
     <message>
         <source>Change password</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">ਪਾਸਵਰਡ ਬਦਲੋ</translation>
     </message>
     <message>
         <source>Changes your account&apos;s password. You will need to re-enter it on your other devices.</source>
@@ -1074,7 +1090,7 @@ Deletion of message history saved on server</extracomment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Configure whether this device can be used to log in on a new device</source>
+        <source>Configure whether this device can be used to log in on another device</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

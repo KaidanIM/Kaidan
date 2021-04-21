@@ -117,19 +117,35 @@ Sila pastikan anda telah menyandarkan kelayakan sekiranya anda ingin menggunakan
     </message>
     <message>
         <source>Allow to add new devices using a QR-Code, but never show the password as text. This action can not be undone, so consider storing the password in another way before using it.</source>
-        <translation>Membolehkan penambahan peranti baharu menggunakan Kod QR, tetapi tidak menunjukkan kata laluan sebagai teks. Perbuatan ini tidak boleh diundur, jadi anda disyorkan untuk menyimpan kata laluan dalam cara yang lain sebelum menggunakannya.</translation>
+        <translation type="vanished">Membolehkan penambahan peranti baharu menggunakan Kod QR, tetapi tidak menunjukkan kata laluan sebagai teks. Perbuatan ini tidak boleh diundur, jadi anda disyorkan untuk menyimpan kata laluan dalam cara yang lain sebelum menggunakannya.</translation>
     </message>
     <message>
         <source>Disable showing the password</source>
-        <translation>Lumpuhkan penampakan kata laluan</translation>
+        <translation type="vanished">Lumpuhkan penampakan kata laluan</translation>
     </message>
     <message>
         <source>Don&apos;t expose the password in any form. This action can not be undone.</source>
-        <translation>Jangan dedah kata laluan dengan sebarang cara. Perbuatan ini tidak boleh diundur.</translation>
+        <translation type="vanished">Jangan dedah kata laluan dengan sebarang cara. Perbuatan ini tidak boleh diundur.</translation>
     </message>
     <message>
         <source>Disable showing the QR-Code and password</source>
-        <translation>Lumpuhkan penampakan Kod QR dan kata laluan</translation>
+        <translation type="vanished">Lumpuhkan penampakan Kod QR dan kata laluan</translation>
+    </message>
+    <message>
+        <source>Allow to add additional devices using the login QR code but never show the password.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Don&apos;t show password</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Neither allow to add additional devices using the login QR code nor show the password.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Don&apos;t expose password in any way</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -174,11 +190,15 @@ Jangan sesekali tunjukkan kod QR ini kepada orang lain. Ia akan membenarkan capa
     </message>
     <message>
         <source>Copy JID</source>
-        <translation>Salin JID</translation>
+        <translation type="vanished">Salin JID</translation>
     </message>
     <message>
         <source>Copy password</source>
         <translation>Salin kata laluan</translation>
+    </message>
+    <message>
+        <source>Copy chat address</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -501,38 +521,66 @@ Jangan sesekali tunjukkan kod QR ini kepada orang lain. Ia akan membenarkan capa
     <name>DisablePasswordDisplay</name>
     <message>
         <source>Remove password completely</source>
-        <translation>Buang kata laluan sepenuhnya</translation>
+        <translation type="vanished">Buang kata laluan sepenuhnya</translation>
     </message>
     <message>
         <source>Your password will not be included in the QR code anymore.
 You won&apos;t be able to use the login via QR code without entering your password again because this action cannot be undone!
 Make sure that you backed it up if you want to use your account later.</source>
-        <translation>Kata laluan anda sudah tidak akan disertakan dalam kod QR.
+        <translation type="vanished">Kata laluan anda sudah tidak akan disertakan dalam kod QR.
 Anda tidak akan mampu log masuk menerusi kod QR tanpa memasukkan kata laluan anda lagi kerana perbuatan ini tidak boleh diundur!
 Pastikan anda sandarkannya jika anda ingin gunakan akaun anda kemudian.</translation>
     </message>
     <message>
         <source>Remove password</source>
-        <translation>Buang kata laluan</translation>
+        <translation type="vanished">Buang kata laluan</translation>
+    </message>
+    <message>
+        <source>Don&apos;t expose your password in any way</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Your password will neither be shown as plain text nor included in the login QR code anymore.
+You won&apos;t be able to use the login via QR code without entering your password again because this action cannot be undone!
+Consider storing the password somewhere else if you want to use your account on another device.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Don&apos;t expose password in any way</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>DisablePlainTextPasswordDisplay</name>
     <message>
         <source>Do not show password as text</source>
-        <translation>Jangan tunjukkan kata laluan sebagai teks</translation>
+        <translation type="vanished">Jangan tunjukkan kata laluan sebagai teks</translation>
     </message>
     <message>
         <source>Your password will not be shown as text anymore.
 You won&apos;t be able to see your password as text again because this action cannot be undone!
 Make sure that you backed it up if you want to use your account later.</source>
-        <translation>Kata laluan anda sudah tidak akan ditunjukkan sebagai teks.
+        <translation type="vanished">Kata laluan anda sudah tidak akan ditunjukkan sebagai teks.
 Anda tidak akan mampu melihat kata laluan anda sebagai teks lagi kerana perbuatan ini tidak boleh diundur!
 Pastikan anda sandarkannya jika anda ingin gunakan akaun anda kemudian.</translation>
     </message>
     <message>
         <source>Do not show password</source>
-        <translation>Jangan tunjuk kata laluan</translation>
+        <translation type="vanished">Jangan tunjuk kata laluan</translation>
+    </message>
+    <message>
+        <source>Don&apos;t show your password</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Your password will not be shown anymore but still exposed via the login QR code.
+You won&apos;t be able to see your password again because this action cannot be undone!
+Consider storing the password somewhere else if you want to use your account on another device without the login QR code.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Don&apos;t show password</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -709,7 +757,7 @@ Pastikan anda sandarkannya jika anda ingin gunakan akaun anda kemudian.</transla
     </message>
     <message>
         <source>No valid login QR code found.</source>
-        <translation>Tiada kod QR log masuk yang sah dijumpai.</translation>
+        <translation type="vanished">Tiada kod QR log masuk yang sah dijumpai.</translation>
     </message>
 </context>
 <context>
@@ -1319,6 +1367,18 @@ Kata laluan anda akan dipadam, pastikan ia disimpan dalam pengurus kata laluan a
         <source>Could not connect to the server. Please check your internet connection or your server name.</source>
         <translation>Tidak boleh sambung ke pelayan. Sila periksa sambungan internet anda atau nama pelayan anda.</translation>
     </message>
+    <message>
+        <source>%1 is online</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>%1 is typing…</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>%1 paused typing</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>QrCodeGenerator</name>
@@ -1348,6 +1408,10 @@ Kata laluan anda akan dipadam, pastikan ia disimpan dalam pengurus kata laluan a
     <message>
         <source>Connecting…</source>
         <translation>Menyambung…</translation>
+    </message>
+    <message>
+        <source>This QR code is not a valid login QR code.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -1710,7 +1774,11 @@ Deletion of message history saved on server</extracomment>
     </message>
     <message>
         <source>Configure whether this device can be used to log in on a new device</source>
-        <translation>Tetapkan sama ada peranti ini boleh digunakan untuk log masuk di peranti baharu</translation>
+        <translation type="vanished">Tetapkan sama ada peranti ini boleh digunakan untuk log masuk di peranti baharu</translation>
+    </message>
+    <message>
+        <source>Configure whether this device can be used to log in on another device</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

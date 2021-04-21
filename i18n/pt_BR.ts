@@ -28,19 +28,35 @@
     </message>
     <message>
         <source>Allow to add new devices using a QR-Code, but never show the password as text. This action can not be undone, so consider storing the password in another way before using it.</source>
-        <translation>Permitir adicionar novos dispositivos usando um Código-QR, mas nunca mostrar a senha como texto. Esta ação não poderá ser desfeita, porém, considere armazenar a senha de outra forma antes de usá-la.</translation>
+        <translation type="vanished">Permitir adicionar novos dispositivos usando um Código-QR, mas nunca mostrar a senha como texto. Esta ação não poderá ser desfeita, porém, considere armazenar a senha de outra forma antes de usá-la.</translation>
     </message>
     <message>
         <source>Disable showing the password</source>
-        <translation>Desativar visibilidade da senha</translation>
+        <translation type="vanished">Desativar visibilidade da senha</translation>
     </message>
     <message>
         <source>Don&apos;t expose the password in any form. This action can not be undone.</source>
-        <translation>Não mostra a senha de nenhuma forma. Esta ação não pode ser desfeita.</translation>
+        <translation type="vanished">Não mostra a senha de nenhuma forma. Esta ação não pode ser desfeita.</translation>
     </message>
     <message>
         <source>Disable showing the QR-Code and password</source>
-        <translation>Desativar a exibição do código QR e da senha</translation>
+        <translation type="vanished">Desativar a exibição do código QR e da senha</translation>
+    </message>
+    <message>
+        <source>Allow to add additional devices using the login QR code but never show the password.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Don&apos;t show password</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Neither allow to add additional devices using the login QR code nor show the password.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Don&apos;t expose password in any way</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -85,11 +101,15 @@ Nunca mostre este código QR a ninguém. Ele permitiria o acesso ilimitado à su
     </message>
     <message>
         <source>Copy JID</source>
-        <translation>Copiar JID</translation>
+        <translation type="vanished">Copiar JID</translation>
     </message>
     <message>
         <source>Copy password</source>
         <translation>Copiar senha</translation>
+    </message>
+    <message>
+        <source>Copy chat address</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -334,38 +354,66 @@ Nunca mostre este código QR a ninguém. Ele permitiria o acesso ilimitado à su
     <name>DisablePasswordDisplay</name>
     <message>
         <source>Remove password completely</source>
-        <translation>Excluir senha por completo</translation>
+        <translation type="vanished">Excluir senha por completo</translation>
     </message>
     <message>
         <source>Your password will not be included in the QR code anymore.
 You won&apos;t be able to use the login via QR code without entering your password again because this action cannot be undone!
 Make sure that you backed it up if you want to use your account later.</source>
-        <translation>A sua senha não será mais incluída no código QR.
+        <translation type="vanished">A sua senha não será mais incluída no código QR.
 Você não poderá usar o login via código QR sem inserir sua senha novamente porque esta ação não pode ser desfeita!
 Certifique-se de que fez o backup se quiser usar sua conta mais tarde.</translation>
     </message>
     <message>
         <source>Remove password</source>
-        <translation>Excluir senha</translation>
+        <translation type="vanished">Excluir senha</translation>
+    </message>
+    <message>
+        <source>Don&apos;t expose your password in any way</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Your password will neither be shown as plain text nor included in the login QR code anymore.
+You won&apos;t be able to use the login via QR code without entering your password again because this action cannot be undone!
+Consider storing the password somewhere else if you want to use your account on another device.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Don&apos;t expose password in any way</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>DisablePlainTextPasswordDisplay</name>
     <message>
         <source>Do not show password as text</source>
-        <translation>Não mostre senha como texto</translation>
+        <translation type="vanished">Não mostre senha como texto</translation>
     </message>
     <message>
         <source>Your password will not be shown as text anymore.
 You won&apos;t be able to see your password as text again because this action cannot be undone!
 Make sure that you backed it up if you want to use your account later.</source>
-        <translation>A partir de agora sua senha não será mais exibida como texto.
+        <translation type="vanished">A partir de agora sua senha não será mais exibida como texto.
 Você não será capaz de ver sua senha como texto novamente, porque essa ação não pode ser desfeita!
 Certifique-se de fazer o backup dela se você deseja usar a sua conta mais tarde.</translation>
     </message>
     <message>
         <source>Do not show password</source>
-        <translation>Não mostre a senha</translation>
+        <translation type="vanished">Não mostre a senha</translation>
+    </message>
+    <message>
+        <source>Don&apos;t show your password</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Your password will not be shown anymore but still exposed via the login QR code.
+You won&apos;t be able to see your password again because this action cannot be undone!
+Consider storing the password somewhere else if you want to use your account on another device without the login QR code.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Don&apos;t show password</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -477,7 +525,7 @@ Certifique-se de fazer o backup dela se você deseja usar a sua conta mais tarde
     </message>
     <message>
         <source>No valid login QR code found.</source>
-        <translation>Não foi possível encontrar um código QR válido.</translation>
+        <translation type="vanished">Não foi possível encontrar um código QR válido.</translation>
     </message>
 </context>
 <context>
@@ -916,6 +964,18 @@ Sua senha também será excluída, certifique-se de que ela é armazenada num ge
         <source>Could not connect to the server. Please check your internet connection or your server name.</source>
         <translation>Não foi possível conectar com o servidor. Verifique sua conexão com a internet ou o nome do seu servidor.</translation>
     </message>
+    <message>
+        <source>%1 is online</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>%1 is typing…</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>%1 paused typing</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>QrCodeGenerator</name>
@@ -945,6 +1005,10 @@ Sua senha também será excluída, certifique-se de que ela é armazenada num ge
     <message>
         <source>Connecting…</source>
         <translation>Conectando…</translation>
+    </message>
+    <message>
+        <source>This QR code is not a valid login QR code.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -1263,7 +1327,11 @@ Deletion of message history saved on server</extracomment>
     </message>
     <message>
         <source>Configure whether this device can be used to log in on a new device</source>
-        <translation>Configurar se este dispositivo pode ser usado para fazer o login em um novo dispositivo</translation>
+        <translation type="vanished">Configurar se este dispositivo pode ser usado para fazer o login em um novo dispositivo</translation>
+    </message>
+    <message>
+        <source>Configure whether this device can be used to log in on another device</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

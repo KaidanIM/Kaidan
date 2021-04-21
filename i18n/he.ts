@@ -27,19 +27,19 @@
         <translation>אבטחת החשבון</translation>
     </message>
     <message>
-        <source>Allow to add new devices using a QR-Code, but never show the password as text. This action can not be undone, so consider storing the password in another way before using it.</source>
+        <source>Allow to add additional devices using the login QR code but never show the password.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Disable showing the password</source>
+        <source>Don&apos;t show password</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Don&apos;t expose the password in any form. This action can not be undone.</source>
+        <source>Neither allow to add additional devices using the login QR code nor show the password.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Disable showing the QR-Code and password</source>
+        <source>Don&apos;t expose password in any way</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -80,6 +80,14 @@ Never show this QR code to anyone else. It would allow unlimited access to your 
         <source>Show as text</source>
         <translation>הצגה כטקסט</translation>
     </message>
+    <message>
+        <source>Copy chat address</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Copy password</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>ChangePassword</name>
@@ -109,7 +117,7 @@ Never show this QR code to anyone else. It would allow unlimited access to your 
     </message>
     <message>
         <source>You need to be connected to change your password.</source>
-        <translation>יש להתחבר על מנת לשנות את הססמה.</translation>
+        <translation type="vanished">יש להתחבר על מנת לשנות את הססמה.</translation>
     </message>
     <message>
         <source>After changing your password, you will need to reenter it on all your other devices.</source>
@@ -122,6 +130,14 @@ Never show this QR code to anyone else. It would allow unlimited access to your 
     <message>
         <source>Change</source>
         <translation>שינוי</translation>
+    </message>
+    <message>
+        <source>Password changed successfully</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Failed to change password: %1</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -158,14 +174,10 @@ Never show this QR code to anyone else. It would allow unlimited access to your 
     <name>ChatPage</name>
     <message>
         <source>Compose message</source>
-        <translation>חיבור הודעה</translation>
+        <translation type="vanished">חיבור הודעה</translation>
     </message>
     <message>
         <source>Send a spoiler message</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Spoiler hint</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -186,7 +198,7 @@ Never show this QR code to anyone else. It would allow unlimited access to your 
     </message>
     <message>
         <source>Close</source>
-        <translation>סגירה</translation>
+        <translation type="vanished">סגירה</translation>
     </message>
     <message>
         <source>Search up</source>
@@ -198,7 +210,26 @@ Never show this QR code to anyone else. It would allow unlimited access to your 
     </message>
     <message>
         <source>All files</source>
-        <translation>כל הקבצים</translation>
+        <translation type="vanished">כל הקבצים</translation>
+    </message>
+    <message>
+        <source>Close message search bar</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>ChatPageSendingPane</name>
+    <message>
+        <source>Spoiler hint</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Close spoiler hint field</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Compose message</source>
+        <translation type="unfinished">חיבור הודעה</translation>
     </message>
 </context>
 <context>
@@ -255,37 +286,83 @@ Never show this QR code to anyone else. It would allow unlimited access to your 
     </message>
 </context>
 <context>
+    <name>ConnectionSettings</name>
+    <message>
+        <source>Connection settings</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Change</source>
+        <translation type="unfinished">שינוי</translation>
+    </message>
+    <message>
+        <source>Cancel</source>
+        <translation type="unfinished">ביטול</translation>
+    </message>
+    <message>
+        <source>Connection settings could not be changed</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Connection settings changed</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>CustomConnectionSettings</name>
+    <message>
+        <source>Hostname:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The hostname must not contain blank spaces</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Port:</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>DisablePasswordDisplay</name>
     <message>
-        <source>Remove password completely</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Your password will not be included in the QR code anymore.
-You won&apos;t be able to use the login via QR code without entering your password again because this action cannot be undone!
-Make sure that you backed it up if you want to use your account later.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Remove password</source>
-        <translation>הסרת הססמה</translation>
+        <translation type="vanished">הסרת הססמה</translation>
+    </message>
+    <message>
+        <source>Don&apos;t expose your password in any way</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Your password will neither be shown as plain text nor included in the login QR code anymore.
+You won&apos;t be able to use the login via QR code without entering your password again because this action cannot be undone!
+Consider storing the password somewhere else if you want to use your account on another device.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Don&apos;t expose password in any way</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>DisablePlainTextPasswordDisplay</name>
     <message>
-        <source>Do not show password as text</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Your password will not be shown as text anymore.
-You won&apos;t be able to see your password as text again because this action cannot be undone!
-Make sure that you backed it up if you want to use your account later.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Do not show password</source>
-        <translation>לא להציג את הססמה</translation>
+        <translation type="vanished">לא להציג את הססמה</translation>
+    </message>
+    <message>
+        <source>Don&apos;t show your password</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Your password will not be shown anymore but still exposed via the login QR code.
+You won&apos;t be able to see your password again because this action cannot be undone!
+Consider storing the password somewhere else if you want to use your account on another device without the login QR code.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Don&apos;t show password</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -303,47 +380,47 @@ Make sure that you backed it up if you want to use your account later.</source>
     <name>EmojiPicker</name>
     <message>
         <source>Favorites</source>
-        <translation>מועדפים</translation>
+        <translation type="vanished">מועדפים</translation>
     </message>
     <message>
         <source>People</source>
-        <translation>אנשים</translation>
+        <translation type="vanished">אנשים</translation>
     </message>
     <message>
         <source>Nature</source>
-        <translation>טבע</translation>
+        <translation type="vanished">טבע</translation>
     </message>
     <message>
         <source>Food</source>
-        <translation>אוכל</translation>
+        <translation type="vanished">אוכל</translation>
     </message>
     <message>
         <source>Activity</source>
-        <translation>פעילות</translation>
+        <translation type="vanished">פעילות</translation>
     </message>
     <message>
         <source>Travel</source>
-        <translation>טיול</translation>
+        <translation type="vanished">טיול</translation>
     </message>
     <message>
         <source>Objects</source>
-        <translation>אובייקטים</translation>
+        <translation type="vanished">אובייקטים</translation>
     </message>
     <message>
         <source>Symbols</source>
-        <translation>סימנים</translation>
+        <translation type="vanished">סימנים</translation>
     </message>
     <message>
         <source>Flags</source>
-        <translation>דגלים</translation>
+        <translation type="vanished">דגלים</translation>
     </message>
     <message>
         <source>Search</source>
-        <translation>חיפוש</translation>
+        <translation type="vanished">חיפוש</translation>
     </message>
     <message>
         <source>Search emoji</source>
-        <translation>חיפוש אימוג׳י</translation>
+        <translation type="vanished">חיפוש אימוג׳י</translation>
     </message>
 </context>
 <context>
@@ -395,10 +472,6 @@ Make sure that you backed it up if you want to use your account later.</source>
         <extracomment>The link is an XMPP-URI (i.e. &apos;xmpp:kaidan@muc.kaidan.im?join&apos; for joining a chat)</extracomment>
         <translation type="unfinished"></translation>
     </message>
-    <message>
-        <source>No valid login QR code found.</source>
-        <translation type="unfinished"></translation>
-    </message>
 </context>
 <context>
     <name>LocalAccountRemoval</name>
@@ -432,7 +505,42 @@ Your password will be deleted, make sure it is stored in a password manager or y
     </message>
     <message>
         <source>Connect</source>
-        <translation>התחברות</translation>
+        <translation type="vanished">התחברות</translation>
+    </message>
+    <message>
+        <source>Connection settings</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>LoginSettingsPage</name>
+    <message>
+        <source>Connection settings</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The connection settings will be saved permanently after the first successful login. If they don&apos;t work, you&apos;ll get back to the login page.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Enable custom connection settings</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Port:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Hostname:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Reset</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Apply</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -503,6 +611,37 @@ Your password will be deleted, make sure it is stored in a password manager or y
     <message>
         <source>%1 (%2)</source>
         <translation>%1 (%2)</translation>
+    </message>
+    <message>
+        <source>Audio</source>
+        <translation type="unfinished">שמע</translation>
+    </message>
+    <message>
+        <source>Document</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Location</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Image</source>
+        <translation type="unfinished">תמונה</translation>
+    </message>
+    <message>
+        <source>Video</source>
+        <translation type="unfinished">סרטון</translation>
+    </message>
+    <message>
+        <source>File</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>Message</name>
+    <message>
+        <source>Spoiler</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -625,10 +764,6 @@ Your password will be deleted, make sure it is stored in a password manager or y
 <context>
     <name>NewMedia</name>
     <message>
-        <source>Ready</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Initializing…</source>
         <translation type="unfinished"></translation>
     </message>
@@ -649,7 +784,7 @@ Your password will be deleted, make sure it is stored in a password manager or y
     <name>PasswordRemovalPage</name>
     <message>
         <source>Remove password</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">הסרת הססמה</translation>
     </message>
     <message>
         <source>You can decide to only not show your password for &lt;b&gt;%1&lt;/b&gt; as text anymore or to remove it completely from the account transfer. If you remove your password completely, you won&apos;t be able to use the account transfer via scanning without entering your password because it is also removed from the QR code.</source>
@@ -670,9 +805,6 @@ Your password will be deleted, make sure it is stored in a password manager or y
         <source>Mark as read</source>
         <translation>סימון כנקרא</translation>
     </message>
-</context>
-<context>
-    <name>QmlUtils</name>
     <message>
         <source>Available</source>
         <translation type="unfinished"></translation>
@@ -687,7 +819,7 @@ Your password will be deleted, make sure it is stored in a password manager or y
     </message>
     <message>
         <source>Do not disturb</source>
-        <translation>נא לא להפריע</translation>
+        <translation type="unfinished">נא לא להפריע</translation>
     </message>
     <message>
         <source>Away for longer</source>
@@ -695,11 +827,22 @@ Your password will be deleted, make sure it is stored in a password manager or y
     </message>
     <message>
         <source>Offline</source>
-        <translation>לא מחובר/ת</translation>
+        <translation type="unfinished">לא מחובר/ת</translation>
+    </message>
+</context>
+<context>
+    <name>QmlUtils</name>
+    <message>
+        <source>Do not disturb</source>
+        <translation type="vanished">נא לא להפריע</translation>
+    </message>
+    <message>
+        <source>Offline</source>
+        <translation type="vanished">לא מחובר/ת</translation>
     </message>
     <message>
         <source>Error</source>
-        <translation>שגיאה</translation>
+        <translation type="vanished">שגיאה</translation>
     </message>
     <message>
         <source>Invalid username or password.</source>
@@ -715,10 +858,6 @@ Your password will be deleted, make sure it is stored in a password manager or y
     </message>
     <message>
         <source>Error while trying to connect securely.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Could not resolve the server&apos;s address. Please check your server name.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -741,6 +880,22 @@ Your password will be deleted, make sure it is stored in a password manager or y
         <source>The internet access is not permitted. Please check your system&apos;s internet access configuration.</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Could not connect to the server. Please check your internet connection or your server name.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>%1 is online</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>%1 is typing…</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>%1 paused typing</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>QrCodeGenerator</name>
@@ -750,10 +905,37 @@ Your password will be deleted, make sure it is stored in a password manager or y
     </message>
 </context>
 <context>
-    <name>QrCodeScannerPage</name>
+    <name>QrCodeOnboardingPage</name>
     <message>
         <source>Scan QR code</source>
-        <translation>סריקת קוד QR</translation>
+        <translation type="unfinished">סריקת קוד QR</translation>
+    </message>
+    <message>
+        <source>Show explanation</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Continue without QR code</source>
+        <translation type="unfinished">המשך ללא קוד QR</translation>
+    </message>
+    <message>
+        <source>Scan the QR code from your existing device to transfer your account.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Connecting…</source>
+        <translation type="unfinished">בהתחברות…</translation>
+    </message>
+    <message>
+        <source>This QR code is not a valid login QR code.</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>QrCodeScanner</name>
+    <message>
+        <source>The camera format &apos;%1&apos; is not supported.</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>There is no camera available.</source>
@@ -764,29 +946,24 @@ Your password will be deleted, make sure it is stored in a password manager or y
 Try to close other applications using the camera.</source>
         <translation type="unfinished"></translation>
     </message>
+</context>
+<context>
+    <name>QrCodeScannerPage</name>
     <message>
-        <source>The camera format &apos;%1&apos; is not supported.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Scan the QR code from your existing device to transfer your account.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Show explanation</source>
-        <translation type="unfinished"></translation>
+        <source>Scan QR code</source>
+        <translation type="vanished">סריקת קוד QR</translation>
     </message>
     <message>
         <source>Scan</source>
-        <translation>סריקה</translation>
+        <translation type="vanished">סריקה</translation>
     </message>
     <message>
         <source>Continue without QR code</source>
-        <translation>המשך ללא קוד QR</translation>
+        <translation type="vanished">המשך ללא קוד QR</translation>
     </message>
     <message>
         <source>Connecting…</source>
-        <translation>בהתחברות…</translation>
+        <translation type="vanished">בהתחברות…</translation>
     </message>
 </context>
 <context>
@@ -805,17 +982,6 @@ Try to close other applications using the camera.</source>
     </message>
 </context>
 <context>
-    <name>RegistrationManager</name>
-    <message>
-        <source>Password changed successfully.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Failed to change password: %1</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
     <name>RemoteAccountDeletion</name>
     <message>
         <source>Delete account completely</source>
@@ -828,7 +994,7 @@ You will not be able to use your account again!</source>
     </message>
     <message>
         <source>Delete</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">מחיקה</translation>
     </message>
 </context>
 <context>
@@ -863,17 +1029,10 @@ You will not be able to use your account again!</source>
     </message>
     <message>
         <source>Cancel</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">ביטול</translation>
     </message>
     <message>
         <source>Add</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>RosterListItem</name>
-    <message>
-        <source>Error: Please check the JID.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -888,10 +1047,6 @@ You will not be able to use your account again!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Spoiler</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Could not rename contact, as a result of not being connected.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -900,7 +1055,7 @@ You will not be able to use your account again!</source>
     <name>RosterPage</name>
     <message>
         <source>Connecting…</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">בהתחברות…</translation>
     </message>
     <message>
         <source>Contacts</source>
@@ -912,7 +1067,7 @@ You will not be able to use your account again!</source>
     </message>
     <message>
         <source>Offline</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">לא מחובר/ת</translation>
     </message>
     <message>
         <source>Search contacts</source>
@@ -921,10 +1076,6 @@ You will not be able to use your account again!</source>
 </context>
 <context>
     <name>RosterRemoveContactSheet</name>
-    <message>
-        <source>Do you really want to delete the contact &lt;b&gt;%1&lt;/b&gt; from your roster?</source>
-        <translation type="unfinished"></translation>
-    </message>
     <message>
         <source>Delete contact</source>
         <translation type="unfinished"></translation>
@@ -936,6 +1087,10 @@ You will not be able to use your account again!</source>
     <message>
         <source>Delete</source>
         <translation>מחיקה</translation>
+    </message>
+    <message>
+        <source>Do you really want to delete the contact &lt;b&gt;%1&lt;/b&gt; from your contact list?</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -961,7 +1116,7 @@ You will not be able to use your account again!</source>
     </message>
     <message>
         <source>Cancel</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">ביטול</translation>
     </message>
     <message>
         <source>Send</source>
@@ -990,7 +1145,7 @@ Deletion of message history saved on server</extracomment>
     <name>SettingsContent</name>
     <message>
         <source>Change password</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">שינוי הססמה</translation>
     </message>
     <message>
         <source>Changes your account&apos;s password. You will need to re-enter it on your other devices.</source>
@@ -998,7 +1153,7 @@ Deletion of message history saved on server</extracomment>
     </message>
     <message>
         <source>Multimedia Settings</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">הגדרות מולטימדיה</translation>
     </message>
     <message>
         <source>Configure photo, video and audio recording settings</source>
@@ -1006,14 +1161,10 @@ Deletion of message history saved on server</extracomment>
     </message>
     <message>
         <source>Settings</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">הגדרות</translation>
     </message>
     <message>
         <source>Account security</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>configure whether this device can be used to log in on a new device</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -1032,12 +1183,24 @@ Deletion of message history saved on server</extracomment>
         <source>Delete account from the server</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Connection Settings</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Configure the hostname and port to connect to</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Configure whether this device can be used to log in on another device</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>SettingsPage</name>
     <message>
         <source>Settings</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">הגדרות</translation>
     </message>
 </context>
 <context>
@@ -1077,18 +1240,30 @@ Deletion of message history saved on server</extracomment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>File</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Message could not be sent.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">לא היה ניתן לשלוח את ההודעה.</translation>
     </message>
 </context>
 <context>
     <name>UserProfilePage</name>
     <message>
         <source>Profile</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Rename contact</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Show QR code</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Remove contact</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Online devices</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -1104,7 +1279,7 @@ Deletion of message history saved on server</extracomment>
     </message>
     <message>
         <source>About</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">על אודות</translation>
     </message>
     <message>
         <source>Email</source>

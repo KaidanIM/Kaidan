@@ -70,11 +70,18 @@ RosterManager::RosterManager(QXmppClient *client,
 		emit RosterModel::instance()->removeItemsRequested(accountJid, jid);
 	});
 
+#if QXMPP_VERSION >= QT_VERSION_CHECK(1, 5, 0)
+	connect(m_manager, &QXmppRosterManager::subscriptionRequestReceived,
+	        this, [](const QString &subscriberBareJid, const QXmppPresence &presence) {
+		emit RosterModel::instance()->subscriptionRequestReceived(subscriberBareJid, presence.statusText());
+	});
+#else
 	connect(m_manager, &QXmppRosterManager::subscriptionReceived,
 			this, [] (const QString &jid) {
 		// emit signal to ask user
 		emit RosterModel::instance()->subscriptionRequestReceived(jid, {});
 	});
+#endif
 	connect(this, &RosterManager::answerSubscriptionRequestRequested,
 	        this, [=] (QString jid, bool accepted) {
 		if (accepted) {

@@ -39,7 +39,6 @@ import im.kaidan.kaidan 1.0
  * This is a view for searching chat messages.
  */
 Item {
-	id: searchBar
 	height: active ? searchField.height + 2 * Kirigami.Units.largeSpacing : 0
 	clip: true
 	visible: height != 0
@@ -57,7 +56,7 @@ Item {
 		color: Kirigami.Theme.backgroundColor
 	}
 
-	// Search field and ist corresponding buttons
+	// Search field and its corresponding buttons
 	RowLayout {
 		// Anchoring like this binds it to the top of the chat page.
 		// It makes it look like the search bar slides down from behind of the upper element.
@@ -79,12 +78,11 @@ Item {
 			Layout.fillWidth: true
 			focusSequence: ""
 			onVisibleChanged: text = ""
-
-			onTextChanged: searchBar.searchUpwardsFromBottom()
-			onAccepted: searchBar.searchUpwardsFromCurrentIndex()
-			Keys.onUpPressed: searchBar.searchUpwardsFromCurrentIndex()
-			Keys.onDownPressed: searchBar.searchDownwardsFromCurrentIndex()
-			Keys.onEscapePressed: searchBar.close()
+			onTextChanged: searchUpwardsFromBottom()
+			onAccepted: searchFromCurrentIndex(true)
+			Keys.onUpPressed: searchFromCurrentIndex(true)
+			Keys.onDownPressed: searchFromCurrentIndex(false)
+			Keys.onEscapePressed: close()
 		}
 
 		Controls.Button {
@@ -93,7 +91,7 @@ Item {
 			display: Controls.Button.IconOnly
 			flat: true
 			onClicked: {
-				searchBar.searchUpwardsFromCurrentIndex()
+				searchFromCurrentIndex(true)
 				searchField.forceActiveFocus()
 			}
 		}
@@ -104,7 +102,7 @@ Item {
 			display: Controls.Button.IconOnly
 			flat: true
 			onClicked: {
-				searchBar.searchDownwardsFromCurrentIndex()
+				searchFromCurrentIndex(false)
 				searchField.forceActiveFocus()
 			}
 		}
@@ -115,7 +113,7 @@ Item {
 	 */
 	function open() {
 		searchField.forceActiveFocus()
-		searchBar.active = true
+		active = true
 	}
 
 	/**
@@ -123,28 +121,28 @@ Item {
 	 */
 	function close() {
 		messageListView.currentIndex = -1
-		searchBar.active = false
+		active = false
 	}
 
 	/**
 	 * Searches upwards for a message containing the entered text in the search field starting from the current index of the message list view.
 	 */
 	function searchUpwardsFromBottom() {
-		searchBar.search(true, 0)
+		search(true, 0)
 	}
 
 	/**
-	 * Searches upwards for a message containing the entered text in the search field starting from the current index of the message list view.
+	 * Searches for a message containing the entered text in the search field starting from the current index of the message list view.
+	 *
+	 * The searchField is automatically focused again on desktop devices if it lost focus (e.g., after clicking a button).
+	 *
+	 * @param searchUpwards true for searching upwards or false for searching downwards
 	 */
-	function searchUpwardsFromCurrentIndex() {
-		searchBar.search(true, messageListView.currentIndex + 1)
-	}
+	function searchFromCurrentIndex(searchUpwards) {
+		if (!Kirigami.Settings.isMobile && !searchField.activeFocus)
+			searchField.forceActiveFocus()
 
-	/**
-	 * Searches downwards for a message containing the entered text in the search field starting from the current index of the message list view.
-	 */
-	function searchDownwardsFromCurrentIndex() {
-		searchBar.search(false, messageListView.currentIndex - 1)
+		search(searchUpwards, messageListView.currentIndex + (searchUpwards ? 1 : -1))
 	}
 
 	/**
@@ -159,22 +157,25 @@ Item {
 	 * @param startIndex index index of the first message to search for the entered text
 	 */
 	function search(searchUpwards, startIndex) {
-		let newIndex = -1
-		if (searchBar.active && searchField.text.length > 0) {
+		var newIndex = -1
+		var searchedString = searchField.text
+
+		if (searchedString.length > 0) {
 			if (searchUpwards) {
 				if (startIndex === 0) {
-					newIndex = MessageModel.searchForMessageFromNewToOld(searchField.text)
+					newIndex = MessageModel.searchForMessageFromNewToOld(searchedString)
 				} else {
-					newIndex = MessageModel.searchForMessageFromNewToOld(searchField.text, startIndex)
+					newIndex = MessageModel.searchForMessageFromNewToOld(searchedString, startIndex)
 					if (newIndex === -1)
-						newIndex = MessageModel.searchForMessageFromNewToOld(searchField.text, 0)
+						newIndex = MessageModel.searchForMessageFromNewToOld(searchedString, 0)
 				}
 			} else {
-				newIndex = MessageModel.searchForMessageFromOldToNew(searchField.text, startIndex)
+				newIndex = MessageModel.searchForMessageFromOldToNew(searchedString, startIndex)
 				if (newIndex === -1)
-					newIndex = MessageModel.searchForMessageFromOldToNew(searchField.text)
+					newIndex = MessageModel.searchForMessageFromOldToNew(searchedString)
 			}
 		}
+
 		messageListView.currentIndex = newIndex
 	}
 }

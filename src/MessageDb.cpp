@@ -197,7 +197,7 @@ void MessageDb::fetchMessages(const QString &user1, const QString &user2, int in
 	bindValues[":user1"] = user1;
 	bindValues[":user2"] = user2;
 	bindValues[":index"] = index;
-	bindValues[":limit"] = DB_MSG_QUERY_LIMIT;
+	bindValues[":limit"] = DB_QUERY_LIMIT_MESSAGES;
 
 	Utils::execQuery(
 		query,

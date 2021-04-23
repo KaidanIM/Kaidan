@@ -348,7 +348,7 @@ bool MessageModel::canCorrectMessage(int index) const
 
 void MessageModel::handleMessagesFetched(const QVector<Message> &msgs)
 {
-	if (msgs.length() < DB_MSG_QUERY_LIMIT)
+	if (msgs.length() < DB_QUERY_LIMIT_MESSAGES)
 		m_fetchedAllFromDb = true;
 
 	if (msgs.empty())

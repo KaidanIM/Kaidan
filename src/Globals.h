@@ -59,10 +59,10 @@ constexpr auto MESSAGE_MAX_CHARS = 1e4;
 // SQL
 #define DB_CONNECTION "kaidan-messages"
 #define DB_FILENAME "messages.sqlite3"
-#define DB_MSG_QUERY_LIMIT 20
 #define DB_TABLE_INFO "dbinfo"
 #define DB_TABLE_ROSTER "Roster"
 #define DB_TABLE_MESSAGES "Messages"
+#define DB_QUERY_LIMIT_MESSAGES 20
 
 //
 // Credential generation

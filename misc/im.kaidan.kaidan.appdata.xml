@@ -64,6 +64,7 @@
     <p>Kaidan is a simple, user-friendly Jabber/XMPP client providing a modern user-interface using Kirigami and  QtQuick. The back-end of Kaidan is entirely written in C++ using the qxmpp XMPP client library and Qt 5.</p>
     <p xml:lang="ca">El Kaidan és un client de Jabber/XMPP senzill i fàcil d'emprar que proporciona una interfície d'usuari moderna usant Kirigami i QtQuick. El dorsal del Kaidan està completament escrit en C++ usant la biblioteca client qxmpp de XMPP i les Qt 5.</p>
     <p xml:lang="ca-valencia">El Kaidan és un client de Jabber/XMPP senzill i fàcil d'emprar que proporciona una interfície d'usuari moderna usant Kirigami i QtQuick. El dorsal del Kaidan està completament escrit en C++ usant la biblioteca client qxmpp de XMPP i les Qt 5.</p>
+    <p xml:lang="de">Kaidan ist ein einfacher, benutzerfreundliches Programm für Jabber/XMPP, das eine moderne Benutzeroberfläche mit Kirigami und QtQuick bietet. Das Hintergrundprogramm von Kaidan ist vollständig in C++ geschrieben und verwendet die XMPP-Bibliothek qxmpp und Qt 5.</p>
     <p xml:lang="el">Το Kaidan είναι μία απλή και φιλική στο χρήστη εφαρμογή Jabber/XMPP με μια μοντέρνα διεπαφή με χρήση των Kirigami και QtQuick. Το σύστημα υποστήριξης του Kaidan είναι σε C++ με τη βιβλιοθήκη qxmpp XMPP και την Qt 5.</p>
     <p xml:lang="en-GB">Kaidan is a simple, user-friendly Jabber/XMPP client providing a modern user-interface using Kirigami and QtQuick. The back-end of Kaidan is entirely written in C++ using the qxmpp XMPP client library and Qt 5.</p>
     <p xml:lang="es">Kaidan es un sencillo y amigable cliente de Jabber/XMPP que proporciona una interfaz moderna que usa Kirigami y QtQuick. El motor de Kaidan está escrito completamente en C++ y usa la biblioteca cliente de XMPP «qxmpp» y Qt 5.</p>
@@ -81,6 +82,7 @@
     <p>Kaidan is not finished yet, so don’t expect it working as well as a finished client will do.</p>
     <p xml:lang="ca">El Kaidan encara no s'ha acabat, així que no espereu que funcioni tan bé com ho faria un client acabat.</p>
     <p xml:lang="ca-valencia">El Kaidan encara no s'ha acabat, així que no espereu que funcione tan bé com ho faria un client acabat.</p>
+    <p xml:lang="de">Die Entwicklung von Kaidan ist noch nicht abgeschlossen, daher sollten Sie noch nicht alle Funktionen eines fertigen Programms erwarten.</p>
     <p xml:lang="el">Η ανάπτυξη του Kaidan δεν έχει ολοκληρωθεί ακόμη, έτσι μην περιμένετε ότι θα λειτουργεί τόσο καλά όσο μια ολοκληρωμένη εφαρμογή.</p>
     <p xml:lang="en-GB">Kaidan is not finished yet, so don’t expect it working as well as a finished client will do.</p>
     <p xml:lang="es">Kaidan todavía no está terminado, por lo que no debería esperar que funcione tan bien como lo haría un cliente completamente terminado.</p>
@@ -128,6 +130,7 @@
       <caption>Example chat on a desktop and on a mobile device</caption>
       <caption xml:lang="ca">Exemple de xat en un escriptori i en un dispositiu mòbil</caption>
       <caption xml:lang="ca-valencia">Exemple de xat en un escriptori i en un dispositiu mòbil</caption>
+      <caption xml:lang="de">Beispiel-Chat auf einer Arbeitsfläche und einem Mobilgerät</caption>
       <caption xml:lang="el">Παράδειγμα συνομιλίας με υπολογιστή γραφείου και κινητό τηλέφωνο.</caption>
       <caption xml:lang="en-GB">Example chat on a desktop and on a mobile device</caption>
       <caption xml:lang="es">Ejemplo de chat en un escritorio y en un dispositivo móvil</caption>

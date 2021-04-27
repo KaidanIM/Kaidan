@@ -158,8 +158,13 @@ quint16 AccountManager::nonCustomPort() const
 QString AccountManager::displayName()
 {
 	// no mutex locker required, own attributes are not accessed
-	const auto nickname = Kaidan::instance()->vCardCache()->vCard(m_jid)->nickName();
-	return nickname.isEmpty() ? QXmppUtils::jidToUser(m_jid) : nickname;
+	if (const auto vCard = Kaidan::instance()->vCardCache()->vCard(m_jid)) {
+		if (const auto nickname = vCard->nickName(); !nickname.isEmpty()) {
+			return nickname;
+		}
+	}
+
+	return QXmppUtils::jidToUser(m_jid);
 }
 
 void AccountManager::resetCustomConnectionSettings()

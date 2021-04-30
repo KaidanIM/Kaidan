@@ -167,7 +167,7 @@ void MessageHandler::handleMessage(const QXmppMessage &msg, MessageOrigin origin
 	Message message;
 	message.setFrom(QXmppUtils::jidToBareJid(msg.from()));
 	message.setTo(QXmppUtils::jidToBareJid(msg.to()));
-	message.setSentByMe(QXmppUtils::jidToBareJid(msg.from()) == m_client->configuration().jidBare());
+	message.setIsOwn(QXmppUtils::jidToBareJid(msg.from()) == m_client->configuration().jidBare());
 	message.setId(msg.id());
 	// don't use file sharing fallback bodys
 	if (msg.body() != msg.outOfBandUrl())
@@ -219,7 +219,7 @@ void MessageHandler::sendMessage(const QString& toJid,
 	msg.setId(QXmppUtils::generateStanzaHash());
 	msg.setOriginId(msg.id());
 	msg.setReceiptRequested(true);
-	msg.setSentByMe(true);
+	msg.setIsOwn(true);
 	msg.setMediaType(MessageType::MessageText); // text message without media
 	msg.setDeliveryState(Enums::DeliveryState::Pending);
 	msg.setStamp(QDateTime::currentDateTimeUtc());

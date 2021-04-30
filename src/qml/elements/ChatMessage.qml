@@ -46,7 +46,7 @@ RowLayout {
 	property string msgId
 	property string senderJid
 	property string senderName
-	property bool sentByMe: true
+	property bool isOwn: true
 	property string messageBody
 	property date dateTime
 	property int deliveryState: Enums.DeliveryState.Delivered
@@ -75,7 +75,7 @@ RowLayout {
 	signal quoteRequested(string body)
 
 	// Own messages are on the right, others on the left side.
-	layoutDirection: sentByMe ? Qt.RightToLeft : Qt.LeftToRight
+	layoutDirection: isOwn ? Qt.RightToLeft : Qt.LeftToRight
 	spacing: 8
 	width: ListView.view.width
 
@@ -86,7 +86,7 @@ RowLayout {
 
 	Avatar {
 		id: avatar
-		visible: !sentByMe
+		visible: !isOwn
 		avatarUrl: root.avatarUrl
 		Layout.alignment: Qt.AlignHCenter | Qt.AlignTop
 		name: root.senderName
@@ -106,7 +106,7 @@ RowLayout {
 			shadow.color: Qt.darker(color, 1.2)
 			shadow.size: 4
 			radius: roundedCornersRadius
-			color: sentByMe ? rightMessageBubbleColor : leftMessageBubbleColor
+			color: isOwn ? rightMessageBubbleColor : leftMessageBubbleColor
 
 			MouseArea {
 				anchors.fill: parent
@@ -261,7 +261,7 @@ RowLayout {
 
 				Image {
 					id: checkmark
-					visible: sentByMe
+					visible: isOwn
 					source: deliveryStateIcon
 					Layout.preferredHeight: Kirigami.Units.gridUnit * 0.65
 					Layout.preferredWidth: Kirigami.Units.gridUnit * 0.65

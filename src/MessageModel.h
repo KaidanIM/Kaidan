@@ -75,7 +75,7 @@ public:
 		Sender,
 		Recipient,
 		Body,
-		SentByMe,
+		IsOwn,
 		MediaType,
 		IsEdited,
 		DeliveryState,

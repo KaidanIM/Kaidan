@@ -96,7 +96,7 @@ bool Message::operator==(const Message &m) const
 {
 	return ::operator==(static_cast<const QXmppMessage &>(m), static_cast<const QXmppMessage &>(*this))
 		&& m.mediaType() == mediaType()
-		&& m.sentByMe() == sentByMe()
+		&& m.isOwn() == isOwn()
 		&& m.isEdited() == isEdited()
 		&& m.deliveryState() == deliveryState()
 		&& m.mediaLocation() == mediaLocation()
@@ -123,14 +123,14 @@ void Message::setMediaType(MessageType mediaType)
 	m_mediaType = mediaType;
 }
 
-bool Message::sentByMe() const
+bool Message::isOwn() const
 {
-	return m_sentByMe;
+	return m_isOwn;
 }
 
-void Message::setSentByMe(bool sentByMe)
+void Message::setIsOwn(bool isOwn)
 {
-	m_sentByMe = sentByMe;
+	m_isOwn = isOwn;
 }
 
 bool Message::isEdited() const

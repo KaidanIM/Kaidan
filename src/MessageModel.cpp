@@ -148,7 +148,7 @@ QHash<int, QByteArray> MessageModel::roleNames() const
 	roles[Sender] = "sender";
 	roles[Recipient] = "recipient";
 	roles[Body] = "body";
-	roles[SentByMe] = "sentByMe";
+	roles[IsOwn] = "isOwn";
 	roles[MediaType] = "mediaType";
 	roles[IsEdited] = "isEdited";
 	roles[DeliveryState] = "deliveryState";
@@ -185,8 +185,8 @@ QVariant MessageModel::data(const QModelIndex &index, int role) const
 		return msg.to();
 	case Body:
 		return msg.body();
-	case SentByMe:
-		return msg.sentByMe();
+	case IsOwn:
+		return msg.isOwn();
 	case MediaType:
 		return QVariant::fromValue(msg.mediaType());
 	case IsEdited:
@@ -328,7 +328,7 @@ bool MessageModel::canCorrectMessage(int index) const
 
 	// message needs to be sent by us and needs to be no error message
 	const auto &msg = m_messages.at(index);
-	if (!msg.sentByMe() || msg.deliveryState() == Enums::DeliveryState::Error)
+	if (!msg.isOwn() || msg.deliveryState() == Enums::DeliveryState::Error)
 		return false;
 
 	// check time limit
@@ -339,7 +339,7 @@ bool MessageModel::canCorrectMessage(int index) const
 
 	// check messages count limit
 	for (int i = 0, count = 0; i < index; i++) {
-		if (m_messages.at(i).sentByMe() && ++count == MAX_CORRECTION_MESSAGE_COUNT_DEPTH)
+		if (m_messages.at(i).isOwn() && ++count == MAX_CORRECTION_MESSAGE_COUNT_DEPTH)
 			return false;
 	}
 
@@ -356,7 +356,7 @@ void MessageModel::handleMessagesFetched(const QVector<Message> &msgs)
 
 	beginInsertRows(QModelIndex(), rowCount(), rowCount() + msgs.length() - 1);
 	for (auto msg : msgs) {
-		msg.setSentByMe(AccountManager::instance()->jid() == msg.from());
+		msg.setIsOwn(AccountManager::instance()->jid() == msg.from());
 		processMessage(msg);
 		m_messages << msg;
 	}
@@ -628,7 +628,7 @@ void MessageModel::showMessageNotification(const Message &message, MessageOrigin
 		break;
 	}
 
-	if (!message.sentByMe()) {
+	if (!message.isOwn()) {
 		const auto accountJid = AccountManager::instance()->jid();
 		const auto chatJid = message.from();
 

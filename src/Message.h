@@ -61,8 +61,8 @@ public:
 	MessageType mediaType() const;
 	void setMediaType(MessageType mediaType);
 
-	bool sentByMe() const;
-	void setSentByMe(bool sentByMe);
+	bool isOwn() const;
+	void setIsOwn(bool isOwn);
 
 	bool isEdited() const;
 	void setIsEdited(bool isEdited);
@@ -98,9 +98,9 @@ private:
 	MessageType m_mediaType = MessageType::MessageText;
 
 	/**
-	 * True if the message was sent by the user.
+	 * True if the message is an own one.
 	 */
-	bool m_sentByMe = true;
+	bool m_isOwn = true;
 
 	/**
 	 * True if the orginal message was edited.

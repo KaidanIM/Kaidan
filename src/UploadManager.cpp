@@ -89,7 +89,7 @@ void UploadManager::sendFile(const QString &jid, const QUrl &fileUrl, const QStr
 	msg->setFrom(m_client->configuration().jidBare());
 	msg->setTo(jid);
 	msg->setId(msgId);
-	msg->setSentByMe(true);
+	msg->setIsOwn(true);
 	msg->setBody(body);
 	msg->setMediaType(messageType);
 	msg->setStamp(QDateTime::currentDateTimeUtc());

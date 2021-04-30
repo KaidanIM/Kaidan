@@ -255,7 +255,7 @@ void RosterModel::removeItems(const QString &accountJid, const QString &jid)
 
 void RosterModel::handleMessageAdded(const Message &message, MessageOrigin origin)
 {
-	const auto contactJid = message.sentByMe() ? message.to() : message.from();
+	const auto contactJid = message.isOwn() ? message.to() : message.from();
 	auto itr = std::find_if(m_items.begin(), m_items.end(), [&contactJid](const RosterItem &item) {
 		return item.jid() == contactJid;
 	});
@@ -285,7 +285,7 @@ void RosterModel::handleMessageAdded(const Message &message, MessageOrigin origi
 
 	// unread messages counter
 	std::optional<int> newUnreadMessages;
-	if (message.sentByMe()) {
+	if (message.isOwn()) {
 		// if we sent a message (with another device), reset counter
 		newUnreadMessages = 0;
 	} else if (MessageModel::instance()->currentChatJid() != contactJid) {

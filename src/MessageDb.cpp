@@ -393,7 +393,7 @@ bool MessageDb::checkMessageExists(const Message &message)
 	}
 	// only check origin IDs if the message was possibly sent by us (since
 	// Kaidan uses random suffixes in the resource, we can't check the resource)
-	if (message.sentByMe() && !message.originId().isEmpty()) {
+	if (message.isOwn() && !message.originId().isEmpty()) {
 		idChecks << QStringLiteral("originId = :originId");
 		bindValues.insert(QStringLiteral(":originId"), message.stanzaId());
 	}

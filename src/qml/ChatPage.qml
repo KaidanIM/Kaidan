@@ -475,7 +475,7 @@ ChatPageBase {
 			senderJid: model.sender
 			senderName: chatName
 			contextMenu: messageContextMenu
-			sentByMe: model.sentByMe
+			isOwn: model.isOwn
 			messageBody: model.body
 			dateTime: new Date(model.timestamp)
 			deliveryState: model.deliveryState

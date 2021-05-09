@@ -62,7 +62,7 @@ Never show this QR code to anyone else. It would allow unlimited access to your 
     </message>
     <message>
         <source>Password:</source>
-        <translation type="unfinished"></translation>
+        <translation>Hasło:</translation>
     </message>
     <message>
         <source>Hide QR code</source>
@@ -133,7 +133,7 @@ Never show this QR code to anyone else. It would allow unlimited access to your 
     </message>
     <message>
         <source>Password changed successfully</source>
-        <translation type="unfinished"></translation>
+        <translation>Hasło zostało zmienione</translation>
     </message>
     <message>
         <source>Failed to change password: %1</source>
@@ -171,11 +171,11 @@ Never show this QR code to anyone else. It would allow unlimited access to your 
     <name>ChatMessageContextMenu</name>
     <message>
         <source>Copy message</source>
-        <translation type="unfinished"></translation>
+        <translation>Skopiuj wiadomość</translation>
     </message>
     <message>
         <source>Edit message</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Edytuj wiadomość</translation>
     </message>
     <message>
         <source>Copy download URL</source>

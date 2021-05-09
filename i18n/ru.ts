@@ -9,7 +9,7 @@
     </message>
     <message>
         <source>License:</source>
-        <translation>Права:</translation>
+        <translation>Лицензия:</translation>
     </message>
     <message>
         <source>Source code on GitHub</source>

@@ -146,7 +146,7 @@ Stellen Sie sicher, dass Sie diese gesichert haben, wenn Sie Ihr Konto später b
     </message>
     <message>
         <source>Don&apos;t show password</source>
-        <translation type="unfinished"></translation>
+        <translation>Passwort nicht anzeigen</translation>
     </message>
     <message>
         <source>Neither allow to add additional devices using the login QR code nor show the password.</source>
@@ -207,7 +207,7 @@ Zeigen Sie diesen QR-Code niemals anderen Personen. Er würde unbegrenzten Zugan
     </message>
     <message>
         <source>Copy chat address</source>
-        <translation type="unfinished"></translation>
+        <translation>Chat-Adresse kopieren</translation>
     </message>
 </context>
 <context>
@@ -585,7 +585,7 @@ Stellen Sie sicher, dass Sie es gesichert haben, wenn Sie sich später noch auf 
     </message>
     <message>
         <source>Don&apos;t show your password</source>
-        <translation type="unfinished"></translation>
+        <translation>Passwort nicht anzeigen</translation>
     </message>
     <message>
         <source>Your password will not be shown anymore but still exposed via the login QR code.
@@ -597,7 +597,7 @@ Speichere dein Passwort sicherheitshalber woanders um dich auf anderen Geräten 
     </message>
     <message>
         <source>Don&apos;t show password</source>
-        <translation type="unfinished"></translation>
+        <translation>Passwort nicht anzeigen</translation>
     </message>
 </context>
 <context>
@@ -1406,15 +1406,15 @@ Ihr Passwort wird gelöscht, stellen Sie sicher, dass es in einem Passwort-Manag
     </message>
     <message>
         <source>%1 is online</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 ist online</translation>
     </message>
     <message>
         <source>%1 is typing…</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 tippt…</translation>
     </message>
     <message>
         <source>%1 paused typing</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 hat aufgehört zu tippen</translation>
     </message>
 </context>
 <context>
@@ -1448,7 +1448,7 @@ Ihr Passwort wird gelöscht, stellen Sie sicher, dass es in einem Passwort-Manag
     </message>
     <message>
         <source>This QR code is not a valid login QR code.</source>
-        <translation type="unfinished"></translation>
+        <translation>Dieser QR-Code ist zum Anmelden nicht valide.</translation>
     </message>
 </context>
 <context>

@@ -44,19 +44,19 @@
     </message>
     <message>
         <source>Allow to add additional devices using the login QR code but never show the password.</source>
-        <translation type="unfinished"></translation>
+        <translation>Permitir engadir dispositivos adicionais utilizando o código QR de conexión mais non amosar nunca o contrasinal.</translation>
     </message>
     <message>
         <source>Don&apos;t show password</source>
-        <translation type="unfinished"></translation>
+        <translation>Non amosar contrasinal</translation>
     </message>
     <message>
         <source>Neither allow to add additional devices using the login QR code nor show the password.</source>
-        <translation type="unfinished"></translation>
+        <translation>Non permitir engadir dispositivos adiconais utilizando o código QR de conexión ni amosar o contrasinal.</translation>
     </message>
     <message>
         <source>Don&apos;t expose password in any way</source>
-        <translation type="unfinished"></translation>
+        <translation>Non amosar o contrasinal baixo ningunha circunstancia</translation>
     </message>
 </context>
 <context>
@@ -101,11 +101,11 @@ Nunca lle mostres este código QR a ninguén. Permitiríalle acceso sen límite 
     </message>
     <message>
         <source>Copy chat address</source>
-        <translation type="unfinished"></translation>
+        <translation>Copiar o enderezo do chat</translation>
     </message>
     <message>
         <source>Copy password</source>
-        <translation type="unfinished"></translation>
+        <translation>Copiar contrasinal</translation>
     </message>
 </context>
 <context>
@@ -152,11 +152,11 @@ Nunca lle mostres este código QR a ninguén. Permitiríalle acceso sen límite 
     </message>
     <message>
         <source>Password changed successfully</source>
-        <translation type="unfinished"></translation>
+        <translation>Cambiado correctamente o contrasinal</translation>
     </message>
     <message>
         <source>Failed to change password: %1</source>
-        <translation type="unfinished">Fallo no cambio de contrasinal: %1</translation>
+        <translation>Fallou o cambio de contrasinal: %1</translation>
     </message>
 </context>
 <context>
@@ -281,22 +281,22 @@ Nunca lle mostres este código QR a ninguén. Permitiríalle acceso sen límite 
     </message>
     <message>
         <source>Close message search bar</source>
-        <translation type="unfinished"></translation>
+        <translation>Pechar a barra de busca de mensaxes</translation>
     </message>
 </context>
 <context>
     <name>ChatPageSendingPane</name>
     <message>
         <source>Spoiler hint</source>
-        <translation type="unfinished">Aviso Spoiler</translation>
+        <translation>Aviso Spoiler</translation>
     </message>
     <message>
         <source>Close spoiler hint field</source>
-        <translation type="unfinished"></translation>
+        <translation>Pechar o cambio de aviso de espoiler</translation>
     </message>
     <message>
         <source>Compose message</source>
-        <translation type="unfinished">Redactar mensaxe</translation>
+        <translation>Redactar mensaxe</translation>
     </message>
 </context>
 <context>
@@ -356,38 +356,38 @@ Nunca lle mostres este código QR a ninguén. Permitiríalle acceso sen límite 
     <name>ConnectionSettings</name>
     <message>
         <source>Connection settings</source>
-        <translation type="unfinished"></translation>
+        <translation>Axustes de conexión</translation>
     </message>
     <message>
         <source>Change</source>
-        <translation type="unfinished">Cambiar</translation>
+        <translation>Cambiar</translation>
     </message>
     <message>
         <source>Cancel</source>
-        <translation type="unfinished">Cancelar</translation>
+        <translation>Cancelar</translation>
     </message>
     <message>
         <source>Connection settings could not be changed</source>
-        <translation type="unfinished"></translation>
+        <translation>Non se puideron mudar os axustes de conexión</translation>
     </message>
     <message>
         <source>Connection settings changed</source>
-        <translation type="unfinished"></translation>
+        <translation>Cambiaronse os axustes de conexión</translation>
     </message>
 </context>
 <context>
     <name>CustomConnectionSettings</name>
     <message>
         <source>Hostname:</source>
-        <translation type="unfinished"></translation>
+        <translation>Nome de servidor:</translation>
     </message>
     <message>
         <source>The hostname must not contain blank spaces</source>
-        <translation type="unfinished"></translation>
+        <translation>O nome de servidor non pode ter espazos baleiros</translation>
     </message>
     <message>
         <source>Port:</source>
-        <translation type="unfinished"></translation>
+        <translation>Porto:</translation>
     </message>
 </context>
 <context>
@@ -410,17 +410,19 @@ Asegúrate de que tes unha copia de apoio se queres usar a conta posteriormente.
     </message>
     <message>
         <source>Don&apos;t expose your password in any way</source>
-        <translation type="unfinished"></translation>
+        <translation>Non amosar o contrasinal baixo ningunha circunstancia</translation>
     </message>
     <message>
         <source>Your password will neither be shown as plain text nor included in the login QR code anymore.
 You won&apos;t be able to use the login via QR code without entering your password again because this action cannot be undone!
 Consider storing the password somewhere else if you want to use your account on another device.</source>
-        <translation type="unfinished"></translation>
+        <translation>O teu contrasinal non volverá a ser mostrado como texto plano nin será incluído no código QR de conexión.
+Non poderá usar o código QR de conexión sen escribir o contrasinal xa que esta acción non ten volta atrás!
+Considera gardar o contrasinal nalgún lugar se tes pensado utilizar a túa conta noutro dispositivo.</translation>
     </message>
     <message>
         <source>Don&apos;t expose password in any way</source>
-        <translation type="unfinished"></translation>
+        <translation>Non amosar o contrasinal de ningunha forma</translation>
     </message>
 </context>
 <context>
@@ -443,17 +445,19 @@ Asegúrate de ter unha copia de apoio se queres usar a túa conta máis adiante.
     </message>
     <message>
         <source>Don&apos;t show your password</source>
-        <translation type="unfinished"></translation>
+        <translation>Non amosar o teu contrasinal</translation>
     </message>
     <message>
         <source>Your password will not be shown anymore but still exposed via the login QR code.
 You won&apos;t be able to see your password again because this action cannot be undone!
 Consider storing the password somewhere else if you want to use your account on another device without the login QR code.</source>
-        <translation type="unfinished"></translation>
+        <translation>O teu contrasinal non volverá a mostrarse pero estará exposto no código QR de conexión.
+Non poderás ver o contrasinal porque esta acción non ten volta atrás!
+Considera gardar o contrasinal nalgún lugar se tes pensado usar a túa conta noutro dispositivo sen utilizar o código QR de conexión.</translation>
     </message>
     <message>
         <source>Don&apos;t show password</source>
-        <translation type="unfinished"></translation>
+        <translation>Non amosar o contrasinal</translation>
     </message>
 </context>
 <context>
@@ -679,38 +683,38 @@ O contrasinal será borrado, asegúrate de que o tes gardado ou de que te lembra
     </message>
     <message>
         <source>Connection settings</source>
-        <translation type="unfinished"></translation>
+        <translation>Axustes de conexión</translation>
     </message>
 </context>
 <context>
     <name>LoginSettingsPage</name>
     <message>
         <source>Connection settings</source>
-        <translation type="unfinished"></translation>
+        <translation>Axustes de conexión</translation>
     </message>
     <message>
         <source>The connection settings will be saved permanently after the first successful login. If they don&apos;t work, you&apos;ll get back to the login page.</source>
-        <translation type="unfinished"></translation>
+        <translation>A configuración de conexión gardarase permanentemente despois do primeiro inicio de sesión correcto. Se non funcionan, volverás á páxina de inicio de sesión.</translation>
     </message>
     <message>
         <source>Enable custom connection settings</source>
-        <translation type="unfinished"></translation>
+        <translation>Activa os axustes de conexión personalizados</translation>
     </message>
     <message>
         <source>Port:</source>
-        <translation type="unfinished"></translation>
+        <translation>Porto:</translation>
     </message>
     <message>
         <source>Hostname:</source>
-        <translation type="unfinished"></translation>
+        <translation>Nome de servidor:</translation>
     </message>
     <message>
         <source>Reset</source>
-        <translation type="unfinished"></translation>
+        <translation>Restablecer</translation>
     </message>
     <message>
         <source>Apply</source>
-        <translation type="unfinished"></translation>
+        <translation>Aplicar</translation>
     </message>
 </context>
 <context>
@@ -784,34 +788,34 @@ O contrasinal será borrado, asegúrate de que o tes gardado ou de que te lembra
     </message>
     <message>
         <source>Audio</source>
-        <translation type="unfinished"></translation>
+        <translation>Audio</translation>
     </message>
     <message>
         <source>Document</source>
-        <translation type="unfinished">Documento</translation>
+        <translation>Documento</translation>
     </message>
     <message>
         <source>Location</source>
-        <translation type="unfinished"></translation>
+        <translation>Localización</translation>
     </message>
     <message>
         <source>Image</source>
-        <translation type="unfinished">Imaxe</translation>
+        <translation>Imaxe</translation>
     </message>
     <message>
         <source>Video</source>
-        <translation type="unfinished">Vídeo</translation>
+        <translation>Vídeo</translation>
     </message>
     <message>
         <source>File</source>
-        <translation type="unfinished">Ficheiro</translation>
+        <translation>Ficheiro</translation>
     </message>
 </context>
 <context>
     <name>Message</name>
     <message>
         <source>Spoiler</source>
-        <translation type="unfinished">Spoiler</translation>
+        <translation>Spoiler</translation>
     </message>
 </context>
 <context>
@@ -1080,27 +1084,27 @@ O contrasinal será borrado, asegúrate de que o tes gardado ou de que te lembra
     </message>
     <message>
         <source>Available</source>
-        <translation type="unfinished">Dispoñible</translation>
+        <translation>Dispoñible</translation>
     </message>
     <message>
         <source>Free for chat</source>
-        <translation type="unfinished">Libre para conversar</translation>
+        <translation>Libre para conversar</translation>
     </message>
     <message>
         <source>Away</source>
-        <translation type="unfinished">Fóra</translation>
+        <translation>Fóra</translation>
     </message>
     <message>
         <source>Do not disturb</source>
-        <translation type="unfinished">Non molestar</translation>
+        <translation>Non molestar</translation>
     </message>
     <message>
         <source>Away for longer</source>
-        <translation type="unfinished">Fóra para longo</translation>
+        <translation>Fóra para longo</translation>
     </message>
     <message>
         <source>Offline</source>
-        <translation type="unfinished">Desconectada</translation>
+        <translation>Desconectada</translation>
     </message>
 </context>
 <context>
@@ -1187,19 +1191,19 @@ O contrasinal será borrado, asegúrate de que o tes gardado ou de que te lembra
     </message>
     <message>
         <source>Could not connect to the server. Please check your internet connection or your server name.</source>
-        <translation type="unfinished"></translation>
+        <translation>Non se puido conectar co servidor. Comproba a conexión a internet ou o nome do servidor.</translation>
     </message>
     <message>
         <source>%1 is online</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 está en liña</translation>
     </message>
     <message>
         <source>%1 is typing…</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 está escribindo…</translation>
     </message>
     <message>
         <source>%1 paused typing</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 parou de escribir</translation>
     </message>
 </context>
 <context>
@@ -1213,43 +1217,43 @@ O contrasinal será borrado, asegúrate de que o tes gardado ou de que te lembra
     <name>QrCodeOnboardingPage</name>
     <message>
         <source>Scan QR code</source>
-        <translation type="unfinished">Escanear código QR</translation>
+        <translation>Escanear código QR</translation>
     </message>
     <message>
         <source>Show explanation</source>
-        <translation type="unfinished">Mostrar explicación</translation>
+        <translation>Mostrar explicación</translation>
     </message>
     <message>
         <source>Continue without QR code</source>
-        <translation type="unfinished">Continuar sen código QR</translation>
+        <translation>Continuar sen código QR</translation>
     </message>
     <message>
         <source>Scan the QR code from your existing device to transfer your account.</source>
-        <translation type="unfinished">Escanea o código QR desde o outro dispositivo para transferir a conta.</translation>
+        <translation>Escanea o código QR desde o outro dispositivo para transferir a conta.</translation>
     </message>
     <message>
         <source>Connecting…</source>
-        <translation type="unfinished">Conectando…</translation>
+        <translation>Conectando…</translation>
     </message>
     <message>
         <source>This QR code is not a valid login QR code.</source>
-        <translation type="unfinished"></translation>
+        <translation>Este código QR non é un código QR de conexión válido.</translation>
     </message>
 </context>
 <context>
     <name>QrCodeScanner</name>
     <message>
         <source>The camera format &apos;%1&apos; is not supported.</source>
-        <translation type="unfinished">O formato de cámara &apos;%1&apos; non está soportado.</translation>
+        <translation>O formato de cámara &apos;%1&apos; non está soportado.</translation>
     </message>
     <message>
         <source>There is no camera available.</source>
-        <translation type="unfinished">Non hai cámara dispoñible.</translation>
+        <translation>Non hai cámara dispoñible.</translation>
     </message>
     <message>
         <source>Your camera is busy.
 Try to close other applications using the camera.</source>
-        <translation type="unfinished">A cámara está ocupada.
+        <translation>A cámara está ocupada.
 Pecha outras aplicacións que a estén utilizando.</translation>
     </message>
 </context>
@@ -1473,7 +1477,7 @@ Non poderás utilizar nunca máis a conta!</translation>
     </message>
     <message>
         <source>Do you really want to delete the contact &lt;b&gt;%1&lt;/b&gt; from your contact list?</source>
-        <translation type="unfinished"></translation>
+        <translation>Tes a certeza de querer eliminar o contacto &lt;b&gt;%1&lt;/b&gt; da lista local de contactos?</translation>
     </message>
 </context>
 <context>
@@ -1576,15 +1580,15 @@ Deletion of message history saved on server</extracomment>
     </message>
     <message>
         <source>Connection Settings</source>
-        <translation type="unfinished"></translation>
+        <translation>Axustes de conexión</translation>
     </message>
     <message>
         <source>Configure the hostname and port to connect to</source>
-        <translation type="unfinished"></translation>
+        <translation>Configura o nome de servidor e porto ao que queres conectar</translation>
     </message>
     <message>
         <source>Configure whether this device can be used to log in on another device</source>
-        <translation type="unfinished"></translation>
+        <translation>Configura se este dispositivo pode ser utilizado para conectar en outro dispositivo</translation>
     </message>
 </context>
 <context>
@@ -1663,19 +1667,19 @@ Deletion of message history saved on server</extracomment>
     </message>
     <message>
         <source>Rename contact</source>
-        <translation type="unfinished">Cambiar nome ao contacto</translation>
+        <translation>Cambiar nome ao contacto</translation>
     </message>
     <message>
         <source>Show QR code</source>
-        <translation type="unfinished"></translation>
+        <translation>Mostrar código QR</translation>
     </message>
     <message>
         <source>Remove contact</source>
-        <translation type="unfinished"></translation>
+        <translation>Eliminar contacto</translation>
     </message>
     <message>
         <source>Online devices</source>
-        <translation type="unfinished"></translation>
+        <translation>Dispositivos en liña</translation>
     </message>
 </context>
 <context>

@@ -17,7 +17,7 @@
     </message>
     <message>
         <source>Report problems</source>
-        <translation>لاڤورکن مسءله</translation>
+        <translation>لاڤورکن مسئله</translation>
     </message>
 </context>
 <context>
@@ -79,7 +79,7 @@ Make sure that you have backed up those if you want to use your account later.</
     <name>AccountSecurity</name>
     <message>
         <source>Account Security</source>
-        <translation>کسلامتن اکاءون</translation>
+        <translation>کسلامتن اکاٴون</translation>
     </message>
     <message>
         <source>Allow to add new devices using a QR-Code, but never show the password as text. This action can not be undone, so consider storing the password in another way before using it.</source>
@@ -99,36 +99,36 @@ Make sure that you have backed up those if you want to use your account later.</
     </message>
     <message>
         <source>Allow to add additional devices using the login QR code but never show the password.</source>
-        <translation type="unfinished"></translation>
+        <translation>بنرکن ڤنمبهن ڤرنتي تمبهن مڠݢوناکن کود QR لوݢ ماسوق تتاڤي جاڠن تونجوقکن کات لالوان.</translation>
     </message>
     <message>
         <source>Don&apos;t show password</source>
-        <translation type="unfinished"></translation>
+        <translation>جاڠن تونجوقکن کات لالوان</translation>
     </message>
     <message>
         <source>Neither allow to add additional devices using the login QR code nor show the password.</source>
-        <translation type="unfinished"></translation>
+        <translation>جاڠن بنرکن ڤنمبهن ڤرنتي تمبهن مڠݢوناکن کود QR لوݢ ماسوق دان جاڠن تونجوقکن کات لالوان.</translation>
     </message>
     <message>
         <source>Don&apos;t expose password in any way</source>
-        <translation type="unfinished"></translation>
+        <translation>جاڠن ددهکن کات لالوان دالم سبارڠ چارا</translation>
     </message>
 </context>
 <context>
     <name>AccountTransferPage</name>
     <message>
         <source>Transfer account to another device</source>
-        <translation>ڤيندهکن اکاءون کڤرنتي لاءين</translation>
+        <translation>ڤيندهکن اکاٴون کڤرنتي لاٴين</translation>
     </message>
     <message>
         <source>Scan the QR code or enter the credentials as text on another device to log in on it.
 
 Attention:
 Never show this QR code to anyone else. It would allow unlimited access to your account!</source>
-        <translation>ايمبس کود کيو ار اتاو ماسوقکن کلايقن سباݢاي تيکس دڤرنتي لاءين اونتوق لوݢ ماسوق کاکاءون.
+        <translation>ايمبس کود QR اتاو ماسوقکن کلايقن سباݢاي تيک‌س دڤرنتي لاٴين اونتوق لوݢ ماسوق کأکاٴون.
 
 ڤرهاتين:
-جاڠن سسکالي تونجوقکن کود کيو ار اين کڤد اورڠ لاءين. اي اکن ممبنرکن چاڤاين تنڤ هد کاکاءون اندا!</translation>
+جاڠن سسکالي تونجوقکن کود QR اين کڤد اورڠ لاٴين. اي اکن ممبنرکن چاڤاين تنڤا حد کأکاٴون اندا!</translation>
     </message>
     <message>
         <source>Chat address:</source>
@@ -156,11 +156,11 @@ Never show this QR code to anyone else. It would allow unlimited access to your 
     </message>
     <message>
         <source>Copy chat address</source>
-        <translation type="unfinished"></translation>
+        <translation>سالين علامت سيمبڠ</translation>
     </message>
     <message>
         <source>Copy password</source>
-        <translation type="unfinished"></translation>
+        <translation>سالين کات لالوان</translation>
     </message>
 </context>
 <context>
@@ -195,7 +195,7 @@ Never show this QR code to anyone else. It would allow unlimited access to your 
     </message>
     <message>
         <source>After changing your password, you will need to reenter it on all your other devices.</source>
-        <translation>سلڤس اندا منوکر کات لالوان⹁ اندا ڤرلو لوݢ ماسوق سمولا دکسموا ڤرانتي اندا يڠ لاءين.</translation>
+        <translation>سلڤس اندا منوکر کات لالوان⹁ اندا ڤرلو لوݢ ماسوق سمولا دکسموا ڤرنتي اندا يڠ لاٴين.</translation>
     </message>
     <message>
         <source>Cancel</source>
@@ -207,11 +207,11 @@ Never show this QR code to anyone else. It would allow unlimited access to your 
     </message>
     <message>
         <source>Password changed successfully</source>
-        <translation type="unfinished"></translation>
+        <translation>کات لالوان برجاي دتوکر</translation>
     </message>
     <message>
         <source>Failed to change password: %1</source>
-        <translation type="unfinished">ݢاݢل منوکر کات لالوان: %1</translation>
+        <translation>ݢاݢل منوکر کات لالوان: %1</translation>
     </message>
 </context>
 <context>
@@ -308,29 +308,29 @@ Never show this QR code to anyone else. It would allow unlimited access to your 
     </message>
     <message>
         <source>Close message search bar</source>
-        <translation type="unfinished"></translation>
+        <translation>توتوڤ بر ݢلينتر ميسيج</translation>
     </message>
 </context>
 <context>
     <name>ChatPageSendingPane</name>
     <message>
         <source>Spoiler hint</source>
-        <translation type="unfinished">تيڤ بيبيرن</translation>
+        <translation>تيڤ بيبيرن</translation>
     </message>
     <message>
         <source>Close spoiler hint field</source>
-        <translation type="unfinished"></translation>
+        <translation>توتوڤ ميدن تيڤ بيبيرن</translation>
     </message>
     <message>
         <source>Compose message</source>
-        <translation type="unfinished">توليس ميسيج</translation>
+        <translation>کارڠ ميسيج</translation>
     </message>
 </context>
 <context>
     <name>ClientWorker</name>
     <message>
         <source>Your account could not be deleted from the server. Therefore, it was also not removed from this app: %1</source>
-        <translation>اکاءون اندا تيدق بوليه دڤادم درڤد ڤلاين. اوليه ايت⹁ اي جوݢ تيدق دبواڠ درڤد اڤليکاسي اين: %1</translation>
+        <translation>اکاٴون اندا تيدق بوليه دڤادم درڤد ڤلاين. اوليه ايت⹁ اي جوݢ تيدق دبواڠ درڤد اڤليکاسي اين: %1</translation>
     </message>
 </context>
 <context>
@@ -383,38 +383,38 @@ Never show this QR code to anyone else. It would allow unlimited access to your 
     <name>ConnectionSettings</name>
     <message>
         <source>Connection settings</source>
-        <translation type="unfinished"></translation>
+        <translation>تتڤن سمبوڠن</translation>
     </message>
     <message>
         <source>Change</source>
-        <translation type="unfinished">توکر</translation>
+        <translation>توکر</translation>
     </message>
     <message>
         <source>Cancel</source>
-        <translation type="unfinished">باتل</translation>
+        <translation>باتل</translation>
     </message>
     <message>
         <source>Connection settings could not be changed</source>
-        <translation type="unfinished"></translation>
+        <translation>تتڤن سمبوڠن تيدق داڤت دتوکر</translation>
     </message>
     <message>
         <source>Connection settings changed</source>
-        <translation type="unfinished"></translation>
+        <translation>تتڤن سمبوڠن دتوکر</translation>
     </message>
 </context>
 <context>
     <name>CustomConnectionSettings</name>
     <message>
         <source>Hostname:</source>
-        <translation type="unfinished"></translation>
+        <translation>نام هوس:</translation>
     </message>
     <message>
         <source>The hostname must not contain blank spaces</source>
-        <translation type="unfinished"></translation>
+        <translation>نام هوس تيدق بوليه مڠندوڠي رواڠ کوسوڠ</translation>
     </message>
     <message>
         <source>Port:</source>
-        <translation type="unfinished"></translation>
+        <translation>ڤورت:</translation>
     </message>
 </context>
 <context>
@@ -437,17 +437,19 @@ Make sure that you backed it up if you want to use your account later.</source>
     </message>
     <message>
         <source>Don&apos;t expose your password in any way</source>
-        <translation type="unfinished"></translation>
+        <translation>جاڠن ددهکن کات لالوان اندا دالم سبارڠ چارا</translation>
     </message>
     <message>
         <source>Your password will neither be shown as plain text nor included in the login QR code anymore.
 You won&apos;t be able to use the login via QR code without entering your password again because this action cannot be undone!
 Consider storing the password somewhere else if you want to use your account on another device.</source>
-        <translation type="unfinished"></translation>
+        <translation>کات لالوان اندا تيدق اکن دتونجوقکن سباݢاي تيک‌س بياسا دان تيدق اکن دسرتاکن دالم کود QR لوݢ ماسوق.
+اندا تيدق ممڤو مڠݢوناکن لوݢ ماسوق ملالوٴي کود QR تنڤا مماسوقکن کات لالوان اندا لاݢي کران تيندقن اين تيدق بوليه دأوندورکن!
+ڤرتيمبڠکن اونتوق مڽيمڤن کات لالوان دتمڤت لاٴين سکيراڽ اندا ايڠين ݢوناکن اکاٴون اندا دڤرنتي لاٴين.</translation>
     </message>
     <message>
         <source>Don&apos;t expose password in any way</source>
-        <translation type="unfinished"></translation>
+        <translation>جاڠن ددهکن کات لالوان دالم سبارڠ چارا</translation>
     </message>
 </context>
 <context>
@@ -470,17 +472,19 @@ Make sure that you backed it up if you want to use your account later.</source>
     </message>
     <message>
         <source>Don&apos;t show your password</source>
-        <translation type="unfinished"></translation>
+        <translation>جاڠن تونجوقکن کات لالوان اندا</translation>
     </message>
     <message>
         <source>Your password will not be shown anymore but still exposed via the login QR code.
 You won&apos;t be able to see your password again because this action cannot be undone!
 Consider storing the password somewhere else if you want to use your account on another device without the login QR code.</source>
-        <translation type="unfinished"></translation>
+        <translation>کات لالوان اندا تيدق اکن دتونجوقکن لاݢي تتاڤي ماسيه دددهکن ملالوٴي کود QR لوݢ ماسوق.
+اندا تيدق ممڤو مليهت کات لالوان اندا لاݢي کران تيندقن اين تيدق بوليه دأوندورکن!
+ڤرتيمبڠکن اونتوق مڽيمڤن کات لالوان دتمڤت لاٴين سکيراڽ اندا ايڠين ݢوناکن اکاٴون اندا دڤرنتي لاٴين تنڤا کود QR لوݢ ماسوق.</translation>
     </message>
     <message>
         <source>Don&apos;t show password</source>
-        <translation type="unfinished"></translation>
+        <translation>جاڠن تونجوقکن کات لالوان</translation>
     </message>
 </context>
 <context>
@@ -607,13 +611,13 @@ Consider storing the password somewhere else if you want to use your account on 
     <name>LocalAccountRemoval</name>
     <message>
         <source>Remove account from this app</source>
-        <translation>بواڠ اکاءون درڤد اڤليلاسي اين</translation>
+        <translation>بواڠ اکاٴون درڤد اڤليلاسي اين</translation>
     </message>
     <message>
         <source>Your account will be removed from this app.
 Your password will be deleted, make sure it is stored in a password manager or you know it!</source>
-        <translation>اکاءون اندا اکن دبواڠ درڤد اڤليکاسي اين.
-کات لالوان اندا اکن دڤادم⹁ ڤستيکن اي دسيمڤن دالم ڤڠوروس کات لالوان اندا اتاو ڤستيکن اندا مڠتاهوي کات لالوان اندا!</translation>
+        <translation>اکاٴون اندا اکن دبواڠ درڤد اڤليکاسي اين.
+کات لالوان اندا اکن دڤادم⹁ ڤستيکن اي دسيمڤن دالم ڤڠوروس کات لالوان اندا اتاو ڤستيکن اندا مڠتاهوٴي کات لالوان اندا!</translation>
     </message>
     <message>
         <source>Remove</source>
@@ -628,7 +632,7 @@ Your password will be deleted, make sure it is stored in a password manager or y
     </message>
     <message>
         <source>Log in to your XMPP account</source>
-        <translation>لوݢ ماسوق اکاءون XMPP اندا</translation>
+        <translation>لوݢ ماسوق اکاٴون XMPP اندا</translation>
     </message>
     <message>
         <source>Connecting…</source>
@@ -640,38 +644,38 @@ Your password will be deleted, make sure it is stored in a password manager or y
     </message>
     <message>
         <source>Connection settings</source>
-        <translation type="unfinished"></translation>
+        <translation>تتڤن سمبوڠن</translation>
     </message>
 </context>
 <context>
     <name>LoginSettingsPage</name>
     <message>
         <source>Connection settings</source>
-        <translation type="unfinished"></translation>
+        <translation>تتڤن سمبوڠن</translation>
     </message>
     <message>
         <source>The connection settings will be saved permanently after the first successful login. If they don&apos;t work, you&apos;ll get back to the login page.</source>
-        <translation type="unfinished"></translation>
+        <translation>تتڤن سمبوڠن اکن دسيمڤن سچارا ککل سلڤس لوݢ ماسوق ڤرتام يڠ برجاي. جک اي تيدق برجاي⹁ اندا اکن کمبالي کهلامن لوݢ ماسوق.</translation>
     </message>
     <message>
         <source>Enable custom connection settings</source>
-        <translation type="unfinished"></translation>
+        <translation>بوليهکن تتڤن سمبوڠن ترسواي</translation>
     </message>
     <message>
         <source>Port:</source>
-        <translation type="unfinished"></translation>
+        <translation>ڤورت:</translation>
     </message>
     <message>
         <source>Hostname:</source>
-        <translation type="unfinished"></translation>
+        <translation>نام هوس:</translation>
     </message>
     <message>
         <source>Reset</source>
-        <translation type="unfinished"></translation>
+        <translation>تتڤ سمولا</translation>
     </message>
     <message>
         <source>Apply</source>
-        <translation type="unfinished"></translation>
+        <translation>ݢوناکن</translation>
     </message>
 </context>
 <context>
@@ -713,7 +717,7 @@ Your password will be deleted, make sure it is stored in a password manager or y
     </message>
     <message>
         <source>Choose audio file</source>
-        <translation>ڤيليه فايل اءوديو</translation>
+        <translation>ڤيليه فاٴيل اٴوديو</translation>
     </message>
     <message>
         <source>Choose document</source>
@@ -733,7 +737,7 @@ Your password will be deleted, make sure it is stored in a password manager or y
     </message>
     <message>
         <source>Audio files</source>
-        <translation>فايل اءوديو</translation>
+        <translation>فاٴيل اٴوديو</translation>
     </message>
     <message>
         <source>Documents</source>
@@ -745,34 +749,34 @@ Your password will be deleted, make sure it is stored in a password manager or y
     </message>
     <message>
         <source>Audio</source>
-        <translation type="unfinished">اءوديو</translation>
+        <translation>اٴوديو</translation>
     </message>
     <message>
         <source>Document</source>
-        <translation type="unfinished"></translation>
+        <translation>دوکومن</translation>
     </message>
     <message>
         <source>Location</source>
-        <translation type="unfinished"></translation>
+        <translation>لوکاسي</translation>
     </message>
     <message>
         <source>Image</source>
-        <translation type="unfinished">ايميج</translation>
+        <translation>ايميج</translation>
     </message>
     <message>
         <source>Video</source>
-        <translation type="unfinished">ۏيديو</translation>
+        <translation>ۏيديو</translation>
     </message>
     <message>
         <source>File</source>
-        <translation type="unfinished">فايل</translation>
+        <translation>فاٴيل</translation>
     </message>
 </context>
 <context>
     <name>Message</name>
     <message>
         <source>Spoiler</source>
-        <translation type="unfinished">بيبيرن</translation>
+        <translation>بيبيرن</translation>
     </message>
 </context>
 <context>
@@ -833,7 +837,7 @@ Your password will be deleted, make sure it is stored in a password manager or y
     </message>
     <message>
         <source>Audio Recording</source>
-        <translation>راکمن اءوديو</translation>
+        <translation>راکمن اٴوديو</translation>
     </message>
     <message>
         <source>Video Recording</source>
@@ -845,7 +849,7 @@ Your password will be deleted, make sure it is stored in a password manager or y
     </message>
     <message>
         <source>Audio input</source>
-        <translation>کماسوقن اءوديو</translation>
+        <translation>کماسوقن اٴوديو</translation>
     </message>
     <message>
         <source>Container</source>
@@ -857,7 +861,7 @@ Your password will be deleted, make sure it is stored in a password manager or y
     </message>
     <message>
         <source>Audio</source>
-        <translation>اءوديو</translation>
+        <translation>اٴوديو</translation>
     </message>
     <message>
         <source>Video</source>
@@ -935,7 +939,7 @@ Your password will be deleted, make sure it is stored in a password manager or y
     </message>
     <message>
         <source>You can decide to only not show your password for &lt;b&gt;%1&lt;/b&gt; as text anymore or to remove it completely from the account transfer. If you remove your password completely, you won&apos;t be able to use the account transfer via scanning without entering your password because it is also removed from the QR code.</source>
-        <translation>اندا بوليه ڤيليه سام اد اندا هاڽ ايڠين کات لالوان اندا تيدق دتونجوقکن سباݢاي تيکس لاݢي اونتوق &lt;b&gt;%1&lt;/b&gt; اتاوڤون اندا ايڠين ممبواڠ کات لالوان سڤنوهڽ درڤد ڤيندهن اکاءون. جيک اندا ممبواڠ کات لالوان سڤنوهڽ⹁ اندا تيدق اکن ممڤو مڠݢوناکن فوڠسي ڤيندهن اکاءون سچارا ايمبسن تنڤ مماسوقکن کات لالوان اندا کران کات لالوان اکن توروت دبواڠ درڤد کود QR.</translation>
+        <translation>اندا بوليه ڤيليه سام اد اندا هاڽ ايڠين کات لالوان اندا تيدق دتونجوقکن سباݢاي تيک‌س لاݢي اونتوق &lt;b&gt;%1&lt;/b&gt; اتاوڤون اندا ايڠين ممبواڠ کات لالوان سڤنوهڽ درڤد ڤيندهن اکاٴون. جک اندا ممبواڠ کات لالوان سڤنوهڽ⹁ اندا تيدق اکن ممڤو مڠݢوناکن فوڠسي ڤيندهن اکاٴون سچارا ايمبسن تنڤا مماسوقکن کات لالوان اندا کران کات لالوان اکن توروت دبواڠ درڤد کود QR.</translation>
     </message>
     <message>
         <source>Do not show password as text</source>
@@ -954,27 +958,27 @@ Your password will be deleted, make sure it is stored in a password manager or y
     </message>
     <message>
         <source>Available</source>
-        <translation type="unfinished">ترسديا</translation>
+        <translation>لاڤڠ</translation>
     </message>
     <message>
         <source>Free for chat</source>
-        <translation type="unfinished">لاڤڠ اونتوق سيمبڠ</translation>
+        <translation>بوليه سيمبڠ</translation>
     </message>
     <message>
         <source>Away</source>
-        <translation type="unfinished">تيدق لاڤڠ</translation>
+        <translation>تيدق لاڤڠ</translation>
     </message>
     <message>
         <source>Do not disturb</source>
-        <translation type="unfinished">جاڠن ݢڠݢو</translation>
+        <translation>جاڠن ݢڠݢو</translation>
     </message>
     <message>
         <source>Away for longer</source>
-        <translation type="unfinished">تيدق لاڤڠ لبيه لام</translation>
+        <translation>تيدق لاڤڠ لبيه لام</translation>
     </message>
     <message>
         <source>Offline</source>
-        <translation type="unfinished">لوار تالين</translation>
+        <translation>لوار تالين</translation>
     </message>
 </context>
 <context>
@@ -1053,70 +1057,70 @@ Your password will be deleted, make sure it is stored in a password manager or y
     </message>
     <message>
         <source>Could not connect to the server. Please check your internet connection or your server name.</source>
-        <translation type="unfinished"></translation>
+        <translation>تيدق بوليه سمبوڠ کڤلاين. سيلا ڤريقسا سمبوڠن اينترنيت اندا اتاو نام ڤلاين اندا.</translation>
     </message>
     <message>
         <source>%1 is online</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 براد دالم تالين</translation>
     </message>
     <message>
         <source>%1 is typing…</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 سدڠ مناٴيڤ…</translation>
     </message>
     <message>
         <source>%1 paused typing</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 برهنتي مناٴيڤ</translation>
     </message>
 </context>
 <context>
     <name>QrCodeGenerator</name>
     <message>
         <source>Generating the QR code failed: %1</source>
-        <translation>ڤنجاناءن کود QR تله ݢاݢل: %1</translation>
+        <translation>ڤنجاناٴن کود QR تله ݢاݢل: %1</translation>
     </message>
 </context>
 <context>
     <name>QrCodeOnboardingPage</name>
     <message>
         <source>Scan QR code</source>
-        <translation type="unfinished">ايمبس کود QR</translation>
+        <translation>ايمبس کود QR</translation>
     </message>
     <message>
         <source>Show explanation</source>
-        <translation type="unfinished">تونجوقکن ڤنجلسن</translation>
+        <translation>تونجوقکن ڤنجلسن</translation>
     </message>
     <message>
         <source>Continue without QR code</source>
-        <translation type="unfinished">تروسکن تنڤ کود QR</translation>
+        <translation>تروسکن تنڤا کود QR</translation>
     </message>
     <message>
         <source>Scan the QR code from your existing device to transfer your account.</source>
-        <translation type="unfinished">ايمبس کود QR درڤد ڤرانتي اندا يڠ سديا اد اونتوق مميندهکن اکاءون اندا.</translation>
+        <translation>ايمبس کود QR دري ڤرنتي اندا يڠ سديا اد اونتوق مميندهکن اکاٴون اندا.</translation>
     </message>
     <message>
         <source>Connecting…</source>
-        <translation type="unfinished">مڽمبوڠ…</translation>
+        <translation>مڽمبوڠ…</translation>
     </message>
     <message>
         <source>This QR code is not a valid login QR code.</source>
-        <translation type="unfinished"></translation>
+        <translation>کود QR اين بوکنڽ کود QR لوݢ ماسوق يڠ صح.</translation>
     </message>
 </context>
 <context>
     <name>QrCodeScanner</name>
     <message>
         <source>The camera format &apos;%1&apos; is not supported.</source>
-        <translation type="unfinished">فورمت کاميرا &apos;%1&apos; تيدق دسوکوڠ.</translation>
+        <translation>فورمت کاميرا &apos;%1&apos; تيدق دسوکوڠ.</translation>
     </message>
     <message>
         <source>There is no camera available.</source>
-        <translation type="unfinished">تيادا کاميرا ترسديا.</translation>
+        <translation>تيادا کاميرا ترسديا.</translation>
     </message>
     <message>
         <source>Your camera is busy.
 Try to close other applications using the camera.</source>
-        <translation type="unfinished">کاميرا اندا سيبوق.
-چوب توتوڤ اڤليکاسي لاءين يڠ مڠݢوناکن کاميرا.</translation>
+        <translation>کاميرا اندا سيبوق.
+چوبا توتوڤ اڤليکاسي لاٴين يڠ مڠݢوناکن کاميرا.</translation>
     </message>
 </context>
 <context>
@@ -1172,11 +1176,11 @@ Try to close other applications using the camera.</source>
     </message>
     <message>
         <source>Register a new account</source>
-        <translation>دفتر اکاءون بهارو</translation>
+        <translation>دفتر اکاٴون بهارو</translation>
     </message>
     <message>
         <source>Use an existing account</source>
-        <translation>ݢونا اکاءون سديا اد</translation>
+        <translation>ݢونا اکاٴون سديا اد</translation>
     </message>
 </context>
 <context>
@@ -1194,13 +1198,13 @@ Try to close other applications using the camera.</source>
     <name>RemoteAccountDeletion</name>
     <message>
         <source>Delete account completely</source>
-        <translation>ڤادم اکاءون کسلوروهنڽ</translation>
+        <translation>ڤادم اکاٴون کسلوروهنڽ</translation>
     </message>
     <message>
         <source>Your account will be deleted completely, which means from this app and from the server.
 You will not be able to use your account again!</source>
-        <translation>اکاءون اندا اکن دڤادم کسلوروهنڽ⹁ ايايت دڤادم درڤد اڤليکاسي اين دان جوݢ درڤد ڤلاين.
-اندا تيدق اکن ممڤو مڠݢوناکن اکاءون اندا لاݢي!</translation>
+        <translation>اکاٴون اندا اکن دڤادم کسلوروهنڽ⹁ ايايت دڤادم درڤد اڤليکاسي اين دان جوݢ درڤد ڤلاين.
+اندا تيدق اکن ممڤو مڠݢوناکن اکاٴون اندا لاݢي!</translation>
     </message>
     <message>
         <source>Delete</source>
@@ -1215,7 +1219,7 @@ You will not be able to use your account again!</source>
     </message>
     <message>
         <source>This will also send a request to access the presence of the contact.</source>
-        <translation>اين جوݢ اکن مڠهنتر ڤرمينتاءن اونتوق منچاڤاي کحاضيرن کنلن.</translation>
+        <translation>اين جوݢ اکن مڠهنتر ڤرمينتاٴن اونتوق منچاڤاي کحاضيرن کنلن.</translation>
     </message>
     <message>
         <source>Jabber-ID:</source>
@@ -1315,7 +1319,7 @@ You will not be able to use your account again!</source>
     </message>
     <message>
         <source>Do you really want to delete the contact &lt;b&gt;%1&lt;/b&gt; from your contact list?</source>
-        <translation type="unfinished"></translation>
+        <translation>اداکه اندا ڤستي اندا ايڠين ڤادم کنلن &lt;b&gt;%1&lt;/b&gt; دري سناراي کنلن اندا؟</translation>
     </message>
 </context>
 <context>
@@ -1374,7 +1378,7 @@ Deletion of message history saved on server</extracomment>
     </message>
     <message>
         <source>Changes your account&apos;s password. You will need to re-enter it on your other devices.</source>
-        <translation>توکر کات لالوان اکاءون اندا. اندا ڤرلو ماسوقکن اي سمولا دکسموا ڤرانتي اندا يڠ لاءين.</translation>
+        <translation>توکر کات لالوان اکاٴون اندا. اندا ڤرلو ماسوقکن اي سمولا دکسموا ڤرنتي اندا يڠ لاٴين.</translation>
     </message>
     <message>
         <source>Multimedia Settings</source>
@@ -1382,7 +1386,7 @@ Deletion of message history saved on server</extracomment>
     </message>
     <message>
         <source>Configure photo, video and audio recording settings</source>
-        <translation>مناتاراجه تتڤن راکمن ݢمبر⹁ ۏيديو دان اءوديو</translation>
+        <translation>مناتاراجه تتڤن راکمن ݢمبر⹁ ۏيديو دان اٴوديو</translation>
     </message>
     <message>
         <source>Settings</source>
@@ -1390,7 +1394,7 @@ Deletion of message history saved on server</extracomment>
     </message>
     <message>
         <source>Account security</source>
-        <translation>کسلامتن اکاءون</translation>
+        <translation>کسلامتن اکاٴون</translation>
     </message>
     <message>
         <source>configure whether this device can be used to log in on a new device</source>
@@ -1398,31 +1402,31 @@ Deletion of message history saved on server</extracomment>
     </message>
     <message>
         <source>Remove account from Kaidan</source>
-        <translation>بواڠ اکاءون درڤد Kaidan</translation>
+        <translation>بواڠ اکاٴون درڤد Kaidan</translation>
     </message>
     <message>
         <source>Remove account from this app</source>
-        <translation>بواڠ اکاءون درڤد اڤليلاسي اين</translation>
+        <translation>بواڠ اکاٴون درڤد اڤليلاسي اين</translation>
     </message>
     <message>
         <source>Delete account</source>
-        <translation>ڤادم اکاءون</translation>
+        <translation>ڤادم اکاٴون</translation>
     </message>
     <message>
         <source>Delete account from the server</source>
-        <translation>ڤادم اکاءون درڤد ڤلاين</translation>
+        <translation>ڤادم اکاٴون درڤد ڤلاين</translation>
     </message>
     <message>
         <source>Connection Settings</source>
-        <translation type="unfinished"></translation>
+        <translation>تتڤن سمبوڠن</translation>
     </message>
     <message>
         <source>Configure the hostname and port to connect to</source>
-        <translation type="unfinished"></translation>
+        <translation>تتڤکن نام هوس دان ڤورت اونتوق دسمبوڠ</translation>
     </message>
     <message>
         <source>Configure whether this device can be used to log in on another device</source>
-        <translation type="unfinished"></translation>
+        <translation>تتڤکن سام اد ڤرنتي اين بوليه دݢوناکن اونتوق لوݢ ماسوق دڤرنتي يڠ لاٴين</translation>
     </message>
 </context>
 <context>
@@ -1454,11 +1458,11 @@ Deletion of message history saved on server</extracomment>
     <name>SubRequestAcceptSheet</name>
     <message>
         <source>Subscription Request</source>
-        <translation>ڤرمينتاءن لڠݢنن</translation>
+        <translation>ڤرمينتاٴن لڠݢنن</translation>
     </message>
     <message>
         <source>You received a subscription request by &lt;b&gt;%1&lt;/b&gt;. If you accept it, the account will have access to your presence status.</source>
-        <translation>اندا منداڤت ڤرمينتاءن لڠݢنن درڤد &lt;b&gt;%1&lt;/b&gt;. جيک اندا تريما⹁ اکاءون ترسبوت بوليه منچاڤاي ستاتوس کحاضيرن اندا.</translation>
+        <translation>اندا منداڤت ڤرمينتاٴن لڠݢنن درڤد &lt;b&gt;%1&lt;/b&gt;. جک اندا تريما⹁ اکاٴون ترسبوت بوليه منچاڤاي ستاتوس کحاضيرن اندا.</translation>
     </message>
     <message>
         <source>Decline</source>
@@ -1492,19 +1496,19 @@ Deletion of message history saved on server</extracomment>
     </message>
     <message>
         <source>Rename contact</source>
-        <translation type="unfinished">نامکن سمولا کنلن</translation>
+        <translation>ناماکن سمولا کنلن</translation>
     </message>
     <message>
         <source>Show QR code</source>
-        <translation type="unfinished"></translation>
+        <translation>تونجوق کود QR</translation>
     </message>
     <message>
         <source>Remove contact</source>
-        <translation type="unfinished"></translation>
+        <translation>بواڠ کنلن</translation>
     </message>
     <message>
         <source>Online devices</source>
-        <translation type="unfinished"></translation>
+        <translation>ڤرنتي دالم تالين</translation>
     </message>
 </context>
 <context>

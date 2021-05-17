@@ -12,6 +12,7 @@
   <name xml:lang="fr">Kaidan</name>
   <name xml:lang="id">Kaidan</name>
   <name xml:lang="it">Kaidan</name>
+  <name xml:lang="ko">Kaidan</name>
   <name xml:lang="nl">Kaidan</name>
   <name xml:lang="nn">Kaidan</name>
   <name xml:lang="pl">Kaidan</name>
@@ -32,6 +33,7 @@
   <summary xml:lang="fr">Kaidan, un client « Jabber / XMPP » simple et convivial pour n'importe quel périphérique et plate-forme.</summary>
   <summary xml:lang="id">Kaidan adalah sebuah klien Jabber/XMPP yang sederhana dan penggunaan yang mudah untuk setiap perangkat dan platform</summary>
   <summary xml:lang="it">Kaidan, un semplice e amichevole client Jabber/XMPP per ogni dispositivo e piattaforma</summary>
+  <summary xml:lang="ko">Kaidan, 모든 장치에서 사용할 수 있는 간단하고 사용자 친화적인 XMPP 클라이언트</summary>
   <summary xml:lang="nl">Kaidan, een eenvoudige en gebruikersvriendelijke client voor Jabber/XMPP voor elk apparaat en platform</summary>
   <summary xml:lang="nn">Kaiden er ein brukarvennleg Jabber-/XMPP-klient for alle typar einingar og plattformer</summary>
   <summary xml:lang="pl">Kaidan, prosty i przyjazny użytkownikowi program do Jabber/XMPP na każde urządzenie i platformę</summary>
@@ -53,6 +55,7 @@
   <developer_name xml:lang="fr">Les développeurs et les contributeurs de Kaidan</developer_name>
   <developer_name xml:lang="id">Para Kontributor &amp; Pengembang Kaidan</developer_name>
   <developer_name xml:lang="it">Sviluppatori e collaboratori di Kaidan</developer_name>
+  <developer_name xml:lang="ko">Kaidan 개발자와 기여자</developer_name>
   <developer_name xml:lang="nl">Ontwikkelaars &amp; medewerkers van Kaidan </developer_name>
   <developer_name xml:lang="nn">Kaiden-utviklarar og -bidragsytarar</developer_name>
   <developer_name xml:lang="pl">Programiści &amp; współtwórcy Kaidan</developer_name>
@@ -74,6 +77,7 @@
     <p xml:lang="fr">Kaidan est un client « Jabber / XMPP » simple et convivial, fournissant une interface utilisateur moderne utilisant Kirigami et QtQuick. Le moteur de Kaidan est totalement écrit en C++, en utilisant la bibliothèque « qxmpp » pour XMPP et Qt 5.</p>
     <p xml:lang="id">Kaidan adalah klien Jabber/XMPP sederhana dan penggunaan yang mudah yang menyediakan antarmuka pengguna modern menggunakan Kirigami dan QtQuick. Bagian belakang Kaidan seluruhnya ditulis dalam C++ menggunakan pustaka klien qxmpp XMPP dan Qt 5.</p>
     <p xml:lang="it">Kaidan è un semplice e amichevole client Jabber/XMPP che fornisce una moderna interfaccia utente usando Kirigami e QtQuick. Il motore di Kaidan è scritto interamente in C++ usando la libreria client qxmpp XMPP e Qt 5.</p>
+    <p xml:lang="ko">Kaidan는 Kirigami와 QtQuick을 사용하는 간단하고 사용자 친화적인 Jabber/XMPP 클라이언트입니다. Kaidan 백엔드는 C++로 작성되었으며 qxmpp XMPP 라이브러리와 Qt 5를 사용합니다.</p>
     <p xml:lang="nl">Kaidan, een eenvoudige en gebruikersvriendelijke client voor Jabber/XMPP die een modern gebruikersinterface levert met gebruik van Kirigami en QtQuick. De back-end van Kaidan is geheel in C++ geschreven met de XMPP-clientbibliotheek qxmpp en Qt 5.</p>
     <p xml:lang="nn">Kaidan er ein enkel og brukarvennleg Jabber-/XMPP-klient med ei moderne brukarflate bygd med Kirigami og QtQuick. Bakgrunns­motoren er skriven i rein C++ med XMPP-biblioteket qxmpp og Qt 5.</p>
     <p xml:lang="pl">Kaidan jest prostym i przyjaznym użytkownikowi programem do Jabber/XMPP, który zapewnia nowoczesny interfejs użytkownika, wykorzystujący Kirigami oraz QtQuick. Silnik Kaidan jest całkowicie napisany w C++ przy użyciu biblioteki klienta XMPP qxmpp oraz Qt 5.</p>
@@ -93,6 +97,7 @@
     <p xml:lang="fr">Kaidan est toujours en développement. Ainsi, ne vous attendez pas à un fonctionnement aussi correct qu'une version finale de client.</p>
     <p xml:lang="id">Kaidan belum selesai, jadi jangan berharap itu bekerja sebaik klien yang sudah diselesaikan.</p>
     <p xml:lang="it">Kaidan non è ancora completo, quindi non aspettarti che funzioni bene come un client che lo è.</p>
+    <p xml:lang="ko">Kaidan은 아직 완성되지 않았으므로 잘 작동하지 않을 수도 있습니다.</p>
     <p xml:lang="nl">Kaidan is nog niet klaar, verwacht dus niet dat het werkt zoals een client die gereed is zou doen.</p>
     <p xml:lang="nn">Kaidan er ikkje ferdig enno, så du bør ikkje forventa at programmet skal fungera like godt som andre, ferdige program.</p>
     <p xml:lang="pl">Kaidan nie jest jeszcze gotowy, więc nie oczekuj, że będzie działał tak dobrze jak ukończone programy.</p>
@@ -112,6 +117,7 @@
     <p xml:lang="fr">Pour une liste des « XEP » pris en charge, veuillez consulter le tutoriel.</p>
     <p xml:lang="id">Untuk sebuah daftar XEP yang didukung, lihat di Wiki.</p>
     <p xml:lang="it">Per un elenco di XEP supportati, dà un'occhiata al nostro Wiki.</p>
+    <p xml:lang="ko">지원하는 XEP 목록은 위키를 참조하십시오.</p>
     <p xml:lang="nl">Voor een lijst met ondersteunde XEP's, kijk op de Wiki.</p>
     <p xml:lang="nn">Du finn ei oversikt over støtta XEP-ar på wikien.</p>
     <p xml:lang="pl">Po wykaz obsługiwanych XEP, zajrzyj na Wiki.</p>
@@ -143,6 +149,7 @@
       <caption xml:lang="fr">Exemple de discussion sur un ordinateur de bureau et sur un périphérique mobile.</caption>
       <caption xml:lang="id">Contoh obrolan chat di desktop dan perangkat ponsel</caption>
       <caption xml:lang="it">Chat di esempio su un desktop e su un dispositivo mobile</caption>
+      <caption xml:lang="ko">데스크톱과 모바일 장치간 대화</caption>
       <caption xml:lang="nl">Voorbeeld van een chat op een desktop en op een mobiel apparaat</caption>
       <caption xml:lang="nn">Eksempel på nettprat på PC og på mobil eining</caption>
       <caption xml:lang="pl">Przykładowa rozmowa na urządzeniu biurkowym i przenośnym</caption>

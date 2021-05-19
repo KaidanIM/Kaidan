@@ -87,9 +87,10 @@ RowLayout {
 	Avatar {
 		id: avatar
 		visible: !isOwn
+		jid: root.senderJid
 		avatarUrl: root.avatarUrl
-		Layout.alignment: Qt.AlignHCenter | Qt.AlignTop
 		name: root.senderName
+		Layout.alignment: Qt.AlignHCenter | Qt.AlignTop
 		Layout.preferredHeight: Kirigami.Units.gridUnit * 2.2
 		Layout.preferredWidth: Kirigami.Units.gridUnit * 2.2
 	}

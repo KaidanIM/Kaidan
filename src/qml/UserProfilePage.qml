@@ -157,6 +157,7 @@ Kirigami.Page {
 				Avatar {
 					Layout.preferredHeight: Kirigami.Units.gridUnit * 10
 					Layout.preferredWidth: Kirigami.Units.gridUnit * 10
+					jid: root.jid
 					name: root.name
 					avatarUrl: Kaidan.avatarStorage.getAvatarUrl(jid)
 					isBorderVisible: false

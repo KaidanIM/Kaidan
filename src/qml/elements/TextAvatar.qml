@@ -35,9 +35,10 @@ import org.kde.kirigami 2.12 as Kirigami
 import im.kaidan.kaidan 1.0
 
 Rectangle {
+	property string jid
 	property string name
 
-	color: Qt.lighter(Utils.getUserColor(name))
+	color: Qt.lighter(Utils.getUserColor(jid ? jid : name))
 
 	Text {
 		id: text
@@ -56,6 +57,6 @@ Rectangle {
 		horizontalAlignment: Text.AlignHCenter
 		verticalAlignment: Text.AlignVCenter
 
-		text: name.substring(0, 2)
+		text: name ? name.substring(0, 2) : jid.substring(0, 2)
 	}
 }

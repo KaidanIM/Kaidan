@@ -32,6 +32,7 @@ import QtQuick 2.14
 import org.kde.kirigami 2.12 as Kirigami
 
 Item {
+	property string jid
 	property string avatarUrl
 	property string name
 	property double radius: width * 0.5
@@ -64,6 +65,7 @@ Item {
 
 	TextAvatar {
 		visible: !avatarUrl
+		jid: parent.jid
 		name: parent.name
 		radius: parent.radius
 		anchors.fill: parent

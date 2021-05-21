@@ -41,7 +41,7 @@ constexpr QChar QUERY_ITEM_KEY_DELIMITER = u'=';
 
 // Query types representing actions, e.g. "join" in
 // "xmpp:group@example.org?join" for joining a group chat
-constexpr std::array<QStringView, 17> QUERY_TYPES = {
+constexpr std::array<QStringView, 18> QUERY_TYPES = {
 	QStringView(),
 	u"command",
 	u"disco",
@@ -56,6 +56,7 @@ constexpr std::array<QStringView, 17> QUERY_TYPES = {
 	u"roster",
 	u"sendfile",
 	u"subscribe",
+	u"trust-message",
 	u"unregister",
 	u"unsubscribe",
 	u"vcard"
@@ -227,6 +228,62 @@ void QXmppUri::setHasMessageType(bool hasMessageType)
 }
 
 ///
+/// Returns the namespace of the encryption protocol that uses the keys
+/// corresponding to their identifiers for a trust message action.
+///
+QString QXmppUri::encryption() const
+{
+	return m_encryption;
+}
+
+///
+/// Sets the namespace of the encryption protocol that uses the keys
+/// corresponding to their identifiers for a trust message action.
+///
+/// \param encryption namespace of the encryption protocol
+///
+void QXmppUri::setEncryption(const QString &encryption)
+{
+	m_encryption = encryption;
+}
+
+///
+/// Returns the identifiers of the trusted keys for a trust message action.
+///
+QList<QString> QXmppUri::trustedKeysIds() const
+{
+	return m_trustedKeysIds;
+}
+
+///
+/// Sets the identifiers of the trusted keys for a trust message action.
+///
+/// \param keyIds identifiers of the trusted keys
+///
+void QXmppUri::setTrustedKeysIds(const QList<QString> &keyIds)
+{
+	m_trustedKeysIds = keyIds;
+}
+
+///
+/// Returns the identifiers of the distrusted keys for a trust message action.
+///
+QList<QString> QXmppUri::distrustedKeysIds() const
+{
+	return m_distrustedKeysIds;
+}
+
+///
+/// Sets the identifiers of the distrusted keys for a trust message action.
+///
+/// \param keyIds identifiers of the distrusted keys
+///
+void QXmppUri::setDistrustedKeysIds(const QList<QString> &keyIds)
+{
+	m_distrustedKeysIds = keyIds;
+}
+
+///
 /// Checks whether the string starts with the XMPP scheme.
 ///
 /// @param uri URI to check for XMPP scheme
@@ -304,6 +361,11 @@ void QXmppUri::setQueryKeyValuePairs(const QUrlQuery &query)
 	case Login:
 		m_password = queryItemValue(query, "password");
 		break;
+	case TrustMessage: {
+		m_encryption = queryItemValue(query, "encryption");
+		m_trustedKeysIds = query.allQueryItemValues("trust", QUrl::FullyDecoded);
+		m_distrustedKeysIds = query.allQueryItemValues("distrust", QUrl::FullyDecoded);
+	}
 	default:
 		break;
 	}
@@ -333,6 +395,17 @@ void QXmppUri::addItemsToQuery(QUrlQuery &query) const
 	case Login:
 		addKeyValuePairToQuery(query, "password", m_password);
 		break;
+	case TrustMessage: {
+		addKeyValuePairToQuery(query, "encryption", m_encryption);
+
+		for (auto &identifier : m_trustedKeysIds) {
+			addKeyValuePairToQuery(query, "trust", identifier);
+		}
+
+		for (auto &identifier : m_distrustedKeysIds) {
+			addKeyValuePairToQuery(query, "distrust", identifier);
+		}
+	}
 	default:
 		break;
 	}

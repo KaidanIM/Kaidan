@@ -75,6 +75,7 @@ public:
 		Roster,
 		SendFile,
 		Subscribe,
+		TrustMessage,
 		Unregister,
 		Unsubscribe,
 		VCard,
@@ -102,6 +103,14 @@ public:
 	bool hasMessageType() const;
 	void setHasMessageType(bool hasMessageType);
 
+	// trust-message
+	QString encryption() const;
+	void setEncryption(const QString &encryption);
+	QList<QString> trustedKeysIds() const;
+	void setTrustedKeysIds(const QList<QString> &keyIds);
+	QList<QString> distrustedKeysIds() const;
+	void setDistrustedKeysIds(const QList<QString> &keyIds);
+
 	static bool isXmppUri(const QString &uri);
 
 private:
@@ -122,6 +131,11 @@ private:
 	// message
 	QXmppMessage m_message;
 	bool m_hasMessageType = false;
+
+	// trust-message
+	QString m_encryption;
+	QList<QString> m_trustedKeysIds;
+	QList<QString> m_distrustedKeysIds;
 };
 
 #endif // QXMPPURI_H

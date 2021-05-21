@@ -61,21 +61,7 @@ Kirigami.GlobalDrawer {
 			}
 
 			Text {
-				text: {
-					var accountStatus = AccountManager.displayName + " ("
-
-					if (parent.disconnected)
-						accountStatus += qsTr("Offline");
-					else if (parent.connected)
-						accountStatus += qsTr("Online");
-					else
-						accountStatus += qsTr("Connecting…");
-
-					accountStatus += ")"
-
-					return accountStatus
-				}
-
+				text: AccountManager.displayName + " (" + Kaidan.connectionStateText + ")"
 				color: parent.connected ? "green" : "silver"
 			}
 		},

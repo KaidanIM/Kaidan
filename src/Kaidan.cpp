@@ -97,6 +97,19 @@ void Kaidan::logOut()
 	emit logOutRequested();
 }
 
+QString Kaidan::connectionStateText() const
+{
+	switch (m_connectionState) {
+	case Enums::ConnectionState::StateConnected:
+		return tr("Online");
+	case Enums::ConnectionState::StateConnecting:
+		return tr("Connecting…");
+	case Enums::ConnectionState::StateDisconnected:
+		return tr("Offline");
+	}
+	return {};
+}
+
 void Kaidan::setConnectionState(Enums::ConnectionState connectionState)
 {
 	if (m_connectionState != connectionState) {

@@ -62,6 +62,7 @@ class Kaidan : public QObject
 	Q_PROPERTY(ServerFeaturesCache* serverFeaturesCache READ serverFeaturesCache CONSTANT)
 	Q_PROPERTY(QSettings* settings READ settings CONSTANT)
 	Q_PROPERTY(quint8 connectionState READ connectionState NOTIFY connectionStateChanged)
+	Q_PROPERTY(QString connectionStateText READ connectionStateText NOTIFY connectionStateChanged)
 	Q_PROPERTY(quint8 connectionError READ connectionError NOTIFY connectionErrorChanged)
 	Q_PROPERTY(PasswordVisibility passwordVisibility READ passwordVisibility WRITE setPasswordVisibility NOTIFY passwordVisibilityChanged)
 
@@ -129,6 +130,8 @@ public:
 	{
 		return quint8(m_connectionState);
 	}
+
+	QString connectionStateText() const;
 
 	/**
 	 * Returns the last connection error.

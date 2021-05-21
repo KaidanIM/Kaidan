@@ -159,7 +159,6 @@ Kirigami.Page {
 					Layout.preferredWidth: Kirigami.Units.gridUnit * 10
 					jid: root.jid
 					name: root.name
-					isBorderVisible: false
 				}
 
 				ColumnLayout {

@@ -33,27 +33,22 @@ import org.kde.kirigami 2.12 as Kirigami
 
 import im.kaidan.kaidan 1.0
 
-Item {
-	property string jid
-	property string name
-	property double radius: width * 0.5
+Avatar {
+	property alias isBorderVisible: border.visible
 
-	RoundedImage {
-		id: imageAvatar
-		visible: source != ""
-		source: parent.jid ? Kaidan.avatarStorage.getAvatarUrl(parent.jid) : ""
-		fillMode: Image.PreserveAspectFit
-		mipmap: true
+	Kirigami.ShadowedRectangle {
+		id: border
+		z: -1
+		shadow.color: Qt.darker(color, 1.2)
+		shadow.size: 4
+		anchors.centerIn: parent
+		radius: parent.radius
+		width: parent.width + 2
 		height: width
-		radius: parent.radius
-		anchors.fill: parent
-	}
 
-	TextAvatar {
-		visible: !imageAvatar.visible
-		jid: parent.jid
-		name: parent.name
-		radius: parent.radius
-		anchors.fill: parent
+		color: {
+			var accentColor = Kirigami.Theme.textColor
+			return Qt.tint(Kirigami.Theme.backgroundColor, Qt.rgba(accentColor.r, accentColor.g, accentColor.b, 0.1))
+		}
 	}
 }

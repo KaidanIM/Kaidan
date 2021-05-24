@@ -38,6 +38,7 @@ import im.kaidan.kaidan 1.0
 Kirigami.OverlaySheet {
 	property string jid: ""
 
+	parent: applicationWindow().overlay
 	header: Kirigami.Heading {
 		text: qsTr("Add new contact")
 		Layout.fillWidth: true

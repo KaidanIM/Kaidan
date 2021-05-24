@@ -35,6 +35,8 @@
 #include <QFile>
 #include <QSettings>
 
+#include "Settings.h"
+
 /*
  * NOTES: Codecs and containers supported list are available as soon as the object is created.
  * Resolutions, frame rates etc are populated once the objects become *ready*.
@@ -774,7 +776,7 @@ void MediaRecorder::saveUserSettings()
 		Q_UNREACHABLE();
 		break;
 	case MediaRecorder::Type::Image: {
-		QSettings &settings(*Kaidan::instance()->settings());
+		QSettings &settings(Kaidan::instance()->settings()->raw());
 
 		settings.beginGroup(settingsKey(m_type, SETTING_USER_DEFAULT));
 		settings.setValue(SETTING_DEFAULT_CAMERA_DEVICE_NAME, m_mediaSettings.camera.deviceName());
@@ -789,7 +791,7 @@ void MediaRecorder::saveUserSettings()
 		break;
 	}
 	case MediaRecorder::Type::Audio: {
-		QSettings &settings(*Kaidan::instance()->settings());
+		QSettings &settings(Kaidan::instance()->settings()->raw());
 
 		settings.beginGroup(settingsKey(m_type, SETTING_USER_DEFAULT));
 		settings.setValue(SETTING_DEFAULT_AUDIO_INPUT_DEVICE_NAME, m_mediaSettings.audioInputDevice.deviceName());
@@ -802,7 +804,7 @@ void MediaRecorder::saveUserSettings()
 		break;
 	}
 	case MediaRecorder::Type::Video: {
-		QSettings &settings(*Kaidan::instance()->settings());
+		QSettings &settings(Kaidan::instance()->settings()->raw());
 
 		settings.beginGroup(settingsKey(m_type, SETTING_USER_DEFAULT));
 		settings.setValue(SETTING_DEFAULT_CAMERA_DEVICE_NAME, m_mediaSettings.camera.deviceName());
@@ -931,7 +933,7 @@ CameraInfo MediaRecorder::userDefaultCamera() const
 		return CameraInfo();
 	}
 
-	QSettings &settings(*Kaidan::instance()->settings());
+	QSettings &settings(Kaidan::instance()->settings()->raw());
 	CameraInfo cameraInfo = m_cameraModel->defaultCamera();
 
 	settings.beginGroup(settingsKey(m_type, SETTING_USER_DEFAULT));
@@ -955,7 +957,7 @@ AudioDeviceInfo MediaRecorder::userDefaultAudioInput() const
 		return AudioDeviceInfo();
 	}
 
-	QSettings &settings(*Kaidan::instance()->settings());
+	QSettings &settings(Kaidan::instance()->settings()->raw());
 	AudioDeviceInfo audioInput = m_audioDeviceModel->defaultAudioInputDevice();
 
 	settings.beginGroup(settingsKey(m_type, SETTING_USER_DEFAULT));
@@ -987,7 +989,7 @@ void MediaRecorder::resetSettings(const CameraInfo &camera, const AudioDeviceInf
 		m_videoEncoderSettings = VideoEncoderSettings();
 		break;
 	case MediaRecorder::Type::Image: {
-		QSettings &settings(*Kaidan::instance()->settings());
+		QSettings &settings(Kaidan::instance()->settings()->raw());
 		MediaSettings mediaSettings(camera, AudioDeviceInfo());
 		ImageEncoderSettings imageSettings;
 
@@ -1001,7 +1003,7 @@ void MediaRecorder::resetSettings(const CameraInfo &camera, const AudioDeviceInf
 		break;
 	}
 	case MediaRecorder::Type::Audio: {
-		QSettings &settings(*Kaidan::instance()->settings());
+		QSettings &settings(Kaidan::instance()->settings()->raw());
 		MediaSettings mediaSettings(CameraInfo(), audioInput);
 		AudioEncoderSettings audioSettings;
 
@@ -1015,7 +1017,7 @@ void MediaRecorder::resetSettings(const CameraInfo &camera, const AudioDeviceInf
 		break;
 	}
 	case MediaRecorder::Type::Video: {
-		QSettings &settings(*Kaidan::instance()->settings());
+		QSettings &settings(Kaidan::instance()->settings()->raw());
 		MediaSettings mediaSettings(camera, AudioDeviceInfo());
 		AudioEncoderSettings audioSettings;
 		VideoEncoderSettings videoSettings;

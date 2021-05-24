@@ -54,6 +54,7 @@ set(KAIDAN_SOURCES
 	src/RegistrationDataFormModel.cpp
 	src/ServerListModel.cpp
 	src/ServerListItem.cpp
+        src/Settings.cpp
 	src/AccountManager.cpp
 	src/VCardCache.cpp
 

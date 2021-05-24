@@ -57,9 +57,10 @@
 #include "VCardCache.h"
 #include "VCardManager.h"
 #include "VersionManager.h"
+#include "Settings.h"
 
 ClientWorker::Caches::Caches(QObject *parent)
-	: settings(new QSettings(APPLICATION_NAME, APPLICATION_NAME)),
+	: settings(new Settings(parent)),
 	  vCardCache(new VCardCache(parent)),
 	  accountManager(new AccountManager(settings, vCardCache, parent)),
 	  msgModel(new MessageModel(parent)),
@@ -74,7 +75,6 @@ ClientWorker::Caches::Caches(QObject *parent)
 
 ClientWorker::Caches::~Caches()
 {
-	delete settings;
 }
 
 ClientWorker::ClientWorker(Caches *caches, bool enableLogging, QObject* parent)
@@ -83,7 +83,7 @@ ClientWorker::ClientWorker(Caches *caches, bool enableLogging, QObject* parent)
 	  m_client(new QXmppClient(this)),
 	  m_logger(new LogHandler(m_client, enableLogging, this)),
 	  m_enableLogging(enableLogging),
-	  m_registrationManager(new RegistrationManager(this, m_client, m_caches->settings, this)),
+	  m_registrationManager(new RegistrationManager(this, m_client, this)),
 	  m_vCardManager(new VCardManager(this, m_client, m_caches->avatarStorage, this)),
 	  m_rosterManager(new RosterManager(m_client, m_caches->avatarStorage, m_vCardManager, this)),
 	  m_messageHandler(new MessageHandler(this, m_client, this)),
@@ -148,9 +148,9 @@ void ClientWorker::finishTask()
 
 void ClientWorker::logIn()
 {
-	if (!m_isFirstLoginAfterStart || m_caches->settings->value(KAIDAN_SETTINGS_AUTH_ONLINE, true).toBool()) {
+	if (!m_isFirstLoginAfterStart || m_caches->settings->authOnline()) {
 		// Store the latest online state which is restored when opening Kaidan again after closing.
-		m_caches->settings->setValue(KAIDAN_SETTINGS_AUTH_ONLINE, true);
+		m_caches->settings->setAuthOnline(true);
 
 		QXmppConfiguration config;
 		config.setResource(AccountManager::instance()->jidResource());
@@ -218,7 +218,7 @@ void ClientWorker::logOut(bool isApplicationBeingClosed)
 {
 	// Store the latest online state which is restored when opening Kaidan again after closing.
 	if (!isApplicationBeingClosed)
-		m_caches->settings->setValue(KAIDAN_SETTINGS_AUTH_ONLINE, false);
+		m_caches->settings->setAuthOnline(false);
 
 	switch (m_client->state()) {
 	case QXmppClient::DisconnectedState:

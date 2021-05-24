@@ -34,10 +34,8 @@
 #include <QMutex>
 #include <QObject>
 
-class QSettings;
+class Settings;
 class VCardCache;
-
-constexpr quint16 NON_CUSTOM_PORT = 0;
 
 /**
  * This class manages account-related settings.
@@ -56,7 +54,7 @@ class AccountManager : public QObject
 public:
 	static AccountManager *instance();
 
-	AccountManager(QSettings *settings, VCardCache *cache, QObject *parent = nullptr);
+	AccountManager(Settings *settings, VCardCache *cache, QObject *parent = nullptr);
 
 	/**
 	 * Returns the bare JID of the account.
@@ -226,7 +224,7 @@ public:
 	 *
 	 * Settings stored in the settings file are also removed from it.
 	 */
- 	void deleteSettings();
+	void deleteSettings();
 
 	/**
 	 * Removes an account.
@@ -275,13 +273,6 @@ signals:
 
 private:
 	/**
-	 * Deletes settings in the settings / configuration file.
-	 *
-	 * @param keys keys of the settings being deleted
-	 */
-	void deleteSettingsInSettingsFile(const QStringList &keys) const;
-
-	/**
 	 * Generates the JID's resource part with the set JID resource prefix and a suffix
 	 * consisting of a dot followed by random alphanumeric characters.
 	 *
@@ -291,14 +282,14 @@ private:
 	QString generateJidResourceWithRandomSuffix(unsigned int numberOfRandomSuffixCharacters = 4) const;
 
 	QMutex m_mutex;
-	QSettings *m_settings;
+	Settings *m_settings;
 
 	QString m_jid;
 	QString m_jidResourcePrefix;
 	QString m_jidResource;
 	QString m_password;
 	QString m_host;
-	quint16 m_port = NON_CUSTOM_PORT;
+	quint16 m_port;
 
 	bool m_hasNewCredentials;
 

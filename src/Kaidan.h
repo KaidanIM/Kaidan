@@ -60,7 +60,6 @@ class Kaidan : public QObject
 	Q_PROPERTY(PresenceCache* presenceCache READ presenceCache CONSTANT)
 	Q_PROPERTY(TransferCache* transferCache READ transferCache CONSTANT)
 	Q_PROPERTY(ServerFeaturesCache* serverFeaturesCache READ serverFeaturesCache CONSTANT)
-	Q_PROPERTY(QSettings* settings READ settings CONSTANT)
 	Q_PROPERTY(quint8 connectionState READ connectionState NOTIFY connectionStateChanged)
 	Q_PROPERTY(QString connectionStateText READ connectionStateText NOTIFY connectionStateChanged)
 	Q_PROPERTY(quint8 connectionError READ connectionError NOTIFY connectionErrorChanged)
@@ -178,7 +177,7 @@ public:
 		return m_caches->vCardCache;
 	}
 
-	QSettings* settings() const
+	Settings *settings() const
 	{
 		return m_caches->settings;
 	}

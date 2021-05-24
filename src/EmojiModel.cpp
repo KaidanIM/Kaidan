@@ -18,7 +18,7 @@
 
 #include "EmojiModel.h"
 
-#include <QSettings>
+#include "Settings.h"
 
 #include "Globals.h"
 #include "Kaidan.h"
@@ -1501,8 +1501,8 @@ QHash<int, QByteArray> EmojiModel::roleNames() const
 EmojiProxyModel::EmojiProxyModel(QObject *parent)
 	: QSortFilterProxyModel(parent)
 {
-	QSettings *settings = Kaidan::instance()->settings();
-	QStringList list = settings->value(QLatin1String(KAIDAN_SETTINGS_FAVORITE_EMOJIS)).toStringList();
+	Settings *settings = Kaidan::instance()->settings();
+	const QStringList list = settings->favoriteEmojis();
 	m_favoriteEmojis = QSet<QString>(list.begin(), list.end());
 }
 
@@ -1559,8 +1559,8 @@ void EmojiProxyModel::addFavoriteEmoji(int proxyRow)
 			invalidateFilter();
 		}
 
-		QSettings *settings = Kaidan::instance()->settings();
-		settings->setValue(QLatin1String(KAIDAN_SETTINGS_FAVORITE_EMOJIS), QStringList(m_favoriteEmojis.values()));
+		Settings *settings = Kaidan::instance()->settings();
+		settings->setFavoriteEmojis(m_favoriteEmojis.values());
 	}
 }
 

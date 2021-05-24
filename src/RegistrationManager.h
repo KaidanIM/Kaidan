@@ -41,7 +41,6 @@
 class ClientWorker;
 class RegistrationDataFormModel;
 class DataFormModel;
-class QSettings;
 class QXmppRegistrationManager;
 class QXmppClient;
 class QXmppDataForm;
@@ -63,7 +62,7 @@ public:
 	};
 	Q_ENUM(RegistrationError)
 
-	RegistrationManager(ClientWorker *clientWorker, QXmppClient *client, QSettings *settings, QObject *parent = nullptr);
+	RegistrationManager(ClientWorker *clientWorker, QXmppClient *client, QObject *parent = nullptr);
 
 	/**
 	 * Sets whether a registration is requested for the next time when the client connects to the server.
@@ -168,7 +167,6 @@ private:
 
 	ClientWorker *m_clientWorker;
 	QXmppClient *m_client;
-	QSettings *m_settings;
 	QXmppRegistrationManager *m_manager;
 	RegistrationDataFormModel *m_dataFormModel;
 	QVector<QXmppBitsOfBinaryContentId> m_contentIdsToRemove;

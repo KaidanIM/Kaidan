@@ -42,11 +42,10 @@
 #include "RegistrationDataFormModel.h"
 #include "ServerFeaturesCache.h"
 
-RegistrationManager::RegistrationManager(ClientWorker *clientWorker, QXmppClient *client, QSettings *settings, QObject *parent)
+RegistrationManager::RegistrationManager(ClientWorker *clientWorker, QXmppClient *client, QObject *parent)
 	: QObject(parent),
 	  m_clientWorker(clientWorker),
 	  m_client(client),
-	  m_settings(settings),
 	  m_manager(new QXmppRegistrationManager),
 	  m_dataFormModel(new RegistrationDataFormModel())
 {

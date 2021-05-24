@@ -40,6 +40,7 @@
 #include "Kaidan.h"
 #include "MessageModel.h"
 #include "RosterModel.h"
+#include "Settings.h"
 #include "VCardCache.h"
 
 AccountManager *AccountManager::s_instance = nullptr;
@@ -49,9 +50,10 @@ AccountManager *AccountManager::instance()
 	return s_instance;
 }
 
-AccountManager::AccountManager(QSettings *settings, VCardCache *cache, QObject *parent)
+AccountManager::AccountManager(Settings *settings, VCardCache *cache, QObject *parent)
 	: QObject(parent),
-	  m_settings(settings)
+	  m_settings(settings),
+	  m_port(NON_CUSTOM_PORT)
 {
 	Q_ASSERT(!s_instance);
 	s_instance = this;
@@ -192,16 +194,15 @@ bool AccountManager::loadCredentials()
 {
 	if (!hasEnoughCredentialsForLogin()) {
 		// Load the credentials from the settings file.
-		setJid(m_settings->value(KAIDAN_SETTINGS_AUTH_JID).toString());
-		setPassword(QByteArray::fromBase64(m_settings->value(KAIDAN_SETTINGS_AUTH_PASSWD).toString().toUtf8()));
+		setJid(m_settings->authJid());
+		setPassword(m_settings->authPassword());
 
 		// Use a default prefix for the JID's resource part if no prefix is already set.
-		setJidResourcePrefix(m_settings->value(KAIDAN_SETTINGS_AUTH_JID_RESOURCE_PREFIX,
-				KAIDAN_JID_RESOURCE_DEFAULT_PREFIX).toString());
+		setJidResourcePrefix(m_settings->authJidResourcePrefix());
 
 		// Load the custom connection setings.
-		setHost(m_settings->value(KAIDAN_SETTINGS_AUTH_HOST).toString());
-		setPort(m_settings->value(KAIDAN_SETTINGS_AUTH_PORT, NON_CUSTOM_PORT).toInt());
+		setHost(m_settings->authHost());
+		setPort(m_settings->authPort());
 
 		// This method is only used to load old credentials. Therefore,
 		// "m_hasNewCredentials" which was set to "true" by setting the credentials in this
@@ -219,25 +220,25 @@ bool AccountManager::loadCredentials()
 
 void AccountManager::storeJid()
 {
-	m_settings->setValue(KAIDAN_SETTINGS_AUTH_JID, jid());
+	m_settings->setAuthJid(jid());
 }
 
 void AccountManager::storePassword()
 {
-	m_settings->setValue(KAIDAN_SETTINGS_AUTH_PASSWD, QString::fromUtf8(password().toUtf8().toBase64()));
+	m_settings->setAuthPassword(password());
 }
 
 void AccountManager::storeCustomConnectionSettings()
 {
 	if (m_host.isEmpty())
-		m_settings->remove(KAIDAN_SETTINGS_AUTH_HOST);
+		m_settings->resetAuthHost();
 	else
-		m_settings->setValue(KAIDAN_SETTINGS_AUTH_HOST, m_host);
+		m_settings->setAuthHost(m_host);
 
-	if (m_port == NON_CUSTOM_PORT)
-		m_settings->remove(KAIDAN_SETTINGS_AUTH_PORT);
+	if (m_settings->isDefaultAuthPort())
+		m_settings->resetAuthPort();
 	else
-		m_settings->setValue(KAIDAN_SETTINGS_AUTH_PORT, m_port);
+		m_settings->setAuthPort(m_port);
 }
 
 void AccountManager::storeCredentials()
@@ -249,7 +250,7 @@ void AccountManager::storeCredentials()
 
 void AccountManager::deleteCredentials()
 {
-	deleteSettingsInSettingsFile({
+	m_settings->remove({
 		KAIDAN_SETTINGS_AUTH_JID,
 		KAIDAN_SETTINGS_AUTH_JID_RESOURCE_PREFIX,
 		KAIDAN_SETTINGS_AUTH_PASSWD,
@@ -269,7 +270,7 @@ void AccountManager::deleteCredentials()
 
 void AccountManager::deleteSettings()
 {
-	deleteSettingsInSettingsFile({
+	m_settings->remove({
 		KAIDAN_SETTINGS_AUTH_ONLINE,
 		KAIDAN_SETTINGS_NOTIFICATIONS_MUTED,
 		KAIDAN_SETTINGS_FAVORITE_EMOJIS
@@ -283,12 +284,6 @@ void AccountManager::removeAccount(const QString &accountJid)
 
 	emit MessageModel::instance()->removeMessagesRequested(accountJid);
 	emit RosterModel::instance()->removeItemsRequested(accountJid);
-}
-
-void AccountManager::deleteSettingsInSettingsFile(const QStringList &keys) const
-{
-	for (const QString &key : keys)
-		m_settings->remove(key);
 }
 
 QString AccountManager::generateJidResourceWithRandomSuffix(unsigned int numberOfRandomSuffixCharacters) const

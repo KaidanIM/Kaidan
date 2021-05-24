@@ -53,7 +53,7 @@ class UploadManager;
 class VCardCache;
 class VCardManager;
 class VersionManager;
-class QSettings;
+class Settings;
 
 /**
  * The ClientWorker is used as a QObject-based worker on the ClientThread.
@@ -94,7 +94,7 @@ public:
 		Caches(QObject *parent = nullptr);
 		~Caches();
 
-		QSettings *settings;
+		Settings *settings;
 		VCardCache *vCardCache;
 		AccountManager *accountManager;
 		MessageModel *msgModel;

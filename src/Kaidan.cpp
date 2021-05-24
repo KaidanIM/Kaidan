@@ -46,6 +46,7 @@
 #include "MessageDb.h"
 #include "Notifications.h"
 #include "RosterDb.h"
+#include "Settings.h"
 
 Kaidan *Kaidan::s_instance;
 
@@ -74,12 +75,12 @@ Kaidan::~Kaidan()
 
 QSize Kaidan::applicationWindowSize() const
 {
-	return m_caches->settings->value(KAIDAN_SETTINGS_WINDOW_SIZE).toSize();
+	return m_caches->settings->windowSize();
 }
 
 void Kaidan::storeApplicationWindowSize(const QSize &size) const
 {
-	m_caches->settings->setValue(KAIDAN_SETTINGS_WINDOW_SIZE, size);
+	m_caches->settings->setWindowSize(size);
 }
 
 void Kaidan::logIn()
@@ -138,26 +139,24 @@ void Kaidan::setConnectionError(ClientWorker::ConnectionError error)
 
 bool Kaidan::notificationsMuted(const QString &jid)
 {
-	return m_caches->settings->value(QString(KAIDAN_SETTINGS_NOTIFICATIONS_MUTED) + jid, false).toBool();
+	return m_caches->settings->notificationsMuted(jid);
 }
 
 void Kaidan::setNotificationsMuted(const QString &jid, bool muted)
 {
-	m_caches->settings->setValue(QString(KAIDAN_SETTINGS_NOTIFICATIONS_MUTED) + jid, muted);
+	m_caches->settings->setNotificationsMuted(jid, muted);
 	emit notificationsMutedChanged(jid);
 }
 
 void Kaidan::setPasswordVisibility(PasswordVisibility passwordVisibility)
 {
-	m_caches->settings->setValue(KAIDAN_SETTINGS_AUTH_PASSWD_VISIBILITY, quint8(passwordVisibility));
+	m_caches->settings->setAuthPasswordVisibility(passwordVisibility);
 	emit passwordVisibilityChanged();
 }
 
 Kaidan::PasswordVisibility Kaidan::passwordVisibility() const
 {
-	return m_caches->settings
-		->value(KAIDAN_SETTINGS_AUTH_PASSWD_VISIBILITY, PasswordVisible)
-		.value<Kaidan::PasswordVisibility>();
+	return m_caches->settings->authPasswordVisibility();
 }
 
 quint8 Kaidan::connectionError() const

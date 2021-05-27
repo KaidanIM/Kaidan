@@ -52,6 +52,7 @@ REPLACE_USER_IDS = [
 	("ZatroxDE <zatroxde@outlook.com>", "Robert Maerkisch <zatroxde@protonmail.ch>"),
 	("X oiseauroch <tobias.ollive@mailoo.org>", "oiseauroch <tobias.ollive@mailoo.org>"),
 	("X ssantos <ssantos@web.de>", "ssantos <ssantos@web.de>"),
+	("ssantos _ <ssantos@web.de>", "ssantos <ssantos@web.de>"),
 	("X Txaume <txaumevw@gmail.com>", "Txaume <txaumevw@gmail.com>"),
 	("X mondstern <hello@mondstern.tk>", "mondstern <mondstern@snopyta.org>"),
 	("X mondstern <mondstern@snopyta.org>", "mondstern <mondstern@snopyta.org>"),
@@ -59,6 +60,9 @@ REPLACE_USER_IDS = [
 	("aevw _ <arcanevw@tuta.io>", "aevw <arcanevw@tuta.io>"),
     ("Coucouf _ <coucouf@coucouf.fr>", "Coucouf <coucouf@coucouf.fr>"),
 	("t4llkr _ <anaterem2015@yandex.ru>", "t4llkr <anaterem2015@yandex.ru>"),
+	("papadop _ <papadop@protonmail.com>", "papadop <papadop@protonmail.com>"),
+	("Anna _ <bs@sysrq.in>", "Anna <bs@sysrq.in>"),
+	("marek _ <Marek@walczak.io>", "marek <marek@walczak.io>"),
 ]
 
 # These user ids will be excluded from any targets

@@ -632,10 +632,10 @@ void MessageModel::showMessageNotification(const Message &message, MessageOrigin
 		const auto accountJid = AccountManager::instance()->jid();
 		const auto chatJid = message.from();
 
-		bool userMuted = !Kaidan::instance()->notificationsMuted(chatJid);
+		bool userMuted = Kaidan::instance()->notificationsMuted(chatJid);
 		bool chatActive =
 				isChatCurrentChat(accountJid, chatJid) &&
-				QGuiApplication::applicationState() != Qt::ApplicationActive;
+				QGuiApplication::applicationState() == Qt::ApplicationActive;
 
 		if (!userMuted && !chatActive) {
 			const auto chatName = RosterModel::instance()->itemName(accountJid, chatJid);

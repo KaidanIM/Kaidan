@@ -1,228 +1,179 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.1" language="pl">
+<TS version="2.1" language="el">
 <context>
     <name>AboutDialog</name>
     <message>
         <source>A simple, user-friendly Jabber/XMPP client</source>
-        <translation>Prosty, przyjazny dla użytkownika klient Jabber/XMPP</translation>
+        <translation>Ένας απλός, φιλικός προς τον χρήστη πελάτης Jabber / XMPP</translation>
     </message>
     <message>
         <source>License:</source>
-        <translation>Licencja:</translation>
+        <translation>Άδεια:</translation>
     </message>
     <message>
         <source>View source code online</source>
-        <translation>Zobacz kod źródłowy online</translation>
+        <translation>Δείτε τον πηγαίο κώδικα στο διαδίκτυο</translation>
     </message>
     <message>
         <source>Report problems</source>
-        <translation type="unfinished"></translation>
+        <translation>Αναφορά προβλημάτων</translation>
     </message>
 </context>
 <context>
     <name>AccountSecurity</name>
     <message>
         <source>Account Security</source>
-        <translation type="unfinished"></translation>
+        <translation>Ασφάλεια λογαριασμού</translation>
     </message>
     <message>
         <source>Allow to add additional devices using the login QR code but never show the password.</source>
-        <translation type="unfinished"></translation>
+        <translation>Επιτρέψτε να προσθέσετε επιπλέον συσκευές χρησιμοποιώντας τον κωδικό QR σύνδεσης, αλλά ποτέ να μην εμφανίζεται ο κωδικός πρόσβασης.</translation>
     </message>
     <message>
         <source>Don&apos;t show password</source>
-        <translation type="unfinished"></translation>
+        <translation>Να μην εμφανίζεται κωδικός πρόσβασης</translation>
     </message>
     <message>
         <source>Neither allow to add additional devices using the login QR code nor show the password.</source>
-        <translation type="unfinished"></translation>
+        <translation>Να μην επιτρέπεται η προσθήκη επιπλέον συσκευών χρησιμοποιώντας τον κωδικό QR σύνδεσης ούτε η εμφάνιση του κωδικού πρόσβασης.</translation>
     </message>
     <message>
         <source>Don&apos;t expose password in any way</source>
-        <translation type="unfinished"></translation>
+        <translation>Μην εκθέτετε τον κωδικό πρόσβασης με κανέναν τρόπο</translation>
     </message>
 </context>
 <context>
     <name>AccountTransferPage</name>
     <message>
         <source>Transfer account to another device</source>
-        <translation type="unfinished"></translation>
+        <translation>Μεταφορά λογαριασμού σε άλλη συσκευή</translation>
     </message>
     <message>
         <source>Scan the QR code or enter the credentials as text on another device to log in on it.
 
 Attention:
 Never show this QR code to anyone else. It would allow unlimited access to your account!</source>
-        <translation type="unfinished"></translation>
+        <translation>Σαρώστε τον κωδικό QR ή εισαγάγετε τα διαπιστευτήρια ως κείμενο σε άλλη συσκευή για να συνδεθείτε σε αυτόν.
+
+Προσοχή:
+Ποτέ μην εμφανίζετε αυτόν τον κωδικό QR σε κανέναν άλλο. Θα επέτρεπε απεριόριστη πρόσβαση στον λογαριασμό σας!</translation>
     </message>
     <message>
         <source>Chat address:</source>
-        <translation type="unfinished"></translation>
+        <translation>Διεύθυνση συνομιλίας:</translation>
     </message>
     <message>
         <source>Password:</source>
-        <translation>Hasło:</translation>
+        <translation>Κωδικός πρόσβασης:</translation>
     </message>
     <message>
         <source>Hide QR code</source>
-        <translation type="unfinished"></translation>
+        <translation>Απόκρυψη κωδικού QR</translation>
     </message>
     <message>
         <source>Show as QR code</source>
-        <translation type="unfinished"></translation>
+        <translation>Εμφάνιση ως κωδικός QR</translation>
     </message>
     <message>
         <source>Hide text</source>
-        <translation type="unfinished"></translation>
+        <translation>Απόκρυψη κειμένου</translation>
     </message>
     <message>
         <source>Show as text</source>
-        <translation type="unfinished"></translation>
+        <translation>Εμφάνιση ως κείμενο</translation>
     </message>
     <message>
         <source>Copy password</source>
-        <translation type="unfinished"></translation>
+        <translation>Αντιγραφή κωδικού πρόσβασης</translation>
     </message>
     <message>
         <source>Copy chat address</source>
-        <translation type="unfinished"></translation>
+        <translation>Αντιγραφή διεύθυνσης συνομιλίας</translation>
     </message>
 </context>
 <context>
     <name>ChangePassword</name>
     <message>
         <source>Change password</source>
-        <translation>Zmień hasło</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Current password:</source>
-        <translation>Aktualne hasło:</translation>
+        <translation>Τρέχων κωδικός πρόσβασης:</translation>
     </message>
     <message>
         <source>New password:</source>
-        <translation>Nowe hasło:</translation>
+        <translation>Νέος κωδικός πρόσβασης:</translation>
     </message>
     <message>
         <source>New password (repeat):</source>
-        <translation>Nowe hasło (powtórz):</translation>
+        <translation>Νέος κωδικός πρόσβασης (επανάληψη):</translation>
     </message>
     <message>
         <source>New passwords do not match.</source>
-        <translation>Nowe hasła się nie zgadzają.</translation>
+        <translation>Οι νέοι κωδικοί πρόσβασης δεν ταιριάζουν.</translation>
     </message>
     <message>
         <source>Current password is invalid.</source>
-        <translation>Aktualne hasło jest nieprawidłowe.</translation>
-    </message>
-    <message>
-        <source>You need to be connected to change your password.</source>
-        <translation type="vanished">Musisz się połączyć, aby zmienić hasło.</translation>
+        <translation>Ο τρέχων κωδικός δεν είναι έγκυρος.</translation>
     </message>
     <message>
         <source>After changing your password, you will need to reenter it on all your other devices.</source>
-        <translation>Po zmianie hasła będzie trzeba je ponownie wprowadzić na wszystkich innych urządzeniach.</translation>
+        <translation>Αφού αλλάξετε τον κωδικό πρόσβασής σας, θα πρέπει να τον εισαγάγετε ξανά σε όλες τις άλλες συσκευές σας.</translation>
     </message>
     <message>
         <source>Cancel</source>
-        <translation>Anuluj</translation>
+        <translation>Ακύρωση</translation>
     </message>
     <message>
         <source>Change</source>
-        <translation>Zmień</translation>
+        <translation>Αλλαγή</translation>
     </message>
     <message>
         <source>Password changed successfully</source>
-        <translation>Hasło zostało zmienione</translation>
+        <translation>Ο κωδικός άλλαξε επιτυχώς</translation>
     </message>
     <message>
         <source>Failed to change password: %1</source>
-        <translation type="unfinished">Zmiana hasła nie powiodła się: %1</translation>
+        <translation>Αποτυχία αλλαγής κωδικού πρόσβασης: % 1</translation>
     </message>
 </context>
 <context>
     <name>ChatMessage</name>
     <message>
-        <source>Copy Message</source>
-        <translation type="vanished">Kopiuj wiadomość</translation>
-    </message>
-    <message>
-        <source>Edit Message</source>
-        <translation type="vanished">Edytuj wiadomość</translation>
-    </message>
-    <message>
         <source>Spoiler</source>
-        <translation>Ukryta wiadomość</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Download</source>
-        <translation>Pobierz</translation>
-    </message>
-    <message>
-        <source>Copy download URL</source>
-        <translation type="vanished">Skopiuj adres URL pobierania</translation>
-    </message>
-    <message>
-        <source>Quote</source>
-        <translation type="vanished">Cytat</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>ChatMessageContextMenu</name>
     <message>
         <source>Copy message</source>
-        <translation>Skopiuj wiadomość</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Edit message</source>
-        <translation type="unfinished">Edytuj wiadomość</translation>
+        <translation>Επεξεργασία μηνύματος</translation>
     </message>
     <message>
         <source>Copy download URL</source>
-        <translation type="unfinished">Skopiuj adres URL pobierania</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Quote message</source>
-        <translation type="unfinished"></translation>
+        <translation>Παράθεση μηνύματος</translation>
     </message>
 </context>
 <context>
     <name>ChatPage</name>
     <message>
-        <source>Compose message</source>
-        <translation type="vanished">Utwórz wiadomość</translation>
-    </message>
-    <message>
-        <source>Image</source>
-        <translation type="vanished">Obraz</translation>
-    </message>
-    <message>
-        <source>Video</source>
-        <translation type="vanished">Wideo</translation>
-    </message>
-    <message>
-        <source>Audio</source>
-        <translation type="vanished">Dźwięk</translation>
-    </message>
-    <message>
-        <source>Document</source>
-        <translation type="vanished">Dokument</translation>
-    </message>
-    <message>
-        <source>Other file</source>
-        <translation type="vanished">Inny plik</translation>
-    </message>
-    <message>
-        <source>Select a file</source>
-        <translation type="vanished">Wybierz plik</translation>
-    </message>
-    <message>
         <source>Send a spoiler message</source>
-        <translation>Wyślij ukrytą wiadomość</translation>
-    </message>
-    <message>
-        <source>Spoiler hint</source>
-        <translation type="vanished">Tytuł ukrytej wiadomości</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Unmute notifications</source>
@@ -230,19 +181,15 @@ Never show this QR code to anyone else. It would allow unlimited access to your 
     </message>
     <message>
         <source>Mute notifications</source>
-        <translation>Wycisz powiadomienia</translation>
+        <translation>Σίγαση ειδοποιήσεων</translation>
     </message>
     <message>
         <source>View profile</source>
-        <translation>Zobacz profil</translation>
+        <translation>Προβολή προφίλ</translation>
     </message>
     <message>
         <source>Search</source>
-        <translation type="unfinished">Szukaj</translation>
-    </message>
-    <message>
-        <source>Close</source>
-        <translation type="obsolete">Zamknij</translation>
+        <translation>Αναζήτηση</translation>
     </message>
     <message>
         <source>Search up</source>
@@ -250,22 +197,18 @@ Never show this QR code to anyone else. It would allow unlimited access to your 
     </message>
     <message>
         <source>Search down</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>All files</source>
-        <translation type="vanished">Wszystkie pliki</translation>
+        <translation>Αναζήτηση προς τα κάτω</translation>
     </message>
     <message>
         <source>Close message search bar</source>
-        <translation type="unfinished"></translation>
+        <translation>Κλείστε τη γραμμή αναζήτησης μηνυμάτων</translation>
     </message>
 </context>
 <context>
     <name>ChatPageSendingPane</name>
     <message>
         <source>Spoiler hint</source>
-        <translation type="unfinished">Tytuł ukrytej wiadomości</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Close spoiler hint field</source>
@@ -273,49 +216,49 @@ Never show this QR code to anyone else. It would allow unlimited access to your 
     </message>
     <message>
         <source>Compose message</source>
-        <translation type="unfinished">Utwórz wiadomość</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>ClientWorker</name>
     <message>
         <source>Your account could not be deleted from the server. Therefore, it was also not removed from this app: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Ο λογαριασμός σας δεν μπόρεσε να διαγραφεί από το διακομιστή. Ως εκ τούτου, δεν αφαιρέθηκε ούτε από αυτήν την εφαρμογή: %1</translation>
     </message>
 </context>
 <context>
     <name>CommonEncoderSettings</name>
     <message>
         <source>Very low</source>
-        <translation>Bardzo niskie</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Low</source>
-        <translation>Niskie</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Normal</source>
-        <translation>Normalne</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>High</source>
-        <translation>Wysokie</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Very high</source>
-        <translation>Bardzo wysokie</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Constant quality</source>
-        <translation>Stała jakość</translation>
+        <translation>Σταθερή ποιότητα</translation>
     </message>
     <message>
         <source>Constant bit rate</source>
-        <translation>Stała szybkość transmisji</translation>
+        <translation>Σταθερός ρυθμός bit</translation>
     </message>
     <message>
         <source>Average bit rate</source>
-        <translation>Średnia szybkość transmisji</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Two pass</source>
@@ -326,7 +269,7 @@ Never show this QR code to anyone else. It would allow unlimited access to your 
     <name>ConfirmationPage</name>
     <message>
         <source>Cancel</source>
-        <translation type="unfinished">Anuluj</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -337,11 +280,11 @@ Never show this QR code to anyone else. It would allow unlimited access to your 
     </message>
     <message>
         <source>Change</source>
-        <translation type="unfinished">Zmień</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Cancel</source>
-        <translation type="unfinished">Anuluj</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Connection settings could not be changed</source>
@@ -405,118 +348,49 @@ Consider storing the password somewhere else if you want to use your account on 
     <name>DownloadJob</name>
     <message>
         <source>Could not save file: %1</source>
-        <translation>Zapisanie pliku nie powiodło się: %1</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Download failed: %1</source>
-        <translation>Pobieranie nie powiodło się: %1</translation>
-    </message>
-</context>
-<context>
-    <name>EmojiPicker</name>
-    <message>
-        <source>Favorites</source>
-        <translation type="vanished">Ulubione</translation>
-    </message>
-    <message>
-        <source>People</source>
-        <translation type="vanished">Ludzie</translation>
-    </message>
-    <message>
-        <source>Nature</source>
-        <translation type="vanished">Natura</translation>
-    </message>
-    <message>
-        <source>Food</source>
-        <translation type="vanished">Żywność</translation>
-    </message>
-    <message>
-        <source>Activity</source>
-        <translation type="vanished">Aktywności</translation>
-    </message>
-    <message>
-        <source>Travel</source>
-        <translation type="vanished">Podróż</translation>
-    </message>
-    <message>
-        <source>Objects</source>
-        <translation type="vanished">Obiekty</translation>
-    </message>
-    <message>
-        <source>Symbols</source>
-        <translation type="vanished">Symbole</translation>
-    </message>
-    <message>
-        <source>Flags</source>
-        <translation type="vanished">Flagi</translation>
-    </message>
-    <message>
-        <source>Search</source>
-        <translation type="vanished">Szukaj</translation>
-    </message>
-    <message>
-        <source>Search emoji</source>
-        <translation type="vanished">Szukaj emotikon</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>EmptyChatPage</name>
     <message>
         <source>Please select a chat to start messaging</source>
-        <translation>Wybierz czat, aby rozpocząć wysyłanie wiadomości</translation>
-    </message>
-</context>
-<context>
-    <name>FileChooser</name>
-    <message>
-        <source>Select a file</source>
-        <translation type="vanished">Wybierz plik</translation>
-    </message>
-</context>
-<context>
-    <name>FileChooserMobile</name>
-    <message>
-        <source>Go to parent folder</source>
-        <translation type="vanished">Przejdź do folderu nadrzędnego</translation>
-    </message>
-    <message>
-        <source>Close</source>
-        <translation type="vanished">Zamknij</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>GlobalDrawer</name>
     <message>
-        <source>Log out</source>
-        <translation type="vanished">Wyloguj się</translation>
-    </message>
-    <message>
         <source>About</source>
-        <translation>O programie</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Invite friends</source>
-        <translation>Zaproś przyjaciół</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Invitation link copied to clipboard</source>
-        <translation>Link zaproszenia skopiowany do schowka</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Settings</source>
-        <translation>Ustawienia</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Offline</source>
-        <translation type="unfinished">Offline</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Online</source>
-        <translation type="unfinished">Online</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Connecting…</source>
-        <translation type="unfinished">Łączenie…</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Switch device</source>
@@ -528,15 +402,7 @@ Consider storing the password somewhere else if you want to use your account on 
     <message>
         <source>The link will be opened after you have connected.</source>
         <extracomment>The link is an XMPP-URI (i.e. &apos;xmpp:kaidan@muc.kaidan.im?join&apos; for joining a chat)</extracomment>
-        <translation>Link zostanie otwarty po nawiązaniu połączenia.</translation>
-    </message>
-    <message>
-        <source>No password found. Please enter it.</source>
-        <translation type="vanished">Nie znaleziono hasła. Proszę je wpisać.</translation>
-    </message>
-    <message>
-        <source>No valid login QR code found.</source>
-        <translation type="vanished">Nie znaleziono poprawnego kodu QR do logowania.</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -559,75 +425,15 @@ Your password will be deleted, make sure it is stored in a password manager or y
     <name>LoginPage</name>
     <message>
         <source>Log in</source>
-        <translation>Zaloguj się</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Log in to your XMPP account</source>
-        <translation>Zaloguj się na swoje konto XMPP</translation>
-    </message>
-    <message>
-        <source>Your Jabber-ID:</source>
-        <translation type="vanished">Twój Jabber ID:</translation>
-    </message>
-    <message>
-        <source>Your diaspora*-ID:</source>
-        <translation type="vanished">Twój identyfikator diaspory*-ID:</translation>
-    </message>
-    <message>
-        <source>user@example.org</source>
-        <translation type="vanished">nick@example.org</translation>
-    </message>
-    <message>
-        <source>user@diaspora.pod</source>
-        <translation type="vanished">user@diaspora.pod</translation>
-    </message>
-    <message>
-        <source>Your Password:</source>
-        <translation type="vanished">Twoje hasło:</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Connecting…</source>
-        <translation>Łączenie…</translation>
-    </message>
-    <message>
-        <source>Connect</source>
-        <translation type="vanished">Połącz</translation>
-    </message>
-    <message>
-        <source>Invalid username or password.</source>
-        <translation type="vanished">Niepoprawny nick lub hasło.</translation>
-    </message>
-    <message>
-        <source>Cannot connect to the server. Please check your internet connection.</source>
-        <translation type="vanished">Nie można połączyć się z serwerem. Proszę sprawdzić połączenie internetowe.</translation>
-    </message>
-    <message>
-        <source>The server doesn&apos;t support secure connections.</source>
-        <translation type="vanished">Serwer nie obsługuje bezpiecznych połączeń.</translation>
-    </message>
-    <message>
-        <source>Error while trying to connect securely.</source>
-        <translation type="vanished">Błąd podczas próby bezpiecznego połączenia.</translation>
-    </message>
-    <message>
-        <source>Could not resolve the server&apos;s address. Please check your JID again.</source>
-        <translation type="vanished">Nie udało się rozwiązać adresu serwera. Proszę zweryfikować JID.</translation>
-    </message>
-    <message>
-        <source>Could not connect to the server.</source>
-        <translation type="vanished">Nie udało się połączyć z serwerem.</translation>
-    </message>
-    <message>
-        <source>Authentification protocol not supported by the server.</source>
-        <translation type="obsolete">Protokół uwierzytelniania nie jest obsługiwany przez serwer.</translation>
-    </message>
-    <message>
-        <source>An unknown error occured; see log for details.</source>
-        <translation type="vanished">Wystąpił nieznany błąd; szczegóły w dzienniku.</translation>
-    </message>
-    <message>
-        <source>Log in using a QR-Code</source>
-        <translation type="vanished">Zaloguj się przy użyciu kodu QR</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Connection settings</source>
@@ -669,7 +475,7 @@ Your password will be deleted, make sure it is stored in a password manager or y
     <name>MediaRecorder</name>
     <message>
         <source>Default</source>
-        <translation>Domyślne</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -692,31 +498,31 @@ Your password will be deleted, make sure it is stored in a password manager or y
     </message>
     <message>
         <source>Choose file</source>
-        <translation>Wybierz plik</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Choose image</source>
-        <translation>Wybierz obraz</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Choose video</source>
-        <translation>Wybierz wideo</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Choose audio file</source>
-        <translation>Wybierz plik audio</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Choose document</source>
-        <translation>Wybierz dokument</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>All files</source>
-        <translation>Wszystkie pliki</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Images</source>
-        <translation>Obrazy</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Videos</source>
@@ -724,23 +530,23 @@ Your password will be deleted, make sure it is stored in a password manager or y
     </message>
     <message>
         <source>Audio files</source>
-        <translation>Pliki audio</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Documents</source>
-        <translation>Dokumenty</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>%1 (%2)</source>
-        <translation type="unfinished">%1 (%2)</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Audio</source>
-        <translation type="unfinished">Dźwięk</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Document</source>
-        <translation type="unfinished">Dokument</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Location</source>
@@ -748,45 +554,33 @@ Your password will be deleted, make sure it is stored in a password manager or y
     </message>
     <message>
         <source>Image</source>
-        <translation type="unfinished">Obraz</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Video</source>
-        <translation type="unfinished">Wideo</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>File</source>
-        <translation type="unfinished">Pilnik</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>Message</name>
     <message>
         <source>Spoiler</source>
-        <translation type="unfinished">Ukryta wiadomość</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>MessageHandler</name>
     <message>
-        <source>Could not send message, as a result of not being connected.</source>
-        <translation type="vanished">Nie udało się wysłać wiadomość z powodu braku połączenia.</translation>
-    </message>
-    <message>
-        <source>Could not correct message, as a result of not being connected.</source>
-        <translation type="vanished">Nie udało się poprawić wiadomość z powodu braku połączenia.</translation>
-    </message>
-    <message>
-        <source>Spoiler</source>
-        <translation type="vanished">Ukryta wiadomość</translation>
-    </message>
-    <message>
         <source>Message could not be sent.</source>
-        <translation>Nie udało się wysłać wiadomość.</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Message correction was not successful.</source>
-        <translation>Poprawienie wiadomości nie powiodło się.</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -812,11 +606,11 @@ Your password will be deleted, make sure it is stored in a password manager or y
     <name>MultimediaSettings</name>
     <message>
         <source>Multimedia Settings</source>
-        <translation>Ustawienia multimediów</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Configure</source>
-        <translation>Konfiguruj</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Image Capture</source>
@@ -824,7 +618,7 @@ Your password will be deleted, make sure it is stored in a password manager or y
     </message>
     <message>
         <source>Audio Recording</source>
-        <translation>Nagrywanie audio</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Video Recording</source>
@@ -836,7 +630,7 @@ Your password will be deleted, make sure it is stored in a password manager or y
     </message>
     <message>
         <source>Audio input</source>
-        <translation>Wejście audio</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Container</source>
@@ -844,27 +638,27 @@ Your password will be deleted, make sure it is stored in a password manager or y
     </message>
     <message>
         <source>Image</source>
-        <translation type="unfinished">Obraz</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Audio</source>
-        <translation type="unfinished">Dźwięk</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Video</source>
-        <translation type="unfinished">Wideo</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Codec</source>
-        <translation>Kodek</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Resolution</source>
-        <translation>Rozdzielczość</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Quality</source>
-        <translation>Jakość</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Sample Rate</source>
@@ -893,21 +687,6 @@ Your password will be deleted, make sure it is stored in a password manager or y
     <message>
         <source>Paused</source>
         <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>MultimediaSettingsPage</name>
-    <message>
-        <source>Image</source>
-        <translation type="obsolete">Obraz</translation>
-    </message>
-    <message>
-        <source>Audio</source>
-        <translation type="obsolete">Dźwięk</translation>
-    </message>
-    <message>
-        <source>Video</source>
-        <translation type="obsolete">Wideo</translation>
     </message>
 </context>
 <context>
@@ -976,38 +755,30 @@ Your password will be deleted, make sure it is stored in a password manager or y
     </message>
     <message>
         <source>Offline</source>
-        <translation type="unfinished">Offline</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>QmlUtils</name>
     <message>
-        <source>Offline</source>
-        <translation type="obsolete">Offline</translation>
-    </message>
-    <message>
         <source>Invalid username or password.</source>
-        <translation type="unfinished">Niepoprawny nick lub hasło.</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Cannot connect to the server. Please check your internet connection.</source>
-        <translation type="unfinished">Nie można połączyć się z serwerem. Proszę sprawdzić połączenie internetowe.</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>The server doesn&apos;t support secure connections.</source>
-        <translation type="unfinished">Serwer nie obsługuje bezpiecznych połączeń.</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Error while trying to connect securely.</source>
-        <translation type="unfinished">Błąd podczas próby bezpiecznego połączenia.</translation>
-    </message>
-    <message>
-        <source>Could not connect to the server.</source>
-        <translation type="obsolete">Nie udało się połączyć z serwerem.</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Authentification protocol not supported by the server.</source>
-        <translation type="unfinished">Protokół uwierzytelniania nie jest obsługiwany przez serwer.</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>This server does not support registration.</source>
@@ -1069,7 +840,7 @@ Your password will be deleted, make sure it is stored in a password manager or y
     </message>
     <message>
         <source>Connecting…</source>
-        <translation type="unfinished">Łączenie…</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>This QR code is not a valid login QR code.</source>
@@ -1093,13 +864,6 @@ Try to close other applications using the camera.</source>
     </message>
 </context>
 <context>
-    <name>QrCodeScannerPage</name>
-    <message>
-        <source>Connecting…</source>
-        <translation type="obsolete">Łączenie…</translation>
-    </message>
-</context>
-<context>
     <name>RegistrationLoginDecisionPage</name>
     <message>
         <source>Set up</source>
@@ -1112,17 +876,6 @@ Try to close other applications using the camera.</source>
     <message>
         <source>Use an existing account</source>
         <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>RegistrationManager</name>
-    <message>
-        <source>Password changed successfully.</source>
-        <translation type="vanished">Hasło zostało pomyślnie zmienione.</translation>
-    </message>
-    <message>
-        <source>Failed to change password: %1</source>
-        <translation type="vanished">Zmiana hasła nie powiodła się: %1</translation>
     </message>
 </context>
 <context>
@@ -1145,27 +898,27 @@ You will not be able to use your account again!</source>
     <name>RosterAddContactSheet</name>
     <message>
         <source>Add new contact</source>
-        <translation>Dodaj nowy kontakt</translation>
-    </message>
-    <message>
-        <source>user@example.org</source>
-        <translation>nick@example.org</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>This will also send a request to access the presence of the contact.</source>
-        <translation>Kontakt zostanie również zapytany o dostęp do swojego stanu online.</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Jabber-ID:</source>
-        <translation>Jabber ID:</translation>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>user@example.org</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Nickname:</source>
-        <translation>Nick:</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Optional message:</source>
-        <translation>Opcjonalna wiadomość:</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Tell your chat partner who you are.</source>
@@ -1173,7 +926,7 @@ You will not be able to use your account again!</source>
     </message>
     <message>
         <source>Cancel</source>
-        <translation type="unfinished">Anuluj</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Add</source>
@@ -1181,25 +934,14 @@ You will not be able to use your account again!</source>
     </message>
 </context>
 <context>
-    <name>RosterListItem</name>
-    <message>
-        <source>Offline</source>
-        <translation type="obsolete">Offline</translation>
-    </message>
-</context>
-<context>
     <name>RosterManager</name>
     <message>
         <source>Could not add contact, as a result of not being connected.</source>
-        <translation>Nie można dodać styku, w wyniku nie podłączenia.</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Could not remove contact, as a result of not being connected.</source>
-        <translation>Nie można usunąć styku, ponieważ nie jest on połączony.</translation>
-    </message>
-    <message>
-        <source>Spoiler</source>
-        <translation type="obsolete">Ukryta wiadomość</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Could not rename contact, as a result of not being connected.</source>
@@ -1210,19 +952,19 @@ You will not be able to use your account again!</source>
     <name>RosterPage</name>
     <message>
         <source>Connecting…</source>
-        <translation>Łączenie…</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Contacts</source>
-        <translation>Kontakty</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Add new contact</source>
-        <translation>Dodaj nowy kontakt</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Offline</source>
-        <translation>Offline</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Search contacts</source>
@@ -1237,7 +979,7 @@ You will not be able to use your account again!</source>
     </message>
     <message>
         <source>Cancel</source>
-        <translation type="unfinished">Anuluj</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Delete</source>
@@ -1256,7 +998,7 @@ You will not be able to use your account again!</source>
     </message>
     <message>
         <source>Cancel</source>
-        <translation type="unfinished">Anuluj</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Rename</source>
@@ -1271,7 +1013,7 @@ You will not be able to use your account again!</source>
     </message>
     <message>
         <source>Cancel</source>
-        <translation type="unfinished">Anuluj</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Send</source>
@@ -1299,12 +1041,8 @@ Deletion of message history saved on server</extracomment>
 <context>
     <name>SettingsContent</name>
     <message>
-        <source>Settings</source>
-        <translation type="unfinished">Ustawienia</translation>
-    </message>
-    <message>
         <source>Change password</source>
-        <translation type="unfinished">Zmień hasło</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Changes your account&apos;s password. You will need to re-enter it on your other devices.</source>
@@ -1312,10 +1050,14 @@ Deletion of message history saved on server</extracomment>
     </message>
     <message>
         <source>Multimedia Settings</source>
-        <translation type="unfinished">Ustawienia multimediów</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Configure photo, video and audio recording settings</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Settings</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -1355,11 +1097,7 @@ Deletion of message history saved on server</extracomment>
     <name>SettingsPage</name>
     <message>
         <source>Settings</source>
-        <translation type="unfinished">Ustawienia</translation>
-    </message>
-    <message>
-        <source>Change password</source>
-        <translation type="obsolete">Zmień hasło</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -1396,15 +1134,11 @@ Deletion of message history saved on server</extracomment>
     <name>UploadManager</name>
     <message>
         <source>Could not send file, as a result of not being connected.</source>
-        <translation>Nie można wysłać pliku, w wyniku braku połączenia.</translation>
-    </message>
-    <message>
-        <source>File</source>
-        <translation type="vanished">Pilnik</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Message could not be sent.</source>
-        <translation type="unfinished">Nie udało się wysłać wiadomość.</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -1442,7 +1176,7 @@ Deletion of message history saved on server</extracomment>
     </message>
     <message>
         <source>About</source>
-        <translation type="unfinished">O programie</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Email</source>

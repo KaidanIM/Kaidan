@@ -5,11 +5,11 @@
     <name>AboutDialog</name>
     <message>
         <source>A simple, user-friendly Jabber/XMPP client</source>
-        <translation>Простой и удобный Jabber/XMPP клиент</translation>
+        <translation>Простой и удобный клиент для Jabber/XMPP</translation>
     </message>
     <message>
         <source>License:</source>
-        <translation>Права:</translation>
+        <translation>Лицензия:</translation>
     </message>
     <message>
         <source>Source code on GitHub</source>
@@ -121,23 +121,23 @@ Cохраните их, если планируете использовать �
     <name>AccountSecurity</name>
     <message>
         <source>Account Security</source>
-        <translation>Безопасность аккаунта</translation>
+        <translation>Безопасность учётной записи</translation>
     </message>
     <message>
         <source>Allow to add additional devices using the login QR code but never show the password.</source>
-        <translation type="unfinished"></translation>
+        <translation>Разрешить авторизацию с других устройств с помощью QR-кода, но никогда не показывать пароль на экране.</translation>
     </message>
     <message>
         <source>Don&apos;t show password</source>
-        <translation type="unfinished"></translation>
+        <translation>Не показывать пароль на экране</translation>
     </message>
     <message>
         <source>Neither allow to add additional devices using the login QR code nor show the password.</source>
-        <translation type="unfinished"></translation>
+        <translation>Запретить авторизацию с других устройств с помощью QR-кода и никогда не показывать пароль на экране.</translation>
     </message>
     <message>
         <source>Don&apos;t expose password in any way</source>
-        <translation type="unfinished"></translation>
+        <translation>Не позволять узнать пароль никаким способом</translation>
     </message>
 </context>
 <context>
@@ -151,14 +151,14 @@ Cохраните их, если планируете использовать �
 
 Attention:
 Never show this QR code to anyone else. It would allow unlimited access to your account!</source>
-        <translation>Отсканируйте QR код или введите учётные данные на другом устройстве (выполните вход). 
+        <translation>Отсканируйте QR-код или введите учётные данные на другом устройстве, чтобы выполнить вход.
 
 Важно:
-Никогда никому не показывайте этот код! Это даст злоумышленникам доступ к вашей учётной записи!</translation>
+Никому не показывайте этот QR-код! С помощью него злоумышленники могут получить неограниченный доступ к вашей учётной записи!</translation>
     </message>
     <message>
         <source>Chat address:</source>
-        <translation>Адрес чата:</translation>
+        <translation>Адрес:</translation>
     </message>
     <message>
         <source>Password:</source>
@@ -166,15 +166,15 @@ Never show this QR code to anyone else. It would allow unlimited access to your 
     </message>
     <message>
         <source>Hide QR code</source>
-        <translation>Спрятать QR код</translation>
+        <translation>Скрыть QR-код</translation>
     </message>
     <message>
         <source>Show as QR code</source>
-        <translation>Показать как QR код</translation>
+        <translation>Показать как QR-код</translation>
     </message>
     <message>
         <source>Hide text</source>
-        <translation>Спрятать текст</translation>
+        <translation>Скрыть текст</translation>
     </message>
     <message>
         <source>Show as text</source>
@@ -182,11 +182,11 @@ Never show this QR code to anyone else. It would allow unlimited access to your 
     </message>
     <message>
         <source>Copy password</source>
-        <translation type="unfinished"></translation>
+        <translation>Копировать пароль</translation>
     </message>
     <message>
         <source>Copy chat address</source>
-        <translation type="unfinished"></translation>
+        <translation>Копировать адрес</translation>
     </message>
 </context>
 <context>
@@ -216,7 +216,7 @@ Never show this QR code to anyone else. It would allow unlimited access to your 
     </message>
     <message>
         <source>New passwords do not match.</source>
-        <translation>Поля с новым паролем не одинаковые.</translation>
+        <translation>Пароли не совпадают.</translation>
     </message>
     <message>
         <source>Current password is invalid.</source>
@@ -232,7 +232,7 @@ Never show this QR code to anyone else. It would allow unlimited access to your 
     </message>
     <message>
         <source>Cancel</source>
-        <translation>Отменить</translation>
+        <translation>Отмена</translation>
     </message>
     <message>
         <source>Change</source>
@@ -240,11 +240,11 @@ Never show this QR code to anyone else. It would allow unlimited access to your 
     </message>
     <message>
         <source>Password changed successfully</source>
-        <translation type="unfinished"></translation>
+        <translation>Пароль успешно изменён</translation>
     </message>
     <message>
         <source>Failed to change password: %1</source>
-        <translation type="unfinished">Не удалось изменить пароль: %1</translation>
+        <translation>Не удалось изменить пароль: %1</translation>
     </message>
 </context>
 <context>
@@ -255,26 +255,26 @@ Never show this QR code to anyone else. It would allow unlimited access to your 
     </message>
     <message>
         <source>Download</source>
-        <translation>Загрузить</translation>
+        <translation>Скачать</translation>
     </message>
 </context>
 <context>
     <name>ChatMessageContextMenu</name>
     <message>
         <source>Copy message</source>
-        <translation type="unfinished">Скопировать сообщение</translation>
+        <translation>Копировать текст сообщения</translation>
     </message>
     <message>
         <source>Edit message</source>
-        <translation type="unfinished">Редактировать сообщение</translation>
+        <translation>Изменить сообщение</translation>
     </message>
     <message>
         <source>Copy download URL</source>
-        <translation type="unfinished">Скопировать URL загрузки</translation>
+        <translation>Копировать ссылку на скачивание</translation>
     </message>
     <message>
         <source>Quote message</source>
-        <translation type="unfinished">Цитировать сообщение</translation>
+        <translation>Цитировать сообщение</translation>
     </message>
 </context>
 <context>
@@ -313,7 +313,7 @@ Never show this QR code to anyone else. It would allow unlimited access to your 
     </message>
     <message>
         <source>Send a spoiler message</source>
-        <translation>Послать спойлер</translation>
+        <translation>Отправить спойлер</translation>
     </message>
     <message>
         <source>Spoiler hint</source>
@@ -341,11 +341,11 @@ Never show this QR code to anyone else. It would allow unlimited access to your 
     </message>
     <message>
         <source>Search up</source>
-        <translation>Искать вверх</translation>
+        <translation>Искать выше</translation>
     </message>
     <message>
         <source>Search down</source>
-        <translation>Искать вниз</translation>
+        <translation>Искать ниже</translation>
     </message>
     <message>
         <source>All files</source>
@@ -369,29 +369,29 @@ Never show this QR code to anyone else. It would allow unlimited access to your 
     </message>
     <message>
         <source>Close message search bar</source>
-        <translation type="unfinished"></translation>
+        <translation>Закрыть панель поиска</translation>
     </message>
 </context>
 <context>
     <name>ChatPageSendingPane</name>
     <message>
         <source>Spoiler hint</source>
-        <translation type="unfinished">Подсказка к спойлеру</translation>
+        <translation>Описание спойлера</translation>
     </message>
     <message>
         <source>Close spoiler hint field</source>
-        <translation type="unfinished"></translation>
+        <translation>Закрыть описание спойлера</translation>
     </message>
     <message>
         <source>Compose message</source>
-        <translation type="unfinished">Создать сообщение</translation>
+        <translation>Написать сообщение</translation>
     </message>
 </context>
 <context>
     <name>ClientWorker</name>
     <message>
         <source>Your account could not be deleted from the server. Therefore, it was also not removed from this app: %1</source>
-        <translation>Вашу учётную запись не удалось удалить на сервере. Поэтому в приложении её удалить тоже не получится: %1</translation>
+        <translation>Вашу учётную запись не удалось удалить на сервере, поэтому из приложения она также не была удалена: %1</translation>
     </message>
 </context>
 <context>
@@ -437,30 +437,30 @@ Never show this QR code to anyone else. It would allow unlimited access to your 
     <name>ConfirmationPage</name>
     <message>
         <source>Cancel</source>
-        <translation>Отменить</translation>
+        <translation>Отмена</translation>
     </message>
 </context>
 <context>
     <name>ConnectionSettings</name>
     <message>
         <source>Connection settings</source>
-        <translation type="unfinished"></translation>
+        <translation>Настройки подключения</translation>
     </message>
     <message>
         <source>Change</source>
-        <translation type="unfinished">Изменить</translation>
+        <translation>Изменить</translation>
     </message>
     <message>
         <source>Cancel</source>
-        <translation type="unfinished"></translation>
+        <translation>Отмена</translation>
     </message>
     <message>
         <source>Connection settings could not be changed</source>
-        <translation type="unfinished"></translation>
+        <translation>Не удалось изменить настройки подключения</translation>
     </message>
     <message>
         <source>Connection settings changed</source>
-        <translation type="unfinished"></translation>
+        <translation>Настройки подключения изменены</translation>
     </message>
 </context>
 <context>
@@ -474,49 +474,53 @@ Never show this QR code to anyone else. It would allow unlimited access to your 
     <name>CustomConnectionSettings</name>
     <message>
         <source>Hostname:</source>
-        <translation type="unfinished"></translation>
+        <translation>Сервер:</translation>
     </message>
     <message>
         <source>The hostname must not contain blank spaces</source>
-        <translation type="unfinished"></translation>
+        <translation>Имя узла не может содержать пробелы</translation>
     </message>
     <message>
         <source>Port:</source>
-        <translation type="unfinished"></translation>
+        <translation>Порт:</translation>
     </message>
 </context>
 <context>
     <name>DisablePasswordDisplay</name>
     <message>
         <source>Don&apos;t expose your password in any way</source>
-        <translation type="unfinished"></translation>
+        <translation>Не позволять узнать пароль никаким способом</translation>
     </message>
     <message>
         <source>Your password will neither be shown as plain text nor included in the login QR code anymore.
 You won&apos;t be able to use the login via QR code without entering your password again because this action cannot be undone!
 Consider storing the password somewhere else if you want to use your account on another device.</source>
-        <translation type="unfinished"></translation>
+        <translation>Ваш пароль больше никогда не будет показан на экране или в QR-коде для авторизации.
+Вы больше не сможете использовать вход через QR-код без ввода пароля, потому что это действие не может быть отменено!
+Если вы хотите использовать аккаунт на другом устройстве, задумайтесь над тем, чтобы сохранить пароль где-либо ещё.</translation>
     </message>
     <message>
         <source>Don&apos;t expose password in any way</source>
-        <translation type="unfinished"></translation>
+        <translation>Не позволять узнать пароль никаким способом</translation>
     </message>
 </context>
 <context>
     <name>DisablePlainTextPasswordDisplay</name>
     <message>
         <source>Don&apos;t show your password</source>
-        <translation type="unfinished"></translation>
+        <translation>Не показывать пароль на экране</translation>
     </message>
     <message>
         <source>Your password will not be shown anymore but still exposed via the login QR code.
 You won&apos;t be able to see your password again because this action cannot be undone!
 Consider storing the password somewhere else if you want to use your account on another device without the login QR code.</source>
-        <translation type="unfinished"></translation>
+        <translation>Ваш пароль больше никогда не будет показан на экране, но он будет включён в QR-код для авторизации.
+Вы больше не сможете увидеть свой пароль, потому что это действие не может быть отменено!
+Если вы хотите использовать аккаунт на устройстве, не имеющем возможности сканирования QR-кода, задумайтесь над тем, чтобы сохранить пароль где-либо ещё.</translation>
     </message>
     <message>
         <source>Don&apos;t show password</source>
-        <translation type="unfinished"></translation>
+        <translation>Не показывать пароль на экране</translation>
     </message>
 </context>
 <context>
@@ -657,7 +661,7 @@ Consider storing the password somewhere else if you want to use your account on 
     </message>
     <message>
         <source>Switch device</source>
-        <translation type="unfinished"></translation>
+        <translation>Переключиться на другое устройство</translation>
     </message>
 </context>
 <context>
@@ -676,16 +680,17 @@ Consider storing the password somewhere else if you want to use your account on 
     <name>LocalAccountRemoval</name>
     <message>
         <source>Remove account from this app</source>
-        <translation type="unfinished">Удалить аккаунт в приложении</translation>
+        <translation>Удалить аккаунт из приложения</translation>
     </message>
     <message>
         <source>Your account will be removed from this app.
 Your password will be deleted, make sure it is stored in a password manager or you know it!</source>
-        <translation type="unfinished"></translation>
+        <translation>Ваш аккаунт будет удалён из этого приложения.
+Ваш пароль также будет удалён, поэтому убедитесь, что он сохранён в диспетчере паролей или вы его знаете!</translation>
     </message>
     <message>
         <source>Remove</source>
-        <translation type="unfinished">Удалить</translation>
+        <translation>Удалить</translation>
     </message>
 </context>
 <context>
@@ -724,7 +729,7 @@ Your password will be deleted, make sure it is stored in a password manager or y
     </message>
     <message>
         <source>Log in to your XMPP account</source>
-        <translation>Войдите в аккаунт Jabber</translation>
+        <translation>Войдите в аккаунт XMPP</translation>
     </message>
     <message>
         <source>Your diaspora*-ID:</source>
@@ -768,38 +773,38 @@ Your password will be deleted, make sure it is stored in a password manager or y
     </message>
     <message>
         <source>Connection settings</source>
-        <translation type="unfinished"></translation>
+        <translation>Настройки подключения</translation>
     </message>
 </context>
 <context>
     <name>LoginSettingsPage</name>
     <message>
         <source>Connection settings</source>
-        <translation type="unfinished"></translation>
+        <translation>Настройки подключения</translation>
     </message>
     <message>
         <source>The connection settings will be saved permanently after the first successful login. If they don&apos;t work, you&apos;ll get back to the login page.</source>
-        <translation type="unfinished"></translation>
+        <translation>Настройки подключения будут сохранены после первого успешного входа. Если не удастся наладить соединение, вы снова окажетесь на странице авторизации.</translation>
     </message>
     <message>
         <source>Enable custom connection settings</source>
-        <translation type="unfinished"></translation>
+        <translation>Использовать пользовательские настройки подключения</translation>
     </message>
     <message>
         <source>Port:</source>
-        <translation type="unfinished"></translation>
+        <translation>Порт:</translation>
     </message>
     <message>
         <source>Hostname:</source>
-        <translation type="unfinished"></translation>
+        <translation>Сервер:</translation>
     </message>
     <message>
         <source>Reset</source>
-        <translation type="unfinished"></translation>
+        <translation>Сброс</translation>
     </message>
     <message>
         <source>Apply</source>
-        <translation type="unfinished"></translation>
+        <translation>Применить</translation>
     </message>
 </context>
 <context>
@@ -873,34 +878,34 @@ Your password will be deleted, make sure it is stored in a password manager or y
     </message>
     <message>
         <source>Audio</source>
-        <translation type="unfinished"></translation>
+        <translation>Аудиофайл</translation>
     </message>
     <message>
         <source>Document</source>
-        <translation type="unfinished">Документ</translation>
+        <translation>Документ</translation>
     </message>
     <message>
         <source>Location</source>
-        <translation type="unfinished"></translation>
+        <translation>Карта</translation>
     </message>
     <message>
         <source>Image</source>
-        <translation type="unfinished">Изображение</translation>
+        <translation>Изображение</translation>
     </message>
     <message>
         <source>Video</source>
-        <translation type="unfinished">Видео</translation>
+        <translation>Видео</translation>
     </message>
     <message>
         <source>File</source>
-        <translation type="unfinished">Файл</translation>
+        <translation>Файл</translation>
     </message>
 </context>
 <context>
     <name>Message</name>
     <message>
         <source>Spoiler</source>
-        <translation type="unfinished">Спойлер</translation>
+        <translation>Спойлер</translation>
     </message>
 </context>
 <context>
@@ -919,30 +924,30 @@ Your password will be deleted, make sure it is stored in a password manager or y
     </message>
     <message>
         <source>Message could not be sent.</source>
-        <translation>Отправить сообщение не удалось.</translation>
+        <translation>Не удалось отправить сообщение.</translation>
     </message>
     <message>
         <source>Message correction was not successful.</source>
-        <translation>Исправить сообщение не удалось.</translation>
+        <translation>Не удалось изменить сообщение.</translation>
     </message>
 </context>
 <context>
     <name>MessageModel</name>
     <message>
         <source>Pending</source>
-        <translation type="unfinished"></translation>
+        <translation>Ожидает отправки</translation>
     </message>
     <message>
         <source>Sent</source>
-        <translation type="unfinished"></translation>
+        <translation>Отправлено</translation>
     </message>
     <message>
         <source>Delivered</source>
-        <translation type="unfinished"></translation>
+        <translation>Доставлено</translation>
     </message>
     <message>
         <source>Error</source>
-        <translation type="unfinished">Ошибка</translation>
+        <translation>Ошибка</translation>
     </message>
 </context>
 <context>
@@ -1074,50 +1079,50 @@ Your password will be deleted, make sure it is stored in a password manager or y
     <name>PasswordRemovalPage</name>
     <message>
         <source>Remove password</source>
-        <translation type="unfinished"></translation>
+        <translation>Удалить пароль</translation>
     </message>
     <message>
         <source>You can decide to only not show your password for &lt;b&gt;%1&lt;/b&gt; as text anymore or to remove it completely from the account transfer. If you remove your password completely, you won&apos;t be able to use the account transfer via scanning without entering your password because it is also removed from the QR code.</source>
-        <translation type="unfinished"></translation>
+        <translation>Вы можете запретить показывать пароль учётной записи &lt;b&gt;%1&lt;/b&gt; на экране или полностью удалить его. Если полностью удалить пароль, вы больше не сможете перенести аккаунт через сканирование кода без ввода пароля, так как он будет удалён в том числе из QR-кода.</translation>
     </message>
     <message>
         <source>Do not show password as text</source>
-        <translation type="unfinished"></translation>
+        <translation>Не показывать пароль на экране</translation>
     </message>
     <message>
         <source>Remove completely</source>
-        <translation type="unfinished"></translation>
+        <translation>Полностью удалить</translation>
     </message>
 </context>
 <context>
     <name>QObject</name>
     <message>
         <source>Mark as read</source>
-        <translation type="unfinished"></translation>
+        <translation>Отметить как прочитанное</translation>
     </message>
     <message>
         <source>Available</source>
-        <translation type="unfinished">Доступен</translation>
+        <translation>Онлайн</translation>
     </message>
     <message>
         <source>Free for chat</source>
-        <translation type="unfinished">В настроении поболтать</translation>
+        <translation>В настроении пообщаться</translation>
     </message>
     <message>
         <source>Away</source>
-        <translation type="unfinished">Отошёл</translation>
+        <translation>Отсутствует</translation>
     </message>
     <message>
         <source>Do not disturb</source>
-        <translation type="unfinished">Не беспокоить</translation>
+        <translation>Не беспокоить</translation>
     </message>
     <message>
         <source>Away for longer</source>
-        <translation type="unfinished">Ушёл надолго</translation>
+        <translation>Отсутствует надолго</translation>
     </message>
     <message>
         <source>Offline</source>
-        <translation type="unfinished">Не в сети</translation>
+        <translation>Не в сети</translation>
     </message>
 </context>
 <context>
@@ -1160,15 +1165,15 @@ Your password will be deleted, make sure it is stored in a password manager or y
     </message>
     <message>
         <source>Cannot connect to the server. Please check your internet connection.</source>
-        <translation>Не удается подключиться к серверу. Пожалуйста, проверьте подключение к сети.</translation>
+        <translation>Не удалось подключиться к серверу. Пожалуйста, проверьте подключение к сети.</translation>
     </message>
     <message>
         <source>The server doesn&apos;t support secure connections.</source>
-        <translation>Сервер не поддерживает безопасные соединения.</translation>
+        <translation>Сервер не поддерживает защищённое соединение.</translation>
     </message>
     <message>
         <source>Error while trying to connect securely.</source>
-        <translation>Ошибка при попытке безопасного подключения.</translation>
+        <translation>Ошибка при попытке установить защищённое соединение.</translation>
     </message>
     <message>
         <source>Could not resolve the server&apos;s address. Please check your server name.</source>
@@ -1188,7 +1193,7 @@ Your password will be deleted, make sure it is stored in a password manager or y
     </message>
     <message>
         <source>The server is offline or blocked by a firewall.</source>
-        <translation>Этот сервер не в сети или заблокирован сетевой защитой.</translation>
+        <translation>Этот сервер не работает или заблокирован сетевым экраном.</translation>
     </message>
     <message>
         <source>The connection could not be refreshed.</source>
@@ -1200,19 +1205,19 @@ Your password will be deleted, make sure it is stored in a password manager or y
     </message>
     <message>
         <source>Could not connect to the server. Please check your internet connection or your server name.</source>
-        <translation type="unfinished"></translation>
+        <translation>Не удалось подключиться к серверу. Проверьте подключение к сети и имя узла сервера.</translation>
     </message>
     <message>
         <source>%1 is online</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 в сети</translation>
     </message>
     <message>
         <source>%1 is typing…</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 набирает сообщение…</translation>
     </message>
     <message>
         <source>%1 paused typing</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 делает паузу</translation>
     </message>
 </context>
 <context>
@@ -1226,44 +1231,44 @@ Your password will be deleted, make sure it is stored in a password manager or y
     <name>QrCodeOnboardingPage</name>
     <message>
         <source>Scan QR code</source>
-        <translation type="unfinished">Отсканировать QR код</translation>
+        <translation>Cканировать QR-код</translation>
     </message>
     <message>
         <source>Show explanation</source>
-        <translation type="unfinished">Показать пояснения</translation>
+        <translation>Показать пояснения</translation>
     </message>
     <message>
         <source>Continue without QR code</source>
-        <translation type="unfinished">Продолжить без QR кода</translation>
+        <translation>Продолжить без QR-кода</translation>
     </message>
     <message>
         <source>Scan the QR code from your existing device to transfer your account.</source>
-        <translation type="unfinished">Чтобы перенести учётную запись, отсканируйте код другим устройством.</translation>
+        <translation>Чтобы перенести учётную запись, сканируйте код c другого устройства.</translation>
     </message>
     <message>
         <source>Connecting…</source>
-        <translation type="unfinished"></translation>
+        <translation>Подключение…</translation>
     </message>
     <message>
         <source>This QR code is not a valid login QR code.</source>
-        <translation type="unfinished"></translation>
+        <translation>Этот QR-код недействителен для входа в аккаунт.</translation>
     </message>
 </context>
 <context>
     <name>QrCodeScanner</name>
     <message>
         <source>The camera format &apos;%1&apos; is not supported.</source>
-        <translation type="unfinished">Формат камеры &apos;%1&apos; не поддерживается.</translation>
+        <translation>Формат камеры &apos;%1&apos; не поддерживается.</translation>
     </message>
     <message>
         <source>There is no camera available.</source>
-        <translation type="unfinished">Не удалось обнаружить камеру.</translation>
+        <translation>Не удалось обнаружить камеру.</translation>
     </message>
     <message>
         <source>Your camera is busy.
 Try to close other applications using the camera.</source>
-        <translation type="unfinished">Камера занята.
-Попробуйте закрыть другие приложения, использующие камеру.</translation>
+        <translation>Камера уже используется.
+Попробуйте закрыть приложения, использующие камеру.</translation>
     </message>
 </context>
 <context>
@@ -1315,11 +1320,11 @@ Try to close other applications using the camera.</source>
     </message>
     <message>
         <source>Register a new account</source>
-        <translation>Завести учётную запись</translation>
+        <translation>Зарегистрироваться</translation>
     </message>
     <message>
         <source>Use an existing account</source>
-        <translation>Существующая учётная запись</translation>
+        <translation>Войти в учётную запись</translation>
     </message>
 </context>
 <context>
@@ -1337,17 +1342,17 @@ Try to close other applications using the camera.</source>
     <name>RemoteAccountDeletion</name>
     <message>
         <source>Delete account completely</source>
-        <translation type="unfinished">Удалить аккаунт отовсюду</translation>
+        <translation>Полностью удалить учётную запись</translation>
     </message>
     <message>
         <source>Your account will be deleted completely, which means from this app and from the server.
 You will not be able to use your account again!</source>
-        <translation type="unfinished">Ваша учётная запись будет удалена в приложении и на сервере. 
+        <translation>Ваша учётная запись будет удалена полностью: и в приложении, и на сервере.
 Вы больше не сможете ей пользоваться!</translation>
     </message>
     <message>
         <source>Delete</source>
-        <translation type="unfinished">Удалить</translation>
+        <translation>Удалить</translation>
     </message>
 </context>
 <context>
@@ -1362,7 +1367,7 @@ You will not be able to use your account again!</source>
     </message>
     <message>
         <source>user@example.org</source>
-        <translation>ivanov@mail.ru</translation>
+        <translation>user@example.org</translation>
     </message>
     <message>
         <source>Cancel</source>
@@ -1386,7 +1391,7 @@ You will not be able to use your account again!</source>
     </message>
     <message>
         <source>Tell your chat partner who you are.</source>
-        <translation>Расскажите собеседнику, кто вы такой.</translation>
+        <translation>Расскажите собеседнику, кто вы.</translation>
     </message>
 </context>
 <context>
@@ -1404,7 +1409,7 @@ You will not be able to use your account again!</source>
     <name>RosterManager</name>
     <message>
         <source>Could not add contact, as a result of not being connected.</source>
-        <translation>Невозможно добавить контакт, так как он не был подключен.</translation>
+        <translation>Невозможно добавить контакт, так как он не подключён.</translation>
     </message>
     <message>
         <source>Could not remove contact, as a result of not being connected.</source>
@@ -1416,7 +1421,7 @@ You will not be able to use your account again!</source>
     </message>
     <message>
         <source>Could not rename contact, as a result of not being connected.</source>
-        <translation>Не удалось переименовать контакт (отсутствует подключение к сети).</translation>
+        <translation>Не удалось переименовать контакт из-за отсутствия подключения.</translation>
     </message>
 </context>
 <context>
@@ -1466,7 +1471,7 @@ You will not be able to use your account again!</source>
     </message>
     <message>
         <source>Do you really want to delete the contact &lt;b&gt;%1&lt;/b&gt; from your contact list?</source>
-        <translation type="unfinished"></translation>
+        <translation>Вы действительно хотите удалить контакт &lt;b&gt;%1&lt;/b&gt; из списка?</translation>
     </message>
 </context>
 <context>
@@ -1477,7 +1482,7 @@ You will not be able to use your account again!</source>
     </message>
     <message>
         <source>Cancel</source>
-        <translation>Отменить</translation>
+        <translation>Отмена</translation>
     </message>
     <message>
         <source>Rename</source>
@@ -1488,7 +1493,7 @@ You will not be able to use your account again!</source>
     <name>SendMediaSheet</name>
     <message>
         <source>Cancel</source>
-        <translation>Отменить</translation>
+        <translation>Отмена</translation>
     </message>
     <message>
         <source>Send</source>
@@ -1503,7 +1508,7 @@ You will not be able to use your account again!</source>
     <name>ServerListModel</name>
     <message>
         <source>Custom server</source>
-        <translation>Пользовательский сервер</translation>
+        <translation>Другой сервер</translation>
     </message>
     <message>
         <source>No limitation</source>
@@ -1533,43 +1538,43 @@ Deletion of message history saved on server</extracomment>
     </message>
     <message>
         <source>Configure photo, video and audio recording settings</source>
-        <translation>Изменить настройки снимков, аудио- и видеозаписей</translation>
+        <translation>Изменить настройки фотографий, аудио- и видеозаписей</translation>
     </message>
     <message>
         <source>Settings</source>
-        <translation type="unfinished">Настройки</translation>
+        <translation>Настройки</translation>
     </message>
     <message>
         <source>Account security</source>
-        <translation type="unfinished"></translation>
+        <translation>Безопасность аккаунта</translation>
     </message>
     <message>
         <source>Remove account from Kaidan</source>
-        <translation type="unfinished"></translation>
+        <translation>Удалить аккаунт из приложения Kaidan</translation>
     </message>
     <message>
         <source>Remove account from this app</source>
-        <translation type="unfinished">Удалить аккаунт в приложении</translation>
+        <translation>Удалить аккаунт из приложения</translation>
     </message>
     <message>
         <source>Delete account</source>
-        <translation type="unfinished"></translation>
+        <translation>Удалить аккаунт</translation>
     </message>
     <message>
         <source>Delete account from the server</source>
-        <translation type="unfinished"></translation>
+        <translation>Удалить аккаунт на сервере</translation>
     </message>
     <message>
         <source>Connection Settings</source>
-        <translation type="unfinished"></translation>
+        <translation>Настройки подключения</translation>
     </message>
     <message>
         <source>Configure the hostname and port to connect to</source>
-        <translation type="unfinished"></translation>
+        <translation>Настройте имя узла сервера и порт для подключения</translation>
     </message>
     <message>
         <source>Configure whether this device can be used to log in on another device</source>
-        <translation type="unfinished"></translation>
+        <translation>Может ли это устройство быть использовано, чтобы авторизоваться с другого устройства</translation>
     </message>
 </context>
 <context>
@@ -1590,7 +1595,7 @@ Deletion of message history saved on server</extracomment>
     <name>StartPage</name>
     <message>
         <source>Enjoy free communication on every device!</source>
-        <translation>Общайтесь бесплатно на любом устройстве!</translation>
+        <translation>Свободное общение на любом устройстве!</translation>
     </message>
     <message>
         <source>Let&apos;s start</source>
@@ -1620,7 +1625,7 @@ Deletion of message history saved on server</extracomment>
     <name>UploadManager</name>
     <message>
         <source>Could not send file, as a result of not being connected.</source>
-        <translation>Не смог отправить файл, так как не был подключен.</translation>
+        <translation>Не удалось отправить файл из-за отсутствия соединения.</translation>
     </message>
     <message>
         <source>File</source>
@@ -1628,7 +1633,7 @@ Deletion of message history saved on server</extracomment>
     </message>
     <message>
         <source>Message could not be sent.</source>
-        <translation type="unfinished">Отправить сообщение не удалось.</translation>
+        <translation>Не удалось отправить сообщение.</translation>
     </message>
 </context>
 <context>
@@ -1639,19 +1644,19 @@ Deletion of message history saved on server</extracomment>
     </message>
     <message>
         <source>Rename contact</source>
-        <translation type="unfinished">Переименовать контакт</translation>
+        <translation>Переименовать контакт</translation>
     </message>
     <message>
         <source>Show QR code</source>
-        <translation type="unfinished"></translation>
+        <translation>Показать QR-код</translation>
     </message>
     <message>
         <source>Remove contact</source>
-        <translation type="unfinished"></translation>
+        <translation>Удалить контакт</translation>
     </message>
     <message>
         <source>Online devices</source>
-        <translation type="unfinished"></translation>
+        <translation>Устройства в сети</translation>
     </message>
 </context>
 <context>

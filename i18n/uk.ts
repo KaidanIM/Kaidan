@@ -44,19 +44,19 @@
     </message>
     <message>
         <source>Allow to add additional devices using the login QR code but never show the password.</source>
-        <translation type="unfinished"></translation>
+        <translation>Дозволити додавати пристрої за допомогою QR-коду, але ніколи не показувати пароль.</translation>
     </message>
     <message>
         <source>Don&apos;t show password</source>
-        <translation type="unfinished"></translation>
+        <translation>Не показувати пароль</translation>
     </message>
     <message>
         <source>Neither allow to add additional devices using the login QR code nor show the password.</source>
-        <translation type="unfinished"></translation>
+        <translation>Не дозволяти додавати пристрої, у яких для входу використовуватиметься QR-код, і не показувати пароль.</translation>
     </message>
     <message>
         <source>Don&apos;t expose password in any way</source>
-        <translation type="unfinished"></translation>
+        <translation>Не показувати пароль у будь-який спосіб</translation>
     </message>
 </context>
 <context>
@@ -109,7 +109,7 @@ Never show this QR code to anyone else. It would allow unlimited access to your 
     </message>
     <message>
         <source>Copy chat address</source>
-        <translation type="unfinished"></translation>
+        <translation>Копіювати адресу спілкування</translation>
     </message>
 </context>
 <context>
@@ -414,17 +414,19 @@ Make sure that you backed it up if you want to use your account later.</source>
     </message>
     <message>
         <source>Don&apos;t expose your password in any way</source>
-        <translation type="unfinished"></translation>
+        <translation>Не показувати ваш пароль ні за яких обставин</translation>
     </message>
     <message>
         <source>Your password will neither be shown as plain text nor included in the login QR code anymore.
 You won&apos;t be able to use the login via QR code without entering your password again because this action cannot be undone!
 Consider storing the password somewhere else if you want to use your account on another device.</source>
-        <translation type="unfinished"></translation>
+        <translation>Ваш пароль більше не буде показано у форматі звичайного тексту і не буде включено до QR-коду для входу.
+Ви не зможете користуватися входом за QR-кодом без введення пароля знову, оскільки наслідки цієї дії не може бути скасовано!
+Вам варто зберегти пароль десь в іншому місці, якщо ви хочете користуватися вашим обліковим записом на іншому пристрої.</translation>
     </message>
     <message>
         <source>Don&apos;t expose password in any way</source>
-        <translation type="unfinished"></translation>
+        <translation>Не показувати пароль у будь-який спосіб</translation>
     </message>
 </context>
 <context>
@@ -447,17 +449,19 @@ Make sure that you backed it up if you want to use your account later.</source>
     </message>
     <message>
         <source>Don&apos;t show your password</source>
-        <translation type="unfinished"></translation>
+        <translation>Не показувати ваш пароль</translation>
     </message>
     <message>
         <source>Your password will not be shown anymore but still exposed via the login QR code.
 You won&apos;t be able to see your password again because this action cannot be undone!
 Consider storing the password somewhere else if you want to use your account on another device without the login QR code.</source>
-        <translation type="unfinished"></translation>
+        <translation>Ваш пароль більше не буде показано у форматі звичайного тексту, але його буде показано як QR-код для входу.
+Ви не зможете більше бачити ваш пароль, оскільки наслідки цієї дії не може бути скасовано!
+Вам варто зберегти пароль десь в іншому місці, якщо ви хочете користуватися вашим обліковим записом на іншому пристрої без можливості входу за QR-кодом.</translation>
     </message>
     <message>
         <source>Don&apos;t show password</source>
-        <translation type="unfinished"></translation>
+        <translation>Не показувати пароль</translation>
     </message>
 </context>
 <context>
@@ -1195,15 +1199,15 @@ Your password will be deleted, make sure it is stored in a password manager or y
     </message>
     <message>
         <source>%1 is online</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 у мережі</translation>
     </message>
     <message>
         <source>%1 is typing…</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 пише…</translation>
     </message>
     <message>
         <source>%1 paused typing</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 призупинив або призупинила введення повідомлення</translation>
     </message>
 </context>
 <context>
@@ -1237,7 +1241,7 @@ Your password will be deleted, make sure it is stored in a password manager or y
     </message>
     <message>
         <source>This QR code is not a valid login QR code.</source>
-        <translation type="unfinished"></translation>
+        <translation>Цей QR-код не є коректним QR-кодом для входу.</translation>
     </message>
 </context>
 <context>
@@ -1592,7 +1596,7 @@ Deletion of message history saved on server</extracomment>
     </message>
     <message>
         <source>Configure whether this device can be used to log in on another device</source>
-        <translation type="unfinished"></translation>
+        <translation>Налаштувати, чи можна використовувати цей пристрій для входу з іншого пристрою</translation>
     </message>
 </context>
 <context>

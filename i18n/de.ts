@@ -142,19 +142,19 @@ Stellen Sie sicher, dass Sie diese gesichert haben, wenn Sie Ihr Konto später b
     </message>
     <message>
         <source>Allow to add additional devices using the login QR code but never show the password.</source>
-        <translation type="unfinished"></translation>
+        <translation>Ermögliche weitere Geräte über einen QR-Code hinzuzufügen, aber zeige nie das Passwort an.</translation>
     </message>
     <message>
         <source>Don&apos;t show password</source>
-        <translation type="unfinished"></translation>
+        <translation>Passwort nicht anzeigen</translation>
     </message>
     <message>
         <source>Neither allow to add additional devices using the login QR code nor show the password.</source>
-        <translation type="unfinished"></translation>
+        <translation>Erlaube weder weitere Geräte hinzuzufügen, noch dein Passwort anzuzeigen.</translation>
     </message>
     <message>
         <source>Don&apos;t expose password in any way</source>
-        <translation type="unfinished"></translation>
+        <translation>Passwort in keiner Weise verfügbar machen</translation>
     </message>
 </context>
 <context>
@@ -207,7 +207,7 @@ Zeigen Sie diesen QR-Code niemals anderen Personen. Er würde unbegrenzten Zugan
     </message>
     <message>
         <source>Copy chat address</source>
-        <translation type="unfinished"></translation>
+        <translation>Chat-Adresse kopieren</translation>
     </message>
 </context>
 <context>
@@ -550,17 +550,19 @@ Stellen Sie sicher, dass Sie das Passwort gesichert haben, wenn Sie Ihr Konto sp
     </message>
     <message>
         <source>Don&apos;t expose your password in any way</source>
-        <translation type="unfinished"></translation>
+        <translation>Dein Passwort in keiner Weise verfügbar machen</translation>
     </message>
     <message>
         <source>Your password will neither be shown as plain text nor included in the login QR code anymore.
 You won&apos;t be able to use the login via QR code without entering your password again because this action cannot be undone!
 Consider storing the password somewhere else if you want to use your account on another device.</source>
-        <translation type="unfinished"></translation>
+        <translation>Dein Passwort wird weder angezeigt, noch im QR-Code enthalten sein.
+Du kannst dich dann nicht mehr über den QR-Code anmelden ohne dein Passwort erneut einzugeben, denn diese Aktion kann nicht rückgängig gemacht werden.
+Speichere dein Passwort sicherheitshalber woanders um dich auf anderen Geräten anmelden zu können.</translation>
     </message>
     <message>
         <source>Don&apos;t expose password in any way</source>
-        <translation type="unfinished"></translation>
+        <translation>Passwort in keiner Weise verfügbar machen</translation>
     </message>
 </context>
 <context>
@@ -583,17 +585,19 @@ Stellen Sie sicher, dass Sie es gesichert haben, wenn Sie sich später noch auf 
     </message>
     <message>
         <source>Don&apos;t show your password</source>
-        <translation type="unfinished"></translation>
+        <translation>Passwort nicht anzeigen</translation>
     </message>
     <message>
         <source>Your password will not be shown anymore but still exposed via the login QR code.
 You won&apos;t be able to see your password again because this action cannot be undone!
 Consider storing the password somewhere else if you want to use your account on another device without the login QR code.</source>
-        <translation type="unfinished"></translation>
+        <translation>Dein Passwort wird nicht mehr angezeigt werden können, aber es kann über einen QR-Code weitergegeben werden.
+Du wirst dein Passwort nicht mehr sehen können, da diese Aktion nicht Rückgängig gemacht werden kann.
+Speichere dein Passwort sicherheitshalber woanders um dich auf anderen Geräten anmelden zu können.</translation>
     </message>
     <message>
         <source>Don&apos;t show password</source>
-        <translation type="unfinished"></translation>
+        <translation>Passwort nicht anzeigen</translation>
     </message>
 </context>
 <context>
@@ -1402,15 +1406,15 @@ Ihr Passwort wird gelöscht, stellen Sie sicher, dass es in einem Passwort-Manag
     </message>
     <message>
         <source>%1 is online</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 ist online</translation>
     </message>
     <message>
         <source>%1 is typing…</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 tippt…</translation>
     </message>
     <message>
         <source>%1 paused typing</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 hat aufgehört zu tippen</translation>
     </message>
 </context>
 <context>
@@ -1444,7 +1448,7 @@ Ihr Passwort wird gelöscht, stellen Sie sicher, dass es in einem Passwort-Manag
     </message>
     <message>
         <source>This QR code is not a valid login QR code.</source>
-        <translation type="unfinished"></translation>
+        <translation>Dieser QR-Code ist zum Anmelden nicht valide.</translation>
     </message>
 </context>
 <context>
@@ -1815,7 +1819,7 @@ Deletion of message history saved on server</extracomment>
     </message>
     <message>
         <source>Configure whether this device can be used to log in on another device</source>
-        <translation type="unfinished"></translation>
+        <translation>Einstellen ob dieses Gerät verwendet werden kann um dich auf weiteren Geräten anzumelden</translation>
     </message>
 </context>
 <context>

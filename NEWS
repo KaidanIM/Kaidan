@@ -1,9 +1,14 @@
-Version 0.8.0-dev
-~~~~~~~~~~~~~~~~~
-Released: 1970-01-01
+Version 0.8.0
+~~~~~~~~~~~~~
+Released: 2021-05-28
 
-Notes:
- * under development
+Features:
+ * Add typing notifications (XEP-0085: Chat State Notifications) (jbb)
+ * Add message history syncing (XEP-0313: Message Archive Management) (lnj)
+ * Window size is restored (melvo)
+ * The server's website link is displayed if account creation is disabled (melvo)
+ * Use breeze theme on macOS (jbb)
+ * Improved user strings & descriptions (melvo)
 
 Version 0.7.0
 ~~~~~~~~~~~~~

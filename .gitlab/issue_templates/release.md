@@ -1,0 +1,12 @@
+- [ ] Create stable branch
+- [ ] Add translations from weblate & regenerate
+- [ ] Update changelog
+- [ ] Finish all release blocking tasks from the milestone (%x.xx)
+- [ ] Publish on download.kde.org
+    - [ ] Create release tarball
+    - [ ] Create release builds
+        - [ ] macOS
+        - [ ] Windows
+        - [ ] Android
+- [ ] Blog post (websites/kaidan-im!xxx)
+- [ ] Mastodon
